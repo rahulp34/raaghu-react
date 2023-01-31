@@ -104,6 +104,9 @@ Default.args = {
   showModalHeader: true,
   scrollable: false,
   verticallyCentered: false,
+  modalTitle: "Title",
+  saveChangesName : "Save Changes",
+  cancelButtonName : "Close",
   modalbutton: <button className="btn btn-primary">Default</button>,
 };
 
@@ -117,6 +120,9 @@ StaticBackdropModal.args = {
   showModalHeader: true,
   scrollable: false,
   verticallyCentered: true,
+  modalTitle: "Title",
+  saveChangesName : "Save Changes",
+  cancelButtonName : "Close",
   modalbutton: (
     <button className="btn btn-primary">Static Backdrop Modal</button>
   ),
@@ -129,6 +135,9 @@ ScrollableContentModal.args = {
   showModalFooter: true,
   showModalHeader: true,
   verticallyCentered: true,
+  modalTitle: "Title",
+  saveChangesName : "Save Changes",
+  cancelButtonName : "Close",
   modalbutton: <button className="btn btn-primary">Long Content Modal</button>,
   scrollable: true,
 };
@@ -141,6 +150,9 @@ VerticallyCentered.args = {
   showModalHeader: true,
   verticallyCentered: true,
   scrollable: false,
+  modalTitle: "Title",
+  saveChangesName : "Save Changes",
+  cancelButtonName : "Close",
   modalbutton: (
     <button className="btn btn-primary">Vertically Centered Modal</button>
   ),
