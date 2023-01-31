@@ -94,17 +94,19 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 verticallyCentered={false}
                 modalbutton={<a className="link-primary"> (Change)</a>}
                 modalTitle="Switch Tenant"
-                saveChangesName={`${checked ?"SWITCH TO THE TENANT":"SWITCH TO THE HOST"}`}
+                saveChangesName={`${
+                  checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                }`}
                 cancelButtonName="CANCEL"
               >
-                <div>
-                  <div className="form-check form-switch">
+                <div className="text-start ps-2 mb-3">
+                  <div className="form-check form-switch text-start mb-4">
                     <input
                       className="form-check-input"
                       type="checkbox"
                       role="switch"
-                      checked ={checked}
-					  onChange ={()=>setChecked(!checked)}
+                      checked={checked}
+                      onChange={() => setChecked(!checked)}
                     />
                     <label
                       className="form-check-label"
@@ -113,6 +115,15 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                       Switch to tenant
                     </label>
                   </div>
+                  <RdsInput
+                    label="Tenancy Name"
+                    placeholder="Tenancy Name"
+                    inputType="text"
+                    onChange={emailhandleChange}
+                    value=""
+                    name="name"
+                    redAsteriskPresent={true}
+                  ></RdsInput>
                 </div>
               </RdsModal>
             </span>
