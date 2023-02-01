@@ -5,9 +5,10 @@ import "./rds-modal.scss";
 export interface RdsModalProps {
   modalId: string;
   modalBackdrop?: boolean | "static";
-  preventEscapeKey?: boolean ;
+  preventEscapeKey?: boolean;
   size?: "small" | "large" | "extra-large" | "fullscreen" | "default";
-  modalAnimation?: "modal fade"
+  modalAnimation?:
+    | "modal fade"
     | "modal fade-scale"
     | "modal fade-rotate"
     | "modal fade-flip";
@@ -18,14 +19,21 @@ export interface RdsModalProps {
   verticallyCentered?: boolean;
   modalbutton?: any;
   children: any;
+  modalTitle?: string;
+  saveChangesName?: string;
+  cancelButtonName?: string;
 
   // onShow = new EventEmitter<Event>();
   // onClose = new EventEmitter<Event>();
 }
 
 const RdsModal = (props: RdsModalProps) => {
- let preventEscapeKey =`${props.hasOwnProperty('preventEscapeKey')?props.preventEscapeKey :true}` 
- let Backdrop = `${props.hasOwnProperty('modalBackdrop')?props.modalBackdrop :true}`
+  let preventEscapeKey = `${
+    props.hasOwnProperty("preventEscapeKey") ? props.preventEscapeKey : true
+  }`;
+  let Backdrop = `${
+    props.hasOwnProperty("modalBackdrop") ? props.modalBackdrop : true
+  }`;
   let size = `${
     props.size == "small"
       ? "modal-sm"
@@ -38,7 +46,9 @@ const RdsModal = (props: RdsModalProps) => {
       : ""
   }`;
 
-  let classes = `modal-dialog ${size} ${props.scrollable === true ? "modal-dialog-scrollable" : ""}
+  let classes = `modal-dialog ${size} ${
+    props.scrollable === true ? "modal-dialog-scrollable" : ""
+  }
    ${props.verticallyCentered === true ? "modal-dialog-centered" : ""}
     ${props.scrollable === true ? "modal-dialog-centered" : ""}`;
 
@@ -53,11 +63,11 @@ const RdsModal = (props: RdsModalProps) => {
       ? "fade-flip"
       : " "
   }`;
-let args
+  let args;
   return (
     <>
-   {/* Button trigger modal */}
-    {props.modalbutton && (
+      {/* Button trigger modal */}
+      {props.modalbutton && (
         <div
           style={{ cursor: "pointer" }}
           data-bs-toggle="modal"
@@ -65,11 +75,11 @@ let args
         >
           {props.modalbutton}
         </div>
-    )}
+      )}
 
       {/*  Modal  */}
-   
-    <div
+
+      <div
         className={modalAnimations}
         id={props.modalId}
         data-bs-backdrop={Backdrop}
@@ -82,16 +92,14 @@ let args
           <div className="modal-content">
             {props.showModalHeader && (
               <div className="modal-header">
-              <h5  className="modal-title">
-        Modal title from outside
-      </h5>
-      <button
-        key="modalHeader"
-        type="button"
-        className="btn-close btn-danger"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-      ></button>
+                <h5 className="modal-title">{props.modalTitle}</h5>
+                <button
+                  key="modalHeader"
+                  type="button"
+                  className="btn-close btn-danger"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
             )}
 
@@ -99,25 +107,22 @@ let args
             {props.showModalFooter && (
               <div className="modal-footer">
                 <button
-       
-       type="button"
-       className="btn btn-secondary"
-       data-bs-dismiss="modal"
-     >
-       Close
-     </button>
-     <button  type="button" className="btn btn-primary ms-2">
-       Save changes
-     </button>
+                  type="button"
+                  className="btn btn-outline-primary"
+                  data-bs-dismiss="modal"
+                >
+                  {props.cancelButtonName}
+                </button>
+                <button type="button" className="btn btn-primary ms-2">
+                  {props.saveChangesName}
+                </button>
               </div>
             )}
           </div>
         </div>
       </div>
-    
     </>
   );
 };
 
 export default RdsModal;
-
