@@ -61,10 +61,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 			{/* {accessToken!=undefined && <h1>Loggedin</h1>} */}
 			<div
 				className="align-items-center d-flex justify-content-center login m-auto"
-				style={{ width: 900, height: "100%" }}
+				style={{ maxWidth: "900px", height: "100vh "}}
 			>
 				<div className="container-fluid m-2">
-					<div className="bg-white row rounded-3 " style={{ height: 524 }}>
+					<div className="bg-white row rounded-3 ">
 						<div className="col-md-6">
 							<div className="py-4 px-3">
 								<div className="pb-4">
