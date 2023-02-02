@@ -17,17 +17,6 @@ const Template: ComponentStory<typeof RdsPageAuditlogs> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-
-  // operationLogsHeaders:any,
-  // listItem1?:any ,
-  // listItem2?:any ,
-  // operationLogs: any[];
-  // deleteEvent ?:(event:React.MouseEventHandler<HTMLDivElement>)=>void;
-  // parameterData ?:(event:React.MouseEventHandler<HTMLDivElement>)=>void;
-  // ChangeLogparameterData ?:(event:React.MouseEventHandler<HTMLDivElement>)=>void;
-  // changeLogs: any 
-  // changeLogsHeaders:any, 
-  // isShimmer?: boolean
   operationLogsHeaders : [
     {displayName: "User Name",key: "username",datatype: "text",sortable: true,isEndUserEditing: true,},
     {displayName: "Service",key: "service", datatype: "text", sortable: true,},

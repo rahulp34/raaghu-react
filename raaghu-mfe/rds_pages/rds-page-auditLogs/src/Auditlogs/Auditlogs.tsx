@@ -12,8 +12,6 @@ import {
   RdsSelectList,
   RdsInput,
 } from "../../../rds-elements";
-import { elements } from "chart.js";
-import { NULL } from "sass";
 
 export interface RdsPageAuditlogsProps {
   operationLogsHeaders: any;
@@ -413,28 +411,18 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
             </div>
           )}
 
-          {OperationFilterData?.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have operation log"
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {OperationFilterData != 0 && (
-          
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={props.operationLogsHeaders}
               tableData={OperationFilterData}
               pagination={true}
               recordsPerPage={5}
+              noDataTitle="Currently you do not have operation log"
               onActionSelection={onActionSelection}
               actions={operationActions}
               recordsPerPageSelectListOption={true}
             ></RdsCompDatatable>
-          )}
+        
           </div>
         </>
       )}
@@ -488,17 +476,7 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
             </div>
          
           </div>
-          {ChangeFilterData?.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have change log"
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {ChangeFilterData != 0 && (
-              
+             
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={props.changeLogsHeaders}
@@ -507,9 +485,10 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
               recordsPerPage={5}
               onActionSelection={onActionSelection}
               actions={changeActions}
+              noDataTitle="Currently you do not have change log"
               recordsPerPageSelectListOption={true}
             ></RdsCompDatatable>
-          )}
+          
           </div>
         </>
       )}
