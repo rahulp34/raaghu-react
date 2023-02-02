@@ -282,17 +282,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
       </div>
       {activeTab == "dynamicProps" && (
         <div className="m-4">
-          {dPItem.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have Dynamic property"
-                subLabel="Click on the button above to add."
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {dPItem.length > 0 && (
+          
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={dPHeader}
@@ -302,35 +292,25 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
               actions={dynamicActions}
               onActionSelection={onActionSelection}
               recordsPerPageSelectListOption={true}
+              noDataTitle="Currently you do not have Dynamic property"
             ></RdsCompDatatable>
-          )}
+         
         </div>
       )}
 
       {activeTab == "dynamicEntityProps" && (
         <div className="m-4">
-          {entityPItem.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have Dynamic Entity property"
-                subLabel="Click on the button above to add."
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {entityPItem.length > 0 && (
-            <RdsCompDatatable
-            classes="table__userTable"
+           <RdsCompDatatable
+              classes="table__userTable"
               tableHeaders={entityPItemheader}
               tableData={entityPItem}
               pagination={true}
               recordsPerPage={5}
+              noDataTitle="Currently you do not have Dynamic Entity property"
               actions={entityActions}
               onActionSelection={onEntityActionSelection}
               recordsPerPageSelectListOption={true}
               ></RdsCompDatatable>
-              )}
         </div>
       )}
       {activeTab == "dynamicProps" && dPItem.length != 0 && (
