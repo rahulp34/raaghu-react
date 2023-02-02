@@ -95,7 +95,7 @@ const RdsButton = (props: RdsButtonProps) => {
       </span>
     )
   }
-  {props.label && (<span className="btn-text align-text-bottom"  >
+  {props.label && (<span className="btn-text "  >
       {props.label}
     </span>
   )}
@@ -128,7 +128,7 @@ aria-controls={props.ariacontrols}
       </span>
     )
   }
-  {props.label && (<span className="btn-text align-text-bottom"  >
+  {props.label && (<span className="btn-text "  >
       {props.label}
     </span>
   )}

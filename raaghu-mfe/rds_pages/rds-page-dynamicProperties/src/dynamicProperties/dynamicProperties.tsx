@@ -187,9 +187,17 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
             offcanvaswidth={650}
             offcanvasbutton={
               <RdsButton
+              
                 type={"button"}
                 colorVariant="primary"
                 label="NEW DYNAMIC PROPERTY"
+                size="small"
+                icon='plus'
+                iconWidth="13px"
+              iconStroke={true}
+              iconFill={false}
+              iconHeight="13px"
+              iconColorVariant="primary"
               />
             }
             children={
@@ -215,6 +223,13 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
                 type={"button"}
                 colorVariant="primary"
                 label="NEW DYNAMIC ENTITY PROPERTY"
+                size="small"
+                icon='plus'
+                iconWidth="13px"
+                iconStroke={true}
+                iconFill={false}
+                iconHeight="13px"
+                iconColorVariant="primary"
               />
             }
             children={
@@ -244,7 +259,8 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
           ></RdsOffcanvas>
         )}
       </div>
-      <div>
+      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+       <div >
         <RdsNavtabs
           type="tabs"
           activeNavtabOrder={activeNavtabOrder}
@@ -266,17 +282,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
       </div>
       {activeTab == "dynamicProps" && (
         <div className="m-4">
-          {dPItem.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have Dynamic property"
-                subLabel="Click on the button above to add."
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {dPItem.length > 0 && (
+          
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={dPHeader}
@@ -286,39 +292,25 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
               actions={dynamicActions}
               onActionSelection={onActionSelection}
               recordsPerPageSelectListOption={true}
+              noDataTitle="Currently you do not have Dynamic property"
             ></RdsCompDatatable>
-          )}
+         
         </div>
       )}
 
-      <RdsCompAlertPopup
-        alertID="dynamic_delete_off"
-        onSuccess={onDeleteUnit}
-      />
       {activeTab == "dynamicEntityProps" && (
         <div className="m-4">
-          {entityPItem.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have Dynamic Entity property"
-                subLabel="Click on the button above to add."
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {entityPItem.length > 0 && (
-            <RdsCompDatatable
+           <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={entityPItemheader}
               tableData={entityPItem}
               pagination={true}
               recordsPerPage={5}
+              noDataTitle="Currently you do not have Dynamic Entity property"
               actions={entityActions}
               onActionSelection={onEntityActionSelection}
               recordsPerPageSelectListOption={true}
-            ></RdsCompDatatable>
-          )}
+              ></RdsCompDatatable>
         </div>
       )}
       {activeTab == "dynamicProps" && dPItem.length != 0 && (
@@ -328,25 +320,25 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
           scrolling={false}
           offId="dynamic-edit-off"
           placement="end"
-          canvasTitle="NEW DYNAMIC PROPERTY : Edit"
+          canvasTitle="NEW DYNAMIC PROPERTY"
           offcanvaswidth={650}
           children={
             <NewDynamicProperty
-              editData={dPItem[identity.dynamicActionId]}
-              dPItemlist={onDynamicEditProperty}
-              offId="dynamic-edit-off"
+            editData={dPItem[identity.dynamicActionId]}
+            dPItemlist={onDynamicEditProperty}
+            offId="dynamic-edit-off"
             ></NewDynamicProperty>
           }
-        ></RdsOffcanvas>
+          ></RdsOffcanvas>
       )}
       {activeTab == "dynamicEntityProps" && entityPItem.length != 0 && (
         <RdsOffcanvas
-          backDrop={true}
-          preventEscapeKey={true}
-          scrolling={false}
-          offId="entity-edit-off"
-          placement="end"
-          canvasTitle="NEW DYNAMIC ENTITY PROPERTY : Edit"
+        backDrop={true}
+        preventEscapeKey={true}
+        scrolling={false}
+        offId="entity-edit-off"
+        placement="end"
+          canvasTitle="NEW DYNAMIC ENTITY PROPERTY"
           offcanvaswidth={650}
           children={
             <RdsCompDynamicEntityProperty
@@ -370,10 +362,15 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
                 { label: "ANZAngular105Demo.Authorization" },
               ]}
               onSelectedItems={onEditedEntityItems}
-            ></RdsCompDynamicEntityProperty>
-          }
-        ></RdsOffcanvas>
+              ></RdsCompDynamicEntityProperty>
+            }
+            ></RdsOffcanvas>
       )}
+        <RdsCompAlertPopup
+        alertID="dynamic_delete_off"
+        onSuccess={onDeleteUnit}
+        />
+    </div>
     </div>
   );
 };

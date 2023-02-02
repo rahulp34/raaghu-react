@@ -12,8 +12,6 @@ import {
   RdsSelectList,
   RdsInput,
 } from "../../../rds-elements";
-import { elements } from "chart.js";
-import { NULL } from "sass";
 
 export interface RdsPageAuditlogsProps {
   operationLogsHeaders: any;
@@ -209,8 +207,9 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
   }, []);
 
   return (
-    <div>
-      <div>
+    
+        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+      <div className="d-flex justify-content-between nav-tabs m-1 ms-3">
         <RdsNavtabs
           type="tabs"
           activeNavtabOrder={activeNavtabOrder}
@@ -225,11 +224,46 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
             { label: "Change Logs", tablink: "#nav-Change", id: "change" },
           ]}
         />
+      { activeTab == "operation" &&  <div className="align-self-top ">
+              <RdsButton
+                type="button"
+                label="Export To Excel"
+                onClick={downloadcsv}
+                isOutline={true}
+                colorVariant="primary"
+                tooltipPlacement="top"
+                size="small"
+                icon="export_data"
+                iconHeight="15px"
+                iconWidth="15px"
+                iconFill={false}
+                iconStroke={true}
+                iconColorVariant="primary"
+              ></RdsButton>
+            </div>}
+        {activeTab == "change" &&    <div className="align-self-top">
+              <RdsButton
+                type="button"
+                label="Export To Excel"
+                onClick={downloadcsv1}
+                isOutline={true}
+                colorVariant="primary"
+                tooltipPlacement="top"
+                size="small"
+                icon="export_data"
+                iconHeight="15px"
+                iconWidth="15px"
+                iconFill={false}
+                iconStroke={true}
+                iconColorVariant="primary"
+              ></RdsButton>
+            </div>}
       </div>
       {activeTab == "operation" && (
         <>
-          <div className="d-flex justify-content-between mt-3">
-            <div className="d-flex justify-content-between mt-3">
+          <div className="mx-3 ">
+          <div className="d-flex justify-content-between  mt-2 pt-1">
+            <div className="d-flex justify-content-between ">
               <div className="ms-1 me-1">
                 <RdsDatePicker
                   DatePickerLabel=""
@@ -258,23 +292,7 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
                 />
               </div>
             </div>
-            <div className="align-self-center">
-              <RdsButton
-                type="button"
-                label="Export To Excel"
-                onClick={downloadcsv}
-                isOutline={true}
-                colorVariant="primary"
-                tooltipPlacement="top"
-                size="small"
-                icon="export_data"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                iconColorVariant="primary"
-              ></RdsButton>
-            </div>
+           
           </div>
           {isAdvancedFilters && (
             <div className="mt-3 mb-3 d-flex justify-content-between">
@@ -393,34 +411,27 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
             </div>
           )}
 
-          {OperationFilterData?.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have operation log"
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {OperationFilterData != 0 && (
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={props.operationLogsHeaders}
               tableData={OperationFilterData}
               pagination={true}
               recordsPerPage={5}
+              noDataTitle="Currently you do not have operation log"
               onActionSelection={onActionSelection}
               actions={operationActions}
               recordsPerPageSelectListOption={true}
             ></RdsCompDatatable>
-          )}
+        
+          </div>
         </>
       )}
 
       {activeTab == "change" && (
         <>
-          <div className="d-flex justify-content-between mt-3">
-            <div className="d-flex justify-content-between mt-3">
+         <div className="mx-3 ">
+          <div className="d-flex justify-content-between  mt-2 pt-1">
+            <div className="d-flex justify-content-between">
               <div className="ms-1 me-1">
                 <RdsDatePicker
                   DatePickerLabel=""
@@ -463,34 +474,9 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
                 />
               </div>
             </div>
-            <div className="align-self-center">
-              <RdsButton
-                type="button"
-                label="Export To Excel"
-                onClick={downloadcsv1}
-                isOutline={true}
-                colorVariant="primary"
-                tooltipPlacement="top"
-                size="small"
-                icon="export_data"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                iconColorVariant="primary"
-              ></RdsButton>
-            </div>
+         
           </div>
-          {ChangeFilterData?.length == 0 && (
-            <div>
-              <RdsIllustration
-                label="Currently you do not have change log"
-                colorVariant="light"
-              />
-            </div>
-          )}
-
-          {ChangeFilterData != 0 && (
+             
             <RdsCompDatatable
               classes="table__userTable"
               tableHeaders={props.changeLogsHeaders}
@@ -499,9 +485,11 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
               recordsPerPage={5}
               onActionSelection={onActionSelection}
               actions={changeActions}
+              noDataTitle="Currently you do not have change log"
               recordsPerPageSelectListOption={true}
             ></RdsCompDatatable>
-          )}
+          
+          </div>
         </>
       )}
       <RdsOffcanvas
