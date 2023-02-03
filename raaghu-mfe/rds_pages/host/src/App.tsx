@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from "react";
 
 import "./App.scss";
-// import "../../../../raaghu-themes/themes/default.scss";
 import Main from "./Main";
 import { Link } from "react-router-dom";
 
