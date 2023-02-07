@@ -17,16 +17,9 @@ const LoginCompo = React.lazy(() => import("Login/Login"));
 const ForgotPasswordCompo = React.lazy(
   () => import("ForgotPassword/ForgotPassword")
 );
-const MaintainanceCompo = React.lazy(() => import("Maintainance/Maintainance"));
 const TenantCompo = React.lazy(() => import("Tenant/Tenant"));
 const EditionCompo = React.lazy(() => import("Edition/Edition"));
-const WebhookSubscriptionCompo = React.lazy(
-  () => import("WebhookSubscription/WebhookSubscription")
-);
 const SettingsCompo = React.lazy(() => import("Settings/Settings"));
-const VisualSettingsCompo = React.lazy(
-  () => import("VisualSetting/VisualSetting")
-);
 const UsersCompo = React.lazy(() => import("Users/Users"));
 
 const AuditlogsCompo = React.lazy(() => import("AuditLogs/AuditLogs"));
@@ -35,10 +28,7 @@ const OrganizationUnitsCompo = React.lazy(
   () => import("OrganizationUnits/OrganizationUnits")
 );
 const LanguageCompo = React.lazy(() => import("Language/Language"));
-const DynamicPropertyCompo = React.lazy(
-  () => import("DynamicProperties/DynamicProperties")
-);
-const IconListCompo = React.lazy(()=>import("IconList/IconList"));
+const IconListCompo = React.lazy(() => import("IconList/IconList"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -151,10 +141,10 @@ const Main = (props: MainProps) => {
     },
     {
       key: "1",
-      label: t("UI Components"),
-      icon: "demo_ui",
-      path: "/demo-ui",
-      subTitle: "",
+      label: t("Tenants"),
+      icon: "tenant",
+      path: "/tenant",
+      subTitle: t("Manage your tenants"),
     },
     {
       key: "2",
@@ -164,103 +154,130 @@ const Main = (props: MainProps) => {
       subTitle: t("icons"),
     },
     {
-      key: "3",
-      label: t("Pages"),
+      key: "4",
+      label: t("Editions"),
+      icon: "editions",
+      path: "/edition",
+      subTitle: t("Manage editions and features of the application"),
+    },
+    {
+      key: "4",
+      label: t("Identity Management"),
       icon: "pages",
       children: [
         {
-          key: "3-0",
-          label: t("Tenants"),
-          icon: "tenant",
-          path: "/tenant",
-          subTitle: t("Manage your tenants"),
+          key: "4-0",
+          label: t("Organization Units"),
+          icon: "organization",
+          path: "/organization-unit",
+          subTitle: t("Use organization units to organize users and entities"),
         },
         {
-          key: "3-1",
-          label: t("Editions"),
+          key: "4-1",
+          label: t("Roles"),
+          icon: "roles",
+          path: "/role",
+          subTitle: t("Use roles to group permissions"),
+        },
+        {
+          key: "4-2",
+          label: t("Users"),
+          icon: "users",
+          path: "/users",
+          subTitle: t("Manage users and permissions"),
+        },
+        {
+          key: "4-3",
+          label: t("Claim Types"),
+          icon: "users",
+          path: "/claim-types",
+          subTitle: t("Manage users and permissions"),
+        },
+        {
+          key: "4-4",
+          label: t("Security-logs"),
+          icon: "users",
+          path: "/security-logs",
+          subTitle: t("Manage users and permissions"),
+        }
+      ],
+    },
+    {
+      key: "5",
+      label: t("Identity Server"),
+      icon: "pages",
+      children: [
+        {
+          key: "5-0",
+          label: t("Client"),
           icon: "editions",
-          path: "/edition",
+          path: "/client",
           subTitle: t("Manage editions and features of the application"),
         },
         {
-          key: "3-2",
-          label: t("Administration"),
-          icon: "administration",
-          children: [
-            {
-              key: "3-2-0",
-              label: t("Organization Units"),
-              icon: "organization",
-              path: "/organization-unit",
-              subTitle: t(
-                "Use organization units to organize users and entities"
-              ),
-            },
-            {
-              key: "3-2-1",
-              label: t("Roles"),
-              icon: "roles",
-              path: "/role",
-              subTitle: t("Use roles to group permissions"),
-            },
-            {
-              key: "3-2-2",
-              label: t("Users"),
-              icon: "users",
-              path: "/users",
-              subTitle: t("Manage users and permissions"),
-            },
-            {
-              key: "3-2-3",
-              label: t("Language"),
-              icon: "languages",
-              path: "/language",
-              subTitle: t("Manage user interface languages"),
-            },
-            {
-              key: "3-2-4",
-              label: t("Audit Logs"),
-              icon: "audit_logs",
-              path: "/audit-logs",
-              subTitle: "",
-            },
-            {
-              key: "3-2-5",
-              label: t("Webhook Subscriptions"),
-              icon: "webhook_subscription",
-              path: "/webhook-subscription",
-              subTitle: t("Webhook Subsubscription Info"),
-            },
-            {
-              key: "3-2-6",
-              label: t("Maintenance"),
-              icon: "maintenance",
-              path: "/maintainance",
-              subTitle: t("Statistics and reports"),
-            },
-            {
-              key: "3-2-7",
-              label: t("Visual Settings"),
-              icon: "visual_settings",
-              path: "/visual-setting",
-              subTitle: t("Change the look of UI"),
-            },
-            {
-              key: "3-2-8",
-              label: t("Dynamic Properties"),
-              icon: "",
-              path: "/dynamic-properties",
-            },
-            {
-              key: "3-2-9",
-              label: t("Settings"),
-              icon: "setting",
-              path: "/settings",
-              subTitle: t("Show and change application settings"),
-            },
-          ],
+          key: "5-1",
+          label: t("Identity Resources"),
+          icon: "editions",
+          path: "/identity-resources",
+          subTitle: t("Manage editions and features of the application"),
+        },
+        {
+          key: "5-2",
+          label: t("Api Resources"),
+          icon: "editions",
+          path: "/api-resources",
+          subTitle: t("Manage editions and features of the application"),
+        },
+        {
+          key: "5-3",
+          label: t("Api Scopes"),
+          icon: "editions",
+          path: "/api-scopes",
+          subTitle: t("Manage editions and features of the application"),
         },
       ],
+    },
+    {
+      key: "6",
+      label: t("Language Management"),
+      icon: "pages",
+      children: [
+        {
+          key: "6-0",
+          label: t("Language"),
+          icon: "languages",
+          path: "/language",
+          subTitle: t("Manage user interface languages"),
+        },
+        {
+          key: "6-1",
+          label: t("Language-Text"),
+          icon: "languages",
+          path: "/language-text",
+          subTitle: t("Manage user interface languages"),
+        },
+      ],
+    },
+    {
+      key: "7",
+      label: t("Text-Template"),
+      icon: "languages",
+      path: "/template-text",
+      subTitle: t("Manage user interface languages"),
+    },
+    {
+      key: "7",
+      label: t("Audit Logs"),
+      icon: "audit_logs",
+      path: "/audit-logs",
+      subTitle: "",
+    },
+    {
+      key: "7",
+      label: t("Settings"),
+      icon: "setting",
+      path: "/settings",
+      subTitle: t("Show and change application settings"),
     },
   ];
 
@@ -359,9 +376,7 @@ const Main = (props: MainProps) => {
         container-fluid
         px-0"
             >
-              <div
-                className="d-flex flex-column-fluid align-items-stretch container-fluid px-0 main-body"
-              >
+              <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0 main-body">
                 <div className="aside ng-tns-c99-0" id="aside">
                   <div className="mx-2 pt-2">
                     <RdsCompSideNavigation
@@ -381,10 +396,6 @@ const Main = (props: MainProps) => {
                       element={<DashboardCompo />}
                     ></Route>
                     <Route
-                      path="/maintainance"
-                      element={<MaintainanceCompo />}
-                    ></Route>
-                    <Route
                       path="/tenant"
                       element={<TenantCompo></TenantCompo>}
                     ></Route>
@@ -396,17 +407,6 @@ const Main = (props: MainProps) => {
                     <Route
                       path="/settings"
                       element={<SettingsCompo></SettingsCompo>}
-                    ></Route>
-
-                    <Route
-                      path="/visual-setting"
-                      element={<VisualSettingsCompo></VisualSettingsCompo>}
-                    ></Route>
-                    <Route
-                      path="/webhook-subscription"
-                      element={
-                        <WebhookSubscriptionCompo></WebhookSubscriptionCompo>
-                      }
                     ></Route>
                     <Route
                       path="/audit-logs"
@@ -427,12 +427,7 @@ const Main = (props: MainProps) => {
                       path="/language"
                       element={<LanguageCompo></LanguageCompo>}
                     ></Route>
-                    <Route
-                      path="/dynamic-properties"
-                      element={<DynamicPropertyCompo></DynamicPropertyCompo>}
-                    ></Route>
-                    <Route path="/icons" 
-                    element={<IconListCompo/>}></Route>
+                    <Route path="/icons" element={<IconListCompo />}></Route>
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>
