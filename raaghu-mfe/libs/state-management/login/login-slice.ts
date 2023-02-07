@@ -134,10 +134,10 @@ export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',
                 if(!accessToken){
                     state.isAuth = false
                 }
-                let tokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * action.payload.result.expireInSeconds : undefined;
+                let tokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.expireInSeconds?action.payload.result.expireInSeconds:1) : undefined;
                 console.log(tokenExpireDate)
                 state.expireDate = tokenExpireDate;
-                state.refreshTokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * action.payload.result.refreshTokenExpireInSeconds : undefined;
+                state.refreshTokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.refreshTokenExpireInSeconds?action.payload.result.refreshTokenExpireInSeconds:1) : undefined;
                 if(tokenExpireDate != undefined)
                 state.date = Date.now() + tokenExpireDate;
                 localStorage.setItem('LoginCredential', JSON.stringify({

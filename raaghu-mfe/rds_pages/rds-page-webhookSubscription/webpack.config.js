@@ -30,11 +30,11 @@ module.exports = (env, argv) => {
 
           test: /\.(scss|css)$/,
 
-          use: [ 'style-loader' , 'css-loader' , 'sass-loader' ],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
 
           exclude: '/node_modules/',
 
-      },
+        },
         {
           test: /\.(js|jsx|tsx|ts)$/,
           loader: "babel-loader",
@@ -68,22 +68,23 @@ module.exports = (env, argv) => {
         name: "webhookSubscription",
         filename: "remoteEntry.js",
         exposes: {
-        // expose each page
-        "./WebhookSubscription": "./src/webhook/webhook"
-      },
-        shared: {
-            ...devdeps,
-          ...deps,
-          'luxon': {
-            singleton: true,
-            requiredVersion: deps['luxon'],
+          // expose each page
+          "./WebhookSubscription": "./src/webhook/webhook"
         },
+        shared: {
+          ...devdeps,
+          ...deps,
           react: { singleton: true, eager: true, requiredVersion: deps.react },
           "react-dom": {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
           },
+          'luxon': {
+            singleton: true,
+            version: '3.1.0',
+            requiredVersion: deps['luxon']
+          }
         },
       }),
       new HtmlWebpackPlugin({
