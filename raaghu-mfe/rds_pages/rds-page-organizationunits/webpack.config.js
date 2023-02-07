@@ -95,6 +95,11 @@ module.exports = (env, argv) => {
 						eager: true,
 						requiredVersion: deps["react-dom"],
 					},
+					'luxon': {
+						singleton: true,
+						version: '3.1.0',
+						requiredVersion: deps['luxon']
+					}
 				},
 			}),
 			new HtmlWebpackPlugin({
