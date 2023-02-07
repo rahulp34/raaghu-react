@@ -1,61 +1,32 @@
 import React, { useEffect, useState } from "react";
 //import axios from "axios";
 import {
-	RdsCompEditionList,
-	RdsCompEditionInformation,
-	RdsCompPermissionTree,
+  RdsCompEditionList,
+  RdsCompEditionInformation,
+  RdsCompPermissionTree,
+  RdsCompEdition,
 } from "../../../rds-components";
 import { RdsButton, RdsOffcanvas, RdsNavtabs } from "../../../rds-elements";
 import {
-	useAppSelector,
-	useAppDispatch,
+  useAppSelector,
+  useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 // import { useAppDispatch } from "../../../../libs/state-management/index"
 import { EditionUser } from "../../../../libs/state-management/edition/edition-slice";
 interface RdsPageEditionProps {}
 const Edition = (props: RdsPageEditionProps) => {
-	const editionuser = useAppSelector((state) => state.persistedReducer.edition)
-	// const dispatch = useDispatch()
-	const dispatch = useAppDispatch()
-	useEffect(() => {
-	  dispatch(EditionUser() as any)
-	  console.log("hi from edition")
-	},[])
-	const [data, setData] = useState([]);
-	const tableHeaders = [
-		{
-			displayName: "Edition Name",
-			key: "editionName",
-			datatype: "text",
-			sortable: true,
-		},
-		{
-			displayName: "Price ($)",
-			key: "price",
-			datatype: "number",
-			sortable: true,
-		},
-		{
-			displayName: "Trial Period(Day(s))",
-			key: "trialPeriod",
-			datatype: "number",
-		},
-		{
-			displayName: "Expiring Edition",
-			key: "expiringEdition",
-			datatype: "text",
-		},
-	];
-	const actions = [
-		{ id: "delete", displayName: "Delete" },
-		{ id: "edit", displayName: "Edit" },
-	];
-	const pagination = true;
-	const recordsPerPage = 7;
-	const recordsPerPageSelectListOption = true;
-	const offCanvasHandler = () => {};
-	const [activeNavTabId, setActiveNavTabId] = useState(0);
-	const [showTenantSettings, setShowTenantSettings] = useState(false);
+  const editionuser = useAppSelector((state) => state.persistedReducer.edition);
+  // const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(EditionUser() as any);
+    console.log("hi from edition");
+  }, []);
+  const [data, setData] = useState([]);
+  const pagination = true;
+  const offCanvasHandler = () => {};
+  const [activeNavTabId, setActiveNavTabId] = useState(0);
+  const [showTenantSettings, setShowTenantSettings] = useState(false);
 
   const offCanvasButton =
     '<RdsButton icon = "plus" iconColorVariant="light" size = "medium" type = "button" colorVariant = "primary" label = "NEW TENANT"/>';
@@ -63,7 +34,7 @@ const Edition = (props: RdsPageEditionProps) => {
     { label: "Edition Information", tablink: "#nav-home", id: 0 },
     { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
-  
+
   const radioItems = [
     {
       label: "First Bill Date",
@@ -171,95 +142,100 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   useEffect(() => {
-		// const credentials = localStorage.getItem("LoginCredential");
-		// if (credentials) {
-		// 	var parsedCredentials = JSON.parse(credentials);
-		// }
-		// async function getData() {
-		// 	const resp = await axios.get(
-		// 		"https://anzdemoapi.raaghu.io/api/services/app/Edition/GetEditions",
-		// 		{
-		// 			headers: {
-		// 				Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-		// 			},
-		// 		}
-		// 	);
-		// 	console.log(resp.data.result.items);
-		// 	setData(
-		// 		resp.data.result.items.map((item: any) => ({
-		// 			id: item.id,
-		// 			editionName: item.displayName,
-		// 			price: item.annualPrice,
-		// 			trialPeriod: item.trialDayCount,
-		// 			expiringEdition: item.expiringEditionDisplayName,
-		// 		}))
-		// 	);
-		// }
-		// getData();
-	}, []);
-  
-	return (
-		<div className="tenant">
-			<RdsOffcanvas
-				canvasTitle="NEW EDITION"
-				onclick={offCanvasHandler}
-				placement="end"
-				offcanvaswidth={830}
-				offcanvasbutton={
-					<div className="d-flex justify-content-end">
-						<RdsButton
-							icon="plus"
-							iconColorVariant="light"
-							size="small"
-							type="button"
-							block={false}
-							iconHeight="15px"
-							iconWidth="15px"
-							iconFill={false}
-							iconStroke={true}
-							colorVariant="primary"
-							label="NEW EDITION"
-						/>
-					</div>
-				}
-				backDrop={false}
-				scrolling={false}
-				preventEscapeKey={false}
-				offId={"Edition"}
-			>
-				<RdsNavtabs
-					navtabsItems={navtabsItems}
-					type="tabs"
-					isNextPressed={showTenantSettings}
-					activeNavTabId={activeNavTabId}
-					activeNavtabOrder={(activeNavTabId) => {
-						setActiveNavTabId(activeNavTabId), setShowTenantSettings(false);
-					}}
-				/>
-				{activeNavTabId == 0 && showTenantSettings === false && (
-					<RdsCompEditionInformation
-						radioItems={radioItems}
-						editionInfo={(showTenantSettings) => {
-							setShowTenantSettings(showTenantSettings), setActiveNavTabId(1);
-						}}
-					/>
-				)}
-				{(activeNavTabId == 1 || showTenantSettings == true) && (
-					<RdsCompPermissionTree familyTree={familyTree} />
-				)}
-			</RdsOffcanvas>
-			<RdsCompEditionList
-				enablecheckboxselection={false}
-				tableHeaders={tableHeaders}
-				tableData={editionuser.users}
-				actions={actions}
-				onActionSelection={() => {}}
-				onNewTenantClick={() => {}}
-				pagination={pagination}
-				recordsPerPage={recordsPerPage}
-				recordsPerPageSelectListOption={true}
-			/>
-		</div>
-	);
+    // const credentials = localStorage.getItem("LoginCredential");
+    // if (credentials) {
+    // 	var parsedCredentials = JSON.parse(credentials);
+    // }
+    // async function getData() {
+    // 	const resp = await axios.get(
+    // 		"https://anzdemoapi.raaghu.io/api/services/app/Edition/GetEditions",
+    // 		{
+    // 			headers: {
+    // 				Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
+    // 			},
+    // 		}
+    // 	);
+    // 	console.log(resp.data.result.items);
+    // 	setData(
+    // 		resp.data.result.items.map((item: any) => ({
+    // 			id: item.id,
+    // 			editionName: item.displayName,
+    // 			price: item.annualPrice,
+    // 			trialPeriod: item.trialDayCount,
+    // 			expiringEdition: item.expiringEditionDisplayName,
+    // 		}))
+    // 	);
+    // }
+    // getData();
+  }, []);
+
+  const EditionItems = {
+    EditionName: "Corporate",
+    EditionTitle: "Strong Application for large team",
+    Price: "45",
+    Plan: "Per month",
+  };
+  const features = [
+    "Maximum User Count",
+    "Test Check feature",
+    "Test check feature count 2",
+  ];
+
+  return (
+    <div className="tenant">
+      <RdsOffcanvas
+        canvasTitle="NEW EDITION"
+        onclick={offCanvasHandler}
+        placement="end"
+        offcanvaswidth={830}
+        offcanvasbutton={
+          <div className="d-flex justify-content-end">
+            <RdsButton
+              icon="plus"
+              iconColorVariant="light"
+              size="small"
+              type="button"
+              block={false}
+              iconHeight="15px"
+              iconWidth="15px"
+              iconFill={false}
+              iconStroke={true}
+              colorVariant="primary"
+              label="NEW EDITION"
+            />
+          </div>
+        }
+        backDrop={false}
+        scrolling={false}
+        preventEscapeKey={false}
+        offId={"Edition"}
+      >
+        <RdsNavtabs
+          navtabsItems={navtabsItems}
+          type="tabs"
+          isNextPressed={showTenantSettings}
+          activeNavTabId={activeNavTabId}
+          activeNavtabOrder={(activeNavTabId) => {
+            setActiveNavTabId(activeNavTabId), setShowTenantSettings(false);
+          }}
+        />
+        {activeNavTabId == 0 && showTenantSettings === false && (
+          <RdsCompEditionInformation
+            radioItems={radioItems}
+            editionInfo={(showTenantSettings) => {
+              setShowTenantSettings(showTenantSettings), setActiveNavTabId(1);
+            }}
+          />
+        )}
+        {(activeNavTabId == 1 || showTenantSettings == true) && (
+          <RdsCompPermissionTree familyTree={familyTree} />
+        )}
+      </RdsOffcanvas>
+      <RdsCompEdition
+        EditionItems={EditionItems}
+        features={features}
+      ></RdsCompEdition>
+    </div>
+  );
 };
 export default Edition;
