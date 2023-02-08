@@ -38,7 +38,8 @@ export const Authenticate = createAsyncThunk('login/Authenticate',
         async(authenticateModal:any)=>{       
             const result =  await TokenAuthService.authenticate(authenticateModal);	
             const obj: {authenticateModal:AuthenticateModel, result: AuthenticateResultModel} = 
-            {authenticateModal, result};        
+            {authenticateModal, result};  
+            console.log("this is console from loginslice",result)      
             return obj;}
 )
 export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',

@@ -7,7 +7,9 @@ import {
 } from "../../../libs/state-management/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLanguages } from "../../../libs/state-management/language/language-slice";
+import { fetchLanguageForEdit } from "../../../libs/state-management/language/languageEdit-slice";
 import axios from "axios";
+import { RdsIcon } from "../../rds-elements";
 
 const tableHeaders = [
   {
@@ -25,7 +27,7 @@ const tableHeaders = [
   {
     displayName: "Is Enabled",
     key: "isenabled",
-    datatype: "text",
+    datatype: "children",
     sortable: true,
   },
   {
@@ -37,25 +39,73 @@ const tableHeaders = [
 ];
 
 const actions = [
-  { id: "edit", displayName: "Edit" },
+  { id: "edit", displayName: "Edit", offId: "editCanvas" },
   { id: "changeText", displayName: "Change Texts" },
   { id: "setDefaultLanguage", displayName: "Set as default language" },
-  { id: "delete", displayName: "Delete" },
+  { id: "delete", displayName: "Delete", modalId: "deleteModal" },
 ];
 
 const App = () => {
-  const [Data, setData] = useState([]);
+  const [Data, setData] = useState<any>([]);
 
   const data = useAppSelector((state) => state.persistedReducer.language);
+  const dataEdit = useAppSelector(
+    (state) => state.persistedReducer.languageEdit
+  );
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   store.dispatch(fetchLanguages());
-  //   console.log("hello");
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchLanguages() as any);
+    dispatch(fetchLanguageForEdit() as any);
+
+    console.log("edit lang ", dataEdit.languagesForEdit);
+
+    const tempData = data.languages.map((item: any) => {
+      return {
+        id: item.id,
+        languageName: item.languageName,
+        code: item.code,
+        isenabled: {
+          children: (
+            <>
+              {item.isenabled === "False" ? (
+                <RdsIcon
+                  name="close"
+                  fill={false}
+                  stroke={true}
+                  width="24px"
+                  height="16px"
+                  colorVariant="danger"
+                ></RdsIcon>
+              ) : (
+                <RdsIcon
+                  name="tick"
+                  colorVariant="success"
+                  fill={false}
+                  stroke={true}
+                  width="24px"
+                  height="16px"
+                ></RdsIcon>
+              )}
+            </>
+          ),
+        },
+        // item.isenabled === "False" ? <div>nothello</div> : <div>hello</div>,
+        creationTime: item.creationTime,
+      };
+    });
+
+    // children: (
+    //   <>
+    //     Work
+    //     <span className="ms-1">
+    //       <RdsBadge label={"Default"} colorVariant={"success"}></RdsBadge>{" "}
+    //     </span>
+    //   </>
+    // ),
+
+    console.log(tempData);
+    setData(tempData);
   }, [dispatch]);
 
   // useEffect(() => {
@@ -118,8 +168,10 @@ const App = () => {
     <Suspense>
       <Language
         languagetableHeaders={tableHeaders}
-        languagetableData={data.languages}
+        languagetableData={Data}
         actions={actions}
+        languageName={[]}
+        flags={[]}
       ></Language>
     </Suspense>
   );
