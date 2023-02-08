@@ -49,15 +49,23 @@ const App = () => {
   const data = useAppSelector((state) => state.persistedReducer.language);
   const Edit = useAppSelector((state) => state.persistedReducer.languageEdit);
   const [Data, setData] = useState<any>([]);
+  const [Lang, setLang]=useState<any>([])
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchLanguages() as any);
     dispatch(fetchLanguagesEdit() as any);
-    console.log(data.languages);
-    console.log("this is edit data ", Edit.languagesEdit);
 
-    const tempLanguageName = Edit.languagesEdit.languageName.map((item:any)=>{});
+    const tempLanguageName = Edit.languagesEdit.languageNames.map(
+      (item: any) => {
+        return {
+          option: item.displayText,
+          value:item.value,
+          isSelected:item.isSelected,
+        };
+      }
+    );
+    setLang(tempLanguageName)
 
     const tempData = data.languages.items.map((item: any) => {
       let flag = item.icon.trim().split(" ")[1];
@@ -104,6 +112,7 @@ const App = () => {
         },
       };
     });
+    console.log(typeof tempData);
     setData(tempData);
   }, [dispatch]);
 
@@ -163,29 +172,26 @@ const App = () => {
   //   // getData();
   // }, []);
 
-
-
-
-//   flags : [
-// 		{ option: "ad" },
-// 		{ option: "ae" },
-// 		{ option: "af" },
-// 		{ option: "ag" },
-// 		{ option: "ai" },
-// 	],
-// languageNames :  [
-// 		{ option: "Invariant Language ()" },
-// 		{ option: "Afar (aa)" },
-// 		{ option: "Afar (Djibouti) (aa-DJ)" },
-// 		{ option: "Afar (Eritrea) (aa-ER)" },
-// 		{ option: "Afar (Ethiopia) (aa-ET)" },
-// 		{ option: "Afrikaans (af)" },
-// 		{ option: "Afrikaans (Namibia) (af-NA)" },
-// 		{ option: "Afrikaans (South Africa) (af-ZA)" },
-// 		{ option: "Aghem (agq)" },
-// 		{ option: "Aghem (Cameroon) (agq-CM)" },
-// 		{ option: "Akan (ak)" },
-// 	]
+  //   flags : [
+  // 		{ option: "ad" },
+  // 		{ option: "ae" },
+  // 		{ option: "af" },
+  // 		{ option: "ag" },
+  // 		{ option: "ai" },
+  // 	],
+  // languageNames :  [
+  // 		{ option: "Invariant Language ()" },
+  // 		{ option: "Afar (aa)" },
+  // 		{ option: "Afar (Djibouti) (aa-DJ)" },
+  // 		{ option: "Afar (Eritrea) (aa-ER)" },
+  // 		{ option: "Afar (Ethiopia) (aa-ET)" },
+  // 		{ option: "Afrikaans (af)" },
+  // 		{ option: "Afrikaans (Namibia) (af-NA)" },
+  // 		{ option: "Afrikaans (South Africa) (af-ZA)" },
+  // 		{ option: "Aghem (agq)" },
+  // 		{ option: "Aghem (Cameroon) (agq-CM)" },
+  // 		{ option: "Akan (ak)" },
+  // 	]
 
   return (
     <Suspense>
@@ -193,7 +199,7 @@ const App = () => {
         languagetableHeaders={tableHeaders}
         languagetableData={Data}
         actions={actions}
-        languageName={[]}
+        languageName={Lang}
         flags={[]}
       ></Language>
     </Suspense>

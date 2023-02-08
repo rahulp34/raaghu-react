@@ -12,12 +12,12 @@ import {
 
 type InitialState = {
   loading: boolean;
-  languagesEdit: { flags: any[]; language: string; languageName: any[] };
+  languagesEdit: { flags: any[]; language: string; languageNames: any[] };
   error: string;
 };
 export const initialStateEdit: InitialState = {
   loading: false,
-  languagesEdit: { flags: [], language: "", languageName: [] },
+  languagesEdit: { flags: [], language: "", languageNames: [] },
   error: "",
 };
 
@@ -64,7 +64,7 @@ const languageEditSlice = createSlice({
 
     builder.addCase(fetchLanguagesEdit.rejected, (state, action) => {
       state.loading = false;
-      state.languagesEdit = { flags: [], language: "", languageName: [] };
+      state.languagesEdit = { flags: [], language: "", languageNames: [] };
       state.error = action.error.message || "Something went wrong";
     });
   },
