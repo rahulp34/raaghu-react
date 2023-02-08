@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { RdsButton, RdsOffcanvas } from "../../../rds-elements";
 import axios from "axios";
-import { RdsCompDatatable, RdsCompNewLanguage } from "../../../rds-components";
+import {
+  RdsCompAlertPopup,
+  RdsCompDatatable,
+  RdsCompNewLanguage,
+} from "../../../rds-components";
 import { Item } from "@storybook/api/dist/ts3.9/lib/stories";
 
 export interface LanguageProps {
@@ -9,6 +13,8 @@ export interface LanguageProps {
   languagetableData: any;
   actions?: any;
   onActionSelection?(arg: any): void;
+  languageName: any[];
+  flags: any[];
 }
 
 const Language = (props: LanguageProps) => {
@@ -41,7 +47,10 @@ const Language = (props: LanguageProps) => {
             offcanvaswidth={550}
           >
             {" "}
-            <RdsCompNewLanguage></RdsCompNewLanguage>
+            <RdsCompNewLanguage
+              languageNames={[]}
+              flags={[]}
+            ></RdsCompNewLanguage>
           </RdsOffcanvas>
         </div>
       </div>
@@ -64,6 +73,28 @@ const Language = (props: LanguageProps) => {
         </div>
       </div>
       <div className="mobile-btn position-absolute bottom-0 end-0 my-4 mx-5"></div>
+
+      <RdsOffcanvas
+        placement={"end"}
+        backDrop={true}
+        scrolling={false}
+        preventEscapeKey={false}
+        offId={"editCanvas"}
+        canvasTitle={"New Language"}
+        offcanvaswidth={550}
+      >
+        {" "}
+        <RdsCompNewLanguage
+          languageNames={props.languageName}
+          flags={props.flags}
+        ></RdsCompNewLanguage>
+      </RdsOffcanvas>
+      <RdsCompAlertPopup
+        alertID="deleteModal"
+        onSuccess={() => {
+          console.log("bahiya yeh delete hogaya");
+        }}
+      />
     </>
   );
 };

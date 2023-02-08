@@ -1,9 +1,13 @@
 {
   "runtime": "Default",
   "defaultVariables": null,
+  "settings": {
+  "outputType": "TypeScript",
+  "responseType": "blob",
+  },
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://demoapi.raaghu.io/swagger/v1/swagger.json",
+      "url": "https://anzdemoapi.raaghu.io/swagger/v1/swagger.json",
       "output": null
     }
   },
@@ -12,8 +16,8 @@
       "className": "{controller}ServiceProxy",
       "moduleName": "",
       "namespace": "",
-      "typeScriptVersion": 2.7,
-      "template": "Fetch",
+      "typeScriptVersion": 4.3,
+      "template": "Axios",
       "promiseType": "Promise",
       "httpClass": "HttpClient",
       "useSingletonProvider": false,

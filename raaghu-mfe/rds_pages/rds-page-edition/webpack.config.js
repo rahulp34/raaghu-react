@@ -24,17 +24,18 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
     },
+    optimization: {
+      splitChunks: false,
+    },
     module: {
       rules: [
         {
-
           test: /\.(scss|css)$/,
 
-          use: [ 'style-loader' , 'css-loader' , 'sass-loader' ],
+          use: ["style-loader", "css-loader", "sass-loader"],
 
-          exclude: '/node_modules/',
-
-      },
+          exclude: "/node_modules/",
+        },
         {
           test: /\.(js|jsx|tsx|ts)$/,
           loader: "babel-loader",
@@ -68,16 +69,16 @@ module.exports = (env, argv) => {
         name: "edition",
         filename: "remoteEntry.js",
         exposes: {
-        // expose each page
-        "./Edition": "./src/edition/edition"
-      },
-        shared: {
-            ...devdeps,
-          ...deps,
-          'luxon': {
-            singleton: true,
-            requiredVersion: deps['luxon'],
+          // expose each page
+          "./Edition": "./src/edition/edition",
         },
+        shared: {
+          ...devdeps,
+          ...deps,
+          luxon: {
+            singleton: true,
+            requiredVersion: deps["luxon"],
+          },
           react: { singleton: true, eager: true, requiredVersion: deps.react },
           "react-dom": {
             singleton: true,

@@ -6,28 +6,13 @@ import {
 	RdsButton,
 } from "../rds-elements";
 
-export interface RdsCompNewLanguageProps {}
+export interface RdsCompNewLanguageProps {
+	languageNames:any[],
+	flags:any[]
+}
 const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
-	const flags = [
-		{ option: "ad" },
-		{ option: "ae" },
-		{ option: "af" },
-		{ option: "ag" },
-		{ option: "ai" },
-	];
-	const languageNames = [
-		{ option: "Invariant Language ()" },
-		{ option: "Afar (aa)" },
-		{ option: "Afar (Djibouti) (aa-DJ)" },
-		{ option: "Afar (Eritrea) (aa-ER)" },
-		{ option: "Afar (Ethiopia) (aa-ET)" },
-		{ option: "Afrikaans (af)" },
-		{ option: "Afrikaans (Namibia) (af-NA)" },
-		{ option: "Afrikaans (South Africa) (af-ZA)" },
-		{ option: "Aghem (agq)" },
-		{ option: "Aghem (Cameroon) (agq-CM)" },
-		{ option: "Akan (ak)" },
-	];
+
+
 	return (
 		<>
 			<form>
@@ -42,7 +27,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
 							</div>
 							<RdsSelectList
 								label="Afar (aa)"
-								selectItems={languageNames}
+								selectItems={props.languageNames}
 							></RdsSelectList>
 						</div>
 					</div>
@@ -51,7 +36,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
 							<div className="mb-2">
 								<RdsLabel label="Country Code"></RdsLabel>
 							</div>
-							<RdsSelectList label="de" selectItems={flags}></RdsSelectList>
+							<RdsSelectList label="de" selectItems={props.flags}></RdsSelectList>
 						</div>
 					</div>
 				</div>
