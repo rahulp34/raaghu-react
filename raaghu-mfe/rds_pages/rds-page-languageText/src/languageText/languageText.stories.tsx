@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import RdsPageLanguage from "./language";
+import RdsPageLanguageText from "./languageText";
 
 export default {
 	title: "Pages/Language",
-	component: RdsPageLanguage,
-} as ComponentMeta<typeof RdsPageLanguage>;
+	component: RdsPageLanguageText,
+} as ComponentMeta<typeof RdsPageLanguageText>;
 
-const Template: ComponentStory<typeof RdsPageLanguage> = (args) => (
-	<RdsPageLanguage {...args} />
+const Template: ComponentStory<typeof RdsPageLanguageText> = (args) => (
+	<RdsPageLanguageText {...args} />
 );
 
 export const Default = Template.bind({});
@@ -16,8 +16,8 @@ export const Default = Template.bind({});
 Default.args = {
 	languagetableHeaders: [
 		{
-			displayName: "Display Name",
-			key: "displayName",
+			displayName: "Language Name",
+			key: "languageName",
 			datatype: "text",
 			sortable: true,
 		},

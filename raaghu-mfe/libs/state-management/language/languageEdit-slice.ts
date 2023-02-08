@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   PayloadAction,
   AnyAction,
-} from "@reduxjs/toolkit"; 
+} from "@reduxjs/toolkit";
 import axios from "axios";
 import {
   LanguageServiceProxy,
@@ -12,12 +12,12 @@ import {
 
 type InitialState = {
   loading: boolean;
-  languages: { defaultLanguageName: string; items: any[] };
+  languagesEdit: { flags: any[]; language: string; languageName: any[] };
   error: string;
 };
-export const initialState: InitialState = {
+export const initialStateEdit: InitialState = {
   loading: false,
-  languages: { defaultLanguageName: "", items: [] },
+  languagesEdit: { flags: [], language: "", languageName: [] },
   error: "",
 };
 
@@ -28,48 +28,46 @@ if (credentials) {
   var parsedCredentials = JSON.parse(credentials);
 }
 
-export const fetchLanguages = createAsyncThunk(
-  "language/fetchLanguages",
+export const fetchLanguagesEdit = createAsyncThunk(
+  "languageEdit/fetchLanguagesEdit",
   () => {
     return axios
       .get(
-        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguages",
+        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguageForEdit?",
         {
           headers: {
             Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
           },
         }
       )
-      .then(
-        (response) => response.data.result
-      );
+      .then((response) => response.data.result);
   }
 );
 
-const languageSlice = createSlice({
-  name: "language",
-  initialState,
+const languageEditSlice = createSlice({
+  name: "languageEdit",
+  initialState: initialStateEdit,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchLanguages.pending, (state) => {
+    builder.addCase(fetchLanguagesEdit.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      fetchLanguages.fulfilled,
+      fetchLanguagesEdit.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.languages = action.payload;
+        state.languagesEdit = action.payload;
         state.error = "";
       }
     );
 
-    builder.addCase(fetchLanguages.rejected, (state, action) => {
+    builder.addCase(fetchLanguagesEdit.rejected, (state, action) => {
       state.loading = false;
-      state.languages = { defaultLanguageName: '', items: [] };
+      state.languagesEdit = { flags: [], language: "", languageName: [] };
       state.error = action.error.message || "Something went wrong";
     });
   },
 });
 
-export default languageSlice.reducer;
+export default languageEditSlice.reducer;

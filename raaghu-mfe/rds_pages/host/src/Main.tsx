@@ -35,6 +35,7 @@ const OrganizationUnitsCompo = React.lazy(
   () => import("OrganizationUnits/OrganizationUnits")
 );
 const LanguageCompo = React.lazy(() => import("Language/Language"));
+const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
 const DynamicPropertyCompo = React.lazy(
   () => import("DynamicProperties/DynamicProperties")
 );
@@ -260,6 +261,27 @@ const Main = (props: MainProps) => {
             },
           ],
         },
+        {
+          key: "3-3",
+          label: t("Language"),
+          icon: "languages",
+          children: [
+            {
+              key: "3-3-1",
+              label: t("Language"),
+              icon: "languages",
+              path: "/language",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-3-2",
+              label: t("LanguageText"),
+              icon: "languages",
+              path: "/language-text",
+              subTitle: t("Manage user interface languages text"),
+            },
+          ],
+        },
       ],
     },
   ];
@@ -426,6 +448,10 @@ const Main = (props: MainProps) => {
                     <Route
                       path="/language"
                       element={<LanguageCompo></LanguageCompo>}
+                    ></Route>
+                    <Route
+                      path="/language-text"
+                      element={<LanguageTextCompo></LanguageTextCompo>}
                     ></Route>
                     <Route
                       path="/dynamic-properties"

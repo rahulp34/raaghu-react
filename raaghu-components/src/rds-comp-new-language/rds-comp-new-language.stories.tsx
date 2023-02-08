@@ -13,4 +13,26 @@ const Template: ComponentStory<typeof RdsCompNewLanguage> = (args) => (
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+ flags : [
+		{ option: "ad" },
+		{ option: "ae" },
+		{ option: "af" },
+		{ option: "ag" },
+		{ option: "ai" },
+	],
+languageNames :  [
+		{ option: "Invariant Language ()" },
+		{ option: "Afar (aa)" },
+		{ option: "Afar (Djibouti) (aa-DJ)" },
+		{ option: "Afar (Eritrea) (aa-ER)" },
+		{ option: "Afar (Ethiopia) (aa-ET)" },
+		{ option: "Afrikaans (af)" },
+		{ option: "Afrikaans (Namibia) (af-NA)" },
+		{ option: "Afrikaans (South Africa) (af-ZA)" },
+		{ option: "Aghem (agq)" },
+		{ option: "Aghem (Cameroon) (agq-CM)" },
+		{ option: "Akan (ak)" },
+	]
+
+};

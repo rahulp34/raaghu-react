@@ -65,8 +65,13 @@ declare module "OrganizationUnits/OrganizationUnits" {
 }
 
 declare module "Language/Language" {
-	const OrganizationUnitsComponent : React.ComponentType;
-	export default OrganizationUnitsComponent;
+	const LanguageComponent : React.ComponentType;
+	export default LanguageComponent;
+}
+
+declare module "LanguageText/LanguageText" {
+	const LanguageTextComponent : React.ComponentType;
+	export default LanguageTextComponent;
 }
 
 declare module "DynamicProperties/DynamicProperties" {
