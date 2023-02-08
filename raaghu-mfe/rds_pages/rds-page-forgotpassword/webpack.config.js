@@ -53,9 +53,9 @@ module.exports = (env, argv) => {
             plugins: [
               "react-hot-loader/babel",
               ["@babel/plugin-proposal-class-properties", { loose: true }],
-			  ["@babel/plugin-proposal-private-methods", { loose: true }],
+              ["@babel/plugin-proposal-private-methods", { loose: true }],
               [
-                "@babel/plugin-proposal-private-property-in-object",{ loose: true },
+                "@babel/plugin-proposal-private-property-in-object", { loose: true },
               ],
             ],
           },
@@ -75,28 +75,32 @@ module.exports = (env, argv) => {
       ],
     },
 
-		plugins: [
-			new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
-			new webpack.DefinePlugin({
-				"process.env": JSON.stringify(process.env),
-			}),
-			new ModuleFederationPlugin({
-				name: "forgotpassword",
-				filename: "remoteEntry.js",
-				exposes: {
-					// expose each page
-					"./ForgotPassword": "./src/forgotpassword/forgotpassword",
-				},
-				shared: {
-					...devdeps,
-					...deps,
-
+    plugins: [
+      new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
+      new webpack.DefinePlugin({
+        "process.env": JSON.stringify(process.env),
+      }),
+      new ModuleFederationPlugin({
+        name: "forgotpassword",
+        filename: "remoteEntry.js",
+        exposes: {
+          // expose each page
+          "./ForgotPassword": "./src/forgotpassword/forgotpassword",
+        },
+        shared: {
+          ...devdeps,
+          ...deps,
           react: { singleton: true, eager: true, requiredVersion: deps.react },
           "react-dom": {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
           },
+          'luxon': {
+            singleton: true,
+            version: '3.1.0',
+            requiredVersion: deps['luxon']
+          }
         },
       }),
       new HtmlWebpackPlugin({

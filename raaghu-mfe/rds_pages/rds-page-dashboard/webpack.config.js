@@ -71,7 +71,7 @@ module.exports = (env, argv) => {
               ["@babel/plugin-proposal-class-properties", { loose: true }],
               ["@babel/plugin-proposal-private-methods", { loose: true }],
               [
-                "@babel/plugin-proposal-private-property-in-object",{ loose: true },
+                "@babel/plugin-proposal-private-property-in-object", { loose: true },
               ],
             ],
           },
@@ -88,9 +88,9 @@ module.exports = (env, argv) => {
         name: "dashboard",
         filename: "remoteEntry.js",
         exposes: {
-        // expose each page
-        "./Dashboard": "./src/Dashboard/Dashboard",
-      },
+          // expose each page
+          "./Dashboard": "./src/Dashboard/Dashboard",
+        },
         shared: {
           ...devdeps,
           ...deps,
@@ -100,6 +100,11 @@ module.exports = (env, argv) => {
             eager: true,
             requiredVersion: deps["react-dom"],
           },
+          'luxon': {
+            singleton: true,
+            version: '3.1.0',
+            requiredVersion: deps['luxon']
+          }
         },
       }),
       new HtmlWebpackPlugin({

@@ -13,83 +13,83 @@ const fs = require("fs");
 const mfeFilePath = path.join(__dirname, "../", "mfe-config.ts");
 let mfeConfig = fs.readFileSync(mfeFilePath).toString();
 let mfeConfigJSON = mfeConfig.substring(
-	mfeConfig.indexOf("{"),
-	mfeConfig.lastIndexOf("}") + 1
+  mfeConfig.indexOf("{"),
+  mfeConfig.lastIndexOf("}") + 1
 );
 mfeConfigJSON = JSON.parse(mfeConfigJSON);
 
 module.exports = (env, argv) => {
-	return {
-		entry: "./src/index.ts",
-		mode: "development",
-		devServer: {
-			port: 8080,
-			open: true,
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-			},
-			hot: true,
-			historyApiFallback: true,
-		},
-		resolve: {
-			extensions: [".ts", ".tsx", ".js"],
-		},
-		module: {
-			rules: [
-				{
-					test: /\.(png|jpe?g|gif|mp4)$/i,
-					use: [
-						{
-							loader: "file-loader",
-							options: {
-								name: "[name].[ext]",
-								outputPath: "assets/",
-								publicPath: "assets/",
-							},
-						},
-					],
-				},
-				{
-					test: /\.svg$/,
-					use: ["@svgr/webpack"],
-				},
+  return {
+    entry: "./src/index.ts",
+    mode: "development",
+    devServer: {
+      port: 8080,
+      open: true,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      hot: true,
+      historyApiFallback: true,
+    },
+    resolve: {
+      extensions: [".ts", ".tsx", ".js"],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(png|jpe?g|gif|mp4)$/i,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                outputPath: "assets/",
+                publicPath: "assets/",
+              },
+            },
+          ],
+        },
+        {
+          test: /\.svg$/,
+          use: ["@svgr/webpack"],
+        },
 
-				{ test: /\.(config)$/, loader: "file-loader" },
-				{
-					test: /\.(scss|css)$/,
+        { test: /\.(config)$/, loader: "file-loader" },
+        {
+          test: /\.(scss|css)$/,
 
-					use: ["style-loader", "css-loader", "sass-loader"],
+          use: ["style-loader", "css-loader", "sass-loader"],
 
-					exclude: "/node_modules/",
-				},
-				{
-					test: /\.(js|jsx|tsx|ts)$/,
-					loader: "babel-loader",
-					exclude: /node_modules/,
-					options: {
-						cacheDirectory: true,
-						babelrc: false,
-						presets: [
-							[
-								"@babel/preset-env",
-								{ targets: { browsers: "last 2 versions" } },
-							],
-							"@babel/preset-typescript",
-							"@babel/preset-react",
-						],
-						plugins: [
-							"react-hot-loader/babel",
-							["@babel/plugin-proposal-class-properties", { loose: true }],
-							["@babel/plugin-proposal-private-methods", { loose: true }],
-							[
-								"@babel/plugin-proposal-private-property-in-object",
-								{ loose: true },
-							],
-						],
-					},
-				},
-			],
-		},
+          exclude: "/node_modules/",
+        },
+        {
+          test: /\.(js|jsx|tsx|ts)$/,
+          loader: "babel-loader",
+          exclude: /node_modules/,
+          options: {
+            cacheDirectory: true,
+            babelrc: false,
+            presets: [
+              [
+                "@babel/preset-env",
+                { targets: { browsers: "last 2 versions" } },
+              ],
+              "@babel/preset-typescript",
+              "@babel/preset-react",
+            ],
+            plugins: [
+              "react-hot-loader/babel",
+              ["@babel/plugin-proposal-class-properties", { loose: true }],
+              ["@babel/plugin-proposal-private-methods", { loose: true }],
+              [
+                "@babel/plugin-proposal-private-property-in-object",
+                { loose: true },
+              ],
+            ],
+          },
+        },
+      ],
+    },
 
 		plugins: [
 			new CopyWebpackPlugin({

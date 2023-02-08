@@ -32,11 +32,11 @@ module.exports = (env, argv) => {
 
           test: /\.(scss|css)$/,
 
-          use: [ 'style-loader' , 'css-loader' , 'sass-loader' ],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
 
           exclude: '/node_modules/',
 
-      },
+        },
         {
           test: /\.(js|jsx|tsx|ts)$/,
           loader: "babel-loader",
@@ -70,19 +70,24 @@ module.exports = (env, argv) => {
         name: "UnderMaintainance",
         filename: "remoteEntry.js",
         exposes: {
-        // expose each page
-        "./UnderMaintainance": "./src/Maintainance/Maintainance"
-      },
+          // expose each page
+          "./UnderMaintainance": "./src/Maintainance/Maintainance"
+        },
         shared: {
-            ...devdeps,
+          ...devdeps,
           ...deps,
-         
+
           react: { singleton: true, eager: true, requiredVersion: deps.react },
           "react-dom": {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
           },
+          'luxon': {
+            singleton: true,
+            version: '3.1.0',
+            requiredVersion: deps['luxon']
+          }
         },
       }),
       new HtmlWebpackPlugin({
