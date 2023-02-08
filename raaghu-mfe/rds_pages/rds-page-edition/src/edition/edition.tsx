@@ -183,7 +183,7 @@ const Edition = (props: RdsPageEditionProps) => {
 
   return (
     <div className="tenant">
-      <RdsOffcanvas
+      {/* <RdsOffcanvas
         canvasTitle="NEW EDITION"
         onclick={offCanvasHandler}
         placement="end"
@@ -230,7 +230,7 @@ const Edition = (props: RdsPageEditionProps) => {
         {(activeNavTabId == 1 || showTenantSettings == true) && (
           <RdsCompPermissionTree familyTree={familyTree} />
         )}
-      </RdsOffcanvas>
+      </RdsOffcanvas> */}
       <RdsCompEdition
         EditionItems={EditionItems}
         features={features}
