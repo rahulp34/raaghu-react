@@ -49,7 +49,8 @@ const App = () => {
   const data = useAppSelector((state) => state.persistedReducer.language);
   const Edit = useAppSelector((state) => state.persistedReducer.languageEdit);
   const [Data, setData] = useState<any>([]);
-  const [Lang, setLang]=useState<any>([])
+  const [Lang, setLang] = useState<any>([]);
+  const[Country,setCountry] = useState<any>([])
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -60,12 +61,26 @@ const App = () => {
       (item: any) => {
         return {
           option: item.displayText,
-          value:item.value,
-          isSelected:item.isSelected,
+          value: item.value,
+          isSelected: item.isSelected,
         };
       }
     );
-    setLang(tempLanguageName)
+
+    setLang(tempLanguageName);
+
+    const tempCountryName = Edit.languagesEdit.languageNames.map(
+      (item: any) => {
+        const text = item.displayText.trim().split(" ")[1];
+        const cleanedText = text.replace(/[\(\)]/g, "");
+        return {
+          option: cleanedText,
+          value: item.value,
+          isSelected: item.isSelected,
+        };
+      }
+    );
+    setCountry(tempCountryName)
 
     const tempData = data.languages.items.map((item: any) => {
       let flag = item.icon.trim().split(" ")[1];
@@ -115,6 +130,13 @@ const App = () => {
     console.log(typeof tempData);
     setData(tempData);
   }, [dispatch]);
+
+
+
+
+
+
+  
 
   // useEffect(() => {
   //   fetchLanguages();
@@ -200,7 +222,7 @@ const App = () => {
         languagetableData={Data}
         actions={actions}
         languageName={Lang}
-        flags={[]}
+        flags={Country}
       ></Language>
     </Suspense>
   );
