@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { RdsBadge, RdsButton, RdsOffcanvas } from "../../../rds-elements";
-import axios from "axios";
+import { RdsButton, RdsOffcanvas } from "../../../rds-elements";
+// import axios from "axios";
 import { RdsCompDatatable, RdsCompNewLanguage } from "../../../rds-components";
 import { Item } from "@storybook/api/dist/ts3.9/lib/stories";
 

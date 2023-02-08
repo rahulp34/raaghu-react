@@ -8,8 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLanguages } from "../../../libs/state-management/language/language-slice";
 import { fetchLanguagesEdit } from "../../../libs/state-management/language/languageEdit-slice";
-
-import axios from "axios";
+// import axios from "axios";
 import { RdsBadge, RdsIcon } from "../../rds-elements";
 
 const tableHeaders = [
@@ -58,7 +57,7 @@ const App = () => {
     console.log(data.languages);
     console.log("this is edit data ", Edit.languagesEdit);
 
-    const tempLanguageName = Edit.languagesEdit.languageName.map((item:any)=>)
+    const tempLanguageName = Edit.languagesEdit.languageName.map((item:any)=>{});
 
     const tempData = data.languages.items.map((item: any) => {
       let flag = item.icon.trim().split(" ")[1];
