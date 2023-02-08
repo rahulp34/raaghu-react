@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
 		mode: process.env.NODE_ENV || "development",
 		devServer: {
 			port: 8017,
-			open: true,
+			open: false,
 			headers: {
 				"Access-Control-Allow-Origin": "*",
 			},
@@ -86,12 +86,11 @@ module.exports = (env, argv) => {
 				filename: "remoteEntry.js",
 				exposes: {
 					// expose each page
-					"./LanguageText": "./src/App",
+					"./LanguageText": "./src/languageText/languageText",
 				},
 				shared: {
 					...devdeps,
 					...deps,
-
 					react: { singleton: true, eager: true, requiredVersion: deps.react },
 					"react-dom": {
 						singleton: true,

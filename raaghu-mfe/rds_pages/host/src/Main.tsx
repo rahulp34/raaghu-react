@@ -145,20 +145,20 @@ const Main = (props: MainProps) => {
     },
     {
       key: "1",
-      label: t("Tenants"),
-      icon: "tenant",
-      path: "/tenant",
-      subTitle: t("Manage your tenants"),
-    },
-    {
-      key: "2",
       label: t("Icons"),
       icon: "icons",
       path: "/icons",
       subTitle: t("icons"),
     },
     {
-      key: "4",
+      key: "2",
+      label: t("Tenants"),
+      icon: "tenant",
+      path: "/tenant",
+      subTitle: t("Manage your tenants"),
+    },
+    {
+      key: "3",
       label: t("Editions"),
       icon: "editions",
       path: "/edition",
@@ -260,27 +260,6 @@ const Main = (props: MainProps) => {
           path: "/language-text",
           subTitle: t("Manage user interface languages"),
         },
-        {
-          key: "3-3",
-          label: t("Language"),
-          icon: "languages",
-          children: [
-            {
-              key: "3-3-1",
-              label: t("Language"),
-              icon: "languages",
-              path: "/language",
-              subTitle: t("Manage user interface languages"),
-            },
-            {
-              key: "3-3-2",
-              label: t("LanguageText"),
-              icon: "languages",
-              path: "/language-text",
-              subTitle: t("Manage user interface languages text"),
-            },
-          ],
-        },
       ],
     },
     {
@@ -291,14 +270,14 @@ const Main = (props: MainProps) => {
       subTitle: t("Manage user interface languages"),
     },
     {
-      key: "7",
+      key: "8",
       label: t("Audit Logs"),
       icon: "audit_logs",
       path: "/audit-logs",
       subTitle: "",
     },
     {
-      key: "7",
+      key: "9",
       label: t("Settings"),
       icon: "setting",
       path: "/settings",

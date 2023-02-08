@@ -4,7 +4,7 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 import {
   LanguageServiceProxy,
   GetLanguagesOutput,
@@ -31,16 +31,16 @@ if (credentials) {
 export const fetchLanguagesEdit = createAsyncThunk(
   "languageEdit/fetchLanguagesEdit",
   () => {
-    return axios
-      .get(
-        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguageForEdit?",
-        {
-          headers: {
-            Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-          },
-        }
-      )
-      .then((response) => response.data.result);
+    // return axios
+    //   .get(
+    //     "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguageForEdit?",
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
+    //       },
+    //     }
+    //   )
+    //   .then((response) => response.data.result);
   }
 );
 

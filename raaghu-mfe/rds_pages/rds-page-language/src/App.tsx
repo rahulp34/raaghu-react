@@ -8,8 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLanguages } from "../../../libs/state-management/language/language-slice";
 import { fetchLanguagesEdit } from "../../../libs/state-management/language/languageEdit-slice";
-
-import axios from "axios";
+// import axios from "axios";
 import { RdsBadge, RdsIcon } from "../../rds-elements";
 
 const tableHeaders = [
@@ -67,9 +66,8 @@ const App = () => {
         };
       }
     );
+
     setLang(tempLanguageName);
-    console.log(Edit.languagesEdit);
-    console.log(data.languages);
 
     const tempCountryName = Edit.languagesEdit.languageNames.map(
       (item: any) => {
@@ -82,7 +80,6 @@ const App = () => {
         };
       }
     );
-    console.log(tempCountryName);
     setCountry(tempCountryName)
 
     const tempData = data.languages.items.map((item: any) => {
