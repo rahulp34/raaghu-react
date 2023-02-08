@@ -8,8 +8,6 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
-import { DateTime, Duration } from "luxon";
-
 export const BASE_URL = "https://anzdemoapi.raaghu.io";
 
 export class AccountServiceProxy {
@@ -518,7 +516,7 @@ export class AuditLogServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -536,16 +534,16 @@ export class AuditLogServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getAuditLogs(startDate: DateTime | undefined, endDate: DateTime | undefined, userName: string | undefined, serviceName: string | undefined, methodName: string | undefined, browserInfo: string | undefined, hasException: boolean | undefined, minExecutionDuration: number | undefined, maxExecutionDuration: number | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfAuditLogListDto> {
+    getAuditLogs(startDate: Date | undefined, endDate: Date | undefined, userName: string | undefined, serviceName: string | undefined, methodName: string | undefined, browserInfo: string | undefined, hasException: boolean | undefined, minExecutionDuration: number | undefined, maxExecutionDuration: number | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfAuditLogListDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogs?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (userName === null)
             throw new Error("The parameter 'userName' cannot be null.");
         else if (userName !== undefined)
@@ -633,16 +631,16 @@ export class AuditLogServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getAuditLogsToExcel(startDate: DateTime | undefined, endDate: DateTime | undefined, userName: string | undefined, serviceName: string | undefined, methodName: string | undefined, browserInfo: string | undefined, hasException: boolean | undefined, minExecutionDuration: number | undefined, maxExecutionDuration: number | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<FileDto> {
+    getAuditLogsToExcel(startDate: Date | undefined, endDate: Date | undefined, userName: string | undefined, serviceName: string | undefined, methodName: string | undefined, browserInfo: string | undefined, hasException: boolean | undefined, minExecutionDuration: number | undefined, maxExecutionDuration: number | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogsToExcel?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (userName === null)
             throw new Error("The parameter 'userName' cannot be null.");
         else if (userName !== undefined)
@@ -769,16 +767,16 @@ export class AuditLogServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getEntityChanges(startDate: DateTime | undefined, endDate: DateTime | undefined, userName: string | undefined, entityTypeFullName: string | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfEntityChangeListDto> {
+    getEntityChanges(startDate: Date | undefined, endDate: Date | undefined, userName: string | undefined, entityTypeFullName: string | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfEntityChangeListDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityChanges?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (userName === null)
             throw new Error("The parameter 'userName' cannot be null.");
         else if (userName !== undefined)
@@ -903,16 +901,16 @@ export class AuditLogServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getEntityChangesToExcel(startDate: DateTime | undefined, endDate: DateTime | undefined, userName: string | undefined, entityTypeFullName: string | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<FileDto> {
+    getEntityChangesToExcel(startDate: Date | undefined, endDate: Date | undefined, userName: string | undefined, entityTypeFullName: string | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetEntityChangesToExcel?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (userName === null)
             throw new Error("The parameter 'userName' cannot be null.");
         else if (userName !== undefined)
@@ -1022,7 +1020,7 @@ export class CachingServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -1141,7 +1139,7 @@ export class ChatServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -1279,7 +1277,7 @@ export class CommonLookupServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -1411,7 +1409,7 @@ export class DashboardCustomizationServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -1880,19 +1878,19 @@ export class DemoUiComponentsServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
      * @param date (optional) 
      * @return Success
      */
-    sendAndGetDate(date: DateTime | undefined): Promise<DateToStringOutput> {
+    sendAndGetDate(date: Date | undefined): Promise<DateToStringOutput> {
         let url_ = this.baseUrl + "/api/services/app/DemoUiComponents/SendAndGetDate?";
         if (date === null)
             throw new Error("The parameter 'date' cannot be null.");
         else if (date !== undefined)
-            url_ += "date=" + encodeURIComponent(date ? "" + date.toString() : "") + "&";
+            url_ += "date=" + encodeURIComponent(date ? "" + date.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -1929,12 +1927,12 @@ export class DemoUiComponentsServiceProxy {
      * @param date (optional) 
      * @return Success
      */
-    sendAndGetDateTime(date: DateTime | undefined): Promise<DateToStringOutput> {
+    sendAndGetDateTime(date: Date | undefined): Promise<DateToStringOutput> {
         let url_ = this.baseUrl + "/api/services/app/DemoUiComponents/SendAndGetDateTime?";
         if (date === null)
             throw new Error("The parameter 'date' cannot be null.");
         else if (date !== undefined)
-            url_ += "date=" + encodeURIComponent(date ? "" + date.toString() : "") + "&";
+            url_ += "date=" + encodeURIComponent(date ? "" + date.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -1972,16 +1970,16 @@ export class DemoUiComponentsServiceProxy {
      * @param endDate (optional) 
      * @return Success
      */
-    sendAndGetDateRange(startDate: DateTime | undefined, endDate: DateTime | undefined): Promise<DateToStringOutput> {
+    sendAndGetDateRange(startDate: Date | undefined, endDate: Date | undefined): Promise<DateToStringOutput> {
         let url_ = this.baseUrl + "/api/services/app/DemoUiComponents/SendAndGetDateRange?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -2162,7 +2160,7 @@ export class DynamicEntityPropertyServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -2445,7 +2443,7 @@ export class DynamicEntityPropertyDefinitionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -2544,7 +2542,7 @@ export class DynamicEntityPropertyValueServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -2879,7 +2877,7 @@ export class DynamicPropertyServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -3125,7 +3123,7 @@ export class DynamicPropertyValueServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -3334,7 +3332,7 @@ export class EditionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -3678,7 +3676,7 @@ export class FriendshipServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -3887,7 +3885,7 @@ export class HostDashboardServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -3895,16 +3893,16 @@ export class HostDashboardServiceProxy {
      * @param endDate (optional) 
      * @return Success
      */
-    getTopStatsData(startDate: DateTime | undefined, endDate: DateTime | undefined): Promise<TopStatsData> {
+    getTopStatsData(startDate: Date | undefined, endDate: Date | undefined): Promise<TopStatsData> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetTopStatsData?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -4016,7 +4014,7 @@ export class HostDashboardServiceProxy {
      * @param endDate (optional) 
      * @return Success
      */
-    getIncomeStatistics(incomeStatisticsDateInterval: ChartDateInterval, startDate: DateTime | undefined, endDate: DateTime | undefined): Promise<GetIncomeStatisticsDataOutput> {
+    getIncomeStatistics(incomeStatisticsDateInterval: ChartDateInterval, startDate: Date | undefined, endDate: Date | undefined): Promise<GetIncomeStatisticsDataOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetIncomeStatistics?";
         if (incomeStatisticsDateInterval === undefined || incomeStatisticsDateInterval === null)
             throw new Error("The parameter 'incomeStatisticsDateInterval' must be defined and cannot be null.");
@@ -4025,11 +4023,11 @@ export class HostDashboardServiceProxy {
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -4067,16 +4065,16 @@ export class HostDashboardServiceProxy {
      * @param endDate (optional) 
      * @return Success
      */
-    getEditionTenantStatistics(startDate: DateTime | undefined, endDate: DateTime | undefined): Promise<GetEditionTenantStatisticsOutput> {
+    getEditionTenantStatistics(startDate: Date | undefined, endDate: Date | undefined): Promise<GetEditionTenantStatisticsOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetEditionTenantStatistics?";
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -4117,7 +4115,7 @@ export class HostSettingsServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -4278,7 +4276,7 @@ export class InstallServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -4401,7 +4399,7 @@ export class InvoiceServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -4492,7 +4490,7 @@ export class LanguageServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -4809,7 +4807,7 @@ export class NotificationServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -4820,7 +4818,7 @@ export class NotificationServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getUserNotifications(state: UserNotificationState | undefined, startDate: DateTime | undefined, endDate: DateTime | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<GetNotificationsOutput> {
+    getUserNotifications(state: UserNotificationState | undefined, startDate: Date | undefined, endDate: Date | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<GetNotificationsOutput> {
         let url_ = this.baseUrl + "/api/services/app/Notification/GetUserNotifications?";
         if (state === null)
             throw new Error("The parameter 'state' cannot be null.");
@@ -4829,11 +4827,11 @@ export class NotificationServiceProxy {
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (maxResultCount === null)
             throw new Error("The parameter 'maxResultCount' cannot be null.");
         else if (maxResultCount !== undefined)
@@ -5068,7 +5066,7 @@ export class NotificationServiceProxy {
      * @param endDate (optional) 
      * @return Success
      */
-    deleteAllUserNotifications(state: UserNotificationState | undefined, startDate: DateTime | undefined, endDate: DateTime | undefined): Promise<void> {
+    deleteAllUserNotifications(state: UserNotificationState | undefined, startDate: Date | undefined, endDate: Date | undefined): Promise<void> {
         let url_ = this.baseUrl + "/api/services/app/Notification/DeleteAllUserNotifications?";
         if (state === null)
             throw new Error("The parameter 'state' cannot be null.");
@@ -5077,11 +5075,11 @@ export class NotificationServiceProxy {
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
@@ -5118,7 +5116,7 @@ export class OrganizationUnitServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -5690,7 +5688,7 @@ export class PaymentServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -6308,7 +6306,7 @@ export class PayPalPaymentServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -6399,7 +6397,7 @@ export class PermissionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -6447,7 +6445,7 @@ export class ProfileServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7031,7 +7029,7 @@ export class RoleServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7202,7 +7200,7 @@ export class SessionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7287,7 +7285,7 @@ export class StripePaymentServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7462,7 +7460,7 @@ export class SubscriptionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7539,7 +7537,7 @@ export class TenantServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -7555,7 +7553,7 @@ export class TenantServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getTenants(filter: string | undefined, subscriptionEndDateStart: DateTime | undefined, subscriptionEndDateEnd: DateTime | undefined, creationDateStart: DateTime | undefined, creationDateEnd: DateTime | undefined, editionId: number | undefined, editionIdSpecified: boolean | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfTenantListDto> {
+    getTenants(filter: string | undefined, subscriptionEndDateStart: Date | undefined, subscriptionEndDateEnd: Date | undefined, creationDateStart: Date | undefined, creationDateEnd: Date | undefined, editionId: number | undefined, editionIdSpecified: boolean | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfTenantListDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenants?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -7564,19 +7562,19 @@ export class TenantServiceProxy {
         if (subscriptionEndDateStart === null)
             throw new Error("The parameter 'subscriptionEndDateStart' cannot be null.");
         else if (subscriptionEndDateStart !== undefined)
-            url_ += "SubscriptionEndDateStart=" + encodeURIComponent(subscriptionEndDateStart ? "" + subscriptionEndDateStart.toString() : "") + "&";
+            url_ += "SubscriptionEndDateStart=" + encodeURIComponent(subscriptionEndDateStart ? "" + subscriptionEndDateStart.toISOString() : "") + "&";
         if (subscriptionEndDateEnd === null)
             throw new Error("The parameter 'subscriptionEndDateEnd' cannot be null.");
         else if (subscriptionEndDateEnd !== undefined)
-            url_ += "SubscriptionEndDateEnd=" + encodeURIComponent(subscriptionEndDateEnd ? "" + subscriptionEndDateEnd.toString() : "") + "&";
+            url_ += "SubscriptionEndDateEnd=" + encodeURIComponent(subscriptionEndDateEnd ? "" + subscriptionEndDateEnd.toISOString() : "") + "&";
         if (creationDateStart === null)
             throw new Error("The parameter 'creationDateStart' cannot be null.");
         else if (creationDateStart !== undefined)
-            url_ += "CreationDateStart=" + encodeURIComponent(creationDateStart ? "" + creationDateStart.toString() : "") + "&";
+            url_ += "CreationDateStart=" + encodeURIComponent(creationDateStart ? "" + creationDateStart.toISOString() : "") + "&";
         if (creationDateEnd === null)
             throw new Error("The parameter 'creationDateEnd' cannot be null.");
         else if (creationDateEnd !== undefined)
-            url_ += "CreationDateEnd=" + encodeURIComponent(creationDateEnd ? "" + creationDateEnd.toString() : "") + "&";
+            url_ += "CreationDateEnd=" + encodeURIComponent(creationDateEnd ? "" + creationDateEnd.toISOString() : "") + "&";
         if (editionId === null)
             throw new Error("The parameter 'editionId' cannot be null.");
         else if (editionId !== undefined)
@@ -7949,7 +7947,7 @@ export class TenantCustomizationServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -8006,7 +8004,7 @@ export class TenantDashboardServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -8321,7 +8319,7 @@ export class TenantRegistrationServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -8453,7 +8451,7 @@ export class TenantSettingsServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -8680,7 +8678,7 @@ export class TimingServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -8781,7 +8779,7 @@ export class TokenAuthServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -9207,7 +9205,7 @@ export class TwitterServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -9302,7 +9300,7 @@ export class UiCustomizationSettingsServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -9504,7 +9502,7 @@ export class UserServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -9893,7 +9891,7 @@ export class UserDelegationServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10076,7 +10074,7 @@ export class UserLinkServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10252,7 +10250,7 @@ export class UserLoginServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10265,7 +10263,7 @@ export class UserLoginServiceProxy {
      * @param skipCount (optional) 
      * @return Success
      */
-    getUserLoginAttempts(filter: string | undefined, startDate: DateTime | undefined, endDate: DateTime | undefined, result: AbpLoginResultType | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfUserLoginAttemptDto> {
+    getUserLoginAttempts(filter: string | undefined, startDate: Date | undefined, endDate: Date | undefined, result: AbpLoginResultType | undefined, sorting: string | undefined, maxResultCount: number | undefined, skipCount: number | undefined): Promise<PagedResultDtoOfUserLoginAttemptDto> {
         let url_ = this.baseUrl + "/api/services/app/UserLogin/GetUserLoginAttempts?";
         if (filter === null)
             throw new Error("The parameter 'filter' cannot be null.");
@@ -10274,11 +10272,11 @@ export class UserLoginServiceProxy {
         if (startDate === null)
             throw new Error("The parameter 'startDate' cannot be null.");
         else if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toString() : "") + "&";
+            url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toISOString() : "") + "&";
         if (endDate === null)
             throw new Error("The parameter 'endDate' cannot be null.");
         else if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toString() : "") + "&";
+            url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toISOString() : "") + "&";
         if (result === null)
             throw new Error("The parameter 'result' cannot be null.");
         else if (result !== undefined)
@@ -10335,7 +10333,7 @@ export class WebhookEventServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10388,7 +10386,7 @@ export class WebhookSendAttemptServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10531,7 +10529,7 @@ export class WebhookSubscriptionServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -10895,7 +10893,7 @@ export class WebLogServiceProxy {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
+        this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : BASE_URL;
     }
 
     /**
@@ -11009,7 +11007,7 @@ export class AcceptFriendshipRequestInput implements IAcceptFriendshipRequestInp
     static fromJS(data: any): AcceptFriendshipRequestInput {
         data = typeof data === 'object' ? data : {};
         let result = new AcceptFriendshipRequestInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11051,7 +11049,7 @@ export class ActivateEmailInput implements IActivateEmailInput {
     static fromJS(data: any): ActivateEmailInput {
         data = typeof data === 'object' ? data : {};
         let result = new ActivateEmailInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11093,7 +11091,7 @@ export class ActivateWebhookSubscriptionInput implements IActivateWebhookSubscri
     static fromJS(data: any): ActivateWebhookSubscriptionInput {
         data = typeof data === 'object' ? data : {};
         let result = new ActivateWebhookSubscriptionInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11135,7 +11133,7 @@ export class AddNewPageInput implements IAddNewPageInput {
     static fromJS(data: any): AddNewPageInput {
         data = typeof data === 'object' ? data : {};
         let result = new AddNewPageInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11175,7 +11173,7 @@ export class AddNewPageOutput implements IAddNewPageOutput {
     static fromJS(data: any): AddNewPageOutput {
         data = typeof data === 'object' ? data : {};
         let result = new AddNewPageOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11221,7 +11219,7 @@ export class AddWidgetInput implements IAddWidgetInput {
     static fromJS(data: any): AddWidgetInput {
         data = typeof data === 'object' ? data : {};
         let result = new AddWidgetInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11248,7 +11246,7 @@ export interface IAddWidgetInput {
 
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version?: string | undefined;
-    releaseDate?: DateTime;
+    releaseDate?: Date;
     currency?: string | undefined;
     currencySign?: string | undefined;
     allowTenantsToChangeEmailSettings?: boolean;
@@ -11268,7 +11266,7 @@ export class ApplicationInfoDto implements IApplicationInfoDto {
     init(_data?: any) {
         if (_data) {
             this.version = _data["version"];
-            this.releaseDate = _data["releaseDate"] ? DateTime.fromISO(_data["releaseDate"].toString()) : <any>undefined;
+            this.releaseDate = _data["releaseDate"] ? new Date(_data["releaseDate"].toString()) : <any>undefined;
             this.currency = _data["currency"];
             this.currencySign = _data["currencySign"];
             this.allowTenantsToChangeEmailSettings = _data["allowTenantsToChangeEmailSettings"];
@@ -11287,14 +11285,14 @@ export class ApplicationInfoDto implements IApplicationInfoDto {
     static fromJS(data: any): ApplicationInfoDto {
         data = typeof data === 'object' ? data : {};
         let result = new ApplicationInfoDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["version"] = this.version;
-        data["releaseDate"] = this.releaseDate ? this.releaseDate.toString() : <any>undefined;
+        data["releaseDate"] = this.releaseDate ? this.releaseDate.toISOString() : <any>undefined;
         data["currency"] = this.currency;
         data["currencySign"] = this.currencySign;
         data["allowTenantsToChangeEmailSettings"] = this.allowTenantsToChangeEmailSettings;
@@ -11313,7 +11311,7 @@ export class ApplicationInfoDto implements IApplicationInfoDto {
 
 export interface IApplicationInfoDto {
     version?: string | undefined;
-    releaseDate?: DateTime;
+    releaseDate?: Date;
     currency?: string | undefined;
     currencySign?: string | undefined;
     allowTenantsToChangeEmailSettings?: boolean;
@@ -11349,7 +11347,7 @@ export class ApplicationLanguageEditDto implements IApplicationLanguageEditDto {
     static fromJS(data: any): ApplicationLanguageEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new ApplicationLanguageEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11378,10 +11376,10 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
     isDisabled?: boolean;
     isDeleted?: boolean;
     deleterUserId?: number | undefined;
-    deletionTime?: DateTime | undefined;
-    lastModificationTime?: DateTime | undefined;
+    deletionTime?: Date | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 
@@ -11403,10 +11401,10 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
             this.isDisabled = _data["isDisabled"];
             this.isDeleted = _data["isDeleted"];
             this.deleterUserId = _data["deleterUserId"];
-            this.deletionTime = _data["deletionTime"] ? DateTime.fromISO(_data["deletionTime"].toString()) : <any>undefined;
-            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.deletionTime = _data["deletionTime"] ? new Date(_data["deletionTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = _data["lastModifierUserId"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.creatorUserId = _data["creatorUserId"];
             this.id = _data["id"];
         }
@@ -11415,7 +11413,7 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
     static fromJS(data: any): ApplicationLanguageListDto {
         data = typeof data === 'object' ? data : {};
         let result = new ApplicationLanguageListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11428,10 +11426,10 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
         data["isDisabled"] = this.isDisabled;
         data["isDeleted"] = this.isDeleted;
         data["deleterUserId"] = this.deleterUserId;
-        data["deletionTime"] = this.deletionTime ? this.deletionTime.toString() : <any>undefined;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
         return data;
@@ -11446,10 +11444,10 @@ export interface IApplicationLanguageListDto {
     isDisabled?: boolean;
     isDeleted?: boolean;
     deleterUserId?: number | undefined;
-    deletionTime?: DateTime | undefined;
-    lastModificationTime?: DateTime | undefined;
+    deletionTime?: Date | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 }
@@ -11490,7 +11488,7 @@ export class AppSettingsJsonDto implements IAppSettingsJsonDto {
     static fromJS(data: any): AppSettingsJsonDto {
         data = typeof data === 'object' ? data : {};
         let result = new AppSettingsJsonDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11521,7 +11519,7 @@ export class AuditLogListDto implements IAuditLogListDto {
     serviceName?: string | undefined;
     methodName?: string | undefined;
     parameters?: string | undefined;
-    executionTime?: DateTime;
+    executionTime?: Date;
     executionDuration?: number;
     clientIpAddress?: string | undefined;
     clientName?: string | undefined;
@@ -11548,7 +11546,7 @@ export class AuditLogListDto implements IAuditLogListDto {
             this.serviceName = _data["serviceName"];
             this.methodName = _data["methodName"];
             this.parameters = _data["parameters"];
-            this.executionTime = _data["executionTime"] ? DateTime.fromISO(_data["executionTime"].toString()) : <any>undefined;
+            this.executionTime = _data["executionTime"] ? new Date(_data["executionTime"].toString()) : <any>undefined;
             this.executionDuration = _data["executionDuration"];
             this.clientIpAddress = _data["clientIpAddress"];
             this.clientName = _data["clientName"];
@@ -11562,7 +11560,7 @@ export class AuditLogListDto implements IAuditLogListDto {
     static fromJS(data: any): AuditLogListDto {
         data = typeof data === 'object' ? data : {};
         let result = new AuditLogListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11575,7 +11573,7 @@ export class AuditLogListDto implements IAuditLogListDto {
         data["serviceName"] = this.serviceName;
         data["methodName"] = this.methodName;
         data["parameters"] = this.parameters;
-        data["executionTime"] = this.executionTime ? this.executionTime.toString() : <any>undefined;
+        data["executionTime"] = this.executionTime ? this.executionTime.toISOString() : <any>undefined;
         data["executionDuration"] = this.executionDuration;
         data["clientIpAddress"] = this.clientIpAddress;
         data["clientName"] = this.clientName;
@@ -11595,7 +11593,7 @@ export interface IAuditLogListDto {
     serviceName?: string | undefined;
     methodName?: string | undefined;
     parameters?: string | undefined;
-    executionTime?: DateTime;
+    executionTime?: Date;
     executionDuration?: number;
     clientIpAddress?: string | undefined;
     clientName?: string | undefined;
@@ -11640,7 +11638,7 @@ export class AuthenticateModel implements IAuthenticateModel {
     static fromJS(data: any): AuthenticateModel {
         data = typeof data === 'object' ? data : {};
         let result = new AuthenticateModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11716,7 +11714,7 @@ export class AuthenticateResultModel implements IAuthenticateResultModel {
     static fromJS(data: any): AuthenticateResultModel {
         data = typeof data === 'object' ? data : {};
         let result = new AuthenticateResultModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11780,7 +11778,7 @@ export class BlockUserInput implements IBlockUserInput {
     static fromJS(data: any): BlockUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new BlockUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11818,7 +11816,7 @@ export class CacheDto implements ICacheDto {
     static fromJS(data: any): CacheDto {
         data = typeof data === 'object' ? data : {};
         let result = new CacheDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11856,7 +11854,7 @@ export class CancelPaymentDto implements ICancelPaymentDto {
     static fromJS(data: any): CancelPaymentDto {
         data = typeof data === 'object' ? data : {};
         let result = new CancelPaymentDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11896,7 +11894,7 @@ export class ChangePasswordInput implements IChangePasswordInput {
     static fromJS(data: any): ChangePasswordInput {
         data = typeof data === 'object' ? data : {};
         let result = new ChangePasswordInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11934,7 +11932,7 @@ export class ChangeUserLanguageDto implements IChangeUserLanguageDto {
     static fromJS(data: any): ChangeUserLanguageDto {
         data = typeof data === 'object' ? data : {};
         let result = new ChangeUserLanguageDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -11964,7 +11962,7 @@ export class ChatMessageDto implements IChatMessageDto {
     readState?: ChatMessageReadState;
     receiverReadState?: ChatMessageReadState;
     message?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     sharedMessageId?: string | undefined;
     id?: number;
 
@@ -11987,7 +11985,7 @@ export class ChatMessageDto implements IChatMessageDto {
             this.readState = _data["readState"];
             this.receiverReadState = _data["receiverReadState"];
             this.message = _data["message"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.sharedMessageId = _data["sharedMessageId"];
             this.id = _data["id"];
         }
@@ -11996,7 +11994,7 @@ export class ChatMessageDto implements IChatMessageDto {
     static fromJS(data: any): ChatMessageDto {
         data = typeof data === 'object' ? data : {};
         let result = new ChatMessageDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12010,7 +12008,7 @@ export class ChatMessageDto implements IChatMessageDto {
         data["readState"] = this.readState;
         data["receiverReadState"] = this.receiverReadState;
         data["message"] = this.message;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["sharedMessageId"] = this.sharedMessageId;
         data["id"] = this.id;
         return data;
@@ -12026,7 +12024,7 @@ export interface IChatMessageDto {
     readState?: ChatMessageReadState;
     receiverReadState?: ChatMessageReadState;
     message?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     sharedMessageId?: string | undefined;
     id?: number;
 }
@@ -12062,7 +12060,7 @@ export class CheckDatabaseOutput implements ICheckDatabaseOutput {
     static fromJS(data: any): CheckDatabaseOutput {
         data = typeof data === 'object' ? data : {};
         let result = new CheckDatabaseOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12100,7 +12098,7 @@ export class CleanValuesInput implements ICleanValuesInput {
     static fromJS(data: any): CleanValuesInput {
         data = typeof data === 'object' ? data : {};
         let result = new CleanValuesInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12142,7 +12140,7 @@ export class ComboboxItemDto implements IComboboxItemDto {
     static fromJS(data: any): ComboboxItemDto {
         data = typeof data === 'object' ? data : {};
         let result = new ComboboxItemDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12200,7 +12198,7 @@ export class CreateEditionDto implements ICreateEditionDto {
     static fromJS(data: any): CreateEditionDto {
         data = typeof data === 'object' ? data : {};
         let result = new CreateEditionDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12244,7 +12242,7 @@ export class CreateFriendshipRequestByUserNameInput implements ICreateFriendship
     static fromJS(data: any): CreateFriendshipRequestByUserNameInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateFriendshipRequestByUserNameInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12284,7 +12282,7 @@ export class CreateFriendshipRequestInput implements ICreateFriendshipRequestInp
     static fromJS(data: any): CreateFriendshipRequestInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateFriendshipRequestInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12322,7 +12320,7 @@ export class CreateInvoiceDto implements ICreateInvoiceDto {
     static fromJS(data: any): CreateInvoiceDto {
         data = typeof data === 'object' ? data : {};
         let result = new CreateInvoiceDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12360,7 +12358,7 @@ export class CreateOrganizationUnitInput implements ICreateOrganizationUnitInput
     static fromJS(data: any): CreateOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateOrganizationUnitInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12402,7 +12400,7 @@ export class CreateOrUpdateLanguageInput implements ICreateOrUpdateLanguageInput
     static fromJS(data: any): CreateOrUpdateLanguageInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateOrUpdateLanguageInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12449,7 +12447,7 @@ export class CreateOrUpdateRoleInput implements ICreateOrUpdateRoleInput {
     static fromJS(data: any): CreateOrUpdateRoleInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateOrUpdateRoleInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12512,7 +12510,7 @@ export class CreateOrUpdateUserInput implements ICreateOrUpdateUserInput {
     static fromJS(data: any): CreateOrUpdateUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateOrUpdateUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12576,7 +12574,7 @@ export class CreatePaymentDto implements ICreatePaymentDto {
     static fromJS(data: any): CreatePaymentDto {
         data = typeof data === 'object' ? data : {};
         let result = new CreatePaymentDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12613,7 +12611,7 @@ export class CreateTenantInput implements ICreateTenantInput {
     sendActivationEmail?: boolean;
     editionId?: number | undefined;
     isActive?: boolean;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
 
     constructor(data?: ICreateTenantInput) {
@@ -12636,7 +12634,7 @@ export class CreateTenantInput implements ICreateTenantInput {
             this.sendActivationEmail = _data["sendActivationEmail"];
             this.editionId = _data["editionId"];
             this.isActive = _data["isActive"];
-            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? DateTime.fromISO(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
+            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? new Date(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
             this.isInTrialPeriod = _data["isInTrialPeriod"];
         }
     }
@@ -12644,7 +12642,7 @@ export class CreateTenantInput implements ICreateTenantInput {
     static fromJS(data: any): CreateTenantInput {
         data = typeof data === 'object' ? data : {};
         let result = new CreateTenantInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12659,7 +12657,7 @@ export class CreateTenantInput implements ICreateTenantInput {
         data["sendActivationEmail"] = this.sendActivationEmail;
         data["editionId"] = this.editionId;
         data["isActive"] = this.isActive;
-        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toString() : <any>undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : <any>undefined;
         data["isInTrialPeriod"] = this.isInTrialPeriod;
         return data;
     }
@@ -12675,14 +12673,14 @@ export interface ICreateTenantInput {
     sendActivationEmail?: boolean;
     editionId?: number | undefined;
     isActive?: boolean;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
 }
 
 export class CreateUserDelegationDto implements ICreateUserDelegationDto {
     targetUserId!: number;
-    startTime!: DateTime;
-    endTime!: DateTime;
+    startTime!: Date;
+    endTime!: Date;
 
     constructor(data?: ICreateUserDelegationDto) {
         if (data) {
@@ -12696,31 +12694,31 @@ export class CreateUserDelegationDto implements ICreateUserDelegationDto {
     init(_data?: any) {
         if (_data) {
             this.targetUserId = _data["targetUserId"];
-            this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
-            this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
+            this.startTime = _data["startTime"] ? new Date(_data["startTime"].toString()) : <any>undefined;
+            this.endTime = _data["endTime"] ? new Date(_data["endTime"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): CreateUserDelegationDto {
         data = typeof data === 'object' ? data : {};
         let result = new CreateUserDelegationDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["targetUserId"] = this.targetUserId;
-        data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
-        data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
+        data["startTime"] = this.startTime ? this.startTime.toISOString() : <any>undefined;
+        data["endTime"] = this.endTime ? this.endTime.toISOString() : <any>undefined;
         return data;
     }
 }
 
 export interface ICreateUserDelegationDto {
     targetUserId: number;
-    startTime: DateTime;
-    endTime: DateTime;
+    startTime: Date;
+    endTime: Date;
 }
 
 export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
@@ -12760,7 +12758,7 @@ export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
     static fromJS(data: any): CurrentUserProfileEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new CurrentUserProfileEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12825,7 +12823,7 @@ export class Dashboard implements IDashboard {
     static fromJS(data: any): Dashboard {
         data = typeof data === 'object' ? data : {};
         let result = new Dashboard();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12880,7 +12878,7 @@ export class DashboardOutput implements IDashboardOutput {
     static fromJS(data: any): DashboardOutput {
         data = typeof data === 'object' ? data : {};
         let result = new DashboardOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12922,7 +12920,7 @@ export class DateToStringOutput implements IDateToStringOutput {
     static fromJS(data: any): DateToStringOutput {
         data = typeof data === 'object' ? data : {};
         let result = new DateToStringOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -12958,7 +12956,7 @@ export class DelegatedImpersonateInput implements IDelegatedImpersonateInput {
     static fromJS(data: any): DelegatedImpersonateInput {
         data = typeof data === 'object' ? data : {};
         let result = new DelegatedImpersonateInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13002,7 +13000,7 @@ export class DynamicEntityPropertyDto implements IDynamicEntityPropertyDto {
     static fromJS(data: any): DynamicEntityPropertyDto {
         data = typeof data === 'object' ? data : {};
         let result = new DynamicEntityPropertyDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13052,7 +13050,7 @@ export class DynamicEntityPropertyValueDto implements IDynamicEntityPropertyValu
     static fromJS(data: any): DynamicEntityPropertyValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new DynamicEntityPropertyValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13104,7 +13102,7 @@ export class DynamicPropertyDto implements IDynamicPropertyDto {
     static fromJS(data: any): DynamicPropertyDto {
         data = typeof data === 'object' ? data : {};
         let result = new DynamicPropertyDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13156,7 +13154,7 @@ export class DynamicPropertyValueDto implements IDynamicPropertyValueDto {
     static fromJS(data: any): DynamicPropertyValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new DynamicPropertyValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13214,7 +13212,7 @@ export class EditionCreateDto implements IEditionCreateDto {
     static fromJS(data: any): EditionCreateDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionCreateDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13270,7 +13268,7 @@ export class EditionEditDto implements IEditionEditDto {
     static fromJS(data: any): EditionEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13322,7 +13320,7 @@ export class EditionInfoDto implements IEditionInfoDto {
     static fromJS(data: any): EditionInfoDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionInfoDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13388,7 +13386,7 @@ export class EditionListDto implements IEditionListDto {
     static fromJS(data: any): EditionListDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13472,7 +13470,7 @@ export class EditionSelectDto implements IEditionSelectDto {
     static fromJS(data: any): EditionSelectDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionSelectDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13554,7 +13552,7 @@ export class EditionsSelectOutput implements IEditionsSelectOutput {
     static fromJS(data: any): EditionsSelectOutput {
         data = typeof data === 'object' ? data : {};
         let result = new EditionsSelectOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13614,7 +13612,7 @@ export class EditionWithFeaturesDto implements IEditionWithFeaturesDto {
     static fromJS(data: any): EditionWithFeaturesDto {
         data = typeof data === 'object' ? data : {};
         let result = new EditionWithFeaturesDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13672,7 +13670,7 @@ export class EmailSettingsEditDto implements IEmailSettingsEditDto {
     static fromJS(data: any): EmailSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new EmailSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13706,7 +13704,7 @@ export interface IEmailSettingsEditDto {
 export class EntityChangeListDto implements IEntityChangeListDto {
     userId?: number | undefined;
     userName?: string | undefined;
-    changeTime?: DateTime;
+    changeTime?: Date;
     entityTypeFullName?: string | undefined;
     changeType?: EntityChangeType;
     readonly changeTypeName?: string | undefined;
@@ -13726,7 +13724,7 @@ export class EntityChangeListDto implements IEntityChangeListDto {
         if (_data) {
             this.userId = _data["userId"];
             this.userName = _data["userName"];
-            this.changeTime = _data["changeTime"] ? DateTime.fromISO(_data["changeTime"].toString()) : <any>undefined;
+            this.changeTime = _data["changeTime"] ? new Date(_data["changeTime"].toString()) : <any>undefined;
             this.entityTypeFullName = _data["entityTypeFullName"];
             this.changeType = _data["changeType"];
             (<any>this).changeTypeName = _data["changeTypeName"];
@@ -13738,7 +13736,7 @@ export class EntityChangeListDto implements IEntityChangeListDto {
     static fromJS(data: any): EntityChangeListDto {
         data = typeof data === 'object' ? data : {};
         let result = new EntityChangeListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13746,7 +13744,7 @@ export class EntityChangeListDto implements IEntityChangeListDto {
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["userName"] = this.userName;
-        data["changeTime"] = this.changeTime ? this.changeTime.toString() : <any>undefined;
+        data["changeTime"] = this.changeTime ? this.changeTime.toISOString() : <any>undefined;
         data["entityTypeFullName"] = this.entityTypeFullName;
         data["changeType"] = this.changeType;
         data["changeTypeName"] = this.changeTypeName;
@@ -13759,7 +13757,7 @@ export class EntityChangeListDto implements IEntityChangeListDto {
 export interface IEntityChangeListDto {
     userId?: number | undefined;
     userName?: string | undefined;
-    changeTime?: DateTime;
+    changeTime?: Date;
     entityTypeFullName?: string | undefined;
     changeType?: EntityChangeType;
     changeTypeName?: string | undefined;
@@ -13794,7 +13792,7 @@ export class EntityDto implements IEntityDto {
     static fromJS(data: any): EntityDto {
         data = typeof data === 'object' ? data : {};
         let result = new EntityDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13830,7 +13828,7 @@ export class EntityDtoOfGuid implements IEntityDtoOfGuid {
     static fromJS(data: any): EntityDtoOfGuid {
         data = typeof data === 'object' ? data : {};
         let result = new EntityDtoOfGuid();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13866,7 +13864,7 @@ export class EntityDtoOfInt64 implements IEntityDtoOfInt64 {
     static fromJS(data: any): EntityDtoOfInt64 {
         data = typeof data === 'object' ? data : {};
         let result = new EntityDtoOfInt64();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13902,7 +13900,7 @@ export class EntityDtoOfString implements IEntityDtoOfString {
     static fromJS(data: any): EntityDtoOfString {
         data = typeof data === 'object' ? data : {};
         let result = new EntityDtoOfString();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -13950,7 +13948,7 @@ export class EntityPropertyChangeDto implements IEntityPropertyChangeDto {
     static fromJS(data: any): EntityPropertyChangeDto {
         data = typeof data === 'object' ? data : {};
         let result = new EntityPropertyChangeDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14000,7 +13998,7 @@ export class ExpiringTenant implements IExpiringTenant {
     static fromJS(data: any): ExpiringTenant {
         data = typeof data === 'object' ? data : {};
         let result = new ExpiringTenant();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14046,7 +14044,7 @@ export class ExternalAuthenticateModel implements IExternalAuthenticateModel {
     static fromJS(data: any): ExternalAuthenticateModel {
         data = typeof data === 'object' ? data : {};
         let result = new ExternalAuthenticateModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14102,7 +14100,7 @@ export class ExternalAuthenticateResultModel implements IExternalAuthenticateRes
     static fromJS(data: any): ExternalAuthenticateResultModel {
         data = typeof data === 'object' ? data : {};
         let result = new ExternalAuthenticateResultModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14160,7 +14158,7 @@ export class ExternalLoginProviderInfoModel implements IExternalLoginProviderInf
     static fromJS(data: any): ExternalLoginProviderInfoModel {
         data = typeof data === 'object' ? data : {};
         let result = new ExternalLoginProviderInfoModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14260,7 +14258,7 @@ export class ExternalLoginProviderSettingsEditDto implements IExternalLoginProvi
     static fromJS(data: any): ExternalLoginProviderSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new ExternalLoginProviderSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14334,7 +14332,7 @@ export class ExternalLoginSettingsDto implements IExternalLoginSettingsDto {
     static fromJS(data: any): ExternalLoginSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ExternalLoginSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14376,7 +14374,7 @@ export class FacebookExternalLoginProviderSettings implements IFacebookExternalL
     static fromJS(data: any): FacebookExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new FacebookExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14428,7 +14426,7 @@ export class FeatureInputTypeDto implements IFeatureInputTypeDto {
     static fromJS(data: any): FeatureInputTypeDto {
         data = typeof data === 'object' ? data : {};
         let result = new FeatureInputTypeDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14480,7 +14478,7 @@ export class FileDto implements IFileDto {
     static fromJS(data: any): FileDto {
         data = typeof data === 'object' ? data : {};
         let result = new FileDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14526,7 +14524,7 @@ export class FindOrganizationUnitRolesInput implements IFindOrganizationUnitRole
     static fromJS(data: any): FindOrganizationUnitRolesInput {
         data = typeof data === 'object' ? data : {};
         let result = new FindOrganizationUnitRolesInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14574,7 +14572,7 @@ export class FindOrganizationUnitUsersInput implements IFindOrganizationUnitUser
     static fromJS(data: any): FindOrganizationUnitUsersInput {
         data = typeof data === 'object' ? data : {};
         let result = new FindOrganizationUnitUsersInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14624,7 +14622,7 @@ export class FindUsersInput implements IFindUsersInput {
     static fromJS(data: any): FindUsersInput {
         data = typeof data === 'object' ? data : {};
         let result = new FindUsersInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14679,7 +14677,7 @@ export class FlatFeatureDto implements IFlatFeatureDto {
     static fromJS(data: any): FlatFeatureDto {
         data = typeof data === 'object' ? data : {};
         let result = new FlatFeatureDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14738,7 +14736,7 @@ export class FlatFeatureSelectDto implements IFlatFeatureSelectDto {
     static fromJS(data: any): FlatFeatureSelectDto {
         data = typeof data === 'object' ? data : {};
         let result = new FlatFeatureSelectDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14794,7 +14792,7 @@ export class FlatPermissionDto implements IFlatPermissionDto {
     static fromJS(data: any): FlatPermissionDto {
         data = typeof data === 'object' ? data : {};
         let result = new FlatPermissionDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14848,7 +14846,7 @@ export class FlatPermissionWithLevelDto implements IFlatPermissionWithLevelDto {
     static fromJS(data: any): FlatPermissionWithLevelDto {
         data = typeof data === 'object' ? data : {};
         let result = new FlatPermissionWithLevelDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14908,7 +14906,7 @@ export class FriendDto implements IFriendDto {
     static fromJS(data: any): FriendDto {
         data = typeof data === 'object' ? data : {};
         let result = new FriendDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -14965,7 +14963,7 @@ export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
     static fromJS(data: any): GeneralSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new GeneralSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15007,7 +15005,7 @@ export class GetAllAvailableWebhooksOutput implements IGetAllAvailableWebhooksOu
     static fromJS(data: any): GetAllAvailableWebhooksOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllAvailableWebhooksOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15058,7 +15056,7 @@ export class GetAllDynamicEntityPropertyValuesOutput implements IGetAllDynamicEn
     static fromJS(data: any): GetAllDynamicEntityPropertyValuesOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllDynamicEntityPropertyValuesOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15115,7 +15113,7 @@ export class GetAllDynamicEntityPropertyValuesOutputItem implements IGetAllDynam
     static fromJS(data: any): GetAllDynamicEntityPropertyValuesOutputItem {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllDynamicEntityPropertyValuesOutputItem();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15167,7 +15165,7 @@ export class GetAllEntitiesHasDynamicPropertyOutput implements IGetAllEntitiesHa
     static fromJS(data: any): GetAllEntitiesHasDynamicPropertyOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllEntitiesHasDynamicPropertyOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15188,8 +15186,8 @@ export class GetAllSendAttemptsOfWebhookEventOutput implements IGetAllSendAttemp
     webhookSubscriptionId?: string;
     response?: string | undefined;
     responseStatusCode?: HttpStatusCode;
-    creationTime?: DateTime;
-    lastModificationTime?: DateTime | undefined;
+    creationTime?: Date;
+    lastModificationTime?: Date | undefined;
 
     constructor(data?: IGetAllSendAttemptsOfWebhookEventOutput) {
         if (data) {
@@ -15207,15 +15205,15 @@ export class GetAllSendAttemptsOfWebhookEventOutput implements IGetAllSendAttemp
             this.webhookSubscriptionId = _data["webhookSubscriptionId"];
             this.response = _data["response"];
             this.responseStatusCode = _data["responseStatusCode"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
-            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): GetAllSendAttemptsOfWebhookEventOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllSendAttemptsOfWebhookEventOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15226,8 +15224,8 @@ export class GetAllSendAttemptsOfWebhookEventOutput implements IGetAllSendAttemp
         data["webhookSubscriptionId"] = this.webhookSubscriptionId;
         data["response"] = this.response;
         data["responseStatusCode"] = this.responseStatusCode;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -15238,8 +15236,8 @@ export interface IGetAllSendAttemptsOfWebhookEventOutput {
     webhookSubscriptionId?: string;
     response?: string | undefined;
     responseStatusCode?: HttpStatusCode;
-    creationTime?: DateTime;
-    lastModificationTime?: DateTime | undefined;
+    creationTime?: Date;
+    lastModificationTime?: Date | undefined;
 }
 
 export class GetAllSendAttemptsOutput implements IGetAllSendAttemptsOutput {
@@ -15249,7 +15247,7 @@ export class GetAllSendAttemptsOutput implements IGetAllSendAttemptsOutput {
     data?: string | undefined;
     response?: string | undefined;
     responseStatusCode?: HttpStatusCode;
-    creationTime?: DateTime;
+    creationTime?: Date;
 
     constructor(data?: IGetAllSendAttemptsOutput) {
         if (data) {
@@ -15268,14 +15266,14 @@ export class GetAllSendAttemptsOutput implements IGetAllSendAttemptsOutput {
             this.data = _data["data"];
             this.response = _data["response"];
             this.responseStatusCode = _data["responseStatusCode"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): GetAllSendAttemptsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllSendAttemptsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15287,7 +15285,7 @@ export class GetAllSendAttemptsOutput implements IGetAllSendAttemptsOutput {
         data["data"] = this.data;
         data["response"] = this.response;
         data["responseStatusCode"] = this.responseStatusCode;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -15299,7 +15297,7 @@ export interface IGetAllSendAttemptsOutput {
     data?: string | undefined;
     response?: string | undefined;
     responseStatusCode?: HttpStatusCode;
-    creationTime?: DateTime;
+    creationTime?: Date;
 }
 
 export class GetAllSubscriptionsOutput implements IGetAllSubscriptionsOutput {
@@ -15333,7 +15331,7 @@ export class GetAllSubscriptionsOutput implements IGetAllSubscriptionsOutput {
     static fromJS(data: any): GetAllSubscriptionsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetAllSubscriptionsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15395,7 +15393,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
     static fromJS(data: any): GetCurrentLoginInformationsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetCurrentLoginInformationsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15445,7 +15443,7 @@ export class GetDailySalesOutput implements IGetDailySalesOutput {
     static fromJS(data: any): GetDailySalesOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetDailySalesOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15530,7 +15528,7 @@ export class GetDashboardDataOutput implements IGetDashboardDataOutput {
     static fromJS(data: any): GetDashboardDataOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetDashboardDataOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15604,7 +15602,7 @@ export class GetDefaultEditionNameOutput implements IGetDefaultEditionNameOutput
     static fromJS(data: any): GetDefaultEditionNameOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetDefaultEditionNameOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15667,7 +15665,7 @@ export class GetEditionEditOutput implements IGetEditionEditOutput {
     static fromJS(data: any): GetEditionEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetEditionEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15726,7 +15724,7 @@ export class GetEditionTenantStatisticsOutput implements IGetEditionTenantStatis
     static fromJS(data: any): GetEditionTenantStatisticsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetEditionTenantStatisticsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15749,8 +15747,8 @@ export class GetExpiringTenantsOutput implements IGetExpiringTenantsOutput {
     expiringTenants?: ExpiringTenant[] | undefined;
     subscriptionEndAlertDayCount?: number;
     maxExpiringTenantsShownCount?: number;
-    subscriptionEndDateStart?: DateTime;
-    subscriptionEndDateEnd?: DateTime;
+    subscriptionEndDateStart?: Date;
+    subscriptionEndDateEnd?: Date;
 
     constructor(data?: IGetExpiringTenantsOutput) {
         if (data) {
@@ -15777,15 +15775,15 @@ export class GetExpiringTenantsOutput implements IGetExpiringTenantsOutput {
             }
             this.subscriptionEndAlertDayCount = _data["subscriptionEndAlertDayCount"];
             this.maxExpiringTenantsShownCount = _data["maxExpiringTenantsShownCount"];
-            this.subscriptionEndDateStart = _data["subscriptionEndDateStart"] ? DateTime.fromISO(_data["subscriptionEndDateStart"].toString()) : <any>undefined;
-            this.subscriptionEndDateEnd = _data["subscriptionEndDateEnd"] ? DateTime.fromISO(_data["subscriptionEndDateEnd"].toString()) : <any>undefined;
+            this.subscriptionEndDateStart = _data["subscriptionEndDateStart"] ? new Date(_data["subscriptionEndDateStart"].toString()) : <any>undefined;
+            this.subscriptionEndDateEnd = _data["subscriptionEndDateEnd"] ? new Date(_data["subscriptionEndDateEnd"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): GetExpiringTenantsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetExpiringTenantsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15798,8 +15796,8 @@ export class GetExpiringTenantsOutput implements IGetExpiringTenantsOutput {
         }
         data["subscriptionEndAlertDayCount"] = this.subscriptionEndAlertDayCount;
         data["maxExpiringTenantsShownCount"] = this.maxExpiringTenantsShownCount;
-        data["subscriptionEndDateStart"] = this.subscriptionEndDateStart ? this.subscriptionEndDateStart.toString() : <any>undefined;
-        data["subscriptionEndDateEnd"] = this.subscriptionEndDateEnd ? this.subscriptionEndDateEnd.toString() : <any>undefined;
+        data["subscriptionEndDateStart"] = this.subscriptionEndDateStart ? this.subscriptionEndDateStart.toISOString() : <any>undefined;
+        data["subscriptionEndDateEnd"] = this.subscriptionEndDateEnd ? this.subscriptionEndDateEnd.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -15808,8 +15806,8 @@ export interface IGetExpiringTenantsOutput {
     expiringTenants?: IExpiringTenant[] | undefined;
     subscriptionEndAlertDayCount?: number;
     maxExpiringTenantsShownCount?: number;
-    subscriptionEndDateStart?: DateTime;
-    subscriptionEndDateEnd?: DateTime;
+    subscriptionEndDateStart?: Date;
+    subscriptionEndDateEnd?: Date;
 }
 
 export class GetGeneralStatsOutput implements IGetGeneralStatsOutput {
@@ -15837,7 +15835,7 @@ export class GetGeneralStatsOutput implements IGetGeneralStatsOutput {
     static fromJS(data: any): GetGeneralStatsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetGeneralStatsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15888,7 +15886,7 @@ export class GetIncomeStatisticsDataOutput implements IGetIncomeStatisticsDataOu
     static fromJS(data: any): GetIncomeStatisticsDataOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetIncomeStatisticsDataOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -15955,7 +15953,7 @@ export class GetLanguageForEditOutput implements IGetLanguageForEditOutput {
     static fromJS(data: any): GetLanguageForEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetLanguageForEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16016,7 +16014,7 @@ export class GetLanguagesOutput implements IGetLanguagesOutput {
     static fromJS(data: any): GetLanguagesOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetLanguagesOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16062,7 +16060,7 @@ export class GetLatestWebLogsOutput implements IGetLatestWebLogsOutput {
     static fromJS(data: any): GetLatestWebLogsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetLatestWebLogsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16113,7 +16111,7 @@ export class GetMemberActivityOutput implements IGetMemberActivityOutput {
     static fromJS(data: any): GetMemberActivityOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetMemberActivityOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16166,7 +16164,7 @@ export class GetNotificationSettingsOutput implements IGetNotificationSettingsOu
     static fromJS(data: any): GetNotificationSettingsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetNotificationSettingsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16223,7 +16221,7 @@ export class GetNotificationsOutput implements IGetNotificationsOutput {
     static fromJS(data: any): GetNotificationsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetNotificationsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16268,7 +16266,7 @@ export class GetPasswordComplexitySettingOutput implements IGetPasswordComplexit
     static fromJS(data: any): GetPasswordComplexitySettingOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetPasswordComplexitySettingOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16304,7 +16302,7 @@ export class GetProfilePictureOutput implements IGetProfilePictureOutput {
     static fromJS(data: any): GetProfilePictureOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetProfilePictureOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16344,7 +16342,7 @@ export class GetProfitShareOutput implements IGetProfitShareOutput {
     static fromJS(data: any): GetProfitShareOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetProfitShareOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16366,7 +16364,7 @@ export interface IGetProfitShareOutput {
 export class GetRecentTenantsOutput implements IGetRecentTenantsOutput {
     recentTenantsDayCount?: number;
     maxRecentTenantsShownCount?: number;
-    tenantCreationStartDate?: DateTime;
+    tenantCreationStartDate?: Date;
     recentTenants?: RecentTenant[] | undefined;
 
     constructor(data?: IGetRecentTenantsOutput) {
@@ -16389,7 +16387,7 @@ export class GetRecentTenantsOutput implements IGetRecentTenantsOutput {
         if (_data) {
             this.recentTenantsDayCount = _data["recentTenantsDayCount"];
             this.maxRecentTenantsShownCount = _data["maxRecentTenantsShownCount"];
-            this.tenantCreationStartDate = _data["tenantCreationStartDate"] ? DateTime.fromISO(_data["tenantCreationStartDate"].toString()) : <any>undefined;
+            this.tenantCreationStartDate = _data["tenantCreationStartDate"] ? new Date(_data["tenantCreationStartDate"].toString()) : <any>undefined;
             if (Array.isArray(_data["recentTenants"])) {
                 this.recentTenants = [] as any;
                 for (let item of _data["recentTenants"])
@@ -16401,7 +16399,7 @@ export class GetRecentTenantsOutput implements IGetRecentTenantsOutput {
     static fromJS(data: any): GetRecentTenantsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetRecentTenantsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16409,7 +16407,7 @@ export class GetRecentTenantsOutput implements IGetRecentTenantsOutput {
         data = typeof data === 'object' ? data : {};
         data["recentTenantsDayCount"] = this.recentTenantsDayCount;
         data["maxRecentTenantsShownCount"] = this.maxRecentTenantsShownCount;
-        data["tenantCreationStartDate"] = this.tenantCreationStartDate ? this.tenantCreationStartDate.toString() : <any>undefined;
+        data["tenantCreationStartDate"] = this.tenantCreationStartDate ? this.tenantCreationStartDate.toISOString() : <any>undefined;
         if (Array.isArray(this.recentTenants)) {
             data["recentTenants"] = [];
             for (let item of this.recentTenants)
@@ -16422,7 +16420,7 @@ export class GetRecentTenantsOutput implements IGetRecentTenantsOutput {
 export interface IGetRecentTenantsOutput {
     recentTenantsDayCount?: number;
     maxRecentTenantsShownCount?: number;
-    tenantCreationStartDate?: DateTime;
+    tenantCreationStartDate?: Date;
     recentTenants?: IRecentTenant[] | undefined;
 }
 
@@ -16458,7 +16456,7 @@ export class GetRegionalStatsOutput implements IGetRegionalStatsOutput {
     static fromJS(data: any): GetRegionalStatsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetRegionalStatsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16518,7 +16516,7 @@ export class GetRoleForEditOutput implements IGetRoleForEditOutput {
     static fromJS(data: any): GetRoleForEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetRoleForEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16570,7 +16568,7 @@ export class GetRolesInput implements IGetRolesInput {
     static fromJS(data: any): GetRolesInput {
         data = typeof data === 'object' ? data : {};
         let result = new GetRolesInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16629,7 +16627,7 @@ export class GetSalesSummaryOutput implements IGetSalesSummaryOutput {
     static fromJS(data: any): GetSalesSummaryOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetSalesSummaryOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16701,7 +16699,7 @@ export class GetTenantFeaturesEditOutput implements IGetTenantFeaturesEditOutput
     static fromJS(data: any): GetTenantFeaturesEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetTenantFeaturesEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16753,7 +16751,7 @@ export class GetTopStatsOutput implements IGetTopStatsOutput {
     static fromJS(data: any): GetTopStatsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetTopStatsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16775,7 +16773,7 @@ export interface IGetTopStatsOutput {
 }
 
 export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriendsWithSettingsOutput {
-    serverTime?: DateTime;
+    serverTime?: Date;
     friends?: FriendDto[] | undefined;
 
     constructor(data?: IGetUserChatFriendsWithSettingsOutput) {
@@ -16796,7 +16794,7 @@ export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriends
 
     init(_data?: any) {
         if (_data) {
-            this.serverTime = _data["serverTime"] ? DateTime.fromISO(_data["serverTime"].toString()) : <any>undefined;
+            this.serverTime = _data["serverTime"] ? new Date(_data["serverTime"].toString()) : <any>undefined;
             if (Array.isArray(_data["friends"])) {
                 this.friends = [] as any;
                 for (let item of _data["friends"])
@@ -16808,13 +16806,13 @@ export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriends
     static fromJS(data: any): GetUserChatFriendsWithSettingsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetUserChatFriendsWithSettingsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["serverTime"] = this.serverTime ? this.serverTime.toString() : <any>undefined;
+        data["serverTime"] = this.serverTime ? this.serverTime.toISOString() : <any>undefined;
         if (Array.isArray(this.friends)) {
             data["friends"] = [];
             for (let item of this.friends)
@@ -16825,7 +16823,7 @@ export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriends
 }
 
 export interface IGetUserChatFriendsWithSettingsOutput {
-    serverTime?: DateTime;
+    serverTime?: Date;
     friends?: IFriendDto[] | undefined;
 }
 
@@ -16885,7 +16883,7 @@ export class GetUserForEditOutput implements IGetUserForEditOutput {
     static fromJS(data: any): GetUserForEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetUserForEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -16958,7 +16956,7 @@ export class GetUserPermissionsForEditOutput implements IGetUserPermissionsForEd
     static fromJS(data: any): GetUserPermissionsForEditOutput {
         data = typeof data === 'object' ? data : {};
         let result = new GetUserPermissionsForEditOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17020,7 +17018,7 @@ export class GetUsersInput implements IGetUsersInput {
     static fromJS(data: any): GetUsersInput {
         data = typeof data === 'object' ? data : {};
         let result = new GetUsersInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17076,7 +17074,7 @@ export class GoogleExternalLoginProviderSettings implements IGoogleExternalLogin
     static fromJS(data: any): GoogleExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new GoogleExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17118,7 +17116,7 @@ export class HostBillingSettingsEditDto implements IHostBillingSettingsEditDto {
     static fromJS(data: any): HostBillingSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new HostBillingSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17185,7 +17183,7 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
     static fromJS(data: any): HostSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new HostSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17251,7 +17249,7 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
     static fromJS(data: any): HostUserManagementSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new HostUserManagementSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17376,7 +17374,7 @@ export class IInputType implements IIInputType {
     static fromJS(data: any): IInputType {
         data = typeof data === 'object' ? data : {};
         let result = new IInputType();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17426,7 +17424,7 @@ export class ImpersonatedAuthenticateResultModel implements IImpersonatedAuthent
     static fromJS(data: any): ImpersonatedAuthenticateResultModel {
         data = typeof data === 'object' ? data : {};
         let result = new ImpersonatedAuthenticateResultModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17468,7 +17466,7 @@ export class ImpersonateOutput implements IImpersonateOutput {
     static fromJS(data: any): ImpersonateOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ImpersonateOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17508,7 +17506,7 @@ export class ImpersonateTenantInput implements IImpersonateTenantInput {
     static fromJS(data: any): ImpersonateTenantInput {
         data = typeof data === 'object' ? data : {};
         let result = new ImpersonateTenantInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17548,7 +17546,7 @@ export class ImpersonateUserInput implements IImpersonateUserInput {
     static fromJS(data: any): ImpersonateUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new ImpersonateUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17567,7 +17565,7 @@ export interface IImpersonateUserInput {
 
 export class IncomeStastistic implements IIncomeStastistic {
     label?: string | undefined;
-    date?: DateTime;
+    date?: Date;
     amount?: number;
 
     constructor(data?: IIncomeStastistic) {
@@ -17582,7 +17580,7 @@ export class IncomeStastistic implements IIncomeStastistic {
     init(_data?: any) {
         if (_data) {
             this.label = _data["label"];
-            this.date = _data["date"] ? DateTime.fromISO(_data["date"].toString()) : <any>undefined;
+            this.date = _data["date"] ? new Date(_data["date"].toString()) : <any>undefined;
             this.amount = _data["amount"];
         }
     }
@@ -17590,14 +17588,14 @@ export class IncomeStastistic implements IIncomeStastistic {
     static fromJS(data: any): IncomeStastistic {
         data = typeof data === 'object' ? data : {};
         let result = new IncomeStastistic();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["label"] = this.label;
-        data["date"] = this.date ? this.date.toString() : <any>undefined;
+        data["date"] = this.date ? this.date.toISOString() : <any>undefined;
         data["amount"] = this.amount;
         return data;
     }
@@ -17605,7 +17603,7 @@ export class IncomeStastistic implements IIncomeStastistic {
 
 export interface IIncomeStastistic {
     label?: string | undefined;
-    date?: DateTime;
+    date?: Date;
     amount?: number;
 }
 
@@ -17641,7 +17639,7 @@ export class InsertOrUpdateAllValuesInput implements IInsertOrUpdateAllValuesInp
     static fromJS(data: any): InsertOrUpdateAllValuesInput {
         data = typeof data === 'object' ? data : {};
         let result = new InsertOrUpdateAllValuesInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17689,7 +17687,7 @@ export class InsertOrUpdateAllValuesInputItem implements IInsertOrUpdateAllValue
     static fromJS(data: any): InsertOrUpdateAllValuesInputItem {
         data = typeof data === 'object' ? data : {};
         let result = new InsertOrUpdateAllValuesInputItem();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17747,7 +17745,7 @@ export class InstallDto implements IInstallDto {
     static fromJS(data: any): InstallDto {
         data = typeof data === 'object' ? data : {};
         let result = new InstallDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17778,7 +17776,7 @@ export class InvoiceDto implements IInvoiceDto {
     amount?: number;
     editionDisplayName?: string | undefined;
     invoiceNo?: string | undefined;
-    invoiceDate?: DateTime;
+    invoiceDate?: Date;
     tenantLegalName?: string | undefined;
     tenantAddress?: string[] | undefined;
     tenantTaxNo?: string | undefined;
@@ -17799,7 +17797,7 @@ export class InvoiceDto implements IInvoiceDto {
             this.amount = _data["amount"];
             this.editionDisplayName = _data["editionDisplayName"];
             this.invoiceNo = _data["invoiceNo"];
-            this.invoiceDate = _data["invoiceDate"] ? DateTime.fromISO(_data["invoiceDate"].toString()) : <any>undefined;
+            this.invoiceDate = _data["invoiceDate"] ? new Date(_data["invoiceDate"].toString()) : <any>undefined;
             this.tenantLegalName = _data["tenantLegalName"];
             if (Array.isArray(_data["tenantAddress"])) {
                 this.tenantAddress = [] as any;
@@ -17819,7 +17817,7 @@ export class InvoiceDto implements IInvoiceDto {
     static fromJS(data: any): InvoiceDto {
         data = typeof data === 'object' ? data : {};
         let result = new InvoiceDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17828,7 +17826,7 @@ export class InvoiceDto implements IInvoiceDto {
         data["amount"] = this.amount;
         data["editionDisplayName"] = this.editionDisplayName;
         data["invoiceNo"] = this.invoiceNo;
-        data["invoiceDate"] = this.invoiceDate ? this.invoiceDate.toString() : <any>undefined;
+        data["invoiceDate"] = this.invoiceDate ? this.invoiceDate.toISOString() : <any>undefined;
         data["tenantLegalName"] = this.tenantLegalName;
         if (Array.isArray(this.tenantAddress)) {
             data["tenantAddress"] = [];
@@ -17850,7 +17848,7 @@ export interface IInvoiceDto {
     amount?: number;
     editionDisplayName?: string | undefined;
     invoiceNo?: string | undefined;
-    invoiceDate?: DateTime;
+    invoiceDate?: Date;
     tenantLegalName?: string | undefined;
     tenantAddress?: string[] | undefined;
     tenantTaxNo?: string | undefined;
@@ -17879,7 +17877,7 @@ export class IsTenantAvailableInput implements IIsTenantAvailableInput {
     static fromJS(data: any): IsTenantAvailableInput {
         data = typeof data === 'object' ? data : {};
         let result = new IsTenantAvailableInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17919,7 +17917,7 @@ export class IsTenantAvailableOutput implements IIsTenantAvailableOutput {
     static fromJS(data: any): IsTenantAvailableOutput {
         data = typeof data === 'object' ? data : {};
         let result = new IsTenantAvailableOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -17967,7 +17965,7 @@ export class IValueValidator implements IIValueValidator {
     static fromJS(data: any): IValueValidator {
         data = typeof data === 'object' ? data : {};
         let result = new IValueValidator();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18013,7 +18011,7 @@ export class JsonClaimMapDto implements IJsonClaimMapDto {
     static fromJS(data: any): JsonClaimMapDto {
         data = typeof data === 'object' ? data : {};
         let result = new JsonClaimMapDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18055,7 +18053,7 @@ export class LanguageTextListDto implements ILanguageTextListDto {
     static fromJS(data: any): LanguageTextListDto {
         data = typeof data === 'object' ? data : {};
         let result = new LanguageTextListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18103,7 +18101,7 @@ export class LdapSettingsEditDto implements ILdapSettingsEditDto {
     static fromJS(data: any): LdapSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new LdapSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18153,7 +18151,7 @@ export class LinkedUserDto implements ILinkedUserDto {
     static fromJS(data: any): LinkedUserDto {
         data = typeof data === 'object' ? data : {};
         let result = new LinkedUserDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18199,7 +18197,7 @@ export class LinkToUserInput implements ILinkToUserInput {
     static fromJS(data: any): LinkToUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new LinkToUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18250,7 +18248,7 @@ export class ListResultDtoOfCacheDto implements IListResultDtoOfCacheDto {
     static fromJS(data: any): ListResultDtoOfCacheDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfCacheDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18301,7 +18299,7 @@ export class ListResultDtoOfChatMessageDto implements IListResultDtoOfChatMessag
     static fromJS(data: any): ListResultDtoOfChatMessageDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfChatMessageDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18352,7 +18350,7 @@ export class ListResultDtoOfDynamicEntityPropertyDto implements IListResultDtoOf
     static fromJS(data: any): ListResultDtoOfDynamicEntityPropertyDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfDynamicEntityPropertyDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18403,7 +18401,7 @@ export class ListResultDtoOfDynamicEntityPropertyValueDto implements IListResult
     static fromJS(data: any): ListResultDtoOfDynamicEntityPropertyValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfDynamicEntityPropertyValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18454,7 +18452,7 @@ export class ListResultDtoOfDynamicPropertyDto implements IListResultDtoOfDynami
     static fromJS(data: any): ListResultDtoOfDynamicPropertyDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfDynamicPropertyDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18505,7 +18503,7 @@ export class ListResultDtoOfDynamicPropertyValueDto implements IListResultDtoOfD
     static fromJS(data: any): ListResultDtoOfDynamicPropertyValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfDynamicPropertyValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18556,7 +18554,7 @@ export class ListResultDtoOfEditionListDto implements IListResultDtoOfEditionLis
     static fromJS(data: any): ListResultDtoOfEditionListDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfEditionListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18607,7 +18605,7 @@ export class ListResultDtoOfFlatPermissionWithLevelDto implements IListResultDto
     static fromJS(data: any): ListResultDtoOfFlatPermissionWithLevelDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfFlatPermissionWithLevelDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18658,7 +18656,7 @@ export class ListResultDtoOfGetAllAvailableWebhooksOutput implements IListResult
     static fromJS(data: any): ListResultDtoOfGetAllAvailableWebhooksOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfGetAllAvailableWebhooksOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18709,7 +18707,7 @@ export class ListResultDtoOfGetAllEntitiesHasDynamicPropertyOutput implements IL
     static fromJS(data: any): ListResultDtoOfGetAllEntitiesHasDynamicPropertyOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfGetAllEntitiesHasDynamicPropertyOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18760,7 +18758,7 @@ export class ListResultDtoOfGetAllSendAttemptsOfWebhookEventOutput implements IL
     static fromJS(data: any): ListResultDtoOfGetAllSendAttemptsOfWebhookEventOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfGetAllSendAttemptsOfWebhookEventOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18811,7 +18809,7 @@ export class ListResultDtoOfGetAllSubscriptionsOutput implements IListResultDtoO
     static fromJS(data: any): ListResultDtoOfGetAllSubscriptionsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfGetAllSubscriptionsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18862,7 +18860,7 @@ export class ListResultDtoOfLinkedUserDto implements IListResultDtoOfLinkedUserD
     static fromJS(data: any): ListResultDtoOfLinkedUserDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfLinkedUserDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18913,7 +18911,7 @@ export class ListResultDtoOfNameValueDto implements IListResultDtoOfNameValueDto
     static fromJS(data: any): ListResultDtoOfNameValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfNameValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -18964,7 +18962,7 @@ export class ListResultDtoOfOrganizationUnitDto implements IListResultDtoOfOrgan
     static fromJS(data: any): ListResultDtoOfOrganizationUnitDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfOrganizationUnitDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19015,7 +19013,7 @@ export class ListResultDtoOfRoleListDto implements IListResultDtoOfRoleListDto {
     static fromJS(data: any): ListResultDtoOfRoleListDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfRoleListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19066,7 +19064,7 @@ export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListR
     static fromJS(data: any): ListResultDtoOfSubscribableEditionComboboxItemDto {
         data = typeof data === 'object' ? data : {};
         let result = new ListResultDtoOfSubscribableEditionComboboxItemDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19108,7 +19106,7 @@ export class LocalizableComboboxItemDto implements ILocalizableComboboxItemDto {
     static fromJS(data: any): LocalizableComboboxItemDto {
         data = typeof data === 'object' ? data : {};
         let result = new LocalizableComboboxItemDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19157,7 +19155,7 @@ export class LocalizableComboboxItemSourceDto implements ILocalizableComboboxIte
     static fromJS(data: any): LocalizableComboboxItemSourceDto {
         data = typeof data === 'object' ? data : {};
         let result = new LocalizableComboboxItemSourceDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19199,7 +19197,7 @@ export class MarkAllUnreadMessagesOfUserAsReadInput implements IMarkAllUnreadMes
     static fromJS(data: any): MarkAllUnreadMessagesOfUserAsReadInput {
         data = typeof data === 'object' ? data : {};
         let result = new MarkAllUnreadMessagesOfUserAsReadInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19245,7 +19243,7 @@ export class MemberActivity implements IMemberActivity {
     static fromJS(data: any): MemberActivity {
         data = typeof data === 'object' ? data : {};
         let result = new MemberActivity();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19291,7 +19289,7 @@ export class MicrosoftExternalLoginProviderSettings implements IMicrosoftExterna
     static fromJS(data: any): MicrosoftExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new MicrosoftExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19331,7 +19329,7 @@ export class MoveOrganizationUnitInput implements IMoveOrganizationUnitInput {
     static fromJS(data: any): MoveOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         let result = new MoveOrganizationUnitInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19371,7 +19369,7 @@ export class MoveTenantsToAnotherEditionDto implements IMoveTenantsToAnotherEdit
     static fromJS(data: any): MoveTenantsToAnotherEditionDto {
         data = typeof data === 'object' ? data : {};
         let result = new MoveTenantsToAnotherEditionDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19411,7 +19409,7 @@ export class NameValue implements INameValue {
     static fromJS(data: any): NameValue {
         data = typeof data === 'object' ? data : {};
         let result = new NameValue();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19451,7 +19449,7 @@ export class NameValueDto implements INameValueDto {
     static fromJS(data: any): NameValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new NameValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19491,7 +19489,7 @@ export class NameValueOfString implements INameValueOfString {
     static fromJS(data: any): NameValueOfString {
         data = typeof data === 'object' ? data : {};
         let result = new NameValueOfString();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19537,7 +19535,7 @@ export class NotificationData implements INotificationData {
     static fromJS(data: any): NotificationData {
         data = typeof data === 'object' ? data : {};
         let result = new NotificationData();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19591,7 +19589,7 @@ export class NotificationSubscriptionDto implements INotificationSubscriptionDto
     static fromJS(data: any): NotificationSubscriptionDto {
         data = typeof data === 'object' ? data : {};
         let result = new NotificationSubscriptionDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19635,7 +19633,7 @@ export class NotificationSubscriptionWithDisplayNameDto implements INotification
     static fromJS(data: any): NotificationSubscriptionWithDisplayNameDto {
         data = typeof data === 'object' ? data : {};
         let result = new NotificationSubscriptionWithDisplayNameDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19685,7 +19683,7 @@ export class OpenIdConnectExternalLoginProviderSettings implements IOpenIdConnec
     static fromJS(data: any): OpenIdConnectExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new OpenIdConnectExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19714,9 +19712,9 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
     displayName?: string | undefined;
     memberCount?: number;
     roleCount?: number;
-    lastModificationTime?: DateTime | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 
@@ -19736,9 +19734,9 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
             this.displayName = _data["displayName"];
             this.memberCount = _data["memberCount"];
             this.roleCount = _data["roleCount"];
-            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = _data["lastModifierUserId"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.creatorUserId = _data["creatorUserId"];
             this.id = _data["id"];
         }
@@ -19747,7 +19745,7 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
     static fromJS(data: any): OrganizationUnitDto {
         data = typeof data === 'object' ? data : {};
         let result = new OrganizationUnitDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19758,9 +19756,9 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
         data["displayName"] = this.displayName;
         data["memberCount"] = this.memberCount;
         data["roleCount"] = this.roleCount;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
         return data;
@@ -19773,9 +19771,9 @@ export interface IOrganizationUnitDto {
     displayName?: string | undefined;
     memberCount?: number;
     roleCount?: number;
-    lastModificationTime?: DateTime | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 }
@@ -19783,7 +19781,7 @@ export interface IOrganizationUnitDto {
 export class OrganizationUnitRoleListDto implements IOrganizationUnitRoleListDto {
     displayName?: string | undefined;
     name?: string | undefined;
-    addedTime?: DateTime;
+    addedTime?: Date;
     id?: number;
 
     constructor(data?: IOrganizationUnitRoleListDto) {
@@ -19799,7 +19797,7 @@ export class OrganizationUnitRoleListDto implements IOrganizationUnitRoleListDto
         if (_data) {
             this.displayName = _data["displayName"];
             this.name = _data["name"];
-            this.addedTime = _data["addedTime"] ? DateTime.fromISO(_data["addedTime"].toString()) : <any>undefined;
+            this.addedTime = _data["addedTime"] ? new Date(_data["addedTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -19807,7 +19805,7 @@ export class OrganizationUnitRoleListDto implements IOrganizationUnitRoleListDto
     static fromJS(data: any): OrganizationUnitRoleListDto {
         data = typeof data === 'object' ? data : {};
         let result = new OrganizationUnitRoleListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19815,7 +19813,7 @@ export class OrganizationUnitRoleListDto implements IOrganizationUnitRoleListDto
         data = typeof data === 'object' ? data : {};
         data["displayName"] = this.displayName;
         data["name"] = this.name;
-        data["addedTime"] = this.addedTime ? this.addedTime.toString() : <any>undefined;
+        data["addedTime"] = this.addedTime ? this.addedTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -19824,7 +19822,7 @@ export class OrganizationUnitRoleListDto implements IOrganizationUnitRoleListDto
 export interface IOrganizationUnitRoleListDto {
     displayName?: string | undefined;
     name?: string | undefined;
-    addedTime?: DateTime;
+    addedTime?: Date;
     id?: number;
 }
 
@@ -19834,7 +19832,7 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
     userName?: string | undefined;
     emailAddress?: string | undefined;
     profilePictureId?: string | undefined;
-    addedTime?: DateTime;
+    addedTime?: Date;
     id?: number;
 
     constructor(data?: IOrganizationUnitUserListDto) {
@@ -19853,7 +19851,7 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
             this.userName = _data["userName"];
             this.emailAddress = _data["emailAddress"];
             this.profilePictureId = _data["profilePictureId"];
-            this.addedTime = _data["addedTime"] ? DateTime.fromISO(_data["addedTime"].toString()) : <any>undefined;
+            this.addedTime = _data["addedTime"] ? new Date(_data["addedTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -19861,7 +19859,7 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
     static fromJS(data: any): OrganizationUnitUserListDto {
         data = typeof data === 'object' ? data : {};
         let result = new OrganizationUnitUserListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19872,7 +19870,7 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
         data["userName"] = this.userName;
         data["emailAddress"] = this.emailAddress;
         data["profilePictureId"] = this.profilePictureId;
-        data["addedTime"] = this.addedTime ? this.addedTime.toString() : <any>undefined;
+        data["addedTime"] = this.addedTime ? this.addedTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -19884,7 +19882,7 @@ export interface IOrganizationUnitUserListDto {
     userName?: string | undefined;
     emailAddress?: string | undefined;
     profilePictureId?: string | undefined;
-    addedTime?: DateTime;
+    addedTime?: Date;
     id?: number;
 }
 
@@ -19909,7 +19907,7 @@ export class OtherSettingsEditDto implements IOtherSettingsEditDto {
     static fromJS(data: any): OtherSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new OtherSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -19960,7 +19958,7 @@ export class Page implements IPage {
     static fromJS(data: any): Page {
         data = typeof data === 'object' ? data : {};
         let result = new Page();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20017,7 +20015,7 @@ export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLo
     static fromJS(data: any): PagedResultDtoOfAuditLogListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfAuditLogListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20072,7 +20070,7 @@ export class PagedResultDtoOfEntityChangeListDto implements IPagedResultDtoOfEnt
     static fromJS(data: any): PagedResultDtoOfEntityChangeListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfEntityChangeListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20127,7 +20125,7 @@ export class PagedResultDtoOfGetAllSendAttemptsOutput implements IPagedResultDto
     static fromJS(data: any): PagedResultDtoOfGetAllSendAttemptsOutput {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfGetAllSendAttemptsOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20182,7 +20180,7 @@ export class PagedResultDtoOfLanguageTextListDto implements IPagedResultDtoOfLan
     static fromJS(data: any): PagedResultDtoOfLanguageTextListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfLanguageTextListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20237,7 +20235,7 @@ export class PagedResultDtoOfLinkedUserDto implements IPagedResultDtoOfLinkedUse
     static fromJS(data: any): PagedResultDtoOfLinkedUserDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfLinkedUserDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20292,7 +20290,7 @@ export class PagedResultDtoOfNameValueDto implements IPagedResultDtoOfNameValueD
     static fromJS(data: any): PagedResultDtoOfNameValueDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfNameValueDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20347,7 +20345,7 @@ export class PagedResultDtoOfOrganizationUnitRoleListDto implements IPagedResult
     static fromJS(data: any): PagedResultDtoOfOrganizationUnitRoleListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfOrganizationUnitRoleListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20402,7 +20400,7 @@ export class PagedResultDtoOfOrganizationUnitUserListDto implements IPagedResult
     static fromJS(data: any): PagedResultDtoOfOrganizationUnitUserListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfOrganizationUnitUserListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20457,7 +20455,7 @@ export class PagedResultDtoOfSubscriptionPaymentListDto implements IPagedResultD
     static fromJS(data: any): PagedResultDtoOfSubscriptionPaymentListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfSubscriptionPaymentListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20512,7 +20510,7 @@ export class PagedResultDtoOfTenantListDto implements IPagedResultDtoOfTenantLis
     static fromJS(data: any): PagedResultDtoOfTenantListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfTenantListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20567,7 +20565,7 @@ export class PagedResultDtoOfUserDelegationDto implements IPagedResultDtoOfUserD
     static fromJS(data: any): PagedResultDtoOfUserDelegationDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfUserDelegationDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20622,7 +20620,7 @@ export class PagedResultDtoOfUserListDto implements IPagedResultDtoOfUserListDto
     static fromJS(data: any): PagedResultDtoOfUserListDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfUserListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20677,7 +20675,7 @@ export class PagedResultDtoOfUserLoginAttemptDto implements IPagedResultDtoOfUse
     static fromJS(data: any): PagedResultDtoOfUserLoginAttemptDto {
         data = typeof data === 'object' ? data : {};
         let result = new PagedResultDtoOfUserLoginAttemptDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20727,7 +20725,7 @@ export class PasswordComplexitySetting implements IPasswordComplexitySetting {
     static fromJS(data: any): PasswordComplexitySetting {
         data = typeof data === 'object' ? data : {};
         let result = new PasswordComplexitySetting();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20773,7 +20771,7 @@ export class PaymentGatewayModel implements IPaymentGatewayModel {
     static fromJS(data: any): PaymentGatewayModel {
         data = typeof data === 'object' ? data : {};
         let result = new PaymentGatewayModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20814,7 +20812,7 @@ export class PaymentInfoDto implements IPaymentInfoDto {
     static fromJS(data: any): PaymentInfoDto {
         data = typeof data === 'object' ? data : {};
         let result = new PaymentInfoDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20869,7 +20867,7 @@ export class PayPalConfigurationDto implements IPayPalConfigurationDto {
     static fromJS(data: any): PayPalConfigurationDto {
         data = typeof data === 'object' ? data : {};
         let result = new PayPalConfigurationDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20897,7 +20895,7 @@ export interface IPayPalConfigurationDto {
 export class RecentTenant implements IRecentTenant {
     id?: number;
     name?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
 
     constructor(data?: IRecentTenant) {
         if (data) {
@@ -20912,14 +20910,14 @@ export class RecentTenant implements IRecentTenant {
         if (_data) {
             this.id = _data["id"];
             this.name = _data["name"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): RecentTenant {
         data = typeof data === 'object' ? data : {};
         let result = new RecentTenant();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -20927,7 +20925,7 @@ export class RecentTenant implements IRecentTenant {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["name"] = this.name;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -20935,7 +20933,7 @@ export class RecentTenant implements IRecentTenant {
 export interface IRecentTenant {
     id?: number;
     name?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
 }
 
 export class RefreshTokenResult implements IRefreshTokenResult {
@@ -20963,7 +20961,7 @@ export class RefreshTokenResult implements IRefreshTokenResult {
     static fromJS(data: any): RefreshTokenResult {
         data = typeof data === 'object' ? data : {};
         let result = new RefreshTokenResult();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21015,7 +21013,7 @@ export class RegionalStatCountry implements IRegionalStatCountry {
     static fromJS(data: any): RegionalStatCountry {
         data = typeof data === 'object' ? data : {};
         let result = new RegionalStatCountry();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21073,7 +21071,7 @@ export class RegisterInput implements IRegisterInput {
     static fromJS(data: any): RegisterInput {
         data = typeof data === 'object' ? data : {};
         let result = new RegisterInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21119,7 +21117,7 @@ export class RegisterOutput implements IRegisterOutput {
     static fromJS(data: any): RegisterOutput {
         data = typeof data === 'object' ? data : {};
         let result = new RegisterOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21167,7 +21165,7 @@ export class RegisterTenantInput implements IRegisterTenantInput {
     static fromJS(data: any): RegisterTenantInput {
         data = typeof data === 'object' ? data : {};
         let result = new RegisterTenantInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21229,7 +21227,7 @@ export class RegisterTenantOutput implements IRegisterTenantOutput {
     static fromJS(data: any): RegisterTenantOutput {
         data = typeof data === 'object' ? data : {};
         let result = new RegisterTenantOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21285,7 +21283,7 @@ export class RenamePageInput implements IRenamePageInput {
     static fromJS(data: any): RenamePageInput {
         data = typeof data === 'object' ? data : {};
         let result = new RenamePageInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21337,7 +21335,7 @@ export class ResetPasswordInput implements IResetPasswordInput {
     static fromJS(data: any): ResetPasswordInput {
         data = typeof data === 'object' ? data : {};
         let result = new ResetPasswordInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21385,7 +21383,7 @@ export class ResetPasswordOutput implements IResetPasswordOutput {
     static fromJS(data: any): ResetPasswordOutput {
         data = typeof data === 'object' ? data : {};
         let result = new ResetPasswordOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21423,7 +21421,7 @@ export class ResolveTenantIdInput implements IResolveTenantIdInput {
     static fromJS(data: any): ResolveTenantIdInput {
         data = typeof data === 'object' ? data : {};
         let result = new ResolveTenantIdInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21463,7 +21461,7 @@ export class RoleEditDto implements IRoleEditDto {
     static fromJS(data: any): RoleEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new RoleEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21487,7 +21485,7 @@ export class RoleListDto implements IRoleListDto {
     displayName?: string | undefined;
     isStatic?: boolean;
     isDefault?: boolean;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: number;
 
     constructor(data?: IRoleListDto) {
@@ -21505,7 +21503,7 @@ export class RoleListDto implements IRoleListDto {
             this.displayName = _data["displayName"];
             this.isStatic = _data["isStatic"];
             this.isDefault = _data["isDefault"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -21513,7 +21511,7 @@ export class RoleListDto implements IRoleListDto {
     static fromJS(data: any): RoleListDto {
         data = typeof data === 'object' ? data : {};
         let result = new RoleListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21523,7 +21521,7 @@ export class RoleListDto implements IRoleListDto {
         data["displayName"] = this.displayName;
         data["isStatic"] = this.isStatic;
         data["isDefault"] = this.isDefault;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -21534,7 +21532,7 @@ export interface IRoleListDto {
     displayName?: string | undefined;
     isStatic?: boolean;
     isDefault?: boolean;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: number;
 }
 
@@ -21565,7 +21563,7 @@ export class RolesToOrganizationUnitInput implements IRolesToOrganizationUnitInp
     static fromJS(data: any): RolesToOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         let result = new RolesToOrganizationUnitInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21611,7 +21609,7 @@ export class SalesSummaryData implements ISalesSummaryData {
     static fromJS(data: any): SalesSummaryData {
         data = typeof data === 'object' ? data : {};
         let result = new SalesSummaryData();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21672,7 +21670,7 @@ export class SavePageInput implements ISavePageInput {
     static fromJS(data: any): SavePageInput {
         data = typeof data === 'object' ? data : {};
         let result = new SavePageInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21730,7 +21728,7 @@ export class SecuritySettingsEditDto implements ISecuritySettingsEditDto {
     static fromJS(data: any): SecuritySettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new SecuritySettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21776,7 +21774,7 @@ export class SendEmailActivationLinkInput implements ISendEmailActivationLinkInp
     static fromJS(data: any): SendEmailActivationLinkInput {
         data = typeof data === 'object' ? data : {};
         let result = new SendEmailActivationLinkInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21812,7 +21810,7 @@ export class SendPasswordResetCodeInput implements ISendPasswordResetCodeInput {
     static fromJS(data: any): SendPasswordResetCodeInput {
         data = typeof data === 'object' ? data : {};
         let result = new SendPasswordResetCodeInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21848,7 +21846,7 @@ export class SendTestEmailInput implements ISendTestEmailInput {
     static fromJS(data: any): SendTestEmailInput {
         data = typeof data === 'object' ? data : {};
         let result = new SendTestEmailInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21886,7 +21884,7 @@ export class SendTwoFactorAuthCodeModel implements ISendTwoFactorAuthCodeModel {
     static fromJS(data: any): SendTwoFactorAuthCodeModel {
         data = typeof data === 'object' ? data : {};
         let result = new SendTwoFactorAuthCodeModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21924,7 +21922,7 @@ export class SendVerificationSmsInputDto implements ISendVerificationSmsInputDto
     static fromJS(data: any): SendVerificationSmsInputDto {
         data = typeof data === 'object' ? data : {};
         let result = new SendVerificationSmsInputDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -21966,7 +21964,7 @@ export class SessionTimeOutSettingsEditDto implements ISessionTimeOutSettingsEdi
     static fromJS(data: any): SessionTimeOutSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new SessionTimeOutSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22008,7 +22006,7 @@ export class SetDefaultLanguageInput implements ISetDefaultLanguageInput {
     static fromJS(data: any): SetDefaultLanguageInput {
         data = typeof data === 'object' ? data : {};
         let result = new SetDefaultLanguageInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22044,7 +22042,7 @@ export class SetNotificationAsReadOutput implements ISetNotificationAsReadOutput
     static fromJS(data: any): SetNotificationAsReadOutput {
         data = typeof data === 'object' ? data : {};
         let result = new SetNotificationAsReadOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22087,7 +22085,7 @@ export class StringOutput implements IStringOutput {
     static fromJS(data: any): StringOutput {
         data = typeof data === 'object' ? data : {};
         let result = new StringOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22123,7 +22121,7 @@ export class StripeConfigurationDto implements IStripeConfigurationDto {
     static fromJS(data: any): StripeConfigurationDto {
         data = typeof data === 'object' ? data : {};
         let result = new StripeConfigurationDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22163,7 +22161,7 @@ export class StripeCreatePaymentSessionInput implements IStripeCreatePaymentSess
     static fromJS(data: any): StripeCreatePaymentSessionInput {
         data = typeof data === 'object' ? data : {};
         let result = new StripeCreatePaymentSessionInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22203,7 +22201,7 @@ export class StripePaymentResultOutput implements IStripePaymentResultOutput {
     static fromJS(data: any): StripePaymentResultOutput {
         data = typeof data === 'object' ? data : {};
         let result = new StripePaymentResultOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22245,7 +22243,7 @@ export class SubscribableEditionComboboxItemDto implements ISubscribableEditionC
     static fromJS(data: any): SubscribableEditionComboboxItemDto {
         data = typeof data === 'object' ? data : {};
         let result = new SubscribableEditionComboboxItemDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22321,7 +22319,7 @@ export class SubscriptionPaymentDto implements ISubscriptionPaymentDto {
     static fromJS(data: any): SubscriptionPaymentDto {
         data = typeof data === 'object' ? data : {};
         let result = new SubscriptionPaymentDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22387,9 +22385,9 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
     editionDisplayName?: string | undefined;
     tenantId?: number;
     invoiceNo?: string | undefined;
-    lastModificationTime?: DateTime | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 
@@ -22415,9 +22413,9 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
             this.editionDisplayName = _data["editionDisplayName"];
             this.tenantId = _data["tenantId"];
             this.invoiceNo = _data["invoiceNo"];
-            this.lastModificationTime = _data["lastModificationTime"] ? DateTime.fromISO(_data["lastModificationTime"].toString()) : <any>undefined;
+            this.lastModificationTime = _data["lastModificationTime"] ? new Date(_data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = _data["lastModifierUserId"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.creatorUserId = _data["creatorUserId"];
             this.id = _data["id"];
         }
@@ -22426,7 +22424,7 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
     static fromJS(data: any): SubscriptionPaymentListDto {
         data = typeof data === 'object' ? data : {};
         let result = new SubscriptionPaymentListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22443,9 +22441,9 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
         data["editionDisplayName"] = this.editionDisplayName;
         data["tenantId"] = this.tenantId;
         data["invoiceNo"] = this.invoiceNo;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toString() : <any>undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
         return data;
@@ -22464,9 +22462,9 @@ export interface ISubscriptionPaymentListDto {
     editionDisplayName?: string | undefined;
     tenantId?: number;
     invoiceNo?: string | undefined;
-    lastModificationTime?: DateTime | undefined;
+    lastModificationTime?: Date | undefined;
     lastModifierUserId?: number | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     creatorUserId?: number | undefined;
     id?: number;
 }
@@ -22516,7 +22514,7 @@ export class SwitchedAccountAuthenticateResultModel implements ISwitchedAccountA
     static fromJS(data: any): SwitchedAccountAuthenticateResultModel {
         data = typeof data === 'object' ? data : {};
         let result = new SwitchedAccountAuthenticateResultModel();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22558,7 +22556,7 @@ export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
     static fromJS(data: any): SwitchToLinkedAccountInput {
         data = typeof data === 'object' ? data : {};
         let result = new SwitchToLinkedAccountInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22598,7 +22596,7 @@ export class SwitchToLinkedAccountOutput implements ISwitchToLinkedAccountOutput
     static fromJS(data: any): SwitchToLinkedAccountOutput {
         data = typeof data === 'object' ? data : {};
         let result = new SwitchToLinkedAccountOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22646,7 +22644,7 @@ export class TenantBillingSettingsEditDto implements ITenantBillingSettingsEditD
     static fromJS(data: any): TenantBillingSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantBillingSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22671,7 +22669,7 @@ export class TenantEditDto implements ITenantEditDto {
     connectionString?: string | undefined;
     editionId?: number | undefined;
     isActive?: boolean;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
     id?: number;
 
@@ -22691,7 +22689,7 @@ export class TenantEditDto implements ITenantEditDto {
             this.connectionString = _data["connectionString"];
             this.editionId = _data["editionId"];
             this.isActive = _data["isActive"];
-            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? DateTime.fromISO(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
+            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? new Date(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
             this.isInTrialPeriod = _data["isInTrialPeriod"];
             this.id = _data["id"];
         }
@@ -22700,7 +22698,7 @@ export class TenantEditDto implements ITenantEditDto {
     static fromJS(data: any): TenantEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22711,7 +22709,7 @@ export class TenantEditDto implements ITenantEditDto {
         data["connectionString"] = this.connectionString;
         data["editionId"] = this.editionId;
         data["isActive"] = this.isActive;
-        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toString() : <any>undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : <any>undefined;
         data["isInTrialPeriod"] = this.isInTrialPeriod;
         data["id"] = this.id;
         return data;
@@ -22724,7 +22722,7 @@ export interface ITenantEditDto {
     connectionString?: string | undefined;
     editionId?: number | undefined;
     isActive?: boolean;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
     id?: number;
 }
@@ -22752,7 +22750,7 @@ export class TenantEdition implements ITenantEdition {
     static fromJS(data: any): TenantEdition {
         data = typeof data === 'object' ? data : {};
         let result = new TenantEdition();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22808,7 +22806,7 @@ export class TenantEmailSettingsEditDto implements ITenantEmailSettingsEditDto {
     static fromJS(data: any): TenantEmailSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantEmailSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22847,8 +22845,8 @@ export class TenantListDto implements ITenantListDto {
     editionDisplayName?: string | undefined;
     connectionString?: string | undefined;
     isActive?: boolean;
-    creationTime?: DateTime;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    creationTime?: Date;
+    subscriptionEndDateUtc?: Date | undefined;
     editionId?: number | undefined;
     isInTrialPeriod?: boolean;
     id?: number;
@@ -22869,8 +22867,8 @@ export class TenantListDto implements ITenantListDto {
             this.editionDisplayName = _data["editionDisplayName"];
             this.connectionString = _data["connectionString"];
             this.isActive = _data["isActive"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
-            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? DateTime.fromISO(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
+            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? new Date(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
             this.editionId = _data["editionId"];
             this.isInTrialPeriod = _data["isInTrialPeriod"];
             this.id = _data["id"];
@@ -22880,7 +22878,7 @@ export class TenantListDto implements ITenantListDto {
     static fromJS(data: any): TenantListDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22891,8 +22889,8 @@ export class TenantListDto implements ITenantListDto {
         data["editionDisplayName"] = this.editionDisplayName;
         data["connectionString"] = this.connectionString;
         data["isActive"] = this.isActive;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
-        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : <any>undefined;
         data["editionId"] = this.editionId;
         data["isInTrialPeriod"] = this.isInTrialPeriod;
         data["id"] = this.id;
@@ -22906,8 +22904,8 @@ export interface ITenantListDto {
     editionDisplayName?: string | undefined;
     connectionString?: string | undefined;
     isActive?: boolean;
-    creationTime?: DateTime;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    creationTime?: Date;
+    subscriptionEndDateUtc?: Date | undefined;
     editionId?: number | undefined;
     isInTrialPeriod?: boolean;
     id?: number;
@@ -22919,12 +22917,12 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
     logoId?: string | undefined;
     logoFileType?: string | undefined;
     customCssId?: string | undefined;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
     subscriptionPaymentType?: SubscriptionPaymentType;
     edition?: EditionInfoDto;
     featureValues?: NameValueDto[] | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     paymentPeriodType?: PaymentPeriodType;
     subscriptionDateString?: string | undefined;
     creationTimeString?: string | undefined;
@@ -22954,7 +22952,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
             this.logoId = _data["logoId"];
             this.logoFileType = _data["logoFileType"];
             this.customCssId = _data["customCssId"];
-            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? DateTime.fromISO(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
+            this.subscriptionEndDateUtc = _data["subscriptionEndDateUtc"] ? new Date(_data["subscriptionEndDateUtc"].toString()) : <any>undefined;
             this.isInTrialPeriod = _data["isInTrialPeriod"];
             this.subscriptionPaymentType = _data["subscriptionPaymentType"];
             this.edition = _data["edition"] ? EditionInfoDto.fromJS(_data["edition"]) : <any>undefined;
@@ -22963,7 +22961,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
                 for (let item of _data["featureValues"])
                     this.featureValues!.push(NameValueDto.fromJS(item));
             }
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.paymentPeriodType = _data["paymentPeriodType"];
             this.subscriptionDateString = _data["subscriptionDateString"];
             this.creationTimeString = _data["creationTimeString"];
@@ -22974,7 +22972,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
     static fromJS(data: any): TenantLoginInfoDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantLoginInfoDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -22985,7 +22983,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
         data["logoId"] = this.logoId;
         data["logoFileType"] = this.logoFileType;
         data["customCssId"] = this.customCssId;
-        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toString() : <any>undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : <any>undefined;
         data["isInTrialPeriod"] = this.isInTrialPeriod;
         data["subscriptionPaymentType"] = this.subscriptionPaymentType;
         data["edition"] = this.edition ? this.edition.toJSON() : <any>undefined;
@@ -22994,7 +22992,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
             for (let item of this.featureValues)
                 data["featureValues"].push(item.toJSON());
         }
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["paymentPeriodType"] = this.paymentPeriodType;
         data["subscriptionDateString"] = this.subscriptionDateString;
         data["creationTimeString"] = this.creationTimeString;
@@ -23009,12 +23007,12 @@ export interface ITenantLoginInfoDto {
     logoId?: string | undefined;
     logoFileType?: string | undefined;
     customCssId?: string | undefined;
-    subscriptionEndDateUtc?: DateTime | undefined;
+    subscriptionEndDateUtc?: Date | undefined;
     isInTrialPeriod?: boolean;
     subscriptionPaymentType?: SubscriptionPaymentType;
     edition?: IEditionInfoDto;
     featureValues?: INameValueDto[] | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     paymentPeriodType?: PaymentPeriodType;
     subscriptionDateString?: string | undefined;
     creationTimeString?: string | undefined;
@@ -23048,7 +23046,7 @@ export class TenantManagementSettingsEditDto implements ITenantManagementSetting
     static fromJS(data: any): TenantManagementSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantManagementSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23077,7 +23075,7 @@ export class TenantNotification implements ITenantNotification {
     entityTypeName?: string | undefined;
     entityId?: any | undefined;
     severity?: NotificationSeverity;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: string;
 
     constructor(data?: ITenantNotification) {
@@ -23099,7 +23097,7 @@ export class TenantNotification implements ITenantNotification {
             this.entityTypeName = _data["entityTypeName"];
             this.entityId = _data["entityId"];
             this.severity = _data["severity"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -23107,7 +23105,7 @@ export class TenantNotification implements ITenantNotification {
     static fromJS(data: any): TenantNotification {
         data = typeof data === 'object' ? data : {};
         let result = new TenantNotification();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23120,7 +23118,7 @@ export class TenantNotification implements ITenantNotification {
         data["entityTypeName"] = this.entityTypeName;
         data["entityId"] = this.entityId;
         data["severity"] = this.severity;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -23134,7 +23132,7 @@ export interface ITenantNotification {
     entityTypeName?: string | undefined;
     entityId?: any | undefined;
     severity?: NotificationSeverity;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: string;
 }
 
@@ -23159,7 +23157,7 @@ export class TenantOtherSettingsEditDto implements ITenantOtherSettingsEditDto {
     static fromJS(data: any): TenantOtherSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantOtherSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23221,7 +23219,7 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
     static fromJS(data: any): TenantSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23288,7 +23286,7 @@ export class TenantUserManagementSettingsEditDto implements ITenantUserManagemen
     static fromJS(data: any): TenantUserManagementSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TenantUserManagementSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23340,7 +23338,7 @@ export class ThemeFooterSettingsDto implements IThemeFooterSettingsDto {
     static fromJS(data: any): ThemeFooterSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeFooterSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23380,7 +23378,7 @@ export class ThemeHeaderSettingsDto implements IThemeHeaderSettingsDto {
     static fromJS(data: any): ThemeHeaderSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeHeaderSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23422,7 +23420,7 @@ export class ThemeLayoutSettingsDto implements IThemeLayoutSettingsDto {
     static fromJS(data: any): ThemeLayoutSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeLayoutSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23476,7 +23474,7 @@ export class ThemeMenuSettingsDto implements IThemeMenuSettingsDto {
     static fromJS(data: any): ThemeMenuSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeMenuSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23543,7 +23541,7 @@ export class ThemeSettingsDto implements IThemeSettingsDto {
     static fromJS(data: any): ThemeSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23599,7 +23597,7 @@ export class ThemeSubHeaderSettingsDto implements IThemeSubHeaderSettingsDto {
     static fromJS(data: any): ThemeSubHeaderSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new ThemeSubHeaderSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23651,7 +23649,7 @@ export class TopStatsData implements ITopStatsData {
     static fromJS(data: any): TopStatsData {
         data = typeof data === 'object' ? data : {};
         let result = new TopStatsData();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23695,7 +23693,7 @@ export class TwitterExternalLoginProviderSettings implements ITwitterExternalLog
     static fromJS(data: any): TwitterExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new TwitterExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23739,7 +23737,7 @@ export class TwitterGetAccessTokenResponse implements ITwitterGetAccessTokenResp
     static fromJS(data: any): TwitterGetAccessTokenResponse {
         data = typeof data === 'object' ? data : {};
         let result = new TwitterGetAccessTokenResponse();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23787,7 +23785,7 @@ export class TwitterGetRequestTokenResponse implements ITwitterGetRequestTokenRe
     static fromJS(data: any): TwitterGetRequestTokenResponse {
         data = typeof data === 'object' ? data : {};
         let result = new TwitterGetRequestTokenResponse();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23839,7 +23837,7 @@ export class TwoFactorLoginSettingsEditDto implements ITwoFactorLoginSettingsEdi
     static fromJS(data: any): TwoFactorLoginSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new TwoFactorLoginSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23894,7 +23892,7 @@ export class UiCustomizationSettingsDto implements IUiCustomizationSettingsDto {
     static fromJS(data: any): UiCustomizationSettingsDto {
         data = typeof data === 'object' ? data : {};
         let result = new UiCustomizationSettingsDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23940,7 +23938,7 @@ export class UnblockUserInput implements IUnblockUserInput {
     static fromJS(data: any): UnblockUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new UnblockUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -23980,7 +23978,7 @@ export class UnlinkUserInput implements IUnlinkUserInput {
     static fromJS(data: any): UnlinkUserInput {
         data = typeof data === 'object' ? data : {};
         let result = new UnlinkUserInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24036,7 +24034,7 @@ export class UpdateEditionDto implements IUpdateEditionDto {
     static fromJS(data: any): UpdateEditionDto {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateEditionDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24078,7 +24076,7 @@ export class UpdateGoogleAuthenticatorKeyOutput implements IUpdateGoogleAuthenti
     static fromJS(data: any): UpdateGoogleAuthenticatorKeyOutput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateGoogleAuthenticatorKeyOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24120,7 +24118,7 @@ export class UpdateLanguageTextInput implements IUpdateLanguageTextInput {
     static fromJS(data: any): UpdateLanguageTextInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateLanguageTextInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24175,7 +24173,7 @@ export class UpdateNotificationSettingsInput implements IUpdateNotificationSetti
     static fromJS(data: any): UpdateNotificationSettingsInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateNotificationSettingsInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24219,7 +24217,7 @@ export class UpdateOrganizationUnitInput implements IUpdateOrganizationUnitInput
     static fromJS(data: any): UpdateOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateOrganizationUnitInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24267,7 +24265,7 @@ export class UpdateProfilePictureInput implements IUpdateProfilePictureInput {
     static fromJS(data: any): UpdateProfilePictureInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateProfilePictureInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24329,7 +24327,7 @@ export class UpdateTenantFeaturesInput implements IUpdateTenantFeaturesInput {
     static fromJS(data: any): UpdateTenantFeaturesInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateTenantFeaturesInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24380,7 +24378,7 @@ export class UpdateUserPermissionsInput implements IUpdateUserPermissionsInput {
     static fromJS(data: any): UpdateUserPermissionsInput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateUserPermissionsInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24426,7 +24424,7 @@ export class UpdateUserSignInTokenOutput implements IUpdateUserSignInTokenOutput
     static fromJS(data: any): UpdateUserSignInTokenOutput {
         data = typeof data === 'object' ? data : {};
         let result = new UpdateUserSignInTokenOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24447,8 +24445,8 @@ export interface IUpdateUserSignInTokenOutput {
 
 export class UserDelegationDto implements IUserDelegationDto {
     username?: string | undefined;
-    startTime?: DateTime;
-    endTime?: DateTime;
+    startTime?: Date;
+    endTime?: Date;
     id?: number;
 
     constructor(data?: IUserDelegationDto) {
@@ -24463,8 +24461,8 @@ export class UserDelegationDto implements IUserDelegationDto {
     init(_data?: any) {
         if (_data) {
             this.username = _data["username"];
-            this.startTime = _data["startTime"] ? DateTime.fromISO(_data["startTime"].toString()) : <any>undefined;
-            this.endTime = _data["endTime"] ? DateTime.fromISO(_data["endTime"].toString()) : <any>undefined;
+            this.startTime = _data["startTime"] ? new Date(_data["startTime"].toString()) : <any>undefined;
+            this.endTime = _data["endTime"] ? new Date(_data["endTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -24472,15 +24470,15 @@ export class UserDelegationDto implements IUserDelegationDto {
     static fromJS(data: any): UserDelegationDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserDelegationDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["username"] = this.username;
-        data["startTime"] = this.startTime ? this.startTime.toString() : <any>undefined;
-        data["endTime"] = this.endTime ? this.endTime.toString() : <any>undefined;
+        data["startTime"] = this.startTime ? this.startTime.toISOString() : <any>undefined;
+        data["endTime"] = this.endTime ? this.endTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -24488,8 +24486,8 @@ export class UserDelegationDto implements IUserDelegationDto {
 
 export interface IUserDelegationDto {
     username?: string | undefined;
-    startTime?: DateTime;
-    endTime?: DateTime;
+    startTime?: Date;
+    endTime?: Date;
     id?: number;
 }
 
@@ -24534,7 +24532,7 @@ export class UserEditDto implements IUserEditDto {
     static fromJS(data: any): UserEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24579,7 +24577,7 @@ export class UserListDto implements IUserListDto {
     isEmailConfirmed?: boolean;
     roles?: UserListRoleDto[] | undefined;
     isActive?: boolean;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: number;
 
     constructor(data?: IUserListDto) {
@@ -24613,7 +24611,7 @@ export class UserListDto implements IUserListDto {
                     this.roles!.push(UserListRoleDto.fromJS(item));
             }
             this.isActive = _data["isActive"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -24621,7 +24619,7 @@ export class UserListDto implements IUserListDto {
     static fromJS(data: any): UserListDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserListDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24640,7 +24638,7 @@ export class UserListDto implements IUserListDto {
                 data["roles"].push(item.toJSON());
         }
         data["isActive"] = this.isActive;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -24656,7 +24654,7 @@ export interface IUserListDto {
     isEmailConfirmed?: boolean;
     roles?: IUserListRoleDto[] | undefined;
     isActive?: boolean;
-    creationTime?: DateTime;
+    creationTime?: Date;
     id?: number;
 }
 
@@ -24683,7 +24681,7 @@ export class UserListRoleDto implements IUserListRoleDto {
     static fromJS(data: any): UserListRoleDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserListRoleDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24725,7 +24723,7 @@ export class UserLockOutSettingsEditDto implements IUserLockOutSettingsEditDto {
     static fromJS(data: any): UserLockOutSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserLockOutSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24751,7 +24749,7 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
     clientName?: string | undefined;
     browserInfo?: string | undefined;
     result?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
 
     constructor(data?: IUserLoginAttemptDto) {
         if (data) {
@@ -24770,14 +24768,14 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
             this.clientName = _data["clientName"];
             this.browserInfo = _data["browserInfo"];
             this.result = _data["result"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
         }
     }
 
     static fromJS(data: any): UserLoginAttemptDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserLoginAttemptDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24789,7 +24787,7 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
         data["clientName"] = this.clientName;
         data["browserInfo"] = this.browserInfo;
         data["result"] = this.result;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         return data;
     }
 }
@@ -24801,7 +24799,7 @@ export interface IUserLoginAttemptDto {
     clientName?: string | undefined;
     browserInfo?: string | undefined;
     result?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
 }
 
 export class UserLoginInfoDto implements IUserLoginInfoDto {
@@ -24835,7 +24833,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     static fromJS(data: any): UserLoginInfoDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserLoginInfoDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24890,7 +24888,7 @@ export class UserNotification implements IUserNotification {
     static fromJS(data: any): UserNotification {
         data = typeof data === 'object' ? data : {};
         let result = new UserNotification();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24945,7 +24943,7 @@ export class UserPasswordSettingsEditDto implements IUserPasswordSettingsEditDto
     static fromJS(data: any): UserPasswordSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserPasswordSettingsEditDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -24995,7 +24993,7 @@ export class UserRoleDto implements IUserRoleDto {
     static fromJS(data: any): UserRoleDto {
         data = typeof data === 'object' ? data : {};
         let result = new UserRoleDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25045,7 +25043,7 @@ export class UsersToOrganizationUnitInput implements IUsersToOrganizationUnitInp
     static fromJS(data: any): UsersToOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         let result = new UsersToOrganizationUnitInput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25089,7 +25087,7 @@ export class VerifySmsCodeInputDto implements IVerifySmsCodeInputDto {
     static fromJS(data: any): VerifySmsCodeInputDto {
         data = typeof data === 'object' ? data : {};
         let result = new VerifySmsCodeInputDto();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25109,10 +25107,10 @@ export interface IVerifySmsCodeInputDto {
 export class WebhookEvent implements IWebhookEvent {
     webhookName!: string;
     data?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     tenantId?: number | undefined;
     isDeleted?: boolean;
-    deletionTime?: DateTime | undefined;
+    deletionTime?: Date | undefined;
     id?: string;
 
     constructor(data?: IWebhookEvent) {
@@ -25128,10 +25126,10 @@ export class WebhookEvent implements IWebhookEvent {
         if (_data) {
             this.webhookName = _data["webhookName"];
             this.data = _data["data"];
-            this.creationTime = _data["creationTime"] ? DateTime.fromISO(_data["creationTime"].toString()) : <any>undefined;
+            this.creationTime = _data["creationTime"] ? new Date(_data["creationTime"].toString()) : <any>undefined;
             this.tenantId = _data["tenantId"];
             this.isDeleted = _data["isDeleted"];
-            this.deletionTime = _data["deletionTime"] ? DateTime.fromISO(_data["deletionTime"].toString()) : <any>undefined;
+            this.deletionTime = _data["deletionTime"] ? new Date(_data["deletionTime"].toString()) : <any>undefined;
             this.id = _data["id"];
         }
     }
@@ -25139,7 +25137,7 @@ export class WebhookEvent implements IWebhookEvent {
     static fromJS(data: any): WebhookEvent {
         data = typeof data === 'object' ? data : {};
         let result = new WebhookEvent();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25147,10 +25145,10 @@ export class WebhookEvent implements IWebhookEvent {
         data = typeof data === 'object' ? data : {};
         data["webhookName"] = this.webhookName;
         data["data"] = this.data;
-        data["creationTime"] = this.creationTime ? this.creationTime.toString() : <any>undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["tenantId"] = this.tenantId;
         data["isDeleted"] = this.isDeleted;
-        data["deletionTime"] = this.deletionTime ? this.deletionTime.toString() : <any>undefined;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
         data["id"] = this.id;
         return data;
     }
@@ -25159,10 +25157,10 @@ export class WebhookEvent implements IWebhookEvent {
 export interface IWebhookEvent {
     webhookName: string;
     data?: string | undefined;
-    creationTime?: DateTime;
+    creationTime?: Date;
     tenantId?: number | undefined;
     isDeleted?: boolean;
-    deletionTime?: DateTime | undefined;
+    deletionTime?: Date | undefined;
     id?: string;
 }
 
@@ -25209,7 +25207,7 @@ export class WebhookSubscription implements IWebhookSubscription {
     static fromJS(data: any): WebhookSubscription {
         data = typeof data === 'object' ? data : {};
         let result = new WebhookSubscription();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25275,7 +25273,7 @@ export class Widget implements IWidget {
     static fromJS(data: any): Widget {
         data = typeof data === 'object' ? data : {};
         let result = new Widget();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25321,7 +25319,7 @@ export class WidgetFilterOutput implements IWidgetFilterOutput {
     static fromJS(data: any): WidgetFilterOutput {
         data = typeof data === 'object' ? data : {};
         let result = new WidgetFilterOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25376,7 +25374,7 @@ export class WidgetOutput implements IWidgetOutput {
     static fromJS(data: any): WidgetOutput {
         data = typeof data === 'object' ? data : {};
         let result = new WidgetOutput();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25430,7 +25428,7 @@ export class WsFederationExternalLoginProviderSettings implements IWsFederationE
     static fromJS(data: any): WsFederationExternalLoginProviderSettings {
         data = typeof data === 'object' ? data : {};
         let result = new WsFederationExternalLoginProviderSettings();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
@@ -25488,7 +25486,7 @@ export class AdditionalData implements IAdditionalData {
     static fromJS(data: any): AdditionalData {
         data = typeof data === 'object' ? data : {};
         let result = new AdditionalData();
-        result.init(data);
+        result.init(data?.result);
         return result;
     }
 
