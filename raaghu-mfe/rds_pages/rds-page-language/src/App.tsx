@@ -7,31 +7,34 @@ import {
 } from "../../../libs/state-management/hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLanguages } from "../../../libs/state-management/language/language-slice";
+import { fetchLanguagesEdit } from "../../../libs/state-management/language/languageEdit-slice";
+
 import axios from "axios";
+import { RdsBadge, RdsIcon } from "../../rds-elements";
 
 const tableHeaders = [
   {
-    displayName: "Language Name",
+    displayName: "Language",
     key: "languageName",
     datatype: "text",
     sortable: true,
   },
   {
-    displayName: "Code",
+    displayName: "Display Name",
     key: "code",
     datatype: "text",
     sortable: true,
   },
   {
-    displayName: "Is Enabled",
-    key: "isenabled",
-    datatype: "text",
+    displayName: "Country",
+    key: "creationTime",
+    datatype: "children",
     sortable: true,
   },
   {
-    displayName: "Creation Time",
-    key: "creationTime",
-    datatype: "text",
+    displayName: "Status",
+    key: "isenabled",
+    datatype: "children",
     sortable: true,
   },
 ];
@@ -44,18 +47,65 @@ const actions = [
 ];
 
 const App = () => {
-  const [Data, setData] = useState([]);
-
   const data = useAppSelector((state) => state.persistedReducer.language);
+  const Edit = useAppSelector((state) => state.persistedReducer.languageEdit);
+  const [Data, setData] = useState<any>([]);
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   store.dispatch(fetchLanguages());
-  //   console.log("hello");
-  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchLanguages() as any);
+    dispatch(fetchLanguagesEdit() as any);
+    console.log(data.languages);
+    console.log("this is edit data ", Edit.languagesEdit);
+
+    const tempLanguageName = Edit.languagesEdit.languageName.map((item:any)=>)
+
+    const tempData = data.languages.items.map((item: any) => {
+      let flag = item.icon.trim().split(" ")[1];
+      let country = item.displayName.trim().split(" ")[1];
+      console.log(flag);
+      return {
+        id: item.id,
+        languageName: item.displayName.trim().split(" ")[0],
+        code: item.name,
+        isenabled: {
+          children: (
+            <>
+              {!item.isDisabled ? (
+                <RdsBadge
+                  label={"Inactive"}
+                  size={"medium"}
+                  badgeType={"rectangle"}
+                  colorVariant={"danger"}
+                ></RdsBadge>
+              ) : (
+                <RdsBadge
+                  label={"Active"}
+                  size={"medium"}
+                  badgeType={"rectangle"}
+                  colorVariant={"success"}
+                ></RdsBadge>
+              )}
+            </>
+          ),
+        },
+        creationTime: {
+          children: (
+            <>
+              <RdsIcon
+                name={flag}
+                fill={false}
+                stroke={true}
+                height="20px"
+                width="20px"
+              ></RdsIcon>{" "}
+              <div>{}</div>{" "}
+            </>
+          ),
+        },
+      };
+    });
+    setData(tempData);
   }, [dispatch]);
 
   // useEffect(() => {
@@ -114,12 +164,38 @@ const App = () => {
   //   // getData();
   // }, []);
 
+
+
+
+//   flags : [
+// 		{ option: "ad" },
+// 		{ option: "ae" },
+// 		{ option: "af" },
+// 		{ option: "ag" },
+// 		{ option: "ai" },
+// 	],
+// languageNames :  [
+// 		{ option: "Invariant Language ()" },
+// 		{ option: "Afar (aa)" },
+// 		{ option: "Afar (Djibouti) (aa-DJ)" },
+// 		{ option: "Afar (Eritrea) (aa-ER)" },
+// 		{ option: "Afar (Ethiopia) (aa-ET)" },
+// 		{ option: "Afrikaans (af)" },
+// 		{ option: "Afrikaans (Namibia) (af-NA)" },
+// 		{ option: "Afrikaans (South Africa) (af-ZA)" },
+// 		{ option: "Aghem (agq)" },
+// 		{ option: "Aghem (Cameroon) (agq-CM)" },
+// 		{ option: "Akan (ak)" },
+// 	]
+
   return (
     <Suspense>
       <Language
         languagetableHeaders={tableHeaders}
-        languagetableData={data.languages}
+        languagetableData={Data}
         actions={actions}
+        languageName={[]}
+        flags={[]}
       ></Language>
     </Suspense>
   );

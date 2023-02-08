@@ -1,13 +1,14 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import {loginReducer} from './public.api'
-import {forgotPasswordReducer} from './forgot-password/forgotpassword-slice'
-import editionReducer from './edition/edition-slice'
-import {subscriptionReducer} from './subscription/subscription-slice'
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { loginReducer } from "./public.api";
+import { forgotPasswordReducer } from "./forgot-password/forgotpassword-slice";
+import editionReducer from "./edition/edition-slice";
+import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
-import { useDispatch } from 'react-redux'
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
-import thunk from 'redux-thunk';
+import languageEditReducer from "./language/languageEdit-slice";
+import { useDispatch } from "react-redux";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
   storage,
@@ -17,18 +18,18 @@ const rootReducer = combineReducers({
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,
   subscription: subscriptionReducer,
-  edition : editionReducer,
+  edition: editionReducer,
   language: languageReducer,
-})
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+  languageEdit: languageEditReducer,
+});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: { persistedReducer },
   middleware: [thunk],
 });
 
-
 export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;

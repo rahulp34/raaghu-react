@@ -28,7 +28,11 @@ const OrganizationUnitsCompo = React.lazy(
   () => import("OrganizationUnits/OrganizationUnits")
 );
 const LanguageCompo = React.lazy(() => import("Language/Language"));
-const IconListCompo = React.lazy(() => import("IconList/IconList"));
+const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
+const DynamicPropertyCompo = React.lazy(
+  () => import("DynamicProperties/DynamicProperties")
+);
+const IconListCompo = React.lazy(()=>import("IconList/IconList"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -256,6 +260,27 @@ const Main = (props: MainProps) => {
           path: "/language-text",
           subTitle: t("Manage user interface languages"),
         },
+        {
+          key: "3-3",
+          label: t("Language"),
+          icon: "languages",
+          children: [
+            {
+              key: "3-3-1",
+              label: t("Language"),
+              icon: "languages",
+              path: "/language",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-3-2",
+              label: t("LanguageText"),
+              icon: "languages",
+              path: "/language-text",
+              subTitle: t("Manage user interface languages text"),
+            },
+          ],
+        },
       ],
     },
     {
@@ -427,7 +452,16 @@ const Main = (props: MainProps) => {
                       path="/language"
                       element={<LanguageCompo></LanguageCompo>}
                     ></Route>
-                    <Route path="/icons" element={<IconListCompo />}></Route>
+                    <Route
+                      path="/language-text"
+                      element={<LanguageTextCompo></LanguageTextCompo>}
+                    ></Route>
+                    <Route
+                      path="/dynamic-properties"
+                      element={<DynamicPropertyCompo></DynamicPropertyCompo>}
+                    ></Route>
+                    <Route path="/icons" 
+                    element={<IconListCompo/>}></Route>
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

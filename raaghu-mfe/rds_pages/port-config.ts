@@ -49,5 +49,8 @@ export const PortConfig = {
 	},
 	"iconlist":{
 		"port":"8016"
+	},
+	"languageText":{
+		"port":"8017"
 	}
 }
