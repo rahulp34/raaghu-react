@@ -60,6 +60,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "create:element": "node utils/create-element.js"
   }
 }
