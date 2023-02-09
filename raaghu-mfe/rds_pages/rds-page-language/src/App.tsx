@@ -58,8 +58,6 @@ const App = () => {
     console.log(data.languages);
     console.log("this is edit data ", Edit.languagesEdit);
 
-    const tempLanguageName = Edit.languagesEdit.languageName.map((item:any)=>)
-
     const tempData = data.languages.items.map((item: any) => {
       let flag = item.icon.trim().split(" ")[1];
       let country = item.displayName.trim().split(" ")[1];

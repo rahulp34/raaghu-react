@@ -74,15 +74,23 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
               <span className="text fs-8 text-wrap">{iconName}</span>
             </div>
             <a className="fs-7 border-top pe-auto pt-1 pb-2">
-              {id == identity ? <span className="text-success">Copied</span>: <span>copy </span> }
+              {id == identity ? (
+                <span className="text-success">Copied</span>
+              ) : (
+                <span>copy </span>
+              )}
               {/* Copy{" "} */}
-              {id == identity ? "":<RdsIcon
-                name="clipboard"
-                width="12px"
-                height="12px"
-                fill={false}
-                stroke={true}
-              ></RdsIcon>}
+              {id == identity ? (
+                ""
+              ) : (
+                <RdsIcon
+                  name="clipboard"
+                  width="12px"
+                  height="12px"
+                  fill={false}
+                  stroke={true}
+                ></RdsIcon>
+              )}
             </a>
           </div>
         ))}

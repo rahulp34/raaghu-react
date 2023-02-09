@@ -6,9 +6,10 @@ import {
   RdsNavtabs,
   RdsButton,
   RdsInput,
-  RdsSelectList
+  RdsSelectList,
+  RdsCounter
 } from "../rds-elements";
-import RdsCompAlertPopupProps from "../rds-comp-alert-popup/rds-comp-alert-popup"
+import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 
 import "./rds-comp-edition.scss";
 export interface RdsCompEditionProps {
@@ -86,7 +87,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
             canvasTitle="UPDATE EDITION"
             onclick={offCanvasHandler}
             placement="end"
-            offcanvaswidth={830}
+            offcanvaswidth={600}
             offcanvasbutton={
               <span className="border border-primary rounded-circle p-1 me-2">
                 <RdsIcon
@@ -130,8 +131,13 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                   </div>
                   <div className="col-md-6 sm-p-0">
                     <div className="form-group mb-3">
-                      <label className="mb-2">Plan <span className="text-danger">*</span></label>
-                      <RdsSelectList label="Select Plan" selectItems={[]}></RdsSelectList>
+                      <label className="mb-2">
+                        Plan <span className="text-danger">*</span>
+                      </label>
+                      <RdsSelectList
+                        label="Select Plan"
+                        selectItems={[]}
+                      ></RdsSelectList>
                     </div>
                   </div>
                 </div>
@@ -157,11 +163,41 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
               </>
             )}
             {(activeNavTabId == 1 || showTenantSettings == true) && (
-              <div></div>
+              <>
+                <div className="m-2">Identity</div>
+                <hr></hr>
+                <div>
+                  <label className="mb-2">Two factor behaviour</label>
+                  <RdsSelectList
+                        label="Optional"
+                        selectItems={[{
+                          option:"Optional"
+                        },
+                        {
+                          option:"Disabled"
+                        },
+                        {
+                          option:"Forced"
+                        }]}
+                      ></RdsSelectList>
+                </div>
+                <div className="mt-3  ">
+                  <RdsCounter counterValue={0} min={0} max={0} width={0} label= "Maximum User Count"></RdsCounter>
+                </div>
+              </>
             )}
           </RdsOffcanvas>
-          <span className="border border-primary rounded-circle p-1 me-2">
-            
+
+          <RdsCompAlertPopup
+            alertID={`targetId`}
+            // onSuccess={() => deleteConfirmation(node.data.id)}
+          ></RdsCompAlertPopup>
+          <a
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#targetId"
+            className="border border-primary rounded-circle p-1 me-2"
+          >
             <RdsIcon
               name="delete"
               height="15px"
@@ -170,7 +206,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
               fill={false}
               stroke={true}
             />
-          </span>
+          </a>
         </div>
       </div>
     </div>
