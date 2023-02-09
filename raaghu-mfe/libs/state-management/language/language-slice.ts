@@ -3,12 +3,13 @@ import {
   createAsyncThunk,
   PayloadAction,
   AnyAction,
-} from "@reduxjs/toolkit"; 
-import axios from "axios";
-import {
-  LanguageServiceProxy,
-  GetLanguagesOutput,
-} from "../../shared/service-proxies";
+} from "@reduxjs/toolkit";
+// import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
+// import axios from "axios";
+// import {
+//   LanguageServiceProxy,
+//   GetLanguagesOutput,
+// } from "../../shared/service-proxies";
 
 type InitialState = {
   loading: boolean;
@@ -31,18 +32,50 @@ if (credentials) {
 export const fetchLanguages = createAsyncThunk(
   "language/fetchLanguages",
   () => {
-    return axios
-      .get(
-        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguages",
-        {
-          headers: {
-            Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-          },
-        }
-      )
-      .then(
-        (response) => response.data.result
-      );
+    // return axios
+    //   .get(
+    //     "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguages",
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
+    //       },
+    //     }
+    //   )
+    //   .then((response) =>
+    //     response.data.result.items.map((item: any) => {
+    //       let date = new Date(item.creationTime);
+    //       let day = date.getDate();
+    //       let month = date.getMonth() + 1;
+    //       let year = date.getFullYear();
+
+    //       let currentTime = date.toLocaleString("en-IN", {
+    //         hour: "numeric",
+    //         minute: "numeric",
+    //         second: "numeric",
+    //         hour12: true,
+    //       });
+
+    //       let currentDate = `${day}/${month}/${year}, ${currentTime}`;
+
+    //       return {
+    //         id: item.id,
+    //         languageName: item.displayName,
+    //         code: item.name,
+    //         isenabled: item.isDisabled ? "False" : "True",
+    //         creationTime: currentDate,
+    //       };
+    //     })
+    //   );
+    // console.log(
+    //   "hello this is new data",
+    //   resp.data.result.items.map((item: any) => ({
+    //     id: item.id,
+    //     languageName: item.languageName,
+    //     code: item.name,
+    //     isenabled: !item.isDisabled,
+    //     creationTime: item.creationTime,
+    //   }))
+    // );
   }
 );
 
