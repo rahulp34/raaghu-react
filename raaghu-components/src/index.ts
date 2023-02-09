@@ -31,3 +31,4 @@ export {default as RdsCompDynamicEntityProperty} from './rds-comp-dynamic-entity
 export {default as RdsCompRoleList} from './rds-comp-role-list/rds-comp-role-list'
 export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-list'
 export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition'
+export {default as RdsCompNewFeatures} from './rds-comp-new-features/rds-comp-new-features'
