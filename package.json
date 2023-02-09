@@ -61,6 +61,7 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "create:element": "node utils/create-element.js"
+    "create:element": "node utils/create.js e",
+    "create:component": "node utils/create.js c"
   }
 }
