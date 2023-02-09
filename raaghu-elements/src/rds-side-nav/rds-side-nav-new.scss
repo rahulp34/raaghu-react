@@ -8,3 +8,10 @@
     list-style :disc ;
     
 }
+
+#sidebar>ul {
+    height: calc(100vh - 188px)!important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+

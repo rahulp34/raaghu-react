@@ -35,7 +35,7 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`mb-0 py-2 px-4 h-100 ps-1 ${
+        className={`mb-0 py-2 px-4 ps-1 ${
           count == 1
             ? "list-unstyled"
             : count == 2
@@ -107,7 +107,7 @@ const Node = ({
   const hasChild = node.children ? true : false;
 
   return (
-    <li style={{ cursor: "pointer" }} className="mb-2">
+    <li className="mb-2 pe-auto">
       {!hasChild && (
         <Link
           to={node.path}
@@ -140,7 +140,7 @@ const Node = ({
 
       {hasChild && (
         <div
-          className="text-decoration-none d-flex align-items-center"
+          className="text-decoration-none d-flex align-items-center pe-auto"
           onClick={(e) => setChildVisibility((v) => !v)}
         >
           <div className="col d-flex align-items-center">
@@ -156,6 +156,7 @@ const Node = ({
                         data-bs-auto-close="outside"
                         aria-expanded="false"
                         id="side-dropdown2"
+                        className="pe-auto"
                       >
                         <RdsIcon
                           name={node.icon}
@@ -216,8 +217,7 @@ const Node = ({
       {hasChild && childVisibility && !collapse && (
         <div>
           <div
-            className="collapse pt-2 show"
-            style={{ marginLeft: "1rem" }}
+            className="collapse pt-2 show ms-1"
             id="menuWithChildren2"
           >
             <RdsSideNavChild
