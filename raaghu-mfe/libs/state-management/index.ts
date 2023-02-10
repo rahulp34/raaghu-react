@@ -4,6 +4,7 @@ import { forgotPasswordReducer } from "./forgot-password/forgotpassword-slice";
 import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
+import organizationReducer from "./organization-tree/organization-tree-slice";
 import languageEditReducer from "./language/languageEdit-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   edition: editionReducer,
   language: languageReducer,
   languageEdit: languageEditReducer,
+  organization: organizationReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
