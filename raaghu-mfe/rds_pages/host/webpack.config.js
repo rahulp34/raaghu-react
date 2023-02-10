@@ -124,6 +124,7 @@ module.exports = (env, argv) => {
 					DynamicProperties: mfeConfigJSON["dynamicProperties"].url,
 					IconList: mfeConfigJSON["iconlist"].url,
 					LanguageText: mfeConfigJSON["languageText"].url,
+          SecurityLogs:mfeConfigJSON["securityLogs"].url,
 				},
 				shared: {
 					...devdeps,

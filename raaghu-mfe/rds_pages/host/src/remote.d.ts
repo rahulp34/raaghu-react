@@ -83,3 +83,8 @@ declare module "IconList/IconList" {
 	const IconListComponent : React.ComponentType;
 	export default IconListComponent;
 }
+
+declare module "SecurityLogs/SecurityLogs" {
+	const SecurityLogsComponent : React.ComponentType;
+	export default SecurityLogsComponent; 
+}
