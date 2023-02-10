@@ -28,7 +28,8 @@ export {default as RdsCompUserPermission} from "./rds-comp-user-permission/rds-c
 export {default as RdsCompUserBasics} from "./rds-comp-user-basics/rds-comp-user-basics"
 export {default as RdsCompNewLanguage} from "./rds-comp-new-language/rds-comp-new-language";
 export {default as RdsCompDynamicEntityProperty} from './rds-comp-dynamic-entity-property/rds-comp-dynamic-entity-property';
-export {default as RdsCompRoleList} from './rds-comp-role-list/rds-comp-role-list';
-export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-list';
-export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition';
-export {default as RdsCompSecurityLogs} from './rds-comp-security-logs/rds-comp-security-logs'
+export {default as RdsCompRoleList} from './rds-comp-role-list/rds-comp-role-list'
+export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-list'
+export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition'
+export { default as RdsCompNewFeatures } from './rds-comp-new-features/rds-comp-new-features';
+export { default as RdsCompSecurityLogs } from './rds-comp-security-logs/rds-comp-security-logs';

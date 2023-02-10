@@ -182,8 +182,8 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   return (
-    <div className="tenant">
-      <RdsOffcanvas
+    <div className="tenant card p-3 h-100 border-0 rounded-0 card-full-stretch">
+      {/* <RdsOffcanvas
         canvasTitle="NEW EDITION"
         onclick={offCanvasHandler}
         placement="end"
@@ -230,11 +230,13 @@ const Edition = (props: RdsPageEditionProps) => {
         {(activeNavTabId == 1 || showTenantSettings == true) && (
           <RdsCompPermissionTree familyTree={familyTree} />
         )}
-      </RdsOffcanvas>
+      </RdsOffcanvas> */}
+      <div className="mt-3">
       <RdsCompEdition
         EditionItems={EditionItems}
         features={features}
       ></RdsCompEdition>
+      </div>
     </div>
   );
 };

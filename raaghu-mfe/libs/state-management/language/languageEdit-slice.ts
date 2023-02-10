@@ -4,7 +4,7 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import axios from "axios";
+// import axios from "axios";
 import {
   LanguageServiceProxy,
   GetLanguagesOutput,
@@ -12,12 +12,12 @@ import {
 
 type InitialState = {
   loading: boolean;
-  languagesEdit: { flags: any[]; language: string; languageName: any[] };
+  languagesEdit: { flags: any[]; language: string; languageNames: any[] };
   error: string;
 };
 export const initialStateEdit: InitialState = {
   loading: false,
-  languagesEdit: { flags: [], language: "", languageName: [] },
+  languagesEdit: { flags: [], language: "", languageNames: [] },
   error: "",
 };
 
@@ -31,16 +31,16 @@ if (credentials) {
 export const fetchLanguagesEdit = createAsyncThunk(
   "languageEdit/fetchLanguagesEdit",
   () => {
-    return axios
-      .get(
-        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguageForEdit?",
-        {
-          headers: {
-            Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-          },
-        }
-      )
-      .then((response) => response.data.result);
+    // return axios
+    //   .get(
+    //     "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguageForEdit?",
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
+    //       },
+    //     }
+    //   )
+    //   .then((response) => response.data.result);
   }
 );
 
@@ -64,7 +64,7 @@ const languageEditSlice = createSlice({
 
     builder.addCase(fetchLanguagesEdit.rejected, (state, action) => {
       state.loading = false;
-      state.languagesEdit = { flags: [], language: "", languageName: [] };
+      state.languagesEdit = { flags: [], language: "", languageNames: [] };
       state.error = action.error.message || "Something went wrong";
     });
   },

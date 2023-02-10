@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     mode: process.env.NODE_ENV || "development",
     devServer: {
       port: 8005,
-      open: true,
+      open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
@@ -92,11 +92,6 @@ module.exports = (env, argv) => {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
-          },
-          'luxon': {
-            singleton: true,
-            version: '3.1.0',
-            requiredVersion: deps['luxon']
           }
         },
       }),

@@ -57,9 +57,7 @@ module.exports = (env, argv) => {
         { test: /\.(config)$/, loader: "file-loader" },
         {
           test: /\.(scss|css)$/,
-
           use: ["style-loader", "css-loader", "sass-loader"],
-
           exclude: "/node_modules/",
         },
         {
@@ -91,58 +89,56 @@ module.exports = (env, argv) => {
       ],
     },
 
-		plugins: [
-			new CopyWebpackPlugin({
-				patterns: [
-					{
-						from: "src/assets",
-						to: "assets",
-					},
-				],
-			}),
-			new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
-			new webpack.DefinePlugin({
-				"process.env": JSON.stringify(process.env),
-			}),
-			new ModuleFederationPlugin({
-				name: "host",
-				remotes: {
-					Dashboard: mfeConfigJSON["dashboard"].url,
-					Login: mfeConfigJSON["login"].url,
-					ForgotPassword: mfeConfigJSON["forgotpassword"].url,
-					Tenant: mfeConfigJSON["tenant"].url,
-					Maintainance: mfeConfigJSON["maintainance"].url,
-					WebhookSubscription: mfeConfigJSON["webhookSubscription"].url,
-					VisualSetting: mfeConfigJSON["visualSetting"].url,
-					Edition: mfeConfigJSON["edition"].url,
-					Settings: mfeConfigJSON["settings"].url,
-					AuditLogs: mfeConfigJSON["auditLogs"].url,
-					Users: mfeConfigJSON["users"].url,
-					Roles: mfeConfigJSON["roles"].url,
-					OrganizationUnits: mfeConfigJSON["organizationUnits"].url,
-					Language: mfeConfigJSON["language"].url,
-					DynamicProperties: mfeConfigJSON["dynamicProperties"].url,
-					IconList: mfeConfigJSON["iconlist"].url,
-					LanguageText: mfeConfigJSON["languageText"].url,
-          SecurityLogs:mfeConfigJSON["securityLogs"].url,
-				},
-				shared: {
-					...devdeps,
-					...deps,
-
-					react: { singleton: true, eager: true, requiredVersion: deps.react },
-					"react-dom": {
-						singleton: true,
-						eager: true,
-						requiredVersion: deps["react-dom"],
-					},
-				},
-			}),
-			// new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
-			new HtmlWebpackPlugin({
-				template: "./public/index.html",
-			}),
-			// new ForkTsCheckerWebpackPlugin(),
-		],
-	};
+    plugins: [
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: "src/assets",
+            to: "assets",
+          },
+        ],
+      }),
+      new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
+      new webpack.DefinePlugin({
+        "process.env": JSON.stringify(process.env),
+      }),
+      new ModuleFederationPlugin({
+        name: "host",
+        remotes: {
+          Dashboard: mfeConfigJSON["dashboard"].url,
+          Login: mfeConfigJSON["login"].url,
+          ForgotPassword: mfeConfigJSON["forgotpassword"].url,
+          Tenant: mfeConfigJSON["tenant"].url,
+          Maintainance: mfeConfigJSON["maintainance"].url,
+          WebhookSubscription: mfeConfigJSON["webhookSubscription"].url,
+          VisualSetting: mfeConfigJSON["visualSetting"].url,
+          Edition: mfeConfigJSON["edition"].url,
+          Settings: mfeConfigJSON["settings"].url,
+          AuditLogs: mfeConfigJSON["auditLogs"].url,
+          Users: mfeConfigJSON["users"].url,
+          Roles: mfeConfigJSON["roles"].url,
+          OrganizationUnits: mfeConfigJSON["organizationUnits"].url,
+          Language: mfeConfigJSON["language"].url,
+          DynamicProperties: mfeConfigJSON["dynamicProperties"].url,
+          IconList: mfeConfigJSON["iconlist"].url,
+          LanguageText: mfeConfigJSON["languageText"].url
+        },
+        shared: {
+          ...devdeps,
+          ...deps,
+          react: { singleton: true, eager: true, requiredVersion: deps.react },
+          "react-dom": {
+            singleton: true,
+            eager: true,
+            requiredVersion: deps["react-dom"],
+          }
+        }
+      }),
+      // new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
+      new HtmlWebpackPlugin({
+        template: "./public/index.html",
+      }),
+      // new ForkTsCheckerWebpackPlugin(),
+    ],
+  };
 };
