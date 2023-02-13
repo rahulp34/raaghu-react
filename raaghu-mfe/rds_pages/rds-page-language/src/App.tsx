@@ -8,8 +8,31 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLanguages } from "../../../libs/state-management/language/language-slice";
 import { fetchLanguagesEdit } from "../../../libs/state-management/language/languageEdit-slice";
-// import axios from "axios";
 import { RdsBadge, RdsIcon } from "../../rds-elements";
+
+const languageItems = [
+  {
+    label: "EN(US)",
+    val: "en",
+    icon: "us",
+    iconWidth: "20px",
+    iconHeight: "20px",
+  },
+  {
+    label: "English(IND)",
+    val: "en",
+    icon: "in",
+    iconWidth: "20px",
+    iconHeight: "20px",
+  },
+  {
+    label: "French",
+    val: "fr",
+    icon: "us",
+    iconWidth: "20px",
+    iconHeight: "20px",
+  },
+];
 
 const tableHeaders = [
   {
@@ -40,8 +63,8 @@ const tableHeaders = [
 
 const actions = [
   { id: "edit", displayName: "Edit" },
-  { id: "changeText", displayName: "Change Texts" },
-  { id: "setDefaultLanguage", displayName: "Set as default language" },
+  // { id: "changeText", displayName: "Change Texts" },
+  // { id: "setDefaultLanguage", displayName: "Set as default language" },
   { id: "delete", displayName: "Delete" },
 ];
 
@@ -50,37 +73,70 @@ const App = () => {
   const Edit = useAppSelector((state) => state.persistedReducer.languageEdit);
   const [Data, setData] = useState<any>([]);
   const [Lang, setLang] = useState<any>([]);
-  const[Country,setCountry] = useState<any>([])
+  const [Country, setCountry] = useState<any>([]);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchLanguages() as any);
     dispatch(fetchLanguagesEdit() as any);
 
-    const tempLanguageName = Edit.languagesEdit.languageNames.map(
-      (item: any) => {
-        return {
-          option: item.displayText,
-          value: item.value,
-          isSelected: item.isSelected,
-        };
+    // .filter(country => country !== '');
+
+    const tempLanguage = Edit.languagesEdit.languageNames.map(
+      (item: any, i) => {
+        if (i !== 0) {
+          return {
+            option: item.displayText,
+            value: item.value,
+            isSelected: item.isSelected,
+          };
+        }
       }
     );
+    const tempLanguageName = tempLanguage.filter((item) => item !== undefined);
 
     setLang(tempLanguageName);
 
-    const tempCountryName = Edit.languagesEdit.languageNames.map(
-      (item: any) => {
-        const text = item.displayText.trim().split(" ")[1];
-        const cleanedText = text.replace(/[\(\)]/g, "");
+    console.log("this is response",Edit.languagesEdit.languageNames)
+
+    const tempCountry = Edit.languagesEdit.languageNames.map((item: any, i) => {
+      const str = item.displayText;
+      const startIndex = str.indexOf("(");
+      const endIndex = str.indexOf(")");
+      const name = str.substring(startIndex + 1, endIndex);
+
+      const text = item.displayText.trim().split(" ")[1];
+      const cleanedText = text.replace(/[\(\)]/g, "");
+
+      let value;
+      const val =() => {
+        if (item.value.indexOf("-") !== -1) {
+          return (value = item.value.trim().split("-")[1]);
+        } else {
+          return (value = item.value);
+        }
+      };
+      val()
+      console.log(value)
+
+      if (i !== 0) {
         return {
-          option: cleanedText,
-          value: item.value,
-          isSelected: item.isSelected,
+          label: name,
+          val: item.value,
+          icon: value,
+          // isSelected: item.isSelected,
+          iconWidth: "20px",
+          iconHeight: "20px",
         };
       }
+    });
+    console.log("hello", tempCountry);
+    const tempCountryName = tempCountry.filter(
+      (item) => item !== undefined
     );
-    setCountry(tempCountryName)
+    console.log("without undefined",tempCountryName)
+
+    setCountry(tempCountryName);
 
     const tempData = data.languages.items.map((item: any) => {
       let flag = item.icon.trim().split(" ")[1];
@@ -130,13 +186,6 @@ const App = () => {
     console.log(typeof tempData);
     setData(tempData);
   }, [dispatch]);
-
-
-
-
-
-
-  
 
   // useEffect(() => {
   //   fetchLanguages();
@@ -223,6 +272,7 @@ const App = () => {
         actions={actions}
         languageName={Lang}
         flags={Country}
+        languageItems={languageItems}
       ></Language>
     </Suspense>
   );

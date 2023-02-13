@@ -14,6 +14,30 @@ const Template: ComponentStory<typeof RdsCompNewLanguage> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
+	placeholder:"Select Country",
+	languageItems: [
+		{
+		  label: "EN(US)",
+		  val: "en",
+		  icon: "us",
+		  iconWidth: "20px",
+		  iconHeight: "20px",
+		},
+		{
+		  label: "English(IND)",
+		  val: "en",
+		  icon: "in",
+		  iconWidth: "20px",
+		  iconHeight: "20px",
+		},
+		{
+		  label: "French",
+		  val: "fr",
+		  icon: "us",
+		  iconWidth: "20px",
+		  iconHeight: "20px",
+		},
+	  ],
  flags : [
 		{ option: "ad" },
 		{ option: "ae" },
