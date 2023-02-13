@@ -4,9 +4,6 @@
 name: "Build and deploy anzstageuireact.raaghu.io"
 
 on:
-  push:
-    branches: [development]
-
   workflow_dispatch:
 
 env:
