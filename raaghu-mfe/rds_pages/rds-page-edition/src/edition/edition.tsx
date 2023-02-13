@@ -231,11 +231,11 @@ const Edition = (props: RdsPageEditionProps) => {
           <RdsCompPermissionTree familyTree={familyTree} />
         )}
       </RdsOffcanvas> */}
-      <div className="mt-3">
-      <RdsCompEdition
-        EditionItems={EditionItems}
-        features={features}
-      ></RdsCompEdition>
+      <div className="row mt-5 flex-row flex-code m-2">
+        <RdsCompEdition
+          EditionItems={EditionItems}
+          features={features}
+        ></RdsCompEdition>
       </div>
     </div>
   );
