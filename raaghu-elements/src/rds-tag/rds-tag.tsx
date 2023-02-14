@@ -97,9 +97,6 @@ const RdsTag = (props: RdsTagProps) => {
                                 stroke={true}
                                 width="15"
                                 height="15"
-                                background={
-                                  closeFill == true ? props.colorVariant : " "
-                                }
                                 borderRadius={
                                   closeFill == true
                                     ? "50%"
