@@ -33,7 +33,7 @@ export const LoginInitialState: LoginState = {
     refreshTokenExpireDate: undefined,
     date: undefined,
     isAuth: false
-};
+}; 
 export const Authenticate = createAsyncThunk('login/Authenticate',
         async(authenticateModal:any)=>{       
             const result =  await TokenAuthService.authenticate(authenticateModal);	

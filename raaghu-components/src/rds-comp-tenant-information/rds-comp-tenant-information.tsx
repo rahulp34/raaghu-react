@@ -154,7 +154,7 @@ const RdsCompTenantInformation = (props: RdsCompTenantInformationProps) => {
 								<RdsSelectList
 									label={t("Edition") ||""}
 									selectItems={props.editionList}
-									onSelectListChange={(e) => setSelectedOption(e.target.value)}
+									onSelectListChange={(e:any) => setSelectedOption(e.target.value)}
 								></RdsSelectList>
 							</div>
 						</div>

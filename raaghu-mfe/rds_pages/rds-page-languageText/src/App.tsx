@@ -47,6 +47,13 @@ const languagetableData = [{id: 1, languageName: 'India', code: 'IND', isenabled
 
 
 const App =() =>{
+
+
+  useEffect(()=>{
+    
+  },[])
+
+
   return (
     <>
     <LanguageText languagetableHeaders={tableHeaders}
