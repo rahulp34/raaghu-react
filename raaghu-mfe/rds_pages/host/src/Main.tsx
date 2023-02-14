@@ -41,12 +41,14 @@ export interface MainProps {
 const Main = (props: MainProps) => {
   const [isAuth, setIsAuth] = useState(true);
   const navigate = useNavigate();
-  let accessToken: string | undefined = undefined;
+  let accessToken: string | undefined | null= localStorage.getItem("access_token")  ;
   let currentPath = window.location.pathname;
 
   const auth: any = useSelector(
     (state: RootState) => state.persistedReducer.login.isAuth
   );
+
+  console.log("auth",auth)
 
   useEffect(() => {
     const loginCredentials = localStorage.getItem("persist:root");
@@ -57,11 +59,11 @@ const Main = (props: MainProps) => {
     }
 
     // setIsAuth(true);
-    if (accessToken) {
+    if (localStorage.getItem("access_token")) {
       setIsAuth(true);
       navigate("/dashboard");
     }
-    if (accessToken == undefined) {
+    if (localStorage.getItem("access_token") == null) {
       navigate("/login");
     }
   }, [accessToken]);
@@ -354,8 +356,9 @@ const Main = (props: MainProps) => {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
-      </Routes>
-      {auth && isAuth && (
+      </Routes> 
+      {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
+      {isAuth && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
