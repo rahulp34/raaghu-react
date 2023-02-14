@@ -74,7 +74,7 @@ const RdsCompContactInformation = (props: RdsCompContactInfoProps) => {
             <RdsLabel
               label="Email Address"
               fontWeight={600}
-              redAsteriskPresent={true}
+              required={true}
             />
             <RdsInput
               placeholder="Enter Email address"
@@ -91,7 +91,7 @@ const RdsCompContactInformation = (props: RdsCompContactInfoProps) => {
           <div className=" mb-3">
             <RdsLabel
               label="Contact Number"
-              redAsteriskPresent={true}
+              required={true}
               fontWeight={600}
             />
             <RdsInput

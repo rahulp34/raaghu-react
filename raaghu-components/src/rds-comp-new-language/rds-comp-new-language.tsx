@@ -28,7 +28,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
               <div className="mb-2">
                 <RdsLabel
                   label="Language Name"
-                  redAsteriskPresent={true}
+                  required={true}
                 ></RdsLabel>{" "}
               </div>
               <RdsSelectList
@@ -76,7 +76,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
           <div className="col-md-6 mb-3">
             <div className="form-group mt-3">
               <div className="mb-2">
-                <RdsLabel label="Country" redAsteriskPresent={true}></RdsLabel>{" "}
+                <RdsLabel label="Country" required={true}></RdsLabel>{" "}
               </div>
               <RdsDropdownList
                 borderDropdown={true}

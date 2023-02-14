@@ -11,6 +11,7 @@ import {
   RdsCheckbox,
   RdsNavtabs,
   RdsOffcanvas,
+  RdsInput
 } from "../../../rds-elements";
 
 const Users = () => {
@@ -201,6 +202,7 @@ const Users = () => {
     <div>
       <div className="row">
         <div className="col-md-12 d-flex justify-content-end mb-3">
+          <RdsInput></RdsInput>
           <RdsButton
             type={"button"}
             size="small"

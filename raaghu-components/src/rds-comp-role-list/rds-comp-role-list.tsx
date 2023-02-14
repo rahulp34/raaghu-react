@@ -320,7 +320,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
                   <div className="mt-4 container">
                     <RdsInput
                       label="Role Name"
-                      redAsteriskPresent={true}
+                      required={true}
                       placeholder={"Role Name"}
                       onChange={nameChangeHandler}
                       value={name.displayName}
@@ -436,7 +436,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               <div className="mt-4 container">
                 <RdsInput
                   label="Role Name"
-                  redAsteriskPresent={true}
+                  required={true}
                   placeholder={"Edit Role Name"}
                   onChange={nameChangeHandler}
                   value={name.displayName}
