@@ -87,24 +87,27 @@ const RdsCompTenantInformation = (props: RdsCompTenantInformationProps) => {
 							<div className="form-group mb-3">
 								<RdsInput
 									inputType="text"
-									redAsteriskPresent={true}
+									required={true}
 									label={t("Tenancy Name") || ""} 
 									name="tenancy_name"
 									id="tenancy_name"
 									placeholder={t("Tenancy Name") || ""}
-									onBlur={() => setIsTenancyNameTouched(true)}
+									//onBlur={() => setIsTenancyNameTouched(true)}
 									onChange={(e) => setEnteredTenancyName(e.target.value)}
 								></RdsInput>
-								{isTenancyNameInputEmptyAndTouched && (
+								
+								{/* <div className="form-control-feedback">
+									{isTenancyNameInputEmptyAndTouched && (
 									<span className="red-color-error">
 										{t("Tenancy Name is required")}
 									</span>
 								)}
-								<div className="form-control-feedback"></div>
+								</div> */}
+								
 							</div>
 							<div className="form-group mb-3">
 								<RdsInput
-									redAsteriskPresent={true}
+									required={true}
 									inputType="text"
 									label={t("Tenant Name") || ""}
 									name="tenant_name"
@@ -113,11 +116,13 @@ const RdsCompTenantInformation = (props: RdsCompTenantInformationProps) => {
 									onBlur={() => setIsTenantNameTouched(true)}
 									onChange={(e) => setEnteredTenantName(e.target.value)}
 								></RdsInput>
+								{/* <div className="form-control-feedback">
 								{isTenantNameInputEmptyAndTouched && (
 									<span className="red-color-error">
 										{t("Tenant Name is required")}
 									</span>
 								)}
+								</div> */}
 							</div>
 						</div>
 					</div>
@@ -125,7 +130,7 @@ const RdsCompTenantInformation = (props: RdsCompTenantInformationProps) => {
 						<div className="col-md-6 sm-p-0">
 							<div className="form-group mb-3">
 								<RdsInput
-									redAsteriskPresent={true}
+									required={true}
 									inputType="email"
 									label={t("Admin Email") || ""}
 									placeholder={t("Admin Email") || ""}
@@ -134,16 +139,18 @@ const RdsCompTenantInformation = (props: RdsCompTenantInformationProps) => {
 									onBlur={() => setIsEmailTouched(true)}
 									onChange={(e) => setEnteredEmail(e.target.value)}
 								></RdsInput>
-								{EmailInputIsEmptyAndTouched && (
+								</div><div className="form-control-feedback">
+								{/* {EmailInputIsEmptyAndTouched && (
 									<span className="red-color-error">
 										{t("Email is required")}
 									</span>
-								)}
-								{isEnteredEmailInvalid && !isEnteredEmailEmpty && (
+								)} */}
+								{/* {isEnteredEmailInvalid && !isEnteredEmailEmpty && (
 									<span className="red-color-error">
 										{t("Entered invalid Email Address")}
 									</span>
 								)}
+								</div> */}
 							</div>
 						</div>
 						<div className="col-md-6 sm-p-0">

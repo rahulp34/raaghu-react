@@ -66,7 +66,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
               <div className="col-md-6 sm-p-0">
                 <div className="form-group mb-3">
                   <RdsInput
-                    redAsteriskPresent={true}
+                    required={true}
                     inputType="text"
                     placeholder="Database Connection String"
                     label="Database Connection String"
@@ -84,7 +84,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                   <RdsInput
                     inputType="password"
                     placeholder={t("Password") || ""}
-                    redAsteriskPresent={true}
+                    required={true}
                     label={t("Password") || ""}
                     name="password"
                     id="password"
@@ -110,7 +110,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                   <RdsInput
                     inputType="password"
                     placeholder={t("Confirm Password") || ""}
-                    redAsteriskPresent={true}
+                    required={true}
                     label={t("Confirm Password") || ""}
                     name="cpassword"
                     id="cpassword"

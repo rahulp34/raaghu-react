@@ -45,7 +45,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 							<form onSubmit={onSubmit}>
 								<div className="form-group mb-3 text-start">
 									<RdsInput
-									redAsteriskPresent={true}
+									required={true}
 										label="Enter email to receive reset password link"
 										onChange={emailhandleChange}
 										size="default"

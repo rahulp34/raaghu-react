@@ -79,7 +79,7 @@ const RdsCompPasswordSetting = (props:RdsCompPasswordSettingProps) => {
 				<div className="fw-normal mt-1 mb-3">				
 					<RdsInput
 						label='Current password '
-						redAsteriskPresent={true}
+						required={true}
 						placeholder='Current password '
 						inputType='password'
 						onChange={curPasshandleChange}
@@ -92,7 +92,7 @@ const RdsCompPasswordSetting = (props:RdsCompPasswordSettingProps) => {
                 <div className=" fw-normal mb-3">
 					<RdsInput
 						label='New password'
-						redAsteriskPresent={true}
+						required={true}
 						placeholder='New password'
 						inputType='password'
 						onChange = {newPasshandleChange}
@@ -104,7 +104,7 @@ const RdsCompPasswordSetting = (props:RdsCompPasswordSettingProps) => {
 				<div className=" fw-normal mb-3">
 					<RdsInput
 						label='Confirm new password'
-						redAsteriskPresent={true}
+						required={true}
 						placeholder='Confirm new password'
 						inputType='password'
 						onChange = {curNewPasshandleChange}

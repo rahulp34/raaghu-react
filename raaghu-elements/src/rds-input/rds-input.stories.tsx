@@ -38,7 +38,7 @@ Default.args = {
   labelPositon:"top",
   id:"",
   value: "",
-  redAsteriskPresent: true,
+  required: true,
 };
 
 export const Tooltip = Template.bind({});
@@ -58,7 +58,7 @@ Tooltip.args = {
   labelPositon:"top",
   id:"",
   value: "",
-  redAsteriskPresent: true,
+  required: true,
   tooltipPlacement:"top",
   tooltipTitle:"This is tooltip",
 };
@@ -73,7 +73,7 @@ Disabled.args = {
   labelPositon:"top",
   id:"",
   value: "",
-  redAsteriskPresent: true,
+  required: true,
   isDisabled: true,
 }
 
@@ -86,6 +86,6 @@ Readonly.args = {
   labelPositon:"top",
   id:"",
   value: "",
-  redAsteriskPresent: true,
+  required: true,
   readonly: true,
 }

@@ -167,7 +167,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                   <RdsInput
                     label={"Add Organization name"}
                     labelPositon="top"
-                    redAsteriskPresent={true}
+                    required={true}
                     size="medium"
                     onChange={(e)=>setEdit(e.target.value)}
                     value={Edit}
@@ -224,7 +224,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                            label='Name'
                            labelPositon="top"
                            id={node.data.id}
-                           redAsteriskPresent={true}
+                           required={true}
                            size="medium"
                            name={Edit}
                            value={Edit}
@@ -273,7 +273,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                          label='Name'
                          labelPositon="top"
                          id={node.data.id}
-                         redAsteriskPresent={true}
+                         required={true}
                          name={Edit}
                          value={Edit}
                          size="medium"
@@ -362,7 +362,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                   <RdsInput
                     label={"Add Organization name"}
                     labelPositon="top"
-                    redAsteriskPresent={true}
+                    required={true}
                     size="medium"
                     onChange={(e)=>setValue(e.target.value)}
                     value={value}

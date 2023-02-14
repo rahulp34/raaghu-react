@@ -142,7 +142,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								inputType="text"
 								name="firstName"
 								placeholder="Enter First Name"
-								redAsteriskPresent
+								required
 								onBlur={(e) => firstNameValidation(e.target.value)}
 							/>
 							{firstNameErrorMessage != "" && (
@@ -158,7 +158,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								inputType="text"
 								name="lastName"
 								placeholder="Enter Last Name"
-								redAsteriskPresent
+								required={true}
 								onBlur={(e) => lastNameValidation(e.target.value)}
 							/>
 							{lastNameErrorMessage != "" && (
@@ -185,7 +185,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								name="phone"
 								id="txtPhone"
 								placeholder="Enter phone"
-								redAsteriskPresent
+								required={true}
 								onBlur={(e) => phoneValidationHandler(e.target.value)}
 							/>
 							{phoneErrorMessage != "" && (
@@ -202,7 +202,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								size="medium"
 								name="address"
 								id="txtAddress"
-								redAsteriskPresent
+								required={true}
 								onBlur={(e) => addressValidation(e.target.value)}
 							/>
 							{addressErrorMessage != "" && (
@@ -220,7 +220,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								name="city"
 								id="txtCompany"
 								placeholder="Enter City"
-								redAsteriskPresent
+								required={true}
 								onBlur={(e) => cityValidation(e.target.value)}
 							/>
 							{cityErrorMessage != "" && (
@@ -267,7 +267,7 @@ const RdsCompBillingAddress = (props: RdsCompBillingAddressProps) => {
 								name="postalCode"
 								id="txtPostalCode"
 								placeholder="Enter Postal code"
-								redAsteriskPresent
+								required={true}
 								onBlur={(e) => postalCodeValidation(e.target.value)}
 							/>
 							{postalCodeErrorMessage != "" && (
