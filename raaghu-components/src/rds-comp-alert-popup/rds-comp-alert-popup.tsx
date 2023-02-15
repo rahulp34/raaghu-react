@@ -33,8 +33,8 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
         size='small'
         verticallyCentered={true}
       >
-        <div className="text-center py-3 ">
-          <p className="">
+        <div className="text-center  py-3 ">
+          <p className="align-items-center d-flex justify-content-center">
             <RdsIcon
               height="40px"
               width="40px"
@@ -50,7 +50,7 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
           <span>
             <RdsLabel label={messageAlert} />
           </span>
-          <div className="mt-5 d-flex justify-content-evenly">
+          <div className="mt-3 d-flex gap-3 justify-content-center">
             <RdsButton
               onClick={props.onCancel}
               class="px-2"

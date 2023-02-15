@@ -28,7 +28,8 @@ export interface RdsCompSecurityLogsProps{
 
 const RdsCompSecurityLogs = (props: RdsCompSecurityLogsProps) => {
     return (
-		<RdsCompDatatable
+        <div className="card  border-0">
+            <RdsCompDatatable
 			tableHeaders={props.tableHeaders}
 			actions={props.actions}
 			tableData={props.tableData!}
@@ -36,6 +37,8 @@ const RdsCompSecurityLogs = (props: RdsCompSecurityLogsProps) => {
 			recordsPerPage={props.recordsPerPage}
 			recordsPerPageSelectListOption={props.recordsPerPageSelectListOption}
 		></RdsCompDatatable>
+        </div>
+		
 	);
 
 };

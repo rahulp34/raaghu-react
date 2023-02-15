@@ -5,6 +5,7 @@ import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import languageEditReducer from "./language/languageEdit-slice";
+import securityLogsReducer from "./security-logs/security-logs-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   edition: editionReducer,
   language: languageReducer,
   languageEdit: languageEditReducer,
+  securityLogs:securityLogsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
