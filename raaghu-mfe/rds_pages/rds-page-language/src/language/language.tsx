@@ -5,11 +5,12 @@ import { RdsCompDatatable, RdsCompNewLanguage } from "../../../rds-components";
 import { Item } from "@storybook/api/dist/ts3.9/lib/stories";
 
 export interface LanguageProps {
+  languageItems: any;
   languagetableHeaders: any;
   languagetableData: any;
   actions?: any;
-  languageName:any[];
-  flags:any[];
+  languageName: any[];
+  flags: any[];
   onActionSelection?(arg: any): void;
 }
 
@@ -46,7 +47,13 @@ const Language = (props: LanguageProps) => {
                   offcanvaswidth={550}
                 >
                   {" "}
-                  <RdsCompNewLanguage flags={props.flags} languageNames={props.languageName}></RdsCompNewLanguage>
+                  <RdsCompNewLanguage
+                    placeholder="Select Country"
+                    languageItems={props.languageItems}
+                    flags={props.flags}
+                    languageNames={props.languageName}
+                    onClick={undefined}
+                  ></RdsCompNewLanguage>
                 </RdsOffcanvas>
               </div>
             </div>
@@ -66,7 +73,6 @@ const Language = (props: LanguageProps) => {
         </div>
       </div>
       <div className="mobile-btn position-absolute bottom-0 end-0 my-4 mx-5"></div>
-   
     </>
   );
 };
