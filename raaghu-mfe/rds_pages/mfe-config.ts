@@ -53,7 +53,13 @@ export const MfeConfig = {
 	"languageText":{
 		"url":"languageText@http://localhost:8017/remoteEntry.js"
 	},
-	"securityLogs":{
-		"url":"securityLogs@http://localhost:8018/remoteEntry.js"
+	"claimtypes":{
+		"url":"claimtypes@http://localhost:8018/remoteEntry.js"
+  },
+	"textTemplate":{
+		"url":"textTemplate@http://localhost:8020/remoteEntry.js"
+	},
+	"securityLogs": {
+		"url": "securityLogs@http://localhost:8018/remoteEntry.js"
 	}
-}
+},

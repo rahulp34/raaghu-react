@@ -390,9 +390,9 @@ const classes =(): string[] =>{
                                   </div>
                                 )}
                                 {tableHeader.datatype === "children" && (
-                                  <div>
+                                  <div className="d-flex justify-content-center">
                                     {" "}
-                                    {tableDataRow[tableHeader.key].children}
+                                    {tableDataRow[tableHeader.key]}
                                   </div>
                                 )}
                                 {/* add more types here if reequired */}

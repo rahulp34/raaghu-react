@@ -84,7 +84,16 @@ declare module "IconList/IconList" {
 	export default IconListComponent;
 }
 
+declare module "ClaimTypes/ClaimTypes" {
+	const ClaimTypesComponent : React.ComponentType;
+	export default ClaimTypesComponent;
+}
+
+declare module "TextTemplate/TextTemplate" {
+	const TextTemplateComponent : React.ComponentType;
+	export default TextTemplateComponent;
+}
 declare module "SecurityLogs/SecurityLogs" {
-	const SecurityLogsComponent : React.ComponentType;
-	export default SecurityLogsComponent; 
+	const SecurityLogsComponent: React.ComponentType;
+	export default SecurityLogsComponent;
 }
