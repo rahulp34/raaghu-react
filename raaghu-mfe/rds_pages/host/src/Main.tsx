@@ -33,6 +33,9 @@ const DynamicPropertyCompo = React.lazy(
   () => import("DynamicProperties/DynamicProperties")
 );
 const IconListCompo = React.lazy(()=>import("IconList/IconList"));
+const ClaimTypesCompo = React.lazy(()=>import("ClaimTypes/ClaimTypes"));
+
+
 
 const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
 
@@ -446,6 +449,7 @@ const Main = (props: MainProps) => {
                     ></Route>
                     <Route path="/icons" 
                     element={<IconListCompo/>}></Route>
+                    <Route path="/claim-types" element={<ClaimTypesCompo />} />
                     <Route path="/text-template" 
                       element={<TextTemplateCompo/>}>
                     </Route>
