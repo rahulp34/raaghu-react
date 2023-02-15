@@ -34,6 +34,8 @@ const DynamicPropertyCompo = React.lazy(
 );
 const IconListCompo = React.lazy(()=>import("IconList/IconList"));
 
+const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
+
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -444,6 +446,9 @@ const Main = (props: MainProps) => {
                     ></Route>
                     <Route path="/icons" 
                     element={<IconListCompo/>}></Route>
+                    <Route path="/text-template" 
+                      element={<TextTemplateCompo/>}>
+                    </Route>
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

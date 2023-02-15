@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import {
   RdsCompDatatable,
+  RdsCompPermissionTree,
   RdsCompTenantInformation,
   RdsCompTenantSettings,
   RdsCompUserBasics,
@@ -15,6 +16,44 @@ import {
 } from "../../../rds-elements";
 
 const Users = () => {
+  const permissionData = [
+    {
+      name: "FeatureManagement",
+      displayName: "Feature management",
+      permissions: [
+        {
+          name: "FeatureManagement.ManageHostFeatures",
+          displayName: "Manage Host features",
+          parentName: null,
+          isGranted: false,
+          allowedProviders: [],
+          grantedProviders: [{ providerName: "R", providerKey: "admin" }]
+        }
+      ]
+    },
+    {
+      name: "AbpIdentity",
+      displayName: "Identity management",
+      permissions: [
+        {
+          name: "AbpIdentity.Roles",
+          displayName: "Role management",
+          parentName: null,
+          isGranted: false,
+          allowedProviders: [],
+          grantedProviders: [{ providerName: "R", providerKey: "admin" }]
+        },
+        {
+          name: "AbpIdentity.Roles.Create",
+          displayName: "Create",
+          parentName: "AbpIdentity.Roles",
+          isGranted: false,
+          allowedProviders: [],
+          grantedProviders: [{ providerName: "R", providerKey: "admin" }]
+        },
+        { name: "AbpIdentity.Roles.Update", displayName: "Edit", parentName: "AbpIdentity.Roles", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Roles.Delete", displayName: "Delete", parentName: "AbpIdentity.Roles", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Roles.ManagePermissions", displayName: "Change permissions", parentName: "AbpIdentity.Roles", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users", displayName: "User management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.Create", displayName: "Create", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.Update", displayName: "Edit", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.Delete", displayName: "Delete", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.ManagePermissions", displayName: "Change permissions", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.Impersonation", displayName: "Impersonation", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.Users.Import", displayName: "Permission:Import", parentName: "AbpIdentity.Users", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.OrganizationUnits", displayName: "Organization Unit Management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.OrganizationUnits.ManageOU", displayName: "Managing organization tree", parentName: "AbpIdentity.OrganizationUnits", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.OrganizationUnits.ManageRoles", displayName: "Managing roles", parentName: "AbpIdentity.OrganizationUnits", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.OrganizationUnits.ManageMembers", displayName: "Managing users", parentName: "AbpIdentity.OrganizationUnits", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.ClaimTypes", displayName: "Claim management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.ClaimTypes.Create", displayName: "Create", parentName: "AbpIdentity.ClaimTypes", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.ClaimTypes.Update", displayName: "Edit", parentName: "AbpIdentity.ClaimTypes", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.ClaimTypes.Delete", displayName: "Delete", parentName: "AbpIdentity.ClaimTypes", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.SettingManagement", displayName: "Setting management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AbpIdentity.SecurityLogs", displayName: "Security logs", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }]
+    }, { name: "SettingManagement", displayName: "Setting Management", permissions: [{ name: "SettingManagement.Emailing", displayName: "Emailing", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "Saas", displayName: "Saas", permissions: [{ name: "Saas.Tenants", displayName: "Tenant management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.Create", displayName: "Create", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.Update", displayName: "Edit", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.Delete", displayName: "Delete", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.ManageFeatures", displayName: "Manage features", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.ManageConnectionStrings", displayName: "Manage connection strings", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Tenants.Impersonation", displayName: "Impersonation", parentName: "Saas.Tenants", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Editions", displayName: "Edition management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Editions.Create", displayName: "Create", parentName: "Saas.Editions", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Editions.Update", displayName: "Edit", parentName: "Saas.Editions", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Editions.Delete", displayName: "Delete", parentName: "Saas.Editions", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "Saas.Editions.ManageFeatures", displayName: "Manage features", parentName: "Saas.Editions", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "AuditLogging", displayName: "Audit Logging", permissions: [{ name: "AuditLogging.AuditLogs", displayName: "Audit Logs", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "IdentityServer", displayName: "Identity Server", permissions: [{ name: "IdentityServer.ApiScope", displayName: "Api Scopes", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiScope.Update", displayName: "Edit", parentName: "IdentityServer.ApiScope", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiScope.Delete", displayName: "Delete", parentName: "IdentityServer.ApiScope", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiScope.Create", displayName: "Create", parentName: "IdentityServer.ApiScope", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "AuditLogging.ViewChangeHistory:Volo.Abp.IdentityServer.ApiScopes.ApiScope", displayName: "View change history", parentName: "IdentityServer.ApiScope", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.IdentityResource", displayName: "Identity Resources", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.IdentityResource.Update", displayName: "Edit", parentName: "IdentityServer.IdentityResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.IdentityResource.Delete", displayName: "Delete", parentName: "IdentityServer.IdentityResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.IdentityResource.Create", displayName: "Create", parentName: "IdentityServer.IdentityResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiResource", displayName: "Api Resources", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiResource.Update", displayName: "Edit", parentName: "IdentityServer.ApiResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiResource.Delete", displayName: "Delete", parentName: "IdentityServer.ApiResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.ApiResource.Create", displayName: "Create", parentName: "IdentityServer.ApiResource", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.Client", displayName: "Clients", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.Client.Update", displayName: "Edit", parentName: "IdentityServer.Client", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.Client.Delete", displayName: "Delete", parentName: "IdentityServer.Client", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.Client.Create", displayName: "Create", parentName: "IdentityServer.Client", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "IdentityServer.Client.ManagePermissions", displayName: "Manage Permissions", parentName: "IdentityServer.Client", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "AbpAccount", displayName: "Account", permissions: [{ name: "AbpAccount.SettingManagement", displayName: "Setting management", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "LanguageManagement", displayName: "Language Management", permissions: [{ name: "LanguageManagement.LanguageTexts", displayName: "Language Texts", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.LanguageTexts.Edit", displayName: "Edit Language Texts", parentName: "LanguageManagement.LanguageTexts", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.Languages", displayName: "Languages", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.Languages.Create", displayName: "Create Language", parentName: "LanguageManagement.Languages", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.Languages.Edit", displayName: "Edit Language", parentName: "LanguageManagement.Languages", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.Languages.ChangeDefault", displayName: "Change Default Language", parentName: "LanguageManagement.Languages", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "LanguageManagement.Languages.Delete", displayName: "Delete Language", parentName: "LanguageManagement.Languages", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "LeptonThemeManagement", displayName: "Lepton Theme management", permissions: [{ name: "LeptonThemeManagement.Settings", displayName: "Lepton Theme settings", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "TextTemplateManagement", displayName: "Text Template Management", permissions: [{ name: "TextTemplateManagement.TextTemplates", displayName: "Text Templates", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }, { name: "TextTemplateManagement.TextTemplates.EditContents", displayName: "Edit Contents", parentName: "TextTemplateManagement.TextTemplates", isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }, { name: "BookStore", displayName: "BookStore", permissions: [{ name: "BookStore.Dashboard.Host", displayName: "Dashboard", parentName: null, isGranted: false, allowedProviders: [], grantedProviders: [{ providerName: "R", providerKey: "admin" }] }] }
+  ];
   const tableHeaders = [
     {
       displayName: "User Name",
@@ -145,9 +184,13 @@ const Users = () => {
     { label: "Organization Units", tablink: "#nav-organization-unit", id: 2 },
   ];
 
-  const offCanvasHandler = () => {};
+  const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
+
+  function getSelectedPermissions(data: any) {
+    console.log('Granted Permissions', data);
+  }
 
   // const exportToExcel = () => {
   //   // create an empty excel workbook
@@ -357,31 +400,34 @@ const Users = () => {
                 </div>
               </div>
             )}
-            {(activeNavTabId == 2 || showTenantSettings == true) && <div></div>}
+            {(activeNavTabId == 2 || showTenantSettings == true) &&
+              <div className="p-4">
+               <RdsCompPermissionTree permissions={permissionData} selectedPermissions={getSelectedPermissions} />
+              </div>}
           </RdsOffcanvas>
         </div>
         <div className="col-md-12 mb-3">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-          <RdsCompDatatable
-            tableHeaders={tableHeaders}
-            tableData={tableData}
-            actions={actions}
-            pagination={true}
-            recordsPerPage={5}
-            recordsPerPageSelectListOption={true}
-            onActionSelection={function (
-              clickEvent: any,
-              tableDataRow: any,
-              tableDataRowIndex: number,
-              action: {
-                displayName: string;
-                id: string;
-                offId?: string | undefined;
-              }
-            ): void {
-              throw new Error("Function not implemented.");
-            }}
-          ></RdsCompDatatable>
+            <RdsCompDatatable
+              tableHeaders={tableHeaders}
+              tableData={tableData}
+              actions={actions}
+              pagination={true}
+              recordsPerPage={5}
+              recordsPerPageSelectListOption={true}
+              onActionSelection={function (
+                clickEvent: any,
+                tableDataRow: any,
+                tableDataRowIndex: number,
+                action: {
+                  displayName: string;
+                  id: string;
+                  offId?: string | undefined;
+                }
+              ): void {
+                throw new Error("Function not implemented.");
+              }}
+            ></RdsCompDatatable>
           </div>
         </div>
       </div>

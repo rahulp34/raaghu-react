@@ -52,5 +52,8 @@ export const MfeConfig = {
 	},
 	"languageText":{
 		"url":"languageText@http://localhost:8017/remoteEntry.js"
+	},
+	"textTemplate":{
+		"url":"textTemplate@http://localhost:8020/remoteEntry.js"
 	}
 }
