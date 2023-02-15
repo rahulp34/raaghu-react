@@ -11,17 +11,17 @@ const RdsCompNewClaimType = () => {
 
 <div>
     <div className='mb-3 row'>
-        <RdsInput label="Name" placeholder='Enter  name'  redAsteriskPresent={true} />
+        <RdsInput label="Name" placeholder='Enter  name'  required={true} />
     </div>
     <div className="mb-3 row">
-        <div className="col-6">  <RdsInput label="Regex"   redAsteriskPresent={true} /></div>
-        <div className="col-6">  <RdsInput label="Value Type"  redAsteriskPresent={true} placeholder='Enter a value' /></div>
+        <div className="col-6">  <RdsInput label="Regex"   required={true} /></div>
+        <div className="col-6">  <RdsInput label="Value Type"  required={true} placeholder='Enter a value' /></div>
     </div>
     <div className='mb-3 row'>
-        <RdsInput label="Regex Description"   redAsteriskPresent={true} />
+        <RdsInput label="Regex Description"   required={true} />
     </div>
     <div className='mb-3 row'>
-        <RdsInput label="Description"  redAsteriskPresent={true}  />
+        <RdsInput label="Description"  required={true}  />
     </div>
 </div>
     </>

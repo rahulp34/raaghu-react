@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-import RdsCompPermissionTree from "../rds-comp-permission-tree/rds-comp-permission-tree";
+// import RdsCompPermissionTree from "../rds-comp-permission-tree/rds-comp-permission-tree";
 import {
   RdsAlert,
   RdsBadge,
@@ -50,6 +50,8 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
     ctime: "",
     id: "",
   });
+
+  const [activeNavTabId1, setActiveNavTabId1] = useState(0);
 
   const onDeleteHandler = () => {
     let tempData = data.map((element: any) => {
@@ -266,9 +268,9 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
                   Permissions
                 </label>
               </div>
-              <RdsCompPermissionTree
+              {/* <RdsCompPermissionTree
                 familyTree={props.permission}
-              ></RdsCompPermissionTree>
+              ></RdsCompPermissionTree> */}
             </RdsOffcanvas>
 
             <RdsOffcanvas
@@ -320,7 +322,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
                   <div className="mt-4 container">
                     <RdsInput
                       label="Role Name"
-                      redAsteriskPresent={true}
+                      required={true}
                       placeholder={"Role Name"}
                       onChange={nameChangeHandler}
                       value={name.displayName}
@@ -349,9 +351,9 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               {activeNavTabId == 1 && (
                 <>
                   <div className=" container mt-4">
-                    <RdsCompPermissionTree
+                    {/* <RdsCompPermissionTree
                       familyTree={props.permission}
-                    ></RdsCompPermissionTree>
+                    ></RdsCompPermissionTree> */}
                   </div>
                 </>
               )}
@@ -436,7 +438,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               <div className="mt-4 container">
                 <RdsInput
                   label="Role Name"
-                  redAsteriskPresent={true}
+                  required={true}
                   placeholder={"Edit Role Name"}
                   onChange={nameChangeHandler}
                   value={name.displayName}
@@ -464,9 +466,9 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
           {activeNavTabIdE == 1 && (
             <>
               <div className=" container mt-4">
-                <RdsCompPermissionTree
+                {/* <RdsCompPermissionTree
                   familyTree={props.permission}
-                ></RdsCompPermissionTree>
+                ></RdsCompPermissionTree> */}
               </div>
             </>
           )}

@@ -78,7 +78,7 @@ const RdsCompApiScopeBasicResource = (props:RdsCompApiScopeBasicResourceProps) =
 			<form onSubmit={handleSubmit}>
 				<div className="mt-1 mb-3">				
 					<RdsInput
-					    redAsteriskPresent={true}
+					    required={true}
 						label="Name"
 						placeholder='Enter name'
 						inputType='email'
@@ -96,7 +96,7 @@ const RdsCompApiScopeBasicResource = (props:RdsCompApiScopeBasicResourceProps) =
 						placeholder='Enter display name'
 						inputType = 'text'
 						onChange = {fullnamehandleChange}
-                        redAsteriskPresent={true}
+                        required={true}
 						name = {'Displayname'}
 						value = {fullname}
 					></RdsInput>

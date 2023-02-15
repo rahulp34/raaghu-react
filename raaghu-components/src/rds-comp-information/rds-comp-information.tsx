@@ -94,7 +94,7 @@ const RdsCompInformation = (props: RdsCompInformationProps) => {
           <div className="mt-1 mb-3 col-6">
             <RdsInput
               label="Property Name"
-              redAsteriskPresent={true}
+              required={true}
               placeholder="Enter Property Name"
               inputType="text"
               onChange={propertyhandleChange}
@@ -109,7 +109,7 @@ const RdsCompInformation = (props: RdsCompInformationProps) => {
           <div className="mt-1 mb-3 col-6">
             <RdsInput
               label="Display Name"
-              redAsteriskPresent={true}
+              required={true}
               placeholder="Display Name"
               inputType="text"
               onChange={displayhandleChange}

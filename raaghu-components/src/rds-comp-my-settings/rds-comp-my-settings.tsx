@@ -108,7 +108,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             inputType="text"
             name="ProfileName"
             placeholder="admin"
-            redAsteriskPresent
+            required
             onBlur={(e) => ProfileNameValidation(e.target.value)}
           />
           {ProfileNameErrorMessage != "" && (
@@ -125,7 +125,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             inputType="text"
             name="Email"
             placeholder="contact@waiin.com"
-            redAsteriskPresent
+            required
             onChange={emailHandler}
           />
           {EmailErrorMessage != "" && (
@@ -141,7 +141,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             inputType="text"
             name="UserName"
             placeholder="admin"
-            redAsteriskPresent
+            required
             onBlur={(e) => UserNameValidation(e.target.value)}
           />
           {UserNameErrorMessage != "" && (
@@ -154,7 +154,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
         <div className="fw-normal mt-1 mb-3">
           <RdsInput
             label="Current password "
-            redAsteriskPresent={true}
+            required={true}
             placeholder="Current password "
             inputType="password"
             onChange={curPasshandleChange}
@@ -166,7 +166,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
         <div className=" fw-normal mb-3">
           <RdsInput
             label="New password"
-            redAsteriskPresent={true}
+            required={true}
             placeholder="New password"
             inputType="password"
             onChange={newPasshandleChange}
@@ -178,7 +178,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
         <div className=" fw-normal mb-3">
           <RdsInput
             label="Confirm new password"
-            redAsteriskPresent={true}
+            required={true}
             placeholder="Confirm new password"
             inputType="password"
             onChange={curNewPasshandleChange}

@@ -111,7 +111,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                       <div className="col-md-6 sm-p-0">
                         <div className="form-group mb-3">
                           <RdsInput
-                            redAsteriskPresent={true}
+                            required={true}
                             inputType="text"
                             label="Edition Name "
                             placeholder="Edition Name "

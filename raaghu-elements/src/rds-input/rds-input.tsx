@@ -16,7 +16,7 @@ export interface RdsInputProps {
 	name?: string;
 	label?: string | "";
 	id?: string;
-	redAsteriskPresent?: boolean;
+	//required?: boolean;
 	required?: boolean;
 
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
@@ -38,6 +38,8 @@ const RdsInput = React.forwardRef(
     } else if (props.size == "large") {
       size = "lg";
     }
+    //Error Messages
+    const [haserror, setError] = useState(false);
 
     const inputClasses =
       "form-control form-control-" +
@@ -45,6 +47,14 @@ const RdsInput = React.forwardRef(
       " flex-grow-1 " +
       props.customClasses;
 
+      const handleBlur = () => {
+        if (!props.value ) {
+          setError(true);
+        }
+      };
+     
+    
+    
     return (
       <div>
         {!props.labelPositon && (
@@ -54,7 +64,7 @@ const RdsInput = React.forwardRef(
                 {props.label}
               </label>
             )}
-            {props.redAsteriskPresent && (
+            {props.required && (
               <span className="text-danger ms-1">*</span>
             )}
           </>
@@ -66,7 +76,7 @@ const RdsInput = React.forwardRef(
                 <label htmlFor={props.id} className="form-label">
                   {props.label}
                 </label>
-                {props.redAsteriskPresent && (
+                {props.required && (
                   <span className="text-danger ms-1">*</span>
                 )}
               </>
@@ -84,9 +94,9 @@ const RdsInput = React.forwardRef(
 						form={props.formName}
 						required={props.required}
 						onFocus={props.onFocus}
-						onBlur={props.onBlur}
+						onBlur={handleBlur}
 						onKeyDown={props.onKeyDown}
-						//defaultValue={props.value}
+						defaultValue={props.value}
 						value={props.value}
 						onChange={props.onChange}
 						disabled={props.isDisabled}
@@ -105,9 +115,9 @@ const RdsInput = React.forwardRef(
 							form={props.formName}
 							required={props.required}
 							onFocus={props.onFocus}
-							onBlur={props.onBlur}
+							onBlur={handleBlur}
 							onKeyDown={props.onKeyDown}
-							//defaultValue={props.value}
+							defaultValue={props.value}
 							value={props.value}
 							onChange={props.onChange}
 							disabled={props.isDisabled}
@@ -122,13 +132,16 @@ const RdsInput = React.forwardRef(
               <>
                 <label htmlFor={props.id} className="form-label">
                 </label>
-                {props.redAsteriskPresent && (
+                {props.required && (
                   <span className="text-danger ms-1">*</span>
                 )}
               </>
             )}
           </>
         )}
+        <div className="form-control-feedback">
+           {props.required && !props.value && haserror &&  (<span className="text-danger">{props.label} is required </span>)}
+        </div>
       </div>
     );
   }

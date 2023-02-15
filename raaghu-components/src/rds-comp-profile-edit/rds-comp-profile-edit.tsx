@@ -53,7 +53,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
               <div className="form-group mb-3">
                 <RdsInput
                   inputType="text"
-                  redAsteriskPresent={true}
+                  required={true}
                   label="Name"
                   name="name"
                   id="name"
@@ -70,7 +70,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
               </div>
               <div className="form-group mb-3">
                 <RdsInput
-                  redAsteriskPresent={true}
+                  required={true}
                   inputType="email"
                   label="Email Address"
                   placeholder="Enter Email Address"
@@ -102,7 +102,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   name="phone"
                   id="phone"
                   size="small"
-                  redAsteriskPresent={true}
+                  required={true}
                   onBlur={() => setIsPhoneNumberTouched(true)}
                   onChange={(e) => setEnteredPhoneNumber(e.target.value)}
                 ></RdsInput>
@@ -127,7 +127,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   name="userName"
                   id="username"
                   size="small"
-                  redAsteriskPresent={true}
+                  required={true}
                   onBlur={() => setIsUserNameTouched(true)}
                   onChange={(e) => setEnteredUserName(e.target.value)}
                 ></RdsInput>
