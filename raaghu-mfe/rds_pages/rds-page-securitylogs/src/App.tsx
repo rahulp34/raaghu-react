@@ -21,7 +21,7 @@ const App = () => {
   const [Data, setData] = useState<any>([]);
 
   
-  const tableHeaders = [
+  const tableHeadersForExcel = [
     "Time",
     "Actions",
     "IP Address",
@@ -31,56 +31,102 @@ const App = () => {
     "Users"
   ];
   
-  
+  const tableHeaders = [
+    {
+      displayName: t("Time"),
+      key: "creationTime",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("Actions"),
+      key: "action",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("IP Address"),
+      key: "clientIpAddress",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("Browser/Os"),
+      key: "browserInfo",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("Application"),
+      key: "applicationName",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("Identity"),
+      key: "identity",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: t("Users"),
+      key: "userName",
+      datatype: "text",
+      sortable: true,
+    },
+  ];
   const tableData = [
     {
       id: 1,
-      time:"12/02/2021",
+      creationTime:"12/02/2021",
       actions:"Login Successful",
-      ipAddress:"103.201.265.1",
-      browserIcon:"",
-      application:"Software 1.0",
+      clientIpAddress:"103.201.265.1",
+      browserInfo:"",
+      applicationName:"Software 1.0",
       identity:"kol324i",
-      users:"Robin Clay"    
-    },
-    {
-      id: 2,
-      time:"12/02/2022",
-      actions:"Login Not Valid",
-      ipAddress:"103.201.265.1",
-      browserIcon:"",
-      application:"Software 1.0",
-      identity:"kol324i",
-      users:"Smith Clay"    
-    }
+      userName:"Robin Clay"    
+    },    
   ];
   
   
-  
-  function download(){
+  // function download(){
 
-    const dataToDownload=tableData.map(data=>{
-      return [data.id,data.time,data.actions,data.ipAddress,data.browserIcon,data.application,data.identity,data.users]
-    })
+  //   const dataToDownload=tableData.map(data=>{
+  //     return [data.id,data.time,data.actions,data.ipAddress,data.browserIcon,data.application,data.identity,data.users]
+  //   })
 
-    const securityLogsSheet=[
-      tableHeaders +'\r\n'+
-      [...dataToDownload]
-    ]
-
-    var re = securityLogsSheet;    
-    var csvStrings =re;
-    var a = document.createElement("a");
-    a.href = "data:attachment/csv," + csvStrings;
-    a.target = "_Blank";
-    a.download = "scurityLogs.csv";
-    document.body.appendChild(a);
-    a.click();
-  }
+  //   const securityLogsSheet=[
+  //     tableHeaders +'\r\n'+
+  //     [...dataToDownload]
+  //   ]
+  //   var re = securityLogsSheet;    
+  //   var csvStrings =re;
+  //   var a = document.createElement("a");
+  //   a.href = "data:attachment/csv," + csvStrings;
+  //   a.target = "_Blank";
+  //   a.download = "scurityLogs.csv";
+  //   document.body.appendChild(a);
+  //   a.click();
+  // }
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchSecurityLogs() as any);
-  // });
+  useEffect(() => {    
+    dispatch(fetchSecurityLogs() as any);
+    const tableDataShow=data.securityLogs.items.map((item:any)=>{
+      console.log(item);
+      return{
+        id:item.id,
+        creationTime:item.currentDate,
+        action:item.action,
+        clientIpAddress:item.clientIpAddress,
+        browserInfo:item.browserInfo,
+        applicationName:item.applicationName,
+        identity:item.identity,
+        userName:item.userName
+      }
+    });  
+    console.log(typeof tableDataShow);
+    // setData(tableDataShow);
+  },[dispatch]);
   return (
     <Suspense>
       <div className="container">
@@ -110,15 +156,16 @@ const App = () => {
             deleteButtonLabel="Yes"
             messageAlert=" "
             iconUrl="download"           
-            onSuccess={download}/>
+           />
         </div>
-      </div>
-      
+      </div>     
         <div className="card card-full-stretch">
           <div className="card-body">
             <div className="row">
               <div className="col-md-12">
-                <SecurityLogs></SecurityLogs>
+                <SecurityLogs
+                securityLogsTableHeaders={tableHeaders}
+                securityLogsTableData={tableData}></SecurityLogs>
               </div>
             </div>
           </div>
