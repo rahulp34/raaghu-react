@@ -81,26 +81,26 @@ const RdsCompEditionInformation = (props: RdsCompEditionInformationProps) => {
             <div className="col-md-6 my-3">
               <RdsInput
                 label="Edition Name"
-                redAsteriskPresent={true}
+                required={true}
                 placeholder="Edition Name"
                 inputType="text"
                 onChange={valuesHandler}
                 onBlur = {inputTouchedHandler}         
                 name={"editionName"}
               ></RdsInput>
-              {inputTouchedAndEmpty.editionName && <span className="error-msg-color">{errorMessages.editionName}</span>}
+              <div className="form-control-feedback">{inputTouchedAndEmpty.editionName && <span className="error-msg-color">{errorMessages.editionName}</span>}</div>
             </div>
             <div className="col-md-6 my-3">
               <RdsInput
                 label="Annual Price"
-                redAsteriskPresent={true}
+                required={true}
                 placeholder="Annual Price"
                 inputType="number"
                 onChange={valuesHandler}
                 onBlur = {inputTouchedHandler}
                 name={"annualPrice"}            
               ></RdsInput>
-              {inputTouchedAndEmpty.annualPrice && <span className="error-msg-color">{errorMessages.annualPrice}</span>}
+              <div className="form-control-feedback">{inputTouchedAndEmpty.annualPrice && <span className="error-msg-color">{errorMessages.annualPrice}</span>}</div>
             </div>
           </div>
           <div className="row">

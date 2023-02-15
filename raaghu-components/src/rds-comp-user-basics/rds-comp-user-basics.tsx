@@ -69,7 +69,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Name"
                 name="name"
                 size="small"
-                redAsteriskPresent={true}
+                required={true}
                 onChange={handleChange}
               ></RdsInput>
             </div>
@@ -81,7 +81,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Surname"
                 name="surName"
                 size="small"
-                redAsteriskPresent={true}
+                required={true}
                 onChange={handleChange}
               ></RdsInput>
             </div>
@@ -97,7 +97,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Email Address"
                 name="email"
                 size="small"
-                redAsteriskPresent={true}
+                required={true}
                 onChange={handleChange}
               ></RdsInput>
             </div>
@@ -113,7 +113,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Phone Number"
                 name="phone"
                 size="small"
-                redAsteriskPresent={true}
+                required={true}
                 onChange={handleChange}
               ></RdsInput>
             </div>
@@ -127,7 +127,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="User Name"
                 name="userName"
                 size="small"
-                redAsteriskPresent={true}
+                required={true}
                 onChange={handleChange}
               ></RdsInput>
             </div>
@@ -142,7 +142,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="password"
                 label="Password"
                 name="password"
-                redAsteriskPresent={true}
+                required={true}
                 size="small"
                 onChange={handleChange}
               ></RdsInput>
@@ -156,7 +156,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="password"
                 label="Confirm Password"
                 name="cnfPassword"
-                redAsteriskPresent={true}
+                required={true}
                 size="small"
                 onChange={handleChange}
               ></RdsInput>

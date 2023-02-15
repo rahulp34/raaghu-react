@@ -162,7 +162,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
           <div className="fw-normal mt-1 mb-3">
             <RdsInput
               label="Webhook Endpoint"
-              redAsteriskPresent={true}
+              required={true}
               placeholder="https://example.com/postreceive"
               inputType="url"
               onChange={endpointhandleChange}
@@ -177,7 +177,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
             <RdsTextArea
               label="Webhook Event"
               placeholder="carolyn Carpenter"
-              redAsteriskPresent={true}
+              required={true}
               onChange={eventhandleChange}
               rows={4}
               value={user.event}

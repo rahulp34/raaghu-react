@@ -50,7 +50,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 								inputType="text"
 								label="Tenancy Name"
 								placeholder="Tenancy Name"
-								redAsteriskPresent={true}
+								required={true}
 								size="small"
 								name="tenancyName"
 							></RdsInput>
@@ -60,7 +60,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 								inputType="text"
 								label="User Name"
 								placeholder="User Name"
-								redAsteriskPresent={true}
+								required={true}
 								size="small"
 								name="userName"
 							></RdsInput>
@@ -70,7 +70,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 								inputType="password"
 								label="Password"
 								placeholder="Password"
-								redAsteriskPresent={true}
+								required={true}
 								size="small"
 								name="password"
 							></RdsInput>

@@ -9,7 +9,7 @@ export interface RdsTextAreaProps {
 	isDisabled?: boolean;
 	isRequired?: boolean;
 	id?: string;
-	redAsteriskPresent?: boolean;
+	required?: boolean;
 	onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	labelPosition?: string;
 	onClick?: (event: React.MouseEvent<HTMLTextAreaElement>) => void;
@@ -24,7 +24,7 @@ const RdsTextArea = (props: RdsTextAreaProps) => {
 							{props.label}
 						</label>}
 
-						{props.redAsteriskPresent && (
+						{props.required && (
 							<span className="text-danger ms-1">*</span>
 						)}
 					</>
