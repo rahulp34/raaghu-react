@@ -83,3 +83,9 @@ declare module "IconList/IconList" {
 	const IconListComponent : React.ComponentType;
 	export default IconListComponent;
 }
+
+declare module "TextTemplate/TextTemplate" {
+	const TextTemplateComponent : React.ComponentType;
+	export default TextTemplateComponent;
+}
+
