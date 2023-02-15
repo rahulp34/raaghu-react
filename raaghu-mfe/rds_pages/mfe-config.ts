@@ -55,5 +55,8 @@ export const MfeConfig = {
 	},
 	"claimtypes":{
 		"url":"claimtypes@http://localhost:8018/remoteEntry.js"
+  },
+	"textTemplate":{
+		"url":"textTemplate@http://localhost:8020/remoteEntry.js"
 	}
 }

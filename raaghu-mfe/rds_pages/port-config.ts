@@ -55,5 +55,8 @@ export const PortConfig = {
 	},
 	"claimtypes":{
 		"port":"8018"
+  },
+	"textTemplate":{
+		"port":"8020"
 	}
 }

@@ -37,6 +37,8 @@ const ClaimTypesCompo = React.lazy(()=>import("ClaimTypes/ClaimTypes"));
 
 
 
+const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
+
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -448,6 +450,9 @@ const Main = (props: MainProps) => {
                     <Route path="/icons" 
                     element={<IconListCompo/>}></Route>
                     <Route path="/claim-types" element={<ClaimTypesCompo />} />
+                    <Route path="/text-template" 
+                      element={<TextTemplateCompo/>}>
+                    </Route>
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>
