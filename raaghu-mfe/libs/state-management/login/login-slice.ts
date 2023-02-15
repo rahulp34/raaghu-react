@@ -10,7 +10,7 @@ export interface LoginState {
     // profilePic: any;
     // loginInfo: any;
     // tenantId:number|undefined;
-    accessToken: string| undefined;
+    accessToken: string| null;
     refreshToken: string | undefined;
     expireDate: number | undefined;
     refreshTokenExpireDate: number | undefined;
@@ -27,13 +27,13 @@ export const LoginInitialState: LoginState = {
     // profilePic: null,
     // loginInfo: null,
     // tenantId: undefined,
-    accessToken: undefined,
+    accessToken: localStorage.getItem("access_token"),
     refreshToken: undefined,
     expireDate: undefined,
     refreshTokenExpireDate: undefined,
     date: undefined,
     isAuth: false
-};
+}; 
 export const Authenticate = createAsyncThunk('login/Authenticate',
         async(authenticateModal:any)=>{       
             const result =  await TokenAuthService.authenticate(authenticateModal);	
@@ -41,6 +41,16 @@ export const Authenticate = createAsyncThunk('login/Authenticate',
             {authenticateModal, result};        
             return obj;}
 )
+
+
+// export const Authenticated = createAsyncThunk('login/Authenticate',
+//         async(authenticateModal:any)=>{       
+//             const result =  await TokenAuthService.authenticate(authenticateModal);	
+//             const obj: {authenticateModal:AuthenticateModel, result: AuthenticateResultModel} = 
+//             {authenticateModal, result};        
+//             return obj;}
+// )
+
 export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',
         async(tenant:any) => {
             tenant = {tenancyName : tenant};
@@ -124,9 +134,10 @@ export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',
         //     })
         builder.addCase(Authenticate.fulfilled,
             (state, action) =>{  
-                let accessToken = action.payload.result.accessToken;   
+                // let accessToken = action.payload.result.accessToken; 
+                let accessToken = localStorage.getItem("access_token");  
                 let refreshToken = action.payload.result.refreshToken;        
-                state.accessToken = accessToken;
+                state.accessToken = localStorage.getItem("access_token");
                 state.refreshToken = refreshToken;
                 if(accessToken){
                     state.isAuth = true

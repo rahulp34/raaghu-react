@@ -20,7 +20,10 @@
     "i18next": "^22.4.6",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
+    "in": "^0.19.0",
+    "level": "^8.0.0",
     "react-big-calendar": "^1.5.2",
-    "react-i18next": "^12.1.1"
+    "react-i18next": "^12.1.1",
+    "root": "^3.2.0"
   }
 }

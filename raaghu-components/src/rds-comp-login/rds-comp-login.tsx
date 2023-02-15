@@ -19,9 +19,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
-  // const [password , setPassword] = useState('');
-  const [error1, setError1] = useState("");
-  const [error2, setError2] = useState("");
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
 
   const isEmailValid = (email: any) => {
@@ -39,21 +36,21 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const emailhandleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    if (!isEmailValid(event.target.value)) {
-      setError1("Email is invalid");
-    } else {
-      setError1("");
-    }
+    // if (!isEmailValid(event.target.value)) {
+    //   setError1("");
+    // } else {
+    //   setError1("");
+    // }
     setEmail(event.target.value);
   };
   const passwordhandleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    if (!isPasswordValid(event.target.value)) {
-      setError2("Password is invalid");
-    } else {
-      setError2("");
-    }
+    // if (!isPasswordValid(event.target.value)) {
+    //   setError2("Password is invalid");
+    // } else {
+    //   setError2("");
+    // }
     setPassword(event.target.value);
   };
 
@@ -81,6 +78,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     <div>
       <div className="text-center">
         <h2>Login</h2>
+        
         <div>
           <small className="pb-5 d-flex justify-content-center">
             Current Tenant : Not Selected{" "}
@@ -122,7 +120,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     onChange={emailhandleChange}
                     value=""
                     name="name"
-                    redAsteriskPresent={true}
+                    required={true}
                   ></RdsInput>
                 </div>
               </RdsModal>
@@ -131,7 +129,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
         </div>
         <div>
           <form onSubmit={handleSubmit}>
-            <div className="form-group text-start mb-3">
+            <div className="form-group text-start">
               <RdsInput
                 label="Email/Username"
                 placeholder="Email/Username"
@@ -139,14 +137,14 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 onChange={emailhandleChange}
                 value={email}
                 name={"email"}
-                redAsteriskPresent={true}
+                required={true}
               ></RdsInput>
-              {error1 && <span style={{ color: "red" }}>{error1}</span>}
+        
             </div>
 
-            <div className="form-group text-start mb-4">
+            <div className="form-group text-start ">
               <RdsInput
-                redAsteriskPresent={true}
+                required={true}
                 label="Password"
                 placeholder="Password"
                 inputType="password"
@@ -154,7 +152,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 name={"password"}
                 value={password}
               ></RdsInput>
-              {error2 && <span style={{ color: "red" }}>{error2}</span>}
             </div>
             <div className="d-flex justify-content-between mt-4 mb-4">
               <div>
@@ -180,6 +177,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               block={true}
               tooltipTitle={""}
               type="submit"
+              //onClick= {emailhandleChange}
             />
           </form>
         </div>

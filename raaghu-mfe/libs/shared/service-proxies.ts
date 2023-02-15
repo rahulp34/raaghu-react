@@ -8770,7 +8770,7 @@ export class TimingServiceProxy {
         }
         return Promise.resolve<ComboboxItemDto[]>(null as any);
     }
-}
+} 
 
 export class TokenAuthServiceProxy {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };

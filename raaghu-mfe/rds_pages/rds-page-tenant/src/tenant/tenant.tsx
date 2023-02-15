@@ -414,7 +414,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   const offCanvasButton =
     '<RdsButton icon = "plus" iconColorVariant="light" size = "medium" type = "button" colorVariant = "primary" label = "NEW TENANT"/>';
   return (
-    <div className="tenant text-uppercase">
+    <div className="tenant ">
       <div className="d-flex justify-content-end">
         <RdsOffcanvas
           canvasTitle={t("New Tenant")}

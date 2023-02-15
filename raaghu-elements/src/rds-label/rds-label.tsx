@@ -9,7 +9,7 @@ export interface RdsLabelProps {
 	class?: string;
 	fontWeight?: number | string;
 	color?: string;
-	redAsteriskPresent?: boolean;
+	required?: boolean;
 }
 
 const RdsLabel = (props: RdsLabelProps) => {
@@ -31,7 +31,7 @@ const RdsLabel = (props: RdsLabelProps) => {
         {props.children}
       </label>
 
-      {props.redAsteriskPresent && (
+      {props.required && (
         <span className="text-danger ms-1">*</span>
       )}
 		</p>
