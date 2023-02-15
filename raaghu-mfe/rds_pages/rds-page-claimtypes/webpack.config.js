@@ -1,35 +1,25 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack"); // only add this if you don't have yet
 const { ModuleFederationPlugin } = webpack.container;
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-// const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const devdeps = require("../../package.json").devDependencies;
 const deps = require("../../package.json").dependencies;
 require("dotenv").config({ path: "./.env" });
 
 const buildDate = new Date().toLocaleString();
-const path = require("path");
-const fs = require("fs");
-const mfeFilePath = path.join(__dirname, "../", "mfe-config.ts");
-let mfeConfig = fs.readFileSync(mfeFilePath).toString();
-let mfeConfigJSON = mfeConfig.substring(
-  mfeConfig.indexOf("{"),
-  mfeConfig.lastIndexOf("}") + 1
-);
-mfeConfigJSON = JSON.parse(mfeConfigJSON);
 
 module.exports = (env, argv) => {
+  const isProduction = argv.mode === "production";
+  console.log({ isProduction });
   return {
     entry: "./src/index.ts",
-    mode: "development",
+    mode: process.env.NODE_ENV || "development",
     devServer: {
-      port: 8080,
-      open: true,
+      port: 8018,
+      open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      hot: true,
-      historyApiFallback: true,
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
@@ -37,27 +27,22 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(png|jpe?g|gif|mp4)$/i,
+          test: /\.(png|jpe?g|gif)$/i,
           use: [
             {
               loader: "file-loader",
               options: {
-                name: "[name].[ext]",
-                outputPath: "assets/",
-                publicPath: "assets/",
+                regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/i,
+                name: "[1]-[name].[ext]",
               },
             },
           ],
         },
         {
-          test: /\.svg$/,
-          use: ["@svgr/webpack"],
-        },
-
-        { test: /\.(config)$/, loader: "file-loader" },
-        {
           test: /\.(scss|css)$/,
+
           use: ["style-loader", "css-loader", "sass-loader"],
+
           exclude: "/node_modules/",
         },
         {
@@ -90,39 +75,16 @@ module.exports = (env, argv) => {
     },
 
     plugins: [
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: "src/assets",
-            to: "assets",
-          },
-        ],
-      }),
       new webpack.EnvironmentPlugin({ BUILD_DATE: buildDate }),
       new webpack.DefinePlugin({
         "process.env": JSON.stringify(process.env),
       }),
       new ModuleFederationPlugin({
-        name: "host",
-        remotes: {
-          Dashboard: mfeConfigJSON["dashboard"].url,
-          Login: mfeConfigJSON["login"].url,
-          ForgotPassword: mfeConfigJSON["forgotpassword"].url,
-          Tenant: mfeConfigJSON["tenant"].url,
-          Maintainance: mfeConfigJSON["maintainance"].url,
-          WebhookSubscription: mfeConfigJSON["webhookSubscription"].url,
-          VisualSetting: mfeConfigJSON["visualSetting"].url,
-          Edition: mfeConfigJSON["edition"].url,
-          Settings: mfeConfigJSON["settings"].url,
-          AuditLogs: mfeConfigJSON["auditLogs"].url,
-          Users: mfeConfigJSON["users"].url,
-          Roles: mfeConfigJSON["roles"].url,
-          OrganizationUnits: mfeConfigJSON["organizationUnits"].url,
-          Language: mfeConfigJSON["language"].url,
-          DynamicProperties: mfeConfigJSON["dynamicProperties"].url,
-          IconList: mfeConfigJSON["iconlist"].url,
-          LanguageText: mfeConfigJSON["languageText"].url,
-          ClaimTypes: mfeConfigJSON["claimtypes"].url
+        name: "claimtypes",
+        filename: "remoteEntry.js",
+        exposes: {
+          // expose each page
+          "./ClaimTypes": "./src/App",
         },
         shared: {
           ...devdeps,
@@ -133,13 +95,12 @@ module.exports = (env, argv) => {
             eager: true,
             requiredVersion: deps["react-dom"],
           }
-        }
+        },
       }),
-      // new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
       new HtmlWebpackPlugin({
         template: "./public/index.html",
       }),
-      // new ForkTsCheckerWebpackPlugin(),
+      new ForkTsCheckerWebpackPlugin(),
     ],
   };
 };

@@ -33,6 +33,9 @@ const DynamicPropertyCompo = React.lazy(
   () => import("DynamicProperties/DynamicProperties")
 );
 const IconListCompo = React.lazy(()=>import("IconList/IconList"));
+const ClaimTypesCompo = React.lazy(()=>import("ClaimTypes/ClaimTypes"));
+
+
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -441,6 +444,7 @@ const Main = (props: MainProps) => {
                     ></Route>
                     <Route path="/icons" 
                     element={<IconListCompo/>}></Route>
+                    <Route path="/claim-types" element={<ClaimTypesCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>
