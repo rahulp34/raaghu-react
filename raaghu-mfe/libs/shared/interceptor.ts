@@ -2,8 +2,8 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  // baseURL: 'https://abpdemoapi.raaghu.io/',
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: 'https://abpdemoapi.raaghu.io/',
+  // baseURL: process.env.REACT_APP_API_URL,
 });
 
 instance.interceptors.request.use((config) => {
