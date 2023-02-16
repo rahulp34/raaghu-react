@@ -21,6 +21,10 @@ if (eTc == 'e') {
     appFolderPath = path.join(__dirname, '..', 'raaghu-components');
 }
 
+function writeFileErrorHandler(err) {
+    if (err) console.log('\x1b[31m%s\x1b[0m', err);
+}
+
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
     let filePath = path.join(appFolderPath, '/src', name, name + '.tsx');
@@ -28,6 +32,10 @@ if (fs.existsSync(appFolderPath)) {
         console.log('\x1b[31m%s\x1b[0m', name + '.tsx already exists in this path.');
     } else {
         execSync(`npx generate-react-cli component ${name}`, { cwd: appFolderPath, stdio: 'inherit' });
+        // index.tsx
+        fs.writeFile(`${appFolderPath}/src/${name}/index.ts`, `import { default } from './${name}'`, writeFileErrorHandler);
+        console.log('\x1b[32m%s\x1b[0m', `index.ts was successfully created at src/${name}/index.ts`);
+
         console.log('\x1b[32m%s\x1b[0m', 'Done..!');
     }
 } else {

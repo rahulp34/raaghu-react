@@ -7,7 +7,7 @@
     "default": {
       "path": "src",
       "withStyle": true,
-      "withTest": false,
+      "withTest": true,
       "withStory": true,
       "withLazy": false
     }
