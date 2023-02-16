@@ -31,16 +31,18 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     
 
-    // proxy.applicationConfiguration(  ).then((result: any)=>{
-    //   console.log('hello this is result',result)
-    // })
-    // proxy.languagesGET().then((result:any)=>{console.log("langs",result)})
+    proxy.applicationConfiguration(undefined).then((result: any)=>{
+      console.log('hello this is result',result)
+    })
+
+    // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
 
     if (cred != undefined) {
       getUserConfiguration("login");
       navigate("/dashboard");
     }
   }
+
   const loginHandler = (email: any, password: any) => {
     const requestBody = {
       grant_type: "password",
@@ -68,8 +70,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   };
   const { t } = useTranslation();
   return (
-    <div className="login-background">      <div
-        className="align-items-center d-flex justify-content-center login m-auto"
+    <div className="login-background">     
+    <div className="align-items-center d-flex justify-content-center login m-auto"
         style={{ maxWidth: "900px", height: "100vh " }}
       >        <div className="container-fluid m-2">          <div className="bg-white row rounded-3 ">            <div className="col-md-6">              <div className="py-4 px-3">                <div className="pb-4">                  <div className="text-center">                    <img src="./assets/raaghu_text_logo.svg"></img>                  </div>                </div>                <RdsCompLogin
                   onLogin={loginHandler}
