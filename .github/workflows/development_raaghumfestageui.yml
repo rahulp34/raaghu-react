@@ -88,5 +88,5 @@ jobs:
         with:
           app-name: "anzstagereact"
           slot-name: "production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_11C2522F3B864650B5A4BAD0CD60581C }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_ABPSTAGEREACT }}
           package: .
