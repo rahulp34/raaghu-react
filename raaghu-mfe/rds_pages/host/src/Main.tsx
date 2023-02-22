@@ -44,7 +44,7 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState<boolean>();
   const navigate = useNavigate();
   let accessToken: string | undefined | null= localStorage.getItem("access_token")  ;
   let currentPath = window.location.pathname;
