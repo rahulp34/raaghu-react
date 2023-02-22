@@ -49,9 +49,9 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "address email phone profile roles RaaghuReact", 
+      scope: "openid profile role phone email BookStore", 
     };
-    fetch("https://localhost:44321/connect/token", {
+    fetch("https://abpdemoapi.raaghu.io/connect/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
