@@ -40,7 +40,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
   return (
     <>
       <>
-        <div className="mb-3 row">
+        <div className="row">
           <RdsInput
             label="Name"
             value={data.name}
@@ -50,7 +50,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onChange={onNameChangeHandler}
           />
         </div>
-        <div className="mb-3 row">
+        <div className="row">
           <div className="col-6">
             {" "}
             <RdsInput
@@ -73,7 +73,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             />
           </div>
         </div>
-        <div className="mb-3 row">
+        <div className="row">
           <RdsInput
             label="Regex Description"
             value={data.regexDesc}
@@ -82,7 +82,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onChange={onRegexDescChangeHandler}
           />
         </div>
-        <div className="mb-3 row">
+        <div className="row">
           <RdsInput
             label="Description"
             value={data.desc}
@@ -91,7 +91,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onChange={onDescChangeHAndler}
           />
         </div>
-        <div className="d-flex">
+        <div className="d-flex footer-buttons">
           <RdsButton
             label="CANCEL"
             databsdismiss="offcanvas"

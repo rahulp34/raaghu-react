@@ -258,6 +258,7 @@ import {
   RdsNavtabs,
   RdsIcon,
   RdsInput,
+  RdsAlert,
 } from "../../../rds-elements";
 import {
   useAppSelector,
@@ -276,15 +277,21 @@ interface RdsPageEditionProps {}
 const Edition = (props: RdsPageEditionProps) => {
   const [tableDataRowid, setTableDataRowId] = useState(0);
   const [value, setValue] = useState("");
+  const [alert, setAlert] = useState({
+    showAlert: false,
+    message: "",
+    success: false,
+  });
 
   const { t } = useTranslation();
   const [Data, setData] = useState<any>([]);
   const editionuser = useAppSelector((state) => state.persistedReducer.edition);
   const dispatch = useAppDispatch();
   const [val, setVal] = useState("");
+  const [alertOne, setAlertOne] = useState(false);
+
   useEffect(() => {
     dispatch(fetchEditionData() as any);
-    // console.log(editionuser.users.items);
   }, [dispatch]);
 
   useEffect(() => {
@@ -300,6 +307,21 @@ const Edition = (props: RdsPageEditionProps) => {
     }
   }, [editionuser.users]);
 
+  useEffect(() => {
+    setAlert({
+      showAlert: editionuser.alert,
+      message: editionuser.alertMessage,
+      success: editionuser.success,
+    });
+    setTimeout(() => {
+      setAlert({
+        showAlert: false,
+        message: "",
+        success: false,
+      });
+    }, 2000);
+  }, [editionuser.users]);
+
   const onActionSelection = (
     clickEvent: any,
     tableDataRow: any,
@@ -307,8 +329,8 @@ const Edition = (props: RdsPageEditionProps) => {
     action: { displayName: string; id: string }
   ) => {
     setTableDataRowId(tableDataRowIndex);
-    if(action.displayName === "Edit"){
-      setVal(tableDataRow.name)
+    if (action.displayName === "Edit") {
+      setVal(tableDataRow.name);
     }
   };
 
@@ -316,6 +338,7 @@ const Edition = (props: RdsPageEditionProps) => {
     dispatch(deleteEditionData(tableDataRowid) as any).then((res: any) => {
       dispatch(fetchEditionData() as any);
     });
+    setAlertOne(true);
   };
 
   const dTo = {
@@ -326,17 +349,21 @@ const Edition = (props: RdsPageEditionProps) => {
     dispatch(addEditionData(dTo) as any).then((res: any) => {
       dispatch(fetchEditionData() as any);
     });
-    setValue("")
+    setValue("");
+    setAlertOne(true);
   };
 
   const editDataHandler = () => {
     const dTo = {
       displayName: val,
     };
-    dispatch(editEditionData({ id: tableDataRowid, dTo: dTo }) as any).then((res: any) => {
-      dispatch(fetchEditionData() as any);
-    });
+    dispatch(editEditionData({ id: tableDataRowid, dTo: dTo }) as any).then(
+      (res: any) => {
+        dispatch(fetchEditionData() as any);
+      }
+    );
     setVal("");
+    setAlertOne(true);
   };
 
   const tableHeaders = [
@@ -355,68 +382,83 @@ const Edition = (props: RdsPageEditionProps) => {
 
   return (
     <div className="tenant">
-      <RdsOffcanvas
-        canvasTitle="NEW EDITION"
-        onclick={offCanvasHandler}
-        placement="end"
-        offcanvaswidth={830}
-        offcanvasbutton={
-          <div className="d-flex justify-content-end">
-            <RdsButton
-              icon="plus"
-              iconColorVariant="light"
-              size="small"
-              type="button"
-              block={false}
-              iconHeight="15px"
-              iconWidth="15px"
-              iconFill={false}
-              iconStroke={true}
-              colorVariant="primary"
-              label="NEW EDITION"
-            />
-          </div>
-        }
-        backDrop={false}
-        scrolling={false}
-        preventEscapeKey={false}
-        offId={"Edition"}
-      >
-        <RdsInput
-          size="medium"
-          inputType="text"
-          placeholder="Add Placeholder"
-          label="Label"
-          labelPositon="top"
-          id=""
-          value={value}
-          required={true}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        ></RdsInput>
-        <div className="d-flex">
-          <RdsButton
-            label="CANCEL"
-            databsdismiss="offcanvas"
-            type={"button"}
-            size="small"
-            isOutline={true}
-            colorVariant="primary"
-            class="me-2"
-          ></RdsButton>
-          <RdsButton
-            label="SAVE"
-            type={"button"}
-            size="small"
-            databsdismiss="offcanvas"
-            isDisabled={value === ""}
-            colorVariant="primary"
-            class="me-2"
-            onClick={addDataHandler}
-          ></RdsButton>
+      <div className="row align-items-center">
+        <div className="col-lg-8 col-md-8">
+          {alert.showAlert && alertOne && (
+            <RdsAlert
+              alertmessage={alert.message}
+              colorVariant={alert.success ? "success" : "danger"}
+              style={{ marginBottom: "0" }}
+            ></RdsAlert>
+          )}
         </div>
-      </RdsOffcanvas>
+        <div className="col-lg-4 col-md-4">
+          <RdsOffcanvas
+            canvasTitle="NEW EDITION"
+            onclick={offCanvasHandler}
+            placement="end"
+            offcanvaswidth={830}
+            offcanvasbutton={
+              <div className="d-flex justify-content-end">
+                <RdsButton
+                  icon="plus"
+                  iconColorVariant="light"
+                  size="small"
+                  type="button"
+                  block={false}
+                  iconHeight="15px"
+                  iconWidth="15px"
+                  iconFill={false}
+                  iconStroke={true}
+                  colorVariant="primary"
+                  label="NEW EDITION"
+                />
+              </div>
+            }
+            backDrop={false}
+            scrolling={false}
+            preventEscapeKey={false}
+            offId={"Edition"}
+          >
+            <div>
+              <RdsInput
+                size="medium"
+                inputType="text"
+                placeholder="Add Placeholder"
+                label="Label"
+                labelPositon="top"
+                id=""
+                value={value}
+                required={true}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              ></RdsInput>
+              <div className="d-flex footer">
+                <RdsButton
+                  label="CANCEL"
+                  databsdismiss="offcanvas"
+                  type={"button"}
+                  size="small"
+                  isOutline={true}
+                  colorVariant="primary"
+                  class="me-2"
+                ></RdsButton>
+                <RdsButton
+                  label="SAVE"
+                  type={"button"}
+                  size="small"
+                  databsdismiss="offcanvas"
+                  isDisabled={value === ""}
+                  colorVariant="primary"
+                  class="me-2"
+                  onClick={addDataHandler}
+                ></RdsButton>
+              </div>
+            </div>
+          </RdsOffcanvas>
+        </div>
+      </div>
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
           tableHeaders={tableHeaders}

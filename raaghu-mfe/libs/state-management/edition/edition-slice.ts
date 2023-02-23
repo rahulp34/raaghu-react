@@ -5,12 +5,18 @@ type InitialState = {
   loading: boolean;
   users: any;
   error: string;
+  alert: boolean;
+  alertMessage: string;
+  success: boolean;
 };
 
 const initialState: InitialState = {
   loading: false,
   users: [],
   error: "",
+  alert: false,
+  alertMessage: "",
+  success: false,
 };
 
 const proxy = new ServiceProxy();
@@ -84,12 +90,18 @@ const editionSlice = createSlice({
         state.loading = false;
         state.users = action.payload;
         state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data deleted Successfully";
+        state.success = true;
       }
     );
     builder.addCase(deleteEditionData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something went wrong";
+      state.success = false;
     });
 
     builder.addCase(addEditionData.pending, (state) => {
@@ -101,12 +113,18 @@ const editionSlice = createSlice({
         state.loading = false;
         state.users = action.payload;
         state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data added Successfully";
+        state.success = true;
       }
     );
     builder.addCase(addEditionData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
     });
 
     builder.addCase(editEditionData.pending, (state) => {
@@ -118,12 +136,18 @@ const editionSlice = createSlice({
         state.loading = false;
         state.users = action.payload;
         state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data edited successfully";
+        state.success = true;
       }
     );
     builder.addCase(editEditionData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
     });
   },
 });
