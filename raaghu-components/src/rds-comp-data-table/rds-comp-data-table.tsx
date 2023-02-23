@@ -1,4 +1,3 @@
-import { DatasetController } from "chart.js";
 import React, { MouseEvent, useState, useEffect } from "react";
 import {
   RdsIcon,
@@ -46,7 +45,7 @@ export interface RdsCompDatatableProps {
       modalId?: string;
     }
   ) => void;
-  
+  onRowSelect?:(data:any)=>void
    tableStyle?: any ;
    alignmentType?: any ;
 
@@ -57,7 +56,6 @@ export interface RdsCompDatatableProps {
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   const [data, setData] = useState(props.tableData);
-  const [action, setAction] = useState("");
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
     endingRow: props.recordsPerPage,
@@ -90,7 +88,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       action.offId != undefined &&
       action.modalId != undefined
     ) {
-      let tempData = data.map((Data) => {
+      let tempData = data?.map((Data) => {
         if (Data.id == tableDataRowIndex) {
           return { ...Data, isEndUserEditing: true };
         } else {
@@ -98,8 +96,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
         }
       });
       setData(tempData);
-    } else {
-      setAction("delete");
     }
     props.onActionSelection != undefined &&
       props.onActionSelection(
@@ -117,7 +113,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     key: any,
     tableDataRowIndex: number
   ) => {
-    tempData = data.map((Data) => {
+    tempData = data?.map((Data) => {
       if (Data.id == tableDataRowIndex) {
         const obj = Object.assign({}, Data);
         obj[key] = e.target.value;
@@ -132,7 +128,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     tableDataRow: any,
     tableDataRowIndex: number
   ) => {
-    let tempata = tempData.map((Data: any) => {
+    let tempata = tempData?.map((Data: any) => {
       if (Data.id == tableDataRowIndex) {
         return { ...Data, isEndUserEditing: false };
       } else {
@@ -146,7 +142,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     tableDataRow: any,
     tableDataRowIndex: number
   ) => {
-    let tempData = data.map((Data) => {
+    let tempData = data?.map((Data) => {
       if (Data.id == tableDataRowIndex) {
         return { ...Data, isEndUserEditing: false };
       } else {
@@ -156,18 +152,22 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     setData(tempData);
   };
   const handleChange = (e: any) => {
+    let tempUser
     const { name, checked } = e.target;
     if (name === "allSelect") {
-      let tempUser = data.map((user) => {
+      let tempUser = data?.map((user) => {
         return { ...user, selected: checked };
       });
       setData(tempUser);
+      props.onRowSelect!==undefined&&props.onRowSelect(tempUser)
     } else {
-      let tempUser = data.map((user) =>
+       tempUser = data?.map((user) =>
         user.id == name ? { ...user, selected: checked } : user
       );
       setData(tempUser);
+      props.onRowSelect!==undefined&&props.onRowSelect(tempUser)
     }
+ 
   };
   const onSortClickHandler = (
     event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
@@ -188,20 +188,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     sort = true;
   };
   let Classes = props.classes;
-const classes =(): string[] =>{
-    var classes = ['res-width']
-    if (props.tableStyle !== "light") {
-      var bgColor = 'table-' + props.tableStyle;
-      classes.push(bgColor);
-    }
-    if (props.tableStyle !== 'light' && props.tableStyle !== 'warning' && props.tableStyle !== 'info' && props.tableStyle !== 'white') {
-      classes.push('text-white');
-    }
-    return classes
-  }
   return (
     <>
-      {data.length == 0 && (
+      {data?.length == 0 && (
             <div>
               <RdsIllustration
                 label={props.noDataTitle}
@@ -211,7 +200,7 @@ const classes =(): string[] =>{
             </div>
           )}
 
-          {data.length > 0 && (<> 
+          {data?.length > 0 && (<> 
             <div className=" sm-datatable table-responsive">
             <table
               className={`table  table-hover table-bordered  h-100 ${Classes} `}
@@ -227,14 +216,14 @@ const classes =(): string[] =>{
                         className="form-check-input"
                         name="allSelect"
                         checked={
-                          data.filter((user) => user?.selected == true).length ==
-                          data.length
+                          data.filter((user) => user?.selected == true)?.length ==
+                          data?.length
                         }
                         onChange={handleChange}
                       />
                     </th>
                   )}
-                  {props.tableHeaders.map((tableHeader, index) => (
+                  {props?.tableHeaders?.map((tableHeader, index) => (
                     <th scope="col"  key={"tableHeader-" + index} >
                       <div className="header d-flex">
                       <span >
@@ -274,9 +263,9 @@ const classes =(): string[] =>{
                     </th>
                   ))}
                   {props.tableHeaders &&
-                    props.tableHeaders.length > 0 &&
+                    props.tableHeaders?.length > 0 &&
                     props.actions &&
-                    props.actions.length > 0 && (
+                    props.actions?.length > 0 && (
                       <th
                         className="text-center"
                         style={{ fontWeight: 500, color: "black" }}
@@ -287,27 +276,28 @@ const classes =(): string[] =>{
                 </tr>
               </thead>
               <tbody>
-                {data.map(
+                {Array.isArray(data) && data?.map(
                   (tableDataRow, index) =>
                     (props.pagination
                       ? typeof rowStatus.endingRow != "undefined" &&
                         index >= rowStatus.startingRow &&
                         index < rowStatus.endingRow
-                      : true) && (
+                      : true) && 
+                      (
                       <tr key={"tableRow-" + index}>
                         {props.enablecheckboxselection && (
                           <th scope="row" className="align-middle">
                             <input
                               type="checkbox"
-                              name={tableDataRow.id}
+                              name={tableDataRow?.id}
                               onChange={handleChange}
-                              checked={tableDataRow.selected}
+                              checked={tableDataRow?.selected}
                               className="form-check-input"
                               id="rowcheck{user.id}"
                             />
                           </th>
                         )}
-                        {props.tableHeaders.map((tableHeader, tableHeaderIndex) => (
+                        {props.tableHeaders?.map((tableHeader, tableHeaderIndex) => (
                           <td
                             key={
                               "column-" +
@@ -414,7 +404,7 @@ const classes =(): string[] =>{
                             )}
                           </td>
                         ))}
-                        {props.actions && props.actions.length > 0 && (
+                        {props.actions && props.actions?.length > 0 && (
                           <td className="align-middle text-center">
                             {!tableDataRow.isEndUserEditing ? (
                               <>
@@ -436,7 +426,7 @@ const classes =(): string[] =>{
                                     />
                                   </button>
                                   <ul className="dropdown-menu ">
-                                    {props.actions.map((action, actionIndex) => (
+                                    {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={
                                           "action-" +
@@ -541,7 +531,7 @@ const classes =(): string[] =>{
           {props.pagination && (
             <div className=" d-flex justify-content-end ">
               <RdsPagination
-                totalRecords={props.tableData.length}
+                totalRecords={props.tableData?.length}
                 recordsPerPage={props.recordsPerPage ? props.recordsPerPage : 5}
                 onPageChange={onPageChangeHandler}
                 paginationType={

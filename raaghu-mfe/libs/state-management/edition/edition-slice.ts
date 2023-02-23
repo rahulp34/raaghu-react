@@ -19,7 +19,7 @@ if (credentials) {
 
 export const EditionUser = createAsyncThunk('Edition/AddUser',  () => {})
 
-const editionSlice = createSlice({
+const editionSlice:any = createSlice({
   name: 'edition',
   initialState,
   reducers:{},
