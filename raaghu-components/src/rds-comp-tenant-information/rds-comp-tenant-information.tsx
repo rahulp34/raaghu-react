@@ -4,7 +4,7 @@ import {
 	RdsCheckbox,
 	RdsDatePicker,
 	RdsButton,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import React ,  { useState, useRef } from "react";
 import "./rds-comp-tenant-information.scss";
 import { useTranslation } from "react-i18next";

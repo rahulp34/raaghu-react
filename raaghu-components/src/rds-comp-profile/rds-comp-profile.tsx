@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "../rds-elements";
+import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "raaghu-react-elements";
 import React from "react";
 import "./rds-comp-profile.scss";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";

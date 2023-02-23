@@ -1,3 +1,3 @@
-export {default} from './rds-button';
+export { default } from './rds-button';
 
 // Button changed

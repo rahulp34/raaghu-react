@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsDropdownList, RdsSelectList, RdsButton } from "../rds-elements";
+import { RdsDropdownList, RdsSelectList, RdsButton } from "raaghu-react-elements";
 
 export interface RdsCompDynamicEntityPropertyProp {
   entityNames: any[];

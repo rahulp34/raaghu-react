@@ -6,7 +6,7 @@ import {
   RdsProgressBar,
   RdsRating,
   RdsIcon,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 export interface RdsCompCustomerReviewsProps {
   itemList: { value: number; count: number }[];
 }

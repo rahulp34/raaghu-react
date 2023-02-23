@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsTextArea, RdsButton, RdsLabel, RdsInput } from "../rds-elements";
+import { RdsTextArea, RdsButton, RdsLabel, RdsInput } from "raaghu-react-elements";
 export interface RdsCompMySettingsProps {}
 const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
   const [curPass, setCurPass] = useState("");

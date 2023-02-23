@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-import { RdsLabel, RdsInput, RdsButton } from "../rds-elements";
+import { RdsLabel, RdsInput, RdsButton } from "raaghu-react-elements";
 
 export interface RdsCompPropertiesProp {
   propertyData: any[];
