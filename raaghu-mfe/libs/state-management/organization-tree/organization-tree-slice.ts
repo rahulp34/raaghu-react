@@ -4,7 +4,7 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import axios from "axios";
+import {ServiceProxy} from '../../shared/service-proxy'
 
 type InitialState = {
   organizationUnitTree: any;
@@ -24,66 +24,111 @@ export const initialState: InitialState = {
   error: "",
   status: "pending",
 };
-var credentials = localStorage.getItem("LoginCredential");
-if (credentials) {
-  var parsedCredentials = JSON.parse(credentials);
-}
+const proxy = new ServiceProxy()
+//organization unit
 export const fetchOrganizationTrees = createAsyncThunk(
   "OrganizationTree/fetchOrganizationTrees",
-  () => {
-    return axios
-      .get(
-        "https://abpdemoapi.raaghu.io/api/identity/organization-units",
-        {
-          headers: {
-            Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-          },
-        }
-      )
-      .then((response) => {
-        console.log("response from api ", response.data.result);
-        return response.data.result;
-      });
+async  () => {
+     return proxy.all2(undefined).then(
+      (result:any)=>{
+        return result
+      }
+    ); 
   }
 );
-// export const updateUnitTree = createAsyncThunk(
-//   "OrganizationTree/updateUnitTree",
-//   (payload) => {
-//     return axios
-//       .put(
-//         "https://anzdemoapi.raaghu.io/api/services/app/OrganizationUnit/PutOrganizationUnits",
-//         {
-//           "displayName": 'saniya',
-//           "parentId": "57"
-//         },
-//         {
-//           headers: {
-//             Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-//           },
-//         }
-//       );
-//       // axios.post(
-//       //   '/bezkoder.com/tutorials',
-//       //   {
-//       //     title: title,
-//       //     description: description,
-//       //   }
-//       // );
-//       // .then((response) => {
-//       //   console.log("response from api on update ", response.data.result);
-//       //   return response.data.result;
-//       // });
-//   }
-//   // async (id:any,data:any ) => {
-//   //   const res = await TutorialDataService.update(id, data);
-//   //   return res.data;
-//   // }
-// );
+export const addOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/addOrganizationUnit",
+  async (dto: any) => {
+     const result = await proxy.organizationUnitsPOST(dto);
+    return result;
+  }
+);
+export const editOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/editOrganizationUnit",
+  async ({ id, dTo }: { id: any; dTo: any }) => {
+    const result = await proxy.organizationUnitsPUT(id, dTo);
+    return result;
+  }
+);
+export const deleteOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/deleteOrganizationUnit",
+  async (id: any) => {
+    const result = await proxy.organizationUnitsDELETE(id);
+    return result;
+  }
+);
+//member actions
+export const fetchMemberOrganizationTrees = createAsyncThunk(
+  "OrganizationTree/fetchMemberOrganizationTrees",
+async(id:any) => {
+     return proxy.membersGET(id,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then(
+      (result:any)=>{
+        return result.items
+      }
+    ); 
+  }
+);
+export const deleteMemberOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/deleteMemberOrganizationUnit",
+  async ({id,memberId}:{id: any,memberId:any}) => {
+    const result = await proxy.membersDELETE(id, memberId);
+    return result;
+  }
+);
+export const editMemberOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/editMemberOrganizationUnit",
+  async ({ id, dTo }: { id: any; dTo: any }) => {
+    const result = await proxy.membersPUT(id, dTo);
+    return result;
+  }
+);
+export const FetchUsersOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/FetchUsersOrganizationUnit",
+  async () => {
+    const result = await proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000);
+    return result.items;
+  }
+);
+//Roles actions
+export const fetchRolesOrganizationTrees = createAsyncThunk(
+  "OrganizationTree/fetchRolesOrganizationTrees",
+async(id:any) => {
+     return proxy.rolesGET(id,undefined,0,1000).then(
+      (result:any)=>{
+        return result.items
+      }
+    ); 
+  }
+);
+export const deleteRolesOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/deleteRolesOrganizationUnit",
+  async ({id,roleId}:{id: any,roleId:any}) => {
+    const result = await proxy.rolesDELETE(id, roleId);
+    return result;
+  }
+);
+export const editRolesOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/editRolesOrganizationUnit",
+  async ({ id, dTo }: { id: any; dTo: any }) => {
+    const result = await proxy.rolesPUT(id, dTo);
+    return result;
+  }
+);
+export const FetchRoleListOrganizationUnit = createAsyncThunk(
+  "OrganizationTree/FetchRoleListOrganizationUnit",
+  async () => {
+    const result = await proxy.rolesGET3(undefined,undefined,0,1000);
+    return result.items;
+  }
+);
+
+//api/identity/roles
 const OrganizationTreeSlice = createSlice({
   name: "OrganizationTree",
   initialState,
   reducers:{},
   extraReducers: (builder) => {
+    //organization unit reducer
     builder.addCase(fetchOrganizationTrees.pending, (state) => {
       state.status = "loading";
     });
@@ -100,249 +145,169 @@ const OrganizationTreeSlice = createSlice({
       state.organizationUnitTree = [];
       state.error = action.error.message || "Something went wrong";
     });
-    // builder.addCase(updateUnitTree.pending, (state) => {
-    //   state.status = "loading";
-    // });
-    // builder.addCase(
-    //   updateUnitTree.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.status = "success";
-    //     state.organizationUnitTree = action.payload;
-    //     state.error = "";
-    //   }
-    // );
-    // builder.addCase(updateUnitTree.rejected, (state, action) => {
-    //   state.status = "error";
-    //   state.organizationUnitTree = [];
-    //   state.error = action.error.message || "Something went wrong";
-    // });
-
+    builder.addCase(deleteOrganizationUnit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      deleteOrganizationUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.organizationUnitTree = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(deleteOrganizationUnit.rejected, (state, action) => {
+      state.status = "error";
+      state.organizationUnitTree = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+    builder.addCase(editOrganizationUnit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      editOrganizationUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.organizationUnitTree = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(editOrganizationUnit.rejected, (state, action) => {
+      state.status = "error";
+      state.organizationUnitTree = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+    
+    //Member unit reducer
+    builder.addCase(fetchMemberOrganizationTrees.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      fetchMemberOrganizationTrees.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.members = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(fetchMemberOrganizationTrees.rejected, (state, action) => {
+      state.status = "error";
+      state.members = [];
+      state.error = action.error.message || "Something went wrong";
+    });
+    builder.addCase(deleteMemberOrganizationUnit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      deleteMemberOrganizationUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.members = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(deleteMemberOrganizationUnit.rejected, (state, action) => {
+      state.status = "error";
+      state.members = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+    builder.addCase(editMemberOrganizationUnit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      editMemberOrganizationUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.members = "success";
+        state.organizationUnitTree = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(editMemberOrganizationUnit.rejected, (state, action) => {
+      state.status = "error";
+      state.members = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+    builder.addCase(FetchUsersOrganizationUnit.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      FetchUsersOrganizationUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.usersList = "success";
+        state.usersList = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(FetchUsersOrganizationUnit.rejected, (state, action) => {
+      state.status = "error";
+      state.usersList = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+   //Member unit reducer
+   builder.addCase(fetchRolesOrganizationTrees.pending, (state) => {
+    state.status = "loading";
+  });
+  builder.addCase(
+    fetchRolesOrganizationTrees.fulfilled,
+    (state, action: PayloadAction<any>) => {
+      state.status = "success";
+      state.roles = action.payload;
+      state.error = "";
+    }
+  );
+  builder.addCase(fetchRolesOrganizationTrees.rejected, (state, action) => {
+    state.status = "error";
+    state.roles = [];
+    state.error = action.error.message || "Something went wrong";
+  });
+  builder.addCase(deleteRolesOrganizationUnit.pending, (state) => {
+    state.status = "loading";
+  });
+  builder.addCase(
+    deleteRolesOrganizationUnit.fulfilled,
+    (state, action: PayloadAction<any>) => {
+      state.status = "success";
+      state.roles = action.payload;
+      state.error = "";
+    }
+  );
+  builder.addCase(deleteRolesOrganizationUnit.rejected, (state, action) => {
+    state.status = "error";
+    state.roles = [];
+    state.error = action.error.message || "Something Went Wrong";
+  });
+  builder.addCase(editRolesOrganizationUnit.pending, (state) => {
+    state.status = "loading";
+  });
+  builder.addCase(
+    editRolesOrganizationUnit.fulfilled,
+    (state, action: PayloadAction<any>) => {
+      state.roles = "success";
+      state.organizationUnitTree = action.payload;
+      state.error = "";
+    }
+  );
+  builder.addCase(editRolesOrganizationUnit.rejected, (state, action) => {
+    state.status = "error";
+    state.roles = [];
+    state.error = action.error.message || "Something Went Wrong";
+  });
+  builder.addCase(FetchRoleListOrganizationUnit.pending, (state) => {
+    state.status = "loading";
+  });
+  builder.addCase(
+    FetchRoleListOrganizationUnit.fulfilled,
+    (state, action: PayloadAction<any>) => {
+      state.status = "success";
+      state.rolesList = action.payload;
+      state.error = "";
+    }
+  );
+  builder.addCase(FetchRoleListOrganizationUnit.rejected, (state, action) => {
+    state.status = "error";
+    state.rolesList = [];
+    state.error = action.error.message || "Something Went Wrong";
+  });
   },
 });
 export default OrganizationTreeSlice.reducer;
-// export const {
-//   addRolesToOrganizationUnit,
-//   addUsersToOrganizationUnit,
-//   createTreeUnit,
-//   deleteMemberFromOrgUnit,
-//   deleteRoleFromOrgUnit,
-//   deleteRoles,
-//   deleteUnitTree,
-//   getOrganizationUnitMembers,
-//   getOrganizationUnitRoles,
-//   getOrganizationUnitRolesList,
-//   getOrganizationUnitTree,
-//   getOrganizationUnitUsersList,
-//   updateUnitTree,
-// } = OrganizationTreeSlice.actions;
-//   reducers: {
-//     addRolesToOrganizationUnit: (state: any) => {},
-//     addUsersToOrganizationUnit: (state: any) => {},
-//     createTreeUnit:(state, action) => {
-//       console.log("action payload ", action.payload);
-//       console.log('parentId',action.payload.data.nodeData.data.parentId)
-//     },
-//     deleteMemberFromOrgUnit: (state: any) => {},
-//     deleteRoleFromOrgUnit: (state: any) => {},
-//     deleteRoles: (state: any) => {},
-//     deleteUnitTree: (state: any) => {},
-//     getOrganizationUnitMembers: (state: any) => {},
-//     getOrganizationUnitRoles: (state: any) => {},
-//     getOrganizationUnitRolesList: (state: any) => {},
-//     getOrganizationUnitTree: (state: any) => {},
-//     getOrganizationUnitUsersList: (state: any) => {},
-//     updateUnitTree: (state, action) => {
-//       console.log('wanted to edit value')
-//       console.log("pid", action.payload.pId, ' id ', action.payload.id);
-//       console.log('state', state)
-//       // payload = {
-//       //   value: value,
-//       //   node: node
-//       // }
-//       //Find index of specific object using findIndex method.    
-// // const objIndex = state.organizationUnitTree?.findIndex(((obj:any) => obj.data.id ===action.payload.id && obj.data.parentId===action.payload.pId));
-
-// // //Log object to Console.
-// // console.log("Before update: ", state.organizationUnitTree[objIndex])
-
-// // //Update object's name property.
-// // state.organizationUnitTree[objIndex].data.displayName = action.payload.value
-
-// // //Log object to console again.
-// // console.log("After update: ", state.organizationUnitTree[objIndex])
-//     },
-//   },
-// export const getOrganizationUnitTreeSuccess = createAction(
-//   '[Organization Unit Page] Get Organization Unit Tree Success',
-//   props<{ organizationUnitTree: ListResultDtoOfOrganizationUnitDto }>()
-// );
-
-// export const getOrganizationUnitTreeFailure = createAction(
-//   '[Organization Unit Page] Get Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const getOrganizationUnitMembers = createAction(
-//   '[Organization Unit Page] Get Organization Unit Members',
-//   (id: number) => ({ id })
-//   );
-
-// export const getOrganizationUnitMembersSuccess = createAction(
-//   '[Organization Unit Page] Get Organization Unit Members Success',
-//   props<{ organizationUnitMembers: PagedResultDtoOfOrganizationUnitUserListDto  }>()
-// );
-
-// export const getOrganizationUnitMembersFailure = createAction(
-//   '[Organization Unit Page] Get Organization Unit Members Failure',
-//   props<{ error: string }>()
-// );
-
-// export const getOrganizationUnitRoles = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles',
-//   (id: number) => ({ id })
-//   );
-
-// export const getOrganizationUnitRolesSuccess = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles Success',
-//   props<{ organizationUnitRoles: PagedResultDtoOfOrganizationUnitRoleListDto  }>()
-// );
-
-// export const getOrganizationUnitRolesFailure = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles Failure',
-//   props<{ error: string }>()
-// );
-// export const deleteUsers = createAction(
-//   '[Organization Unit Page] Delete Users',
-//   (userid: number) => ({ userid })
-// );
-// export const deleteRoles = createAction(
-//   '[Organization Unit Page] Delete Roles',
-//   (roleid: number) => ({ roleid })
-// );
-
-// export const getOrganizationUnitUsersList = createAction(
-//   '[Organization Unit Page] Get Organization Unit Users list',
-//   (input: FindOrganizationUnitUsersInput) => ({ input })
-//   );
-
-// export const getOrganizationUnitUsersListSuccess = createAction(
-//   '[Organization Unit Page] Get Organization Unit Users list Success',
-//   props<{ organizationUnitUsersList: PagedResultDtoOfNameValueDto  }>()
-// );
-
-// export const getOrganizationUnitUsersListFailure = createAction(
-//   '[Organization Unit Page] Get Organization Unit Users list Failure',
-//   props<{ error: string }>()
-// );
-// export const getOrganizationUnitRolesList = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles List',
-//   (input: FindOrganizationUnitRolesInput) => ({ input })
-//   );
-
-// export const getOrganizationUnitRolesListSuccess = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles List Success',
-//   props<{ organizationUnitRolesList: PagedResultDtoOfNameValueDto  }>()
-// );
-
-// export const getOrganizationUnitRolesListFailure = createAction(
-//   '[Organization Unit Page] Get Organization Unit Roles List Failure',
-//   props<{ error: string }>()
-// );
-
-// export const createTreeUnit = createAction(
-//   '[Organization Unit Page] create Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const createTreeUnitSuccess = createAction(
-//   '[Organization Unit Page] create Organization Unit Tree Success',
-// );
-
-// export const createTreeUnitFailure = createAction(
-//   '[Organization Unit Page] create Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const updateUnitTree = createAction(
-//   '[Organization Unit Page] Update Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const updateUnitTreeSuccess = createAction(
-//   '[Organization Unit Page] update Organization Unit Tree Success',
-// );
-
-// export const updateUnitTreeFailure = createAction(
-//   '[Organization Unit Page] update Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const deleteUnitTree = createAction(
-//   '[Organization Unit Page] delete Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const deleteUnitTreeSuccess = createAction(
-//   '[Organization Unit Page] delete Organization Unit Tree Success',
-// );
-
-// export const deleteUnitTreeFailure = createAction(
-//   '[Organization Unit Page] delete Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const addUsersToOrganizationUnit = createAction(
-//   '[Organization Unit Page] Add Member Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const addUsersToOrganizationUnitSuccess = createAction(
-//   '[Organization Unit Page] Add Member Organization Unit Tree Success',
-// );
-
-// export const addUsersToOrganizationUnitFailure = createAction(
-//   '[Organization Unit Page] Add Member Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const addRolesToOrganizationUnit = createAction(
-//   '[Organization Unit Page] Add Role Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const addRolesToOrganizationUnitSuccess = createAction(
-//   '[Organization Unit Page] Add Role Organization Unit Tree Success',
-// );
-
-// export const addRolesToOrganizationUnitFailure = createAction(
-//   '[Organization Unit Page] Add Role Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const deleteMemberFromOrgUnit = createAction(
-//   '[Organization Unit Page] Delete Member Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const deleteMemberFromOrgUnitSuccess = createAction(
-//   '[Organization Unit Page] Delete Member Organization Unit Tree Success',
-// );
-
-// export const deleteMemberFromOrgUnitFailure = createAction(
-//   '[Organization Unit Page] Delete Member Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
-
-// export const deleteRoleFromOrgUnit = createAction(
-//   '[Organization Unit Page] Delete Role Organization Unit Tree',
-//   (data) => ( data )
-//   );
-
-// export const deleteRoleFromOrgUnitSuccess = createAction(
-//   '[Organization Unit Page] Delete Role Organization Unit Tree Success',
-// );
-
-// export const deleteRoleFromOrgUnitFailure = createAction(
-//   '[Organization Unit Page] Delete Role Organization Unit Tree Failure',
-//   props<{ error: string }>()
-// );
