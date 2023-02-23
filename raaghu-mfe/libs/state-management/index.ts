@@ -10,6 +10,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
+import textTemplateReducer from "./text-template/text-template-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   language: languageReducer,
   organization: organizationReducer,
   applications : applicationsReducer,
+  textTemplate: textTemplateReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
