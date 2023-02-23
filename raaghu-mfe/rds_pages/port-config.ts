@@ -58,5 +58,8 @@ export const PortConfig = {
   },
 	"textTemplate":{
 		"port":"8020"
+	},
+	"applications":{
+		"port":"8025"
 	}
 }

@@ -33,3 +33,4 @@ export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-lis
 export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition'
 export {default as RdsCompNewFeatures} from './rds-comp-new-features/rds-comp-new-features'
 export {default as RdsCompNewClaimType} from './rds-comp-new-claim-type/rds-comp-new-claim-type';
+export {default as RdsCompApplicationBasic} from './rds-comp-application-basic/rds-comp-application-basic'
