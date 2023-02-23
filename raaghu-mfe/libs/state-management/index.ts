@@ -5,12 +5,11 @@ import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
-import localizationReducer from "./localization/localization-slice";
-import languageEditReducer from "./language/languageEdit-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import  applicationsReducer  from "./applications/applications-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -22,9 +21,9 @@ const rootReducer = combineReducers({
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
-  languageEdit: languageEditReducer,
   organization: organizationReducer,
-  localization:localizationReducer,
+  applications : applicationsReducer,
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

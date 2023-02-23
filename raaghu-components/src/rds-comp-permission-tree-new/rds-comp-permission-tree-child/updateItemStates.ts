@@ -1,5 +1,5 @@
 import { Item } from "./CheckboxList";
-import { CheckboxState, ItemState } from "../rds-comp-permission-ree";
+import { CheckboxState, ItemState } from "../rds-comp-permission-tree";
 
 export const updateItemStates = (oldState: ItemState[], items: Item[], clickedId: number) => {
   const newState = oldState.map((i) => ({ ...i }));

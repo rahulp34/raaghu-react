@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating } from "../rds-elements";
+import { RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating } from "raaghu-react-elements";
 export interface Item {
   name: string;
   username?: string;

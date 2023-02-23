@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsLabel, RdsSelectList } from "../rds-elements";
+import { RdsLabel, RdsSelectList } from "raaghu-react-elements";
 import "./rds-comp-theme-new.scss";
 
 export interface RdsCompThemeNewProps {

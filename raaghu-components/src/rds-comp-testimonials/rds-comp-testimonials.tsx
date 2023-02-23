@@ -4,7 +4,7 @@ import {
 	RdsTestimonial,
 	RdsIcon,
 	RdsCarousel,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompTestimonialsProps {
 	testimonialItems?: any;
@@ -36,7 +36,6 @@ const RdsCompTestimonials = (props: RdsCompTestimonialsProps) => {
 									stroke={true}
 									width="15px"
 									name="chevron_right"
-									class="mx-2"
 								></RdsIcon>
 							</span>
 						</div>

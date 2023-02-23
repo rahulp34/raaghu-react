@@ -1,5 +1,5 @@
 import React from 'react'
-import {RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating,RdsReviewCategory} from '../rds-elements'
+import {RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating,RdsReviewCategory} from 'raaghu-react-elements'
 import RdsCompFeeds,{Item} from '../rds-comp-feeds/rds-comp-feeds'
 export interface RdsCompReviewsProps {
   itemList: Item[] ;

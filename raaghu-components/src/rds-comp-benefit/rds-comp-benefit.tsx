@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsBenefit } from "../rds-elements";
+import { RdsBenefit } from "raaghu-react-elements";
 
 export interface RdsCompBenefitProps {
   displayType:string,

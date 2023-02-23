@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsButton, RdsIcon } from "../rds-elements";
+import { RdsButton, RdsIcon } from "raaghu-react-elements";
 import "./rds-comp-subscription.scss";
 export interface RdsCompSubscriptionProps {
   subscriptionData: any[];

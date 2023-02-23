@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { RdsButton, RdsInput, RdsTextArea } from "../rds-elements";
+import { RdsButton, RdsInput, RdsTextArea } from "raaghu-react-elements";
 
 export interface RdsCompContactUsProps {
  

@@ -1,5 +1,5 @@
 import React, { FormEventHandler, useState, useRef } from "react";
-import { RdsButton, RdsCheckbox, RdsInput } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsInput } from "raaghu-react-elements";
 // import img from "./assets/edit-profile";
 
 export interface RdsCompUserBasicsProps {}

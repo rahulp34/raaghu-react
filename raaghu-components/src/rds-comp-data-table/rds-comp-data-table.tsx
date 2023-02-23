@@ -7,7 +7,7 @@ import {
   RdsPagination,
   RdsAvatar,
   RdsIllustration
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import "./rds-comp-data-table.scss";
 export interface RdsCompDatatableProps {
   enablecheckboxselection?: boolean;
@@ -380,7 +380,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   </div>
                                 )}
                                 {tableHeader.datatype === "children" && (
-                                  <div className="d-flex justify-content-center">
+                                  <div className="d-flex">
                                     {" "}
                                     {tableDataRow[tableHeader.key]}
                                   </div>
@@ -534,9 +534,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                 totalRecords={props.tableData?.length}
                 recordsPerPage={props.recordsPerPage ? props.recordsPerPage : 5}
                 onPageChange={onPageChangeHandler}
-                paginationType={
-                  props.recordsPerPageSelectListOption ? "advance" : "default"
-                }
+                paginationType={props.recordsPerPageSelectListOption ? "advance" : "default"}
               ></RdsPagination>
             </div>
           )}

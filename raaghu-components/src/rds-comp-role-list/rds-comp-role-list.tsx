@@ -11,7 +11,7 @@ import {
   RdsNavtabs,
   RdsOffcanvas,
   RdsSearch,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import { useEffect } from "@storybook/addons";
 import { setDate } from "date-fns/esm";
 
