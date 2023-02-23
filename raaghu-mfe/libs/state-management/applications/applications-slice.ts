@@ -29,6 +29,18 @@ export const deleteApplications = createAsyncThunk("applications/deleteApplicati
   }) 
 });
 
+export const saveApplications = createAsyncThunk("applications/saveApplications", (data:any) => {
+  return proxy.applicationsPOST(data,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const updateApplications = createAsyncThunk("applications/updateApplications", (id:string ,data:any) => {
+  return proxy.applicationsPUT(id, data,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
 //reducer
 const applicationsSlice = createSlice({
   name: "applications",
@@ -59,6 +71,39 @@ const applicationsSlice = createSlice({
         state.applications= action.payload;
       }  
     );
+
+    //Save
+    builder.addCase(saveApplications.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      saveApplications.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.applications=action.payload;
+      }
+    );
+    builder.addCase(saveApplications.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //update
+    builder.addCase(updateApplications.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      updateApplications.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.applications=action.payload;
+      }
+    );
+    builder.addCase(updateApplications.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
   }, 
 });
 

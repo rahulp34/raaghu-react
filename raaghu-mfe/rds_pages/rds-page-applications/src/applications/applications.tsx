@@ -9,14 +9,14 @@ import {
 import {
   RdsCompAlertPopup,
   RdsCompDatatable,
-  RdsCompNewClaimType
+  RdsCompApplicationBasic
 } from "../../../rds-components";
 
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchApplications, deleteApplications } from "../../../../libs/state-management/applications/applications-slice";
+import { fetchApplications, deleteApplications, saveApplications } from "../../../../libs/state-management/applications/applications-slice";
 
 const Applications = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const Applications = () => {
 
   useEffect(() => {
     let tempData: any[] = [];
-    if(application.applications?.items){
+    if (application.applications?.items) {
       application.applications.items.map((e: any) => {
         const item = {
           id: e.id,
@@ -40,12 +40,11 @@ const Applications = () => {
       })
       setApplicationData(tempData)
     }
-  
 
-  },[application]);
+
+  }, [application]);
 
   const [tableDataId, setTableDataRowId] = useState(0);
-
   const scopeSelection = (
     clickEvent: any,
     tableDataRow: any,
@@ -54,13 +53,33 @@ const Applications = () => {
   ) => {
     setTableDataRowId(tableDataRowIndex);
   };
-  function onDeleteHandler(e: any) { 
+  function onDeleteHandler(e: any) {
     const tableDataIndex = String(tableDataId)
-    dispatch(deleteApplications(tableDataIndex) as any).then((res:any)=>{
-     dispatch(fetchApplications() as any);
+    dispatch(deleteApplications(tableDataIndex) as any).then((res: any) => {
+      dispatch(fetchApplications() as any);
     })
 
     e.preventDefault();
+  }
+
+  function handleEmailSubmit(basicApplicationData: any) {
+    console.log("function of parent component", basicApplicationData)
+    dispatch(saveApplications(basicApplicationData) as any);
+    setBasicApplicationData({
+      clientId:'',
+      displayName:'',
+      clientUri:'',
+      logoUri:'',
+      allowAuthorizationCodeFlow:false,
+      allowDeviceEndpoint:false,
+      allowImplicitFlow:false,
+      allowHybridFlow:false,
+      allowPasswordFlow:false,
+      allowClientCredentialsFlow:false,
+      allowRefreshTokenFlow:false,
+      type:'',
+      scopes:''
+    })
   }
 
   const tableHeaders = [
@@ -125,19 +144,43 @@ const Applications = () => {
     { label: "Applications Information", tablink: "#nav-home", id: 0 },
     { label: "Permissions", tablink: "#nav-profile", id: 1 },
   ];
-
+  const [basicApplicationData , setBasicApplicationData] = useState<any>({
+    clientId:'',
+    displayName:'',
+    clientUri:'',
+    logoUri:'',
+    allowAuthorizationCodeFlow:false,
+    allowDeviceEndpoint:false,
+    allowImplicitFlow:false,
+    allowHybridFlow:false,
+    allowPasswordFlow:false,
+    allowClientCredentialsFlow:false,
+    allowRefreshTokenFlow:false,
+    type:'',
+    scopes:''
+  })
   const [applicationData, setApplicationData] = useState<any>(
     {
-      id:'',
+      id: '',
       clientId: '',
       displayName: '',
       type: '',
     });
-
   const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showNextTab, setShowNextTab] = useState(false);
-
+  const typeList: any[] = [ 
+  { option: 'admin', value: 1 }, 
+  { option: 'email', value: 2 }, 
+  { option: 'phone', value: 3 }, 
+  { option: 'password', value: 4 }
+];
+  const scopesList: any[] = [
+    { option: 'admin', value: 1 }, 
+    { option: 'email', value: 2 }, 
+    { option: 'phone', value: 3 }, 
+    { option: 'password', value: 4 }
+  ]
   return (
     <>
       <div className="row">
@@ -167,7 +210,7 @@ const Applications = () => {
             backDrop={false}
             scrolling={false}
             preventEscapeKey={false}
-            offId={"tenant"}
+            offId="application"
           >
             <RdsNavtabs
               navtabsItems={navtabsItems}
@@ -179,10 +222,11 @@ const Applications = () => {
               }}
             />
             {activeNavTabId == 0 && showNextTab === false && (
-              <></>
+              <RdsCompApplicationBasic handleSubmit={(basicApplicationData: any) => { handleEmailSubmit(basicApplicationData) }} basicData={basicApplicationData} typeList={typeList} scopesList={scopesList}></RdsCompApplicationBasic>
             )}
             {(activeNavTabId == 1 || showNextTab == true) && (
-              <RdsCompNewClaimType></RdsCompNewClaimType>
+              // <RdsCompNewClaimType></RdsCompNewClaimType>
+              <></>
             )}
             {(activeNavTabId == 2 || showNextTab == true) && (<></>)}
           </RdsOffcanvas>
@@ -197,25 +241,11 @@ const Applications = () => {
               recordsPerPage={5}
               recordsPerPageSelectListOption={true}
               onActionSelection={scopeSelection}
-            // onActionSelection={function (
-            //   clickEvent: any,
-            //   tableDataRow: any,
-            //   tableDataRowIndex: number,
-            //   action: {
-            //     displayName: string;
-            //     id: string;
-            //     offId?: string | undefined;
-            //   }
-            // ): void {
-            //   setTableDataRowId(tableDataRowIndex)
-            // }}
             ></RdsCompDatatable>
             <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
-
           </div>
         </div>
       </div>
-
     </>
   );
 };
