@@ -49,9 +49,9 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "profile roles phone email address ABP_VZKY_IN", 
+      scope: "address email phone profile roles abp_demo", 
     };
-    fetch("https://localhost:44347/connect/token", {
+    fetch("https://localhost:44317/connect/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -61,7 +61,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello()
+        hello()   
       });
   };
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {

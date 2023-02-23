@@ -5,6 +5,7 @@ import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
+import ClaimTypesReducer from "./claim-types/claim-types-slice"
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   edition: editionReducer,
   language: languageReducer,
   organization: organizationReducer,
+  claimTypes: ClaimTypesReducer,
   applications : applicationsReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);

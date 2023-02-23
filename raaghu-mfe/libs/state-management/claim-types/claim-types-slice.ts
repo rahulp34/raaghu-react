@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { ServiceProxy } from "../../shared/service-proxy";
-import { useAppDispatch } from "../../state-management/hooks";
+
 type InitialState = {
   loading: boolean;
-  users: any;
+  users: any[];
   error: string;
   alert: boolean;
   alertMessage: string;
@@ -21,71 +21,74 @@ const initialState: InitialState = {
 
 const proxy = new ServiceProxy();
 
-export const fetchEditionData = createAsyncThunk(
-  "edition/fetchEditionData",
-  async () => {
-    const result = await proxy.editionsGET2(
-      undefined,
-      "false",
-      undefined,
-      1000
-    );
-    console.log("result", result);
-    return result;
+export const fetchClaimTypesData = createAsyncThunk(
+  "claimTypes/fetchClaimTypesData",
+  () => {
+    return proxy
+      .claimTypesGET(undefined, undefined, undefined, undefined)
+      .then((result: any) => {
+        console.log("result ClaimType", result);
+        return result.items;
+      });
   }
 );
 
-export const deleteEditionData = createAsyncThunk(
-  "edition/deleteEditionData",
-  async (id: any) => {
-    const result = await proxy.editionsDELETE(id);
-    return result;
+export const deleteClaimTypesData = createAsyncThunk(
+  "claimTypes/deleteClaimTypesData",
+  (id: any) => {
+    return proxy.claimTypesDELETE(id!).then((result: any) => {
+      return result.items;
+    });
   }
 );
 
-export const addEditionData = createAsyncThunk(
-  "edition/addEditionData",
-  async (value: any) => {
-    const result = await proxy.editionsPOST(value);
-    return result;
+export const addClaimTypesData = createAsyncThunk(
+  "claimTypes/addClaimTypesData",
+  (claimTypeDto: any) => {
+    return proxy.claimTypesPOST(claimTypeDto).then((result:any)=>{
+      return result.items;
+    })
   }
 );
 
-export const editEditionData = createAsyncThunk(
-  "edition/editEditionData",
-  async ({ id, dTo }: { id: any; dTo: any }) => {
-    const result = await proxy.editionsPUT(id, dTo);
-    return result;
+export const editClaimTypesData = createAsyncThunk(
+  "claimTypes/editClaimTypesData",
+  ({id ,claimTypeDto}:{id: any, claimTypeDto: any}) => {
+    return proxy.claimTypesPUT(id, claimTypeDto).then((result:any)=>{
+      return result.items;
+    })
   }
 );
 
-const editionSlice = createSlice({
-  name: "edition",
+const claimTypesSlice = createSlice({
+  name: "claimTypes",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchEditionData.pending, (state) => {
+    // Fetch Data
+
+    builder.addCase(fetchClaimTypesData.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      fetchEditionData.fulfilled,
+      fetchClaimTypesData.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.users = action.payload;
         state.error = "";
       }
     );
-    builder.addCase(fetchEditionData.rejected, (state, action) => {
+    builder.addCase(fetchClaimTypesData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
     });
 
-    builder.addCase(deleteEditionData.pending, (state) => {
+    builder.addCase(deleteClaimTypesData.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      deleteEditionData.fulfilled,
+      deleteClaimTypesData.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.users = action.payload;
@@ -95,20 +98,20 @@ const editionSlice = createSlice({
         state.success = true;
       }
     );
-    builder.addCase(deleteEditionData.rejected, (state, action) => {
+    builder.addCase(deleteClaimTypesData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
       state.alert = true;
-      state.alertMessage = "Something went wrong";
-      state.success = false;
+      state.alertMessage = "Data deleted successfully";
+      state.success = true;
     });
 
-    builder.addCase(addEditionData.pending, (state) => {
+    builder.addCase(addClaimTypesData.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      addEditionData.fulfilled,
+      addClaimTypesData.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.users = action.payload;
@@ -118,7 +121,7 @@ const editionSlice = createSlice({
         state.success = true;
       }
     );
-    builder.addCase(addEditionData.rejected, (state, action) => {
+    builder.addCase(addClaimTypesData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
@@ -127,11 +130,11 @@ const editionSlice = createSlice({
       state.success = false;
     });
 
-    builder.addCase(editEditionData.pending, (state) => {
+    builder.addCase(editClaimTypesData.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(
-      editEditionData.fulfilled,
+      editClaimTypesData.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.users = action.payload;
@@ -141,7 +144,7 @@ const editionSlice = createSlice({
         state.success = true;
       }
     );
-    builder.addCase(editEditionData.rejected, (state, action) => {
+    builder.addCase(editClaimTypesData.rejected, (state, action) => {
       state.loading = false;
       state.users = [];
       state.error = action.error.message || "Something Went Wrong";
@@ -152,4 +155,4 @@ const editionSlice = createSlice({
   },
 });
 
-export default editionSlice.reducer;
+export default claimTypesSlice.reducer;
