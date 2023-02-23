@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   organization: organizationReducer,
   claimTypes: ClaimTypesReducer,
   applications : applicationsReducer,
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -59,8 +59,8 @@ export const editEditionData = createAsyncThunk(
   }
 );
 
-const editionSlice = createSlice({
-  name: "edition",
+const editionSlice:any = createSlice({
+  name: 'edition',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
