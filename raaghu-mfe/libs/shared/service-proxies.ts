@@ -11611,7 +11611,7 @@ export class AuthenticateModel implements IAuthenticateModel {
     twoFactorRememberClientToken?: string | undefined;
     singleSignIn?: boolean | undefined;
     returnUrl?: string | undefined;
-    captchaResponse?: string | undefined;
+    captchaResponse?: string | undefined; 
 
     constructor(data?: IAuthenticateModel) {
         if (data) {
@@ -25544,4 +25544,4 @@ function throwException(message: string, status: number, response: string, heade
         throw result;
     else
         throw new ApiException(message, status, response, headers, null);
-}
+} 

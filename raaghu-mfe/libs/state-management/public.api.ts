@@ -3,4 +3,3 @@ export * from "./index";
 export * from "./forgot-password/forgotpassword-slice";
 export * from "./subscription/subscription-slice";
 export * from "./language/language-slice";
-export * from "./language/languageEdit-slice";
