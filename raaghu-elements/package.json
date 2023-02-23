@@ -81,6 +81,7 @@
     "react-draft-wysiwyg": "^1.15.0",
     "react-player": "^2.11.0",
     "react-popper": "^2.3.0",
+    "react-quill": "^2.0.0",
     "root": "^3.2.0",
     "sass-loader": "^13.2.0",
     "validator": "^13.7.0"
