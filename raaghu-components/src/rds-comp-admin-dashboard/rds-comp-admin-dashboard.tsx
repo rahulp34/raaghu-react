@@ -1,14 +1,16 @@
 import React from "react";
-import { RdsPagination, RdsProgressBar, RdsWidget } from "../rds-elements";
 import { useTranslation } from "react-i18next";
 import {
+	RdsPagination,
+	RdsProgressBar,
+	RdsWidget,
 	RdsLineChart,
 	RdsBigNumber,
 	RdsDoughnutChart,
 	RdsBooleanChart,
 	RdsBarChart,
 	RdsTable,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import { ScriptableContext } from "chart.js";
 const RdsCompAdminDashboard = () => {
 	const monthlySummaryChartOptions = () => {
@@ -16,11 +18,11 @@ const RdsCompAdminDashboard = () => {
 	};
 
 	const { t } = useTranslation();
-    let user ='Host Admin';
+	let user = 'Host Admin';
 	return (
 		<div>
 			<div className="dark">
-				<div className ="mb-3">
+				<div className="mb-3">
 					<h5><label htmlFor="label" className="fw-bold">Hello, {user} !</label></h5>
 				</div>
 				<div className="row">
@@ -559,7 +561,7 @@ const RdsCompAdminDashboard = () => {
 								>
 									<div>
 										<RdsBigNumber
-										  bigNumber="$3,73,960.412"
+											bigNumber="$3,73,960.412"
 											icon={"triangle_down"}
 											iconHeight={"12px"}
 											subTitle="-$5850.75"
@@ -772,8 +774,8 @@ const RdsCompAdminDashboard = () => {
 							headerTitle={t("Member Activity")}
 							isRefreshRequired={true}
 							colorVariant={"white"}
-							// minHeight="462px"
-							// style={{ overflow: "scroll" }}
+						// minHeight="462px"
+						// style={{ overflow: "scroll" }}
 						>
 							<div>
 								<RdsTable
@@ -1026,7 +1028,7 @@ const RdsCompAdminDashboard = () => {
 							headerTitle={t("To do List")}
 							isRefreshRequired={true}
 							colorVariant={"white"}
-							// minHeight="462px"
+						// minHeight="462px"
 						>
 							<div>
 								<RdsTable

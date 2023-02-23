@@ -4,7 +4,7 @@ import {
   RdsSelectList,
   RdsCounter,
   RdsCheckbox,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompNewFeaturesProps {}
 

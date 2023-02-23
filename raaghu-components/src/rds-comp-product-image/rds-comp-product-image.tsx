@@ -6,7 +6,7 @@ import {
   RdsRating,
   RdsColorSwitcher,
   RdsButton,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import "./rds-comp-product-image.scss";
 export interface Item {
   imgUrl?: string;
@@ -113,7 +113,6 @@ const RdsCompProductImage = (props: RdsCompProductImageProps) => {
                   size="small"
                   badgeType="pill"
                   colorVariant="warning"
-                  textColor="danger"
                   children={
                     <RdsIcon
                       name={props.item.badgeWithIcon?.icon}

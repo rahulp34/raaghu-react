@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsButton, RdsDatePicker, RdsInput } from "../rds-elements";
+import { RdsButton, RdsDatePicker, RdsInput } from "raaghu-react-elements";
 
 export interface RdsUserDelegationsProps {
   onSubmit: (data: any) => void;

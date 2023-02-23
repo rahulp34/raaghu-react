@@ -5,7 +5,7 @@ import {
   RdsInput,
   RdsLabel,
   RdsButton,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompNewLanguageProps {
   languageNames: any[];
@@ -96,7 +96,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                   <RdsLabel label="Culture" required={true}></RdsLabel>
                 </div>
                 <RdsSelectList
-                  id={"1"}
+                  // id={"1"}
                   label={dataEmit.name}
                   selectItems={props.languageNames}
                   onSelectListChange={langNamesHandler}
@@ -129,7 +129,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                   <RdsLabel label="Ui Culture" required={true}></RdsLabel>
                 </div>
                 <RdsSelectList
-                  id={"2"}
+                  // id={"2"}
                   label={dataEmit.item}
                   selectItems={props.languageItems}
                   onSelectListChange={langItemHandler}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
 import "./rds-comp-email.scss";
 
 export interface RdsCompEmailProps {}

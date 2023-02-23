@@ -8,7 +8,7 @@ import {
   RdsPagination,
   RdsAvatar,
   RdsIllustration
-} from "../rds-elements";
+} from "raaghu-react-elements";
 import "./rds-comp-data-table.scss";
 export interface RdsCompDatatableProps {
   enablecheckboxselection?: boolean;

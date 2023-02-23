@@ -1,6 +1,6 @@
 import React from "react";
 import Checkbox from "./Checkbox";
-import { CheckboxState } from "../rds-comp-permission-ree";
+import { CheckboxState } from "../rds-comp-permission-tree";
 import styles from "./checkboxlist.module.scss";
 
 export type Item = {

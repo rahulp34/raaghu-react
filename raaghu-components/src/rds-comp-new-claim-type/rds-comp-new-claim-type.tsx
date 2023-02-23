@@ -1,5 +1,5 @@
 import React from 'react'
-import { RdsInput, RdsTextArea } from '../rds-elements'
+import { RdsInput, RdsTextArea } from 'raaghu-react-elements'
 
 export interface RdsCompNewClaimTypeProps {
 

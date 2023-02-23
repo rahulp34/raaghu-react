@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./rds-comp-cache.scss";
-import { RdsIcon, RdsPagination } from "../rds-elements";
+import { RdsIcon, RdsPagination } from "raaghu-react-elements";
 import { useEffect } from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 

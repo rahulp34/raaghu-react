@@ -24,6 +24,7 @@ export { default as RdsAlert } from "./rds-alert";
 export { default as RdsBadge } from "./rds-badge";
 export { default as RdsBanner } from "./rds-banner";
 export { default as RdsIcon } from './rds-icon';
+export { Icons } from './rds-icon/Icons';
 export { default as RdsIconLabel } from './rds-icon-label';
 export { default as RdsSearch } from './rds-search';
 export { default as RdsNavbar } from './rds-navbar';
