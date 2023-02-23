@@ -15,13 +15,11 @@ module.exports = (env, argv) => {
     entry: "./src/index.ts",
     mode: process.env.NODE_ENV || "development",
     devServer: {
-      port: 8020,
+      port: 8019,
       open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
-      hot: true,
-      historyApiFallback: true,
     },
     resolve: {
       extensions: [".ts", ".tsx", ".js"],
@@ -29,27 +27,13 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(png|jpe?g|gif|mp4)$/i,
-          use: [
-            {
-              loader: "file-loader",
-              options: {
-                regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/i,
-                name: "[1]-[name].[ext]",
-              },
-            },
-          ],
-        },
-        {
-          test: /\.svg$/,
-          use: ['@svgr/webpack'],
-        },
-        {
+
           test: /\.(scss|css)$/,
 
-          use: ["style-loader", "css-loader", "sass-loader"],
+          use: ['style-loader', 'css-loader', 'sass-loader'],
 
-          exclude: "/node_modules/",
+          exclude: '/node_modules/',
+
         },
         {
           test: /\.(js|jsx|tsx|ts)$/,
@@ -69,10 +53,6 @@ module.exports = (env, argv) => {
             plugins: [
               "react-hot-loader/babel",
               ["@babel/plugin-proposal-class-properties", { loose: true }],
-              ["@babel/plugin-proposal-private-methods", { loose: true }],
-              [
-                "@babel/plugin-proposal-private-property-in-object",{ loose: true },
-              ],
             ],
           },
         },
@@ -85,11 +65,11 @@ module.exports = (env, argv) => {
         "process.env": JSON.stringify(process.env),
       }),
       new ModuleFederationPlugin({
-        name: "textTemplate",
+        name: "apiScope",
         filename: "remoteEntry.js",
         exposes: {
           // expose each page
-          "./TextTemplate": "./src/App",
+          "./ApiScope": "./src/App"
         },
         shared: {
           ...devdeps,
@@ -99,7 +79,7 @@ module.exports = (env, argv) => {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
-          },
+          }
         },
       }),
       new HtmlWebpackPlugin({

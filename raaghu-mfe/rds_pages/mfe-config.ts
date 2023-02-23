@@ -61,6 +61,9 @@ export const MfeConfig = {
 	},
 	"applications":{
 		"url":"applications@http://localhost:8025/remoteEntry.js"
+	},
+	"apiScope":{
+		"url":"apiScope@http://localhost:8019/remoteEntry.js"
 	}
 
 }
