@@ -33,12 +33,16 @@
 }
 .node_dot {
   border-radius: 50%;
-  height: 0.75rem;
-  width: 0.75rem;
+  height: 14px;
+  width: 14px;
   margin-right: 0.5625px;
   margin-left: -1px;
   margin-top: 0.3125rem;
   z-index: 2;
 }
-
+.node-icons{
+  position: absolute;
+  left: -27px;
+  top: 10px;
+}
 // ================================================================================================
