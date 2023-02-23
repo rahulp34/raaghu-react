@@ -7,7 +7,7 @@ import {
 	RdsNotification,
 	RdsOffcanvas,
 	RdsAvatar,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;

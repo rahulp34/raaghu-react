@@ -32,12 +32,12 @@ export default [
         exclude: ["node_modules/**"],
         presets: ["@babel/preset-typescript"],
       }),
-      resolve(),
+      resolve({ preferBuiltins: true, mainFields: ['browser'] }),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json",sourceMap: false }),
+      typescript({ tsconfig: "./tsconfig.json", sourceMap: false }),
       postcss({
-        plugins:[],
-        minimize:true
+        plugins: [],
+        minimize: true
       }),
       external(),
       terser(),

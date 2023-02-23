@@ -1,6 +1,5 @@
-import { id } from "date-fns/locale";
 import React, { useState, useEffect, Children, useReducer } from "react";
-import { RdsAccordion, RdsCheckbox } from "../rds-elements";
+import { RdsAccordion, RdsCheckbox } from "raaghu-react-elements";
 import "./rds-comp-api-scope-resource.scss";
 
 export interface RdsCompApiScopeResourceProps {
@@ -188,51 +187,51 @@ const RdsCompApiScopeResource = (props: RdsCompApiScopeResourceProps) => {
         {props.role=="advanced" &&  <RdsAccordion
             onclick={() => onClickHandler(resource)}
             key={i}
-            
-            buttonGroupItems={[
-              {
-                id: "accordionOne",
-                bId: "collapseOne",
-                Bodyheading: "",
-                title: resource.displayName,
-                content: (
-                  <>
-                    <div >
-                      {" "}
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name="select everything"
-                        checked={resource.selected}
-                        onChange={(event) => Phandlechange(resource)}
-                      ></input>{" "}
-                      <label  className="form-check-label ms-2" htmlFor="">Select all</label>
-                    </div>
+            accordionType=''
+            // buttonGroupItems={[
+            //   {
+            //     id: "accordionOne",
+            //     bId: "collapseOne",
+            //     Bodyheading: "",
+            //     title: resource.displayName,
+            //     content: (
+            //       <>
+            //         <div >
+            //           {" "}
+            //           <input
+            //             className="form-check-input"
+            //             type="checkbox"
+            //             name="select everything"
+            //             checked={resource.selected}
+            //             onChange={(event) => Phandlechange(resource)}
+            //           ></input>{" "}
+            //           <label  className="form-check-label ms-2" htmlFor="">Select all</label>
+            //         </div>
 
-                    <div className="accbodycheck ">
-                      {resource.children.map((check: any, idd: number) => (
-                        <div key={idd} className="col-md-4 mt-3">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            name={check.displayName}
-                            checked={check.selected}
-                            onChange={(event) =>
-                              ChandleChange(check, resource, event)
-                            }
-                          ></input>{" "}
-                          <label  className="form-check-label ms-2" htmlFor="">{check.displayName}</label>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                ),
-                state: resource.select,
-              },
-            ]}
-            colorVariant={"primary"}
-            size={"small"}
-            outline={false}
+            //         <div className="accbodycheck ">
+            //           {resource.children.map((check: any, idd: number) => (
+            //             <div key={idd} className="col-md-4 mt-3">
+            //               <input
+            //                 className="form-check-input"
+            //                 type="checkbox"
+            //                 name={check.displayName}
+            //                 checked={check.selected}
+            //                 onChange={(event) =>
+            //                   ChandleChange(check, resource, event)
+            //                 }
+            //               ></input>{" "}
+            //               <label  className="form-check-label ms-2" htmlFor="">{check.displayName}</label>
+            //             </div>
+            //           ))}
+            //         </div>
+            //       </>
+            //     ),
+            //     state: resource.select,
+            //   },
+            // ]}
+            // colorVariant={"primary"}
+            // size={"small"}
+            // outline={false}
           ></RdsAccordion>}
           
           </>

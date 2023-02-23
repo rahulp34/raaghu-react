@@ -1,41 +1,42 @@
-import RdsCompApiScopeResource from "../rds-comp-api-scope-resource/rds-comp-api-scope-resource";
-import {RdsButton} from "../rds-elements"
+import React from 'react';
+import RdsCompApiScopeResource from "../rds-comp-api-scope-resource";
+import { RdsButton } from "raaghu-react-elements"
 
 export interface RdsCompClientResourceProp {
   resources: any[];
-  role?:"basic"|"advanced"
+  role?: "basic" | "advanced"
 }
 
 const RdsCompClientResource = (props: RdsCompClientResourceProp) => {
 
   return (
     <div>
-    { props.role=="basic"?<>
-     <RdsCompApiScopeResource role="basic" resources={props.resources} />
+      {props.role == "basic" ? <>
+        <RdsCompApiScopeResource role="basic" resources={props.resources} />
         <div className="row mt-5 mb-3">
-        <div className="col-2">
-          <RdsButton
-            label="Cancel"
-            colorVariant="primary"
-            block={true}
-            tooltipTitle={""}
-            type="submit"
-            isOutline={true}
-          />
+          <div className="col-2">
+            <RdsButton
+              label="Cancel"
+              colorVariant="primary"
+              block={true}
+              tooltipTitle={""}
+              type="submit"
+              isOutline={true}
+            />
+          </div>
+          <div className="col-2">
+            <RdsButton
+              label="Save"
+              colorVariant="primary"
+              block={true}
+              tooltipTitle={""}
+              type="submit"
+            />
+          </div>
         </div>
-        <div className="col-2">
-          <RdsButton
-            label="Save"
-            colorVariant="primary"
-            block={true}
-            tooltipTitle={""}
-            type="submit"
-          />
-        </div>
-      </div>
-    </>
-      :
-     <RdsCompApiScopeResource role="advanced" resources={props.resources} />}
+      </>
+        :
+        <RdsCompApiScopeResource role="advanced" resources={props.resources} />}
     </div>
 
   );

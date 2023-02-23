@@ -4,6 +4,8 @@ import RdsIcon from "../rds-icon";
 import "./rds-side-nav-new.scss";
 import RdsToggle from "../rds-toggle/rds-toggle";
 import RdsDropdown from "../rds-dropdown";
+import { getVisibleSelectionRect } from "draft-js";
+import { NavLink } from 'react-router-dom';
 
 const RdsSideNavChild = ({
   data,
@@ -35,13 +37,12 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`mb-0 py-2 px-4 ps-1 ${
-          count == 1
-            ? "list-unstyled"
-            : count == 2
-            ? "list-unstyled fw-normal pb-1 small"
-            : ""
-        }`}
+        className={`mb-0 py-2 ps-1 sideNav ${count == 1
+          ? "list-unstyled"
+          : count == 2
+            ? "list-unstyled fw-normal pb-1 small ms-2 "
+            : count == 3 ? "ms-4" : " "
+          }`}
       >
         {data &&
           data.map((item, id) => (
@@ -60,6 +61,7 @@ const RdsSideNavChild = ({
         >
           <div className="ms-3">
             <div className="text-center mb-3">
+
               <RdsIcon
                 name="grid_square"
                 height="23px"
@@ -71,14 +73,16 @@ const RdsSideNavChild = ({
             </div>
             <div className="darkTheme text-center">
               <a
-                className={` d-inline-flex align-items-center text-decoration-none text-uppercase `}
+                className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
               >
+                 
                 <RdsToggle
                   small={collapse}
                   iconOnUncheck={"sun"}
                   iconOnCheck={"moon"}
                   onClick={toggleTheme}
                 ></RdsToggle>
+               
               </a>
             </div>
           </div>
@@ -105,19 +109,21 @@ const Node = ({
 }) => {
   const [childVisibility, setChildVisibility] = useState(false);
   const hasChild = node.children ? true : false;
+  const [active, setActive] = useState(null)
 
   return (
-    <li className="mb-2 pe-auto">
+
+    <li className="mb-2 pe-auto nav-item">
+
       {!hasChild && (
-        <Link
+        <NavLink
           to={node.path}
           onClick={onClickHandler}
-          className={`routingLink d-inline-flex align-items-center ${
-            count == 1 ? "text-uppercase" : ""
-          }text-decoration-none `}
+          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-uppercase " : ""
+            } text-decoration-none`}
         >
           <div className="d-flex">
-            <div className="col d-flex align-items-center">
+            <div className="col d-flex align-items-center py-2 ">
               {count == 1 ? (
                 <div>
                   <RdsIcon
@@ -129,61 +135,8 @@ const Node = ({
                     classes="me-3"
                   ></RdsIcon>
                 </div>
-              ) : null}
-              <div className="me-3" data-name={node.label}>
-                {!collapse && <>{node.label}</>}
-              </div>
-            </div>
-          </div>
-        </Link>
-      )}
-
-      {hasChild && (
-        <div
-          className="text-decoration-none d-flex align-items-center pe-auto"
-          onClick={(e) => setChildVisibility((v) => !v)}
-        >
-          <div className="col d-flex align-items-center">
-            {count == 1 ? (
-              <>
-                {collapse ? (
-                  <>
-                    <div className="btn-group dropend">
-                      <a
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        // data-bs-offset="3,25"
-                        data-bs-auto-close="outside"
-                        aria-expanded="false"
-                        id="side-dropdown2"
-                        className="pe-auto"
-                      >
-                        <RdsIcon
-                          name={node.icon}
-                          fill={false}
-                          stroke={true}
-                          height="20px"
-                          width="20px"
-                          classes="me-3"
-                        ></RdsIcon>
-                      </a>
-                      <ul
-                        className="dropdown-menu shadow p-3 ms-3 position-fixed "
-                        aria-labelledby="side-dropdown2"
-                      >
-                        {node.children.map((item: any) => (
-                          <>
-                            <li className="list" id={item.id}>
-                              <a className="dropdown-item" href={item.path}>
-                                {item.label}
-                              </a>
-                            </li>
-                          </>
-                        ))}
-                      </ul>
-                    </div>
-                  </>
-                ) : (
+              ) : count == 2 ?
+                <div className="px-1">
                   <RdsIcon
                     name={node.icon}
                     fill={false}
@@ -192,33 +145,156 @@ const Node = ({
                     width="20px"
                     classes="me-3"
                   ></RdsIcon>
-                )}
-              </>
-            ) : null}
-            <div>
-              {!collapse && (
-                <span className="text-uppercase">{node.label}</span>
-              )}
+                </div>
+                : null}
+              <div className="me-3" data-name={node.label}>
+                {!collapse && <>{node.label}</>}
+              </div>
             </div>
           </div>
-          <div className="me-2">
+        </NavLink>
+      )}
+
+      {hasChild && (
+        <>
+          {count == 1 ? (
+            <>
+              {collapse && (
+                <>
+                  <div className="btn-group dropend">
+                    <a
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      // data-bs-offset="3,25"
+                      data-bs-auto-close="outside"
+                      aria-expanded="false"
+                      id="side-dropdown2"
+                      className="pe-auto list-unstyled "
+                    >
+                      <RdsIcon
+                        name={node.icon}
+                        fill={false}
+                        stroke={true}
+                        height="20px"
+                        width="20px"
+                        classes="me-3"
+                      ></RdsIcon>
+                    </a>
+                    <ul
+                      className="dropdown-menu shadow p-3 ms-3 position-fixed overflow-visible"
+                      aria-labelledby="side-dropdown2"
+                    >
+                      {node.children.map((item: any) => (
+                        <>
+                          <li className="list" id={item.id}  >
+                            <NavLink className="dropdown-item " to={item.path} >
+                              {item.children && item.children.length > 0 ? <>
+                                <div className="btn-group dropend">
+                                  <a
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    // data-bs-offset="3,25"
+                                    data-bs-auto-close="outside"
+                                    aria-expanded="false"
+                                    id="side-dropdown3"
+                                    className="pe-auto list-unstyled "
+                                  >
+                                    {item.label}
+                                  </a>
+                                  <ul
+                                    className="dropdown-menu shadow p-3 ms-3 position-fixed "
+                                    aria-labelledby="side-dropdown3"
+                                  >
+                                    {item.children.map((subItem: any) => (
+                                      <>
+                                        <li className="list" id={subItem.id}  >
+                                          <NavLink className="dropdown-item " to={subItem.path}>
+                                            {subItem.label}
+                                          </NavLink>
+                                        </li>
+                                      </>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </> : <>{item.label}</>}
+                            </NavLink>
+                          </li>
+                        </>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              )
+              }
+            </>
+          ) : null}
+          {count == 1 && (
+            <>
+              {!collapse && (
+                <>
+                  <a
+                    aria-expanded={childVisibility}
+                    className={`nav-link child ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    onClick={(e) => setChildVisibility((v) => !v)}>
+                    <RdsIcon
+                      name={node.icon}
+                      fill={false}
+                      stroke={true}
+                      height="20px"
+                      width="20px"
+                      classes="me-3"
+                    ></RdsIcon>
+                    <span className="text-uppercase">{node.label}</span>
+                  </a>
+                </>
+              )}
+            </>
+          )}
+
+          {count == 2 ? (
+            <>
+              {!collapse && (
+                <>
+                  <div id="menuWithChildren2">
+                    <a
+                      aria-expanded={childVisibility}
+                      className={`nav-link child  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                      onClick={(e) => setChildVisibility((v) => !v)}>
+                      <RdsIcon
+                        name={node.icon}
+                        fill={false}
+                        stroke={true}
+                        height="20px"
+                        width="20px"
+                        classes="me-3"
+                      ></RdsIcon>
+                      <span className="text-uppercase">{node.label}</span>
+                    </a>
+                  </div>
+                </>
+              )}
+            </>
+          ) : null}
+
+
+          {/* <div className="">
             <RdsIcon
               name="chevron_down"
               fill={false}
               stroke={true}
               height="10px"
               width="10px"
-              classes="ms-4 me-3"
+              classes="ms-4 me-4"
             ></RdsIcon>
-          </div>
-        </div>
+          </div> */}
+        </>
       )}
 
       {hasChild && childVisibility && !collapse && (
         <div>
           <div
-            className="collapse pt-2 show ms-1"
-            id="menuWithChildren2"
+            className="show ms-1"
+            id="menuWithChildren3"
           >
             <RdsSideNavChild
               data={node.children}

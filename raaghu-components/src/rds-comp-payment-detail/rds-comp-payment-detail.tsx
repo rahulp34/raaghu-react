@@ -1,5 +1,5 @@
 import React from 'react'
-import { RdsRadioButton, RdsInput, RdsButton, RdsSpinner } from '../rds-elements';
+import { RdsRadioButton, RdsInput, RdsButton, RdsSpinner } from 'raaghu-react-elements';
 import "./rds-comp-payment-detail.scss"
 
 export interface RdsCompPaymentDetailProps {

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { RdsInput, RdsButton, RdsIcon } from "../rds-elements";
+import { RdsInput, RdsButton, RdsIcon } from "raaghu-react-elements";
 import React from "react";
 import img from "./cookie.svg";
 import "./rds-comp-cookies-section.scss";
-import { RdsAlert } from "../rds-elements";
+import { RdsAlert } from "raaghu-react-elements";
 export interface RdsCompCookiesSectionProps {
   showDeclineButton?: boolean;
 }

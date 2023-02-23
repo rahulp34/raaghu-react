@@ -1,4 +1,5 @@
-import { RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
+import React from 'react';
+import { RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
 import "./rds-comp-email-settings-new.scss";
 
 export interface RdsCompEmailSettingsNewProps {}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton } from "../rds-elements";
+import { RdsInput, RdsButton } from "raaghu-react-elements";
 import React from "react";
 export interface RdsForgotPasswordProps {
 	onForgotPassword?: (email?: string) => void;
@@ -30,7 +30,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 	};
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		props.onForgotPassword!=undefined&&props.onForgotPassword(email);
+		props.onForgotPassword != undefined && props.onForgotPassword(email);
 		setEmail("");
 	};
 	return (
@@ -45,7 +45,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 							<form onSubmit={onSubmit}>
 								<div className="form-group mb-3 text-start">
 									<RdsInput
-									required={true}
+										required={true}
 										label="Enter email to receive reset password link"
 										onChange={emailhandleChange}
 										size="default"
@@ -74,7 +74,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 										tooltipTitle={""}
 										type={"submit"}
 									></RdsButton>
-									
+
 								</div>
 							</form>
 						</div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsButton, RdsInput } from "../rds-elements";
+import { RdsButton, RdsInput } from "raaghu-react-elements";
 
 export interface RdsLinkedAccountProps {}
 

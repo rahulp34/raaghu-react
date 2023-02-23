@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsLabel, RdsIcon, RdsTeamMember } from "../rds-elements";
+import { RdsLabel, RdsIcon, RdsTeamMember } from "raaghu-react-elements";
 
 export interface RdsCompTeamsProps {
   teamItem: any[];
@@ -29,7 +29,6 @@ const RdsCompTeams = (props: RdsCompTeamsProps) => {
                   stroke={true}
                   width="15px"
                   name="arrow-left"
-                  class="mx-2"
                 ></RdsIcon>
               </span>
             </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton } from "../rds-elements";
+import { RdsInput, RdsButton } from "raaghu-react-elements";
 import React from "react";
 import img from "./edit-pic.png";
 import "./rds-comp-profile-edit.scss";
