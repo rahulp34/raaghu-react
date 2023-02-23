@@ -56,6 +56,7 @@ export interface RdsCompDatatableProps {
   // }): void;
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
+  console.log({props})
   const [data, setData] = useState(props.tableData);
   const [action, setAction] = useState("");
   const [rowStatus, setRowStatus] = useState({
@@ -218,7 +219,7 @@ const classes =(): string[] =>{
               id="sortTable"
               width="400px"
             >
-              <thead>
+              <thead style={{whiteSpace:"nowrap"}}>
                 <tr className="align-middle ">
                   {props.enablecheckboxselection && (
                     <th scope="col">
@@ -236,13 +237,13 @@ const classes =(): string[] =>{
                   )}
                   {props.tableHeaders.map((tableHeader, index) => (
                     <th scope="col"  key={"tableHeader-" + index} >
-                      <div className="header d-flex">
+                      <div className="header align-items-center d-flex">
                       <span >
                         {tableHeader.displayName}
                       </span>
                       <div className="header-options mobile-header-option cursor-pointer ps-1">
                       {tableHeader.sortable && (
-                        <span className="px-2">
+                        <span className="px-2 d-flex">
                           <span
                             onClick={(e) =>
                               onSortClickHandler(e, "ascending", tableHeader.key)
@@ -315,7 +316,7 @@ const classes =(): string[] =>{
                               "-inside-tableRow" +
                               index
                             }
-                            className="px-2"
+                            className="px-2" 
                           >
                             {!tableDataRow.isEndUserEditing ? (
                               <div>
@@ -396,6 +397,7 @@ const classes =(): string[] =>{
                                   </div>
                                 )}
                                 {/* add more types here if reequired */}
+                               
                               </div>
                             ) : (
                               <RdsInput
