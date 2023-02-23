@@ -16,7 +16,7 @@ module.exports = (env, argv) => {
     mode: process.env.NODE_ENV || "development",
     devServer: {
       port: 8020,
-      open: true,
+      open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
