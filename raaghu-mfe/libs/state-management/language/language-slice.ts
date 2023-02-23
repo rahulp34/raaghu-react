@@ -1,84 +1,91 @@
+import { PostLanguage } from './language-models';
 import {
   createSlice,
-  createAsyncThunk,
+  createAsyncThunk, 
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-// import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
-// import axios from "axios";
-// import {
-//   LanguageServiceProxy,
-//   GetLanguagesOutput,
-// } from "../../shared/service-proxies";
+
+import {ServiceProxy} from '../../shared/service-proxy'
 
 type InitialState = {
   loading: boolean;
-  languages: { defaultLanguageName: string; items: any[] };
+  languages: any;
+  cultureList:any;
   error: string;
 };
+
+
 export const initialState: InitialState = {
   loading: false,
-  languages: { defaultLanguageName: "", items: [] },
+  languages: {},
+  cultureList :{},
   error: "",
 };
 
 // Generates pending, fulfilled and rejected action types
 
-var credentials = localStorage.getItem("LoginCredential");
-if (credentials) {
-  var parsedCredentials = JSON.parse(credentials);
-}
+const proxy = new ServiceProxy()
 
 export const fetchLanguages = createAsyncThunk(
   "language/fetchLanguages",
-  () => {
-    return axios
-      .get(
-        "https://anzdemoapi.raaghu.io/api/services/app/Language/GetLanguages",
-        {
-          headers: {
-            Authorization: "Bearer " + parsedCredentials.token, //the token is a variable which holds the token
-          },
-        }
-      )
-      .then((response) =>
-        response.data.result.items.map((item: any) => {
-          let date = new Date(item.creationTime);
-          let day = date.getDate();
-          let month = date.getMonth() + 1;
-          let year = date.getFullYear();
+  async () => {
+    return await proxy.languagesGET(undefined,  undefined,  undefined,  undefined,  undefined, undefined, undefined, 1000).then((result:any)=>{
+      return result
+    })
 
-          let currentTime = date.toLocaleString("en-IN", {
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-            hour12: true,
-          });
-
-          let currentDate = `${day}/${month}/${year}, ${currentTime}`;
-
-          return {
-            id: item.id,
-            languageName: item.displayName,
-            code: item.name,
-            isenabled: item.isDisabled ? "False" : "True",
-            creationTime: currentDate,
-          };
-        })
-      );
-    // console.log(
-    //   "hello this is new data",
-    //   resp.data.result.items.map((item: any) => ({
-    //     id: item.id,
-    //     languageName: item.languageName,
-    //     code: item.name,
-    //     isenabled: !item.isDisabled,
-    //     creationTime: item.creationTime,
-    //   }))
-    // );
   }
 );
+export const fetchCultureList = createAsyncThunk(
+  "language/fetchCultureList",
+  async () => {
+    return await proxy.cultureList().then((result:any)=>{
+      return result
+    })
+
+  }
+);
+
+
+export const postNewLanguage= createAsyncThunk(
+  "language/postNewLanguage",
+ (cultureModel:any) => {
+    return proxy.languagesPOST(cultureModel).then((result:any)=>{
+     return result
+    })
+  }
+);
+
+
+
+export const deleteLanguage= createAsyncThunk(
+  "language/deleteLanguage",
+ (id:any) => {
+    return proxy.languagesDELETE(id).then((result:any)=>{
+     return result
+    })
+  }
+);
+export const defaultLanguage= createAsyncThunk(
+  "language/defaultLanguage",
+ (id:any) => {
+    return proxy.setAsDefault(id).then((result:any)=>{
+     return result
+    })
+  }
+);
+export const updateLanguage= createAsyncThunk(
+  "language/updateLanguage",
+  ({idd, model}:{idd:any, model:any}) => {
+    return proxy.languagesPUT(idd,model).then((result:any)=>{
+     return result
+    })
+  }
+);
+
+
+
 
 const languageSlice = createSlice({
   name: "language",
@@ -100,7 +107,78 @@ const languageSlice = createSlice({
 
     builder.addCase(fetchLanguages.rejected, (state, action) => {
       state.loading = false;
-      state.languages = { defaultLanguageName: '', items: [] };
+      state.languages = {};
+      state.error = action.error.message || "Something went wrong";
+    });
+
+
+
+
+
+
+    builder.addCase(postNewLanguage.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      postNewLanguage.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.languages = action.payload;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(postNewLanguage.rejected, (state, action) => {
+      state.loading = false;
+      state.languages = {};
+      state.error = action.error.message || "Something went wrong";
+    });
+
+
+
+
+
+    builder.addCase(deleteLanguage.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      deleteLanguage.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.languages = action.payload;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(deleteLanguage.rejected, (state, action) => {
+      state.loading = false;
+      state.languages = {};
+      state.error = action.error.message || "Something went wrong";
+    });
+
+
+
+
+
+
+    builder.addCase(fetchCultureList.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      fetchCultureList.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.cultureList = action.payload;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(fetchCultureList.rejected, (state, action) => {
+      state.loading = false;
+      state.cultureList = {};
       state.error = action.error.message || "Something went wrong";
     });
   },

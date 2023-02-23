@@ -390,7 +390,7 @@ const classes =(): string[] =>{
                                   </div>
                                 )}
                                 {tableHeader.datatype === "children" && (
-                                  <div className="d-flex justify-content-center">
+                                  <div className="d-flex">
                                     {" "}
                                     {tableDataRow[tableHeader.key]}
                                   </div>
@@ -544,9 +544,7 @@ const classes =(): string[] =>{
                 totalRecords={props.tableData.length}
                 recordsPerPage={props.recordsPerPage ? props.recordsPerPage : 5}
                 onPageChange={onPageChangeHandler}
-                paginationType={
-                  props.recordsPerPageSelectListOption ? "advance" : "default"
-                }
+                paginationType={props.recordsPerPageSelectListOption ? "advance" : "default"}
               ></RdsPagination>
             </div>
           )}
