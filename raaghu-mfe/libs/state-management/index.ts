@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import  applicationsReducer  from "./applications/applications-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -22,8 +23,8 @@ const rootReducer = combineReducers({
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
-  languageEdit: languageEditReducer,
   organization: organizationReducer,
+  applications : applicationsReducer,
   securityLogs:securityLogsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
-import { RdsIcon, RdsButton, RdsOffcanvas, RdsInput } from "../rds-elements";
+import { RdsIcon, RdsButton, RdsOffcanvas, RdsInput } from "raaghu-react-elements";
 import "./rds-comp-organization-tree.scss";
 export interface RdsCompOrganizationTreeProps {
  counter?: number;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsLabel, RdsIcon, RdsButton } from "../rds-elements";
+import { RdsLabel, RdsIcon, RdsButton } from "raaghu-react-elements";
 import RdsCompProductImage, {
   Item,
 } from "../rds-comp-product-image/rds-comp-product-image";

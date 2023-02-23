@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsCheckbox } from "../rds-elements";
+import { RdsCheckbox } from "raaghu-react-elements";
 export interface RdsCompUserManagementProps {
   Usermanagementsettings: any;
 }

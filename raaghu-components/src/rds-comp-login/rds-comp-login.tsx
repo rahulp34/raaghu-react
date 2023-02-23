@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { RdsInput } from "../rds-elements";
-// import { RdsButton } from "../rds-elements";
-import RdsButton from "../../../raaghu-elements/src/rds-button/rds-button";
-import RdsInput from "../../../raaghu-elements/src/rds-input/rds-input";
-import RdsCheckbox from "../../../raaghu-elements/src/rds-checkbox/rds-checkbox";
-import RdsModal from "../../../raaghu-elements/src/rds-modal/rds-modal";
-// import { RdsCheckbox } from "../rds-elements";
+import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "raaghu-react-elements";
 import "./rds-comp-login.scss";
 import { Navigate, NavigationType } from "react-router-dom";
 export interface RdsCompLoginProps {
@@ -78,7 +72,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     <div>
       <div className="text-center">
         <h2>Login</h2>
-        
+
         <div>
           <small className="pb-5 d-flex justify-content-center">
             Current Tenant : Not Selected{" "}
@@ -92,9 +86,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 verticallyCentered={false}
                 modalbutton={<a className="link-primary"> (Change)</a>}
                 modalTitle="Switch Tenant"
-                saveChangesName={`${
-                  checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
-                }`}
+                saveChangesName={`${checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                  }`}
                 cancelButtonName="CANCEL"
               >
                 <div className="text-start ps-2 mb-3">
@@ -139,7 +132,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 name={"email"}
                 required={true}
               ></RdsInput>
-        
+
             </div>
 
             <div className="form-group text-start ">
@@ -177,7 +170,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               block={true}
               tooltipTitle={""}
               type="submit"
-              //onClick= {emailhandleChange}
+            //onClick= {emailhandleChange}
             />
           </form>
         </div>

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { RdsModal, RdsIcon, RdsButton, RdsLabel } from "../rds-elements";
+import { RdsModal, RdsIcon, RdsButton, RdsLabel } from "raaghu-react-elements";
 export interface RdsCompAlertPopupProps {
   alertID: any;
   iconUrl?: string;

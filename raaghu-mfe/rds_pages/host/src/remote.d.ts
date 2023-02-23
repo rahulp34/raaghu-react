@@ -93,7 +93,8 @@ declare module "TextTemplate/TextTemplate" {
 	const TextTemplateComponent : React.ComponentType;
 	export default TextTemplateComponent;
 }
-declare module "SecurityLogs/SecurityLogs" {
-	const SecurityLogsComponent: React.ComponentType;
-	export default SecurityLogsComponent;
+
+declare module "Applications/Applications" {
+	const ApplicationsComponent : React.ComponentType;
+	export default ApplicationsComponent;
 }
