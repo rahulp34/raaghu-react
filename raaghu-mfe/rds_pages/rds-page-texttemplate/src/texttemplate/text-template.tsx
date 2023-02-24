@@ -37,17 +37,18 @@ const TextTemplate = () => {
   const [name, setName] = useState('');
   const [referenceContent, setReferenceContent] = useState('');
   const [targetContent, setTargetContent] = useState('');
-  const [cultureName, setCultureName] = useState(undefined);
 
   const [offCanvasId, setOffCanvasId] = useState('');
   const [languages, setLanguages] = useState([]);
-  const [referenceName, setReferenceName] = useState('');
+  const [targetName, setTargetName] = useState('');
   const [selectedList, setSelectedList] = useState('');
+  const [selectedDataName, setSelectedDataName] = useState('');
 
   getAll();
   function getAll() {
     useEffect(() => {
       dispatch(getAllTemplates() as any);
+      dispatch(allLanguagesCulture() as any);
     }, [dispatch]);
     useEffect(() => {
       const data: any = [];
@@ -67,69 +68,73 @@ const TextTemplate = () => {
         });
         setTableData(data);
       }
+
+      if (textTemplate.languages.localization.languages !== null || textTemplate.languages.localization.languages !== undefined) {
+        const data: any = [];
+        textTemplate.languages.localization.languages.forEach((ele: any) => {
+          const item = {
+            value: ele.cultureName,
+            option: ele.cultureName,
+            isSelected: ele.cultureName === 'en' ? true : false
+          };
+          data.push(item);
+          setLanguages(data);
+        });
+      }
     }, [textTemplate]);
   }
 
   async function onActionSelection(clickEvent: any, selectedData: any, rowIndex: any, action: any) {
     setOffCanvasId(action.displayName);
-    if (offCanvasId === 'Edit') {
-      setSelectedList('target');
-      dispatch(getTemplateContent({ template: selectedData.name, culture: undefined }) as any);
-    }
-    else {
-      dispatch(allLanguagesCulture() as any);
-      dispatch(getTemplateContent({ template: selectedData.name, culture: 'en' }) as any);
-      dispatch(getTemplateContent({ template: selectedData.name, culture: 'ar' }) as any);
-    }
+    setSelectedDataName(selectedData.name);
   };
 
-  function onSaveFn(event: any) {
-    event.preventDefault();
-    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'Edit' ? cultureName : referenceName, content: targetContent }) as any);
-  }
-
+  useEffect(() => {
+    offCanvasId === 'Edit' ? dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any) :
+      offCanvasId === 'Customize Per Culture' ? dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any) : null;
+  }, [offCanvasId, selectedDataName]);
 
   function onCloseFn(event: any) {
     event.preventDefault();
     setName('');
     setReferenceContent('');
     setTargetContent('');
-    setCultureName(undefined);
+    setSelectedList('');
+    setOffCanvasId('');
   }
 
   function restoreDefault() {
     dispatch(restoreToDefault({ templateName: name }) as any);
   }
 
+  function refernceNameFn(event: any) {
+    setSelectedList('reference');
+    dispatch(getTemplateContent({ template: name, culture: event.target.value }) as any);
+  }
+
   function targetNameFn(event: any) {
     setSelectedList('target');
     dispatch(getTemplateContent({ template: name, culture: event.target.value }) as any);
+    setTargetName(event.target.value);
   }
 
-  function refernceNameFn(event: any) {
-    setSelectedList('reference');
-    setReferenceName(event.target.value);
-    dispatch(getTemplateContent({ template: name, culture: event.target.value }) as any);
+  function onSaveFn(event: any) {
+    event.preventDefault();
+    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'Edit' ? null : targetName, content: targetContent }) as any);
   }
 
   useEffect(() => {
-    setName(textTemplate.templateData.name);
-    selectedList === 'target' ? setTargetContent(textTemplate.templateData.content) : setReferenceContent(textTemplate.templateData.content);
-    setCultureName(textTemplate.templateData.cultureName);
-  }, [textTemplate.templateData]);
-
-  useEffect(() => {
-    const data: any = [];
-    textTemplate.languages.localization.languages.forEach((ele: any) => {
-      const item = {
-        value: ele.cultureName,
-        option: ele.displayName,
-        isSelected: ele.cultureName === 'en' ? true : false
-      };
-      data.push(item);
-      setLanguages(data);
-    });
-  }, [textTemplate.languages.localization.languages])
+    if (textTemplate.templateData) {
+      debugger;
+      setName(textTemplate.templateData.name);
+      if (selectedList === 'target') setTargetContent(textTemplate.templateData.content);
+      else if (selectedList === 'reference') setReferenceContent(textTemplate.templateData.content);
+      else {
+        setTargetContent(textTemplate.templateData.content);
+        setReferenceContent(textTemplate.templateData.content);
+      }
+    }
+  }, [textTemplate.templateData, selectedList]);
 
   return (
     <>
@@ -156,9 +161,9 @@ const TextTemplate = () => {
             {offCanvasId !== 'Edit' ?
               <>
                 <div className="form-group mb-2">
-                  <RdsLabel label={'Target Culture Name'}></RdsLabel>
-                  <RdsSelectList label={"Target Culture Name"} selectItems={languages}
-                    onSelectListChange={targetNameFn}></RdsSelectList>
+                  <RdsLabel label={'Reference Culture Name'}></RdsLabel>
+                  <RdsSelectList label={"Reference Culture Name"} selectItems={languages}
+                    onSelectListChange={refernceNameFn}></RdsSelectList>
                 </div>
                 <div className="form-group mb-3">
                   <RdsTextArea placeholder={""} value={referenceContent} onChange={(e) => setReferenceContent(e.target.value)}
@@ -170,9 +175,9 @@ const TextTemplate = () => {
             {offCanvasId !== 'Edit' ?
               <>
                 <div className="form-group mb-2">
-                  <RdsLabel label={'Reference Culture Name'}></RdsLabel>
-                  <RdsSelectList label={"Reference Culture Name"} selectItems={languages}
-                    onSelectListChange={refernceNameFn}></RdsSelectList>
+                  <RdsLabel label={'Target Culture Name'}></RdsLabel>
+                  <RdsSelectList label={"Target Culture Name"} selectItems={languages}
+                    onSelectListChange={targetNameFn}></RdsSelectList>
                 </div>
               </> :
               null
