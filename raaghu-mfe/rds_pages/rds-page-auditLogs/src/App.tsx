@@ -92,12 +92,7 @@ const changeLogs = [
 
 const App = () => (
 	<Suspense>
-		<Auditlogs
-			operationLogsHeaders={operationLogsHeaders}
-			operationLogs={operationLogs}
-			changeLogs={changeLogs}
-			changeLogsHeaders={changeLogsHeaders}
-		></Auditlogs>
+		<Auditlogs></Auditlogs>
 	</Suspense>
 );
 
