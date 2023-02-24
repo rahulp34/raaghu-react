@@ -8,7 +8,7 @@ import organizationReducer from "./organization-tree/organization-tree-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
-
+import userReducer from "./user/user-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -31,7 +31,8 @@ const rootReducer = combineReducers({
   securityLogs:securityLogsReducer,
   applications : applicationsReducer,
   textTemplate: textTemplateReducer,
-  auditLog : auditLogsReducer
+  auditLog : auditLogsReducer,
+  user: userReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
