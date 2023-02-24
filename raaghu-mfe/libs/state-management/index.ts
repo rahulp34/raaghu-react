@@ -15,6 +15,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
 import textTemplateReducer from "./text-template/text-template-slice";
+import  tenantReducer  from "./tenant/tenant-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -32,7 +33,9 @@ const rootReducer = combineReducers({
   applications : applicationsReducer,
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
-  user: userReducer
+  user: userReducer,
+  tenant:tenantReducer,
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -47,6 +47,16 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 "form-check " + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
               }
             >
+
+{/* <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio
+  </label>
+</div> */}
+
+
+
               <input
                 type="radio"
                 className={`${state =="errorRadio" ?"form-check-input-error": "form-check-input" }`}
@@ -57,7 +67,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 disabled={item.disabled}
                 onClick = {props.onClick}
               />
-              <label htmlFor={item.id} className="ms-2 form-check-label">
+              <label htmlFor={item.id} className="form-check-label">
                 {item.label}
               </label>
             </div>

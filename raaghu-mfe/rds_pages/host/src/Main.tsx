@@ -65,7 +65,6 @@ const Main = (props: MainProps) => {
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
     }
-
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
