@@ -5,6 +5,7 @@ export interface RdsSelectProps{
     label: string;
     isDisabled?:boolean;
     isMultiple?:boolean;
+    selectedOption?:any;
     size?:string;
     selectItems: any[];
     id?:string;
@@ -28,7 +29,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
        onChange={props.onSelectListChange}>
         <option  hidden className="text-muted">{props.label}</option>
         {props.selectItems.map((selectItem,i) => (
-          <option value={selectItem.option} id={`${selectItem.id}`}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>
+          <option value={selectItem.value} key={selectItem.value} id={`${selectItem.id}`}>{props.children}{selectItem.option}</option>
         ))}
       </select>
     </Fragment>

@@ -1,202 +1,202 @@
-import React, { FormEventHandler, useState, useRef } from "react";
-import { RdsButton, RdsCheckbox, RdsInput } from "raaghu-react-elements";
+import React, { useState, useRef, useEffect } from "react";
+import { RdsButton, RdsCheckbox, RdsInput, RdsSelectList } from "../rds-elements";
 // import img from "./assets/edit-profile";
 
-export interface RdsCompUserBasicsProps {}
+export interface RdsCompUserBasicsProps {
+  userData?: any;
+  organizationUnit?: any;
+  roles?: any;
+  createUser?:any
+}
 
 const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
+  const [organizationUnit, setOrganizationUnit] = useState(
+    props.organizationUnit
+  );
+  const [roles, setRoles ] = useState(props.roles);
 
-  const [values, setValues] = useState({
-    name: "",
-    surName: "",
-    email: "",
-    phone: "",
-    userName: "",
-    password: "",
-    cnfPassword: "",
-  });
+  const [userData, setUserData] = useState<any>(props.userData);
 
-  const [records, setRecords] = useState({});
 
-  let name, val;
-  const handleChange = (event: any) => {
-    name = event.target.name;
-    val = event.target.value;
-    setValues({ ...values, [name]: val });
+  const setName = (event: any) => {
+    setUserData({...userData, name:event.target.value})
   };
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    let newRecord = { ...values, id: new Date().getTime().toString() };
-    setRecords({ ...values, id: new Date().getTime().toString() });
-    setValues({
-      name: "",
-      surName: "",
-      email: "",
-      phone: "",
-      userName: "",
-      password: "",
-      cnfPassword: "",
-    });
+  const setSurname = (event: any) => {
+    setUserData({...userData, surname:event.target.value})
   };
+
+  const setEmail = (event: any) => {
+    setUserData({...userData, email:event.target.value})
+  };
+
+  const setPassword = (event: any) => {
+    setUserData({...userData, password:event.target.value})
+  };
+
+  const setUserName = (event: any) => {
+    setUserData({...userData, userName:event.target.value})
+  };
+
+  const setPhoneNumber = (event: any) => {
+    setUserData({...userData, phoneNumber:event.target.value})
+  };
+
+
+
+
+ 
   const inputFile: any = useRef(null);
   const profilePicHandler = () => {
     inputFile.current.click();
   };
+  function setOrganizationUnitData(value:any){
+    setUserData({...userData, organizationUnitIds:[value]})
+  }
+  function setRolesData(value:any){
+    setUserData({...userData, roleNames:[value]})
+  }
+  function handletwoFactorEnable(event:any){
+    setUserData({...userData, twoFactorEnabled:event.target.checked})
+  }
+
+
+  useEffect(()=>{
+   setOrganizationUnit(props.organizationUnit);
+   setRoles(props.roles)
+  },[props])
+
   return (
     <>
-      <input
-        type="file"
-        id="file"
-        ref={inputFile}
-        style={{ display: "none" }}
-      />
-      <form className="p-2" onSubmit={handleSubmit}>
+      <form className="p-2 mt-2">
         <div className="row align-items-center">
-          <div className="col-lg-3 col-md-3 text-center mb-2">
+          <div className="col-lg-6 col-md-6">
+            <div>
+              <RdsInput
+                value={userData.name}
+                placeholder="Enter Name"
+                inputType="text"
+                label="Name"
+                name="name"
+                required={true}
+                onChange={(e)=>{setName(e)}}
+              ></RdsInput>
+            </div>
+            <div>
+              <RdsInput
+                value={userData.surname}
+                placeholder="Smith"
+                inputType="text"
+                label="Surname"
+                name="surName"
+                required={true}
+                onChange={(e)=>{setSurname(e)}}
+              ></RdsInput>
+            </div>
+          </div>
+
+          <div className="col-lg-6 col-md-6 text-center mb-2">
             <img
               src={"img"}
               alt="Profile Pic"
               onClick={profilePicHandler}
             ></img>
           </div>
-          <div className="col-lg-9 col-md-9">
-            <div className="mb-3">
-              <RdsInput
-                value={values.name}
-                placeholder="Enter Name"
-                inputType="text"
-                label="Name"
-                name="name"
-                size="small"
-                required={true}
-                onChange={handleChange}
-              ></RdsInput>
-            </div>
-            <div>
-              <RdsInput
-                value={values.surName}
-                placeholder="Smith"
-                inputType="text"
-                label="Surname"
-                name="surName"
-                size="small"
-                required={true}
-                onChange={handleChange}
-              ></RdsInput>
-            </div>
-          </div>
         </div>
+
         <div className="row mb-2">
-          <div className="col-lg-12 col-md-12">
+          <div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
-                value={values.email}
+                value={userData.email}
                 placeholder="Carolyncarpenter@gmail.com"
                 inputType="email"
                 label="Email Address"
                 name="email"
-                size="small"
                 required={true}
-                onChange={handleChange}
-              ></RdsInput>
-            </div>
-          </div>
-        </div>
-        <div className="row mb-2">
-          <div className="col-lg-6 col-md-6">
-            <div className="mb-2">
-              <RdsInput
-                value={values.phone}
-                placeholder="Carolyncarpenter@gmail.com"
-                inputType="number"
-                label="Phone Number"
-                name="phone"
-                size="small"
-                required={true}
-                onChange={handleChange}
+                onChange={(e)=>{setEmail(e)}}
               ></RdsInput>
             </div>
           </div>
           <div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
-                value={values.userName}
-                placeholder="Carolyncarpenter"
-                inputType="text"
-                label="User Name"
-                name="userName"
-                size="small"
-                required={true}
-                onChange={handleChange}
-              ></RdsInput>
-            </div>
-          </div>
-        </div>
-        <div className="row mb-2">
-          <div className="col-lg-6 col-md-6">
-            <div className="mb-2">
-              <RdsInput
-                value={values.password}
+                value={userData.password}
                 placeholder="**********"
                 inputType="password"
                 label="Password"
                 name="password"
                 required={true}
-                size="small"
-                onChange={handleChange}
+                onChange={(e)=>{setPassword(e)}}
+              ></RdsInput>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+        <div className="col-lg-6 col-md-6">
+            <div className="mb-2">
+              <RdsInput
+                value={userData.userName}
+                placeholder="Carolyncarpenter"
+                inputType="text"
+                label="User Name"
+                name="userName"
+                required={true}
+                onChange={(e)=>{setUserName(e)}}
               ></RdsInput>
             </div>
           </div>
           <div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
-                value={values.cnfPassword}
-                placeholder="**********"
-                inputType="password"
-                label="Confirm Password"
-                name="cnfPassword"
+                value={userData.phoneNumber}
+                placeholder="Carolyncarpenter@gmail.com"
+                inputType="number"
+                label="Phone Number"
+                name="phone"
                 required={true}
-                size="small"
-                onChange={handleChange}
+                onChange={(e)=>{setPhoneNumber(e)}}
               ></RdsInput>
             </div>
           </div>
+          
         </div>
-        <div className="row mb-2">
+        <div className="row my-2">
+          
+          <div className="col-lg-6 col-md-6">
+            <div className="mb-2">
+            <RdsSelectList
+								label={"Organization Unit"}
+								selectItems={organizationUnit}
+								// selectItems={props.typeList}
+								// selectedValue={basicApplicationData.type}
+								onSelectListChange={(e: any) => setOrganizationUnitData(e.target.value)}
+							></RdsSelectList>
+              
+            </div>
+          </div>
+          <div className="col-lg-6 col-md-6">
+            <div className="mb-2">
+            <RdsSelectList
+								label={"Roles"}
+								selectItems={roles}
+								onSelectListChange={(e: any) => setRolesData(e.target.value)}
+						></RdsSelectList>
+              
+            </div>
+          </div>
+        </div>
+        <div className="row my-2">
           <div className="mb-2 text-muted">
             <RdsCheckbox
               id="0"
-              label="Set Random Password"
-              checked={false}
-            ></RdsCheckbox>
-          </div>
-          <div className="mb-2 text-muted">
-            <RdsCheckbox
-              id="1"
-              label="Should Change Password On Next Login"
-              checked={false}
-            ></RdsCheckbox>
-          </div>
-          <div className="mb-2 text-muted">
-            <RdsCheckbox
-              id="2"
-              label="Send Activation Email"
-              checked={false}
-            ></RdsCheckbox>
-          </div>
-          <div className="mb-2 text-muted">
-            <RdsCheckbox label="Active" id="3" checked={false}></RdsCheckbox>
-          </div>
-          <div className="mb-2 text-muted">
-            <RdsCheckbox
-              label="Lockout Enabled"
-              id="4"
-              checked={false}
+              label="Two Factor Authentication"
+              checked={userData.twoFactorEnabled}
+              onChange={e=>{handletwoFactorEnable(e)}}
             ></RdsCheckbox>
           </div>
         </div>
-        <div className="mt-3 d-flex">
+        <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0">
           <RdsButton
             class="me-2"
             label="CANCEL"
@@ -204,7 +204,6 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             databsdismiss="offcanvas"
             isOutline={true}
             colorVariant="primary"
-            size="small"
           ></RdsButton>
           <RdsButton
             class="me-2"
@@ -212,9 +211,8 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             type="submit"
             isOutline={false}
             colorVariant="primary"
-            onClick={handleSubmit}
+            onClick={()=>{props.createUser(userData)}}
             databsdismiss="offcanvas"
-            size="small"
           ></RdsButton>
         </div>
       </form>

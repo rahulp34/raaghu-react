@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Login.scss";
 import {ServiceProxy} from "../../../../libs/shared/service-proxy"
-import {  getUserConfiguration,} from "../../../../libs/public.api";
+import {  getUserConfiguration} from "../../../../libs/public.api";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
 import { filter } from "lodash-es";
@@ -49,9 +49,9 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "address email phone profile roles abp_demo", 
+      scope: "openid profile role phone email BookStore", 
     };
-    fetch("https://localhost:44317/connect/token", {
+    fetch("https://abpdemoapi.raaghu.io/connect/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
