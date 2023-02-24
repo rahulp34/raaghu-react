@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsBankCardDetail } from "../rds-elements";
+import { RdsBankCardDetail } from "raaghu-react-elements";
 import "./rds-comp-card-detail-list.scss";
 
 export interface RdsCompCardDetailListProps {

@@ -37,7 +37,7 @@ const RdsAlert = (props: RdsAlertProps) => {
     let isPosition = props.position == "bottom"? "fixed-bottom": " ";
 	return (
 		<Fragment>
-			<div className={`${alertColor} ${isShow} ${isPosition} `} style={props.style} role="alert">
+			<div className={`${alertColor} m-0 ${isShow} ${isPosition} `}  style={props.style} role="alert">
 				<div className="px-2 d-flex justify-content-between" >
 					<div>
 						{props.hasOwnProperty("icon")&&

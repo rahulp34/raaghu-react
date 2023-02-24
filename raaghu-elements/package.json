@@ -1,6 +1,6 @@
 {
   "name": "raaghu-react-elements",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Collection of raaghu-elements",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -14,11 +14,11 @@
   "homepage": "https://github.com/Wai-Technologies/raaghu-react#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wai-Technologies/raaghu-angular.git",
+    "url": "git+https://github.com/Wai-Technologies/raaghu-react.git",
     "directory": "packages/raaghu-elements"
   },
   "bugs": {
-    "url": "https://github.com/Wai-Technologies/raaghu-angular/issues",
+    "url": "https://github.com/Wai-Technologies/raaghu-react/issues",
     "email": "contact@raaghu.io"
   },
   "keywords": [
@@ -81,6 +81,7 @@
     "react-draft-wysiwyg": "^1.15.0",
     "react-player": "^2.11.0",
     "react-popper": "^2.3.0",
+    "react-quill": "^2.0.0",
     "root": "^3.2.0",
     "sass-loader": "^13.2.0",
     "validator": "^13.7.0"

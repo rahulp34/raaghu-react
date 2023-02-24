@@ -1,97 +1,148 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   RdsSelectList,
   RdsCheckbox,
   RdsInput,
   RdsLabel,
   RdsButton,
-  RdsDropdownList,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompNewLanguageProps {
-  flags: any[];
   languageNames: any[];
   languageItems: any[];
   placeholder: any;
   onClick: any;
+  onSaveHandler: any;
+  check: any;
+  displayName?: any;
+  edit?: boolean;
+  id?: any;
 }
 const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
-	const inputChangeHandler = (event:any)=>{
-			console.log(event.target.value)
-	}
+  const [dataEmit, setdataEmit] = useState<{
+    check: boolean;
+    name: string;
+    item: string;
+    displayName: any;
+    id: any;
+    flag: any;
+  }>({
+    check: props.check,
+    name: "Select Culture Name",
+    item: "Select UI Culture Name",
+    displayName: props.displayName || "",
+    id: props.id,
+    flag: "",
+  });
+
+  const [formValid, setformValid] = useState(true);
+
+  useEffect(() => {
+    if (props.edit) {
+      if (dataEmit.displayName && 
+        dataEmit.displayName.trim() !== "") {
+        setformValid(false);
+      }else{
+        setformValid(true)
+      }
+    } else {
+      if (
+        dataEmit.name != "Select Culture Name" &&
+        dataEmit.item != "Select UI Culture Name" &&
+        dataEmit.displayName && 
+        dataEmit.displayName.trim() !== ""
+      ) {
+        setformValid(false);
+      }else{
+        setformValid(true)
+      }
+    }
+    
+  }, [dataEmit.name, dataEmit.item, dataEmit.displayName]);
+
+  const checkboxHandler = (event: any) => {
+    setdataEmit({ ...dataEmit, check: event.target.checked });
+  };
+  const langNamesHandler = (event: any) => {
+    setdataEmit({ ...dataEmit, name: event.target.selectedOptions[0].id });
+  };
+  const langItemHandler = (event: any) => {
+    setdataEmit({ ...dataEmit, item: event.target.selectedOptions[0].id });
+  };
+
+  const onSaveHandler = (data: any) => {
+    props.onSaveHandler(dataEmit);
+    setdataEmit({
+      check: false,
+      name: "Select Culture Name",
+      item: "Select UI Culture Name",
+      displayName: "",
+      id: "",
+      flag: "",
+    });
+  };
+
+  const inputChangeHandler = (event: any) => {
+    setdataEmit({ ...dataEmit, displayName: event.target.value });
+  };
   return (
     <>
       <form>
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <div className="form-group mt-3">
-              <div className="mb-2">
-                <RdsLabel
-                  label="Language Name"
-                  required={true}
-                ></RdsLabel>{" "}
+        <div key={props.id} className="row">
+          {!props.edit && (
+            <div className="col-md-6 mb-3">
+              <div className="form-group mt-3">
+                <div className="mb-2">
+                  <RdsLabel label="Culture" required={true}></RdsLabel>
+                </div>
+                <RdsSelectList
+                  // id={"1"}
+                  label={dataEmit.name}
+                  selectItems={props.languageNames}
+                  onSelectListChange={langNamesHandler}
+                ></RdsSelectList>
               </div>
-              <RdsSelectList
-                label="Select Languages"
-                selectItems={props.languageNames}
-				// onSelectListChange={}
-
-              ></RdsSelectList>
             </div>
-          </div>
+          )}
           <div className="col-md-6 mb-3">
             <div className="form-group mt-3">
-              <div className="mb-2">
+              {/* <div className="mb-2">
                 <RdsLabel label="Display Name"></RdsLabel>
-              </div>
+              </div> */}
 
-	{/* size?: "small" | "large" | "medium" | string;
-	isDisabled?: boolean;
-	readonly?: boolean;
-	value?: string;
-	inputType?: string;
-	placeholder?: string;
-	labelPositon?: string;
-	tooltipPlacement?: placements;
-	tooltipTitle?: string;
-	name?: string;
-	label?: string | "";
-	id?: string;
-	redAsteriskPresent?: boolean;
-	required?: boolean; */}
-
-
-			  <RdsInput size="small" placeholder="Enter Display Name" onChange={inputChangeHandler} ></RdsInput>
-              {/* <RdsSelectList
-                label="Select Country"
-                selectItems={props.flags}
-              ></RdsSelectList> */}
-
-              {/* <RdsSelectList label="de" selectItems={props.flags}></RdsSelectList> */}
+              <RdsInput
+                size="small"
+                label="Display Name"
+                placeholder="Enter Display Name"
+                value={dataEmit.displayName}
+                onChange={inputChangeHandler}
+                required={true}
+              ></RdsInput>
             </div>
           </div>
         </div>
-
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <div className="form-group mt-3">
-              <div className="mb-2">
-                <RdsLabel label="Country" required={true}></RdsLabel>{" "}
+        {!props.edit && (
+          <div className="row">
+            <div className="col-md-6 mb-3">
+              <div className="form-group mt-3">
+                <div className="mb-2">
+                  <RdsLabel label="Ui Culture" required={true}></RdsLabel>
+                </div>
+                <RdsSelectList
+                  // id={"2"}
+                  label={dataEmit.item}
+                  selectItems={props.languageItems}
+                  onSelectListChange={langItemHandler}
+                ></RdsSelectList>
               </div>
-              <RdsDropdownList
-                borderDropdown={true}
-                placeholder={props.placeholder}
-                icon=""
-                iconFill={false}
-                iconStroke={true}
-                listItems={props.languageItems}
-                onClick={props.onClick}
-              ></RdsDropdownList>
             </div>
           </div>
-        </div>
-
-        <RdsCheckbox label="is Enabled" checked={false}></RdsCheckbox>
+        )}
+        <RdsCheckbox
+          label="is Enabled"
+          checked={dataEmit.check}
+          onChange={checkboxHandler}
+        ></RdsCheckbox>
       </form>
 
       <div className="footer-buttons my-2">
@@ -107,22 +158,18 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                 isOutline={true}
               ></RdsButton>
             </div>
-            {/* <rds-button [label]="translate.instant('Cancel')" (click)="closeCanvas()" type="button"
-          [colorVariant]="'primary'" [isOutline]="true" [size]="'small'">
-        </rds-button> */}
             <div>
               <RdsButton
                 label="Save"
                 type="button"
                 size="small"
+                isDisabled={formValid}
                 class="ms-2"
                 colorVariant="primary"
+                databsdismiss="offcanvas"
+                onClick={() => onSaveHandler(dataEmit)}
               ></RdsButton>
             </div>
-            {/* <rds-button [label]="translate.instant('Save')" type="button" [size]="'small'"
-          [isDisabled]="!selectedLanguage||!selectedLanguage.languageName" class="ms-2" [colorVariant]="'primary'"
-          (click)="addLanguage(languageForm)">
-        </rds-button> */}
           </div>
         </div>
       </div>

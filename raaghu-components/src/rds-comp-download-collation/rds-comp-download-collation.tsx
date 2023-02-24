@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsIcon } from "../rds-elements";
+import { RdsIcon } from "raaghu-react-elements";
 
 export interface RdsCompDownloadCollationProps {
   downloadTable: any[];

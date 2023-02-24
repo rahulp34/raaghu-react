@@ -534,9 +534,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                 totalRecords={props.tableData?.length}
                 recordsPerPage={props.recordsPerPage ? props.recordsPerPage : 5}
                 onPageChange={onPageChangeHandler}
-                paginationType={
-                  props.recordsPerPageSelectListOption ? "advance" : "default"
-                }
+                paginationType={props.recordsPerPageSelectListOption ? "advance" : "default"}
               ></RdsPagination>
             </div>
           )}

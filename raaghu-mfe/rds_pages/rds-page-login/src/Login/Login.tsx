@@ -31,25 +31,27 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     
 
-    // proxy.applicationConfiguration(  ).then((result: any)=>{
-    //   console.log('hello this is result',result)
-    // })
-    // proxy.languagesGET().then((result:any)=>{console.log("langs",result)})
+    proxy.applicationConfiguration(undefined).then((result: any)=>{
+      console.log('hello this is result',result)
+    })
+
+    // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
 
     if (cred != undefined) {
       getUserConfiguration("login");
       navigate("/dashboard");
     }
   }
+
   const loginHandler = (email: any, password: any) => {
     const requestBody = {
       grant_type: "password",
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "openid profile role phone email BookStore", 
+      scope: "address email phone profile roles abp_demo", 
     };
-    fetch("https://abpdemoapi.raaghu.io/connect/token", {
+    fetch("https://localhost:44317/connect/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -59,7 +61,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello()
+        hello()   
       });
   };
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
@@ -68,8 +70,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   };
   const { t } = useTranslation();
   return (
-    <div className="login-background">      <div
-        className="align-items-center d-flex justify-content-center login m-auto"
+    <div className="login-background">     
+    <div className="align-items-center d-flex justify-content-center login m-auto"
         style={{ maxWidth: "900px", height: "100vh " }}
       >        <div className="container-fluid m-2">          <div className="bg-white row rounded-3 ">            <div className="col-md-6">              <div className="py-4 px-3">                <div className="pb-4">                  <div className="text-center">                    <img src="./assets/raaghu_text_logo.svg"></img>                  </div>                </div>                <RdsCompLogin
                   onLogin={loginHandler}

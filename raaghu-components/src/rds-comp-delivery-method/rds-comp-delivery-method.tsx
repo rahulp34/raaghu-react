@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { RdsButton } from "../rds-elements";
+import { RdsButton } from "raaghu-react-elements";
 import "./rds-comp-delivery-method.scss"
 
 export interface RdsCompDeliveryMethodProps {

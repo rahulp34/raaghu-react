@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "raaghu-react-elements";
 import "./rds-comp-visual-setting.scss";
 
 export interface RdsCompVisualSettingProps {

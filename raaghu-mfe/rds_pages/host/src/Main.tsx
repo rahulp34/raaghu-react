@@ -32,28 +32,30 @@ const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
 const DynamicPropertyCompo = React.lazy(
   () => import("DynamicProperties/DynamicProperties")
 );
-const IconListCompo = React.lazy(()=>import("IconList/IconList"));
-const ClaimTypesCompo = React.lazy(()=>import("ClaimTypes/ClaimTypes"));
+const IconListCompo = React.lazy(() => import("IconList/IconList"));
+const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
+const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 
 
 
-const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
+
+const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
 
 const Main = (props: MainProps) => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState<boolean>();
   const navigate = useNavigate();
-  let accessToken: string | undefined | null= localStorage.getItem("access_token")  ;
+  let accessToken: string | undefined | null = localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
 
   const auth: any = useSelector(
     (state: RootState) => state.persistedReducer.login.isAuth
   );
 
-  console.log("auth",auth)
+  console.log("auth", auth)
 
   useEffect(() => {
     const loginCredentials = localStorage.getItem("persist:root");
@@ -157,138 +159,139 @@ const Main = (props: MainProps) => {
       path: "/icons",
       subTitle: t("icons"),
     },
+
     {
       key: "2",
-      label: t("Tenants"),
-      icon: "tenant",
-      path: "/tenant",
-      subTitle: t("Manage your tenants"),
+      label: t("Saas"),
+      icon: "pages",
+      children: [
+        {
+          key: "2-0",
+          label: t("Tenants"),
+          icon: "tenant",
+          path: "/tenant",
+          subTitle: t("Manage your tenants"),
+        },
+        {
+          key: "2-1",
+          label: t("Editions"),
+          icon: "editions",
+          path: "/edition",
+          subTitle: t("Manage editions and features of the application"),
+        },
+      ]
     },
     {
       key: "3",
-      label: t("Editions"),
-      icon: "editions",
-      path: "/edition",
-      subTitle: t("Manage editions and features of the application"),
-    },
-    {
-      key: "4",
-      label: t("Identity Management"),
+      label: t("Administration"),
       icon: "pages",
       children: [
         {
-          key: "4-0",
-          label: t("Organization Units"),
+          key: "3-0",
+          label: t("Identity Management"),
           icon: "organization",
-          path: "/organization-unit",
-          subTitle: t("Use organization units to organize users and entities"),
+          children: [
+            {
+              key: "3-0-0",
+              label: t("Organization units"),
+              icon: "tenant",
+              path: "/organization-unit",
+              subTitle: t("Use organization units to organize users and entities"),
+            },
+            {
+              key: "3-0-1",
+              label: t("Roles"),
+              icon: "roles",
+              path: "/role",
+              subTitle: t("Use roles to group permissions"),
+            },
+            {
+              key: "3-0-2",
+              label: t("Users"),
+              icon: "users",
+              path: "/users",
+              subTitle: t("Manage users and permissions"),
+            },
+            {
+              key: "3-0-3",
+              label: t("Claim Types"),
+              icon: "users",
+              path: "/claim-types",
+              subTitle: t("Manage users and permissions"),
+            },
+            {
+              key: "3-0-4",
+              label: t("Security-logs"),
+              icon: "users",
+              path: "/security-logs",
+              subTitle: t("Manage users and permissions"),
+            },
+          ]
         },
         {
-          key: "4-1",
-          label: t("Roles"),
-          icon: "roles",
-          path: "/role",
-          subTitle: t("Use roles to group permissions"),
+          key: "3-1",
+          label: t("OpenId"),
+          icon: "tenant",
+          children: [
+            {
+              key: "3-1-0",
+              label: t("Applications"),
+              icon: "tenant",
+              path: "/applications",
+              subTitle: t("Use organization units to organize users and entities"),
+            },
+            {
+              key: "3-1-1",
+              label: t("Scopes"),
+              icon: "tenant",
+              path: "/scopes",
+              subTitle: t("Use organization units to organize users and entities"),
+            },
+          ]
         },
         {
-          key: "4-2",
-          label: t("Users"),
-          icon: "users",
-          path: "/users",
-          subTitle: t("Manage users and permissions"),
+          key: "3-2",
+          label: t("Language Management"),
+          icon: "tenant",
+          children: [
+            {
+              key: "3-2-0",
+              label: t("Language"),
+              icon: "languages",
+              path: "/language",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-2-1",
+              label: t("Language-Text"),
+              icon: "languages",
+              path: "/language-text",
+              subTitle: t("Manage user interface languages"),
+            },
+          ]
         },
         {
-          key: "4-3",
-          label: t("Claim Types"),
-          icon: "users",
-          path: "/claim-types",
-          subTitle: t("Manage users and permissions"),
-        },
-        {
-          key: "4-4",
-          label: t("Security-logs"),
-          icon: "users",
-          path: "/security-logs",
-          subTitle: t("Manage users and permissions"),
-        }
-      ],
-    },
-    {
-      key: "5",
-      label: t("Identity Server"),
-      icon: "pages",
-      children: [
-        {
-          key: "5-0",
-          label: t("Client"),
-          icon: "editions",
-          path: "/client",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-1",
-          label: t("Identity Resources"),
-          icon: "editions",
-          path: "/identity-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-2",
-          label: t("Api Resources"),
-          icon: "editions",
-          path: "/api-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-3",
-          label: t("Api Scopes"),
-          icon: "editions",
-          path: "/api-scopes",
-          subTitle: t("Manage editions and features of the application"),
-        },
-      ],
-    },
-    {
-      key: "6",
-      label: t("Language Management"),
-      icon: "pages",
-      children: [
-        {
-          key: "6-0",
-          label: t("Language"),
+          key: "3-3",
+          label: t("Text-Template"),
           icon: "languages",
-          path: "/language",
+          path: "/template-text",
           subTitle: t("Manage user interface languages"),
         },
         {
-          key: "6-1",
-          label: t("Language-Text"),
-          icon: "languages",
-          path: "/language-text",
-          subTitle: t("Manage user interface languages"),
+          key: "3-4",
+          label: t("Audit Logs"),
+          icon: "audit_logs",
+          path: "/audit-logs",
+          subTitle: "",
         },
-      ],
-    },
-    {
-      key: "7",
-      label: t("Text-Template"),
-      icon: "languages",
-      path: "/template-text",
-      subTitle: t("Manage user interface languages"),
-    },
-    {
-      key: "8",
-      label: t("Audit Logs"),
-      icon: "audit_logs",
-      path: "/audit-logs",
-      subTitle: "",
-    },
-    {
-      key: "9",
-      label: t("Settings"),
-      icon: "setting",
-      path: "/settings",
-      subTitle: t("Show and change application settings"),
+        {
+          key: "3-5",
+          label: t("Settings"),
+          icon: "setting",
+          path: "/settings",
+          subTitle: t("Show and change application settings"),
+        },
+      ]
     },
   ];
 
@@ -361,7 +364,7 @@ const Main = (props: MainProps) => {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
-      </Routes> 
+      </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {isAuth && (
         <div className="d-flex flex-column flex-root">
@@ -447,12 +450,14 @@ const Main = (props: MainProps) => {
                       path="/dynamic-properties"
                       element={<DynamicPropertyCompo></DynamicPropertyCompo>}
                     ></Route>
-                    <Route path="/icons" 
-                    element={<IconListCompo/>}></Route>
+                    <Route path="/icons"
+                      element={<IconListCompo />}></Route>
                     <Route path="/claim-types" element={<ClaimTypesCompo />} />
-                    <Route path="/text-template" 
-                      element={<TextTemplateCompo/>}>
+                    <Route path="/text-template"
+                      element={<TextTemplateCompo />}>
                     </Route>
+                    <Route path="/applications" element={<ApplicationsCompo />}></Route>
+
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

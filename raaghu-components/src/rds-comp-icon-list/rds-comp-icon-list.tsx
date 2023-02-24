@@ -1,7 +1,7 @@
 import { id } from "date-fns/locale";
 import React, { useState } from "react";
-import { Icons } from "../../../raaghu-elements/src/rds-icon/Icons";
-import { RdsAlert, RdsIcon, RdsSearch } from "../rds-elements";
+import { Icons } from "./Icons";
+import { RdsAlert, RdsIcon, RdsSearch } from "raaghu-react-elements";
 
 export interface RdsCompIconListProps {}
 

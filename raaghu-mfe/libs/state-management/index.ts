@@ -6,12 +6,14 @@ import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import rolesReducer from "./roles/roles-slice";
-import localizationReducer from "./localization/localization-slice";
-import languageEditReducer from "./language/languageEdit-slice";
+import auditLogsReducer from "./audit-logs/audit-log-slice";
+import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
+import  applicationsReducer  from "./applications/applications-slice";
+import textTemplateReducer from "./text-template/text-template-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -23,10 +25,12 @@ const rootReducer = combineReducers({
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
-  languageEdit: languageEditReducer,
   organization: organizationReducer,
-  localization:localizationReducer,
   roles:rolesReducer,
+  claimTypes: ClaimTypesReducer,
+  applications : applicationsReducer,
+  textTemplate: textTemplateReducer,
+  auditLog : auditLogsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
+import { RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
 
 export interface RdsCompIdentityManagementProps {
 	identityData: any;

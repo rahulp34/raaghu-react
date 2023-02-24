@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {RdsCheckboxGroup, RdsInput, RdsTextArea } from "../rds-elements";
+import {RdsCheckboxGroup, RdsInput, RdsTextArea } from "raaghu-react-elements";
 
 export interface RdsCompApiScopeBasicResourceProps {
     resourceData:any;

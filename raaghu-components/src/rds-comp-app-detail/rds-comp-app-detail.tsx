@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsAppDetail } from "../rds-elements";
+import { RdsAppDetail } from "raaghu-react-elements";
 
 export interface RdsCompAppDetailProps {
 	appDetailList: any;

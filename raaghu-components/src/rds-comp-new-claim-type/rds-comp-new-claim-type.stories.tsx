@@ -11,7 +11,7 @@ export default {
 
 
 const Template: ComponentStory<typeof RdsCompNewClaimType> = (args) => 
-  <RdsCompNewClaimType />;
+  <RdsCompNewClaimType name={""} regex={""} value={""} regexDesc={""} desc={""} onSubmit={undefined} />;
 
 
 export const Default = Template.bind({});
