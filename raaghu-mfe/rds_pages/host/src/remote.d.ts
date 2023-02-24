@@ -98,3 +98,8 @@ declare module "Applications/Applications" {
 	const ApplicationsComponent : React.ComponentType;
 	export default ApplicationsComponent;
 }
+
+declare module "SecurityLogs/SecurityLogs" {
+	const SecurityLogs : React.ComponentType;
+	export default SecurityLogs;
+}

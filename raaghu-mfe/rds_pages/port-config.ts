@@ -61,5 +61,8 @@ export const PortConfig = {
 	},
 	"applications":{
 		"port":"8025"
+	},
+	"securityLogs": {
+		"port": "8021"
 	}
 }

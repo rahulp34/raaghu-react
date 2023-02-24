@@ -7,7 +7,8 @@ import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
-import userReducer from "./user/user-slice"
+import securityLogsReducer from "./security-logs/security-logs-slice";
+import userReducer from "./user/user-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -21,12 +22,13 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   login: loginReducer,
-  forgotPassword: forgotPasswordReducer,
+  forgotPassword: forgotPasswordReducer,  
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
   organization: organizationReducer,
   claimTypes: ClaimTypesReducer,
+  securityLogs:securityLogsReducer,
   applications : applicationsReducer,
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,

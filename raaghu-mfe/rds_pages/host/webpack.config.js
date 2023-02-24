@@ -124,7 +124,8 @@ module.exports = (env, argv) => {
           LanguageText: mfeConfigJSON["languageText"].url,
           ClaimTypes: mfeConfigJSON["claimtypes"].url,
           TextTemplate: mfeConfigJSON["textTemplate"].url,
-          Applications: mfeConfigJSON["applications"].url
+          Applications: mfeConfigJSON["applications"].url,
+          SecurityLogs: mfeConfigJSON["securityLogs"].url
         },
         shared: {
           ...devdeps,

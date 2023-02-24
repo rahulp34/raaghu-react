@@ -35,11 +35,12 @@ const DynamicPropertyCompo = React.lazy(
 const IconListCompo = React.lazy(() => import("IconList/IconList"));
 const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
-
-
-
-
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
+const SecurityLogsCompo =React.lazy(()=>import("SecurityLogs/SecurityLogs"))
+
+
+
+
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -450,6 +451,8 @@ const Main = (props: MainProps) => {
                       path="/dynamic-properties"
                       element={<DynamicPropertyCompo></DynamicPropertyCompo>}
                     ></Route>
+                    <Route path="/security-logs" element={<SecurityLogsCompo />}></Route>
+
                     <Route path="/icons"
                       element={<IconListCompo />}></Route>
                     <Route path="/claim-types" element={<ClaimTypesCompo />} />
