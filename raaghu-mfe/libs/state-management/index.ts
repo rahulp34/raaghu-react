@@ -5,6 +5,7 @@ import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
+import rolesReducer from "./roles/roles-slice";
 import localizationReducer from "./localization/localization-slice";
 import languageEditReducer from "./language/languageEdit-slice";
 import { useDispatch } from "react-redux";
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   languageEdit: languageEditReducer,
   organization: organizationReducer,
   localization:localizationReducer,
+  roles:rolesReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -380,7 +380,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   </div>
                                 )}
                                 {tableHeader.datatype === "children" && (
-                                  <div className="d-flex justify-content-center">
+                                  <div className="d-flex ">
                                     {" "}
                                     {tableDataRow[tableHeader.key]}
                                   </div>
