@@ -274,7 +274,7 @@ const Main = (props: MainProps) => {
           key: "3-3",
           label: t("Text-Template"),
           icon: "languages",
-          path: "/template-text",
+          path: "/text-template",
           subTitle: t("Manage user interface languages"),
         },
         {
