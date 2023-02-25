@@ -53,20 +53,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       client_id: "raaghu",
      scope: "address email phone profile roles demoAngular ",
     };
-    fetch("https://localhost:44317/connect/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(requestBody).toString(),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello()   
-      });
-
-  };
+ 
   fetch("https://localhost:44381/connect/token", {
     method: "POST",
     headers: {
