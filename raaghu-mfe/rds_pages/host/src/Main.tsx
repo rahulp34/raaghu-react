@@ -1,10 +1,10 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, Navigate, Link } from "react-router-dom";
+import { Route, useNavigate, Routes, Navigate, Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../libs/state-management";
-import "./App.scss"
+import "./App.scss";
 
 import {
   RdsCompSideNavigation,
@@ -35,11 +35,9 @@ const DynamicPropertyCompo = React.lazy(
 const IconListCompo = React.lazy(() => import("IconList/IconList"));
 const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
-const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
-const ApiScopeCompo = React.lazy(()=>import("ApiScope/ApiScope"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
-const SecurityLogsCompo =React.lazy(()=>import("SecurityLogs/SecurityLogs"))
-
+const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -48,14 +46,18 @@ export interface MainProps {
 const Main = (props: MainProps) => {
   const [isAuth, setIsAuth] = useState<boolean>();
   const navigate = useNavigate();
-  let accessToken: string | undefined | null = localStorage.getItem("access_token");
+  let accessToken: string | undefined | null =
+    localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
+  console.log("This is the current path ",currentPath);
 
   const auth: any = useSelector(
     (state: RootState) => state.persistedReducer.login.isAuth
   );
 
-  console.log("auth", auth)
+  console.log("auth", isAuth);
+  // const isLoggedIn = localStorage.getItem('access_token');
+  const location = useLocation();
 
   useEffect(() => {
     const loginCredentials = localStorage.getItem("persist:root");
@@ -67,12 +69,12 @@ const Main = (props: MainProps) => {
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
-      navigate("/dashboard");
+      navigate(currentPath);
     }
     if (localStorage.getItem("access_token") == null) {
       navigate("/login");
     }
-  }, [accessToken]);
+  }, []);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
@@ -158,7 +160,6 @@ const Main = (props: MainProps) => {
       path: "/icons",
       subTitle: t("icons"),
     },
-
     {
       key: "2",
       label: t("Saas"),
@@ -178,7 +179,7 @@ const Main = (props: MainProps) => {
           path: "/edition",
           subTitle: t("Manage editions and features of the application"),
         },
-      ]
+      ],
     },
     {
       key: "3",
@@ -195,7 +196,9 @@ const Main = (props: MainProps) => {
               label: t("Organization units"),
               icon: "tenant",
               path: "/organization-unit",
-              subTitle: t("Use organization units to organize users and entities"),
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
             {
               key: "3-0-1",
@@ -225,7 +228,7 @@ const Main = (props: MainProps) => {
               path: "/security-logs",
               subTitle: t("Manage users and permissions"),
             },
-          ]
+          ],
         },
         {
           key: "3-1",
@@ -237,16 +240,20 @@ const Main = (props: MainProps) => {
               label: t("Applications"),
               icon: "tenant",
               path: "/applications",
-              subTitle: t("Use organization units to organize users and entities"),
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
             {
               key: "3-1-1",
               label: t("Scopes"),
               icon: "tenant",
               path: "/scopes",
-              subTitle: t("Use organization units to organize users and entities"),
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
-          ]
+          ],
         },
         {
           key: "3-2",
@@ -267,71 +274,13 @@ const Main = (props: MainProps) => {
               path: "/language-text",
               subTitle: t("Manage user interface languages"),
             },
-          ]
+          ],
         },
         {
           key: "3-3",
           label: t("Text-Template"),
-          key: "4-3",
-          label: t("Claim Types"),
-          icon: "users",
-          path: "/claim-types",
-          subTitle: t("Manage users and permissions"),
-        },
-        {
-          key: "4-4",
-          label: t("Security-logs"),
-          icon: "users",
-          path: "/security-logs",
-          subTitle: t("Manage users and permissions"),
-        }
-      ],
-    },
-    {
-      key: "5",
-      label: t("Identity Server"),
-      icon: "pages",
-      children: [
-        {
-          key: "5-0",
-          label: t("Client"),
-          icon: "editions",
-          path: "/client",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-1",
-          label: t("Identity Resources"),
-          icon: "editions",
-          path: "/identity-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-2",
-          label: t("Api Resources"),
-          icon: "editions",
-          path: "/api-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-3",
-          label: t("Api Scopes"),
-          icon: "editions",
-          path: "/api-scope",
-          subTitle: t("Manage editions and features of the application"),
-        },
-      ],
-    },
-    {
-      key: "6",
-      label: t("Language Management"),
-      icon: "pages",
-      children: [
-        {
-          key: "6-0",
-          label: t("Language"),
           icon: "languages",
-          path: "/text-template",
+          path: "/template-text",
           subTitle: t("Manage user interface languages"),
         },
         {
@@ -348,7 +297,7 @@ const Main = (props: MainProps) => {
           path: "/settings",
           subTitle: t("Show and change application settings"),
         },
-      ]
+      ],
     },
   ];
 
@@ -475,7 +424,6 @@ const Main = (props: MainProps) => {
                       path="/edition"
                       element={<EditionCompo></EditionCompo>}
                     ></Route>
-
                     <Route
                       path="/settings"
                       element={<SettingsCompo></SettingsCompo>}
@@ -507,15 +455,21 @@ const Main = (props: MainProps) => {
                       path="/dynamic-properties"
                       element={<DynamicPropertyCompo></DynamicPropertyCompo>}
                     ></Route>
-                    <Route path="/security-logs" element={<SecurityLogsCompo />}></Route>
+                    <Route
+                      path="/security-logs"
+                      element={<SecurityLogsCompo />}
+                    ></Route>
 
-                    <Route path="/icons"
-                      element={<IconListCompo />}></Route>
+                    <Route path="/icons" element={<IconListCompo />}></Route>
                     <Route path="/claim-types" element={<ClaimTypesCompo />} />
-                    <Route path="/text-template"
-                      element={<TextTemplateCompo />}>
-                    </Route>
-                    <Route path="/applications" element={<ApplicationsCompo />}></Route>
+                    <Route
+                      path="/text-template"
+                      element={<TextTemplateCompo />}
+                    ></Route>
+                    <Route
+                      path="/applications"
+                      element={<ApplicationsCompo />}
+                    ></Route>
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
