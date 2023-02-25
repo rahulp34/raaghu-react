@@ -5,9 +5,11 @@ export interface RdsSelectProps{
     label: string;
     isDisabled?:boolean;
     isMultiple?:boolean;
+    selectedOption?:any;
     size?:string;
     selectItems: any[];
     id?:string;
+    selectedValue?:any;
     classes?:string, 
     children?:React.ReactNode
     onSelectListChange ?:( Event:React.ChangeEvent<HTMLSelectElement>, ) => void; 
@@ -23,12 +25,10 @@ const RdsSelectList = (props: RdsSelectProps) => {
   
   return (
     <Fragment>
-      <select key={props.id}  defaultValue={props.label} className={`${customSize} ${props.classes}`}
-       disabled={Disabled} multiple={Multiple} aria-label="select example"
-       onChange={props.onSelectListChange}>
-        <option  hidden className="text-muted">{props.label}</option>
-        {props.selectItems.map((selectItem,i) => (
-          <option value={selectItem.option} id={`${selectItem.id}`}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>
+      <select id={props.id} value={props.selectedValue} className={`${customSize} ${props.classes}`} disabled={Disabled} multiple={Multiple} aria-label="select example" onChange={props.onSelectListChange}>
+        <option disabled  hidden className="text-muted">{props.label}</option>
+        {props.selectItems.map((selectItem) => (
+          <option value={selectItem.value} key={selectItem.value}>{props.children}{selectItem.option}</option>
         ))}
       </select>
     </Fragment>

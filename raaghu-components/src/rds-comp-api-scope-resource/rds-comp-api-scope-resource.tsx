@@ -184,7 +184,7 @@ const RdsCompApiScopeResource = (props: RdsCompApiScopeResourceProps) => {
           ))}
         </div>
         </div>}
-        {props.role=="advanced" &&  <RdsAccordion
+        {/* {props.role=="advanced" &&  <RdsAccordion
             onclick={() => onClickHandler(resource)}
             key={i}
             accordionType=''
@@ -232,7 +232,7 @@ const RdsCompApiScopeResource = (props: RdsCompApiScopeResourceProps) => {
             // colorVariant={"primary"}
             // size={"small"}
             // outline={false}
-          ></RdsAccordion>}
+          ></RdsAccordion>}*/}
           
           </>
           );

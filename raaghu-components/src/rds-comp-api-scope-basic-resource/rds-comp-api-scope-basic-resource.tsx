@@ -1,123 +1,147 @@
-import React, {useState} from "react";
-import {RdsCheckboxGroup, RdsInput, RdsTextArea } from "raaghu-react-elements";
+import { AnyAction } from "@reduxjs/toolkit";
+import React, {useEffect, useState} from "react";
+import {RdsCheckboxGroup, RdsInput, RdsTextArea,RdsButton } from "../rds-elements";
 
 export interface RdsCompApiScopeBasicResourceProps {
-    resourceData:any;
+	email:any;
+	fullname:any;
+	message:any;
+	 onSuccess?: any;
+	
 }
 
 const RdsCompApiScopeBasicResource = (props:RdsCompApiScopeBasicResourceProps) => {
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-	const [fullname, setFullname] = useState('');
-
-	const [error1, setError1] = useState('');
-    const [error2, setError2] = useState('');
-    const [error3, setError3] = useState('');
-
+    const [email, setEmail] = useState(props.email);
+    const [message, setMessage] = useState(props.message);
+	const [fullname, setFullname] = useState(props.fullname);
+	const [resource,setResource] =useState('');
+	const [data,setdata] = useState({
+		fullname:props.fullname,
+		email:props.email,
+		message:props.message,
+		resource:[]})
+useEffect(()=>{
+console.log("newdata ", props.fullname)
+setdata({
+		fullname:props.fullname,
+		email:props.email,
+		message:props.message,
+		resource:[]}) 
+},[props.email,props.fullname,props.message])
     
-	const isEmailValid = (email: any) => {
-		if (!email || email.length === 0) {
+	const isEmailValid = (email:any) => {
+		if (!data.email || data.email.length === 0) {
 			return false;	  
 		}
 		return true;
 	}
-	const isFullnameValid = (fullname : any) =>{
-		if (!fullname || fullname.length === 0) {
-			return false;
-		  }
-		  return true;
-	}
-    const isMessageValid = (fullname : any) =>{
-		if (!fullname || fullname.length === 0) {
-			return false;
-		  }
-		  return true;
-	}
-	const emailhandleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+	const emailhandleChange = (event:any) => {
         
-        if (!isEmailValid(event.target.value)) {
-			setError1('Please enter name');
-		  } else {
-			setError1('');
-		  }
-        setEmail(event.target.value);
-    }
-	const fullnamehandleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+       setdata({...data, email: event.target.value})
      
-        if (!isFullnameValid(event.target.value)) {
-			setError2('Please enter Display Name');
-		} else {
-			setError2('');
-		}
-		setFullname(event.target.value);
+    }
+	const fullnamehandleChange = (event: any) => {
+     
+		setdata({...data, fullname: event.target.value})
        
     }
-    const messagehandleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    const messagehandleChange = (event: any) => {
        
-        if (!isMessageValid(event.target.value)) {
-			setError3('Description is empty');
-            
-		} else {
-			setError3('');
-		}
-		setMessage(event.target.value);
+    	setdata({...data, message: event.target.value})
     }
-	const isFormValid = isFullnameValid(fullname) && isEmailValid(email) && isMessageValid(message);
+	const resourcehadleChange = (event: any) => {
+       
+    	setdata({...data, resource: event.target.value})
+    }
+	const isFormValid = isEmailValid(email) ;
 
     const handleSubmit = (event : React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-		//props.onLogin(email,fullname)
 		setEmail('');
 		setFullname('');
-        setMessage(' ');
+        setMessage('');
+		setResource('');
     }
   return (
     <>
 <div >
 			
 			<form onSubmit={handleSubmit}>
-				<div className="mt-1 mb-3">				
+				<div className="row mt-3">
+				<div className="col-6">				
 					<RdsInput
 					    required={true}
 						label="Name"
 						placeholder='Enter name'
-						inputType='email'
+						inputType='text'
 						onChange={emailhandleChange}
-						value = {email}
+						value = {data.email}
 						name = {'email'}
                         
 				></RdsInput>
-				    {error1 && <span style={{color: 'red'}}>{error1}</span>}
+				   
 				</div>
 
-				<div className=" mb-3">
+				<div className="col-6 ">
 					<RdsInput
 						label='Display name'
 						placeholder='Enter display name'
 						inputType = 'text'
 						onChange = {fullnamehandleChange}
-                        required={true}
+                        required={false}
 						name = {'Displayname'}
-						value = {fullname}
+						value = {data.fullname}
 					></RdsInput>
-					{error2 && <span style={{color: 'red'}}>{error2}</span>}
+				
 				</div>
+				</div>
+				
                 <div className=" mb-4">
 					<RdsTextArea
 						label='Description'
 						placeholder='Description'
 					    onChange = {messagehandleChange}
-                       
-						rows ={3}
-						value = {message}
+						rows ={2}
+						value = {data.message}
 
-					/>
-					{error3  && <span style={{color: 'red'}}>{error3}</span>}                                                       
+					/>                                                      
+				</div>
+				<div className=" mb-4">
+					<RdsTextArea
+						label='Resources'
+						placeholder='Resources'
+					    onChange = {resourcehadleChange}
+						rows ={3}
+						value = {data.resource}
+
+					/>                                                      
 				</div>
            <div >
-			<label className="Text-bold" >Others</label>
-            <RdsCheckboxGroup itemList={props.resourceData.checklist} />
+			{/* <label className="Text-bold" >Others</label>
+            <RdsCheckboxGroup itemList={props.resourceData.checklist} /> */}
            </div>
+		   <div className="mt-3 d-flex footer-buttons">
+						<RdsButton
+							class="me-2"
+							tooltipTitle={""}
+							type={"button"}
+							label={("Cancel") || ""}
+							colorVariant="outline-primary"
+							size="small"
+							databsdismiss="offcanvas"
+						></RdsButton>
+						<RdsButton
+							class="me-2"
+							label={("Save") || ""}
+							size="small"
+							colorVariant="primary"
+							tooltipTitle={""}
+							type={"submit"}
+							databsdismiss="offcanvas"
+							onClick={()=>props.onSuccess(data)}
+							isDisabled={!isFormValid}
+						></RdsButton>
+					</div>
 			</form>
 		</div>
     </>
