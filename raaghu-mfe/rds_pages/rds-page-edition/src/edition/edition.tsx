@@ -285,7 +285,7 @@ const Edition = (props: RdsPageEditionProps) => {
 
   const { t } = useTranslation();
   const [Data, setData] = useState<any>([]);
-  const editionuser = useAppSelector((state) => state.persistedReducer.edition);
+  const editionuser = useAppSelector((state) => state.persistedReducer.edition) as any;
   const dispatch = useAppDispatch();
   const [val, setVal] = useState("");
   const [alertOne, setAlertOne] = useState(false);

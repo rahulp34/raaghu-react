@@ -35,7 +35,6 @@ const DynamicPropertyCompo = React.lazy(
 const IconListCompo = React.lazy(() => import("IconList/IconList"));
 const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
-const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(()=>import("ApiScope/ApiScope"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const SecurityLogsCompo =React.lazy(()=>import("SecurityLogs/SecurityLogs"))
@@ -158,7 +157,6 @@ const Main = (props: MainProps) => {
       path: "/icons",
       subTitle: t("icons"),
     },
-
     {
       key: "2",
       label: t("Saas"),
@@ -178,7 +176,7 @@ const Main = (props: MainProps) => {
           path: "/edition",
           subTitle: t("Manage editions and features of the application"),
         },
-      ]
+      ],
     },
     {
       key: "3",
@@ -195,7 +193,9 @@ const Main = (props: MainProps) => {
               label: t("Organization units"),
               icon: "tenant",
               path: "/organization-unit",
-              subTitle: t("Use organization units to organize users and entities"),
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
             {
               key: "3-0-1",
@@ -225,7 +225,7 @@ const Main = (props: MainProps) => {
               path: "/security-logs",
               subTitle: t("Manage users and permissions"),
             },
-          ]
+          ],
         },
         {
           key: "3-1",
@@ -237,16 +237,20 @@ const Main = (props: MainProps) => {
               label: t("Applications"),
               icon: "tenant",
               path: "/applications",
-              subTitle: t("Use organization units to organize users and entities"),
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
             {
               key: "3-1-1",
               label: t("Scopes"),
               icon: "tenant",
-              path: "/scopes",
-              subTitle: t("Use organization units to organize users and entities"),
+              path: "/api-scope",
+              subTitle: t(
+                "Use organization units to organize users and entities"
+              ),
             },
-          ]
+          ],
         },
         {
           key: "3-2",
@@ -267,71 +271,13 @@ const Main = (props: MainProps) => {
               path: "/language-text",
               subTitle: t("Manage user interface languages"),
             },
-          ]
+          ],
         },
         {
           key: "3-3",
           label: t("Text-Template"),
-          key: "4-3",
-          label: t("Claim Types"),
-          icon: "users",
-          path: "/claim-types",
-          subTitle: t("Manage users and permissions"),
-        },
-        {
-          key: "4-4",
-          label: t("Security-logs"),
-          icon: "users",
-          path: "/security-logs",
-          subTitle: t("Manage users and permissions"),
-        }
-      ],
-    },
-    {
-      key: "5",
-      label: t("Identity Server"),
-      icon: "pages",
-      children: [
-        {
-          key: "5-0",
-          label: t("Client"),
-          icon: "editions",
-          path: "/client",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-1",
-          label: t("Identity Resources"),
-          icon: "editions",
-          path: "/identity-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-2",
-          label: t("Api Resources"),
-          icon: "editions",
-          path: "/api-resources",
-          subTitle: t("Manage editions and features of the application"),
-        },
-        {
-          key: "5-3",
-          label: t("Api Scopes"),
-          icon: "editions",
-          path: "/api-scope",
-          subTitle: t("Manage editions and features of the application"),
-        },
-      ],
-    },
-    {
-      key: "6",
-      label: t("Language Management"),
-      icon: "pages",
-      children: [
-        {
-          key: "6-0",
-          label: t("Language"),
           icon: "languages",
-          path: "/text-template",
+          path: "/template-text",
           subTitle: t("Manage user interface languages"),
         },
         {
@@ -348,7 +294,7 @@ const Main = (props: MainProps) => {
           path: "/settings",
           subTitle: t("Show and change application settings"),
         },
-      ]
+      ],
     },
   ];
 

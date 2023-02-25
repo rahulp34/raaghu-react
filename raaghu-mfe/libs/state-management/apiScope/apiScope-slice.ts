@@ -6,9 +6,7 @@ type InitialState = {
   users : any,
   error : string,
   editScope:any,
-  alertMessage:string,
-  alertDisplay:boolean,
-  alertColor:boolean
+
 }
 
 const initialState : InitialState = {
@@ -16,9 +14,7 @@ const initialState : InitialState = {
   users : {},
   editScope:{},
   error : "",
-  alertMessage:"",
-  alertDisplay:false,
-  alertColor:false
+
 
 }
 
@@ -125,7 +121,7 @@ const scopeSlice = createSlice({
       state.loading = false
       state.editScope = action.payload
       state.error = ''
-      state.alertDisplay=true
+ 
     });
     builder.addCase(editScopesData.rejected, (state , action) => {
       state.loading = false
@@ -134,7 +130,7 @@ const scopeSlice = createSlice({
       
     });
     builder.addCase(editScopesData.pending, (state) => {
-    
+      state.loading = true;
       
     });
     
