@@ -34,7 +34,7 @@ const operationLogsHeaders = [
 ];
 
 const operationLogs = [
-  { id: 1, username: "Admin", service:"UserDelegationAppService", action:"GetActiveUserDelegations", duration: "1351", ipAddress: "103.151.184.6", 
+  { id: 1, username: "Admin", service:"UserDelegationAppService", action:"", duration: "1351", ipAddress: "103.151.184.6", 
   browser: {
     "avatar":  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/2048px-Google_Chrome_icon_%28February_2022%29.svg.png",
     "title": "Chrome",
@@ -45,13 +45,13 @@ const operationLogs = [
     "title": "Opera",
     "info": "Window NT 10"
   },time:"11/15/2021, 2:44:52 PM"  },
-  { id: 3, username: "Manager", service:"UserDelegationAppService", action:"GetActiveUserDelegations", duration: "1321", ipAddress: "103.151.184.6",
+  { id: 3, username: "Manager", service:"UserDelegationAppService", action:"", duration: "1321", ipAddress: "103.151.184.6",
   browser: {
     "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Microsoft_Edge_logo_%282019%29.svg/480px-Microsoft_Edge_logo_%282019%29.svg.png",
     "title": "Edge",
     "info": "Window NT 10"
   },time:"11/15/2021, 2:44:52 PM" },
-  { id: 4, username: "Developer", service:"UserDelegationAppService", action:"GetActiveUserDelegations", duration: "1301", ipAddress: "103.151.184.6",
+  { id: 4, username: "Developer", service:"UserDelegationAppService", action:"", duration: "1301", ipAddress: "103.151.184.6",
   browser: {
     "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Safari_browser_logo.svg/2057px-Safari_browser_logo.svg.png",
     "title": "Safari",
@@ -63,13 +63,13 @@ const operationLogs = [
     "title": "Firefox",
     "info": "Window NT 10"
   },time:"11/15/2021, 2:44:52 PM"  },
-  { id: 6, username: "HR", service:"UserDelegationAppService", action:"GetActiveUserDelegations", duration: "1401", ipAddress: "103.151.184.6", 
+  { id: 6, username: "HR", service:"UserDelegationAppService", action:"", duration: "1401", ipAddress: "103.151.184.6", 
    browser: {
     "avatar": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Microsoft_Edge_logo_%282019%29.svg/480px-Microsoft_Edge_logo_%282019%29.svg.png",
     "title": "Edge",
     "info": "Window NT 10"
   },time:"11/15/2021, 2:44:52 PM"  },
-  { id: 7, username: "HR", service:"UserDelegationAppService", action:"GetActiveUserDelegations", duration: "1105", ipAddress: "103.151.184.6", 
+  { id: 7, username: "HR", service:"UserDelegationAppService", action:"", duration: "1105", ipAddress: "103.151.184.6", 
    browser: {
     "avatar":  "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Google_Chrome_icon_%28February_2022%29.svg/2048px-Google_Chrome_icon_%28February_2022%29.svg.png",
     "title": "Chrome",
@@ -92,12 +92,7 @@ const changeLogs = [
 
 const App = () => (
 	<Suspense>
-		<Auditlogs
-			operationLogsHeaders={operationLogsHeaders}
-			operationLogs={operationLogs}
-			changeLogs={changeLogs}
-			changeLogsHeaders={changeLogsHeaders}
-		></Auditlogs>
+		<Auditlogs></Auditlogs>
 	</Suspense>
 );
 

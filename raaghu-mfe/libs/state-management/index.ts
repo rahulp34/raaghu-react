@@ -6,11 +6,17 @@ import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import scopesReducer from "./apiScope/apiScope-slice";
+import auditLogsReducer from "./audit-logs/audit-log-slice";
+import ClaimTypesReducer from "./claim-types/claim-types-slice";
+import securityLogsReducer from "./security-logs/security-logs-slice";
+import userReducer from "./user/user-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
+import textTemplateReducer from "./text-template/text-template-slice";
+import  tenantReducer  from "./tenant/tenant-slice";
 const persistConfig = {
   key: "root",
   storage,
@@ -18,13 +24,20 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   login: loginReducer,
-  forgotPassword: forgotPasswordReducer,
+  forgotPassword: forgotPasswordReducer,  
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
   organization: organizationReducer,
+  claimTypes: ClaimTypesReducer,
+  securityLogs:securityLogsReducer,
   applications : applicationsReducer,
   scopes: scopesReducer,          
+  textTemplate: textTemplateReducer,
+  auditLog : auditLogsReducer,
+  user: userReducer,
+  tenant:tenantReducer,
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

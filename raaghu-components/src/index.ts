@@ -31,7 +31,9 @@ export { default as RdsCompDynamicEntityProperty } from './rds-comp-dynamic-enti
 export { default as RdsCompRoleList } from './rds-comp-role-list/rds-comp-role-list';
 export { default as RdsCompIconList } from './rds-comp-icon-list/rds-comp-icon-list';
 export { default as RdsCompEdition } from './rds-comp-edition/rds-comp-edition';
-export { default as RdsCompNewFeatures } from './rds-comp-new-features/rds-comp-new-features';
+export { default as RdsCompFeatures } from './rds-comp-new-features/rds-comp-new-features';
 export { default as RdsCompNewClaimType } from './rds-comp-new-claim-type/rds-comp-new-claim-type';
 export { default as RdsCompApplicationBasic } from './rds-comp-application-basic/rds-comp-application-basic';
 export {default as RdsCompApiScopeBasicResource} from './rds-comp-api-scope-basic-resource/rds-comp-api-scope-basic-resource'
+export { default as RdsCompSecurityLogs } from './rds-comp-security-logs/rds-comp-security-logs';
+

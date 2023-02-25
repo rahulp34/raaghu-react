@@ -2,62 +2,186 @@ import React, { useEffect, useReducer, useRef, useState } from "react";
 import { RdsCompDatatable } from "../../../rds-components";
 import "./Auditlogs.scss";
 import {
-  RdsIllustration,
-  RdsButton,
   RdsBadge,
   RdsOffcanvas,
-  RdsNavtabs,
   RdsDatePicker,
-  RdsCheckbox,
-  RdsSelectList,
   RdsInput,
+  RdsLabel,
+  RdsSelectList,
+  RdsNavtabs,
+  RdsButton,
 } from "../../../rds-elements";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "../../../../libs/state-management/hooks";
+import {
+  auditLogsData,
+  auditActionData,
+} from "../../../../libs/state-management/audit-logs/audit-log-slice";
 
 export interface RdsPageAuditlogsProps {
-  operationLogsHeaders: any;
   listItem1?: any;
   listItem2?: any;
-  operationLogs: any[];
   deleteEvent?: (event: React.MouseEventHandler<HTMLDivElement>) => void;
   parameterData?: (event: React.MouseEventHandler<HTMLDivElement>) => void;
   ChangeLogparameterData?: (
     event: React.MouseEventHandler<HTMLDivElement>
   ) => void;
-  changeLogs: any;
-  changeLogsHeaders: any;
+  // changeLogs: any;
+  // changeLogsHeaders: any;
   isShimmer?: boolean;
 }
 
 const Auditlogs = (props: RdsPageAuditlogsProps) => {
-  const [activeTab, setActiveTab] = useState("operation");
+  const audituser = useAppSelector((state) => state.persistedReducer.auditLog);
+  const [auditData, setAuditData] = useState<any[]>([{}]);
+  const dispatch = useAppDispatch();
 
-  const [count, setCount] = useState(0);
-  const isFirstRun = useRef(true);
-  const [isAdvancedFilters, setIsAdvancedFilters] = useState(false);
+
+const Auditpayload = ()=>{
+  const payload = {
+    userName: selectFilterValue.userName,
+    url: selectFilterValue.url,
+    minDuration: selectFilterValue.minDuration,
+    maxDuration: selectFilterValue.maxDuration,
+    httpMethod: selectFilterValue.httpMethod,
+    HttpStatusCode: selectFilterValue.HttpStatusCode,
+    applicationName: selectFilterValue.applicationName,
+    correlationId: selectFilterValue.correlationId,
+    exceptions: selectFilterValue.exceptions,
+  }
+  dispatch(auditLogsData(payload) as any);
+  const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
+    console.log(auditDataTable);
+    return {
+      id: dataAudit.id,
+      httpStatusCode: dataAudit.httpStatusCode,
+      userName: dataAudit.userName,
+      clientIpAddress: dataAudit.clientIpAddress,
+      executionTime: dataAudit.executionTime,
+      // executionDuration: dataAudit.executionDuration,
+      applicationName: dataAudit.applicationName,
+      browserInfo: dataAudit.browserInfo,
+      httpMethod: dataAudit.httpMethod,
+      url: dataAudit.url,
+      clientName: dataAudit.clientName,
+      exceptions: dataAudit.exceptions,
+      correlationId: dataAudit.correlationId,
+      comments: dataAudit.comments,
+      // extraProperties : dataAudit.extraProperties
+    };
+  }, []);
+  setAuditData(auditDataTable);
+}
+  
+
+  useEffect(() => {
+    
+    // dispatch(auditLogsData(payload) as any);
+    // const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
+    //   console.log(auditDataTable);
+    //   return {
+    //     id: dataAudit.id,
+    //     httpStatusCode: dataAudit.httpStatusCode,
+    //     userName: dataAudit.userName,
+    //     clientIpAddress: dataAudit.clientIpAddress,
+    //     // executionTime: dataAudit.executionTime,
+    //     executionDuration: dataAudit.executionDuration,
+    //     applicationName: dataAudit.applicationName,
+    //     browserInfo: dataAudit.browserInfo,
+    //     httpMethod: dataAudit.httpMethod,
+    //     url: dataAudit.url,
+    //     clientName: dataAudit.clientName,
+    //     exceptions: dataAudit.exceptions,
+    //     correlationId: dataAudit.correlationId,
+    //     comments: dataAudit.comments,
+    //     // extraProperties : dataAudit.extraProperties
+    //   };
+    // }, []);
+    // setAuditData(auditDataTable);
+    Auditpayload();
+  }, [dispatch]);
+
 
   const [selectFilterValue, setSelectFilterValue] = useState({
-    user: "",
-    service: "",
-    duration: 0,
-    durationConditon: "",
-    action: "",
-    browser: "",
-    usernameC: "",
-    id: "data",
-    errorStateO: "",
-    errorStateC: "",
+    userName: "",
+    url: "",
+    minDuration : "",
+    maxDuration: "",
+    httpMethod: "",
+    HttpStatusCode: "",
+    applicationName: "",
+    correlationId: "",
+    exceptions: "",
+    executionTime : ""
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
   const operationActions = [
-    { id: "view", displayName: "View", offId: "oparationlogs" },
+    { id: "view", displayName: "View", offId: "auditLogs" },
   ];
 
-  const changeActions = [
-    { id: "view", displayName: "View", offId: "changelogs" },
-  ];
-  const activeNavtabOrder = (id: any) => {
-    setActiveTab(id);
+  const onActionFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      userName: event?.target?.value,
+    });
   };
+
+  const onUrlFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      url: event?.target?.value,
+    });
+  };
+
+  // const onMinDurationFilter = (event: any) => {
+  //   setSelectFilterValue({
+  //     ...selectFilterValue,
+  //     executionDuration: event?.target?.value,
+  //   });
+  // }; 
+
+  const onApplicationNameFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      applicationName: event?.target?.value,
+    });
+    return auditData
+  };
+
+  const onCorrelationIdFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      correlationId: event?.target?.value,
+    });
+    return auditData
+  };
+  const onHttpStatusCode = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      correlationId: event?.target?.value,
+    });
+    return auditData
+  };
+
+  const HttpMethod = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      httpMethod: event?.target?.value,
+    });
+    return auditData
+  };
+
+  const onHasExceptionFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      exceptions: event?.target?.value,
+    });
+    return auditData
+  };
+  
+
   const onActionSelection = (
     clickEvent: any,
     tableDataRow: any,
@@ -65,465 +189,252 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
     action: { displayName: string; id: string }
   ) => {
     setTableDataRowId(tableDataRowIndex);
+    dispatch(auditActionData(tableDataRow.id) as any);
   };
 
-  const onAdvancedFilteration = (e: any) => {
-    setIsAdvancedFilters(!isAdvancedFilters);
-  };
-  const downloadcsv = () => {
-    const keys = Object.keys(OperationFilterData[0]);
-    const csvString = OperationFilterData.map((row: any) =>
-      keys.map((key) => row[key]).join(",")
-    ).join("\n");
-
-    // Create a hidden link element
-    const link = document.createElement("a");
-    link.style.display = "none";
-    link.setAttribute(
-      "href",
-      "data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
-    );
-    link.setAttribute("download", "operation_logs.csv");
-
-    // Append the link to the DOM
-    document.body.appendChild(link);
-
-    // Click the link to initiate the download
-    link.click();
-
-    // Remove the link from the DOM
-    document.body.removeChild(link);
-  };
-  const downloadcsv1 = () => {
-    const keys = Object.keys(ChangeFilterData[0]);
-    const csvString = ChangeFilterData.map((row: any) =>
-      keys.map((key) => row[key]).join(",")
-    ).join("\n");
-
-    // Create a hidden link element
-    const link = document.createElement("a");
-    link.style.display = "none";
-    link.setAttribute(
-      "href",
-      "data:text/csv;charset=utf-8," + encodeURIComponent(csvString)
-    );
-    link.setAttribute("download", "change_logs.csv");
-
-    // Append the link to the DOM
-    document.body.appendChild(link);
-
-    // Click the link to initiate the download
-    link.click();
-
-    // Remove the link from the DOM
-    document.body.removeChild(link);
-  };
   const onDatePicker = () => {};
 
-  const filterByUser = (data: any, user: any) => {
-    if (user == "") {
-      return props.operationLogs;
-    }
-    return data.filter((data: any) => data.username == user);
-  };
-  const filterByService = (data: any, service: any) => {
-    if (service == "") {
-      return props.operationLogs;
-    }
-    return data.filter((data: any) => data.service == service);
-  };
+  const AuditTableData = [
+    {
+      displayName: "Http Request",
+      key: "httpStatusCode",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: "User",
+      key: "userName",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: "IP Address",
+      key: "clientIpAddress",
+      datatype: "text",
+      sortable: true,
+    },
+    {
+      displayName: "Time",
+      key: "executionTime",
+      datatype: "date",
+      sortable: true,
+    },
+    // {
+    //   displayName: "Duration",
+    //   key: "executionDuration",
+    //   datatype: "number",
+    //   sortable: true,
+    // },
+    {
+      displayName: "Application Name",
+      key: "applicationName",
+      datatype: "text",
+      sortable: true,
+    },
+  ];
 
-  const filterByDurationCondition = (
-    data: any,
-    duration: any,
-    durationConditon: any
-  ) => {
-    let DataTable;
-    if (duration == 0) {
-      DataTable = props.operationLogs;
-    } else {
-      if (durationConditon == "Greater than") {
-        DataTable = data.filter((item: any) => item.duration >= duration);
-      } else {
-        DataTable = data.filter((item: any) => item.duration < duration);
-      }
-    }
-    return DataTable;
+  const navtabsItems = [
+    { label: "Overall", tablink: " #nav-overall", id: 0 },
+    { label: "Actions", tablink: " #nav-action", id: 1 },
+  ];
+
+  const offCanvasHandler = () => {};
+  const [activeNavTabId, setActiveNavTabId] = useState(0);
+  const [showAction, setShowAction] = useState(false);
+
+  const handleSearch = (event: any) => {
+    console.log("Hello", event.target.value);
   };
-
-  const filterByAction = (data: any, action: any) => {
-    if (action == "") {
-      return props.operationLogs;
-    }
-    return data.filter((data: any) => data.action == action);
-  };
-
-  const filterByBrowser = (data: any, browser: any) => {
-    if (browser == "") {
-      return props.operationLogs;
-    }
-    return data.filter((data: any) => data.browser == browser);
-  };
-  const filterByUserNameforChangeLogs = (data: any, username: any) => {
-    if (username == "") {
-      return props.changeLogs;
-    }
-    return data.filter((data: any) => data.username == username);
-  };
-
-  const OperationFilterData = (() => {
-    return filterByDurationCondition(
-      filterByUser(
-        filterByAction(
-          filterByBrowser(
-            filterByService(
-              [...props.operationLogs],
-              selectFilterValue.service
-            ),
-            selectFilterValue.browser
-          ),
-          selectFilterValue.action
-        ),
-        selectFilterValue.user
-      ),
-      selectFilterValue.duration,
-      selectFilterValue.durationConditon
-    );
-  })();
-
-  const ChangeFilterData = (() => {
-    return filterByUserNameforChangeLogs(
-      [...props.changeLogs],
-      selectFilterValue.usernameC
-    );
-  })();
-
-  useEffect(() => {
-    setSelectFilterValue({
-      ...selectFilterValue,
-      duration: 1000000000,
-      usernameC: "",
-    });
-  }, []);
 
   return (
-    
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-      <div className="d-flex justify-content-between nav-tabs m-1 ms-3">
-        <RdsNavtabs
-          type="tabs"
-          activeNavtabOrder={activeNavtabOrder}
-          fill={false}
-          navtabsItems={[
-            {
-              label: "Operation Logs",
-              tablink: "#nav-Operation",
-              subText: "Active subtext",
-              id: "operation",
-            },
-            { label: "Change Logs", tablink: "#nav-Change", id: "change" },
-          ]}
-        />
-      { activeTab == "operation" &&  <div className="align-self-top ">
-              <RdsButton
-                type="button"
-                label="Export To Excel"
-                onClick={downloadcsv}
-                isOutline={true}
-                colorVariant="primary"
-                tooltipPlacement="top"
-                size="small"
-                icon="export_data"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                iconColorVariant="primary"
-              ></RdsButton>
-            </div>}
-        {activeTab == "change" &&    <div className="align-self-top">
-              <RdsButton
-                type="button"
-                label="Export To Excel"
-                onClick={downloadcsv1}
-                isOutline={true}
-                colorVariant="primary"
-                tooltipPlacement="top"
-                size="small"
-                icon="export_data"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                iconColorVariant="primary"
-              ></RdsButton>
-            </div>}
+    <div className="card p-2 h-100 border-0 rounded-0 vh-100">
+      <div className="row p-4">
+        <h4>
+          <RdsLabel label="Activities" />
+        </h4>
       </div>
-      {activeTab == "operation" && (
-        <>
-          <div className="mx-3 ">
-          <div className="d-flex justify-content-between  mt-2 pt-1">
-            <div className="d-flex justify-content-between ">
-              <div className="ms-1 me-1">
-                <RdsDatePicker
-                  DatePickerLabel=""
-                  onDatePicker={onDatePicker}
-                ></RdsDatePicker>
-              </div>
-              <div className="ms-4 me-1">
-                <RdsInput
-                  placeholder="User"
-                  onKeyDown={(e: any) => {
-                    if (e.keyCode == 13) {
-                      setSelectFilterValue({
-                        ...selectFilterValue,
-                        user: e.target.value,
-                      });
-                    }
-                  }}
-                ></RdsInput>
-              </div>
-              <div className="ms-4 mt-1">
-                <RdsCheckbox
-                  label="Advanced Filters"
-                  labelClass="nowwrap-class"
-                  onChange={onAdvancedFilteration}
-                  checked={isAdvancedFilters}
-                />
-              </div>
-            </div>
-           
+      <div className="">
+        <div className="grid mx-4 mb-4">
+          <div className="">
+            <RdsDatePicker
+              // DatePickerLabel="Select Date"
+              onDatePicker={onDatePicker}
+              type="advanced"
+            ></RdsDatePicker>
           </div>
-          {isAdvancedFilters && (
-            <div className="mt-3 mb-3 d-flex justify-content-between">
-              <div className="me-2">
-                {" "}
-                <RdsInput
-                  placeholder="Service"
-                  onKeyDown={(e: any) => {
-                    if (e.keyCode == 13) {
-                      setSelectFilterValue({
-                        ...selectFilterValue,
-                        service: e.target.value,
-                      });
-                    }
-                  }}
-                ></RdsInput>
-              </div>
-              <div className="me-2">
-                {" "}
-                <RdsSelectList
-                  onSelectListChange={(e: any) =>
-                    setSelectFilterValue({
-                      ...selectFilterValue,
-                      durationConditon: e.target.value,
-                    })
-                  }
-                  label="Duration Condition"
-                  selectItems={[
-                    {
-                      option: "Greater than",
-                    },
-                    {
-                      option: "less than",
-                    },
-                  ]}
-                />
-              </div>
-              <div className="me-2">
-                {" "}
-                <RdsInput
-                  placeholder="Duration"
-                  onKeyDown={(e: any) => {
-                    if (e.keyCode == 13) {
-                      setSelectFilterValue({
-                        ...selectFilterValue,
-                        duration: e.target.value,
-                      });
-                    }
-                  }}
-                ></RdsInput>
-              </div>
+          <div className="">
+            <RdsInput
+              placeholder="User"
+              onChange={onActionFilter}
+            ></RdsInput>
+          </div>
+          <div className="">
+            <RdsInput
+              placeholder="Url Filter"
+              onChange={onUrlFilter}
+            ></RdsInput>
+          </div>
+          <div className="">
+            <RdsInput
+              placeholder="Min Duration"
+              // onChange={onMinDurationFilter}
+            ></RdsInput>
+          </div>
+          <div className="">
+            <RdsInput
+              placeholder="Max Duration"
+              onChange={(event) => handleSearch(event)}
+            ></RdsInput>
+          </div>
+        </div>
+        <div className="grid mx-4">
+          <div className="">
+            <RdsSelectList
+              label="Http Method"
+              onSelectListChange={HttpMethod}
+              selectItems={[
+                {
+                  option: "GET",
+                },
+                {
+                  option: "POST",
+                },
+                {
+                  option: "DELETE",
+                },
+                {
+                  option: "POST",
+                },
+                {
+                  option: "HEAD",
+                },
+                {
+                  option: "TRACE",
+                },
+              ]}
+            />
+          </div>
+          <div className="">
+            <RdsSelectList
+              label="Http Status Code"
+              onSelectListChange={onHttpStatusCode}
+              selectItems={[
+                {
+                  option: "100 - Continue",
+                },
+                {
+                  option: "101 - Switching Protocols",
+                },
+                {
+                  option: "101 - Switching Protocols",
+                },
+                {
+                  option: "103 - Early Hints",
+                },
+                {
+                  option: "200 - OK",
+                },
+                {
+                  option: "201 - Created",
+                },
+              ]}
+            />
+          </div>
 
-              <div className="me-2">
-                {" "}
-                <RdsInput
-                  placeholder="Action"
-                  onKeyDown={(e: any) => {
-                    if (e.keyCode == 13) {
-                      setSelectFilterValue({
-                        ...selectFilterValue,
-                        action: e.target.value,
-                      });
-                    }
-                  }}
-                ></RdsInput>
-              </div>
-              <div className="me-2">
-                {" "}
-                <RdsSelectList
-                  onSelectListChange={(e: any) =>
-                    setSelectFilterValue({
-                      ...selectFilterValue,
-                      errorStateO: e.target.value,
-                    })
-                  }
-                  label="Error State"
-                  selectItems={[
-                    { option: "All" },
-                    { option: "Success" },
-                    { option: "Has Error" },
-                  ]}
-                />{" "}
-              </div>
-              <div className="me-2">
-                {" "}
-                <RdsSelectList
-                  onSelectListChange={(e: any) =>
-                    setSelectFilterValue({
-                      ...selectFilterValue,
-                      browser: e.target.value,
-                    })
-                  }
-                  label="Select browser"
-                  selectItems={[
-                    {
-                      option: "All",
-                    },
-                    {
-                      option: "Chrome",
-                    },
-                    {
-                      option: "Opera",
-                    },
-                    {
-                      option: "Edge",
-                    },
-                    {
-                      option: "Safari",
-                    },
-                    {
-                      option: "UC Browser",
-                    },
-                  ]}
-                />{" "}
-              </div>
-            </div>
-          )}
+          <div className="">
+            <RdsInput
+              placeholder="Application Name"
+              onChange={onApplicationNameFilter}
+            ></RdsInput>
+          </div>
+          <div className="">
+            <RdsInput
+              placeholder="Correlation ID"
+              onChange={onCorrelationIdFilter}
+            ></RdsInput>
+          </div>
+          <div className="">
+            <RdsSelectList
+              label="Has Exception"
+             onSelectListChange={onHasExceptionFilter}
+              selectItems={[
+                {
+                  option: "Yes",
+                },
+                {
+                  option: "No",
+                },
+              ]}
+            />
+          </div>
+        </div>
+        <div className="float-end mx-4">
+          <RdsButton
+            label="Search"
+            type="button"
+            colorVariant="primary"
+            size="small"
+            isOutline={false}
+            icon = "search"
+            iconFill = {false}
+            iconStroke = {true}
+            iconColorVariant = "light"
+            iconHeight = "15px"
+            iconWidth = "15px"
+            onClick={Auditpayload}
+          ></RdsButton>
+        </div>
 
-            <RdsCompDatatable
-              classes="table__userTable"
-              tableHeaders={props.operationLogsHeaders}
-              tableData={OperationFilterData}
-              pagination={true}
-              recordsPerPage={5}
-              noDataTitle="Currently you do not have operation log"
-              onActionSelection={onActionSelection}
-              actions={operationActions}
-              recordsPerPageSelectListOption={true}
-            ></RdsCompDatatable>
-        
-          </div>
-        </>
-      )}
+        <div className="row mx-3 my-5">
+          <RdsCompDatatable
+            classes="table__userTable"
+            tableHeaders={AuditTableData}
+            tableData={auditData}
+            pagination={true}
+            recordsPerPage={10}
+            noDataTitle="Currently you do not have operation log"
+            onActionSelection={onActionSelection}
+            actions={operationActions}
+            recordsPerPageSelectListOption={true}
+          ></RdsCompDatatable>
+        </div>
+      </div>
 
-      {activeTab == "change" && (
-        <>
-         <div className="mx-3 ">
-          <div className="d-flex justify-content-between  mt-2 pt-1">
-            <div className="d-flex justify-content-between">
-              <div className="ms-1 me-1">
-                <RdsDatePicker
-                  DatePickerLabel=""
-                  onDatePicker={onDatePicker}
-                ></RdsDatePicker>
-              </div>
-              <div className="ms-4 me-1">
-                <RdsInput
-                  placeholder="User Name"
-                  onKeyDown={(e: any) => {
-                    if (e.keyCode == 13) {
-                      setSelectFilterValue({
-                        ...selectFilterValue,
-                        usernameC: e.target.value,
-                      });
-                    }
-                  }}
-                ></RdsInput>
-              </div>
-              <div className="ms-4 mt-1">
-                <RdsSelectList
-                  onSelectListChange={(e: any) =>
-                    setSelectFilterValue({
-                      ...selectFilterValue,
-                      errorStateC: e.target.value,
-                    })
-                  }
-                  label="Error State"
-                  selectItems={[
-                    {
-                      option: "All",
-                    },
-                    {
-                      option: "Success",
-                    },
-                    {
-                      option: "HasError",
-                    },
-                  ]}
-                />
-              </div>
-            </div>
-         
-          </div>
-             
-            <RdsCompDatatable
-              classes="table__userTable"
-              tableHeaders={props.changeLogsHeaders}
-              tableData={ChangeFilterData}
-              pagination={true}
-              recordsPerPage={5}
-              onActionSelection={onActionSelection}
-              actions={changeActions}
-              noDataTitle="Currently you do not have change log"
-              recordsPerPageSelectListOption={true}
-            ></RdsCompDatatable>
-          
-          </div>
-        </>
-      )}
       <RdsOffcanvas
         backDrop={true}
         preventEscapeKey={true}
         scrolling={false}
-        offId="oparationlogs"
+        offId="auditLogs"
         placement="end"
-        canvasTitle="Operation Logs"
+        canvasTitle="Detail"
+        onclick={offCanvasHandler}
         offcanvaswidth={650}
-        children={
+        className="mx-1"
+      >
+        <RdsNavtabs
+          navtabsItems={navtabsItems}
+          type="tabs"
+          isNextPressed={showAction}
+          activeNavTabId={activeNavTabId}
+          activeNavtabOrder={(activeNavTabId) => {
+            setActiveNavTabId(activeNavTabId), setShowAction(false);
+          }}
+        />
+        {activeNavTabId == 0 && showAction === false && (
           <ViewOperationLogsOffCanvas
-            selectedRowData={OperationFilterData.filter(
+            selectedRowData={ auditData.filter(
               (item: any) => item.id == (tableDataRowid || 1)
             )}
           ></ViewOperationLogsOffCanvas>
-        }
-      ></RdsOffcanvas>
-      <RdsOffcanvas
-        backDrop={true}
-        preventEscapeKey={true}
-        scrolling={false}
-        offId="changelogs"
-        placement="end"
-        canvasTitle="Change Logs"
-        offcanvaswidth={650}
-        children={
-          <ViewChangeLogsOffCanvas
-            selectedRowData={ChangeFilterData.filter(
+        )}
+        {(activeNavTabId == 1 || showAction == true) && (
+          <ActionOperationLogsOffCanvas
+            selectedRowData={auditData.filter(
               (item: any) => item.id == (tableDataRowid || 1)
             )}
-          ></ViewChangeLogsOffCanvas>
-        }
-      ></RdsOffcanvas>
+          ></ActionOperationLogsOffCanvas>
+        )}
+      </RdsOffcanvas>
     </div>
   );
 };
@@ -532,70 +443,84 @@ export default Auditlogs;
 const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
   return (
     <>
-      <h5>
-        <span className="fw-medium">User Information</span>
-      </h5>
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>UserName : </span>
+            <span>Http Status Code : </span>
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.username}</span>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="form-group mb-3">
-            <span>IP Address :</span>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.ipAddress}</span>
+            {/* <span>{selectedRowData.selectedRowData[0]?.username}</span> */}
+            <RdsBadge
+              size="small"
+              label={selectedRowData.selectedRowData[0]?.httpStatusCode}
+              colorVariant="dark"
+            ></RdsBadge>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>Client :</span>
+            <span>Http Method :</span>
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.ipAddress}</span>
+            <RdsBadge
+              size="small"
+              label={selectedRowData.selectedRowData[0]?.httpMethod}
+              colorVariant="success"
+            ></RdsBadge>
           </div>
         </div>
       </div>
       <div className="row">
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>Browser :</span>
+            <span>Url :</span>
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.browserInfo}</span>
+            <span>{selectedRowData.selectedRowData[0]?.url}</span>
           </div>
         </div>
       </div>
-
-      <h5>
-        <span className="fw-medium">Account Information</span>
-      </h5>
       <div className="row">
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>Service :</span>
+            <span>Client Name :</span>
           </div>
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.service}</span>
+            <span>{selectedRowData.selectedRowData[0]?.clientName}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Exceptions :</span>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.exceptions}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>User Name :</span>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.userName}</span>
           </div>
         </div>
       </div>
@@ -608,7 +533,7 @@ const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.time}</span>
+            <span>{selectedRowData.selectedRowData[0]?.executionTime}</span>
           </div>
         </div>
       </div>
@@ -620,7 +545,110 @@ const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
         </div>
         <div className="col-md-6">
           <div className="form-group mb-3">
-            <span>{selectedRowData.selectedRowData[0]?.duration}</span>
+            <span>{selectedRowData.selectedRowData[0]?.executionDuration}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Browser Info : </span>
+          </div>
+        </div>
+        <div className="col-md-6  ">
+          <div className="form-group p-2 fs-6 mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.browserInfo}</span>
+          </div>
+        </div>
+      </div>
+    
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Application Name : </span>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.applicationName}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Correlation Id : </span>
+          </div>
+        </div>
+        <div className="col-md-6  ">
+          <div className="form-group p-2 fs-6 mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.correlationId}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Comments : </span>
+          </div>
+        </div>
+        <div className="col-md-6  ">
+          <div className="form-group p-2 fs-6 mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.comments}</span>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-3">
+            <span>Extra properties : </span>
+          </div>
+        </div>
+        <div className="col-md-6  ">
+          <div className="form-group p-2 fs-6 mb-3">
+            <span>{selectedRowData.selectedRowData[0]?.extraProperties}</span>
+          </div>
+        </div>
+      </div>
+      <div className="footer-buttons my-2">
+        <div className="row">
+          <div className="col-md-12 d-flex">
+            <div>
+              <RdsButton
+                label="Close"
+                type="button"
+                colorVariant="primary"
+                size="small"
+                databsdismiss="offcanvas"
+                isOutline={true}
+              ></RdsButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const ActionOperationLogsOffCanvas = (selectedRowData: any) => {
+  return (
+    <>
+      <div className="row mt-4">
+        <h5 className="py-4">
+          <RdsLabel label="Http Status Code" />
+        </h5>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <div className="form-group mb-4">
+            <span>Duration : </span>
+          </div>
+        </div>
+        <div className="col-md-6  ">
+          <div className="form-group p-2 fs-6 mb-3">
+            <span>
+              {selectedRowData.selectedRowData[0]?.executionDuration} ms
+            </span>
           </div>
         </div>
       </div>
@@ -631,60 +659,28 @@ const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
           </div>
         </div>
         <div className="col-md-6  ">
-          <div
-            className="form-group p-2 parameter-bg-color fs-6 mb-3 " //style="overflow-wrap:anywhere ;"
-          >
-            {selectedRowData.selectedRowData[0]?.parameters}
+          <div className="form-group p-2 fs-6 mb-3">
+            {/* <span>{selectedRowData.selectedRowData[0]?.extraProperties}</span> */}
           </div>
         </div>
       </div>
-      <h5>
-        <span className="fw-medium">Custom Data </span>
-      </h5>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="form-group mb-3">
-            <span>None </span>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form-group mb-3">
-            <span></span>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="form-group mb-3">
-            <span className="fw-medium">Error State : </span>
-          </div>
-          <div className="col-md-6">
-            <div className="form-group mb-3">
-              <RdsBadge
+
+      <div className="footer-buttons my-2">
+        <div className="row">
+          <div className="col-md-12 d-flex">
+            <div>
+              <RdsButton
+                label="Close"
+                type="button"
+                colorVariant="primary"
                 size="small"
-                label="9"
-                colorVariant="success"
-              ></RdsBadge>
+                databsdismiss="offcanvas"
+                isOutline={true}
+              ></RdsButton>
             </div>
           </div>
         </div>
       </div>
     </>
-  );
-};
-const ViewChangeLogsOffCanvas = (selectedRowData: any) => {
-  return (
-    <div className="row">
-      <div className="col-md-6">
-        <div className="form-group mb-3">
-          <span>{selectedRowData.selectedRowData[0]?.action} by:</span>
-        </div>
-      </div>
-      <div className="col-md-6">
-        <div className="form-group mb-3">
-          <span>{selectedRowData.selectedRowData[0]?.username}</span>
-        </div>
-      </div>
-    </div>
   );
 };

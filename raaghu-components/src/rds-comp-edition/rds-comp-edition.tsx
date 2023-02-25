@@ -155,7 +155,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                 )}
                 {(activeNavTabId == 1 || showTenantSettings == true) && (
                   <>
-                    <RdsCompNewFeatures></RdsCompNewFeatures>
+                    {/* <RdsCompNewFeatures></RdsCompNewFeatures> */}
                   </>
                 )}
               </RdsOffcanvas>

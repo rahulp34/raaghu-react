@@ -37,6 +37,9 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(()=>import("ApiScope/ApiScope"));
+const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
+const SecurityLogsCompo =React.lazy(()=>import("SecurityLogs/SecurityLogs"))
+
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -61,7 +64,6 @@ const Main = (props: MainProps) => {
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
     }
-
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
@@ -329,7 +331,7 @@ const Main = (props: MainProps) => {
           key: "6-0",
           label: t("Language"),
           icon: "languages",
-          path: "/template-text",
+          path: "/text-template",
           subTitle: t("Manage user interface languages"),
         },
         {
@@ -505,6 +507,8 @@ const Main = (props: MainProps) => {
                       path="/dynamic-properties"
                       element={<DynamicPropertyCompo></DynamicPropertyCompo>}
                     ></Route>
+                    <Route path="/security-logs" element={<SecurityLogsCompo />}></Route>
+
                     <Route path="/icons"
                       element={<IconListCompo />}></Route>
                     <Route path="/claim-types" element={<ClaimTypesCompo />} />

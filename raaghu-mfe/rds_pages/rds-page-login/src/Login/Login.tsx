@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Login.scss";
-import { ServiceProxy } from "../../../../libs/shared/service-proxy"
-import { getUserConfiguration, } from "../../../../libs/public.api";
+import {ServiceProxy} from "../../../../libs/shared/service-proxy"
+import {  getUserConfiguration} from "../../../../libs/public.api";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
 import { filter } from "lodash-es";
@@ -52,6 +52,20 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       password: password, //"1q2w3E*"
       client_id: "raaghu",
      scope: "address email phone profile roles demoAngular ",
+    };
+    fetch("https://localhost:44317/connect/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(requestBody).toString(),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        localStorage.setItem("access_token", JSON.stringify(data.access_token));
+        hello()   
+      });
+
   };
   fetch("https://localhost:44381/connect/token", {
     method: "POST",
