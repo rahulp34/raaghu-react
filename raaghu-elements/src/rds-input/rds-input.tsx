@@ -7,7 +7,7 @@ export interface RdsInputProps {
 	size?: "small" | "large" | "medium" | string;
 	isDisabled?: boolean;
 	readonly?: boolean;
-	value?: string;
+	value?: any;
 	inputType?: string;
 	placeholder?: string;
 	labelPositon?: string;

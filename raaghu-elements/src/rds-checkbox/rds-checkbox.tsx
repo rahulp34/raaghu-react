@@ -5,7 +5,7 @@ import "./rds-checkbox.scss";
 export interface RdsCheckboxProps {
   label: string;
   labelClass?: string;
-  checked: boolean;
+  checked: any;
   isDisabled?: boolean;
   classes?: string;
   isSwitch?: boolean;
@@ -37,7 +37,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             }
             value=" "
             disabled={props.isDisabled}
-            checked={props.checked}
+            defaultChecked={props.checked}
             id={props.id}
             name={props.name}
             onChange={props.onChange}

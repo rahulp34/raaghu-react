@@ -115,7 +115,6 @@ const textTemplateSlice = createSlice({
     });
     builder.addCase(saveTemplateContent.fulfilled, (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.templateData = action.payload;
     });
     builder.addCase(saveTemplateContent.rejected, (state, action) => {
       state.loading = false;

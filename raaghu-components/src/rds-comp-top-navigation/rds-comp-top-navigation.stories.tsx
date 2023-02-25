@@ -14,7 +14,7 @@ export const Default = Template.bind({});
 Default.args = {
   navbarTitle: "Dashboard",
   navbarSubTitle: "Statistics and reports",
-  darkMode: false,
+  // darkMode: false,
   brandName: "Raaghu",
   profileTitle: "Host Admin",
   profileName: "Keanu Foster",
