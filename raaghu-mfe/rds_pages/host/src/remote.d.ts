@@ -99,7 +99,13 @@ declare module "Applications/Applications" {
 	export default ApplicationsComponent;
 }
 
+declare module "ApiScope/ApiScope" {
+	const ApiScopeComponent : React.ComponentType;
+	export default ApiScopeComponent;
+}
+
 declare module "SecurityLogs/SecurityLogs" {
 	const SecurityLogs : React.ComponentType;
 	export default SecurityLogs;
+
 }

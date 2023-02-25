@@ -19,17 +19,17 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   // const accessToken: any = useSelector(
   //   (state: RootState) => state.persistedReducer.login.accessToken
   // );
-     const navigate = useNavigate();
-     const proxy = new ServiceProxy()
-  const hello=()=>{
+  const navigate = useNavigate();
+  const proxy = new ServiceProxy()
+  const hello = () => {
     var cred = localStorage.getItem("access_token");
     if (cred) {
       var pasrsedtoken = JSON.parse(cred);
-      console.log("pasrsed" , pasrsedtoken)
-      console.log("cred",cred)
+      console.log("pasrsed", pasrsedtoken)
+      console.log("cred", cred)
     }
 
-    
+
 
     proxy.applicationConfiguration(undefined).then((result: any)=>{
       console.log('hello this is result',result)
@@ -44,65 +44,68 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }
 
   const loginHandler = (email: any, password: any) => {
+
+
     const requestBody = {
       grant_type: "password",
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "profile roles phone email address Demo", 
+     scope: "address email phone profile roles demoAngular ",
     };
-    fetch("https://localhost:44317/connect/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(requestBody).toString(),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello()   
-      });
+ 
+  fetch("https://localhost:44381/connect/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(requestBody).toString(),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.setItem("access_token", JSON.stringify(data.access_token));
+      hello()
+    });
   };
-  const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
-    // navigate("/forgot-password");
-    // props.onForgotPassword(isForgotPasswordClicked);
-  };
-  const { t } = useTranslation();
-  return (
-    <div className="login-background">     
-    <div className="align-items-center d-flex justify-content-center login m-auto"
-        style={{ maxWidth: "900px", height: "100vh " }}
-      >        <div className="container-fluid m-2">          <div className="bg-white row rounded-3 ">            <div className="col-md-6">              <div className="py-4 px-3">                <div className="pb-4">                  <div className="text-center">                    <img src="./assets/raaghu_text_logo.svg"></img>                  </div>                </div>                <RdsCompLogin
-                  onLogin={loginHandler}
-                  onForgotPassword={forgotPasswordHandler}
-                />              </div>            </div>            <div
-              className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0"
-              style={{
-                backgroundRepeat: "no-repeat",
-                backgroundColor: "#000",
-                height: 524,
-              }}
-            >              <video
-                className="video position-relative"
-                autoPlay
-                muted
-                loop
-                style={{ width: 442, height: 524 }}
-              >                <source
-                  src="./assets/building_lights.mp4"
-                  type="video/mp4"
-                ></source>              </video>              <img
-                className="position-absolute"
-                style={{
-                  zIndex: "3",
-                  backgroundSize: "cover",
-                  top: 240,
-                  left: 196,
-                  width: 50,
-                  height: 50,
-                }}
-                src="./assets/raaghu_icon.png"
-              ></img>            </div>          </div>        </div>      </div>    </div>  );
+const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
+  // navigate("/forgot-password");
+  // props.onForgotPassword(isForgotPasswordClicked);
+};
+const { t } = useTranslation();
+return (
+  <div className="login-background">      <div
+    className="align-items-center d-flex justify-content-center login m-auto"
+    style={{ maxWidth: "900px", height: "100vh " }}
+  >        <div className="container-fluid m-2">          <div className="bg-white row rounded-3 ">            <div className="col-md-6">              <div className="py-4 px-3">                <div className="pb-4">                  <div className="text-center">                    <img src="./assets/raaghu_text_logo.svg"></img>                  </div>                </div>                <RdsCompLogin
+    onLogin={loginHandler}
+    onForgotPassword={forgotPasswordHandler}
+  />              </div>            </div>            <div
+    className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0"
+    style={{
+      backgroundRepeat: "no-repeat",
+      backgroundColor: "#000",
+      height: 524,
+    }}
+  >              <video
+    className="video position-relative"
+    autoPlay
+    muted
+    loop
+    style={{ width: 442, height: 524 }}
+  >                <source
+    src="./assets/building_lights.mp4"
+    type="video/mp4"
+  ></source>              </video>              <img
+    className="position-absolute"
+    style={{
+      zIndex: "3",
+      backgroundSize: "cover",
+      top: 240,
+      left: 196,
+      width: 50,
+      height: 50,
+    }}
+    src="./assets/raaghu_icon.png"
+  ></img>            </div>          </div>        </div>      </div>    </div>);
 };
 export default Login;

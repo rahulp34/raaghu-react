@@ -35,11 +35,10 @@ const DynamicPropertyCompo = React.lazy(
 const IconListCompo = React.lazy(() => import("IconList/IconList"));
 const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
+const TextTemplateCompo = React.lazy(()=>import("TextTemplate/TextTemplate"));
+const ApiScopeCompo = React.lazy(()=>import("ApiScope/ApiScope"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const SecurityLogsCompo =React.lazy(()=>import("SecurityLogs/SecurityLogs"))
-
-
-
 
 
 export interface MainProps {
@@ -273,6 +272,64 @@ const Main = (props: MainProps) => {
         {
           key: "3-3",
           label: t("Text-Template"),
+          key: "4-3",
+          label: t("Claim Types"),
+          icon: "users",
+          path: "/claim-types",
+          subTitle: t("Manage users and permissions"),
+        },
+        {
+          key: "4-4",
+          label: t("Security-logs"),
+          icon: "users",
+          path: "/security-logs",
+          subTitle: t("Manage users and permissions"),
+        }
+      ],
+    },
+    {
+      key: "5",
+      label: t("Identity Server"),
+      icon: "pages",
+      children: [
+        {
+          key: "5-0",
+          label: t("Client"),
+          icon: "editions",
+          path: "/client",
+          subTitle: t("Manage editions and features of the application"),
+        },
+        {
+          key: "5-1",
+          label: t("Identity Resources"),
+          icon: "editions",
+          path: "/identity-resources",
+          subTitle: t("Manage editions and features of the application"),
+        },
+        {
+          key: "5-2",
+          label: t("Api Resources"),
+          icon: "editions",
+          path: "/api-resources",
+          subTitle: t("Manage editions and features of the application"),
+        },
+        {
+          key: "5-3",
+          label: t("Api Scopes"),
+          icon: "editions",
+          path: "/api-scope",
+          subTitle: t("Manage editions and features of the application"),
+        },
+      ],
+    },
+    {
+      key: "6",
+      label: t("Language Management"),
+      icon: "pages",
+      children: [
+        {
+          key: "6-0",
+          label: t("Language"),
           icon: "languages",
           path: "/text-template",
           subTitle: t("Manage user interface languages"),
@@ -460,6 +517,7 @@ const Main = (props: MainProps) => {
                     </Route>
                     <Route path="/applications" element={<ApplicationsCompo />}></Route>
 
+                    <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

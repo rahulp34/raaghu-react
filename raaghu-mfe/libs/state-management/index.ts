@@ -5,6 +5,7 @@ import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
+import scopesReducer from "./apiScope/apiScope-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   claimTypes: ClaimTypesReducer,
   securityLogs:securityLogsReducer,
   applications : applicationsReducer,
+  scopes: scopesReducer,          
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
   user: userReducer,
