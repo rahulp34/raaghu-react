@@ -9,39 +9,28 @@ import {
 import {
   RdsCompAlertPopup,
   RdsCompDatatable,
-  RdsCompApplicationBasic
+  RdsCompApplicationBasic,
+  RdsCompPermissionTree
 } from "../../../rds-components";
 
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchApplications, deleteApplications, saveApplications, getScopes, getApplications, updateApplications } from "../../../../libs/state-management/applications/applications-slice";
+import { fetchApplications, deleteApplications, saveApplications, getScopes, getApplications, updateApplications, getPermission, updatePermission } from "../../../../libs/state-management/applications/applications-slice";
 
 const Applications = () => {
   const dispatch = useAppDispatch();
   const application = useAppSelector((state) => state.persistedReducer.applications);
-  const [applicationId, setApplicationId] = useState("")
+  const [applicationId, setApplicationId] = useState("");
+  const [permissionKeyName, setPermissionKeyName] = useState("")
   const [editApplicationData, setEditApplicationData] = useState<any>(
-    {
-      clientId: '',
-      displayName: '',
-      clientUri: '',
-      logoUri: '',
-      allowAuthorizationCodeFlow: false,
-      allowDeviceEndpoint: false,
-      allowImplicitFlow: false,
-      allowHybridFlow: false,
-      allowPasswordFlow: false,
-      allowClientCredentialsFlow: false,
-      allowRefreshTokenFlow: false,
-      type: '',
-      scopes: ''
-    });
+    {});
 
   useEffect(() => {
     dispatch(fetchApplications() as any);
     dispatch(getScopes() as any);
+   
   }, [dispatch]);
 
   useEffect(() => {
@@ -63,7 +52,7 @@ const Applications = () => {
   useEffect(() => {
     let tempScopes: any[] = [];
     if (application.scopes && application.scopes.length > 0) {
-      
+
       application.scopes.map((e: any) => {
         const item = {
           option: e.name,
@@ -76,27 +65,34 @@ const Applications = () => {
   }, [application.scopes]);
 
   useEffect(() => {
-    
-    
+    if (application.permission && application.permission.groups.length > 0) {
+      setPermissionListData(application.permission.groups);
+    }
+  }, [application.permission]);
+
+  useEffect(() => {
     if (application.editApplication) {
-      const tempData = {...application.editApplication}
+      const tempData = { ...application.editApplication }
       setEditApplicationData(tempData)
-      //console.log(tempData, "EditApplicationData");
     }
   }, [application.editApplication]);
 
   const [tableDataId, setTableDataRowId] = useState(0);
+  const [tableDisplayName , settableDisplayName] = useState();
   const scopeSelection = (
     clickEvent: any,
     tableDataRow: any,
     tableDataRowIndex: number,
     action: { displayName: string; id: string }
   ) => {
-    
+debugger
     setTableDataRowId(tableDataRowIndex);
+    settableDisplayName(tableDataRow.clientId);
     const tempApplicationId = String(tableDataRowIndex)
     setApplicationId(tempApplicationId)
+    setPermissionKeyName(tableDataRow.clientId)
     dispatch(getApplications(tempApplicationId) as any);
+    dispatch(getPermission(tableDataRow.clientId) as any);
   };
   function onDeleteHandler(e: any) {
     const tableDataIndex = String(tableDataId)
@@ -126,14 +122,29 @@ const Applications = () => {
   }
 
   function handleEditSubmit(data: any) {
-    
     const payload = {
-      id:applicationId,
-      body:data
+      id: applicationId,
+      body: data
     }
-    console.log(data , 'editApplicationData');
+    console.log(data, 'editApplicationData');
     dispatch(updateApplications(payload) as any);
   }
+
+  function SelectesPermissions(permissionsData: any) {
+    setSelectedPermissionListData(permissionsData)
+  }
+
+  function handleSelectesPermission() {
+    debugger
+      const permissions : any= {
+        key : permissionKeyName,
+        permissions:{
+        permissions : selectedPermissionListData
+        }
+      }
+      dispatch(updatePermission(permissions) as any);
+  }
+
 
   const tableHeaders = [
     {
@@ -168,7 +179,6 @@ const Applications = () => {
   ];
   const navtabsItems = [
     { label: "Applications Information", tablink: "#nav-home", id: 0 },
-    { label: "Permissions", tablink: "#nav-profile", id: 1 },
   ];
 
   const navtabsEditItems = [
@@ -202,8 +212,12 @@ const Applications = () => {
       displayName: '',
       type: '',
     });
-  
+
   const [scopesListData, setScopesListData] = useState<any>([]);
+  const [permissionListData, setPermissionListData] = useState<any>([]);
+  const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
+
+
   const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
@@ -214,7 +228,7 @@ const Applications = () => {
     { option: 'Public client', value: 'public' },
   ];
 
-  const consentType :any[] = [
+  const consentType: any[] = [
     { option: 'Explicit consent', value: 'explicit' },
     { option: 'External consent', value: 'external' },
     { option: 'Implicit consent', value: 'implicit' },
@@ -263,10 +277,6 @@ const Applications = () => {
             {activeNavTabId == 0 && showNextTab === false && (
               <RdsCompApplicationBasic handleSubmit={(basicApplicationData: any) => { handleApplicationSubmit(basicApplicationData) }} basicData={basicApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType}></RdsCompApplicationBasic>
             )}
-            {(activeNavTabId == 1 || showNextTab == true) && (
-              // <RdsCompNewClaimType></RdsCompNewClaimType>
-              <></>
-            )}
           </RdsOffcanvas>
         </div>
 
@@ -304,8 +314,38 @@ const Applications = () => {
                 <RdsCompApplicationBasic handleSubmit={(editApplicationData: any) => { handleEditSubmit(editApplicationData) }} basicData={editApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType} ></RdsCompApplicationBasic>
               )}
               {(activeNavTabEditId == 1 || showNextTab == true) && (
-                // <RdsCompNewClaimType></RdsCompNewClaimType>
-                <></>
+                <>
+                  <RdsCompPermissionTree permissions={permissionListData} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
+                  <div className="footer-buttons my-2">
+                    <div className="row">
+                      <div className="col-md-12 d-flex">
+                        <div>
+                          <RdsButton
+                            label="Cancel"
+                            type="button"
+                            colorVariant="primary"
+                            size="small"
+                            databsdismiss="offcanvas"
+                            isOutline={true}
+                          ></RdsButton>
+                        </div>
+                        <div>
+                          <RdsButton
+                            label="Save"
+                            type="button"
+                            size="small"
+                            // isDisabled={formValid}
+                            class="ms-2"
+                            colorVariant="primary"
+                            databsdismiss="offcanvas"
+                            onClick={handleSelectesPermission}
+                          ></RdsButton>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+
               )}
             </RdsOffcanvas>
             <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
