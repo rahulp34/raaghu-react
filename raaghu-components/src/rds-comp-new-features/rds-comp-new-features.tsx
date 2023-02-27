@@ -81,7 +81,7 @@ const RdsCompFeatures = (props: any) => {
                   label="Select"
                   selectItems={[{option:"optional",value:"Optional"},{option:"forced",value:"Forced"},{option:"disable",value:"Disable"}]}
                   selectedValue={a}
-                  onSelectListChange={(e) => {
+                  onSelectListChange={(e: any) => {
                     twoFactChange(e)
                   }}
                   size="small"
