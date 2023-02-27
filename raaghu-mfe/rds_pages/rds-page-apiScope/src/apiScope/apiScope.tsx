@@ -11,14 +11,17 @@ import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
-import { RdsButton, RdsOffcanvas, RdsNavtabs, RdsLabel, RdsInput, RdsTextArea, RdsAlert, RdsModal } from "../../../rds-elements";
+import { RdsButton, RdsOffcanvas, RdsLabel, RdsInput, RdsTextArea, RdsAlert, RdsModal } from "../../../rds-elements";
 import { fetchScopesData, deleteScopesData, getScopesData, updateScopesData, editScopesData } from "../../../../libs/state-management/apiScope/apiScope-slice"
+//import { entityChangesWithUsername } from "../../../../libs/state-management/audit-logs/audit-log-slice";
 interface RdsPageScopeProps { }
 
 const ApiScope = (props: RdsPageScopeProps) => {
   const { t } = useTranslation();
   const scopeuser = useAppSelector((state) => state.persistedReducer.scopes);
+  const scopehistory = useAppSelector((state) => state.persistedReducer.auditLog);
   const [scopeData, setScopeData] = useState<any[]>([{}]);
+
   const [editscopeData, setEditScopeData] = useState({
     id: "",
     name: "",
@@ -46,6 +49,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
           name: scope.name,
           displayName: scope.displayName,
           description: scope.description,
+          
         }
       })
       setScopeData(setData1)
@@ -65,15 +69,8 @@ const ApiScope = (props: RdsPageScopeProps) => {
     }
   }
     , [scopeuser.editScope]);
-
-
-  useEffect(() => {
-    // setShowAlert({
-    // color: true,
-    //       show: false,
-    //       message :""
-    // })
-   
+  
+  useEffect(() => { 
 			const timer = setTimeout(() => {
         setShowAlert({
           color: true,
@@ -89,8 +86,6 @@ const ApiScope = (props: RdsPageScopeProps) => {
 
   const [tableDataid, setTableDataRowId] = useState(0);
 
-  const [email, setemail] = useState();
-
   const scopeSelection = (
     clickEvent: any,
     tableDataRow: any,
@@ -98,6 +93,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
     action: { displayName: string; id: string }
   ) => {
     setTableDataRowId(tableDataRowIndex)
+ 
     dispatch(editScopesData(tableDataRow.id) as any);
 
   };
@@ -113,6 +109,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
       name: data.email,
       displayName: data.fullname,
       description: data.message,
+      resources : data.resources,
     };
     dispatch(getScopesData(newDto) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
     setShowAlert({color:true,show:true,message:"Scope added Successfully"})
@@ -164,11 +161,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
 
       <div className="card card-full-stretch mt-3 p-3 ">
         <div className="d-flex justify-content-between">
-          <RdsLabel
-            label="Scopes"
-            fontWeight="600"
-          />
-
+        <div className="h5">Scopes</div>
           <div>
             <RdsOffcanvas
               canvasTitle={t("New Scope")}
@@ -229,13 +222,19 @@ const ApiScope = (props: RdsPageScopeProps) => {
             }
           ></RdsOffcanvas>
           <RdsModal
-            modalId=""
-            modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope"
+            modalId="change_history"
+            modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope" 
             modalAnimation="modal fade"
             showModalHeader={true}
-
           >
+       
+            <p>({editscopeData.id})</p>
+            <p className="text-center" >No Change(s)</p>
+            <div className="text-end">
 
+              <RdsButton type={"button"} colorVariant="primary" label="Close" databsdismiss="modal" databstarget="change_history"></RdsButton>
+            </div>
+           
           </RdsModal>
           <RdsCompAlertPopup
             alertID="dynamic_delete_off"

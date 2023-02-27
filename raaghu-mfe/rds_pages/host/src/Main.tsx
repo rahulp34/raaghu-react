@@ -248,7 +248,7 @@ const Main = (props: MainProps) => {
               key: "3-1-1",
               label: t("Scopes"),
               icon: "tenant",
-              path: "/scopes",
+              path: "/api-scope",
               subTitle: t(
                 "Use organization units to organize users and entities"
               ),
