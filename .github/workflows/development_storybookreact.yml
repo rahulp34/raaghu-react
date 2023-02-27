@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - storybookreact
 on:
   push:
     branches:
-      - development
+      - development-abp
   workflow_dispatch:
 
 jobs:
@@ -22,10 +22,10 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: npm install at raaghu-themes
-        working-directory: raaghu-themes
-        run: |
-          npm install
+      # - name: npm install at raaghu-themes
+      #   working-directory: raaghu-themes
+      #   run: |
+      #     npm install
 
       - name: build storybook
         run: |
