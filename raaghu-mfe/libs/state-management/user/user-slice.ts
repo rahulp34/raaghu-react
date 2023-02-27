@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import { result } from "lodash-es";
 import { ServiceProxy } from "../../shared/service-proxy";
 
 
@@ -10,12 +11,14 @@ export interface UserState {
   loading: boolean
   users: any
   organizationUnit:any
+  editUser:any
   roles:any
   error: string;
 };
 export const UserInitialState: UserState = {
   loading: false,
   users: [],
+  editUser:null,
   roles:null,
   organizationUnit:null,
   error: "",
@@ -62,6 +65,14 @@ export const fetchEditUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk("user/updateUser",
+(data:any)=>{
+  return proxy.usersPUT(data.id, data.body).then((result:any)=>{
+    console.log("successfully updated user")
+    return result;
+  })
+})
+
 export const createUser = createAsyncThunk(
   "user/createuser",
   (data:any)=>{
@@ -70,6 +81,12 @@ export const createUser = createAsyncThunk(
     })
   }
 )
+
+export const deleteUser = createAsyncThunk("user/deleteUser",(data:any)=>{
+  return proxy.usersDELETE(data).then(result=>{
+    return result;
+  })
+})
 
 const userSlice = createSlice({
   name: "user",
@@ -141,7 +158,44 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
-    
+
+
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(
+      updateUser.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(updateUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(
+      deleteUser.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
   },
 });
 

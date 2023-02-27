@@ -22,21 +22,7 @@ export const tenantInitialState: TenantState = {
   feature:null
 };
 
-// export const fetchTenants= createAsyncThunk(
-//   "tenants/fetchTenants",
-//   ()=>{
-//     return fetch("https://anzdemoapi.raaghu.io/api/saas/tenants",{
-//       method: "GET",
-//       headers: {
-//         Authorization: "Bearer + parsedCredentials.token"
-//       },
-//       .then
-//     }
 
-//     }
-//   }
-
-// )
 
 
 
