@@ -8,11 +8,13 @@ import {
   
   type InitialState = {
     roles: any;
+    permission:any;
     error: string;
     status: "pending" | "loading" | "error" | "success";
   };
   export const initialState: InitialState = {
     roles: [],
+    permission:[],
     error: "",
     status: "pending",
   };
@@ -40,10 +42,12 @@ import {
   export const editRoles = createAsyncThunk(
     "Roles/editRoles",
     async ({ id, dTo }: { id: any; dTo: any }) => {
+      console.log('dTo from slice ',dTo )
       const result = await proxy.rolesPUT2(id, dTo);
       return result;
     }
   );
+  
   export const deleteRoles = createAsyncThunk(
     "Roles/deleteRoles",
     async (id: any) => {
@@ -52,6 +56,28 @@ import {
     }
   );
  
+  //permissionsGET
+  export const fetchPermission = createAsyncThunk(
+    "Roles/fetchPermission",
+  async  (key:any) => {
+       return proxy.permissionsGET('R' , key).then(
+        (result:any)=>{
+            console.log('fetched data , ',result  )
+          return result.groups
+
+        }
+      ); 
+    }
+  );
+
+  //permissionsPUT
+  export const editPermisstion = createAsyncThunk(
+    "Roles/editPermisstion",
+    async ({ key, dTo }: { key: any; dTo: any }) => {
+      const result = await proxy.permissionsPUT('R', key,dTo);
+      return result;
+    }
+  );
   const RolesSlice = createSlice({
     name: "Roles",
     initialState,
@@ -106,7 +132,39 @@ import {
         state.roles = [];
         state.error = action.error.message || "Something Went Wrong";
       });
-      
+      //permission
+      builder.addCase(fetchPermission.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        fetchPermission.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = "success";
+          state.permission = action.payload;
+          state.error = "";
+        }
+      );
+      builder.addCase(fetchPermission.rejected, (state, action) => {
+        state.status = "error";
+        state.permission = [];
+        state.error = action.error.message || "Something went wrong";
+      });
+      builder.addCase(editPermisstion.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        editPermisstion.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = "success";
+          state.permission = action.payload;
+          state.error = "";
+        }
+      );
+      builder.addCase(editPermisstion.rejected, (state, action) => {
+        state.status = "error";
+        state.permission = [];
+        state.error = action.error.message || "Something Went Wrong";
+      });
     }
   });
   export default RolesSlice.reducer;
