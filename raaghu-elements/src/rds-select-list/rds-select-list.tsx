@@ -8,29 +8,52 @@ export interface RdsSelectProps{
     selectedOption?:any;
     size?:string;
     selectItems: any[];
+    selectedValue?:any;
     id?:string;
     selectedValue?:any;
     classes?:string, 
     children?:React.ReactNode
-    onSelectListChange ?:( Event:React.ChangeEvent<HTMLSelectElement>, ) => void; 
+    someCallback?:any;
+    onSelectListChange ?:any; 
    }
 
 const RdsSelectList = (props: RdsSelectProps) => {
 
+  // setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
+  const handleChange = (e :any) => {
+    if(props.isMultiple){
+      var options = e.target.options;
+      var value = [];
+      for (var i = 0, l = options.length; i < l; i++) {
+        if (options[i].selected) {
+          value.push(options[i].value);
+        }
+      }
+      props.someCallback(value);
+      console.log("value",value)
+    }else{
+      props.onSelectListChange(e.target.value);
+      
+    }
+  }
+   
   const Size = `${props.hasOwnProperty("size") ? props.size : "md"}`
   const customSize = `${Size === "lg" ? "form-select form-select-lg" : Size === "sm" ? "form-select form-select-sm" : "form-select"}`
 
-  let Multiple = props.isMultiple || false;
+  // let Multiple = props.isMultiple || false;
   let Disabled = props.isDisabled || false;
   
   return (
     <Fragment>
-      <select id={props.id} value={props.selectedValue} className={`${customSize} ${props.classes}`} disabled={Disabled} multiple={Multiple} aria-label="select example" onChange={props.onSelectListChange}>
-        <option disabled  hidden className="text-muted">{props.label}</option>
-        {props.selectItems.map((selectItem) => (
-          <option value={selectItem.value} key={selectItem.value}>{props.children}{selectItem.option}</option>
+      <select key={props.id}  value={props.selectedValue} className={`${customSize} ${props.classes}`}
+       disabled={Disabled} multiple={props.isMultiple} aria-label="select example"
+       onChange={handleChange}>{}
+        <option  hidden className="text-muted">{props.label}</option>
+        {props.selectItems.map((selectItem,i) => (
+          <option value={selectItem.value}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>
         ))}
       </select>
+     
     </Fragment>
   );
 };
