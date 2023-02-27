@@ -1,66 +1,66 @@
 export const PortConfig = {
-	"host":{
-		"port":"8080"
+	"host": {
+		"port": "8080"
 	},
-	"edition":{
-		"port":"8001"
+	"edition": {
+		"port": "8001"
 	},
-	"dashboard":{
-    "port":"8002"	 
+	"dashboard": {
+		"port": "8002"
 	},
-	"forgotpassword":{
-		"port":"8003"
+	"forgotpassword": {
+		"port": "8003"
 	},
-	"login":{
-		"port":"8004"
+	"login": {
+		"port": "8004"
 	},
-	"maintainance":{
-    "port":"8005"
+	"maintainance": {
+		"port": "8005"
 	},
-	"tenant":{
-		"port":"8006"
+	"tenant": {
+		"port": "8006"
 	},
-	"visualSetting":{
-    "port":"8007"
+	"visualSetting": {
+		"port": "8007"
 	},
-	"webhookSubscription":{
-    "port":"8008"
+	"webhookSubscription": {
+		"port": "8008"
 	},
-	"auditLogs":{
-    "port":"8009"
+	"auditLogs": {
+		"port": "8009"
 	},
-	"settings":{
-		"port":"8010"
+	"settings": {
+		"port": "8010"
 	},
-	"dynamicProperties":{
-		"port":"8011"
+	"dynamicProperties": {
+		"port": "8011"
 	},
-	"roles":{
-		"port":"8012"
+	"roles": {
+		"port": "8012"
 	},
-	"organizationUnits":{
-		"port":"8013"
+	"organizationUnits": {
+		"port": "8013"
 	},
-	"language":{
-		"port":"8014"
+	"language": {
+		"port": "8014"
 	},
-	"users":{
-		"port":"8015"
+	"users": {
+		"port": "8015"
 	},
-	"iconlist":{
-		"port":"8016"
+	"iconlist": {
+		"port": "8016"
 	},
-	"languageText":{
-		"port":"8017"
+	"languageText": {
+		"port": "8017"
 	},
-	"claimtypes":{
-		"port":"8018"
-  },
-	"textTemplate":{
-		"port":"8020"
+	"claimtypes": {
+		"port": "8018"
 	},
-	"applications":{
-		"port":"8025"
+	"textTemplate": {
+		"port": "8020"
+	},
+	"applications": {
+		"port": "8025"
 	},
 	"securityLogs": {
 		"port": "8021"
