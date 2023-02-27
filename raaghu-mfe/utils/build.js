@@ -16,23 +16,25 @@ if (process.argv.length > 3) {
 let mfeConfig = fs.readFileSync(mfeFilePath).toString();
 let mfeConfigJSON = mfeConfig.substring(mfeConfig.indexOf("{"), mfeConfig.lastIndexOf("}") + 1);
 
-mfeConfigJSON = mfeConfigJSON.replace(/\'/g, "\"");
-mfeConfigJSON = mfeConfigJSON.replace(/([a-zA-Z]*): {/g, "\"$1\": {");
-mfeConfigJSON = mfeConfigJSON.replace(/url:/g, "\"url\":");
-mfeConfigJSON = mfeConfigJSON.replace(/\",/g, "\"");
+// mfeConfigJSON = mfeConfigJSON.replace(/\'/g, "\"");
+// mfeConfigJSON = mfeConfigJSON.replace(/([a-zA-Z]*): {/g, "\"$1\": {");
+// mfeConfigJSON = mfeConfigJSON.replace(/url:/g, "\"url\":");
+// mfeConfigJSON = mfeConfigJSON.replace(/\",/g, "\"");
+// console.log(mfeConfigJSON);
 mfeConfigJSON = JSON.parse(mfeConfigJSON);
 if (appConfig.replaceUrl == "true") {
 
   console.log('Changing URLs in .env file...');
   fs.copyFileSync(mfeFilePath, mfeFilePathTemp);
-  console.log("file path mayank2",mfeConfigJSON)
+  // console.log("file path mayank2",mfeConfigJSON);
 
   let portConfig = fs.readFileSync(portFilePath).toString();
   let portConfigJSON = portConfig.substring(portConfig.indexOf("{"), portConfig.lastIndexOf("}") +1);
-  portConfigJSON = portConfigJSON.replace(/\'/g, "\"");
-  portConfigJSON = portConfigJSON.replace(/([a-zA-Z]*): {/g, "\"$1\": {");
-  portConfigJSON = portConfigJSON.replace(/url:/g, "\"port\":");
-  portConfigJSON = portConfigJSON.replace(/\",/g, "\"");
+  // portConfigJSON = portConfigJSON.replace(/\'/g, "\"");
+  // portConfigJSON = portConfigJSON.replace(/([a-zA-Z]*): {/g, "\"$1\": {");
+  // portConfigJSON = portConfigJSON.replace(/url:/g, "\"port\":");
+  // portConfigJSON = portConfigJSON.replace(/\",/g, "\"");
+  // console.log(portConfigJSON);
   portConfigJSON = JSON.parse(portConfigJSON);
   // console.log("port file path :",portConfigJSON)
 
@@ -56,8 +58,7 @@ if (appConfig.replaceUrl == "true") {
           break;
       }
     }
-
-      console.log("Updated mfeConfig : ",mfeConfigJSON)
+      // console.log("Updated mfeConfig : ",mfeConfigJSON);
   }
 
   mfeConfig = mfeConfig.substring(0, mfeConfig.indexOf("{")) + JSON.stringify(mfeConfigJSON, null, 2);
@@ -68,7 +69,7 @@ if (appConfig.replaceUrl == "true") {
 
 
 for(const page of Object.keys(mfeConfigJSON)) {
-  console.log(page)
+  // console.log(page);
   if(page=='host'){
     execSync(`concurrently \"cd rds_pages\\host && npm run build\"`, { cwd: process.cwd(), stdio: 'inherit' });
   }else{
