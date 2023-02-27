@@ -8,7 +8,7 @@ import {
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 
-import { createUser, deleteUser, fetchEditUser, fetchOrganizationUnits, fetchRoles, fetchUsers } from "../../../../libs/state-management/user/user-slice";
+import { createUser, deleteUser, fetchEditUser, fetchOrganizationUnits, fetchRoles, fetchUsers, getPermission, updatePermission } from "../../../../libs/state-management/user/user-slice";
 
 const Users = () => {
   const dispatch = useAppDispatch();
@@ -753,7 +753,23 @@ const Users = () => {
     //   this.newUser(event);
     // }
   }
+  const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
 
+  const [permissionKeyName, setPermissionKeyName] = useState(0)
+  function handleSelectesPermission() {
+    debugger
+      const permissions : any= {
+        key : permissionKeyName,
+        permissions:{
+        permissions : selectedPermissionListData
+        }
+      }
+      dispatch(updatePermission(permissions) as any);
+  }
+
+  function SelectesPermissions(permissionsData: any) {
+    setSelectedPermissionListData(permissionsData)
+  }
 
   const onActionSelection = (
     clickEvent: any,
@@ -762,10 +778,14 @@ const Users = () => {
     action: { displayName: string; id: string }
   ) => {
     console.log(event);
+    setPermissionKeyName(tableDataRowIndex)
     setUserId(String(tableDataRowIndex));
     if (action.displayName === "Edit") {
       dispatch(fetchEditUser(String(tableDataRowIndex)) as any)
     }
+    var tableId = String(tableDataRowIndex);
+    dispatch(getPermission(tableId) as any);
+
   };
 
   function getSelectedPermissions(data: any) {
@@ -1153,10 +1173,41 @@ const Users = () => {
           )}
 
           {activeNavTabId == 1 && (
-             <RdsCompPermissionTree
-                permissions={userPermission} 
-                selectedPermissions={handlerSelectedPermission}  
-              ></RdsCompPermissionTree>
+            //  <RdsCompPermissionTree
+            //     permissions={userPermission} 
+            //     selectedPermissions={handlerSelectedPermission}  
+            //   ></RdsCompPermissionTree>
+              <>
+              <RdsCompPermissionTree permissions={userPermission} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
+              <div className="footer-buttons my-2">
+                <div className="row">
+                  <div className="col-md-12 d-flex">
+                    <div>
+                      <RdsButton
+                        label="Cancel"
+                        type="button"
+                        colorVariant="primary"
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isOutline={true}
+                      ></RdsButton>
+                    </div>
+                    <div>
+                      <RdsButton
+                        label="Save"
+                        type="button"
+                        size="small"
+                        // isDisabled={formValid}
+                        class="ms-2"
+                        colorVariant="primary"
+                        databsdismiss="offcanvas"
+                        onClick={handleSelectesPermission}
+                      ></RdsButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
 
           </RdsNavtabs>
