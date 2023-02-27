@@ -49,10 +49,10 @@ jobs:
         run: |
           npm install
 
-      # - name: npm install at raaghu-themes
-      #   working-directory: raaghu-themes
-      #   run: |
-      #     npm install
+      - name: npm install at raaghu-components
+        working-directory: raaghu-components
+        run: |
+          npm install
 
       - name: npm install, build, and test raaghu-mfe
         working-directory: raaghu-mfe
