@@ -1,5 +1,5 @@
 import "./rds-comp-permission-tree.scss";
-import React, { useState, } from "react";
+import React, { useState, useEffect} from "react";
 import { RdsCheckbox } from "raaghu-react-elements";
 
 export interface RdsCompPermissionTreeProps {
@@ -18,17 +18,28 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
   const [treeData, setTreeData] = useState(finalPermissionData);
   const [selectAll, setSelectAll] = useState(false);
-  const [selectAllInter, setSelectAllInter] = useState(false);
+  const [selectAllInter, setSelectAllInter] = useState(false);  
+
+  useEffect(() => {
+    for (let i = 0; i < treeData.length; i++) {
+      const grantedPermissions = treeData[i].permissions.filter((x: any) => x.isGranted);
+      if (grantedPermissions.length > 0) {
+        for (let childIndex = 0; childIndex < grantedPermissions.length; childIndex++) {
+          if (grantedPermissions[childIndex].isGranted) selectChild(grantedPermissions[childIndex].isGranted, grantedPermissions[childIndex], i);
+        }
+      }
+    }
+  }, []);
 
   // Select All Permissions
   function selectAllFn(event: any) {
     const allCheck = treeData.map(item => (
       {
-        ...item, isChecked: event.target.checked, isIntermediate: false,
-        permissions: item.permissions.map((permItems: any) => ({ ...permItems, isGranted: event.target.checked, isIntermediate: false }))
+        ...item, isChecked: event, isIntermediate: false,
+        permissions: item.permissions.map((permItems: any) => ({ ...permItems, isGranted: event, isIntermediate: false }))
       }
     ));
-    setSelectAll(event.target.checked);
+    setSelectAll(event);
     setSelectAllInter(false);
     setTreeData(allCheck);
     emitData(allCheck);
@@ -36,13 +47,13 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
   // select Particluar Parent
   function selectParentFn(event: any, checkData: any) {
-    checkData.isChecked = event.target.checked;
+    checkData.isChecked = event;
     const selectAllChild = treeData.map((parent: any) => {
       return {
-        ...parent, isChecked: checkData.name === parent.name ? event.target.checked : parent.isChecked,
+        ...parent, isChecked: checkData.name === parent.name ? event : parent.isChecked,
         isIntermediate: checkData.name === parent.name ? false : parent.isIntermediate, permissions: parent.permissions.map((child: any) => (
           {
-            ...child, isGranted: checkData.name === parent.name ? event.target.checked : child.isGranted,
+            ...child, isGranted: checkData.name === parent.name ? event : child.isGranted,
             isIntermediate: checkData.name === parent.name ? false : child.isIntermediate
           }
         ))
@@ -55,14 +66,13 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
   // Select Children
   function selectChild(event: any, checkData: any, mainParentIndex: any) {
-    const check = event.target.checked;
-    checkData.isGranted = check;
+    checkData.isGranted = event;
     const data = treeData.map(parent => {
       return {
         ...parent, permissions: parent.permissions.map((child: any) => {
           if (parent.permissions.length > 0) {
             if (checkData.parentName !== null) {
-              if (checkData.name === child.name) return { ...child, isGranted: check, isIntermediate: false };
+              if (checkData.name === child.name) return { ...child, isGranted: event, isIntermediate: false };
               const childCheckLength = parent.permissions.filter((x: any) => x.parentName === child.name && x.parentName !== null && x.isGranted).length;
               const childLength = parent.permissions.filter((x: any) => x.parentName === child.name).length;
               return checkData.parentName === child.name ? {
@@ -72,9 +82,9 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
             } else if (checkData.parentName === null) {
               const childrenLength = parent.permissions.filter((x: any) => x.parentName === checkData.name).length;
               return childrenLength > 0 ? {
-                ...child, isGranted: child.parentName === checkData.name || child.name === checkData.name ? check : child.isGranted,
+                ...child, isGranted: child.parentName === checkData.name || child.name === checkData.name ? event : child.isGranted,
                 isIntermediate: child.name === checkData.name ? false : child.isIntermediate
-              } : { ...child, isGranted: child.name === checkData.name ? check : child.isGranted, isIntermediate: child.name === checkData.name ? false : child.isIntermediate };
+              } : { ...child, isGranted: child.name === checkData.name ? event : child.isGranted, isIntermediate: child.name === checkData.name ? false : child.isIntermediate };
             };
           };
         })
@@ -108,12 +118,7 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
     const per = finalPermissionData[mainParentIndex].permissions;
     const data = per.length;
     const lastElementName = per[per.length - 1].name;
-    const permissionsArr = per.filter((x: any) => x.name === node.parentName);
-    if (data > 0) {
-      if (data <= 1) return false;
-    }
-    else if (lastElementName === node.name) return false;
-    return true;
+    return data > 0 && data <= 1 ? false : lastElementName === node.name ? false : true;
   }
 
   // Set SelectAll Main Checkbox
@@ -130,25 +135,33 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
     return lastElement.name == node.name ? (lastElement.permissions.length * 50).toString() + '%' : '100%';
   }
 
+  // Custom height of vertical line for child
+  function customHeightChild(node: any, mainParentIndex: number) {
+    const lastChildElement = finalPermissionData[mainParentIndex].permissions[finalPermissionData[mainParentIndex].permissions.length - 1];
+    if (lastChildElement.name === node.name) return '0%'
+    return '100%';
+  }
+
   return (
     <>
       <div className="checkedstyle dottedstyle">
         <div className="position-relative">
           <div className="vertical-dotted-line-select-all"></div>
-          <RdsCheckbox label={"Select All"} checked={selectAll} onChange={selectAllFn} state={selectAllInter ? 'Indeterminate' : 'Checkbox'} />
+          <RdsCheckbox label={"Select All"} checked={selectAll} onChange={(e) => selectAllFn(e.target.checked)} state={selectAllInter ? 'Indeterminate' : 'Checkbox'} />
         </div>
         {treeData.map((mainParent, mainParentIndex) => (
           <div className="ms-4 position-relative">
             <div className="vertical-dotted-line" style={{ 'height': customHeightParent(mainParent) }} ></div>
-            <div className="position-relative checkboxClass">
-              <RdsCheckbox label={mainParent.displayName} checked={mainParent.isChecked} state={mainParent.isIntermediate ? 'Indeterminate' : 'Checkbox'} onChange={(e) => selectParentFn(e, mainParent)} />
+            <div className="position-relative pt-4">
+              <RdsCheckbox label={mainParent.displayName} checked={mainParent.isChecked} state={mainParent.isIntermediate ? 'Indeterminate' : 'Checkbox'} onChange={(e) => selectParentFn(e.target.checked, mainParent)} />
               <div className="horizontal-dotted-line dottedstyle"></div>
             </div>
             {mainParent.permissions.map((parent: any, i: number) => (
               <div className="ms-4 position-relative">
-                <div className={'vertical-dotted-line ' + `${!showVerticalLine(parent, mainParentIndex) ? 'd-none' : ''}`} style={{ 'height': '100%' }} ></div>
-                <div className={`${parent.parentName === null ? 'position-relative checkboxClass' : 'ms-4 position-relative checkboxClass'}`}>
-                  <RdsCheckbox label={parent.displayName} state={parent.isIntermediate ? 'Indeterminate' : 'Checkbox'} checked={parent.isGranted} onChange={(e) => selectChild(e, parent, mainParentIndex)} />
+                <div className={'vertical-dotted-line ' + `${!showVerticalLine(parent, mainParentIndex) ? 'd-none' : ''}`}
+                  style={{ 'height': customHeightChild(parent, mainParentIndex) }} ></div>
+                <div className={'position-relative pt-4 ' + `${parent.parentName === null ? '' : 'ms-4'}`}>
+                  <RdsCheckbox label={parent.displayName} state={parent.isIntermediate ? 'Indeterminate' : 'Checkbox'} checked={parent.isGranted} onChange={(e) => selectChild(e.target.checked, parent, mainParentIndex)} />
                   <div className="horizontal-dotted-line dottedstyle"></div>
                 </div>
               </div>

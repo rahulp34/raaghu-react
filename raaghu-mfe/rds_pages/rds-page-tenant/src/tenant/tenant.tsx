@@ -3,10 +3,8 @@ import { useTranslation } from "react-i18next";
 import {
   createTenant,
   deleteTenant,
-  editEdition,
   editTenant,
   fetchEdition,
-  fetchFeature,
   fetchTenant,
   tenantFeaturesGet,
   tenantPut,
@@ -16,13 +14,11 @@ import { useAppDispatch } from "../../../../libs/state-management/hooks";
 import {
   RdsCompTenantList,
   RdsCompTenantInformation,
-  RdsCompTenantSettings,
   RdsCompAlertPopup,
 } from "../../../rds-components";
 import { RdsButton, RdsOffcanvas, RdsNavtabs } from "../../../rds-elements";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
 import {
-  SaasTenantCreateDto,
   SaasTenantUpdateDto,
 } from "../../../../libs/shared/service-proxy";
 import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-features/rds-comp-new-features";
@@ -34,12 +30,6 @@ const actions = [
 ];
 let editionData1: any[];
 let id: string = "";
-const editionList = [
-  // { option: "Not assigned" , value : 1},
-  // { option: "Standard" },
-  // { option: "apple" },
-  // { option: "Apple1" },
-];
 const checkboxlabel = [
   {
     id: "1",
@@ -61,26 +51,6 @@ const Tenant = (props: RdsPageTenantProps) => {
   const dispatch = useAppDispatch();
   
 
-  // const OnCreateNewTenant= (data: {tenancyName:string,
-  //   editionList:any,
-  //   Edition:any,
-  //   Username:any
-  //   Password:any,
-  //   databaseURL:any})=>{
-  //     console.log("hello data", data);
-  //     tenantState.name=data.Username;
-  //     tenantState.editionId=data.Edition.DisplayName;
-  //     tenantState.adminEmailAddress=data.Username;
-  //     tenantState.adminPassword=data.Password;
-  //     dispatch(createTenant(tenantState) as any)
-  //   };
-
-  // const [editionList, setEditionList] = useState<any[]>([
-  //   { option: "Not assigned" },
-  //   { option: "Standard" },
-  //   { option: "apple" },
-  //   { option: "Apple1" },
-  // ]);
 
   const OnUpdateTenant = new SaasTenantUpdateDto();
   const onEditHandler = (data: { editTenantData:{
@@ -105,8 +75,8 @@ const Tenant = (props: RdsPageTenantProps) => {
     );
   };
 
-  const [tempData, setTempData] = useState<any>([]);
-  const [editionSelectList, setEditionSelectList] = useState<any>([]);
+  const [tableData, setTableData] = useState<any>([]);
+  const [editionList, setEditionList] = useState<any>([]);
   const [featureIdentitySettingsData, setFeatureIdentitySettingsData] = useState<any>([{value:"Optional"},{value:3},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true}]);
   
   const [editTenantData, setEditTenantData] = useState<any>({
@@ -115,94 +85,11 @@ const Tenant = (props: RdsPageTenantProps) => {
     editionName: "",
   });
 
-  useEffect(() => {
-    if (data.editTenant?.name) {
-      setEditTenantData({
-        ...editTenantData,
-        name: data.editTenant.name,
-        hasDefaultConnectionString: data.editTenant.hasDefaultConnectionString,
-        editionName: data.editTenant.editionName,
-      });
-    }
-    dispatch(fetchTenant() as any);
-    dispatch(fetchEdition() as any);
-  }, []);
-
-  useEffect(() => {
-    // dispatch(fetchTenant() as any);
-    // dispatch(fetchEdition() as any);
-    
-    
-
-if(data.tenants.length){
-
-
-    const tempData1 = data.tenants.map((tenant: any) => {
-      return {
-        id: tenant.id,
-        tenant: {
-          avatar:
-            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
-          title: tenant.name,
-          info: "software",
-        },
-        editionName: tenant.editionName,
-        status: tenant.activationState == 1 ? "Active" : "Inactive",
-        expiry: tenant.editionEndDateUtc,
-      };
-    });
-    
-
-    setTempData(tempData1);
-  }
   
-    if (data.edition.items.length) {
-      editionData1 = [];
-      
-      data.edition.items.map((item: any) => {
-        const newItem = {
-          option: item.displayName,
-          value: item.id,
-        };
-        editionData1.push(newItem);
-      });
 
-      setEditionSelectList(editionData1);
-    }
-  }, [data.tenants]);
+  
 
-  useEffect(()=>{
-    if(data.feature){
-      let tempFeatureData :any[] = [];
-      data.feature.groups.map((item:any)=>{
-        item.features.map((items:any)=>{
-          let data = {}
-          if(items.value == "True" || items.value == "true"){
-            data = {
-              name:items.name,
-              value:true
-            }
-          }
-          else if(items.value == "True" || items.value == "true"){
-            data = {
-              name:items.name,
-              value:false
-            }
-          }
-          else{
-            data = {
-              name:items.name,
-              value:items.value
-            }
-          }
-          tempFeatureData.push(data);
-        })
-      })
-      if(tempFeatureData.length)
-      setFeatureIdentitySettingsData(tempFeatureData)
-    }
-
-  },[data.feature])
+  
 
   const { t } = useTranslation();
 
@@ -233,27 +120,12 @@ if(data.tenants.length){
     },
   ];
 
-
-  
-
   const navtabsItems = [
     { label: t("Basics"), tablink: "#nav-home", id: 0 },
     { label: t("Features"), tablink: "#nav-profile", id: 1 },
   ];
 
   const treeData: any[] = [];
-  const onCreateHandler = (e: any) => {
-    dispatch(createTenant(e) as any).then((res:any)=>{
-      dispatch(fetchEdition() as any);
-    dispatch(fetchTenant() as any);
-    if (data.editTenant) {
-      setEditTenantData(data.editTenant);
-    }
-    });
-    
-
-    // const createTenant1= data.tenants.items.map(())
-  };
   const offCanvasHandler = () => {
     // dispatch(fetchEdition() as any);
   };
@@ -280,9 +152,7 @@ if(data.tenants.length){
     dispatch(tenantFeaturesGet(id) as any);
 
     }
-    // if(data.editTenant){
 
-    // }
   };
   const onDeleteHandler = () => {
     console.log("id", id);
@@ -292,23 +162,89 @@ if(data.tenants.length){
     
   };
 
-  // const onDeleteHandler = (id) => {
-  //   dispatch(deleteTenant(id.id) as any);
-  // };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
 
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState(0);
 
-  // const onEditHandler = (data:any)=>{
-  // console.log("hello edit data ", data)
-  // dispatch(tenantPut(data) as any);
-  // dispatch(fetchTenant as any);
-  // }
+  //  const tag = [{ label: t("Features"), tablink: "#Admin-Features", id: 0 }];
+  // const offCanvasButton =
+  //   '<RdsButton icon = "plus" iconColorVariant="light" size = "medium" type = "button" colorVariant = "primary" label = "NEW TENANT"/>';
+  
+  
+  
+  
+    useEffect(() => {
+      dispatch(fetchTenant() as any);
+      dispatch(fetchEdition() as any);
+    }, [dispatch]);
 
-  const tag = [{ label: t("Features"), tablink: "#Admin-Features", id: 0 }];
-  const offCanvasButton =
-    '<RdsButton icon = "plus" iconColorVariant="light" size = "medium" type = "button" colorVariant = "primary" label = "NEW TENANT"/>';
+    useEffect(()=>{
+      if(data.tenants.length){
+        const tempData = data.tenants.map((tenant: any) => {
+          return {
+            id: tenant.id,
+            tenant: {
+              avatar:
+                "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+              title: tenant.name,
+              info: "software",
+            },
+            editionName: tenant.editionName,
+            status: tenant.activationState == 1 ? "Active" : "Inactive",
+            expiry: tenant.editionEndDateUtc,
+          };
+        });
+        setTableData(tempData);
+      }
+    },[data.tenants])
+
+    useEffect(()=>{
+      if(data.feature){
+        let tempFeatureData :any[] = [];
+        data.feature.groups.map((item:any)=>{
+          item.features.map((items:any)=>{
+            let data = {}
+            if(items.value == "True" || items.value == "true"){
+              data = { value:true }
+            }
+            else if(items.value == "True" || items.value == "true"){
+              data = { value:false}
+            }
+            else{
+              data = { value:items.value }
+            }
+            tempFeatureData.push({...data, name:items.name});
+          })
+        })
+        setFeatureIdentitySettingsData(tempFeatureData)
+      }
+  
+    },[data.feature])
+
+    useEffect(() => {
+      if (data.edition.items.length) {
+        editionData1 = [];
+        data.edition.items.map((item: any) => {
+          const newItem = {
+            option: item.displayName,
+            value: item.id,
+          };
+          editionData1.push(newItem);
+        });
+        setEditionList(editionData1);
+      }
+    }, [data.edition]);
+
+
+    function saveTenant(data:any){
+      dispatch(createTenant(data) as any).then((res:any)=>{
+        dispatch(fetchEdition() as any);
+        dispatch(fetchTenant() as any);
+      })
+    }
+  
+  
   return (
     <div className="tenant">
       <div className="d-flex justify-content-end">
@@ -369,34 +305,21 @@ if(data.tenants.length){
             }}
           />
           {activeNavTabId == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation
-              checkboxlabel={checkboxlabel}
-              editTenantData={editTenantData}
-              edit={false}
-              onClick={(e: any) => {
-                onCreateHandler(e);
-              }}
-              editionList={editionSelectList}
-              tenantInfo={(showTenantSettings) => {
-                setShowTenantSettings(showTenantSettings), setActiveNavTabId(1);
-              }}
-            />
+            <RdsCompTenantInformation onSaveHandler={(e:any)=>saveTenant(e)} />
           )}
-         {/* {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
-            <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
-          )} */}
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
         <RdsCompTenantList
           tableHeaders={tableHeaders}
-          tableData={tempData}
+          tableData={tableData}
           actions={actions}
           onActionSelection={onActionHandler}
           pagination={true}
           recordsPerPage={10}
           recordsPerPageSelectListOption={true}
         />
+
         <RdsOffcanvas
           canvasTitle={t("Edit Tenant")}
           onclick={offCanvasHandler}
@@ -418,33 +341,14 @@ if(data.tenants.length){
             }}
           />
           {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation
-              checkboxlabel={checkboxlabel}
-              onClick={onEditHandler}
-              edit={true}
-              editTenantData={data.editTenant}
-              editionList={editionSelectList}
-              tenantInfo={(showTenantSettings) => {
-                setShowTenantSettings(showTenantSettings),
-                  setActiveNavTabIdEdit(1);
-              }}
-            />
+            <RdsCompTenantInformation editionList={editionList} onSaveHandler={(e:any)=>{saveTenant(e)}} />
           )}
+
           {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
             <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
           )}
         </RdsOffcanvas>
       </div>
-      {/* <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
-        <RdsCompTenantList
-          tableHeaders={tableHeaders}
-          tableData={tempData}
-          actions={actions}
-          pagination={true}
-          recordsPerPage={10}
-          recordsPerPageSelectListOption={true}
-        />
-      </div> */}
       <RdsCompAlertPopup alertID="Del" onSuccess={onDeleteHandler} />
     </div>
   );

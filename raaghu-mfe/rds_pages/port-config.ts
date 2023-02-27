@@ -53,8 +53,14 @@ export const PortConfig = {
 	"languageText": {
 		"port": "8017"
 	},
-	"claimtypes": {
-		"port": "8018"
+	"claimtypes":{
+		"port":"8018"
+  },
+  "apiScope":{
+		"port":"8019"
+  },
+  "textTemplate":{
+		"port":"8020"
 	},
 	"textTemplate": {
 		"port": "8020"

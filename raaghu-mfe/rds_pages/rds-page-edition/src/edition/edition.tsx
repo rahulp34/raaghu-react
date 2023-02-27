@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-//import axios from "axios";
 import {
-  RdsCompEditionList,
-  RdsCompEditionInformation,
-  RdsCompPermissionTree,
   RdsCompAlertPopup,
   RdsCompDatatable,
 } from "../../../rds-components";
 import {
   RdsButton,
   RdsOffcanvas,
-  RdsNavtabs,
-  RdsIcon,
   RdsInput,
   RdsAlert,
 } from "../../../rds-elements";
@@ -21,7 +15,6 @@ import {
 } from "../../../../libs/state-management/hooks";
 import { useTranslation } from "react-i18next";
 
-// import { useAppDispatch } from "../../../../libs/state-management/index"
 import {
   fetchEditionData,
   deleteEditionData,
@@ -152,7 +145,7 @@ const Edition = (props: RdsPageEditionProps) => {
             canvasTitle="NEW EDITION"
             onclick={offCanvasHandler}
             placement="end"
-            offcanvaswidth={830}
+            offcanvaswidth={550}
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton
@@ -189,7 +182,7 @@ const Edition = (props: RdsPageEditionProps) => {
                   setValue(e.target.value);
                 }}
               ></RdsInput>
-              <div className="d-flex footer">
+              <div className="d-flex footer-buttons">
                 <RdsButton
                   label="CANCEL"
                   databsdismiss="offcanvas"
