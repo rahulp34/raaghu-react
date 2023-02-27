@@ -7,7 +7,7 @@ export interface RdsInputProps {
 	size?: "small" | "large" | "medium" | string;
 	isDisabled?: boolean;
 	readonly?: boolean;
-	value?: any;
+	value?: string | null | any;
 	inputType?: string;
 	placeholder?: string;
 	labelPositon?: string;
@@ -96,8 +96,8 @@ const RdsInput = React.forwardRef(
 						onFocus={props.onFocus}
 						onBlur={handleBlur}
 						onKeyDown={props.onKeyDown}
-						defaultValue={props.value}
-						value={props.value}
+						defaultValue={props.value ?? ""}
+						value={props.value ?? ""}
 						onChange={props.onChange}
 						disabled={props.isDisabled}
 						readOnly={props.readonly}
@@ -117,8 +117,8 @@ const RdsInput = React.forwardRef(
 							onFocus={props.onFocus}
 							onBlur={handleBlur}
 							onKeyDown={props.onKeyDown}
-							defaultValue={props.value}
-							value={props.value}
+							defaultValue={props.value ?? ""}
+							value={props.value ?? ""}
 							onChange={props.onChange}
 							disabled={props.isDisabled}
 							readOnly={props.readonly}

@@ -121,7 +121,6 @@ const ClaimType = () => {
       setValue(tableDataRow.value);
       setregexDesc(tableDataRow.regexDesc);
       setDesc(tableDataRow.description);
-      // console.log("Hey buddy this is edition data after edit is clicked",editData);
     }
   };
 
@@ -160,127 +159,6 @@ const ClaimType = () => {
     },
   ];
 
-  // const tableData = [
-  //   {
-  //     id: 1,
-  //     name: "User Id",
-  //     value: "Your Id",
-  //     description: "Associate",
-  //     regex: "Test_Employer",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="check"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="success"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "On_Request",
-  //     value: "Boolean",
-  //     description: "Has to request",
-  //     regex: "New_Request",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="check"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="success"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Family_name",
-  //     value: "String",
-  //     description: "List of names to get",
-  //     regex: "String_Value",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="check"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="success"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Tree_View",
-  //     value: "String",
-  //     description: "Structure to show parent child",
-  //     regex: "Tree_Value",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="cancel"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="danger"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "On_Request",
-  //     value: "Boolean",
-  //     description: "Has to request",
-  //     regex: "New_Request",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="check"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="success"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Family_name",
-  //     value: "String",
-  //     description: "List of names to get",
-  //     regex: "String_value",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="check"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="success"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Tree_View",
-  //     value: "String",
-  //     description: "Structure to show parent child",
-  //     regex: "Tree_Value",
-  //     icon: (
-  //       <div style={{ strokeWidth: "3px" }}>
-  //         <RdsIcon
-  //           name="cancel"
-  //           height="17px"
-  //           width="15px"
-  //           colorVariant="danger"
-  //         />
-  //       </div>
-  //     ),
-  //   },
-  // ];
   const actions = [
     { id: "edit_offcanvas", displayName: "Edit", offId: "dynamic-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
@@ -468,7 +346,6 @@ const ClaimType = () => {
                   type={"button"}
                   size="small"
                   databsdismiss="offcanvas"
-                  // isDisabled={allFieldsAreEmpty}
                   colorVariant="primary"
                   class="me-2"
                   onClick={onEditHandler}
