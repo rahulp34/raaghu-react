@@ -227,7 +227,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                   {props?.tableHeaders?.map((tableHeader, index) => (
                     <th scope="col"  key={"tableHeader-" + index} >
                       <div className="header align-items-center d-flex">
-                      <span >
+                      <span className="fw-bold">
                         {tableHeader.displayName}
                       </span>
                       <div className="header-options mobile-header-option cursor-pointer ps-1">
@@ -268,7 +268,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     props.actions &&
                     props.actions?.length > 0 && (
                       <th
-                        className="text-center"
+                        className="text-center fw-bold"
                         style={{ fontWeight: 500, color: "black" }}
                       >
                         Actions
@@ -358,6 +358,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                         }
                                         height={
                                           tableDataRow[tableHeader.key].iconHeight
+                                        }
+                                        strokeWidth={
+                                          tableDataRow[tableHeader.key].iconStrokeWidth
                                         }
                                       />
                                     </div>
@@ -450,7 +453,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                                 action
                                               );
                                             }}
-                                            className="dropdown-item"
+                                            className="dropdown-item text-wrap"
                                           >
                                             {action.displayName}
                                           </a>
@@ -468,7 +471,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                                   action
                                                 );
                                               }}
-                                              className="dropdown-item"
+                                              className="dropdown-item text-wrap"
                                             >
                                               {action.displayName}
                                             </a>
