@@ -20,7 +20,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 	const [errorClientId, srrorClientId] = useState("");
 	const [errorDisplayName, setErrorDisplayName] = useState("");
 	const [errorType, setErrorType] = useState("");
-	const checkboxes = [props.basicData.allowAuthorizationCodeFlow, props.basicData.allowHybridFlow, props.basicData.allowPasswordFlow];
+	const checkboxes = [basicApplicationData.allowAuthorizationCodeFlow, basicApplicationData.allowHybridFlow, basicApplicationData.allowPasswordFlow];
 	const isDisabled = checkboxes.length > 1 && !checkboxes.some((checkbox) => checkbox);
 
 	function setClientId(value: any) {
@@ -151,7 +151,6 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsInput>
 						</div>
 					</div>
-
 					<div className="row pb-3">
 						<div className=" col-6 ">
 							<RdsLabel label="Type" class="pb-2" />
@@ -209,6 +208,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									label="Allow Client Credential Flow"
 									onChange={e => { setClient(e.target.checked) }}
 									checked={basicApplicationData.allowClientCredentialsFlow}
+									isDisabled={basicApplicationData.type === 'public'}
 								></RdsCheckbox>
 							</div>
 							<div className="row py-2">
@@ -224,6 +224,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									label="Allow Device Endpoint"
 									onChange={e => { setDevice(e.target.checked) }}
 									checked={basicApplicationData.allowDeviceEndpoint}
+									isDisabled={basicApplicationData.type === 'public'}
 								></RdsCheckbox>
 							</div>
 						</div>
@@ -238,7 +239,6 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									value={basicApplicationData.clientSecret}
 								></RdsInput>
 							)}
-
 						</div>
 					</div>
 					{basicApplicationData.allowAuthorizationCodeFlow || basicApplicationData.allowImplicitFlow ||
@@ -253,7 +253,6 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 										rows={3}
 									/>
 								</div>
-
 								<div className="col-6 ">
 									<RdsLabel label="Consent Type" class="pb-2" />
 									<RdsSelectList
@@ -315,6 +314,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							type="submit"
 							isOutline={false}
 							colorVariant="primary"
+							databsdismiss="offcanvas"
 							size="small"
 							onClick={() => { props.handleSubmit(basicApplicationData) }}
 						></RdsButton>

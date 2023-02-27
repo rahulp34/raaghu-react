@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
-import {ServiceProxy} from '../../shared/service-proxy'
+import {ServiceProxy, UpdatePermissionsDto} from '../../shared/service-proxy'
 
 type InitialStateApplication = {
   loading: boolean;
   applications: any;
   editApplication:any;
   scopes:any;
+  permission:any;
   error: string;
 }; 
 
@@ -14,7 +15,8 @@ export const InitialStateApplication:InitialStateApplication= {
   applications: null,
   editApplication:null,
   error: "",
-  scopes: null
+  scopes: null,
+  permission:null
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -53,6 +55,18 @@ export const getApplications = createAsyncThunk("applications/getApplications", 
 
 export const getScopes = createAsyncThunk("applications/getScopes", () => {
   return proxy.allAll(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getPermission = createAsyncThunk("applications/getPermission", (key:string) => {
+  return proxy.permissionsGET("C",key,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const updatePermission = createAsyncThunk("applications/updatePermission", (data:any) => {
+  return proxy.permissionsPUT("C",data.key,data.permissions,undefined).then((result:any)=>{
      return result;
   }) 
 });
@@ -150,33 +164,40 @@ const applicationsSlice = createSlice({
       state.loading=false;
       state.error=action.error.message||"Somethingwentwrong";
     });
+
+    //permissions
+
+    builder.addCase(getPermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getPermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.permission=action.payload;
+      }
+    );
+    builder.addCase(getPermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //updatePermission
+    builder.addCase(updatePermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      updatePermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+      }
+    );
+    builder.addCase(updatePermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
   }, 
 });
-
-// const applicationsScopeSlice = createSlice({
-//   name: "scopes",
-//   initialState :InitialStateApplication, 
-//   reducers: {},
-
-//   extraReducers: (builder) => {
-//     //getScopes
-//     builder.addCase(getScopes.pending,(state)=>{
-//       state.loading=true;
-//     });
-
-//     builder.addCase(
-//       getScopes.fulfilled,(state,action:PayloadAction<any>)=>{
-//         state.loading=false;
-//         state.scopes=action.payload;
-//       }
-//     );
-//     builder.addCase(getScopes.rejected,(state,action)=>{
-//       state.loading=false;
-//       state.error=action.error.message||"Somethingwentwrong";
-//     });
-//   }, 
-// });
-
 
 
 export default applicationsSlice.reducer;

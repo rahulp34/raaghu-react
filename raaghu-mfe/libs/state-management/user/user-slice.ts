@@ -14,6 +14,7 @@ export interface UserState {
   editUser:any
   roles:any
   error: string;
+  permission:any;
 };
 export const UserInitialState: UserState = {
   loading: false,
@@ -22,6 +23,8 @@ export const UserInitialState: UserState = {
   roles:null,
   organizationUnit:null,
   error: "",
+  permission:null
+
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -87,6 +90,18 @@ export const deleteUser = createAsyncThunk("user/deleteUser",(data:any)=>{
     return result;
   })
 })
+
+export const getPermission = createAsyncThunk("user/getPermission", (key:string) => {
+  return proxy.permissionsGET("U",key,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const updatePermission = createAsyncThunk("user/updatePermission", (data:any) => {
+  return proxy.permissionsPUT("U",data.key,data.permissions,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
 
 const userSlice = createSlice({
   name: "user",
@@ -160,10 +175,10 @@ const userSlice = createSlice({
     });
 
 
-    builder.addCase(updateUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message || "Something went wrong";
-    });
+    // builder.addCase(updateUser.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.error.message || "Something went wrong";
+    // });
 
     builder.addCase(
       updateUser.fulfilled,
@@ -178,10 +193,10 @@ const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
-    builder.addCase(deleteUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message || "Something went wrong";
-    });
+    // builder.addCase(deleteUser.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.error.message || "Something went wrong";
+    // });
 
     builder.addCase(
       deleteUser.fulfilled,
@@ -196,6 +211,38 @@ const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
+
+     //permissions
+
+     builder.addCase(getPermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getPermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.permission=action.payload;
+      }
+    );
+    builder.addCase(getPermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //updatePermission
+    builder.addCase(updatePermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      updatePermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+      }
+    );
+    builder.addCase(updatePermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
   },
 });
 

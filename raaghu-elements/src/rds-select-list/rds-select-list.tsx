@@ -8,7 +8,6 @@ export interface RdsSelectProps{
     selectedOption?:any;
     size?:string;
     selectItems: any[];
-    selectedValue?:any;
     id?:string;
     selectedValue?:any;
     classes?:string, 
