@@ -10,7 +10,6 @@ export interface RdsSelectProps{
     selectItems: any[];
     selectedValue?:any;
     id?:string;
-    selectedValue?:any;
     classes?:string, 
     children?:React.ReactNode
     someCallback?:any;
