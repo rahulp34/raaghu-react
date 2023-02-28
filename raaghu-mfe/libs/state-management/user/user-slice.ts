@@ -161,24 +161,40 @@ const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
+    builder.addCase(fetchEditUser.pending, (state) => {
+      state.loading = true;
+    });
+
     builder.addCase(
-      createUser.fulfilled,
+      fetchEditUser.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
+        state.editUser = action.payload;
         state.error = "";
       }
     );
 
-    builder.addCase(createUser.rejected, (state, action) => {
+    builder.addCase(fetchEditUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
 
+    builder.addCase(
+      createUser.pending,
+      (state, action: PayloadAction<any>) => {
+        state.loading = true;
+        state.error = "";
+      }
+    );
 
-    // builder.addCase(updateUser.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message || "Something went wrong";
-    // });
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+
+
+    builder.addCase(updateUser.pending, (state, action) => {
+      state.loading = true;
+    });
 
     builder.addCase(
       updateUser.fulfilled,
@@ -193,10 +209,9 @@ const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
-    // builder.addCase(deleteUser.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message || "Something went wrong";
-    // });
+    builder.addCase(deleteUser.pending, (state, action) => {
+      state.loading = false;
+    });
 
     builder.addCase(
       deleteUser.fulfilled,
