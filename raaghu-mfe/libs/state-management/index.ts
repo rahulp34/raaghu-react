@@ -4,6 +4,7 @@ import { forgotPasswordReducer } from "./forgot-password/forgotpassword-slice";
 import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
 import languageReducer from "./language/language-slice";
+import languageTextReducer from "./language-text/language-text-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import scopesReducer from "./apiScope/apiScope-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   subscription: subscriptionReducer,
   edition: editionReducer,
   language: languageReducer,
+  languagesText:languageTextReducer,
   organization: organizationReducer,
   claimTypes: ClaimTypesReducer,
   securityLogs:securityLogsReducer,
