@@ -7,12 +7,14 @@ export interface RdsCompUserBasicsProps {
   organizationUnit?: any;
   roles?: any;
   createUser?:any
+  isEdit?:boolean;
 }
 
 const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   const [organizationUnit, setOrganizationUnit] = useState(
     props.organizationUnit
   );
+  
   const [roles, setRoles ] = useState(props.roles);
 
   const [userData, setUserData] = useState<any>(props.userData);
@@ -41,30 +43,38 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   const setPhoneNumber = (event: any) => {
     setUserData({...userData, phoneNumber:event.target.value})
   };
-
-
-
-
  
-  const inputFile: any = useRef(null);
-  const profilePicHandler = () => {
-    inputFile.current.click();
-  };
   function setOrganizationUnitData(value:any){
+    debugger
     setUserData({...userData, organizationUnitIds:[value]})
   }
   function setRolesData(value:any){
+    debugger
     setUserData({...userData, roleNames:[value]})
   }
   function handletwoFactorEnable(event:any){
     setUserData({...userData, twoFactorEnabled:event.target.checked})
   }
+  function handleIsActive(event:any){
+    setUserData({...userData, isActive:event.target.checked})
+  }
+  function handleLockoutEnabled(event:any){
+    setUserData({...userData, lockoutEnabled:event.target.checked})
+  }
+  userData
 
+  useEffect(()=>{
+    setUserData(props.userData)
+   },[props.userData])
+
+   useEffect(()=>{
+    setOrganizationUnit(props.organizationUnit)
+   },[props.organizationUnit])
 
   useEffect(()=>{
    setOrganizationUnit(props.organizationUnit);
    setRoles(props.roles)
-  },[props])
+  },[props.roles])
 
   return (
     <>
@@ -96,11 +106,11 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
 
           <div className="col-lg-6 col-md-6 text-center mb-2">
-            <img
+            {/* <img
               src={"img"}
               alt="Profile Pic"
               onClick={profilePicHandler}
-            ></img>
+            ></img> */}
           </div>
         </div>
 
@@ -118,7 +128,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-lg-6 col-md-6">
+          {!props.isEdit && (<div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
                 value={userData.password}
@@ -130,7 +140,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 onChange={(e)=>{setPassword(e)}}
               ></RdsInput>
             </div>
-          </div>
+          </div>)}
         </div>
         <div className="row">
         <div className="col-lg-6 col-md-6">
@@ -161,8 +171,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
           
         </div>
-        <div className="row my-2">
-          
+        <div className="row my-2"> 
           <div className="col-lg-6 col-md-6">
             <div className="mb-2">
             <RdsSelectList
@@ -182,11 +191,10 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
 								selectItems={roles}
 								onSelectListChange={(e: any) => setRolesData(e.target.value)}
 						></RdsSelectList>
-              
             </div>
           </div>
         </div>
-        <div className="row my-2">
+        {!props.isEdit && (<div className="row my-2">
           <div className="mb-2 text-muted">
             <RdsCheckbox
               id="0"
@@ -195,7 +203,27 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               onChange={e=>{handletwoFactorEnable(e)}}
             ></RdsCheckbox>
           </div>
+        </div>)}
+        {props.isEdit && (<><div className="row my-2">
+          <div className="mb-2 text-muted">
+            <RdsCheckbox
+              id="0"
+              label="Active"
+              checked={userData.isActive}
+              onChange={e=>{handleIsActive(e)}}
+            ></RdsCheckbox>
+          </div>
         </div>
+        <div className="row my-2">
+          <div className="mb-2 text-muted">
+            <RdsCheckbox
+              id="0"
+              label="Account Lockout"
+              checked={userData.lockoutEnabled}
+              onChange={e=>{handleLockoutEnabled(e)}}
+            ></RdsCheckbox>
+          </div>
+        </div></>)}
         <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0">
           <RdsButton
             class="me-2"
@@ -208,7 +236,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           <RdsButton
             class="me-2"
             label="SAVE"
-            type="submit"
+            type="button"
             isOutline={false}
             colorVariant="primary"
             onClick={()=>{props.createUser(userData)}}

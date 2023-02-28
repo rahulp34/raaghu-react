@@ -630,6 +630,7 @@ const Users = () => {
   ];
   const [userPermission, setUserPermission] = useState<any>(permissionData)
   const [tableData, setTableData] = useState([
+
     {
       id: 1,
       userName: "tet04",
@@ -715,10 +716,12 @@ const Users = () => {
     { option: "Apple1" },
   ];
 
+  const navtabsItemsEdit = [
+    { label: "User Information", tablink: "#nav-home", id: 0 },
+    { label: "Permissions", tablink: "#nav-profile", id: 1 }
+  ];
   const navtabsItems = [
     { label: "User Information", tablink: "#nav-home", id: 0 },
-    { label: "Roles", tablink: "#nav-profile", id: 1 },
-    { label: "Organization Units", tablink: "#nav-organization-unit", id: 2 },
   ];
 
   const offCanvasHandler = () => {};
@@ -780,9 +783,7 @@ const Users = () => {
     console.log(event);
     setPermissionKeyName(tableDataRowIndex)
     setUserId(String(tableDataRowIndex));
-    if (action.displayName === "Edit") {
-      dispatch(fetchEditUser(String(tableDataRowIndex)) as any)
-    }
+    dispatch(fetchEditUser(String(tableDataRowIndex)) as any)
     var tableId = String(tableDataRowIndex);
     dispatch(getPermission(tableId) as any);
 
@@ -850,7 +851,9 @@ const Users = () => {
 
   function createNewUser(data:any){
     debugger
-    dispatch(createUser(data) as any)
+    dispatch(createUser(data) as any).then((res:any)=>{
+      dispatch(fetchUsers() as any);
+    })
     setActiveNavTabId(0)
     setUserData({
       name: "",
@@ -938,6 +941,7 @@ const Users = () => {
 
   useEffect(()=>{
     if(data.editUser){
+      debugger
       setUserData(data.editUser);
     }
   },[data.editUser])
@@ -1006,141 +1010,6 @@ const Users = () => {
               createUser={(e:any)=>{createNewUser(e)}}
             />
           )}
-        {/*
-        <div class="tab-content">
-          <div class="row">
-            <rds-comp-permission-tree
-              [treeData]="permissionTreeData"
-              [isEdit]="isEdit"
-              (getAllselectedPermissions)="getAllselectedPermissions($event)"
-            >
-            </rds-comp-permission-tree>
-          </div>
-          <div class="footer-buttons my-2">
-            <rds-button
-              [label]="translate.instant('Cancel')"
-              (click)="close()"
-              [isOutline]="true"
-              [colorVariant]="'primary'"
-              [size]="'small'"
-              data-bs-dismiss="offcanvas"
-            >
-            </rds-button>
-            <rds-button
-              [label]="translate.instant('Save')"
-              [isDisabled]="!user || !user.userInfo"
-              [size]="'small'"
-              class="ms-2"
-              [colorVariant]="'primary'"
-              data-bs-dismiss="offcanvas"
-              (click)="save()"
-            >
-            </rds-button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade px-3 mt-3"
-        [ngClass]="{ 'show active': activePage === 2 }"
-        id="organizationUnits"
-        role="tabpanel"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content">
-          <rds-comp-claim-type-role
-            [claimValueData]="claimValueData"
-            [claimDisplayArray]="claimDisplayArray"
-            [claimsActions]="claims_actions"
-            (addClaim)="addClaim($event)"
-            (onCancel)="close()"
-            (deleteClaim)="deleteClaim($event)"
-          ></rds-comp-claim-type-role>
-        </div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [size]="'small'"
-            [colorVariant]="'primary'"
-            (click)="save()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade"
-        [ngClass]="{ 'show active': activePage === 3 }"
-        id="permissions"
-        role="tabpanel"
-        *ngIf="selectedId"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content">
-          <!-- <app-rds-comp-permission-tree [treeData]="orgTreeData" [selectedItems]="selectedOrganizations"
-            (getAllSelectedNodes)="getSelectedorganizationunits($event)"></app-rds-comp-permission-tree> -->
-        </div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            (click)="savePermission()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade"
-        [ngClass]="{ 'show active': activePage === 4 }"
-        id="claim"
-        role="tabpanel"
-        *ngIf="selectedId"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content"></div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            (click)="savePermission()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-    </div> */}
         </RdsNavtabs>
       </RdsOffcanvas>
 
@@ -1155,7 +1024,7 @@ const Users = () => {
           preventEscapeKey={false}
         >
           <RdsNavtabs
-          navtabsItems={navtabsItems}
+          navtabsItems={navtabsItemsEdit}
           type={"tabs"}
           activeNavTabId={activeNavTabId}
           activeNavtabOrder={(activeNavTabId) => {
@@ -1168,15 +1037,11 @@ const Users = () => {
               organizationUnit={organizationUnit}
               roles={roles}
               userData={userData}
+              isEdit={true}
               createUser={(e:any)=>{createNewUser(e)}}
             />
           )}
-
           {activeNavTabId == 1 && (
-            //  <RdsCompPermissionTree
-            //     permissions={userPermission} 
-            //     selectedPermissions={handlerSelectedPermission}  
-            //   ></RdsCompPermissionTree>
               <>
               <RdsCompPermissionTree permissions={userPermission} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
               <div className="footer-buttons my-2">
@@ -1208,7 +1073,7 @@ const Users = () => {
                 </div>
               </div>
             </>
-          )}
+            )}
 
           </RdsNavtabs>
 
