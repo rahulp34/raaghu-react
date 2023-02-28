@@ -7,7 +7,7 @@ import {
   RdsNavtabs,
   RdsTextArea,
   RdsCheckbox,
-} from "../../../../../raaghu-elements/src";
+} from "raaghu-react-elements";
 
 import {
   RdsCompDatatable,
