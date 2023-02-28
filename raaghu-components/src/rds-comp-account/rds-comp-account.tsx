@@ -39,6 +39,7 @@ let  google = <>
               name="displayName"
               label="Site Key"
               placeholder=""
+              required={true}
               customClasses="form-control"
 			        onChange={e => setGoogleSIteKey(e.target.value)} 
             ></RdsInput>
@@ -52,6 +53,7 @@ let  google = <>
               name="displayName"
               label="Secret Key"
               placeholder=""
+              required={true}
               customClasses="form-control"
 			        onChange={e => setGSecretKey(e.target.value)} 
             ></RdsInput>
@@ -70,6 +72,7 @@ let microsoft=<>
             name="displayName"
             label="Site Key"
             placeholder=""
+            required={true}
             customClasses="form-control"
             onChange={(e:any) => setMSSiteKey(e.target.value)} 
           ></RdsInput>
@@ -82,6 +85,7 @@ let microsoft=<>
             name="displayName"
             label="Secret Key"
             placeholder=""
+            required={true}
             customClasses="form-control"
             onChange={(e:any) => setMSSecretKey(e.target.value)} 
           ></RdsInput>
@@ -98,6 +102,7 @@ let twitter=<>
             name="displayName"
             label="Site Key"
             placeholder=""
+            required={true}
             customClasses="form-control"
             onChange={(e:any) => setTSiteKey(e.target.value)} 
           ></RdsInput>
@@ -110,6 +115,7 @@ let twitter=<>
             name="displayName"
             label="Secret Key"
             placeholder=""
+            required={true}
             customClasses="form-control"
             onChange={e => setTSecretKey(e.target.value)} 
           ></RdsInput>
@@ -248,8 +254,8 @@ let twitter=<>
   return (
     <div>
       <form onSubmit={AccountData}>
-      <div className="border-bottom text-muted mt-3 fw-bold pb-2">
-        <RdsLabel label="General Settings" class="mb-1" size="14px"></RdsLabel>
+      <div className="border-bottom text-muted mt-3 fw-bold">
+        <RdsLabel label="General Settings" size="14px"></RdsLabel>
       </div>
       <div className="row">
         <div className="col-md-12 mt-3">
@@ -273,10 +279,10 @@ let twitter=<>
           ></RdsCheckbox>
         </div>
       </div>
-      <div className="border-bottom text-muted mt-3 fw-bold pb-2">
+      <div className="border-bottom text-muted mt-3 fw-bold">
         <RdsLabel
           label="Two Factor Authentication"
-          class="mb-1"
+         
           size="14px"
         ></RdsLabel>
       </div>
@@ -285,7 +291,7 @@ let twitter=<>
           label="Select"
           selectItems={props.twoFactList}
           selectedValue={twoFactorData.twoFactorBehaviour}
-          onSelectListChange={(e) => {
+          onSelectListChange={(e:any) => {
             twoFactChange(e);
           }}
           size="small"
@@ -313,7 +319,7 @@ let twitter=<>
           ></RdsCheckbox>
         </div>
       </div>
-      <div className="border-bottom text-muted mt-4 fw-bold pb-2">
+      <div className="border-bottom text-muted mt-4 fw-bold ">
         <RdsLabel label="Captcha" size="14px"></RdsLabel>
       </div>
 
@@ -346,6 +352,7 @@ let twitter=<>
               name="baseUrl"
               label="Verify Base URL"
               labelPositon="top"
+              required={true}
               placeholder="Enter URL"
               customClasses="form-control"
                value={accountCaptchData.verifyBaseUrl}
@@ -357,14 +364,14 @@ let twitter=<>
         </div>
         <div className="col-md-4 mt-3">
           <label className="mb-2">
-            Version<span className="text-danger"></span>
+            Version<span className="text-danger">*</span>
           </label>
           <RdsSelectList
             label="Select"
             selectItems={props.versionList}
             selectedValue={accountCaptchData.version}
             size="small"
-            onSelectListChange={(e) => {
+            onSelectListChange={(e:any) => {
               setVersion(e.target.value);
             }}
           ></RdsSelectList>
@@ -375,6 +382,7 @@ let twitter=<>
             <RdsInput
               name="score"
               label="Score"
+              required={true}
               labelPositon="top"
               placeholder="Enter Score"
               customClasses="form-control"
@@ -387,13 +395,14 @@ let twitter=<>
         </div>
       </div>
       <div className="row mt-2">
-        <div className="col-md-4 mt-3">
+        <div className="col-md-4">
           <div className="form-group ">
             <RdsInput
               name="score"
               label="Site Key"
               labelPositon="top"
-              placeholder="'Enter URL'"
+              required={true}
+              placeholder="Enter URL"
               customClasses="form-control"
               value={accountCaptchData.siteKey}
               onChange={(e)=>{
@@ -402,19 +411,20 @@ let twitter=<>
             ></RdsInput>
           </div>
         </div>
-        <div className="col-md-4 mt-3">
+        <div className="col-md-4">
           <RdsInput
             name="score"
             label="Site Secret"
             labelPositon="top"
-            placeholder="'Enter Secret'"
+            required={true}
+            placeholder="Enter Secret"
             customClasses="form-control"
             value={accountCaptchData.siteSecret}
             onChange={(e)=>setSiteScore(e.target.value)}
           ></RdsInput>
         </div>
       </div>
-      <div className="border-bottom text-muted mt-4 fw-bold pb-2">
+      <div className="border-bottom text-muted mt-2 fw-bold">
         <RdsLabel label="External Provider" size="14px"></RdsLabel>
       </div>
       <div className="row pt-3">
