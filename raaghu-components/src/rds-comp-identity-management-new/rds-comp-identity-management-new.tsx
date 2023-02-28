@@ -1,151 +1,319 @@
-import React from "react";
-import { RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
+
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
+import React, { useState, useEffect } from "react";
 
 export interface RdsCompIdentityManagementProps {
-	identityData: any;
+
+  handleIdentity:any;
+  lockoutSettings:any;
+  passwordSettings:any;
+  signSettings:any;
+  userSettings:any;
 }
 
 const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
-	return (
-		<>
-			<form>
-				{/* Password Settings */}
-				<div className="border-bottom text-muted fw-bold">
-					<RdsLabel label="Pssword Settings"></RdsLabel>
-				</div>
-				<div className="row mt-4">
-					<div className="col-md-6 sm-p-0">
-						<div className="form-group mb-4">
-							<RdsLabel
-								size="14px"
-								label="Required Length (Min)"
-								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
-							<RdsInput
-								size="small"
-								inputType="text"
-								isDisabled={false}
-								readonly={false}
-								placeholder="Enter Length"
-								required={true}
-							></RdsInput>
-						</div>
-					</div>
-					<div className="col-md-6 sm-p-0">
-						<div className="form-group mb-4">
-							<RdsLabel
-								size="14px"
-								label="Required Special Characters (Min)"
-								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
-							<RdsInput
-								size="small"
-								inputType="text"
-								isDisabled={false}
-								readonly={false}
-								placeholder="Enter Number"
-								required={true}
-							></RdsInput>
-						</div>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox
-							label="Required Non Alpha Numeric Characters"
-							checked={false}
-						></RdsCheckbox>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox
-							label="Required Upper Case"
-							checked={false}
-						></RdsCheckbox>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox
-							label="Required Lower Case"
-							checked={false}
-						></RdsCheckbox>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox label="Required Numbers" checked={false}></RdsCheckbox>
-					</div>
-				</div>
-				{/* Lockout Settings */}
-				<div className="border-bottom text-muted mt-4 fw-bold">
-					<RdsLabel label="Lockout Settings"></RdsLabel>
-				</div>
-				<div className="row mt-4">
-					<div className="col-md-6 sm-p-0">
-						<div className="form-group mb-4">
-							<RdsLabel
-								size="14px"
-								label="Lockout Duration (Seconds) "
-								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
-							<RdsInput
-								size="small"
-								inputType="text"
-								isDisabled={false}
-								readonly={false}
-								placeholder="Enter Length"
-								required={true}
-							></RdsInput>
-						</div>
-					</div>
-					<div className="col-md-6 sm-p-0">
-						<div className="form-group mb-4">
-							<RdsLabel
-								size="14px"
-								label="Max Failed Access Attempts "
-								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
-							<RdsInput
-								size="small"
-								inputType="text"
-								isDisabled={false}
-								readonly={false}
-								placeholder="Enter Name"
-								required={true}
-							></RdsInput>
-						</div>
-					</div>
-				</div>
+  const [lockoutSettings, setLockoutSettings] = useState(props.lockoutSettings);
+  const [passwordSettings, setPasswordSettings] = useState(props.passwordSettings);
+  console.log("password Settings", passwordSettings);
+  
+  const [signSettings, setSignSettings] = useState(props.signSettings);
+  
+  const [userSettings, setUserSettings] = useState(props.userSettings);
+  
+  useEffect( () => {
+	setLockoutSettings(props.lockoutSettings);
+	setPasswordSettings(props.passwordSettings);
+	setSignSettings(props.signSettings);
+	setUserSettings(props.userSettings)
+  }, [props]);
 
-				{/* Signin Settings */}
-				<div className="border-bottom text-muted mt-3 fw-bold">
-					<RdsLabel label="Signin Settings"></RdsLabel>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox
-							label="Required Upper Case"
-							checked={false}
-						></RdsCheckbox>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-md-12 mt-3">
-						<RdsCheckbox
-							label="Required Lower Case"
-							checked={false}
-						></RdsCheckbox>
-					</div>
-				</div>
-			</form>
-		</>
-	);
+
+  const handleIdentity = (event: any) => {
+    event.preventDefault();
+    console.log("formData is");
+  };
+  function setLenght(value: any) {
+    setPasswordSettings({ ...passwordSettings, requiredLength: value });
+  }
+  function setNumber(value: any) {
+    setPasswordSettings({ ...passwordSettings, requiredUniqueChars: value });
+  }
+  function setNonAlphaNumeric(value: boolean) {
+    setPasswordSettings({ ...passwordSettings, requireNonAlphanumeric: value });
+  }
+  function setUpperCase(value: boolean) {
+    setPasswordSettings({ ...passwordSettings, requireUppercase: value });
+  }
+  function setLowerCase(value: boolean) {
+    setPasswordSettings({ ...passwordSettings, requireLowercase: value });
+  }
+  function setReqNumber(value: boolean) {
+    setPasswordSettings({ ...passwordSettings, requireDigit: value });
+  }
+  function setLockDuration(value: any) {
+    setLockoutSettings({ ...lockoutSettings, lockoutDuration: value });
+  }
+  function setAccessAttempts(value: any) {
+    setLockoutSettings({ ...lockoutSettings, maxFailedAccessAttempts: value });
+  }
+  function setReqEmail(value: boolean) {
+    setSignSettings({ ...signSettings, requireConfirmedEmail: value });
+  }
+  function setAllowUsers(value: boolean) {
+    setSignSettings({ ...signSettings, enablePhoneNumberConfirmation: value });
+  }
+  function setReqPhoneNumber(value: boolean) {
+    setSignSettings({ ...signSettings, requireConfirmedPhoneNumber: value });
+  }
+  function changeEmail(value: boolean) {
+    setUserSettings({ ...userSettings, isEmailUpdateEnabled: value });
+  }
+  function changeUserNames(value: boolean) {
+    setUserSettings({ ...userSettings, isUserNameUpdateEnabled: value });
+  }
+  function enabledNewUsers(value: boolean) {
+    setLockoutSettings({ ...lockoutSettings, allowedForNewUsers: value });
+  }
+  return (
+    <div className="pt-4">
+      <form onSubmit={handleIdentity}>
+        {/* Password Settings */}
+        <div className="border-bottom text-muted fw-bold">
+          <RdsLabel label="Password Settings"></RdsLabel>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-6 sm-p-0">
+            <div className="form-group">
+			<RdsLabel
+                size="14px"
+                label="Required Length (Min)"
+                class="form-label"
+                required={true}
+              ></RdsLabel>
+              <RdsInput
+                size="small"
+                inputType="text"
+                isDisabled={false}
+               
+                readonly={false}
+                placeholder="Enter Length"
+                required={true}
+                value={passwordSettings.requiredLength}
+                onChange={(e: any) => {
+                  setLenght(e.target.value);
+                }}
+              ></RdsInput>
+            </div>
+          </div>
+          <div className="col-md-6 sm-p-0 ">
+            <div className="form-group">
+              <RdsLabel
+                size="14px"
+                label="Required Special Characters (Min)"
+                class="form-label"
+                required={true}
+              ></RdsLabel>
+              <RdsInput
+                size="small"
+                inputType="text"
+                isDisabled={false}
+                readonly={false}
+				
+                placeholder="Enter Number"
+                required={true}
+                value={passwordSettings.requiredUniqueChars}
+                onChange={(e) => setNumber(e.target.value)}
+              ></RdsInput>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <RdsCheckbox
+              label="Required Non Alpha Numeric Characters"
+              checked={passwordSettings.requireNonAlphanumeric}
+              onChange={(e) => {
+                setNonAlphaNumeric(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <RdsCheckbox
+              label="Required Upper Case"
+              checked={passwordSettings.requireUppercase}
+              onChange={(e) => {
+                setUpperCase(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <RdsCheckbox
+              label="Required Lower Case"
+              checked={passwordSettings.requireLowercase}
+              onChange={(e) => {
+                setLowerCase(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <RdsCheckbox
+              label="Required Numbers"
+              checked={passwordSettings.requireDigit}
+              onChange={(e) => {
+                setReqNumber(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        {/* Lockout Settings */}
+        <div className="border-bottom text-muted mt-4 fw-bold">
+          <RdsLabel label="Lockout Settings"></RdsLabel>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-4">
+            <RdsCheckbox
+              label="Enabled for new users (Whether a new user can be locked out.)"
+              checked={lockoutSettings.allowedForNewUsers}
+              onChange={(e) => {
+                enabledNewUsers(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-6 sm-p-0">
+            <div className="form-group ">
+              <RdsLabel
+                size="14px"
+                label="Lockout Duration (Seconds) "
+                class="form-label ms-1"
+                children={<span style={{ color: "red" }}>*</span>}
+              ></RdsLabel>
+              <RdsInput
+                size="small"
+                inputType="number"
+                isDisabled={false}
+                readonly={false}
+                placeholder="Enter Length"
+                required={true}
+                value={lockoutSettings.lockoutDuration}
+                onChange={(e) => setLockDuration(e.target.value)}
+              ></RdsInput>
+            </div>
+          </div>
+          <div className="col-md-6 sm-p-0">
+            <div className="form-group">
+              <RdsLabel
+                size="14px"
+                label="Max Failed Access Attempts "
+                class="form-label ms-1"
+                required={true}
+              ></RdsLabel>
+              <RdsInput
+                size="small"
+                inputType="text"
+                isDisabled={false}
+                readonly={false}
+                placeholder="Enter Name"
+                required={true}
+                value={lockoutSettings.maxFailedAccessAttempts}
+                onChange={(e) => setAccessAttempts(e.target.value)}
+              ></RdsInput>
+            </div>
+          </div>
+        </div>
+
+        {/* Signin Settings */}
+        <div className="border-bottom text-muted mt-2 fw-bold">
+          <RdsLabel label="Signin Settings"></RdsLabel>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-4">
+            <RdsCheckbox
+              label="Require confirmed email  (Whether a confirmed email address is required to sign in.) "
+              checked={signSettings.requireConfirmedEmail}
+              onChange={(e) => {
+                setReqEmail(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <RdsCheckbox
+              label="Allow users to confirm their phone number  (Whether the phoneNumber can be confirmed by the user.)"
+              checked={signSettings.enablePhoneNumberConfirmation}
+              onChange={(e) => {
+                setAllowUsers(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3">
+            <RdsCheckbox
+              label="Require confirmed phone number  (Whether a confirmed telephone number is required to sign in)."
+              checked={signSettings.requireConfirmedPhoneNumber}
+              onChange={(e) => {
+                setReqPhoneNumber(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        {/* User Settings */}
+        <div className="border-bottom text-muted mt-4 fw-bold">
+          <RdsLabel label="User Settings"></RdsLabel>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-4">
+            <RdsCheckbox
+              label="Allow users to change their email addresses  (Whether the email can be updated by the user.)"
+              checked={userSettings.isEmailUpdateEnabled}
+              onChange={(e) => {
+                changeEmail(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12 mt-3 mb-4">
+            <RdsCheckbox
+              label="Allow users to change their usernames  (Whether the username can be updated by the user.)"
+              checked={userSettings.isUserNameUpdateEnabled}
+              onChange={(e) => {
+                changeUserNames(e.target.checked);
+              }}
+            ></RdsCheckbox>
+          </div>
+        </div>
+        <div className=" justify-content-end d-flex bottom-0 pt-0 ">
+          <RdsButton
+            class="me-2"
+            label="CANCEL"
+            type="button"
+            isOutline={true}
+            colorVariant="primary"
+            size="small"
+          ></RdsButton>
+          <RdsButton
+            class="me-2"
+            label="SAVE"
+            type="submit"
+			onClick={()=>{props.handleIdentity({lockout:lockoutSettings, user:userSettings, signIn:signSettings,password:passwordSettings})}}
+            isOutline={false}
+            colorVariant="primary"
+            size="small"
+          ></RdsButton>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default RdsCompIdentityManagement;

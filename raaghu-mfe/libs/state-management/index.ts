@@ -10,18 +10,19 @@ import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
 import userReducer from "./user/user-slice";
+import settingsReducer from "./settings/settings-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
 import textTemplateReducer from "./text-template/text-template-slice";
-import  tenantReducer  from "./tenant/tenant-slice";
-const persistConfig = {
+
+const persistConfig={
   key: "root",
   storage,
   blacklist: ["forgotPassword"],
-};
+}; 
 const rootReducer = combineReducers({
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,  
@@ -36,16 +37,14 @@ const rootReducer = combineReducers({
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
   user: userReducer,
-  tenant:tenantReducer,
+  settings: settingsReducer
 
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: { persistedReducer },
-  middleware: [thunk],
 });
-
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
