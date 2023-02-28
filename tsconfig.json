@@ -15,7 +15,9 @@
     "forceConsistentCasingInFileNames": true,
   },
   "exclude": [
+    "dist",
     "node_modules",
-    "dist"
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx"
   ]
 }

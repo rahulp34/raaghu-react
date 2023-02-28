@@ -125,7 +125,6 @@ const TextTemplate = () => {
 
   useEffect(() => {
     if (textTemplate.templateData) {
-      debugger;
       setName(textTemplate.templateData.name);
       if (selectedList === 'target') setTargetContent(textTemplate.templateData.content);
       else if (selectedList === 'reference') setReferenceContent(textTemplate.templateData.content);
