@@ -154,7 +154,7 @@ function saveFeaturesData(){
                   label="Select"
                   selectItems={props.twoFactorList}
                   selectedValue={a}
-                  onSelectListChange={(e) => {
+                  onSelectListChange={(e:any) => {
                     twoFactChange(e)
                   }}
                   size="small"
@@ -188,7 +188,7 @@ function saveFeaturesData(){
                 <RdsCheckbox
                   label="LDAP Login"
                   checked={featureIdentitySettingsData[2].value}
-                  onChange={(e) => {
+                  onChange={(e:any) => {
                     setLDAP(e.target.checked);
                   }}
                 ></RdsCheckbox>
@@ -197,7 +197,7 @@ function saveFeaturesData(){
                 <RdsCheckbox
                   label="OAuth Login"
                   checked={featureIdentitySettingsData[3].value}
-                  onChange={(e) => {
+                  onChange={(e:any) => {
                     setOAuthLogin(e.target.checked);
                   }}
                 ></RdsCheckbox>
@@ -211,7 +211,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable language Management"
                 checked={featureIdentitySettingsData[4].value}
-                onChange={(e) => {
+                onChange={(e:any) => {
                   setLanguage(e.target.checked);
                 }}
               ></RdsCheckbox>
@@ -227,7 +227,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable text template Management"
                 checked={featureIdentitySettingsData[5].value}
-                onChange={(e) => {
+                onChange={(e:any) => {
                   setTextTemplate(e.target.checked);
                 }}
               ></RdsCheckbox>
@@ -243,7 +243,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable Audit logging page"
                 checked={featureIdentitySettingsData[6].value}
-                onChange={(e) => {
+                onChange={(e:any) => {
                   setAuditLog(e.target.checked);
                 }}
               ></RdsCheckbox>
