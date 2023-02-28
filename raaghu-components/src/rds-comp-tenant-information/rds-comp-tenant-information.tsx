@@ -35,6 +35,10 @@ const RdsCompTenantInformation = (props: any) => {
   });
 
   useEffect(()=>{
+    setTenantInformationData(props.tenantInformationData)
+  },[props.tenantInformationData])
+
+  useEffect(()=>{
     setEditionList(props.editions)
   },[props.editions])
 
