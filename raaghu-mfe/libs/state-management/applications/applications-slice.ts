@@ -1,16 +1,22 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
-import {ServiceProxy} from '../../shared/service-proxy'
+import {ServiceProxy, UpdatePermissionsDto} from '../../shared/service-proxy'
 
 type InitialStateApplication = {
   loading: boolean;
   applications: any;
+  editApplication:any;
+  scopes:any;
+  permission:any;
   error: string;
 }; 
 
 export const InitialStateApplication:InitialStateApplication= {
   loading: false,
   applications: null,
-  error: ""
+  editApplication:null,
+  error: "",
+  scopes: null,
+  permission:null
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -35,8 +41,32 @@ export const saveApplications = createAsyncThunk("applications/saveApplications"
   }) 
 });
 
-export const updateApplications = createAsyncThunk("applications/updateApplications", (id:string ,data:any) => {
-  return proxy.applicationsPUT(id, data,undefined).then((result:any)=>{
+export const updateApplications = createAsyncThunk("applications/updateApplications", (data:any) => {
+  return proxy.applicationsPUT(data.id, data.body,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getApplications = createAsyncThunk("applications/getApplications", (id:string) => {
+  return proxy.applicationsGET(id,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getScopes = createAsyncThunk("applications/getScopes", () => {
+  return proxy.allAll(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getPermission = createAsyncThunk("applications/getPermission", (key:string) => {
+  return proxy.permissionsGET("C",key,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const updatePermission = createAsyncThunk("applications/updatePermission", (data:any) => {
+  return proxy.permissionsPUT("C",data.key,data.permissions,undefined).then((result:any)=>{
      return result;
   }) 
 });
@@ -59,6 +89,7 @@ const applicationsSlice = createSlice({
         state.applications= action.payload;
       }  
     );
+
     builder.addCase(fetchApplications.rejected, (state, action) => { 
       state.loading = false; 
       state.error = action.error.message || "Something went wrong"; 
@@ -68,7 +99,6 @@ const applicationsSlice = createSlice({
     builder.addCase(
       deleteApplications.fulfilled,(state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.applications= action.payload;
       }  
     );
 
@@ -80,7 +110,6 @@ const applicationsSlice = createSlice({
     builder.addCase(
       saveApplications.fulfilled,(state,action:PayloadAction<any>)=>{
         state.loading=false;
-        state.applications=action.payload;
       }
     );
     builder.addCase(saveApplications.rejected,(state,action)=>{
@@ -96,7 +125,6 @@ const applicationsSlice = createSlice({
     builder.addCase(
       updateApplications.fulfilled,(state,action:PayloadAction<any>)=>{
         state.loading=false;
-        state.applications=action.payload;
       }
     );
     builder.addCase(updateApplications.rejected,(state,action)=>{
@@ -104,9 +132,72 @@ const applicationsSlice = createSlice({
       state.error=action.error.message||"Somethingwentwrong";
     });
 
+    //getUpdate
+    builder.addCase(getApplications.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getApplications.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.editApplication=action.payload;
+      }
+    );
+    builder.addCase(getApplications.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+
+    //getScopes
+    builder.addCase(getScopes.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getScopes.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.scopes=action.payload;
+      }
+    );
+    builder.addCase(getScopes.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //permissions
+
+    builder.addCase(getPermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getPermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.permission=action.payload;
+      }
+    );
+    builder.addCase(getPermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //updatePermission
+    builder.addCase(updatePermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      updatePermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+      }
+    );
+    builder.addCase(updatePermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
   }, 
 });
-
 
 
 export default applicationsSlice.reducer;

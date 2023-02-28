@@ -1,334 +1,413 @@
-import React, { useState } from "react";
-import { RdsBadge } from "../../../../../raaghu-elements/src";
+import React, { useState, useEffect } from "react";
+import {
+  RdsBadge,
+  RdsInput,
+  RdsButton,
+  RdsOffcanvas,
+  RdsNavtabs,
+  RdsTextArea,
+  RdsCheckbox,
+} from "raaghu-react-elements";
 
-import { RdsCompRoleList } from "../../../rds-components";
+import {
+  RdsCompDatatable,
+  RdsCompPermissionTree,
+  RdsCompAlertPopup,
+} from "../../../rds-components";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../libs/state-management/hooks";
+import { fetchRoles , addRolesUnit, editRoles, deleteRoles,fetchPermission, editPermisstion} from "../../../../libs/state-management/roles/roles-slice";
 
 interface RdsPageRolesProps {}
 
 const Roles = (props: RdsPageRolesProps) => {
+  const [activeTab, setActiveTab] = useState("basic");
+  const [data, setData] = useState({
+    roles:[],
+    permission:[]
+  });
+  const [val, setVal]=useState('')
+  const [id, setId]=useState(0)
+  const [checked, setChecked] = useState({
+    default: false,
+    public: false,
+  });
   const enablecheckboxselection = true;
+  const dispatch = useAppDispatch();
+  const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
 
-  const tableHeaders = [
+  useEffect(() => {
+    dispatch(fetchRoles() as any);
+  }, [dispatch]);
+  useEffect(() => {
+    if (Array.isArray(Data.roles)) {
+      const tempData = Data.roles?.map((curr: any) => {
+        return {
+          provideKey:curr.name,
+          isDefault: curr.isDefault,
+          isPublic: curr.isPublic,
+          id: curr.id,
+          concurrencyStamp:curr.concurrencyStamp,
+          extraProperties:curr.extraProperties,
+          name: (
+            <>
+              {" "}
+              <div>
+                {curr.name}
+                {curr.isDefault && (
+                  <RdsBadge
+                    label="Default"
+                    size="medium"
+                    colorVariant="success"
+                  ></RdsBadge>
+                )}
+                {curr.isPublic && (
+                  <RdsBadge
+                    label="Public"
+                    size="medium"
+                    colorVariant="primary"
+                  ></RdsBadge>
+                )}
+              </div>
+            </>
+          ),
+        };
+      });
+      setData({...data, roles:tempData});
+    }
+  }, [Data.roles]);
+
+  const handleractiveNavtabOrder = (id: any) => {
+    setActiveTab(id);
+  };
+  const handlerSelectedPermission = (data: any) => {
+const newElements = data.filter((newItem:any) => {
+  return (data.permission )?.some((prevItem:any) => prevItem.name == newItem.name && prevItem.isGranted == !newItem.isGranted );
+});
+  };
+  const handlerDeleteConfirm = () => {
+    dispatch(deleteRoles(id) as any).then(() => {
+      dispatch(fetchRoles() as any);
+    });
+    
+  };
+ 
+  const tableHeader = [
     {
       displayName: "Role Name",
-      key: "role",
+      key: "name",
       datatype: "children",
-      dataLength: 30,
-      required: true,
       sortable: true,
-      isEndUserEditing: false,
-    },
-    {
-      displayName: "Creation Time",
-      key: "ctime",
-      datatype: "text",
-      dataLength: 5,
-      required: false,
-      sortable: true,
-      isEndUserEditing: false,
     },
   ];
-
-  const tableData = [
-    {
-      id: 1,
-
-      isDefault: false,
-      displayName: "Admin",
-      role: {
-        children: (
-          <>
-            Admin{" "}
-            <RdsBadge label={"Static"} colorVariant={"primary"}></RdsBadge>{" "}
-          </>
-        ),
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
-    {
-      id: 2,
-      isDefault: false,
-      displayName: "User Prime",
-      role: {
-        children: <>User Prime</>,
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
-    {
-      id: 3,
-      isDefault: true,
-      displayName: "Golden Role",
-      role: {
-        children: (
-          <>
-            Golden Role
-            <RdsBadge
-              label={"Default"}
-              colorVariant={"success"}
-            ></RdsBadge>{" "}
-          </>
-        ),
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
-    {
-      id: 4,
-      isDefault: true,
-      displayName: "Work",
-      role: {
-        children: (
-          <>
-            Work<RdsBadge label={"Default"} colorVariant={"success"}></RdsBadge>{" "}
-          </>
-        ),
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
-    {
-      id: 5,
-      isDefault: true,
-      displayName: "Hello",
-      role: {
-        children: (
-          <>
-            Hello
-            <RdsBadge
-              label={"Default"}
-              colorVariant={"success"}
-            ></RdsBadge>{" "}
-          </>
-        ),
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
-    {
-      id: 6,
-      isDefault: false,
-      displayName: "Hello",
-      role: {
-        children: <>Hello</>,
-      },
-      ctime: "11/15/2021, 2:44:51 PM",
-    },
+  let actions: any = [
+    { id: "delete", displayName: "Delete", modalId: "deleteRolesof" },
+    { id: "edit", displayName: "Edit", offId: "editRoleof" },
   ];
-
-  const actions = [
-    { id: "anything", displayName: "Edit", offId: "Edit" },
-    { id: "Del", displayName: "Delete", modalId: "Del" },
-  ];
-
-  const pagination = true;
-
-  const permission = [
-    {
-      name: "Test edition scope feature",
-
-      id: "L1E1",
-
-      isSelected: false,
-
-      isIntermediate: false,
-
-      disabled: false,
-
-      children: [],
-    },
-
-    {
-      name: "Chat",
-
-      id: "L1E2",
-
-      parent_id: 0,
-
-      isSelected: false,
-
-      isIntermediate: false,
-
-      disabled: false,
-
-      children: [
-        {
-          name: "Chat with host",
-
-          id: "L2E1",
-
-          parent_id: 2,
-
-          isSelected: false,
-
-          isIntermediate: false,
-
-          disabled: false,
-
-          children: [],
-        },
-
-        {
-          name: "Chat with other tentents",
-
-          id: "L2E2",
-
-          parent_id: 2,
-
-          isSelected: false,
-
-          isIntermediate: false,
-
-          disabled: false,
-
-          children: [],
-        },
-      ],
-    },
-
-    {
-      name: "Maximum user count",
-
-      id: "L1E6",
-
-      parent_id: 0,
-
-      isSelected: false,
-
-      isIntermediate: false,
-
-      disabled: false,
-
-      children: [],
-    },
-
-    {
-      name: "Test check feature",
-
-      id: "L1E5",
-
-      parent_id: 0,
-
-      isSelected: false,
-
-      isIntermediate: false,
-
-      disabled: false,
-
-      children: [],
-    },
-
-    {
-      name: "Test check feature",
-
-      id: "L1E5",
-
-      parent_id: 0,
-
-      isSelected: true,
-
-      isIntermediate: false,
-
-      disabled: false,
-
-      children: [],
-    },
-  ];
-
-  const listItems = [
-    {
-      value: "Refresh",
-
-      some: "value",
-
-      key: "refresh",
-
-      icon: "refresh",
-
-      iconWidth: "20px",
-
-      iconHeight: "20px",
-    },
-
-    {
-      value: "Filter By Permission",
-
-      some: "value",
-
-      key: "filterByPermission",
-
-      icon: "funnel",
-
-      iconWidth: "20px",
-
-      iconHeight: "20px",
-    },
-
-    {
-      value: "New Role",
-
-      some: "value",
-
-      key: "new",
-
-      icon: "plus",
-
-      iconWidth: "12px",
-
-      iconHeight: "12px",
-    },
-  ];
-
-  //   displayName: "hello",
-
-  //   key: "hello",
-
-  //   datatype: "text",
-
-  //   dataLength?: number | undefined;
-
-  //   required?: boolean | undefined;
-
-  //   sortable?: boolean | undefined;
-
-  //   colWidth?: string | undefined;
-
-  //   disabled?: boolean | undefined;
-
-  //   isEndUserEditing?: boolean | undefined;
-
-  // }];
-
-  // tableData: {}[];
-
-  // actions: {
-
-  //   displayName: string;
-
-  //   id: string;
-
-  // }[];
-
-  // pagination: boolean;
-
-  // enablecheckboxselection?: boolean;
-
-  // onActionSelection(arg: any): any;
-
-  // onRefresh?:(Event:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-
-  // onSearch?:(Event:React.MouseEvent<HTMLDivElement, MouseEvent>)=>void;
-
-  // onFilterByPermissions?:(id:any)=>void;
-
-  // onNewRole?:(Event:React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
-
+  const handlerActions = (clickEvent: any,
+    tableDataRow: any,
+    tableDataRowIndex: number,
+    action: {
+      displayName: string;
+      id: string;
+      offId?: string;
+      modalId?: string;
+    }) => {
+setId(tableDataRowIndex)
+
+
+if(action.id==='edit'){
+  setVal(tableDataRow.provideKey)
+  setChecked({...checked, default:tableDataRow.isDefault, public:tableDataRow.isPublic})
+  dispatch(fetchPermission(tableDataRow.provideKey) as any )
+}}
+useEffect(() => {
+  setData({...data, permission:Data.permission})
+}, [Data.permission]);
+  
+  const handlerAddRole =()=>{
+    const dto={
+      isDefault:checked.default,
+      isPublic:checked.public,
+      name:val
+    }
+    dispatch(addRolesUnit(dto) as any).then(() => {
+      dispatch(fetchRoles() as any);
+    });
+  }
+  const handlerEditRole  =()=>{
+    // name!: string;
+    // isDefault?: boolean;
+    // isPublic?: boolean;
+    // concurrencyStamp?
+//     concurrencyStamp
+// : 
+// "f66717ce843c47aa8f95851066d2f217"
+// extraProperties
+// : 
+// {}
+const dto={
+  name:val,
+  isDefault:checked.default,
+  isPublic:checked.public,
+  concurrencyStamp:undefined,
+  extraProperties: {}
+}
+    dispatch(editRoles({ id: id, dTo: dto }) as any).then(() => {
+      dispatch(fetchRoles() as any);
+    });
+  }
+  const handlerNewRole =()=>{
+    setVal('')
+    setChecked({...checked, default:false, public:false})
+  }
   return (
     <>
-      <RdsCompRoleList
-        tableHeaders={tableHeaders}
-        tableData={tableData}
-        actions={actions}
-        pagination={pagination}
-        listItems={listItems}
-        permission={permission}
-      ></RdsCompRoleList>
+      <div className="d-flex justify-content-between">
+        <h4>Roles </h4>
+        <div className="d-flex justify-content-end">
+          <RdsButton
+            icon="plus"
+            label="New Role"
+            iconColorVariant="light"
+            iconHeight="15px"
+            iconWidth="15px"
+            iconFill={false}
+            iconStroke={true}
+            block={false}
+            size="small"
+            type="button"
+            colorVariant="primary"
+            databstoggle="offcanvas"
+            databstarget="#newRole"
+            onClick={handlerNewRole}
+          ></RdsButton>
+        </div>
+      </div>
+      <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
+        <RdsCompDatatable
+          classes="table__userTable"
+          tableHeaders={tableHeader}
+          tableData={data?.roles}
+          pagination={data?.roles?.length > 5 ? true : false}
+          recordsPerPage={10}
+          noDataTitle="Currently you do not have Role"
+          actions={actions}
+          onActionSelection={handlerActions}
+          recordsPerPageSelectListOption={true}
+        ></RdsCompDatatable>
+        <RdsOffcanvas
+          placement="end"
+          canvasTitle="New Role"
+          offcanvaswidth={500}
+          offId="newRole"
+          backDrop={false}
+          scrolling={false}
+          preventEscapeKey={false}
+        >
+          <div className="mt-2">
+            <div>
+              <div className=" mt-4 mb-2 ">
+                <RdsInput
+                  inputType="text"
+                  label="Role Name"
+                  labelPositon="top"
+                  placeholder="Enter Role"
+                  required={true}
+                  value={val}
+                  size="medium"
+                  onChange={(e)=>setVal(e.target.value)}
+                ></RdsInput>
+              </div>
+              <div className="d-flex mt-4">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    checked ={checked.default}
+                    onChange={(e)=>{setChecked({...checked, default:!checked.default})}}
+                    id="flexCheckDefaultrole"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefaultrole"
+                  >
+                    Default Role
+                  </label>
+                </div>
+                <div className="ms-3 form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefaultpublic"
+                    checked ={checked.public}
+                    onChange={(e)=>{setChecked({...checked, public:!checked.public})}}
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefaultpublic"
+                  >
+                    Available For Public
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              className="d-flex"
+              style={{ position: "absolute", bottom: "2%" }}
+            >
+              <div className="me-3">
+                <RdsButton
+                  type={"button"}
+                  label="cancel"
+                  isOutline={true}
+                  colorVariant="primary"
+                  databsdismiss="offcanvas"
+                  databstoggle="offcanvas"
+                  databstarget="#newRole"
+                ></RdsButton>
+              </div>
+              <RdsButton
+                type={"button"}
+                label="save"
+               isDisabled={val===''}
+                colorVariant="primary"
+                onClick={handlerAddRole}
+                databsdismiss="offcanvas"
+                databstoggle="offcanvas"
+                databstarget="#newRole"
+              ></RdsButton>
+            </div>
+          </div>
+        </RdsOffcanvas>
+        <RdsOffcanvas
+          placement="end"
+          canvasTitle="Edit Role"
+          offcanvaswidth={500}
+          offId="editRoleof"
+          backDrop={false}
+          scrolling={false}
+          preventEscapeKey={false}
+        >
+          <RdsNavtabs
+            type="tabs"
+            activeNavtabOrder={handleractiveNavtabOrder}
+            fill={false}
+            navtabsItems={[
+              {
+                label: "Basic",
+                tablink: "#nav-Operation",
+                id: "basic",
+              },
+              {
+                label: "Permissions",
+                tablink: "#nav-Change",
+                id: "permissions",
+              },
+            ]}
+          />
+          <div className="mt-2">
+            {activeTab == "basic" && (
+              <div>
+                {" "}
+                <div className=" mt-3 ">
+                  <RdsInput
+                    inputType="text"
+                    label="Role Name"
+                    labelPositon="top"
+                    placeholder="Enter Name"
+                    // id={node.data.id}
+                    required={true}
+                    //  name={Edit}
+                      value={val}
+                    size="medium"
+                    onChange={(e)=>setVal(e.target.value)}
+                  ></RdsInput>
+                </div>
+               
+                <div className="d-flex mt-4">
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    checked ={checked.default}
+                    onChange={(e)=>{setChecked({...checked, default:!checked.default})}}
+                    id="flexCheckDefaultrole"
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefaultrole"
+                  >
+                    Default Role
+                  </label>
+                </div>
+                <div className="ms-3 form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefaultpublic"
+                    checked ={checked.public}
+                    onChange={(e)=>{setChecked({...checked, public:!checked.public})}}
+                  />
+                  <label
+                    className="form-check-label"
+                    htmlFor="flexCheckDefaultpublic"
+                  >
+                    Available For Public
+                  </label>
+                </div>
+              </div>
+              </div>
+            )}
+            {activeTab !== "basic" && (
+              <div>
+                <RdsCompPermissionTree
+                  permissions={data.permission
+                  }
+                  selectedPermissions={handlerSelectedPermission}
+                ></RdsCompPermissionTree>
+              </div>
+            )}
+            <div
+              className="d-flex"
+              style={{ position: "absolute", bottom: "2%" }}
+            >
+              <div className="me-3">
+                <RdsButton
+                  type={"button"}
+                  label="cancel"
+                  isOutline={true}
+                  colorVariant="primary"
+                  // onClick={CancelClick}
+                  databsdismiss="offcanvas"
+                  databstoggle="offcanvas"
+                  databstarget="#editRoleof"
+                ></RdsButton>
+              </div>
+              <RdsButton
+                type={"button"}
+                label="save"
+                   isDisabled={val===''}
+                colorVariant="primary"
+                   onClick={handlerEditRole}
+                databsdismiss="offcanvas"
+                databstoggle="offcanvas"
+                databstarget="#editRoleof"
+              ></RdsButton>
+            </div>
+          </div>
+        </RdsOffcanvas>
+        <RdsCompAlertPopup
+          alertID={`deleteRolesof`}
+          onSuccess={handlerDeleteConfirm}
+        ></RdsCompAlertPopup>
+      </div>
     </>
   );
 };

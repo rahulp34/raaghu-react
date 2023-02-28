@@ -3,6 +3,7 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import { result } from "lodash-es";
 import { ServiceProxy } from "../../shared/service-proxy";
 
 
@@ -10,15 +11,20 @@ export interface UserState {
   loading: boolean
   users: any
   organizationUnit:any
+  editUser:any
   roles:any
   error: string;
+  permission:any;
 };
 export const UserInitialState: UserState = {
   loading: false,
   users: [],
+  editUser:null,
   roles:null,
   organizationUnit:null,
   error: "",
+  permission:null
+
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -62,6 +68,14 @@ export const fetchEditUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk("user/updateUser",
+(data:any)=>{
+  return proxy.usersPUT(data.id, data.body).then((result:any)=>{
+    console.log("successfully updated user")
+    return result;
+  })
+})
+
 export const createUser = createAsyncThunk(
   "user/createuser",
   (data:any)=>{
@@ -70,6 +84,24 @@ export const createUser = createAsyncThunk(
     })
   }
 )
+
+export const deleteUser = createAsyncThunk("user/deleteUser",(data:any)=>{
+  return proxy.usersDELETE(data).then(result=>{
+    return result;
+  })
+})
+
+export const getPermission = createAsyncThunk("user/getPermission", (key:string) => {
+  return proxy.permissionsGET("U",key,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const updatePermission = createAsyncThunk("user/updatePermission", (data:any) => {
+  return proxy.permissionsPUT("U",data.key,data.permissions,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
 
 const userSlice = createSlice({
   name: "user",
@@ -129,19 +161,103 @@ const userSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
+    builder.addCase(fetchEditUser.pending, (state) => {
+      state.loading = true;
+    });
+
     builder.addCase(
-      createUser.fulfilled,
+      fetchEditUser.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.editUser = action.payload;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(fetchEditUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(
+      createUser.pending,
+      (state, action: PayloadAction<any>) => {
+        state.loading = true;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+
+
+    builder.addCase(updateUser.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      updateUser.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = "";
       }
     );
 
-    builder.addCase(createUser.rejected, (state, action) => {
+    builder.addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
-    
+
+    builder.addCase(deleteUser.pending, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(
+      deleteUser.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+
+     //permissions
+
+     builder.addCase(getPermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getPermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.permission=action.payload;
+      }
+    );
+    builder.addCase(getPermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    //updatePermission
+    builder.addCase(updatePermission.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      updatePermission.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+      }
+    );
+    builder.addCase(updatePermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
   },
 });
 
