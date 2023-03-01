@@ -103,6 +103,7 @@ export const saveFeaturesSettings = createAsyncThunk("settings/saveFeaturesS
       return result;
   })  
 });
+
 export const restoreToDefaultFeaturesSettings = createAsyncThunk("settings/restoreToDefaultFeaturesSettings", (data:any) => {
   
   return proxy.featuresDELETE("T",undefined,undefined).then((result:any)=>{

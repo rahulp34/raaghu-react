@@ -51,41 +51,44 @@ useEffect( () => {
  
   const condition =!formData.smtpUseDefaultCredentials?<>
   <div className="row mt-2">
-        <div className="col-md-6 sm-p-0">
-            <div className="form-group mb-4">
+        <div className="col-md-4 sm-p-0">
+            <div className="form-group ">
             <RdsInput
               value={formData.smtpDomain}
               name="displayName"
               label="Domain"
+              required={true}
               placeholder=""
               customClasses="form-control"
-			        onChange={e => setDomain(e.target.value)} 
+			        onChange={(e:any) => setDomain(e.target.value)} 
             ></RdsInput>
             </div>
         </div>
      </div>
 
    <div className="row mt-2">
-        <div className="col-md-6 sm-p-0">
-            <div className="form-group mb-4">
+        <div className="col-md-4 sm-p-0">
+            <div className="form-group">
             <RdsInput
               value={formData.smtpUserName}
               name="displayName"
               label="User name"
+              required={true}
               placeholder=""
               customClasses="form-control"
-			        onChange={e => setUserName(e.target.value)} 
+			        onChange={(e:any) => setUserName(e.target.value)} 
             ></RdsInput>
             </div>
         </div>
      </div>
      <div className="row mt-2">
-        <div className="col-md-6 sm-p-0">
-            <div className="form-group mb-4">
+        <div className="col-md-4 sm-p-0">
+            <div className="form-group ">
             <RdsInput
               value={formData.smtpPassword}
               name="displayName"
               label="Password"
+              required={true}
               placeholder=""
               inputType="password"
               customClasses="form-control"
@@ -101,19 +104,16 @@ useEffect( () => {
   return (
     <div className="pt-4">
       <form onSubmit={handleSubmit}>
-        <div className="row mb-3">
-          <div className="col-md-6 col-sm-6 col-lg-6">
+        <div className="row">
+          <div className="col-md-4 col-sm-4 col-lg-4">
             <div className="form-group">
-              <RdsLabel
-                label="Default From (Sender) Email Address"
-                class="mb-1"
-                size="14px"
-              ></RdsLabel>
               <RdsInput
                 placeholder="Email Address"
                 customClasses="form-control"
                 inputType="text"
+                label="Default From (Sender) Email Address"
                 name="email"
+                required={true}
                 value={formData.defaultFromDisplayName}
                 onChange={(e:any) => setEmail(e.target.value)}
               ></RdsInput>
@@ -126,15 +126,12 @@ useEffect( () => {
               )} */}
             </div>
           </div>
-          <div className="col-md-6 col-sm-6 col-lg-6">
-            <RdsLabel
-              label="Default From (Sender) Display Name"
-              class="mb-1"
-              size="14px"
-            ></RdsLabel>
+          <div className="col-md-4 col-sm-4 col-lg-4">
             <RdsInput
               value={formData.defaultFromAddress}
               name="displayName"
+              required={true}
+              label="Default From (Sender) Display Name"
               placeholder="Display Name"
               customClasses="form-control"
 			        onChange={(e:any) => setUsername(e.target.value)} 
@@ -142,27 +139,29 @@ useEffect( () => {
           </div>
         </div>
 
-        <div className="row mb-3">
-          <div className="col-md-6 col-sm-6 col-lg-6">
+        <div className="row">
+          <div className="col-md-4 col-sm-4 col-lg-4">
             <div className="form-group">
-              <RdsLabel label="SMTP Host" class="mb-1" size="14px"></RdsLabel>
               <RdsInput
                 value={formData.smtpHost}
                 name="smtpHost"
+                label="SMTP Host"
                 placeholder="127.0.0.1"
+                required={true}
                 customClasses="form-control"
-				onChange={e => setSmtHost(e.target.value)}
+				onChange={(e:any) => setSmtHost(e.target.value)}
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-6 col-sm-6 col-lg-6">
-            <RdsLabel label="SMTP Port" class="mb-1" size="14px"></RdsLabel>
+          <div className="col-md-4 col-sm-4 col-lg-4">
             <RdsInput
               value={formData.smtpPort}
               name="smtpPort"
               placeholder="25"
+              label="SMTP Port"
+              required={true}
               customClasses="form-control"
-			  onChange={e => setPort(e.target.value)}
+			  onChange={(e:any) => setPort(e.target.value)}
             ></RdsInput>
           </div>
         </div>
@@ -171,7 +170,7 @@ useEffect( () => {
             className="col-lg-12 col-md-12 col-sm-12"
             style={{ fontSize: "14px" }}
           >
-            <RdsCheckbox label="Use SSL"  onChange={e =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
+            <RdsCheckbox label="Use SSL"  onChange={(e:any) =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
           </div>
         </div>
 
@@ -182,14 +181,14 @@ useEffect( () => {
           >
             <RdsCheckbox
               label="Use Default Credentials"
-			  onChange={e =>{setCredential(e.target.checked)}}
+			  onChange={(e:any) =>{setCredential(e.target.checked)}}
               checked={formData.smtpUseDefaultCredentials}
             ></RdsCheckbox>
           </div>
         </div>
 
         {condition }
-          <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0" >
+          <div className="footer-buttons card-footer justify-content-end d-flex  pt-0" >
             <RdsButton
               class="me-2"
               label="CANCEL"

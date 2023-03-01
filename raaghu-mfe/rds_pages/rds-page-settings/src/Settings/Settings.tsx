@@ -268,7 +268,7 @@ const Settings = (props: RdsCompSettingsProps) => {
     <div className="tenant">
       <div className="row">
         <div className="col-md-12">
-          <div className="card border-0 py-2 px-4 h-100 rounded-0 card-full-stretch">
+          <div className="card border-0 px-4 h-100 rounded-0 card-full-stretch">
             <RdsNavtabs
               navtabsItems={navtabsItems}
               type="tabs"
