@@ -95,7 +95,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div>
               <RdsInput
                 value={userData.surname}
-                placeholder="Smith"
+                placeholder="Enter Surname"
                 inputType="text"
                 label="Surname"
                 name="surName"
@@ -105,13 +105,19 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             </div>
           </div>
 
-          <div className="col-lg-6 col-md-6 text-center mb-2">
-            {/* <img
-              src={"img"}
-              alt="Profile Pic"
-              onClick={profilePicHandler}
-            ></img> */}
-          </div>
+          <div className="col-md-6 text-center cursor-pointer sm-p-0">
+              <img
+                src="./assets/edit-pic.png"
+                width="100"
+                //onClick={}
+              />
+              <input
+                type="file"
+                id="file"
+                //ref={inputFile}
+                style={{ display: "none" }}
+              />
+            </div>
         </div>
 
         <div className="row mb-2">
@@ -119,7 +125,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div className="mb-2">
               <RdsInput
                 value={userData.email}
-                placeholder="Carolyncarpenter@gmail.com"
+                placeholder="Enter Email"
                 inputType="email"
                 label="Email Address"
                 name="email"
@@ -132,7 +138,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div className="mb-2">
               <RdsInput
                 value={userData.password}
-                placeholder="**********"
+                placeholder="****"
                 inputType="password"
                 label="Password"
                 name="password"
@@ -147,7 +153,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div className="mb-2">
               <RdsInput
                 value={userData.userName}
-                placeholder="Carolyncarpenter"
+                placeholder="Enter Username"
                 inputType="text"
                 label="User Name"
                 name="userName"
@@ -160,7 +166,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div className="mb-2">
               <RdsInput
                 value={userData.phoneNumber}
-                placeholder="Carolyncarpenter@gmail.com"
+                placeholder="Enter Phone"
                 inputType="number"
                 label="Phone Number"
                 name="phone"

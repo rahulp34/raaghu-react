@@ -4,7 +4,7 @@ import {
   RdsDropdownList,
   RdsLabel,
   RdsSelectList,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 import "./rds-comp-theme-new.scss";
 
@@ -53,7 +53,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.StyleList}
               size="small"
-              onSelectListChange={(e) => {
+              onSelectListChange={(e:any) => {
                 handleStyleListChange(e);
               }}
             ></RdsSelectList>
@@ -68,7 +68,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.WebList}
               size="small"
-              onSelectListChange={(e) => {
+              onSelectListChange={(e:any) => {
                 webStyleListChange(e);
               }}
             ></RdsSelectList>
@@ -86,7 +86,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.MenuList}
               size="small"
-              onSelectListChange={(e) => {
+              onSelectListChange={(e:any) => {
                 menuListChange(e);
               }}
             ></RdsSelectList>
@@ -101,7 +101,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.StatusList}
               size="small"
-              onSelectListChange={(e) => {
+              onSelectListChange={(e:any) => {
                 statusListChange(e);
               }}
             ></RdsSelectList>
