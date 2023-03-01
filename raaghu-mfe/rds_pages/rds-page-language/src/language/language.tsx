@@ -12,7 +12,7 @@ import {
   RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompNewLanguage,
-} from "../../../rds-components";
+} from "../../../rds-components"; 
 
 import {
   useAppDispatch,
@@ -160,20 +160,24 @@ const Language = (props: LanguageProps) => {
           isDefault: item.isDefaultLanguage,
           isenabled: (
             <>
-              {!item.isEnabled ? (
+              {item.isEnabled ? (
+                <RdsBadge
+                label={"Active"}
+                size={"medium"}
+                badgeType={"rectangle"}
+                colorVariant={"success"}
+              ></RdsBadge>
+                
+              ) : (
+
                 <RdsBadge
                   label={"Inactive"}
                   size={"medium"}
                   badgeType={"rectangle"}
                   colorVariant={"danger"}
                 ></RdsBadge>
-              ) : (
-                <RdsBadge
-                  label={"Active"}
-                  size={"medium"}
-                  badgeType={"rectangle"}
-                  colorVariant={"success"}
-                ></RdsBadge>
+
+                
               )}
             </>
           ),
