@@ -1,6 +1,5 @@
+import React, { useState, useEffect } from "react";
 import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
-import { hu } from "date-fns/locale";
-import React, { useEffect, useState } from "react";
 import "./rds-comp-email.scss";
 
 const RdsCompEmail = (props: any) => {
@@ -90,7 +89,7 @@ useEffect( () => {
               placeholder=""
               inputType="password"
               customClasses="form-control"
-			        onChange={e => setPassword(e.target.value)} 
+			        onChange={(e:any) => setPassword(e.target.value)} 
             ></RdsInput>
             </div>
         </div>
@@ -116,7 +115,7 @@ useEffect( () => {
                 inputType="text"
                 name="email"
                 value={formData.defaultFromDisplayName}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e:any) => setEmail(e.target.value)}
               ></RdsInput>
               {/* {error && (
                 // <h2
@@ -138,7 +137,7 @@ useEffect( () => {
               name="displayName"
               placeholder="Display Name"
               customClasses="form-control"
-			        onChange={e => setUsername(e.target.value)} 
+			        onChange={(e:any) => setUsername(e.target.value)} 
             ></RdsInput>
           </div>
         </div>

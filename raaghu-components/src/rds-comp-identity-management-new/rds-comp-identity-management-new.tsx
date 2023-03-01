@@ -1,6 +1,5 @@
-
+import React, {useState, useEffect} from "react";
 import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
-import React, { useState, useEffect } from "react";
 
 export interface RdsCompIdentityManagementProps {
 
@@ -122,7 +121,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Number"
                 required={true}
                 value={passwordSettings.requiredUniqueChars}
-                onChange={(e) => setNumber(e.target.value)}
+                onChange={(e:any) => setNumber(e.target.value)}
               ></RdsInput>
             </div>
           </div>
@@ -132,7 +131,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Non Alpha Numeric Characters"
               checked={passwordSettings.requireNonAlphanumeric}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setNonAlphaNumeric(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -143,7 +142,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Upper Case"
               checked={passwordSettings.requireUppercase}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setUpperCase(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -154,7 +153,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Lower Case"
               checked={passwordSettings.requireLowercase}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setLowerCase(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -165,7 +164,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Numbers"
               checked={passwordSettings.requireDigit}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setReqNumber(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -180,7 +179,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Enabled for new users (Whether a new user can be locked out.)"
               checked={lockoutSettings.allowedForNewUsers}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 enabledNewUsers(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -203,7 +202,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Length"
                 required={true}
                 value={lockoutSettings.lockoutDuration}
-                onChange={(e) => setLockDuration(e.target.value)}
+                onChange={(e:any) => setLockDuration(e.target.value)}
               ></RdsInput>
             </div>
           </div>
@@ -223,7 +222,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Name"
                 required={true}
                 value={lockoutSettings.maxFailedAccessAttempts}
-                onChange={(e) => setAccessAttempts(e.target.value)}
+                onChange={(e:any) => setAccessAttempts(e.target.value)}
               ></RdsInput>
             </div>
           </div>
@@ -238,7 +237,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Require confirmed email  (Whether a confirmed email address is required to sign in.) "
               checked={signSettings.requireConfirmedEmail}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setReqEmail(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -249,7 +248,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to confirm their phone number  (Whether the phoneNumber can be confirmed by the user.)"
               checked={signSettings.enablePhoneNumberConfirmation}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setAllowUsers(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -260,7 +259,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Require confirmed phone number  (Whether a confirmed telephone number is required to sign in)."
               checked={signSettings.requireConfirmedPhoneNumber}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 setReqPhoneNumber(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -275,7 +274,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to change their email addresses  (Whether the email can be updated by the user.)"
               checked={userSettings.isEmailUpdateEnabled}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 changeEmail(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -286,7 +285,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to change their usernames  (Whether the username can be updated by the user.)"
               checked={userSettings.isUserNameUpdateEnabled}
-              onChange={(e) => {
+              onChange={(e:any) => {
                 changeUserNames(e.target.checked);
               }}
             ></RdsCheckbox>
