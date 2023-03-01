@@ -5,8 +5,6 @@ import {
   RdsButton,
   RdsOffcanvas,
   RdsNavtabs,
-  RdsTextArea,
-  RdsCheckbox,
 } from "raaghu-react-elements";
 
 import {
@@ -18,18 +16,25 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchRoles , addRolesUnit, editRoles, deleteRoles,fetchPermission, editPermisstion} from "../../../../libs/state-management/roles/roles-slice";
+import {
+  fetchRoles,
+  addRolesUnit,
+  editRoles,
+  deleteRoles,
+  fetchPermission,
+  editPermisstion,
+} from "../../../../libs/state-management/roles/roles-slice";
 
 interface RdsPageRolesProps {}
 
 const Roles = (props: RdsPageRolesProps) => {
   const [activeTab, setActiveTab] = useState("basic");
   const [data, setData] = useState({
-    roles:[],
-    permission:[]
+    roles: [],
+    permission: [],
   });
-  const [val, setVal]=useState('')
-  const [id, setId]=useState(0)
+  const [val, setVal] = useState("");
+  const [id, setId] = useState(0);
   const [checked, setChecked] = useState({
     default: false,
     public: false,
@@ -45,12 +50,12 @@ const Roles = (props: RdsPageRolesProps) => {
     if (Array.isArray(Data.roles)) {
       const tempData = Data.roles?.map((curr: any) => {
         return {
-          provideKey:curr.name,
+          provideKey: curr.name,
           isDefault: curr.isDefault,
           isPublic: curr.isPublic,
           id: curr.id,
-          concurrencyStamp:curr.concurrencyStamp,
-          extraProperties:curr.extraProperties,
+          concurrencyStamp: curr.concurrencyStamp,
+          extraProperties: curr.extraProperties,
           name: (
             <>
               {" "}
@@ -75,7 +80,7 @@ const Roles = (props: RdsPageRolesProps) => {
           ),
         };
       });
-      setData({...data, roles:tempData});
+      setData({ ...data, roles: tempData });
     }
   }, [Data.roles]);
 
@@ -83,17 +88,20 @@ const Roles = (props: RdsPageRolesProps) => {
     setActiveTab(id);
   };
   const handlerSelectedPermission = (data: any) => {
-const newElements = data.filter((newItem:any) => {
-  return (data.permission )?.some((prevItem:any) => prevItem.name == newItem.name && prevItem.isGranted == !newItem.isGranted );
-});
+    const newElements = data.filter((newItem: any) => {
+      return data.permission?.some(
+        (prevItem: any) =>
+          prevItem.name == newItem.name &&
+          prevItem.isGranted == !newItem.isGranted
+      );
+    });
   };
   const handlerDeleteConfirm = () => {
     dispatch(deleteRoles(id) as any).then(() => {
       dispatch(fetchRoles() as any);
     });
-    
   };
- 
+
   const tableHeader = [
     {
       displayName: "Role Name",
@@ -106,63 +114,49 @@ const newElements = data.filter((newItem:any) => {
     { id: "delete", displayName: "Delete", modalId: "deleteRolesof" },
     { id: "edit", displayName: "Edit", offId: "editRoleof" },
   ];
-  const handlerActions = (clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }) => {
-setId(tableDataRowIndex)
+  const handlerActions = (rowData: any, actionId: any) => {
+    setId(rowData.id);
 
-
-if(action.id==='edit'){
-  setVal(tableDataRow.provideKey)
-  setChecked({...checked, default:tableDataRow.isDefault, public:tableDataRow.isPublic})
-  dispatch(fetchPermission(tableDataRow.provideKey) as any )
-}}
-useEffect(() => {
-  setData({...data, permission:Data.permission})
-}, [Data.permission]);
-  
-  const handlerAddRole =()=>{
-    const dto={
-      isDefault:checked.default,
-      isPublic:checked.public,
-      name:val
+    if (actionId === "edit") {
+      setVal(rowData.provideKey);
+      setChecked({
+        ...checked,
+        default: rowData.isDefault,
+        public: rowData.isPublic,
+      });
+      dispatch(fetchPermission(rowData.provideKey) as any);
     }
+  };
+  useEffect(() => {
+    setData({ ...data, permission: Data.permission });
+  }, [Data.permission]);
+
+  const handlerAddRole = () => {
+    const dto = {
+      isDefault: checked.default,
+      isPublic: checked.public,
+      name: val,
+    };
     dispatch(addRolesUnit(dto) as any).then(() => {
       dispatch(fetchRoles() as any);
     });
-  }
-  const handlerEditRole  =()=>{
-    // name!: string;
-    // isDefault?: boolean;
-    // isPublic?: boolean;
-    // concurrencyStamp?
-//     concurrencyStamp
-// : 
-// "f66717ce843c47aa8f95851066d2f217"
-// extraProperties
-// : 
-// {}
-const dto={
-  name:val,
-  isDefault:checked.default,
-  isPublic:checked.public,
-  concurrencyStamp:undefined,
-  extraProperties: {}
-}
+  };
+  const handlerEditRole = () => {
+    const dto = {
+      name: val,
+      isDefault: checked.default,
+      isPublic: checked.public,
+      concurrencyStamp: undefined,
+      extraProperties: {},
+    };
     dispatch(editRoles({ id: id, dTo: dto }) as any).then(() => {
       dispatch(fetchRoles() as any);
     });
-  }
-  const handlerNewRole =()=>{
-    setVal('')
-    setChecked({...checked, default:false, public:false})
-  }
+  };
+  const handlerNewRole = () => {
+    setVal("");
+    setChecked({ ...checked, default: false, public: false });
+  };
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -218,17 +212,19 @@ const dto={
                   required={true}
                   value={val}
                   size="medium"
-                  onChange={(e)=>setVal(e.target.value)}
+                  onChange={(e) => setVal(e.target.value)}
                 ></RdsInput>
               </div>
-              <div className="d-flex mt-4">
+              <div className="d-flex mt-4 me-2">
                 <div className="form-check">
                   <input
                     className="form-check-input"
                     type="checkbox"
                     value=""
-                    checked ={checked.default}
-                    onChange={(e)=>{setChecked({...checked, default:!checked.default})}}
+                    checked={checked.default}
+                    onChange={(e) => {
+                      setChecked({ ...checked, default: !checked.default });
+                    }}
                     id="flexCheckDefaultrole"
                   />
                   <label
@@ -238,14 +234,16 @@ const dto={
                     Default Role
                   </label>
                 </div>
-                <div className="ms-3 form-check">
+                <div className="ms-4 form-check">
                   <input
                     className="form-check-input"
                     type="checkbox"
                     value=""
                     id="flexCheckDefaultpublic"
-                    checked ={checked.public}
-                    onChange={(e)=>{setChecked({...checked, public:!checked.public})}}
+                    checked={checked.public}
+                    onChange={(e) => {
+                      setChecked({ ...checked, public: !checked.public });
+                    }}
                   />
                   <label
                     className="form-check-label"
@@ -274,7 +272,7 @@ const dto={
               <RdsButton
                 type={"button"}
                 label="save"
-               isDisabled={val===''}
+                isDisabled={val === ""}
                 colorVariant="primary"
                 onClick={handlerAddRole}
                 databsdismiss="offcanvas"
@@ -323,53 +321,55 @@ const dto={
                     // id={node.data.id}
                     required={true}
                     //  name={Edit}
-                      value={val}
+                    value={val}
                     size="medium"
-                    onChange={(e)=>setVal(e.target.value)}
+                    onChange={(e) => setVal(e.target.value)}
                   ></RdsInput>
                 </div>
-               
-                <div className="d-flex mt-4">
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    checked ={checked.default}
-                    onChange={(e)=>{setChecked({...checked, default:!checked.default})}}
-                    id="flexCheckDefaultrole"
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefaultrole"
-                  >
-                    Default Role
-                  </label>
+                <div className="d-flex mt-4 me-2">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      checked={checked.default}
+                      onChange={(e) => {
+                        setChecked({ ...checked, default: !checked.default });
+                      }}
+                      id="flexCheckDefaultrole"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexCheckDefaultrole"
+                    >
+                      Default Role
+                    </label>
+                  </div>
+                  <div className="ms-4 form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefaultpublic"
+                      checked={checked.public}
+                      onChange={(e) => {
+                        setChecked({ ...checked, public: !checked.public });
+                      }}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexCheckDefaultpublic"
+                    >
+                      Available For Public
+                    </label>
+                  </div>
                 </div>
-                <div className="ms-3 form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefaultpublic"
-                    checked ={checked.public}
-                    onChange={(e)=>{setChecked({...checked, public:!checked.public})}}
-                  />
-                  <label
-                    className="form-check-label"
-                    htmlFor="flexCheckDefaultpublic"
-                  >
-                    Available For Public
-                  </label>
-                </div>
-              </div>
               </div>
             )}
             {activeTab !== "basic" && (
               <div>
                 <RdsCompPermissionTree
-                  permissions={data.permission
-                  }
+                  permissions={data.permission}
                   selectedPermissions={handlerSelectedPermission}
                 ></RdsCompPermissionTree>
               </div>
@@ -384,7 +384,6 @@ const dto={
                   label="cancel"
                   isOutline={true}
                   colorVariant="primary"
-                  // onClick={CancelClick}
                   databsdismiss="offcanvas"
                   databstoggle="offcanvas"
                   databstarget="#editRoleof"
@@ -393,9 +392,9 @@ const dto={
               <RdsButton
                 type={"button"}
                 label="save"
-                   isDisabled={val===''}
+                isDisabled={val === ""}
                 colorVariant="primary"
-                   onClick={handlerEditRole}
+                onClick={handlerEditRole}
                 databsdismiss="offcanvas"
                 databstoggle="offcanvas"
                 databstarget="#editRoleof"

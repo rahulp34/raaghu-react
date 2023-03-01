@@ -119,11 +119,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
     });
     setWebhookheaderfile([]);
   };
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }) => {
+  const onActionSelection = (rowData: any, actionId: any) => {
 	};
 
   const tableHeaders = [

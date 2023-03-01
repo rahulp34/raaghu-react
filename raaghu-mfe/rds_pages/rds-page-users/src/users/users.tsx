@@ -774,17 +774,11 @@ const Users = () => {
     setSelectedPermissionListData(permissionsData)
   }
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-    console.log(event);
-    setPermissionKeyName(tableDataRowIndex)
-    setUserId(String(tableDataRowIndex));
-    dispatch(fetchEditUser(String(tableDataRowIndex)) as any)
-    var tableId = String(tableDataRowIndex);
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setPermissionKeyName(rowData.id)
+    setUserId(rowData.id);
+    dispatch(fetchEditUser(String(rowData.id)) as any)
+    var tableId = String(rowData.id);
     dispatch(getPermission(tableId) as any);
 
   };

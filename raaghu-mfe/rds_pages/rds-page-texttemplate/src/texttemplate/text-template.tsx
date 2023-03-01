@@ -75,8 +75,8 @@ const TextTemplate = () => {
   }
 
   useEffect(() => {
-    if (offCanvasId === 'Edit') dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any);
-    else if (offCanvasId === 'Customize Per Culture') {
+    if (offCanvasId === 'edit') dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any);
+    else if (offCanvasId === 'customizePerCulture') {
       dispatch(getTemplateContent({ template: selectedDataName, culture: 'en' }) as any);
       dispatch(getTemplateContent({ template: selectedDataName, culture: languages[0].value }) as any);
     }
@@ -101,9 +101,9 @@ const TextTemplate = () => {
   }, [textTemplate.templateData, selectedList]);
 
   // Functions
-  function onActionSelection(clickEvent: any, selectedData: any, rowIndex: any, action: any) {
-    setOffCanvasId(action.displayName);
-    setSelectedDataName(selectedData.name);
+  function onActionSelection(rowData: any, actionId: any) {
+    setOffCanvasId(actionId);
+    setSelectedDataName(rowData.name);
   };
 
   function onCloseFn(event: any) {
@@ -136,7 +136,7 @@ const TextTemplate = () => {
 
   function onSaveFn(event: any) {
     event.preventDefault();
-    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'Edit' ? null : targetName, content: targetContent }) as any);
+    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'edit' ? null : targetName, content: targetContent }) as any);
   }
 
   // DOM
@@ -162,7 +162,7 @@ const TextTemplate = () => {
               :
               <div className="ps-2">{name}</div>
             </div>
-            {offCanvasId !== 'Edit' &&
+            {offCanvasId !== 'edit' &&
               <>
                 <div className="form-group mb-2">
                   <RdsLabel label={'Reference Culture Name'}></RdsLabel>
@@ -170,12 +170,12 @@ const TextTemplate = () => {
                     selectedValue={selectedReferenceValue} onSelectListChange={refernceNameFn}></RdsSelectList>
                 </div>
                 <div className="form-group mb-4">
-                  <RdsTextArea placeholder={""} value={referenceContent} onChange={(e) => setReferenceContent(e.target.value)}
+                  <RdsTextArea placeholder={""} value={referenceContent} onChange={(e:any) => setReferenceContent(e.target.value)}
                     required={true} readonly={true} isRequired={true} label={'Reference Content'} rows={10}></RdsTextArea>
                 </div>
               </>
             }
-            {offCanvasId !== 'Edit' &&
+            {offCanvasId !== 'edit' &&
               <div className="form-group mb-2">
                 <RdsLabel label={'Target Culture Name'}></RdsLabel>
                 <RdsSelectList label={"Target Culture Name"} selectItems={languages}
@@ -183,7 +183,7 @@ const TextTemplate = () => {
               </div>
             }
             <div className="form-group pb-4">
-              <RdsTextArea placeholder={""} value={targetContent} onChange={(e) => setTargetContent(e.target.value)}
+              <RdsTextArea placeholder={""} value={targetContent} onChange={(e:any) => setTargetContent(e.target.value)}
                 required={true} isRequired={true} label={'Template Content'} rows={10}></RdsTextArea>
             </div>
             <div className="position-absolute bottom-0 py-4 d-flex w-100 bg-white">
@@ -194,12 +194,12 @@ const TextTemplate = () => {
               </div>
               <div className="ms-2">
                 <RdsButton size={'small'} colorVariant="primary" type={"button"} label="cancel" isOutline={true}
-                  onClick={(e) => onCloseFn(e)} databsdismiss="offcanvas">
+                  onClick={(e:any) => onCloseFn(e)} databsdismiss="offcanvas">
                 </RdsButton>
               </div>
               <div className="ms-2">
                 <RdsButton size={'small'} colorVariant="primary" type={'submit'} label="Save"
-                  databsdismiss={'offcanvas'} isDisabled={targetContent === ''} onClick={(e) => onSaveFn(e)}>
+                  databsdismiss={'offcanvas'} isDisabled={targetContent === ''} onClick={(e:any) => onSaveFn(e)}>
                 </RdsButton>
               </div>
             </div>

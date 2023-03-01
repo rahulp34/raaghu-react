@@ -35,15 +35,8 @@ export interface RdsCompDatatableProps {
   recordsPerPage?: number;
   recordsPerPageSelectListOption?: boolean;
   onActionSelection?: (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
+    rowData: any,
+    actionId:any
   ) => void;
   onRowSelect?:(data:any)=>void
    tableStyle?: any ;
@@ -55,7 +48,6 @@ export interface RdsCompDatatableProps {
   // }): void;
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
-  console.log({props})
   const [data, setData] = useState(props.tableData);
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
@@ -99,12 +91,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       setData(tempData);
     }
     props.onActionSelection != undefined &&
-      props.onActionSelection(
-        clickEvent,
-        tableDataRow,
-        tableDataRowIndex,
-        action
-      );
+      props.onActionSelection(tableDataRow,action.id);
   };
   let tempData: any;
   const onInputChangeHandler = (

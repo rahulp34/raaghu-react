@@ -182,14 +182,9 @@ const Auditpayload = ()=>{
   };
   
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-    setTableDataRowId(tableDataRowIndex);
-    dispatch(auditActionData(tableDataRow.id) as any);
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    dispatch(auditActionData(rowData.id) as any);
   };
 
   const onDatePicker = () => {};

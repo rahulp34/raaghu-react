@@ -21,17 +21,7 @@ export interface RdsCompEditionListProps {
   pagination?: boolean;
   recordsPerPage?: number;
   recordsPerPageSelectListOption?: boolean;
-  onActionSelection?(
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ): void;
+  onActionSelection?(rowData: any, actionId: any): void;
   onNewTenantClick?(
     event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ): void;

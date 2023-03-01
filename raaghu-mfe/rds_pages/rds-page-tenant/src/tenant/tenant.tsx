@@ -8,7 +8,10 @@ import {
   tenantFeaturesGet,
   tenantPut,
 } from "../../../../libs/state-management/tenant/tenant-slice";
-import { useAppDispatch } from "../../../../libs/state-management/hooks";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "../../../../libs/state-management/hooks";
 
 import {
   RdsCompTenantList,
@@ -16,7 +19,6 @@ import {
   RdsCompAlertPopup,
 } from "../../../rds-components";
 import { RdsButton, RdsOffcanvas, RdsNavtabs } from "../../../rds-elements";
-import { useAppSelector } from "../../../../libs/state-management/hooks";
 import {
   SaasTenantUpdateDto,
 } from "../../../../libs/shared/service-proxy";
@@ -25,7 +27,7 @@ import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-f
 interface RdsPageTenantProps {}
 
 const actions = [
-  { id: "edit", displayName: "Edit", offId: "Edit" },
+  { id: "editTenant", displayName: "Edit", offId: "Edit" },
   { id: "delete", displayName: "Delete", modalId: "Del" },
 ];
 
@@ -84,21 +86,15 @@ const Tenant = (props: RdsPageTenantProps) => {
     { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
 
-  const onActionHandler = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    console.log(tableDataRow);
-    if (action.displayName == "Edit") {
-      setTenantid(String(tableDataRowIndex));
-        dispatch(editTenant(String(tableDataRowIndex)) as any).then((res:any)=>{
+  const treeData: any[] = [];
+  const offCanvasHandler = () => {
+    // dispatch(fetchEdition() as any);
+  };
+  const onActionHandler = (rowData: any, actionId: any) => {
+    id = rowData.id;
+
+    if (actionId == "editTenant") {
+      dispatch(editTenant(id) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
