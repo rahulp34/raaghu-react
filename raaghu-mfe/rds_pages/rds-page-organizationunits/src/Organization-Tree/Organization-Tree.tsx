@@ -190,18 +190,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
   const activeNavtabOrder = (id: any) => {
     setActiveTab(id);
   };
-  const handlerMemberActions = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    setId({ ...id, memberId: tableDataRow.id });
+  const handlerMemberActions = (rowData: any, actionId: any) => {
+    setId({ ...id, memberId: rowData.id });
   };
   const handlerDeleteConfirmUserRoles = () => {
     if (activeTab === "member") {
@@ -221,18 +211,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       });
     }
   };
-  const handlerRoleActions = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    setId({ ...id, roleId: tableDataRow.id });
+  const handlerRoleActions = (rowData: any, actionId: any) => {
+    setId({ ...id, roleId: rowData.id });
   };
 
   const handlerDeleteConfirm = () => {

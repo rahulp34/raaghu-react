@@ -7,4 +7,5 @@ export * from "./claim-types/claim-types-slice";
 export * from "./security-logs/security-logs-slice";
 export * from "./user/user-slice";
 export * from "./settings/settings-slice";
+export * from './tenant/tenant-slice';
 

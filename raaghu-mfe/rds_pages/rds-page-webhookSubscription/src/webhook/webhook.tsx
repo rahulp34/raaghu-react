@@ -49,12 +49,7 @@ const Webhook = (props: RdsPageWebhookSubscriptionProps) => {
     });
     setWebhookItem([...webhookItem]);
   };
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {};
+  const onActionSelection = (rowData: any, actionId: any) => {};
 
   return (
     <div>

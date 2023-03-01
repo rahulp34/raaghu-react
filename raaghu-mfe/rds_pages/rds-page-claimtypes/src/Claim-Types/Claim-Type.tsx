@@ -108,19 +108,14 @@ const ClaimType = () => {
   const [regexDesc, setregexDesc] = useState("");
   const [desc, setDesc] = useState("");
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-    setTableDataRowId(tableDataRowIndex);
-    if (action.displayName === "Edit") {
-      setName(tableDataRow.name);
-      setRegex(tableDataRow.regex);
-      setValue(tableDataRow.value);
-      setregexDesc(tableDataRow.regexDesc);
-      setDesc(tableDataRow.description);
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    if (actionId === "editClaim") {
+      setName(rowData.name);
+      setRegex(rowData.regex);
+      setValue(rowData.value);
+      setregexDesc(rowData.regexDesc);
+      setDesc(rowData.description);
     }
   };
 
@@ -160,7 +155,7 @@ const ClaimType = () => {
   ];
 
   const actions = [
-    { id: "edit_offcanvas", displayName: "Edit", offId: "dynamic-edit-off" },
+    { id: "editClaim", displayName: "Edit", offId: "dynamic-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
 
