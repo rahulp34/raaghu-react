@@ -70,15 +70,10 @@ const Edition = (props: RdsPageEditionProps) => {
     }, 2000);
   }, [editionuser.users]);
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-    setTableDataRowId(tableDataRowIndex);
-    if (action.displayName === "Edit") {
-      setVal(tableDataRow.name);
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    if (actionId === "editEdition") {
+      setVal(rowData.name);
     }
   };
 
@@ -123,7 +118,7 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   const actions = [
-    { id: "edit_offcanvas", displayName: "Edit", offId: "dynamic-edit-off" },
+    { id: "editEdition", displayName: "Edit", offId: "dynamic-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
   const offCanvasHandler = () => {};

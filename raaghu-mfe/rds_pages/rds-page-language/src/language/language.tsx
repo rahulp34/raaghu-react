@@ -12,7 +12,7 @@ import {
   RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompNewLanguage,
-} from "../../../rds-components";
+} from "../../../rds-components"; 
 
 import {
   useAppDispatch,
@@ -160,20 +160,24 @@ const Language = (props: LanguageProps) => {
           isDefault: item.isDefaultLanguage,
           isenabled: (
             <>
-              {!item.isEnabled ? (
+              {item.isEnabled ? (
+                <RdsBadge
+                label={"Active"}
+                size={"medium"}
+                badgeType={"rectangle"}
+                colorVariant={"success"}
+              ></RdsBadge>
+                
+              ) : (
+
                 <RdsBadge
                   label={"Inactive"}
                   size={"medium"}
                   badgeType={"rectangle"}
                   colorVariant={"danger"}
                 ></RdsBadge>
-              ) : (
-                <RdsBadge
-                  label={"Active"}
-                  size={"medium"}
-                  badgeType={"rectangle"}
-                  colorVariant={"success"}
-                ></RdsBadge>
+
+                
               )}
             </>
           ),
@@ -262,40 +266,30 @@ const Language = (props: LanguageProps) => {
     setAlert({...Alert,show:true,message:"Languages deleted Succesfully", color:"success"})
   };
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    if (tableDataRow.enable === "false") {
+  const onActionSelection = (rowData: any, actionId: any) => {
+    if (rowData.enable === "false") {
       Setid({
         ...id,
-        languageName: tableDataRow.languageName,
-        id: tableDataRow.id,
+        languageName: rowData.languageName,
+        id: rowData.id,
         isenabled: false,
       });
     } else {
       Setid({
         ...id,
         languageName: "hahaha",
-        id: tableDataRow.id,
+        id: rowData.id,
         isenabled: true,
       });
     }
-    if (action.displayName == "set as default language") {
-      dispatch(defaultLanguage(tableDataRow.id) as any).then((res: any) => {
+    if (actionId == "def") {
+      dispatch(defaultLanguage(rowData.id) as any).then((res: any) => {
         dispatch(fetchLanguages() as any);
       });
       setAlert({...Alert,show:true,message:"Languages set as default Succesfully", color:"success"})
     }
 
-    setdataEmit({...dataEmit,displayName:tableDataRow.name,check:tableDataRow.enable,flag:tableDataRow.flag})
+    setdataEmit({...dataEmit,displayName:rowData.name,check:rowData.enable,flag:rowData.flag})
   };
 
   const inputChangeHandler = (event: any) => {

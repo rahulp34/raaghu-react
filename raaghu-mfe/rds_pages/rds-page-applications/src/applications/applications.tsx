@@ -79,20 +79,14 @@ const Applications = () => {
 
   const [tableDataId, setTableDataRowId] = useState(0);
   const [tableDisplayName , settableDisplayName] = useState();
-  const scopeSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-debugger
-    setTableDataRowId(tableDataRowIndex);
-    settableDisplayName(tableDataRow.clientId);
-    const tempApplicationId = String(tableDataRowIndex)
+  const scopeSelection = (rowData: any, actionId: any) => {
+  setTableDataRowId(rowData.id);
+    settableDisplayName(rowData.clientId);
+    const tempApplicationId = String(rowData.id)
     setApplicationId(tempApplicationId)
-    setPermissionKeyName(tableDataRow.clientId)
+    setPermissionKeyName(rowData.clientId)
     dispatch(getApplications(tempApplicationId) as any);
-    dispatch(getPermission(tableDataRow.clientId) as any);
+    dispatch(getPermission(rowData.clientId) as any);
   };
   function onDeleteHandler(e: any) {
     const tableDataIndex = String(tableDataId)

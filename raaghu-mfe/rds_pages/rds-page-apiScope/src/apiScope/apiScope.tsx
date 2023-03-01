@@ -86,15 +86,10 @@ const ApiScope = (props: RdsPageScopeProps) => {
 
   const [tableDataid, setTableDataRowId] = useState(0);
 
-  const scopeSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: { displayName: string; id: string }
-  ) => {
-    setTableDataRowId(tableDataRowIndex)
+  const scopeSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id)
  
-    dispatch(editScopesData(tableDataRow.id) as any);
+    dispatch(editScopesData(rowData.id) as any);
 
   };
 
