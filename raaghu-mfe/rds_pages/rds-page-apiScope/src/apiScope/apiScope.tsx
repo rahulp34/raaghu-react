@@ -19,9 +19,13 @@ interface RdsPageScopeProps { }
 const ApiScope = (props: RdsPageScopeProps) => {
   const { t } = useTranslation();
   const scopeuser = useAppSelector((state) => state.persistedReducer.scopes);
-  const scopehistory = useAppSelector((state) => state.persistedReducer.auditLog);
+  
   const [scopeData, setScopeData] = useState<any[]>([{}]);
-
+  const [newScopeData, setnewScopeData] = useState({
+    name: "",
+    displayName: "",
+    description: "",
+  });
   const [editscopeData, setEditScopeData] = useState({
     id: "",
     name: "",
@@ -69,6 +73,14 @@ const ApiScope = (props: RdsPageScopeProps) => {
     }
   }
     , [scopeuser.editScope]);
+
+    useEffect(() => {
+      setnewScopeData({
+            name: '',
+            displayName:'',
+            description:''   
+        })
+     }, [scopeuser.users]);
   
   useEffect(() => { 
 			const timer = setTimeout(() => {
@@ -82,7 +94,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
 
       return ()=>clearTimeout(timer)
 		}
-    , [showalert]);
+    , [scopeuser.users]);
 
   const [tableDataid, setTableDataRowId] = useState(0);
 
@@ -108,6 +120,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
     };
     dispatch(getScopesData(newDto) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
     setShowAlert({color:true,show:true,message:"Scope added Successfully"})
+  
   }
 
 
@@ -148,16 +161,19 @@ const ApiScope = (props: RdsPageScopeProps) => {
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
 
-  const offCanvasHandler = () => { };
+  const offCanvasHandler = () => { 
+    
+  };
 
   return (
     <div>
-      { showalert.show  && <RdsAlert alertmessage={showalert.message} colorVariant={showalert.color? "success":""} />}
+       <div className="row align-items-center">
+        <div className="col-lg-9 col-md-9">
+      { showalert.show && <RdsAlert alertmessage={showalert.message} colorVariant={showalert.color? "success":""} />}
+        </div>
 
-      <div className="card card-full-stretch mt-3 p-3 ">
-        <div className="d-flex justify-content-between">
-        <div className="h5">Scopes</div>
-          <div>
+        {/* <div className="d-flex justify-content-between"> */}
+        <div className="col-lg-3 col-md-3 mb-2 d-flex justify-content-end">
             <RdsOffcanvas
               canvasTitle={t("New Scope")}
               onclick={offCanvasHandler}
@@ -187,13 +203,14 @@ const ApiScope = (props: RdsPageScopeProps) => {
             >
 
               <RdsCompApiScopeBasicResource
-                onSuccess={submit} email={""} fullname={""} message={""} />
+                onSuccess={submit} email={newScopeData.name} fullname={newScopeData.displayName} message={newScopeData.description} />
 
             </RdsOffcanvas>
           </div>
 
         </div>
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+          {/* <h5 className="m-2" >Scopes</h5> */}
           <RdsCompDatatable
             tableHeaders={tableHeaders}
             actions={actions}
@@ -239,7 +256,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
             onSuccess={success}
           />
         </div>
-      </div>
+      
     </div>
   );
 };
