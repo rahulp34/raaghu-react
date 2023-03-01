@@ -21,6 +21,8 @@ const RdsPagination = (props: RdsPaginationProps) => {
     }
   };
   const PageNumbers = [];
+  const continued =[];
+  const previous =[];
   let int: any;
 
 
@@ -48,13 +50,42 @@ const RdsPagination = (props: RdsPaginationProps) => {
     setCurrentPage(current - 1);
 
   };
+  const startIndex = Math.max(currentPage - 5, 0);
+
+  const endIndex = Math.min(startIndex + 5, PageNumbers.length);
+
+  const displayedPages = PageNumbers.slice(startIndex, endIndex);
+
+
+    let leftBound = currentPage - 2;
+    let rightBound = currentPage + 1;
+  
+    if (leftBound <= 1) {
+      leftBound = 1;
+      rightBound = 5;
+    }
+
+    if (rightBound >= int) {
+      rightBound = int;
+      leftBound = int - 4;
+    }
+    if (rightBound < int) {
+      continued.push("...");
+      continued.push(int);
+    }
+    if(rightBound >= int && int > 5){
+      previous.push(1);
+      previous.push("...");
+      
+    }
+
   
     useEffect(() => {
       props.onPageChange != undefined &&
         props.onPageChange(currentPage, recordsPerPage);
     }, [currentPage, recordsPerPage]);
 
-  const size = " pagination-" + `${props.size || "md"}`;
+  const size = " pagination-" + `${props.size || "sm"}`;
   const align =
     " pagination justify-content-" + `${props.alignmentType || "start"}`;
   return (
@@ -62,7 +93,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
       {paginType == "default" && (
         <nav aria-label="Page navigation example">
           <ul
-            className={"pagination align-items-center" + `${size}` + `${align}`}
+            className={"pagination rounded align-items-center" + `${size}` + `${align}`}
           >
             <li
               className={
@@ -84,7 +115,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
                 <span className="ms-1 pagination-prev">Prev</span>
               </a>
             </li>
-            {PageNumbers.map((number) => (
+            {displayedPages.map((number) => (
               <li
                 key={number}
                 className={`${number === currentPage
@@ -96,7 +127,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
                   onClick={() => {
                     onPage(number);
                   }}
-                  className="page-link"
+                  className="page-link pe-auto"
                 >
                   {number}
                 </a>
@@ -126,7 +157,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
         <nav aria-label="page navigation">
           <ul
             className={
-              "pagination align-items-center " + `${size}` + `${align}`
+              "pagination rounded align-items-center " + `${size}` + `${align}`
             }
           >
             <li
@@ -135,7 +166,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
               }
             >
               <a
-                className="page-link rounds"
+                // className="page-link rounds"
                 onClick={() => onPrevious(currentPage)}
               >
                 <RdsIcon
@@ -148,7 +179,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
                 />
               </a>
             </li>
-            {PageNumbers.map((number) => (
+            {previous.map((number) => (
               <li
                 key={number}
                 className={`${number === currentPage
@@ -156,21 +187,55 @@ const RdsPagination = (props: RdsPaginationProps) => {
                     : "page-item m-1 default-li "
                   }`}
               >
-                <a
+                <a href="#" 
                   onClick={() => onPage(number)}
-                  className="page-link roundeds"
+                  className={`${number === 1?"page-link roundeds":""}`}
                 >
                   {number}
                 </a>
               </li>
             ))}
+            {displayedPages.map((number) => (
+              <li
+                key={number}
+                className={`${number === currentPage
+                    ? "page-item m-1 default-li active"
+                    : "page-item m-1 default-li "
+                  }`}
+              >
+                <a href="#" 
+                  onClick={() => onPage(number)}
+                  className="page-link roundeds pe-auto"
+                >
+                  {number}
+                </a>
+              </li>
+            ))}
+           
+            {continued.map((number) => (
+              <li
+                key={number}
+                className={`${number === currentPage
+                    ? "page-item m-1 default-li active"
+                    : "page-item m-1 default-li "
+                  }`}
+              >
+                <a href="#" 
+                  onClick={() => onPage(number)}
+                  className={`${number === int?"page-link roundeds":""}`}
+                >
+                  {number}
+                </a>
+              </li>
+            ))}
+         
             <li
               className={
                 "page-item m-1 " + `${currentPage == int ? "disabled" : " "}`
               }
             >
               <a
-                className="page-link rounds "
+                // className="page-link rounds "
                 onClick={() => onNext(currentPage)}
               >
                 <RdsIcon

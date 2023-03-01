@@ -204,7 +204,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
           {data?.length > 0 && (<> 
             <div className=" sm-datatable table-responsive">
             <table
-              className={`table  table-hover table-bordered  h-100 ${Classes} `}
+              className={`table  table-hover table-bordered  ${Classes} `}
               id="sortTable"
               width="400px"
             >
