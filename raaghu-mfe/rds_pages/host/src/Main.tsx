@@ -66,6 +66,7 @@ const Main = (props: MainProps) => {
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
     }
+
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
@@ -74,7 +75,7 @@ const Main = (props: MainProps) => {
     if (localStorage.getItem("access_token") == null) {
       navigate("/login");
     }
-  }, []);
+  }, [localStorage.getItem("access_token")]);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
