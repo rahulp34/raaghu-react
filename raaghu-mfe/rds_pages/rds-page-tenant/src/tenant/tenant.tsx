@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import {
   createTenant,
   deleteTenant,
@@ -24,14 +23,14 @@ import {
   SaasTenantUpdateDto,
 } from "../../../../libs/shared/service-proxy";
 import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-features/rds-comp-new-features";
+
 interface RdsPageTenantProps {}
 
 const actions = [
   { id: "editTenant", displayName: "Edit", offId: "Edit" },
   { id: "delete", displayName: "Delete", modalId: "Del" },
 ];
-let editionData1: any[];
-let id: string = "";
+
 const checkboxlabel = [
   {
     id: "1",
@@ -49,73 +48,33 @@ const checkboxlabel = [
 
 const Tenant = (props: RdsPageTenantProps) => {
   const data = useAppSelector((state) => state.persistedReducer.tenant);
-
   const dispatch = useAppDispatch();
-  
-
-
-  const OnUpdateTenant = new SaasTenantUpdateDto();
-  const onEditHandler = (data: { editTenantData:{
-    activationEndDate: any;
-    activationState: any;
-    concurrencyStamp: any;
-    editionEndDateUtc: any;
-    editionId: any;
-    editionName: any;
-    extraProperties: any;
-    hasDefaultConnectionString: any;
-    id: any;
-    name: any;
-  }}) => {
-    console.log("datajahi", data.editTenantData.name);
-    OnUpdateTenant.name = data.editTenantData.name;
-    OnUpdateTenant.editionId = data.editTenantData.editionId;
-    dispatch(tenantPut({ id: id, body: OnUpdateTenant }) as any).then(
-      (res: any) => {
-        dispatch(fetchTenant() as any);
-      }
-    );
-  };
-
   const [tableData, setTableData] = useState<any>([]);
   const [editionList, setEditionList] = useState<any>([]);
   const [featureIdentitySettingsData, setFeatureIdentitySettingsData] = useState<any>([{value:"Optional"},{value:3},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true}]);
-  
-  const [editTenantData, setEditTenantData] = useState<any>({
-    name:"" ,
-    hasDefaultConnectionString: false,
-    editionName: "",
-  });
-
-  
-
-  
-
-  
-
-  const { t } = useTranslation();
-
+  const [tenantId, setTenantid] = useState<any>("")
+  const [tenantInformationData, setTenantInformationData] = useState<any>({})
   const tableHeaders = [
     {
-      displayName: t("Tenant"),
+      displayName: "Tenant",
       key: "tenant",
       datatype: "avatarTitleInfo",
       sortable: true,
     },
     {
-      displayName: t("Edition"),
+      displayName: "Edition",
       key: "editionName",
       datatype: "text",
       sortable: true,
     },
     {
-      displayName: t("Status"),
+      displayName:"Status",
       key: "status",
       datatype: "badge",
       sortable: true,
     },
     {
-      displayName: t("Subscription End Date"),
+      displayName: "Subscription End Date",
       key: "expiry",
       datatype: "text",
       sortable: true,
@@ -123,8 +82,8 @@ const Tenant = (props: RdsPageTenantProps) => {
   ];
 
   const navtabsItems = [
-    { label: t("Basics"), tablink: "#nav-home", id: 0 },
-    { label: t("Features"), tablink: "#nav-profile", id: 1 },
+    { label: "Basics", tablink: "#nav-home", id: 0 },
+    { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
 
   const treeData: any[] = [];
@@ -139,30 +98,14 @@ const Tenant = (props: RdsPageTenantProps) => {
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
-    if(id)
-    dispatch(tenantFeaturesGet(id) as any);
-
+      dispatch(tenantFeaturesGet(String(tableDataRowIndex)) as any);
     }
-
   };
-  const onDeleteHandler = () => {
-    console.log("id", id);
-    dispatch(deleteTenant(id) as any).then((res:any)=>{
-      dispatch(fetchTenant() as any);
-    });
-    
-  };
+  
 
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
-
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState(0);
-
-  //  const tag = [{ label: t("Features"), tablink: "#Admin-Features", id: 0 }];
-  // const offCanvasButton =
-  //   '<RdsButton icon = "plus" iconColorVariant="light" size = "medium" type = "button" colorVariant = "primary" label = "NEW TENANT"/>';
-  
-  
   
   
     useEffect(() => {
@@ -215,7 +158,7 @@ const Tenant = (props: RdsPageTenantProps) => {
 
     useEffect(() => {
       if (data.edition.items.length) {
-        editionData1 = [];
+        let editionData1:any[] = [];
         data.edition.items.map((item: any) => {
           const newItem = {
             option: item.displayName,
@@ -227,6 +170,13 @@ const Tenant = (props: RdsPageTenantProps) => {
       }
     }, [data.edition]);
 
+    useEffect(()=>{
+      if(data.editTenant){
+        debugger
+        setTenantInformationData(data.editTenant);
+      }
+    },[data.editTenant])
+
 
     function saveTenant(data:any){
       dispatch(createTenant(data) as any).then((res:any)=>{
@@ -234,14 +184,19 @@ const Tenant = (props: RdsPageTenantProps) => {
         dispatch(fetchTenant() as any);
       })
     }
+    const onDeleteHandler = () => {
+      dispatch(deleteTenant(tenantId) as any).then((res:any)=>{
+        dispatch(fetchTenant() as any);
+      });
+      
+    };
   
   
   return (
     <div className="tenant">
       <div className="d-flex justify-content-end">
         <RdsOffcanvas
-          canvasTitle={t("Manage Host Admin Features")}
-          onclick={offCanvasHandler}
+          canvasTitle={"Manage Host Admin Features"}
           placement="end"
           offcanvaswidth={650}
           offcanvasbutton={
@@ -260,15 +215,14 @@ const Tenant = (props: RdsPageTenantProps) => {
         </RdsOffcanvas>
 
         <RdsOffcanvas
-          canvasTitle={t("New Tenant")}
-          onclick={offCanvasHandler}
+          canvasTitle={"New Tenant"}
           placement="end"
           offcanvaswidth={650}
           offcanvasbutton={
             <div className="d-flex justify-content-end">
               <RdsButton
                 icon="plus"
-                label={t("New Tenant") || ""}
+                label={"New Tenant"}
                 iconColorVariant="light"
                 iconHeight="15px"
                 iconWidth="15px"
@@ -296,7 +250,7 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabId == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation onSaveHandler={(e:any)=>saveTenant(e)} />
+            <RdsCompTenantInformation editionList={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} />
           )}
         </RdsOffcanvas>
       </div>
@@ -312,8 +266,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         />
 
         <RdsOffcanvas
-          canvasTitle={t("Edit Tenant")}
-          onclick={offCanvasHandler}
+          canvasTitle={"Edit Tenant"}
           placement="end"
           offcanvaswidth={650}
           backDrop={false}
@@ -332,9 +285,8 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation editionList={editionList} onSaveHandler={(e:any)=>{saveTenant(e)}} />
+            <RdsCompTenantInformation editionList={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
           )}
-
           {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
             <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
           )}
