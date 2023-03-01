@@ -74,8 +74,14 @@ const LanguageText = (props: LanguageTextProps) => {
   const proxy = new ServiceProxy();
   const [name, setname] = useState<{ option: string; id: any }[]>([]);
   const [res, setres] = useState<{ option: string; id: any }[]>([]);
-  const [tableData,settableData]=useState([])
-  const [textEdit, settextEdit] = useState({base:"",target:" ",key:"",resource:""})
+  const [tableData, settableData] = useState([]);
+  const [Alert, setAlert] = useState({show:false,message:"",color:""});
+  const [textEdit, settextEdit] = useState({
+    base: "",
+    target: " ",
+    key: "",
+    resource: "",
+  });
 
   const [displaylist, setdisplaylist] = useState({
     baseCulture: name.length > 0 ? name[1].option : "",
@@ -144,7 +150,7 @@ const LanguageText = (props: LanguageTextProps) => {
         }) as any
       );
     }
-  }, [codes, displaylist.resourceName , displaylist.targetvalue]);
+  }, [codes, displaylist.resourceName, displaylist.targetvalue]);
 
   useEffect(() => {
     if (data.languagesText?.items != null) {
@@ -154,12 +160,9 @@ const LanguageText = (props: LanguageTextProps) => {
           basevalue: item.baseValue,
           value: item.value,
           resourcename: item.resourceName,
-         
-          
         };
       });
-      settableData(temptableData)
-
+      settableData(temptableData);
     }
   }, [data.languagesText]);
 
@@ -202,21 +205,67 @@ const LanguageText = (props: LanguageTextProps) => {
       offId?: string;
       modalId?: string;
     }
-  )=>{
-    console.log("TABLDATAROW",tableDataRow)
-    settextEdit({...textEdit,base:tableDataRow.basevalue,target:tableDataRow.value ? tableDataRow.value : "" ,key:tableDataRow.key,resource:tableDataRow.resourcename})
-  }
+  ) => {
+    console.log("TABLDATAROW", tableDataRow);
+    settextEdit({
+      ...textEdit,
+      base: tableDataRow.basevalue,
+      target: tableDataRow.value ? tableDataRow.value : "",
+      key: tableDataRow.key,
+      resource: tableDataRow.resourcename,
+    });
+  };
 
-  const onTextEdit = (e:any)=>{
-    settextEdit({...textEdit, target:e.target.value})
-  }
+  const onTextEdit = (e: any) => {
+    settextEdit({ ...textEdit, target: e.target.value });
+  };
 
-  const onRestore = ()=>{
-    const resourceName = textEdit.resource
-    const cultureName = codes.targetCulture
-    const  Name = textEdit.key
-    dispatch(restore({resourceName, cultureName, Name})as any).then((res:any)=>{
+  const onRestore = () => {
+    const resourceName = textEdit.resource;
+    const cultureName = codes.targetCulture;
+    const Name = textEdit.key;
+    dispatch(restore({ resourceName, cultureName, Name }) as any).then(
+      (res: any) => {
+        setAlert({...Alert,show:true,message:"Target language restored Succesfully", color:"success"})
+        const resourceName = displaylist.resourceName;
+        const baseCultureName = codes.baseCulture;
+        const targetCultureName = codes.targetCulture;
+        const getOnlyEmptyValues =
+          displaylist.targetvalue == "All" ? false : true;
 
+        dispatch(
+          fetchLanguagesText({
+            resourceName,
+            baseCultureName,
+            targetCultureName,
+            getOnlyEmptyValues,
+          }) as any
+        );
+
+
+      }
+    );
+  };
+
+  useEffect(() => {
+    // Set a 3-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 3000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [tableData]);
+
+  const SaveHandler = () => {
+    const resourceName = textEdit.resource;
+    const cultureName = codes.targetCulture;
+    const Name = textEdit.key;
+    const value = textEdit.target;
+    dispatch(
+      putLanguages({ resourceName, cultureName, Name, value }) as any
+    ).then((res: any) => {
+      setAlert({...Alert,show:true,message:"Target language edited Succesfully", color:"success"})
       const resourceName = displaylist.resourceName;
       const baseCultureName = codes.baseCulture;
       const targetCultureName = codes.targetCulture;
@@ -231,40 +280,29 @@ const LanguageText = (props: LanguageTextProps) => {
           getOnlyEmptyValues,
         }) as any
       );
-
-    })
-  }
-
-  const SaveHandler =()=>{
-    const resourceName = textEdit.resource
-    const cultureName = codes.targetCulture
-    const  Name =  textEdit.key
-    const value = textEdit.target
-    dispatch(putLanguages({resourceName, cultureName, Name , value}) as any).then((res:any)=>{
-
-      const resourceName = displaylist.resourceName;
-      const baseCultureName = codes.baseCulture;
-      const targetCultureName = codes.targetCulture;
-      const getOnlyEmptyValues =
-        displaylist.targetvalue == "All" ? false : true;
-
-      dispatch(
-        fetchLanguagesText({
-          resourceName,
-          baseCultureName,
-          targetCultureName,
-          getOnlyEmptyValues,
-        }) as any
-      );
-
-    })
-  }
+    });
+  };
 
   return (
     <>
       <div className="row">
         <div className="col-md-12">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+        <div className="row ">
+            <div className="col-md-4" style={{position: "absolute" , 
+    zIndex: "0"}}>
+              {Alert.show && (
+                <RdsAlert
+                alertmessage={Alert.message}
+                colorVariant={Alert.color}
+              ></RdsAlert>
+              )}
+              
+            </div>
+            </div>
+          <div
+            style={{ top: "48px" }}
+            className="card p-2 h-100 border-0 rounded-0 card-full-stretch"
+          >
             <div className="d-flex mt-3">
               <h5 className="col-md-9  ps-2 p-2">All Languages</h5>
             </div>
@@ -321,21 +359,29 @@ const LanguageText = (props: LanguageTextProps) => {
             >
               <form>
                 <div className="row">
-                  <div>
-                    Key
-                  </div>
-                  <h6>
-                    {textEdit.key}
-                  </h6>
+                  <div>Key</div>
+                  <h6>{textEdit.key}</h6>
                   <div className="col-md-12 mb-3">
                     <div className="form-group mt-3">
-                      <RdsTextArea placeholder="" readonly={true}  label={"Base Value"}  rows={4} value={textEdit.base}></RdsTextArea>
+                      <RdsTextArea
+                        placeholder=""
+                        readonly={true}
+                        label={"Base Value"}
+                        rows={4}
+                        value={textEdit.base}
+                      ></RdsTextArea>
                     </div>
                   </div>
                   <div className="col-md-12 mb-3">
                     <div className="form-group mt-3">
-                      <RdsTextArea placeholder="" readonly={false}  label={"Target Value"}  rows={4} value={textEdit.target}
-                      onChange={onTextEdit}></RdsTextArea>
+                      <RdsTextArea
+                        placeholder=""
+                        readonly={false}
+                        label={"Target Value"}
+                        rows={4}
+                        value={textEdit.target}
+                        onChange={onTextEdit}
+                      ></RdsTextArea>
                     </div>
                   </div>
                 </div>
@@ -366,8 +412,14 @@ const LanguageText = (props: LanguageTextProps) => {
                       ></RdsButton>
                     </div>
                   </div>
-                  <div className="col-md-4" onClick={onRestore} data-bs-dismiss={"offcanvas"} >
-                    <h6 className="text-primary my-0 pt-2 cursor-pointer">Restore to default</h6>
+                  <div
+                    className="col-md-4"
+                    onClick={onRestore}
+                    data-bs-dismiss={"offcanvas"}
+                  >
+                    <h6 className="text-primary my-0 pt-2 cursor-pointer">
+                      Restore to default
+                    </h6>
                   </div>
                 </div>
               </div>

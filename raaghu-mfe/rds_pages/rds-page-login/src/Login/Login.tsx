@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Login.scss";
-import { ServiceProxy } from "../../../../libs/shared/service-proxy"
+import { ServiceProxy } from "../../../../libs/shared/service-proxy";
 import { getUserConfiguration } from "../../../../libs/public.api";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
@@ -10,20 +10,24 @@ export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
-
+  // const [accessToken , setaccessToken] = useState()
+  // const dispatch: any = useAppDispatch();
+  // const accessToken: any = useSelector(
+  //   (state: RootState) => state.persistedReducer.login.accessToken
+  // );
   const navigate = useNavigate();
-  const proxy = new ServiceProxy()
+  const proxy = new ServiceProxy();
   const hello = () => {
     var cred = localStorage.getItem("access_token");
     if (cred) {
       var pasrsedtoken = JSON.parse(cred);
-      console.log("pasrsed", pasrsedtoken)
-      console.log("cred", cred)
+      console.log("pasrsed", pasrsedtoken);
+      console.log("cred", cred);
     }
 
     proxy.applicationConfiguration(undefined).then((result: any) => {
-      console.log('hello this is result', result)
-    })
+      console.log("hello this is result", result);
+    });
 
     // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
 
@@ -31,19 +35,18 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       getUserConfiguration("login");
       navigate("/dashboard");
     }
-  }
+  };
 
   const loginHandler = (email: any, password: any) => {
-
-
     const requestBody = {
       grant_type: "password",
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "profile roles phone email address project_abp_react",
+      scope: "address email phone profile roles ABP_VZKY_IN  ",
     };
-    fetch("https://abpdemoapi.raaghu.io/connect/token", {
+
+    fetch("https://localhost:44347/connect/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -53,7 +56,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello()
+        hello();
       });
   };
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {

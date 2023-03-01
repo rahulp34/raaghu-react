@@ -111,7 +111,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								label="Client ID"
 								placeholder="Enter Id"
 								inputType="text"
-								onChange={e => setClientId(e.target.value)}
+								onChange={(e:any) => setClientId(e.target.value)}
 								value={basicApplicationData.clientId}
 								name={"clientId"}
 							></RdsInput>

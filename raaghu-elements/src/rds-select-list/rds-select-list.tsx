@@ -49,7 +49,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
        onChange={handleChange}>{}
         <option  hidden className="text-muted">{props.label}</option>
         {props.selectItems.map((selectItem,i) => (
-          <option value={selectItem.value}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>
+          <option value={selectItem.value} id={selectItem.id}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>
         ))}
       </select>
      
