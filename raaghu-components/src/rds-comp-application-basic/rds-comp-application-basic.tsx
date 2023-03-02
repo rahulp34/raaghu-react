@@ -95,11 +95,9 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		console.log(basicApplicationData, basicApplicationData, 'basicApplicationData');
-
 	};
 
-
+	const isBasicApplicationdata = Object.values(basicApplicationData).every((value) => value === "");
 
 	return (
 		<>
@@ -173,109 +171,106 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsSelectList>
 						</div>
 					</div>
+					<div className="row ">
+						{basicApplicationData.type === 'confidential' && (
+							<RdsInput
+								label="Client secrete"
+								placeholder="Enter client secrete"
+								inputType="text"
+								onChange={e => setClientSecret(e.target.value)}
+								name={"clientSecret"}
+								value={basicApplicationData.clientSecret}
+							></RdsInput>
+						)}
+					</div>
 					<div className="row">
-						<div className=" col-6">
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Authorization Code Flow"
-									onChange={e => { setCredential(e.target.checked) }}
-									checked={basicApplicationData.allowAuthorizationCodeFlow}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Implicit Flow"
-									onChange={e => { setImplicit(e.target.checked) }}
-									checked={basicApplicationData.allowImplicitFlow}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Hybrid Flow"
-									onChange={e => { setHybrid(e.target.checked) }}
-									checked={basicApplicationData.allowHybridFlow}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Password Flow"
-									onChange={e => { setPassword(e.target.checked) }}
-									checked={basicApplicationData.allowPasswordFlow}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Client Credential Flow"
-									onChange={e => { setClient(e.target.checked) }}
-									checked={basicApplicationData.allowClientCredentialsFlow}
-									isDisabled={basicApplicationData.type === 'public'}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Refresh Token Flow"
-									onChange={e => { setRefresh(e.target.checked) }}
-									checked={basicApplicationData.allowRefreshTokenFlow}
-									isDisabled={isDisabled}
-								></RdsCheckbox>
-							</div>
-							<div className="row py-2">
-								<RdsCheckbox
-									label="Allow Device Endpoint"
-									onChange={e => { setDevice(e.target.checked) }}
-									checked={basicApplicationData.allowDeviceEndpoint}
-									isDisabled={basicApplicationData.type === 'public'}
-								></RdsCheckbox>
-							</div>
+						<div className=" col-6 ">
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Authorization Code Flow"
+								onChange={e => { setCredential(e.target.checked) }}
+								checked={basicApplicationData.allowAuthorizationCodeFlow}
+							></RdsCheckbox>
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Implicit Flow"
+								onChange={e => { setImplicit(e.target.checked) }}
+								checked={basicApplicationData.allowImplicitFlow}
+							></RdsCheckbox>
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Hybrid Flow"
+								onChange={e => { setHybrid(e.target.checked) }}
+								checked={basicApplicationData.allowHybridFlow}
+							></RdsCheckbox>
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Refresh Token Flow"
+								onChange={e => { setRefresh(e.target.checked) }}
+								checked={basicApplicationData.allowRefreshTokenFlow}
+								isDisabled={isDisabled}
+							></RdsCheckbox>
 						</div>
 						<div className="col-6">
-							{basicApplicationData.type === 'confidential' && (
-								<RdsInput
-									label="Client secrete"
-									placeholder="Enter client secrete"
-									inputType="text"
-									onChange={e => setClientSecret(e.target.value)}
-									name={"clientSecret"}
-									value={basicApplicationData.clientSecret}
-								></RdsInput>
-							)}
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Password Flow"
+								onChange={e => { setPassword(e.target.checked) }}
+								checked={basicApplicationData.allowPasswordFlow}
+							></RdsCheckbox>
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Client Credential Flow"
+								onChange={e => { setClient(e.target.checked) }}
+								checked={basicApplicationData.allowClientCredentialsFlow}
+								isDisabled={basicApplicationData.type === 'public'}
+							></RdsCheckbox>
+							<RdsCheckbox
+							classes="py-2"
+								label="Allow Device Endpoint"
+								onChange={e => { setDevice(e.target.checked) }}
+								checked={basicApplicationData.allowDeviceEndpoint}
+								isDisabled={basicApplicationData.type === 'public'}
+							></RdsCheckbox>
 						</div>
 					</div>
 					{basicApplicationData.allowAuthorizationCodeFlow || basicApplicationData.allowImplicitFlow ||
 						basicApplicationData.allowHybridFlow ? (<>
+							
+								<RdsLabel label="Consent Type" class="py-2" />
+								
+								<RdsSelectList
+								    classes="mb-3"
+									label={"Consent Type"}
+									selectItems={props.consentType}
+									selectedValue={basicApplicationData.consentType}
+									onSelectListChange={setConsentType}
+								></RdsSelectList>
+							
+								
+							
 							<div className="row">
-								<div className=" col-6 ">
-									<RdsTextArea
-										label="Redirect Uris"
-										placeholder="enter redirect uris"
-										onChange={e => setRedirectUris(e.target.value)}
-										value={basicApplicationData.redirectUris}
-										rows={3}
-									/>
-								</div>
-								<div className="col-6 ">
-									<RdsLabel label="Consent Type" class="pb-2" />
-									<RdsSelectList
-										label={"Consent Type"}
-										selectItems={props.consentType}
-										selectedValue={basicApplicationData.consentType}
-										onSelectListChange={setConsentType}
-									></RdsSelectList>
-								</div>
+								<RdsTextArea
+									label="Redirect Uris"
+									placeholder="enter redirect uris"
+									onChange={e => setRedirectUris(e.target.value)}
+									value={basicApplicationData.redirectUris}
+									rows={3}
+								/>
 							</div>
-						</>) : null
-					}
-					<div className="row py-2">
-						<div className=" col-6 ">
+							<div className=" col-6 py-3">
 							<RdsCheckbox
 								label="Allow Logout EndPoint"
 								onChange={e => { setLogoutEndpoint(e.target.checked) }}
 								checked={basicApplicationData.allowLogoutEndpoint}
 							></RdsCheckbox>
 						</div>
+						</>) : null
+					}
+					<div className="row">
+						
 						{basicApplicationData.allowLogoutEndpoint && (
 							<>
-								<div className=" col-6 ">
 									<RdsTextArea
 										label="Post Logout Redirect Uris"
 										placeholder="enter post logout redirect uris"
@@ -283,7 +278,6 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 										value={basicApplicationData.postLogoutRedirectUris}
 										rows={3}
 									/>
-								</div>
 							</>)
 						}
 					</div>
@@ -316,6 +310,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							colorVariant="primary"
 							databsdismiss="offcanvas"
 							size="small"
+							isDisabled={isBasicApplicationdata}
 							onClick={() => { props.handleSubmit(basicApplicationData) }}
 						></RdsButton>
 					</div>

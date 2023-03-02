@@ -4,7 +4,8 @@ import {
   RdsCheckbox,
   RdsNavtabs,
   RdsOffcanvas,
-  RdsInput
+  RdsInput,
+  RdsAlert
 } from "../../../rds-elements";
 import {
   RdsCompAlertPopup,
@@ -24,13 +25,12 @@ const Applications = () => {
   const application = useAppSelector((state) => state.persistedReducer.applications);
   const [applicationId, setApplicationId] = useState("");
   const [permissionKeyName, setPermissionKeyName] = useState("")
-  const [editApplicationData, setEditApplicationData] = useState<any>(
-    {});
+  const [editApplicationData, setEditApplicationData] = useState<any>({});
 
   useEffect(() => {
     dispatch(fetchApplications() as any);
     dispatch(getScopes() as any);
-   
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -83,6 +83,8 @@ const Applications = () => {
   setTableDataRowId(rowData.id);
     settableDisplayName(rowData.clientId);
     const tempApplicationId = String(rowData.id)
+    debugger
+    setTableDataRowId(rowData.id);
     setApplicationId(tempApplicationId)
     setPermissionKeyName(rowData.clientId)
     dispatch(getApplications(tempApplicationId) as any);
@@ -97,7 +99,9 @@ const Applications = () => {
   }
 
   function handleApplicationSubmit(basicApplicationData: any) {
-    dispatch(saveApplications(basicApplicationData) as any);
+    dispatch(saveApplications(basicApplicationData) as any).then((res: any) => {
+      dispatch(fetchApplications() as any);
+    })
     setBasicApplicationData({
       clientId: '',
       displayName: '',
@@ -113,6 +117,7 @@ const Applications = () => {
       type: '',
       scopes: ''
     })
+    setAlertOne(true);
   }
 
   function handleEditSubmit(data: any) {
@@ -120,8 +125,10 @@ const Applications = () => {
       id: applicationId,
       body: data
     }
-    console.log(data, 'editApplicationData');
-    dispatch(updateApplications(payload) as any);
+    dispatch(updateApplications(payload) as any).then((res: any) => {
+      dispatch(fetchApplications() as any);
+    })
+    setAlertOne(true);
   }
 
   function SelectesPermissions(permissionsData: any) {
@@ -130,13 +137,14 @@ const Applications = () => {
 
   function handleSelectesPermission() {
     debugger
-      const permissions : any= {
-        key : permissionKeyName,
-        permissions:{
-        permissions : selectedPermissionListData
-        }
+    const permissions: any = {
+      key: permissionKeyName,
+      permissions: {
+        permissions: selectedPermissionListData
       }
-      dispatch(updatePermission(permissions) as any);
+    }
+    dispatch(updatePermission(permissions) as any);
+    setAlertOne(true);
   }
 
 
@@ -228,121 +236,152 @@ const Applications = () => {
     { option: 'Implicit consent', value: 'implicit' },
     { option: 'Systematic consent', value: 'systematic' },
   ]
+  // const [selctedValue , setselctedValue] = useState({claimType : 12 , claimValue:2})
+  const [alert, setAlert] = useState({
+    showAlert: false,
+    message: "",
+    success: false,
+  });
+  const [alertOne, setAlertOne] = useState(false);
+  useEffect(() => {
+    debugger
+    setAlert({
+      showAlert: application.alert,
+      message: application.alertMessage,
+      success: application.success,
+    });
+    setTimeout(() => {
+      setAlert({
+        showAlert: false,
+        message: "",
+        success: false,
+      });
+    }, 2000);
+  }, [applicationData]);
   return (
     <>
-      <div className="row">
-        <div className="col-md-12 d-flex justify-content-end mb-3">
-          <RdsOffcanvas
-            canvasTitle={"NEW APPLICATION"}
-            onclick={offCanvasHandler}
-            placement="end"
-            offcanvaswidth={650}
-            offcanvasbutton={
-              <div className="d-flex justify-content-end">
-                <RdsButton
-                  type={"button"}
-                  size="small"
-                  label="NEW APPLICATION"
-                  icon="plus"
-                  iconColorVariant="light"
-                  iconFill={false}
-                  iconStroke={true}
-                  iconHeight="15px"
-                  iconWidth="15px"
-                  colorVariant="primary"
-                  class="me-2"
-                ></RdsButton>
-              </div>
-            }
-            backDrop={false}
-            scrolling={false}
-            preventEscapeKey={false}
-            offId="application"
-          >
-            <RdsNavtabs
-              navtabsItems={navtabsItems}
-              type="tabs"
-              isNextPressed={showNextTab}
-              activeNavTabId={activeNavTabId}
-              activeNavtabOrder={(activeNavTabId) => {
-                setActiveNavTabId(activeNavTabId), setShowNextTab(false);
-              }}
-            />
-            {activeNavTabId == 0 && showNextTab === false && (
-              <RdsCompApplicationBasic handleSubmit={(basicApplicationData: any) => { handleApplicationSubmit(basicApplicationData) }} basicData={basicApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType}></RdsCompApplicationBasic>
-            )}
-          </RdsOffcanvas>
-        </div>
-
-        <div className="col-md-12 mb-3">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-            <RdsCompDatatable
-              tableHeaders={tableHeaders}
-              tableData={applicationData}
-              actions={actions}
-              pagination={true}
-              recordsPerPage={5}
-              recordsPerPageSelectListOption={true}
-              onActionSelection={scopeSelection}
-            ></RdsCompDatatable>
+      <div>
+        {alert.showAlert && alertOne && (
+          <RdsAlert
+            alertmessage={alert.message}
+            colorVariant={alert.success ? "success" : "danger"}
+            style={{ marginBottom: "0" }}
+          ></RdsAlert>
+        )}
+        <div className="row">
+          <div className="col-md-12 d-flex justify-content-end mb-3">
             <RdsOffcanvas
-              canvasTitle={"Edit APPLICATION"}
+              canvasTitle={"NEW APPLICATION"}
               onclick={offCanvasHandler}
               placement="end"
               offcanvaswidth={650}
+              offcanvasbutton={
+                <div className="d-flex justify-content-end">
+                  <RdsButton
+                    type={"button"}
+                    size="small"
+                    label="NEW APPLICATION"
+                    icon="plus"
+                    iconColorVariant="light"
+                    iconFill={false}
+                    iconStroke={true}
+                    iconHeight="15px"
+                    iconWidth="15px"
+                    colorVariant="primary"
+                    class="me-2"
+                  ></RdsButton>
+                </div>
+              }
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId="Edit"
+              offId="application"
             >
               <RdsNavtabs
-                navtabsItems={navtabsEditItems}
+                navtabsItems={navtabsItems}
                 type="tabs"
                 isNextPressed={showNextTab}
-                activeNavTabId={activeNavTabEditId}
-                activeNavtabOrder={(activeNavTabEditId) => {
-                  setActiveNavTabEditId(activeNavTabEditId), setShowNextTab(false);
+                activeNavTabId={activeNavTabId}
+                activeNavtabOrder={(activeNavTabId) => {
+                  setActiveNavTabId(activeNavTabId), setShowNextTab(false);
                 }}
               />
-              {activeNavTabEditId == 0 && showNextTab === false && (
-                <RdsCompApplicationBasic handleSubmit={(editApplicationData: any) => { handleEditSubmit(editApplicationData) }} basicData={editApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType} ></RdsCompApplicationBasic>
+              {activeNavTabId == 0 && showNextTab === false && (
+                <RdsCompApplicationBasic handleSubmit={(basicApplicationData: any) => { handleApplicationSubmit(basicApplicationData) }} basicData={basicApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType}></RdsCompApplicationBasic>
               )}
-              {(activeNavTabEditId == 1 || showNextTab == true) && (
-                <>
-                  <RdsCompPermissionTree permissions={permissionListData} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
-                  <div className="footer-buttons my-2">
-                    <div className="row">
-                      <div className="col-md-12 d-flex">
-                        <div>
-                          <RdsButton
-                            label="Cancel"
-                            type="button"
-                            colorVariant="primary"
-                            size="small"
-                            databsdismiss="offcanvas"
-                            isOutline={true}
-                          ></RdsButton>
-                        </div>
-                        <div>
-                          <RdsButton
-                            label="Save"
-                            type="button"
-                            size="small"
-                            // isDisabled={formValid}
-                            class="ms-2"
-                            colorVariant="primary"
-                            databsdismiss="offcanvas"
-                            onClick={handleSelectesPermission}
-                          ></RdsButton>
+            </RdsOffcanvas>
+          </div>
+
+          <div className="col-md-12 mb-3">
+            <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+              <RdsCompDatatable
+                tableHeaders={tableHeaders}
+                tableData={applicationData}
+                actions={actions}
+                pagination={true}
+                recordsPerPage={5}
+                recordsPerPageSelectListOption={true}
+                onActionSelection={scopeSelection}
+              ></RdsCompDatatable>
+              <RdsOffcanvas
+                canvasTitle={"Edit APPLICATION"}
+                onclick={offCanvasHandler}
+                placement="end"
+                offcanvaswidth={650}
+                backDrop={false}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId="Edit"
+              >
+                <RdsNavtabs
+                  navtabsItems={navtabsEditItems}
+                  type="tabs"
+                  isNextPressed={showNextTab}
+                  activeNavTabId={activeNavTabEditId}
+                  activeNavtabOrder={(activeNavTabEditId) => {
+                    setActiveNavTabEditId(activeNavTabEditId), setShowNextTab(false);
+                  }}
+                />
+                {activeNavTabEditId == 0 && showNextTab === false && (
+                  <RdsCompApplicationBasic handleSubmit={(editApplicationData: any) => { handleEditSubmit(editApplicationData) }} basicData={editApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType} ></RdsCompApplicationBasic>
+                )}
+                {(activeNavTabEditId == 1 || showNextTab == true) && (
+                  <>
+                    <RdsCompPermissionTree permissions={permissionListData} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
+                    <div className="footer-buttons my-2">
+                      <div className="row">
+                        <div className="col-md-12 d-flex">
+                          <div>
+                            <RdsButton
+                              label="Cancel"
+                              type="button"
+                              colorVariant="primary"
+                              size="small"
+                              databsdismiss="offcanvas"
+                              isOutline={true}
+                            ></RdsButton>
+                          </div>
+                          <div>
+                            <RdsButton
+                              label="Save"
+                              type="button"
+                              size="small"
+                              // isDisabled={formValid}
+                              class="ms-2"
+                              colorVariant="primary"
+                              databsdismiss="offcanvas"
+                              onClick={handleSelectesPermission}
+                            ></RdsButton>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </>
+                  </>
 
-              )}
-            </RdsOffcanvas>
-            <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
+                )}
+              </RdsOffcanvas>
+              <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
+            </div>
           </div>
         </div>
       </div>
