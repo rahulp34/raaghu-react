@@ -53,6 +53,7 @@ const Edition = (props: RdsPageEditionProps) => {
 
   useEffect(() => {
     if (editionuser.users?.items) {
+      console.log("getting this dhfoasdjfajdlfj", editionuser.users.items);
       const tempData = editionuser.users.items.map((item: any) => {
         return {
           id: item.id,
@@ -137,12 +138,21 @@ const Edition = (props: RdsPageEditionProps) => {
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
 
+  // const onActionSelection = (rowData: any, actionId: any) => {
+  //   console.log("asdfasdfasdfa", actionId);
+  //   setTableDataRowId(actionId.id);
+  //   setVal(actionId.name);
+  //   console.log("hi bro!!");
+  //   dispatch(fetchFeaturesEdition(actionId.id) as any);
+  // };
+
   const onActionSelection = (rowData: any, actionId: any) => {
-    console.log("asdfasdfasdfa", actionId);
-    setTableDataRowId(actionId.id);
-    setVal(actionId.name);
-    console.log("hi bro!!");
-    dispatch(fetchFeaturesEdition(actionId.id) as any);
+    setTableDataRowId(rowData.id);
+    setVal(rowData.name);
+    // console.log(rowData, "a;sldkjf;asdf", actionId)
+    if (actionId === "editEdition") {
+      dispatch(fetchFeaturesEdition(rowData.id) as any);
+    }
   };
 
   const deleteHandler = () => {

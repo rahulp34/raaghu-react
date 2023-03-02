@@ -8,7 +8,7 @@ type InitialState = {
   alert: boolean;
   alertMessage: string;
   success: boolean;
-  featureIdentitySettings: any
+  featureIdentitySettings: any;
 };
 
 const initialState: InitialState = {
@@ -18,70 +18,75 @@ const initialState: InitialState = {
   alert: false,
   alertMessage: "",
   success: false,
-  featureIdentitySettings: null
+  featureIdentitySettings: null,
 };
 
 const proxy = new ServiceProxy();
 
 export const fetchEditionData = createAsyncThunk(
   "edition/fetchEditionData",
-  async () => {
-    const result = await proxy.editionsGET2(
-      undefined,
-      "false",
-      undefined,
-      1000
-    );
-    console.log("result", result);
-    return result;
+  () => {
+    return proxy.editionsGET2(undefined, "false", undefined, 1000).then((result) => {
+      console.log("result", result);
+      return result;
+    });
   }
 );
 
 export const deleteEditionData = createAsyncThunk(
   "edition/deleteEditionData",
-  async (id: any) => {
-    const result = await proxy.editionsDELETE(id);
-    return result;
+  (id: any) => {
+    return proxy.editionsDELETE(id).then((result) => {
+      return result;
+    });
   }
 );
 
 export const addEditionData = createAsyncThunk(
   "edition/addEditionData",
-  async (value: any) => {
-    const result = await proxy.editionsPOST(value);
-    return result;
+  (value: any) => {
+    return proxy.editionsPOST(value).then((result) => {
+      return result;
+    });
   }
 );
 
 export const editEditionData = createAsyncThunk(
   "edition/editEditionData",
-  async ({ id, dTo }: { id: any; dTo: any }) => {
-    const result = await proxy.editionsPUT(id, dTo);
-    return result;
+  ({ id, dTo }: { id: any; dTo: any }) => {
+    return proxy.editionsPUT(id, dTo).then((result) => {
+      return result;
+    });
   }
 );
 
-export const fetchFeaturesEdition = createAsyncThunk("edition/fetchFeaturesEdition", (id: any) => {
+export const fetchFeaturesEdition = createAsyncThunk(
+  "edition/fetchFeaturesEdition",
+  (id: any) => { 
+    return proxy.featuresGET("E", id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+export const saveFeaturesEdition = createAsyncThunk(
+  "edition/saveFeaturesEdition",
+  (data: any) => { 
+    return proxy.featuresPUT("E", data.id, data.body).then((result: any) => {
+      return result;
+    });
+  }
+);
+export const restoreToDefaultFeaturesEdition = createAsyncThunk(
+  "edition/restoreToDefaultFeaturesEdition",
+  (id: any) => { 
+    return proxy.featuresDELETE("E", id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
 
-  return proxy.featuresGET("E",id,undefined).then((result:any)=>{
-      return result;
-  })  
-});
-export const saveFeaturesEdition = createAsyncThunk("edition/saveFeaturesEdition", (data:any) => {
-  
-  return proxy.featuresPUT("E",data.id, data.body).then((result:any)=>{
-      return result;
-  })  
-});
-export const restoreToDefaultFeaturesEdition = createAsyncThunk("edition/restoreToDefaultFeaturesEdition", (id:any) => {
-  
-  return proxy.featuresDELETE("E",id,undefined).then((result:any)=>{
-      return result;
-  })  
-});
-
-const editionSlice:any = createSlice({
-  name: 'edition',
+const editionSlice: any = createSlice({
+  name: "edition",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -173,49 +178,54 @@ const editionSlice:any = createSlice({
 
     builder.addCase(fetchFeaturesEdition.pending, (state) => {
       state.loading = true;
-    });     
+    });
 
     builder.addCase(
-      fetchFeaturesEdition.fulfilled,(state, action: PayloadAction<any>) => {
+      fetchFeaturesEdition.fulfilled,
+      (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.featureIdentitySettings= action.payload;
-      }     
+        state.featureIdentitySettings = action.payload;
+      }
     );
-    builder.addCase(fetchFeaturesEdition.rejected, (state, action) => {       
-      state.loading = false;            
-      state.error = action.error.message || "Something went wrong";     
-    }); 
+    builder.addCase(fetchFeaturesEdition.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
 
     builder.addCase(saveFeaturesEdition.pending, (state) => {
       state.loading = true;
-    });     
+    });
 
     builder.addCase(
-      saveFeaturesEdition.fulfilled,(state, action: PayloadAction<any>) => {
+      saveFeaturesEdition.fulfilled,
+      (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.featureIdentitySettings= action.payload;
-      }     
+        state.featureIdentitySettings = action.payload;
+      }
     );
-    builder.addCase(saveFeaturesEdition.rejected, (state, action) => {       
-      state.loading = false;            
-      state.error = action.error.message || "Something went wrong";     
-    }); 
+    builder.addCase(saveFeaturesEdition.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
 
     builder.addCase(restoreToDefaultFeaturesEdition.pending, (state) => {
       state.loading = true;
-    });     
+    });
 
     builder.addCase(
-      restoreToDefaultFeaturesEdition.fulfilled,(state, action: PayloadAction<any>) => {
+      restoreToDefaultFeaturesEdition.fulfilled,
+      (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.featureIdentitySettings= action.payload;
-      }     
+        state.featureIdentitySettings = action.payload;
+      }
     );
-    builder.addCase(restoreToDefaultFeaturesEdition.rejected, (state, action) => {       
-      state.loading = false;            
-      state.error = action.error.message || "Something went wrong";     
-    }); 
-
+    builder.addCase(
+      restoreToDefaultFeaturesEdition.rejected,
+      (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Something went wrong";
+      }
+    );
   },
 });
 
