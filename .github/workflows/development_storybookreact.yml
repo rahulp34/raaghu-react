@@ -40,7 +40,7 @@ jobs:
       - name: npm install mfe 
         working-directory: raaghu-mfe
         run: |
-          npm install
+          npm i --legacy-peer-deps
 
       - name: build storybook
         run: |
