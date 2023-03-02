@@ -26,6 +26,16 @@ jobs:
       #   working-directory: raaghu-themes
       #   run: |
       #     npm install
+      
+      - name: npm install raaghu-elements
+        working-directory: raaghu-elements
+        run: |
+          npm install
+          
+      - name: npm install at raaghu-components
+        working-directory: raaghu-components
+        run: |
+          npm install
 
       - name: build storybook
         run: |
