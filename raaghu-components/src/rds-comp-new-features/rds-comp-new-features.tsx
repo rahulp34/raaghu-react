@@ -239,7 +239,7 @@ export interface RdsCompFeatureProps {
   restoreFeatures?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const RdsCompFeature = (props: RdsCompFeatureProps) => {
+const RdsCompFeatures = (props: RdsCompFeatureProps) => {
   const [featureIdentitySettingsData, setfeatureIdentitySettingsData] =
     useState<any>(props.featureIdentitySettingsData1);
   const [a, setA] = useState(featureIdentitySettingsData[0].value);
@@ -523,4 +523,4 @@ const RdsCompFeature = (props: RdsCompFeatureProps) => {
   );
 };
 
-export default RdsCompFeature;
+export default RdsCompFeatures;
