@@ -91,14 +91,14 @@ const Tenant = (props: RdsPageTenantProps) => {
     // dispatch(fetchEdition() as any);
   };
   const onActionHandler = (rowData: any, actionId: any) => {
-    id = rowData.id;
+    let id = rowData.id;
 
     if (actionId == "editTenant") {
       dispatch(editTenant(id) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
-      dispatch(tenantFeaturesGet(String(tableDataRowIndex)) as any);
+      dispatch(tenantFeaturesGet(String(id)) as any);
     }
   };
   
@@ -288,7 +288,8 @@ const Tenant = (props: RdsPageTenantProps) => {
             <RdsCompTenantInformation editionList={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
           )}
           {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
-            <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
+            <></>
+            // <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
           )}
         </RdsOffcanvas>
       </div>
