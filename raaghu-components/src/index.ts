@@ -36,9 +36,9 @@ export {default as RdsCompNewClaimType} from './rds-comp-new-claim-type/rds-comp
 export { default as RdsCompApplicationBasic } from './rds-comp-application-basic/rds-comp-application-basic';
 export {default as RdsCompApiScopeBasicResource} from './rds-comp-api-scope-basic-resource/rds-comp-api-scope-basic-resource'
 export { default as RdsCompSecurityLogs } from './rds-comp-security-logs/rds-comp-security-logs';
+export { default as RdsCompClaims} from   './rds-comp-claims/rds-comp-claims';
 export {default as RdsCompEmailSettingsNew}  from './rds-comp-email-settings-new/rds-comp-email-settings-new'
 export {default as RdsCompIdentityManagement}  from './rds-comp-identity-management-new/rds-comp-identity-management-new'
 export {default as RdsCompThemeNew}  from './rds-comp-theme-new/rds-comp-theme-new'
 export {default as RdsCompAccount}  from './rds-comp-account/rds-comp-account'
 export {default as RdsCompFeatureManagement} from './rds-comp-feature-management/rds-comp-feature-management'
-

@@ -179,7 +179,6 @@ const tenantSlice= createSlice({
       createTenant.fulfilled,
       (state,action:PayloadAction<any>)=>{
         state.loading=false;
-        state.edition= action.payload;
         state.error= "";
       }
     );
