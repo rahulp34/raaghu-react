@@ -221,7 +221,6 @@ const Applications = () => {
 
 
   const offCanvasHandler = () => { };
-  const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 
   const [showNextTab, setShowNextTab] = useState(false);
@@ -261,21 +260,24 @@ const Applications = () => {
   return (
     <>
       <div>
-        {alert.showAlert && alertOne && (
+        
+        <div className="row">
+          <div className=" col-md-10">
+          {alert.showAlert && alertOne && (
           <RdsAlert
             alertmessage={alert.message}
             colorVariant={alert.success ? "success" : "danger"}
             style={{ marginBottom: "0" }}
           ></RdsAlert>
         )}
-        <div className="row">
-          <div className="col-md-12 d-flex justify-content-end mb-3">
+          </div>
+          <div className="col d-flex justify-content-end mb-3">
             <RdsOffcanvas
               canvasTitle={"NEW APPLICATION"}
               onclick={offCanvasHandler}
               placement="end"
               offcanvaswidth={650}
-              offcanvasbutton={
+              offcanvasbutton={               
                 <div className="d-flex justify-content-end">
                   <RdsButton
                     type={"button"}
@@ -297,18 +299,8 @@ const Applications = () => {
               preventEscapeKey={false}
               offId="application"
             >
-              <RdsNavtabs
-                navtabsItems={navtabsItems}
-                type="tabs"
-                isNextPressed={showNextTab}
-                activeNavTabId={activeNavTabId}
-                activeNavtabOrder={(activeNavTabId) => {
-                  setActiveNavTabId(activeNavTabId), setShowNextTab(false);
-                }}
-              />
-              {activeNavTabId == 0 && showNextTab === false && (
                 <RdsCompApplicationBasic handleSubmit={(basicApplicationData: any) => { handleApplicationSubmit(basicApplicationData) }} basicData={basicApplicationData} typeList={typeList} scopesList={scopesListData} consentType={consentType}></RdsCompApplicationBasic>
-              )}
+              
             </RdsOffcanvas>
           </div>
 

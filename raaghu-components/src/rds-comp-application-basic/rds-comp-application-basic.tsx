@@ -68,8 +68,9 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 
 		setBasicApplicationData({ ...basicApplicationData, redirectUris: lines })
 	}
+
 	function setLogoutEndpoint(value: any) {
-		setBasicApplicationData({ ...basicApplicationData, allowLogoutEndpoint: value })
+		setBasicApplicationData({ ...basicApplicationData, allowLogoutEndpoint: value });
 	}
 	function setPostLogoutRedirectUris(value: any) {
 		const lines = value.split('\n');
@@ -106,19 +107,21 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 					<div className="row">
 						<div className=" col-6 ">
 							<RdsInput
-								label="Client ID"
+								label="Client Id"
 								placeholder="Enter Id"
 								inputType="text"
 								onChange={(e:any) => setClientId(e.target.value)}
 								value={basicApplicationData.clientId}
 								name={"clientId"}
+								required={true}
 							></RdsInput>
 							{errorClientId && <span style={{ color: "red" }}>{errorClientId}</span>}
 						</div>
 						<div className="col-6 ">
 							<RdsInput
+							    required={true}
 								label="Display Name"
-								placeholder="Enter Displayname"
+								placeholder="Enter Display Name"
 								inputType="text"
 								onChange={e => setDisplayName(e.target.value)}
 								name={"displayName"}
@@ -130,22 +133,24 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 					<div className="row">
 						<div className=" col-6 ">
 							<RdsInput
-								label="Client Url"
-								placeholder="enter url"
+								label="Client Uri"
+								placeholder="Enter Url"
 								inputType="url"
 								onChange={e => setClientUrl(e.target.value)}
 								value={basicApplicationData.clientUri}
 								name={"clientUrl"}
+								required={true}
 							></RdsInput>
 						</div>
 						<div className="col-6 ">
 							<RdsInput
-								label="Logo Url"
-								placeholder="Enter logo url"
+								label="Logo Uri"
+								placeholder="Enter Uri"
 								inputType="url"
 								onChange={e => setLogoUrl(e.target.value)}
 								name={"logoUrl"}
 								value={basicApplicationData.logoUri}
+								required={true}
 							></RdsInput>
 						</div>
 					</div>
@@ -163,7 +168,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 						<div className=" col-6 ">
 							<RdsLabel label="Scopes" class="pb-2" />
 							<RdsSelectList
-								label={"Type"}
+								label={"Ecoped"}
 								selectItems={props.scopesList}
 								selectedValue={basicApplicationData.scopes}
 								isMultiple={true}
@@ -174,8 +179,8 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 					<div className="row ">
 						{basicApplicationData.type === 'confidential' && (
 							<RdsInput
-								label="Client secrete"
-								placeholder="Enter client secrete"
+								label="Client Secrete"
+								placeholder="Enter Secrete"
 								inputType="text"
 								onChange={e => setClientSecret(e.target.value)}
 								name={"clientSecret"}
@@ -186,25 +191,25 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 					<div className="row">
 						<div className=" col-6 ">
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Authorization Code Flow"
 								onChange={e => { setCredential(e.target.checked) }}
 								checked={basicApplicationData.allowAuthorizationCodeFlow}
 							></RdsCheckbox>
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Implicit Flow"
 								onChange={e => { setImplicit(e.target.checked) }}
 								checked={basicApplicationData.allowImplicitFlow}
 							></RdsCheckbox>
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Hybrid Flow"
 								onChange={e => { setHybrid(e.target.checked) }}
 								checked={basicApplicationData.allowHybridFlow}
 							></RdsCheckbox>
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Refresh Token Flow"
 								onChange={e => { setRefresh(e.target.checked) }}
 								checked={basicApplicationData.allowRefreshTokenFlow}
@@ -213,20 +218,20 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 						</div>
 						<div className="col-6">
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Password Flow"
 								onChange={e => { setPassword(e.target.checked) }}
 								checked={basicApplicationData.allowPasswordFlow}
 							></RdsCheckbox>
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Client Credential Flow"
 								onChange={e => { setClient(e.target.checked) }}
 								checked={basicApplicationData.allowClientCredentialsFlow}
 								isDisabled={basicApplicationData.type === 'public'}
 							></RdsCheckbox>
 							<RdsCheckbox
-							classes="py-2"
+								classes="py-2"
 								label="Allow Device Endpoint"
 								onChange={e => { setDevice(e.target.checked) }}
 								checked={basicApplicationData.allowDeviceEndpoint}
@@ -236,48 +241,43 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 					</div>
 					{basicApplicationData.allowAuthorizationCodeFlow || basicApplicationData.allowImplicitFlow ||
 						basicApplicationData.allowHybridFlow ? (<>
-							
-								<RdsLabel label="Consent Type" class="py-2" />
-								
-								<RdsSelectList
-								    classes="mb-3"
-									label={"Consent Type"}
-									selectItems={props.consentType}
-									selectedValue={basicApplicationData.consentType}
-									onSelectListChange={setConsentType}
-								></RdsSelectList>
-							
-								
-							
+							<RdsLabel label="Consent Type" class="py-2" />
+
+							<RdsSelectList
+								classes="mb-3"
+								label={"Consent Type"}
+								selectItems={props.consentType}
+								selectedValue={basicApplicationData.consentType}
+								onSelectListChange={setConsentType}
+							></RdsSelectList>
 							<div className="row">
 								<RdsTextArea
 									label="Redirect Uris"
-									placeholder="enter redirect uris"
+									placeholder="Enter uris"
 									onChange={e => setRedirectUris(e.target.value)}
 									value={basicApplicationData.redirectUris}
 									rows={3}
 								/>
 							</div>
 							<div className=" col-6 py-3">
-							<RdsCheckbox
-								label="Allow Logout EndPoint"
-								onChange={e => { setLogoutEndpoint(e.target.checked) }}
-								checked={basicApplicationData.allowLogoutEndpoint}
-							></RdsCheckbox>
-						</div>
+								<RdsCheckbox
+									label="Allow Logout EndPoint"
+									onChange={e => { setLogoutEndpoint(e.target.checked) }}
+									checked={basicApplicationData.allowLogoutEndpoint}
+								></RdsCheckbox>
+							</div>
 						</>) : null
 					}
 					<div className="row">
-						
 						{basicApplicationData.allowLogoutEndpoint && (
 							<>
-									<RdsTextArea
-										label="Post Logout Redirect Uris"
-										placeholder="enter post logout redirect uris"
-										onChange={e => setPostLogoutRedirectUris(e.target.value)}
-										value={basicApplicationData.postLogoutRedirectUris}
-										rows={3}
-									/>
+								<RdsTextArea
+									label="Post Logout Redirect Uris"
+									placeholder="Enter uris"
+									onChange={e => setPostLogoutRedirectUris(e.target.value)}
+									value={basicApplicationData.postLogoutRedirectUris}
+									rows={3}
+								/>
 							</>)
 						}
 					</div>
