@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
-import { RdsCompDatatable, RdsCompUserBasics } from "../../../rds-components";
-import { RdsBadge, RdsButton, RdsNavtabs, RdsOffcanvas } from "../../../rds-elements";
+import { RdsCompAlertPopup, RdsCompDatatable, RdsCompPermissionTree, RdsCompUserBasics } from "../../../rds-components";
+import { RdsBadge, RdsButton, RdsInput, RdsNavtabs, RdsOffcanvas } from "../../../rds-elements";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 
-import { createUser, fetchEditUser, fetchOrganizationUnits, fetchRoles, fetchUsers } from "../../../../libs/state-management/user/user-slice";
+import { createUser, deleteUser, fetchEditUser, fetchOrganizationUnits, fetchRoles, fetchUsers, getPermission, updatePermission } from "../../../../libs/state-management/user/user-slice";
 
 const Users = () => {
   const dispatch = useAppDispatch();
 
   const data = useAppSelector((state) => state.persistedReducer.user);
+  const [userId, setUserId] = useState("")
   const [userData, setUserData] = useState<any>({
     name: "",
     surname: "",
@@ -23,20 +24,6 @@ const Users = () => {
     userName: "",
     password:""
   })
-  
-  const [tableData, setTableData] = useState([
-    {
-      id: 1,
-      userName: "tet04",
-      name: "test04",
-      roles: "Admin, HR",
-      emaiAddress: "test04@yopmail.com",
-      emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
-      status: { badgeColorVariant: "success", content: "Active" },
-      creationTime: "01/04/2023, 09:20:51 AM",
-    },
-  ]);
-
   const permissionData = [
     {
       name: "FeatureManagement",
@@ -641,6 +628,22 @@ const Users = () => {
       ],
     },
   ];
+  const [userPermission, setUserPermission] = useState<any>(permissionData)
+  const [tableData, setTableData] = useState([
+
+    {
+      id: 1,
+      userName: "tet04",
+      name: "test04",
+      roles: "Admin, HR",
+      emaiAddress: "test04@yopmail.com",
+      emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
+      status: { badgeColorVariant: "success", content: "Active" },
+      creationTime: "01/04/2023, 09:20:51 AM",
+    },
+  ]);
+
+  
   const tableHeaders = [
     {
       displayName: "User Name",
@@ -701,8 +704,9 @@ const Users = () => {
   ];
 
   const actions = [
-    { id: "delete", displayName: "Delete" },
-    { id: "edit", displayName: "Edit" },
+    { id: "user_edit_offcanvas", displayName: "Edit", offId: "user-edit-off" },
+    { id: "user_delete", displayName: "Delete", modalId: "user_delete_off" },
+    { id: "set_password", displayName: "Set Password", modalId: "set_password" }
   ];
 
   const editionList = [
@@ -712,10 +716,12 @@ const Users = () => {
     { option: "Apple1" },
   ];
 
+  const navtabsItemsEdit = [
+    { label: "User Information", tablink: "#nav-home", id: 0 },
+    { label: "Permissions", tablink: "#nav-profile", id: 1 }
+  ];
   const navtabsItems = [
     { label: "User Information", tablink: "#nav-home", id: 0 },
-    { label: "Roles", tablink: "#nav-profile", id: 1 },
-    { label: "Organization Units", tablink: "#nav-organization-unit", id: 2 },
   ];
 
   const offCanvasHandler = () => {};
@@ -750,10 +756,32 @@ const Users = () => {
     //   this.newUser(event);
     // }
   }
+  const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
 
-  function onActionSelection(event: any) {
-    console.log(event);
+  const [permissionKeyName, setPermissionKeyName] = useState(0)
+  function handleSelectesPermission() {
+    debugger
+      const permissions : any= {
+        key : permissionKeyName,
+        permissions:{
+        permissions : selectedPermissionListData
+        }
+      }
+      dispatch(updatePermission(permissions) as any);
   }
+
+  function SelectesPermissions(permissionsData: any) {
+    setSelectedPermissionListData(permissionsData)
+  }
+
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setPermissionKeyName(rowData.id)
+    setUserId(rowData.id);
+    dispatch(fetchEditUser(String(rowData.id)) as any)
+    var tableId = String(rowData.id);
+    dispatch(getPermission(tableId) as any);
+
+  };
 
   function getSelectedPermissions(data: any) {
     console.log("Granted Permissions", data);
@@ -817,15 +845,38 @@ const Users = () => {
 
   function createNewUser(data:any){
     debugger
-    dispatch(createUser(data) as any)
+    dispatch(createUser(data) as any).then((res:any)=>{
+      dispatch(fetchUsers() as any);
+    })
+    setActiveNavTabId(0)
+    setUserData({
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      twoFactorEnabled: false,
+      userName: "",
+      password:""
+    })
   }
   useEffect(() => {
     dispatch(fetchUsers() as any);
     dispatch(fetchOrganizationUnits() as any)
     dispatch(fetchRoles() as any)
-    dispatch(fetchEditUser("d58fa786-41a6-b110-d3e4-3a0922833270") as any)
+    //dispatch(fetchEditUser("d58fa786-41a6-b110-d3e4-3a0922833270") as any)
 
   }, [dispatch]);
+
+  function deleteHandler(data:any){
+    console.log(data);
+    dispatch(deleteUser(userId) as any).then((result:any)=>{
+      dispatch(fetchUsers() as any)
+    })
+  }
+
+  function handlerSelectedPermission(data:any){
+    console.log(data);
+  }
 
 
 
@@ -842,33 +893,15 @@ const Users = () => {
           emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
           status: { badgeColorVariant: "success", content: "Active" },
           creationTime: "01/04/2023, 09:20:51 AM",
-          // roleNames: item.roleNames,
-          // emaiAddress: "test04@yopmail.com",
-          // emailConfirmed:(<> { 
-          //   item.emailConfirmed ? (
-          //       <RdsBadge
-          //         label={"Active"}
-          //         size={"medium"}
-          //         badgeType={"rectangle"}
-          //         colorVariant={"success"}
-          //       ></RdsBadge>
-          //     ) : (
-          //       <RdsBadge
-          //         label={"Inactive"}
-          //         size={"medium"}
-          //         badgeType={"rectangle"}
-          //         colorVariant={"danger"}
-          //       ></RdsBadge>
-          //     )
-          //     } </>)
-          // status: { badgeColorVariant: "success", content: "Active" },
-          // creationTime: "01/04/2023, 09:20:51 AM",
         };
         tempTableData.push(data);
       });
       setTableData(tempTableData);
     }
+  }, [data.users]);
 
+
+  useEffect(()=>{
     if(data.organizationUnit){
       debugger
       console.log(data.organizationUnit)
@@ -882,7 +915,9 @@ const Users = () => {
       })
       setOrganizationUnit(tempOrgData);
     }
+  },[data.organizationUnit])
 
+  useEffect(()=>{
     if(data.roles){
       debugger
       console.log(data.roles)
@@ -896,7 +931,14 @@ const Users = () => {
       })
       setRoles(tempRoleData);
     }
-  }, [data]);
+  },[data.roles])
+
+  useEffect(()=>{
+    if(data.editUser){
+      debugger
+      setUserData(data.editUser);
+    }
+  },[data.editUser])
 
   return (
     <>
@@ -923,25 +965,16 @@ const Users = () => {
             noDataTitle={"Currently you do not have user"}
             classes="table__userTable"
             pagination={true}
-            onActionSelection={(e) => {
-              onActionSelection(e);
-            }}
+            onActionSelection={onActionSelection}
             recordsPerPageSelectListOption={true}
           ></RdsCompDatatable>
+          <RdsCompAlertPopup
+          alertID="user_delete_off"
+          onSuccess={deleteHandler}
+        />
         </div>
       </div>
-      {/* <div className="mobile-btn position-absolute bottom-0 end-0 my-5 me-5">
-        <RdsFabMenu
-          listItems={fabMenuListItems}
-          menuIcon={"plus"}
-          colorVariant={"primary"}
-          menuiconWidth={"12px"}
-          menuiconHeight={"12px"}
-          onClick={(e: any) => {
-            onSelectMenu(e);
-          }}
-        ></RdsFabMenu>
-      </div> */}
+      
       <RdsOffcanvas
         backDrop={false}
         scrolling={true}
@@ -969,172 +1002,98 @@ const Users = () => {
               roles={roles}
               userData={userData}
               createUser={(e:any)=>{createNewUser(e)}}
-              // userInfo="getUserData($event)"
-              // userData="userinfo"
-              // roleListItem={roleListItem}
-              // orgUnitListItem={orgUnitListItem}
             />
           )}
-          {/* <div naveContent class="row tab-content navsm-p-0" id="nav-tabContent">
-      <div
-        class="tab-pane fade px-3 mt-3"
-        [ngClass]="{ 'show active': activePage === 0 }"
-        id="basics"
-        role="tabpanel"
-        aria-labelledby="nav-home-tab"
-      >
-        <rds-comp-user-basic-profile-right
-          (userInfo)="getUserData($event)"
-          [userData]="userinfo"
-          [roleListItem]="roleListItem"
-          [orgUnitListItem]="orgUnitListItem"
-          (onCancel)="close()"
-        >
-        </rds-comp-user-basic-profile-right>
-      </div>
-      <div
-        class="tab-pane fade px-3"
-        [ngClass]="{ 'show active': activePage === 1 }"
-        id="permissions"
-        role="permissionspanel"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content">
-          <div class="row">
-            <rds-comp-permission-tree
-              [treeData]="permissionTreeData"
-              [isEdit]="isEdit"
-              (getAllselectedPermissions)="getAllselectedPermissions($event)"
-            >
-            </rds-comp-permission-tree>
-          </div>
-          <div class="footer-buttons my-2">
-            <rds-button
-              [label]="translate.instant('Cancel')"
-              (click)="close()"
-              [isOutline]="true"
-              [colorVariant]="'primary'"
-              [size]="'small'"
-              data-bs-dismiss="offcanvas"
-            >
-            </rds-button>
-            <rds-button
-              [label]="translate.instant('Save')"
-              [isDisabled]="!user || !user.userInfo"
-              [size]="'small'"
-              class="ms-2"
-              [colorVariant]="'primary'"
-              data-bs-dismiss="offcanvas"
-              (click)="save()"
-            >
-            </rds-button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade px-3 mt-3"
-        [ngClass]="{ 'show active': activePage === 2 }"
-        id="organizationUnits"
-        role="tabpanel"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content">
-          <rds-comp-claim-type-role
-            [claimValueData]="claimValueData"
-            [claimDisplayArray]="claimDisplayArray"
-            [claimsActions]="claims_actions"
-            (addClaim)="addClaim($event)"
-            (onCancel)="close()"
-            (deleteClaim)="deleteClaim($event)"
-          ></rds-comp-claim-type-role>
-        </div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [size]="'small'"
-            [colorVariant]="'primary'"
-            (click)="save()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade"
-        [ngClass]="{ 'show active': activePage === 3 }"
-        id="permissions"
-        role="tabpanel"
-        *ngIf="selectedId"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content">
-          <!-- <app-rds-comp-permission-tree [treeData]="orgTreeData" [selectedItems]="selectedOrganizations"
-            (getAllSelectedNodes)="getSelectedorganizationunits($event)"></app-rds-comp-permission-tree> -->
-        </div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            (click)="savePermission()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-      <div
-        class="tab-pane fade"
-        [ngClass]="{ 'show active': activePage === 4 }"
-        id="claim"
-        role="tabpanel"
-        *ngIf="selectedId"
-        aria-labelledby="nav-home-tab"
-      >
-        <div class="tab-content"></div>
-        <div class="footer-buttons my-2">
-          <rds-button
-            [label]="translate.instant('Cancel')"
-            (click)="close()"
-            [isOutline]="true"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-          <rds-button
-            [label]="translate.instant('Save')"
-            class="ms-2"
-            [colorVariant]="'primary'"
-            [size]="'small'"
-            (click)="savePermission()"
-            data-bs-dismiss="offcanvas"
-          >
-          </rds-button>
-        </div>
-      </div>
-    </div> */}
         </RdsNavtabs>
       </RdsOffcanvas>
+
+      <RdsOffcanvas
+          canvasTitle="Edit User"
+          onclick={offCanvasHandler}
+          placement="end"
+          offId="user-edit-off"
+          offcanvaswidth={830}
+          backDrop={false}
+          scrolling={false}
+          preventEscapeKey={false}
+        >
+          <RdsNavtabs
+          navtabsItems={navtabsItemsEdit}
+          type={"tabs"}
+          activeNavTabId={activeNavTabId}
+          activeNavtabOrder={(activeNavTabId) => {
+            setActiveNavTabId(activeNavTabId);
+          }}
+          justified={false}
+        >
+          {activeNavTabId == 0 && (
+            <RdsCompUserBasics
+              organizationUnit={organizationUnit}
+              roles={roles}
+              userData={userData}
+              isEdit={true}
+              createUser={(e:any)=>{createNewUser(e)}}
+            />
+          )}
+          {activeNavTabId == 1 && (
+              <>
+              <RdsCompPermissionTree permissions={userPermission} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
+              <div className="footer-buttons my-2">
+                <div className="row">
+                  <div className="col-md-12 d-flex">
+                    <div>
+                      <RdsButton
+                        label="Cancel"
+                        type="button"
+                        colorVariant="primary"
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isOutline={true}
+                      ></RdsButton>
+                    </div>
+                    <div>
+                      <RdsButton
+                        label="Save"
+                        type="button"
+                        size="small"
+                        // isDisabled={formValid}
+                        class="ms-2"
+                        colorVariant="primary"
+                        databsdismiss="offcanvas"
+                        onClick={handleSelectesPermission}
+                      ></RdsButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+            )}
+
+          </RdsNavtabs>
+
+
+
+          {/* <div className="d-flex">
+            <RdsButton
+              label="CANCEL"
+              databsdismiss="offcanvas"
+              type={"button"}
+              size="small"
+              isOutline={true}
+              colorVariant="primary"
+              class="me-2"
+            ></RdsButton>
+            <RdsButton
+              label="SAVE"
+              type={"button"}
+              size="small"
+              databsdismiss="offcanvas"
+              isDisabled={val === ""}
+              colorVariant="primary"
+              class="me-2"
+              onClick={editDataHandler}
+            ></RdsButton> */}
+        </RdsOffcanvas>
     </>
   );
 };

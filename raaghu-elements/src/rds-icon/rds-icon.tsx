@@ -40,6 +40,9 @@ const RdsIcon = (props: RdsIconProps) => {
     if (props.opacity) {
       svg.style.opacity = props.opacity;
     }
+    if (props.strokeWidth) {
+      svg.style.strokeWidth = props.strokeWidth;
+    }
     if (props.colorVariant == "primary") {
       // svg.setAttribute('class', 'icon-' + props.colorVariant);
       fillColor = "#7E2EEf";

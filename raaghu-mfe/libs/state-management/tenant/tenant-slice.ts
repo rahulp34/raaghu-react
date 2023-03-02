@@ -1,9 +1,6 @@
-import { Tenants } from "./tenant.models";
-import { AnyListenerPredicate, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../index";
-import { SaasTenantUpdateDto, ServiceProxy } from "../../shared/service-proxy";
-import { create, result } from "lodash-es";
-import { id } from "date-fns/locale";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  ServiceProxy } from "../../shared/service-proxy";
+
 export interface TenantState {
   loading:boolean;
   tenants: any;
@@ -22,21 +19,7 @@ export const tenantInitialState: TenantState = {
   feature:null
 };
 
-// export const fetchTenants= createAsyncThunk(
-//   "tenants/fetchTenants",
-//   ()=>{
-//     return fetch("https://anzdemoapi.raaghu.io/api/saas/tenants",{
-//       method: "GET",
-//       headers: {
-//         Authorization: "Bearer + parsedCredentials.token"
-//       },
-//       .then
-//     }
 
-//     }
-//   }
-
-// )
 
 
 

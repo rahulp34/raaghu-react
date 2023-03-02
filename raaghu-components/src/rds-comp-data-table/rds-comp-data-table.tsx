@@ -35,15 +35,8 @@ export interface RdsCompDatatableProps {
   recordsPerPage?: number;
   recordsPerPageSelectListOption?: boolean;
   onActionSelection?: (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
+    rowData: any,
+    actionId:any
   ) => void;
   onRowSelect?:(data:any)=>void
    tableStyle?: any ;
@@ -55,7 +48,6 @@ export interface RdsCompDatatableProps {
   // }): void;
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
-  console.log({props})
   const [data, setData] = useState(props.tableData);
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
@@ -99,12 +91,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       setData(tempData);
     }
     props.onActionSelection != undefined &&
-      props.onActionSelection(
-        clickEvent,
-        tableDataRow,
-        tableDataRowIndex,
-        action
-      );
+      props.onActionSelection(tableDataRow,action.id);
   };
   let tempData: any;
   const onInputChangeHandler = (
@@ -204,7 +191,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
           {data?.length > 0 && (<> 
             <div className=" sm-datatable table-responsive">
             <table
-              className={`table  table-hover table-bordered  h-100 ${Classes} `}
+              className={`table  table-hover table-bordered  ${Classes} `}
               id="sortTable"
               width="400px"
             >
@@ -227,7 +214,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                   {props?.tableHeaders?.map((tableHeader, index) => (
                     <th scope="col"  key={"tableHeader-" + index} >
                       <div className="header align-items-center d-flex">
-                      <span >
+                      <span className="fw-bold">
                         {tableHeader.displayName}
                       </span>
                       <div className="header-options mobile-header-option cursor-pointer ps-1">
@@ -268,7 +255,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     props.actions &&
                     props.actions?.length > 0 && (
                       <th
-                        className="text-center"
+                        className="text-center fw-bold"
                         style={{ fontWeight: 500, color: "black" }}
                       >
                         Actions
@@ -358,6 +345,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                         }
                                         height={
                                           tableDataRow[tableHeader.key].iconHeight
+                                        }
+                                        strokeWidth={
+                                          tableDataRow[tableHeader.key].iconStrokeWidth
                                         }
                                       />
                                     </div>
@@ -450,7 +440,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                                 action
                                               );
                                             }}
-                                            className="dropdown-item"
+                                            className="dropdown-item text-wrap"
                                           >
                                             {action.displayName}
                                           </a>
@@ -468,7 +458,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                                   action
                                                 );
                                               }}
-                                              className="dropdown-item"
+                                              className="dropdown-item text-wrap"
                                             >
                                               {action.displayName}
                                             </a>

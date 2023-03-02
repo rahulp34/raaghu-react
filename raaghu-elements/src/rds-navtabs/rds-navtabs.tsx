@@ -25,6 +25,7 @@ export interface RdsNavtabsProps {
 }
 
 const RdsNavtabs = (props: RdsNavtabsProps) => {
+  
   const [activeTabKey, setActiveTabKey] = useState(props.navtabsItems[0].id);
   useEffect(() => {
     props.activeNavtabOrder != undefined &&
@@ -34,7 +35,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
     if (props.isNextPressed === true) setActiveTabKey(props.activeNavTabId);
   }, [props.isNextPressed]);
   return (
-    <div >
+    <div style={{ position: 'relative', left : -24 }}>
       <ul
         className={
           "nav mobile-ul-tabs flex" +
@@ -43,16 +44,16 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
             : props.type === "tabs"
             ? " justify-content-start nav-tabs"
             : props.type === "vertical"
-            ? " flex-column nav-pills col-3"
+            ? " flex-column nav-pills col-12 vh-75 border-end border-end"
             : " nav-tabs") +
           (props.fill ? " nav-fill" : "") +
           (props.justified ? " nav-justified" : "")
         }
       >
         {props.navtabsItems.map((navtabsItem) => (
-          <li className="nav-item" key={navtabsItem.id}>
+          <li className="nav-item p-1" key={navtabsItem.id}>
             <a className={
-                "nav-link " +
+                "nav-link rounded-0 py-3 px-3 pe-auto" +
                 (navtabsItem.id === activeTabKey ||
                   navtabsItem.id === props.activeNavTabId
                   ?( props.type === "tabs" ?" border-bottom border-primary border-3 text-primary ":" active") 
@@ -75,7 +76,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
                   />
                 </span>
               )}
-              <span className="fw-semibold">{navtabsItem.label}</span>
+              <div className="fw-semibold">{navtabsItem.label}</div>
             </a>
           </li>
         ))}

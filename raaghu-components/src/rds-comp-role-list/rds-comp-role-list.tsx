@@ -79,22 +79,12 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
     setname({ ...name, displayName: e.target.value });
   };
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
+  const onActionSelection = (rowData: any, actionId: any) => {
     setname({
       ...name,
-      displayName: tableDataRow.displayName,
-      isDefault: tableDataRow.isDefault,
-      id: tableDataRow.id,
+      displayName: rowData.displayName,
+      isDefault: rowData.isDefault,
+      id: rowData.id,
     });
   };
 

@@ -85,7 +85,7 @@ const RdsDropdown = (props: RdsDropdownProps) => {
         >
           {props.listItems.map((listItem) => (
             <li id={listItem.id}>
-              <a className="dropdown-item" href={listItem.path}>
+              <a className="dropdown-item text-wrap" href={listItem.path}>
                 {listItem.label}
               </a>
             </li>

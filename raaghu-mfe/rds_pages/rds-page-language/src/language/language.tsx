@@ -12,7 +12,7 @@ import {
   RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompNewLanguage,
-} from "../../../rds-components";
+} from "../../../rds-components"; 
 
 import {
   useAppDispatch,
@@ -58,9 +58,9 @@ const tableHeaders = [
   },
 ];
 const actions = [
-  { id: "edit", displayName: "Edit", offId: "langEdit" },
-  { id: "delete", displayName: "Delete", modalId: "langDel" },
-  { id: "def", displayName: "set as default language" },
+  { id: "edit", displayName: "Edit", offId: "languagesEdit" },
+  { id: "delete", displayName: "Delete", modalId: "languagesDel" },
+  { id: "defaa", displayName: "set as default language" },
 ];
 
 export interface LanguageProps {
@@ -70,13 +70,14 @@ export interface LanguageProps {
 const Language = (props: LanguageProps) => {
   const [Data, setData] = useState<any>([{}]);
 
+
   const [dataEmit, setdataEmit] = useState<{
     check: boolean;
     displayName: any;
     id: any;
     flag: any;
   }>({
-    check:false,
+    check:true || false,
     displayName:"",
     id: "",
     flag: "",
@@ -107,22 +108,10 @@ const Language = (props: LanguageProps) => {
 
   const [Alert, setAlert] = useState({show:false,message:"",color:""});
 
-  useEffect(() => {
-    // Set a 3-second timer to update the state
-    const timer = setTimeout(() => {
-      setAlert({ ...Alert, show: false });
-    }, 3000);
-
-    // Clean up the timer when the component unmounts or when the state changes
-    return () => clearTimeout(timer);
-  }, [Alert]);
 
 
-  const [id, Setid] = useState<{
-    languageName: string;
-    id: string;
-    isenabled: boolean;
-  }>({ languageName: "hello", id: "", isenabled: false });
+
+
   // const [data,setdata] = useState(useAppSelector((state) => state.persistedReducer.language))
   const data = useAppSelector((state) => state.persistedReducer.language);
   const dispatch = useAppDispatch();
@@ -160,20 +149,24 @@ const Language = (props: LanguageProps) => {
           isDefault: item.isDefaultLanguage,
           isenabled: (
             <>
-              {!item.isEnabled ? (
+              {item.isEnabled ? (
+                <RdsBadge
+                label={"Active"}
+                size={"medium"}
+                badgeType={"rectangle"}
+                colorVariant={"success"}
+              ></RdsBadge>
+                
+              ) : (
+
                 <RdsBadge
                   label={"Inactive"}
                   size={"medium"}
                   badgeType={"rectangle"}
                   colorVariant={"danger"}
                 ></RdsBadge>
-              ) : (
-                <RdsBadge
-                  label={"Active"}
-                  size={"medium"}
-                  badgeType={"rectangle"}
-                  colorVariant={"success"}
-                ></RdsBadge>
+
+                
               )}
             </>
           ),
@@ -238,17 +231,42 @@ const Language = (props: LanguageProps) => {
   const onEditHandler = (data: {
     check: boolean;
     displayName: string;
-    flag:string
+    flag:string,
+    id:string
   }) => {
 
     model.displayName = data.displayName;
     model.isEnabled = data.check;
     model.flagIcon = data.flag;
-     const idd = id.id
+     const idd = data.id
     dispatch(updateLanguage({idd , model})as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
     setAlert({...Alert,show:true,message:"Languages edited Succesfully", color:"success"})
+  };
+
+
+ 
+
+  const onActionSelection = (
+    rowData: any, actionId: any
+  ) => {
+
+
+    setdataEmit({...dataEmit,displayName:rowData.name,check:rowData.enable,flag:rowData.flag,id:rowData.id})
+
+
+
+
+    if (actionId == "defaa") {
+      dispatch(defaultLanguage(rowData.id) as any).then((res: any) => {
+        dispatch(fetchLanguages() as any);
+      });
+      setAlert({...Alert,show:true,message:"Languages set as default Succesfully", color:"success"})
+    }
+
+
+    
   };
 
   const onNewLangHandler = () => {
@@ -256,47 +274,13 @@ const Language = (props: LanguageProps) => {
   };
 
   const onDeleteHandler = () => {
-    dispatch(deleteLanguage(id.id) as any).then((res: any) => {
+    dispatch(deleteLanguage(dataEmit.id) as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
     setAlert({...Alert,show:true,message:"Languages deleted Succesfully", color:"success"})
   };
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    if (tableDataRow.enable === "false") {
-      Setid({
-        ...id,
-        languageName: tableDataRow.languageName,
-        id: tableDataRow.id,
-        isenabled: false,
-      });
-    } else {
-      Setid({
-        ...id,
-        languageName: "hahaha",
-        id: tableDataRow.id,
-        isenabled: true,
-      });
-    }
-    if (action.displayName == "set as default language") {
-      dispatch(defaultLanguage(tableDataRow.id) as any).then((res: any) => {
-        dispatch(fetchLanguages() as any);
-      });
-      setAlert({...Alert,show:true,message:"Languages set as default Succesfully", color:"success"})
-    }
-
-    setdataEmit({...dataEmit,displayName:tableDataRow.name,check:tableDataRow.enable,flag:tableDataRow.flag})
-  };
+  
 
   const inputChangeHandler = (event: any) => {
     setdataEmit({ ...dataEmit, displayName: event.target.value });
@@ -304,6 +288,17 @@ const Language = (props: LanguageProps) => {
   const checkboxHandler = (event: any) => {
     setdataEmit({ ...dataEmit, check: event.target.checked });
   };
+
+
+  useEffect(() => {
+    // Set a 3-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 3000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [data.languages]);
 
   return (
     <>
@@ -382,7 +377,7 @@ const Language = (props: LanguageProps) => {
               backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"langEdit"}
+              offId={"languagesEdit"}
               canvasTitle={"Edit Language"}
               offcanvaswidth={550}
             >
@@ -444,7 +439,7 @@ const Language = (props: LanguageProps) => {
             </RdsOffcanvas>
 
             <RdsCompAlertPopup
-              alertID={"langDel"}
+              alertID={"languagesDel"}
               onSuccess={onDeleteHandler}
             ></RdsCompAlertPopup>
           </div>

@@ -376,7 +376,7 @@ const RdsCompFeature = (props: RdsCompFeatureProps) => {
               label="Select"
               selectItems={props.twoFactorList}
               selectedValue={a}
-              onSelectListChange={(e) => {
+              onSelectListChange={(e:any) => {
                 twoFactChange(e);
               }}
               size="small"

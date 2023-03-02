@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import RdsCompPermissionTree from "./rds-comp-permission-ree";
+import RdsCompPermissionTree from "./rds-comp-permission-tree";
 
 export default {
   title: "Components/Permission Tree 2.0",

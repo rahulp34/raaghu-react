@@ -14,6 +14,11 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
 
   const [password, setPassword] = useState("");
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
+  const [checkbox,setcheckbox]=useState(false)
+
+  const onCheckedHandler = (e:any)=>{
+    setcheckbox(e.target.checked)
+  }
 
   const isEmailValid = (email: any) => {
     if (!email || email.length === 0) {
@@ -149,7 +154,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
             <div className="d-flex justify-content-between mt-4 mb-4">
               <div>
                 <div className="form-group mb-3">
-                  <RdsCheckbox label={"Remember me"} checked></RdsCheckbox>
+                  <RdsCheckbox label={"Remember me"} checked={checkbox} onChange={onCheckedHandler}></RdsCheckbox>
                 </div>
               </div>
               <div>

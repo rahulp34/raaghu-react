@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../libs/state-management/hooks";
 import { allLanguagesCulture, getAllTemplates, getTemplateContent, restoreToDefault, saveTemplateContent } from "../../../../libs/state-management/text-template/text-template-slice";
-import {
-  RdsCompDatatable,
-} from "../../../rds-components";
-import {
-  RdsButton,
-  RdsCheckbox,
-  RdsLabel,
-  RdsNavtabs,
-  RdsOffcanvas,
-  RdsSelectList,
-  RdsTextArea,
-  RdsTextEditor,
-} from "../../../rds-elements";
+import { RdsCompDatatable } from "../../../rds-components";
+import { RdsButton, RdsLabel, RdsOffcanvas, RdsSelectList, RdsTextArea, } from "raaghu-react-elements";
 
 const TextTemplate = () => {
 
+  // constant variables
   const tableHeaders = [
     { displayName: "Template Name", key: "name", datatype: "text", dataLength: 30, required: true, sortable: false },
     { displayName: "Inline Localized", key: "isInlineLocalized", datatype: "iconAvatarTitle", dataLength: 30, required: true, sortable: false },
@@ -24,26 +14,27 @@ const TextTemplate = () => {
     { displayName: "Layout Details", key: "layout", datatype: "text", dataLength: 30, required: true, sortable: false },
     { displayName: "Default Culture Name", key: "defaultCultureName", datatype: "text", dataLength: 30, required: true, sortable: false },
   ];
-
   const actions = [
     { id: "edit", displayName: "Edit", offId: "Edit" },
     { id: "customizePerCulture", displayName: "Customize Per Culture", offId: "Edit" },
   ];
 
+  // Use State constants
   const [tableData, setTableData] = useState([]);
-
   const dispatch = useAppDispatch();
   const textTemplate = useAppSelector((state) => state.persistedReducer.textTemplate);
   const [name, setName] = useState('');
   const [referenceContent, setReferenceContent] = useState('');
   const [targetContent, setTargetContent] = useState('');
-
   const [offCanvasId, setOffCanvasId] = useState('');
-  const [languages, setLanguages] = useState([]);
+  const [languages, setLanguages]: any = useState([]);
   const [targetName, setTargetName] = useState('');
   const [selectedList, setSelectedList] = useState('');
   const [selectedDataName, setSelectedDataName] = useState('');
+  const [selectedReferenceValue, setSelectedReferenceValue] = useState('');
+  const [selectedTargetValue, setSelectedTargetValue] = useState('');
 
+  // Use Effects
   getAll();
   function getAll() {
     useEffect(() => {
@@ -53,8 +44,8 @@ const TextTemplate = () => {
     useEffect(() => {
       const data: any = [];
       if (textTemplate.textTemplate.items) {
-        const tickIcon = { iconName: "tick", iconFill: false, iconStroke: true, iconColor: "success", iconWidth: '16px', iconHeight: '16px' };
-        const closeIcon = { iconName: "close", iconFill: false, iconStroke: true, iconColor: "danger", iconWidth: '16px', iconHeight: '16px' };
+        const tickIcon = { iconName: "tick", iconFill: false, iconStroke: true, iconColor: "success", iconWidth: '16px', iconHeight: '16px', iconStrokeWidth: '3' };
+        const closeIcon = { iconName: "close", iconFill: false, iconStroke: true, iconColor: "danger", iconWidth: '16px', iconHeight: '16px', iconStrokeWidth: '3' };
         textTemplate.textTemplate.items.map((res: any) => {
           const item = {
             defaultCultureName: res.defaultCultureName,
@@ -63,7 +54,7 @@ const TextTemplate = () => {
             isLayout: res.isLayout ? tickIcon : closeIcon,
             layout: res.layout,
             name: res.name
-          }
+          };
           data.push(item);
         });
         setTableData(data);
@@ -74,8 +65,7 @@ const TextTemplate = () => {
         textTemplate.languages.localization.languages.forEach((ele: any) => {
           const item = {
             value: ele.cultureName,
-            option: ele.cultureName,
-            isSelected: ele.cultureName === 'en' ? true : false
+            option: ele.displayName,
           };
           data.push(item);
           setLanguages(data);
@@ -84,15 +74,37 @@ const TextTemplate = () => {
     }, [textTemplate]);
   }
 
-  async function onActionSelection(clickEvent: any, selectedData: any, rowIndex: any, action: any) {
-    setOffCanvasId(action.displayName);
-    setSelectedDataName(selectedData.name);
-  };
+  useEffect(() => {
+    if (offCanvasId === 'edit') dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any);
+    else if (offCanvasId === 'customizePerCulture') {
+      dispatch(getTemplateContent({ template: selectedDataName, culture: 'en' }) as any);
+      dispatch(getTemplateContent({ template: selectedDataName, culture: languages[0].value }) as any);
+    }
+  }, [offCanvasId, selectedDataName]);
 
   useEffect(() => {
-    offCanvasId === 'Edit' ? dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any) :
-      offCanvasId === 'Customize Per Culture' ? dispatch(getTemplateContent({ template: selectedDataName, culture: undefined }) as any) : null;
-  }, [offCanvasId, selectedDataName]);
+    if (textTemplate.templateData) {
+      setName(textTemplate.templateData.name);
+      if (selectedList === 'target') setTargetContent(textTemplate.templateData.content);
+      else if (selectedList === 'reference') setReferenceContent(textTemplate.templateData.content);
+      else {
+        if (textTemplate.templateData.cultureName === 'ar') {
+          setTargetContent(textTemplate.templateData.content);
+          setTargetName('ar');
+          setSelectedTargetValue('ar');
+        } else if (textTemplate.templateData.cultureName === 'en') {
+          setReferenceContent(textTemplate.templateData.content);
+          setSelectedReferenceValue('en');
+        } else if (textTemplate.templateData.cultureName === null) setTargetContent(textTemplate.templateData.content);
+      }
+    }
+  }, [textTemplate.templateData, selectedList]);
+
+  // Functions
+  function onActionSelection(rowData: any, actionId: any) {
+    setOffCanvasId(actionId);
+    setSelectedDataName(rowData.name);
+  };
 
   function onCloseFn(event: any) {
     event.preventDefault();
@@ -101,6 +113,8 @@ const TextTemplate = () => {
     setTargetContent('');
     setSelectedList('');
     setOffCanvasId('');
+    setSelectedReferenceValue('');
+    setSelectedTargetValue('');
   }
 
   function restoreDefault() {
@@ -109,33 +123,23 @@ const TextTemplate = () => {
 
   function refernceNameFn(event: any) {
     setSelectedList('reference');
+    setSelectedReferenceValue(event.target.value);
     dispatch(getTemplateContent({ template: name, culture: event.target.value }) as any);
   }
 
   function targetNameFn(event: any) {
     setSelectedList('target');
+    setSelectedTargetValue(event.target.value);
     dispatch(getTemplateContent({ template: name, culture: event.target.value }) as any);
     setTargetName(event.target.value);
   }
 
   function onSaveFn(event: any) {
     event.preventDefault();
-    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'Edit' ? null : targetName, content: targetContent }) as any);
+    dispatch(saveTemplateContent({ templateName: name, cultureName: offCanvasId === 'edit' ? null : targetName, content: targetContent }) as any);
   }
 
-  useEffect(() => {
-    if (textTemplate.templateData) {
-      debugger;
-      setName(textTemplate.templateData.name);
-      if (selectedList === 'target') setTargetContent(textTemplate.templateData.content);
-      else if (selectedList === 'reference') setReferenceContent(textTemplate.templateData.content);
-      else {
-        setTargetContent(textTemplate.templateData.content);
-        setReferenceContent(textTemplate.templateData.content);
-      }
-    }
-  }, [textTemplate.templateData, selectedList]);
-
+  // DOM
   return (
     <>
       <div className="row">
@@ -158,32 +162,28 @@ const TextTemplate = () => {
               :
               <div className="ps-2">{name}</div>
             </div>
-            {offCanvasId !== 'Edit' ?
+            {offCanvasId !== 'edit' &&
               <>
                 <div className="form-group mb-2">
                   <RdsLabel label={'Reference Culture Name'}></RdsLabel>
                   <RdsSelectList label={"Reference Culture Name"} selectItems={languages}
-                    onSelectListChange={refernceNameFn}></RdsSelectList>
+                    selectedValue={selectedReferenceValue} onSelectListChange={refernceNameFn}></RdsSelectList>
                 </div>
-                <div className="form-group mb-3">
-                  <RdsTextArea placeholder={""} value={referenceContent} onChange={(e) => setReferenceContent(e.target.value)}
+                <div className="form-group mb-4">
+                  <RdsTextArea placeholder={""} value={referenceContent} onChange={(e:any) => setReferenceContent(e.target.value)}
                     required={true} readonly={true} isRequired={true} label={'Reference Content'} rows={10}></RdsTextArea>
                 </div>
-              </> :
-              null
+              </>
             }
-            {offCanvasId !== 'Edit' ?
-              <>
-                <div className="form-group mb-2">
-                  <RdsLabel label={'Target Culture Name'}></RdsLabel>
-                  <RdsSelectList label={"Target Culture Name"} selectItems={languages}
-                    onSelectListChange={targetNameFn}></RdsSelectList>
-                </div>
-              </> :
-              null
+            {offCanvasId !== 'edit' &&
+              <div className="form-group mb-2">
+                <RdsLabel label={'Target Culture Name'}></RdsLabel>
+                <RdsSelectList label={"Target Culture Name"} selectItems={languages}
+                  selectedValue={selectedTargetValue} onSelectListChange={targetNameFn}></RdsSelectList>
+              </div>
             }
             <div className="form-group pb-4">
-              <RdsTextArea placeholder={""} value={targetContent} onChange={(e) => setTargetContent(e.target.value)}
+              <RdsTextArea placeholder={""} value={targetContent} onChange={(e:any) => setTargetContent(e.target.value)}
                 required={true} isRequired={true} label={'Template Content'} rows={10}></RdsTextArea>
             </div>
             <div className="position-absolute bottom-0 py-4 d-flex w-100 bg-white">
@@ -194,12 +194,12 @@ const TextTemplate = () => {
               </div>
               <div className="ms-2">
                 <RdsButton size={'small'} colorVariant="primary" type={"button"} label="cancel" isOutline={true}
-                  onClick={(e) => onCloseFn(e)} databsdismiss="offcanvas">
+                  onClick={(e:any) => onCloseFn(e)} databsdismiss="offcanvas">
                 </RdsButton>
               </div>
               <div className="ms-2">
                 <RdsButton size={'small'} colorVariant="primary" type={'submit'} label="Save"
-                  databsdismiss={'offcanvas'} isDisabled={targetContent === ''} onClick={(e) => onSaveFn(e)}>
+                  databsdismiss={'offcanvas'} isDisabled={targetContent === ''} onClick={(e:any) => onSaveFn(e)}>
                 </RdsButton>
               </div>
             </div>
