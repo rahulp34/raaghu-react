@@ -36,7 +36,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     })
 
     // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
-
     if (cred != undefined) {
       getUserConfiguration("login");
       navigate("/dashboard");
@@ -51,10 +50,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-     scope: "address email phone profile roles demoAngular ",
+     scope: "address email phone profile roles abp_demo",
     };
  
-  fetch("https://localhost:44381/connect/token", {
+  fetch("https://localhost:44317/connect/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",

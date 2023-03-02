@@ -69,7 +69,12 @@ const Main = (props: MainProps) => {
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
-      navigate(currentPath);
+      if(currentPath !== '/dashobard' && currentPath != '/'){
+        navigate(currentPath);
+      }
+      else{
+        navigate('/dashboard');
+      }
     }
     if (localStorage.getItem("access_token") == null) {
       navigate("/login");
