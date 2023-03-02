@@ -270,7 +270,8 @@ const Tenant = (props: RdsPageTenantProps) => {
             <RdsCompTenantInformation editions={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
           )}
           {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
-            <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
+            <></>
+            // <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
           )}
         </RdsOffcanvas>
       </div>

@@ -195,24 +195,13 @@ const LanguageText = (props: LanguageTextProps) => {
     }));
   };
 
-  const onActionSelection = (
-    clickEvent: any,
-    tableDataRow: any,
-    tableDataRowIndex: number,
-    action: {
-      displayName: string;
-      id: string;
-      offId?: string;
-      modalId?: string;
-    }
-  ) => {
-    console.log("TABLDATAROW", tableDataRow);
+  const onActionSelection = (rowData:any, actionId:any ) => {
     settextEdit({
       ...textEdit,
-      base: tableDataRow.basevalue,
-      target: tableDataRow.value ? tableDataRow.value : "",
-      key: tableDataRow.key,
-      resource: tableDataRow.resourcename,
+      base: rowData.basevalue,
+      target: rowData.value ? rowData.value : "",
+      key: rowData.key,
+      resource: rowData.resourcename,
     });
   };
 

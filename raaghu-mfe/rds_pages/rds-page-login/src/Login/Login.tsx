@@ -30,7 +30,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     });
 
     // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
-
     if (cred != undefined) {
       getUserConfiguration("login");
       navigate("/dashboard");
@@ -43,21 +42,21 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       username: email, // "admin",
       password: password, //"1q2w3E*"
       client_id: "raaghu",
-      scope: "address email phone profile roles ABP_VZKY_IN  ",
+     scope: "address email phone profile roles abp_demo",
     };
-
-    fetch("https://localhost:44347/connect/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(requestBody).toString(),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("access_token", JSON.stringify(data.access_token));
-        hello();
-      });
+ 
+  fetch("https://localhost:44317/connect/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(requestBody).toString(),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.setItem("access_token", JSON.stringify(data.access_token));
+      hello()
+    });
   };
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
     // navigate("/forgot-password");
