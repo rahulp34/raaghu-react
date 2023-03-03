@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import i18n from './i18n';
+import i18n from '../../../libs/shared/i18n';
 
 function LanguageSwitcher() {
     const { i18n } = useTranslation();

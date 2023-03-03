@@ -1,5 +1,4 @@
-import {BASE_URL} from './public.api'
-
+    import {BASE_URL} from './public.api'
 
     export const getUserConfiguration = async(login?: string) =>{
     const response = await fetch(BASE_URL + '/AbpUserConfiguration/GetAll');
