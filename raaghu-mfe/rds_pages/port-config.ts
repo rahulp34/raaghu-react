@@ -55,20 +55,20 @@ export const PortConfig = {
 	},
 	"claimtypes":{
 		"port":"8018"
-  },
-  "apiScope":{
+  	},
+  	"apiScope":{
 		"port":"8019"
-  },
-  "textTemplate":{
+  	},
+  	"textTemplate":{
 		"port":"8020"
-	},
-	"textTemplate": {
-		"port": "8020"
 	},
 	"applications": {
 		"port": "8025"
 	},
 	"securityLogs": {
 		"port": "8021"
+	},
+	"chats":{
+		"port": "8026"
 	}
 }

@@ -109,3 +109,8 @@ declare module "SecurityLogs/SecurityLogs" {
 	export default SecurityLogs;
 
 }
+
+declare module "Chats/Chats" {
+	const ChatsComponent : React.ComponentType;
+	export default ChatsComponent;
+}

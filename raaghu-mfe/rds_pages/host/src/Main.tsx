@@ -38,6 +38,7 @@ const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
+const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -305,6 +306,13 @@ const Main = (props: MainProps) => {
         },
       ],
     },
+    {
+      key: "4",
+      label: t("Chats"),
+      icon: "home",
+      path: "/chats",
+      subTitle: "Chats Module",
+    },
   ];
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -478,6 +486,8 @@ const Main = (props: MainProps) => {
                     ></Route>
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/chats" element={<ChatsCompo />} />
+                    
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

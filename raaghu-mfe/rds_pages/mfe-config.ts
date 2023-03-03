@@ -55,7 +55,7 @@ export const MfeConfig = {
 	},
 	"claimtypes":{
 		"url":"claimtypes@http://localhost:8018/remoteEntry.js"
-  },
+  	},
 	"textTemplate":{
 		"url":"textTemplate@http://localhost:8020/remoteEntry.js"
 	},
@@ -65,8 +65,11 @@ export const MfeConfig = {
 
 	"apiScope":{
 		"url":"apiScope@http://localhost:8019/remoteEntry.js"
-  },
+  	},
 	"securityLogs": {
 		"url": "securityLogs@http://localhost:8021/remoteEntry.js"
+	},
+	"chats": {
+		"url": "chats@http://localhost:8026/remoteEntry.js"
 	}
 }
