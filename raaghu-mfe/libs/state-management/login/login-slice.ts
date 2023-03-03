@@ -1,7 +1,5 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { AccountServiceProxy, IsTenantAvailableInput} from '../../shared/service-proxies';
-import { TokenAuthServiceProxy,AuthenticateModel,AuthenticateResultModel } from '../../shared/public.api';
 export interface LoginState {
     // Tenant: any;
     // error: string|undefined|null;
@@ -17,8 +15,8 @@ export interface LoginState {
     date: number | undefined;
     isAuth: boolean
 }
-const AccountService = new AccountServiceProxy();
-const TokenAuthService = new TokenAuthServiceProxy();
+// const AccountService = new AccountServiceProxy();
+// const TokenAuthService = new TokenAuthServiceProxy();
 export const LoginInitialState: LoginState = {    
     // Tenant: { result:{} },
     // tenancyName: null,
@@ -34,13 +32,13 @@ export const LoginInitialState: LoginState = {
     date: undefined,
     isAuth: false
 }; 
-export const Authenticate = createAsyncThunk('login/Authenticate',
-        async(authenticateModal:any)=>{       
-            const result =  await TokenAuthService.authenticate(authenticateModal);	
-            const obj: {authenticateModal:AuthenticateModel, result: AuthenticateResultModel} = 
-            {authenticateModal, result};        
-            return obj;}
-)
+// export const Authenticate = createAsyncThunk('login/Authenticate',
+//         async(authenticateModal:any)=>{       
+//             const result =  await TokenAuthService.authenticate(authenticateModal);	
+//             const obj: {authenticateModal:AuthenticateModel, result: AuthenticateResultModel} = 
+//             {authenticateModal, result};        
+//             return obj;}
+// )
 
 
 // export const Authenticated = createAsyncThunk('login/Authenticate',
@@ -54,9 +52,11 @@ export const Authenticate = createAsyncThunk('login/Authenticate',
 export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',
         async(tenant:any) => {
             tenant = {tenancyName : tenant};
-            const response = await AccountService.isTenantAvailable(tenant);  
-            const data = response.tenantId;
-            const obj:{data:number|undefined,tenant:any} = {data,tenant};
+            const obj:any = {}
+
+            //const response = await AccountService.isTenantAvailable(tenant);  
+            //const data = response.tenantId;
+           // const obj:{data:number|undefined,tenant:any} = {data,tenant};
             return obj;
             
            
@@ -132,34 +132,34 @@ export const ValidateTenantName = createAsyncThunk('tenants/ValidateTenantName',
         //     (state,action) =>{
         //         state.tenancyName = action.payload;
         //     })
-        builder.addCase(Authenticate.fulfilled,
-            (state, action) =>{  
-                // let accessToken = action.payload.result.accessToken; 
-                let accessToken = localStorage.getItem("access_token");  
-                let refreshToken = action.payload.result.refreshToken;        
-                state.accessToken = localStorage.getItem("access_token");
-                state.refreshToken = refreshToken;
-                if(accessToken){
-                    state.isAuth = true
-                }
-                if(!accessToken){
-                    state.isAuth = false
-                }
-                let tokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.expireInSeconds?action.payload.result.expireInSeconds:1) : undefined;
-                console.log(tokenExpireDate)
-                state.expireDate = tokenExpireDate;
-                state.refreshTokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.refreshTokenExpireInSeconds?action.payload.result.refreshTokenExpireInSeconds:1) : undefined;
-                if(tokenExpireDate != undefined)
-                state.date = Date.now() + tokenExpireDate;
-                localStorage.setItem('LoginCredential', JSON.stringify({
-                    token: accessToken,
-                    refreshToken: refreshToken,
-                    expireDate: tokenExpireDate,
-                    refreshTokenExpireDate: state.refreshTokenExpireDate,
-                    date: state.date,
-                    isAuth: state.isAuth
-                  }));
-            })
+    //     builder.addCase(Authenticate.fulfilled,
+    //         (state, action) =>{  
+    //             // let accessToken = action.payload.result.accessToken; 
+    //             let accessToken = localStorage.getItem("access_token");  
+    //             let refreshToken = action.payload.result.refreshToken;        
+    //             state.accessToken = localStorage.getItem("access_token");
+    //             state.refreshToken = refreshToken;
+    //             if(accessToken){
+    //                 state.isAuth = true
+    //             }
+    //             if(!accessToken){
+    //                 state.isAuth = false
+    //             }
+    //             let tokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.expireInSeconds?action.payload.result.expireInSeconds:1) : undefined;
+    //             console.log(tokenExpireDate)
+    //             state.expireDate = tokenExpireDate;
+    //             state.refreshTokenExpireDate = action.payload.authenticateModal.rememberClient ? new Date().getTime() + 1000 * (action.payload.result.refreshTokenExpireInSeconds?action.payload.result.refreshTokenExpireInSeconds:1) : undefined;
+    //             if(tokenExpireDate != undefined)
+    //             state.date = Date.now() + tokenExpireDate;
+    //             localStorage.setItem('LoginCredential', JSON.stringify({
+    //                 token: accessToken,
+    //                 refreshToken: refreshToken,
+    //                 expireDate: tokenExpireDate,
+    //                 refreshTokenExpireDate: state.refreshTokenExpireDate,
+    //                 date: state.date,
+    //                 isAuth: state.isAuth
+    //               }));
+    //         })
     }
 });
 export const loginReducer = LoginSlice.reducer;

@@ -1,8 +1,6 @@
-import {BASE_URL} from './public.api'
-
 
     export const getUserConfiguration = async(login?: string) =>{
-    const response = await fetch(BASE_URL + '/AbpUserConfiguration/GetAll');
+    const response = await fetch("https://localhost:44344" + '/AbpUserConfiguration/GetAll');
     const responseObj = await response.json();
     const result = responseObj.result;
     // console.log(result);

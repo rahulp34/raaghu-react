@@ -1,7 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { AccountServiceProxy, SendPasswordResetCodeInput} from '../../shared/service-proxies';
 import type { RootState } from '../index'
+import { ServiceProxy } from '../../public.api';
 export interface ForgotPasswordState{
     title: string,
     message: string,
@@ -13,8 +13,8 @@ export const forgotPasswordInitialState: ForgotPasswordState = {
   
 }
 
-const AccountService = new AccountServiceProxy();
-const email: SendPasswordResetCodeInput = new SendPasswordResetCodeInput();
+const AccountService = new ServiceProxy();
+const email: any = {}
 
 export const shouldSendPasswordResetCode = createAsyncThunk('sendPasswordResetCode/status',
     async(emailAddress: any) => {
