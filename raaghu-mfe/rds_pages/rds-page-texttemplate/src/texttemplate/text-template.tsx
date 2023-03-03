@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../libs/state-management/hooks";
 import { allLanguagesCulture, getAllTemplates, getTemplateContent, restoreToDefault, saveTemplateContent } from "../../../../libs/state-management/text-template/text-template-slice";
 import { RdsCompDatatable } from "../../../rds-components";
-import { RdsButton, RdsLabel, RdsOffcanvas, RdsSelectList, RdsTextArea, } from "raaghu-react-elements";
+import { RdsButton, RdsLabel, RdsOffcanvas, RdsSelectList, RdsTextArea, } from "../../../rds-elements";
 
 const TextTemplate = () => {
 

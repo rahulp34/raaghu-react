@@ -165,6 +165,7 @@ const RdsCompFeatures = (props: RdsCompFeatureProps) => {
           </h6>
           <div className="col-md-6 mt-3">
             <div className="form-group fw-normal">
+
               <RdsInput
                 size="small"
                 inputType="text"

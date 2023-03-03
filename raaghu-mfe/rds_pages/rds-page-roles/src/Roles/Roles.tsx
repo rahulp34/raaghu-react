@@ -5,7 +5,7 @@ import {
   RdsButton,
   RdsOffcanvas,
   RdsNavtabs,
-} from "raaghu-react-elements";
+} from "../../../rds-elements";
 
 import {
   RdsCompDatatable,
