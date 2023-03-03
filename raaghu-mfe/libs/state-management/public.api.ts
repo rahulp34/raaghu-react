@@ -9,4 +9,5 @@ export * from "./user/user-slice";
 export * from "./language-text/language-text-slice";
 export * from "./settings/settings-slice";
 export * from './tenant/tenant-slice';
+export * from './localization/localization-slice';
 

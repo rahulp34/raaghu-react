@@ -5,13 +5,18 @@ import i18n from "i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../libs/state-management";
 import "./App.scss";
-
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../libs/state-management/hooks";
+import {fetchLocalization} from "../../../libs/state-management/localization/localization-slice";
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
+import MyComponent from "./MyComponent";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
 const ForgotPasswordCompo = React.lazy(
@@ -138,11 +143,14 @@ const Main = (props: MainProps) => {
   const onClickHandler = (e: any) => {
     setCurrentLanguage(e.target.getAttribute("data-name"));
   };
+  const dispatch = useAppDispatch();
+  const Data = useAppSelector((state:any) => state.persistedReducer.localization) as any;
 
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
+    dispatch(fetchLocalization(currentLanguage) as any);
   }, [currentLanguage]);
-
+console.log('localization ', Data.localization)
   // Datas for side nav
 
   const sideNavItems = [
@@ -386,7 +394,7 @@ const Main = (props: MainProps) => {
                 logo={logo}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
-              ></RdsCompTopNavigation>
+              />
             </div>
             <div
               className="
@@ -400,6 +408,7 @@ const Main = (props: MainProps) => {
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0 main-body">
                 <div className="aside ng-tns-c99-0" id="aside">
                   <div className="mx-2 pt-2">
+                    <MyComponent/>
                     <RdsCompSideNavigation
                       sideNavItems={sideNavItems}
                       onClick={sideNavOnClickHandler}
