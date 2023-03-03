@@ -38,6 +38,7 @@ const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
+const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -66,15 +67,21 @@ const Main = (props: MainProps) => {
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
     }
+
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
-      navigate(currentPath);
+      if(currentPath !== '/dashobard' && currentPath != '/'){
+        navigate(currentPath);
+      }
+      else{
+        navigate('/dashboard');
+      }
     }
     if (localStorage.getItem("access_token") == null) {
       navigate("/login");
     }
-  }, []);
+  }, [localStorage.getItem("access_token")]);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
@@ -299,6 +306,13 @@ const Main = (props: MainProps) => {
         },
       ],
     },
+    {
+      key: "5",
+      label: t("File Management"),
+      icon: "icons",
+      path: "/fileManagement",
+      subTitle: t("File Management"),
+    },
   ];
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -472,6 +486,7 @@ const Main = (props: MainProps) => {
                     ></Route>
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

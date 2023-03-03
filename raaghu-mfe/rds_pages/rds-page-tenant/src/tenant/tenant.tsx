@@ -17,6 +17,7 @@ import {
   RdsCompTenantList,
   RdsCompTenantInformation,
   RdsCompAlertPopup,
+  RdsCompClaims,
 } from "../../../rds-components";
 import { RdsButton, RdsOffcanvas, RdsNavtabs } from "../../../rds-elements";
 import {
@@ -91,14 +92,14 @@ const Tenant = (props: RdsPageTenantProps) => {
     // dispatch(fetchEdition() as any);
   };
   const onActionHandler = (rowData: any, actionId: any) => {
-    id = rowData.id;
+    let id = rowData.id;
 
     if (actionId == "editTenant") {
       dispatch(editTenant(id) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
-      dispatch(tenantFeaturesGet(String(tableDataRowIndex)) as any);
+      dispatch(tenantFeaturesGet(id) as any);
     }
   };
   
@@ -157,6 +158,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     },[data.feature])
 
     useEffect(() => {
+      if(data.edition)
       if (data.edition.items.length) {
         let editionData1:any[] = [];
         data.edition.items.map((item: any) => {
@@ -172,7 +174,6 @@ const Tenant = (props: RdsPageTenantProps) => {
 
     useEffect(()=>{
       if(data.editTenant){
-        debugger
         setTenantInformationData(data.editTenant);
       }
     },[data.editTenant])
@@ -195,25 +196,6 @@ const Tenant = (props: RdsPageTenantProps) => {
   return (
     <div className="tenant">
       <div className="d-flex justify-content-end">
-        <RdsOffcanvas
-          canvasTitle={"Manage Host Admin Features"}
-          placement="end"
-          offcanvaswidth={650}
-          offcanvasbutton={
-            <div className="d-flex justify-content-end ms-2 ">
-              <a className="link-primary fw-bold me-2 px-4 mt-1" href="#">
-                Manage Host admin Features
-              </a>
-            </div>
-          }
-          backDrop={false}
-          scrolling={false}
-          preventEscapeKey={false}
-          offId={"tenant12"}
-        >
-          {/* <RdsCompNewFeatures></RdsCompNewFeatures> */}
-        </RdsOffcanvas>
-
         <RdsOffcanvas
           canvasTitle={"New Tenant"}
           placement="end"
@@ -250,7 +232,7 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabId == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation editionList={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} />
+            <RdsCompTenantInformation editions={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} />
           )}
         </RdsOffcanvas>
       </div>
@@ -285,10 +267,11 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation editionList={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
+            <RdsCompTenantInformation editions={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
           )}
           {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
-            <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
+            <></>
+            // <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
           )}
         </RdsOffcanvas>
       </div>
