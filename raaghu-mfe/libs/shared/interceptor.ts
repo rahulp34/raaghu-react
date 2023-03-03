@@ -2,12 +2,8 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  // baseURL: 'https://localhost:44381/',
-
-  baseURL: 'https://abpdemoapi.raaghu.io',
-  // baseURL: 'https://localhost:44384',
-  // baseURL: process.env.REACT_APP_API_URL,
-
+  baseURL: 'https://localhost:44317/',
+// baseURL: 'https://abpdemoapi.raaghu.io/',
 });
 
 instance.interceptors.request.use((config) => {

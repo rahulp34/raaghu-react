@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
 		entry: "./src/index.ts",
 		mode: process.env.NODE_ENV || "development",
 		devServer: {
-			port: 8021,
+			port: 8027,
 			open: false,
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -82,27 +82,21 @@ module.exports = (env, argv) => {
 				"process.env": JSON.stringify(process.env),
 			}),
 			new ModuleFederationPlugin({
-				name: "securityLogs",
+				name: "fileManagement",
 				filename: "remoteEntry.js",
 				exposes: {
 					// expose each page
-					"./SecurityLogs": "./src/App",
+					"./FileManagement": "./src/App",
 				},
 				shared: {
 					...devdeps,
 					...deps,
-
 					react: { singleton: true, eager: true, requiredVersion: deps.react },
 					"react-dom": {
 						singleton: true,
 						eager: true,
 						requiredVersion: deps["react-dom"],
 					},
-					'luxon': {
-						singleton: true,
-						version: '3.1.0',
-						requiredVersion: deps['luxon']
-					}
 				},
 			}),
 			new HtmlWebpackPlugin({
@@ -112,12 +106,3 @@ module.exports = (env, argv) => {
 		],
 	};
 };
-
-
-
-
-
-
-
-
-         

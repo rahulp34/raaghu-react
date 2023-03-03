@@ -21,6 +21,7 @@ import {
   deleteClaimTypesData,
   addClaimTypesData,
   editClaimTypesData,
+  getClaimTypesData,
 } from "../../../../libs/state-management/claim-types/claim-types-slice";
 import { use } from "i18next";
 
@@ -35,14 +36,28 @@ const ClaimType = () => {
   const [alertOne, setAlertOne] = useState(false);
 
   const { t } = useTranslation();
-  const offCanvasHandler = () => {};
+  const offCanvasHandler = () => { };
   const [Data, setData] = useState<any>([]);
   const claimTypesUser = useAppSelector(
     (state) => state.persistedReducer.claimTypes.users
   );
+  const claimTypesEdit = useAppSelector(
+    (state) => state.persistedReducer.claimTypes.editClaimsData
+  );
   const claimTypeData = useAppSelector(
     (state) => state.persistedReducer.claimTypes
   );
+
+  const [editClaimData, setEditClaimData] = useState<any>({});
+
+  useEffect(() => {
+    debugger
+    if (claimTypesEdit) {
+      const tempData = { ...claimTypesEdit }
+      setEditClaimData(tempData)
+    }
+  }, [claimTypesEdit]);
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchClaimTypesData() as any);
@@ -50,13 +65,38 @@ const ClaimType = () => {
 
   useEffect(() => {
     if (claimTypesUser) {
+      debugger
       const tempData = claimTypesUser.map((item: any) => {
+        debugger
         return {
           id: item.id,
           name: item.name,
           valueType: item.valueTypeAsString,
           description: item.description,
           regex: item.regex,
+          static :(
+            <>
+              {item.isStatic == true ? (
+                <div style={{ strokeWidth: "3px" }}>
+                  <RdsIcon
+                    name="check"
+                    height="17px"
+                    width="15px"
+                    colorVariant="success"
+                  />
+                </div>
+              ) : (
+                <div style={{ strokeWidth: "3px" }}>
+                  <RdsIcon
+                    name="cancel"
+                    height="17px"
+                    width="15px"
+                    colorVariant="danger"
+                  />
+                </div>
+              )}
+            </>
+          ),
           required: (
             <>
               {item.required == true ? (
@@ -84,6 +124,7 @@ const ClaimType = () => {
       });
       console.log(" tempData ", tempData);
       setData(tempData);
+
     }
   }, [claimTypesUser]);
 
@@ -102,20 +143,25 @@ const ClaimType = () => {
     }, 2000);
   }, [claimTypesUser]);
 
-  const [name, setName] = useState("");
-  const [regex, setRegex] = useState("");
-  const [value, setValue] = useState("");
-  const [regexDesc, setregexDesc] = useState("");
-  const [desc, setDesc] = useState("");
+  const [claimsData, setClaimsData] = useState<any>({
+    name: '',
+    required: false,
+    isStatic: false,
+    regex: '',
+    regexDescription: '',
+    description: '',
+    valueType: '',
+    valueTypeAsString: '',
+  });
+  const [claimTypesId, setClaimTypesId] = useState("");
 
   const onActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
     if (actionId === "editClaim") {
-      setName(rowData.name);
-      setRegex(rowData.regex);
-      setValue(rowData.value);
-      setregexDesc(rowData.regexDesc);
-      setDesc(rowData.description);
+      const tempApplicationId = String(rowData.id);
+      setClaimTypesId(tempApplicationId);
+      debugger
+      dispatch(getClaimTypesData(tempApplicationId) as any);
     }
   };
 
@@ -150,7 +196,12 @@ const ClaimType = () => {
     {
       displayName: t("Required"),
       key: "required",
-      datatype: "children",
+      datatype: "text",
+    },
+    {
+      displayName: t("Static"),
+      key: "static",
+      datatype: "text",
     },
   ];
 
@@ -160,31 +211,41 @@ const ClaimType = () => {
   ];
 
   const submitHandler = (data: any) => {
-    const newDto = {
-      name: data.name,
-      required: true,
-      regex: data.regex,
-      regexDescription: data.regexDesc,
-      description: data.desc,
-    };
-    dispatch(addClaimTypesData(newDto) as any).then((res: any) => {
+    debugger
+    dispatch(addClaimTypesData(data) as any).then((res: any) => {
       dispatch(fetchClaimTypesData() as any);
     });
+    setClaimsData({
+      name: '',
+      required: false,
+      isStatic: false,
+      regex: '',
+      regexDescription: '',
+      description: '',
+      valueType: '',
+      valueTypeAsString: '',
+    })
     setAlertOne(true);
   };
+  const valueType = [
+    { option: 'String', value: 0 },
+    { option: 'Int', value: 1 },
+    { option: 'Boolean', value: 2 },
+    { option: 'DateTime', value: 3 },
+  ]
 
-  const onEditHandler = () => {
+  const onEditHandler = (editClaimData: any) => {
+    debugger
     const dTo = {
-      name: name,
-      required: true,
-      regex: regex,
-      regexDescription: regexDesc,
-      description: desc,
+      id: claimTypesId,
+      claimTypeDto: editClaimData,
     };
     dispatch(
-      editClaimTypesData({ id: tableDataRowid, claimTypeDto: dTo }) as any
+      editClaimTypesData(dTo) as any
     ).then((res: any) => {
-      dispatch(fetchClaimTypesData() as any);
+      dispatch(fetchClaimTypesData() as any).then((res: any) => {
+        dispatch(fetchClaimTypesData() as any);
+      });
     });
     setAlertOne(true);
   };
@@ -230,11 +291,8 @@ const ClaimType = () => {
               offId={"tenant"}
             >
               <RdsCompNewClaimType
-                name=""
-                regex={""}
-                value={""}
-                regexDesc={""}
-                desc={""}
+                claimsData={claimsData}
+                valueType={valueType}
                 onSubmit={submitHandler}
               ></RdsCompNewClaimType>
             </RdsOffcanvas>
@@ -255,7 +313,7 @@ const ClaimType = () => {
             onSuccess={DeleteHandler}
           />
           <RdsOffcanvas
-            canvasTitle="NEW EDITION"
+            canvasTitle="EDIT EDITION"
             onclick={offCanvasHandler}
             placement="end"
             offId="dynamic-edit-off"
@@ -264,89 +322,11 @@ const ClaimType = () => {
             scrolling={false}
             preventEscapeKey={false}
           >
-            <>
-              <div className="row">
-                <RdsInput
-                  label="Name"
-                  value={name}
-                  placeholder="Enter  name"
-                  required={true}
-                  name="name"
-                  onChange={(e: any) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  {" "}
-                  <RdsInput
-                    label="Regex"
-                    value={regex}
-                    name="regex"
-                    required={true}
-                    onChange={(e: any) => {
-                      setRegex(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="col-6">
-                  {" "}
-                  <RdsInput
-                    label="Value Type"
-                    required={true}
-                    value={value}
-                    name="value"
-                    placeholder="Enter a value"
-                    onChange={(e) => {
-                      setValue(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <RdsInput
-                  label="Regex Description"
-                  value={regexDesc}
-                  name="regexDesc"
-                  required={true}
-                  onChange={(e: any) => {
-                    setregexDesc(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="row">
-                <RdsInput
-                  label="Description"
-                  value={desc}
-                  required={true}
-                  name="desc"
-                  onChange={(e: any) => {
-                    setDesc(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="d-flex footer-buttons">
-                <RdsButton
-                  label="CANCEL"
-                  databsdismiss="offcanvas"
-                  type={"button"}
-                  size="small"
-                  isOutline={true}
-                  colorVariant="primary"
-                  class="me-2"
-                ></RdsButton>
-                <RdsButton
-                  label="SAVE"
-                  type={"button"}
-                  size="small"
-                  databsdismiss="offcanvas"
-                  colorVariant="primary"
-                  class="me-2"
-                  onClick={onEditHandler}
-                ></RdsButton>
-              </div>
-            </>
+            <RdsCompNewClaimType
+              claimsData={editClaimData}
+              valueType={valueType}
+              onSubmit={onEditHandler}
+            ></RdsCompNewClaimType>
           </RdsOffcanvas>
         </div>
       </div>

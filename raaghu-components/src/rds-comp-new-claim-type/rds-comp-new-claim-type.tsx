@@ -1,24 +1,24 @@
-import React, { FormEventHandler, useState } from "react";
+import { RdsCheckbox, RdsLabel, RdsSelectList } from "../rds-elements";
+import React, { FormEventHandler, useState, useEffect } from "react";
 import { RdsInput, RdsTextArea, RdsButton } from "../rds-elements";
 
 export interface RdsCompNewClaimTypeProps {
-  name: string;
-  regex: string;
-  value: string;
-  regexDesc: string;
-  desc: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  name?: string;
+  regex?: string;
+  value?: string;
+  regexDesc?: string;
+  desc?: string;
   onSubmit: any;
+  claimsData?: any;
+  valueType?: any;
 }
 
 const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
-  const [data, setData] = useState({
-    name: props.name,
-    regex: props.regex,
-    value: props.value,
-    regexDesc: props.regexDesc,
-    desc: props.desc,
-  });
+  const [data, setData] = useState(props.claimsData);
+  useEffect(() => {
+    setData(props.claimsData);
+  }, [props.claimsData]);
+
   const allFieldsAreEmpty = Object.values(data).every((value) => value === "");
 
   const onNameChangeHandler = (e: any) => {
@@ -28,15 +28,19 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
     setData({ ...data, regex: e.target.value });
   };
   const onValueChangeHandler = (e: any) => {
-    setData({ ...data, value: e.target.value });
+    debugger
+    setData({ ...data, valueType: e});
+
   };
   const onRegexDescChangeHandler = (e: any) => {
-    setData({ ...data, regexDesc: e.target.value });
+    setData({ ...data, regexDescription: e.target.value });
   };
   const onDescChangeHAndler = (e: any) => {
-    setData({ ...data, desc: e.target.value });
+    setData({ ...data, description: e.target.value });
   };
-
+  const setDevice = (e: any) => {
+    setData({ ...data, required: e });
+  };
   return (
     <>
       <>
@@ -56,40 +60,48 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             <RdsInput
               label="Regex"
               value={data.regex}
+              placeholder="enter regex"
               name="regex"
               required={true}
               onChange={onRegexChangeHandler}
             />
           </div>
           <div className="col-6">
-            {" "}
-            <RdsInput
-              label="Value Type"
-              required={true}
-              value={data.value}
-              name="value"
-              placeholder="Enter a value"
-              onChange={onValueChangeHandler}
-            />
+          <RdsLabel label="Value Type" class="pb-2" />
+            <RdsSelectList
+              label={"Value Type"}
+              selectItems={props.valueType}
+              selectedValue={data.valueType}
+              selectedOption={data.valueTypeAsString}
+              onSelectListChange={onValueChangeHandler}
+            ></RdsSelectList>
           </div>
         </div>
         <div className="row">
           <RdsInput
             label="Regex Description"
-            value={data.regexDesc}
+            value={data.regexDescription}
+            placeholder="enter regex description"
             name="regexDesc"
             required={true}
             onChange={onRegexDescChangeHandler}
           />
         </div>
         <div className="row">
-          <RdsInput
+          <RdsTextArea
             label="Description"
-            value={data.desc}
-            required={true}
-            name="desc"
+            placeholder="enter description"
             onChange={onDescChangeHAndler}
+            value={data.description}
+            rows={3}
           />
+        </div>
+        <div className="row pt-2">
+          <RdsCheckbox
+            label="Required"
+            onChange={e => { setDevice(e.target.checked) }}
+            checked={data.required}
+          ></RdsCheckbox>
         </div>
         <div className="d-flex footer-buttons">
           <RdsButton

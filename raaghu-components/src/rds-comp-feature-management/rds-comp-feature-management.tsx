@@ -7,7 +7,7 @@ import {
   RdsLabel,
   RdsNavtabs,
   RdsSelectList,
-} from "../../../raaghu-elements/src";
+} from "raaghu-react-elements";
 
 export interface RdsCompFeatureManagementProps{
  featureIdentitySettingsData1?:any;
@@ -125,8 +125,9 @@ function saveFeaturesData(){
   
   return (
     <div className="d-flex">
+   
       <div className="mt-4 ">
-        <div className="col-11"> 
+        <div className="col-12"> 
         <RdsNavtabs
           navtabsItems={navtabsItems}
           type="vertical"
@@ -139,7 +140,7 @@ function saveFeaturesData(){
         </div>
       </div>
 
-      <div className="flex-grow-1">
+      <div className="flex-grow-1 mx-3">
         {activeNavTabId == 0 && (
           <>
             <form >
@@ -149,7 +150,7 @@ function saveFeaturesData(){
                   size="14px"
                 ></RdsLabel>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <RdsSelectList
                   label="Select"
                   selectItems={props.twoFactorList}
@@ -157,22 +158,17 @@ function saveFeaturesData(){
                   onSelectListChange={(e:any) => {
                     twoFactChange(e)
                   }}
-                  size="small"
+                  size="medium"
                 ></RdsSelectList>
               </div>
               <h6 className="text-muted mt-1">
                 Set two factor behaviour.Optional values:Optional,Disabled,Forced
               </h6>
-              <div className="col-md-6 text-muted mt-4 ">
+              <div className="col-md-4 text-muted mt-4 ">
               <div className="form-group ">
-              <RdsLabel
-                size="14px"
-                label="Maximum User Count "
-                class="form-label ms-1"
-                children={<span style={{ color: "red" }}>*</span>}
-              ></RdsLabel>
               <RdsInput
-                size="small"
+                size="medium"
+                label="Maximum User Count "
                 inputType="text"
                 isDisabled={false}
                 readonly={false}
@@ -183,7 +179,9 @@ function saveFeaturesData(){
               ></RdsInput>
               </div>
             </div>
-        
+            {/* <h6 className="text-muted">
+            0 = unlimited
+              </h6> */}
               <div className="col-md-12 mt-3">
                 <RdsCheckbox
                   label="LDAP Login"

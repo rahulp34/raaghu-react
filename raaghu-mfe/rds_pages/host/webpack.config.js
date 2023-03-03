@@ -126,7 +126,8 @@ module.exports = (env, argv) => {
           TextTemplate: mfeConfigJSON["textTemplate"].url,
           Applications: mfeConfigJSON["applications"].url,
           ApiScope: mfeConfigJSON["apiScope"].url,
-          SecurityLogs: mfeConfigJSON["securityLogs"].url
+          SecurityLogs: mfeConfigJSON["securityLogs"].url,
+          FileManagement: mfeConfigJSON["fileManagement"].url
         },
         shared: {
           ...devdeps,

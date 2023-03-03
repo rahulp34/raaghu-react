@@ -81,19 +81,13 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           <RdsLabel label="Password Settings"></RdsLabel>
         </div>
         <div className="row mt-3">
-          <div className="col-md-6 sm-p-0">
+          <div className="col-md-4">
             <div className="form-group">
-			<RdsLabel
-                size="14px"
-                label="Required Length (Min)"
-                class="form-label"
-                required={true}
-              ></RdsLabel>
               <RdsInput
-                size="small"
+                size="medium"
                 inputType="text"
                 isDisabled={false}
-               
+                label="Required Length (Min)"
                 readonly={false}
                 placeholder="Enter Length"
                 required={true}
@@ -104,20 +98,14 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-6 sm-p-0 ">
+          <div className="col-md-4 sm-p-0 ">
             <div className="form-group">
-              <RdsLabel
-                size="14px"
-                label="Required Special Characters (Min)"
-                class="form-label"
-                required={true}
-              ></RdsLabel>
               <RdsInput
-                size="small"
+                size="medium"
                 inputType="text"
                 isDisabled={false}
                 readonly={false}
-				
+                label="Required Special Characters (Min)"
                 placeholder="Enter Number"
                 required={true}
                 value={passwordSettings.requiredUniqueChars}
@@ -186,19 +174,14 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col-md-6 sm-p-0">
+          <div className="col-md-4 sm-p-0">
             <div className="form-group ">
-              <RdsLabel
-                size="14px"
-                label="Lockout Duration (Seconds) "
-                class="form-label ms-1"
-                children={<span style={{ color: "red" }}>*</span>}
-              ></RdsLabel>
               <RdsInput
-                size="small"
+                 size="medium"
                 inputType="number"
                 isDisabled={false}
                 readonly={false}
+                label="Lockout Duration (Seconds) "
                 placeholder="Enter Length"
                 required={true}
                 value={lockoutSettings.lockoutDuration}
@@ -206,18 +189,13 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-6 sm-p-0">
+          <div className="col-md-4 sm-p-0">
             <div className="form-group">
-              <RdsLabel
-                size="14px"
-                label="Max Failed Access Attempts "
-                class="form-label ms-1"
-                required={true}
-              ></RdsLabel>
               <RdsInput
-                size="small"
+                 size="medium"
                 inputType="text"
                 isDisabled={false}
+                label="Max Failed Access Attempts "
                 readonly={false}
                 placeholder="Enter Name"
                 required={true}

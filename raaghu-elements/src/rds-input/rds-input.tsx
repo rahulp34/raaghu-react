@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./rds-input.scss";
 import Tooltip from "../rds-tooltip/rds-tooltip";
 import { placements } from "../../libs/types";
@@ -29,8 +29,16 @@ export interface RdsInputProps {
   formName?: string;
 }
 
-const RdsInput = React.forwardRef(
-  (props: RdsInputProps, ref: React.Ref<unknown> | undefined) => {
+const RdsInput = (props: RdsInputProps) => {
+
+    const [value,setvalue]=useState(props.value)
+
+    useEffect(() => {
+
+      setvalue(props.value ?? "")
+    
+    }, [props.value])
+
     let size: "sm" | "lg" | undefined = undefined;
 
     if (props.size == "small") {
@@ -96,8 +104,7 @@ const RdsInput = React.forwardRef(
 						onFocus={props.onFocus}
 						onBlur={handleBlur}
 						onKeyDown={props.onKeyDown}
-						defaultValue={props.value ?? ""}
-						value={props.value ?? ""}
+						value={value ?? ""}
 						onChange={props.onChange}
 						disabled={props.isDisabled}
 						readOnly={props.readonly}
@@ -117,8 +124,7 @@ const RdsInput = React.forwardRef(
 							onFocus={props.onFocus}
 							onBlur={handleBlur}
 							onKeyDown={props.onKeyDown}
-							defaultValue={props.value ?? ""}
-							value={props.value ?? ""}
+							value={value}
 							onChange={props.onChange}
 							disabled={props.isDisabled}
 							readOnly={props.readonly}
@@ -145,6 +151,5 @@ const RdsInput = React.forwardRef(
       </div>
     );
   }
-);
 
 export default RdsInput;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, Fragment } from "react";
+import React, { useState, useRef, Fragment, useEffect } from "react";
 
 import "./rds-checkbox.scss";
 
@@ -18,6 +18,16 @@ export interface RdsCheckboxProps {
 }
 
 const RdsCheckbox = (props: RdsCheckboxProps) => {
+
+  const[check,setcheck]=useState(props.checked)
+
+  useEffect(() => {
+  console.log("runns")
+    setcheck(props.checked)
+
+  }, [props.checked])
+
+
   const SWITCH = `${
     props.isSwitch !== true ? " form-check " : " form-switch "
   }`;
@@ -37,7 +47,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             }
             value=" "
             disabled={props.isDisabled}
-            defaultChecked={props.checked}
+            checked={check}
             id={props.id}
             name={props.name}
             onChange={props.onChange}

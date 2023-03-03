@@ -109,3 +109,8 @@ declare module "SecurityLogs/SecurityLogs" {
 	export default SecurityLogs;
 
 }
+
+declare module "FileManagement/FileManagement" {
+	const FileManagementComponent : React.ComponentType;
+	export default FileManagementComponent;
+}
