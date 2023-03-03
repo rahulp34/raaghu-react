@@ -68,5 +68,8 @@ export const MfeConfig = {
   },
 	"securityLogs": {
 		"url": "securityLogs@http://localhost:8021/remoteEntry.js"
+	},
+	"fileManagement": {
+		"url": "fileManagement@http://localhost:8027/remoteEntry.js"
 	}
 }

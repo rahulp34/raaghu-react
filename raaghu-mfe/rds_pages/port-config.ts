@@ -62,13 +62,13 @@ export const PortConfig = {
   "textTemplate":{
 		"port":"8020"
 	},
-	"textTemplate": {
-		"port": "8020"
-	},
 	"applications": {
 		"port": "8025"
 	},
 	"securityLogs": {
 		"port": "8021"
+	},
+	"fileManagement": {
+		"port": "8027"
 	}
 }
