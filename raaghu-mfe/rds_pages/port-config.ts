@@ -54,7 +54,7 @@ export const PortConfig = {
 		"port": "8017"
 	},
 	"claimtypes":{
-		"port":"8018"
+		"port":"8035"
   },
   "apiScope":{
 		"port":"8019"

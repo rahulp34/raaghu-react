@@ -8,6 +8,9 @@ type InitialStateApplication = {
   scopes:any;
   permission:any;
   error: string;
+  alert: boolean;
+  alertMessage: string;
+  success: boolean;
 }; 
 
 export const InitialStateApplication:InitialStateApplication= {
@@ -16,7 +19,10 @@ export const InitialStateApplication:InitialStateApplication= {
   editApplication:null,
   error: "",
   scopes: null,
-  permission:null
+  permission:null,
+  alert: false,
+  alertMessage: "",
+  success: false,
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -99,6 +105,10 @@ const applicationsSlice = createSlice({
     builder.addCase(
       deleteApplications.fulfilled,(state, action: PayloadAction<any>) => {
         state.loading = false;
+        state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data deleted Successfully";
+        state.success = true;
       }  
     );
 
@@ -110,26 +120,40 @@ const applicationsSlice = createSlice({
     builder.addCase(
       saveApplications.fulfilled,(state,action:PayloadAction<any>)=>{
         state.loading=false;
+        state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data added Successfully";
+        state.success = true;
       }
     );
     builder.addCase(saveApplications.rejected,(state,action)=>{
       state.loading=false;
-      state.error=action.error.message||"Somethingwentwrong";
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
     });
 
     //update
     builder.addCase(updateApplications.pending,(state)=>{
       state.loading=true;
+      state.error = "";    
     });
 
     builder.addCase(
       updateApplications.fulfilled,(state,action:PayloadAction<any>)=>{
         state.loading=false;
+        state.alert = true;
+        state.alertMessage = "Data edited successfully";
+        state.success = true;
       }
     );
     builder.addCase(updateApplications.rejected,(state,action)=>{
       state.loading=false;
-      state.error=action.error.message||"Somethingwentwrong";
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
     });
 
     //getUpdate
@@ -190,6 +214,9 @@ const applicationsSlice = createSlice({
     builder.addCase(
       updatePermission.fulfilled,(state,action:PayloadAction<any>)=>{
         state.loading=false;
+        state.alert = true;
+        state.alertMessage = "Data edited successfully";
+        state.success = true;
       }
     );
     builder.addCase(updatePermission.rejected,(state,action)=>{
