@@ -53,7 +53,7 @@ export const fetchOrganizationUnits = createAsyncThunk(
 export const fetchRoles = createAsyncThunk(
   "user/fetchRoles",
   () => {
-    return proxy.rolesGET3(undefined,undefined,0,1000).then((result:any)=>{
+    return proxy.rolesGET3(undefined,undefined,0,1000,undefined).then((result:any)=>{
       return result;
     })
   }
@@ -150,6 +150,7 @@ const userSlice = createSlice({
     builder.addCase(
       fetchRoles.fulfilled,
       (state, action: PayloadAction<any>) => {
+        debugger
         state.loading = false;
         state.roles = action.payload;
         state.error = "";
