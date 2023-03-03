@@ -43,6 +43,7 @@ const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
+const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 
 export interface MainProps {
@@ -315,6 +316,13 @@ console.log('localization ', Data.localization)
       ],
     },
     {
+      key: "4",
+      label: t("Chats"),
+      icon: "home",
+      path: "/chats",
+      subTitle: "Chats Module",
+  },
+  {
       key: "5",
       label: t("File Management"),
       icon: "icons",
@@ -495,6 +503,8 @@ console.log('localization ', Data.localization)
                     ></Route>
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/chats" element={<ChatsCompo />} />
+                    
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>

@@ -68,6 +68,9 @@ export const PortConfig = {
 	"securityLogs": {
 		"port": "8021"
 	},
+	"chats":{
+		"port": "8026"
+  }
 	"fileManagement": {
 		"port": "8027"
 	}

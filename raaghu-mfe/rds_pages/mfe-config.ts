@@ -62,13 +62,15 @@ export const MfeConfig = {
 	"applications":{
 		"url":"applications@http://localhost:8025/remoteEntry.js"
 	},
-
 	"apiScope":{
 		"url":"apiScope@http://localhost:8019/remoteEntry.js"
   },
 	"securityLogs": {
 		"url": "securityLogs@http://localhost:8021/remoteEntry.js"
 	},
+	"chats": {
+		"url": "chats@http://localhost:8026/remoteEntry.js"
+   },
 	"fileManagement": {
 		"url": "fileManagement@http://localhost:8027/remoteEntry.js"
 	}
