@@ -114,3 +114,8 @@ declare module "Chats/Chats" {
 	const ChatsComponent : React.ComponentType;
 	export default ChatsComponent;
 }
+
+declare module "FileManagement/FileManagement" {
+	const FileManagementComponent : React.ComponentType;
+	export default FileManagementComponent;
+}

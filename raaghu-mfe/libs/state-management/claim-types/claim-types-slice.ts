@@ -8,6 +8,7 @@ type InitialState = {
   alert: boolean;
   alertMessage: string;
   success: boolean;
+  editClaimsData:any[];
 };
 
 const initialState: InitialState = {
@@ -17,13 +18,14 @@ const initialState: InitialState = {
   alert: false,
   alertMessage: "",
   success: false,
+  editClaimsData:[]
 };
 
 const proxy = new ServiceProxy();
 
 export const fetchClaimTypesData = createAsyncThunk(
   "claimTypes/fetchClaimTypesData",
-  () => {
+  () => { 
     return proxy
       .claimTypesGET(undefined, undefined, undefined, undefined)
       .then((result: any) => {
@@ -47,6 +49,15 @@ export const addClaimTypesData = createAsyncThunk(
   (claimTypeDto: any) => {
     return proxy.claimTypesPOST(claimTypeDto).then((result:any)=>{
       return result.items;
+    })
+  }
+);
+
+export const getClaimTypesData = createAsyncThunk(
+  "claimTypes/getClaimTypesData",
+  (id:string) => {
+    return proxy.claimTypesGET2(id,undefined).then((result:any)=>{
+      return result;
     })
   }
 );
@@ -151,6 +162,22 @@ const claimTypesSlice = createSlice({
       state.alert = true;
       state.alertMessage = "Something Went Wrong";
       state.success = false;
+    });
+
+    builder.addCase(getClaimTypesData.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getClaimTypesData.fulfilled,(state,action:PayloadAction<any>)=>{
+        debugger
+        state.loading=false;
+        state.editClaimsData=action.payload;
+      }
+    );
+    builder.addCase(getClaimTypesData.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
     });
   },
 });

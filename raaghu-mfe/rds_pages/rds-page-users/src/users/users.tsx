@@ -1,636 +1,116 @@
 import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
+import { filter as _filter, forEach as _forEach } from "lodash-es";
 
-import { RdsCompAlertPopup, RdsCompDatatable, RdsCompPermissionTree, RdsCompUserBasics } from "../../../rds-components";
-import { RdsBadge, RdsButton, RdsInput, RdsNavtabs, RdsOffcanvas } from "../../../rds-elements";
+import {
+  RdsCompAlertPopup,
+  RdsCompDatatable,
+  RdsCompPermissionTree,
+  RdsCompUserBasics,
+  RdsCompUserRoles,
+} from "../../../rds-components";
+import {
+  RdsBadge,
+  RdsButton,
+  RdsInput,
+  RdsNavtabs,
+  RdsOffcanvas,
+} from "../../../rds-elements";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 
-import { createUser, deleteUser, fetchEditUser, fetchOrganizationUnits, fetchRoles, fetchUsers, getPermission, updatePermission } from "../../../../libs/state-management/user/user-slice";
+import {
+  createUser,
+  deleteUser,
+  fetchEditUser,
+  fetchOrganizationUnits,
+  fetchRoles,
+  fetchUsers,
+  getPermission,
+  updatePermission,
+} from "../../../../libs/state-management/user/user-slice";
 
 const Users = () => {
+  const tempRolesData = [
+    { isChecked: false, name: "select all" },
+    { isChecked: false, name: "Admin" },
+    { isChecked: false, name: "User" },
+    { isChecked: false, name: "Tenant" },
+  ];
+
+  function createTree(
+    array: any[],
+    parentIdProperty: any,
+    idProperty: any,
+    parentIdValue: any,
+    childrenProperty: string,
+    fieldMappings: any,
+    level: any
+  ): any {
+    let tree: any[] = [];
+    debugger;
+    let nodes = _filter(array, [parentIdProperty, parentIdValue]);
+
+    _forEach(nodes, (node) => {
+      let newNode: any = {
+        data: node,
+        level: level,
+        selected: false,
+      };
+
+      mapFields(node, newNode, fieldMappings);
+
+      newNode[childrenProperty] = createTree(
+        array,
+        parentIdProperty,
+        idProperty,
+        node[idProperty],
+        childrenProperty,
+        fieldMappings,
+        level + 1
+      );
+
+      tree.push(newNode);
+    });
+
+    return tree;
+  }
+
+  function mapFields(node: any, newNode: any, fieldMappings: any): void {
+    _forEach(fieldMappings, (fieldMapping: any) => {
+      if (!fieldMapping["target"]) {
+        return;
+      }
+
+      if (fieldMapping.hasOwnProperty("value")) {
+        newNode[fieldMapping["target"]] = fieldMapping["value"];
+      } else if (fieldMapping["source"]) {
+        newNode[fieldMapping["target"]] = node[fieldMapping["source"]];
+      } else if (fieldMapping["targetFunction"]) {
+        newNode[fieldMapping["target"]] = fieldMapping["targetFunction"](node);
+      }
+    });
+  }
+
   const dispatch = useAppDispatch();
 
   const data = useAppSelector((state) => state.persistedReducer.user);
-  const [userId, setUserId] = useState("")
+  // const userRoles = useAppSelector((state) => state.persistedReducer.user)
+  const [userId, setUserId] = useState("");
   const [userData, setUserData] = useState<any>({
     name: "",
     surname: "",
     email: "",
     phoneNumber: "",
-    twoFactorEnabled: false,
+    lockoutEnabled: true,
+    isActive: true,
     userName: "",
-    password:""
-  })
-  const permissionData = [
-    {
-      name: "FeatureManagement",
-      displayName: "Feature management",
-      permissions: [
-        {
-          name: "FeatureManagement.ManageHostFeatures",
-          displayName: "Manage Host features",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "AbpIdentity",
-      displayName: "Identity management",
-      permissions: [
-        {
-          name: "AbpIdentity.Roles",
-          displayName: "Role management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Roles.Create",
-          displayName: "Create",
-          parentName: "AbpIdentity.Roles",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Roles.Update",
-          displayName: "Edit",
-          parentName: "AbpIdentity.Roles",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Roles.Delete",
-          displayName: "Delete",
-          parentName: "AbpIdentity.Roles",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Roles.ManagePermissions",
-          displayName: "Change permissions",
-          parentName: "AbpIdentity.Roles",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users",
-          displayName: "User management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.Create",
-          displayName: "Create",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.Update",
-          displayName: "Edit",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.Delete",
-          displayName: "Delete",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.ManagePermissions",
-          displayName: "Change permissions",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.Impersonation",
-          displayName: "Impersonation",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.Users.Import",
-          displayName: "Permission:Import",
-          parentName: "AbpIdentity.Users",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.OrganizationUnits",
-          displayName: "Organization Unit Management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.OrganizationUnits.ManageOU",
-          displayName: "Managing organization tree",
-          parentName: "AbpIdentity.OrganizationUnits",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.OrganizationUnits.ManageRoles",
-          displayName: "Managing roles",
-          parentName: "AbpIdentity.OrganizationUnits",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.OrganizationUnits.ManageMembers",
-          displayName: "Managing users",
-          parentName: "AbpIdentity.OrganizationUnits",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.ClaimTypes",
-          displayName: "Claim management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.ClaimTypes.Create",
-          displayName: "Create",
-          parentName: "AbpIdentity.ClaimTypes",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.ClaimTypes.Update",
-          displayName: "Edit",
-          parentName: "AbpIdentity.ClaimTypes",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.ClaimTypes.Delete",
-          displayName: "Delete",
-          parentName: "AbpIdentity.ClaimTypes",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.SettingManagement",
-          displayName: "Setting management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AbpIdentity.SecurityLogs",
-          displayName: "Security logs",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "SettingManagement",
-      displayName: "Setting Management",
-      permissions: [
-        {
-          name: "SettingManagement.Emailing",
-          displayName: "Emailing",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "Saas",
-      displayName: "Saas",
-      permissions: [
-        {
-          name: "Saas.Tenants",
-          displayName: "Tenant management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.Create",
-          displayName: "Create",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.Update",
-          displayName: "Edit",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.Delete",
-          displayName: "Delete",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.ManageFeatures",
-          displayName: "Manage features",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.ManageConnectionStrings",
-          displayName: "Manage connection strings",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Tenants.Impersonation",
-          displayName: "Impersonation",
-          parentName: "Saas.Tenants",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Editions",
-          displayName: "Edition management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Editions.Create",
-          displayName: "Create",
-          parentName: "Saas.Editions",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Editions.Update",
-          displayName: "Edit",
-          parentName: "Saas.Editions",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Editions.Delete",
-          displayName: "Delete",
-          parentName: "Saas.Editions",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "Saas.Editions.ManageFeatures",
-          displayName: "Manage features",
-          parentName: "Saas.Editions",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "AuditLogging",
-      displayName: "Audit Logging",
-      permissions: [
-        {
-          name: "AuditLogging.AuditLogs",
-          displayName: "Audit Logs",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "IdentityServer",
-      displayName: "Identity Server",
-      permissions: [
-        {
-          name: "IdentityServer.ApiScope",
-          displayName: "Api Scopes",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiScope.Update",
-          displayName: "Edit",
-          parentName: "IdentityServer.ApiScope",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiScope.Delete",
-          displayName: "Delete",
-          parentName: "IdentityServer.ApiScope",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiScope.Create",
-          displayName: "Create",
-          parentName: "IdentityServer.ApiScope",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "AuditLogging.ViewChangeHistory:Volo.Abp.IdentityServer.ApiScopes.ApiScope",
-          displayName: "View change history",
-          parentName: "IdentityServer.ApiScope",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.IdentityResource",
-          displayName: "Identity Resources",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.IdentityResource.Update",
-          displayName: "Edit",
-          parentName: "IdentityServer.IdentityResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.IdentityResource.Delete",
-          displayName: "Delete",
-          parentName: "IdentityServer.IdentityResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.IdentityResource.Create",
-          displayName: "Create",
-          parentName: "IdentityServer.IdentityResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiResource",
-          displayName: "Api Resources",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiResource.Update",
-          displayName: "Edit",
-          parentName: "IdentityServer.ApiResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiResource.Delete",
-          displayName: "Delete",
-          parentName: "IdentityServer.ApiResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.ApiResource.Create",
-          displayName: "Create",
-          parentName: "IdentityServer.ApiResource",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.Client",
-          displayName: "Clients",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.Client.Update",
-          displayName: "Edit",
-          parentName: "IdentityServer.Client",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.Client.Delete",
-          displayName: "Delete",
-          parentName: "IdentityServer.Client",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.Client.Create",
-          displayName: "Create",
-          parentName: "IdentityServer.Client",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "IdentityServer.Client.ManagePermissions",
-          displayName: "Manage Permissions",
-          parentName: "IdentityServer.Client",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "AbpAccount",
-      displayName: "Account",
-      permissions: [
-        {
-          name: "AbpAccount.SettingManagement",
-          displayName: "Setting management",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "LanguageManagement",
-      displayName: "Language Management",
-      permissions: [
-        {
-          name: "LanguageManagement.LanguageTexts",
-          displayName: "Language Texts",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.LanguageTexts.Edit",
-          displayName: "Edit Language Texts",
-          parentName: "LanguageManagement.LanguageTexts",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.Languages",
-          displayName: "Languages",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.Languages.Create",
-          displayName: "Create Language",
-          parentName: "LanguageManagement.Languages",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.Languages.Edit",
-          displayName: "Edit Language",
-          parentName: "LanguageManagement.Languages",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.Languages.ChangeDefault",
-          displayName: "Change Default Language",
-          parentName: "LanguageManagement.Languages",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "LanguageManagement.Languages.Delete",
-          displayName: "Delete Language",
-          parentName: "LanguageManagement.Languages",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "LeptonThemeManagement",
-      displayName: "Lepton Theme management",
-      permissions: [
-        {
-          name: "LeptonThemeManagement.Settings",
-          displayName: "Lepton Theme settings",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "TextTemplateManagement",
-      displayName: "Text Template Management",
-      permissions: [
-        {
-          name: "TextTemplateManagement.TextTemplates",
-          displayName: "Text Templates",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-        {
-          name: "TextTemplateManagement.TextTemplates.EditContents",
-          displayName: "Edit Contents",
-          parentName: "TextTemplateManagement.TextTemplates",
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-    {
-      name: "BookStore",
-      displayName: "BookStore",
-      permissions: [
-        {
-          name: "BookStore.Dashboard.Host",
-          displayName: "Dashboard",
-          parentName: null,
-          isGranted: false,
-          allowedProviders: [],
-          grantedProviders: [{ providerName: "R", providerKey: "admin" }],
-        },
-      ],
-    },
-  ];
-  const [userPermission, setUserPermission] = useState<any>(permissionData)
+    password: "",
+  });
+  const [userPermission, setUserPermission] = useState<any>([]);
   const [tableData, setTableData] = useState([
-
     {
       id: 1,
       userName: "tet04",
@@ -643,7 +123,6 @@ const Users = () => {
     },
   ]);
 
-  
   const tableHeaders = [
     {
       displayName: "User Name",
@@ -706,7 +185,11 @@ const Users = () => {
   const actions = [
     { id: "user_edit_offcanvas", displayName: "Edit", offId: "user-edit-off" },
     { id: "user_delete", displayName: "Delete", modalId: "user_delete_off" },
-    { id: "set_password", displayName: "Set Password", modalId: "set_password" }
+    {
+      id: "set_password",
+      displayName: "Set Password",
+      modalId: "set_password",
+    },
   ];
 
   const editionList = [
@@ -718,14 +201,18 @@ const Users = () => {
 
   const navtabsItemsEdit = [
     { label: "User Information", tablink: "#nav-home", id: 0 },
-    { label: "Permissions", tablink: "#nav-profile", id: 1 }
+    { label: "Permissions", tablink: "#nav-profile", id: 1 },
   ];
   const navtabsItems = [
-    { label: "User Information", tablink: "#nav-home", id: 0 },
+    { label: "Basics", tablink: "#nav-home", id: 0 },
+    { label: "Roles", tablink: "#nav-role", id: 1 },
   ];
 
   const offCanvasHandler = () => {};
-  const [activeNavTabId, setActiveNavTabId] = useState(0);
+  const [getUser, setGetUserData] =useState<any>({})
+  const [activeNavTabId, setActiveNavTabId] = useState();
+  const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
+
   const [organizationUnit, setOrganizationUnit] = useState([
     { option: "a", value: "aa" },
     { option: "b", value: "bb" },
@@ -748,7 +235,7 @@ const Users = () => {
       iconHeight: "20px",
     },
   ];
-  const canvasTitle = "Create New User";
+  const canvasTitle = "New User";
   function onSelectMenu(event: any) {
     console.log(event);
     // if (event.key === 'new') {
@@ -756,31 +243,42 @@ const Users = () => {
     //   this.newUser(event);
     // }
   }
-  const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
+  const [roleNames, setRoleNames] = useState<any>();
+  const [selectedPermissionListData, setSelectedPermissionListData] =
+    useState<any>([]);
 
-  const [permissionKeyName, setPermissionKeyName] = useState(0)
+  const [permissionKeyName, setPermissionKeyName] = useState(0);
   function handleSelectesPermission() {
+    debugger;
+    const permissions: any = {
+      key: permissionKeyName,
+      permissions: {
+        permissions: selectedPermissionListData,
+      },
+    };
+    dispatch(updatePermission(permissions) as any);
+  }
+
+  function handleRoleNamesData(data:any){
+    let rolesNames:any[] = []
     debugger
-      const permissions : any= {
-        key : permissionKeyName,
-        permissions:{
-        permissions : selectedPermissionListData
-        }
-      }
-      dispatch(updatePermission(permissions) as any);
+    data.forEach((element:any) => {
+      if(element.isChecked)
+      rolesNames.push(element.name);
+    });
+    setRoleNames(rolesNames);
   }
 
   function SelectesPermissions(permissionsData: any) {
-    setSelectedPermissionListData(permissionsData)
+    setSelectedPermissionListData(permissionsData);
   }
 
   const onActionSelection = (rowData: any, actionId: any) => {
-    setPermissionKeyName(rowData.id)
+    setPermissionKeyName(rowData.id);
     setUserId(rowData.id);
-    dispatch(fetchEditUser(String(rowData.id)) as any)
+    dispatch(fetchEditUser(String(rowData.id)) as any);
     var tableId = String(rowData.id);
     dispatch(getPermission(tableId) as any);
-
   };
 
   function getSelectedPermissions(data: any) {
@@ -839,16 +337,18 @@ const Users = () => {
     XLSX.writeFile(wb, "data.xlsx");
   };
 
-  function newUser(e: any) {
-    console.log(e);
+
+  function getUserData(data:any){
+    setGetUserData(data);
   }
 
-  function createNewUser(data:any){
-    debugger
-    dispatch(createUser(data) as any).then((res:any)=>{
+  function createNewUser(data: any) {
+debugger
+const tempData ={...getUser , roleNames: roleNames}
+    dispatch(createUser(tempData) as any).then((res: any) => {
+
       dispatch(fetchUsers() as any);
-    })
-    setActiveNavTabId(0)
+    });
     setUserData({
       name: "",
       surname: "",
@@ -856,29 +356,48 @@ const Users = () => {
       phoneNumber: "",
       twoFactorEnabled: false,
       userName: "",
-      password:""
-    })
+      password: "",
+    });
   }
   useEffect(() => {
     dispatch(fetchUsers() as any);
-    dispatch(fetchOrganizationUnits() as any)
-    dispatch(fetchRoles() as any)
+    dispatch(fetchOrganizationUnits() as any);
+    dispatch(fetchRoles() as any);
     //dispatch(fetchEditUser("d58fa786-41a6-b110-d3e4-3a0922833270") as any)
-
   }, [dispatch]);
 
-  function deleteHandler(data:any){
-    console.log(data);
-    dispatch(deleteUser(userId) as any).then((result:any)=>{
-      dispatch(fetchUsers() as any)
+  useEffect(() => {
+    debugger;
+    let tempRoleData:any[] = []
+    if(data.roles)
+    data.roles.items.map((el:any)=>{
+        const data = {
+          name:el.name,
+          isChecked:false
+        }
+        tempRoleData.push(data);
     })
+    setUseRolesData(tempRoleData);
+  }, [data.roles]);
+
+  const [userRolesData, setUseRolesData] = useState<any>();
+  function deleteHandler(data: any) {
+    console.log(data);
+    dispatch(deleteUser(userId) as any).then((result: any) => {
+      dispatch(fetchUsers() as any);
+    });
   }
 
-  function handlerSelectedPermission(data:any){
+  function handlerSelectedPermission(data: any) {
     console.log(data);
   }
 
-
+  useEffect(() => {
+    if (data.permission) {
+      debugger;
+      setUserPermission(data.permission.groups);
+    }
+  }, [data.permission]);
 
   useEffect(() => {
     if (data.users) {
@@ -899,46 +418,77 @@ const Users = () => {
       setTableData(tempTableData);
     }
   }, [data.users]);
+  function abc(...prop: any[]) {
+    console.log(prop);
+    return prop;
+  }
 
+  useEffect(() => {
+    let tempOrgData: any[] = [];
+    if (data.organizationUnit) {
+      debugger;
+      console.log(data.organizationUnit);
+      const treeData1 = createTree(
+        data.organizationUnit.items,
+        "parentId",
+        "id",
+        null,
+        "children",
+        [
+          {
+            target: "label",
+            source: "displayName",
+          },
+          {
+            target: "expandedIcon",
+            value: "fa fa-folder-open text-warning",
+          },
+          {
+            target: "collapsedIcon",
+            value: "fa fa-folder text-warning",
+          },
+          {
+            target: "expanded",
+            value: true,
+          },
+        ],
+        1
+      );
 
-  useEffect(()=>{
-    if(data.organizationUnit){
-      debugger
-      console.log(data.organizationUnit)
-      let tempOrgData : any[] = [];
-      data.organizationUnit.items.map((item:any) =>{
-        const data = {
-          option:item.displayName,
-          value:item.id
-        }
-        tempOrgData.push(data);
-      })
-      setOrganizationUnit(tempOrgData);
+      debugger;
+      tempOrgData = treeData1;
     }
-  },[data.organizationUnit])
+    setOrganizationUnit(tempOrgData);
+  }, [data.organizationUnit]);
 
-  useEffect(()=>{
-    if(data.roles){
-      debugger
-      console.log(data.roles)
-      let tempRoleData : any[] = [];
-      data.roles.items.map((item:any) =>{
+  useEffect(() => {
+    if (data.roles) {
+      debugger;
+      console.log(data.roles);
+      let tempRoleData: any[] = [];
+      data.roles.items.map((item: any) => {
         const data = {
-          option:item.name,
-          value:item.id
-        }
+          option: item.name,
+          value: item.id,
+        };
         tempRoleData.push(data);
-      })
+      });
       setRoles(tempRoleData);
     }
-  },[data.roles])
+  }, [data.roles]);
 
-  useEffect(()=>{
-    if(data.editUser){
-      debugger
+  useEffect(() => {
+    if (data.editUser) {
+      debugger;
       setUserData(data.editUser);
     }
-  },[data.editUser])
+  }, [data.editUser]);
+
+  function saveUserRoles(data :any) {
+debugger
+console.log(data);
+
+  }
 
   return (
     <>
@@ -969,12 +519,12 @@ const Users = () => {
             recordsPerPageSelectListOption={true}
           ></RdsCompDatatable>
           <RdsCompAlertPopup
-          alertID="user_delete_off"
-          onSuccess={deleteHandler}
-        />
+            alertID="user_delete_off"
+            onSuccess={deleteHandler}
+          />
         </div>
       </div>
-      
+
       <RdsOffcanvas
         backDrop={false}
         scrolling={true}
@@ -1001,43 +551,76 @@ const Users = () => {
               organizationUnit={organizationUnit}
               roles={roles}
               userData={userData}
-              createUser={(e:any)=>{createNewUser(e)}}
+              createUser={(e: any) => {
+                getUserData(e);
+              }}
             />
+          )}
+          {activeNavTabId == 1 && (
+            <>
+              <RdsCompUserRoles usersRole={userRolesData} changedData={(data:any)=>{handleRoleNamesData(data)}}></RdsCompUserRoles>
+              <div className="footer-buttons justify-content-end bottom-0 pt-0">
+                <RdsButton
+                  class="me-2"
+                  label="CANCEL"
+                  type="button"
+                  databsdismiss="offcanvas"
+                  isOutline={true}
+                  colorVariant="primary"
+                ></RdsButton>
+                <RdsButton
+                  class="me-2"
+                  label="SAVE"
+                  type="button"
+                  isOutline={false}
+                  colorVariant="primary"
+                  onClick={createNewUser}
+                  databsdismiss="offcanvas"
+                ></RdsButton>
+              </div>
+            </>
           )}
         </RdsNavtabs>
       </RdsOffcanvas>
 
       <RdsOffcanvas
-          canvasTitle="Edit User"
-          onclick={offCanvasHandler}
-          placement="end"
-          offId="user-edit-off"
-          offcanvaswidth={830}
-          backDrop={false}
-          scrolling={false}
-          preventEscapeKey={false}
-        >
-          <RdsNavtabs
+        canvasTitle="Edit User"
+        onclick={offCanvasHandler}
+        placement="end"
+        offId="user-edit-off"
+        offcanvaswidth={650}
+        backDrop={false}
+        scrolling={false}
+        preventEscapeKey={false}
+      >
+        <RdsNavtabs
           navtabsItems={navtabsItemsEdit}
           type={"tabs"}
-          activeNavTabId={activeNavTabId}
-          activeNavtabOrder={(activeNavTabId) => {
-            setActiveNavTabId(activeNavTabId);
+          activeNavTabId={activeNavTabIdEdit}
+          activeNavtabOrder={(activeNavTabIdEdit) => {
+            setActiveNavTabIdEdit(activeNavTabIdEdit);
           }}
           justified={false}
         >
-          {activeNavTabId == 0 && (
+          {activeNavTabIdEdit == 0 && (
             <RdsCompUserBasics
               organizationUnit={organizationUnit}
               roles={roles}
               userData={userData}
               isEdit={true}
-              createUser={(e:any)=>{createNewUser(e)}}
+              createUser={(e: any) => {
+                createNewUser(e);
+              }}
             />
           )}
-          {activeNavTabId == 1 && (
-              <>
-              <RdsCompPermissionTree permissions={userPermission} selectedPermissions={(SelectesPermission: any) => { SelectesPermissions(SelectesPermission) }}></RdsCompPermissionTree>
+          {activeNavTabIdEdit == 1 && (
+            <>
+              <RdsCompPermissionTree
+                permissions={userPermission}
+                selectedPermissions={(SelectesPermission: any) => {
+                  SelectesPermissions(SelectesPermission);
+                }}
+              ></RdsCompPermissionTree>
               <div className="footer-buttons my-2">
                 <div className="row">
                   <div className="col-md-12 d-flex">
@@ -1067,13 +650,10 @@ const Users = () => {
                 </div>
               </div>
             </>
-            )}
+          )}
+        </RdsNavtabs>
 
-          </RdsNavtabs>
-
-
-
-          {/* <div className="d-flex">
+        {/* <div className="d-flex">
             <RdsButton
               label="CANCEL"
               databsdismiss="offcanvas"
@@ -1093,7 +673,7 @@ const Users = () => {
               class="me-2"
               onClick={editDataHandler}
             ></RdsButton> */}
-        </RdsOffcanvas>
+      </RdsOffcanvas>
     </>
   );
 };

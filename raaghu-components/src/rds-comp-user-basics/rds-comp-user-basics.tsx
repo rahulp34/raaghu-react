@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { RdsButton, RdsCheckbox, RdsInput, RdsSelectList } from "raaghu-react-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel, RdsSelectList } from "../rds-elements";
 // import img from "./assets/edit-profile";
 
 export interface RdsCompUserBasicsProps {
@@ -20,48 +20,60 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   const [userData, setUserData] = useState<any>(props.userData);
 
 
+
   const setName = (event: any) => {
     setUserData({...userData, name:event.target.value})
+    props.createUser({...userData, name:event.target.value})
   };
 
   const setSurname = (event: any) => {
     setUserData({...userData, surname:event.target.value})
+    props.createUser({...userData, surname:event.target.value})
   };
 
   const setEmail = (event: any) => {
     setUserData({...userData, email:event.target.value})
+    props.createUser({...userData, email:event.target.value})
   };
 
   const setPassword = (event: any) => {
     setUserData({...userData, password:event.target.value})
+    props.createUser({...userData, password:event.target.value})
   };
 
   const setUserName = (event: any) => {
+    
     setUserData({...userData, userName:event.target.value})
+    props.createUser({...userData, userName:event.target.value})
   };
 
   const setPhoneNumber = (event: any) => {
     setUserData({...userData, phoneNumber:event.target.value})
+    props.createUser({...userData, phoneNumber:event.target.value})
   };
  
   function setOrganizationUnitData(value:any){
     debugger
-    setUserData({...userData, organizationUnitIds:[value]})
+    //setUserData({...userData, organizationUnitIds:[value]})
+    //props.createUser()
   }
   function setRolesData(value:any){
     debugger
-    setUserData({...userData, roleNames:[value]})
+    //setUserData({...userData, roleNames:[value]})
   }
   function handletwoFactorEnable(event:any){
-    setUserData({...userData, twoFactorEnabled:event.target.checked})
+    //setUserData({...userData, twoFactorEnabled:event.target.checked})
   }
   function handleIsActive(event:any){
     setUserData({...userData, isActive:event.target.checked})
+    props.createUser({...userData, isActive:event.target.checked})
   }
   function handleLockoutEnabled(event:any){
     setUserData({...userData, lockoutEnabled:event.target.checked})
+    props.createUser({...userData, lockoutEnabled:event.target.checked})
   }
-  userData
+
+
 
   useEffect(()=>{
     setUserData(props.userData)
@@ -122,7 +134,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
 
         <div className="row mb-2">
           <div className="col-lg-6 col-md-6">
-            <div className="mb-2">
+            <div className="">
               <RdsInput
                 value={userData.email}
                 placeholder="Enter Email"
@@ -135,7 +147,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             </div>
           </div>
           {!props.isEdit && (<div className="col-lg-6 col-md-6">
-            <div className="mb-2">
+            <div className="">
               <RdsInput
                 value={userData.password}
                 placeholder="****"
@@ -177,11 +189,17 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
           
         </div>
-        <div className="row my-2"> 
+        <div className="row"> 
+      
           <div className="col-lg-6 col-md-6">
-            <div className="mb-2">
+         
+        <label className="mb-2">
+        Organization Unit<span className="text-danger"> *</span>
+          </label>
+      
+            <div className="">
             <RdsSelectList
-								label={"Organization Unit"}
+								label="Select Organization Unit(s)"
 								selectItems={organizationUnit}
 								// selectItems={props.typeList}
 								// selectedValue={basicApplicationData.type}
@@ -190,17 +208,24 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               
             </div>
           </div>
+          
           <div className="col-lg-6 col-md-6">
+          <div className="">
+        <label className="mb-2">
+        Roles<span className="text-danger"> *</span>
+          </label>
+      </div>
             <div className="mb-2">
             <RdsSelectList
-								label={"Roles"}
+								label="Select Roles"
 								selectItems={roles}
 								onSelectListChange={(e: any) => setRolesData(e.target.value)}
 						></RdsSelectList>
             </div>
           </div>
+        
         </div>
-        {!props.isEdit && (<div className="row my-2">
+        {props.isEdit && (<div className="row my-2">
           <div className="mb-2 text-muted">
             <RdsCheckbox
               id="0"
@@ -210,7 +235,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             ></RdsCheckbox>
           </div>
         </div>)}
-        {props.isEdit && (<><div className="row my-2">
+        <div className="row my-2">
           <div className="mb-2 text-muted">
             <RdsCheckbox
               id="0"
@@ -229,25 +254,6 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               onChange={e=>{handleLockoutEnabled(e)}}
             ></RdsCheckbox>
           </div>
-        </div></>)}
-        <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0">
-          <RdsButton
-            class="me-2"
-            label="CANCEL"
-            type="button"
-            databsdismiss="offcanvas"
-            isOutline={true}
-            colorVariant="primary"
-          ></RdsButton>
-          <RdsButton
-            class="me-2"
-            label="SAVE"
-            type="button"
-            isOutline={false}
-            colorVariant="primary"
-            onClick={()=>{props.createUser(userData)}}
-            databsdismiss="offcanvas"
-          ></RdsButton>
         </div>
       </form>
     </>

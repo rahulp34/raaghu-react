@@ -12,6 +12,7 @@ import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
 import userReducer from "./user/user-slice";
+import localizationReducer from "./localization/localization-slice";
 import settingsReducer from "./settings/settings-slice";
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   settings: settingsReducer,
   tenant:tenantReducer,
+  localization:localizationReducer, 
 
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
