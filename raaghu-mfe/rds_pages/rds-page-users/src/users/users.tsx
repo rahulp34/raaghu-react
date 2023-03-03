@@ -50,7 +50,7 @@ const Users = () => {
     level: any
   ): any {
     let tree: any[] = [];
-    debugger;
+    
     let nodes = _filter(array, [parentIdProperty, parentIdValue]);
 
     _forEach(nodes, (node) => {
@@ -249,7 +249,7 @@ const Users = () => {
 
   const [permissionKeyName, setPermissionKeyName] = useState(0);
   function handleSelectesPermission() {
-    debugger;
+    
     const permissions: any = {
       key: permissionKeyName,
       permissions: {
@@ -261,7 +261,7 @@ const Users = () => {
 
   function handleRoleNamesData(data:any){
     let rolesNames:any[] = []
-    debugger
+    
     data.forEach((element:any) => {
       if(element.isChecked)
       rolesNames.push(element.name);
@@ -343,7 +343,7 @@ const Users = () => {
   }
 
   function createNewUser(data: any) {
-debugger
+
 const tempData ={...getUser , roleNames: roleNames}
     dispatch(createUser(tempData) as any).then((res: any) => {
 
@@ -367,7 +367,7 @@ const tempData ={...getUser , roleNames: roleNames}
   }, [dispatch]);
 
   useEffect(() => {
-    debugger;
+    
     let tempRoleData:any[] = []
     if(data.roles)
     data.roles.items.map((el:any)=>{
@@ -394,7 +394,7 @@ const tempData ={...getUser , roleNames: roleNames}
 
   useEffect(() => {
     if (data.permission) {
-      debugger;
+      
       setUserPermission(data.permission.groups);
     }
   }, [data.permission]);
@@ -426,7 +426,7 @@ const tempData ={...getUser , roleNames: roleNames}
   useEffect(() => {
     let tempOrgData: any[] = [];
     if (data.organizationUnit) {
-      debugger;
+      
       console.log(data.organizationUnit);
       const treeData1 = createTree(
         data.organizationUnit.items,
@@ -455,7 +455,7 @@ const tempData ={...getUser , roleNames: roleNames}
         1
       );
 
-      debugger;
+      
       tempOrgData = treeData1;
     }
     setOrganizationUnit(tempOrgData);
@@ -463,7 +463,7 @@ const tempData ={...getUser , roleNames: roleNames}
 
   useEffect(() => {
     if (data.roles) {
-      debugger;
+      
       console.log(data.roles);
       let tempRoleData: any[] = [];
       data.roles.items.map((item: any) => {
@@ -479,13 +479,13 @@ const tempData ={...getUser , roleNames: roleNames}
 
   useEffect(() => {
     if (data.editUser) {
-      debugger;
+      
       setUserData(data.editUser);
     }
   }, [data.editUser]);
 
   function saveUserRoles(data :any) {
-debugger
+
 console.log(data);
 
   }
