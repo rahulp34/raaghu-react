@@ -5,7 +5,7 @@ import {
   RdsButton,
   RdsOffcanvas,
   RdsNavtabs,
-} from "raaghu-react-elements";
+} from "../../../../../raaghu-elements/src";
 
 import {
   RdsCompDatatable,
@@ -212,7 +212,7 @@ const Roles = (props: RdsPageRolesProps) => {
                   required={true}
                   value={val}
                   size="medium"
-                  onChange={(e) => setVal(e.target.value)}
+                  onChange={(e:any) => setVal(e.target.value)}
                 ></RdsInput>
               </div>
               <div className="d-flex mt-4 me-2">
@@ -222,7 +222,7 @@ const Roles = (props: RdsPageRolesProps) => {
                     type="checkbox"
                     value=""
                     checked={checked.default}
-                    onChange={(e) => {
+                    onChange={(e:any) => {
                       setChecked({ ...checked, default: !checked.default });
                     }}
                     id="flexCheckDefaultrole"
@@ -241,7 +241,7 @@ const Roles = (props: RdsPageRolesProps) => {
                     value=""
                     id="flexCheckDefaultpublic"
                     checked={checked.public}
-                    onChange={(e) => {
+                    onChange={(e:any) => {
                       setChecked({ ...checked, public: !checked.public });
                     }}
                   />
@@ -323,7 +323,7 @@ const Roles = (props: RdsPageRolesProps) => {
                     //  name={Edit}
                     value={val}
                     size="medium"
-                    onChange={(e) => setVal(e.target.value)}
+                    onChange={(e:any) => setVal(e.target.value)}
                   ></RdsInput>
                 </div>
                 <div className="d-flex mt-4 me-2">
@@ -333,7 +333,7 @@ const Roles = (props: RdsPageRolesProps) => {
                       type="checkbox"
                       value=""
                       checked={checked.default}
-                      onChange={(e) => {
+                      onChange={(e:any) => {
                         setChecked({ ...checked, default: !checked.default });
                       }}
                       id="flexCheckDefaultrole"
@@ -352,7 +352,7 @@ const Roles = (props: RdsPageRolesProps) => {
                       value=""
                       id="flexCheckDefaultpublic"
                       checked={checked.public}
-                      onChange={(e) => {
+                      onChange={(e:any) => {
                         setChecked({ ...checked, public: !checked.public });
                       }}
                     />
