@@ -170,7 +170,7 @@ const claimTypesSlice = createSlice({
 
     builder.addCase(
       getClaimTypesData.fulfilled,(state,action:PayloadAction<any>)=>{
-        debugger
+        
         state.loading=false;
         state.editClaimsData=action.payload;
       }

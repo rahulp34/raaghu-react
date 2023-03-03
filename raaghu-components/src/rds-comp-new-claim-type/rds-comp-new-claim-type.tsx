@@ -28,7 +28,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
     setData({ ...data, regex: e.target.value });
   };
   const onValueChangeHandler = (e: any) => {
-    debugger
+    
     setData({ ...data, valueType: e});
 
   };

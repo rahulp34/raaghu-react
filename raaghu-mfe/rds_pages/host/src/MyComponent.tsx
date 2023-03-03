@@ -6,7 +6,7 @@ import i18n from './i18n';
 function LanguageSwitcher() {
     const { i18n } = useTranslation();
     const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
-    debugger
+    
     console.log(selectedLanguage);
     const handleLanguageChange = (event:any) => {
       const newLanguage = event.target.value;
@@ -34,10 +34,10 @@ function MyComponent() {
   const { t } = useTranslation();
   let selectedLanguage = 'hi';
   useEffect(() => {
-    debugger
+    
     axios.get(`https://localhost:44344/api/abp/application-localization?cultureName=${selectedLanguage}&onlyDynamics=false`)
       .then(response => {
-        debugger
+        
         var data1 = {};
         const translation= response.data.resources;
         Object.keys(response.data.resources).forEach(key => {

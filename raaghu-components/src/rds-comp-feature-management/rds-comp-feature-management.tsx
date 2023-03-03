@@ -29,7 +29,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
   const [featureIdentitySettingsData, setfeatureIdentitySettingsData] = useState<any>(props.featureIdentitySettingsData1)
   const [a, setA] = useState(featureIdentitySettingsData[0].value)
   const twoFactChange = (event: any) => {
-    debugger
+    
     setA(event.target.value);
     let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
       if(index===2){
@@ -51,7 +51,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
 
 function saveFeaturesData(){
   let tempdata:any[] = [];
-  debugger
+  
 
   props.featureIdentitySettingsData1.forEach((element:any,index:number) => {
     if(element.value != featureIdentitySettingsData[index].value){
