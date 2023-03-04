@@ -9,195 +9,152 @@ export interface RdsCompPermissionTreeProps {
 
 const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
-  // UseStates
-  const finalPermissionData = props.permissions.map((x: any) => ({
-    ...x, isChecked: false, isIntermediate: false, permissions: x.permissions.map((m: any) => (
-      { ...m, isIntermediate: false }
-    ))
-  }));
+  const modifiedPermissionData = props.permissions.map((parent, parentIndex) => {
+    const mainParentChildren = props.permissions[parentIndex].permissions;
+    const checkedChildren = mainParentChildren.filter((x: any) => x.isGranted);
+    return (mainParentChildren.length === checkedChildren.length) ? {
+      ...parent, isGranted: true, isIntermediate: false, mainParentIndex: parentIndex, permissions: addMainParentIndex(parent, parentIndex)
+    } :
+      (checkedChildren.length > 0 && checkedChildren.length) ? {
+        ...parent, isGranted: true, isIntermediate: true, mainParentIndex: parentIndex, permissions: addMainParentIndex(parent, parentIndex)
+      } :
+        (checkedChildren.length === 0) ? {
+          ...parent, isGranted: false, isIntermediate: false, mainParentIndex: parentIndex, permissions: addMainParentIndex(parent, parentIndex)
+        } :
+          {
+            ...parent, mainParentIndex: parentIndex, permissions: addMainParentIndex(parent, parentIndex)
+          }
+  });
 
-  const [treeData, setTreeData] = useState(finalPermissionData);
+  useEffect(() => {
+    setAll(modifiedPermissionData);
+    let allData: any = [];
+    for (let i = 0; i < modifiedPermissionData.length; i++) {
+      modifiedPermissionData[i].permissions.forEach((ele: any) => allData.push(ele));
+    }
+    localStorage.setItem('initailStateData', JSON.stringify(allData));
+  }, [])
+
+  const [treeData, setTreeData] = useState(modifiedPermissionData);
   const [selectAll, setSelectAll] = useState(false);
   const [selectAllInter, setSelectAllInter] = useState(false);
 
-  useEffect(() => {
-    for (let i = 0; i < treeData.length; i++) {
-      const grantedPermissions = treeData[i].permissions.filter((x: any) => x.isGranted);
-      if (grantedPermissions.length > 0) {
-        for (let childIndex = 0; childIndex < grantedPermissions.length; childIndex++) {
-          if (grantedPermissions[childIndex].isGranted) selectChild(grantedPermissions[childIndex].isGranted, grantedPermissions[childIndex], i);
-        }
-      }
-    }
-    setEmittedData([]);
-  }, []);
+  const [emittedData, setEmittedData] = useState<any>([]);
 
-  // Select All Permissions
+
+  function addMainParentIndex(parent: any, parentIndex: number) {
+    return (parent.permissions.length > 0) ? parent.permissions.map((child: any) => {
+      return { ...child, mainParentIndex: parentIndex }
+    }) : [];
+  }
+
   function selectAllFn(event: any) {
-    const allCheck = treeData.map(item => (
+    const allCheck = treeData.map((item) => (
       {
-        ...item, isChecked: event, isIntermediate: false,
-        permissions: item.permissions.map((permItems: any) => ({ ...permItems, isGranted: event, isIntermediate: false }))
+        ...item, isGranted: event, isIntermediate: false,
+        permissions: item.permissions.map((permItems: any) => ({ ...permItems, isGranted: event }))
       }
     ));
+    emitData(allCheck);
     setSelectAll(event);
     setSelectAllInter(false);
     setTreeData(allCheck);
-    const emitPermissions: any = [];
-    for (let i = 0; i < allCheck.length; i++) {
-      allCheck[i].permissions.filter((x: any) => x.isGranted === event).forEach((ele: any) => {
-        const item = { name: ele.name, isGranted: ele.isGranted, parentName: ele.parentName };
-        emitPermissions.push(item);
-      });
-    }
-    setEmittedData(emitPermissions);
-    props.selectedPermissions(emitPermissions);
-    //emitData(allCheck);
   };
 
-  // select Particluar Parent
+
   function selectParentFn(event: any, checkData: any, mainParentIndex: number) {
-    checkData.isChecked = event;
-    const selectAllChild = treeData.map((parent: any) => {
+    checkData.isGranted = event;
+    checkData.isIntermediate = false;
+    const selectAllChild = treeData.map(parent => {
       return {
-        ...parent, isChecked: checkData.name === parent.name ? event : parent.isChecked,
+        ...parent, isGranted: checkData.name === parent.name ? event : parent.isGranted, mainParentIndex: mainParentIndex,
         isIntermediate: checkData.name === parent.name ? false : parent.isIntermediate, permissions: parent.permissions.map((child: any) => (
           {
-            ...child, isGranted: checkData.name === parent.name ? event : child.isGranted,
-            isIntermediate: checkData.name === parent.name ? false : child.isIntermediate
+            ...child, isGranted: checkData.name === parent.name ? event : child.isGranted, mainParentIndex: mainParentIndex
           }
         ))
-      }
+      };
     });
-    setTreeData(selectAllChild);
+    emitData(selectAllChild);
     setAll(selectAllChild);
-    emitData(event, checkData, mainParentIndex, selectAllChild);
-    //emitData(selectAllChild);
+    setTreeData(selectAllChild);
   }
 
-  const [emittedData, setEmittedData] = useState<{ name: string; parentName: string; isGranted: boolean; }[]>([]);
-  const [finalEmittedData, setFinalEmittedData] = useState<{ name: string; isGranted: boolean; }[]>([]);
-
-  useEffect(() => {
-    const data = emittedData.map(x => ({ name: x.name, isGranted: x.isGranted }));
-    setFinalEmittedData(data);
-  }, [emittedData]);
-
-  useEffect(() => {
-    console.log('finalEmittedData', finalEmittedData);
-  }, [finalEmittedData])
-
-  // Select Children
-  function selectChild(event: any, checkData: any, mainParentIndex: any) {
+  function selectChild(event: any, checkData: any, mainParentIndex: number) {
+    checkData.mainParentIndex = mainParentIndex;
     checkData.isGranted = event;
     const data = treeData.map(parent => {
       return {
         ...parent, permissions: parent.permissions.map((child: any) => {
           if (parent.permissions.length > 0) {
             if (checkData.parentName !== null) {
-              if (checkData.name === child.name) return { ...child, isGranted: event, isIntermediate: false };
-              const childCheckLength = parent.permissions.filter((x: any) => x.parentName === child.name && x.parentName !== null && x.isGranted).length;
-              const childLength = parent.permissions.filter((x: any) => x.parentName === child.name).length;
-              return checkData.parentName === child.name ? {
-                ...child, isGranted: childCheckLength > 0 && childCheckLength < childLength ? true : childCheckLength === childLength ? true : false,
-                isIntermediate: childCheckLength > 0 && childCheckLength < childLength ? true : false
-              } : { ...child };
-            } else if (checkData.parentName === null) {
+              if (checkData.name === child.name) {
+                return { ...child, isGranted: event, mainParentIndex: mainParentIndex };
+              }
+              if (checkData.parentName === child.name && checkData.isGranted) {
+                return { ...child, isGranted: true, mainParentIndex: mainParentIndex };
+              }
+              else {
+                return { ...child, mainParentIndex: mainParentIndex };
+              }
+            }
+            else if (checkData.parentName === null) {
               const childrenLength = parent.permissions.filter((x: any) => x.parentName === checkData.name).length;
-              return childrenLength > 0 ? {
-                ...child, isGranted: child.parentName === checkData.name || child.name === checkData.name ? event : child.isGranted,
-                isIntermediate: child.name === checkData.name ? false : child.isIntermediate
-              } : { ...child, isGranted: child.name === checkData.name ? event : child.isGranted, isIntermediate: child.name === checkData.name ? false : child.isIntermediate };
-            };
-          };
+              if (childrenLength > 0) {
+                if (checkData.name === child.parentName && !checkData.isGranted) {
+                  return { ...child, isGranted: false, mainParentIndex: mainParentIndex };
+                } else {
+                  return { ...child, isGranted: child.isGranted, mainParentIndex: mainParentIndex };
+                }
+              } else {
+                return { ...child, isGranted: checkData.name === child.name ? event : child.isGranted, mainParentIndex: mainParentIndex };
+              }
+            }
+          }
         })
-      };
+      }
     });
-    const parents = data[mainParentIndex].permissions.filter((x: any) => x.parentName === null);
-    const grantedParentLength = parents.filter((x: any) => x.isGranted).length;
-    const interParentLength = parents.filter((x: any) => x.isIntermediate).length;
-    const itemData = data.map((main, i) => (grantedParentLength === parents.length ? { ...main, isChecked: mainParentIndex === i ? true : main.isChecked, isIntermediate: interParentLength > 0 ? true : false } :
-      grantedParentLength > 0 && grantedParentLength < data.length ? { ...main, isChecked: mainParentIndex === i ? true : main.isChecked, isIntermediate: true } :
-        { ...main, isChecked: mainParentIndex === i ? false : main.isChecked, isIntermediate: false }));
+    emitData(data);
+    const mainParentChildren = data[mainParentIndex].permissions;
+    const checkedChildren = mainParentChildren.filter((x: any) => x.isGranted);
+    const itemData = data.map((parent, i) => {
+      return (mainParentIndex === i) ? (mainParentChildren.length === checkedChildren.length) ? { ...parent, isGranted: true, isIntermediate: false, mainParentIndex: mainParentIndex } :
+        (checkedChildren.length > 0 && checkedChildren.length) ? { ...parent, isGranted: true, isIntermediate: true, mainParentIndex: mainParentIndex } :
+          { ...parent, isGranted: false, isIntermediate: false, mainParentIndex: mainParentIndex } : { ...parent, mainParentIndex: mainParentIndex }
+    });
     setAll(itemData);
     setTreeData(itemData);
-    emitData(event, checkData, mainParentIndex, itemData);
-    //emitData(itemData);
   }
 
-  // Emit Selected Data
-  function emitData(event: boolean, checkData: any, mainParentIndex: number, allData: any) {
-    const findName = emittedData.find(x => x.name === checkData.name);
-    if (findName !== undefined) {
-      const data = emittedData.map(x => ({ ...x, isGranted: (x.name === checkData.name || x.parentName === checkData.name) ? event : x.isGranted }));
-      setEmittedData(data);
-      // const findParent = allData[mainParentIndex].permissions.find((x: any) => x.name === checkData.parentName);
-      // if (findParent !== undefined) {
-      //   const parentChildren = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === findParent.name && x.isGranted);
-      //   const alreadyParent = emittedData.find(x => x.name === findParent.name);
-      //   if (parentChildren.length > 0) {
-          
-      //   }
-      // }
+
+  function emitData(allData: any) {
+    let data: any = [];
+    for (let i = 0; i < allData.length; i++) {
+      allData[i].permissions.forEach((ele: any) => data.push(ele));
     }
-    else {
-      let emit: any[] = [];
-      const findChildren: any[] = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === checkData.name);
-      if (findChildren.length > 0) {
-        findChildren.forEach((ele: any) => {
-          if (emittedData.find(x => x.name === ele.name) === undefined) {
-            const item = { name: ele.name, parentName: ele.parentName, isGranted: event };
-            emit.push(item);
-          }
-        });
-        emit.push({ name: checkData.name, parentName: checkData.parentName, isGranted: event });
-        const dataAfterSplice = emittedData.filter(x => x.parentName !== checkData.name);
-        const data = [...dataAfterSplice, ...emit];
-        setEmittedData(data);
-      } else {
-        emit.push({ name: checkData.name, parentName: checkData.parentName, isGranted: event });
-        const findParent = allData[mainParentIndex].permissions.find((x: any) => x.name === checkData.parentName);
-        if (findParent !== undefined) {
-          const parentChildren = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === findParent.name && x.isGranted);
-          const alreadyParent = emittedData.find(x => x.name === findParent.name);
-          if (parentChildren.length > 0) {
-            if (alreadyParent === undefined) {
-              emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: true});
-              setEmittedData([...emittedData, ...emit]);
-            } else {
-              const setEmit = emittedData.map(x => ({ ...x, isGranted: x.name === findParent.name ? true : x.isGranted }));
-              setEmittedData([...setEmit, ...emit]);
-            }
-          } else {
-            // emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: false});
-            if (alreadyParent === undefined) {
-              emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: false});
-              setEmittedData([...emittedData, ...emit]);
-            } else {
-              const setEmit = emittedData.map(x => ({ ...x, isGranted: x.name === findParent.name ? false : x.isGranted }));
-              setEmittedData([...setEmit, ...emit]);
-            }
-          }
-        } else {
-          setEmittedData([...emittedData, ...emit]);
-        }
-        
-      }
-      
-    }
-    // const emitPermissions: any = [];
-    // for (let i = 0; i < data.length; i++) {
-    //   data[i].permissions.filter((x: any) => x.isGranted).forEach((ele: any) => {
-    //     const item = { name: ele.name, isGranted: ele.isGranted };
-    //     emitPermissions.push(item);
-    //   });
-    // }
-    // props.selectedPermissions(emitPermissions);
+    setEmittedData(data);
   }
+
+  useEffect(() => {
+    const spliceMainParentUndefined = emittedData.filter((x: any) => x.parentName !== undefined);
+    const initailStateData = JSON.parse(localStorage.getItem('initailStateData') as string);
+    for (let mainIndex = 0; mainIndex < initailStateData.length; mainIndex++) {
+      for (let resultIndex = 0; resultIndex < spliceMainParentUndefined.length; resultIndex++) {
+        const valueFromResult = spliceMainParentUndefined[resultIndex];
+        const valueFromMain = initailStateData[mainIndex];
+        if (valueFromMain !== undefined && valueFromMain.name === valueFromResult.name && valueFromMain.isGranted === valueFromResult.isGranted) {
+          const startIndex = spliceMainParentUndefined.findIndex((x: any) => x.name === valueFromMain.name);
+          spliceMainParentUndefined.splice(startIndex, 1);
+        }
+      }
+    }
+    const data = spliceMainParentUndefined.map((x: any) => ({ name: x.name, isGranted: x.isGranted }));
+    props.selectedPermissions(data);
+  }, [emittedData]);
 
   // Show Vertical Line
   function showVerticalLine(node: any, mainParentIndex: number) {
-    const per = finalPermissionData[mainParentIndex].permissions;
+    const per = modifiedPermissionData[mainParentIndex].permissions;
     const data = per.length;
     const lastElementName = per[per.length - 1].name;
     return data > 0 && data <= 1 ? false : lastElementName === node.name ? false : true;
@@ -213,13 +170,13 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
   // Custom height of vertical line for parent
   function customHeightParent(node: any): string {
-    const lastElement = finalPermissionData[finalPermissionData.length - 1];
+    const lastElement = modifiedPermissionData[modifiedPermissionData.length - 1];
     return lastElement.name == node.name ? (lastElement.permissions.length * 50).toString() + '%' : '100%';
   }
 
   // Custom height of vertical line for child
   function customHeightChild(node: any, mainParentIndex: number) {
-    const lastChildElement = finalPermissionData[mainParentIndex].permissions[finalPermissionData[mainParentIndex].permissions.length - 1];
+    const lastChildElement = modifiedPermissionData[mainParentIndex].permissions[modifiedPermissionData[mainParentIndex].permissions.length - 1];
     if (lastChildElement.name === node.name) return '0%'
     return '100%';
   }
