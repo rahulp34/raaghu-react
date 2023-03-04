@@ -35,7 +35,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
     if (props.isNextPressed === true) setActiveTabKey(props.activeNavTabId);
   }, [props.isNextPressed]);
   return (
-    <div style={{ position: 'relative', left : -24 }}>
+    <div >
       <ul
         className={
           "nav mobile-ul-tabs flex" +

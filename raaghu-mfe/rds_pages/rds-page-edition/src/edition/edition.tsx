@@ -138,18 +138,10 @@ const Edition = (props: RdsPageEditionProps) => {
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
 
-  // const onActionSelection = (rowData: any, actionId: any) => {
-  //   console.log("asdfasdfasdfa", actionId);
-  //   setTableDataRowId(actionId.id);
-  //   setVal(actionId.name);
-  //   console.log("hi bro!!");
-  //   dispatch(fetchFeaturesEdition(actionId.id) as any);
-  // };
 
   const onActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
     setVal(rowData.name);
-    // console.log(rowData, "a;sldkjf;asdf", actionId)
     if (actionId === "editEdition") {
       dispatch(fetchFeaturesEdition(rowData.id) as any);
     }
@@ -209,7 +201,6 @@ const Edition = (props: RdsPageEditionProps) => {
 
   function restoreFeatures(data: any) {
     dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then((res: any) => {
-      //dispatch(fetchFeaturesEdition() as any);
     });
   }
 
@@ -304,6 +295,7 @@ const Edition = (props: RdsPageEditionProps) => {
         </div>
       </div>
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
+        <h3>{t("AccessDenied")}</h3>
         <RdsCompDatatable
           tableHeaders={tableHeaders}
           actions={actions}

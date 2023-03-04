@@ -51,7 +51,7 @@ const ClaimType = () => {
   const [editClaimData, setEditClaimData] = useState<any>({});
 
   useEffect(() => {
-    debugger
+    
     if (claimTypesEdit) {
       const tempData = { ...claimTypesEdit }
       setEditClaimData(tempData)
@@ -65,9 +65,9 @@ const ClaimType = () => {
 
   useEffect(() => {
     if (claimTypesUser) {
-      debugger
+      
       const tempData = claimTypesUser.map((item: any) => {
-        debugger
+        
         return {
           id: item.id,
           name: item.name,
@@ -160,7 +160,7 @@ const ClaimType = () => {
     if (actionId === "editClaim") {
       const tempApplicationId = String(rowData.id);
       setClaimTypesId(tempApplicationId);
-      debugger
+      
       dispatch(getClaimTypesData(tempApplicationId) as any);
     }
   };
@@ -211,7 +211,7 @@ const ClaimType = () => {
   ];
 
   const submitHandler = (data: any) => {
-    debugger
+    
     dispatch(addClaimTypesData(data) as any).then((res: any) => {
       dispatch(fetchClaimTypesData() as any);
     });
@@ -235,7 +235,7 @@ const ClaimType = () => {
   ]
 
   const onEditHandler = (editClaimData: any) => {
-    debugger
+    
     const dTo = {
       id: claimTypesId,
       claimTypeDto: editClaimData,

@@ -83,7 +83,7 @@ const Applications = () => {
   setTableDataRowId(rowData.id);
     settableDisplayName(rowData.clientId);
     const tempApplicationId = String(rowData.id)
-    debugger
+    
     setTableDataRowId(rowData.id);
     setApplicationId(tempApplicationId)
     setPermissionKeyName(rowData.clientId)
@@ -136,7 +136,7 @@ const Applications = () => {
   }
 
   function handleSelectesPermission() {
-    debugger
+    
     const permissions: any = {
       key: permissionKeyName,
       permissions: {
@@ -243,7 +243,7 @@ const Applications = () => {
   });
   const [alertOne, setAlertOne] = useState(false);
   useEffect(() => {
-    debugger
+    
     setAlert({
       showAlert: application.alert,
       message: application.alertMessage,

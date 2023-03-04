@@ -10,7 +10,7 @@ export { default as RdsColorPicker } from './rds-color-picker';
 export { default as RdsAddressDetail } from './rds-address-detail';
 export { default as RdsBreadcrumb } from './rds-breadcrumb';
 export { default as RdsSelectList } from './rds-select-list';
-export { default as RdsDowndrop } from './rds-dropdown';
+export { default as RdsDropdown } from './rds-dropdown';
 export { default as RdsDatePicker } from './rds-datepicker';
 export { default as RdsCounter } from './rds-counter';
 export { default as RdsCard } from './rds-card';
@@ -68,7 +68,6 @@ export { default as RdsWebsiteMatrix } from "./rds-website-matrix";
 export { default as RdsTextEditor } from "./rds-text-editor";
 export { default as RdsFileUploader } from "./rds-file-uploader";
 export { default as RdsToggle } from "./rds-toggle";
-
 //Charts
 export { default as RdsAreaChart } from "./rds-chart-area";
 export { default as RdsLineChart } from './rds-chart-line';

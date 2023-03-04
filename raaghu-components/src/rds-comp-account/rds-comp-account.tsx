@@ -179,7 +179,7 @@ let twitter=<>
     setExternalProvider(externalProvider)
   }
   function setGoogleSIteKey(value:any){
-    debugger
+    
     let data = externalProvider;
     data[0].properties[0].value = value;
     setExternalProvider(data)
@@ -203,13 +203,13 @@ let twitter=<>
     setExternalProvider(externalProvider)
   }
   function setMSSiteKey(value:any){
-    debugger
+    
     let data = externalProvider;
     data[1].properties[0].value = value;
     setExternalProvider(data)
   }
   function setMSSecretKey(value:any){
-    debugger
+    
     let data = externalProvider;
       data[1].secretProperties[0].value = value;
       setExternalProvider(data)
