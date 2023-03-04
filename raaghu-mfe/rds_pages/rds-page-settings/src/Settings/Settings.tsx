@@ -245,7 +245,7 @@ const Settings = (props: RdsCompSettingsProps) => {
   }, [data.featureIdentitySettings]);
 
   function saveFeature(data: any) {
-    debugger;
+    
     const tempData :any[] = []
     data.map((e:any) => {
       const item = {
@@ -258,7 +258,7 @@ const Settings = (props: RdsCompSettingsProps) => {
   }
 
   function restoreFeatures(data: any) {
-    debugger;
+    
     dispatch(restoreToDefaultFeaturesSettings(data) as any).then((res: any) => {
       dispatch(fetchFeaturesSettings() as any);
     });

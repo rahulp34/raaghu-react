@@ -35,13 +35,13 @@ const RdsCompTenantInformation = (props: any) => {
   });
 
   useEffect(()=>{
-    debugger
+    
     if(props.tenantInformationData)
     setTenantInformationData(props.tenantInformationData)
   },[props.tenantInformationData])
 
   useEffect(()=>{
-    debugger
+    
     if(props.editions)
       setEditionList(props.editions)
   },[props.editions])

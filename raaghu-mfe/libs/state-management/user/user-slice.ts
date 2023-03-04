@@ -167,7 +167,7 @@ const userSlice = createSlice({
     builder.addCase(
       fetchRoles.fulfilled,
       (state, action: PayloadAction<any>) => {
-        debugger
+        
         state.loading = false;
         state.roles = action.payload;
         state.error = "";

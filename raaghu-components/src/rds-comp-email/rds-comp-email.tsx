@@ -17,7 +17,7 @@ useEffect( () => {
   }
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    debugger
+    
 	console.log("formData is",formData)
   };
   function setEmail(value :any){
@@ -33,7 +33,7 @@ useEffect( () => {
 	setFormData({...formData, smtpPort:value})
   }
   function setSSL(value:boolean){
-    debugger
+    
 	setFormData({...formData,smtpEnableSsl:value})
   }
   function setDomain(value:any){

@@ -53,12 +53,12 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   };
  
   function setOrganizationUnitData(value:any){
-    debugger
+    
     //setUserData({...userData, organizationUnitIds:[value]})
     //props.createUser()
   }
   function setRolesData(value:any){
-    debugger
+    
     //setUserData({...userData, roleNames:[value]})
   }
   function handletwoFactorEnable(event:any){

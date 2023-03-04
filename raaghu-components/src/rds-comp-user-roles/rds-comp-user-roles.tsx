@@ -11,17 +11,17 @@ const RdsCompUserRoles = (props: RdsCompUserRolesProps) => {
   //const [tempRoleData, settempRoleData] = useState<any>([]);
   
   useEffect(() => {
-    debugger
+    
     setRoleData(props.usersRole);
   }, [props.usersRole]);
   
   // useEffect(() => {
-  //   debugger
+  //   
   //   settempRoleData(roleData);
   // }, [roleData]);
 
   function isRoleChecked(index: number, value: boolean) {
-    debugger
+    
     const updatedRoleData = [...roleData];
     updatedRoleData[index] = { ...updatedRoleData[index], isChecked: value };
     props.changedData(updatedRoleData)

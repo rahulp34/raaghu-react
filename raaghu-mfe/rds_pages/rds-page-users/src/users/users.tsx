@@ -52,6 +52,7 @@ const Users = () => {
     level: any
   ): any {
     let tree: any[] = [];
+
     let nodes = _filter(array, [parentIdProperty, parentIdValue]);
 
     _forEach(nodes, (node) => {

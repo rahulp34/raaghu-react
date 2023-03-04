@@ -7,7 +7,6 @@
 			"esnext"
 		],
 		"baseUrl": "./",
-		"outDir": "./dist",
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
@@ -24,11 +23,11 @@
 		"jsx": "react-jsx",
 	},
 	"include": [
-		"src",
-		"../../libs/shared/i18n.ts"	],
+		"src"
+	],
 	"exclude": [
-		"./dist/**/*",
 		"./node_modules/**/*",
+		"./dist/**/*",
 		"**/*.stories.tsx"
 	]
 }
