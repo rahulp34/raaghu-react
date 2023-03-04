@@ -43,5 +43,6 @@ export {default as RdsCompThemeNew}  from './rds-comp-theme-new/rds-comp-theme-n
 export {default as RdsCompAccount}  from './rds-comp-account/rds-comp-account'
 export {default as RdsCompFeatureManagement} from './rds-comp-feature-management/rds-comp-feature-management'
 export {default as RdsCompUserRoles} from './rds-comp-user-roles/rds-comp-user-roles'
+export {default as RdsDirectoryList} from './rds-comp-directory-list/rds-comp-directory-list'
 
 
