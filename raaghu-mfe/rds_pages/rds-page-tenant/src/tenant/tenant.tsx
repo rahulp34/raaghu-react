@@ -5,6 +5,8 @@ import {
   editTenant,
   fetchEdition,
   fetchTenant,
+  restoreToDefaultFeaturesEdition,
+  saveFeaturesEdition,
   tenantFeaturesGet,
   tenantPut,
 } from "../../../../libs/state-management/tenant/tenant-slice";
@@ -54,7 +56,24 @@ const Tenant = (props: RdsPageTenantProps) => {
   const [editionList, setEditionList] = useState<any>([]);
   const [featureIdentitySettingsData, setFeatureIdentitySettingsData] = useState<any>([{value:"Optional"},{value:3},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true}]);
   const [tenantId, setTenantid] = useState<any>("")
-  const [tenantInformationData, setTenantInformationData] = useState<any>({})
+  const [tenantInformationData, setTenantInformationData] = useState<any>({     
+      editionId: "",
+      name: "",
+      activationEndDate: null,
+      password: "",
+      activationState: 0,
+      adminEmailAddress: "",
+      connectionStrings: { id: "", default: null, databases: [] },
+    });
+    const [basicTenantInformation , setBasicTenantInformation ] = useState<any>({     
+      editionId: "",
+      name: "",
+      activationEndDate: null,
+      password: "",
+      activationState: 0,
+      adminEmailAddress: "",
+      connectionStrings: { id: "", default: null, databases: [] },
+    })
   const tableHeaders = [
     {
       displayName: "Tenant",
@@ -86,20 +105,23 @@ const Tenant = (props: RdsPageTenantProps) => {
     { label: "Basics", tablink: "#nav-home", id: 0 },
     { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
+ 
 
   const treeData: any[] = [];
   const offCanvasHandler = () => {
     // dispatch(fetchEdition() as any);
   };
+  const [tableDataRowid, setTableDataRowId] = useState(0);
+
   const onActionHandler = (rowData: any, actionId: any) => {
     let id = rowData.id;
-
+    setTableDataRowId(rowData.id);
     if (actionId == "editTenant") {
       dispatch(editTenant(id) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
-      dispatch(tenantFeaturesGet(id) as any);
+      dispatch(tenantFeaturesGet(rowData.id) as any);
     }
   };
   
@@ -135,6 +157,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     },[data.tenants])
 
     useEffect(()=>{
+      debugger
       if(data.feature){
         let tempFeatureData :any[] = [];
         data.feature.groups.map((item:any)=>{
@@ -157,6 +180,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   
     },[data.feature])
 
+
     useEffect(() => {
       if(data.edition)
       if (data.edition.items.length) {
@@ -173,17 +197,20 @@ const Tenant = (props: RdsPageTenantProps) => {
     }, [data.edition]);
 
     useEffect(()=>{
+      debugger
       if(data.editTenant){
         setTenantInformationData(data.editTenant);
       }
-    },[data.editTenant])
+    },[data.editTenant]);
 
 
     function saveTenant(data:any){
+      data.preventDefault();
       dispatch(createTenant(data) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant() as any);
-      })
+      });
+      setBasicTenantInformation(data)
     }
     const onDeleteHandler = () => {
       dispatch(deleteTenant(tenantId) as any).then((res:any)=>{
@@ -192,10 +219,30 @@ const Tenant = (props: RdsPageTenantProps) => {
       
     };
   
-  
+    function saveFeature(data: any) {
+      console.log("This is data ", data);
+      const tempData: any[] = [];
+      data.map((e: any) => {
+        const item = {
+          value: String(e.value),
+          name: e.name,
+        };
+        tempData.push(item);
+      });
+      const data1 = {
+        id: tableDataRowid,
+        body:{features: tempData},
+      };
+      console.log("This is temp Data ", tempData);
+      dispatch(saveFeaturesEdition(data1) as any);
+    }
+    function restoreFeatures(data: any) {
+      dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then((res: any) => {
+      });
+    }
   return (
     <div className="tenant">
-      <div className="d-flex justify-content-end">
+      <div className="d-flex justify-content-end ">
         <RdsOffcanvas
           canvasTitle={"New Tenant"}
           placement="end"
@@ -222,18 +269,9 @@ const Tenant = (props: RdsPageTenantProps) => {
           preventEscapeKey={false}
           offId={"tenant"}
         >
-          <RdsNavtabs
-            navtabsItems={navtabsItems}
-            type="tabs"
-            isNextPressed={showTenantSettings}
-            activeNavTabId={activeNavTabId}
-            activeNavtabOrder={(activeNavTabId) => {
-              setActiveNavTabId(activeNavTabId), setShowTenantSettings(false);
-            }}
-          />
-          {activeNavTabId == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation editions={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} />
-          )}
+          
+            <RdsCompTenantInformation editions={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} tenantInformationData1={basicTenantInformation} />
+      
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
@@ -267,11 +305,24 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-            <RdsCompTenantInformation editions={editionList} tenantInformationData={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
+            <>
+              <RdsCompTenantInformation editions={editionList} tenantInformationData1={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
+            </>
           )}
-          {(activeNavTabIdEdit == 1 || showTenantSettings == false) && (
-            <></>
-            // <RdsCompFeatures featureIdentitySettingsData={featureIdentitySettingsData}></RdsCompFeatures>
+          {(activeNavTabIdEdit == 1 || showTenantSettings === true) && (
+            <>
+             <RdsCompFeatures
+           featureIdentitySettingsData1={featureIdentitySettingsData}
+           twoFactorList={[
+             { option: "Optional", value: "Optional" },
+             { option: "Disabled", value: "Disabled" },
+             { option: "Forced", value: "Forced" },
+           ]}
+           saveFeature={saveFeature}
+           restoreFeatures={restoreFeatures}
+         />
+            </>
+          
           )}
         </RdsOffcanvas>
       </div>

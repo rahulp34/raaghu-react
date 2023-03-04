@@ -7,7 +7,8 @@ export interface TenantState {
   edition:any;
   editTenant:any
   error: string | null;
-  feature:any
+  feature:any;
+
 }
 
 export const tenantInitialState: TenantState = {
@@ -16,7 +17,8 @@ export const tenantInitialState: TenantState = {
   edition:{items:[]},
   error: null,
   editTenant:null,
-  feature:null
+  feature:null,
+
 };
 
 
@@ -119,6 +121,22 @@ export const tenantFeaturesGet= createAsyncThunk(
   }
 )
 
+export const saveFeaturesEdition = createAsyncThunk(
+  "edition/saveFeaturesEdition",
+  (data: any) => { 
+    return proxy.featuresPUT("T", data.id, data.body).then((result: any) => {
+      return result;
+    });
+  }
+);
+export const restoreToDefaultFeaturesEdition = createAsyncThunk(
+  "edition/restoreToDefaultFeaturesEdition",
+  (id: any) => { 
+    return proxy.featuresDELETE("T", id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
 // export const tenantFeaturesPut= createAsyncThunk(
 //   "tenant/tenantPut",
 //   (data:any)=>{
@@ -253,6 +271,42 @@ const tenantSlice= createSlice({
       state.loading=false;
       state.error=action.error.message || "Something went wrong";
     })
+
+    
+    builder.addCase(saveFeaturesEdition.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      saveFeaturesEdition.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.feature = action.payload;
+      }
+    );
+    builder.addCase(saveFeaturesEdition.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(restoreToDefaultFeaturesEdition.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      restoreToDefaultFeaturesEdition.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.feature = action.payload;
+      }
+    );
+    builder.addCase(
+      restoreToDefaultFeaturesEdition.rejected,
+      (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Something went wrong";
+      }
+    );
 
     // builder.addCase(tenantFeaturesPut.pending,(state)=>{
     //   state.loading=true;
