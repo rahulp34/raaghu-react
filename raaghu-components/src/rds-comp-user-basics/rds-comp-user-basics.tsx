@@ -197,7 +197,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
         Organization Unit<span className="text-danger"> *</span>
           </label>
       
-            <div className="">
+            {/* <div className="">
             <RdsSelectList
 								label="Select Organization Unit(s)"
 								selectItems={organizationUnit}
@@ -206,7 +206,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
 								onSelectListChange={(e: any) => setOrganizationUnitData(e.target.value)}
 							></RdsSelectList>
               
-            </div>
+            </div> */}
           </div>
           
           <div className="col-lg-6 col-md-6">
@@ -215,13 +215,13 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
         Roles<span className="text-danger"> *</span>
           </label>
       </div>
-            <div className="mb-2">
+            {/* <div className="mb-2">
             <RdsSelectList
 								label="Select Roles"
 								selectItems={roles}
 								onSelectListChange={(e: any) => setRolesData(e.target.value)}
 						></RdsSelectList>
-            </div>
+            </div> */}
           </div>
         
         </div>

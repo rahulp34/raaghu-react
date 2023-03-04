@@ -25,11 +25,13 @@ import {
   createUser,
   deleteUser,
   fetchEditUser,
+  fetchEditUserRoles,
   fetchOrganizationUnits,
   fetchRoles,
   fetchUsers,
   getPermission,
   updatePermission,
+  updateUser,
 } from "../../../../libs/state-management/user/user-slice";
 
 const Users = () => {
@@ -50,7 +52,6 @@ const Users = () => {
     level: any
   ): any {
     let tree: any[] = [];
-    debugger;
     let nodes = _filter(array, [parentIdProperty, parentIdValue]);
 
     _forEach(nodes, (node) => {
@@ -99,6 +100,8 @@ const Users = () => {
   const data = useAppSelector((state) => state.persistedReducer.user);
   // const userRoles = useAppSelector((state) => state.persistedReducer.user)
   const [userId, setUserId] = useState("");
+  const [userRolesData, setUseRolesData] = useState<any>();
+  const [editRolesData, setEditRoleData]= useState<any>();
   const [userData, setUserData] = useState<any>({
     name: "",
     surname: "",
@@ -201,7 +204,8 @@ const Users = () => {
 
   const navtabsItemsEdit = [
     { label: "User Information", tablink: "#nav-home", id: 0 },
-    { label: "Permissions", tablink: "#nav-profile", id: 1 },
+    { label: "Roles", tablink: "#nav-role", id: 1 },
+    { label: "Permissions", tablink: "#nav-profile", id: 2 },
   ];
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
@@ -209,7 +213,7 @@ const Users = () => {
   ];
 
   const offCanvasHandler = () => {};
-  const [getUser, setGetUserData] =useState<any>({})
+  const [getUser, setGetUserData] = useState<any>({});
   const [activeNavTabId, setActiveNavTabId] = useState();
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
 
@@ -249,7 +253,6 @@ const Users = () => {
 
   const [permissionKeyName, setPermissionKeyName] = useState(0);
   function handleSelectesPermission() {
-    debugger;
     const permissions: any = {
       key: permissionKeyName,
       permissions: {
@@ -259,12 +262,11 @@ const Users = () => {
     dispatch(updatePermission(permissions) as any);
   }
 
-  function handleRoleNamesData(data:any){
-    let rolesNames:any[] = []
-    debugger
-    data.forEach((element:any) => {
-      if(element.isChecked)
-      rolesNames.push(element.name);
+  function handleRoleNamesData(data: any) {
+    let rolesNames: any[] = [];
+    debugger;
+    data.forEach((element: any) => {
+      if (element.isChecked) rolesNames.push(element.name);
     });
     setRoleNames(rolesNames);
   }
@@ -274,11 +276,12 @@ const Users = () => {
   }
 
   const onActionSelection = (rowData: any, actionId: any) => {
+    debugger
     setPermissionKeyName(rowData.id);
-    setUserId(rowData.id);
+    setUserId(rowData.id); 
     dispatch(fetchEditUser(String(rowData.id)) as any);
-    var tableId = String(rowData.id);
-    dispatch(getPermission(tableId) as any);
+    dispatch(getPermission(rowData.id) as any);
+    dispatch(fetchEditUserRoles(rowData.id) as any);
   };
 
   function getSelectedPermissions(data: any) {
@@ -289,8 +292,8 @@ const Users = () => {
   }
 
   // const exportToExcel = () => {
-  //   // create an empty excel workbook
-  //   const wb = XLSX.utils.book_new();
+  //   // create an empty excel workbo
+  //   const wb = X  LSX.utils.book_new();
 
   //   // create the headers and data arrays
   //   const headers = tableHeaders.map(header => header.displayName);
@@ -337,16 +340,38 @@ const Users = () => {
     XLSX.writeFile(wb, "data.xlsx");
   };
 
-
-  function getUserData(data:any){
+  function getUserData(data: any) {
     setGetUserData(data);
   }
 
   function createNewUser(data: any) {
-debugger
-const tempData ={...getUser , roleNames: roleNames}
+    debugger
+    const tempData = { ...getUser, roleNames: roleNames };
     dispatch(createUser(tempData) as any).then((res: any) => {
 
+      dispatch(fetchUsers() as any);
+    });
+    setUserData({
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      twoFactorEnabled: false,
+      userName: "",
+      password: "",
+    });
+  }
+
+  function updateUserData(data: any) {
+    debugger
+    let updateData:any = {}
+    if(getUser.name){
+       updateData = { ...getUser, roleNames: roleNames };
+    }
+    else{
+       updateData = { ...userData, roleNames: roleNames };
+    }
+    dispatch(updateUser({id:userId, body:updateData}) as any).then((res: any) => {
       dispatch(fetchUsers() as any);
     });
     setUserData({
@@ -367,20 +392,45 @@ const tempData ={...getUser , roleNames: roleNames}
   }, [dispatch]);
 
   useEffect(() => {
-    debugger;
-    let tempRoleData:any[] = []
-    if(data.roles)
-    data.roles.items.map((el:any)=>{
-        const data = {
-          name:el.name,
-          isChecked:false
-        }
-        tempRoleData.push(data);
-    })
+    let tempRoleData: any[] = [];
+    debugger
+    if (data.roles){
+      data.roles.items.map((el: any) => {
+        const data3 = {
+          name: el.name,
+          isChecked: false,
+        };
+        tempRoleData.push(data3);
+      });
     setUseRolesData(tempRoleData);
+    }
   }, [data.roles]);
 
-  const [userRolesData, setUseRolesData] = useState<any>();
+  useEffect(()=>{
+    if(data.editUserRoles){
+      let editRolesUserData:any[] = [];
+      if(userRolesData){
+      userRolesData.map((el: any) => {
+        let isChecked = false;
+        data.editUserRoles.items.forEach((item:any)=>{
+          if(item.name == el.name){
+            isChecked = true;
+          }
+        })
+        const data1 = {
+          name: el.name,
+          isChecked: isChecked,
+        };
+        editRolesUserData.push(data1);
+      });
+    }
+      console.log(editRolesUserData)
+      setEditRoleData(editRolesUserData);
+
+    }
+
+  },[data.editUserRoles])
+
   function deleteHandler(data: any) {
     console.log(data);
     dispatch(deleteUser(userId) as any).then((result: any) => {
@@ -426,7 +476,6 @@ const tempData ={...getUser , roleNames: roleNames}
   useEffect(() => {
     let tempOrgData: any[] = [];
     if (data.organizationUnit) {
-      debugger;
       console.log(data.organizationUnit);
       const treeData1 = createTree(
         data.organizationUnit.items,
@@ -455,27 +504,26 @@ const tempData ={...getUser , roleNames: roleNames}
         1
       );
 
-      debugger;
       tempOrgData = treeData1;
     }
     setOrganizationUnit(tempOrgData);
   }, [data.organizationUnit]);
 
-  useEffect(() => {
-    if (data.roles) {
-      debugger;
-      console.log(data.roles);
-      let tempRoleData: any[] = [];
-      data.roles.items.map((item: any) => {
-        const data = {
-          option: item.name,
-          value: item.id,
-        };
-        tempRoleData.push(data);
-      });
-      setRoles(tempRoleData);
-    }
-  }, [data.roles]);
+  // useEffect(() => {
+  //   if (data.roles) {
+  //     debugger;
+  //     console.log(data.roles);
+  //     let tempRoleData: any[] = [];
+  //     data.roles.items.map((item: any) => {
+  //       const data = {
+  //         option: item.name,
+  //         value: item.id,
+  //       };
+  //       tempRoleData.push(data);
+  //     });
+  //     setRoles(tempRoleData);
+  //   }
+  // }, [data.roles]);
 
   useEffect(() => {
     if (data.editUser) {
@@ -484,11 +532,6 @@ const tempData ={...getUser , roleNames: roleNames}
     }
   }, [data.editUser]);
 
-  function saveUserRoles(data :any) {
-debugger
-console.log(data);
-
-  }
 
   return (
     <>
@@ -558,8 +601,18 @@ console.log(data);
           )}
           {activeNavTabId == 1 && (
             <>
-              <RdsCompUserRoles usersRole={userRolesData} changedData={(data:any)=>{handleRoleNamesData(data)}}></RdsCompUserRoles>
-              <div className="footer-buttons justify-content-end bottom-0 pt-0">
+              <RdsCompUserRoles
+                usersRole={userRolesData}
+                changedData={(data: any) => {
+                  handleRoleNamesData(data);
+                }}
+              ></RdsCompUserRoles>
+              
+            </>
+          )}
+
+        </RdsNavtabs>
+        <div className="footer-buttons justify-content-end bottom-0 pt-0">
                 <RdsButton
                   class="me-2"
                   label="CANCEL"
@@ -578,9 +631,6 @@ console.log(data);
                   databsdismiss="offcanvas"
                 ></RdsButton>
               </div>
-            </>
-          )}
-        </RdsNavtabs>
       </RdsOffcanvas>
 
       <RdsOffcanvas
@@ -609,11 +659,25 @@ console.log(data);
               userData={userData}
               isEdit={true}
               createUser={(e: any) => {
-                createNewUser(e);
+                getUserData(e);
               }}
             />
           )}
-          {activeNavTabIdEdit == 1 && (
+
+
+           {activeNavTabIdEdit == 1 && (
+            <>
+              <RdsCompUserRoles
+                usersRole={editRolesData}
+                changedData={(data: any) => {
+                  handleRoleNamesData(data);
+                }}
+              ></RdsCompUserRoles>
+              
+            </>
+          )}
+          
+          {activeNavTabIdEdit == 2 && (
             <>
               <RdsCompPermissionTree
                 permissions={userPermission}
@@ -651,28 +715,31 @@ console.log(data);
               </div>
             </>
           )}
+
+           
+
+
         </RdsNavtabs>
 
-        {/* <div className="d-flex">
-            <RdsButton
-              label="CANCEL"
-              databsdismiss="offcanvas"
-              type={"button"}
-              size="small"
-              isOutline={true}
-              colorVariant="primary"
-              class="me-2"
-            ></RdsButton>
-            <RdsButton
-              label="SAVE"
-              type={"button"}
-              size="small"
-              databsdismiss="offcanvas"
-              isDisabled={val === ""}
-              colorVariant="primary"
-              class="me-2"
-              onClick={editDataHandler}
-            ></RdsButton> */}
+        <div className="footer-buttons justify-content-end bottom-0 pt-0">
+                <RdsButton
+                  class="me-2"
+                  label="CANCEL"
+                  type="button"
+                  databsdismiss="offcanvas"
+                  isOutline={true}
+                  colorVariant="primary"
+                ></RdsButton>
+                <RdsButton
+                  class="me-2"
+                  label="SAVE"
+                  type="button"
+                  isOutline={false}
+                  colorVariant="primary"
+                  onClick={updateUserData}
+                  databsdismiss="offcanvas"
+                ></RdsButton>
+              </div>
       </RdsOffcanvas>
     </>
   );
