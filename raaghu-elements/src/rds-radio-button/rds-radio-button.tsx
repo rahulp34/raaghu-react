@@ -44,7 +44,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
             <div
               key={idx}
               className={
-                "form-check " + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
+                "form-check mb-3 " + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
               }
             >
 

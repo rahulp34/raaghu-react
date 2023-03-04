@@ -1,3 +1,4 @@
+import { RdsLabel } from "raaghu-react-elements";
 import React, { useState, useEffect } from "react";
 import {
   RdsInput,
@@ -11,7 +12,7 @@ const RdsCompTenantInformation = (props: any) => {
     {
       id: 1,
       label: "Shared Database",
-      checked: false,
+      checked: true,
       name: "radio_button",
     },
     {
@@ -23,48 +24,44 @@ const RdsCompTenantInformation = (props: any) => {
   ];
 
   const RadioButton = "Separated Database";
-  const [editionList , setEditionList] = useState<any>([]);
-  const [tenantInformationData, setTenantInformationData] = useState<any>({
-    editionId: "",
-    name: "",
-    activationEndDate: null,
-    password: "",
-    activationState: 0,
-    adminEmailAddress: "",
-    connectionStrings: { id: "", default: null, databases: [] },
-  });
+  const [editionList, setEditionList] = useState<any>([]);
+  const [tenantInformationData, setTenantInformationData] = useState<any>(props.tenantInformationData1);
+  const [databaseUrl , setDatabaseUrl]= useState("");
 
-  useEffect(()=>{
-    setTenantInformationData(props.tenantInformationData)
-  },[props.tenantInformationData])
+  useEffect(() => {
+    debugger
+    setTenantInformationData(props.tenantInformationData1)
+  }, [props.tenantInformationData1])
 
-  useEffect(()=>{
+  useEffect(() => {
     setEditionList(props.editions)
-  },[props.editions])
+  }, [props.editions])
 
   function handleName(value: any) {
-    setTenantInformationData({...tenantInformationData, name:value})
+    setTenantInformationData({ ...tenantInformationData, name: value })
   }
 
   function handleEditionId(value: any) {
-    setTenantInformationData({...tenantInformationData, editionId:value})
+    
+    setTenantInformationData({ ...tenantInformationData, editionId: value })
   }
   function handleEmail(value: any) {
-    setTenantInformationData({...tenantInformationData, email:value})
+    debugger
+    setTenantInformationData({ ...tenantInformationData, adminEmailAddress: value })
   }
   function handlePassword(value: any) {
-    setTenantInformationData({...tenantInformationData, password:value})
+    setTenantInformationData({ ...tenantInformationData, password: value })
   }
-  function handleDatabaseURL(value: any){
-    setTenantInformationData({...tenantInformationData, connectionStrings:{...tenantInformationData.connectionStrings, id:value}})
+  function handleDatabaseUrl(value: any) {
+    setDatabaseUrl(value);
+    setTenantInformationData({ ...tenantInformationData, connectionStrings: { ...tenantInformationData.connectionStrings, id: value } })
   }
-
 
   return (
     <div>
       <div className="tab-content py-4">
         <form>
-          <div className="row align-items-center">
+          <div className="row ">
             <div className="col-md-6 sm-p-0">
               <div className="form-group mb-3">
                 <RdsInput
@@ -73,11 +70,10 @@ const RdsCompTenantInformation = (props: any) => {
                   label={"Name"}
                   value={tenantInformationData.name}
                   placeholder={"Enter Tenant Name"}
-                  onChange={(e)=>{handleName(e.target.value)}}
+                  onChange={(e) => { handleName(e.target.value) }}
                 ></RdsInput>
-                <div className="form-control-feedback"></div>
               </div>
-              <div className="form-group mb-3">       
+              <div className="form-group mb-3">
                 <label htmlFor="Edition" className="mb-2">
                   {"Edition"}
                 </label>
@@ -85,43 +81,40 @@ const RdsCompTenantInformation = (props: any) => {
                   label={"Select Edition"}
                   selectItems={editionList}
                   selectedValue={tenantInformationData.editionId}
-                  onSelectListChange={(e:any)=>{handleEditionId(e.target.value)}}
+                  onSelectListChange={(e: any) => { handleEditionId(e.target.value) }}
                 ></RdsSelectList>
               </div>
             </div>
-            <div className="col-md-6 text-center cursor-pointer sm-p-0">
+            <div className="col-md-6 cursor-pointer text-center mt-2 sm-p-0">
+             
               <img
                 src="./assets/edit-pic.png"
                 width="100"
-                //onClick={}
+              //onClick={}
               />
               <input
                 type="file"
                 id="file"
                 //ref={inputFile}
                 style={{ display: "none" }}
-              />
+              />      
             </div>
           </div>
-          <div className="mt-3 border-bottom text-muted">
-            
+          <div className="my-3 pb-2 border-bottom text-muted">
             <label htmlFor="Admin details">{"Admin Details"}</label>
           </div>
           <div className="row mt-4">
-            
             <div className="col-md-6 cursor-pointer sm-p-0">
-              
               <div className="form-group mb-3">
-                
                 <RdsInput
-                  required={false}
+                  required={true}
                   inputType="email"
-                  label="Username/Email"
-                  placeholder="Enter Username /Email"
+                  label="Email"
+                  placeholder="Enter Email"
                   name="email"
                   value={tenantInformationData.adminEmailAddress}
                   id="email"
-                  onChange={(e:any)=>{handleEmail(e.target.value)}}
+                  onChange={(e: any) => { handleEmail(e.target.value) }}
                 ></RdsInput>
               </div>
             </div>
@@ -135,7 +128,7 @@ const RdsCompTenantInformation = (props: any) => {
                   name="password"
                   id="password"
                   value={tenantInformationData.password}
-                  onChange={(e:any)=>{handlePassword(e.target.value)}}
+                  onChange={(e: any) => { handlePassword(e.target.value) }}
                 ></RdsInput>
               </div>
             </div>
@@ -147,33 +140,33 @@ const RdsCompTenantInformation = (props: any) => {
                   displayType="Default"
                   label=""
                   itemList={radioItemList}
-                  //onClick={props.onClick}
+                onClick={(e: any) => { handleDatabaseUrl(e.target.value) }}
                 ></RdsRadioButton>
               </div>
             </div>
           </div>
-          {RadioButton == "Separated Database" && (
+          {databaseUrl == "Separated Database" && (
+            <>
             <div className="row">
-              <div className="col-md-12 sm-p-0">
-                
-                <div className="form-group mb-3">
+            <div className="col-md-12 sm-p-0">
+              <div className="form-group mb-3">
+                <RdsInput
                   
-                  <RdsInput
-                    required={true}
-                    inputType="URL"
-                    label={"Database URL"}
-                    placeholder={"Enter URL"}
-                    name="URL"
-                    id="URL"
-                    value={tenantInformationData.connectionStrings.id}
-                    onChange={(e:any)=>{handleDatabaseURL(e.target.value)}}
-                    //onFocus={() => setUrlTouched(true)}
-                  ></RdsInput>
-                </div>
+                  inputType="URL"
+                  label={"Database URL"}
+                  placeholder={"Enter URL"}
+                  name="URL"
+                  id="URL"
+                  value={tenantInformationData.connectionStrings.id}
+                  // onChange={(e: any) => { handleDatabaseURL(e.target.value) }}
+                //onFocus={() => setUrlTouched(true)}
+                ></RdsInput>
               </div>
             </div>
+          </div>
+          </>
           )}
-          <div className="footer-buttons mb-2 d-flex"> 
+          <div className="footer-buttons mb-2 d-flex">
             <RdsButton
               class="me-2"
               tooltipTitle={""}
