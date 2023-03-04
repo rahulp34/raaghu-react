@@ -1,6 +1,6 @@
 import "./rds-comp-permission-tree.scss";
-import React, { useState, useEffect} from "react";
-import { RdsCheckbox } from "raaghu-react-elements";
+import React, { useState, useEffect } from "react";
+import { RdsCheckbox } from "../rds-elements";
 
 export interface RdsCompPermissionTreeProps {
   permissions: any[];
@@ -18,7 +18,7 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
 
   const [treeData, setTreeData] = useState(finalPermissionData);
   const [selectAll, setSelectAll] = useState(false);
-  const [selectAllInter, setSelectAllInter] = useState(false);  
+  const [selectAllInter, setSelectAllInter] = useState(false);
 
   useEffect(() => {
     for (let i = 0; i < treeData.length; i++) {
@@ -29,6 +29,7 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
         }
       }
     }
+    setEmittedData([]);
   }, []);
 
   // Select All Permissions
@@ -42,11 +43,20 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
     setSelectAll(event);
     setSelectAllInter(false);
     setTreeData(allCheck);
-    emitData(allCheck);
+    const emitPermissions: any = [];
+    for (let i = 0; i < allCheck.length; i++) {
+      allCheck[i].permissions.filter((x: any) => x.isGranted === event).forEach((ele: any) => {
+        const item = { name: ele.name, isGranted: ele.isGranted, parentName: ele.parentName };
+        emitPermissions.push(item);
+      });
+    }
+    setEmittedData(emitPermissions);
+    props.selectedPermissions(emitPermissions);
+    //emitData(allCheck);
   };
 
   // select Particluar Parent
-  function selectParentFn(event: any, checkData: any) {
+  function selectParentFn(event: any, checkData: any, mainParentIndex: number) {
     checkData.isChecked = event;
     const selectAllChild = treeData.map((parent: any) => {
       return {
@@ -61,8 +71,21 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
     });
     setTreeData(selectAllChild);
     setAll(selectAllChild);
-    emitData(selectAllChild);
+    emitData(event, checkData, mainParentIndex, selectAllChild);
+    //emitData(selectAllChild);
   }
+
+  const [emittedData, setEmittedData] = useState<{ name: string; parentName: string; isGranted: boolean; }[]>([]);
+  const [finalEmittedData, setFinalEmittedData] = useState<{ name: string; isGranted: boolean; }[]>([]);
+
+  useEffect(() => {
+    const data = emittedData.map(x => ({ name: x.name, isGranted: x.isGranted }));
+    setFinalEmittedData(data);
+  }, [emittedData]);
+
+  useEffect(() => {
+    console.log('finalEmittedData', finalEmittedData);
+  }, [finalEmittedData])
 
   // Select Children
   function selectChild(event: any, checkData: any, mainParentIndex: any) {
@@ -98,19 +121,78 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
         { ...main, isChecked: mainParentIndex === i ? false : main.isChecked, isIntermediate: false }));
     setAll(itemData);
     setTreeData(itemData);
-    emitData(itemData);
+    emitData(event, checkData, mainParentIndex, itemData);
+    //emitData(itemData);
   }
 
   // Emit Selected Data
-  function emitData(data: any[]) {
-    const emitPermissions: any = [];
-    for (let i = 0; i < data.length; i++) {
-      data[i].permissions.filter((x: any) => x.isGranted).forEach((ele: any) => {
-        const item = { name: ele.name, isGranted: ele.isGranted };
-        emitPermissions.push(item);
-      });
+  function emitData(event: boolean, checkData: any, mainParentIndex: number, allData: any) {
+    const findName = emittedData.find(x => x.name === checkData.name);
+    if (findName !== undefined) {
+      const data = emittedData.map(x => ({ ...x, isGranted: (x.name === checkData.name || x.parentName === checkData.name) ? event : x.isGranted }));
+      setEmittedData(data);
+      // const findParent = allData[mainParentIndex].permissions.find((x: any) => x.name === checkData.parentName);
+      // if (findParent !== undefined) {
+      //   const parentChildren = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === findParent.name && x.isGranted);
+      //   const alreadyParent = emittedData.find(x => x.name === findParent.name);
+      //   if (parentChildren.length > 0) {
+          
+      //   }
+      // }
     }
-    props.selectedPermissions(emitPermissions);
+    else {
+      let emit: any[] = [];
+      const findChildren: any[] = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === checkData.name);
+      if (findChildren.length > 0) {
+        findChildren.forEach((ele: any) => {
+          if (emittedData.find(x => x.name === ele.name) === undefined) {
+            const item = { name: ele.name, parentName: ele.parentName, isGranted: event };
+            emit.push(item);
+          }
+        });
+        emit.push({ name: checkData.name, parentName: checkData.parentName, isGranted: event });
+        const dataAfterSplice = emittedData.filter(x => x.parentName !== checkData.name);
+        const data = [...dataAfterSplice, ...emit];
+        setEmittedData(data);
+      } else {
+        emit.push({ name: checkData.name, parentName: checkData.parentName, isGranted: event });
+        const findParent = allData[mainParentIndex].permissions.find((x: any) => x.name === checkData.parentName);
+        if (findParent !== undefined) {
+          const parentChildren = allData[mainParentIndex].permissions.filter((x: any) => x.parentName === findParent.name && x.isGranted);
+          const alreadyParent = emittedData.find(x => x.name === findParent.name);
+          if (parentChildren.length > 0) {
+            if (alreadyParent === undefined) {
+              emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: true});
+              setEmittedData([...emittedData, ...emit]);
+            } else {
+              const setEmit = emittedData.map(x => ({ ...x, isGranted: x.name === findParent.name ? true : x.isGranted }));
+              setEmittedData([...setEmit, ...emit]);
+            }
+          } else {
+            // emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: false});
+            if (alreadyParent === undefined) {
+              emit.push({name: findParent.name, parentName: findParent.parentName, isGranted: false});
+              setEmittedData([...emittedData, ...emit]);
+            } else {
+              const setEmit = emittedData.map(x => ({ ...x, isGranted: x.name === findParent.name ? false : x.isGranted }));
+              setEmittedData([...setEmit, ...emit]);
+            }
+          }
+        } else {
+          setEmittedData([...emittedData, ...emit]);
+        }
+        
+      }
+      
+    }
+    // const emitPermissions: any = [];
+    // for (let i = 0; i < data.length; i++) {
+    //   data[i].permissions.filter((x: any) => x.isGranted).forEach((ele: any) => {
+    //     const item = { name: ele.name, isGranted: ele.isGranted };
+    //     emitPermissions.push(item);
+    //   });
+    // }
+    // props.selectedPermissions(emitPermissions);
   }
 
   // Show Vertical Line
@@ -153,7 +235,7 @@ const RdsCompPermissionTree = (props: RdsCompPermissionTreeProps) => {
           <div className="ms-4 position-relative">
             <div className="vertical-dotted-line" style={{ 'height': customHeightParent(mainParent) }} ></div>
             <div className="position-relative pt-4">
-              <RdsCheckbox label={mainParent.displayName} checked={mainParent.isChecked} state={mainParent.isIntermediate ? 'Indeterminate' : 'Checkbox'} onChange={(e) => selectParentFn(e.target.checked, mainParent)} />
+              <RdsCheckbox label={mainParent.displayName} checked={mainParent.isChecked} state={mainParent.isIntermediate ? 'Indeterminate' : 'Checkbox'} onChange={(e) => selectParentFn(e.target.checked, mainParent, mainParentIndex)} />
               <div className="horizontal-dotted-line dottedstyle"></div>
             </div>
             {mainParent.permissions.map((parent: any, i: number) => (
