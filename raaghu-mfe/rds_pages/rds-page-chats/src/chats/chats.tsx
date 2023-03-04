@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsButton, RdsIcon, RdsSearch } from "../../../rds-elements";
+import { RdsButton, RdsIcon, RdsSearch } from "raaghu-react-elements";
 
 const Chats = () => {
   return (
