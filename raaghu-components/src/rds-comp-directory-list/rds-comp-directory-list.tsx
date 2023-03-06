@@ -1,30 +1,37 @@
 import React,{useState} from "react";
+import { Link } from "react-router-dom";
 import { RdsIcon } from "../rds-elements";
 
-export interface RdsDirectoryListProps {
+export interface RdsCompDirectoryListProps {
   directory: Directory[];
+  path:any;
 }
 
 export interface Directory {
   name: string;
   children?: Directory[];
+  path : any;
 }
 
-const RdsDirectoryList = ({ directory }: RdsDirectoryListProps) => {
+const RdsCompDirectoryList = (props: RdsCompDirectoryListProps) => {
   const [expanded, setExpanded] = useState(false);
 
-  const handleExpand = () => {
+  const handleExpand = (e:any) => {
     setExpanded(!expanded);
+    props.path(e)
   };
 
   return (
-    <ul>
-      {directory.map((dir) => (
+    <>
+    <nav  aria-label="breadcrumb">
+  <ul className="breadcrumb">
+    <li className="breadcrumb-item"> 
+    {props.directory.map((dir) => (
         <div key={dir.name}>
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center ">
             {dir.children && (
-              <button className="me-2 border-0 bg-white" onClick={handleExpand}>
-                {expanded ? <RdsIcon name="chevron_down" height="8px" width="6px"  fill={false} stroke={true}></RdsIcon> : <RdsIcon name="chevron_right" height="8px" width="6px" fill={false} stroke={true}></RdsIcon>}
+              <button className="ms-2 me-2 border-0 bg-white" onClick={()=>{handleExpand(dir.name)}}>
+                {expanded ? <RdsIcon name="chevron_down" height="8px" width="6px"  fill={false} stroke={true} ></RdsIcon> : <RdsIcon name="chevron_right" height="8px" width="6px" fill={false} stroke={true}></RdsIcon>}
               </button>
             )}
             <span className="me-2 ms-1">
@@ -34,13 +41,18 @@ const RdsDirectoryList = ({ directory }: RdsDirectoryListProps) => {
             {dir.children && <span className="ms-2 mt-2">&nbsp;({dir.children.length})</span>}
           </div>
           {dir.children && expanded && (
-            <RdsDirectoryList directory={dir.children} />
+            <RdsCompDirectoryList directory={dir.children} path={props.path} />
           )}
         </div>
-      ))}
-    </ul>
+      ))}</li>
+  </ul>
+</nav>
+    </>
+    
+
+
   );
 };
 
-export default RdsDirectoryList;
+export default RdsCompDirectoryList;
 
