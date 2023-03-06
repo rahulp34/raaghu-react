@@ -13,7 +13,7 @@ import {
   RdsCompApplicationBasic,
   RdsCompPermissionTree
 } from "../../../rds-components";
-
+import { useTranslation } from "react-i18next";
 import {
   useAppDispatch,
   useAppSelector,
@@ -26,6 +26,8 @@ const Applications = () => {
   const [applicationId, setApplicationId] = useState("");
   const [permissionKeyName, setPermissionKeyName] = useState("")
   const [editApplicationData, setEditApplicationData] = useState<any>({});
+  const { t } = useTranslation();
+
 
   useEffect(() => {
     dispatch(fetchApplications() as any);

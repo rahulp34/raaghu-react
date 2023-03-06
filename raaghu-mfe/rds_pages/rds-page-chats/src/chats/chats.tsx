@@ -1,7 +1,12 @@
 import React from "react";
 import { RdsButton, RdsIcon, RdsSearch } from "raaghu-react-elements";
+import { useTranslation } from "react-i18next";
+
 
 const Chats = () => {
+  const { t } = useTranslation();
+
+
   return (
     <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
       <div className="row p-3">

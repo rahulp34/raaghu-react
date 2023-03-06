@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Directory } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
 import { RdsButton, RdsOffcanvas } from "../../../../../raaghu-elements/src";
 
@@ -42,6 +43,9 @@ const directories: Directory[] = [
   },
 ];
 const FileManagement = () => {
+  const { t } = useTranslation();
+
+
   return (
     <div className="New Folder">
       <div className="d-flex justify-content-end">

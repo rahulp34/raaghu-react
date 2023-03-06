@@ -33,8 +33,11 @@ import {
   updatePermission,
   updateUser,
 } from "../../../../libs/state-management/user/user-slice";
+import { useTranslation } from "react-i18next";
 
 const Users = () => {
+  const { t } = useTranslation();
+
   const tempRolesData = [
     { isChecked: false, name: "select all" },
     { isChecked: false, name: "Admin" },
