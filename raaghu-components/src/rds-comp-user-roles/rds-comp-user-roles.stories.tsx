@@ -5,7 +5,7 @@ import RdsCompUserRoles from "./rds-comp-user-roles";
 
 
 export default {
-  title: "RdsCompUserRoles",
+  title: "<components /User Roles",
 };
 
 export const Default = () => <RdsCompUserRoles usersRole={undefined} />;
