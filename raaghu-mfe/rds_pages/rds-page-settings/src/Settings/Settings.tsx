@@ -32,6 +32,7 @@ import {
   saveFeaturesSettings,
   saveIdentitySettings,
 } from "../../../../libs/state-management/settings/settings-slice";
+import { useTranslation } from "react-i18next";
 
 interface RdsCompSettingsProps {}
 const navtabsItems = [
@@ -54,6 +55,8 @@ const Settings = (props: RdsCompSettingsProps) => {
     smtpPassword: "",
     smtpDomain: "",
   });
+  const { t } = useTranslation();
+
   const [identitySettings, setIdentitySettings] = useState<any>({
     lockout: {
       allowedForNewUsers: false,

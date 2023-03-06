@@ -1,3 +1,5 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
@@ -12,7 +14,8 @@ import {
 import { RdsCompDirectoryList } from "../../../rds-components";
 
 const FileManagement = () => {
-  const[path,setPath]=useState("/");
+const { t } = useTranslation();
+const[path,setPath]=useState("/");
 
   const directories: Directory[] = [
     {
