@@ -44,6 +44,7 @@ const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
+const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -342,6 +343,13 @@ const Main = (props: MainProps) => {
       path: "/fileManagement",
       subTitle: t("File Management"),
     },
+    {
+      key: "6",
+      label: t("Blogger"),
+      icon: "blog",
+      path: "/blogger",
+      subTitle: t("Blogs, Posts, Articles"),
+    },
   ];
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -518,6 +526,7 @@ const Main = (props: MainProps) => {
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
+                    <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

@@ -119,3 +119,8 @@ declare module "FileManagement/FileManagement" {
 	const FileManagementComponent : React.ComponentType;
 	export default FileManagementComponent;
 }
+
+declare module "Blogger/Blogger" {
+	const BloggerComponent : React.ComponentType;
+	export default BloggerComponent;
+}

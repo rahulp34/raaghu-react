@@ -70,8 +70,8 @@ export const PortConfig = {
 	},
 	"chats":{
 		"port": "8026"
-  }
-	"fileManagement": {
-		"port": "8027"
+  },
+	"blogger": {
+		"port": "8028"
 	}
 }
