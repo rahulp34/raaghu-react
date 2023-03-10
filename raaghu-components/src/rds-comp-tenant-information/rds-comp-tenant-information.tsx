@@ -59,11 +59,11 @@ const RdsCompTenantInformation = (props: any) => {
 
   return (
     <div>
-      <div className="tab-content py-4">
+      <div className="tab-content">
         <form>
-          <div className="row ">
+          <div className="row align-items-center">
             <div className="col-md-6 sm-p-0">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <RdsInput
                   inputType="text"
                   required={true}
@@ -73,7 +73,7 @@ const RdsCompTenantInformation = (props: any) => {
                   onChange={(e) => { handleName(e.target.value) }}
                 ></RdsInput>
               </div>
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <label htmlFor="Edition" className="mb-2">
                   {"Edition"}
                 </label>
@@ -105,7 +105,7 @@ const RdsCompTenantInformation = (props: any) => {
           </div>
           <div className="row mt-4">
             <div className="col-md-6 cursor-pointer sm-p-0">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <RdsInput
                   required={true}
                   inputType="email"
@@ -119,7 +119,7 @@ const RdsCompTenantInformation = (props: any) => {
               </div>
             </div>
             <div className="col-md-6 sm-p-0">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <RdsInput
                   required={true}
                   label="Password"
@@ -135,7 +135,7 @@ const RdsCompTenantInformation = (props: any) => {
           </div>
           <div className="row">
             <div className="col-md-12 sm-p-0">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <RdsRadioButton
                   displayType="Default"
                   label=""
@@ -149,7 +149,7 @@ const RdsCompTenantInformation = (props: any) => {
             <>
             <div className="row">
             <div className="col-md-12 sm-p-0">
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <RdsInput
                   
                   inputType="URL"
