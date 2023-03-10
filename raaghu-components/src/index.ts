@@ -45,4 +45,5 @@ export {default as RdsCompFeatureManagement} from './rds-comp-feature-management
 export {default as RdsCompUserRoles} from './rds-comp-user-roles/rds-comp-user-roles'
 export {default as RdsDirectoryList} from './rds-comp-directory-list/rds-comp-directory-list'
 
+export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'
 

@@ -6,6 +6,7 @@ import {
   RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompPermissionTree,
+  RdsCompPermissionTreeNew,
   RdsCompUserBasics,
   RdsCompUserRoles,
 } from "../../../rds-components";
@@ -63,6 +64,7 @@ const Users = () => {
         data: node,
         level: level,
         selected: false,
+      
       };
 
       mapFields(node, newNode, fieldMappings);
@@ -214,6 +216,7 @@ const Users = () => {
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
     { label: "Roles", tablink: "#nav-role", id: 1 },
+    { label: "Organization Tree", tablink: "#nav-org", id: 2 },
   ];
 
   const offCanvasHandler = () => {};
@@ -221,28 +224,15 @@ const Users = () => {
   const [activeNavTabId, setActiveNavTabId] = useState();
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
 
-  const [organizationUnit, setOrganizationUnit] = useState([
-    { option: "a", value: "aa" },
-    { option: "b", value: "bb" },
-    { option: "c", value: "cc" },
-    { option: "d", value: "dd" },
-  ]);
+  const [organizationUnit, setOrganizationUnit] = useState<any[]>([]);
+  const [orgUnitIds, setOrgUnitIds] = useState<any[]>([]);
   const [roles, setRoles] = useState([
     { option: "t", value: "tt" },
     { option: "r", value: "rr" },
     { option: "w", value: "ww" },
     { option: "q", value: "qq" },
   ]);
-  const fabMenuListItems: any[] = [
-    {
-      value: "New User",
-      some: "value",
-      key: "new",
-      icon: "plus",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-  ];
+
   const canvasTitle = "New User";
   function onSelectMenu(event: any) {
     console.log(event);
@@ -273,6 +263,17 @@ const Users = () => {
       if (element.isChecked) rolesNames.push(element.name);
     });
     setRoleNames(rolesNames);
+  }
+
+  function handleOrganizationUnit(data: any, selected:boolean) {
+    debugger
+    let temporgUnit = orgUnitIds.map((element: any) => (
+      element != data.label
+    ));
+    if(selected){
+      temporgUnit.push(data.id)
+    }
+    setOrgUnitIds(temporgUnit);
   }
 
   function SelectesPermissions(permissionsData: any) {
@@ -350,7 +351,7 @@ const Users = () => {
 
   function createNewUser(data: any) {
     debugger
-    const tempData = { ...getUser, roleNames: roleNames };
+    const tempData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
     dispatch(createUser(tempData) as any).then((res: any) => {
 
       dispatch(fetchUsers() as any);
@@ -435,6 +436,7 @@ const Users = () => {
 
   },[data.editUserRoles])
 
+  
   function deleteHandler(data: any) {
     console.log(data);
     dispatch(deleteUser(userId) as any).then((result: any) => {
@@ -595,8 +597,6 @@ const Users = () => {
         >
           {activeNavTabId == 0 && (
             <RdsCompUserBasics
-              organizationUnit={organizationUnit}
-              roles={roles}
               userData={userData}
               createUser={(e: any) => {
                 getUserData(e);
@@ -611,6 +611,12 @@ const Users = () => {
                   handleRoleNamesData(data);
                 }}
               ></RdsCompUserRoles>
+              
+            </>
+          )}
+          {activeNavTabId == 2 && (
+            <>
+              <RdsCompPermissionTreeNew treeData={organizationUnit} onCheckboxChange={handleOrganizationUnit} />
               
             </>
           )}
