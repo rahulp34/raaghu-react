@@ -73,5 +73,8 @@ export const MfeConfig = {
    },
 	"fileManagement": {
 		"url": "fileManagement@http://localhost:8027/remoteEntry.js"
+	},
+	"forms": {
+		"url" : "forms@http://localhost:8037/remoteEntry.js"
 	}
 }

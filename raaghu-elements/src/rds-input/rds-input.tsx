@@ -145,9 +145,13 @@ const RdsInput = (props: RdsInputProps) => {
             )}
           </>
         )}
+        {props.required && ( 
+        <>
         <div className="form-control-feedback">
            {props.required && !props.value && haserror &&  (<span className="text-danger">{props.label} is required </span>)}
         </div>
+        </>)}
+        
       </div>
     );
   }

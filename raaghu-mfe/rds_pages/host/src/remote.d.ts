@@ -119,3 +119,8 @@ declare module "FileManagement/FileManagement" {
 	const FileManagementComponent : React.ComponentType;
 	export default FileManagementComponent;
 }
+
+declare module "Forms/Forms" {
+	const FormsComponent : React.ComponentType;
+	export default FormsComponent;
+}
