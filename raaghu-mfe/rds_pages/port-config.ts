@@ -77,4 +77,7 @@ export const PortConfig = {
   forms: {
     port: "8037",
   },
+	blogger: {
+		"port": "8028"
+	}
 };

@@ -3,6 +3,7 @@ import { RdsButton, RdsLabel, RdsOffcanvas, RdsSelectList, RdsTextArea } from "r
 import { useAppDispatch, useAppSelector } from "../../../../libs/state-management/hooks";
 import { allLanguagesCulture, getAllTemplates, getTemplateContent, restoreToDefault, saveTemplateContent } from "../../../../libs/state-management/text-template/text-template-slice";
 import { RdsCompDatatable } from "../../../rds-components";
+import { useTranslation } from "react-i18next";
 
 const TextTemplate = () => {
 
@@ -33,6 +34,8 @@ const TextTemplate = () => {
   const [selectedDataName, setSelectedDataName] = useState('');
   const [selectedReferenceValue, setSelectedReferenceValue] = useState('');
   const [selectedTargetValue, setSelectedTargetValue] = useState('');
+  const { t } = useTranslation();
+
 
   // Use Effects
   getAll();

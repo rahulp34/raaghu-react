@@ -24,6 +24,7 @@ import {
   fetchPermission,
   editPermisstion,
 } from "../../../../libs/state-management/roles/roles-slice";
+import { useTranslation } from "react-i18next";
 
 interface RdsPageRolesProps {}
 
@@ -42,6 +43,8 @@ const Roles = (props: RdsPageRolesProps) => {
   const enablecheckboxselection = true;
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
+  const { t } = useTranslation();
+
 
   useEffect(() => {
     dispatch(fetchRoles() as any);

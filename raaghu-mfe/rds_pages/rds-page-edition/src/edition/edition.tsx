@@ -295,7 +295,6 @@ const Edition = (props: RdsPageEditionProps) => {
         </div>
       </div>
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
-        <h3>{t("AccessDenied")}</h3>
         <RdsCompDatatable
           tableHeaders={tableHeaders}
           actions={actions}

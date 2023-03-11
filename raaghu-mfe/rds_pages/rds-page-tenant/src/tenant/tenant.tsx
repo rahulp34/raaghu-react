@@ -26,6 +26,7 @@ import {
   SaasTenantUpdateDto,
 } from "../../../../libs/shared/service-proxy";
 import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-features/rds-comp-new-features";
+import { useTranslation } from "react-i18next";
 
 interface RdsPageTenantProps {}
 
@@ -51,6 +52,8 @@ const checkboxlabel = [
 
 const Tenant = (props: RdsPageTenantProps) => {
   const data = useAppSelector((state) => state.persistedReducer.tenant);
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
   const [tableData, setTableData] = useState<any>([]);
   const [editionList, setEditionList] = useState<any>([]);

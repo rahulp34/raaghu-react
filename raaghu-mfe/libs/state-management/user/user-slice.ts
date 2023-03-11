@@ -13,6 +13,7 @@ export interface UserState {
   organizationUnit:any
   editUser:any
   roles:any
+  editUserRoles:any,
   error: string;
   permission:any;
 };
@@ -21,6 +22,7 @@ export const UserInitialState: UserState = {
   users: [],
   editUser:null,
   roles:null,
+  editUserRoles:null,
   organizationUnit:null,
   error: "",
   permission:null
@@ -33,10 +35,10 @@ const proxy = new ServiceProxy();
 
 export const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
-  () => {
-    return proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
+  async () => {
+    return await proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
       console.log(result);
-      return result;
+        return result;
     })
   }
 );
@@ -67,6 +69,20 @@ export const fetchEditUser = createAsyncThunk(
     })
   }
 );
+
+export const fetchEditUserRoles = createAsyncThunk("user/fetchEditUserRoles",
+(id:any)=>{
+  return proxy.rolesGET4(id).then((result)=>{
+    return result;
+  })
+})
+
+// export const fetchEditUserOrg = createAsyncThunk("user/fetchEditUserOrg",
+// (id:any)=>{
+//   return proxy.organizationUnitsAll(id).then((result)=>{
+//     return result;
+//   })
+// })
 
 export const updateUser = createAsyncThunk("user/updateUser",
 (data:any)=>{
@@ -113,6 +129,7 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchUsers.fulfilled,(state, action: PayloadAction<any>) => {
+      debugger
         state.loading = false;
         state.users = action.payload;
         state.error = "";
@@ -128,7 +145,7 @@ const userSlice = createSlice({
       state.loading = true;
     });
 
-    builder.addCase(
+    builder.addCase( 
       fetchOrganizationUnits.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
@@ -256,6 +273,21 @@ const userSlice = createSlice({
       }
     );
     builder.addCase(updatePermission.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+    
+    builder.addCase(fetchEditUserRoles.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      fetchEditUserRoles.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.editUserRoles = action.payload
+      }
+    );
+    builder.addCase(fetchEditUserRoles.rejected,(state,action)=>{
       state.loading=false;
       state.error=action.error.message||"Somethingwentwrong";
     });

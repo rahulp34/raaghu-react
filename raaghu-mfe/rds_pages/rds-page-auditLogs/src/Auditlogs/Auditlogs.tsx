@@ -19,6 +19,7 @@ import {
   auditLogsData,
   auditActionData,
 } from "../../../../libs/state-management/audit-logs/audit-log-slice";
+import { useTranslation } from "react-i18next";
 
 export interface RdsPageAuditlogsProps {
   listItem1?: any;
@@ -37,6 +38,8 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
   const audituser = useAppSelector((state) => state.persistedReducer.auditLog);
   const [auditData, setAuditData] = useState<any[]>([{}]);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+
 
 
 const Auditpayload = ()=>{

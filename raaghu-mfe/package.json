@@ -6,7 +6,6 @@
   "scripts": {
 
     "start": "concurrently \"cd rds_pages/rds-page-login && npm run dev\" \"cd rds_pages/rds-page-dashboard && npm run dev\" \"cd rds_pages/host && npm run dev\" \"cd rds_pages/rds-page-forgotpassword && npm run dev\" \"cd rds_pages/rds-page-tenant && npm run dev\" \"cd rds_pages/rds-page-edition && npm run dev\" \"cd rds_pages/rds-page-settings && npm run dev\" \"cd rds_pages/rds-page-auditLogs && npm run dev\" \"cd rds_pages/rds-page-roles && npm run dev\" \"cd rds_pages/rds-page-organizationUnits && npm run dev\" \"cd rds_pages/rds-page-language && npm run dev\" \"cd rds_pages/rds-page-users && npm run dev\" \"cd rds_pages/rds-page-iconlist && npm run dev\" \"cd rds_pages/rds-page-languageText && npm run dev\" \"cd rds_pages/rds-page-claimtypes && npm run dev\" \"cd rds_pages/rds-page-applications && npm run dev\" \"cd rds_pages/rds-page-texttemplate && npm run dev\" \"cd rds_pages/rds-page-securitylogs && npm run dev\" \"cd rds_pages/rds-page-apiScope && npm run dev\" \"cd rds_pages/rds-page-chats && npm run dev\" \"cd rds_pages/rds-page-fileManagement && npm run dev\" \"cd rds_pages/rds-page-forms && npm run dev\"",
-
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "node utils/build.js"
@@ -31,6 +30,7 @@
     "in": "^0.19.0",
     "level": "^8.0.0",
     "quill": "^1.3.7",
+    "raaghu-react-elements": "^0.4.0",
     "raaghu-themes": "^0.0.16",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",

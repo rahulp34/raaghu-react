@@ -124,3 +124,7 @@ declare module "Forms/Forms" {
 	const FormsComponent : React.ComponentType;
 	export default FormsComponent;
 }
+declare module "Blogger/Blogger" {
+	const BloggerComponent : React.ComponentType;
+	export default BloggerComponent;
+}

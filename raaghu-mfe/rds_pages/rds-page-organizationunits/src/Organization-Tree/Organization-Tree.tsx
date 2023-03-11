@@ -30,6 +30,7 @@ import {
   deleteRolesOrganizationUnit,
   editRolesOrganizationUnit,
 } from "../../../../libs/state-management/organization-tree/organization-tree-slice";
+import { useTranslation } from "react-i18next";
 
 export interface OrganizationTreeProps {
   onActionSelection?(arg: any): void;
@@ -47,6 +48,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
     rolesListSelected: [],
   });
   const [oData, setOData] = useState([]);
+  const { t } = useTranslation();
+
   const [id, setId] = useState({
     id: null,
     memberId: null,

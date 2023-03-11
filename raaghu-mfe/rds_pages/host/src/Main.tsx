@@ -16,7 +16,6 @@ import {
 } from "../../rds-components";
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import MyComponent from "./MyComponent";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
 const ForgotPasswordCompo = React.lazy(
@@ -46,6 +45,8 @@ const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
+const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
+
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -146,20 +147,34 @@ const Main = (props: MainProps) => {
   // OnClickHandler for language change
 
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
   const onClickHandler = (e: any) => {
-    setCurrentLanguage(e.target.getAttribute("data-name"));
+    debugger
+    setCurrentLanguage(e.target.getAttribute("data-name"));    
   };
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state:any) => state.persistedReducer.localization) as any;
 
   useEffect(() => {
-    i18n.changeLanguage(currentLanguage);
+    debugger
     dispatch(fetchLocalization(currentLanguage) as any);
   }, [currentLanguage]);
-console.log('localization ', Data.localization)
-  // Datas for side nav
+  
+  useEffect(()=>{
+    debugger
+    console.log(Data.localization)
+    i18n.changeLanguage(currentLanguage);
+    var data1 = {};
+    const translation= Data.localization.resources;
+    Object.keys(translation).forEach(key => {
+        data1 = {...data1, ...translation[key].texts}
+    })
+    console.log(data1)
+    // Object.keys(response.data.resources).forEach(key => {
+    i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+  },[Data.localization])
 
   const sideNavItems = [
     {
@@ -296,7 +311,7 @@ console.log('localization ', Data.localization)
           key: "3-3",
           label: t("Text-Template"),
           icon: "languages",
-          path: "/template-text",
+          path: "/text-template",
           subTitle: t("Manage user interface languages"),
         },
         {
@@ -336,6 +351,14 @@ console.log('localization ', Data.localization)
       path: "/forms",
       subTitle: t("Forms"),
     },
+    {
+      key: "7",
+      label: t("Blogger"),
+      icon: "blog",
+      path: "/blogger",
+      subTitle: t("Blogs, Posts, Articles"),
+    },
+
   ];
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -437,7 +460,6 @@ console.log('localization ', Data.localization)
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0 main-body">
                 <div className="aside ng-tns-c99-0" id="aside">
                   <div className="mx-2 pt-2">
-                    <MyComponent/>
                     <RdsCompSideNavigation
                       sideNavItems={sideNavItems}
                       onClick={sideNavOnClickHandler}
@@ -515,6 +537,7 @@ console.log('localization ', Data.localization)
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
 
+                    <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>
