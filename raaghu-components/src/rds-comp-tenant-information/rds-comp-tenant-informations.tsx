@@ -60,9 +60,10 @@ const RdsCompTenantInformation = (props: any) => {
     setTenantInformationData({...tenantInformationData, adminPassword:value})
   }
   function handleDatabaseURL(value: any){
+    console.log();
+    
     setTenantInformationData({...tenantInformationData, connectionStrings:{...tenantInformationData.connectionStrings, id:value}})
   }
-
 
   return (
     <div>
@@ -89,7 +90,7 @@ const RdsCompTenantInformation = (props: any) => {
                   label={"Select Edition"}
                   selectItems={editionList}
                   selectedValue={tenantInformationData.editionId}
-                  onSelectListChange={(e:any)=>{handleEditionId(e.target.value)}}
+                  onSelectListChange={(e:any)=>{handleEditionId(e)}}
                 ></RdsSelectList>
               </div>
             </div>

@@ -51,7 +51,7 @@ export const fetchEdition= createAsyncThunk(
 export const createTenant= createAsyncThunk(
   "tenant/createTenant",
   (data:any)=>{
-    return proxy.tenantsPOST(data).then((result:any)=>{
+    return proxy.tenantsPOST(data.data).then((result:any)=>{
       return result
     })
   }
@@ -115,7 +115,8 @@ export const tenantPut= createAsyncThunk(
 export const tenantFeaturesGet= createAsyncThunk(
   "tenant/tenantFeaturesGet",
   (data:any)=>{
-    return proxy.featuresGET("T",data).then((result:any)=>{
+    return proxy.featuresGET("T",data.id).then((result:any)=>{
+      // debugger;
       return result
     })
   }
