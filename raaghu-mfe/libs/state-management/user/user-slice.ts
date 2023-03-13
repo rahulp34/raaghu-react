@@ -129,7 +129,7 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchUsers.fulfilled,(state, action: PayloadAction<any>) => {
-      debugger
+      
         state.loading = false;
         state.users = action.payload;
         state.error = "";

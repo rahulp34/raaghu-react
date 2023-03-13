@@ -1,6 +1,5 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
 import { Directory } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
@@ -11,7 +10,7 @@ import {
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
 
-import { RdsCompDirectoryList } from "../../../rds-components";
+// import { RdsCompDirectoryList } from "../../../rds-components";
 
 const FileManagement = () => {
 const { t } = useTranslation();
@@ -174,7 +173,6 @@ const[path,setPath]=useState("/");
   },[path])
 
   function setPathValue(event:any){
-    debugger
     setPath(event)
 
   }
@@ -240,10 +238,10 @@ const[path,setPath]=useState("/");
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
         <div className="row">
           <div className="col-md-3 pt-3">
-            <RdsCompDirectoryList
+            {/* <RdsCompDirectoryList
               directory={directories}
               path={setPathValue}
-            ></RdsCompDirectoryList>
+            ></RdsCompDirectoryList> */}
           </div>
 
           <div className="col-md-9 border-start">

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxies";
+import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
   allblogs: any,

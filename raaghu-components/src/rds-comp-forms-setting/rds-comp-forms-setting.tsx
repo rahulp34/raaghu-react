@@ -37,7 +37,7 @@ const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 
 	const handleFormSettings = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		debugger
+		
 	};
 	return (
 		<>

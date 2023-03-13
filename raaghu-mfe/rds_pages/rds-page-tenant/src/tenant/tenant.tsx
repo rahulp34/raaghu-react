@@ -160,7 +160,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     },[data.tenants])
 
     useEffect(()=>{
-      debugger
+      
       if(data.feature){
         let tempFeatureData :any[] = [];
         data.feature.groups.map((item:any)=>{
@@ -200,7 +200,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     }, [data.edition]);
 
     useEffect(()=>{
-      debugger
+      
       if(data.editTenant){
         setTenantInformationData(data.editTenant);
       }

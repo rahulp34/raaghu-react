@@ -258,7 +258,7 @@ const Users = () => {
 
   function handleRoleNamesData(data: any) {
     let rolesNames: any[] = [];
-    debugger;
+    
     data.forEach((element: any) => {
       if (element.isChecked) rolesNames.push(element.name);
     });
@@ -266,7 +266,7 @@ const Users = () => {
   }
 
   function handleOrganizationUnit(data: any, selected:boolean) {
-    debugger
+    
     let temporgUnit = orgUnitIds.map((element: any) => (
       element != data.label
     ));
@@ -281,7 +281,7 @@ const Users = () => {
   }
 
   const onActionSelection = (rowData: any, actionId: any) => {
-    debugger
+    
     setPermissionKeyName(rowData.id);
     setUserId(rowData.id); 
     dispatch(fetchEditUser(String(rowData.id)) as any);
@@ -350,7 +350,7 @@ const Users = () => {
   }
 
   function createNewUser(data: any) {
-    debugger
+    
     const tempData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
     dispatch(createUser(tempData) as any).then((res: any) => {
 
@@ -368,7 +368,7 @@ const Users = () => {
   }
 
   function updateUserData(data: any) {
-    debugger
+    
     let updateData:any = {}
     if(getUser.name){
        updateData = { ...getUser, roleNames: roleNames };
@@ -398,7 +398,7 @@ const Users = () => {
 
   useEffect(() => {
     let tempRoleData: any[] = [];
-    debugger
+    
     if (data.roles){
       data.roles.items.map((el: any) => {
         const data3 = {
@@ -450,7 +450,7 @@ const Users = () => {
 
   useEffect(() => {
     if (data.permission) {
-      debugger;
+      
       setUserPermission(data.permission.groups);
     }
   }, [data.permission]);
@@ -517,7 +517,7 @@ const Users = () => {
 
   // useEffect(() => {
   //   if (data.roles) {
-  //     debugger;
+  //     
   //     console.log(data.roles);
   //     let tempRoleData: any[] = [];
   //     data.roles.items.map((item: any) => {
@@ -533,7 +533,7 @@ const Users = () => {
 
   useEffect(() => {
     if (data.editUser) {
-      debugger;
+      
       setUserData(data.editUser);
     }
   }, [data.editUser]);

@@ -12,7 +12,7 @@ const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 	});
 	const [formQuestionsData, setFormQuestionsData] = useState<any>({});
 	function handleNewFormData(basicInfo: any) {
-		debugger
+		
 		setbasicEditFormData({ title: '', description: '' });
 	}
 
