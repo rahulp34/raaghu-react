@@ -16,6 +16,7 @@ export interface UserState {
   editUserRoles:any,
   error: string;
   permission:any;
+  editorganizationUnit : any;
 };
 export const UserInitialState: UserState = {
   loading: false,
@@ -25,7 +26,8 @@ export const UserInitialState: UserState = {
   editUserRoles:null,
   organizationUnit:null,
   error: "",
-  permission:null
+  permission:null,
+  editorganizationUnit:[]
 
 };
 
@@ -118,6 +120,31 @@ export const updatePermission = createAsyncThunk("user/updatePermission", (data:
      return result;
   }) 
 });
+
+export const fetchOrgUnit = createAsyncThunk("user/updatePermission", (data:any) => {
+  return proxy.availableOrganizationUnits(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getSelectedOrgUnit = createAsyncThunk("user/getSelectedOrgUnit", (id:string) => {
+  return proxy.organizationUnitsAll(id,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+
+export const fetchRolesForEdit = createAsyncThunk("user/fetchRoles", (data:any) => {
+  return proxy.assignableRoles(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+// export const getRolesForEdit = createAsyncThunk("user/getRoles", (id:string) => {
+//   return proxy.rolesPUT(id,undefined).then((result:any)=>{
+//      return result;
+//   }) 
+// });
 
 const userSlice = createSlice({
   name: "user",
@@ -221,6 +248,8 @@ const userSlice = createSlice({
         state.error = "";
       }
     );
+ 
+    
 
     builder.addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
@@ -291,6 +320,14 @@ const userSlice = createSlice({
       state.loading=false;
       state.error=action.error.message||"Somethingwentwrong";
     });
+
+    builder.addCase(
+      getSelectedOrgUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.editorganizationUnit = action.payload;
+      }
+    );
   },
 });
 
