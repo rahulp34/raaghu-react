@@ -25,7 +25,7 @@ export interface RdsNavtabsProps {
 }
 
 const RdsNavtabs = (props: RdsNavtabsProps) => {
-  
+  const [activeNavTabId,setActiveNavTabId]=useState(props.activeNavTabId)
   const [activeTabKey, setActiveTabKey] = useState(props.navtabsItems[0].id);
   useEffect(() => {
     props.activeNavtabOrder != undefined &&
@@ -34,6 +34,10 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
   useEffect(() => {
     if (props.isNextPressed === true) setActiveTabKey(props.activeNavTabId);
   }, [props.isNextPressed]);
+
+  useEffect(()=>{
+    setActiveNavTabId(props.activeNavTabId)
+  },[props.activeNavTabId])
   return (
     <div >
       <ul
@@ -55,7 +59,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
             <a className={
                 "nav-link rounded-0 py-3 px-3 pe-auto" +
                 (navtabsItem.id === activeTabKey ||
-                  navtabsItem.id === props.activeNavTabId
+                  navtabsItem.id === activeNavTabId
                   ?( props.type === "tabs" ?" border-bottom border-primary border-3 text-primary ":" active") 
                   : "inactive") +
                   (navtabsItem.disabled ? " disabled " : "")

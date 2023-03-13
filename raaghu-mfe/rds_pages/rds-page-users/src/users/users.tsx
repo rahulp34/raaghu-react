@@ -28,9 +28,11 @@ import {
   fetchEditUser,
   fetchEditUserRoles,
   fetchOrganizationUnits,
+  fetchOrgUnit,
   fetchRoles,
   fetchUsers,
   getPermission,
+  getSelectedOrgUnit,
   updatePermission,
   updateUser,
 } from "../../../../libs/state-management/user/user-slice";
@@ -63,8 +65,7 @@ const Users = () => {
       let newNode: any = {
         data: node,
         level: level,
-        selected: false,
-      
+        selected: false
       };
 
       mapFields(node, newNode, fieldMappings);
@@ -119,18 +120,7 @@ const Users = () => {
     password: "",
   });
   const [userPermission, setUserPermission] = useState<any>([]);
-  const [tableData, setTableData] = useState([
-    {
-      id: 1,
-      userName: "tet04",
-      name: "test04",
-      roles: "Admin, HR",
-      emaiAddress: "test04@yopmail.com",
-      emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
-      status: { badgeColorVariant: "success", content: "Active" },
-      creationTime: "01/04/2023, 09:20:51 AM",
-    },
-  ]);
+  const [tableData, setTableData] = useState<any[]>([ ]);
 
   const tableHeaders = [
     {
@@ -201,28 +191,23 @@ const Users = () => {
     },
   ];
 
-  const editionList = [
-    { option: "Not assigned" },
-    { option: "Standard" },
-    { option: "apple" },
-    { option: "Apple1" },
-  ];
 
   const navtabsItemsEdit = [
-    { label: "User Information", tablink: "#nav-home", id: 0 },
+    { label: "Basics", tablink: "#nav-home", id: 0 },
     { label: "Roles", tablink: "#nav-role", id: 1 },
-    { label: "Permissions", tablink: "#nav-profile", id: 2 },
+    { label: "Organization Units", tablink: "#nav-org", id: 2 },
+    { label: "Permissions", tablink: "#nav-profile", id: 3 },
   ];
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
     { label: "Roles", tablink: "#nav-role", id: 1 },
-    { label: "Organization Tree", tablink: "#nav-org", id: 2 },
+    { label: "Organization Units", tablink: "#nav-org", id: 2 },
   ];
 
   const offCanvasHandler = () => {};
   const [getUser, setGetUserData] = useState<any>({});
   const [activeNavTabId, setActiveNavTabId] = useState();
-  const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
+  const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState<any>(0);
 
   const [organizationUnit, setOrganizationUnit] = useState<any[]>([]);
   const [orgUnitIds, setOrgUnitIds] = useState<any[]>([]);
@@ -232,19 +217,15 @@ const Users = () => {
     { option: "w", value: "ww" },
     { option: "q", value: "qq" },
   ]);
-
   const canvasTitle = "New User";
   function onSelectMenu(event: any) {
     console.log(event);
-    // if (event.key === 'new') {
-    //   event = new PointerEvent("click")
-    //   this.newUser(event);
-    // }
+    
   }
   const [roleNames, setRoleNames] = useState<any>();
   const [selectedPermissionListData, setSelectedPermissionListData] =
     useState<any>([]);
-
+ const [editOrganizationUnit,setEditOrganizationUnit]=useState<any[]>([]);
   const [permissionKeyName, setPermissionKeyName] = useState(0);
   function handleSelectesPermission() {
     const permissions: any = {
@@ -267,16 +248,23 @@ const Users = () => {
 
   function handleOrganizationUnit(data: any, selected:boolean) {
     debugger
-    let temporgUnit = orgUnitIds.map((element: any) => (
-      element != data.label
-    ));
-    if(selected){
-      temporgUnit.push(data.id)
+    const orgData=orgUnitIds.includes(data.data.id)
+
+    let temporgUnit = orgUnitIds.filter((element: any) => {
+      if(element != data.data.id){
+        return element;
+      }
+  });
+
+    if(!orgData){
+      temporgUnit.push(data.data.id)
     }
+    debugger
     setOrgUnitIds(temporgUnit);
   }
 
-  function SelectesPermissions(permissionsData: any) {
+  function SelectesPermissions(permissionsData: any
+    ) {
     setSelectedPermissionListData(permissionsData);
   }
 
@@ -287,6 +275,8 @@ const Users = () => {
     dispatch(fetchEditUser(String(rowData.id)) as any);
     dispatch(getPermission(rowData.id) as any);
     dispatch(fetchEditUserRoles(rowData.id) as any);
+    dispatch(getSelectedOrgUnit(rowData.id)as any);
+    setActiveNavTabIdEdit(0)
   };
 
   function getSelectedPermissions(data: any) {
@@ -295,30 +285,6 @@ const Users = () => {
   function getSelectedNavTab(event: any) {
     console.log(event);
   }
-
-  // const exportToExcel = () => {
-  //   // create an empty excel workbo
-  //   const wb = X  LSX.utils.book_new();
-
-  //   // create the headers and data arrays
-  //   const headers = tableHeaders.map(header => header.displayName);
-  //   const data = tableData.map(row => {
-  //     let dataRow = {}
-  //     tableHeaders.forEach(header => {
-  //       dataRow[header.displayName] = row[header.key]
-  //     })
-  //     return dataRow
-  //   });
-
-  //   // create a worksheet and add the headers and data
-  //   const ws = XLSX.utils.json_to_sheet([headers, ...data]);
-
-  //   // add the worksheet to the workbook
-  //   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-  //   // write the workbook to a file
-  //   XLSX.writeFile(wb, "data.xlsx")
-  // }
 
   const exportToExcel = () => {
     // create an empty excel workbook
@@ -366,15 +332,28 @@ const Users = () => {
       password: "",
     });
   }
+ function offcanvasClose(){
+    setUserData({
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      twoFactorEnabled: false,
+      userName: "",
+      password: "",
+    })
+    setUseRolesData(userRolesData);
+    setOrganizationUnit(organizationUnit)
 
+ }
   function updateUserData(data: any) {
     debugger
     let updateData:any = {}
     if(getUser.name){
-       updateData = { ...getUser, roleNames: roleNames };
+       updateData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
     }
     else{
-       updateData = { ...userData, roleNames: roleNames };
+       updateData = { ...userData, roleNames: roleNames,organizationUnitIds:orgUnitIds };
     }
     dispatch(updateUser({id:userId, body:updateData}) as any).then((res: any) => {
       dispatch(fetchUsers() as any);
@@ -390,6 +369,7 @@ const Users = () => {
     });
   }
   useEffect(() => {
+    debugger;
     dispatch(fetchUsers() as any);
     dispatch(fetchOrganizationUnits() as any);
     dispatch(fetchRoles() as any);
@@ -397,6 +377,7 @@ const Users = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    debugger;
     let tempRoleData: any[] = [];
     debugger
     if (data.roles){
@@ -412,6 +393,7 @@ const Users = () => {
   }, [data.roles]);
 
   useEffect(()=>{
+    debugger;
     if(data.editUserRoles){
       let editRolesUserData:any[] = [];
       if(userRolesData){
@@ -431,10 +413,41 @@ const Users = () => {
     }
       console.log(editRolesUserData)
       setEditRoleData(editRolesUserData);
+  }
 
+
+  },[data.editUserRoles]) 
+
+   
+  function recursionFunction(organizationUnit:any, selectedOrgUnit:any){
+    debugger
+    return organizationUnit.map((el:any)=>{
+      selectedOrgUnit.map((e:any)=>{
+        if(el.data.id == e.id){
+          el.selected = true;
+        }
+      })
+      if(el.children.length){
+        el.children = recursionFunction(el.children, selectedOrgUnit);
+        return el;
+      }
+      else{ 
+        return el;
+      }
+     }) 
+  } 
+
+  useEffect(()=>{
+    debugger
+    if(data.editorganizationUnit?.length){
+      let tempEditOrgData:any[] = recursionFunction(organizationUnit,data.editorganizationUnit)
+      setEditOrganizationUnit(tempEditOrgData)
+      console.log(tempEditOrgData)
     }
-
-  },[data.editUserRoles])
+    else{
+      setEditOrganizationUnit(organizationUnit)
+    }
+  },[data.editorganizationUnit])
 
   
   function deleteHandler(data: any) {
@@ -444,18 +457,16 @@ const Users = () => {
     });
   }
 
-  function handlerSelectedPermission(data: any) {
-    console.log(data);
-  }
-
   useEffect(() => {
+    debugger;
     if (data.permission) {
-      debugger;
+      
       setUserPermission(data.permission.groups);
     }
   }, [data.permission]);
 
   useEffect(() => {
+    debugger;
     if (data.users) {
       let tempTableData: any[] = [];
       data.users.items.map((item: any) => {
@@ -480,9 +491,10 @@ const Users = () => {
   }
 
   useEffect(() => {
+    debugger;
     let tempOrgData: any[] = [];
     if (data.organizationUnit) {
-      console.log(data.organizationUnit);
+     console.log(data.organizationUnit);
       const treeData1 = createTree(
         data.organizationUnit.items,
         "parentId",
@@ -515,23 +527,10 @@ const Users = () => {
     setOrganizationUnit(tempOrgData);
   }, [data.organizationUnit]);
 
-  // useEffect(() => {
-  //   if (data.roles) {
-  //     debugger;
-  //     console.log(data.roles);
-  //     let tempRoleData: any[] = [];
-  //     data.roles.items.map((item: any) => {
-  //       const data = {
-  //         option: item.name,
-  //         value: item.id,
-  //       };
-  //       tempRoleData.push(data);
-  //     });
-  //     setRoles(tempRoleData);
-  //   }
-  // }, [data.roles]);
+
 
   useEffect(() => {
+    debugger;
     if (data.editUser) {
       debugger;
       setUserData(data.editUser);
@@ -583,7 +582,7 @@ const Users = () => {
         offcanvaswidth={650}
         placement={"end"}
         onClose={(e) => {
-          close();
+        offcanvasClose()
         }}
       >
         <RdsNavtabs
@@ -651,6 +650,9 @@ const Users = () => {
         offcanvaswidth={650}
         backDrop={false}
         scrolling={false}
+        onClose={(e) => {
+          offcanvasClose()}
+        }
         preventEscapeKey={false}
       >
         <RdsNavtabs
@@ -674,7 +676,6 @@ const Users = () => {
             />
           )}
 
-
            {activeNavTabIdEdit == 1 && (
             <>
               <RdsCompUserRoles
@@ -688,6 +689,14 @@ const Users = () => {
           )}
           
           {activeNavTabIdEdit == 2 && (
+            <>
+             <RdsCompPermissionTreeNew treeData={editOrganizationUnit}
+              onCheckboxChange={handleOrganizationUnit} />
+              
+            </>
+          )}
+          
+          {activeNavTabIdEdit == 3 && (
             <>
               <RdsCompPermissionTree
                 permissions={userPermission}
