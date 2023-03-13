@@ -44,6 +44,7 @@ const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
+const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 
 export interface MainProps {
@@ -345,11 +346,19 @@ const Main = (props: MainProps) => {
     },
     {
       key: "6",
+      label: t("Forms"),
+      icon: "icons",
+      path: "/forms",
+      subTitle: t("Forms"),
+    },
+    {
+      key: "7",
       label: t("Blogger"),
       icon: "blog",
       path: "/blogger",
       subTitle: t("Blogs, Posts, Articles"),
     },
+
   ];
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -526,6 +535,8 @@ const Main = (props: MainProps) => {
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
+                    <Route path="/forms" element={<FormsCompo />} />
+
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
