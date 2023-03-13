@@ -455,6 +455,7 @@ const Main = (props: MainProps) => {
                 logo={logo}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
+                onChatClickHandler={()=>{console.log("Hey Chat Button Clicked!!")}}
               />
             </div>
             <div

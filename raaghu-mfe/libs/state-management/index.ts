@@ -21,6 +21,7 @@ import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
+import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
 
 const persistConfig={
@@ -47,8 +48,8 @@ const rootReducer = combineReducers({
   settings: settingsReducer,
   tenant:tenantReducer,
   localization:localizationReducer, 
-  blogger:bloggerReducer, 
-
+  chats: chatsReducer,
+  blogger:bloggerReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
