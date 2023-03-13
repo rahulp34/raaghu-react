@@ -68,7 +68,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setFormQuestions({ ...formQuestions, title: value })
 	}
 	function setSelectedOption(value: any) {
-		debugger
+		
 		setFormQuestions({ ...formQuestions, questionType: value })
 	}
 	function setOption(index: number, value: any) {
@@ -78,7 +78,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 	}
 	let [count, setCount] = useState(1);
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		debugger
+		
 		console.log('event form-questions', event);
 		setCount(count + 1);
 	};
@@ -98,7 +98,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		{ option: "checkboxes", value: 3 },
 		{ option: "dropdown", value: 4 }]
 	function handleAddMoreChoices() {
-		debugger
+		
 		let tempChoices = choices.map((e: any) => {
 			return e;
 		})
@@ -109,7 +109,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setFormQuestions(props.formQuestionsData)
 	}, [props.formQuestionsData])
 	useEffect(() => {
-		debugger
+		
 		setFormQuestions({ ...formQuestions, choices })
 	}, [choices])
 	return (

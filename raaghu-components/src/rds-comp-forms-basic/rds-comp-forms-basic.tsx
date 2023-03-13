@@ -16,7 +16,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 	}
 
 	useEffect(() => {
-		debugger
+		
 		setBasicFormData(props.basicInfo)
 		console.log(basicFormData,"basicFormData");
 		

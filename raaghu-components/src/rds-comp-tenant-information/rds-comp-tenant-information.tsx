@@ -29,7 +29,7 @@ const RdsCompTenantInformation = (props: any) => {
   const [databaseUrl , setDatabaseUrl]= useState("");
 
   useEffect(() => {
-    debugger
+    
     setTenantInformationData(props.tenantInformationData1)
   }, [props.tenantInformationData1])
 
@@ -46,7 +46,7 @@ const RdsCompTenantInformation = (props: any) => {
     setTenantInformationData({ ...tenantInformationData, editionId: value })
   }
   function handleEmail(value: any) {
-    debugger
+    
     setTenantInformationData({ ...tenantInformationData, adminEmailAddress: value })
   }
   function handlePassword(value: any) {

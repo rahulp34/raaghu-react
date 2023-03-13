@@ -151,19 +151,19 @@ const Main = (props: MainProps) => {
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
   const onClickHandler = (e: any) => {
-    debugger
+    
     setCurrentLanguage(e.target.getAttribute("data-name"));    
   };
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state:any) => state.persistedReducer.localization) as any;
 
   useEffect(() => {
-    debugger
+    
     dispatch(fetchLocalization(currentLanguage) as any);
   }, [currentLanguage]);
   
   useEffect(()=>{
-    debugger
+    
     console.log(Data.localization)
     i18n.changeLanguage(currentLanguage);
     var data1 = {};

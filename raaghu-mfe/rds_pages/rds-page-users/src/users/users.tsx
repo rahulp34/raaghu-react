@@ -239,7 +239,7 @@ const Users = () => {
 
   function handleRoleNamesData(data: any) {
     let rolesNames: any[] = [];
-    debugger;
+    
     data.forEach((element: any) => {
       if (element.isChecked) rolesNames.push(element.name);
     });
@@ -247,7 +247,6 @@ const Users = () => {
   }
 
   function handleOrganizationUnit(data: any, selected:boolean) {
-    debugger
     const orgData=orgUnitIds.includes(data.data.id)
 
     let temporgUnit = orgUnitIds.filter((element: any) => {
@@ -259,7 +258,6 @@ const Users = () => {
     if(!orgData){
       temporgUnit.push(data.data.id)
     }
-    debugger
     setOrgUnitIds(temporgUnit);
   }
 
@@ -269,7 +267,7 @@ const Users = () => {
   }
 
   const onActionSelection = (rowData: any, actionId: any) => {
-    debugger
+    
     setPermissionKeyName(rowData.id);
     setUserId(rowData.id); 
     dispatch(fetchEditUser(String(rowData.id)) as any);
@@ -316,7 +314,7 @@ const Users = () => {
   }
 
   function createNewUser(data: any) {
-    debugger
+    
     const tempData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
     dispatch(createUser(tempData) as any).then((res: any) => {
 
@@ -347,7 +345,7 @@ const Users = () => {
 
  }
   function updateUserData(data: any) {
-    debugger
+    
     let updateData:any = {}
     if(getUser.name){
        updateData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
@@ -369,7 +367,6 @@ const Users = () => {
     });
   }
   useEffect(() => {
-    debugger;
     dispatch(fetchUsers() as any);
     dispatch(fetchOrganizationUnits() as any);
     dispatch(fetchRoles() as any);
@@ -377,9 +374,8 @@ const Users = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    debugger;
     let tempRoleData: any[] = [];
-    debugger
+    
     if (data.roles){
       data.roles.items.map((el: any) => {
         const data3 = {
@@ -393,7 +389,6 @@ const Users = () => {
   }, [data.roles]);
 
   useEffect(()=>{
-    debugger;
     if(data.editUserRoles){
       let editRolesUserData:any[] = [];
       if(userRolesData){
@@ -420,7 +415,6 @@ const Users = () => {
 
    
   function recursionFunction(organizationUnit:any, selectedOrgUnit:any){
-    debugger
     return organizationUnit.map((el:any)=>{
       selectedOrgUnit.map((e:any)=>{
         if(el.data.id == e.id){
@@ -438,7 +432,6 @@ const Users = () => {
   } 
 
   useEffect(()=>{
-    debugger
     if(data.editorganizationUnit?.length){
       let tempEditOrgData:any[] = recursionFunction(organizationUnit,data.editorganizationUnit)
       setEditOrganizationUnit(tempEditOrgData)
@@ -458,7 +451,6 @@ const Users = () => {
   }
 
   useEffect(() => {
-    debugger;
     if (data.permission) {
       
       setUserPermission(data.permission.groups);
@@ -466,7 +458,6 @@ const Users = () => {
   }, [data.permission]);
 
   useEffect(() => {
-    debugger;
     if (data.users) {
       let tempTableData: any[] = [];
       data.users.items.map((item: any) => {
@@ -491,7 +482,6 @@ const Users = () => {
   }
 
   useEffect(() => {
-    debugger;
     let tempOrgData: any[] = [];
     if (data.organizationUnit) {
      console.log(data.organizationUnit);
@@ -527,12 +517,9 @@ const Users = () => {
     setOrganizationUnit(tempOrgData);
   }, [data.organizationUnit]);
 
-
-
   useEffect(() => {
-    debugger;
     if (data.editUser) {
-      debugger;
+      
       setUserData(data.editUser);
     }
   }, [data.editUser]);
