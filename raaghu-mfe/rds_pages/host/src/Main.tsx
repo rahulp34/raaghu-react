@@ -416,6 +416,7 @@ console.log('localization ', Data.localization)
                 logo={logo}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
+                onChatClickHandler={()=>{console.log("Hey Chat Button Clicked!!")}}
               />
             </div>
             <div

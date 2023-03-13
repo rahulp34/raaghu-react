@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const App = () => {
 	
-
+	
 	const [themes, setThemes] = useState("light");
 
 	const toggleTheme = (e: any)=>{
