@@ -41,6 +41,7 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const ScopeCompo = React.lazy(() => import("Scope/Scope"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
@@ -168,12 +169,15 @@ const Main = (props: MainProps) => {
     i18n.changeLanguage(currentLanguage);
     var data1 = {};
     const translation= Data.localization.resources;
-    Object.keys(translation).forEach(key => {
-        data1 = {...data1, ...translation[key].texts}
-    })
-    console.log(data1)
-    // Object.keys(response.data.resources).forEach(key => {
-    i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+    if(translation){
+      if(translation){
+        Object.keys(translation).forEach(key => {
+          data1 = {...data1, ...translation[key].texts}
+      })
+      }
+      i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+    }
+   
   },[Data.localization])
 
   const sideNavItems = [
@@ -358,11 +362,16 @@ const Main = (props: MainProps) => {
       path: "/blogger",
       subTitle: t("Blogs, Posts, Articles"),
     },
-
+  {
+    key: "8",
+    label: t("Api Scope"),
+    icon: "icons",
+    path: "/scope",
+    subTitle: t("Scopes"),
+  }
   ];
-
+  
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
-
   const getLabelForPath: any = (path: string, navItems: any) => {
     let label = null;
     for (const navItem of navItems) {
@@ -529,6 +538,10 @@ const Main = (props: MainProps) => {
                     <Route
                       path="/applications"
                       element={<ApplicationsCompo />}
+                    ></Route>
+                    <Route
+                      path="/scope"
+                      element={<ScopeCompo />}
                     ></Route>
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />

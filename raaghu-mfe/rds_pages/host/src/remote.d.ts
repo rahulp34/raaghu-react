@@ -104,6 +104,11 @@ declare module "ApiScope/ApiScope" {
 	export default ApiScopeComponent;
 }
 
+declare module "Scope/Scope" {
+	const ScopeComponent : React.ComponentType;
+	export default ScopeComponent;
+}
+
 declare module "SecurityLogs/SecurityLogs" {
 	const SecurityLogs : React.ComponentType;
 	export default SecurityLogs;
