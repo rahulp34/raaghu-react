@@ -2,7 +2,7 @@
 import RdsCompAccount from './rds-comp-account';
 
 export default {
-  title: "RdsCompAccount",
+  title: "<components /Account",
 };
 
 export const Default = () => <RdsCompAccount />;

@@ -13,17 +13,21 @@ export interface UserState {
   organizationUnit:any
   editUser:any
   roles:any
+  editUserRoles:any,
   error: string;
   permission:any;
+  editorganizationUnit : any;
 };
 export const UserInitialState: UserState = {
   loading: false,
   users: [],
   editUser:null,
   roles:null,
+  editUserRoles:null,
   organizationUnit:null,
   error: "",
-  permission:null
+  permission:null,
+  editorganizationUnit:[]
 
 };
 
@@ -33,10 +37,10 @@ const proxy = new ServiceProxy();
 
 export const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
-  () => {
-    return proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
+  async () => {
+    return await proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
       console.log(result);
-      return result;
+        return result;
     })
   }
 );
@@ -67,6 +71,20 @@ export const fetchEditUser = createAsyncThunk(
     })
   }
 );
+
+export const fetchEditUserRoles = createAsyncThunk("user/fetchEditUserRoles",
+(id:any)=>{
+  return proxy.rolesGET4(id).then((result)=>{
+    return result;
+  })
+})
+
+// export const fetchEditUserOrg = createAsyncThunk("user/fetchEditUserOrg",
+// (id:any)=>{
+//   return proxy.organizationUnitsAll(id).then((result)=>{
+//     return result;
+//   })
+// })
 
 export const updateUser = createAsyncThunk("user/updateUser",
 (data:any)=>{
@@ -103,6 +121,31 @@ export const updatePermission = createAsyncThunk("user/updatePermission", (data:
   }) 
 });
 
+export const fetchOrgUnit = createAsyncThunk("user/updatePermission", (data:any) => {
+  return proxy.availableOrganizationUnits(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getSelectedOrgUnit = createAsyncThunk("user/getSelectedOrgUnit", (id:string) => {
+  return proxy.organizationUnitsAll(id,undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+
+export const fetchRolesForEdit = createAsyncThunk("user/fetchRoles", (data:any) => {
+  return proxy.assignableRoles(undefined).then((result:any)=>{
+     return result;
+  }) 
+});
+
+// export const getRolesForEdit = createAsyncThunk("user/getRoles", (id:string) => {
+//   return proxy.rolesPUT(id,undefined).then((result:any)=>{
+//      return result;
+//   }) 
+// });
+
 const userSlice = createSlice({
   name: "user",
   initialState:UserInitialState,
@@ -113,6 +156,7 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchUsers.fulfilled,(state, action: PayloadAction<any>) => {
+      
         state.loading = false;
         state.users = action.payload;
         state.error = "";
@@ -128,7 +172,7 @@ const userSlice = createSlice({
       state.loading = true;
     });
 
-    builder.addCase(
+    builder.addCase( 
       fetchOrganizationUnits.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
@@ -204,6 +248,8 @@ const userSlice = createSlice({
         state.error = "";
       }
     );
+ 
+    
 
     builder.addCase(updateUser.rejected, (state, action) => {
       state.loading = false;
@@ -259,6 +305,29 @@ const userSlice = createSlice({
       state.loading=false;
       state.error=action.error.message||"Somethingwentwrong";
     });
+    
+    builder.addCase(fetchEditUserRoles.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      fetchEditUserRoles.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.editUserRoles = action.payload
+      }
+    );
+    builder.addCase(fetchEditUserRoles.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    builder.addCase(
+      getSelectedOrgUnit.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.editorganizationUnit = action.payload;
+      }
+    );
   },
 });
 

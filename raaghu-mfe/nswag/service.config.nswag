@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://abpdemoapi.raaghu.io/swagger/v1/swagger.json",
+      "url": "https://localhost:44384/swagger/v1/swagger.json",
       "output": null,
       "newLineBehavior": "Auto"
     }
@@ -69,7 +69,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../libs/shared/service-proxies.ts",
+      "output": "../libs/shared/service-proxy.ts",
       "newLineBehavior": "Auto"
     }
   }

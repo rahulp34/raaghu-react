@@ -15,7 +15,7 @@ i18n
     },
     backend: {
       // load translations from this url
-      loadPath: 'https://localhost:44344/api/abp/application-localization?cultureName=en&sourceName={{ns}}',
+      loadPath: '',
       // allow cross-origin requests
       crossDomain: true,
       // set request headers if needed

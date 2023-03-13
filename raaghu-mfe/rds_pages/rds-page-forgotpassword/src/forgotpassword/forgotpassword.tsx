@@ -11,6 +11,7 @@ import {
 } from "../../../../libs/public.api";
 import { useSelector } from "react-redux";
 import { RdsCompForgotPassword } from "../../../rds-components";
+import { useTranslation } from "react-i18next";
 
 export interface ForgotPasswordProps {}
 
@@ -20,6 +21,8 @@ const ForgotPassword = (props: ForgotPasswordProps) => {
 		await dispatch(shouldSendPasswordResetCode(email));
 		alert(Message);
 	};
+	const { t } = useTranslation();
+
 
 	const dispatch: any = useAppDispatch();
 

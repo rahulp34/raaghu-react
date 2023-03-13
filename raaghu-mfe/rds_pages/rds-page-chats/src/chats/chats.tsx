@@ -7,6 +7,7 @@ import {
   fetchChatsData
 } from "../../../../libs/state-management/chats/chats-slice";
 import { RdsButton, RdsIcon, RdsInput, RdsSearch } from "../../../rds-elements";
+import { useTranslation } from "react-i18next";
 
 const Chats = () => {
   const [conversationVisibility, setConversationVisibility] = useState(false);
@@ -74,6 +75,9 @@ console.log('aaya kya data ',chatsData )
       setEnteredText("");
     }
   };
+
+
+  const { t } = useTranslation();
 
   return (
     <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">

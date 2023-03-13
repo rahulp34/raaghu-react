@@ -42,7 +42,7 @@ export const saveEmailSettings = createAsyncThunk("settings/saveEmailSetting
   })   
 });
 export const fetchIdentitySettings = createAsyncThunk("settings/fetchIdentitySettings", () => {
-  return proxy.settingsGET2(undefined).then((result:any)=>{
+  return proxy.settingsGET2('').then((result:any)=>{
       return result;
   })   
 });

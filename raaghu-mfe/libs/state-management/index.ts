@@ -22,6 +22,7 @@ import  applicationsReducer  from "./applications/applications-slice";
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
 import chatsReducer from './chats/chats-slice';
+import bloggerReducer from './blogger/blogger-slice';
 
 const persistConfig={
   key: "root",
@@ -48,6 +49,7 @@ const rootReducer = combineReducers({
   tenant:tenantReducer,
   localization:localizationReducer, 
   chats: chatsReducer,
+  blogger:bloggerReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
