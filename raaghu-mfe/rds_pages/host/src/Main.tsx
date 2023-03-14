@@ -42,6 +42,7 @@ const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const ScopeCompo = React.lazy(() => import("Scope/Scope"));
+const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
@@ -170,11 +171,9 @@ const Main = (props: MainProps) => {
     var data1 = {};
     const translation= Data.localization.resources;
     if(translation){
-      if(translation){
         Object.keys(translation).forEach(key => {
           data1 = {...data1, ...translation[key].texts}
       })
-      }
       i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
     }
    
@@ -368,7 +367,15 @@ const Main = (props: MainProps) => {
     icon: "icons",
     path: "/scope",
     subTitle: t("Scopes"),
-  }
+  },
+    {
+      key: "9",
+      label: t("Identity Resources"),
+      icon: "icons",
+      path: "/identityResources",
+      subTitle: t("Blogs, Posts, Articles"),
+    },
+
   ];
   
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -544,6 +551,9 @@ const Main = (props: MainProps) => {
                       path="/scope"
                       element={<ScopeCompo />}
                     ></Route>
+                    <Route path="/identityResources"
+                    element ={<IdentityResourcesCompo/>}
+                    />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />

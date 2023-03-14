@@ -79,5 +79,8 @@ export const PortConfig = {
   },
 	blogger: {
 		"port": "8028"
-	}
+	},
+  identityResources:{
+    "port":"8098"
+  }
 };

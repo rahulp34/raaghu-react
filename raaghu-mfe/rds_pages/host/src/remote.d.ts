@@ -109,6 +109,12 @@ declare module "Scope/Scope" {
 	export default ScopeComponent;
 }
 
+
+declare module "IdentityResources/IdentityResources" {
+	const IdentityresourcesComponent : React.ComponentType;
+	export default IdentityResourcesComponent;
+}
+
 declare module "SecurityLogs/SecurityLogs" {
 	const SecurityLogs : React.ComponentType;
 	export default SecurityLogs;
