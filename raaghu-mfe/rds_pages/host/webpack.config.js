@@ -131,7 +131,8 @@ module.exports = (env, argv) => {
           Chats: mfeConfigJSON["chats"].url,
           FileManagement: mfeConfigJSON["fileManagement"].url,
           Forms : mfeConfigJSON["forms"].url,
-          Blogger: mfeConfigJSON["blogger"].url
+          Blogger: mfeConfigJSON["blogger"].url,
+          IdentityResources: mfeConfigJSON["identityResources"].url
         },
         shared: {
           ...devdeps,
