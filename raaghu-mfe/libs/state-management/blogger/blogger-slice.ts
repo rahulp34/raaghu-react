@@ -24,7 +24,7 @@ export const getAllBlogs = createAsyncThunk('Blogs/GetAll', () => {
 });
 
 export const createNewBlog = createAsyncThunk('Blogs/Create', (data: any) => {
-  return proxy.adminPOST(data.blog).then((result: any) => {
+  return proxy.adminPOST(data.data).then((result: any) => {
     return result;
   })
 });
@@ -36,7 +36,7 @@ export const getBlogById = createAsyncThunk('Blogs/GetById', (data: any) => {
 });
 
 export const updateBlog = createAsyncThunk('Blogs/Update', (data: any) => {
-  return proxy.adminPUT(data.id, data.blog).then((result: any) => {
+  return proxy.adminPUT(data.id, data.data).then((result: any) => {
     return result;
   })
 });
@@ -90,7 +90,7 @@ const scopeSlice = createSlice({
     });
     builder.addCase(getBlogById.fulfilled, (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.blog = {};
+      state.blog = action.payload;
       state.error = '';
     });
     builder.addCase(getBlogById.rejected, (state, action) => {

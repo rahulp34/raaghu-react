@@ -35,6 +35,7 @@ export {default as RdsCompFeatures} from './rds-comp-new-features/rds-comp-new-f
 export {default as RdsCompNewClaimType} from './rds-comp-new-claim-type/rds-comp-new-claim-type';
 export { default as RdsCompApplicationBasic } from './rds-comp-application-basic/rds-comp-application-basic';
 export {default as RdsCompApiScopeBasicResource} from './rds-comp-api-scope-basic-resource/rds-comp-api-scope-basic-resource'
+export {default as RdsCompScopeBasicResource} from './rds-comp-scope-basic-resource/rds-comp-scope-basic-resource'
 export { default as RdsCompSecurityLogs } from './rds-comp-security-logs/rds-comp-security-logs';
 export { default as RdsCompClaims} from   './rds-comp-claims/rds-comp-claims';
 export {default as RdsCompEmailSettingsNew}  from './rds-comp-email-settings-new/rds-comp-email-settings-new'
@@ -49,5 +50,6 @@ export {default as RdsCompFormsQuestion} from './rds-comp-forms-question/rds-com
 export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp-forms-setting'
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
 export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'
+export {default as RdsCompClientResource} from './rds-comp-client-resources/rds-comp-client-resources'
 
-
+export {default as RdsCompIdentiyResourcseBasic} from './rds-comp-identiy-resourcse-basic/rds-comp-identiy-resourcse-basic'

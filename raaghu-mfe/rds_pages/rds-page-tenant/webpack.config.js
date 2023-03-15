@@ -53,6 +53,11 @@ module.exports = (env, argv) => {
             plugins: [
               "react-hot-loader/babel",
               ["@babel/plugin-proposal-class-properties", { loose: true }],
+              ["@babel/plugin-proposal-private-methods", { loose: true }],
+							[
+								"@babel/plugin-proposal-private-property-in-object",
+								{ loose: true },
+							],
             ],
           },
         },
@@ -69,7 +74,7 @@ module.exports = (env, argv) => {
         filename: "remoteEntry.js",
         exposes: {
           // expose each page
-          "./Tenant": "./src/tenant/tenant"
+          "./Tenant": "./src/App"
         },
         shared: {
           ...devdeps,

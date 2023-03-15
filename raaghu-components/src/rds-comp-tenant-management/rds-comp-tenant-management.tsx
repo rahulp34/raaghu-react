@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { RdsLabel, RdsCheckbox, RdsSelectList, RdsDropdownList } from "raaghu-react-elements";
+import { RdsLabel, RdsCheckbox, RdsSelectList, RdsDropdownList } from "../rds-elements";
 import './rds-comp-tenant-management.scss'
 export interface RdsCompTenantManagementProps {
   settingsTenantEditionList: any[];

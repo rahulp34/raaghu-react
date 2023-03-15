@@ -41,11 +41,14 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const ScopeCompo = React.lazy(() => import("Scope/Scope"));
+const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
+const ClientCompo = React.lazy(() => import("Client/Client"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -168,12 +171,13 @@ const Main = (props: MainProps) => {
     i18n.changeLanguage(currentLanguage);
     var data1 = {};
     const translation= Data.localization.resources;
-    Object.keys(translation).forEach(key => {
-        data1 = {...data1, ...translation[key].texts}
-    })
-    console.log(data1)
-    // Object.keys(response.data.resources).forEach(key => {
-    i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+    if(translation){
+        Object.keys(translation).forEach(key => {
+          data1 = {...data1, ...translation[key].texts}
+      })
+      i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+    }
+   
   },[Data.localization])
 
   const sideNavItems = [
@@ -328,6 +332,27 @@ const Main = (props: MainProps) => {
           path: "/settings",
           subTitle: t("Show and change application settings"),
         },
+        {
+          key: "3-5",
+          label: t("Identity Server"),
+          icon: "tenant",
+          children: [
+            {
+              key: "3-5-0",
+              label: t("Clients"),
+              icon: "languages",
+              path: "/client",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-5-1",
+              label: t("Identity resources"),
+              icon: "languages",
+              path: "/language-text",
+              subTitle: t("Manage user interface languages"),
+            },
+          ],
+        },
       ],
     },
     {
@@ -358,11 +383,24 @@ const Main = (props: MainProps) => {
       path: "/blogger",
       subTitle: t("Blogs, Posts, Articles"),
     },
+  {
+    key: "8",
+    label: t("Api Scope"),
+    icon: "icons",
+    path: "/scope",
+    subTitle: t("Scopes"),
+  },
+    {
+      key: "9",
+      label: t("Identity Resources"),
+      icon: "icons",
+      path: "/identityResources",
+      subTitle: t("Blogs, Posts, Articles"),
+    },
 
   ];
-
+  
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
-
   const getLabelForPath: any = (path: string, navItems: any) => {
     let label = null;
     for (const navItem of navItems) {
@@ -531,6 +569,13 @@ const Main = (props: MainProps) => {
                       path="/applications"
                       element={<ApplicationsCompo />}
                     ></Route>
+                    <Route
+                      path="/scope"
+                      element={<ScopeCompo />}
+                    ></Route>
+                    <Route path="/identityResources"
+                    element ={<IdentityResourcesCompo/>}
+                    />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
@@ -539,6 +584,7 @@ const Main = (props: MainProps) => {
                     <Route path="/forms" element={<FormsCompo />} />
 
                     <Route path="/blogger" element={<BloggerCompo />} />
+                    <Route path="/client" element={<ClientCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

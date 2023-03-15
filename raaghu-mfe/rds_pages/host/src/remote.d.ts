@@ -104,6 +104,17 @@ declare module "ApiScope/ApiScope" {
 	export default ApiScopeComponent;
 }
 
+declare module "Scope/Scope" {
+	const ScopeComponent : React.ComponentType;
+	export default ScopeComponent;
+}
+
+
+declare module "IdentityResources/IdentityResources" {
+	const IdentityresourcesComponent : React.ComponentType;
+	export default IdentityResourcesComponent;
+}
+
 declare module "SecurityLogs/SecurityLogs" {
 	const SecurityLogs : React.ComponentType;
 	export default SecurityLogs;
@@ -125,6 +136,10 @@ declare module "Forms/Forms" {
 	export default FormsComponent;
 }
 declare module "Blogger/Blogger" {
-	const BloggerComponent : React.ComponentType;
+	const BloggerComponent : React.ComponentType;f
 	export default BloggerComponent;
+}
+declare module "Client/Client" {
+	const ClientComponent : React.ComponentType;
+	export default ClientComponent;
 }

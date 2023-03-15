@@ -290,7 +290,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
               pagination={true}
               recordsPerPage={5}
               actions={dynamicActions}
-              onActionSelection={onActionSelection}
+              // onActionSelection={onActionSelection}
               recordsPerPageSelectListOption={true}
               noDataTitle="Currently you do not have Dynamic property"
             ></RdsCompDatatable>
@@ -308,7 +308,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
               recordsPerPage={5}
               noDataTitle="Currently you do not have Dynamic Entity property"
               actions={entityActions}
-              onActionSelection={onEntityActionSelection}
+              // onActionSelection={onEntityActionSelection}
               recordsPerPageSelectListOption={true}
               ></RdsCompDatatable>
         </div>
