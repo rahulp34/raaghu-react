@@ -11,51 +11,67 @@ import {
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 import { RdsButton, RdsOffcanvas, RdsAlert, RdsModal } from "../../../rds-elements";
-import { fetchScopesData, deleteScopesData, getScopesData, updateScopesData, editScopesData } from "../../../../libs/state-management/apiScope/apiScope-slice"
+import { deleteScopeshData, editScopeshData, fetchScopeshData, saveScopesData, updateScopeshData } from "../../../../libs/state-management/scope/scope-slice";
 interface RdsPageScopeProps { }
 
 const Scope = (props: RdsPageScopeProps) => {
   const { t } = useTranslation();
-  const scopeuser = useAppSelector((state) => state.persistedReducer.scopes);
+  const scopeuser = useAppSelector((state) => state.persistedReducer.scopesH);
   
   const [scopeData, setScopeData] = useState<any[]>([{}]);
-  const [newScopeData, setnewScopeData] = useState({
-    name: "",
-    displayName: "",
-    description: "",
-  });
+
   const [editscopeData, setEditScopeData] = useState({
-    id: "",
+    id:"",
     name: "",
-    displayName: "",
     description: "",
-    resources: [""],
+    displayName: "",
+    enabled: false,
+    required: false,
+    emphasize: false,
+    showInDiscoveryDocument: false,
+    userClaims: [
+      {
+        apiScopeId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        type: "string"
+      }
+    ],
+    properties: [
+      {
+        apiScopeId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        key: "string",
+        value: "string"
+      }
+    ]
   });
+
   const [showalert, setShowAlert] = useState({
     color:true,
     show:false,
     message:'',
   })
-
-
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(fetchScopesData() as any);
+    dispatch(fetchScopeshData() as any);
   }, [dispatch]);
 
   useEffect(() => {
-    if (scopeuser.users?.items) {
-      const setData1 = scopeuser.users.items.map((scope: any) => {
+    if (scopeuser.scopes?.items) {
+      const setData1 = scopeuser.scopes.items.map((scope: any) => {
         return {
           id: scope.id,
           name: scope.name,
-          displayName: scope.displayName,
-          description: scope.description
+          description: scope.description,
+          displayName:scope.displayName,
+          enabled: scope.enabled,
+          required: scope.required,
+          emphasize: scope.emphasize,
+          showInDiscoveryDocument: scope.showInDiscoveryDocument
         }
       })
       setScopeData(setData1)
     }
-  }, [scopeuser.users]);
+  }, [scopeuser.scopes]);
 
 
   useEffect(() => {
@@ -63,24 +79,21 @@ const Scope = (props: RdsPageScopeProps) => {
       setEditScopeData({
         id: scopeuser.editScope.id,
         name: scopeuser.editScope.name,
-        displayName: scopeuser.editScope.displayName,
         description: scopeuser.editScope.description,
-        resources: scopeuser.editScope.resources
+        displayName:scopeuser.editScope.displayName,
+        enabled: scopeuser.editScope.enabled,
+        required: scopeuser.editScope.required,
+        emphasize: scopeuser.editScope.emphasize,
+        showInDiscoveryDocument: scopeuser.editScope.showInDiscoveryDocument,
+        userClaims:scopeuser.editScope.userClaims,
+        properties:scopeuser.editScope.properties
       })
     }
   }
-    , [scopeuser.editScope]);
-
-    useEffect(() => {
-      setnewScopeData({
-            name: '',
-            displayName:'',
-            description:''   
-        })
-     }, [scopeuser.users]);
+  ,[scopeuser.editScope]);
   
   useEffect(() => { 
-			const timer = setTimeout(() => {
+			const timer = setTimeout(() => {  
         setShowAlert({
           color: true,
           show: false,
@@ -91,44 +104,23 @@ const Scope = (props: RdsPageScopeProps) => {
 
       return ()=>clearTimeout(timer)
 		}
-    , [scopeuser.users]);
+    , [scopeuser.scopes]);
 
   const [tableDataid, setTableDataRowId] = useState(0);
 
   const scopeSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id)
- 
-    dispatch(editScopesData(rowData.id) as any);
-
+    dispatch(editScopeshData(rowData.id) as any);
   };
 
   const success = () => {
-    dispatch(deleteScopesData(tableDataid) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
+    dispatch(deleteScopeshData(tableDataid) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
     setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
   };
 
 
-  const submit = (data: any) => {
-    const newDto = {
-      name: data.email,
-      displayName: data.fullname,
-      description: data.message,
-      resources : data.resources,
-    };
-    dispatch(getScopesData(newDto) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
-    setShowAlert({color:true,show:true,message:"Scope added Successfully"})
-  
-  }
-
-
-  const edit = (data: any) => {
-    const editDto = {
-      name: data.email,
-      displayName: data.fullname,
-      description: data.message,
-
-    };
-    dispatch(updateScopesData({ id: tableDataid, updateScopeDto: editDto }) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
+  const updateScope = (data: any) => {
+    dispatch(updateScopeshData({ id: tableDataid, body: data }) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
     setShowAlert({color:true,show:true,message:"Scope Edited Successfully"})
   }
   const tableHeaders = [
@@ -162,7 +154,10 @@ const Scope = (props: RdsPageScopeProps) => {
     
   };
   function saveApiScopeData(data:any){
-    //dispatch(saveApiScopeData() as any)
+    dispatch(saveScopesData(data) as any).then((res: any) => { 
+      dispatch(fetchScopeshData() as any); 
+      setShowAlert({color:true,show:true,message:"Scope added Successfully"})
+    });
   }
 
   return (
@@ -219,6 +214,7 @@ const Scope = (props: RdsPageScopeProps) => {
             recordsPerPageSelectListOption={true}
             onActionSelection={scopeSelection}
           ></RdsCompDatatable>
+
           <RdsOffcanvas
             backDrop={true}
             preventEscapeKey={true}
@@ -228,7 +224,7 @@ const Scope = (props: RdsPageScopeProps) => {
             canvasTitle="Edit"
             offcanvaswidth={550}
             children={
-              <RdsCompScopeBasicResource />
+              <RdsCompScopeBasicResource saveApiScopeData={(data:any)=>{updateScope(data)}} />
             }
           ></RdsOffcanvas>
           <RdsModal
