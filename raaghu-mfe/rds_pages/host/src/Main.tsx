@@ -48,6 +48,7 @@ const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
+const ClientCompo = React.lazy(() => import("Client/Client"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -331,6 +332,27 @@ const Main = (props: MainProps) => {
           path: "/settings",
           subTitle: t("Show and change application settings"),
         },
+        {
+          key: "3-5",
+          label: t("Identity Server"),
+          icon: "tenant",
+          children: [
+            {
+              key: "3-5-0",
+              label: t("Clients"),
+              icon: "languages",
+              path: "/client",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-5-1",
+              label: t("Identity resources"),
+              icon: "languages",
+              path: "/language-text",
+              subTitle: t("Manage user interface languages"),
+            },
+          ],
+        },
       ],
     },
     {
@@ -562,6 +584,7 @@ const Main = (props: MainProps) => {
                     <Route path="/forms" element={<FormsCompo />} />
 
                     <Route path="/blogger" element={<BloggerCompo />} />
+                    <Route path="/client" element={<ClientCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>

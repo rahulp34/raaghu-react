@@ -82,5 +82,8 @@ export const PortConfig = {
 	},
   identityResources:{
     "port":"8098"
-  }
+  },
+  "client": {
+		"port": "8028"
+	}
 };
