@@ -136,6 +136,10 @@ declare module "Forms/Forms" {
 	export default FormsComponent;
 }
 declare module "Blogger/Blogger" {
-	const BloggerComponent : React.ComponentType;
+	const BloggerComponent : React.ComponentType;f
 	export default BloggerComponent;
+}
+declare module "Client/Client" {
+	const ClientComponent : React.ComponentType;
+	export default ClientComponent;
 }
