@@ -377,7 +377,7 @@ const Edition = (props: RdsPageEditionProps) => {
                   { option: "Forced", value: "Forced" },
                 ]}
                 saveFeature={saveFeature}
-                restoreFeatures={restoreFeatures}
+                // restoreFeatures={restoreFeatures}
               />
             </>
           )}
