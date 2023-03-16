@@ -139,3 +139,7 @@ declare module "Blogger/Blogger" {
 	const BloggerComponent : React.ComponentType;
 	export default BloggerComponent;
 }
+declare module "ApiResources/ApiResources" {
+	const ApiResourcesComponent : React.ComponentType;
+	export default ApiResourcesComponent;
+}
