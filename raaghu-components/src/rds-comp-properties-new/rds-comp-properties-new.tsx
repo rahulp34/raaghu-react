@@ -4,19 +4,18 @@ import { json } from "react-router-dom";
 import { Value } from "sass";
 import RdsCompDatatable from "../rds-comp-data-table";
 
-
-interface RdsCompPropertiesNewProps {}
+export interface RdsCompPropertiesNewProps { }
 
 const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
   const [tableData, setTableData] = useState<any>([]);
   const [propertyData, setPropertyData] = useState<any>({
     key: '',
     PropValue: '',
- 
+
   });
   function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("hello handleSubmit",propertyData)
+    console.log("hello handleSubmit", propertyData)
   }
   function headerKeyhandleChange(value: any) {
     debugger
@@ -45,7 +44,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
       sortable: true,
     },
   ];
-  const style={ marginTop:'29px'}
+  const style = { marginTop: '29px' }
   const handleAddItem = () => {
     let newTempData: any;
     newTempData = {
@@ -71,25 +70,25 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
       ),
     };
     setTableData((prev: any) => [...prev, newTempData]);
-    
+
   };
-  function onDelete(key:any){
+  function onDelete(key: any) {
     console.log("hello")
     debugger
-    let tempPropertyData = tableData.filter((el:any)=>(el.key !=  key))
+    let tempPropertyData = tableData.filter((el: any) => (el.key != key))
     setTableData(tempPropertyData)
   }
- 
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <div className="mt-3">
-        <RdsCompDatatable
-          tableHeaders={tableHeaders}
-          tableData={tableData}
-          pagination={false}
-          
-        ></RdsCompDatatable>
+          <RdsCompDatatable
+            tableHeaders={tableHeaders}
+            tableData={tableData}
+            pagination={false}
+
+          ></RdsCompDatatable>
         </div>
         <div className=" row mt-3" >
           <div className="col-md-5  mb-2">
@@ -111,7 +110,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               onChange={(e: any) => {
                 headerValuehandleChange(e.target.value);
               }}
-              
+
               value={propertyData.PropValue}
             ></RdsInput>
           </div>
