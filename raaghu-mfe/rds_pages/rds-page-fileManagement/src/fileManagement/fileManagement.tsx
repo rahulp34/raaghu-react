@@ -10,11 +10,11 @@ import {
   RdsOffcanvas,
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
-
-// import { RdsCompDirectoryList } from "../../../rds-components";
+import { useAppDispatch } from "../../../../libs/public.api";
 
 const FileManagement = () => {
 const { t } = useTranslation();
+const dispatch = useAppDispatch();
 const[path,setPath]=useState("");
 const [name,setName]=useState("")
 
@@ -33,17 +33,7 @@ const [name,setName]=useState("")
             },
           ],
         },
-        // {
-        //   name: "Parent 2",
-        //   children: [
-        //     {
-        //       name: "Grandchild 1.2.1",
-        //     },
-        //     {
-        //       name: "Grandchild 1.2.2",
-        //     },
-        //   ],
-        // },
+        
       ],
     },
     // {
@@ -193,6 +183,10 @@ const [name,setName]=useState("")
         iconColor: "primary",
       },
     ]
+
+  useEffect(()=>{
+
+  },[dispatch])
 
   useEffect(() => {
     if(path=="All"){
