@@ -7,7 +7,7 @@ import {
   RdsLabel,
   RdsNavtabs,
   RdsSelectList,
-} from "../rds-elements";
+} from "raaghu-react-elements";
 
 export interface RdsCompFeatureManagementProps{
  featureIdentitySettingsData1?:any;
