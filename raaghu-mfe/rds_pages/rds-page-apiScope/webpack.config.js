@@ -4,16 +4,19 @@ const { ModuleFederationPlugin } = webpack.container;
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const devdeps = require("../../package.json").devDependencies;
 const deps = require("../../package.json").dependencies;
-require("dotenv").config({ path: "./.env" });
+// require("dotenv").config({ path: "./.env" });
 
 const buildDate = new Date().toLocaleString();
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
-  console.log({ isProduction });
   return {
     entry: "./src/index.ts",
     mode: process.env.NODE_ENV || "development",
+    devtool: isProduction ? false : "source-map",
+    performance: {
+      hints: false
+    },
     devServer: {
       port: 8019,
       open: false,
@@ -27,13 +30,9 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-
           test: /\.(scss|css)$/,
-
           use: ['style-loader', 'css-loader', 'sass-loader'],
-
           exclude: '/node_modules/',
-
         },
         {
           test: /\.(js|jsx|tsx|ts)$/,

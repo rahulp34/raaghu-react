@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "npm run start",
     "start": "webpack serve",
-    "build": "webpack --mode development"
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",

@@ -10,10 +10,13 @@ const buildDate = new Date().toLocaleString();
 
 module.exports = (env, argv) => {
 	const isProduction = argv.mode === "production";
-	console.log({ isProduction });
 	return {
 		entry: "./src/index.ts",
 		mode: process.env.NODE_ENV || "development",
+		devtool: isProduction ? false : "source-map",
+		performance: {
+			hints: false
+		},
 		devServer: {
 			port: 8028,
 			open: false,
