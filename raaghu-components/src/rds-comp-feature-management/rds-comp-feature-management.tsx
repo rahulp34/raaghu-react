@@ -154,7 +154,7 @@ function saveFeaturesData(){
                 <RdsSelectList
                   label="Select"
                   selectItems={props.twoFactorList}
-                  selectedValue={a}
+                  // selectedValue={a}
                   onSelectListChange={(e:any) => {
                     twoFactChange(e)
                   }}
