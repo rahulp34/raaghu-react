@@ -50,5 +50,6 @@ export {default as RdsCompFormsQuestion} from './rds-comp-forms-question/rds-com
 export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp-forms-setting'
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
 export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'
+export {default as RdsCompClientResource} from './rds-comp-client-resources/rds-comp-client-resources'
 
 export {default as RdsCompIdentiyResourcseBasic} from './rds-comp-identiy-resourcse-basic/rds-comp-identiy-resourcse-basic'
