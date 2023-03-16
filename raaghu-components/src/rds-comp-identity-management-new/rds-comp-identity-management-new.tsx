@@ -1,29 +1,28 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
 
 export interface RdsCompIdentityManagementProps {
-
-  handleIdentity:any;
-  lockoutSettings:any;
-  passwordSettings:any;
-  signSettings:any;
-  userSettings:any;
+  handleIdentity: any;
+  lockoutSettings: any;
+  passwordSettings: any;
+  signSettings: any;
+  userSettings: any;
 }
 
 const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
   const [lockoutSettings, setLockoutSettings] = useState(props.lockoutSettings);
   const [passwordSettings, setPasswordSettings] = useState(props.passwordSettings);
   console.log("password Settings", passwordSettings);
-  
+
   const [signSettings, setSignSettings] = useState(props.signSettings);
-  
+
   const [userSettings, setUserSettings] = useState(props.userSettings);
-  
-  useEffect( () => {
-	setLockoutSettings(props.lockoutSettings);
-	setPasswordSettings(props.passwordSettings);
-	setSignSettings(props.signSettings);
-	setUserSettings(props.userSettings)
+
+  useEffect(() => {
+    setLockoutSettings(props.lockoutSettings);
+    setPasswordSettings(props.passwordSettings);
+    setSignSettings(props.signSettings);
+    setUserSettings(props.userSettings)
   }, [props]);
 
 
@@ -109,7 +108,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Number"
                 required={true}
                 value={passwordSettings.requiredUniqueChars}
-                onChange={(e:any) => setNumber(e.target.value)}
+                onChange={(e: any) => setNumber(e.target.value)}
               ></RdsInput>
             </div>
           </div>
@@ -119,7 +118,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Non Alpha Numeric Characters"
               checked={passwordSettings.requireNonAlphanumeric}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setNonAlphaNumeric(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -130,7 +129,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Upper Case"
               checked={passwordSettings.requireUppercase}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setUpperCase(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -141,7 +140,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Lower Case"
               checked={passwordSettings.requireLowercase}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setLowerCase(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -152,7 +151,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Required Numbers"
               checked={passwordSettings.requireDigit}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setReqNumber(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -167,7 +166,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Enabled for new users (Whether a new user can be locked out.)"
               checked={lockoutSettings.allowedForNewUsers}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 enabledNewUsers(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -177,7 +176,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           <div className="col-md-4 sm-p-0">
             <div className="form-group ">
               <RdsInput
-                 size="medium"
+                size="medium"
                 inputType="number"
                 isDisabled={false}
                 readonly={false}
@@ -185,14 +184,14 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Length"
                 required={true}
                 value={lockoutSettings.lockoutDuration}
-                onChange={(e:any) => setLockDuration(e.target.value)}
+                onChange={(e: any) => setLockDuration(e.target.value)}
               ></RdsInput>
             </div>
           </div>
           <div className="col-md-4 sm-p-0">
             <div className="form-group">
               <RdsInput
-                 size="medium"
+                size="medium"
                 inputType="text"
                 isDisabled={false}
                 label="Max Failed Access Attempts "
@@ -200,7 +199,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 placeholder="Enter Name"
                 required={true}
                 value={lockoutSettings.maxFailedAccessAttempts}
-                onChange={(e:any) => setAccessAttempts(e.target.value)}
+                onChange={(e: any) => setAccessAttempts(e.target.value)}
               ></RdsInput>
             </div>
           </div>
@@ -215,7 +214,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Require confirmed email  (Whether a confirmed email address is required to sign in.) "
               checked={signSettings.requireConfirmedEmail}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setReqEmail(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -226,7 +225,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to confirm their phone number  (Whether the phoneNumber can be confirmed by the user.)"
               checked={signSettings.enablePhoneNumberConfirmation}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setAllowUsers(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -237,7 +236,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Require confirmed phone number  (Whether a confirmed telephone number is required to sign in)."
               checked={signSettings.requireConfirmedPhoneNumber}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setReqPhoneNumber(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -252,7 +251,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to change their email addresses  (Whether the email can be updated by the user.)"
               checked={userSettings.isEmailUpdateEnabled}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 changeEmail(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -263,7 +262,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             <RdsCheckbox
               label="Allow users to change their usernames  (Whether the username can be updated by the user.)"
               checked={userSettings.isUserNameUpdateEnabled}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 changeUserNames(e.target.checked);
               }}
             ></RdsCheckbox>
@@ -282,7 +281,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             class="me-2"
             label="SAVE"
             type="submit"
-			onClick={()=>{props.handleIdentity({lockout:lockoutSettings, user:userSettings, signIn:signSettings,password:passwordSettings})}}
+            onClick={() => { props.handleIdentity({ lockout: lockoutSettings, user: userSettings, signIn: signSettings, password: passwordSettings }) }}
             isOutline={false}
             colorVariant="primary"
             size="small"
