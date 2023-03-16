@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RdsCheckbox } from "../rds-elements";
 
 function TreeNode(props:any) {
@@ -11,6 +11,7 @@ function TreeNode(props:any) {
         <RdsCheckbox
           label ={props.node.label}
           checked={checked}
+
           onChange={(e) =>{ props.onCheckboxChange(props.node, e.target.checked)
           SetChecked(e.target.checked)}}
         />
@@ -20,7 +21,7 @@ function TreeNode(props:any) {
         <div style={{ marginLeft: "20px" }}>
           {props.node.children.map((child:any) => (
             <TreeNode
-              key={child.data.id}
+              key={child.data?.id}
               node={child}
               onCheckboxChange={props.onCheckboxChange}
             />
@@ -30,13 +31,18 @@ function TreeNode(props:any) {
     </div>
   );
 }
+ 
 
 function RdsCompPermissionTreeNew(props:any) {
+  const [treeData, setTreeData]=useState(props.treeData)
+  useEffect(()=>{
+       setTreeData(props.treeData)
+  },[props])
   return (
     <div>
-      {props.treeData?.map((node:any) => (
+      {treeData?.map((node:any) => (
         <TreeNode
-          key={node.data.id}
+          key={node.data?.id}
           node={node}
           onCheckboxChange={props.onCheckboxChange}
         />

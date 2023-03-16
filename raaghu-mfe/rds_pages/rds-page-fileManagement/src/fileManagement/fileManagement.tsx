@@ -1,21 +1,22 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
-import { Directory } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
+import RdsCompDirectoryList, { Directory } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
 import {
   RdsBreadcrumb,
   RdsButton,
+  RdsInput,
   RdsOffcanvas,
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
-
-import { RdsCompDirectoryList } from "../../../rds-components";
+import { useAppDispatch } from "../../../../libs/public.api";
 
 const FileManagement = () => {
 const { t } = useTranslation();
-const[path,setPath]=useState("/");
+const dispatch = useAppDispatch();
+const[path,setPath]=useState("");
+const [name,setName]=useState("")
 
   const directories: Directory[] = [
     {
@@ -29,26 +30,10 @@ const[path,setPath]=useState("/");
             {
               name: "child 1",
               path: "/child1",
-              children: [
-                {
-                  name: "GChild",
-                  path: "/GChild",
-                },
-              ],
             },
           ],
         },
-        // {
-        //   name: "Parent 2",
-        //   children: [
-        //     {
-        //       name: "Grandchild 1.2.1",
-        //     },
-        //     {
-        //       name: "Grandchild 1.2.2",
-        //     },
-        //   ],
-        // },
+        
       ],
     },
     // {
@@ -97,12 +82,7 @@ const[path,setPath]=useState("/");
       datatype: "text",
       sortable: true,
     },
-    {
-      displayName: "Action",
-      key: "action",
-      datatype: "text",
-      sortable: true,
-    },
+   
   ];
   
   const [tableData , setTableData]  = useState<any[]>([
@@ -162,7 +142,52 @@ const[path,setPath]=useState("/");
     { id: "delete", displayName: "Delete" },
     { id: "move", displayName: "Move" },
   ];
-  
+
+  const breadItems=[
+      {
+        label: "All",
+        id: 1,
+        //route: "#",
+        disabled: false,
+        icon: "home",
+        iconFill: false,
+        iconstroke: true,
+        iconWidth: "12px",
+        iconHeight: "12px",
+        iconColor: "primary",
+        active: false,
+      },
+      {
+        label: "Parent 1",
+        id: 2,
+        //route: "",
+        disabled: false,
+        icon: "",
+        iconFill: false,
+        iconstroke: true,
+        iconWidth: "7px",
+        iconHeight: "7px",
+        iconColor: "primary",
+        active: false,
+      },
+      {
+        label: "child 1",
+        id: 3,
+        active: false,
+        disabled: true,
+        icon: "",
+        iconFill: false,
+        iconstroke: true,
+        iconWidth: "7px",
+        iconHeight: "7px",
+        iconColor: "primary",
+      },
+    ]
+
+  useEffect(()=>{
+
+  },[dispatch])
+
   useEffect(() => {
     if(path=="All"){
       setTableData(tableData1)
@@ -170,20 +195,23 @@ const[path,setPath]=useState("/");
     if(path=="Parent 1"){
       setTableData(tableData2)
     }
-  console.log(path,"bredCrumbs PAth");
+  console.log(path,"bredCrumbs Path");
   },[path])
 
   function setPathValue(event:any){
-    debugger
     setPath(event)
 
+  }
+
+  function setValue(value: string) {
+    throw new Error("Function not implemented.");
   }
 
   return (
     <div className="New Folder">
       <div className="d-flex justify-content-end">
         <RdsOffcanvas
-          canvasTitle={"New Folder"}
+          canvasTitle={"CREATE FOLDER"}
           placement="end"
           offcanvaswidth={650}
           backDrop={false}
@@ -207,7 +235,46 @@ const[path,setPath]=useState("/");
               ></RdsButton>
             </div>
           }
-        ></RdsOffcanvas>
+        >
+          <div>
+                <div className="pt-3">
+                  <RdsInput
+                    size="medium"
+                    inputType="text"
+                    placeholder="Enter Name"
+                    label="Folder Name"
+                    labelPositon="top"
+                    id=""
+                    value={name}
+                    required={true}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  ></RdsInput>
+                  <div className="d-flex footer-buttons">
+                    <RdsButton
+                      label="CANCEL"
+                      databsdismiss="offcanvas"
+                      type={"button"}
+                      size="small"
+                      isOutline={true}
+                      colorVariant="primary"
+                      class="me-2"
+                    ></RdsButton>
+                    <RdsButton
+                      label="SAVE"
+                      type={"button"}
+                      size="small"
+                      databsdismiss="offcanvas"
+                      isDisabled={name === ""}
+                      colorVariant="primary"
+                      class="me-2"
+                      //onClick={addDataHandler}
+                    ></RdsButton>
+                  </div>
+                </div>
+            </div>
+        </RdsOffcanvas>
 
         <RdsOffcanvas
           canvasTitle={"Upload Files"}
@@ -235,7 +302,9 @@ const[path,setPath]=useState("/");
               ></RdsButton>
             </div>
           }
-        ></RdsOffcanvas>
+        >
+          
+        </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
         <div className="row">
@@ -249,7 +318,8 @@ const[path,setPath]=useState("/");
           <div className="col-md-9 border-start">
             <div className="row mt-3 ms-3">
               <div className="col-md-4 d-flex justify-comtent-start">
-              <RdsBreadcrumb breadItems={directories}/>
+              {/* <RdsBreadcrumb breadItems={directories}/> */}
+              <RdsBreadcrumb breadItems={breadItems} role="advance"></RdsBreadcrumb>
                 
               
               </div>

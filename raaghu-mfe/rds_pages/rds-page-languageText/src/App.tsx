@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { ListResultDtoOfCacheDto } from "../../../libs/shared/service-proxies";
+// import { ListResultDtoOfCacheDto } from "../../../libs/shared/service-proxies";
 import { store } from "../../../libs/state-management/index";
 import LanguageText from "./languageText/languageText";
 

@@ -35,6 +35,128 @@ const actions = [
   { id: "delete", displayName: "Delete", modalId: "Del" },
 ];
 
+const featuresData1 = [
+  {
+    name: "Identity",
+    displayName: "Identity",
+    features: [
+      {
+        name: "Identity.TwoFactor",
+        displayName: "Two factor behaviour",
+        value: "Optional",
+        provider: { name: "D", key: null },
+        description: "Set two factor behaviour. Optional values: Optional,Disabled,Forced",
+        valueType: {
+          itemSource: {
+            items: [
+              {
+                value: "Optional",
+                displayText: {
+                  resourceName: "AbpIdentity",
+                  name: "Feature:TwoFactor.Optional"
+                }
+              },
+              {
+                value: "Disabled",
+                displayText: {
+                  resourceName: "AbpIdentity",
+                  name: "Feature:TwoFactor.Disabled"
+                }
+              },
+              {
+                value: "Forced",
+                displayText: {
+                  resourceName: "AbpIdentity",
+                  name: "Feature:TwoFactor.Forced"
+                }
+              }
+            ]
+          },
+          name: "SelectionStringValueType",
+          properties: {},
+          validator: {
+            name: "NULL",
+            properties: {}
+          }
+        },
+        depth: 0,
+        parentName: null
+      },
+      {
+        name: "Identity.MaxUserCount",
+        displayName: "Maximum user count",
+        value: "0",
+        provider: {
+          name: "D",
+          key: null
+        },
+        description: "0 = unlimited",
+        valueType: {
+          name: "FreeTextStringValueType",
+          properties: {},
+          validator: {
+            name: "NUMERIC",
+            properties: {
+              MinValue: 0,
+              MaxValue: 2147483647
+            }
+          }
+        },
+        depth: 0,
+        parentName: null
+      },
+      {
+        name: "Account.EnableLdapLogin",
+        displayName: "LDAP Login",
+        value: "False",
+        provider: {
+          name: "D",
+          key: null
+        },
+        description: null,
+        valueType: {
+          name: "ToggleStringValueType",
+          properties: {},
+          validator: {
+            name: "BOOLEAN",
+            properties: {}
+          }
+        },
+        depth: 0,
+        parentName: null
+      },
+      {
+        name: "Identity.EnableOAuthLogin",
+        displayName: "OAuth Login",
+        value: "False",
+        provider: {
+          name: "D",
+          key: null
+        },
+        description: null,
+        valueType: {
+          name: "ToggleStringValueType",
+          properties: {},
+          validator: {
+            name: "BOOLEAN",
+            properties: {}
+          }
+        },
+        depth: 0,
+        parentName: null
+      }
+    ]
+  },
+  {
+    name: "SettingManagement", displayName: "Setting Management", features: [{ name: "SettingManagement.Enable", displayName: "Enable setting management", value: "true", provider: { name: "D", key: null }, description: "Enable setting management system in the application.", valueType: { name: "ToggleStringValueType", properties: {}, validator: { name: "BOOLEAN", properties: {} } }, depth: 0, parentName: null }, {
+      name: "SettingManagement.AllowChangingEmailSettings", displayName: "Allow changing email settings.", value: "false", provider: { name: "D", key: null },
+      description: null, valueType: { name: "ToggleStringValueType", properties: {}, validator: { name: "BOOLEAN", properties: {} } }, depth: 1, parentName: "SettingManagement.Enable"
+    }]
+  }, { name: "LanguageManagement", displayName: "Language Management", features: [{ name: "LanguageManagement.Enable", displayName: "Enable language management", value: "true", provider: { name: "D", key: null }, description: "Enable language management system in the application.", valueType: { name: "ToggleStringValueType", properties: {}, validator: { name: "BOOLEAN", properties: {} } }, depth: 0, parentName: null }] }, { name: "TextManagement", displayName: "Text Template Management", features: [{ name: "TextManagement.Enable", displayName: "Enable text template management", value: "true", provider: { name: "D", key: null }, description: "Enable text management system in the application.", valueType: { name: "ToggleStringValueType", properties: {}, validator: { name: "BOOLEAN", properties: {} } }, depth: 0, parentName: null }] }, {
+    name: "AuditLogging", displayName: "Audit Logging", features: [{ name: "AuditLogging.Enable", displayName: "Enabled audit logging page", value: "true", provider: { name: "D", key: null }, description: "Enable audit logging page in the application.", valueType: { name: "ToggleStringValueType", properties: {}, validator: { name: "BOOLEAN", properties: {} } }, depth: 0, parentName: null }]
+  }];
+
+
 const checkboxlabel = [
   {
     id: "1",
@@ -54,16 +176,17 @@ const Tenant = (props: RdsPageTenantProps) => {
   const data = useAppSelector((state) => state.persistedReducer.tenant);
   const { t } = useTranslation();
 
+  const [featuresData, setFeaturesData] = useState<any>([]);
   const dispatch = useAppDispatch();
   const [tableData, setTableData] = useState<any>([]);
   const [editionList, setEditionList] = useState<any>([]);
   const [featureIdentitySettingsData, setFeatureIdentitySettingsData] = useState<any>([{value:"Optional"},{value:3},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true},{value:true}]);
-  const [tenantId, setTenantid] = useState<any>("")
+  const [tenantId, setTenantid] = useState<any>("");
   const [tenantInformationData, setTenantInformationData] = useState<any>({     
       editionId: "",
       name: "",
       activationEndDate: null,
-      password: "",
+      adminPassword: "",
       activationState: 0,
       adminEmailAddress: "",
       connectionStrings: { id: "", default: null, databases: [] },
@@ -72,7 +195,7 @@ const Tenant = (props: RdsPageTenantProps) => {
       editionId: "",
       name: "",
       activationEndDate: null,
-      password: "",
+      adminPassword: "",
       activationState: 0,
       adminEmailAddress: "",
       connectionStrings: { id: "", default: null, databases: [] },
@@ -109,6 +232,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
  
+  const [emittedFeaturesData, setEmittedFeaturesData] = useState([]);
 
   const treeData: any[] = [];
   const offCanvasHandler = () => {
@@ -119,19 +243,23 @@ const Tenant = (props: RdsPageTenantProps) => {
   const onActionHandler = (rowData: any, actionId: any) => {
     let id = rowData.id;
     setTableDataRowId(rowData.id);
+    setActionId(actionId);
     if (actionId == "editTenant") {
       dispatch(editTenant(id) as any).then((res:any)=>{
         dispatch(fetchEdition() as any);
         dispatch(fetchTenant as any);
       })
-      dispatch(tenantFeaturesGet(rowData.id) as any);
-    }
+      dispatch(tenantFeaturesGet(rowData) as any);
+    } else if (actionId === 'delete') setTenantid(rowData.id);
+    
   };
   
-
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState(0);
+  const [actionId, setActionId] = useState('new');
+
+  const [emittedDataTenantData, setEmittedDataTenantData] = useState<any>([]);
   
   
     useEffect(() => {
@@ -160,29 +288,27 @@ const Tenant = (props: RdsPageTenantProps) => {
     },[data.tenants])
 
     useEffect(()=>{
-      debugger
+      
       if(data.feature){
-        let tempFeatureData :any[] = [];
-        data.feature.groups.map((item:any)=>{
-          item.features.map((items:any)=>{
-            let data = {}
-            if(items.value == "True" || items.value == "true"){
-              data = { value:true }
-            }
-            else if(items.value == "True" || items.value == "true"){
-              data = { value:false}
-            }
-            else{
-              data = { value:items.value }
-            }
-            tempFeatureData.push({...data, name:items.name});
-          })
-        })
-        setFeatureIdentitySettingsData(tempFeatureData)
+        // setFeaturesData(data.feature.groups);
+        const sample = data.feature.groups.map((x: any) => {
+          return {
+            name: x.name,
+            displayName: x.displayName,
+            features: x.features.map((f: any) => {
+              return { ...f, valueType: { name: f.valueType.name, validator: f.valueType.validator, itemSource: f.valueType.itemSource}}
+            })
+          };
+        });
+        setFeaturesData(sample);
       }
-  
     },[data.feature])
 
+    useEffect(() => {
+      if (featuresData.length > 0) {
+        console.log('FeaturesData', featuresData);
+      }
+    }, [featuresData])
 
     useEffect(() => {
       if(data.edition)
@@ -200,7 +326,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     }, [data.edition]);
 
     useEffect(()=>{
-      debugger
+      
       if(data.editTenant){
         setTenantInformationData(data.editTenant);
       }
@@ -208,12 +334,38 @@ const Tenant = (props: RdsPageTenantProps) => {
 
 
     function saveTenant(data:any){
-      data.preventDefault();
-      dispatch(createTenant(data) as any).then((res:any)=>{
-        dispatch(fetchEdition() as any);
-        dispatch(fetchTenant() as any);
+      const updateitem = {id: data.id, body: data};
+      const createItem = {data: data};
+      if (actionId === 'editTenant') {
+        dispatch(tenantPut(updateitem) as any).then((res:any)=>{
+          dispatch(fetchEdition() as any);
+          dispatch(fetchTenant() as any);
+        });
+        if (emittedFeaturesData.length > 0) {
+          const features = {
+            id: data.id,
+            body: {
+              features: emittedFeaturesData
+            }
+          };
+          dispatch(saveFeaturesEdition(features));
+        } 
+      } else {
+        dispatch(createTenant(createItem) as any).then((res:any)=>{
+          dispatch(fetchEdition() as any);
+          dispatch(fetchTenant() as any);
+        });
+      }
+      setBasicTenantInformation(data);
+      setTenantInformationData({     
+        editionId: "",
+        name: "",
+        activationEndDate: null,
+        adminPassword: "",
+        activationState: 0,
+        adminEmailAddress: "",
+        connectionStrings: { id: "", default: null, databases: [] },
       });
-      setBasicTenantInformation(data)
     }
     const onDeleteHandler = () => {
       dispatch(deleteTenant(tenantId) as any).then((res:any)=>{
@@ -243,6 +395,20 @@ const Tenant = (props: RdsPageTenantProps) => {
       dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then((res: any) => {
       });
     }
+
+    function createNewCanvasFn(event: any) {
+      event.preventDefault();
+      setActionId('new');
+    }
+
+    function onFeatureSelection(data: any) {
+      setEmittedFeaturesData(data);
+    }
+
+    function getTenantData(data: any) {
+      setEmittedDataTenantData(data);
+    }
+
   return (
     <div className="tenant">
       <div className="d-flex justify-content-end ">
@@ -264,6 +430,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                 size="small"
                 type="button"
                 colorVariant="primary"
+                onClick={(e: any) => createNewCanvasFn(e)}
               ></RdsButton>
             </div>
           }
@@ -273,7 +440,10 @@ const Tenant = (props: RdsPageTenantProps) => {
           offId={"tenant"}
         >
           
-            <RdsCompTenantInformation editions={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} tenantInformationData1={basicTenantInformation} />
+            <div className="mt-3">
+            <RdsCompTenantInformation editions={editionList}  onSaveHandler={(e:any)=>saveTenant(e)} tenantInformationData1={basicTenantInformation}
+            emittedDataTenantData={getTenantData} />
+            </div>
       
         </RdsOffcanvas>
       </div>
@@ -308,23 +478,44 @@ const Tenant = (props: RdsPageTenantProps) => {
             }}
           />
           {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-            <>
-              <RdsCompTenantInformation editions={editionList} tenantInformationData1={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} />
-            </>
+            <div className="mt-3">
+              <RdsCompTenantInformation editions={editionList} tenantInformationData1={tenantInformationData}  onSaveHandler={(e:any)=>{saveTenant(e)}} 
+              emittedDataTenantData={getTenantData}/>
+            </div>
           )}
           {(activeNavTabIdEdit == 1 || showTenantSettings === true) && (
-            <>
-             <RdsCompFeatures
-           featureIdentitySettingsData1={featureIdentitySettingsData}
-           twoFactorList={[
-             { option: "Optional", value: "Optional" },
-             { option: "Disabled", value: "Disabled" },
-             { option: "Forced", value: "Forced" },
-           ]}
-           saveFeature={saveFeature}
-           restoreFeatures={restoreFeatures}
-         />
-            </>
+            <div className="mt-3">
+             <RdsCompFeatures featuresData={featuresData} onFeatureSelection={onFeatureSelection}  />
+             <RdsButton
+              class="me-2"
+              tooltipTitle={""}
+              type={"button"}
+              label="Restore to default"
+              colorVariant="outline-primary"
+              size="small"
+              databsdismiss="offcanvas"
+              onClick={restoreFeatures}
+            ></RdsButton>
+             <RdsButton
+              class="me-2"
+              tooltipTitle={""}
+              type={"button"}
+              label="Cancel"
+              colorVariant="outline-primary"
+              size="small"
+              databsdismiss="offcanvas"
+            ></RdsButton>
+            <RdsButton
+              class="me-2"
+              label="Create"
+              size="small"
+              colorVariant="primary"
+              tooltipTitle={""}
+              type={"submit"}
+              databsdismiss="offcanvas"
+              onClick={() => saveTenant(emittedDataTenantData)}
+            ></RdsButton>
+            </div>
           
           )}
         </RdsOffcanvas>

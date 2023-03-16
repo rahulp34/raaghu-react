@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 import {
@@ -11,6 +12,7 @@ import {
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
   notifications?: any[];
   languageItems: any[];
   navbarTitle?: string;
@@ -138,6 +140,20 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               stroke={true}
             ></RdsIcon>
           </div>
+
+          <Link to="/chats"
+            className="me-3 pe-3 border-end"
+            role ='button'
+            onClick={props.onChatClickHandler}
+          >
+            <RdsIcon
+              name="question_chat"
+              height="20px"
+              width="20px"
+              fill={false}
+              stroke={true}
+            ></RdsIcon>
+          </Link>
 
           <RdsOffcanvas
             className="pb-0"

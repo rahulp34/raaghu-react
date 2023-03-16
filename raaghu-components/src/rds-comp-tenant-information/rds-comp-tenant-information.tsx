@@ -1,4 +1,4 @@
-import { RdsLabel } from "raaghu-react-elements";
+import { RdsLabel } from "../rds-elements";
 import React, { useState, useEffect } from "react";
 import {
   RdsInput,
@@ -29,7 +29,7 @@ const RdsCompTenantInformation = (props: any) => {
   const [databaseUrl , setDatabaseUrl]= useState("");
 
   useEffect(() => {
-    debugger
+    
     setTenantInformationData(props.tenantInformationData1)
   }, [props.tenantInformationData1])
 
@@ -38,24 +38,45 @@ const RdsCompTenantInformation = (props: any) => {
   }, [props.editions])
 
   function handleName(value: any) {
-    setTenantInformationData({ ...tenantInformationData, name: value })
+    setTenantInformationData({ ...tenantInformationData, name: value });
   }
 
   function handleEditionId(value: any) {
-    
     setTenantInformationData({ ...tenantInformationData, editionId: value })
   }
   function handleEmail(value: any) {
-    debugger
+    
     setTenantInformationData({ ...tenantInformationData, adminEmailAddress: value })
   }
   function handlePassword(value: any) {
-    setTenantInformationData({ ...tenantInformationData, password: value })
+    setTenantInformationData({ ...tenantInformationData, adminPassword: value })
   }
   function handleDatabaseUrl(value: any) {
     setDatabaseUrl(value);
     setTenantInformationData({ ...tenantInformationData, connectionStrings: { ...tenantInformationData.connectionStrings, id: value } })
   }
+
+  function emitSaveData(event: any) {
+    event.preventDefault();
+    props.onSaveHandler(tenantInformationData);
+    setTenantInformationData (
+      {     
+        editionId: "",
+        name: "",
+        activationEndDate: null,
+        adminPassword: "",
+        activationState: 0,
+        adminEmailAddress: "",
+        connectionStrings: { id: "", default: null, databases: [] },
+      }
+    );
+    
+  }
+
+  useEffect(() => {
+    props.emittedDataTenantData(tenantInformationData);
+  }, [tenantInformationData]);
+  
 
   return (
     <div>
@@ -81,7 +102,7 @@ const RdsCompTenantInformation = (props: any) => {
                   label={"Select Edition"}
                   selectItems={editionList}
                   selectedValue={tenantInformationData.editionId}
-                  onSelectListChange={(e: any) => { handleEditionId(e.target.value) }}
+                  onSelectListChange={(e: any) => { handleEditionId(e) }}
                 ></RdsSelectList>
               </div>
             </div>
@@ -125,9 +146,9 @@ const RdsCompTenantInformation = (props: any) => {
                   label="Password"
                   placeholder="Enter Password"
                   inputType="password"
-                  name="password"
-                  id="password"
-                  value={tenantInformationData.password}
+                  name="adminPassword"
+                  id="adminPassword"
+                  value={tenantInformationData.adminPassword}
                   onChange={(e: any) => { handlePassword(e.target.value) }}
                 ></RdsInput>
               </div>
@@ -184,9 +205,7 @@ const RdsCompTenantInformation = (props: any) => {
               tooltipTitle={""}
               type={"submit"}
               databsdismiss="offcanvas"
-              onClick={() => {
-                props.onSaveHandler(tenantInformationData);
-              }}
+              onClick={(e: any) => emitSaveData(e)}
             ></RdsButton>
           </div>
         </form>

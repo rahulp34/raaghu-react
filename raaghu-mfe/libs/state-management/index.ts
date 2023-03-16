@@ -8,6 +8,7 @@ import languageTextReducer from "./language-text/language-text-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import rolesReducer from "./roles/roles-slice";
 import scopesReducer from "./apiScope/apiScope-slice";
+import scopesHReducer from "./scope/scope-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
@@ -21,6 +22,7 @@ import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
+import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
 
 const persistConfig={
@@ -40,15 +42,17 @@ const rootReducer = combineReducers({
   claimTypes: ClaimTypesReducer,
   securityLogs:securityLogsReducer,
   applications : applicationsReducer,
-  scopes: scopesReducer,          
+  scopes: scopesReducer,
+  scopesH:scopesHReducer,  
+  apiScope: scopesHReducer,    
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
   user: userReducer,
   settings: settingsReducer,
   tenant:tenantReducer,
   localization:localizationReducer, 
-  blogger:bloggerReducer, 
-
+  chats: chatsReducer,
+  blogger:bloggerReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

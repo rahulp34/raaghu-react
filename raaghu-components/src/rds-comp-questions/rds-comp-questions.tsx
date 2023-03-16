@@ -13,6 +13,7 @@ const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 	const [formQuestionsDataArray, setFormQuestionsDataArray] = useState<any>([]);
 
 	function handleNewFormData(basicInfo: any) {
+		
 		setbasicEditFormData({ title: '', description: '' });
 	}
 	let [count, setCount] = useState(0);
