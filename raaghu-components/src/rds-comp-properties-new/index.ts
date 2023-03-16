@@ -1,0 +1,1 @@
+import { default } from './rds-comp-properties-new'
