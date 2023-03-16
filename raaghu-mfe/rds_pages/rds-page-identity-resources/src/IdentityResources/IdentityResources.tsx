@@ -6,7 +6,8 @@ import {
   RdsCompTenantSettings,
   RdsCompDatatable,
   RdsCompAlertPopup,
-  RdsCompIdentiyResourcseBasic
+  RdsCompIdentiyResourcseBasic,
+  RdsCompPropertiesNew
 } from "../../../rds-components";
 import {
   useAppSelector,
@@ -148,7 +149,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-basics", id: 0 },
     { label: "Claims", tablink: "#nav-claims", id: 1 },
-
+    { label: "Properties", tablink: "#nav-claims", id: 2 },
   ];
   const tableHeaders = [
     {
@@ -227,6 +228,10 @@ const IdentityResources = (props: IdentityResourcesProps) => {
                 {activeNavTabId == 1 && (
                <span>Claims</span>
           )}
+
+            {activeNavTabId == 2 && (
+             <RdsCompPropertiesNew></RdsCompPropertiesNew>
+          )} 
           </RdsNavtabs>
             </RdsOffcanvas>
           </div>
