@@ -67,7 +67,6 @@ const Forms = () => {
     responses:'',email: '',quiz: '' ,login: '',hasLimit: '', edit: '' });
   // const [viewtable , setViewtable] = useState(false);
   const scopeSelection = (rowData: any, actionId: any) => {
-    debugger
     setTableRowId(rowData.id);
     setTableRowAction(actionId);
     setbasicEditFormData(rowData)
@@ -84,7 +83,7 @@ const Forms = () => {
     title: '', description: ''
   });
   function handleNewFormData(basicInfo: any) {
-    debugger
+    
     setBasicFormData({ title: '', description: '' });
 
   }

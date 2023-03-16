@@ -77,7 +77,7 @@ export const MfeConfig = {
 
 	"forms": {
 		"url" : "forms@http://localhost:8037/remoteEntry.js"
-
+	},
 	"blogger": {
 		"url": "blogger@http://localhost:8028/remoteEntry.js"
 	}

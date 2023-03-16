@@ -5,60 +5,11 @@ import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectL
 
 export interface RdsCompFormsQuestionProps {
 	formQuestionsData?: any;
+	questionNumber : number
+	questionId: any;
 }
 
 const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
-
-	const tableHeaders = [
-		{
-		  displayName: "Question",
-		  key: "title",
-		  datatype: "text",
-		  dataLength: 30,
-		  required: true,
-		  sortable: true,
-		},
-		{
-		  displayName: "Description",
-		  key: "description",
-		  datatype: "text",
-		  dataLength: 30,
-		  required: true,
-		  sortable: true,
-		},
-		{
-			displayName: "Type",
-			key: "questionType",
-			datatype: "text",
-			dataLength: 30,
-			required: true,
-			sortable: true,
-		  }
-	  ];
-	  const tableData = [
-		{
-		  title: "test",
-		  description: "Form test",
-		  questionType : "Multiple Choice"
-		},
-		{
-		  title: "Form",
-		  description: "Form test1",
-		  questionType : "DropDown"
-		}
-	
-	  ]
-	
-	  const scopeSelection = (rowData: any, actionId: any) => {
-	  };
-	
-	  const actions = [
-		{ id: "edit", displayName: "Edit", offId: "edit" },
-		{ id: "delete", displayName: "Delete", modalId: "Delete" },
-	  ];
-	  
-	
-	  
 
 	const [formQuestions, setFormQuestions] = useState(props.formQuestionsData);
 	function setDescription(value: any) {
@@ -68,7 +19,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setFormQuestions({ ...formQuestions, title: value })
 	}
 	function setSelectedOption(value: any) {
-		debugger
+		
 		setFormQuestions({ ...formQuestions, questionType: value })
 	}
 	function setOption(index: number, value: any) {
@@ -76,11 +27,9 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		tempChoices[index].value = value;
 		setchoices(tempChoices);
 	}
-	let [count, setCount] = useState(1);
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		debugger
+		
 		console.log('event form-questions', event);
-		setCount(count + 1);
 	};
 
 	function handleDelete(el: number) {
@@ -98,7 +47,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		{ option: "checkboxes", value: 3 },
 		{ option: "dropdown", value: 4 }]
 	function handleAddMoreChoices() {
-		debugger
+		
 		let tempChoices = choices.map((e: any) => {
 			return e;
 		})
@@ -109,12 +58,15 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setFormQuestions(props.formQuestionsData)
 	}, [props.formQuestionsData])
 	useEffect(() => {
-		debugger
+		
 		setFormQuestions({ ...formQuestions, choices })
 	}, [choices])
 	return (
 		<>
-			<h5>Question {count}</h5>
+		<div  key={props.questionId}>
+
+		
+			<h5>Question {props.questionNumber}</h5>
 			<form onSubmit={handleSubmit}>
 				<div className="row">
 					<div className="col-3">
@@ -193,7 +145,7 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 
 					</div>
 				</div>
-				<div className="d-flex align-items-center justify-content-end">
+				{/* <div className="d-flex align-items-center justify-content-end">
 					<RdsButton
 						type={"button"}
 						size="small"
@@ -201,18 +153,8 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 						colorVariant="primary"
 						onClick={() => handleSubmit(formQuestions)}
 					></RdsButton>
-				</div>
+				</div> */}
 			</form>
-			<div className=" row">
-			<RdsCompDatatable
-                  tableHeaders={tableHeaders}
-                  tableData={tableData}
-                  actions={actions}
-                  pagination={true}
-                  recordsPerPage={5}
-                  recordsPerPageSelectListOption={true}
-                  onActionSelection={scopeSelection}
-                ></RdsCompDatatable>
 			</div>
 		</>
 	);
