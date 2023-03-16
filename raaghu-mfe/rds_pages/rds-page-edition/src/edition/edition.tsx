@@ -370,12 +370,15 @@ const Edition = (props: RdsPageEditionProps) => {
           {(activeEditNavTabId == 1 || showNextEdtiTab == true) && (
             <>
               <RdsCompFeatures
-                featuresData={featureIdentitySettingsData} 
-                onFeatureSelection={function (event: any) {
-                  throw new Error("Function not implemented.");
-                } }            
-             
-              />-
+                featureIdentitySettingsData1={featureIdentitySettingsData}
+                twoFactorList={[
+                  { option: "Optional", value: "Optional" },
+                  { option: "Disabled", value: "Disabled" },
+                  { option: "Forced", value: "Forced" },
+                ]}
+                saveFeature={saveFeature}
+                // restoreFeatures={restoreFeatures}
+              />
             </>
           )}
         </RdsOffcanvas>
