@@ -315,20 +315,6 @@ const Main = (props: MainProps) => {
         },
         {
           key: "3-3",
-          label: t("Identity Server"),
-          icon: "tenant",
-          children: [
-            {
-              key: "3-3-0",
-              label: t("API Resources"),
-              icon: "languages",
-              path: "/apiResources",
-              subTitle: t("Manage user interface languages"),
-            },
-          ],
-        },
-        {
-          key: "3-3",
           label: t("Text-Template"),
           icon: "languages",
           path: "/text-template",
@@ -365,6 +351,13 @@ const Main = (props: MainProps) => {
               label: t("Identity resources"),
               icon: "languages",
               path: "/language-text",
+              subTitle: t("Manage user interface languages"),
+            },
+            {
+              key: "3-5-2",
+              label: t("API Resources"),
+              icon: "languages",
+              path: "/apiResources",
               subTitle: t("Manage user interface languages"),
             },
           ],
