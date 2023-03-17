@@ -15,6 +15,7 @@ import securityLogsReducer from "./security-logs/security-logs-slice";
 import userReducer from "./user/user-slice";
 import localizationReducer from "./localization/localization-slice";
 import settingsReducer from "./settings/settings-slice";
+import FileManagementReducer from "./file-management/file-management-slice"
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -53,6 +54,7 @@ const rootReducer = combineReducers({
   localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
+  fileManagement: FileManagementReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
