@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
       hints: false
     },
     devServer: {
-      port: 8028,
+      port: 8029,
       open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",

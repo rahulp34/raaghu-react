@@ -53,3 +53,4 @@ export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-ne
 export {default as RdsCompClientResource} from './rds-comp-client-resources/rds-comp-client-resources'
 export {default as RdsCompIdentiyResourcseBasic} from './rds-comp-identiy-resourcse-basic/rds-comp-identiy-resourcse-basic'
 export {default as RdsCompPropertiesNew} from './rds-comp-properties-new/rds-comp-properties-new'
+export {default as RdsCompIdentityClientBasic} from './rds-comp-identity-client-basic/rds-comp-identity-client-basic'
