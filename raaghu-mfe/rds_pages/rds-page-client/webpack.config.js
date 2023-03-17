@@ -15,7 +15,7 @@ console.log({ isProduction });
     entry: "./src/index.ts",
     mode: process.env.NODE_ENV || "development",
     devServer: {
-      port: 8028,
+      port: 8029,
       open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",

@@ -87,6 +87,6 @@ export const MfeConfig = {
 		"url": "blogger@http://localhost:8028/remoteEntry.js"
 	},
 	"client": {
-		"url": "client@http://localhost:8028/remoteEntry.js"
+		"url": "client@http://localhost:8029/remoteEntry.js"
 	}
 }
