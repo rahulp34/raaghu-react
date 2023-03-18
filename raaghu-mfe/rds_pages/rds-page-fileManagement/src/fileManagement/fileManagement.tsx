@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
 import RdsCompDirectoryList  from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
+import RdsCompFileUploader from "../../../../../raaghu-components/src/rds-comp-fileUploader/rds-comp-fileUploader";
 import {
   RdsBreadcrumb,
   RdsButton,
@@ -28,12 +28,6 @@ const [name,setName]=useState("")
       id: null,
       hasChildren:false,
       children: [
-      //   {
-      //   hasChildren: false,
-      //   id : "dbe7509e-a495-1e55-5abd-3a09fbcdb86a",
-      //   name : "abc",
-      //   parentId : null
-      // }
       ],
     },
   ])
@@ -52,7 +46,7 @@ const [name,setName]=useState("")
       active: false,
     },
   ];
-  
+
   const tableHeaders = [
     {
       displayName: "Name",
@@ -66,10 +60,9 @@ const [name,setName]=useState("")
       datatype: "text",
       sortable: true,
     },
-   
   ];
-  
-  const [tableData , setTableData]  = useState<any[]>([
+
+  const [tableData, setTableData] = useState<any[]>([
     {
       id: 1,
       name: "RDS.ppt",
@@ -85,8 +78,8 @@ const [name,setName]=useState("")
       name: "RDS-elements.xd",
       size: "1MB",
     },
-  ])
-  
+  ]);
+
   const tableData1 = [
     {
       id: 1,
@@ -127,46 +120,46 @@ const [name,setName]=useState("")
     { id: "move", displayName: "Move" },
   ];
 
-  const breadItems=[
-      {
-        label: "All",
-        id: 1,
-        //route: "#",
-        disabled: false,
-        icon: "home",
-        iconFill: false,
-        iconstroke: true,
-        iconWidth: "12px",
-        iconHeight: "12px",
-        iconColor: "primary",
-        active: false,
-      },
-      {
-        label: "Parent 1",
-        id: 2,
-        //route: "",
-        disabled: false,
-        icon: "",
-        iconFill: false,
-        iconstroke: true,
-        iconWidth: "7px",
-        iconHeight: "7px",
-        iconColor: "primary",
-        active: false,
-      },
-      {
-        label: "child 1",
-        id: 3,
-        active: false,
-        disabled: true,
-        icon: "",
-        iconFill: false,
-        iconstroke: true,
-        iconWidth: "7px",
-        iconHeight: "7px",
-        iconColor: "primary",
-      },
-    ]
+  const breadItems = [
+    {
+      label: "All",
+      id: 1,
+      //route: "#",
+      disabled: false,
+      icon: "home",
+      iconFill: false,
+      iconstroke: true,
+      iconWidth: "12px",
+      iconHeight: "12px",
+      iconColor: "primary",
+      active: false,
+    },
+    {
+      label: "Parent 1",
+      id: 2,
+      //route: "",
+      disabled: false,
+      icon: "",
+      iconFill: false,
+      iconstroke: true,
+      iconWidth: "7px",
+      iconHeight: "7px",
+      iconColor: "primary",
+      active: false,
+    },
+    {
+      label: "child 1",
+      id: 3,
+      active: false,
+      disabled: true,
+      icon: "",
+      iconFill: false,
+      iconstroke: true,
+      iconWidth: "7px",
+      iconHeight: "7px",
+      iconColor: "primary",
+    },
+  ];
 
   function recursiveFunctionAddData(directories:any, data:any){
     return directories.map((el:any)=>{
@@ -216,11 +209,20 @@ const [name,setName]=useState("")
   // },[path])
 
   function setPathValue(event:any){
-    debugger
     dispatch(fetchSubDirectory(event.id) as any);
-    //dispatch(event.id)
-    //setPath(event)
+
+    
   }
+
+  // useEffect(() => {
+  //   if (path == "All") {
+  //     setTableData(tableData1);
+  //   }
+  //   if (path == "Parent 1") {
+  //     setTableData(tableData2);
+  //   }
+  //   console.log(path, "bredCrumbs Path");
+  // }, [path]);
 
   function setValue(value: string) {
     throw new Error("Function not implemented.");
@@ -256,43 +258,43 @@ const [name,setName]=useState("")
           }
         >
           <div>
-                <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Enter Name"
-                    label="Folder Name"
-                    labelPositon="top"
-                    id=""
-                    value={name}
-                    required={true}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <div className="d-flex footer-buttons">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      isDisabled={name === ""}
-                      colorVariant="primary"
-                      class="me-2"
-                      //onClick={addDataHandler}
-                    ></RdsButton>
-                  </div>
-                </div>
+            <div className="pt-3">
+              <RdsInput
+                size="medium"
+                inputType="text"
+                placeholder="Enter Name"
+                label="Folder Name"
+                labelPositon="top"
+                id=""
+                value={name}
+                required={true}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              ></RdsInput>
+              <div className="d-flex footer-buttons">
+                <RdsButton
+                  label="CANCEL"
+                  databsdismiss="offcanvas"
+                  type={"button"}
+                  size="small"
+                  isOutline={true}
+                  colorVariant="primary"
+                  class="me-2"
+                ></RdsButton>
+                <RdsButton
+                  label="SAVE"
+                  type={"button"}
+                  size="small"
+                  databsdismiss="offcanvas"
+                  isDisabled={name === ""}
+                  colorVariant="primary"
+                  class="me-2"
+                  //onClick={addDataHandler}
+                ></RdsButton>
+              </div>
             </div>
+          </div>
         </RdsOffcanvas>
 
         <RdsOffcanvas
@@ -307,7 +309,7 @@ const [name,setName]=useState("")
             <div className="d-flex justify-content-end ms-3">
               <RdsButton
                 icon="upload_data"
-                label={"Upload Files"}
+                label={"UPLOAD FILES"}
                 iconColorVariant="primary"
                 iconHeight="15px"
                 iconWidth="15px"
@@ -321,8 +323,9 @@ const [name,setName]=useState("")
               ></RdsButton>
             </div>
           }
+         
         >
-          
+          <RdsCompFileUploader></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
@@ -337,10 +340,11 @@ const [name,setName]=useState("")
           <div className="col-md-9 border-start">
             <div className="row mt-3 ms-3">
               <div className="col-md-4 d-flex justify-comtent-start">
-              {/* <RdsBreadcrumb breadItems={directories}/> */}
-              <RdsBreadcrumb breadItems={breadItems} role="advance"></RdsBreadcrumb>
-                
-              
+                {/* <RdsBreadcrumb breadItems={directories}/> */}
+                <RdsBreadcrumb
+                  breadItems={breadItems}
+                  role="advance"
+                ></RdsBreadcrumb>
               </div>
 
               <div className="col md-4 d-flex "></div>
@@ -352,7 +356,6 @@ const [name,setName]=useState("")
 
             <div className="row mt-3 ms-3">
               <RdsCompDataTable
-
                 tableHeaders={tableHeaders}
                 tableData={tableData}
                 pagination={false}
