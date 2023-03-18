@@ -8,16 +8,17 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 		<>
 			<div className="secrets">
 				<div>
-					<div className="row">
-						<div className="col-md-5 mb-3 form-group">
-							<RdsLabel
+					<div className="row mt-3">
+						<div className="col-md-4 mb-3 form-group">
+							{/* <RdsLabel
 								size="14px"
 								label="Type"
 								class="form-label"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
+								// children={<span style={{ color: "red" }}>*</span>}
+							></RdsLabel> */}
 							<RdsInput
 								size="small"
+								label="Type"
 								inputType="text"
 								isDisabled={false}
 								readonly={false}
@@ -26,14 +27,15 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 							></RdsInput>
 						</div>
 						<div className="col-md-4 mb-3 form-group">
-							<RdsLabel
+							{/* <RdsLabel
 								size="14px"
 								label="Value"
 								class="form-label"
-								children={<span style={{ color: "red" }}>*</span>}
-							></RdsLabel>
+								// children={<span style={{ color: "red" }}>*</span>}
+							></RdsLabel> */}
 							<RdsInput
 								size="small"
+								label="Value"
 								inputType="text"
 								isDisabled={false}
 								readonly={false}
@@ -41,14 +43,15 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								required={true}
 							></RdsInput>
 						</div>
-						<div className="col-md-3 mb-3 form-group">
-							<RdsLabel
+						<div className="col-md-4 mb-3 form-group">
+							{/* <RdsLabel
 								size="14px"
 								label="Expiration"
 								class="form-label"
-							></RdsLabel>
+							></RdsLabel> */}
 							<RdsInput
 								size="small"
+								label="Expiration"
 								inputType="text"
 								isDisabled={false}
 								readonly={false}
@@ -58,14 +61,15 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 						</div>
 					</div>
 					<div className="mb-3 form-group">
-						<RdsLabel
+						{/* <RdsLabel
 							size="14px"
 							label="Description"
 							class="form-label"
-							children={<span style={{ color: "red" }}>*</span>}
-						></RdsLabel>
+							// children={<span style={{ color: "red" }}>*</span>}
+						></RdsLabel> */}
 						<RdsInput
 							size="small"
+							label="Description"
 							inputType="text"
 							isDisabled={false}
 							readonly={false}
