@@ -14,7 +14,6 @@ import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
-import sideNavItem  from "../../side-nav-items"
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index"
 
