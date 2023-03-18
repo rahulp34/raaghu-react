@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./rds-file-uploader.scss";
 import { useState, useEffect } from "react";
 
