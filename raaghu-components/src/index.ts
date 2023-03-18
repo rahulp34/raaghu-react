@@ -54,3 +54,4 @@ export {default as RdsCompClientResource} from './rds-comp-client-resources/rds-
 export {default as RdsCompIdentiyResourcseBasic} from './rds-comp-identiy-resourcse-basic/rds-comp-identiy-resourcse-basic'
 export {default as RdsCompPropertiesNew} from './rds-comp-properties-new/rds-comp-properties-new'
 export {default as RdsCompIdentityClientBasic} from './rds-comp-identity-client-basic/rds-comp-identity-client-basic'
+export{default as RdsCompFileUploader} from './rds-comp-fileUploader/rds-comp-fileUploader'

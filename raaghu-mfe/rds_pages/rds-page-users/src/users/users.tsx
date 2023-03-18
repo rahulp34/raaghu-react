@@ -10,6 +10,7 @@ import {
   RdsCompUserBasics,
   RdsCompUserRoles,
 } from "../../../rds-components";
+import {RdsCompFileUploader} from '../../../../../raaghu-components/src/index'
 import {
   RdsBadge,
   RdsButton,
@@ -658,15 +659,7 @@ const Users = () => {
           justified={false}
         >
           {activeNavTabIdEdit == 0 && (
-            <RdsCompUserBasics
-              organizationUnit={organizationUnit}
-              roles={roles}
-              userData={userData}
-              isEdit={true}
-              createUser={(e: any) => {
-                getUserData(e);
-              }}
-            />
+            <RdsCompFileUploader/>
           )}
 
            {activeNavTabIdEdit == 1 && (
