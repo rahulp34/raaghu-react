@@ -17,7 +17,7 @@ const [clientData, setClientData] = useState<any>(props.clientData)
   return (
     <>
       <form className="p-2 mt-2">
-        <div className="row">
+        <div className="row mb-4">
             <div className="col-lg-6 col-md-6">
               <div>
               <RdsInput
@@ -58,7 +58,7 @@ const [clientData, setClientData] = useState<any>(props.clientData)
 					/>            
             </div>
         </div>
-        <div className="row">
+        <div className="row mb-4">
             <div className="col-lg-6 col-md-6">
               <div>
               <RdsInput
@@ -87,7 +87,7 @@ const [clientData, setClientData] = useState<any>(props.clientData)
             </div>
 
         </div>
-        <div className="row">
+        <div className="row mb-4">
             <div className="col-lg-6 col-md-6">
               <div>
               <RdsInput
