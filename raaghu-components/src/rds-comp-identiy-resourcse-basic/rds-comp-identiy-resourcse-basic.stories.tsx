@@ -1,8 +1,12 @@
 /* eslint-disable */
-import RdsCompIdentiyResourcseBasic from './RdsCompIdentiyResourcseBasic';
+
+import React from "react";
+import RdsCompIdentiyResourcseBasic from "./rds-comp-identiy-resourcse-basic";
+
+
 
 export default {
-  title: "RdsCompIdentiyResourcseBasic",
+  title: "Components/Identiy Resourcse Basic",
 };
 
 export const Default = () => <RdsCompIdentiyResourcseBasic />;

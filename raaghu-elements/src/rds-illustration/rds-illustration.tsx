@@ -8,10 +8,11 @@ export interface RdsIllustrationProps {
   subLabel?: string;
   colorVariant?: colors;
 }
+const style={ marginTop:'100px', marginBottom:'100px'}
 const RdsIllustration = (props: RdsIllustrationProps) => {
   return (
     <Fragment>
-      <div className="text-center illustration-margin">
+      <div className="text-center illustration-margin" style={style}>
         <div className="d-block">
           <RdsIcon name="file_plus" width="155px" height="155px" fill={false} stroke={true} colorVariant ={props.colorVariant||"dark"}></RdsIcon>
         </div>

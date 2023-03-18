@@ -51,5 +51,9 @@ export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
 export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'
 export {default as RdsCompClientResource} from './rds-comp-client-resources/rds-comp-client-resources'
-
 export {default as RdsCompIdentiyResourcseBasic} from './rds-comp-identiy-resourcse-basic/rds-comp-identiy-resourcse-basic'
+export {default as RdsCompPropertiesNew} from './rds-comp-properties-new/rds-comp-properties-new'
+export {default as RdsCompIdentityClientBasic} from './rds-comp-identity-client-basic/rds-comp-identity-client-basic'
+export { default as RdsCompSecrets } from './rds-comp-secrets/rds-comp-secrets'
+export { default as RdsCompApiScopeResource } from './rds-comp-api-scope-resource'
+export { default as RdsCompFileUploader } from './rds-comp-fileUploader/rds-comp-fileUploader'

@@ -84,6 +84,6 @@ export const PortConfig = {
     "port": "8098"
   },
   "client": {
-    "port": "8028"
+    "port": "8029"
   }
 }
