@@ -56,3 +56,4 @@ export {default as RdsCompPropertiesNew} from './rds-comp-properties-new/rds-com
 export {default as RdsCompIdentityClientBasic} from './rds-comp-identity-client-basic/rds-comp-identity-client-basic'
 export { default as RdsCompSecrets } from './rds-comp-secrets/rds-comp-secrets'
 export { default as RdsCompApiScopeResource } from './rds-comp-api-scope-resource'
+export { default as RdsCompFileUploader } from './rds-comp-fileUploader/rds-comp-fileUploader'

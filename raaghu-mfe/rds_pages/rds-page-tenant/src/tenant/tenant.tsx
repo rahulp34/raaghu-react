@@ -219,12 +219,7 @@ const Tenant = (props: RdsPageTenantProps) => {
       datatype: "badge",
       sortable: true,
     },
-    {
-      displayName: "Subscription End Date",
-      key: "expiry",
-      datatype: "text",
-      sortable: true,
-    },
+   
   ];
 
   const navtabsItems = [
