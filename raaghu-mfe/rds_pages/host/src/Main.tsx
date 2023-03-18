@@ -454,7 +454,7 @@ const Main = (props: MainProps) => {
   };
   let logo = "./assets/raaghu_icon.png";
   return (
-    <Suspense fallback="loading...">
+    <Suspense>
       <Routes>
         <Route
           path="/login"
@@ -510,6 +510,7 @@ const Main = (props: MainProps) => {
                   className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper pt-3 px-sm-0 px-lg-3 "
                   id="FixedHeaderOverFlow"
                 >
+                  <Suspense>
                   <Routes>
                     <Route
                       path="/dashboard"
@@ -587,6 +588,7 @@ const Main = (props: MainProps) => {
                     <Route path="/client" element={<ClientCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
+                  </Suspense>
                 </div>
               </div>
             </div>
