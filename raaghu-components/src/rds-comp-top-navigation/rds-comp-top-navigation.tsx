@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 import {
@@ -26,7 +26,7 @@ export interface RdsCompTopNavigationProps {
 
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 	const [LinkAccount, setLinkAccount] = useState(false);
-
+  const navigate = useNavigate();
 	const navtabItems = [
 		{
 			label: "Manage Linked Accounts",
@@ -71,14 +71,16 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       >
         <div className="d-flex align-items-center">
           <span className="navbar-brand p-0 m-0">
-            <img
+           <img
               className="ms-1"
               src={props?.logo}
               alt="logo"
               width="70"
             ></img>
+            
             <span className="title fw-bold text-lowercase m-2">
-              <b>{props.brandName}</b>
+      
+             <b onClick={()=>{navigate("/dashboard")}}>{props.brandName}</b>
             </span>
           </span>
           <div>
