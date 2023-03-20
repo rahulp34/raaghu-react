@@ -11,6 +11,7 @@ import {
   RdsCompDatatable,
   RdsCompPermissionTree,
   RdsCompAlertPopup,
+  RdsCompClaims,
 } from "../../../rds-components";
 import {
   useAppDispatch,
@@ -23,6 +24,8 @@ import {
   deleteRoles,
   fetchPermission,
   editPermisstion,
+  fetchAllClaims,
+  fetchClaims,
 } from "../../../../libs/state-management/roles/roles-slice";
 import { useTranslation } from "react-i18next";
 
@@ -44,10 +47,12 @@ const Roles = (props: RdsPageRolesProps) => {
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
   const { t } = useTranslation();
+  const [claimsTable, setClaimsTableData] = useState<any[]>([])
 
-
+  
   useEffect(() => {
     dispatch(fetchRoles() as any);
+    dispatch(fetchAllClaims() as any);
   }, [dispatch]);
   useEffect(() => {
     if (Array.isArray(Data.roles)) {
@@ -127,9 +132,33 @@ const Roles = (props: RdsPageRolesProps) => {
         default: rowData.isDefault,
         public: rowData.isPublic,
       });
+      dispatch(fetchClaims(rowData.id) as any)
       dispatch(fetchPermission(rowData.provideKey) as any);
     }
   };
+
+  const [allClaimsArray, setAllClaimsArray] = useState<any[]>([]);
+
+  useEffect(()=>{
+    if(Data.allClaims){
+      let tempAllClaimsArray:any[] = [];
+      Data.allClaims.map((res:any)=>{
+        const item = {
+          option:res.name,
+          value: res.name
+        }
+        tempAllClaimsArray.push(item);
+      })
+      setAllClaimsArray(tempAllClaimsArray);
+    }
+  },[Data.allClaims])
+
+  useEffect(() => {
+    if(Data.claims){
+      setClaimsTableData(Data.claims)
+    }
+  }, [Data.claims]);
+  
   useEffect(() => {
     setData({ ...data, permission: Data.permission });
   }, [Data.permission]);
@@ -309,6 +338,11 @@ const Roles = (props: RdsPageRolesProps) => {
                 tablink: "#nav-Change",
                 id: "permissions",
               },
+              {
+                label: "Claims",
+                tablink: "#nav-Claims",
+                id: "claims",
+              },
             ]}
           />
           <div className="mt-2">
@@ -369,12 +403,17 @@ const Roles = (props: RdsPageRolesProps) => {
                 </div>
               </div>
             )}
-            {activeTab !== "basic" && (
+            {activeTab == "permissions" && (
               <div>
                 <RdsCompPermissionTree
                   permissions={data.permission}
                   selectedPermissions={handlerSelectedPermission}
                 ></RdsCompPermissionTree>
+              </div>
+            )}
+            {activeTab == "claims" && (
+              <div>
+                <RdsCompClaims allClaimsArray={allClaimsArray} claimsTable={claimsTable} id={id}  ></RdsCompClaims>
               </div>
             )}
             <div

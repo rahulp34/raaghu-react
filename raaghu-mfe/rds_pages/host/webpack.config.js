@@ -133,7 +133,8 @@ module.exports = (env, argv) => {
           Forms : mfeConfigJSON["forms"].url,
           Blogger: mfeConfigJSON["blogger"].url,
           IdentityResources: mfeConfigJSON["identityResources"].url,
-          Client: mfeConfigJSON["client"].url
+          Client: mfeConfigJSON["client"].url,
+          ApiResources: mfeConfigJSON["apiResources"].url
         },
         shared: {
           ...devdeps,

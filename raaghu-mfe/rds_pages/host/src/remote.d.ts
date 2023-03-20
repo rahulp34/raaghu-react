@@ -143,3 +143,7 @@ declare module "Client/Client" {
 	const ClientComponent : React.ComponentType;
 	export default ClientComponent;
 }
+declare module "ApiResources/ApiResources" {
+	const ApiResourcesComponent : React.ComponentType;
+	export default ApiResourcesComponent;
+}

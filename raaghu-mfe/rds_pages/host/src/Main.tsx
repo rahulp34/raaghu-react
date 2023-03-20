@@ -44,6 +44,8 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
+
 const ScopeCompo = React.lazy(() => import("Scope/Scope"));
 const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
@@ -188,7 +190,7 @@ const Main = (props: MainProps) => {
    
   },[Data.localization])
 
-  const sideNavItems = concatenated
+  const sideNavItems = concatenated;
   
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
   const getLabelForPath: any = (path: string, navItems: any) => {
@@ -368,6 +370,7 @@ const Main = (props: MainProps) => {
                     />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/apiResources" element={<ApiResourcesCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
