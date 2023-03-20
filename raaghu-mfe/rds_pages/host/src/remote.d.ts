@@ -152,3 +152,7 @@ declare module "Polls/Polls" {
 	const PollsComponent : React.ComponentType;
 	export default PollsComponent;
 }
+declare module "UrlForwarding/UrlForwarding" {
+	const UrlForwardingComponent : React.ComponentType;
+	export default UrlForwardingComponent;
+}

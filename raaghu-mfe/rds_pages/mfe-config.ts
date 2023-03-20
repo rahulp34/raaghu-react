@@ -94,5 +94,8 @@ export const MfeConfig = {
   },
   "polls": {
     "url": "polls@http://localhost:8096/remoteEntry.js"
-  }
+  },
+   "urlForwarding": {
+        "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
+    }
 }

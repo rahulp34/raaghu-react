@@ -55,6 +55,7 @@ const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
 const PollsCompo = React.lazy(()=> import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -382,6 +383,7 @@ const Main = (props: MainProps) => {
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
+                    <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                   </Suspense>
