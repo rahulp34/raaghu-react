@@ -147,6 +147,15 @@ declare module "ApiResources/ApiResources" {
 	const ApiResourcesComponent : React.ComponentType;
 	export default ApiResourcesComponent;
 }
+
+declare module "Polls/Polls" {
+	const PollsComponent : React.ComponentType;
+	export default PollsComponent;
+}
+declare module "UrlForwarding/UrlForwarding" {
+	const UrlForwardingComponent : React.ComponentType;
+	export default UrlForwardingComponent;
+}
 declare module "Blogs/Blogs" {
 	const BlogsComponent : React.ComponentType;
 	export default BlogsComponent;

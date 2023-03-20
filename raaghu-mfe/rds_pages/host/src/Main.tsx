@@ -54,6 +54,8 @@ const FileManagementCompo = React.lazy(() => import("FileManagement/FileManageme
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
+const PollsCompo = React.lazy(()=> import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 
 
@@ -379,9 +381,12 @@ const Main = (props: MainProps) => {
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/polls" element={<PollsCompo />} />
+                    
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
+                    <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                   </Suspense>

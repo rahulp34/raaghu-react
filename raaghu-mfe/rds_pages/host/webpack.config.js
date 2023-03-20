@@ -135,6 +135,8 @@ module.exports = (env, argv) => {
           IdentityResources: mfeConfigJSON["identityResources"].url,
           Client: mfeConfigJSON["client"].url,
           ApiResources: mfeConfigJSON["apiResources"].url,
+          Polls: mfeConfigJSON["polls"].url,
+          UrlForwarding: mfeConfigJSON["urlForwarding"].url,
           Blogs: mfeConfigJSON["blogs"].url
         },
         shared: {

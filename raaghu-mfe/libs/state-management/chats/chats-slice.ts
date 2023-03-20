@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { ContactCreateInput, ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
   loading: boolean;
@@ -19,7 +19,7 @@ export const fetchChatsData = createAsyncThunk(
     "chats/fetchChatsData",
     () => { 
       return proxy
-        .contacts(undefined, true)
+        .contacts(undefined)
         .then((result: any) => {
           console.log("result chats", result);
           return result.items;

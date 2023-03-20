@@ -202,13 +202,6 @@ const mainMenu = [
       "subTitle": "Blogs, Posts, Articles",
     },
     {
-        "key": "8",
-        "label": "Api Scope",
-        "icon": "icons",
-        "path": "/scope",
-        "subTitle": "Scopes",
-    },
-    {
       "key": "9",
       "label": "Identity Resources",
       "icon": "icons",
@@ -217,17 +210,24 @@ const mainMenu = [
     },
     {
       "key": "10",
-      "label": "CMS",
-      "icon": "pages",
-      "children": [
-        {
-          "key": "10-0",
-          "label": "Blogs",
-          "icon": "tenant",
-          "path": "/blogs",
-          "subTitle": "Manage your blogs",
-        },
-      ]
+      "label": "Polls",
+      "icon": "icons",
+      "path": "/polls",
+      "subTitle": "Blogs, Posts, Articles",
+    },
+    {
+        "key": "11",
+        "label": "CMS",
+        "icon": "pages",
+        "children": [
+            {
+                "key": "11-0",
+                "label": "Blogs",
+                "icon": "tenant",
+                "path": "/blogs",
+                "subTitle": "Manage your blogs",
+            },
+        ]
     }
 ]
 

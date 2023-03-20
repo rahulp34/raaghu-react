@@ -88,11 +88,17 @@ export const MfeConfig = {
   },
   "client": {
     "url": "client@http://localhost:8028/remoteEntry.js"
-    },
-   "apiResources": {
-        "url": "apiResources@http://localhost:8030/remoteEntry.js"
   },
+  "apiResources": {
+    "url": "apiResources@http://localhost:8030/remoteEntry.js"
+  },
+  "polls": {
+    "url": "polls@http://localhost:8096/remoteEntry.js"
+  },
+   "urlForwarding": {
+        "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
+    },
     "blogs": {
-      "url": "blogs@http://localhost:8031/remoteEntry.js"
-  }
+        "url": "blogs@http://localhost:8031/remoteEntry.js"
+    }
 }
