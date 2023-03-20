@@ -20,7 +20,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
     <>
       <nav
         id="sidebar"
-        className={`bd-links min-vh-100 pt-3 ps-4 position-relative  ${
+        className={`bd-links min-vh-100 pt-3 ps-2 position-relative  ${
           dataFromChild ? "toggle toggle-sidebar-menu" : ""
         }`}
       >
