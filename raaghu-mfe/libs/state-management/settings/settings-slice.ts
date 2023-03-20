@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
 import {ServiceProxy} from '../../shared/service-proxy'
+import { featureTenant } from "../public.api";
 
 type InitialStateSettings = {
   loading: boolean;
@@ -42,7 +43,7 @@ export const saveEmailSettings = createAsyncThunk("settings/saveEmailSetting
   })   
 });
 export const fetchIdentitySettings = createAsyncThunk("settings/fetchIdentitySettings", () => {
-  return proxy.settingsGET2('').then((result:any)=>{
+  return proxy.settingsGET2().then((result:any)=>{
       return result;
   })   
 });
@@ -93,7 +94,7 @@ export const saveAccountExternalProviderSettings = createAsyncThunk("setting
 });
 export const fetchFeaturesSettings = createAsyncThunk("settings/fetchFeaturesSettings ", () => {
 
-  return proxy.featuresGET("T",undefined,undefined).then((result:any)=>{
+  return proxy.featuresGET("T", "").then((result:any)=>{
       return result;
   })  
 });
