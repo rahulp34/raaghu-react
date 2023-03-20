@@ -202,13 +202,6 @@ const mainMenu = [
       "subTitle": "Blogs, Posts, Articles",
     },
     {
-        "key": "8",
-        "label": "Api Scope",
-        "icon": "icons",
-        "path": "/scope",
-        "subTitle": "Scopes",
-    },
-    {
       "key": "9",
       "label": "Identity Resources",
       "icon": "icons",
