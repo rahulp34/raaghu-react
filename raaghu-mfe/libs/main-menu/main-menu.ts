@@ -215,6 +215,13 @@ const mainMenu = [
       "path": "/identityResources",
       "subTitle": "Blogs, Posts, Articles",
     },
+    {
+      "key": "10",
+      "label": "Polls",
+      "icon": "icons",
+      "path": "/polls",
+      "subTitle": "Blogs, Posts, Articles",
+    }
 ]
 
 

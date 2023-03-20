@@ -54,6 +54,7 @@ const FileManagementCompo = React.lazy(() => import("FileManagement/FileManageme
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
+const PollsCompo = React.lazy(()=> import("Polls/Polls"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -376,6 +377,8 @@ const Main = (props: MainProps) => {
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/polls" element={<PollsCompo />} />
+                    
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
