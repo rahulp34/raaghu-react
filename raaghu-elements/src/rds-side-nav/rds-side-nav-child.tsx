@@ -234,7 +234,7 @@ const Node = ({
                 <>
                   <a
                     aria-expanded={childVisibility}
-                    className={`nav-link child ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    className={`nav-link child d-inline-flex cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
                     onClick={(e) => setChildVisibility((v) => !v)}>
                     <RdsIcon
                       name={node.icon}
@@ -258,7 +258,7 @@ const Node = ({
                   <div id="menuWithChildren2">
                     <a
                       aria-expanded={childVisibility}
-                      className={`nav-link child  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                      className={`nav-link child d-inline-flex cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
                       onClick={(e) => setChildVisibility((v) => !v)}>
                       <RdsIcon
                         name={node.icon}
