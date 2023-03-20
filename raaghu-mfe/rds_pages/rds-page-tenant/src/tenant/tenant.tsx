@@ -350,8 +350,16 @@ const Tenant = (props: RdsPageTenantProps) => {
           dispatch(fetchEdition() as any);
           dispatch(fetchTenant() as any);
         });
+      
       }
-      setBasicTenantInformation(data);
+      setBasicTenantInformation({editionId: "",
+      name: "",
+      activationEndDate: null,
+      adminPassword: "",
+      activationState: 0,
+      adminEmailAddress: "",
+      connectionStrings: { id: "", default: null, databases: [] },
+    });
       setTenantInformationData({     
         editionId: "",
         name: "",

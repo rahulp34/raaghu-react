@@ -459,7 +459,7 @@ const Users = () => {
   }, [data.permission]);
 
   useEffect(() => {
-    if (data.users) {
+    if (data.users && data.users.items.length ) {
       let tempTableData: any[] = [];
       data.users.items.map((item: any) => {
         const data = {
