@@ -88,5 +88,8 @@ export const PortConfig = {
   },
   "apiResources": {
     "port": "8030"
+  },
+  "blogs": {
+    "port": "8031"
   }
 }

@@ -91,5 +91,8 @@ export const MfeConfig = {
     },
    "apiResources": {
         "url": "apiResources@http://localhost:8030/remoteEntry.js"
-    }
+  },
+    "blogs": {
+      "url": "blogs@http://localhost:8031/remoteEntry.js"
+  }
 }

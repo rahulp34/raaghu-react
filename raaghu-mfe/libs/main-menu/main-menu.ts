@@ -215,6 +215,20 @@ const mainMenu = [
       "path": "/identityResources",
       "subTitle": "Blogs, Posts, Articles",
     },
+    {
+      "key": "10",
+      "label": "CMS",
+      "icon": "pages",
+      "children": [
+        {
+          "key": "10-0",
+          "label": "Blogs",
+          "icon": "tenant",
+          "path": "/blogs",
+          "subTitle": "Manage your blogs",
+        },
+      ]
+    }
 ]
 
 

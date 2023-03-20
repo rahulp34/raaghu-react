@@ -147,3 +147,7 @@ declare module "ApiResources/ApiResources" {
 	const ApiResourcesComponent : React.ComponentType;
 	export default ApiResourcesComponent;
 }
+declare module "Blogs/Blogs" {
+	const BlogsComponent : React.ComponentType;
+	export default BlogsComponent;
+}
