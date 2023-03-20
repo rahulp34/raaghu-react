@@ -31,28 +31,21 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
     roleId: props.id,
   });
   const [tableData, setTableData] = useState<any>(props.claimsTable);
-  const actions= [{ id: "delete", displayName: "delete" }];
+  const actions= [{ id: "delete", displayName: "delete", modalId: "noModal" }];
 
   const handleAddItem = () => {
-    debugger
+    debugger  
     let newTempData: any;
     newTempData = {
       id: selectedData.id,
       claimType: selectedData.claimType,
       claimValue: selectedData.claimValue,
       roleId: props.id,
-      delete: "Delete",
     };
     setTableData((prev: any) => [...prev, newTempData]);
     setSelectedData({ ...selectedData, id: selectedData.id + 1 });
   };
 
-  const HandlerDelete = () => {
-    console.log(" yes bhai you clicked me !!");
-  };
-  // const handleDeleteItem = (index: number) => {
-  //   setSelectedItems(selectedItems.filter((item, i) => i !== index));
-  // };
   const tableHeaders = [
     {
       displayName: "claim Type",
@@ -69,8 +62,13 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
   ];
   
   function onActionSelection(data:any){
-    debugger
-    console.log(data)
+    let tempTableData = tableData.filter((res:any)=>{
+      debugger
+      if((res.claimType!=data.claimType)|| (res.claimType == data.claimType && res.claimValue != data.claimValue)){
+        return res;
+      }
+    })
+    setTableData(tempTableData);
   }
 
   return (
