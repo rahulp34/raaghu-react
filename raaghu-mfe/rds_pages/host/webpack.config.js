@@ -137,7 +137,8 @@ module.exports = (env, argv) => {
           ApiResources: mfeConfigJSON["apiResources"].url,
           Polls: mfeConfigJSON["polls"].url,
           UrlForwarding: mfeConfigJSON["urlForwarding"].url,
-          PaymentPlans: mfeConfigJSON["paymentPlans"].url
+          PaymentPlans: mfeConfigJSON["paymentPlans"].url,
+          Blogs: mfeConfigJSON["blogs"].url
         },
         shared: {
           ...devdeps,

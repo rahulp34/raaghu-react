@@ -160,3 +160,7 @@ declare module "PaymentPlans/PaymentPlans" {
 	const PaymentPlansComponent : React.ComponentType;
 	export default PaymentPlansComponent;
 }
+declare module "Blogs/Blogs" {
+	const BlogsComponent : React.ComponentType;
+	export default BlogsComponent;
+}

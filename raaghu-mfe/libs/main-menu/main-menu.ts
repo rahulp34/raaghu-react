@@ -222,7 +222,19 @@ const mainMenu = [
       "path": "/paymentPlans",
       "subTitle": "Payment Plans",
     },
+        "key": "12",
+        "label": "CMS",
+        "icon": "pages",
+        "children": [
+            {
+                "key": "12-0",
+                "label": "Blogs",
+                "icon": "tenant",
+                "path": "/blogs",
+                "subTitle": "Manage your blogs",
+            },
+        ]
+    }
 ]
-
 
 export default mainMenu;

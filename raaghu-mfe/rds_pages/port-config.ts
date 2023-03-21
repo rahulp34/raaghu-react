@@ -94,5 +94,8 @@ export const PortConfig = {
   },
   "paymentPlans":{
     "port":"8031"
+  },
+  "blogs": {
+    "port": "8032"
   }
 }
