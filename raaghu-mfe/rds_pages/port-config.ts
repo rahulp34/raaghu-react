@@ -91,8 +91,11 @@ export const PortConfig = {
   },
   "urlForwarding": {
     "port": "8097"
-    },
-    "blogs": {
-        "port": "8031"
-    }
+  },
+  "paymentPlans":{
+    "port":"8031"
+  },
+  "blogs": {
+    "port": "8032"
+  }
 }
