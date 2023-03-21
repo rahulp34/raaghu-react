@@ -222,6 +222,7 @@ const mainMenu = [
       "path": "/paymentPlans",
       "subTitle": "Payment Plans",
     },
+    {
         "key": "12",
         "label": "CMS",
         "icon": "pages",

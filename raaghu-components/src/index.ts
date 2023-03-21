@@ -60,3 +60,4 @@ export { default as RdsCompApiScopeResource } from './rds-comp-api-scope-resourc
 export { default as RdsCompFileUploader } from './rds-comp-fileUploader/rds-comp-fileUploader'
 export { default as RdsCompApiResourceBasic } from './rds-comp-api-resource-basic';
 export { default as RdsCompClaim } from './rds-comp-claim/rds-comp-claim';
+export { default as RdsCompUrlForwardings} from './rds-comp-url-forwardings';
