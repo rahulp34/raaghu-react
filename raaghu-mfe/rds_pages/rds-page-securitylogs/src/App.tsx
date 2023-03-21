@@ -264,7 +264,7 @@ const onUserNameFilter=(event:any)=>{
                     onChange={onActionFilter}                  
                   ></RdsInput>
                 </div>
-                <div className="col-3 d-flex mt-2 align-items-center ">
+                <div className="col-3 d-flex mt-auto align-items-center ">
                   <RdsButton
                     type="button"
                     colorVariant="primary"

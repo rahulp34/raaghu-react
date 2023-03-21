@@ -8,13 +8,13 @@ import languageTextReducer from "./language-text/language-text-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import rolesReducer from "./roles/roles-slice";
 import scopesReducer from "./apiScope/apiScope-slice";
-import scopesHReducer from "./scope/scope-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
 import userReducer from "./user/user-slice";
 import localizationReducer from "./localization/localization-slice";
 import settingsReducer from "./settings/settings-slice";
+import FileManagementReducer from "./file-management/file-management-slice"
 import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -44,8 +44,6 @@ const rootReducer = combineReducers({
   securityLogs:securityLogsReducer,
   applications : applicationsReducer,
   scopes: scopesReducer,
-  scopesH:scopesHReducer,  
-  apiScope: scopesHReducer,    
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
   user: userReducer,
@@ -54,7 +52,8 @@ const rootReducer = combineReducers({
   localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
-  forms : formsReducer
+  forms : formsReducer,
+  fileManagement: FileManagementReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompPropertiesNew from './RdsCompPropertiesNew';
+import React from 'react';
+import RdsCompPropertiesNew from './rds-comp-properties-new';
 
 export default {
   title: "RdsCompPropertiesNew",

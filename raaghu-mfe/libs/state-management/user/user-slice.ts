@@ -20,7 +20,7 @@ export interface UserState {
 };
 export const UserInitialState: UserState = {
   loading: false,
-  users: [],
+  users: null,
   editUser:null,
   roles:null,
   editUserRoles:null,

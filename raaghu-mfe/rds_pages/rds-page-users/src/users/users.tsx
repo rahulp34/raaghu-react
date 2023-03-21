@@ -10,6 +10,7 @@ import {
   RdsCompUserBasics,
   RdsCompUserRoles,
 } from "../../../rds-components";
+import {RdsCompFileUploader} from '../../../../../raaghu-components/src/index'
 import {
   RdsBadge,
   RdsButton,
@@ -458,7 +459,7 @@ const Users = () => {
   }, [data.permission]);
 
   useEffect(() => {
-    if (data.users) {
+    if (data.users && data.users.items.length ) {
       let tempTableData: any[] = [];
       data.users.items.map((item: any) => {
         const data = {
@@ -531,15 +532,19 @@ const Users = () => {
         <div className="col-md-12 text-end pb-3 desktop-btn">
           <RdsButton
             label="New User"
-            type="button"
-            size="medium"
-            colorVariant="primary"
             showLoadingSpinner={false}
             databstoggle="offcanvas"
             databstarget="#userOffcanvas"
             icon={"plus"}
-            iconWidth={"12px"}
-            iconHeight={"12px"}
+            iconColorVariant="light"
+            iconHeight="15px"
+            iconWidth="15px"
+            iconFill={false}
+            iconStroke={true}
+            block={false}
+            size="small"
+            type="button"
+            colorVariant="primary"
           ></RdsButton>
         </div>
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
@@ -615,12 +620,14 @@ const Users = () => {
                   type="button"
                   databsdismiss="offcanvas"
                   isOutline={true}
+                  size="small"
                   colorVariant="primary"
                 ></RdsButton>
                 <RdsButton
                   class="me-2"
                   label="SAVE"
                   type="button"
+                  size="small"
                   isOutline={false}
                   colorVariant="primary"
                   onClick={createNewUser}
@@ -652,15 +659,7 @@ const Users = () => {
           justified={false}
         >
           {activeNavTabIdEdit == 0 && (
-            <RdsCompUserBasics
-              organizationUnit={organizationUnit}
-              roles={roles}
-              userData={userData}
-              isEdit={true}
-              createUser={(e: any) => {
-                getUserData(e);
-              }}
-            />
+            <RdsCompFileUploader/>
           )}
 
            {activeNavTabIdEdit == 1 && (

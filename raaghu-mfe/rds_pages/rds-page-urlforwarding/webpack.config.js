@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
     entry: "./src/index.ts",
     mode: process.env.NODE_ENV || "development",
     devServer: {
-      port: 8098,
+      port: 8097,
       open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -65,11 +65,11 @@ module.exports = (env, argv) => {
         "process.env": JSON.stringify(process.env),
       }),
       new ModuleFederationPlugin({
-        name: "identityResources",
+        name: "urlForwarding",
         filename: "remoteEntry.js",
         exposes: {
           // expose each page
-          "./IdentityResources": "./src/App"
+          "./UrlForwarding": "./src/App"
         },
         shared: {
           ...devdeps,

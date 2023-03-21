@@ -199,7 +199,7 @@ const RdsCompTenantInformation = (props: any) => {
             ></RdsButton>
             <RdsButton
               class="me-2"
-              label="Create"
+              label="Save"
               size="small"
               colorVariant="primary"
               tooltipTitle={""}

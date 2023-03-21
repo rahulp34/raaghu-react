@@ -14,6 +14,9 @@ import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
+// const menus = <Record<string, any>>require("../../../libs/main-menu");
+import * as menus from "../../../libs/main-menu/index"
+
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
@@ -41,6 +44,8 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
+
 const ScopeCompo = React.lazy(() => import("Scope/Scope"));
 const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
@@ -49,6 +54,8 @@ const FileManagementCompo = React.lazy(() => import("FileManagement/FileManageme
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
+const PollsCompo = React.lazy(()=> import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -148,6 +155,11 @@ const Main = (props: MainProps) => {
   ];
 
   // OnClickHandler for language change
+  const objectArray = Object.entries(menus); 
+   let newobjectArray=  objectArray.map((item)=>{
+     return item[1]})
+  const concatenated = newobjectArray.reduce((acc:any, arr:any) => acc.concat(arr), []);
+
 
   const { t } = useTranslation();
   const { i18n } = useTranslation();
@@ -180,225 +192,7 @@ const Main = (props: MainProps) => {
    
   },[Data.localization])
 
-  const sideNavItems = [
-    {
-      key: "0",
-      label: t("Dashboard"),
-      icon: "home",
-      path: "/dashboard",
-      subTitle: "Statistics and reports",
-    },
-    {
-      key: "1",
-      label: t("Icons"),
-      icon: "icons",
-      path: "/icons",
-      subTitle: t("icons"),
-    },
-    {
-      key: "2",
-      label: t("Saas"),
-      icon: "pages",
-      children: [
-        {
-          key: "2-0",
-          label: t("Tenants"),
-          icon: "tenant",
-          path: "/tenant",
-          subTitle: t("Manage your tenants"),
-        },
-        {
-          key: "2-1",
-          label: t("Editions"),
-          icon: "editions",
-          path: "/edition",
-          subTitle: t("Manage editions and features of the application"),
-        },
-      ],
-    },
-    {
-      key: "3",
-      label: t("Administration"),
-      icon: "pages",
-      children: [
-        {
-          key: "3-0",
-          label: t("Identity Management"),
-          icon: "organization",
-          children: [
-            {
-              key: "3-0-0",
-              label: t("Organization units"),
-              icon: "tenant",
-              path: "/organization-unit",
-              subTitle: t(
-                "Use organization units to organize users and entities"
-              ),
-            },
-            {
-              key: "3-0-1",
-              label: t("Roles"),
-              icon: "roles",
-              path: "/role",
-              subTitle: t("Use roles to group permissions"),
-            },
-            {
-              key: "3-0-2",
-              label: t("Users"),
-              icon: "users",
-              path: "/users",
-              subTitle: t("Manage users and permissions"),
-            },
-            {
-              key: "3-0-3",
-              label: t("Claim Types"),
-              icon: "users",
-              path: "/claim-types",
-              subTitle: t("Manage users and permissions"),
-            },
-            {
-              key: "3-0-4",
-              label: t("Security-logs"),
-              icon: "users",
-              path: "/security-logs",
-              subTitle: t("Manage users and permissions"),
-            },
-          ],
-        },
-        {
-          key: "3-1",
-          label: t("OpenId"),
-          icon: "tenant",
-          children: [
-            {
-              key: "3-1-0",
-              label: t("Applications"),
-              icon: "tenant",
-              path: "/applications",
-              subTitle: t(
-                "Use organization units to organize users and entities"
-              ),
-            },
-            {
-              key: "3-1-1",
-              label: t("Scopes"),
-              icon: "tenant",
-              path: "/api-scope",
-              subTitle: t(
-                "Use organization units to organize users and entities"
-              ),
-            },
-          ],
-        },
-        {
-          key: "3-2",
-          label: t("Language Management"),
-          icon: "tenant",
-          children: [
-            {
-              key: "3-2-0",
-              label: t("Language"),
-              icon: "languages",
-              path: "/language",
-              subTitle: t("Manage user interface languages"),
-            },
-            {
-              key: "3-2-1",
-              label: t("Language-Text"),
-              icon: "languages",
-              path: "/language-text",
-              subTitle: t("Manage user interface languages"),
-            },
-          ],
-        },
-        {
-          key: "3-3",
-          label: t("Text-Template"),
-          icon: "languages",
-          path: "/text-template",
-          subTitle: t("Manage user interface languages"),
-        },
-        {
-          key: "3-4",
-          label: t("Audit Logs"),
-          icon: "audit_logs",
-          path: "/audit-logs",
-          subTitle: "",
-        },
-        {
-          key: "3-5",
-          label: t("Settings"),
-          icon: "setting",
-          path: "/settings",
-          subTitle: t("Show and change application settings"),
-        },
-        {
-          key: "3-5",
-          label: t("Identity Server"),
-          icon: "tenant",
-          children: [
-            {
-              key: "3-5-0",
-              label: t("Clients"),
-              icon: "languages",
-              path: "/client",
-              subTitle: t("Manage user interface languages"),
-            },
-            {
-              key: "3-5-1",
-              label: t("Identity resources"),
-              icon: "languages",
-              path: "/language-text",
-              subTitle: t("Manage user interface languages"),
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: "4",
-      label: t("Chats"),
-      icon: "home",
-      path: "/chats",
-      subTitle: "Chats Module",
-  },
-  {
-      key: "5",
-      label: t("File Management"),
-      icon: "icons",
-      path: "/fileManagement",
-      subTitle: t("File Management"),
-    },
-    {
-      key: "6",
-      label: t("Forms"),
-      icon: "icons",
-      path: "/forms",
-      subTitle: t("Forms"),
-    },
-    {
-      key: "7",
-      label: t("Blogger"),
-      icon: "blog",
-      path: "/blogger",
-      subTitle: t("Blogs, Posts, Articles"),
-    },
-  {
-    key: "8",
-    label: t("Api Scope"),
-    icon: "icons",
-    path: "/scope",
-    subTitle: t("Scopes"),
-  },
-    {
-      key: "9",
-      label: t("Identity Resources"),
-      icon: "icons",
-      path: "/identityResources",
-      subTitle: t("Blogs, Posts, Articles"),
-    },
-
-  ];
+  const sideNavItems = concatenated;
   
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
   const getLabelForPath: any = (path: string, navItems: any) => {
@@ -454,7 +248,7 @@ const Main = (props: MainProps) => {
   };
   let logo = "./assets/raaghu_icon.png";
   return (
-    <Suspense fallback="loading...">
+    <Suspense>
       <Routes>
         <Route
           path="/login"
@@ -510,6 +304,7 @@ const Main = (props: MainProps) => {
                   className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper pt-3 px-sm-0 px-lg-3 "
                   id="FixedHeaderOverFlow"
                 >
+                  <Suspense>
                   <Routes>
                     <Route
                       path="/dashboard"
@@ -578,15 +373,20 @@ const Main = (props: MainProps) => {
                     />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/apiResources" element={<ApiResourcesCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/polls" element={<PollsCompo />} />
+                    
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
+                    <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
+                  </Suspense>
                 </div>
               </div>
             </div>

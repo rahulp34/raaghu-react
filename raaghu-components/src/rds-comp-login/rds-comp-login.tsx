@@ -76,7 +76,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   return (
     <div>
       <div className="text-center">
-        <h2>Login</h2>
+      <h2 > <b> Login </b> </h2>
 
         <div>
           <small className="pb-5 d-flex justify-content-center">
@@ -151,7 +151,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 value={password}
               ></RdsInput>
             </div>
-            <div className="d-flex justify-content-between mt-4 mb-4">
+            <div className="d-flex justify-content-between mt-2 mb-4">
               <div>
                 <div className="form-group mb-3">
                   <RdsCheckbox label={"Remember me"} checked={checkbox} onChange={onCheckedHandler}></RdsCheckbox>

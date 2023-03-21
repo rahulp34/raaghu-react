@@ -4,7 +4,7 @@
   "description": "",
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "bootstrap": "^5.2.3",
@@ -26,7 +26,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "redux-persist": "^6.0.0",
-    "sass": "^1.56.1",
+    "sass": "^1.58.3",
     "validator": "^13.7.0",
     "webpack": "^5.75.0",
     "xlsx": "^0.18.5"
@@ -35,6 +35,7 @@
     "@babel/core": "^7.20.5",
     "@mdx-js/react": "1.6",
     "@storybook/addon-actions": "^6.5.13",
+    "@storybook/addon-docs": "^6.5.16",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
@@ -55,12 +56,12 @@
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "sass-loader": "^13.2.0",
     "storybook-addon-themes": "^6.1.0",
-    "style-loader": "^3.3.1",
+    "style-loader": "^3.3.2",
     "typescript": "<4.8"
   },
   "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+    "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
     "create:page": "node utils/create.js p"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RdsCompApiScopeResource from "../../../../../raaghu-components/src/rds-comp-api-scope-resource";
+import {RdsCompApiScopeResource , RdsCompSecrets }  from "../../../rds-components";
 import {
   RdsBadge,
   RdsInput,
@@ -11,6 +11,7 @@ import {
 import {
   RdsCompDatatable,
   RdsCompClientResource,
+  RdsCompIdentityClientBasic
 } from "../../../rds-components";
 
 
@@ -283,11 +284,14 @@ const Client = (props: RdsPageScopeProps) => {
           justified={false}
         >
           {activeNavTabId == 0 && (
-          <></>
+          <RdsCompIdentityClientBasic
+          clientData="naemsef"
+          />
           )}
           {activeNavTabId == 1 && (
-            <>            
-            </>
+              
+            <RdsCompSecrets />         
+            
           )}
            {activeNavTabId == 2 && (
            <RdsCompApiScopeResource role="advanced"  resources={[resources]}></RdsCompApiScopeResource>

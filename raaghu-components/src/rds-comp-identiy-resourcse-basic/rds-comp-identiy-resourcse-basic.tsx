@@ -1,26 +1,22 @@
 import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from "raaghu-react-elements";
 import React, { FC, useState } from "react";
 
+export interface RdsCompIdentiyResourcseBasicProps { }
 
-interface RdsCompIdentiyResourcseBasicProps {}
+const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) => {
 
-const RdsCompIdentiyResourcseBasic = (
-  props: RdsCompIdentiyResourcseBasicProps
-) => {
-
-  
   const [identityBasicData, setidentityBasicData] = useState({
-    name:'',
-    displayName:'',
-    description:'',
-    enabled:false,
-    required:false,
-    emphasize:false,
-    showInDiscovery:false,
+    name: '',
+    displayName: '',
+    description: '',
+    enabled: false,
+    required: false,
+    emphasize: false,
+    showInDiscovery: false,
   });
   const resourceBasicData = (event: any) => {
     event.preventDefault();
-   console.log("identity resourcesss  basic",identityBasicData)
+    console.log("identity resourcesss  basic", identityBasicData)
   };
 
   function setName(value: any) {
@@ -36,7 +32,7 @@ const RdsCompIdentiyResourcseBasic = (
   function setEnabled(value: boolean) {
     setidentityBasicData({ ...identityBasicData, enabled: value });
   }
-  
+
   function setRequired(value: boolean) {
     setidentityBasicData({ ...identityBasicData, required: value });
   }
@@ -92,41 +88,41 @@ const RdsCompIdentiyResourcseBasic = (
             />
           </div>
           <div className="row mt-2">
-           <RdsCheckbox
+            <RdsCheckbox
               id="0"
               label="Enabled"
               checked={identityBasicData.enabled}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setEnabled(e.target.checked);
               }}
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
-           <RdsCheckbox
+            <RdsCheckbox
               id="0"
               label="Required"
               checked={identityBasicData.required}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setRequired(e.target.checked);
               }}
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
-           <RdsCheckbox
+            <RdsCheckbox
               id="0"
               label="Emphasize"
               checked={identityBasicData.emphasize}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setEmphasize(e.target.checked);
               }}
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
-           <RdsCheckbox
+            <RdsCheckbox
               id="0"
               label="Show in Discovery Document"
               checked={identityBasicData.showInDiscovery}
-              onChange={(e:any) => {
+              onChange={(e: any) => {
                 setDiscovery(e.target.checked);
               }}
             ></RdsCheckbox>
