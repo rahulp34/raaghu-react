@@ -138,23 +138,6 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      const filename = `raaghu-mfe/rds_pages/${name}/webpack.config.js`;
-    const searchString = "template_port_number";
-    const replaceString = 8069;
-
-    fs.readFile(filename, "utf8", function (err, data) {
-      if (err) throw err;
-
-      const result = data.replace(new RegExp(searchString, "g"), replaceString);
-
-      fs.writeFile(filename, result, "utf8", function (err) {
-        if (err) throw err;
-        console.log(
-          `Replaced all occurrences of "${searchString}" with "${replaceString}" in ${filename}`
-        );
-      });
-    });
-
       console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
@@ -283,6 +266,30 @@ if (fs.existsSync(appFolderPath)) {
       2
     )}\n`;
     fs.writeFileSync(portConfigFilePath, updatedportConfigString);
+
+    // Updating in remote.d.ts file
+
+    fs.readFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    
+      // Add the new module declaration
+      const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
+      const updatedContent = data + newDeclaration;
+    
+      // Write the updated content back to the file
+      fs.writeFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', updatedContent, 'utf8', (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+    
+        console.log('remote.d.ts file updated successfully!');
+      });
+    });
+    
   }
 } else {
   if (eTc == "e") {
