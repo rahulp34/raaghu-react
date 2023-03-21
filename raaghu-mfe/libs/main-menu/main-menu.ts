@@ -214,6 +214,20 @@ const mainMenu = [
       "icon": "icons",
       "path": "/polls",
       "subTitle": "Blogs, Posts, Articles",
+    },
+    {
+        "key": "11",
+        "label": "CMS",
+        "icon": "pages",
+        "children": [
+            {
+                "key": "11-0",
+                "label": "Blogs",
+                "icon": "tenant",
+                "path": "/blogs",
+                "subTitle": "Manage your blogs",
+            },
+        ]
     }
 ]
 

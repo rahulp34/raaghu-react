@@ -156,3 +156,7 @@ declare module "UrlForwarding/UrlForwarding" {
 	const UrlForwardingComponent : React.ComponentType;
 	export default UrlForwardingComponent;
 }
+declare module "Blogs/Blogs" {
+	const BlogsComponent : React.ComponentType;
+	export default BlogsComponent;
+}
