@@ -54,7 +54,7 @@ export const updatePlan = createAsyncThunk('PaymentPlans/UpdatePlan', (data: any
 
 // Gateway Plan
 export const createGatewayPlan = createAsyncThunk('PaymentPlans/CreateGatewayPlan', (data: any) => {
-  return proxy.externalPlansPOST(data.body.planId, data.body, data.cancelToken).then((result: any) => {
+  return proxy.externalPlansPOST(data.planId, data.body, data.cancelToken).then((result: any) => {
     return result;
   })
 });
@@ -72,7 +72,7 @@ export const deleteGatewayPlan = createAsyncThunk('PaymentPlans/DeleteGatewayPla
 });
 
 export const updateGatewayPlan = createAsyncThunk('PaymentPlans/UpdateGatewayPlan', (data: any) => {
-  return proxy.externalPlansPUT(data.id, data.gateway, data.body, data.cancelToken).then((result: any) => {
+  return proxy.externalPlansPUT(data.planId, data.gateway, data.body, data.cancelToken).then((result: any) => {
     return result;
   })
 });
