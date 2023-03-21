@@ -138,9 +138,33 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
+      const filename = `raaghu-mfe/rds_pages/${name}/webpack.config.js`;
+    const searchString = "template_port_number";
+    const replaceString = 8069;
+
+    fs.readFile(filename, "utf8", function (err, data) {
+      if (err) throw err;
+
+      const result = data.replace(new RegExp(searchString, "g"), replaceString);
+
+      fs.writeFile(filename, result, "utf8", function (err) {
+        if (err) throw err;
+        console.log(
+          `Replaced all occurrences of "${searchString}" with "${replaceString}" in ${filename}`
+        );
+      });
+    });
+
       console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
+
+    // Deleting the directory from the src in the template.
+    fs.rm(dirName, { recursive: true }, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
     // Generate the new export statement with the updated list of variables
 
     const filePathForPageComponent =
@@ -219,25 +243,45 @@ if (fs.existsSync(appFolderPath)) {
 
     // updating port-config and mfe-config
 
-    const mfeConfigFilePath = path.resolve(__dirname, '../raaghu-mfe/rds_pages/mfe-config.ts');
-    const mfeConfigContent = fs.readFileSync(mfeConfigFilePath, 'utf-8');
-    const mfeConfigString = mfeConfigContent.replace(/^export\s+const\s+MfeConfig\s+=\s+/, '');
+    const mfeConfigFilePath = path.resolve(
+      __dirname,
+      "../raaghu-mfe/rds_pages/mfe-config.ts"
+    );
+    const mfeConfigContent = fs.readFileSync(mfeConfigFilePath, "utf-8");
+    const mfeConfigString = mfeConfigContent.replace(
+      /^export\s+const\s+MfeConfig\s+=\s+/,
+      ""
+    );
     const config = JSON.parse(mfeConfigString);
     config[camelCaseName] = {
       url: `${camelCaseName}@http://localhost:8034/remoteEntry.js`,
     };
-    const updatedmfeConfigString = `export const MfeConfig = ${JSON.stringify(config, null, 2)};\n`;
+    const updatedmfeConfigString = `export const MfeConfig = ${JSON.stringify(
+      config,
+      null,
+      2
+    )}\n`;
     fs.writeFileSync(mfeConfigFilePath, updatedmfeConfigString);
 
     // For port-config
-    const portConfigFilePath = path.resolve(__dirname, '../raaghu-mfe/rds_pages/port-config.ts');
-    const portConfigContent = fs.readFileSync(portConfigFilePath, 'utf-8');
-    const portConfigString = portConfigContent.replace(/^export\s+const\s+PortConfig\s+=\s+/, '');
+    const portConfigFilePath = path.resolve(
+      __dirname,
+      "../raaghu-mfe/rds_pages/port-config.ts"
+    );
+    const portConfigContent = fs.readFileSync(portConfigFilePath, "utf-8");
+    const portConfigString = portConfigContent.replace(
+      /^export\s+const\s+PortConfig\s+=\s+/,
+      ""
+    );
     const portConfig = JSON.parse(portConfigString);
     portConfig[camelCaseName] = {
-      port: '8034',
+      port: "8034",
     };
-    const updatedportConfigString = `export const PortConfig = ${JSON.stringify(portConfig, null, 2)};\n`;
+    const updatedportConfigString = `export const PortConfig = ${JSON.stringify(
+      portConfig,
+      null,
+      2
+    )}\n`;
     fs.writeFileSync(portConfigFilePath, updatedportConfigString);
   }
 } else {
