@@ -97,5 +97,8 @@ export const MfeConfig = {
   },
    "urlForwarding": {
         "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
+    },
+    "paymentPlans": {
+      "url": "paymentPlans@http://localhost:8031/remoteEntry.js"
     }
 }

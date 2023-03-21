@@ -214,7 +214,14 @@ const mainMenu = [
       "icon": "icons",
       "path": "/polls",
       "subTitle": "Blogs, Posts, Articles",
-    }
+    },
+    {
+      "key": "11",
+      "label": "Payment Plans",
+      "icon": "card_image",
+      "path": "/paymentPlans",
+      "subTitle": "Payment Plans",
+    },
 ]
 
 

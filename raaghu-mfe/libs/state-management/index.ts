@@ -24,6 +24,7 @@ import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
 import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
+import paymentPlansReducer from './payment-plans/paymentPlans-slice';
 
 const persistConfig={
   key: "root",
@@ -51,7 +52,8 @@ const rootReducer = combineReducers({
   localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
-  fileManagement: FileManagementReducer
+  fileManagement: FileManagementReducer,
+  paymentPlans:paymentPlansReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
