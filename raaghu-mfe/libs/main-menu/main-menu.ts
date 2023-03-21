@@ -1,4 +1,4 @@
-const mainMenu = [
+const MainMenu = [
     {
       "key": "0",
       "label": "Dashboard",
@@ -218,4 +218,4 @@ const mainMenu = [
 ]
 
 
-export default mainMenu;
+export default MainMenu;
