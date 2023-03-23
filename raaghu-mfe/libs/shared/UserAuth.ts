@@ -1,6 +1,6 @@
     export const getUserConfiguration = async(login?: string) =>{
     // const response = await fetch("https://abp-mvc-raaghu.azurewebsites.net" + '/AbpUserConfiguration/GetAll');
-    const response = await fetch("https://localhost:44380" + '/AbpUserConfiguration/GetAll');
+    const response = await fetch("https://raaghu-react.azurewebsites.net" + '/AbpUserConfiguration/GetAll');
         const responseObj = await response.json();
     const result = responseObj.result;
     // console.log(result);
