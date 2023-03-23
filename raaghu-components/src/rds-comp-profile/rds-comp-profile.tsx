@@ -34,7 +34,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             height="120px"
             className="profil_image_Class"
           ></img>
-          <span className="pencilIconClass">
+          <span className="pencilIconClass cursor-pointer">
             <RdsIcon
               name="pencil"
               fill={false}
@@ -55,7 +55,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           {props.navtabItems.map((item: any, i) => (
             <div key={i}>
               <div
-                className={` d-flex mb-4 align-items-baseline gap-1  ${
+                className={` d-flex mb-4 align-items-baseline gap-1 cursor-pointer  ${
                   activetab == item.id ? " activeBackgraound" : ""
                 }`}
                 onClick={() => onSetNavTabHandler(item.id)}

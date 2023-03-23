@@ -37,10 +37,10 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`mb-0 py-2 ps-1 sideNav ${count == 1
+        className={`list-style mb-0 py-2 ps-1 sideNav ${count == 1
           ? "list-unstyled"
           : count == 2
-            ? "list-unstyled fw-normal pb-1 small ms-2 "
+            ? "list-unstyled fw-normal pb-1 small ms-1 "
             : count == 3 ? "ms-4" : " "
           }`}
       >
@@ -71,7 +71,7 @@ const RdsSideNavChild = ({
                 onClick={onCollapse}
               ></RdsIcon>
             </div>
-            <div className="darkTheme text-center">
+            {/* <div className="darkTheme text-center">
               <a
                 className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
               >
@@ -84,7 +84,7 @@ const RdsSideNavChild = ({
                 ></RdsToggle>
                
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </span>
@@ -119,7 +119,7 @@ const Node = ({
         <NavLink
           to={node.path}
           onClick={onClickHandler}
-          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-uppercase " : ""
+          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
             } text-decoration-none`}
         >
           <div className="d-flex">
@@ -234,7 +234,7 @@ const Node = ({
                 <>
                   <a
                     aria-expanded={childVisibility}
-                    className={`nav-link child ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    className={`nav-link child d-inline-flex cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
                     onClick={(e) => setChildVisibility((v) => !v)}>
                     <RdsIcon
                       name={node.icon}
@@ -244,7 +244,7 @@ const Node = ({
                       width="20px"
                       classes="me-3"
                     ></RdsIcon>
-                    <span className="text-uppercase">{node.label}</span>
+                    <span className="text-capitalize">{node.label}</span>
                   </a>
                 </>
               )}
@@ -258,7 +258,7 @@ const Node = ({
                   <div id="menuWithChildren2">
                     <a
                       aria-expanded={childVisibility}
-                      className={`nav-link child  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                      className={`nav-link child d-inline-flex cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
                       onClick={(e) => setChildVisibility((v) => !v)}>
                       <RdsIcon
                         name={node.icon}
@@ -268,7 +268,7 @@ const Node = ({
                         width="20px"
                         classes="me-3"
                       ></RdsIcon>
-                      <span className="text-uppercase">{node.label}</span>
+                      <span className="text-capitalize">{node.label}</span>
                     </a>
                   </div>
                 </>

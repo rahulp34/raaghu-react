@@ -47,6 +47,7 @@ export {default as RdsCompUserRoles} from './rds-comp-user-roles/rds-comp-user-r
 export {default as RdsDirectoryList} from './rds-comp-directory-list/rds-comp-directory-list'
 export {default as RdsCompFormsBasic} from './rds-comp-forms-basic/rds-comp-forms-basic'
 export {default as RdsCompFormsQuestion} from './rds-comp-forms-question/rds-comp-forms-question'
+export {default as RdsCompFormsQuestions} from './rds-comp-forms-question/rds-comp-forms-questions'
 export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp-forms-setting'
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
 export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'
@@ -57,3 +58,9 @@ export {default as RdsCompIdentityClientBasic} from './rds-comp-identity-client-
 export { default as RdsCompSecrets } from './rds-comp-secrets/rds-comp-secrets'
 export { default as RdsCompApiScopeResource } from './rds-comp-api-scope-resource'
 export { default as RdsCompFileUploader } from './rds-comp-fileUploader/rds-comp-fileUploader'
+export { default as RdsCompApiResourceBasic } from './rds-comp-api-resource-basic';
+export { default as RdsCompClaim } from './rds-comp-claim/rds-comp-claim';
+export { default as RdsCompUrlForwardings} from './rds-comp-url-forwardings';
+export { default as RdsCompPollsQuestion} from './rds-comp-polls-question/rds-comp-polls-question'
+export {default as RdsCompPollsOption} from './rds-comp-polls-option/rds-comp-polls-option'
+ 

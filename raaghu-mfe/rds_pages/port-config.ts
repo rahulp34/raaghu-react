@@ -57,7 +57,7 @@ export const PortConfig = {
     "port": "8035"
   },
   "apiScope": {
-    "port": "8019"
+    "port": "8099"
   },
   "textTemplate": {
     "port": "8020"
@@ -85,5 +85,17 @@ export const PortConfig = {
   },
   "client": {
     "port": "8029"
+  },
+  "apiResources": {
+    "port": "8030"
+  },
+  "urlForwarding": {
+    "port": "8097"
+  },
+  "paymentPlans":{
+    "port":"8031"
+  },
+  "blogs": {
+    "port": "8032"
   }
 }

@@ -70,17 +70,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 fixed-top`}
       >
         <div className="d-flex align-items-center">
-          <span className="navbar-brand p-0 m-0">
+          <span className="navbar-brand p-0 m-0" onClick={()=>{navigate("/dashboard")}}>
            <img
-              className="ms-1"
+              className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
               width="70"
             ></img>
             
-            <span className="title fw-bold text-lowercase m-2">
+            <span className="title fw-bold text-lowercase m-2 cursor-pointer">
       
-             <b onClick={()=>{navigate("/dashboard")}}>{props.brandName}</b>
+             <b >{props.brandName}</b>
             </span>
           </span>
           <div>

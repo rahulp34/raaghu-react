@@ -11,6 +11,6 @@ export * from "./settings/settings-slice";
 export * from './tenant/tenant-slice';
 export * from './localization/localization-slice';
 export * from './chats/chats-slice';
-export * from './scope/scope-slice';
 export * from './file-management/file-management-slice';
+export * from './url-forwarding/url-forwarding-slice';
 

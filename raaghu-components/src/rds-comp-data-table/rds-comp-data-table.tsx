@@ -175,11 +175,12 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     setData(sorted);
     sort = true;
   };
+  const style={ marginTop:'150px', marginBottom:'100px'}
   let Classes = props.classes;
   return (
     <>
       {data?.length == 0 && (
-            <div>
+            <div style={style} >
               <RdsIllustration
                 label={props.noDataTitle}
                 subLabel="Click on the button above to add."
@@ -520,7 +521,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
               </tbody>
             </table>
           </div>
-          {props.pagination && (
+          {props.pagination && props.tableData.length >4 && (
             <div className=" d-flex justify-content-end ">
               <RdsPagination
                 totalRecords={props.tableData?.length}

@@ -125,7 +125,7 @@ const RdsCompScopeBasicResource = (props: RdsCompScopeBasicResourceProps) => {
             {/* <label className="Text-bold" >Others</label>
             <RdsCheckboxGroup itemList={props.resourceData.checklist} /> */}
           </div>
-          <div className="mt-3 d-flex footer-buttons">
+          <div className="mb-3 d-flex footer-buttons">
             <RdsButton
               class="me-2"
               tooltipTitle={""}

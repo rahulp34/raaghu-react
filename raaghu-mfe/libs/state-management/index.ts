@@ -8,7 +8,6 @@ import languageTextReducer from "./language-text/language-text-slice";
 import organizationReducer from "./organization-tree/organization-tree-slice";
 import rolesReducer from "./roles/roles-slice";
 import scopesReducer from "./apiScope/apiScope-slice";
-import scopesHReducer from "./scope/scope-slice";
 import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
@@ -21,10 +20,13 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
+import urlForwardingReducer from './url-forwarding/url-forwarding-slice';
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
 import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
+import formsReducer from './forms/forms-slice';
+import paymentPlansReducer from './payment-plans/paymentPlans-slice';
 
 const persistConfig={
   key: "root",
@@ -44,8 +46,6 @@ const rootReducer = combineReducers({
   securityLogs:securityLogsReducer,
   applications : applicationsReducer,
   scopes: scopesReducer,
-  scopesH:scopesHReducer,  
-  apiScope: scopesHReducer,    
   textTemplate: textTemplateReducer,
   auditLog : auditLogsReducer,
   user: userReducer,
@@ -54,7 +54,10 @@ const rootReducer = combineReducers({
   localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
-  fileManagement: FileManagementReducer
+  forms : formsReducer,
+  fileManagement: FileManagementReducer,
+  paymentPlans:paymentPlansReducer,
+  urlForwarding: urlForwardingReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

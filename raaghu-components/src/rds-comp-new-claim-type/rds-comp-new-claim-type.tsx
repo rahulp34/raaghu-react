@@ -43,9 +43,10 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
   };
   return (
     <>
-      <>
-        <div className="row">
-          <RdsInput
+     
+      <div className="row mt-3">
+      <div className="col-md-12">	
+       <RdsInput
             label="Name"
             value={data.name}
             placeholder="Enter  name"
@@ -53,10 +54,9 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             name="name"
             onChange={onNameChangeHandler}
           />
-        </div>
-        <div className="row">
-          <div className="col-6">
-            {" "}
+      </div>
+      <div className="col-md-6">	
+      {" "}
             <RdsInput
               label="Regex"
               value={data.regex}
@@ -65,9 +65,9 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               required={true}
               onChange={onRegexChangeHandler}
             />
-          </div>
-          <div className="col-6">
-          <RdsLabel label="Value Type" class="pb-2" />
+      </div>
+      <div className="col-md-6">	
+      <RdsLabel label="Value Type" class="pb-2" />
             <RdsSelectList
               label={"Value Type"}
               selectItems={props.valueType}
@@ -75,10 +75,9 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               selectedOption={data.valueTypeAsString}
               onSelectListChange={onValueChangeHandler}
             ></RdsSelectList>
-          </div>
-        </div>
-        <div className="row">
-          <RdsInput
+      </div>
+      <div className="col-md-12">	
+      <RdsInput
             label="Regex Description"
             value={data.regexDescription}
             placeholder="enter regex description"
@@ -86,24 +85,26 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             required={true}
             onChange={onRegexDescChangeHandler}
           />
-        </div>
-        <div className="row">
-          <RdsTextArea
+      </div>
+      <div className="col-md-12">	
+      <RdsTextArea
             label="Description"
             placeholder="enter description"
             onChange={onDescChangeHAndler}
             value={data.description}
             rows={3}
           />
-        </div>
-        <div className="row pt-2">
+      </div>
+      
+      <div className="col-md-12 mt-3">	
           <RdsCheckbox
             label="Required"
             onChange={e => { setDevice(e.target.checked) }}
             checked={data.required}
           ></RdsCheckbox>
         </div>
-        <div className="d-flex footer-buttons">
+       
+        <div className="footer-buttons mb-2 d-flex">
           <RdsButton
             label="CANCEL"
             databsdismiss="offcanvas"
@@ -126,7 +127,12 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             }}
           ></RdsButton>
         </div>
-      </>
+      
+      </div>
+				
+				
+        
+     
     </>
   );
 };

@@ -60,7 +60,7 @@ export const createTenant= createAsyncThunk(
 export const featureTenant= createAsyncThunk(
   "tenant/featureTenant",
   (data:any)=>{
-    return proxy.featuresGET(undefined, undefined,undefined).then((result:any)=>{
+    return proxy.featuresGET("T", "").then((result:any)=>{
       return result
     })
   }

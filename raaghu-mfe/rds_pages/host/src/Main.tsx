@@ -46,6 +46,11 @@ import {
   FormsCompo,
   BloggerCompo,
   ClientCompo,
+  PollsCompo,
+  UrlForwardingCompo,
+  PaymentPlansCompo,
+  BlogsCompo,
+  ApiResourcesCompo
 }  from './PageComponent'
 
 export interface MainProps {
@@ -183,7 +188,7 @@ const Main = (props: MainProps) => {
    
   },[Data.localization])
 
-  const sideNavItems = concatenated
+  const sideNavItems = concatenated;
   
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
   const getLabelForPath: any = (path: string, navItems: any) => {
@@ -239,7 +244,7 @@ const Main = (props: MainProps) => {
   };
   let logo = "./assets/raaghu_icon.png";
   return (
-    <Suspense fallback="loading...">
+    <Suspense>
       <Routes>
         <Route
           path="/login"
@@ -295,6 +300,7 @@ const Main = (props: MainProps) => {
                   className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper pt-3 px-sm-0 px-lg-3 "
                   id="FixedHeaderOverFlow"
                 >
+                  <Suspense>
                   <Routes>
                     <Route
                       path="/dashboard"
@@ -363,15 +369,22 @@ const Main = (props: MainProps) => {
                     />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
+                    <Route path="/apiResources" element={<ApiResourcesCompo />} />
+                    <Route path="/blogs" element={<BlogsCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/polls" element={<PollsCompo />} />
+                    
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
+                    <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
+                    <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
+                  </Suspense>
                 </div>
               </div>
             </div>
