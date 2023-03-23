@@ -214,8 +214,28 @@ const mainMenu = [
       "icon": "icons",
       "path": "/polls",
       "subTitle": "Blogs, Posts, Articles",
+    },
+    {
+      "key": "11",
+      "label": "Payment Plans",
+      "icon": "card_image",
+      "path": "/paymentPlans",
+      "subTitle": "Payment Plans",
+    },
+    {
+        "key": "12",
+        "label": "CMS",
+        "icon": "pages",
+        "children": [
+            {
+                "key": "12-0",
+                "label": "Blogs",
+                "icon": "tenant",
+                "path": "/blogs",
+                "subTitle": "Manage your blogs",
+            },
+        ]
     }
 ]
-
 
 export default mainMenu;

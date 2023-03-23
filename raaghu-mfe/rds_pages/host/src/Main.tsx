@@ -56,6 +56,8 @@ const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
 const PollsCompo = React.lazy(()=> import("Polls/Polls"));
 const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
+const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
+const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -374,6 +376,7 @@ const Main = (props: MainProps) => {
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/apiResources" element={<ApiResourcesCompo />} />
+                    <Route path="/blogs" element={<BlogsCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
@@ -384,6 +387,7 @@ const Main = (props: MainProps) => {
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
                     <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
+                    <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                   </Suspense>

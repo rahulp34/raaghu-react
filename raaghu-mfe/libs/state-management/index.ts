@@ -20,10 +20,13 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import  applicationsReducer  from "./applications/applications-slice";
+import urlForwardingReducer from './url-forwarding/url-forwarding-slice';
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
 import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
+import formsReducer from './forms/forms-slice';
+import paymentPlansReducer from './payment-plans/paymentPlans-slice';
 
 const persistConfig={
   key: "root",
@@ -51,7 +54,10 @@ const rootReducer = combineReducers({
   localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
-  fileManagement: FileManagementReducer
+  forms : formsReducer,
+  fileManagement: FileManagementReducer,
+  paymentPlans:paymentPlansReducer,
+  urlForwarding: urlForwardingReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
