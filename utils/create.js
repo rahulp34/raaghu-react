@@ -4,7 +4,11 @@ let { execSync } = require("child_process");
 let fs = require("fs");
 
 // Check whether the arguments passed contain the mfe name and the page name
-if (process.argv.length !== 4) {
+if (
+  (process.argv[2] === "p" && process.argv.length !== 5) ||
+  ((process.argv[2] === "e" || process.argv[2] === "c") &&
+    process.argv.length !== 4)
+) {
   console.log("\x1b[31m%s\x1b[0m", "Invalid command..!");
   process.exit(0);
 }
@@ -12,6 +16,7 @@ if (process.argv.length !== 4) {
 // Parse the name of the mfe and the page name
 let eTc = process.argv[2];
 let name = process.argv[3];
+let port = process.argv[4];
 
 let shortName = name.replace(/^rds-page-/, "");
 
@@ -98,6 +103,47 @@ if (fs.existsSync(appFolderPath)) {
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   } else if (eTc == "p") {
+    console.log(port);
+
+    const templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
+    const templateWebpackbackupFile = path.join( __dirname,"../page-template/template/webpack.config.js");
+
+    if (!fs.existsSync(templateWebpackbackupFile)) {
+      fs.copyFileSync(templateWebpackfile, templateWebpackbackupFile);
+    }
+
+    function updateConfig(port) {
+      fs.readFile(templateWebpackbackupFile, 'utf8', (err, data) => {
+        if (err) {
+          return console.error(err);
+        }
+    
+        const result = data.replace(/{template_port_number}/g, port);
+    
+        fs.writeFile(templateWebpackfile, result, 'utf8', (err) => {
+          if (err) {
+            return console.error(err);
+          }
+    
+          console.log(`Updated webpack.config.js with port ${port}`);
+        });
+      });
+    }
+
+    updateConfig('8098');
+
+    function restoretemplateWebpackConfig() {
+      try {
+        fs.copyFileSync(templateWebpackbackupFile, templateWebpackfile);
+        console.log('Restored original webpack.config.js');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    restoretemplateWebpackConfig();
+
+
     let filePath = path.join(appFolderPath, name);
 
     // Path to create a new directory in the src directory in the template
@@ -274,22 +320,23 @@ if (fs.existsSync(appFolderPath)) {
         console.error(err);
         return;
       }
-    
+
       // Add the new module declaration
       const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
       const updatedContent = data + newDeclaration;
-    
+
       // Write the updated content back to the file
       fs.writeFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', updatedContent, 'utf8', (err) => {
         if (err) {
           console.error(err);
           return;
         }
-    
+
         console.log('remote.d.ts file updated successfully!');
       });
     });
-    
+
+    restoretemplateWebpackConfig();
   }
 } else {
   if (eTc == "e") {
