@@ -105,9 +105,11 @@ if (fs.existsSync(appFolderPath)) {
   } else if (eTc == "p") {
 
     console.log(port);
-    const templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
-    const webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
-    const updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
+    let templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
+    let webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
+    let updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
+    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_page_name}/g, camelCaseName);
+    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_Page_Name_expose}/g, pageName);
     fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
 
     let filePath = path.join(appFolderPath, name);
@@ -249,7 +251,7 @@ if (fs.existsSync(appFolderPath)) {
     );
     const config = JSON.parse(mfeConfigString);
     config[camelCaseName] = {
-      url: `${camelCaseName}@http://localhost:8034/remoteEntry.js`,
+      url: `${camelCaseName}@http://localhost:${port}/remoteEntry.js`,
     };
     const updatedmfeConfigString = `export const MfeConfig = ${JSON.stringify(
       config,
@@ -270,7 +272,7 @@ if (fs.existsSync(appFolderPath)) {
     );
     const portConfig = JSON.parse(portConfigString);
     portConfig[camelCaseName] = {
-      port: "8034",
+      port: `${port}`,
     };
     const updatedportConfigString = `export const PortConfig = ${JSON.stringify(
       portConfig,
@@ -301,7 +303,10 @@ if (fs.existsSync(appFolderPath)) {
         console.log('remote.d.ts file updated successfully!');
       });
     });
-    const finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
+
+    let finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
+    finalWebpackConfig = finalWebpackConfig.replace(camelCaseName,'{template_page_name}');
+    finalWebpackConfig = finalWebpackConfig.replace(pageName,'{template_Page_Name_expose}');
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
   }
 } else {

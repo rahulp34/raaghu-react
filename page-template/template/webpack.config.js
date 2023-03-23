@@ -65,11 +65,11 @@ module.exports = (env, argv) => {
         "process.env": JSON.stringify(process.env),
       }),
       new ModuleFederationPlugin({
-        name: {page_name},
+        name: "{template_page_name}",
         filename: "remoteEntry.js",
         exposes: {
           // expose each page
-          "./{PageNAme}": "./src/App"
+          "./{template_Page_Name_expose}": "./src/App"
         },
         shared: {
           ...devdeps,
