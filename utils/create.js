@@ -57,7 +57,7 @@ const newItem = {
 };
 
 console.log(newItem);
-const importStatement = `\r\nexport {default as ${camelCaseName}} from './${kebabCaseName}';`;
+const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
 
 const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
 
@@ -104,210 +104,254 @@ if (fs.existsSync(appFolderPath)) {
     }
   } else if (eTc == "p") {
 
-    console.log(port);
-    let templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
-    let webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
-    let updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
-    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_page_name}/g, camelCaseName);
-    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_Page_Name_expose}/g, pageName);
-    fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
+    // console.log(port);
+    // let templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
+    // let webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
+    // let updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
+    // updatedWebpackConfig = updatedWebpackConfig.replace(/{template_page_name}/g, camelCaseName);
+    // updatedWebpackConfig = updatedWebpackConfig.replace(/{template_Page_Name_expose}/g, pageName);
+    // fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
 
-    let filePath = path.join(appFolderPath, name);
+    // let filePath = path.join(appFolderPath, name);
 
-    // Path to create a new directory in the src directory in the template
-    let dirName = path.join(
-      __dirname,
-      `../page-template/template/src/${kebabCaseName}`
-    );
-    // Creating directory inside the src
-    try {
-      if (!fs.existsSync(dirName)) {
-        fs.mkdirSync(dirName);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    // Creatign a file in the src/{name}
-    try {
-      fs.writeFileSync(
-        `${dirName}/${kebabCaseName}.tsx`,
-        "Edit this file to proceed"
-      );
-      // file written successfully
-    } catch (err) {
-      console.error(err);
-    }
+    // // Path to create a new directory in the src directory in the template
+    // let dirName = path.join(
+    //   __dirname,
+    //   `../page-template/template/src/${kebabCaseName}`
+    // );
+    // // Creating directory inside the src
+    // try {
+    //   if (!fs.existsSync(dirName)) {
+    //     fs.mkdirSync(dirName);
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    // }
+    // // Creatign a file in the src/{name}
+    // try {
+    //   fs.writeFileSync(
+    //     `${dirName}/${kebabCaseName}.tsx`,
+    //     `import React from "react"; \n //Edit this file and export this in App.tsx`
+    //   );
+    //   // file written successfully
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
-    // Create the directory if it doesn't exist
-    //  Running the script to create page
+    // // Create the directory if it doesn't exist
+    // //  Running the script to create page
 
-    if (fs.existsSync(filePath)) {
-      console.log(
-        "\x1b[31m%s\x1b[0m",
-        name + " page is already exists in this path."
-      );
-    } else {
-      execSync(
-        `npx create-react-app rds-page-${camelCaseName.toLowerCase()} --template file:../../page-template`,
-        { cwd: appFolderPath, stdio: "inherit" }
-      );
+    // if (fs.existsSync(filePath)) {
+    //   console.log(
+    //     "\x1b[31m%s\x1b[0m",
+    //     name + " page is already exists in this path."
+    //   );
+    // } else {
+    //   execSync(
+    //     `npx create-react-app rds-page-${camelCaseName.toLowerCase()} --template file:../../page-template`,
+    //     { cwd: appFolderPath, stdio: "inherit" }
+    //   );
 
-      console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
-    }
+    //   console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
+    //   console.log("\x1b[32m%s\x1b[0m", "Done..!");
+    // }
 
-    // Deleting the directory from the src in the template.
-    fs.rm(dirName, { recursive: true }, (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
-    // Generate the new export statement with the updated list of variables
+    // // Deleting the directory from the src in the template.
+    // fs.rm(dirName, { recursive: true }, (err) => {
+    //   if (err) {
+    //     console.error(err);
+    //   }
+    // });
+    // // Generate the new export statement with the updated list of variables
 
-    const filePathForPageComponent =
-      "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
-    const newImportStatementForPageComponent = `const ${pageName}Compo = React.lazy(() => import("${pageName}/${pageName}"));`;
-    // Define the export statement to find and update
-    const exportStatementForPageComponent = "export {";
+    // const filePathForPageComponent =
+    //   "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
+    // const newImportStatementForPageComponent = `const ${pageName}Compo = React.lazy(() => import("${pageName}/${pageName}"));`;
+    // // Define the export statement to find and update
+    // const exportStatementForPageComponent = "export {";
 
-    // Read the file contents as a string
-    const fileContentsOfPageComponent = fs.readFileSync(
-      filePathForPageComponent,
-      "utf8"
-    );
+    // // Read the file contents as a string
+    // const fileContentsOfPageComponent = fs.readFileSync(
+    //   filePathForPageComponent,
+    //   "utf8"
+    // );
 
-    // Find the index of the export statement in the file
-    const exportIndex = fileContentsOfPageComponent.indexOf(
-      exportStatementForPageComponent
-    );
+    // // Find the index of the export statement in the file
+    // const exportIndex = fileContentsOfPageComponent.indexOf(
+    //   exportStatementForPageComponent
+    // );
 
-    // Define the start and end indices of the export block
-    const exportStartIndexPageComponent =
-      exportIndex + exportStatementForPageComponent.length;
-    const exportEndIndexPageComponent =
-      fileContentsOfPageComponent.indexOf("};", exportStartIndexPageComponent) +
-      1;
+    // // Define the start and end indices of the export block
+    // const exportStartIndexPageComponent =
+    //   exportIndex + exportStatementForPageComponent.length;
+    // const exportEndIndexPageComponent =
+    //   fileContentsOfPageComponent.indexOf("};", exportStartIndexPageComponent) +
+    //   1;
 
-    // Extract the current export block from the file
-    const exportBlock = fileContentsOfPageComponent.slice(
-      exportStartIndexPageComponent,
-      exportEndIndexPageComponent - 1
-    );
-    const block = fileContentsOfPageComponent.slice(0, exportIndex);
-    const updatedBlock = `${block}${newImportStatementForPageComponent}`;
+    // // Extract the current export block from the file
+    // const exportBlock = fileContentsOfPageComponent.slice(
+    //   exportStartIndexPageComponent,
+    //   exportEndIndexPageComponent - 1
+    // );
+    // const block = fileContentsOfPageComponent.slice(0, exportIndex);
+    // const updatedBlock = `${block}${newImportStatementForPageComponent}`;
 
-    // Add the new import statement to the start of the export block
-    const updatedExportBlock = `${exportBlock}${pageName}Compo,`;
-    const updatedPage = `${updatedBlock}\n export {${updatedExportBlock}};`;
+    // // Add the new import statement to the start of the export block
+    // const updatedExportBlock = `${exportBlock}\n${pageName}Compo,`;
+    // const updatedPage = `${updatedBlock}\n export {${updatedExportBlock}};`;
 
-    console.log("This is export block: ", updatedPage);
+    // console.log("This is export block: ", updatedPage);
 
-    // Use the fs.writeFile method to write the new content to the file, overwriting the old content
-    fs.writeFile(filePathForPageComponent, updatedPage, (err) => {
+    // // Use the fs.writeFile method to write the new content to the file, overwriting the old content
+    // fs.writeFile(filePathForPageComponent, updatedPage, (err) => {
+    //   if (err) throw err;
+    //   console.log("The content has been overwritten!");
+    // });
+
+    // // Output a message to confirm that the script has run successfully
+    // console.log(`Added AbhiCompo to ${filePathForPageComponent}`);
+    // // Creating a file for side Nav items
+    // let sideNavItemPath = path.join(__dirname, `../raaghu-mfe/libs/main-menu`);
+    // try {
+    //   fs.writeFileSync(
+    //     `${sideNavItemPath}/${kebabCaseName}.ts`,
+    //     `const ${pageName} =[${JSON.stringify(
+    //       newItem,
+    //       null,
+    //       2
+    //     )}]; export default ${pageName};`
+    //   );
+    //   // file written successfully
+    // } catch (err) {
+    //   console.error(err);
+    // }
+
+    // fs.appendFile(
+    //   `${sideNavItemPath}/index.ts`,
+    //   importStatement,
+    //   "utf8",
+    //   // callback function
+    //   function (err) {
+    //     if (err) throw err;
+    //     // if no error
+    //     console.log("Data is appended to file successfully.");
+    //   }
+    // );
+
+    // // updating port-config and mfe-config
+
+    // const mfeConfigFilePath = path.resolve(
+    //   __dirname,
+    //   "../raaghu-mfe/rds_pages/mfe-config.ts"
+    // );
+    // const mfeConfigContent = fs.readFileSync(mfeConfigFilePath, "utf-8");
+    // const mfeConfigString = mfeConfigContent.replace(
+    //   /^export\s+const\s+MfeConfig\s+=\s+/,
+    //   ""
+    // );
+    // const config = JSON.parse(mfeConfigString);
+    // config[camelCaseName] = {
+    //   url: `${camelCaseName}@http://localhost:${port}/remoteEntry.js`,
+    // };
+    // const updatedmfeConfigString = `export const MfeConfig = ${JSON.stringify(
+    //   config,
+    //   null,
+    //   2
+    // )}\n`;
+    // fs.writeFileSync(mfeConfigFilePath, updatedmfeConfigString);
+
+    // // For port-config
+    // const portConfigFilePath = path.resolve(
+    //   __dirname,
+    //   "../raaghu-mfe/rds_pages/port-config.ts"
+    // );
+    // const portConfigContent = fs.readFileSync(portConfigFilePath, "utf-8");
+    // const portConfigString = portConfigContent.replace(
+    //   /^export\s+const\s+PortConfig\s+=\s+/,
+    //   ""
+    // );
+    // const portConfig = JSON.parse(portConfigString);
+    // portConfig[camelCaseName] = {
+    //   port: `${port}`,
+    // };
+    // const updatedportConfigString = `export const PortConfig = ${JSON.stringify(
+    //   portConfig,
+    //   null,
+    //   2
+    // )}\n`;
+    // fs.writeFileSync(portConfigFilePath, updatedportConfigString);
+
+    // // Updating in remote.d.ts file
+
+    // fs.readFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', 'utf8', (err, data) => {
+    //   if (err) {
+    //     console.error(err);
+    //     return;
+    //   }
+
+    //   // Add the new module declaration
+    //   const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
+    //   const updatedContent = data + newDeclaration;
+
+    //   // Write the updated content back to the file
+    //   fs.writeFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', updatedContent, 'utf8', (err) => {
+    //     if (err) {
+    //       console.error(err);
+    //       return;
+    //     }
+
+    //     console.log('remote.d.ts file updated successfully!');
+    //   });
+    // });
+
+    // let finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
+    // finalWebpackConfig = finalWebpackConfig.replace(camelCaseName,'{template_page_name}');
+    // finalWebpackConfig = finalWebpackConfig.replace(pageName,'{template_Page_Name_expose}');
+    // fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
+
+    // // Adding url to the webpack file of the host page
+    // const hostWebpackpath = "raaghu-mfe/rds_pages/host/webpack.config.js";
+
+
+    // fs.readFile(hostWebpackpath, "utf8", (err, data) => {
+    //   if (err) {
+    //     console.error(err);
+    //     return;
+    //   }
+    
+    //   const updatedData = data.replace(
+    //     /(remotes: \{[\s\S]*?)(\n\s*\})/m,
+    //     `$1\n     ${pageName}: mfeConfigJSON["${camelCaseName}"].url,\n}`
+    //   );
+    
+    //   fs.writeFile(hostWebpackpath, updatedData, "utf8", (err) => {
+    //     if (err) {
+    //       console.error(err);
+    //       return;
+    //     }
+    //     console.log("webpack.config.js updated successfully!");
+    //   });
+    // });
+
+    // Adding start script to the package.json
+
+    const packageFile = 'raaghu-mfe/package.json';
+    const newScript = `cd rds_pages/rds-page-${camelCaseName} && npm run dev`;
+    fs.readFile(packageFile, 'utf-8', function (err, data) {
       if (err) throw err;
-      console.log("The content has been overwritten!");
-    });
-
-    // Output a message to confirm that the script has run successfully
-    console.log(`Added AbhiCompo to ${filePathForPageComponent}`);
-    // Creating a file for side Nav items
-    let sideNavItemPath = path.join(__dirname, `../raaghu-mfe/libs/main-menu`);
-    try {
-      fs.writeFileSync(
-        `${sideNavItemPath}/${kebabCaseName}.ts`,
-        `const ${camelCaseName} =[${JSON.stringify(
-          newItem,
-          null,
-          2
-        )}]; export default ${camelCaseName};`
-      );
-      // file written successfully
-    } catch (err) {
-      console.error(err);
-    }
-
-    fs.appendFile(
-      `${sideNavItemPath}/index.ts`,
-      importStatement,
-      "utf8",
-      // callback function
-      function (err) {
+    
+      // parse the package.json data into an object
+      const packageObj = JSON.parse(data);
+    
+      // add the new command to the "start" script
+      packageObj.scripts.start += ` "${newScript}"`;
+    
+      // write the updated package.json object back to the file
+      fs.writeFile(packageFile, JSON.stringify(packageObj, null, 2), 'utf-8', function (err) {
         if (err) throw err;
-        // if no error
-        console.log("Data is appended to file successfully.");
-      }
-    );
-
-    // updating port-config and mfe-config
-
-    const mfeConfigFilePath = path.resolve(
-      __dirname,
-      "../raaghu-mfe/rds_pages/mfe-config.ts"
-    );
-    const mfeConfigContent = fs.readFileSync(mfeConfigFilePath, "utf-8");
-    const mfeConfigString = mfeConfigContent.replace(
-      /^export\s+const\s+MfeConfig\s+=\s+/,
-      ""
-    );
-    const config = JSON.parse(mfeConfigString);
-    config[camelCaseName] = {
-      url: `${camelCaseName}@http://localhost:${port}/remoteEntry.js`,
-    };
-    const updatedmfeConfigString = `export const MfeConfig = ${JSON.stringify(
-      config,
-      null,
-      2
-    )}\n`;
-    fs.writeFileSync(mfeConfigFilePath, updatedmfeConfigString);
-
-    // For port-config
-    const portConfigFilePath = path.resolve(
-      __dirname,
-      "../raaghu-mfe/rds_pages/port-config.ts"
-    );
-    const portConfigContent = fs.readFileSync(portConfigFilePath, "utf-8");
-    const portConfigString = portConfigContent.replace(
-      /^export\s+const\s+PortConfig\s+=\s+/,
-      ""
-    );
-    const portConfig = JSON.parse(portConfigString);
-    portConfig[camelCaseName] = {
-      port: `${port}`,
-    };
-    const updatedportConfigString = `export const PortConfig = ${JSON.stringify(
-      portConfig,
-      null,
-      2
-    )}\n`;
-    fs.writeFileSync(portConfigFilePath, updatedportConfigString);
-
-    // Updating in remote.d.ts file
-
-    fs.readFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', 'utf8', (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      // Add the new module declaration
-      const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
-      const updatedContent = data + newDeclaration;
-
-      // Write the updated content back to the file
-      fs.writeFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', updatedContent, 'utf8', (err) => {
-        if (err) {
-          console.error(err);
-          return;
-        }
-
-        console.log('remote.d.ts file updated successfully!');
+        console.log('start script updated successfully');
       });
     });
-
-    let finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
-    finalWebpackConfig = finalWebpackConfig.replace(camelCaseName,'{template_page_name}');
-    finalWebpackConfig = finalWebpackConfig.replace(pageName,'{template_Page_Name_expose}');
-    fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
   }
 } else {
   if (eTc == "e") {

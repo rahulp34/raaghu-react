@@ -45,7 +45,8 @@ import {
   FileManagementCompo,
   FormsCompo,
   BloggerCompo,
-  ClientCompo
+  ClientCompo,
+  // BookStoreCompo
 }  from './PageComponent'
 
 export interface MainProps {
@@ -370,6 +371,7 @@ const Main = (props: MainProps) => {
 
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
+                    {/* <Route path="/book-store" element={<BookStoreCompo />} /> */}
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                 </div>
