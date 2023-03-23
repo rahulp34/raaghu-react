@@ -37,6 +37,11 @@ const FileManagementCompo = React.lazy(
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
+const PollsCompo = React.lazy(()=> import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
+const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
+const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
+const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
 
 export {
   DashboardCompo,
@@ -65,4 +70,9 @@ export {
   FormsCompo,
   BloggerCompo,
   ClientCompo,
+  PollsCompo,
+  UrlForwardingCompo,
+  PaymentPlansCompo,
+  BlogsCompo,
+  ApiResourcesCompo,
 };
