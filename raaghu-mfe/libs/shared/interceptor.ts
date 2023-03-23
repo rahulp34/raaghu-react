@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  baseURL: 'https://raaghu-react.azurewebsites.net',
+  baseURL: 'https://localhost:44380/',
 // baseURL: 'https://abpdemoapi.raaghu.io/',
 });
 
