@@ -45,7 +45,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
      scope: "address email phone profile roles BookStore",
     };
  
-  fetch("https://localhost:44380/connect/token", {
+  fetch("https://raaghu-react.azurewebsites.net/connect/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
