@@ -103,46 +103,12 @@ if (fs.existsSync(appFolderPath)) {
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   } else if (eTc == "p") {
+
     console.log(port);
-
     const templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
-    const templateWebpackbackupFile = path.join( __dirname,"../page-template/template/webpack.config.js");
-
-    if (!fs.existsSync(templateWebpackbackupFile)) {
-      fs.copyFileSync(templateWebpackfile, templateWebpackbackupFile);
-    }
-
-    function updateConfig(port) {
-      fs.readFile(templateWebpackbackupFile, 'utf8', (err, data) => {
-        if (err) {
-          return console.error(err);
-        }
-    
-        const result = data.replace(/{template_port_number}/g, port);
-    
-        fs.writeFile(templateWebpackfile, result, 'utf8', (err) => {
-          if (err) {
-            return console.error(err);
-          }
-    
-          console.log(`Updated webpack.config.js with port ${port}`);
-        });
-      });
-    }
-
-    updateConfig('8098');
-
-    function restoretemplateWebpackConfig() {
-      try {
-        fs.copyFileSync(templateWebpackbackupFile, templateWebpackfile);
-        console.log('Restored original webpack.config.js');
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    restoretemplateWebpackConfig();
-
+    const webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
+    const updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
+    fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
 
     let filePath = path.join(appFolderPath, name);
 
@@ -335,8 +301,8 @@ if (fs.existsSync(appFolderPath)) {
         console.log('remote.d.ts file updated successfully!');
       });
     });
-
-    restoretemplateWebpackConfig();
+    const finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
+    fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
   }
 } else {
   if (eTc == "e") {
