@@ -209,7 +209,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
              offId="userOffcanvas"
              canvasTitle={t("New Scope")}
              placement="end"
-              offcanvaswidth={550}
+              offcanvaswidth={600}
             >
                <RdsNavtabs
           navtabsItems={navtabsItems}
@@ -255,7 +255,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
             offId="entity-edit-off"
             placement="end"
             canvasTitle="Edit"
-            offcanvaswidth={550}
+            offcanvaswidth={600}
             children={
               <RdsCompApiScopeBasicResource
                 onSuccess={edit} email={editscopeData.name} fullname={editscopeData.displayName} message={editscopeData.description} />

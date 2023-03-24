@@ -268,7 +268,7 @@ const ApiResources = (props: RdsPageResourcesProps) => {
                             canvasTitle={("New Api Resource")}
                             onclick={offCanvasHandler}
                             placement="end"
-                            offcanvaswidth={550}
+                            offcanvaswidth={600}
                             offcanvasbutton={
                                 <div>
                                     <RdsButton
@@ -338,7 +338,7 @@ const ApiResources = (props: RdsPageResourcesProps) => {
              offId="entity-edit-off"
              placement="end"
              canvasTitle="Edit"
-             offcanvaswidth={550}
+             offcanvaswidth={600}
              children={
                <RdsCompScopeBasicResource saveApiScopeData={(data:any)=>{updateScope(data)}} />
              }

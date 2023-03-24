@@ -344,7 +344,7 @@ const LanguageText = (props: LanguageTextProps) => {
               preventEscapeKey={false}
               offId={"langtextEdit"}
               canvasTitle={"Edit Language"}
-              offcanvaswidth={550}
+              offcanvaswidth={600}
             >
               <form>
                 <div className="row">

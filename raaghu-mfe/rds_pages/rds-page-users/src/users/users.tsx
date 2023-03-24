@@ -571,7 +571,7 @@ const Users = () => {
         preventEscapeKey={false}
         canvasTitle={canvasTitle}
         offId="userOffcanvas"
-        offcanvaswidth={650}
+        offcanvaswidth={600}
         placement={"end"}
         onClose={(e) => {
         offcanvasClose()
@@ -641,7 +641,7 @@ const Users = () => {
         onclick={offCanvasHandler}
         placement="end"
         offId="user-edit-off"
-        offcanvaswidth={650}
+        offcanvaswidth={600}
         backDrop={false}
         scrolling={false}
         onClose={(e) => {

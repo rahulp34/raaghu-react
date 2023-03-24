@@ -438,7 +438,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Select Member"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         offId="addMemberOff"
         backDrop={false}
         scrolling={false}
@@ -503,7 +503,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Select Roles"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         offId="addRoleOff"
         backDrop={false}
         scrolling={false}
@@ -568,7 +568,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="New Organization Unit"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         offId="aoganization"
         backDrop={false}
         scrolling={false}
@@ -610,7 +610,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Edit Organization Unit"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         offId={`boganization`}
         backDrop={false}
         scrolling={false}
@@ -651,7 +651,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Add Organiztion Sub-Unit"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -692,7 +692,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Add Organiztion New Unit"
-        offcanvaswidth={500}
+        offcanvaswidth={600}
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}

@@ -1,21 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { RdsCompDatatable, RdsCompApiResourceBasic, RdsCompClaim, RdsCompAlertPopup } from "../../../rds-components";
+import { RdsCompDatatable, RdsCompAlertPopup } from "../../../rds-components";
 import {
-  RdsBadge,
   RdsInput,
   RdsButton,
   RdsOffcanvas,
-  RdsNavtabs,
-  RdsSearch,
   RdsCheckbox,
+  RdsAlert,
 } from "../../../../../raaghu-elements/src";
+import { addBlogsData, editBlogsData, fetchBlogsData } from "../../../../libs/state-management/Blogs/blogs-slice";
+import { useAppDispatch } from "../../../../libs/state-management/hooks";
 
 interface RdsPageResourcesProps { }
 
 const Blogs = (props: RdsPageResourcesProps) => {
   const { t } = useTranslation();
-  //const [resourceData, setResourceData] = useState<any[]>([{}]);
+  const [blogsData, setResourceData] = useState<any>([]);
+
+  const [value, setValue] = useState("");
+  const [alertOne, setAlertOne] = useState(false);
+  const [alert, setAlert] = useState({
+    showAlert: false,
+    message: "",
+    success: false,
+  });
+  const [tableDataRowid, setTableDataRowId] = useState(0);
+
+  const editDataHandler = () => {
+    const dTo = {
+      displayName: value,
+    };
+    dispatch(editBlogsData({ id: tableDataRowid, dTo: dTo }) as any).then(
+      (res: any) => {
+        dispatch(fetchBlogsData() as any);
+      }
+    );
+    setValue("");
+    setAlertOne(true);
+  };
+
+
+
   const [newResourceData, setnewResourceData] = useState({
     name: "",
     displayName: "",
@@ -23,13 +48,27 @@ const Blogs = (props: RdsPageResourcesProps) => {
     accessTokenSigningAlgorithm: ""
   });
 
-  const [tableDataid, setTableDataRowId] = useState(0);
   const [activeNavTabId, setActiveNavTabId] = useState();
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
 
   const scopeSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id)
     //dispatch(editScopeshData(rowData.id) as any);
+  };
+
+  const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    debugger;
+    dispatch(fetchBlogsData() as any);
+  }, [dispatch]);
+
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    setValue(rowData.name);
+    if (actionId === "edit") {
+      dispatch(fetchBlogsData() as any);
+    }
   };
 
   const tableHeaders = [
@@ -53,25 +92,6 @@ const Blogs = (props: RdsPageResourcesProps) => {
     { id: "delete", displayName: "Delete", modalId: "blogs_delete_off" },
   ];
 
-  const resourceData = [
-    {
-      "id": 1,
-      "name": "Standard",
-      "slug": "test123",
-    },
-    {
-      "id": 2,
-      "name": "Basic",
-      "slug": "test89",
-    },
-    {
-      "id": 3,
-      "name": "Premium",
-      "slug": "test652",
-    },
-
-  ]
-
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -89,6 +109,17 @@ const Blogs = (props: RdsPageResourcesProps) => {
   const success = () => {
     // dispatch(deleteScopeshData(tableDataid) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
     // setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
+  };
+
+  const dTo = {
+    displayName: value,
+  };
+  const addDataHandler = () => {
+    dispatch(addBlogsData(dTo) as any).then((res: any) => {
+      dispatch(fetchBlogsData() as any);
+    });
+    setValue("");
+    setAlertOne(true);
   };
 
   function handleEnabled(event: any) {
@@ -111,12 +142,22 @@ const Blogs = (props: RdsPageResourcesProps) => {
       <div className="row align-items-center">
         <div className="d-flex justify-content-between">
           <h4>Blogs</h4>
+
+          <div className="col-lg-8 col-md-8">
+          {alert.showAlert && alertOne && (
+            <RdsAlert
+              alertmessage={alert.message}
+              colorVariant={alert.success ? "success" : "danger"}
+              style={{ marginBottom: "0" }}
+            ></RdsAlert>
+          )}
+        </div>
           <div className="d-flex justify-content-end">
             <RdsOffcanvas
               canvasTitle={("New Blog")}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={550}
+              offcanvaswidth={600}
               offcanvasbutton={
                 <div>
                   <RdsButton
@@ -148,11 +189,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     label="Name"
                     labelPositon="top"
                     id=""
-                    //value={value}
+                    value={value}
                     required={true}
-                  // onChange={(e) => {
-                  //   setValue(e.target.value);
-                  // }}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
                   ></RdsInput>
                   <RdsInput
                     size="medium"
@@ -161,11 +202,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     label="Slug"
                     labelPositon="top"
                     id=""
-                    //value={value}
+                    value={value}
                     required={true}
-                  // onChange={(e) => {
-                  //   setValue(e.target.value);
-                  // }}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
                   ></RdsInput>
                   <div className="d-flex footer-buttons mb-3">
                     <RdsButton
@@ -182,10 +223,10 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       type={"button"}
                       size="small"
                       databsdismiss="offcanvas"
-                      //isDisabled={value === ""}
+                      isDisabled={value === ""}
                       colorVariant="primary"
                       class="me-2"
-                    //onClick={addDataHandler}
+                    onClick={addDataHandler}
                     ></RdsButton>
                   </div>
                 </div>
@@ -199,11 +240,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
         <RdsCompDatatable
           tableHeaders={tableHeaders}
           actions={actions}
-          tableData={resourceData}
+          tableData={blogsData}
           pagination={true}
           recordsPerPage={10}
           recordsPerPageSelectListOption={true}
-          onActionSelection={scopeSelection}
+          onActionSelection={onActionSelection}
         ></RdsCompDatatable>
 
 
@@ -214,7 +255,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           offId="blogs-edit-off"
           placement="end"
           canvasTitle="Edit Blog"
-          offcanvaswidth={550}
+          offcanvaswidth={600}
           children={
             <>
               <RdsInput
@@ -276,7 +317,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           offId="features"
           placement="end"
           canvasTitle="Features"
-          offcanvaswidth={550}
+          offcanvaswidth={600}
           children={
             <>
               <div className=" mb-4">
@@ -370,7 +411,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
             offId="features"
             placement="end"
             canvasTitle="Edit"
-            offcanvaswidth={550}
+           offcanvaswidth={600}
             children={
               <>
               hii

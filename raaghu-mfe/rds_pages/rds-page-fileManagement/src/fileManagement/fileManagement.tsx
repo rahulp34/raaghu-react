@@ -234,7 +234,7 @@ const [name,setName]=useState("")
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
-          offcanvaswidth={650}
+          offcanvaswidth={600}
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -300,7 +300,7 @@ const [name,setName]=useState("")
         <RdsOffcanvas
           canvasTitle={"Upload Files"}
           placement="end"
-          offcanvaswidth={650}
+          offcanvaswidth={600}
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

@@ -156,7 +156,7 @@ const TextTemplate = () => {
         </div>
       </div>
       <RdsOffcanvas placement={"end"} backDrop={false} scrolling={false} preventEscapeKey={false} offId={"Edit"}
-        canvasTitle={"Contents"} offcanvaswidth={650} >
+        canvasTitle={"Contents"} offcanvaswidth={600}>
         <form>
           <div className="px-2">
             <div className="form-group mb-4 d-flex">

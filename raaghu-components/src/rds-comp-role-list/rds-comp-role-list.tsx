@@ -283,7 +283,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               preventEscapeKey={false}
               offId={props.listItems[2].key}
               canvasTitle={props.listItems[2].value}
-              offcanvaswidth={550}
+              offcanvaswidth={600}
             >
               <RdsNavtabs
                 navtabsItems={[
@@ -399,7 +399,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
           preventEscapeKey={false}
           offId={"Edit"}
           canvasTitle={"Edit"}
-          offcanvaswidth={550}
+          offcanvaswidth={600}
         >
           <RdsNavtabs
             navtabsItems={[
