@@ -34,14 +34,14 @@ export const fetchBlogsData = createAsyncThunk(
   }
 );
 
-// export const deleteEditionData = createAsyncThunk(
-//   "edition/deleteEditionData",
-//   (id: any) => {
-//     return proxy.editionsDELETE(id).then((result) => {
-//       return result;
-//     });
-//   }
-// );
+export const deleteBlogsData = createAsyncThunk(
+  "blogs/deleteBlogsData",
+  (id: any) => {
+    return proxy.blogsDELETE(id).then((result) => {
+      return result;
+    });
+  }
+);
 
 export const addBlogsData = createAsyncThunk(
   "blogs/addBlogsData",
@@ -53,7 +53,7 @@ export const addBlogsData = createAsyncThunk(
 );
 
 export const editBlogsData = createAsyncThunk(
-  "edition/editBlogsData",
+  "blogs/editBlogsData",
   ({ id, dTo }: { id: any; dTo: any }) => {
     return proxy.blogPostsPUT(id, dTo).then((result) => {
       return result;
@@ -61,14 +61,14 @@ export const editBlogsData = createAsyncThunk(
   }
 );
 
-// export const fetchFeaturesEdition = createAsyncThunk(
-//   "edition/fetchFeaturesEdition",
-//   (id: any) => { 
-//     return proxy.featuresGET("E", id, undefined).then((result: any) => {
-//       return result;
-//     });
-//   }
-// );
+export const fetchFeaturesBlogs = createAsyncThunk(
+  "blogs/fetchFeaturesBlogs",
+  (id: any) => { 
+    return proxy.featuresAll("E", id).then((result: any) => {
+      return result;
+    });
+  }
+);
 // export const saveFeaturesEdition = createAsyncThunk(
 //   "edition/saveFeaturesEdition",
 //   (data: any) => { 
@@ -108,28 +108,28 @@ const blogsSlice: any = createSlice({
       state.error = action.error.message || "Something Went Wrong";
     });
 
-    // builder.addCase(deleteEditionData.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(
-    //   deleteEditionData.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.blogs = action.payload;
-    //     state.error = "";
-    //     state.alert = true;
-    //     state.alertMessage = "Data deleted Successfully";
-    //     state.success = true;
-    //   }
-    // );
-    // builder.addCase(deleteEditionData.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.blogs = [];
-    //   state.error = action.error.message || "Something Went Wrong";
-    //   state.alert = true;
-    //   state.alertMessage = "Something went wrong";
-    //   state.success = false;
-    // });
+    builder.addCase(deleteBlogsData.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      deleteBlogsData.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.blogs = action.payload;
+        state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data deleted Successfully";
+        state.success = true;
+      }
+    );
+    builder.addCase(deleteBlogsData.rejected, (state, action) => {
+      state.loading = false;
+      state.blogs = [];
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something went wrong";
+      state.success = false;
+    });
 
     builder.addCase(addBlogsData.pending, (state) => {
       state.loading = true;
@@ -178,21 +178,21 @@ const blogsSlice: any = createSlice({
       state.success = false;
     });
 
-    // builder.addCase(fetchFeaturesEdition.pending, (state) => {
-    //   state.loading = true;
-    // });
+    builder.addCase(fetchFeaturesBlogs.pending, (state) => {
+      state.loading = true;
+    });
 
-    // builder.addCase(
-    //   fetchFeaturesEdition.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.featureIdentitySettings = action.payload;
-    //   }
-    // );
-    // builder.addCase(fetchFeaturesEdition.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message || "Something went wrong";
-    // });
+    builder.addCase(
+      fetchFeaturesBlogs.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.featureIdentitySettings = action.payload;
+      }
+    );
+    builder.addCase(fetchFeaturesBlogs.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
 
     // builder.addCase(saveFeaturesEdition.pending, (state) => {
     //   state.loading = true;

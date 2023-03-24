@@ -76,7 +76,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                 canvasTitle="UPDATE EDITION"
                 onclick={offCanvasHandler}
                 placement="end"
-                
+                offcanvaswidth={650}
                 offcanvasbutton={
                   <div>
                     <span className="position-relative btn btn-outline-primary btn-sm btn-icon p-1 rounded-pill">
