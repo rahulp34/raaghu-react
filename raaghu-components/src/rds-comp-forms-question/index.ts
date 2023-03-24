@@ -1,1 +1,1 @@
-export {default} from "./rds-comp-forms-question"
+export {default} from "./rds-comp-forms-questions"

@@ -7,6 +7,8 @@ export interface RdsCompFormsQuestionProps {
 	formQuestionsData?: any;
 	questionNumber : number
 	questionId: any;
+	 handleNewQuestionsData?:any;
+
 }
 
 const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
@@ -14,13 +16,18 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 	const [formQuestions, setFormQuestions] = useState(props.formQuestionsData);
 	function setDescription(value: any) {
 		setFormQuestions({ ...formQuestions, description: value })
+		props.handleNewQuestionsData({ ...formQuestions, description: value });
+
 	}
 	function setTitle(value: any) {
 		setFormQuestions({ ...formQuestions, title: value })
+		props.handleNewQuestionsData({ ...formQuestions, title: value });
+
 	}
 	function setSelectedOption(value: any) {
-		
 		setFormQuestions({ ...formQuestions, questionType: value })
+		props.handleNewQuestionsData({ ...formQuestions, questionType: value });
+
 	}
 	function setOption(index: number, value: any) {
 		const tempChoices = [...choices];
@@ -28,8 +35,6 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setchoices(tempChoices);
 	}
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		
-		console.log('event form-questions', event);
 	};
 
 	function handleDelete(el: number) {
@@ -58,7 +63,6 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 		setFormQuestions(props.formQuestionsData)
 	}, [props.formQuestionsData])
 	useEffect(() => {
-		
 		setFormQuestions({ ...formQuestions, choices })
 	}, [choices])
 	return (
@@ -145,15 +149,6 @@ const RdsCompFormsQuestion = (props: RdsCompFormsQuestionProps) => {
 
 					</div>
 				</div>
-				{/* <div className="d-flex align-items-center justify-content-end">
-					<RdsButton
-						type={"button"}
-						size="small"
-						label="Save"
-						colorVariant="primary"
-						onClick={() => handleSubmit(formQuestions)}
-					></RdsButton>
-				</div> */}
 			</form>
 			</div>
 		</>

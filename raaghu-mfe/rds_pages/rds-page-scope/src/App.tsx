@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-//import Scope from "./Scope/Scope";
+// import Scope from "./Scope/Scope";
 
 const App = () => (
   <Suspense>

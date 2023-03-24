@@ -1,2 +1,2 @@
-export {default as MainMenu} from './main-menu'
-export {default as urlForwarding} from './url-forwarding'
+export {default as MainMenu} from './main-menu';
+export {default as UrlForwarding} from './url-forwarding';

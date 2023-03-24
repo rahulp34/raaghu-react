@@ -18,7 +18,7 @@ const PaymentPlans = () => {
   const [actions, setActions] = useState([
     { id: "edit", displayName: "Edit", offId: "paymentPlans" },
     { id: "delete", displayName: "Delete", modalId: "delete" },
-    { id: "manageGatewayPlans", displayName: "Manage Gateway Plans" },
+    { id: "manageGatewayPlans", displayName: "Manage Gateway Plans", modalId: "manageGatewayPlans" },
   ]);
 
   // Use States ================
@@ -29,7 +29,7 @@ const PaymentPlans = () => {
   const [canvasTitle, setCanvasTitle] = useState('Create New Payment Plans');
   const [paymentPlansObj, setPaymentPlansObj] = useState({ id: '', name: '', concurrencyStamp: '' });
   const [gatewayPlansObj, setGatewayPlansObj] = useState({ planId: '', gateway: '', externalId: '' });
-  const [managePlan, setManagePlan] = useState(false);
+  const [managePlan, setManagePlan] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<any>({});
 
@@ -40,8 +40,6 @@ const PaymentPlans = () => {
   // Use Effects ==================
   useEffect(() => {
     dispatch(getAllPaymentPlans({ filter: undefined, sorting: undefined, cancelToken: undefined }));
-    const item = { planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
-    dispatch(getAllGatewayPlansByPlanId(item));
   }, [dispatch]);
 
   // Get all alogs API
@@ -54,7 +52,7 @@ const PaymentPlans = () => {
       }));
       setPlansTableData(allData);
     }
-  }, [paymentPlans.allPaymentPlans])
+  }, [paymentPlans.allPaymentPlans]);
 
   // Get selected paymentPlans API
   useEffect(() => {
@@ -65,11 +63,11 @@ const PaymentPlans = () => {
         concurrencyStamp: paymentPlans.paymentPlan.concurrencyStamp,
       });
     }
-  }, [paymentPlans.paymentPlan])
+  }, [paymentPlans.paymentPlan]);
 
   // Get all gateway plans
   useEffect(() => {
-    if (paymentPlans.allGatewayPlans) {
+    if (paymentPlans.allGatewayPlans.items !== undefined) {
       const allGatewayData = paymentPlans.allGatewayPlans.items.map((gateway: any) => ({
         planId: gateway.planId,
         gateway: gateway.gateway,
@@ -77,7 +75,7 @@ const PaymentPlans = () => {
       }));
       setGatewayTableData(allGatewayData);
     }
-  }, [paymentPlans.allGatewayPlans])
+  }, [paymentPlans.allGatewayPlans]);
 
   // Functions ================
   // Create New Plan
@@ -97,17 +95,10 @@ const PaymentPlans = () => {
         dispatch(getPlanById({ id: data.id }));
         setIsEdit(true);
         setCanvasTitle('Edit Plan');
-      } else if (actionId === 'manageGatewayPlans') {
-        dispatch(getAllGatewayPlansByPlanId({ planId: data.id }));
-        setManagePlan(false);
-        setActions([
-          { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-          { id: "delete", displayName: "Delete", modalId: "delete" },
-        ]);
       }
     } else {
       if (actionId === 'edit') {
-        setGatewayPlansObj({ planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', gateway: paymentPlan.gateway, externalId: data.externalId });
+        setGatewayPlansObj({ planId: data.planId, gateway: data.gateway, externalId: data.externalId });
         setIsEdit(true);
         setCanvasTitle('Edit Gateway Plan');
       }
@@ -117,8 +108,13 @@ const PaymentPlans = () => {
   // Save / Update Payment Plans and Gateway Plans
   function saveUpdatePaymentPlans(event: any) {
     event.preventDefault();
+    // Plan
     if (managePlan) {
-      const body = { filter: undefined, sorting: undefined, cancelToken: undefined };
+      const body = {
+        filter: undefined,
+        sorting: undefined,
+        cancelToken: undefined
+      };
       if (isEdit) {
         const data = { id: paymentPlansObj.id, body: { name: paymentPlansObj.name } };
         dispatch(updatePlan(data)).then(() => dispatch(getAllPaymentPlans(body)));
@@ -128,34 +124,32 @@ const PaymentPlans = () => {
         dispatch(createNewPlan(data)).then(() => dispatch(getAllPaymentPlans(body)));
         setIsEdit(false);
       }
-    } else {
+    }
+    // Gateway
+    else {
       if (isEdit) {
         const data = {
-          id: 'fdd60537-48a6-1530-796c-3a0a10df34cf',
-          gateway: paymentPlan.gateway,
+          planId: gatewayPlansObj.planId,
+          gateway: gatewayPlansObj.gateway,
           body: {
-            gateway: gatewayPlansObj.gateway,
             externalId: gatewayPlansObj.externalId,
-            planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf'
           }
         };
-        const item = { planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
+        const item = { planId: gatewayPlansObj.planId, filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
         dispatch(updateGatewayPlan(data)).then(() => dispatch(getAllGatewayPlansByPlanId(item)));
         setIsEdit(false);
       } else {
         const data = {
+          planId: paymentPlan.id,
           body: {
             gateway: gatewayPlansObj.gateway,
             externalId: gatewayPlansObj.externalId,
-            // planId: gatewayPlansObj.planId
-            planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf'
           }
         };
-        const item = { planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
+        const item = { planId: paymentPlan.id, filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
         dispatch(createGatewayPlan(data)).then(() => dispatch(getAllGatewayPlansByPlanId(item)));
         setIsEdit(false);
       }
-
     }
     setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' });
     setGatewayPlansObj({ planId: '', gateway: '', externalId: '' });
@@ -168,9 +162,18 @@ const PaymentPlans = () => {
       const body = { filter: undefined, sorting: undefined, cancelToken: undefined };
       dispatch(deletePlan(data)).then(() => dispatch(getAllPaymentPlans(body)));
     } else {
-      // const data = { body: { planId: paymentPlan.id, gateway: paymentPlan.gateway } };
-      const data = { planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', gateway: paymentPlan.gateway };
-      const item = { planId: 'fdd60537-48a6-1530-796c-3a0a10df34cf', filter: undefined, sorting: undefined, skipCount: 0, maxResultCount: 1000, cancelToken: undefined };
+      const data = {
+        planId: (paymentPlan.id === undefined || paymentPlan.id === '') ? paymentPlan.planId : paymentPlan.id,
+        gateway: paymentPlan.gateway
+      };
+      const item = {
+        planId: (paymentPlan.id === undefined || paymentPlan.id === '') ? paymentPlan.planId : paymentPlan.id,
+        filter: undefined,
+        sorting: undefined,
+        skipCount: 0,
+        maxResultCount: 1000,
+        cancelToken: undefined
+      };
       dispatch(deleteGatewayPlan(data)).then(() => dispatch(getAllGatewayPlansByPlanId(item)));
     }
   }
@@ -180,6 +183,24 @@ const PaymentPlans = () => {
     event.preventDefault();
     setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' });
     setGatewayPlansObj({ planId: '', gateway: '', externalId: '' });
+  }
+
+  // Route to gateway plans
+  function confirmRoute() {
+    setManagePlan(false);
+    const item = {
+      planId: paymentPlan.id,
+      filter: undefined,
+      sorting: undefined,
+      skipCount: 0,
+      maxResultCount: 1000,
+      cancelToken: undefined
+    };
+    dispatch(getAllGatewayPlansByPlanId(item));
+    setActions([
+      { id: "edit", displayName: "Edit", offId: "paymentPlans" },
+      { id: "delete", displayName: "Delete", modalId: "delete" }
+    ]);
   }
 
   // DOM
@@ -239,11 +260,13 @@ const PaymentPlans = () => {
         </div>
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
           <RdsCompDatatable tableHeaders={managePlan ? tableHeadersPlans : tableHeadersGatewayPlans} tableData={managePlan ? plansTableData : gatewayTableData} pagination={false} actions={actions}
-            onActionSelection={onActionSelection} classes="table" recordsPerPageSelectListOption={true} 
+            onActionSelection={onActionSelection} classes="table" recordsPerPageSelectListOption={true}
             recordsPerPage={5} noDataTitle={'No Plans Available'}></RdsCompDatatable>
         </div>
       </div>
       <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
+      <RdsCompAlertPopup alertID="manageGatewayPlans" onSuccess={confirmRoute} deleteButtonLabel={'Yes'} iconUrl={'card_image'} colorVariant={'primary'}
+        messageAlert={'You will be route to manage Gateway Plans'} alertConfirmation={'Are you sure you want to manage Gateway Plans'} />
     </>
   );
 };
