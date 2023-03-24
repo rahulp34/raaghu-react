@@ -130,7 +130,7 @@ module.exports = (env, argv) => {
           SecurityLogs: mfeConfigJSON["securityLogs"].url,
           Chats: mfeConfigJSON["chats"].url,
           FileManagement: mfeConfigJSON["fileManagement"].url,
-          Forms : mfeConfigJSON["forms"].url,
+          Forms: mfeConfigJSON["forms"].url,
           Blogger: mfeConfigJSON["blogger"].url,
           IdentityResources: mfeConfigJSON["identityResources"].url,
           Client: mfeConfigJSON["client"].url,
@@ -138,9 +138,8 @@ module.exports = (env, argv) => {
           Polls: mfeConfigJSON["polls"].url,
           UrlForwarding: mfeConfigJSON["urlForwarding"].url,
           PaymentPlans: mfeConfigJSON["paymentPlans"].url,
-          Blogs: mfeConfigJSON["blogs"].url,
-     BookStore: mfeConfigJSON["bookStore"].url,
-},
+          Blogs: mfeConfigJSON["blogs"].url
+        },
         shared: {
           ...devdeps,
           ...deps,
