@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompPollsQuestion from './RdsCompPollsQuestion';
+import React from 'react';
+import RdsCompPollsQuestion from './rds-comp-polls-question';
 
 export default {
   title: "RdsCompPollsQuestion",
