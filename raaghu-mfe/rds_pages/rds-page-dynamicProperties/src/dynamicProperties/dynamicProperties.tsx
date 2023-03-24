@@ -184,7 +184,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
             offId="dynamic_offcanvas"
             placement="end"
             canvasTitle="NEW DYNAMIC PROPERTY"
-            offcanvaswidth={600}
+            
             offcanvasbutton={
               <RdsButton
               
@@ -217,7 +217,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
             offId="entity__offCanvas"
             placement="end"
             canvasTitle="NEW DYNAMIC ENTITY PROPERTY"
-            offcanvaswidth={600}
+            
             offcanvasbutton={
               <RdsButton
                 type={"button"}
@@ -321,7 +321,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
           offId="dynamic-edit-off"
           placement="end"
           canvasTitle="NEW DYNAMIC PROPERTY"
-          offcanvaswidth={600}
+          
           children={
             <NewDynamicProperty
             editData={dPItem[identity.dynamicActionId]}
@@ -339,7 +339,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
         offId="entity-edit-off"
         placement="end"
           canvasTitle="NEW DYNAMIC ENTITY PROPERTY"
-          offcanvaswidth={600}
+          
           children={
             <RdsCompDynamicEntityProperty
               offcanvasId="entity-edit-off"

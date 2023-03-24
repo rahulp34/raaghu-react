@@ -240,7 +240,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               preventEscapeKey={false}
               offId={props.listItems[1].key}
               canvasTitle={props.listItems[1].value}
-              offcanvaswidth={600}
+              
             >
               <div className="" onClick={props.onSearch}>
                 <RdsSearch size="small" placeholder="search role"></RdsSearch>
@@ -283,7 +283,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
               preventEscapeKey={false}
               offId={props.listItems[2].key}
               canvasTitle={props.listItems[2].value}
-              offcanvaswidth={600}
+              
             >
               <RdsNavtabs
                 navtabsItems={[
@@ -399,7 +399,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
           preventEscapeKey={false}
           offId={"Edit"}
           canvasTitle={"Edit"}
-          offcanvaswidth={600}
+          
         >
           <RdsNavtabs
             navtabsItems={[

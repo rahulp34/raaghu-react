@@ -278,7 +278,7 @@ const Applications = () => {
               canvasTitle={"NEW APPLICATION"}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={600}
+              
               offcanvasbutton={               
                 <div className="d-flex justify-content-end">
                   <RdsButton
@@ -321,7 +321,7 @@ const Applications = () => {
                 canvasTitle={"Edit APPLICATION"}
                 onclick={offCanvasHandler}
                 placement="end"
-                offcanvaswidth={600}
+                
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}

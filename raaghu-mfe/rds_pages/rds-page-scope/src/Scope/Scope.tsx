@@ -173,7 +173,6 @@ const Scope = (props: RdsPageScopeProps) => {
   //             canvasTitle={t("New Scope")}
   //             onclick={offCanvasHandler}
   //             placement="end"
-  //             offcanvaswidth={550}
   //             offcanvasbutton={
   //               <div>
   //                 <RdsButton
@@ -222,8 +221,7 @@ const Scope = (props: RdsPageScopeProps) => {
   //           offId="entity-edit-off"
   //           placement="end"
   //           canvasTitle="Edit"
-  //           offcanvaswidth={550}
-  //           children={
+  //          children={
   //             <RdsCompScopeBasicResource saveApiScopeData={(data:any)=>{updateScope(data)}} />
   //           }
   //         ></RdsOffcanvas>

@@ -82,7 +82,6 @@ const Polls = (props: any) => {
              offId="userOffcanvas"
              canvasTitle={"New"}
              placement="end"
-              offcanvaswidth={550}
             >
          <RdsNavtabs
           navtabsItems={navtabsItems}

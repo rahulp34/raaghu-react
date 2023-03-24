@@ -418,7 +418,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         <RdsOffcanvas
           canvasTitle={"New Tenant"}
           placement="end"
-          offcanvaswidth={600}
+          
           offcanvasbutton={
             <div className="d-flex justify-content-end">
               <RdsButton
@@ -464,7 +464,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         <RdsOffcanvas
           canvasTitle={"Edit Tenant"}
           placement="end"
-          offcanvaswidth={600}
+          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

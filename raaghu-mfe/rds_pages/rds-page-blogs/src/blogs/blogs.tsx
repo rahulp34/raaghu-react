@@ -157,7 +157,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
               canvasTitle={("New Blog")}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={600}
+              
               offcanvasbutton={
                 <div>
                   <RdsButton
@@ -255,7 +255,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           offId="blogs-edit-off"
           placement="end"
           canvasTitle="Edit Blog"
-          offcanvaswidth={600}
+          
           children={
             <>
               <RdsInput
@@ -317,7 +317,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           offId="features"
           placement="end"
           canvasTitle="Features"
-          offcanvaswidth={600}
+          
           children={
             <>
               <div className=" mb-4">
@@ -411,7 +411,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
             offId="features"
             placement="end"
             canvasTitle="Edit"
-           offcanvaswidth={600}
+           
             children={
               <>
               hii
