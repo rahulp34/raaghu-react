@@ -255,7 +255,7 @@ const Auditpayload = ()=>{
         <div className="grid mx-4 mb-4">
           <div className="">
             <RdsDatePicker
-              // DatePickerLabel="Select Date"
+              DatePickerLabel="Select Date"
               onDatePicker={onDatePicker}
               type="advanced"
             ></RdsDatePicker>
