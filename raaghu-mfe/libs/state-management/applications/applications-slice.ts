@@ -30,7 +30,7 @@ const proxy = new ServiceProxy();
 
 //effects and actions
 export const fetchApplications = createAsyncThunk("applications/fetchApplications", () => {
-  return proxy.applicationsGET2(undefined, undefined, 0, 30, undefined).then((result:any)=>{
+  return proxy.applicationsGET2(undefined, 'id DESC', 0, 30, undefined).then((result:any)=>{
      return result;
   }) 
 });

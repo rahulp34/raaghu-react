@@ -26,7 +26,7 @@ const proxy = new ServiceProxy();
 export const fetchEditionData = createAsyncThunk(
   "edition/fetchEditionData",
   () => {
-    return proxy.editionsGET2(undefined, "false", undefined, 1000).then((result) => {
+    return proxy.editionsGET2(undefined, 'id DESC', undefined, 1000).then((result) => {
       console.log("result", result);
       return result;
     });

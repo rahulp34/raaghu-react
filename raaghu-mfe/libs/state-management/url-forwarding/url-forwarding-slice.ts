@@ -18,7 +18,7 @@ const UrlForwardingInitialState : UrlForwardingInitialState = {
 const proxy =new ServiceProxy();
 
 export const fetchUrlShortingsData = createAsyncThunk('urlForwardingSlice/fetchUrlShortingsData',() => {
-    return proxy.urlShortingGET('','',0,1000).then((result:any) =>{
+    return proxy.urlShortingGET('','id DESC',0,1000).then((result:any) =>{
         console.log("result",result)
         return result
     })

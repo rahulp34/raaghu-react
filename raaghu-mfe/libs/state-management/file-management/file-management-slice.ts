@@ -37,7 +37,7 @@ import {
   export const fetchDirectoryDescriptor = createAsyncThunk(
     "FileManagement/fetchDirectoryDescriptor",
     (data:any)=>{
-      return proxy.directoryDescriptorGET2(undefined,undefined,undefined,undefined,1000).then((result:any)=>{
+      return proxy.directoryDescriptorGET2(undefined,data,undefined,undefined,1000).then((result:any)=>{
         return result;
       })
     

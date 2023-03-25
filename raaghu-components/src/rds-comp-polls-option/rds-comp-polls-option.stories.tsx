@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompPollsOption from './RdsCompPollsOption';
+import React from 'react';
+import RdsCompPollsOption from './rds-comp-polls-option';
 
 export default {
   title: "RdsCompPollsOption",
