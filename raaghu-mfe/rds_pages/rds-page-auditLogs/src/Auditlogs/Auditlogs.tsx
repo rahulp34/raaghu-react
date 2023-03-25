@@ -406,7 +406,7 @@ const Auditpayload = ()=>{
         placement="end"
         canvasTitle="Detail"
         onclick={offCanvasHandler}
-        offcanvaswidth={650}
+        
         className="mx-1"
       >
         <RdsNavtabs

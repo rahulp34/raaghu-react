@@ -209,7 +209,7 @@ const PaymentPlans = () => {
       <div className="row">
         <div className="d-flex">
           <div className="ms-auto">
-            <RdsOffcanvas canvasTitle={canvasTitle} placement="end" offcanvaswidth={650} onClose={(event) => setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' })}
+            <RdsOffcanvas canvasTitle={canvasTitle} placement="end"  onClose={(event) => setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' })}
               offcanvasbutton={
                 <div className="d-flex justify-content-end">
                   <RdsButton icon="plus" label={managePlan ? "Create New Plan" : "Create New Gateway Plan"} iconColorVariant="light" iconHeight="15px" iconWidth="15px"

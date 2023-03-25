@@ -227,7 +227,7 @@ const Roles = (props: RdsPageRolesProps) => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="New Role"
-          offcanvaswidth={500}
+          
           offId="newRole"
           backDrop={false}
           scrolling={false}
@@ -317,7 +317,7 @@ const Roles = (props: RdsPageRolesProps) => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="Edit Role"
-          offcanvaswidth={500}
+          
           offId="editRoleof"
           backDrop={false}
           scrolling={false}

@@ -141,7 +141,6 @@ const UrlForwarding = () => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="New Url Forward"
-          offcanvaswidth={500}
           offId="newUrlForwarding"
           backDrop={false}
           scrolling={false}
@@ -180,7 +179,6 @@ const UrlForwarding = () => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="Edit Role"
-          offcanvaswidth={500}
           offId="editUrlForwardingoff"
           backDrop={false}
           scrolling={false}
