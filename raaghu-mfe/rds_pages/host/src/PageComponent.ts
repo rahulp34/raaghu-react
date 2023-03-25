@@ -2,9 +2,7 @@ import React from "react";
 
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
-const ForgotPasswordCompo = React.lazy(
-  () => import("ForgotPassword/ForgotPassword")
-);
+const ForgotPasswordCompo = React.lazy(() => import("ForgotPassword/ForgotPassword"));
 const TenantCompo = React.lazy(() => import("Tenant/Tenant"));
 const EditionCompo = React.lazy(() => import("Edition/Edition"));
 const SettingsCompo = React.lazy(() => import("Settings/Settings"));
