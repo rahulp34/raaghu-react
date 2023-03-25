@@ -29,35 +29,29 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const navigate = useNavigate();
 	const navtabItems = [
 		{
-			label: "Manage Linked Accounts",
+			label: "Linked Accounts",
 			icon: "manage_linked",
 			subText: "Manage accounts linked to your account",
 			id: "nav-LinkAccount",
 		},
 		{
-			label: "Manage Authority Delegation",
+			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
 			id: "nav-Deligation",
 		},
 		{
-			label: "Login Attempts",
+			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
 			id: "nav-Attempts",
 		},
 		{
-			label: "My Settings",
+			label: "Personal Data",
 			icon: "my_settings",
 			subText: "Change your account settings",
 			id: "nav-Settings",
-		},
-		{
-			label: "Download Collected Data",
-			icon: "download_data",
-			subText: "Download data belongs to your account",
-			id: "nav-DownLoad",
-		},
+		},		
 	];
 
 	const ChangeId = (e: any) => {
@@ -160,7 +154,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           <RdsOffcanvas
             className="pb-0"
             placement="end"
-            offcanvaswidth={374}
+            offcanvaswidth={307}
             offId="Profile"
             offcanvasbutton={
               <div
