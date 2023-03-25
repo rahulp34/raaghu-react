@@ -5,7 +5,6 @@ import RdsBadge from "../rds-badge";
 import "./rds-dropdown-list.scss";
 import { PROPERTY_TYPES } from "@babel/types";
 import { useEffect } from "react";
-import { Dropdown } from "bootstrap";
 export interface RdsDropdownListProps {
   id?:string, 
   reset?: boolean;
@@ -39,6 +38,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   let id=props.id ||'dropdown_id'
   const lang = localStorage.getItem("i18nextLng");
   let index = props.listItems.findIndex((item) => item.val === lang);
+  const[toggle, setToggle] = useState('show'); 
 
   //  If language not found then we are updating index to 0
 
@@ -55,6 +55,11 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   const onClickHandler = (index: number, val: string) => {
     setSelectedOption(index);
     setIsTouch(true);
+    var myDropdown = document.querySelector('.dropdown-raaghu') as any;
+    var dropdownMenu = myDropdown.querySelector('.dropdown-menu');
+    dropdownMenu.classList.remove('show')
+    dropdownMenu.classList.add('hide');
+    setToggle('show');
   };
   let IconWidth = props.listItems[selectedOption].iconWidth || "16px";
   let IconHeight = props.listItems[selectedOption].iconHeight || "12px";
@@ -93,12 +98,30 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       props.selectedItems != undefined &&
       props.selectedItems(checkedCategoryList);
   }, [checkedCategoryList]);
+  function clickedOnHarshit(e:any){
+    debugger
+    var myDropdown = document.querySelector('.dropdown-raaghu') as any;
+    var dropdownToggle = myDropdown.querySelector('.dropdown-raaghu-button');
+    var dropdownMenu = myDropdown.querySelector('.dropdown-menu');
+    
+    if(toggle == 'show'){
+      dropdownMenu.classList.remove('hide')
+      dropdownMenu.classList.add(toggle);
+      setToggle('hide');
+    }
+    else{
+      dropdownMenu.classList.remove('show')
+      dropdownMenu.classList.add(toggle);
+      setToggle('show');
+
+    }
+    
+  }
   return (
-      <div className="dropdown w-100 position-relative">
-        <span 
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          data-bs-offset={offset} 
+      <div className="dropdown-raaghu w-100 position-relative">
+        <span
+          className="dropdown-raaghu-button"
+          onClick={clickedOnHarshit}
         >
           <div className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}>
         {/* simple dropdown  */}
@@ -111,7 +134,6 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                   <span >
                      <RdsIcon name={props.icon} height={IconHeight} width={IconWidth} fill={props.iconFill}
                     stroke={props.iconStroke} classes ="pe-1" />
-                     
                   </span>
                 )}
                 <span className="fs-6 ms-2 me-2 flex-grow-1">
@@ -203,6 +225,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                 {props.multiSelect && (
                     <div className="form-check">
                       <input
+                      
                         className="form-check-input"
                         type="checkbox"
                         checked={
