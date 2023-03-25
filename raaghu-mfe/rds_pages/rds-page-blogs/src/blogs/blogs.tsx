@@ -7,7 +7,7 @@ import {
   RdsOffcanvas,
   RdsCheckbox,
   RdsAlert,
-} from "../../../../../raaghu-elements/src";
+} from "raaghu-react-elements";
 import { addBlogsData, editBlogsData, fetchBlogsData } from "../../../../libs/state-management/Blogs/blogs-slice";
 import { useAppDispatch } from "../../../../libs/state-management/hooks";
 
