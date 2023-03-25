@@ -156,6 +156,7 @@ const tenantSlice= createSlice({
 
   reducers :{},
   extraReducers:(builder)=>{
+    
     builder.addCase(fetchTenant.pending,(state)=>{
       state.loading=true;
     });
