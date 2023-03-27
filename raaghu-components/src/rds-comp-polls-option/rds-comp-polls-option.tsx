@@ -1,27 +1,24 @@
-import { RdsButton, RdsIcon, RdsInput } from 'raaghu-react-elements';
-import React, { useState } from 'react';
-import RdsCompDatatable from '../rds-comp-data-table';
-
+import { RdsButton, RdsIcon, RdsInput } from "raaghu-react-elements";
+import React, { useState } from "react";
+import RdsCompDatatable from "../rds-comp-data-table";
 
 interface RdsCompPollsOptionProps {}
 
-const RdsCompPollsOption = (props:RdsCompPollsOptionProps) => {
+const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
   const [tableData, setTableData] = useState<any>([]);
+  const [ErrorFreeData, setErrorFreeData] =useState<any[]>([]);
   const [optionData, setoptionData] = useState<any>({
-    option: '',
+    option: "",
   });
   function handleSubmit(event: any) {
     event.preventDefault();
-    console.log("hello handleSubmit", optionData)
+    console.log("hello handleSubmit", optionData);
   }
   function optionChange(value: any) {
-    debugger
+    debugger;
     setoptionData({ ...optionData, option: value });
   }
-  const actions = [
-    { id: "editOption", displayName: "Edit" },
-    { id: "delete", displayName: "Delete",modalId:'nomodal'},
-  ];
+
   const tableHeaders = [
     {
       displayName: "Text",
@@ -29,48 +26,123 @@ const RdsCompPollsOption = (props:RdsCompPollsOptionProps) => {
       datatype: "text",
       sortable: true,
     },
-    
+    {
+      displayName: "Action",
+      key: "actions",
+      datatype: "children",
+      sortable: true,
+    },
   ];
-  const style = { marginTop: '29px' }
-  const handleAddItem = () => {
-    let newTempData: any;
-    newTempData = {
-      option: optionData.option,
-     
-    };
-    setTableData((prev: any) => [...prev, newTempData]);
-    setoptionData({option : ''})
-  };
-  function onDelete(key: any) {
-    console.log("hello")
-    debugger
-    let tempPropertyData = tableData.filter((el: any) => (el.key != key))
-    setTableData(tempPropertyData)
+  const style = { marginTop: "29px" };
+  const[areWeEditing, setAreWeEditing] = useState(false);
+  const[dataId, setDataId] =useState("");
+  function handleEdit(data:any){
+    setAreWeEditing(true);
+    setDataId(data);
+    let editData = ErrorFreeData.find((element:any)=>element.id == data)
+    setoptionData({ ...optionData, option: editData.option });
   }
-  function onActionSelection(rowData:any , actionId:any) {
+  function handleDelete(data:any){
+    let tempTableData :any[] =[];
+    tableData.map((res:any)=>{
+      if(res.id != data){
+        tempTableData.push(res);
+      }
+    })
+    setTableData(tempTableData);
+    setErrorFreeData(tempTableData)
+  }
+
+  function generateUniqueID() {
+    const randomNumber = Math.floor(Math.random() * 1000000);
+    const timestamp = Date.now();
+    const uniqueID = `${randomNumber}-${timestamp}`;
+    return uniqueID;
+  }
+  
+
+  function handleAddItem(){
     debugger
-if(actionId == 'delete'){
-  let count = true;
-  let tempPropertyData:any[] = [];
-   tableData.map(((el: any) =>{
-    if(count && el.option == rowData.option){
-      count = false;
+    if(areWeEditing){
+      setAreWeEditing(false);
+      let tempTableData :any[] =[];
+      tableData.map((res:any)=>{
+        if(res.option == dataId){
+          res.option = optionData.option;
+        }
+        tempTableData.push(res);
+      })
+      setTableData(tempTableData);
+      setErrorFreeData(tempTableData);
     }
     else{
-      tempPropertyData.push(el);
+      let newTempData: any;
+      let id= generateUniqueID();
+      newTempData = {
+        id:id,
+        option: optionData.option,
+        actions: (
+          <>
+            <div className="d-flex justify-content-center">
+              <div className="mx-2">
+              <RdsIcon
+                width="17px"
+                height="17px"
+                name="edit"
+                stroke={true}
+                colorVariant="primary"
+                onClick={()=>{handleEdit(id)}}
+              ></RdsIcon>
+               </div>
+                <RdsIcon
+                width="17px"
+                height="17px"
+                name="delete"
+                stroke={true}
+                colorVariant="danger"
+                onClick={()=>{handleDelete(id)}}
+              ></RdsIcon>
+  
+            </div>
+          </>
+        ),
+      };
+      let tempTableData = tableData.concat([newTempData])
+      debugger
+      setTableData(tempTableData);
+      setErrorFreeData(tempTableData)
     }
-  } 
-  ))
-  setTableData(tempPropertyData)
-}
+    setoptionData({ option: "" });
+  };
+  // function onDelete(key: any) {
+  //   console.log("hello");
+  //   debugger;
+  //   let tempPropertyData = tableData.filter((el: any) => el.key != key);
+  //   setTableData(tempPropertyData);
+  // }
+  function onActionSelection(rowData: any, actionId: any) {
+    debugger;
+    if (actionId == "delete") {
+      let count = true;
+      let tempPropertyData: any[] = [];
+      tableData.map((el: any) => {
+        if (count && el.option == rowData.option) {
+          count = false;
+        } else {
+          tempPropertyData.push(el);
+        }
+      });
+      setTableData(tempPropertyData);
+    }
   }
-  return(
-     <>
-     <form onSubmit={handleSubmit}>
-        <div className=" row mt-3" >
+  
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className=" row mt-3">
           <div className="col-md-5  mb-2">
             <RdsInput
-              label="New Option"
+              label="Option"
               placeholder=""
               inputType="text"
               onChange={(e: any) => {
@@ -79,15 +151,15 @@ if(actionId == 'delete'){
               value={optionData.option}
             ></RdsInput>
           </div>
-         
+
           <div className="col-md-3 " style={style}>
             <RdsButton
-              label="Add New"
+              label="Add"
               colorVariant="primary"
               block={true}
-              icon={'plus'}
-              iconHeight={'10px'}
-              iconWidth={'10px'}
+              icon={"plus"}
+              iconHeight={"10px"}
+              iconWidth={"10px"}
               onClick={handleAddItem}
               tooltipTitle={""}
               type="submit"
@@ -99,7 +171,7 @@ if(actionId == 'delete'){
             tableHeaders={tableHeaders}
             tableData={tableData}
             pagination={false}
-            actions={actions}
+          
             onActionSelection={onActionSelection}
           ></RdsCompDatatable>
         </div>
@@ -128,8 +200,7 @@ if(actionId == 'delete'){
         </div>
       </form>
     </>
-     
-  )
-}
+  );
+};
 
 export default RdsCompPollsOption;
