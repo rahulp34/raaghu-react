@@ -191,8 +191,8 @@ const Roles = (props: RdsPageRolesProps) => {
   };
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <h4>Roles </h4>
+      <div className="d-flex">
+        <div className="flex-grow-1"></div>
         <div className="d-flex justify-content-end">
           <RdsButton
             icon="plus"
@@ -286,10 +286,46 @@ const Roles = (props: RdsPageRolesProps) => {
                 </div>
               </div>
             </div>
-            <div
+
+            <div className="footer-buttons my-2">
+                      <div className="row">
+                        <div className="col-md-12 d-flex">
+                          <div className="flex-grow-1"></div>
+                          <div>
+                            <RdsButton
+                              label="Cancel"
+                              type="button"
+                              colorVariant="primary"
+                              size="small"
+                              databsdismiss="offcanvas"
+                              isOutline={true}
+                            ></RdsButton>
+                          </div>
+                          <div>
+                            <RdsButton
+                              label="Save"
+                              type="button"
+                              size="small"
+                              // isDisabled={formValid}
+                              class="ms-2"
+                              colorVariant="primary"
+                              databsdismiss="offcanvas"
+                              databstoggle="offcanvas"
+                              databstarget="#newRole"
+                              onClick={handlerAddRole}
+                            ></RdsButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+            {/* <div
               className="d-flex"
               style={{ position: "absolute", bottom: "2%" }}
-            >
+            > <div className="flex-grow-1"></div>
               <div className="me-3">
                 <RdsButton
                   type={"button"}
@@ -311,7 +347,7 @@ const Roles = (props: RdsPageRolesProps) => {
                 databstoggle="offcanvas"
                 databstarget="#newRole"
               ></RdsButton>
-            </div>
+            </div> */}
           </div>
         </RdsOffcanvas>
         <RdsOffcanvas
