@@ -103,5 +103,11 @@ export const PortConfig = {
   },
   "blogs": {
     "port": "8032"
+  },
+  "comments": {
+    "port": "8033"
+  },
+  "tags": {
+    "port": "8034"
   }
 }

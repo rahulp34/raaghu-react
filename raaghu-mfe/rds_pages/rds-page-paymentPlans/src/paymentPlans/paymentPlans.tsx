@@ -15,16 +15,13 @@ const PaymentPlans = () => {
     { displayName: "External Id", key: "externalId", datatype: "text", dataLength: 30, required: true, sortable: false }
   ];
 
+  // Use States ================
   const [actions, setActions] = useState([
     { id: "edit", displayName: "Edit", offId: "paymentPlans" },
     { id: "delete", displayName: "Delete", modalId: "delete" },
     { id: "manageGatewayPlans", displayName: "Manage Gateway Plans", modalId: "manageGatewayPlans" },
   ]);
-
-  // Use States ================
-  const [plansTableData, setPlansTableData] = useState([
-    { name: 'Test Plan' }
-  ]);
+  const [plansTableData, setPlansTableData] = useState([]);
   const [gatewayTableData, setGatewayTableData] = useState([]);
   const [canvasTitle, setCanvasTitle] = useState('Create New Payment Plans');
   const [paymentPlansObj, setPaymentPlansObj] = useState({ id: '', name: '', concurrencyStamp: '' });

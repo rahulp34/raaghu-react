@@ -172,3 +172,11 @@ declare module "Blogs/Blogs" {
 	const BlogsComponent : React.ComponentType;
 	export default BlogsComponent;
 }
+declare module "Comments/Comments" {
+	const CommentsComponent : React.ComponentType;
+	export default CommentsComponent;
+}
+declare module "Tags/Tags" {
+	const TagsComponent : React.ComponentType;
+	export default TagsComponent;
+}
