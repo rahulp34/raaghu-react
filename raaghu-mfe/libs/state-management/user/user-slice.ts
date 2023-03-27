@@ -3,7 +3,6 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { result } from "lodash-es";
 import { ServiceProxy } from "../../shared/service-proxy";
 
 
@@ -27,8 +26,7 @@ export const UserInitialState: UserState = {
   organizationUnit:null,
   error: "",
   permission:null,
-  editorganizationUnit:[]
-
+  editorganizationUnit:null
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -37,9 +35,8 @@ const proxy = new ServiceProxy();
 
 export const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
-  async () => {
-    return await proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
-      console.log(result);
+  () => {
+    return proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
         return result;
     })
   }
@@ -156,7 +153,6 @@ const userSlice = createSlice({
     });
 
     builder.addCase(fetchUsers.fulfilled,(state, action: PayloadAction<any>) => {
-      
         state.loading = false;
         state.users = action.payload;
         state.error = "";

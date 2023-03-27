@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as XLSX from "xlsx";
 import { filter as _filter, forEach as _forEach } from "lodash-es";
 
 import {
@@ -40,7 +39,6 @@ import {
 import { useTranslation } from "react-i18next";
 
 const Users = () => {
-  const { t } = useTranslation();
 
   const tempRolesData = [
     { isChecked: false, name: "select all" },
@@ -106,7 +104,6 @@ const Users = () => {
   const dispatch = useAppDispatch();
 
   const data = useAppSelector((state) => state.persistedReducer.user);
-  // const userRoles = useAppSelector((state) => state.persistedReducer.user)
   const [userId, setUserId] = useState("");
   const [userRolesData, setUseRolesData] = useState<any>();
   const [editRolesData, setEditRoleData]= useState<any>();
@@ -121,7 +118,7 @@ const Users = () => {
     password: "",
   });
   const [userPermission, setUserPermission] = useState<any>([]);
-  const [tableData, setTableData] = useState<any[]>([ ]);
+  const [tableData, setTableData] = useState<any[]>([]);
 
   const tableHeaders = [
     {
@@ -150,36 +147,36 @@ const Users = () => {
     },
     {
       displayName: "Email Address",
-      key: "emaiAddress",
+      key: "emailAddress",
       datatype: "text",
       dataLength: 30,
       required: true,
       sortable: true,
     },
-    {
-      displayName: "Email Confirm",
-      key: "emailConfirm",
-      datatype: "badge",
-      dataLength: 5,
-      required: true,
-      sortable: true,
-    },
-    {
-      displayName: "Status",
-      key: "status",
-      datatype: "badge",
-      dataLength: 20,
-      required: true,
-      sortable: true,
-    },
-    {
-      displayName: "Creation Time",
-      key: "creationTime",
-      datatype: "text",
-      dataLength: 30,
-      required: true,
-      sortable: true,
-    },
+    // {
+    //   displayName: "Email Confirm",
+    //   key: "emailConfirm",
+    //   datatype: "badge",
+    //   dataLength: 5,
+    //   required: true,
+    //   sortable: true,
+    // },
+    // {
+    //   displayName: "Status",
+    //   key: "status",
+    //   datatype: "badge",
+    //   dataLength: 20,
+    //   required: true,
+    //   sortable: true,
+    // },
+    // {
+    //   displayName: "Creation Time",
+    //   key: "creationTime",
+    //   datatype: "text",
+    //   dataLength: 30,
+    //   required: true,
+    //   sortable: true,
+    // },
   ];
 
   const actions = [
@@ -238,26 +235,24 @@ const Users = () => {
     dispatch(updatePermission(permissions) as any);
   }
 
-  function handleRoleNamesData(data: any) {
+  function handleRoleNamesData(event: any) {
     let rolesNames: any[] = [];
-    
-    data.forEach((element: any) => {
+    event.forEach((element: any) => {
       if (element.isChecked) rolesNames.push(element.name);
     });
     setRoleNames(rolesNames);
   }
 
-  function handleOrganizationUnit(data: any, selected:boolean) {
-    const orgData=orgUnitIds.includes(data.data.id)
-
+  function handleOrganizationUnit(event: any, selected:boolean) {
+    const orgData=orgUnitIds.includes(event.data.id)
     let temporgUnit = orgUnitIds.filter((element: any) => {
-      if(element != data.data.id){
+      if(element != event.data.id){
         return element;
       }
   });
 
     if(!orgData){
-      temporgUnit.push(data.data.id)
+      temporgUnit.push(event.data.id)
     }
     setOrgUnitIds(temporgUnit);
   }
@@ -267,8 +262,8 @@ const Users = () => {
     setSelectedPermissionListData(permissionsData);
   }
 
-  const onActionSelection = (rowData: any, actionId: any) => {
-    
+  const onActionSelection = (rowData: any, actionId: any) => { 
+
     setPermissionKeyName(rowData.id);
     setUserId(rowData.id); 
     dispatch(fetchEditUser(String(rowData.id)) as any);
@@ -285,30 +280,30 @@ const Users = () => {
     console.log(event);
   }
 
-  const exportToExcel = () => {
-    // create an empty excel workbook
-    const wb = XLSX.utils.book_new();
+  // const exportToExcel = () => {
+  //   // create an empty excel workbook
+  //   const wb = XLSX.utils.book_new();
 
-    // create the headers and data arrays
-    const headers = tableHeaders.map((header) => header.displayName);
-    type DataRow = { [key: string]: any };
-    const data = tableData.map((row: any) => {
-      let dataRow: DataRow = {};
-      tableHeaders.forEach((header) => {
-        dataRow[header.displayName] = row[header.key];
-      });
-      return dataRow;
-    });
+  //   // create the headers and data arrays
+  //   const headers = tableHeaders.map((header) => header.displayName);
+  //   type DataRow = { [key: string]: any };
+  //   const data = tableData.map((row: any) => {
+  //     let dataRow: DataRow = {};
+  //     tableHeaders.forEach((header) => {
+  //       dataRow[header.displayName] = row[header.key];
+  //     });
+  //     return dataRow;
+  //   });
 
-    // create a worksheet and add the headers and data
-    const ws = XLSX.utils.json_to_sheet([headers, ...data]);
+  //   // create a worksheet and add the headers and data
+  //   const ws = XLSX.utils.json_to_sheet([headers, ...data]);
 
-    // add the worksheet to the workbook
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+  //   // add the worksheet to the workbook
+  //   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
 
-    // write the workbook to a file
-    XLSX.writeFile(wb, "data.xlsx");
-  };
+  //   // write the workbook to a file
+  //   XLSX.writeFile(wb, "data.xlsx");
+  // };
 
   function getUserData(data: any) {
     setGetUserData(data);
@@ -346,7 +341,7 @@ const Users = () => {
 
  }
   function updateUserData(data: any) {
-    
+
     let updateData:any = {}
     if(getUser.name){
        updateData = { ...getUser, roleNames: roleNames, organizationUnitIds:orgUnitIds };
@@ -371,12 +366,10 @@ const Users = () => {
     dispatch(fetchUsers() as any);
     dispatch(fetchOrganizationUnits() as any);
     dispatch(fetchRoles() as any);
-    //dispatch(fetchEditUser("d58fa786-41a6-b110-d3e4-3a0922833270") as any)
   }, [dispatch]);
 
   useEffect(() => {
     let tempRoleData: any[] = [];
-    
     if (data.roles){
       data.roles.items.map((el: any) => {
         const data3 = {
@@ -385,15 +378,16 @@ const Users = () => {
         };
         tempRoleData.push(data3);
       });
-    setUseRolesData(tempRoleData);
     }
+    setUseRolesData(tempRoleData);
+ 
   }, [data.roles]);
 
   useEffect(()=>{
+    let editRolesUserData:any[] = [];
     if(data.editUserRoles){
-      let editRolesUserData:any[] = [];
       if(userRolesData){
-      userRolesData.map((el: any) => {
+        userRolesData.map((el: any) => {
         let isChecked = false;
         data.editUserRoles.items.forEach((item:any)=>{
           if(item.name == el.name){
@@ -406,10 +400,10 @@ const Users = () => {
         };
         editRolesUserData.push(data1);
       });
+      }
     }
-      console.log(editRolesUserData)
-      setEditRoleData(editRolesUserData);
-  }
+    setEditRoleData(editRolesUserData);
+
 
 
   },[data.editUserRoles]) 
@@ -433,7 +427,7 @@ const Users = () => {
   } 
 
   useEffect(()=>{
-    if(data.editorganizationUnit?.length){
+    if(data.editorganizationUnit){
       let tempEditOrgData:any[] = recursionFunction(organizationUnit,data.editorganizationUnit)
       setEditOrganizationUnit(tempEditOrgData)
       console.log(tempEditOrgData)
@@ -459,28 +453,29 @@ const Users = () => {
   }, [data.permission]);
 
   useEffect(() => {
-    if (data.users && data.users.items.length ) {
+    if (data.users) {
       let tempTableData: any[] = [];
       data.users.items.map((item: any) => {
+        let rolesNames:string = "";
+        item.roleNames.map((res:any)=>{
+          rolesNames = rolesNames+`${res} `;
+        })
         const data = {
           id: item.id,
           userName: item.userName,
           name: item.name,
-          roles: item.roleNames,
-          emaiAddress: item.email,
-          emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
-          status: { badgeColorVariant: "success", content: "Active" },
-          creationTime: "01/04/2023, 09:20:51 AM",
+          roles: rolesNames,
+          emailAddress: item.email,
+          // emailConfirm: { badgeColorVariant: "primary", content: "Yes" },
+          // status: { badgeColorVariant: "success", content: "Active" },
+          // creationTime: "01/04/2023, 09:20:51 AM",
         };
         tempTableData.push(data);
       });
       setTableData(tempTableData);
     }
   }, [data.users]);
-  function abc(...prop: any[]) {
-    console.log(prop);
-    return prop;
-  }
+  
 
   useEffect(() => {
     let tempOrgData: any[] = [];
@@ -520,7 +515,6 @@ const Users = () => {
 
   useEffect(() => {
     if (data.editUser) {
-      
       setUserData(data.editUser);
     }
   }, [data.editUser]);
