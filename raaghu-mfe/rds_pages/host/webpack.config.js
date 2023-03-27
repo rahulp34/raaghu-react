@@ -140,7 +140,9 @@ module.exports = (env, argv) => {
           Polls: mfeConfigJSON["polls"].url,
           UrlForwarding: mfeConfigJSON["urlForwarding"].url,
           PaymentPlans: mfeConfigJSON["paymentPlans"].url,
-          Blogs: mfeConfigJSON["blogs"].url
+          Blogs: mfeConfigJSON["blogs"].url,
+          Comments: mfeConfigJSON["comments"].url,
+          Tags: mfeConfigJSON["tags"].url
         },
         shared: {
           ...devdeps,

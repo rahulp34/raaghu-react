@@ -214,6 +214,20 @@ const MainMenu = [
             "path": "/url-forwarding",
             "subTitle": "Blogs, Posts, Articles",
           },
+          {
+            "key": "7-0-3",
+            "label": "Comments",
+            "icon": "question_chat",
+            "path": "/comments",
+            "subTitle": "Comments",
+          },
+              {
+              "key": "7-0-4",
+              "label": "Tags",
+              "icon": "tag",
+              "path": "/tags",
+              "subTitle": "tags",
+            },
       ]
   }
 ]
