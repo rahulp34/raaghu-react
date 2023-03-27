@@ -19,39 +19,46 @@ import * as menus from "../../../libs/main-menu/index"
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import {
-  DashboardCompo,
-  LoginCompo,
-  ForgotPasswordCompo,
-  TenantCompo,
-  EditionCompo,
-  SettingsCompo,
-  UsersCompo,
-  AuditlogsCompo,
-  RolesCompo,
-  OrganizationUnitsCompo,
-  LanguageCompo,
-  LanguageTextCompo,
-  DynamicPropertyCompo,
-  IconListCompo,
-  ClaimTypesCompo,
-  ApplicationsCompo,
-  TextTemplateCompo,
-  ApiScopeCompo,
-  ScopeCompo,
-  IdentityResourcesCompo,
-  SecurityLogsCompo,
-  ChatsCompo,
-  FileManagementCompo,
-  FormsCompo,
-  BloggerCompo,
-  ClientCompo,
-  PollsCompo,
-  UrlForwardingCompo,
-  PaymentPlansCompo,
-  BlogsCompo,
-  ApiResourcesCompo
-}  from './PageComponent'
+import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
+const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
+const LoginCompo = React.lazy(() => import("Login/Login"));
+const ForgotPasswordCompo = React.lazy(
+  () => import("ForgotPassword/ForgotPassword")
+);
+const TenantCompo = React.lazy(() => import("Tenant/Tenant"));
+const EditionCompo = React.lazy(() => import("Edition/Edition"));
+const SettingsCompo = React.lazy(() => import("Settings/Settings"));
+const UsersCompo = React.lazy(() => import("Users/Users"));
+
+const AuditlogsCompo = React.lazy(() => import("AuditLogs/AuditLogs"));
+const RolesCompo = React.lazy(() => import("Roles/Roles"));
+const OrganizationUnitsCompo = React.lazy(
+  () => import("OrganizationUnits/OrganizationUnits")
+);
+const LanguageCompo = React.lazy(() => import("Language/Language"));
+const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
+const DynamicPropertyCompo = React.lazy(
+  () => import("DynamicProperties/DynamicProperties")
+);
+const IconListCompo = React.lazy(() => import("IconList/IconList"));
+const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
+const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
+const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
+const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
+const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
+
+const ScopeCompo = React.lazy(() => import("Scope/Scope"));
+const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
+const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
+const ChatsCompo = React.lazy(() => import("Chats/Chats"));
+const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
+const FormsCompo = React.lazy(() => import("Forms/Forms"));
+const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
+const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
+const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
+const ClientCompo = React.lazy(() => import("Client/Client"));
+const PollsCompo = React.lazy(()=> import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -375,6 +382,8 @@ const Main = (props: MainProps) => {
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/formsView/:id" element={<FormsViewCompo />} />
+                    <Route  path="/formsPreview/:id" element={<FormsPreviewCompo />} />
                     <Route path="/polls" element={<PollsCompo />} />
                     
 

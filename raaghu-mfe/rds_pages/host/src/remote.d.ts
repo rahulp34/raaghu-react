@@ -135,6 +135,14 @@ declare module "Forms/Forms" {
 	const FormsComponent : React.ComponentType;
 	export default FormsComponent;
 }
+declare module "FormsView/FormsView" {
+	const FormsViewCompo : React.ComponentType;
+	export default FormsViewCompo;
+}
+declare module "FormsPreview/FormsPreview" {
+	const FormsPreviewCompo : React.ComponentType;
+	export default FormsPreviewCompo;
+}
 declare module "Blogger/Blogger" {
 	const BloggerComponent : React.ComponentType;f
 	export default BloggerComponent;

@@ -17,5 +17,3 @@
     //       localStorage.removeItem('storedPermissions');
     //       this.router.navigateByUrl('/login');   
 }
- 
-
