@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "raaghu-react-elements";
 import "./rds-comp-login.scss";
-import { Navigate, NavigationType } from "react-router-dom";
+import { Navigate, NavigationType, useNavigate } from "react-router-dom";
 export interface RdsCompLoginProps {
   onLogin: (email: string, password: string) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
@@ -11,7 +11,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   props: RdsCompLoginProps
 ) => {
   const [email, setEmail] = useState("");
-
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const [checkbox,setcheckbox]=useState(false)
@@ -64,6 +64,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
     setIsForgotPasswordClicked(true);
+    navigate("/forgot-password");
     props.onForgotPassword(isForgotPasswordClicked);
     console.log(isForgotPasswordClicked);
   };

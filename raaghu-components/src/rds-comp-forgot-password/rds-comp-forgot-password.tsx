@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { RdsInput, RdsButton } from "raaghu-react-elements";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 export interface RdsForgotPasswordProps {
 	onForgotPassword?: (email?: string) => void;
 }
 
 const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 	const [error1, setError1] = useState("");
-	let showmailsuccess = false;
+	const [showmailsuccess, setShowMailSuccess] = useState(false);
+	const navigate = useNavigate();
+	const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
 
 	const [email, setEmail] = useState("");
 
@@ -32,20 +35,28 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 		event.preventDefault();
 		props.onForgotPassword != undefined && props.onForgotPassword(email);
 		setEmail("");
+		setShowMailSuccess(true); // Update showmailsuccess to true
 	};
+
+	const resendHandler: any = () => {
+		navigate("/forgot-password");
+		setShowMailSuccess(false); // reset showmailsuccess to false
+	};
+
+
 	return (
 		<div>
 			<div className="text-center">
 				{!showmailsuccess && (
 					<div>
-						<h2 className="pb-3">
+						<h2 className="pb-4">
 							<b>Forgot Password? </b>
 						</h2>
 						<div>
 							<form onSubmit={onSubmit}>
 								<div className="form-group mb-3 text-start">
 									<RdsInput
-										required={true}
+										required={false}
 										label="Enter email to receive reset password link"
 										onChange={emailhandleChange}
 										size="default"
@@ -56,7 +67,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 										<div className="col-md-12">
 											<div>
 												Remember Password ?
-												<a href={"/"} className="text-decoration-none">
+												<a href={"/"} className="link-primary text-decoration-none px-1">
 													Login
 												</a>
 											</div>
@@ -94,9 +105,14 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 						<br />
 						<div>
 							"Didn't receive the link" ?
-							<a href={"/Dashboard"} className="text-decoration-none">
+							<a
+								className="link-primary text-decoration-none px-1"
+								href="javascript:void(0)"
+								onClick={resendHandler}
+							>
 								Resend
 							</a>
+
 						</div>
 					</div>
 				)}
