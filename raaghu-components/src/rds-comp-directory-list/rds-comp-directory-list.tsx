@@ -217,7 +217,7 @@ export const RdsCompDirectoryList = ({
   };
 
   const renderDirectoryItem = (item: DirectoryItem) => (
-    <div key={item.id}>
+    <div key={item.name}>
       <div className="d-flex align-items-center ">
         {item.hasChildren && (
           <button

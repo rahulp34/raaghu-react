@@ -28,6 +28,7 @@ const[id,setId]=useState("")
     {
       name: "All",
       path: "/all",
+      parentId: null,
       id: null,
       hasChildren:false,
       children: [
@@ -115,6 +116,22 @@ const[id,setId]=useState("")
       size: "1MB",
     },
   ]);
+
+  useEffect(()=>{
+    
+    if (file.directoryDescriptor?.items.length){
+      
+      const tempdata=file.directoryDescriptor.items.map((item:any)=>{
+        return {
+          id:item.id,
+          name:item.name,
+          isDirectory:item.isDirectory,
+          size:item.size,
+        }
+      });
+      setTableData(tempdata);
+    }
+  },[file.directoryDescriptor])
 
   const tableData1 = [
     {
@@ -229,23 +246,18 @@ const[id,setId]=useState("")
 
   useEffect(()=>{
     dispatch(fetchSubDirectory(undefined) as any);
+    dispatch(fetchDirectoryDescriptor(undefined) as any)
+
   },[dispatch])
 
   useEffect(()=>{
     if(file.subDirectories){
-     debugger
+      let parsedDirectory = JSON.parse(JSON.stringify(directories));
       file.subDirectories.items.map((el:any)=>{
-        let tempData = recursiveFunctionAddData(directories, el);
+        let tempData = recursiveFunctionAddData(parsedDirectory, el);
         setDirectories(tempData);
       })
-      const tempData=file.subDirectories.items.map((item:any)=>{
-        return{
-          name:item.name,
-          id:item.id
-        }
-      })
-      setData(tempData);
-      setId(tempData);
+   
     }
 
   },[file.subDirectories])
@@ -260,19 +272,22 @@ extraProperties:{}};
   
  const[folderId, setFolderId] = useState<string>("");
   function setPathValue(event:any){
+    let id = undefined;
+    if(event && event.id){
+      id = event.id;
+    }
+    else{
+      id = undefined;
+    }
     setFolderId(event.id);
-    dispatch(fetchDirectoryDescriptor(event.id) as any)
-    dispatch(fetchSubDirectory(event.id) as any); 
-    
+    dispatch(fetchDirectoryDescriptor(id) as any);
+    dispatch(fetchSubDirectory(id) as any); 
+    // dispatch(fetchSubDirectory(event.name) as any);
   }
   
   function AddChildren(event:any){
     dispatch
   }
-
-  // const addDataHandler(()=>){
-  //   dispatch(fetchDirectoryDescriptor)
-  // }
   const addDataHandler=()=>{
     dTo.name = name;
     dTo.parentId = folderId;
