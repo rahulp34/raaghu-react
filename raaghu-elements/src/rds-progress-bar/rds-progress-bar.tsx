@@ -20,7 +20,7 @@ const RdsProgressBar = (props: RdsProgressBarProps) => {
       {props.role == "single" && (
         <>
           <div
-            className="progress"
+            className="progress p-0"
             style={{ height: props.height, maxWidth: `${props.width}` }}
           >
             <div
