@@ -62,14 +62,14 @@ const RdsSideNavChild = ({
           <div className="ms-3">
             <div className="text-center mb-3">
 
-              <RdsIcon
+              {/* <RdsIcon
                 name="grid_square"
                 height="23px"
                 width="23px"
                 stroke={true}
                 fill={false}
                 onClick={onCollapse}
-              ></RdsIcon>
+              ></RdsIcon> */}
             </div>
             {/* <div className="darkTheme text-center">
               <a

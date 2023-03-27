@@ -48,7 +48,7 @@ export const fetchUsers = createAsyncThunk(
 export const fetchOrganizationUnits = createAsyncThunk(
   "user/fetchOrganizationUnit",
   () => {
-    return proxy.organizationUnitsGET(undefined,undefined,0,1000).then((result:any)=>{
+    return proxy.organizationUnitsGET(undefined,'id DESC',0,1000).then((result:any)=>{
       return result;
     })
   }

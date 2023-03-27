@@ -144,7 +144,7 @@ const Forms = () => {
             canvasTitle={"NEW FORM"}
             onclick={offCanvasHandler}
             placement="end"
-            offcanvaswidth={650}
+            
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton

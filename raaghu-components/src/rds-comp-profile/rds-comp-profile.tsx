@@ -18,7 +18,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
   const [activetab, setAcivetab] = useState("");
   const profilePic =
     props.profilePic ||
-    "https://www.freeiconspng.com/thumbs/profile-icon-png/account-profile-user-icon--icon-search-engine-10.png";
+    "./assets/profile-picture-circle.svg";
   const onSetNavTabHandler = (id: any) => {
     setAcivetab(id);
     props.currNavTabId != undefined && props.currNavTabId(id);
@@ -34,8 +34,20 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             height="120px"
             className="profil_image_Class"
           ></img>
-          <span className="pencilIconClass cursor-pointer">
-            <RdsIcon
+          <span className="cursor-pointer position-absolute bottom-0" style={{right:'2px'}}>
+          <RdsButton    
+              class="btn btn-icon btn-sm position-relative rounded-circle bg-white"
+              icon="pencil"
+              isOutline={true}           
+              size= "small"
+              roundedButton={true}                        
+              iconFill={false}
+              iconStroke={true}
+              iconColorVariant="light"
+              iconHeight="16px"
+              iconWidth="16px" 
+              type={"button"}/>
+            {/* <RdsIcon             
               name="pencil"
               fill={false}
               stroke={true}
@@ -43,7 +55,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
               height="18px"
               colorVariant="dark"
               onClick={props.onEditProfile}
-            ></RdsIcon>
+            ></RdsIcon> */}
           </span>
         </div>
         <p className="fw-bold text-center m-0">{props.userName}</p>
@@ -99,8 +111,8 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           ))}
         </div>
       </div>
-
-      <section className="justify-content-center d-flex align-items-center ">
+      
+      <div className="mt-5 d-flex justify-content-center">
         <RdsButton
           label="Logout"
           colorVariant="primary"
@@ -110,9 +122,10 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           isOutline={true}
           onClick={props.onLogout}
         />
-      </section>
+      </div>
     </>
   );
 };
 
 export default RdsCompProfile;
+ 

@@ -267,7 +267,7 @@ const ClaimType = () => {
               canvasTitle={t("New Claim Type")}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={550}
+              
               offcanvasbutton={
                 <div className="d-flex justify-content-end">
                   <RdsButton
@@ -317,7 +317,7 @@ const ClaimType = () => {
             onclick={offCanvasHandler}
             placement="end"
             offId="dynamic-edit-off"
-            offcanvaswidth={550}
+            
             backDrop={false}
             scrolling={false}
             preventEscapeKey={false}

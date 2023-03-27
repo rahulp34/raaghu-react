@@ -19,6 +19,7 @@ import * as menus from "../../../libs/main-menu/index"
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
+import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
 const ForgotPasswordCompo = React.lazy(
@@ -376,6 +377,7 @@ const Main = (props: MainProps) => {
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/apiResources" element={<ApiResourcesCompo />} />
+                    <Route path="/blogs" element={<BlogsCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
@@ -388,6 +390,7 @@ const Main = (props: MainProps) => {
                     <Route path="/blogger" element={<BloggerCompo />} />
                     <Route path="/client" element={<ClientCompo />} />
                     <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
+                    <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                   </Suspense>

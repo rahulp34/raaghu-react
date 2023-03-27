@@ -255,7 +255,7 @@ const Auditpayload = ()=>{
         <div className="grid mx-4 mb-4">
           <div className="">
             <RdsDatePicker
-              // DatePickerLabel="Select Date"
+              DatePickerLabel="Select Date"
               onDatePicker={onDatePicker}
               type="advanced"
             ></RdsDatePicker>
@@ -406,7 +406,7 @@ const Auditpayload = ()=>{
         placement="end"
         canvasTitle="Detail"
         onclick={offCanvasHandler}
-        offcanvaswidth={650}
+        
         className="mx-1"
       >
         <RdsNavtabs

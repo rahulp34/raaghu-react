@@ -7,7 +7,7 @@ export interface RdsOffcanvasProps {
   preventEscapeKey: boolean;
   offId: any;
   canvasTitle: string;
-  offcanvaswidth: number;
+  offcanvaswidth?: number;
   onShow?: React.EventHandler<HTMLAllCollection | any>;
   onClose?: React.EventHandler<HTMLAllCollection | any>;
   buttonname?: string;
@@ -25,9 +25,10 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
       ? " offCanvas_Class"
       : " offCanvasClass"
   }`;
+  const offcanvasCustomWidth = props.offcanvaswidth || 650;
   const Width = `${
     props.placement == "start" || props.placement == "end"
-      ? `${props.offcanvaswidth}px`
+      ? `${offcanvasCustomWidth}px`
       : "100% "
   }`;
   let isCanvasTitle =props.canvasTitle !== "" && props.canvasTitle !== undefined;

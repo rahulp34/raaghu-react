@@ -35,7 +35,7 @@ const proxy = new ServiceProxy();
 //effects and actions
 export const fetchForms = createAsyncThunk("forms/fetchForms", () => {
   return proxy
-    .formsGET(undefined, undefined, 0, 30, undefined)
+    .formsGET(undefined, 'id DESC', 0, 30, undefined)
     .then((result: any) => {
       return result;
     });

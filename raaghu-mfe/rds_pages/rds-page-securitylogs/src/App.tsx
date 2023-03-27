@@ -17,7 +17,7 @@ import { format } from 'date-fns'
 const SecurityLogsPage = () => {
   const { t } = useTranslation();
   const data = useAppSelector((state) => state.persistedReducer.securityLogs);
-  const [securityLogsData, setData] = useState<any>([]);  
+  const [securityLogsData, setData] = useState<any>([]);
 
   const tableHeadersForExcel = [
     "Time",
@@ -73,7 +73,7 @@ const SecurityLogsPage = () => {
       sortable: true,
     },
   ];
-  
+
 
   const [selectFilterValue, setSelectFilterValue] = useState({
     applicationName: "",
@@ -85,7 +85,7 @@ const SecurityLogsPage = () => {
     id: "",
     userId: "",
   });
-  
+
 
   function downloadcsv() {
     const dataToDownload = securityLogsData.map((item: any) => {
@@ -116,82 +116,83 @@ const SecurityLogsPage = () => {
 
   const dispatch = useAppDispatch();
 
-  const securityLogs= ()=>{
+  const securityLogs = () => {
     const securityLogsParamsData = {
-      action : selectFilterValue.action,
-      identity:selectFilterValue.identity,
-      browserInfo:selectFilterValue.browserInfo,
-      userName:selectFilterValue.userName,
-      applicationName:selectFilterValue.applicationName,
-      clientIpAddress:selectFilterValue.clientIpAddress,
+      action: selectFilterValue.action,
+      identity: selectFilterValue.identity,
+      browserInfo: selectFilterValue.browserInfo,
+      userName: selectFilterValue.userName,
+      applicationName: selectFilterValue.applicationName,
+      clientIpAddress: selectFilterValue.clientIpAddress,
 
     }
-    dispatch(fetchSecurityLogs(securityLogsParamsData) as any);    
-    if(data.securityLogs){ 
+    dispatch(fetchSecurityLogs(securityLogsParamsData) as any);
+    if (data.securityLogs) {
       const tableDataShow = data.securityLogs.items.map((item: any) => {
-      const date = new Date(item.creationTime);     
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
-      let currentTime = date.toLocaleString("en-IN", {
+        const date = new Date(item.creationTime);
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let currentTime = date.toLocaleString("en-IN", {
           hour: "numeric",
           minute: "numeric",
           second: "numeric",
-          hour12: true,          
+          hour12: true,
         });
-       let currentDate = `${year}/${month}/${day}`+'\n'+`${currentTime}`;
-      return {
-        id: item?.id,
-        creationTime: currentDate,        
-        action: item?.action,
-        clientIpAddress: item?.clientIpAddress,
-        browserInfo: item?.browserInfo,
-        applicationName: item?.applicationName,
-        identity: item?.identity,
-        userName: item?.userName,
-      };      
-    }, []);
-    setData(tableDataShow);
-  }
+        let currentDate = `${year}/${month}/${day}` + '\n' + `${currentTime}`;
+        return {
+          id: item?.id,
+          creationTime: currentDate,
+          action: item?.action,
+          clientIpAddress: item?.clientIpAddress,
+          browserInfo: item?.browserInfo,
+          applicationName: item?.applicationName,
+          identity: item?.identity,
+          userName: item?.userName,
+        };
+      }, []);
+      setData(tableDataShow);
+    }
   }
 
   useEffect(() => {
     securityLogs();
   }, []);
 
-const onActionFilter=(event:any)=>{
-  setSelectFilterValue({
-    ...selectFilterValue,
-    action: event?.target?.value,          
-  });
-  return securityLogsData;
-}
-const onIdentityFilter=(event:any)=>{
-  setSelectFilterValue({
-    ...selectFilterValue,
-    identity: event?.target?.value,    
-  });   
-  return securityLogsData;
-}
-
-const onApplicationNameFilter=(event:any)=>{
-  setSelectFilterValue({
-    ...selectFilterValue,
-    applicationName: event?.target?.value,    
-  });   
-}
-
-const onUserNameFilter=(event:any)=>{
-  setSelectFilterValue({
-    ...selectFilterValue,
-    applicationName: event?.target?.value,    
-  });  
-  return securityLogsData; 
-}
-
-  function onDatePicker(start: any, end: any): void {
-    throw new Error("Function not implemented.");
+  const onActionFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      action: event?.target?.value,
+    });
+    return securityLogsData;
   }
+  const onIdentityFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      identity: event?.target?.value,
+    });
+    return securityLogsData;
+  }
+
+  const onApplicationNameFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      applicationName: event?.target?.value,
+    });
+  }
+
+  const onUserNameFilter = (event: any) => {
+    setSelectFilterValue({
+      ...selectFilterValue,
+      applicationName: event?.target?.value,
+    });
+    return securityLogsData;
+  }
+
+  // function onDatePicker(start: any, end: any): void {
+  //   throw new Error("Function not implemented.");
+  // }
+  const onDatePicker = () => {};
 
   return (
     <Suspense>
@@ -231,37 +232,37 @@ const onUserNameFilter=(event:any)=>{
             <div className="card-body">
               <div className="row">
                 <div className="col-3">
-                 <RdsDatePicker    
-                          // DatePickerLabel="Select Date"  
-                            onDatePicker={onDatePicker}  
-                            type="advanced"    
-                ></RdsDatePicker>
+                  <RdsDatePicker
+                    DatePickerLabel="Select Date"  
+                    onDatePicker={onDatePicker}
+                    type="advanced"
+                  ></RdsDatePicker>
                 </div>
                 <div className="col-3">
                   <RdsInput
                     label="Application Name"
-                    placeholder="Application Name"                   
-                  onChange={onApplicationNameFilter}></RdsInput>                  
+                    placeholder="Application Name"
+                    onChange={onApplicationNameFilter}></RdsInput>
                 </div>
                 <div className="col-3">
                   <RdsInput
                     label="Identity"
-                    placeholder="Identity"                    
+                    placeholder="Identity"
                     onChange={onIdentityFilter}
                   ></RdsInput>
                 </div>
                 <div className="col-3">
-                  <RdsInput label="Username" 
-                  placeholder="Username"
-                  onChange={onUserNameFilter}></RdsInput>
+                  <RdsInput label="Username"
+                    placeholder="Username"
+                    onChange={onUserNameFilter}></RdsInput>
                 </div>
               </div>
               <div className="row">
                 <div className="col-3">
                   <RdsInput
                     label="Actions"
-                    placeholder="Actions" 
-                    onChange={onActionFilter}                  
+                    placeholder="Actions"
+                    onChange={onActionFilter}
                   ></RdsInput>
                 </div>
                 <div className="col-3 d-flex mt-auto align-items-center ">
@@ -289,7 +290,7 @@ const onUserNameFilter=(event:any)=>{
             <div className="row">
               <div className="col-md-12">
                 <SecurityLogs
-                securityLogsTableHeaders={tableHeaders}
+                  securityLogsTableHeaders={tableHeaders}
                   securityLogsTableData={securityLogsData}
                   securityLogsTablePagination={true}
                   securityLogsTableRecords={10}

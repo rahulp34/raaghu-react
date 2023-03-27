@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
-import RdsCompDirectoryList  from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
+import RdsCompDirectoryList, { DirectoryItem }  from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
 import RdsCompFileUploader from "../../../../../raaghu-components/src/rds-comp-fileUploader/rds-comp-fileUploader";
 import {
   RdsBreadcrumb,
@@ -10,7 +10,7 @@ import {
   RdsOffcanvas,
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
-import { fetchSubDirectory, useAppDispatch } from "../../../../libs/public.api";
+import { fetchDirectoryDescriptor, fetchEditDirectory, fetchSubDirectory, saveDirectoryDescriptor, updateDirectoryDescriptor, useAppDispatch } from "../../../../libs/public.api";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
 
 const FileManagement = () => {
@@ -20,6 +20,9 @@ const file = useAppSelector((state) => state.persistedReducer.fileManagement);
 
 const[path,setPath]=useState("");
 const [name,setName]=useState("")
+const[data,setData]= useState("")
+const[id,setId]=useState("")
+
 
   const [directories, setDirectories] = useState<any[]>([
     {
@@ -31,19 +34,52 @@ const [name,setName]=useState("")
       ],
     },
   ])
+
   
-  const items = [
+  // const items = [
+  //   {
+  //     label: "Home",
+  //     id: 1,
+  //     disabled: false,
+  //     icon: "home",
+  //     iconFill: false,
+  //     iconstroke: true,
+  //     iconWidth: "15px",
+  //     iconHeight: "15px",
+  //     iconColor: "primary",
+  //     active: false,
+  //   },
+  // ];
+
+  const items: DirectoryItem[] = [
     {
-      label: "Home",
-      id: 1,
-      disabled: false,
-      icon: "home",
-      iconFill: false,
-      iconstroke: true,
-      iconWidth: "15px",
-      iconHeight: "15px",
-      iconColor: "primary",
-      active: false,
+      id: "1",
+      name: "Parent 1",
+      hasChildren: true,
+      children: [
+        {
+          id: "2",
+          name: "Child 1.1",
+          hasChildren: true,
+          children: [
+            {
+              id: "3",
+              name: "Grandchild 1.1.1",
+              hasChildren: false,
+            },
+          ],
+        },
+        {
+          id: "4",
+          name: "Child 1.2",
+          hasChildren: false,
+        },
+      ],
+    },
+    {
+      id: "5",
+      name: "Parent 2",
+      hasChildren: false,
     },
   ];
 
@@ -165,18 +201,27 @@ const [name,setName]=useState("")
     return directories.map((el:any)=>{
       if(data.parentId == el.id){
         let flag = 0;
-        el.children.map((e:any)=>{
+        el.children?.map((e:any)=>{
           if(e.id == data.id){
             flag = 1;
           }
         })
         if(!flag){
           el.hasChildren = true;
-          el.children.push(data);
+          if(el.children){
+            el.children.push(data)
+          }
+          else{
+            el['children'] = [data];
+          }
+          
         }
         return el;
       }
       else{
+        if(el.children){
+          el.children = recursiveFunctionAddData(el.children, data)
+        }
         return el;
       }
     })
@@ -187,42 +232,55 @@ const [name,setName]=useState("")
   },[dispatch])
 
   useEffect(()=>{
-    debugger
     if(file.subDirectories){
+     debugger
       file.subDirectories.items.map((el:any)=>{
         let tempData = recursiveFunctionAddData(directories, el);
-        debugger
         setDirectories(tempData);
       })
+      const tempData=file.subDirectories.items.map((item:any)=>{
+        return{
+          name:item.name,
+          id:item.id
+        }
+      })
+      setData(tempData);
+      setId(tempData);
     }
 
   },[file.subDirectories])
-
-  // useEffect(() => {
-  //   if(path=="All"){
-  //     setTableData(tableData1)
-  //   }
-  //   if(path=="Parent 1"){
-  //     setTableData(tableData2)
-  //   }
-  // console.log(path,"bredCrumbs Path");
-  // },[path])
-
+  const dTo : {
+    name: string,
+    parentId:any,
+    extraProperties:any
+  } = 
+  { name:"",
+    parentId:null,
+extraProperties:{}};
+  
+ const[folderId, setFolderId] = useState<string>("");
   function setPathValue(event:any){
-    dispatch(fetchSubDirectory(event.id) as any);
-
+    setFolderId(event.id);
+    dispatch(fetchDirectoryDescriptor(event.id) as any)
+    dispatch(fetchSubDirectory(event.id) as any); 
     
   }
+  
+  function AddChildren(event:any){
+    dispatch
+  }
 
-  // useEffect(() => {
-  //   if (path == "All") {
-  //     setTableData(tableData1);
-  //   }
-  //   if (path == "Parent 1") {
-  //     setTableData(tableData2);
-  //   }
-  //   console.log(path, "bredCrumbs Path");
-  // }, [path]);
+  // const addDataHandler(()=>){
+  //   dispatch(fetchDirectoryDescriptor)
+  // }
+  const addDataHandler=()=>{
+    dTo.name = name;
+    dTo.parentId = folderId;
+    dispatch(saveDirectoryDescriptor(dTo) as any).then((res:any)=>{  
+    })
+    setName("");
+  }
+
 
   function setValue(value: string) {
     throw new Error("Function not implemented.");
@@ -234,7 +292,7 @@ const [name,setName]=useState("")
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
-          offcanvaswidth={650}
+          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -290,7 +348,7 @@ const [name,setName]=useState("")
                   isDisabled={name === ""}
                   colorVariant="primary"
                   class="me-2"
-                  //onClick={addDataHandler}
+                  onClick={addDataHandler}
                 ></RdsButton>
               </div>
             </div>
@@ -300,7 +358,7 @@ const [name,setName]=useState("")
         <RdsOffcanvas
           canvasTitle={"Upload Files"}
           placement="end"
-          offcanvaswidth={650}
+          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -325,15 +383,16 @@ const [name,setName]=useState("")
           }
          
         >
-          <RdsCompFileUploader></RdsCompFileUploader>
+          <RdsCompFileUploader ></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
         <div className="row">
           <div className="col-md-3 pt-3">
             <RdsCompDirectoryList
-              directory={directories}
+              items={directories}
               path={setPathValue}
+              selectedItemId={directories[0].id}
             ></RdsCompDirectoryList>
           </div>
 
@@ -380,3 +439,16 @@ export default FileManagement;
 </div>
 </div> */
 }
+
+
+  // useEffect(() => {
+  //   if(path=="All"){
+  //     setTableData(tableData1)
+  //   }
+  //   if(path=="Parent 1"){
+  //     setTableData(tableData2)
+  //   }
+  // console.log(path,"bredCrumbs Path");
+  // },[path])
+
+  
