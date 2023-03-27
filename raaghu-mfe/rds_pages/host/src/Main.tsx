@@ -52,6 +52,8 @@ const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
 const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
+const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
+const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
 const PollsCompo = React.lazy(()=> import("Polls/Polls"));
@@ -378,6 +380,8 @@ const Main = (props: MainProps) => {
                     
                     <Route path="/fileManagement" element={<FileManagementCompo />} />
                     <Route path="/forms" element={<FormsCompo />} />
+                    <Route path="/formsView/:id" element={<FormsViewCompo />} />
+                    <Route  path="/formsPreview/:id" element={<FormsPreviewCompo />} />
                     <Route path="/polls" element={<PollsCompo />} />
                     
 

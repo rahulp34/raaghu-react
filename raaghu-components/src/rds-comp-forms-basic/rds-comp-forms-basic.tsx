@@ -28,9 +28,8 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 	},[props.basicInfo])
 	return (
 		<>
-		<form onSubmit={props.handleNewFormData}>
-				
-				{basicFormData.id ? (
+		<form>
+				{basicFormData?.id ? (
 				<>
 				<div className="row">
 					<div className="col-4">

@@ -131,6 +131,8 @@ module.exports = (env, argv) => {
           Chats: mfeConfigJSON["chats"].url,
           FileManagement: mfeConfigJSON["fileManagement"].url,
           Forms : mfeConfigJSON["forms"].url,
+          FormsView : mfeConfigJSON["formsView"].url,
+          FormsPreview : mfeConfigJSON["formsPreview"].url,
           Blogger: mfeConfigJSON["blogger"].url,
           IdentityResources: mfeConfigJSON["identityResources"].url,
           Client: mfeConfigJSON["client"].url,

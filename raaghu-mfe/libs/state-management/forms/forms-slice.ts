@@ -4,7 +4,7 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import { ServiceProxy, UpdatePermissionsDto } from "../../shared/service-proxy";
+import { CreateQuestionDto, ServiceProxy, UpdatePermissionsDto } from "../../shared/service-proxy";
 
 type InitialStateForms = {
   loading: boolean;
@@ -73,11 +73,15 @@ export const getForms = createAsyncThunk("forms/getForms", (id: string) => {
 
 //Forms Questions
 
-export const SaveformsQuestions = createAsyncThunk(
+export const 
+SaveformsQuestions = createAsyncThunk(
   "forms/SaveformsQuestions",
-  (data: any) => {
+  (data:any) => {
+    debugger
+     let temp :CreateQuestionDto = data.body;
+    //  temp.index = data.body.index
     return proxy
-      .questionsPOST(data.id, data.body, undefined)
+      .questionsPOST(data.id, temp, undefined)
       .then((result: any) => {
         return result;
       });
@@ -246,19 +250,19 @@ const formsSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
     
-    builder.addCase(getAllFormsQuestions.pending, (state) => {
+    builder.addCase(getFormsQuestionsForEdit.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      getAllFormsQuestions.fulfilled,
+      getFormsQuestionsForEdit.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.formQuestion = action.payload;
       }
     );
 
-    builder.addCase(getAllFormsQuestions.rejected, (state, action) => {
+    builder.addCase(getFormsQuestionsForEdit.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });

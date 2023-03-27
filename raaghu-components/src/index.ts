@@ -46,7 +46,6 @@ export {default as RdsCompFeatureManagement} from './rds-comp-feature-management
 export {default as RdsCompUserRoles} from './rds-comp-user-roles/rds-comp-user-roles'
 export {default as RdsDirectoryList} from './rds-comp-directory-list/rds-comp-directory-list'
 export {default as RdsCompFormsBasic} from './rds-comp-forms-basic/rds-comp-forms-basic'
-export {default as RdsCompFormsQuestion} from './rds-comp-forms-question/rds-comp-forms-question'
 export {default as RdsCompFormsQuestions} from './rds-comp-forms-question/rds-comp-forms-questions'
 export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp-forms-setting'
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
