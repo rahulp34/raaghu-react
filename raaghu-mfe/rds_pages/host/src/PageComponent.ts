@@ -40,9 +40,9 @@ const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"
 const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
-
 const PersonalDataCompo = React.lazy(() => import("PersonalData/PersonalData"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
+const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
  export {
   DashboardCompo,
   LoginCompo,
@@ -75,7 +75,8 @@ const ElementsCompo = React.lazy(() => import("Elements/Elements"));
   PaymentPlansCompo,
   BlogsCompo,
   ApiResourcesCompo,
-
 PersonalDataCompo,
-ElementsCompo
+ElementsCompo,
+MyAccountCompo
 };
+

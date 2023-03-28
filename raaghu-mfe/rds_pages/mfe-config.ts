@@ -121,5 +121,8 @@ export const MfeConfig = {
   },
   "personalData": {
     "url": "personalData@http://localhost:8102/remoteEntry.js"
+  },
+  "myAccount": {
+    "url": "myAccount@http://localhost:8101/remoteEntry.js"
   }
 }

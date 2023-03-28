@@ -23,7 +23,7 @@ import * as menus from "../../../libs/main-menu/index";
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
+import { BlogsCompo, MyAccountCompo, PaymentPlansCompo } from "./PageComponent";
 import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
@@ -438,6 +438,7 @@ const Main = (props: MainProps) => {
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
+                      <Route path="/my-account" element={<MyAccountCompo/>}/>
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                     </Routes>
                   </Suspense>
