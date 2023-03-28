@@ -74,7 +74,7 @@ const RdsCompChangePassword= (props:any)  => {
                   onChange={(e:any) => setConfirmNewPassword(e.target.value)}               
          ></RdsInput>
       </div> 
-      <div className="col-12 col-md-12">
+      <div className="col-12 col-md-12 footer-buttons">
          <RdsButton
             label = 'Save'
             colorVariant ='primary'                 

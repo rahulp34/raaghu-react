@@ -86,7 +86,7 @@ import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from
                                 checked={twoFactorData}
                             ></RdsCheckbox>  
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-3 footer-buttons">
                         <RdsButton
                             label = 'Save'
                             colorVariant ='primary'                 

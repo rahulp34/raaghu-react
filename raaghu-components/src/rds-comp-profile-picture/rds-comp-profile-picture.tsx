@@ -28,7 +28,7 @@ const RdsCompProfilePicture = (props: any) => {
 
   return (
     <form>
-      <div className="row py-4">
+      <div className="row py-4 mt-4">
         <div className="col-4">
           <img
             src="./assets/edit-pic.png"
@@ -41,7 +41,7 @@ const RdsCompProfilePicture = (props: any) => {
         <div className="col-4 my-3">
           <RdsRadioButton displayType="Default" itemList={profileList} />
         </div>
-        <div className="col-12 col-md-12 mt-5">
+        <div className="col-12 col-md-12 footer-buttons">
           <RdsButton
             label="Save Changes"
             colorVariant="primary"
