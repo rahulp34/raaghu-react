@@ -3,115 +3,92 @@ import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectL
 
 export interface RdsCompFormsSettingProps {
 	formsSettingData?: any;
-	handleFormSettings: React.EventHandler<any>;
-
+	handleFormSettings?: any;
 }
 
 const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 
-	const [formsSetting, setFormsSetting] = useState(props.formsSettingData)
+	const [formsSetting, setFormsSetting] = useState(props.formsSettingData);
 
 	useEffect(() => {
 		setFormsSetting(props.formsSettingData)
 	}, [props.formsSettingData]);
 
 	function setResponses(value: any) {
-		setFormsSetting({ ...formsSetting, responses: value })
+		setFormsSetting({ ...formsSetting, isAcceptingResponses: value })
+		props.handleFormSettings({ ...formsSetting, isAcceptingResponses: value });
 	}
 	function setEmail(value: any) {
-		setFormsSetting({ ...formsSetting, email: value })
+		setFormsSetting({ ...formsSetting, isCollectingEmail: value })
+		props.handleFormSettings({ ...formsSetting, isCollectingEmail: value });
 	}
 	function setQuiz(value: any) {
-		setFormsSetting({ ...formsSetting, quiz: value })
+		setFormsSetting({ ...formsSetting, isQuiz: value })
+		props.handleFormSettings({ ...formsSetting, isQuiz: value });
 	}
 	function setLogin(value: any) {
-		setFormsSetting({ ...formsSetting, login: value })
+		setFormsSetting({ ...formsSetting, requiresLogin: value });
+		props.handleFormSettings({ ...formsSetting, requiresLogin: value });
 	}
 	function setHasLimit(value: any) {
-		setFormsSetting({ ...formsSetting, hasLimit: value })
+		setFormsSetting({ ...formsSetting, hasLimitOneResponsePerUser: value });
+		props.handleFormSettings({ ...formsSetting, hasLimitOneResponsePerUser: value });
 	}
 	function setEdit(value: any) {
-		setFormsSetting({ ...formsSetting, edit: value })
+		setFormsSetting({ ...formsSetting, canEditResponse: value });
+		props.handleFormSettings({ ...formsSetting, canEditResponse: value });
 	}
-
-
-	const handleFormSettings = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-
-	};
 	return (
 		<>
-			<form onSubmit={handleFormSettings}>
+			<form onSubmit={props.handleFormSettings}>
 				<div className="row">
-					<div className="row py-3 border-bottom">
-						<RdsLabel label="Form is" class="fw-bold"></RdsLabel>
+					<div className="row">
+						{/* <RdsLabel label="Form is" class="fw-bold"></RdsLabel> */}
 						<RdsCheckbox
 							classes="py-2"
 							label="Is accepting responses"
 							onChange={e => { setResponses(e.target.checked) }}
-							checked={formsSetting.responses}
+							checked={formsSetting.isAcceptingResponses}
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
 							label="Is collecting email"
 							onChange={e => { setEmail(e.target.checked) }}
-							checked={formsSetting.email}
+							checked={formsSetting.isCollectingEmail}
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
 							label="Is a quiz"
 							onChange={e => { setQuiz(e.target.checked) }}
-							checked={formsSetting.quiz}
+							checked={formsSetting.isQuiz}
 						></RdsCheckbox>
 					</div>
-					<div className="row py-3 border-bottom">
-						<RdsLabel label="Form" class="fw-bold"></RdsLabel>
+					<div className="row">
+						{/* <RdsLabel label="Form" class="fw-bold"></RdsLabel> */}
 						<RdsCheckbox
 							classes="py-2"
 							label="Requires login"
 							onChange={e => { setLogin(e.target.checked) }}
-							checked={formsSetting.login}
+							checked={formsSetting.requiresLogin}
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
 							label="Has limit one response per user"
 							onChange={e => { setHasLimit(e.target.checked) }}
-							checked={formsSetting.hasLimit}
-							isDisabled={formsSetting.login}
+							checked={formsSetting.hasLimitOneResponsePerUser}
+							isDisabled={formsSetting.requiresLogin}
 						></RdsCheckbox>
 					</div>
-					<div className="row py-3">
-						<RdsLabel label="Respondents" class="fw-bold"></RdsLabel>
+					<div className="row ">
+						{/* <RdsLabel label="Respondents" class="fw-bold"></RdsLabel> */}
 						<RdsCheckbox
 							classes="py-2"
 							label="Can edit after submit"
 							onChange={e => { setEdit(e.target.checked) }}
-							checked={formsSetting.edit}
+							checked={formsSetting.canEditResponse}
 						></RdsCheckbox>
 					</div>
-					<div className="pt-3" >
-						<RdsButton
-							class="me-2"
-							type={"button"}
-							label="cancel"
-							size="small"
-							isOutline={true}
-							colorVariant="primary"
-							databsdismiss="offcanvas"
-							databstoggle="offcanvas"
-							databstarget="#formSetting"
-						></RdsButton>
-						<RdsButton
-							class="me-2"
-							label="SAVE"
-							type="submit"
-							isOutline={false}
-							colorVariant="primary"
-							databsdismiss="offcanvas"
-							size="small"
-							onClick={() => { props.handleFormSettings(formsSetting) }}
-						></RdsButton>
-					</div>
+
 				</div>
 
 			</form>

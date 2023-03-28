@@ -130,9 +130,9 @@ module.exports = (env, argv) => {
           SecurityLogs: mfeConfigJSON["securityLogs"].url,
           Chats: mfeConfigJSON["chats"].url,
           FileManagement: mfeConfigJSON["fileManagement"].url,
-          Forms : mfeConfigJSON["forms"].url,
-          FormsView : mfeConfigJSON["formsView"].url,
-          FormsPreview : mfeConfigJSON["formsPreview"].url,
+          Forms: mfeConfigJSON["forms"].url,
+          FormsView: mfeConfigJSON["formsView"].url,
+          FormsPreview: mfeConfigJSON["formsPreview"].url,
           Blogger: mfeConfigJSON["blogger"].url,
           IdentityResources: mfeConfigJSON["identityResources"].url,
           Client: mfeConfigJSON["client"].url,
@@ -140,7 +140,7 @@ module.exports = (env, argv) => {
           Polls: mfeConfigJSON["polls"].url,
           UrlForwarding: mfeConfigJSON["urlForwarding"].url,
           PaymentPlans: mfeConfigJSON["paymentPlans"].url,
-          Blogs: mfeConfigJSON["blogs"].url
+          Blogs: mfeConfigJSON["blogs"].url,
         },
         shared: {
           ...devdeps,
@@ -150,8 +150,8 @@ module.exports = (env, argv) => {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
-          }
-        }
+          },
+        },
       }),
       // new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
       new HtmlWebpackPlugin({

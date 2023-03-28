@@ -19,7 +19,7 @@ export interface RdsCompEditionProps {
   features: any;
 }
 const RdsCompEdition = (props: RdsCompEditionProps) => {
-  const offCanvasHandler = () => {};
+  const offCanvasHandler = () => { };
 
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
@@ -73,6 +73,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
           <div className="p-3">
             <div className="d-flex gap-2">
               <RdsOffcanvas
+                offcanvaswidth={650}
                 canvasTitle="UPDATE EDITION"
                 onclick={offCanvasHandler}
                 placement="end"
@@ -161,7 +162,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
 
               <RdsCompAlertPopup
                 alertID={`targetId`}
-                // onSuccess={() => deleteConfirmation(node.data.id)}
+              // onSuccess={() => deleteConfirmation(node.data.id)}
               ></RdsCompAlertPopup>
               <div>
                 <a

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+  import React, { useState } from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
 // import RdsCompPermissionTree from "../rds-comp-permission-tree/rds-comp-permission-tree";
@@ -224,6 +224,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             ></RdsButton>
 
             <RdsOffcanvas
+            offcanvaswidth={650}
               offcanvasbutton={
                 <RdsButton
                   onClick={props.onFilterByPermissions}
@@ -262,6 +263,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             </RdsOffcanvas>
 
             <RdsOffcanvas
+            offcanvaswidth={650}
               offcanvasbutton={
                 <RdsButton
                   onClick={onNewRole}
@@ -389,6 +391,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
         ></RdsCompDatatable>
         </div>
         <RdsOffcanvas
+        offcanvaswidth={650}
           placement={"end"}
           backDrop={false}
           scrolling={false}

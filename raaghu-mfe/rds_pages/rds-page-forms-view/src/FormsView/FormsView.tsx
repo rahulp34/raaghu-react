@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
- import {
+import { Link, useLocation } from "react-router-dom";
+import {
   RdsButton,
   RdsNavtabs,
   RdsOffcanvas,
@@ -13,7 +13,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions } from "../../../../libs/state-management/forms/forms-slice";
+import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions, getFormsSettings, getForms, updateFormsSettings } from "../../../../libs/state-management/forms/forms-slice";
 import { useNavigate } from "react-router-dom";
 const FormsView = (props: any) => {
   const navigate = useNavigate();
@@ -24,6 +24,10 @@ const FormsView = (props: any) => {
 
   useEffect(() => {
     dispatch(fetchForms() as any);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFormsSettings(props.id) as any);
   }, [dispatch]);
 
   const [basicEditFormData1, setbasicEditFormData] = useState<any>();
@@ -37,13 +41,33 @@ const FormsView = (props: any) => {
   function getQuestionsEditDataFromQuestionComp(data: any) {
     setTempSaveQuestionsData(data);
   }
-
+  const [formSettingData, setFormSettingData] = useState({
+  });
+  const [updatedFormSettingData, setUpdatedFormSettingData] = useState({
+  })
   useEffect(() => {
     if (forms.formQuestionEdit) {
-
       setTempQuestionsData(forms.formQuestionEdit);
     }
   }, [forms.formQuestionEdit]);
+
+  useEffect(() => {
+    if (forms.getSettings) {
+      setFormSettingData(forms.getSettings);
+    }
+  }, [forms.getSettings]);
+
+  function handleGetFormSettings(_data: any) {
+    setUpdatedFormSettingData(_data);
+
+  }
+  function handleFormSettings() {
+    const data = {
+      id: props.id,
+      body: updatedFormSettingData
+    }
+    dispatch(updateFormsSettings(data) as any)
+  }
 
   useEffect(() => {
     if (forms.editForms) {
@@ -68,7 +92,9 @@ const FormsView = (props: any) => {
               id: res.id,
               body: { ...res, formId: props.id }
             }
-            dispatch(updateFormsQuestions(data) as any)
+            dispatch(updateFormsQuestions(data) as any).then((res: any) => {
+              dispatch(getAll2FormsQuestions(props.id) as any);
+            })
           }
 
         }
@@ -78,10 +104,14 @@ const FormsView = (props: any) => {
             body: { ...res, formId: props.id }
           }
 
-          dispatch(SaveformsQuestions(data) as any)
+          dispatch(SaveformsQuestions(data) as any).then((res: any) => {
+            dispatch(getForms(props.id) as any);
+          })
         }
+
       })
-      dispatch(getAll2FormsQuestions(props.id) as any);
+    }).then((res: any) => {
+      dispatch(getForms(props.id) as any);
     })
   }
 
@@ -91,22 +121,12 @@ const FormsView = (props: any) => {
     })
 
   }
- function handlePreview(id:any){
-  // navigate(`/formsPreview`);
-  // const url = `/formsPreview/${id}`;
-  // window.open(url, "_blank");
-  debugger
-  // const location = useLocation();
-  // const query = location.search(id);
-     navigate(`/formsPreview/${id}`);
-
-
- }
+  function handlePreview(id: any) {
+    navigate(`/formsPreview/${id}`);
+  }
   const offCanvasHandler = () => { };
 
-  const [formSettingData, setFormSettingData] = useState({
-    responses: '', email: '', quiz: '', login: '', hasLimit: '', edit: ''
-  });
+
   const navtabsEditItems = [
     { label: "Questions", tablink: "#nav-home", id: 0 },
     { label: "Responses", tablink: "#nav-responses", id: 1 },
@@ -119,7 +139,9 @@ const FormsView = (props: any) => {
       <div className="row">
 
         <div className="col d-flex justify-content-end mb-3">
-        <RdsButton
+          {/* <Link to={`/formsPreview/${props.id}`} target="_blank">Preview Page</Link> */}
+
+          <RdsButton
             type={"button"}
             size="small"
             label="PREVIEW"
@@ -135,7 +157,7 @@ const FormsView = (props: any) => {
             class="me-2"
           ></RdsButton>
           <RdsOffcanvas
-            canvasTitle={"VIEW FORM"}
+            canvasTitle={"FORM SETTINGS"}
             onclick={offCanvasHandler}
             placement="end"
             offcanvaswidth={650}
@@ -145,7 +167,7 @@ const FormsView = (props: any) => {
                   type={"button"}
                   size="small"
                   label="Settings"
-                  icon="plus"
+                  icon="gear"
                   iconColorVariant="light"
                   iconFill={false}
                   iconStroke={true}
@@ -163,11 +185,38 @@ const FormsView = (props: any) => {
           >
             <>
               <div className="row ps-4">
-                <RdsCompFormsSettings handleFormSettings={() => { }} formsSettingData={formSettingData}></RdsCompFormsSettings>
+                <RdsCompFormsSettings handleFormSettings={(data: any) => handleGetFormSettings(data)} formsSettingData={formSettingData} ></RdsCompFormsSettings>
+                <div className="footer-buttons my-2">
+                  <div className="row">
+                    <div className="col-md-12 d-flex">
+                      <div>
+                        <RdsButton
+                          label="Cancel"
+                          type="button"
+                          colorVariant="primary"
+                          size="small"
+                          databsdismiss="offcanvas"
+                          isOutline={true}
+                        ></RdsButton>
+                      </div>
+                      <div>
+                        <RdsButton
+                          label="Save"
+                          type="button"
+                          size="small"
+                          class="ms-2"
+                          colorVariant="primary"
+                          databsdismiss="offcanvas"
+                          onClick={() => handleFormSettings()}
+                        ></RdsButton>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </>
           </RdsOffcanvas>
-         
+
         </div>
 
         <div className="col-md-12 mb-3">
@@ -211,7 +260,7 @@ const FormsView = (props: any) => {
               )}
               {activeNavTabEditId == 1 && showNextTab === false && (
                 <>
-                  <RdsCompFormsSettings handleFormSettings={() => { }} formsSettingData={formSettingData}></RdsCompFormsSettings>
+                  <RdsCompFormsSettings formsSettingData={formSettingData}></RdsCompFormsSettings>
                 </>)}
             </div>
 
