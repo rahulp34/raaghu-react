@@ -40,7 +40,6 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
         props.handleQuestions(tempquestions);
     }
     function setSelectedOption(index: number, value: any) {
-
         let number = parseInt(value);
         const tempquestions = questions.map((res: any) => {
             return res;

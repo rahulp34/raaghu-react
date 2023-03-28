@@ -192,3 +192,11 @@ declare module "MyAccount/MyAccount" {
 	const MyAccountComponent: React.ComponentType;
 	export default MyAccountComponent;
 }
+declare module "Comments/Comments" {
+	const CommentsComponent : React.ComponentType;
+	export default CommentsComponent;
+}
+declare module "Tags/Tags" {
+	const TagsComponent : React.ComponentType;
+	export default TagsComponent;
+}

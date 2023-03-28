@@ -70,5 +70,3 @@ export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-
 export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';
 
 
-
-
