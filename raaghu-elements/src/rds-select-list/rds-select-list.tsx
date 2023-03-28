@@ -9,6 +9,7 @@ export interface RdsSelectProps{
     selectItems: any[];
     selectedValue?:any;
     id?:string;
+    placeholder?: string;
     classes?:string, 
     children?:React.ReactNode
     someCallback?:any;
@@ -25,7 +26,6 @@ const RdsSelectList = (props: RdsSelectProps) => {
         }
       }
       props.someCallback(value);
-      console.log("value",value)
     }else{
       props.onSelectListChange(e.target.value);
     }
@@ -34,10 +34,10 @@ const RdsSelectList = (props: RdsSelectProps) => {
   const customSize = `${Size === "lg" ? "form-select form-select-lg" : Size === "sm" ? "form-select form-select-sm" : "form-select"}`
   let Disabled = props.isDisabled || false;
   return (
-    <Fragment>      <select key={props.id}  value={props.selectedValue} className={`${customSize} ${props.classes}`}
-       disabled={Disabled} multiple={props.isMultiple} aria-label="select example"
+    <Fragment>      <select key={props.id}  value={props.selectedValue} className={`${customSize} ${props.classes}` + ' ' + `${props.selectedValue === '' && 'text-muted' }` }
+       disabled={Disabled} multiple={props.isMultiple} aria-label="select example" placeholder={props.placeholder}
        onChange={handleChange}>{}
-        <option  hidden className="text-muted">{props.label}</option>        {props.selectItems.map((selectItem,i) => (
+        <option  hidden className="text-muted">{props.placeholder}</option>        {props.selectItems.map((selectItem,i) => (
           <option value={selectItem.value}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>        ))}
       </select>    </Fragment>  );
 };

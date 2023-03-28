@@ -109,5 +109,11 @@ export const MfeConfig = {
   },
   "blogs": {
     "url": "blogs@http://localhost:8032/remoteEntry.js"
+  },
+  "comments": {
+    "url": "comments@http://localhost:8033/remoteEntry.js"
+  },
+  "tags": {
+    "url": "tags@http://localhost:8034/remoteEntry.js"
   }
 }
