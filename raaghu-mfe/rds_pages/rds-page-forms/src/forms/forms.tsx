@@ -56,6 +56,16 @@ const Forms = () => {
   //   }
   // }, [forms.editForms]);
 
+  const handleDrop = (event:any) => {
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text/plain');
+    // Do something with the dropped row id
+  };
+
+  const handleDragOver = (event:any) => {
+    event.preventDefault();
+  };
+
 
   const offCanvasHandler = () => { };
   const tableHeaders = [
@@ -212,6 +222,7 @@ const Forms = () => {
                 recordsPerPage={5}
                 recordsPerPageSelectListOption={true}
                 onActionSelection={scopeSelection}
+                // onDrop={handleDrop} onDragOver={handleDragOver}
               ></RdsCompDatatable>
             </div>
             <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
@@ -222,6 +233,9 @@ const Forms = () => {
 
     </>
   );
-};
+
+
+}
+
 
 export default Forms;
