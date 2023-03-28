@@ -1,7 +1,11 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, Navigate, Link, useLocation } from "react-router-dom";
+import {
+  Route,
+  useNavigate,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import i18n from "i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../libs/state-management";
 import "./App.scss";
@@ -15,11 +19,12 @@ import {
   RdsCompTopNavigation,
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
-import * as menus from "../../../libs/main-menu/index"
+import * as menus from "../../../libs/main-menu/index";
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
+import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
 const ForgotPasswordCompo = React.lazy(
@@ -51,7 +56,9 @@ const ScopeCompo = React.lazy(() => import("Scope/Scope"));
 const IdentityResourcesCompo = React.lazy(() => import("IdentityResources/IdentityResources"));
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
-const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
+const FileManagementCompo = React.lazy(
+  () => import("FileManagement/FileManagement")
+);
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
 const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
@@ -68,9 +75,12 @@ export interface MainProps {
 
 const Main = (props: MainProps) => {
   const [isAuth, setIsAuth] = useState<boolean>();
+  const dataHost = useAppSelector((state) => state.persistedReducer.host);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const[checkingFirstTime, setChecking] = useState(false);
   let accessToken: string | undefined | null =
-    localStorage.getItem("access_token");
+  localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
   console.log("This is the current path ", currentPath);
 
@@ -79,12 +89,11 @@ const Main = (props: MainProps) => {
   );
 
   console.log("auth", isAuth);
-  // const isLoggedIn = localStorage.getItem('access_token');
   const location = useLocation();
 
   useEffect(() => {
     const loginCredentials = localStorage.getItem("persist:root");
-    if (loginCredentials != null) {
+    if (loginCredentials != null){
       let credentials = JSON.parse(loginCredentials);
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
@@ -104,6 +113,23 @@ const Main = (props: MainProps) => {
       navigate("/login");
     }
   }, [localStorage.getItem("access_token")]);
+
+  useEffect(() => {
+    dispatch(fetchApplicationConfig() as any);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (checkingFirstTime&&
+      dataHost.configuration &&
+      !dataHost.configuration.currentUser.isAuthenticated
+    ) {
+      navigate("/login");
+    }
+    else{
+      setChecking(true);
+      navigate(location.pathname)
+    }
+  }, [dataHost.configuration]);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
@@ -172,20 +198,17 @@ const Main = (props: MainProps) => {
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
 
   const onClickHandler = (e: any) => {
-
     setCurrentLanguage(e.target.getAttribute("data-name"));
   };
-  const dispatch = useAppDispatch();
-  const Data = useAppSelector((state: any) => state.persistedReducer.localization) as any;
+  const Data = useAppSelector(
+    (state: any) => state.persistedReducer.localization
+  ) as any;
 
   useEffect(() => {
-
     dispatch(fetchLocalization(currentLanguage) as any);
   }, [currentLanguage]);
 
   useEffect(() => {
-
-    console.log(Data.localization)
     i18n.changeLanguage(currentLanguage);
     var data1 = {};
     const translation = Data.localization.resources;
