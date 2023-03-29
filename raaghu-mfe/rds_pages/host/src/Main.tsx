@@ -202,6 +202,22 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     }
   ];
+  const toggleItems = [
+    {
+      label: "Light",
+      val: "light",
+      icon: "sun",
+      iconWidth: "20px",
+      iconHeight: "20px",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+      icon: "moon",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    }
+  ];
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);

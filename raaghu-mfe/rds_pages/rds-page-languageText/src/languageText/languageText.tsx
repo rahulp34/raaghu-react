@@ -288,8 +288,14 @@ const LanguageText = (props: LanguageTextProps) => {
               
             </div>
             </div>
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-            <div className="row mt-3">
+          <div
+            style={{ top: "48px" }}
+            className="card p-2 h-100 border-0 rounded-0 card-full-stretch"
+          >
+            <div className="d-flex mt-3">
+              <h5 className="col-md-9  ps-2 p-2">All Languages</h5>
+            </div>
+            <div className="row">
               <div className="col-md-3">
                 <RdsSelectList
                   label={displaylist.baseCulture}

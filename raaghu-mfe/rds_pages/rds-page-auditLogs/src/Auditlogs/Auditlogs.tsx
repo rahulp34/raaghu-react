@@ -246,7 +246,12 @@ const Auditpayload = ()=>{
 
   return (
     <div className="card p-2 h-100 border-0 rounded-0 vh-100">
-      <div className="mt-3">
+      <div className="row p-4">
+        <h4>
+          <RdsLabel label="Activities" />
+        </h4>
+      </div>
+      <div className="">
         <div className="grid mx-4 mb-4">
           <div className="">
             <RdsDatePicker
