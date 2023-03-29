@@ -41,6 +41,7 @@ const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
 
+const PersonalDataCompo = React.lazy(() => import("PersonalData/PersonalData"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
  export {
   DashboardCompo,
@@ -75,4 +76,6 @@ const ElementsCompo = React.lazy(() => import("Elements/Elements"));
   BlogsCompo,
   ApiResourcesCompo,
 
-ElementsCompo,};
+PersonalDataCompo,
+ElementsCompo
+};

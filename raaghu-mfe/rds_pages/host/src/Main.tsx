@@ -69,6 +69,7 @@ const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"
 const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
+const PersonalDataCompo = React.lazy(()=> import("PersonalData/PersonalData"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -436,7 +437,7 @@ const Main = (props: MainProps) => {
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
-
+                      <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                     </Routes>
                   </Suspense>

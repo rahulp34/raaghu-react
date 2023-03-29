@@ -184,3 +184,7 @@ declare module "Elements/Elements" {
 	const ElementsComponent: React.ComponentType;
 	export default ElementsComponent;
 }
+declare module "PersonalData/PersonalData" {
+	const PersonalDataComponent: React.ComponentType;
+	export default PersonalDataComponent;
+}
