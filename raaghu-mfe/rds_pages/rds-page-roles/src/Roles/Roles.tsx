@@ -191,8 +191,7 @@ const Roles = (props: RdsPageRolesProps) => {
   };
   return (
     <>
-      <div className="d-flex">
-        <div className="flex-grow-1"></div>
+      <div>
         <div className="d-flex justify-content-end">
           <RdsButton
             icon="plus"
