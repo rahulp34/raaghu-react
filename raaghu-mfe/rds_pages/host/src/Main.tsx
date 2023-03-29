@@ -61,6 +61,7 @@ const PollsCompo = React.lazy(()=> import("Polls/Polls"));
 const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
+const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -158,6 +159,22 @@ const Main = (props: MainProps) => {
       iconHeight: "20px",
     },
   ];
+  const toggleItems = [
+    {
+      label: "Light",
+      val: "light",
+      icon: "sun",
+      iconWidth: "20px",
+      iconHeight: "20px",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+      icon: "moon",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    }
+  ];
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus); 
@@ -251,7 +268,7 @@ const Main = (props: MainProps) => {
     setIsAuth(false);
     navigate("/login");
   };
-  let logo = "./assets/raaghu_icon.png";
+  let logo = "./assets/raaghu_logs.png";
   return (
     <Suspense>
       <Routes>
@@ -275,12 +292,14 @@ const Main = (props: MainProps) => {
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
                 languageItems={languageItems}
-                brandName="raaghu"
+                toggleItems={toggleItems}
+                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
                 onLogout={logout}
                 logo={logo}
+                toggleTheme={props.toggleTheme}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={()=>{console.log("Hey Chat Button Clicked!!")}}
@@ -313,6 +332,10 @@ const Main = (props: MainProps) => {
                   <Routes>
                     <Route
                       path="/dashboard"
+                      element={<DashboardCompo />}
+                    ></Route>
+                      <Route
+                      path="/raaghuUi"
                       element={<DashboardCompo />}
                     ></Route>
                     <Route
@@ -395,6 +418,7 @@ const Main = (props: MainProps) => {
                     <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
                     <Route path="/comments" element={<CommentsCompo />} />
                     <Route path="/tags" element={<TagsCompo />} />
+                    <Route path="/elements" element={<ElementsCompo />} />
                     <Route path="/**/*" element={<RdsCompPageNotFound />} />
                   </Routes>
                   </Suspense>

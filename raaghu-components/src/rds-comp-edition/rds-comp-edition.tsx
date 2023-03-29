@@ -76,24 +76,20 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                 canvasTitle="UPDATE EDITION"
                 onclick={offCanvasHandler}
                 placement="end"
-                offcanvasbutton={
-                  <div>
-                    <span className="position-relative btn btn-outline-primary btn-sm btn-icon p-1 rounded-pill">
-                      <RdsIcon
-                        name="pencil"
-                        height="15px"
-                        width="15px"
-                        fill={false}
-                        stroke={true}
-                      />
-                    </span>
-                  </div>
-                }
+                offcanvasbutton={<div>
+                  <span className="position-relative btn btn-outline-primary btn-sm btn-icon p-1 rounded-pill">
+                    <RdsIcon
+                      name="pencil"
+                      height="15px"
+                      width="15px"
+                      fill={false}
+                      stroke={true} />
+                  </span>
+                </div>}
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Edition"}
-              >
+                offId={"Edition"} offcanvaswidth={0}              >
                 <RdsNavtabs
                   navtabsItems={navtabsItems}
                   type="tabs"
