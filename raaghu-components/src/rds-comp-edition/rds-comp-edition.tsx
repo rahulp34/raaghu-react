@@ -90,7 +90,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Edition"} offcanvaswidth={0}              >
+                offId={"Edition"}>
                 <RdsNavtabs
                   navtabsItems={navtabsItems}
                   type="tabs"
