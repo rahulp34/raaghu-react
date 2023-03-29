@@ -70,6 +70,7 @@ const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
 const PersonalDataCompo = React.lazy(()=> import("PersonalData/PersonalData"));
+const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
