@@ -224,17 +224,13 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             ></RdsButton>
 
             <RdsOffcanvas
-            offcanvaswidth={650}
-              offcanvasbutton={
-                <RdsButton
-                  onClick={props.onFilterByPermissions}
-                  class="me-3 btn-sm"
-                  type={"button"}
-                  colorVariant="primary"
-                  isOutline={true}
-                  label="FILTER BY PERMISSIONS"
-                />
-              }
+              offcanvasbutton={<RdsButton
+                onClick={props.onFilterByPermissions}
+                class="me-3 btn-sm"
+                type={"button"}
+                colorVariant="primary"
+                isOutline={true}
+                label="FILTER BY PERMISSIONS" />}
               placement={"end"}
               backDrop={false}
               scrolling={false}
@@ -263,20 +259,16 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             </RdsOffcanvas>
 
             <RdsOffcanvas
-            offcanvaswidth={650}
-              offcanvasbutton={
-                <RdsButton
-                  onClick={onNewRole}
-                  class="btn-sm"
-                  type={"button"}
-                  colorVariant="primary"
-                  label={props.listItems[2].value}
-                  icon={props.listItems[2].icon}
-                  iconHeight={props.listItems[2].iconHeight}
-                  iconWidth={props.listItems[2].iconWidth}
-                  iconColorVariant="light"
-                />
-              }
+              offcanvasbutton={<RdsButton
+                onClick={onNewRole}
+                class="btn-sm"
+                type={"button"}
+                colorVariant="primary"
+                label={props.listItems[2].value}
+                icon={props.listItems[2].icon}
+                iconHeight={props.listItems[2].iconHeight}
+                iconWidth={props.listItems[2].iconWidth}
+                iconColorVariant="light" />}
               placement={"end"}
               backDrop={false}
               scrolling={false}

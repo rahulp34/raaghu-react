@@ -180,3 +180,7 @@ declare module "Tags/Tags" {
 	const TagsComponent : React.ComponentType;
 	export default TagsComponent;
 }
+declare module "Elements/Elements" {
+	const ElementsComponent: React.ComponentType;
+	export default ElementsComponent;
+}

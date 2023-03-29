@@ -66,7 +66,7 @@ export const MfeConfig = {
     "url": "apiScope@http://localhost:8019/remoteEntry.js"
   },
   "scope": {
-      "url": "scope@http://localhost:8099/remoteEntry.js"
+    "url": "scope@http://localhost:8099/remoteEntry.js"
   },
   "identityResources": {
     "url": "identityResources@http://localhost:8098/remoteEntry.js"
@@ -115,5 +115,8 @@ export const MfeConfig = {
   },
   "tags": {
     "url": "tags@http://localhost:8034/remoteEntry.js"
+  },
+  "elements": {
+    "url": "elements@http://localhost:8100/remoteEntry.js"
   }
 }

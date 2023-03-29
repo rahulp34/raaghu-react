@@ -41,7 +41,8 @@ const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
 
-export {
+const ElementsCompo = React.lazy(() => import("Elements/Elements"));
+ export {
   DashboardCompo,
   LoginCompo,
   ForgotPasswordCompo,
@@ -73,4 +74,5 @@ export {
   PaymentPlansCompo,
   BlogsCompo,
   ApiResourcesCompo,
-};
+
+ElementsCompo,};

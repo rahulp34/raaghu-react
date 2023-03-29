@@ -68,6 +68,7 @@ const PollsCompo = React.lazy(() => import("Polls/Polls"));
 const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
 const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
+const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -184,6 +185,22 @@ const Main = (props: MainProps) => {
       iconHeight: "20px",
     },
   ];
+  const toggleItems = [
+    {
+      label: "Light",
+      val: "light",
+      icon: "sun",
+      iconWidth: "20px",
+      iconHeight: "20px",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+      icon: "moon",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    }
+  ];
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
@@ -275,7 +292,7 @@ const Main = (props: MainProps) => {
     setIsAuth(false);
     navigate("/login");
   };
-  let logo = "./assets/raaghu_icon.png";
+  let logo = "./assets/raaghu_logs.png";
   return (
     <Suspense>
       <Routes>
@@ -299,12 +316,14 @@ const Main = (props: MainProps) => {
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
                 languageItems={languageItems}
-                brandName="raaghu"
+                toggleItems={toggleItems}
+                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
                 onLogout={logout}
                 logo={logo}
+                toggleTheme={props.toggleTheme}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => { console.log("Hey Chat Button Clicked!!") }}
@@ -405,20 +424,18 @@ const Main = (props: MainProps) => {
                       <Route path="/apiResources" element={<ApiResourcesCompo />} />
                       <Route path="/blogs" element={<BlogsCompo />} />
                       <Route path="/chats" element={<ChatsCompo />} />
-
                       <Route path="/fileManagement" element={<FileManagementCompo />} />
                       <Route path="/forms" element={<FormsCompo />} />
                       <Route path="/formsView/:id" element={<FormsViewCompo />} />
                       <Route path="/formsPreview/:id" element={<FormsPreviewCompo />} />
                       <Route path="/polls" element={<PollsCompo />} />
-
-
                       <Route path="/blogger" element={<BloggerCompo />} />
                       <Route path="/client" element={<ClientCompo />} />
                       <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
                       <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
+                      <Route path="/elements" element={<ElementsCompo />} />
 
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                     </Routes>

@@ -14,6 +14,13 @@ const MainMenu = [
       "subTitle": "icons",
     },
     {
+      "key": "8",
+      "label": "Elements",
+      "icon": "icons",
+      "path": "/elements",
+      "subTitle": "Elements"
+    },
+    {
       "key": "2",
       "label": "Saas",
       "icon": "pages",
