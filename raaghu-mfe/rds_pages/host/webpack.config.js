@@ -147,16 +147,6 @@ module.exports = (env, argv) => {
           PersonalData: mfeConfigJSON["personalData"].url,
           MyAccount: mfeConfigJSON["myAccount"].url,
         },
-        shared: {
-          ...devdeps,
-          ...deps,
-          react: { singleton: true, eager: true, requiredVersion: deps.react },
-          "react-dom": {
-            singleton: true,
-            eager: true,
-            requiredVersion: deps["react-dom"],
-          },
-        },
       }),
       // new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
       new HtmlWebpackPlugin({

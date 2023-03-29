@@ -440,7 +440,7 @@ const Main = (props: MainProps) => {
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo/>}/>
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                    </Routes>
+                  </Routes>
                   </Suspense>
                 </div>
               </div>
