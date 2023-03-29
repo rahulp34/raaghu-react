@@ -221,7 +221,7 @@ export const RdsCompDirectoryList = ({
       <div className="d-flex align-items-center ">
         {item.hasChildren && (
           <button
-            className="ms-2 me-2 border-0 bg-white"
+            className=" me-2 border-0 bg-white"
             onClick={handleClick(item.id, item.name)}
           >
             <RdsIcon

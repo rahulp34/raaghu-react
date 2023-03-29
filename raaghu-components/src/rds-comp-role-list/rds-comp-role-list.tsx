@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+  import React, { useState } from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
 // import RdsCompPermissionTree from "../rds-comp-permission-tree/rds-comp-permission-tree";
@@ -383,12 +383,13 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
         ></RdsCompDatatable>
         </div>
         <RdsOffcanvas
+        offcanvaswidth={650}
           placement={"end"}
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
           offId={"Edit"}
-          canvasTitle={"Edit"} offcanvaswidth={0}>
+          canvasTitle={"Edit"}>
           <RdsNavtabs
             navtabsItems={[
               {

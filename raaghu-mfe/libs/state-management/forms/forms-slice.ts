@@ -16,6 +16,7 @@ type InitialStateForms = {
   alert: boolean;
   alertMessage: string;
   success: boolean;
+  getSettings:any;
 };
 
 export const InitialStateForms: InitialStateForms = {
@@ -28,6 +29,7 @@ export const InitialStateForms: InitialStateForms = {
   alert: false,
   alertMessage: "",
   success: false,
+  getSettings:null
 };
 
 const proxy = new ServiceProxy();
@@ -134,6 +136,23 @@ export const getAll2FormsQuestions = createAsyncThunk(
     });
   }
 );
+export const updateFormsSettings = createAsyncThunk(
+  "forms/updateFormsSettings",
+  (data: any) => {
+    return proxy.settingsPUT2(data.id, data.body, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+export const getFormsSettings = createAsyncThunk(
+  "forms/getFormsSettings",
+  (id: string) => {
+    return proxy.settingsGET3(id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+
 
 //reducer
 const formsSlice = createSlice({
@@ -320,7 +339,42 @@ const formsSlice = createSlice({
       state.alertMessage = "Something Went Wrong";
       state.success = false;
     });
+ 
+    //settings
+    builder.addCase(getFormsSettings.pending, (state) => {
+      state.loading = true;
+    });
 
+    builder.addCase(getFormsSettings.fulfilled, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.getSettings= action.payload;
+    });
+    builder.addCase(getFormsSettings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Somethingwentwrong";
+    });
+
+    builder.addCase(updateFormsSettings.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+
+    builder.addCase(
+      updateFormsSettings.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.alert = true;
+        state.alertMessage = "Data edited successfully";
+        state.success = true;
+      }
+    );
+    builder.addCase(updateFormsSettings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
+    });
   },
 });
 

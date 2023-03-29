@@ -40,23 +40,23 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
         props.handleQuestions(tempquestions);
     }
     function setSelectedOption(index: number, value: any) {
-        
+
         let number = parseInt(value);
         const tempquestions = questions.map((res: any) => {
             return res;
         });
         tempquestions[index].isEdit = true;
         tempquestions[index].questionType = number;
-        if(!tempquestions[index].choices.length && number > 2){
-            tempquestions[index].choices.push({value:'Option'}) 
+        if (!tempquestions[index].choices.length && number > 2) {
+            tempquestions[index].choices.push({ value: 'Option' })
         }
-           
+
         if (tempquestions[index].questionType === 5) {
-            const otherIndex = tempquestions[index].choices.findIndex((choice:any )=> choice.value === "Other...");
+            const otherIndex = tempquestions[index].choices.findIndex((choice: any) => choice.value === "Other...");
             if (otherIndex !== -1) {
-                tempquestions[index].choices.splice(otherIndex, 1); 
+                tempquestions[index].choices.splice(otherIndex, 1);
             }
-    }
+        }
         setQuestions(tempquestions);
         props.handleQuestions(tempquestions);
     }
@@ -65,10 +65,10 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
     function setOption(index: number, choiceIndex: number, value: any) {
         const tempquestions = questions.map((res: any) => {
             return res;
-        }); 
+        });
         tempquestions[index].isEdit = true;
         tempquestions[index].choices[choiceIndex].value = value;
-        if(tempquestions[index].choices[choiceIndex].value === 'Other...'){
+        if (tempquestions[index].choices[choiceIndex].value === 'Other...') {
             tempquestions[index].choices[choiceIndex].readOnly = true;
             setReadOnly(true);
         }
@@ -96,11 +96,11 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
     function handleDelete(index: number, choiceIndex: number) {
         const tempQuestions = [...questions];
         const tempChoices = tempQuestions[index].choices.filter((choice: any, j: number) => {
-            if(choice.value === "Other..." && tempQuestions[index].hasOtherOption){
+            if (choice.value === "Other..." && tempQuestions[index].hasOtherOption) {
                 tempQuestions[index].hasOtherOption = false
             }
             return j !== choiceIndex;
-            
+
         });
         tempQuestions[index].choices = tempChoices;
         setQuestions(tempQuestions);
@@ -114,10 +114,10 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
         tempquestions[index].choices.push({ value: 'Option' })
         setQuestions(tempquestions);
     }
-    const[readOnly, setReadOnly] = useState(false);
+    const [readOnly, setReadOnly] = useState(false);
 
     function handleAddOtherChoices(index: any) {
-        
+
         const tempquestions = questions.map((res: any) => {
             return res;
         });

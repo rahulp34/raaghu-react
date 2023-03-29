@@ -19,7 +19,8 @@ import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
-import  applicationsReducer  from "./applications/applications-slice";
+import hostReducer from './host/host-slice';
+import applicationsReducer  from "./applications/applications-slice";
 import urlForwardingReducer from './url-forwarding/url-forwarding-slice';
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
@@ -62,6 +63,7 @@ const rootReducer = combineReducers({
   urlForwarding: urlForwardingReducer,
   comments:commentsReducer,
   tags:tagsReducer,
+  host: hostReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
