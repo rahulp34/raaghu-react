@@ -24,35 +24,29 @@ export interface RdsCompTopNavigationProps {
   profileName?: string;
   logo?:string, 
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleToggle?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
-
-
 
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 	const [LinkAccount, setLinkAccount] = useState(false);
-  const [visible, setVisible] = useState(false);  
   const navigate = useNavigate();
- 
 	const navtabItems = [
 		{
 			label: "Linked Accounts",
 			icon: "manage_linked",
 			subText: "Manage accounts linked to your account",
 			id: "nav-LinkAccount",
-      databsdismiss: "offcanvas"
 		},
 		{
 			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
-			id: "nav-myAccount",
+			id: "nav-Deligation",
 		},
 		{
 			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
-			id: "nav-Security-logs",
+			id: "nav-Attempts",
 		},
 		{
 			label: "Personal Data",
@@ -172,7 +166,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             ></RdsIcon>
           </Link>
 
-          
           <RdsOffcanvas
             className="pb-0"
             placement="end"
@@ -212,13 +205,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             preventEscapeKey={false}
             canvasTitle={""}
           >
-            <RdsCompProfile          
+            <RdsCompProfile
               navtabItems={navtabItems}
               profilePic={""}
               userName={"Host Admin"}
               userRole={"admin"}
               onLogout={props.onLogout}
-              handleToggle={props.handleToggle}             
             ></RdsCompProfile>
           </RdsOffcanvas>
         </div>

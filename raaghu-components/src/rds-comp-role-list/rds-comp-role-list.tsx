@@ -389,7 +389,7 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
           scrolling={false}
           preventEscapeKey={false}
           offId={"Edit"}
-          canvasTitle={"Edit"} >
+          canvasTitle={"Edit"}>
           <RdsNavtabs
             navtabsItems={[
               {

@@ -43,6 +43,7 @@ const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
 const PersonalDataCompo = React.lazy(() => import("PersonalData/PersonalData"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
+
  export {
   DashboardCompo,
   LoginCompo,

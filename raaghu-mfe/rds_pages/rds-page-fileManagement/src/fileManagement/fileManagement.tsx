@@ -373,7 +373,7 @@ const FileManagement = () => {
             </div>
           }
         >
-          <RdsCompFileUploader ></RdsCompFileUploader>
+          <RdsCompFileUploader></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">

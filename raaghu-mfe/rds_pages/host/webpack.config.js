@@ -155,8 +155,8 @@ module.exports = (env, argv) => {
             singleton: true,
             eager: true,
             requiredVersion: deps["react-dom"],
-          }
-        }
+          },
+        },
       }),
       // new CopyWebpackPlugin([{ from: "./public/images", to: "./assests" }]),
       new HtmlWebpackPlugin({

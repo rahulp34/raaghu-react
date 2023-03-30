@@ -23,7 +23,7 @@ import * as menus from "../../../libs/main-menu/index";
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { BlogsCompo, MyAccountCompo, PaymentPlansCompo } from "./PageComponent";
+import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
 import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
