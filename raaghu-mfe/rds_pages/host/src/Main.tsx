@@ -70,6 +70,7 @@ const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
 const PersonalDataCompo = React.lazy(()=> import("PersonalData/PersonalData"));
+const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -438,8 +439,9 @@ const Main = (props: MainProps) => {
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
+                      <Route path="/my-account" element={<MyAccountCompo/>}/>
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                    </Routes>
+                  </Routes>
                   </Suspense>
                 </div>
               </div>
