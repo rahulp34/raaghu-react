@@ -17,6 +17,7 @@ import { fetchScopesData, deleteScopesData, getScopesData, updateScopesData, edi
 interface RdsPageScopeProps { }
 
 const ApiScope = (props: RdsPageScopeProps) => {
+  console.log("ApiScope  HHHHHHHHHHHHHHHHHHHHH", process.env.REACT_APP_API_URL)
   const { t } = useTranslation();
   const scopeuser = useAppSelector((state) => state.persistedReducer.scopes);
   

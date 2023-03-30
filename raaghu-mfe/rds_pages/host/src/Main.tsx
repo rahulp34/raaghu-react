@@ -1,20 +1,21 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, Navigate, Link, useLocation } from "react-router-dom";
+import { Route, useNavigate, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import i18n from "i18next";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../libs/state-management";
+import { useSelector } from 'react-redux';
 import "./App.scss";
 import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../libs/state-management/hooks";
-import {fetchLocalization} from "../../../libs/state-management/localization/localization-slice";
+  localizationService,
+  configurationService,
+  store,
+  clearToken,
+  grantedpolicies,
+} from "../../../libs/raaghu-core";
+import { useAppSelector} from '../../../libs/state-management/hooks'
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
-import { AuthGuard } from "../../../libs/public.api";
+import { AuthGuard, useAppDispatch } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
@@ -42,10 +43,14 @@ const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
 const ScopeCompo = React.lazy(() => import("Scope/Scope"));
-const IdentityResourcesCompo = React.lazy(()=> import("IdentityResources/IdentityResources"));
+const IdentityResourcesCompo = React.lazy(
+  () => import("IdentityResources/IdentityResources")
+);
 const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
 const ChatsCompo = React.lazy(() => import("Chats/Chats"));
-const FileManagementCompo = React.lazy(() => import("FileManagement/FileManagement"));
+const FileManagementCompo = React.lazy(
+  () => import("FileManagement/FileManagement")
+);
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
@@ -55,131 +60,94 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>();
+  const isAuth =localStorage.getItem("auth");
+  const [languageData, setLanguageData] = useState([]);
+  const [storeData, setStoreData] = useState({
+    languages: store.languages,
+    auth: store.auth,
+    localization: store.localization,
+  });
   const navigate = useNavigate();
-  let accessToken: string | undefined | null =
-    localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
-  console.log("This is the current path ",currentPath);
-
-  const auth: any = useSelector(
-    (state: RootState) => state.persistedReducer.login.isAuth
-  );
-
-  console.log("auth", isAuth);
-  // const isLoggedIn = localStorage.getItem('access_token');
-  const location = useLocation();
-
+  
+console.log("session store.language", storeData.languages,storeData.localization, isAuth, localStorage.getItem("auth"))
   useEffect(() => {
-    const loginCredentials = localStorage.getItem("persist:root");
-    if (loginCredentials != null) {
-      let credentials = JSON.parse(loginCredentials);
-      let parsedCredentials = JSON.parse(credentials.login);
-      accessToken = parsedCredentials.accessToken;
-    }
-
-    // setIsAuth(true);
-    if (localStorage.getItem("access_token")) {
-      setIsAuth(true);
-      if(currentPath !== '/dashobard' && currentPath != '/'){
+    console.log("hello ")
+    if (localStorage.getItem('auth') && true ) {
+      if (currentPath !== "/dashboard" && currentPath !=="/") {
         navigate(currentPath);
-      }
-      else{
-        navigate('/dashboard');
+      } else {
+        navigate("/dashboard");
       }
     }
-    if (localStorage.getItem("access_token") == null) {
+    else {
       navigate("/login");
     }
-  }, [localStorage.getItem("access_token")]);
+  }, [localStorage.getItem("auth")]);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
-  const languageItems = [
-    {
-      label: "EN(US)",
-      val: "en",
-      icon: "us",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "English(IND)",
-      val: "en",
-      icon: "in",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Français",
-      val: "fr",
-      icon: "fr",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Deutsch",
-      val: "de",
-      icon: "de",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Português (Brasil)",
-      val: "pt-BR",
-      icon: "br",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Türkçe",
-      val: "tr",
-      icon: "tr",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Italiano",
-      val: "it",
-      icon: "it",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-  ];
-
   // OnClickHandler for language change
 
-  const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const { t, i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")||"en-GB");
 
-  const onClickHandler = (e: any) => {
-    
-    setCurrentLanguage(e.target.getAttribute("data-name"));    
+  const onClickHandler = (e: any, val: any) => {
+    setCurrentLanguage(val);
+    localStorage.setItem("currentLang", JSON.stringify(val))
   };
-  const dispatch = useAppDispatch();
-  const Data = useAppSelector((state:any) => state.persistedReducer.localization) as any;
+  // const storeData.languages=storeData.languages
+  //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
 
   useEffect(() => {
-    
-    dispatch(fetchLocalization(currentLanguage) as any);
-  }, [currentLanguage]);
-  
-  useEffect(()=>{
-    
-    console.log(Data.localization)
-    i18n.changeLanguage(currentLanguage);
-    var data1 = {};
-    const translation= Data.localization.resources;
-    if(translation){
-        Object.keys(translation).forEach(key => {
-          data1 = {...data1, ...translation[key].texts}
-      })
-      i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
-    }
-   
-  },[Data.localization])
+    console.log("session useEffect from main 1")
+      configurationService(currentLanguage).then(async(res: any) => {
+      await console.log(" session this is res currentCulture",res.localization.currentCulture.cultureName)
+      await localizationService(currentLanguage).then(async (resp:any)=>{
+         console.log(" session this is res lang",resp)
+         i18n.changeLanguage(currentLanguage);
+         var data1 = {};
+         const translation = resp?.resources;
+         console.log("this is res tran",translation)
+         if (translation) {
+           Object.keys(translation).forEach((key) => {
+             data1 = { ...data1, ...translation[key].texts };
+           });
+           i18n.addResourceBundle(
+             currentLanguage,
+             "translation",
+             data1,
+             false,
+             true
+           );
+         }
+       })
+ 
+        await  setStoreData({
+         ...storeData,
+         languages: res.localization,
+         auth: res.auth,
+       });
+       const tempdata = await res.localization.languages.map((item: any) => {
+           return {
+             label: item.displayName,
+             val: item.cultureName,
+             icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+             iconWidth: "20px",
+             iconHeight: "20px",
+           };
+          
+         }
+        )
+        setLanguageData(tempdata)
+     });
+    // Do something with the data
 
+    //  dispatch(fetchConfiguration(currentLanguage) as any).then((res:any) => { dispatch(fetchLocalization(res.localization.currentCulture.cultureName) as any);  });
+
+  }, [currentLanguage]);
+
+ 
   const sideNavItems = [
     {
       key: "0",
@@ -361,8 +329,8 @@ const Main = (props: MainProps) => {
       icon: "home",
       path: "/chats",
       subTitle: "Chats Module",
-  },
-  {
+    },
+    {
       key: "5",
       label: t("File Management"),
       icon: "icons",
@@ -383,13 +351,13 @@ const Main = (props: MainProps) => {
       path: "/blogger",
       subTitle: t("Blogs, Posts, Articles"),
     },
-  {
-    key: "8",
-    label: t("Api Scope"),
-    icon: "icons",
-    path: "/scope",
-    subTitle: t("Scopes"),
-  },
+    {
+      key: "8",
+      label: t("Api Scope"),
+      icon: "icons",
+      path: "/scope",
+      subTitle: t("Scopes"),
+    },
     {
       key: "9",
       label: t("Identity Resources"),
@@ -397,9 +365,9 @@ const Main = (props: MainProps) => {
       path: "/identityResources",
       subTitle: t("Blogs, Posts, Articles"),
     },
-
   ];
-  
+
+  console.log("Grantedpolicies for BookStore.Books.Create ", grantedpolicies("BookStore.Books.Create") )
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
   const getLabelForPath: any = (path: string, navItems: any) => {
     let label = null;
@@ -448,8 +416,14 @@ const Main = (props: MainProps) => {
   };
 
   const logout = () => {
-    localStorage.clear();
-    setIsAuth(false);
+   // clearToken(); //
+     localStorage.clear();
+    // setIsAuth(false);
+    console.log("session in logout ", isAuth)
+    store.accessToken=null
+    //  localStorage.setItem("auth", JSON.stringify(false));
+    // localStorage.setItem("token",JSON.stringify(null))
+  
     navigate("/login");
   };
   let logo = "./assets/raaghu_icon.png";
@@ -475,7 +449,10 @@ const Main = (props: MainProps) => {
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageItems={languageItems}
+                languageLable={storeData.languages?.currentCulture?.displayName ||"English (United Kingdom)"}
+                //languageLable ="English"
+                languageIcon="gb"
+                languageItems={languageData}
                 brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
@@ -484,7 +461,9 @@ const Main = (props: MainProps) => {
                 logo={logo}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
-                onChatClickHandler={()=>{console.log("Hey Chat Button Clicked!!")}}
+                onChatClickHandler={() => {
+                  console.log(" session Hey Chat Button Clicked!!");
+                }}
               />
             </div>
             <div
@@ -569,18 +548,19 @@ const Main = (props: MainProps) => {
                       path="/applications"
                       element={<ApplicationsCompo />}
                     ></Route>
+                    <Route path="/scope" element={<ScopeCompo />}></Route>
                     <Route
-                      path="/scope"
-                      element={<ScopeCompo />}
-                    ></Route>
-                    <Route path="/identityResources"
-                    element ={<IdentityResourcesCompo/>}
+                      path="/identityResources"
+                      element={<IdentityResourcesCompo />}
                     />
 
                     <Route path="/api-scope" element={<ApiScopeCompo />} />
                     <Route path="/chats" element={<ChatsCompo />} />
-                    
-                    <Route path="/fileManagement" element={<FileManagementCompo />} />
+
+                    <Route
+                      path="/fileManagement"
+                      element={<FileManagementCompo />}
+                    />
                     <Route path="/forms" element={<FormsCompo />} />
 
                     <Route path="/blogger" element={<BloggerCompo />} />

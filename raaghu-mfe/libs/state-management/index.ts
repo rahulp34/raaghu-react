@@ -13,7 +13,6 @@ import auditLogsReducer from "./audit-logs/audit-log-slice";
 import ClaimTypesReducer from "./claim-types/claim-types-slice";
 import securityLogsReducer from "./security-logs/security-logs-slice";
 import userReducer from "./user/user-slice";
-import localizationReducer from "./localization/localization-slice";
 import settingsReducer from "./settings/settings-slice";
 import FileManagementReducer from "./file-management/file-management-slice"
 import { useDispatch } from "react-redux";
@@ -51,15 +50,14 @@ const rootReducer = combineReducers({
   user: userReducer,
   settings: settingsReducer,
   tenant:tenantReducer,
-  localization:localizationReducer, 
   chats: chatsReducer,
   blogger:bloggerReducer,
   fileManagement: FileManagementReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-  reducer: { persistedReducer },
+export const store:any = configureStore({
+  reducer:  persistedReducer,
 });
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;

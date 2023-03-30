@@ -10,7 +10,7 @@
 
 import axios, { AxiosError } from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
-import Instance  from './interceptor';
+import Instance  from '../../../raaghu-core/src/utils/interceptor';
 
 export class ServiceProxy {
     private instance: AxiosInstance;

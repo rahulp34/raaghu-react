@@ -1,62 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Login.scss";
-import { ServiceProxy } from "../../../../libs/shared/service-proxy";
-import { getUserConfiguration } from "../../../../libs/public.api";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
-import { filter } from "lodash-es";
+import { sessionService, store, localizationService,
+  configurationService,} from "../../../../libs/raaghu-core";
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
+
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
-  // const [accessToken , setaccessToken] = useState()
-  // const dispatch: any = useAppDispatch();
-  // const accessToken: any = useSelector(
-  //   (state: RootState) => state.persistedReducer.login.accessToken
-  // );
+
+  let API_URL: string = process.env.REACT_APP_API_URL ||"https://raaghu-react.azurewebsites.net"
+  let grant_type =process.env.REACT_APP_GRANT_TYPE ||"password"
+  let client_id= process.env.REACT_APP_CLIENT_ID ||"raaghu"
+  let scope =process.env.REACT_APP_SCOPE ||"address email phone profile roles BookStore"
+
   const navigate = useNavigate();
-  const proxy = new ServiceProxy();
-  const hello = () => {
-    var cred = localStorage.getItem("access_token");
-    if (cred) {
-      var pasrsedtoken = JSON.parse(cred);
-      console.log("pasrsed", pasrsedtoken);
-      console.log("cred", cred);
+  const { i18n } = useTranslation();
+  async function  loginHandler  (email: any, password: any) {
+    function hello(res:any){
+      if(res!= undefined){
+        localStorage.setItem("auth", JSON.stringify(true));
+        const lang =localStorage.getItem("currentLang")||"en-GB"
+         navigate('/dashboard')
+
+          configurationService(lang).then(async(res: any) => {
+          
+           await localizationService(lang).then(async (resp:any)=>{
+              i18n.changeLanguage(lang);
+              var data1 = {};
+              const translation = resp?.resources;
+               if (translation) {
+                Object.keys(translation).forEach((key) => {
+                  data1 = { ...data1, ...translation[key].texts };
+                });
+                i18n.addResourceBundle(
+                  lang,
+                  "translation",
+                  data1,
+                  false,
+                  true
+                );
+              }
+            })
+        
+          });
+      } else{
+        localStorage.setItem("auth", JSON.stringify(false));
+      }
     }
-
-    proxy.applicationConfiguration(undefined).then((result: any) => {
-      console.log("hello this is result", result);
-    });
-
-    // proxy.languagesGET( undefined,undefined, undefined,  undefined,  undefined,  undefined, undefined, 1000).then((result:any)=>{console.log("langs",result)})
-    if (cred != undefined) {
-      getUserConfiguration("login");
-      navigate("/dashboard");
-    }
-  };
-
-  const loginHandler = (email: any, password: any) => {
-    const requestBody = {
-      grant_type: "password",
-      username: email, // "admin",
-      password: password, //"1q2w3E*"
-      client_id: "raaghu",
-      scope: "address email phone profile roles BookStore", 
+   await sessionService(API_URL, grant_type, email, password, client_id, scope).then(async(res:any)=>{
+    await hello(res)
+    })
     };
-    fetch("https://raaghu-react.azurewebsites.net/connect/token", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams(requestBody).toString(),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      localStorage.setItem("access_token", JSON.stringify(data.access_token));
-      hello()
-    });
-  };
+ // localStorage.setItem("auth", JSON.stringify(false));
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
     // navigate("/forgot-password");
     // props.onForgotPassword(isForgotPasswordClicked);
@@ -64,8 +62,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const { t } = useTranslation();
   return (
     <div className="login-background">
-      <div className="align-items-center d-flex justify-content-center login m-auto"
-        style={{ maxWidth: "900px", height: "100vh " }}>
+      <div
+        className="align-items-center d-flex justify-content-center login m-auto"
+        style={{ maxWidth: "900px", height: "100vh " }}
+      >
         <div className="container-fluid m-2">
           <div className="bg-white row rounded-3 ">
             <div className="col-md-6">
@@ -77,7 +77,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 </div>
                 <RdsCompLogin
                   onLogin={loginHandler}
-                  onForgotPassword={forgotPasswordHandler} />
+                  onForgotPassword={forgotPasswordHandler}
+                />
               </div>
             </div>
             <div
@@ -86,11 +87,32 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 backgroundRepeat: "no-repeat",
                 backgroundColor: "#000",
                 height: 524,
-              }}>
-              <video className="video position-relative" autoPlay muted loop style={{ width: 442, height: 524 }}>
-                <source src="./assets/building_lights.mp4" type="video/mp4"></source>
+              }}
+            >
+              <video
+                className="video position-relative"
+                autoPlay
+                muted
+                loop
+                style={{ width: 442, height: 524 }}
+              >
+                <source
+                  src="./assets/building_lights.mp4"
+                  type="video/mp4"
+                ></source>
               </video>
-              <img className="position-absolute" style={{ zIndex: "3", backgroundSize: "cover", top: 240, left: 196, width: 50, height: 50, }} src="./assets/raaghu_icon.png"></img>
+              <img
+                className="position-absolute"
+                style={{
+                  zIndex: "3",
+                  backgroundSize: "cover",
+                  top: 240,
+                  left: 196,
+                  width: 50,
+                  height: 50,
+                }}
+                src="./assets/raaghu_icon.png"
+              ></img>
             </div>
           </div>
         </div>
