@@ -112,5 +112,8 @@ export const PortConfig = {
   },
   "elements": {
     "port": "8100"
+  },
+  "personalData": {
+    "port": "8102"
   }
 }
