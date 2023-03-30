@@ -37,6 +37,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   let id=props.id ||'dropdown_id'
   const lang = localStorage.getItem("i18nextLng");
   let index = props.listItems.findIndex((item) => item.val === lang);
+  const[toggle, setToggle] = useState('show'); 
 
   //  If language not found then we are updating index to 0
 
@@ -115,7 +116,6 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                   <span >
                      <RdsIcon name={props.icon} height={IconHeight} width={IconWidth} fill={props.iconFill}
                     stroke={props.iconStroke} classes ="pe-1" />
-                     
                   </span>
                 )}
                 <span className="fs-6 ms-2 me-2 flex-grow-1">
@@ -204,6 +204,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                 {props.multiSelect && (
                     <div className="form-check">
                       <input
+                      
                         className="form-check-input"
                         type="checkbox"
                         checked={

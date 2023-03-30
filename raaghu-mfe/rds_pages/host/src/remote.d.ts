@@ -135,6 +135,14 @@ declare module "Forms/Forms" {
 	const FormsComponent : React.ComponentType;
 	export default FormsComponent;
 }
+declare module "FormsView/FormsView" {
+	const FormsViewCompo : React.ComponentType;
+	export default FormsViewCompo;
+}
+declare module "FormsPreview/FormsPreview" {
+	const FormsPreviewCompo : React.ComponentType;
+	export default FormsPreviewCompo;
+}
 declare module "Blogger/Blogger" {
 	const BloggerComponent : React.ComponentType;f
 	export default BloggerComponent;
@@ -142,4 +150,37 @@ declare module "Blogger/Blogger" {
 declare module "Client/Client" {
 	const ClientComponent : React.ComponentType;
 	export default ClientComponent;
+}
+declare module "ApiResources/ApiResources" {
+	const ApiResourcesComponent : React.ComponentType;
+	export default ApiResourcesComponent;
+}
+
+declare module "Polls/Polls" {
+	const PollsComponent : React.ComponentType;
+	export default PollsComponent;
+}
+declare module "UrlForwarding/UrlForwarding" {
+	const UrlForwardingComponent : React.ComponentType;
+	export default UrlForwardingComponent;
+}
+declare module "PaymentPlans/PaymentPlans" {
+	const PaymentPlansComponent : React.ComponentType;
+	export default PaymentPlansComponent;
+}
+declare module "Blogs/Blogs" {
+	const BlogsComponent : React.ComponentType;
+	export default BlogsComponent;
+}
+declare module "Comments/Comments" {
+	const CommentsComponent : React.ComponentType;
+	export default CommentsComponent;
+}
+declare module "Tags/Tags" {
+	const TagsComponent : React.ComponentType;
+	export default TagsComponent;
+}
+declare module "Elements/Elements" {
+	const ElementsComponent: React.ComponentType;
+	export default ElementsComponent;
 }

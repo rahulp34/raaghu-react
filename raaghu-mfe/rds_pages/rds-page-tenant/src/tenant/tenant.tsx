@@ -350,8 +350,16 @@ const Tenant = (props: RdsPageTenantProps) => {
           dispatch(fetchEdition() as any);
           dispatch(fetchTenant() as any);
         });
+      
       }
-      setBasicTenantInformation(data);
+      setBasicTenantInformation({editionId: "",
+      name: "",
+      activationEndDate: null,
+      adminPassword: "",
+      activationState: 0,
+      adminEmailAddress: "",
+      connectionStrings: { id: "", default: null, databases: [] },
+    });
       setTenantInformationData({     
         editionId: "",
         name: "",
@@ -410,7 +418,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         <RdsOffcanvas
           canvasTitle={"New Tenant"}
           placement="end"
-          offcanvaswidth={650}
+          
           offcanvasbutton={
             <div className="d-flex justify-content-end">
               <RdsButton
@@ -456,7 +464,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         <RdsOffcanvas
           canvasTitle={"Edit Tenant"}
           placement="end"
-          offcanvaswidth={650}
+          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

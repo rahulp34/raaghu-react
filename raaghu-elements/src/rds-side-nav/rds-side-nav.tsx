@@ -7,20 +7,31 @@ export interface RdsSideNavProps {
   sideNavItems: any[];
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
+  collapse: boolean;
 }
 
 const RdsSideNav = (props: RdsSideNavProps) => {
   const [dataFromChild, setDataFromChild] = useState("");
+  const [collapse, setcollapse] = useState(false);
 
   const handleChildData = (data: any) => {
     console.log(data);
     setDataFromChild(data);
   };
+
+  const onDivCollapse = () => {
+    debugger
+    // callback(!collapse);
+    console.log(collapse)
+    setcollapse(!collapse);
+
+    
+  }
   return (
     <>
       <nav
         id="sidebar"
-        className={`bd-links min-vh-100 pt-3 ps-4 position-relative  ${
+        className={`bd-links min-vh-100 ps-2 position-relative  ${ 
           dataFromChild ? "toggle toggle-sidebar-menu" : ""
         }`}
       >

@@ -339,7 +339,7 @@ const Language = (props: LanguageProps) => {
                 preventEscapeKey={false}
                 offId={"Language"}
                 canvasTitle={"New Language"}
-                offcanvaswidth={550}
+                
               >
                 <RdsCompNewLanguage
                   onSaveHandler={onSaveHandler}
@@ -379,7 +379,7 @@ const Language = (props: LanguageProps) => {
               preventEscapeKey={false}
               offId={"languagesEdit"}
               canvasTitle={"Edit Language"}
-              offcanvaswidth={550}
+              
             >
               <form>
         <div className="row">

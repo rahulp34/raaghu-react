@@ -14,8 +14,10 @@ import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/inde
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
   onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
+  toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
+  toggleItems: any[];
   navbarTitle?: string;
   navbarSubTitle?: string;
   brandName?: string;
@@ -32,35 +34,29 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const navigate = useNavigate();
 	const navtabItems = [
 		{
-			label: "Manage Linked Accounts",
+			label: "Linked Accounts",
 			icon: "manage_linked",
 			subText: "Manage accounts linked to your account",
 			id: "nav-LinkAccount",
 		},
 		{
-			label: "Manage Authority Delegation",
+			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
 			id: "nav-Deligation",
 		},
 		{
-			label: "Login Attempts",
+			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
 			id: "nav-Attempts",
 		},
 		{
-			label: "My Settings",
+			label: "Personal Data",
 			icon: "my_settings",
 			subText: "Change your account settings",
 			id: "nav-Settings",
-		},
-		{
-			label: "Download Collected Data",
-			icon: "download_data",
-			subText: "Download data belongs to your account",
-			id: "nav-DownLoad",
-		},
+		},		
 	];
 
 	const ChangeId = (e: any) => {
@@ -79,17 +75,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 fixed-top`}
       >
         <div className="d-flex align-items-center">
-          <span className="navbar-brand p-0 m-0">
+          <span className="navbar-brand p-0 m-0" onClick={()=>{navigate("/dashboard")}}>
            <img
-              className="ms-1"
+              className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-              width="70"
+              // width="70"
             ></img>
             
-            <span className="title fw-bold text-lowercase m-2">
+            <span className="title fw-bold text-lowercase m-2 cursor-pointer">
       
-             <b onClick={()=>{navigate("/dashboard")}}>{props.brandName}</b>
+             <b >{props.brandName}</b>
             </span>
           </span>
           <div>
@@ -105,6 +101,18 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
+          <div className="px-2 position-relative border-end">
+          <RdsDropdownList
+           placeholder={props.toggleItems[0].label}
+           icon =  "sun"
+           iconFill = {false }
+           iconStroke ={true}
+            listItems={props.toggleItems}
+            // onClick={props.toggleTheme}
+          ></RdsDropdownList>
+          </div>
+     
+          <div className="px-2 position-relative border-end">
           <RdsDropdownList
            placeholder={props.languageLable}
            icon =  {props.languageIcon}
@@ -113,6 +121,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             listItems={props.languageItems}
             onClick={onClickHandler}
           ></RdsDropdownList>
+          </div>
          <div className="me-3 ms-3 position-relative">
             <a
               data-bs-toggle="dropdown"
@@ -169,7 +178,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           <RdsOffcanvas
             className="pb-0"
             placement="end"
-            offcanvaswidth={374}
+            offcanvaswidth={307}
             offId="Profile"
             offcanvasbutton={
               <div

@@ -23,6 +23,7 @@ const RdsSideNavChild = ({
   const [count, setCount] = useState(counter);
 
   const [collapse, setcollapse] = useState(false);
+  // const collapse = props.collapse;
 
   const onCollapse = () => {
     console.log(collapse);
@@ -37,10 +38,10 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`mb-0 py-2 ps-1 sideNav ${count == 1
+        className={`list-style mb-0 py-2 ps-1 sideNav ${count == 1
           ? "list-unstyled"
           : count == 2
-            ? "list-unstyled fw-normal pb-1 small ms-2 "
+            ? "list-unstyled fw-normal pb-1 small ms-1 "
             : count == 3 ? "ms-4" : " "
           }`}
       >
@@ -55,23 +56,26 @@ const RdsSideNavChild = ({
             ></Node>
           ))}
       </ul>
-      <span>
+      {/* <span> */}
         <div
           className={`sidenav-footer text-center ${collapse ? "w-auto" : ""}`}
         >
-          <div className="ms-3">
-            <div className="text-center mb-3">
+          {/* <div className="ms-3"> */}
+            {/* <div className="text-center mb-3"> */}
+         <span className="collpase-button">
 
-              <RdsIcon
-                name="grid_square"
-                height="23px"
-                width="23px"
+           <RdsIcon
+                name="chevron_right_double "
+                height="15px"
+                width="15px"
                 stroke={true}
                 fill={false}
                 onClick={onCollapse}
+                colorVariant="primary"
               ></RdsIcon>
-            </div>
-            <div className="darkTheme text-center">
+       </span>
+            {/* </div> */}
+            {/* <div className="darkTheme text-center">
               <a
                 className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
               >
@@ -84,10 +88,10 @@ const RdsSideNavChild = ({
                 ></RdsToggle>
                
               </a>
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
-      </span>
+      {/* </span> */}
     </>
   );
 };
@@ -119,7 +123,7 @@ const Node = ({
         <NavLink
           to={node.path}
           onClick={onClickHandler}
-          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-uppercase " : ""
+          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
             } text-decoration-none`}
         >
           <div className="d-flex">
@@ -234,7 +238,7 @@ const Node = ({
                 <>
                   <a
                     aria-expanded={childVisibility}
-                    className={`nav-link child ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    className={`nav-link child d-inline-flex cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
                     onClick={(e) => setChildVisibility((v) => !v)}>
                     <RdsIcon
                       name={node.icon}
@@ -244,7 +248,7 @@ const Node = ({
                       width="20px"
                       classes="me-3"
                     ></RdsIcon>
-                    <span className="text-uppercase">{node.label}</span>
+                    <span className="text-capitalize">{node.label}</span>
                   </a>
                 </>
               )}
@@ -258,7 +262,7 @@ const Node = ({
                   <div id="menuWithChildren2">
                     <a
                       aria-expanded={childVisibility}
-                      className={`nav-link child  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                      className={`nav-link child d-inline-flex cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
                       onClick={(e) => setChildVisibility((v) => !v)}>
                       <RdsIcon
                         name={node.icon}
@@ -268,7 +272,7 @@ const Node = ({
                         width="20px"
                         classes="me-3"
                       ></RdsIcon>
-                      <span className="text-uppercase">{node.label}</span>
+                      <span className="text-capitalize">{node.label}</span>
                     </a>
                   </div>
                 </>

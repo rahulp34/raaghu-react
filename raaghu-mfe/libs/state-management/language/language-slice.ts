@@ -31,7 +31,7 @@ const proxy = new ServiceProxy()
 export const fetchLanguages = createAsyncThunk(
   "language/fetchLanguages",
   async () => {
-    return await proxy.languagesGET(undefined,  undefined,  undefined,  undefined,  undefined, undefined, undefined, 1000).then((result:any)=>{
+    return await proxy.languagesGET(undefined,  undefined,  undefined,  undefined,  undefined, 'id DESC', undefined, 1000).then((result:any)=>{
       return result
     })
 

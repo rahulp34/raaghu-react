@@ -11,6 +11,7 @@ import {
   RdsCompDatatable,
   RdsCompPermissionTree,
   RdsCompAlertPopup,
+  RdsCompClaims,
 } from "../../../rds-components";
 import {
   useAppDispatch,
@@ -23,6 +24,8 @@ import {
   deleteRoles,
   fetchPermission,
   editPermisstion,
+  fetchAllClaims,
+  fetchClaims,
 } from "../../../../libs/state-management/roles/roles-slice";
 import { useTranslation } from "react-i18next";
 
@@ -44,10 +47,12 @@ const Roles = (props: RdsPageRolesProps) => {
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
   const { t } = useTranslation();
+  const [claimsTable, setClaimsTableData] = useState<any[]>([])
 
-
+  
   useEffect(() => {
     dispatch(fetchRoles() as any);
+    dispatch(fetchAllClaims() as any);
   }, [dispatch]);
   useEffect(() => {
     if (Array.isArray(Data.roles)) {
@@ -127,9 +132,33 @@ const Roles = (props: RdsPageRolesProps) => {
         default: rowData.isDefault,
         public: rowData.isPublic,
       });
+      dispatch(fetchClaims(rowData.id) as any)
       dispatch(fetchPermission(rowData.provideKey) as any);
     }
   };
+
+  const [allClaimsArray, setAllClaimsArray] = useState<any[]>([]);
+
+  useEffect(()=>{
+    if(Data.allClaims){
+      let tempAllClaimsArray:any[] = [];
+      Data.allClaims.map((res:any)=>{
+        const item = {
+          option:res.name,
+          value: res.name
+        }
+        tempAllClaimsArray.push(item);
+      })
+      setAllClaimsArray(tempAllClaimsArray);
+    }
+  },[Data.allClaims])
+
+  useEffect(() => {
+    if(Data.claims){
+      setClaimsTableData(Data.claims)
+    }
+  }, [Data.claims]);
+  
   useEffect(() => {
     setData({ ...data, permission: Data.permission });
   }, [Data.permission]);
@@ -162,8 +191,8 @@ const Roles = (props: RdsPageRolesProps) => {
   };
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <h4>Roles </h4>
+      <div className="d-flex">
+        <div className="flex-grow-1"></div>
         <div className="d-flex justify-content-end">
           <RdsButton
             icon="plus"
@@ -198,7 +227,7 @@ const Roles = (props: RdsPageRolesProps) => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="New Role"
-          offcanvaswidth={500}
+          
           offId="newRole"
           backDrop={false}
           scrolling={false}
@@ -257,10 +286,46 @@ const Roles = (props: RdsPageRolesProps) => {
                 </div>
               </div>
             </div>
-            <div
+
+            <div className="footer-buttons my-2">
+                      <div className="row">
+                        <div className="col-md-12 d-flex">
+                          <div className="flex-grow-1"></div>
+                          <div>
+                            <RdsButton
+                              label="Cancel"
+                              type="button"
+                              colorVariant="primary"
+                              size="small"
+                              databsdismiss="offcanvas"
+                              isOutline={true}
+                            ></RdsButton>
+                          </div>
+                          <div>
+                            <RdsButton
+                              label="Save"
+                              type="button"
+                              size="small"
+                              // isDisabled={formValid}
+                              class="ms-2"
+                              colorVariant="primary"
+                              databsdismiss="offcanvas"
+                              databstoggle="offcanvas"
+                              databstarget="#newRole"
+                              onClick={handlerAddRole}
+                            ></RdsButton>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+            {/* <div
               className="d-flex"
               style={{ position: "absolute", bottom: "2%" }}
-            >
+            > <div className="flex-grow-1"></div>
               <div className="me-3">
                 <RdsButton
                   type={"button"}
@@ -282,13 +347,13 @@ const Roles = (props: RdsPageRolesProps) => {
                 databstoggle="offcanvas"
                 databstarget="#newRole"
               ></RdsButton>
-            </div>
+            </div> */}
           </div>
         </RdsOffcanvas>
         <RdsOffcanvas
           placement="end"
           canvasTitle="Edit Role"
-          offcanvaswidth={500}
+          
           offId="editRoleof"
           backDrop={false}
           scrolling={false}
@@ -308,6 +373,11 @@ const Roles = (props: RdsPageRolesProps) => {
                 label: "Permissions",
                 tablink: "#nav-Change",
                 id: "permissions",
+              },
+              {
+                label: "Claims",
+                tablink: "#nav-Claims",
+                id: "claims",
               },
             ]}
           />
@@ -369,12 +439,17 @@ const Roles = (props: RdsPageRolesProps) => {
                 </div>
               </div>
             )}
-            {activeTab !== "basic" && (
+            {activeTab == "permissions" && (
               <div>
                 <RdsCompPermissionTree
                   permissions={data.permission}
                   selectedPermissions={handlerSelectedPermission}
                 ></RdsCompPermissionTree>
+              </div>
+            )}
+            {activeTab == "claims" && (
+              <div>
+                <RdsCompClaims allClaimsArray={allClaimsArray} claimsTable={claimsTable} id={id}  ></RdsCompClaims>
               </div>
             )}
             <div

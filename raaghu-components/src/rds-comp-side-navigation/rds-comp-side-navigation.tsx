@@ -15,7 +15,7 @@ const RdsCompSideNavigation = (props:RdsCompSideNavigationProps) => {
   //   console.log("Button Clicked", e.target.checked)
   // }
 
-  return <RdsSideNav sideNavItems={props.sideNavItems} onClick={props.onClick} toggleTheme={props.toggleTheme}></RdsSideNav>;
+  return <RdsSideNav sideNavItems={props.sideNavItems} onClick={props.onClick} toggleTheme={props.toggleTheme} collapse={false}></RdsSideNav>;
 };
 
 export default RdsCompSideNavigation;

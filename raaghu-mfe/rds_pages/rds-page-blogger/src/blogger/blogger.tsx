@@ -134,7 +134,7 @@ const Blogger = () => {
     <>
       <div className="row">
         <div className="d-flex justify-content-end ">
-          <RdsOffcanvas canvasTitle={canvasTitle} placement="end" offcanvaswidth={650} onClose={(event) => setBlogObj({ name: '', shortName: '', description: '', concurrencyStamp: '' })}
+          <RdsOffcanvas canvasTitle={canvasTitle} placement="end"   onClose={(event) => setBlogObj({ name: '', shortName: '', description: '', concurrencyStamp: '' })}
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton icon="plus" label={"Create a new blog"} iconColorVariant="light" iconHeight="15px" iconWidth="15px"

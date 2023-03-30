@@ -9,12 +9,16 @@ import {
   type InitialState = {
     roles: any;
     permission:any;
+    allClaims:any;
+    claims:any;
     error: string;
     status: "pending" | "loading" | "error" | "success";
   };
   export const initialState: InitialState = {
     roles: [],
     permission:[],
+    allClaims:null,
+    claims:null,
     error: "",
     status: "pending",
   };
@@ -23,7 +27,7 @@ import {
   export const fetchRoles = createAsyncThunk(
     "Roles/fetchRoles",
   async  () => {
-       return proxy.rolesGET3(undefined, undefined,0,1000).then(
+       return proxy.rolesGET3(undefined, 'id DESC',0,1000).then(
         (result:any)=>{
             console.log('fetched data , ',result.items  )
           return result.items
@@ -32,6 +36,34 @@ import {
       ); 
     }
   );
+
+  export const fetchAllClaims = createAsyncThunk(
+    "Roles/fetchAllClaims",() => {
+       return proxy.allClaimTypes().then((result:any)=>{
+          return result
+        }
+      );
+    }
+  );
+  
+  export const fetchClaims = createAsyncThunk(
+    "Roles/fetchClaims",(data:any) => {
+       return proxy.claimsAll(data).then((result:any)=>{
+          return result
+        }
+      );
+    }
+  );
+  
+  export const putClaims = createAsyncThunk(
+    "Roles/putClaims",(data:any) => {
+       return proxy.claims(data.id, data.body).then((result:any)=>{
+          return result
+        }
+      );
+    }
+  );
+
   export const addRolesUnit = createAsyncThunk(
     "Roles/addRolesUnit",
     async (dto: any) => {
@@ -100,6 +132,42 @@ import {
         state.roles = [];
         state.error = action.error.message || "Something went wrong";
       });
+      
+      builder.addCase(fetchAllClaims.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        fetchAllClaims.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          debugger
+          state.status = "success";
+          state.allClaims = action.payload;
+          state.error = "";
+        }
+      );
+      builder.addCase(fetchAllClaims.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message || "Something went wrong";
+      });
+      
+
+      builder.addCase(fetchClaims.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        fetchClaims.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = "success";
+          state.claims = action.payload;
+          state.error = "";
+        }
+      );
+      builder.addCase(fetchClaims.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message || "Something went wrong";
+      });
+
+
       builder.addCase(deleteRoles.pending, (state) => {
         state.status = "loading";
       });
@@ -165,6 +233,17 @@ import {
         state.permission = [];
         state.error = action.error.message || "Something Went Wrong";
       });
+      
+      builder.addCase(putClaims.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        putClaims.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = "success";
+          state.error = "";
+        }
+      );
     }
   });
   export default RolesSlice.reducer;
