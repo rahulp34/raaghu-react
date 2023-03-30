@@ -106,9 +106,8 @@ const UrlForwarding = () => {
   };
   return (
     <>
-      <div className="d-flex justify-content-between">
-        <h4>Url Forwarding </h4>
-        <div className="d-flex justify-content-end">
+      <div>
+         <div className="d-flex justify-content-end">
           <RdsButton
             icon="plus"
             label="Forward an URL"
@@ -141,12 +140,11 @@ const UrlForwarding = () => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="New Url Forward"
-          offcanvaswidth={500}
           offId="newUrlForwarding"
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
-        >
+          >
           <div className="mt-2">
           <RdsCompUrlForwardings  urlForwardingData={urlNewData} emitUrlForwardingData={getUrlForwardingsData}/>
             <div
@@ -180,12 +178,11 @@ const UrlForwarding = () => {
         <RdsOffcanvas
           placement="end"
           canvasTitle="Edit Role"
-          offcanvaswidth={500}
           offId="editUrlForwardingoff"
           backDrop={false}
           scrolling={false}
-          preventEscapeKey={false}
-        >
+          preventEscapeKey={false} 
+          >
           <div className="mt-2">
             <RdsCompUrlForwardings urlForwardingData={editUrlShortingData} emitUrlForwardingData={getUrlForwardingsDataForEdit}/>
             <div

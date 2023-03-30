@@ -15,16 +15,13 @@ const PaymentPlans = () => {
     { displayName: "External Id", key: "externalId", datatype: "text", dataLength: 30, required: true, sortable: false }
   ];
 
+  // Use States ================
   const [actions, setActions] = useState([
     { id: "edit", displayName: "Edit", offId: "paymentPlans" },
     { id: "delete", displayName: "Delete", modalId: "delete" },
     { id: "manageGatewayPlans", displayName: "Manage Gateway Plans", modalId: "manageGatewayPlans" },
   ]);
-
-  // Use States ================
-  const [plansTableData, setPlansTableData] = useState([
-    { name: 'Test Plan' }
-  ]);
+  const [plansTableData, setPlansTableData] = useState([]);
   const [gatewayTableData, setGatewayTableData] = useState([]);
   const [canvasTitle, setCanvasTitle] = useState('Create New Payment Plans');
   const [paymentPlansObj, setPaymentPlansObj] = useState({ id: '', name: '', concurrencyStamp: '' });
@@ -209,7 +206,7 @@ const PaymentPlans = () => {
       <div className="row">
         <div className="d-flex">
           <div className="ms-auto">
-            <RdsOffcanvas canvasTitle={canvasTitle} placement="end" offcanvaswidth={650} onClose={(event) => setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' })}
+            <RdsOffcanvas canvasTitle={canvasTitle} placement="end"  onClose={(event) => setPaymentPlansObj({ id: '', name: '', concurrencyStamp: '' })}
               offcanvasbutton={
                 <div className="d-flex justify-content-end">
                   <RdsButton icon="plus" label={managePlan ? "Create New Plan" : "Create New Gateway Plan"} iconColorVariant="light" iconHeight="15px" iconWidth="15px"

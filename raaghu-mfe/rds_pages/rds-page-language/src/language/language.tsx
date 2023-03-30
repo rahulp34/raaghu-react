@@ -12,7 +12,7 @@ import {
   RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompNewLanguage,
-} from "../../../rds-components"; 
+} from "../../../rds-components";
 
 import {
   useAppDispatch,
@@ -77,8 +77,8 @@ const Language = (props: LanguageProps) => {
     id: any;
     flag: any;
   }>({
-    check:true || false,
-    displayName:"",
+    check: true || false,
+    displayName: "",
     id: "",
     flag: "",
   });
@@ -86,17 +86,17 @@ const Language = (props: LanguageProps) => {
   const [formValid, setformValid] = useState(true);
 
   useEffect(() => {
-    
-      if (
-        dataEmit.displayName && 
-        dataEmit.displayName.trim() !== ""
-      ) {
-        setformValid(false);
-      }else{
-        setformValid(true)
-      }
-    
-    
+
+    if (
+      dataEmit.displayName &&
+      dataEmit.displayName.trim() !== ""
+    ) {
+      setformValid(false);
+    } else {
+      setformValid(true)
+    }
+
+
   }, [dataEmit.displayName]);
   const [name, setname] = useState<
     {
@@ -106,7 +106,7 @@ const Language = (props: LanguageProps) => {
     }[]
   >([{ option: "", id: "" }]);
 
-  const [Alert, setAlert] = useState({show:false,message:"",color:""});
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
 
 
 
@@ -144,19 +144,19 @@ const Language = (props: LanguageProps) => {
           ),
           code: item.cultureName,
           enable: item.isEnabled,
-          flag:item.flagIcon,
-          name:item.displayName,
+          flag: item.flagIcon,
+          name: item.displayName,
           isDefault: item.isDefaultLanguage,
           isenabled: (
             <>
               {item.isEnabled ? (
                 <RdsBadge
-                label={"Active"}
-                size={"medium"}
-                badgeType={"rectangle"}
-                colorVariant={"success"}
-              ></RdsBadge>
-                
+                  label={"Active"}
+                  size={"medium"}
+                  badgeType={"rectangle"}
+                  colorVariant={"success"}
+                ></RdsBadge>
+
               ) : (
 
                 <RdsBadge
@@ -166,7 +166,7 @@ const Language = (props: LanguageProps) => {
                   colorVariant={"danger"}
                 ></RdsBadge>
 
-                
+
               )}
             </>
           ),
@@ -215,15 +215,15 @@ const Language = (props: LanguageProps) => {
     cultureModel.flagIcon = data.name;
 
     dispatch(postNewLanguage(cultureModel) as any).then((res: any) => {
-      if(res.type == "language/postNewLanguage/rejected"
-      ){setAlert({...Alert,show:true,message:"your request has been denied",color:"danger"})}else{
-        setAlert({...Alert,show:true,message:"Language added Successfully", color:"success"})
+      if (res.type == "language/postNewLanguage/rejected"
+      ) { setAlert({ ...Alert, show: true, message: "your request has been denied", color: "danger" }) } else {
+        setAlert({ ...Alert, show: true, message: "Language added Successfully", color: "success" })
       }
       dispatch(fetchLanguages() as any);
     });
 
     setname([]);
-    
+
   };
 
   const model = new UpdateLanguageDto();
@@ -231,29 +231,29 @@ const Language = (props: LanguageProps) => {
   const onEditHandler = (data: {
     check: boolean;
     displayName: string;
-    flag:string,
-    id:string
+    flag: string,
+    id: string
   }) => {
 
     model.displayName = data.displayName;
     model.isEnabled = data.check;
     model.flagIcon = data.flag;
-     const idd = data.id
-    dispatch(updateLanguage({idd , model})as any).then((res: any) => {
+    const idd = data.id
+    dispatch(updateLanguage({ idd, model }) as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
-    setAlert({...Alert,show:true,message:"Languages edited Succesfully", color:"success"})
+    setAlert({ ...Alert, show: true, message: "Languages edited Succesfully", color: "success" })
   };
 
 
- 
+
 
   const onActionSelection = (
     rowData: any, actionId: any
   ) => {
 
 
-    setdataEmit({...dataEmit,displayName:rowData.name,check:rowData.enable,flag:rowData.flag,id:rowData.id})
+    setdataEmit({ ...dataEmit, displayName: rowData.name, check: rowData.enable, flag: rowData.flag, id: rowData.id })
 
 
 
@@ -262,11 +262,11 @@ const Language = (props: LanguageProps) => {
       dispatch(defaultLanguage(rowData.id) as any).then((res: any) => {
         dispatch(fetchLanguages() as any);
       });
-      setAlert({...Alert,show:true,message:"Languages set as default Succesfully", color:"success"})
+      setAlert({ ...Alert, show: true, message: "Languages set as default Succesfully", color: "success" })
     }
 
 
-    
+
   };
 
   const onNewLangHandler = () => {
@@ -277,10 +277,10 @@ const Language = (props: LanguageProps) => {
     dispatch(deleteLanguage(dataEmit.id) as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
-    setAlert({...Alert,show:true,message:"Languages deleted Succesfully", color:"success"})
+    setAlert({ ...Alert, show: true, message: "Languages deleted Succesfully", color: "success" })
   };
 
-  
+
 
   const inputChangeHandler = (event: any) => {
     setdataEmit({ ...dataEmit, displayName: event.target.value });
@@ -308,11 +308,11 @@ const Language = (props: LanguageProps) => {
             <div className="col-md-4">
               {Alert.show && (
                 <RdsAlert
-                alertmessage={Alert.message}
-                colorVariant={Alert.color}
-              ></RdsAlert>
+                  alertmessage={Alert.message}
+                  colorVariant={Alert.color}
+                ></RdsAlert>
               )}
-              
+
             </div>
             <div className="col-md-8 d-flex justify-content-end ">
               <RdsOffcanvas
@@ -339,7 +339,7 @@ const Language = (props: LanguageProps) => {
                 preventEscapeKey={false}
                 offId={"Language"}
                 canvasTitle={"New Language"}
-                offcanvaswidth={550}
+
               >
                 <RdsCompNewLanguage
                   onSaveHandler={onSaveHandler}
@@ -357,21 +357,16 @@ const Language = (props: LanguageProps) => {
 
         <div className="col-md-12">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-            <div className="d-flex mt-3">
-              <h5 className="col-md-9  ps-2 p-2">All Languages</h5>
-            </div>
-            <div className="p-2">
-              <RdsCompDatatable
-                classes="table__userTable"
-                tableHeaders={tableHeaders}
-                pagination={true}
-                tableData={Data}
-                actions={actions}
-                onActionSelection={onActionSelection}
-                recordsPerPage={5}
-                recordsPerPageSelectListOption={true}
-              ></RdsCompDatatable>
-            </div>
+            <RdsCompDatatable
+              classes="table__userTable"
+              tableHeaders={tableHeaders}
+              pagination={true}
+              tableData={Data}
+              actions={actions}
+              onActionSelection={onActionSelection}
+              recordsPerPage={5}
+              recordsPerPageSelectListOption={true}
+            ></RdsCompDatatable>
             <RdsOffcanvas
               placement={"end"}
               backDrop={true}
@@ -379,63 +374,63 @@ const Language = (props: LanguageProps) => {
               preventEscapeKey={false}
               offId={"languagesEdit"}
               canvasTitle={"Edit Language"}
-              offcanvaswidth={550}
+
             >
               <form>
-        <div className="row">
-          
-          <div className="col-md-6 mb-3">
-            <div className="form-group mt-3">
+                <div className="row">
 
-              <RdsInput
-                size="small"
-                label="Display Name"
-                placeholder="Enter Display Name"
-                value={dataEmit.displayName}
-                onChange={inputChangeHandler}
-                required={true}
-              ></RdsInput>
-            </div>
-          </div>
-        </div>
-        
-        <RdsCheckbox
-          label="is Enabled"
-          checked={dataEmit.check}
-          onChange={checkboxHandler}
-        ></RdsCheckbox>
-      </form>
+                  <div className="col-md-6 mb-3">
+                    <div className="form-group mt-3">
 
-      <div className="footer-buttons my-2">
-        <div className="row">
-          <div className="col-md-12 d-flex">
-            <div>
-              <RdsButton
-                label="Cancel"
-                type="button"
-                colorVariant="primary"
-                size="small"
-                databsdismiss="offcanvas"
-                isOutline={true}
-              ></RdsButton>
-            </div>
-            <div>
-              <RdsButton
-                label="Save"
-                type="button"
-                size="small"
-                isDisabled={formValid}
-                class="ms-2"
-                colorVariant="primary"
-                databsdismiss="offcanvas"
-                onClick={() => onEditHandler(dataEmit)}
-              ></RdsButton>
-            </div>
-          </div>
-        </div>
-      </div>
+                      <RdsInput
+                        size="small"
+                        label="Display Name"
+                        placeholder="Enter Display Name"
+                        value={dataEmit.displayName}
+                        onChange={inputChangeHandler}
+                        required={true}
+                      ></RdsInput>
+                    </div>
+                  </div>
+                </div>
 
-              
+                <RdsCheckbox
+                  label="is Enabled"
+                  checked={dataEmit.check}
+                  onChange={checkboxHandler}
+                ></RdsCheckbox>
+              </form>
+
+              <div className="footer-buttons my-2">
+                <div className="row">
+                  <div className="col-md-12 d-flex">
+                    <div>
+                      <RdsButton
+                        label="Cancel"
+                        type="button"
+                        colorVariant="primary"
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isOutline={true}
+                      ></RdsButton>
+                    </div>
+                    <div>
+                      <RdsButton
+                        label="Save"
+                        type="button"
+                        size="small"
+                        isDisabled={formValid}
+                        class="ms-2"
+                        colorVariant="primary"
+                        databsdismiss="offcanvas"
+                        onClick={() => onEditHandler(dataEmit)}
+                      ></RdsButton>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </RdsOffcanvas>
 
             <RdsCompAlertPopup

@@ -251,7 +251,7 @@ const Client = (props: RdsPageScopeProps) => {
               canvasTitle={("New Client")}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={550}
+              
               offcanvasbutton={
                 <div>
                   <RdsButton

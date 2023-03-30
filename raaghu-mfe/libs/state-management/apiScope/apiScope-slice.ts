@@ -21,7 +21,7 @@ const initialState : InitialState = {
 const proxy =new ServiceProxy()
 
 export const fetchScopesData = createAsyncThunk('Scopes/fetchScopesData',() => {
-    return proxy.scopesGET2(undefined,undefined,undefined,1000).then((result:any) =>{
+    return proxy.scopesGET2(undefined,'id DESC',undefined,1000).then((result:any) =>{
         console.log("result",result)
         return result
     })

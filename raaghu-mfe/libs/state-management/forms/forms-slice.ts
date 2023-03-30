@@ -4,7 +4,7 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import { ServiceProxy, UpdatePermissionsDto } from "../../shared/service-proxy";
+import { CreateQuestionDto, ServiceProxy, UpdatePermissionsDto } from "../../shared/service-proxy";
 
 type InitialStateForms = {
   loading: boolean;
@@ -16,6 +16,7 @@ type InitialStateForms = {
   alert: boolean;
   alertMessage: string;
   success: boolean;
+  getSettings:any;
 };
 
 export const InitialStateForms: InitialStateForms = {
@@ -28,6 +29,7 @@ export const InitialStateForms: InitialStateForms = {
   alert: false,
   alertMessage: "",
   success: false,
+  getSettings:null
 };
 
 const proxy = new ServiceProxy();
@@ -35,7 +37,7 @@ const proxy = new ServiceProxy();
 //effects and actions
 export const fetchForms = createAsyncThunk("forms/fetchForms", () => {
   return proxy
-    .formsGET(undefined, undefined, 0, 30, undefined)
+    .formsGET(undefined, 'id DESC', 0, 30, undefined)
     .then((result: any) => {
       return result;
     });
@@ -73,11 +75,15 @@ export const getForms = createAsyncThunk("forms/getForms", (id: string) => {
 
 //Forms Questions
 
-export const SaveformsQuestions = createAsyncThunk(
+export const 
+SaveformsQuestions = createAsyncThunk(
   "forms/SaveformsQuestions",
-  (data: any) => {
+  (data:any) => {
+    debugger
+     let temp :CreateQuestionDto = data.body;
+    //  temp.index = data.body.index
     return proxy
-      .questionsPOST(data.id, data.body, undefined)
+      .questionsPOST(data.id, temp, undefined)
       .then((result: any) => {
         return result;
       });
@@ -130,6 +136,23 @@ export const getAll2FormsQuestions = createAsyncThunk(
     });
   }
 );
+export const updateFormsSettings = createAsyncThunk(
+  "forms/updateFormsSettings",
+  (data: any) => {
+    return proxy.settingsPUT2(data.id, data.body, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+export const getFormsSettings = createAsyncThunk(
+  "forms/getFormsSettings",
+  (id: string) => {
+    return proxy.settingsGET3(id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+
 
 //reducer
 const formsSlice = createSlice({
@@ -246,19 +269,19 @@ const formsSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
     
-    builder.addCase(getAllFormsQuestions.pending, (state) => {
+    builder.addCase(getFormsQuestionsForEdit.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      getAllFormsQuestions.fulfilled,
+      getFormsQuestionsForEdit.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.formQuestion = action.payload;
       }
     );
 
-    builder.addCase(getAllFormsQuestions.rejected, (state, action) => {
+    builder.addCase(getFormsQuestionsForEdit.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
@@ -316,7 +339,42 @@ const formsSlice = createSlice({
       state.alertMessage = "Something Went Wrong";
       state.success = false;
     });
+ 
+    //settings
+    builder.addCase(getFormsSettings.pending, (state) => {
+      state.loading = true;
+    });
 
+    builder.addCase(getFormsSettings.fulfilled, (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.getSettings= action.payload;
+    });
+    builder.addCase(getFormsSettings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Somethingwentwrong";
+    });
+
+    builder.addCase(updateFormsSettings.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+
+    builder.addCase(
+      updateFormsSettings.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.alert = true;
+        state.alertMessage = "Data edited successfully";
+        state.success = true;
+      }
+    );
+    builder.addCase(updateFormsSettings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
+    });
   },
 });
 

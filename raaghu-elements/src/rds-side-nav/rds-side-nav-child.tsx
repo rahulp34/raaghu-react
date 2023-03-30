@@ -23,6 +23,7 @@ const RdsSideNavChild = ({
   const [count, setCount] = useState(counter);
 
   const [collapse, setcollapse] = useState(false);
+  // const collapse = props.collapse;
 
   const onCollapse = () => {
     console.log(collapse);
@@ -55,22 +56,25 @@ const RdsSideNavChild = ({
             ></Node>
           ))}
       </ul>
-      <span>
+      {/* <span> */}
         <div
           className={`sidenav-footer text-center ${collapse ? "w-auto" : ""}`}
         >
-          <div className="ms-3">
-            <div className="text-center mb-3">
+          {/* <div className="ms-3"> */}
+            {/* <div className="text-center mb-3"> */}
+         <span className="collpase-button">
 
-              <RdsIcon
-                name="grid_square"
-                height="23px"
-                width="23px"
+           <RdsIcon
+                name="chevron_right_double "
+                height="15px"
+                width="15px"
                 stroke={true}
                 fill={false}
                 onClick={onCollapse}
+                colorVariant="primary"
               ></RdsIcon>
-            </div>
+       </span>
+            {/* </div> */}
             {/* <div className="darkTheme text-center">
               <a
                 className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
@@ -85,9 +89,9 @@ const RdsSideNavChild = ({
                
               </a>
             </div> */}
-          </div>
+          {/* </div> */}
         </div>
-      </span>
+      {/* </span> */}
     </>
   );
 };

@@ -77,6 +77,12 @@ export const PortConfig = {
   "forms": {
     "port": "8037"
   },
+  "formsView": {
+    "port": "8038"
+  },
+  "formsPreview": {
+    "port": "8039"
+  },
   "blogger": {
     "port": "8028"
   },
@@ -92,10 +98,22 @@ export const PortConfig = {
   "urlForwarding": {
     "port": "8097"
   },
-  "paymentPlans":{
-    "port":"8031"
+  "paymentPlans": {
+    "port": "8031"
   },
   "blogs": {
     "port": "8032"
+  },
+  "comments": {
+    "port": "8033"
+  },
+  "tags": {
+    "port": "8034"
+  },
+  "elements": {
+    "port": "8100"
+  },
+  "personalData": {
+    "port": "8102"
   }
 }

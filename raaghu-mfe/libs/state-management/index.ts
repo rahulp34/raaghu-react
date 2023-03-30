@@ -19,7 +19,8 @@ import { useDispatch } from "react-redux";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
-import  applicationsReducer  from "./applications/applications-slice";
+import hostReducer from './host/host-slice';
+import applicationsReducer  from "./applications/applications-slice";
 import urlForwardingReducer from './url-forwarding/url-forwarding-slice';
 import textTemplateReducer from "./text-template/text-template-slice";
 import tenantReducer from './tenant/tenant-slice';
@@ -27,6 +28,9 @@ import chatsReducer from './chats/chats-slice';
 import bloggerReducer from './blogger/blogger-slice';
 import formsReducer from './forms/forms-slice';
 import paymentPlansReducer from './payment-plans/paymentPlans-slice';
+import personalDataReducer from './personal-data/personal-data-slice';
+import commentsReducer from './comments/comments-slice';
+import tagsReducer from './tags/tags-slice';
 
 const persistConfig={
   key: "root",
@@ -58,6 +62,11 @@ const rootReducer = combineReducers({
   fileManagement: FileManagementReducer,
   paymentPlans:paymentPlansReducer,
   urlForwarding: urlForwardingReducer,
+  personalData: personalDataReducer,
+  comments:commentsReducer,
+ tags:tagsReducer,
+ host: hostReducer
+
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

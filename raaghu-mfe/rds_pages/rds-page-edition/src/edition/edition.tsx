@@ -230,7 +230,7 @@ const Edition = (props: RdsPageEditionProps) => {
             canvasTitle="NEW EDITION"
             onclick={offCanvasHandler}
             placement="end"
-            offcanvaswidth={550}
+            
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton
@@ -314,7 +314,7 @@ const Edition = (props: RdsPageEditionProps) => {
           onclick={offCanvasHandler}
           placement="end"
           offId="dynamic-edit-off"
-          offcanvaswidth={550}
+          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

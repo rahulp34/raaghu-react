@@ -27,7 +27,7 @@ import {
   export const fetchRoles = createAsyncThunk(
     "Roles/fetchRoles",
   async  () => {
-       return proxy.rolesGET3(undefined, undefined,0,1000).then(
+       return proxy.rolesGET3(undefined, 'id DESC',0,1000).then(
         (result:any)=>{
             console.log('fetched data , ',result.items  )
           return result.items

@@ -135,6 +135,14 @@ declare module "Forms/Forms" {
 	const FormsComponent : React.ComponentType;
 	export default FormsComponent;
 }
+declare module "FormsView/FormsView" {
+	const FormsViewCompo : React.ComponentType;
+	export default FormsViewCompo;
+}
+declare module "FormsPreview/FormsPreview" {
+	const FormsPreviewCompo : React.ComponentType;
+	export default FormsPreviewCompo;
+}
 declare module "Blogger/Blogger" {
 	const BloggerComponent : React.ComponentType;f
 	export default BloggerComponent;
@@ -163,4 +171,20 @@ declare module "PaymentPlans/PaymentPlans" {
 declare module "Blogs/Blogs" {
 	const BlogsComponent : React.ComponentType;
 	export default BlogsComponent;
+}
+declare module "Comments/Comments" {
+	const CommentsComponent : React.ComponentType;
+	export default CommentsComponent;
+}
+declare module "Tags/Tags" {
+	const TagsComponent : React.ComponentType;
+	export default TagsComponent;
+}
+declare module "Elements/Elements" {
+	const ElementsComponent: React.ComponentType;
+	export default ElementsComponent;
+}
+declare module "PersonalData/PersonalData" {
+	const PersonalDataComponent: React.ComponentType;
+	export default PersonalDataComponent;
 }

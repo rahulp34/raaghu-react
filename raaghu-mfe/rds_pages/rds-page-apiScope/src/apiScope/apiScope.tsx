@@ -178,7 +178,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
               canvasTitle={t("New Scope")}
               onclick={offCanvasHandler}
               placement="end"
-              offcanvaswidth={550}
+              
               offcanvasbutton={
                 <div>
                   <RdsButton
@@ -227,7 +227,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
             offId="entity-edit-off"
             placement="end"
             canvasTitle="Edit"
-            offcanvaswidth={550}
+          
             children={
               <RdsCompApiScopeBasicResource
                 onSuccess={edit} email={editscopeData.name} fullname={editscopeData.displayName} message={editscopeData.description} />

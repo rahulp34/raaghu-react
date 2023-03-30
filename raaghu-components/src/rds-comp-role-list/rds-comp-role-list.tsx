@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+  import React, { useState } from "react";
 import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
 // import RdsCompPermissionTree from "../rds-comp-permission-tree/rds-comp-permission-tree";
@@ -224,24 +224,19 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             ></RdsButton>
 
             <RdsOffcanvas
-              offcanvasbutton={
-                <RdsButton
-                  onClick={props.onFilterByPermissions}
-                  class="me-3 btn-sm"
-                  type={"button"}
-                  colorVariant="primary"
-                  isOutline={true}
-                  label="FILTER BY PERMISSIONS"
-                />
-              }
+              offcanvasbutton={<RdsButton
+                onClick={props.onFilterByPermissions}
+                class="me-3 btn-sm"
+                type={"button"}
+                colorVariant="primary"
+                isOutline={true}
+                label="FILTER BY PERMISSIONS" />}
               placement={"end"}
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
               offId={props.listItems[1].key}
-              canvasTitle={props.listItems[1].value}
-              offcanvaswidth={600}
-            >
+              canvasTitle={props.listItems[1].value}>
               <div className="" onClick={props.onSearch}>
                 <RdsSearch size="small" placeholder="search role"></RdsSearch>
               </div>
@@ -264,27 +259,22 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
             </RdsOffcanvas>
 
             <RdsOffcanvas
-              offcanvasbutton={
-                <RdsButton
-                  onClick={onNewRole}
-                  class="btn-sm"
-                  type={"button"}
-                  colorVariant="primary"
-                  label={props.listItems[2].value}
-                  icon={props.listItems[2].icon}
-                  iconHeight={props.listItems[2].iconHeight}
-                  iconWidth={props.listItems[2].iconWidth}
-                  iconColorVariant="light"
-                />
-              }
+              offcanvasbutton={<RdsButton
+                onClick={onNewRole}
+                class="btn-sm"
+                type={"button"}
+                colorVariant="primary"
+                label={props.listItems[2].value}
+                icon={props.listItems[2].icon}
+                iconHeight={props.listItems[2].iconHeight}
+                iconWidth={props.listItems[2].iconWidth}
+                iconColorVariant="light" />}
               placement={"end"}
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
               offId={props.listItems[2].key}
-              canvasTitle={props.listItems[2].value}
-              offcanvaswidth={550}
-            >
+              canvasTitle={props.listItems[2].value}>
               <RdsNavtabs
                 navtabsItems={[
                   {
@@ -393,14 +383,13 @@ const RdscompRoleList = (props: RdscompRoleListProps) => {
         ></RdsCompDatatable>
         </div>
         <RdsOffcanvas
+        offcanvaswidth={650}
           placement={"end"}
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
           offId={"Edit"}
-          canvasTitle={"Edit"}
-          offcanvaswidth={550}
-        >
+          canvasTitle={"Edit"}>
           <RdsNavtabs
             navtabsItems={[
               {

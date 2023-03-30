@@ -14,6 +14,13 @@ const MainMenu = [
       "subTitle": "icons",
     },
     {
+      "key": "8",
+      "label": "Elements",
+      "icon": "icons",
+      "path": "/elements",
+      "subTitle": "Elements"
+    },
+    {
       "key": "2",
       "label": "Saas",
       "icon": "pages",
@@ -150,24 +157,17 @@ const MainMenu = [
           "path": "/settings",
           "subTitle": "Show and change application settings",
         },
-        {
-          "key": "3-5",
-          "label": "Identity Server",
+         {
+          "key": "3-6",
+          "label": "Blogging",
           "icon": "tenant",
           "children": [
             {
-              "key": "3-5-0",
-              "label": "Clients",
-              "icon": "languages",
-              "path": "/client",
-              "subTitle": "Manage user interface languages",
-            },
-            {
-              "key": "3-5-1",
-              "label": "Identity resources",
-              "icon": "languages",
-              "path": "/language-text",
-              "subTitle": "Manage user interface languages",
+              "key": "3-6-0",
+              "label": "Blogging",
+              "icon": "blog",
+              "path": "/blog",
+              "subTitle": "Blogs, Posts, Articles",
             },
           ],
         },
@@ -175,67 +175,68 @@ const MainMenu = [
     },
     {
       "key": "4",
-      "label": "Chats",
-      "icon": "home",
-      "path": "/chats",
-      "subTitle": "Chats Module",
-    },
-    {
-      "key": "5",
       "label": "File Management",
       "icon": "icons",
       "path": "/fileManagement",
       "subTitle": "File Management",
     },
     {
-      "key": "6",
+      "key": "5",
       "label": "Forms",
       "icon": "icons",
       "path": "/forms",
       "subTitle": "Forms",
     },
+    
     {
-      "key": "7",
-      "label": "Blogger",
-      "icon": "blog",
-      "path": "/blogger",
-      "subTitle": "Blogs, Posts, Articles",
-    },
-    {
-      "key": "9",
-      "label": "Identity Resources",
-      "icon": "icons",
-      "path": "/identityResources",
-      "subTitle": "Blogs, Posts, Articles",
-    },
-    {
-      "key": "10",
-      "label": "Polls",
-      "icon": "icons",
-      "path": "/polls",
-      "subTitle": "Blogs, Posts, Articles",
-    },
-    {
-      "key": "11",
+      "key": "6",
       "label": "Payment Plans",
       "icon": "card_image",
       "path": "/paymentPlans",
       "subTitle": "Payment Plans",
     },
     {
-        "key": "12",
-        "label": "CMS",
-        "icon": "pages",
-        "children": [
-            {
-                "key": "12-0",
-                "label": "Blogs",
-                "icon": "tenant",
-                "path": "/blogs",
-                "subTitle": "Manage your blogs",
+      "key": "7",
+      "label": "CMS",
+      "icon": "pages",
+      "children": [
+          {
+              "key": "7-0-0",
+              "label": "Blogs",
+              "icon": "tenant",
+              "path": "/blogs",
+              "subTitle": "Manage your blogs",
+          },
+          {
+            "key": "7-0-1",
+            "label": "Polls",
+            "icon": "icons",
+            "path": "/polls",
+            "subTitle": "Blogs, Posts, Articles",
+          },
+          {
+            "key": "7-0-2",
+            "label": "Url Forwarding",
+            "icon": "icons",
+            "path": "/url-forwarding",
+            "subTitle": "Blogs, Posts, Articles",
+          },
+          {
+            "key": "7-0-3",
+            "label": "Comments",
+            "icon": "question_chat",
+            "path": "/comments",
+            "subTitle": "Comments",
+          },
+              {
+              "key": "7-0-4",
+              "label": "Tags",
+              "icon": "tag",
+              "path": "/tags",
+              "subTitle": "tags",
             },
-        ]
-    }
+      ]
+  }
 ]
 
 export default MainMenu;

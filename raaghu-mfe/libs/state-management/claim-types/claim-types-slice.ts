@@ -27,7 +27,7 @@ export const fetchClaimTypesData = createAsyncThunk(
   "claimTypes/fetchClaimTypesData",
   () => { 
     return proxy
-      .claimTypesGET(undefined, undefined, undefined, undefined)
+      .claimTypesGET(undefined, 'id DESC', undefined, undefined)
       .then((result: any) => {
         console.log("result ClaimType", result);
         return result.items;

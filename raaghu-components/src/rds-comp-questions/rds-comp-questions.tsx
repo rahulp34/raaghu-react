@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import RdsCompFormsBasic from "../rds-comp-forms-basic/rds-comp-forms-basic";
-import RdsCompFormsQuestion from "../rds-comp-forms-question/rds-comp-forms-question";
 import RdsCompFormsQuestions from "../rds-comp-forms-question/rds-comp-forms-questions";
 import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea, RdsToggle } from "../rds-elements";
 
@@ -10,43 +9,39 @@ export interface RdsCompQuestionsProps {
 	basicEditFormData: any;
 	getBasicEditDataFromQuestionComp?: any;
 	getQuestionsEditDataFromQuestionComp?: any;
+	deleteQuestion:React.EventHandler<any>
 }
 
 const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
-	const [basicEditFormData, setbasicEditFormData] = useState(props.basicEditFormData);
-	// const [questions, setQuestions] = useState<any[]>([]);
+	const [basicEditFormData2, setbasicEditFormData] = useState(props.basicEditFormData);
+	const [formQuestionsData1, setFormQuestionsData] = useState(props.formQuestionsData);
 	useEffect(() => {
 		setbasicEditFormData(props.basicEditFormData)
 	}, [props.basicEditFormData])
 
 	function handleGetEditFormData(data: any) {
-
 		const updatedFormData = {
 			...data,
-			questions: formQuestionsData
+			questions: formQuestionsData1
 		};
 		setbasicEditFormData(updatedFormData)
 		props.getBasicEditDataFromQuestionComp(updatedFormData);                                                            
 	}
 
-	const [formQuestionsData, setFormQuestionsData] = useState(props.formQuestionsData);
 	useEffect(() => {
 		setFormQuestionsData(props.formQuestionsData)
 	}, [props.formQuestionsData])
 
 	function handleGetQuestions(data: any) {
-        debugger
-		setFormQuestionsData(data)
-
 		props.getQuestionsEditDataFromQuestionComp(data);
 	}
 
 	return (
 		<>
 			<div className="row mt-3 ">
-				<RdsCompFormsBasic basicInfo={basicEditFormData} handleNewFormData={(data: any) => handleGetEditFormData(data)} questions={formQuestionsData} />
+			{basicEditFormData2?.id && (<RdsCompFormsBasic basicInfo={basicEditFormData2} handleNewFormData={(data: any) => handleGetEditFormData(data)} questions={formQuestionsData1} />)}
 			</div>
-			<RdsCompFormsQuestions formQuestionsData={formQuestionsData} handleQuestions={(data: any) => handleGetQuestions(data)}></RdsCompFormsQuestions>
+			<RdsCompFormsQuestions formQuestionsData={formQuestionsData1} handleQuestions={(data: any) => handleGetQuestions(data)} deleteQuestion={(data:any)=>{props.deleteQuestion(data)}}></RdsCompFormsQuestions>
 		</>
 	);
 };
