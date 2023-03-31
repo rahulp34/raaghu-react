@@ -92,7 +92,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <div className="px-2 position-relative border-end">
+          <div className="px-2 cursor-pointer position-relative border-end">
           <RdsDropdownList
            placeholder={props.toggleItems[0].label}
            icon =  "sun"

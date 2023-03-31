@@ -117,7 +117,13 @@ const Main = (props: MainProps) => {
       navigate("/login");
     } else {
       setChecking(true);
-      navigate(location.pathname);
+      if(location.pathname==""){
+        navigate('/dashboard')
+      }
+      else{
+        navigate(location.pathname)
+
+      }
     }
   }, [dataHost.configuration]);
 
@@ -288,6 +294,7 @@ const Main = (props: MainProps) => {
     setIsAuth(false);
     navigate("/login");
   };
+
   let logo = "./assets/raaghu_logs.png";
   return (
     <Suspense>
