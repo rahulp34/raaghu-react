@@ -516,6 +516,7 @@ const dragOverItem = useRef<any>(null);
                                             data-bs-toggle="modal"
                                             data-bs-target={`#${action?.modalId}`}
                                             aria-controls={action?.modalId}
+                                            data-bs-backdrop={false}
                                             onClick={(e) => {
                                               actionOnClickHandler(
                                                 e,
@@ -534,6 +535,7 @@ const dragOverItem = useRef<any>(null);
                                               data-bs-toggle="offcanvas"
                                               data-bs-target={`#${action?.offId}`}
                                               aria-controls={action?.offId}
+                                              data-bs-backdrop={false}
                                               onClick={(e) => {
                                                 actionOnClickHandler(
                                                   e,

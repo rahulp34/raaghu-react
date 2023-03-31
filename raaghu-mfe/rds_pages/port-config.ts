@@ -121,5 +121,8 @@ export const PortConfig = {
   },
   "paymentRequests": {
     "port": "8036"
+  },
+  "rdsComponents": {
+    "port": "8103"
   }
 }
