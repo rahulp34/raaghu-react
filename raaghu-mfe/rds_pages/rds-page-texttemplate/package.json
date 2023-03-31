@@ -14,7 +14,6 @@
   "dependencies": {
     "in": "^0.19.0",
     "level": "^8.0.0",
-    "raaghu-react-elements": "^0.4.0",
     "root": "^3.2.0"
   }
 }

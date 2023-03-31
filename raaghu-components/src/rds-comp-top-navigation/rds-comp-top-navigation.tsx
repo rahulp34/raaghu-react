@@ -13,8 +13,10 @@ import {
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
+  toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
+  toggleItems: any[];
   navbarTitle?: string;
   navbarSubTitle?: string;
   brandName?: string;
@@ -38,19 +40,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
-			id: "nav-Deligation",
+			id: "nav-MyAccount",
 		},
 		{
 			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
-			id: "nav-Attempts",
+			id: "nav-SecuityLogs",
 		},
 		{
 			label: "Personal Data",
 			icon: "my_settings",
 			subText: "Change your account settings",
-			id: "nav-Settings",
+			id: "nav-PersonalData",
 		},		
 	];
 
@@ -69,7 +71,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-              width="70"
+              // width="70"
             ></img>
             
             <span className="title fw-bold text-lowercase m-2 cursor-pointer">
@@ -90,6 +92,18 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
+          <div className="px-2 cursor-pointer position-relative border-end">
+          <RdsDropdownList
+           placeholder={props.toggleItems[0].label}
+           icon =  "sun"
+           iconFill = {false }
+           iconStroke ={true}
+            listItems={props.toggleItems}
+            // onClick={props.toggleTheme}
+          ></RdsDropdownList>
+          </div>
+     
+          <div className="px-2 position-relative border-end">
           <RdsDropdownList
            placeholder={props.languageItems[0].label}
            icon =  "us"
@@ -98,6 +112,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             listItems={props.languageItems}
             onClick={props.onClick}
           ></RdsDropdownList>
+          </div>
          <div className="me-3 ms-3 position-relative">
             <a
               data-bs-toggle="dropdown"

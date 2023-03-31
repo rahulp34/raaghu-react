@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
-import RdsCompDirectoryList, { DirectoryItem }  from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
+import RdsCompDirectoryList, {
+  DirectoryItem,
+} from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
 import RdsCompFileUploader from "../../../../../raaghu-components/src/rds-comp-fileUploader/rds-comp-fileUploader";
 import {
+  RdsCompAlertPopup,
+} from "../../../rds-components";
+import {
+  RdsAlert,
   RdsBreadcrumb,
   RdsButton,
   RdsInput,
   RdsOffcanvas,
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
-import { fetchDirectoryDescriptor, fetchEditDirectory, fetchSubDirectory, saveDirectoryDescriptor, updateDirectoryDescriptor, useAppDispatch } from "../../../../libs/public.api";
+import {
+  deleteDirectoryDescriptor,
+  fetchDirectoryDescriptor,
+  fetchEditDirectory,
+  fetchSubDirectory,
+  saveDirectoryDescriptor,
+  updateDirectoryDescriptor,
+  useAppDispatch,
+} from "../../../../libs/public.api";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
 
 const FileManagement = () => {
-const { t } = useTranslation();
-const dispatch = useAppDispatch();
-const file = useAppSelector((state) => state.persistedReducer.fileManagement);
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const file = useAppSelector((state) => state.persistedReducer.fileManagement);
 
-const[path,setPath]=useState("");
-const [name,setName]=useState("")
-const[data,setData]= useState("")
-const[id,setId]=useState("")
-
+  const [path, setPath] = useState("");
+  const [name, setName] = useState("");
+  const [data, setData] = useState("");
+  const [id, setId] = useState("");
+  const[RenameFolder,setRenameFolder]=useState<any>({})
 
   const [directories, setDirectories] = useState<any[]>([
     {
@@ -30,59 +44,12 @@ const[id,setId]=useState("")
       path: "/all",
       parentId: null,
       id: null,
-      hasChildren:false,
-      children: [
-      ],
-    },
-  ])
-
-  
-  // const items = [
-  //   {
-  //     label: "Home",
-  //     id: 1,
-  //     disabled: false,
-  //     icon: "home",
-  //     iconFill: false,
-  //     iconstroke: true,
-  //     iconWidth: "15px",
-  //     iconHeight: "15px",
-  //     iconColor: "primary",
-  //     active: false,
-  //   },
-  // ];
-
-  const items: DirectoryItem[] = [
-    {
-      id: "1",
-      name: "Parent 1",
-      hasChildren: true,
-      children: [
-        {
-          id: "2",
-          name: "Child 1.1",
-          hasChildren: true,
-          children: [
-            {
-              id: "3",
-              name: "Grandchild 1.1.1",
-              hasChildren: false,
-            },
-          ],
-        },
-        {
-          id: "4",
-          name: "Child 1.2",
-          hasChildren: false,
-        },
-      ],
-    },
-    {
-      id: "5",
-      name: "Parent 2",
       hasChildren: false,
+      children: [],
     },
-  ];
+  ]);
+
+ 
 
   const tableHeaders = [
     {
@@ -117,63 +84,51 @@ const[id,setId]=useState("")
     },
   ]);
 
-  useEffect(()=>{
-    
-    if (file.directoryDescriptor?.items.length){
-      
-      const tempdata=file.directoryDescriptor.items.map((item:any)=>{
+  useEffect(() => {
+    if (file.directoryDescriptor?.items.length) {
+      const tempdata = file.directoryDescriptor.items.map((item: any) => {
         return {
-          id:item.id,
-          name:item.name,
-          isDirectory:item.isDirectory,
-          size:item.size,
-        }
+          id: item.id,
+          name: item.name,
+          isDirectory: item.isDirectory,
+          size: item.size,
+        };
       });
       setTableData(tempdata);
     }
-  },[file.directoryDescriptor])
+  }, [file.directoryDescriptor]);
 
-  const tableData1 = [
-    {
-      id: 1,
-      name: "khghjfvghv.ppt",
-      size: "987.66KB, ",
-    },
-    {
-      id: 2,
-      name: "RDS-Lojbhjvgo.png",
-      size: "512KB",
-    },
-    {
-      id: 2,
-      name: "RDS-elemekjbjhgnts.xd",
-      size: "1MB",
-    },
-  ];
-  const tableData2 = [
-    {
-      id: 1,
-      name: "RDSjghfyugb.ppt",
-      size: "987.66KB, ",
-    },
-    {
-      id: 2,
-      name: "RDS-Logkjyfuttycvo.png",
-      size: "512KB",
-    },
-    {
-      id: 2,
-      name: "RDS-elekhygfyifments.xd",
-      size: "1MB",
-    },
-  ];
+
   const actions = [
-    { id: "rename", displayName: "Rename" },
-    { id: "delete", displayName: "Delete" },
-    { id: "move", displayName: "Move" },
+    { id: "rename", displayName: "Rename", offId: "Rename" },
+    { id: "delete", displayName: "Delete", modalId: "DeleteFile" },
+    { id: "move", displayName: "Move", offId: "Move" },
   ];
 
-  const breadItems = [
+  const onActionHandler=(rowData:any , actionId: any)=>{
+   if(actionId="Rename "){
+    setFolderId(rowData.id)
+    console.log(rowData)
+    setRenameFolder(rowData.name);
+    setName(rowData.name); 
+   }
+  } 
+  const UpdateFolderName = () => {
+    let dto ={body:{name:name},
+              id: folderId}
+    dispatch(updateDirectoryDescriptor((dto))as any).then((res:any)=>{
+      dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    })
+    setRenameFolder("")
+  };
+  useEffect(()=>{
+    if(file.editDirectory){
+      setRenameFolder(file.editDirectory)
+    }
+  },[file.editDirectory])
+
+  const [breadItems, setbreadCrumItems] = useState<any[]>([
     {
       label: "All",
       id: 1,
@@ -212,92 +167,115 @@ const[id,setId]=useState("")
       iconHeight: "7px",
       iconColor: "primary",
     },
-  ];
+  ]);
 
-  function recursiveFunctionAddData(directories:any, data:any){
-    return directories.map((el:any)=>{
-      if(data.parentId == el.id){
+  function recursiveFunctionAddData(directories: any, data: any) {
+    return directories.map((el: any) => {
+      if (data.parentId == el.id) {
         let flag = 0;
-        el.children?.map((e:any)=>{
-          if(e.id == data.id){
+        el.children?.map((e: any) => {
+          if (e.id == data.id) {
             flag = 1;
           }
-        })
-        if(!flag){
+        });
+        if (!flag) {
           el.hasChildren = true;
-          if(el.children){
-            el.children.push(data)
+          if (el.children) {
+            el.children.push(data);
+          } else {
+            el["children"] = [data];
           }
-          else{
-            el['children'] = [data];
-          }
-          
+        }
+        return el;
+      } else {
+        if (el.children) {
+          el.children = recursiveFunctionAddData(el.children, data);
         }
         return el;
       }
-      else{
-        if(el.children){
-          el.children = recursiveFunctionAddData(el.children, data)
-        }
-        return el;
-      }
-    })
+    });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchSubDirectory(undefined) as any);
-    dispatch(fetchDirectoryDescriptor(undefined) as any)
+    dispatch(fetchDirectoryDescriptor(undefined) as any);
+  }, [dispatch]);
 
-  },[dispatch])
-
-  useEffect(()=>{
-    if(file.subDirectories){
+  useEffect(() => {
+    if (file.subDirectories) {
       let parsedDirectory = JSON.parse(JSON.stringify(directories));
-      file.subDirectories.items.map((el:any)=>{
+      file.subDirectories.items.map((el: any) => {
         let tempData = recursiveFunctionAddData(parsedDirectory, el);
         setDirectories(tempData);
-      })
-   
+      });
     }
+  }, [file.subDirectories]);
+  const dTo: {
+    name: string;
+    parentId: any;
+    extraProperties: any;
+  } = { name: "", parentId: null, extraProperties: {} };
+  function setbreadCrum(data: any) {
+    // directories.
+  }
 
-  },[file.subDirectories])
-  const dTo : {
-    name: string,
-    parentId:any,
-    extraProperties:any
-  } = 
-  { name:"",
-    parentId:null,
-extraProperties:{}};
-  
- const[folderId, setFolderId] = useState<string>("");
-  function setPathValue(event:any){
+  const [folderId, setFolderId] = useState<string>("");
+  function setPathValue(event: any) {
     let id = undefined;
-    if(event && event.id){
+    if (event && event.id) {
       id = event.id;
-    }
-    else{
+    } else {
       id = undefined;
     }
-    setFolderId(event.id);
+    setFolderId(id);
     dispatch(fetchDirectoryDescriptor(id) as any);
-    dispatch(fetchSubDirectory(id) as any); 
+    dispatch(fetchSubDirectory(id) as any);
+    setbreadCrum(id);
     // dispatch(fetchSubDirectory(event.name) as any);
   }
-  
-  function AddChildren(event:any){
-    dispatch
+
+  function AddChildren(event: any) {
+    dispatch;
   }
-  const addDataHandler=()=>{
+  const addDataHandler = () => {
     dTo.name = name;
     dTo.parentId = folderId;
-    dispatch(saveDirectoryDescriptor(dTo) as any).then((res:any)=>{  
-    })
+    dispatch(saveDirectoryDescriptor(dTo) as any).then((res: any) => {
+      dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    });
     setName("");
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ])
+    
+  };
+
+  const onDeleteFile=()=>{
+    dispatch(deleteDirectoryDescriptor(folderId )as any).then((res:any)=>{
+      setDirectories([
+    {
+      name: "All",
+      path: "/all",
+      parentId: null,
+      id: null,
+      hasChildren: false,
+      children: [],
+    },
+  ])
+      dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    })
   }
 
-
-  function setValue(value: string) {
+  function setValue(value: string) { 
     throw new Error("Function not implemented.");
   }
 
@@ -307,7 +285,6 @@ extraProperties:{}};
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
-          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -373,7 +350,6 @@ extraProperties:{}};
         <RdsOffcanvas
           canvasTitle={"Upload Files"}
           placement="end"
-          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -396,9 +372,8 @@ extraProperties:{}};
               ></RdsButton>
             </div>
           }
-         
         >
-          <RdsCompFileUploader ></RdsCompFileUploader>
+          <RdsCompFileUploader></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
@@ -434,12 +409,65 @@ extraProperties:{}};
                 tableData={tableData}
                 pagination={false}
                 actions={actions}
+                onActionSelection={onActionHandler}
               />
+              <RdsOffcanvas
+                canvasTitle={"RENAME"}
+                placement="end"
+                offcanvaswidth={650}
+                backDrop={false}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"Rename"}
+              >
+                <div>
+                  <div className="pt-3">
+                    <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Enter Name"
+                      label="Name"
+                      labelPositon="top"
+                      id=""
+                      value={name}
+                      required={true}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                    ></RdsInput>
+                    <div className="d-flex footer-buttons">
+                      <RdsButton
+                        label="CANCEL"
+                        databsdismiss="offcanvas"
+                        type={"button"}
+                        size="small"
+                        isOutline={true}
+                        colorVariant="primary"
+                        class="me-2"
+                      ></RdsButton>
+                      <RdsButton
+                        label="RENAME"
+                        type={"button"}
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isDisabled={name === ""}
+                        colorVariant="primary"
+                        class="me-2"
+                        onClick={UpdateFolderName}
+                      ></RdsButton>
+                    </div>
+                  </div>
+                </div>
+              </RdsOffcanvas>
+              <RdsCompAlertPopup alertID="DeleteFile" onSuccess={onDeleteFile} /> 
             </div>
+            
           </div>
         </div>
       </div>
+       
     </div>
+    
   );
 };
 
@@ -455,15 +483,12 @@ export default FileManagement;
 </div> */
 }
 
-
-  // useEffect(() => {
-  //   if(path=="All"){
-  //     setTableData(tableData1)
-  //   }
-  //   if(path=="Parent 1"){
-  //     setTableData(tableData2)
-  //   }
-  // console.log(path,"bredCrumbs Path");
-  // },[path])
-
-  
+// useEffect(() => {
+//   if(path=="All"){
+//     setTableData(tableData1)
+//   }
+//   if(path=="Parent 1"){
+//     setTableData(tableData2)
+//   }
+// console.log(path,"bredCrumbs Path");
+// },[path])

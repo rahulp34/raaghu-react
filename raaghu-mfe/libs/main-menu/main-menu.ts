@@ -14,6 +14,13 @@ const MainMenu = [
       "subTitle": "icons",
     },
     {
+      "key": "8",
+      "label": "Elements",
+      "icon": "icons",
+      "path": "/elements",
+      "subTitle": "Elements"
+    },
+    {
       "key": "2",
       "label": "Saas",
       "icon": "pages",
@@ -190,39 +197,46 @@ const MainMenu = [
     },
     {
       "key": "7",
+      "label": "Payment Requests",
+      "icon": "card_image",
+      "path": "/paymentRequests",
+      "subTitle": "Payment Requests",
+    },
+    {
+      "key": "8",
       "label": "CMS",
       "icon": "pages",
       "children": [
           {
-              "key": "7-0-0",
+              "key": "8-0-0",
               "label": "Blogs",
               "icon": "tenant",
               "path": "/blogs",
               "subTitle": "Manage your blogs",
           },
           {
-            "key": "7-0-1",
+            "key": "8-0-1",
             "label": "Polls",
             "icon": "icons",
             "path": "/polls",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
-            "key": "7-0-2",
+            "key": "8-0-2",
             "label": "Url Forwarding",
             "icon": "icons",
             "path": "/url-forwarding",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
-            "key": "7-0-3",
+            "key": "8-0-3",
             "label": "Comments",
             "icon": "question_chat",
             "path": "/comments",
             "subTitle": "Comments",
           },
               {
-              "key": "7-0-4",
+              "key": "8-0-4",
               "label": "Tags",
               "icon": "tag",
               "path": "/tags",

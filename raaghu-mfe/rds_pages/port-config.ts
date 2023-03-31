@@ -98,8 +98,8 @@ export const PortConfig = {
   "urlForwarding": {
     "port": "8097"
   },
-  "paymentPlans":{
-    "port":"8031"
+  "paymentPlans": {
+    "port": "8031"
   },
   "blogs": {
     "port": "8032"
@@ -109,5 +109,20 @@ export const PortConfig = {
   },
   "tags": {
     "port": "8034"
+  },
+  "elements": {
+    "port": "8100"
+  },
+  "personalData": {
+    "port": "8102"
+  },
+  "myAccount": {
+    "port": "8101"
+  },
+  "paymentRequests": {
+    "port": "8036"
+  },
+  "rdsComponents": {
+    "port": "8103"
   }
 }

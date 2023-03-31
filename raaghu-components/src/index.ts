@@ -1,3 +1,5 @@
+import { from } from "form-data";
+
 export {default as RdsCompAdminDashboard} from "./rds-comp-admin-dashboard/rds-comp-admin-dashboard";
 export {default as RdsCompForgotPassword} from "./rds-comp-forgot-password/rds-comp-forgot-password";
 export {default as RdsCompLogin} from "./rds-comp-login/rds-comp-login";
@@ -28,7 +30,6 @@ export {default as RdsCompUserPermission} from "./rds-comp-user-permission/rds-c
 export {default as RdsCompUserBasics} from "./rds-comp-user-basics/rds-comp-user-basics"
 export {default as RdsCompNewLanguage} from "./rds-comp-new-language/rds-comp-new-language";
 export {default as RdsCompDynamicEntityProperty} from './rds-comp-dynamic-entity-property/rds-comp-dynamic-entity-property';
-export {default as RdsCompRoleList} from './rds-comp-role-list/rds-comp-role-list'
 export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-list'
 export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition'
 export {default as RdsCompFeatures} from './rds-comp-new-features/rds-comp-new-features'
@@ -64,4 +65,7 @@ export { default as RdsCompClaim } from './rds-comp-claim/rds-comp-claim';
 export { default as RdsCompUrlForwardings} from './rds-comp-url-forwardings';
 export { default as RdsCompPollsQuestion} from './rds-comp-polls-question/rds-comp-polls-question';
 export {default as RdsCompPollsOption} from './rds-comp-polls-option/rds-comp-polls-option';
-
+export { default as RdsCompElements} from './rds-comp-elements/rds-comp-elements'
+export {default as RdsCompChangePassword} from './rds-comp-change-password/rds-comp-change-password';
+export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-personal-info';
+export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';

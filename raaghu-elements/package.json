@@ -1,6 +1,6 @@
 {
   "name": "raaghu-react-elements",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Collection of raaghu-elements",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

@@ -66,7 +66,7 @@ export const MfeConfig = {
     "url": "apiScope@http://localhost:8019/remoteEntry.js"
   },
   "scope": {
-      "url": "scope@http://localhost:8099/remoteEntry.js"
+    "url": "scope@http://localhost:8099/remoteEntry.js"
   },
   "identityResources": {
     "url": "identityResources@http://localhost:8098/remoteEntry.js"
@@ -115,5 +115,20 @@ export const MfeConfig = {
   },
   "tags": {
     "url": "tags@http://localhost:8034/remoteEntry.js"
+  },
+  "elements": {
+    "url": "elements@http://localhost:8100/remoteEntry.js"
+  },
+  "personalData": {
+    "url": "personalData@http://localhost:8102/remoteEntry.js"
+  },
+  "myAccount": {
+    "url": "myAccount@http://localhost:8101/remoteEntry.js"
+  },
+  "paymentRequests": {
+    "url": "paymentRequests@http://localhost:8036/remoteEntry.js"
+  },
+  "rdsComponents": {
+    "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
   }
 }

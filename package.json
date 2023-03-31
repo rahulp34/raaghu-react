@@ -15,7 +15,7 @@
     "i18next-http-backend": "^2.1.1",
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
-    "raaghu-themes": "^0.0.17",
+    "raaghu-themes": "^0.0.18",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
     "react-datepicker": "^4.8.0",
@@ -64,6 +64,7 @@
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
-    "create:page": "node utils/create.js p"
+    "create:page": "node utils/create.js p",
+    "create:proxy":"node utils/create.js pr"
   }
 }

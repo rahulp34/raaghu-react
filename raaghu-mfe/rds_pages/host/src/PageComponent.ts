@@ -2,12 +2,13 @@ import React from "react";
 
 const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
 const LoginCompo = React.lazy(() => import("Login/Login"));
-const ForgotPasswordCompo = React.lazy(() => import("ForgotPassword/ForgotPassword"));
+const ForgotPasswordCompo = React.lazy(
+  () => import("ForgotPassword/ForgotPassword")
+);
 const TenantCompo = React.lazy(() => import("Tenant/Tenant"));
 const EditionCompo = React.lazy(() => import("Edition/Edition"));
 const SettingsCompo = React.lazy(() => import("Settings/Settings"));
 const UsersCompo = React.lazy(() => import("Users/Users"));
-
 const AuditlogsCompo = React.lazy(() => import("AuditLogs/AuditLogs"));
 const RolesCompo = React.lazy(() => import("Roles/Roles"));
 const OrganizationUnitsCompo = React.lazy(
@@ -38,11 +39,20 @@ const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
 const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
-const PollsCompo = React.lazy(()=> import("Polls/Polls"));
-const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
+const PollsCompo = React.lazy(() => import("Polls/Polls"));
+const UrlForwardingCompo = React.lazy(
+  () => import("UrlForwarding/UrlForwarding")
+);
 const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
+const CommentsCompo = React.lazy(() => import("Comments/Comments"));
+const TagsCompo = React.lazy(() => import("Tags/Tags"));
+const ElementsCompo = React.lazy(() => import("Elements/Elements"));
+const PersonalDataCompo = React.lazy(() => import("Elements/Elements"));
+const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
+const RdsComponentsCompo = React.lazy(() => import("RdsComponents/RdsComponents"));
+const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
 
 export {
   DashboardCompo,
@@ -76,6 +86,13 @@ export {
   PaymentPlansCompo,
   BlogsCompo,
   ApiResourcesCompo,
+  PersonalDataCompo,
+  ElementsCompo,
+  MyAccountCompo,
+  RdsComponentsCompo,
   FormsViewCompo,
-  FormsPreviewCompo 
+  FormsPreviewCompo,
+  CommentsCompo,
+  TagsCompo,
+  PaymentRequestsCompo
 };

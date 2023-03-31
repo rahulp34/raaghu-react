@@ -180,3 +180,24 @@ declare module "Tags/Tags" {
 	const TagsComponent : React.ComponentType;
 	export default TagsComponent;
 }
+declare module "Elements/Elements" {
+	const ElementsComponent: React.ComponentType;
+	export default ElementsComponent;
+}
+declare module "PersonalData/PersonalData" {
+	const PersonalDataComponent: React.ComponentType;
+	export default PersonalDataComponent;
+}
+declare module "MyAccount/MyAccount" {
+	const MyAccountComponent: React.ComponentType;
+	export default MyAccountComponent;
+}
+declare module "PaymentRequests/PaymentRequests" {
+	const PaymentRequestsComponent : React.ComponentType;
+	export default PaymentRequestsComponent;
+}
+
+declare module "RdsComponents/RdsComponents" {
+	const RdsComponentsComponent: React.ComponentType;
+	export default RdsComponentsComponent;
+}

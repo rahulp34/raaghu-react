@@ -259,9 +259,8 @@ const ClaimType = () => {
           style={{ marginBottom: "0" }}
         ></RdsAlert>
       )}
-      <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
-        <div className="d-flex justify-content-between">
-          <div className="h5">Claim Type</div>
+      <div>
+        <div className="d-flex justify-content-end">
           <div>
             <RdsOffcanvas
               canvasTitle={t("New Claim Type")}
@@ -298,7 +297,8 @@ const ClaimType = () => {
             </RdsOffcanvas>
           </div>
         </div>
-        <div>
+        </div>
+        <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
           <RdsCompDatatable
             tableHeaders={tableHeaders}
             actions={actions}
@@ -329,7 +329,7 @@ const ClaimType = () => {
             ></RdsCompNewClaimType>
           </RdsOffcanvas>
         </div>
-      </div>
+     
     </div>
   );
 };
