@@ -49,6 +49,8 @@ const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
 const PersonalDataCompo = React.lazy(() => import("Elements/Elements"));
+const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
+const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
 export {
   DashboardCompo,
   LoginCompo,
@@ -87,4 +89,6 @@ export {
   TagsCompo,
   ElementsCompo,
   PersonalDataCompo,
+  MyAccountCompo,
+  PaymentRequestsCompo,
 };

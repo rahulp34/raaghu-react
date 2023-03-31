@@ -40,19 +40,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
-			id: "nav-Deligation",
+			id: "nav-MyAccount",
 		},
 		{
 			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
-			id: "nav-Attempts",
+			id: "nav-SecuityLogs",
 		},
 		{
 			label: "Personal Data",
 			icon: "my_settings",
 			subText: "Change your account settings",
-			id: "nav-Settings",
+			id: "nav-PersonalData",
 		},		
 	];
 

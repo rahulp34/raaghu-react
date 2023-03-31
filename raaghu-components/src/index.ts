@@ -65,3 +65,6 @@ export { default as RdsCompUrlForwardings} from './rds-comp-url-forwardings';
 export { default as RdsCompPollsQuestion} from './rds-comp-polls-question/rds-comp-polls-question';
 export {default as RdsCompPollsOption} from './rds-comp-polls-option/rds-comp-polls-option';
 export { default as RdsCompElements} from './rds-comp-elements/rds-comp-elements'
+export {default as RdsCompChangePassword} from './rds-comp-change-password/rds-comp-change-password';
+export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-personal-info';
+export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';
