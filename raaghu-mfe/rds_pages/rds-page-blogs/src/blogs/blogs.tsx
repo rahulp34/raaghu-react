@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RdsCompDatatable, RdsCompAlertPopup } from "../../../rds-components";
-import {
-  RdsInput,
-  RdsButton,
-  RdsOffcanvas,
-  RdsCheckbox,
-  RdsAlert,
-} from "raaghu-react-elements";
+// import {
+//   RdsInput,
+//   RdsButton,
+//   RdsOffcanvas,
+//   RdsCheckbox,
+//   RdsAlert,
+// } from "../rds-elements";
 import { addBlogsData, editBlogsData, fetchBlogsData } from "../../../../libs/state-management/Blogs/blogs-slice";
 import { useAppDispatch } from "../../../../libs/state-management/hooks";
 
@@ -136,293 +136,293 @@ const Blogs = (props: RdsPageResourcesProps) => {
   }
 
 
-  return (
-    <div>
+  // return (
+  //   <div>
 
-      <div className="row align-items-center">
-        <div className="d-flex justify-content-between">
-          <h4>Blogs</h4>
+  //     <div className="row align-items-center">
+  //       <div className="d-flex justify-content-between">
+  //         <h4>Blogs</h4>
 
-          <div className="col-lg-8 col-md-8">
-          {alert.showAlert && alertOne && (
-            <RdsAlert
-              alertmessage={alert.message}
-              colorVariant={alert.success ? "success" : "danger"}
-              style={{ marginBottom: "0" }}
-            ></RdsAlert>
-          )}
-        </div>
-          <div className="d-flex justify-content-end">
-            <RdsOffcanvas
-              canvasTitle={("New Blog")}
-              onclick={offCanvasHandler}
-              placement="end"
+  //         <div className="col-lg-8 col-md-8">
+  //         {alert.showAlert && alertOne && (
+  //           <RdsAlert
+  //             alertmessage={alert.message}
+  //             colorVariant={alert.success ? "success" : "danger"}
+  //             style={{ marginBottom: "0" }}
+  //           ></RdsAlert>
+  //         )}
+  //       </div>
+  //         <div className="d-flex justify-content-end">
+  //           <RdsOffcanvas
+  //             canvasTitle={("New Blog")}
+  //             onclick={offCanvasHandler}
+  //             placement="end"
               
-              offcanvasbutton={
-                <div>
-                  <RdsButton
-                    icon="plus"
-                    label={("New Blog") || ""}
-                    iconColorVariant="light"
-                    iconHeight="15px"
-                    iconWidth="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    block={false}
-                    size="small"
-                    type="button"
-                    colorVariant="primary"
-                  ></RdsButton>
-                </div>
-              }
-              backDrop={false}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"client"}
-            >
-              <div>
-                <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Name"
-                    label="Name"
-                    labelPositon="top"
-                    id=""
-                    value={value}
-                    required={true}
-                  onChange={(e) => {
-                    setValue(e.target.value);
-                  }}
-                  ></RdsInput>
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Slug"
-                    label="Slug"
-                    labelPositon="top"
-                    id=""
-                    value={value}
-                    required={true}
-                  onChange={(e) => {
-                    setValue(e.target.value);
-                  }}
-                  ></RdsInput>
-                  <div className="d-flex footer-buttons mb-3">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      isDisabled={value === ""}
-                      colorVariant="primary"
-                      class="me-2"
-                    onClick={addDataHandler}
-                    ></RdsButton>
-                  </div>
-                </div>
-              </div>
-            </RdsOffcanvas>
-          </div>
-        </div>
+  //             offcanvasbutton={
+  //               <div>
+  //                 <RdsButton
+  //                   icon="plus"
+  //                   label={("New Blog") || ""}
+  //                   iconColorVariant="light"
+  //                   iconHeight="15px"
+  //                   iconWidth="15px"
+  //                   iconFill={false}
+  //                   iconStroke={true}
+  //                   block={false}
+  //                   size="small"
+  //                   type="button"
+  //                   colorVariant="primary"
+  //                 ></RdsButton>
+  //               </div>
+  //             }
+  //             backDrop={false}
+  //             scrolling={false}
+  //             preventEscapeKey={false}
+  //             offId={"client"}
+  //           >
+  //             <div>
+  //               <div className="pt-3">
+  //                 <RdsInput
+  //                   size="medium"
+  //                   inputType="text"
+  //                   placeholder="Add Name"
+  //                   label="Name"
+  //                   labelPositon="top"
+  //                   id=""
+  //                   value={value}
+  //                   required={true}
+  //                 onChange={(e: any) => {
+  //                   setValue(e.target.value);
+  //                 }}
+  //                 ></RdsInput>
+  //                 <RdsInput
+  //                   size="medium"
+  //                   inputType="text"
+  //                   placeholder="Add Slug"
+  //                   label="Slug"
+  //                   labelPositon="top"
+  //                   id=""
+  //                   value={value}
+  //                   required={true}
+  //                 onChange={(e: any) => {
+  //                   setValue(e.target.value);
+  //                 }}
+  //                 ></RdsInput>
+  //                 <div className="d-flex footer-buttons mb-3">
+  //                   <RdsButton
+  //                     label="CANCEL"
+  //                     databsdismiss="offcanvas"
+  //                     type={"button"}
+  //                     size="small"
+  //                     isOutline={true}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   ></RdsButton>
+  //                   <RdsButton
+  //                     label="SAVE"
+  //                     type={"button"}
+  //                     size="small"
+  //                     databsdismiss="offcanvas"
+  //                     isDisabled={value === ""}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   onClick={addDataHandler}
+  //                   ></RdsButton>
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </RdsOffcanvas>
+  //         </div>
+  //       </div>
 
-      </div>
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
-        <RdsCompDatatable
-          tableHeaders={tableHeaders}
-          actions={actions}
-          tableData={blogsData}
-          pagination={true}
-          recordsPerPage={10}
-          recordsPerPageSelectListOption={true}
-          onActionSelection={onActionSelection}
-        ></RdsCompDatatable>
+  //     </div>
+  //     <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+  //       <RdsCompDatatable
+  //         tableHeaders={tableHeaders}
+  //         actions={actions}
+  //         tableData={blogsData}
+  //         pagination={true}
+  //         recordsPerPage={10}
+  //         recordsPerPageSelectListOption={true}
+  //         onActionSelection={onActionSelection}
+  //       ></RdsCompDatatable>
 
 
-        <RdsOffcanvas
-          backDrop={true}
-          preventEscapeKey={true}
-          scrolling={false}
-          offId="blogs-edit-off"
-          placement="end"
-          canvasTitle="Edit Blog"
+  //       <RdsOffcanvas
+  //         backDrop={true}
+  //         preventEscapeKey={true}
+  //         scrolling={false}
+  //         offId="blogs-edit-off"
+  //         placement="end"
+  //         canvasTitle="Edit Blog"
           
-          children={
-            <>
-              <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Name"
-                    label="Name"
-                    labelPositon="top"
-                    id=""
-                    //value={value}
-                    required={true}
-                  // onChange={(e) => {
-                  //   setValue(e.target.value);
-                  // }}
-                  ></RdsInput>
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Slug"
-                    label="Slug"
-                    labelPositon="top"
-                    id=""
-                    //value={value}
-                    required={true}
-                  // onChange={(e) => {
-                  //   setValue(e.target.value);
-                  // }}
-                  ></RdsInput>
+  //         children={
+  //           <>
+  //             <RdsInput
+  //                   size="medium"
+  //                   inputType="text"
+  //                   placeholder="Add Name"
+  //                   label="Name"
+  //                   labelPositon="top"
+  //                   id=""
+  //                   //value={value}
+  //                   required={true}
+  //                 // onChange={(e: any) => {
+  //                 //   setValue(e.target.value);
+  //                 // }}
+  //                 ></RdsInput>
+  //                 <RdsInput
+  //                   size="medium"
+  //                   inputType="text"
+  //                   placeholder="Add Slug"
+  //                   label="Slug"
+  //                   labelPositon="top"
+  //                   id=""
+  //                   //value={value}
+  //                   required={true}
+  //                 // onChange={(e: any) => {
+  //                 //   setValue(e.target.value);
+  //                 // }}
+  //                 ></RdsInput>
                   
-                  <div className="d-flex footer-buttons mb-3">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      //isDisabled={value === ""}
-                      colorVariant="primary"
-                      class="me-2"
-                    //onClick={addDataHandler}
-                    ></RdsButton>
-                  </div>
-            </>
-          }
-        ></RdsOffcanvas>
+  //                 <div className="d-flex footer-buttons mb-3">
+  //                   <RdsButton
+  //                     label="CANCEL"
+  //                     databsdismiss="offcanvas"
+  //                     type={"button"}
+  //                     size="small"
+  //                     isOutline={true}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   ></RdsButton>
+  //                   <RdsButton
+  //                     label="SAVE"
+  //                     type={"button"}
+  //                     size="small"
+  //                     databsdismiss="offcanvas"
+  //                     //isDisabled={value === ""}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   //onClick={addDataHandler}
+  //                   ></RdsButton>
+  //                 </div>
+  //           </>
+  //         }
+  //       ></RdsOffcanvas>
 
-        <RdsOffcanvas
-          backDrop={true}
-          preventEscapeKey={true}
-          scrolling={false}
-          offId="features"
-          placement="end"
-          canvasTitle="Features"
+  //       <RdsOffcanvas
+  //         backDrop={true}
+  //         preventEscapeKey={true}
+  //         scrolling={false}
+  //         offId="features"
+  //         placement="end"
+  //         canvasTitle="Features"
           
-          children={
-            <>
-              <div className=" mb-4">
-            <RdsCheckbox
-              id="0"
-              label="Comments"
-              checked={formData.enabled}
-              onChange={(e) => {
-                handleEnabled(e.target.checked);
-              }}
-            ></RdsCheckbox>
-          </div>
-		  <div className=" mb-4">
-            <RdsCheckbox
-              id="1"
-              label="Reactions"
-              checked={formData.required}
-              onChange={(e) => {
-                handleRequired(e.target.checked);
-              }}
-            ></RdsCheckbox>
-          </div>
-		  <div className=" mb-4">
-            <RdsCheckbox
-              id="2"
-              label="Ratings"
-              checked={formData.emphasize}
-              onChange={(e) => {
-                handleEmphasize(e.target.checked);
-              }}
-            ></RdsCheckbox>
-          </div>
-		  <div className=" mb-4">
-            <RdsCheckbox
-              id="3"
-              label="Tags"
-              checked={formData.showInDiscoveryDocument}
-              onChange={(e) => {
-                handleShowInDiscovery(e.target.checked);
-              }}
-            ></RdsCheckbox>
-          </div>
-          <div className=" mb-4">
-            <RdsCheckbox
-              id="4"
-              label="Quick navigation bar in blog posts"
-              checked={formData.showInDiscoveryDocument}
-              onChange={(e) => {
-                handleShowInDiscovery(e.target.checked);
-              }}
-            ></RdsCheckbox>
-          </div>
-          <div className="d-flex footer-buttons mb-3">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      //isDisabled={value === ""}
-                      colorVariant="primary"
-                      class="me-2"
-                    //onClick={addDataHandler}
-                    ></RdsButton>
-                  </div>
-            </>
-          }
-        ></RdsOffcanvas>
+  //         children={
+  //           <>
+  //             <div className=" mb-4">
+  //           <RdsCheckbox
+  //             id="0"
+  //             label="Comments"
+  //             checked={formData.enabled}
+  //             onChange={(e: any) => {
+  //               handleEnabled(e.target.checked);
+  //             }}
+  //           ></RdsCheckbox>
+  //         </div>
+	// 	  <div className=" mb-4">
+  //           <RdsCheckbox
+  //             id="1"
+  //             label="Reactions"
+  //             checked={formData.required}
+  //             onChange={(e: any) => {
+  //               handleRequired(e.target.checked);
+  //             }}
+  //           ></RdsCheckbox>
+  //         </div>
+	// 	  <div className=" mb-4">
+  //           <RdsCheckbox
+  //             id="2"
+  //             label="Ratings"
+  //             checked={formData.emphasize}
+  //             onChange={(e: any) => {
+  //               handleEmphasize(e.target.checked);
+  //             }}
+  //           ></RdsCheckbox>
+  //         </div>
+	// 	  <div className=" mb-4">
+  //           <RdsCheckbox
+  //             id="3"
+  //             label="Tags"
+  //             checked={formData.showInDiscoveryDocument}
+  //             onChange={(e: any) => {
+  //               handleShowInDiscovery(e.target.checked);
+  //             }}
+  //           ></RdsCheckbox>
+  //         </div>
+  //         <div className=" mb-4">
+  //           <RdsCheckbox
+  //             id="4"
+  //             label="Quick navigation bar in blog posts"
+  //             checked={formData.showInDiscoveryDocument}
+  //             onChange={(e: any) => {
+  //               handleShowInDiscovery(e.target.checked);
+  //             }}
+  //           ></RdsCheckbox>
+  //         </div>
+  //         <div className="d-flex footer-buttons mb-3">
+  //                   <RdsButton
+  //                     label="CANCEL"
+  //                     databsdismiss="offcanvas"
+  //                     type={"button"}
+  //                     size="small"
+  //                     isOutline={true}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   ></RdsButton>
+  //                   <RdsButton
+  //                     label="SAVE"
+  //                     type={"button"}
+  //                     size="small"
+  //                     databsdismiss="offcanvas"
+  //                     //isDisabled={value === ""}
+  //                     colorVariant="primary"
+  //                     class="me-2"
+  //                   //onClick={addDataHandler}
+  //                   ></RdsButton>
+  //                 </div>
+  //           </>
+  //         }
+  //       ></RdsOffcanvas>
 
-        <RdsCompAlertPopup
-          alertID="blogs_delete_off"
-          messageAlert="The selected Resource will be Deleted Permanently "
-          alertConfirmation="Are you sure"
-          deleteButtonLabel="Yes"
-          onSuccess={success}
-        />
+  //       <RdsCompAlertPopup
+  //         alertID="blogs_delete_off"
+  //         messageAlert="The selected Resource will be Deleted Permanently "
+  //         alertConfirmation="Are you sure"
+  //         deleteButtonLabel="Yes"
+  //         onSuccess={success}
+  //       />
 
 
-        {/* <RdsOffcanvas
-            backDrop={true}
-            preventEscapeKey={true}
-            scrolling={false}
-            offId="features"
-            placement="end"
-            canvasTitle="Edit"
+  //       {/* <RdsOffcanvas
+  //           backDrop={true}
+  //           preventEscapeKey={true}
+  //           scrolling={false}
+  //           offId="features"
+  //           placement="end"
+  //           canvasTitle="Edit"
            
-            children={
-              <>
-              hii
-              </>
-            }></RdsOffcanvas> */}
+  //           children={
+  //             <>
+  //             hii
+  //             </>
+  //           }></RdsOffcanvas> */}
 
 
-      </div>
+  //     </div>
 
-    </div>
-  );
+  //   </div>
+  // );
 };
 
 export default Blogs;

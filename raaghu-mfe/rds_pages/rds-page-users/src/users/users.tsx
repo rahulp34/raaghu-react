@@ -100,7 +100,7 @@ const Users = () => {
       datatype: "text",
     },
     {
-      displayName: "Account Lockout",
+      displayName: "Lockout",
       key: "lockoutEnabled",
       datatype: "text",
     },
@@ -127,6 +127,7 @@ const Users = () => {
     { label: "Roles", tablink: "#nav-role", id: 1 },
     { label: "Organization Units", tablink: "#nav-org", id: 2 },
   ];
+  
 
   const offCanvasHandler = () => {};
   const [getUser, setGetUserData] = useState<any>({});
@@ -644,7 +645,17 @@ const Users = () => {
           }}
           justified={false}
         >
-          {activeNavTabIdEdit == 0 && <RdsCompFileUploader />}
+          {activeNavTabIdEdit == 0 && 
+             <RdsCompUserBasics
+             organizationUnit={organizationUnit}
+             userData={userData}
+             isEdit={true}
+             createUser={(e: any) => {
+               getUserData(e);
+             }}
+           />
+          
+          }
 
           {activeNavTabIdEdit == 1 && (
             <>

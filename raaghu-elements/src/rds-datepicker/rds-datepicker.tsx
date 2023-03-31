@@ -6,14 +6,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
 export interface RdsDatepickerProps {
   DatePickerLabel?: string;
-  onDatePicker: (date: any) => void;
+  onDatePicker: (start: any, end?: any) => void;
   type?: "default" | "advanced";
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const onRangeChange = (dates: [any, any]) => {
-    debugger
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
@@ -23,7 +22,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         (end != null ? end.toDateString().slice(4) : "")
     );
     {
-      //props.onDatePicker(start, end);
+      props.onDatePicker(start, end);
     }
   };
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
