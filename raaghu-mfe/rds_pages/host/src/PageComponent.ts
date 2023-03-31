@@ -44,6 +44,7 @@ const PersonalDataCompo = React.lazy(() => import("PersonalData/PersonalData"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 
+ const RdsComponentsCompo = React.lazy(() => import("RdsComponents/RdsComponents"));
  export {
   DashboardCompo,
   LoginCompo,
@@ -79,5 +80,5 @@ const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 PersonalDataCompo,
 ElementsCompo,
 MyAccountCompo
-};
 
+RdsComponentsCompo,};
