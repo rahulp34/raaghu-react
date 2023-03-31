@@ -49,6 +49,21 @@ export interface RdsCompDatatableProps {
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   const [data, setData] = useState(props.tableData);
+  const [array, setArray] = useState<boolean[]>([])
+
+  function openCloseDropDown(data:any){
+    let tempArray:boolean[] = [];
+    array?.map((res:any,index:number)=>{
+      if(index == data){
+        tempArray.push(!array[data]);
+      }
+      else{
+        tempArray.push(false);
+      }
+    }) 
+    setArray(tempArray);
+  }
+
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
     endingRow: props.recordsPerPage,
@@ -58,6 +73,11 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     if (!sort) {
       setData(props.tableData);
     }
+    let tempArray:boolean[] = [];
+    props.tableData.map(res=>{
+      tempArray.push(false);
+    })
+    setArray(tempArray);
   }, [props.tableData]);
   const onPageChangeHandler = (currentPage: number, recordsPerPage: number) => {
     setRowStatus({
@@ -65,6 +85,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       endingRow: currentPage * recordsPerPage, //considering that 1st element has '0' index
     });
   };
+  
   const actionOnClickHandler = (
     clickEvent: any,
     tableDataRow: any,
@@ -76,6 +97,12 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       modalId?: string;
     }
   ) => {
+
+    let tempArray:boolean[] = [];
+    array.map((res:any)=>{
+      tempArray.push(false);
+    })
+    setArray(tempArray);
     if (
       action.id == "edit" &&
       action.offId != undefined &&
@@ -111,6 +138,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       }
     });
   };
+  
   const onEditCheck = (
     clickEvent: any,
     tableDataRow: any,
@@ -125,6 +153,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     });
     setData(tempata);
   };
+
   const onEditClose = (
     clickEvent: any,
     tableDataRow: any,
@@ -155,7 +184,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       setData(tempUser);
       props.onRowSelect!==undefined&&props.onRowSelect(tempUser)
     }
- 
   };
   const onSortClickHandler = (
     event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
@@ -401,13 +429,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                           <td className="align-middle text-center">
                             {!tableDataRow.isEndUserEditing ? (
                               <>
-                                <div className="dropdown">
+                                <div>
                                   <button
                                     className="btn rounded-pill border-0"
                                     type="button"
-                                    data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                     style={{ minWidth: 0 }}
+                                    onClick={()=>openCloseDropDown(index)}
                                   >
                                     <RdsIcon
                                       name={"three_dots"}
@@ -418,7 +446,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                      // class="bi bi-three-dots-vertical"
                                     />
                                   </button>
-                                  <ul className="dropdown-menu ">
+                                  {array[index] && (<ul className="dropdown-menu" style={{display:'block'}}>
                                     {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={
@@ -469,7 +497,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                         )}
                                       </li>
                                     ))}
-                                  </ul>
+                                  </ul>)}
                                 </div>
                               </>
                             ) : (

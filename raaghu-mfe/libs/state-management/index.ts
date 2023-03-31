@@ -31,6 +31,8 @@ import paymentPlansReducer from './payment-plans/paymentPlans-slice';
 import personalDataReducer from './personal-data/personal-data-slice';
 import commentsReducer from './comments/comments-slice';
 import tagsReducer from './tags/tags-slice';
+import myAccountReducer from './my-account/my-account-slice';
+import paymentRequestsReducer from './payment-requests/paymentRequests-slice';
 
 const persistConfig={
   key: "root",
@@ -63,10 +65,11 @@ const rootReducer = combineReducers({
   paymentPlans:paymentPlansReducer,
   urlForwarding: urlForwardingReducer,
   personalData: personalDataReducer,
-  comments:commentsReducer,
- tags:tagsReducer,
- host: hostReducer
-
+  comments: commentsReducer,
+  tags: tagsReducer,
+  host: hostReducer,
+  myaccount :myAccountReducer,
+  paymentRequests: paymentRequestsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
