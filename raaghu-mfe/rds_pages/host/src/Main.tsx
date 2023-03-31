@@ -1,10 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import {
-  Route,
-  useNavigate,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../libs/state-management";
@@ -23,56 +18,48 @@ import * as menus from "../../../libs/main-menu/index";
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { BlogsCompo, PaymentPlansCompo } from "./PageComponent";
 import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
-const DashboardCompo = React.lazy(() => import("Dashboard/Dashboard"));
-const LoginCompo = React.lazy(() => import("Login/Login"));
-const ForgotPasswordCompo = React.lazy(
-  () => import("ForgotPassword/ForgotPassword")
-);
-const TenantCompo = React.lazy(() => import("Tenant/Tenant"));
-const EditionCompo = React.lazy(() => import("Edition/Edition"));
-const SettingsCompo = React.lazy(() => import("Settings/Settings"));
-const UsersCompo = React.lazy(() => import("Users/Users"));
-
-const AuditlogsCompo = React.lazy(() => import("AuditLogs/AuditLogs"));
-const RolesCompo = React.lazy(() => import("Roles/Roles"));
-const OrganizationUnitsCompo = React.lazy(
-  () => import("OrganizationUnits/OrganizationUnits")
-);
-const LanguageCompo = React.lazy(() => import("Language/Language"));
-const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
-const DynamicPropertyCompo = React.lazy(
-  () => import("DynamicProperties/DynamicProperties")
-);
-const IconListCompo = React.lazy(() => import("IconList/IconList"));
-const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
-const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
-const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
-const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
-const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
-
-const ScopeCompo = React.lazy(() => import("Scope/Scope"));
-const IdentityResourcesCompo = React.lazy(() => import("IdentityResources/IdentityResources"));
-const SecurityLogsCompo = React.lazy(() => import("SecurityLogs/SecurityLogs"));
-const ChatsCompo = React.lazy(() => import("Chats/Chats"));
-const FileManagementCompo = React.lazy(
-  () => import("FileManagement/FileManagement")
-);
-const FormsCompo = React.lazy(() => import("Forms/Forms"));
-const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
-const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
-const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
-const ClientCompo = React.lazy(() => import("Client/Client"));
-const PollsCompo = React.lazy(() => import("Polls/Polls"));
-const UrlForwardingCompo = React.lazy(() => import("UrlForwarding/UrlForwarding"));
-const CommentsCompo = React.lazy(() => import("Comments/Comments"));
-const TagsCompo = React.lazy(() => import("Tags/Tags"));
-const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
-const PersonalDataCompo = React.lazy(()=> import("PersonalData/PersonalData"));
-const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
-const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
-
+import {
+  DashboardCompo,
+  LoginCompo,
+  ForgotPasswordCompo,
+  TenantCompo,
+  EditionCompo,
+  SettingsCompo,
+  UsersCompo,
+  AuditlogsCompo,
+  RolesCompo,
+  OrganizationUnitsCompo,
+  LanguageCompo,
+  LanguageTextCompo,
+  DynamicPropertyCompo,
+  IconListCompo,
+  ClaimTypesCompo,
+  ApplicationsCompo,
+  TextTemplateCompo,
+  ApiScopeCompo,
+  ScopeCompo,
+  IdentityResourcesCompo,
+  SecurityLogsCompo,
+  ChatsCompo,
+  FileManagementCompo,
+  FormsCompo,
+  BloggerCompo,
+  ClientCompo,
+  PollsCompo,
+  UrlForwardingCompo,
+  PaymentPlansCompo,
+  BlogsCompo,
+  ApiResourcesCompo,
+  FormsViewCompo,
+  FormsPreviewCompo,
+  CommentsCompo,
+  TagsCompo,
+  ElementsCompo,
+  PersonalDataCompo,
+  PaymentRequestsCompo,
+  MyAccountCompo,
+} from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -82,9 +69,9 @@ const Main = (props: MainProps) => {
   const dataHost = useAppSelector((state) => state.persistedReducer.host);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const[checkingFirstTime, setChecking] = useState(false);
+  const [checkingFirstTime, setChecking] = useState(false);
   let accessToken: string | undefined | null =
-  localStorage.getItem("access_token");
+    localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
   console.log("This is the current path ", currentPath);
 
@@ -97,7 +84,7 @@ const Main = (props: MainProps) => {
 
   useEffect(() => {
     const loginCredentials = localStorage.getItem("persist:root");
-    if (loginCredentials != null){
+    if (loginCredentials != null) {
       let credentials = JSON.parse(loginCredentials);
       let parsedCredentials = JSON.parse(credentials.login);
       accessToken = parsedCredentials.accessToken;
@@ -106,11 +93,10 @@ const Main = (props: MainProps) => {
     // setIsAuth(true);
     if (localStorage.getItem("access_token")) {
       setIsAuth(true);
-      if (currentPath !== '/dashobard' && currentPath != '/') {
+      if (currentPath !== "/dashobard" && currentPath != "/") {
         navigate(currentPath);
-      }
-      else {
-        navigate('/dashboard');
+      } else {
+        navigate("/dashboard");
       }
     }
     if (localStorage.getItem("access_token") == null) {
@@ -123,15 +109,15 @@ const Main = (props: MainProps) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (checkingFirstTime&&
+    if (
+      checkingFirstTime &&
       dataHost.configuration &&
       !dataHost.configuration.currentUser.isAuthenticated
     ) {
       navigate("/login");
-    }
-    else{
+    } else {
       setChecking(true);
-      navigate(location.pathname)
+      navigate(location.pathname);
     }
   }, [dataHost.configuration]);
 
@@ -202,16 +188,18 @@ const Main = (props: MainProps) => {
       icon: "moon",
       iconWidth: "17px",
       iconHeight: "17px",
-    }
+    },
   ];
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
   let newobjectArray = objectArray.map((item) => {
-    return item[1]
-  })
-  const concatenated = newobjectArray.reduce((acc: any, arr: any) => acc.concat(arr), []);
-
+    return item[1];
+  });
+  const concatenated = newobjectArray.reduce(
+    (acc: any, arr: any) => acc.concat(arr),
+    []
+  );
 
   const { t } = useTranslation();
   const { i18n } = useTranslation();
@@ -233,13 +221,18 @@ const Main = (props: MainProps) => {
     var data1 = {};
     const translation = Data.localization.resources;
     if (translation) {
-      Object.keys(translation).forEach(key => {
-        data1 = { ...data1, ...translation[key].texts }
-      })
-      i18n.addResourceBundle(currentLanguage, 'translation', data1, false, true);
+      Object.keys(translation).forEach((key) => {
+        data1 = { ...data1, ...translation[key].texts };
+      });
+      i18n.addResourceBundle(
+        currentLanguage,
+        "translation",
+        data1,
+        false,
+        true
+      );
     }
-
-  }, [Data.localization])
+  }, [Data.localization]);
 
   const sideNavItems = concatenated;
 
@@ -329,7 +322,9 @@ const Main = (props: MainProps) => {
                 toggleTheme={props.toggleTheme}
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
-                onChatClickHandler={() => { console.log("Hey Chat Button Clicked!!") }}
+                onChatClickHandler={() => {
+                  console.log("Hey Chat Button Clicked!!");
+                }}
               />
             </div>
             <div
@@ -406,7 +401,10 @@ const Main = (props: MainProps) => {
                       ></Route>
 
                       <Route path="/icons" element={<IconListCompo />}></Route>
-                      <Route path="/claim-types" element={<ClaimTypesCompo />} />
+                      <Route
+                        path="/claim-types"
+                        element={<ClaimTypesCompo />}
+                      />
                       <Route
                         path="/text-template"
                         element={<TextTemplateCompo />}
@@ -415,22 +413,32 @@ const Main = (props: MainProps) => {
                         path="/applications"
                         element={<ApplicationsCompo />}
                       ></Route>
+                      <Route path="/scope" element={<ScopeCompo />}></Route>
                       <Route
-                        path="/scope"
-                        element={<ScopeCompo />}
-                      ></Route>
-                      <Route path="/identityResources"
+                        path="/identityResources"
                         element={<IdentityResourcesCompo />}
                       />
 
                       <Route path="/api-scope" element={<ApiScopeCompo />} />
-                      <Route path="/apiResources" element={<ApiResourcesCompo />} />
+                      <Route
+                        path="/apiResources"
+                        element={<ApiResourcesCompo />}
+                      />
                       <Route path="/blogs" element={<BlogsCompo />} />
                       <Route path="/chats" element={<ChatsCompo />} />
-                      <Route path="/fileManagement" element={<FileManagementCompo />} />
+                      <Route
+                        path="/fileManagement"
+                        element={<FileManagementCompo />}
+                      />
                       <Route path="/forms" element={<FormsCompo />} />
-                      <Route path="/formsView/:id" element={<FormsViewCompo />} />
-                      <Route path="/formsPreview/:id" element={<FormsPreviewCompo />} />
+                      <Route
+                        path="/formsView/:id"
+                        element={<FormsViewCompo />}
+                      />
+                      <Route
+                        path="/formsPreview/:id"
+                        element={<FormsPreviewCompo />}
+                      />
                       <Route path="/polls" element={<PollsCompo />} />
                       <Route path="/blogger" element={<BloggerCompo />} />
                       <Route path="/client" element={<ClientCompo />} />
