@@ -38,7 +38,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
           {state =="errorRadio" && <span className="error_Msg"> {props.errorMessage}</span>}
           <div className = {radioButtonClass}>
 
-          {props.itemList.map((item: any, idx: any) => (
+          {props.itemList?.map((item: any, idx: any) => (
             <div className="col-md-6">
 
             <div
