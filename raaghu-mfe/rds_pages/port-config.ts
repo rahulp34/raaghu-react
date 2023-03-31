@@ -118,5 +118,8 @@ export const PortConfig = {
   },
   "myAccount": {
     "port": "8101"
+  },
+  "paymentRequests": {
+    "port": "8036"
   }
 }

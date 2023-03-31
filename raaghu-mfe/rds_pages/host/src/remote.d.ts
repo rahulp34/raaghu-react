@@ -192,3 +192,7 @@ declare module "MyAccount/MyAccount" {
 	const MyAccountComponent: React.ComponentType;
 	export default MyAccountComponent;
 }
+declare module "PaymentRequests/PaymentRequests" {
+	const PaymentRequestsComponent : React.ComponentType;
+	export default PaymentRequestsComponent;
+}
