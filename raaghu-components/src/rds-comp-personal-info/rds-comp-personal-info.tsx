@@ -1,19 +1,21 @@
 import { RdsButton, RdsInput } from "raaghu-react-elements";
-import React, { FC, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { RdsCompPersonalInfoWrapper } from "./rds-comp-personal-info.styled";
 
-interface RdsCompPersonalInfoProps {}
 
 const RdsCompPersonalInfo = (props: any) => {
-  const [formData, setPersonalFormData] = useState(props.personalIfo);
+  const [formData, setPersonalFormData] = useState(props.personalInfo);
 
   useEffect(() => {
-    setPersonalFormData(props.personalIfo);
-  }, [props.personalIfo]);
+    setPersonalFormData(props.personalInfo);
+  }, [props.personalInfo]);
 
   const handlePersonalDataSubmit = (event: any) => {
     event.preventDefault();
-    console.log("formData is", formData);
+  };
+
+  const handleVerifyEmailSubmit = (event: any) => {
+    event.preventDefault();
   };
 
   function setUserName(value: any) {
@@ -21,7 +23,19 @@ const RdsCompPersonalInfo = (props: any) => {
   }
 
   function setName(value: any) {
-    setPersonalFormData({ ...formData, userName: value });
+    setPersonalFormData({ ...formData, name: value });
+  }
+
+  function setSurname(value: any) {
+    setPersonalFormData({ ...formData, surname: value });
+  }
+
+  function setEmail(value: any) {
+    setPersonalFormData({ ...formData, email: value });
+  }
+
+  function setPhoneNumber(value: any) {
+    setPersonalFormData({ ...formData, phoneNumber: value });
   }
 
   return (
@@ -48,8 +62,8 @@ const RdsCompPersonalInfo = (props: any) => {
             isDisabled={false}
             readonly={false}
             placeholder="Name"
-            value={formData.userName}
-            onChange={(e: any) => setUserName(e.target.value)}
+            value={formData.name}
+            onChange={(e: any) => setName(e.target.value)}
             required={true}
           ></RdsInput>
         </div>
@@ -61,12 +75,12 @@ const RdsCompPersonalInfo = (props: any) => {
             isDisabled={false}
             readonly={false}
             placeholder="Surname"
-            value={formData.userName}
-            onChange={(e: any) => setUserName(e.target.value)}
+            value={formData.surname}
+            onChange={(e: any) => setSurname(e.target.value)}
             required={true}
           ></RdsInput>
         </div>
-        <div className="col-12">
+        <div className="col-8">
           <RdsInput
             size="medium"
             label="Email"
@@ -74,12 +88,23 @@ const RdsCompPersonalInfo = (props: any) => {
             isDisabled={false}
             readonly={false}
             placeholder="Email"
-            value={formData.userName}
-            onChange={(e: any) => setUserName(e.target.value)}
-            required={true}
+            value={formData.email}
+            onChange={(e: any) => setEmail(e.target.value)}
+            required={false}
           ></RdsInput>
         </div>
-        <div className="col-12">
+        <div className="col-4 d-flex align-items-end">
+        <RdsButton
+            label="Verify Email"
+            colorVariant="primary"
+            block={false}
+            type="submit"
+            onClick={() => {
+              props.handleVerifyEmailSubmit(formData);
+            }}
+          />
+        </div>
+        <div className="col-12 pt-4">
           <RdsInput
             size="medium"
             label="Phone Number"
@@ -87,9 +112,9 @@ const RdsCompPersonalInfo = (props: any) => {
             isDisabled={false}
             readonly={false}
             placeholder="Phone Number"
-            value={formData.userName}
-            onChange={(e: any) => setUserName(e.target.value)}
-            required={true}
+            value={formData.phoneNumber}
+            onChange={(e: any) => setPhoneNumber(e.target.value)}
+            required={false}
           ></RdsInput>
         </div>
         <div className="col-12 col-md-12 footer-buttons">
@@ -99,7 +124,7 @@ const RdsCompPersonalInfo = (props: any) => {
             block={false}
             type="submit"
             onClick={() => {
-              props.handlePasswordDataSubmit(formData);
+              props.handlePersonalDataSubmit(formData);
             }}
           />
         </div>

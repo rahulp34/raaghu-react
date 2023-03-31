@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"; 
 import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
+import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
+import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile } from "../../../../libs/state-management/my-account/my-account-slice";
+
 
  const navtabsItems = [
     { label: "Profile Picture", tablink: "#nav-profile_picture", id: 0 },
@@ -11,20 +14,29 @@ import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from
 
  const MyAccount = (props:any) => { 
     const [activeNavTabId, setActiveNavTabId] = useState(0);
+    const data = useAppSelector((state) => state.persistedReducer.myaccount);
     const [twoFactorData,setFormData] = useState(props.changePasswordData);
 
-    var data:any;
+
     const [changePasswordData, setchangePassword] = useState<any>({
-        cuurentPassword: "",       
+        currentPassword: "",
+        newPassword:"",
+        newPasswordConfirm:""       
     });
 
-    const [personalIfo, setpersonalIfo] = useState<any>({
-        cuurentPassword: "",       
+    const [personalInfo, setpersonalInfo] = useState<any>({
+        userName: "", 
+        name:"",
+        surname:"",
+        email:"",
+        phoneNumber:""    
     });
+
+    const dispatch = useAppDispatch();
     
-
     function handlePasswordDataSubmit(formData: any) {
         console.log("Data", formData);
+        dispatch(changepasswordProfile(formData) as any);
     }
 
     function handleTwoFactorSubmit(value:boolean) {
@@ -32,16 +44,34 @@ import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from
         console.log("Two factor Data", value);
     }
 
-    function handlePersonalInfoSubmit(value:boolean) {
-        setpersonalIfo({twoFactorData:value})
-        console.log("Personal Info Data", value);
+    function handlePersonalInfoSubmit(formData:any) {
+        console.log("Personal Info Data", formData);
+        dispatch(saveMyProfile(formData) as any);
     }
 
-    // useEffect(() => {
-    //     if (data.changePasswordData) {
-    //         setchangePassword(data.changePasswordData);
-    //     }
-    //   }, [data.changePasswordData]);
+    function handleVerifyEmailDataSubmit(email:any) {
+        console.log("email", email);
+        dispatch(sendEmailVerifyProfile(email) as any);
+    }
+
+    useEffect(() => {
+        dispatch(fetchMyProfile() as any);
+
+    },[dispatch]);
+
+    useEffect(() => {
+        if (data.personalInfo) {
+            setpersonalInfo(data.personalInfo);
+        }
+      }, [data.personalInfo]);
+
+      useEffect(() => {
+        if (data.changePasswordData) {
+            setchangePassword(data.changePasswordData);
+        }
+      }, [data.changePasswordData]);
+
+
  
     return (
      <div className="mt-4">
@@ -64,17 +94,20 @@ import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from
                     {activeNavTabId == 1 && (
                         <RdsCompChangePassword
                         handlePasswordDataSubmit={(formData: any) => {
-                                handlePasswordDataSubmit(formData);
+                            handlePasswordDataSubmit(formData);
                             }}
                             changePasswordData={changePasswordData}>                            
                         </RdsCompChangePassword>
                     )} 
                     {activeNavTabId == 2 && (
                         <RdsCompPersonalInfo
-                        handlePersonalInfoSubmit={(formData: any) => {
+                        handlePersonalDataSubmit={(formData: any) => {
                             handlePersonalInfoSubmit(formData);
                         }}
-                        personalIfo={personalIfo}></RdsCompPersonalInfo>
+                        handleVerifyEmailSubmit={(email:any)=>{
+                            handleVerifyEmailDataSubmit(email)
+                        }}
+                        personalInfo={personalInfo}></RdsCompPersonalInfo>
                         
                     )}
                     {activeNavTabId == 3 && (

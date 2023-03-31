@@ -21,7 +21,7 @@ const RdsCompChangePassword= (props:any)  => {
     };
 
    function setCurrentPassword(value :any){
-      setFormData({...formData, cuurentPassword:value})
+      setFormData({...formData, currentPassword:value})
    }
 
    function setNewPassword(value :any){
@@ -29,7 +29,7 @@ const RdsCompChangePassword= (props:any)  => {
    }
 
    function setConfirmNewPassword(value :any){
-      setFormData({...formData, confirmNewPassword:value})
+      setFormData({...formData, newPasswordConfirm:value})
    }
 
   return(
@@ -39,11 +39,11 @@ const RdsCompChangePassword= (props:any)  => {
          <RdsInput   
                   size="medium"
                   label="Current Password"
-                  inputType="text"
+                  inputType="password"
                   isDisabled={false}
                   readonly={false}
                   placeholder="Current Password"
-                  value={formData.cuurentPassword} 
+                  value={formData.currentPassword} 
                   onChange={(e:any) => setCurrentPassword(e.target.value)}              
                   required={true}               
          ></RdsInput>
@@ -52,7 +52,7 @@ const RdsCompChangePassword= (props:any)  => {
          <RdsInput
                   size="medium"
                   label="New Password"
-                  inputType="text"
+                  inputType="password"
                   isDisabled={false}
                   readonly={false}               
                   required={true}
@@ -65,12 +65,12 @@ const RdsCompChangePassword= (props:any)  => {
          <RdsInput
                   size="medium"
                   label="Confirm New Password"
-                  inputType="text"
+                  inputType="password"
                   isDisabled={false}
                   readonly={false}               
                   required={true} 
                   placeholder="Confirm New Password"
-                  value={formData.confirmNewPassword} 
+                  value={formData.newPasswordConfirm} 
                   onChange={(e:any) => setConfirmNewPassword(e.target.value)}               
          ></RdsInput>
       </div> 
