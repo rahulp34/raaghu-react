@@ -10,6 +10,7 @@ export interface RdsSearchProps {
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (event: React.KeyboardEvent) => void;
+  onSearchClick?: () => void;
 }
 
 const RdsSearch = (props: RdsSearchProps) => {
@@ -24,7 +25,7 @@ const RdsSearch = (props: RdsSearchProps) => {
     <div className={searchBarClass}>
    {iconside =="left" ?
    <>
-        <span className={spanClass} id={ariaDescribedby}>
+        <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick}>
           <RdsIcon name="search" fill={false}  stroke={true} height='17px' width="17px" ></RdsIcon>
         </span>
      
@@ -50,7 +51,7 @@ const RdsSearch = (props: RdsSearchProps) => {
         defaultValue=""
         onChange={props.onChange}
       />
-       <span className={spanClass} id={ariaDescribedby}>
+       <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick}>
        <RdsIcon name="search" fill={false}  stroke={true} height='17px' width="17px" ></RdsIcon>
         </span>
      

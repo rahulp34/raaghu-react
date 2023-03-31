@@ -71,6 +71,7 @@ const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(()=> import("Elements/Elements"));
 const PersonalDataCompo = React.lazy(()=> import("PersonalData/PersonalData"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
+const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
 
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -435,6 +436,7 @@ const Main = (props: MainProps) => {
                       <Route path="/client" element={<ClientCompo />} />
                       <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
                       <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
+                      <Route path="/paymentRequests" element={<PaymentRequestsCompo />} />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
