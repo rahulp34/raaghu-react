@@ -427,6 +427,7 @@ if (fs.existsSync(appFolderPath)) {
       console.error(err);
     }
   } else if (eTc == "pr") {
+    console.log("Proxy is being generated!!");
     let filePath = path.join(appFolderPath, "proxy");;
     if (fs.existsSync(filePath)) {
       console.log(
@@ -439,8 +440,8 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      console.log("\x1b[32m%s\x1b[0m", `proxy was successfully created!!`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..! \nEnjoy!!");
+      console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
+      console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   }
 } else {

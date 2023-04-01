@@ -193,9 +193,12 @@ const Main = (props: MainProps) => {
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
-  let newobjectArray = objectArray.map((item) => {
-    return item[1];
-  });
+  let newobjectArray = objectArray
+    .map((item) => {
+      return item[1];
+    })
+    .reverse();
+  console.log("newobject :", newobjectArray);
   const concatenated = newobjectArray.reduce(
     (acc: any, arr: any) => acc.concat(arr),
     []
@@ -234,6 +237,8 @@ const Main = (props: MainProps) => {
     }
   }, [Data.localization]);
 
+  debugger;
+  console.log("Concatenated :", concatenated);
   const sideNavItems = concatenated;
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -442,16 +447,28 @@ const Main = (props: MainProps) => {
                       <Route path="/polls" element={<PollsCompo />} />
                       <Route path="/blogger" element={<BloggerCompo />} />
                       <Route path="/client" element={<ClientCompo />} />
-                      <Route path="/url-forwarding" element={<UrlForwardingCompo />} />
-                      <Route path="/paymentPlans" element={<PaymentPlansCompo />} />
-                      <Route path="/paymentRequests" element={<PaymentRequestsCompo />} />
+                      <Route
+                        path="/url-forwarding"
+                        element={<UrlForwardingCompo />}
+                      />
+                      <Route
+                        path="/paymentPlans"
+                        element={<PaymentPlansCompo />}
+                      />
+                      <Route
+                        path="/paymentRequests"
+                        element={<PaymentRequestsCompo />}
+                      />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
-                      <Route path="/personal-data" element={<PersonalDataCompo />} />
-                      <Route path="/my-account" element={<MyAccountCompo/>}/>
+                      <Route
+                        path="/personal-data"
+                        element={<PersonalDataCompo />}
+                      />
+                      <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                  </Routes>
+                    </Routes>
                   </Suspense>
                 </div>
               </div>
