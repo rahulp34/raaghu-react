@@ -127,5 +127,8 @@ export const MfeConfig = {
   },
   "paymentRequests": {
     "url": "paymentRequests@http://localhost:8036/remoteEntry.js"
+  },
+  "components": {
+    "url": "components@http://localhost:8104/remoteEntry.js"
   }
 }

@@ -196,3 +196,7 @@ declare module "PaymentRequests/PaymentRequests" {
 	const PaymentRequestsComponent : React.ComponentType;
 	export default PaymentRequestsComponent;
 }
+declare module "Components/Components" {
+	const ComponentsComponent: React.ComponentType;
+	export default ComponentsComponent;
+}
