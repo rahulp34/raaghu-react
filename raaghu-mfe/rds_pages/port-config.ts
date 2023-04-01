@@ -77,10 +77,10 @@ export const PortConfig = {
   "forms": {
     "port": "8037"
   },
-  "formsView": {
+  "forms-view": {
     "port": "8038"
   },
-  "formsPreview": {
+  "forms-preview": {
     "port": "8039"
   },
   "blogger": {
