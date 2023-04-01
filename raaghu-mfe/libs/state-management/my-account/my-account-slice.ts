@@ -6,7 +6,9 @@ import { ServiceProxy } from "../../shared/service-proxy";
 type InitialStateMyAccount = {
     loading: boolean,
     personalInfo:any,
-    changePasswordData:any
+    changePasswordData:any,
+    profilePicture:any,
+    twoFactor:boolean,
     error:string
 };
 
@@ -14,6 +16,8 @@ type InitialStateMyAccount = {
     loading:false,
     personalInfo:null,
     changePasswordData:null,
+    profilePicture:null,
+    twoFactor:false,
     error:""
  }
 
@@ -48,6 +52,26 @@ type InitialStateMyAccount = {
     "myProfile/changepasswordProfile",(data:any)=>{
     return myAccountService.changePasswordPOST(data).then((result:any)=>{
         return result;
+    })
+    }
+  )
+
+  export const setProfilePicture = createAsyncThunk(   
+    "myProfile/setProfilePicture",(data:any)=>{
+    return myAccountService.profilePicturePOST(0,data?.imageContent).then((result:any)=>{
+        console.log("result",data)
+        return result;
+        
+    })
+    }
+  )
+
+  export const setTwoFactorEnabled = createAsyncThunk(   
+    "myProfile/setTwoFactorEnabled",(data:any)=>{
+    return myAccountService.setTwoFactorEnabled(data?.enabled).then((result:any)=>{
+        console.log("result",data)
+        return result;
+        
     })
     }
   )
@@ -113,6 +137,36 @@ type InitialStateMyAccount = {
         }     
       );
       builder.addCase(changepasswordProfile.rejected, (state, action) => {       
+        state.loading = false;            
+        state.error = action.error.message || "Something went wrong";     
+      });   
+
+      builder.addCase(setProfilePicture.pending, (state) => {
+        state.loading = true;
+      });
+  
+      builder.addCase(
+        setProfilePicture.fulfilled,(state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.profilePicture= action.payload;
+        }     
+      );
+      builder.addCase(setProfilePicture.rejected, (state, action) => {       
+        state.loading = false;            
+        state.error = action.error.message || "Something went wrong";     
+      });   
+
+      builder.addCase(setTwoFactorEnabled.pending, (state) => {
+        state.loading = true;
+      });
+  
+      builder.addCase(
+        setTwoFactorEnabled.fulfilled,(state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.twoFactor= action.payload;
+        }     
+      );
+      builder.addCase(setTwoFactorEnabled.rejected, (state, action) => {       
         state.loading = false;            
         state.error = action.error.message || "Something went wrong";     
       });   
