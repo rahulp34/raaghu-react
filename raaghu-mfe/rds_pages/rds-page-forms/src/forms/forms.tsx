@@ -1,49 +1,23 @@
 import React, { useEffect, useState } from "react"; import {
-  RdsAlert,
   RdsButton,
-  RdsIcon,
-  RdsInput,
-  RdsLabel,
   RdsNavtabs,
   RdsOffcanvas,
 } from "../../../rds-elements";
 
 import {
   RdsCompAlertPopup,
-  RdsCompDatatable, RdsCompFormsBasic, RdsCompFormsEmail,
+  RdsCompDatatable, RdsCompFormsBasic,
 } from "../../../rds-components";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import { useNavigate } from 'react-router-dom';
-import { deleteForms, fetchForms, getForms, Saveforms, getAll2FormsQuestions, SaveFormsSendResponse } from "../../../../libs/state-management/forms/forms-slice";
+import { deleteForms, fetchForms, getForms, Saveforms, getAll2FormsQuestions } from "../../../../libs/state-management/forms/forms-slice";
 const Forms = () => {
   const dispatch = useAppDispatch();
   const forms = useAppSelector((state) => state.persistedReducer.forms);
   const navigate = useNavigate();
-  const [formsData, setFormsData] = useState<any>([])
-  const [alert, setAlert] = useState({
-    showAlert: false,
-    message: "",
-    success: false,
-  });
-  const [alertOne, setAlertOne] = useState(false);
-  useEffect(() => {
-
-    setAlert({
-      showAlert: forms.alert,
-      message: forms.alertMessage,
-      success: forms.success,
-    });
-    setTimeout(() => {
-      setAlert({
-        showAlert: false,
-        message: "",
-        success: false,
-      });
-    }, 2000);
-  }, [formsData]);
   useEffect(() => {
     dispatch(fetchForms() as any);
   }, [dispatch]);
@@ -71,6 +45,27 @@ const Forms = () => {
       setFormsData(tempData)
     }
   }, [forms.forms]);
+
+  // const [tempEditFormData, setTempEditFormData] = useState<any>();
+
+
+  // useEffect(() => {
+  //   if (forms.editForms) {
+  //     const tempData = { ...forms.editForms }
+  //     setTempEditFormData(tempData);
+  //   }
+  // }, [forms.editForms]);
+
+  const handleDrop = (event:any) => {
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text/plain');
+    // Do something with the dropped row id
+  };
+
+  const handleDragOver = (event:any) => {
+    event.preventDefault();
+  };
+
 
   const offCanvasHandler = () => { };
   const tableHeaders = [
@@ -108,6 +103,7 @@ const Forms = () => {
     }
   ];
 
+  const [formsData, setFormsData] = useState<any>([])
   const [tableRowId, setTableRowId] = useState('');
   const scopeSelection = (rowData: any, actionId: any) => {
 
@@ -115,16 +111,17 @@ const Forms = () => {
     setTableRowId(rowDataString);
     dispatch(getForms(rowDataString) as any);
     dispatch(getAll2FormsQuestions(rowDataString) as any);
-    if (actionId === 'view') {
-      navigate("/formsView/" + rowDataString);
+    if(actionId === 'view'){
+      navigate(`/formsView/${rowDataString}`);
     }
-    setFormsEmailData({...formsEmailData , subject:rowData.title })
+  
+
   };
   function onDeleteHandler(e: any) {
     dispatch(deleteForms(tableRowId) as any).then((res: any) => {
       dispatch(fetchForms() as any);
     });
-    setAlertOne(true);
+
   }
 
   const actions = [
@@ -139,61 +136,25 @@ const Forms = () => {
     title: '', description: ''
   });
   function handleNewFormData() {
+
     dispatch(Saveforms(saveNewFormData) as any).then((res: any) => {
       dispatch(fetchForms() as any);
     })
-    setAlertOne(true);
-    setBasicFormData({ title: '', description: '' })
   }
 
   function handleGetFormData(data: any) {
     setSaveNewFormData(data)
   }
-  const navtabsSendItems = [
-    { label: "Email", tablink: "#nav-email", id: 0 },
-    { label: "Link", tablink: "#nav-link", id: 1 },
-  ];
-  const [showNextSendTab, setShowNextSendTab] = useState(false);
-  const [activeNavTabSendId, setActiveNavTabSendId] = useState(0);
-  const [copybtn, setCopyBtn] = useState("clipboard")
-  function handleCopyLink(event: any) {
-    const linkValueToCopy = event.target.baseURI;
-    navigator.clipboard.writeText(linkValueToCopy)
-      .then(() => {
-        console.log('Link copied to clipboard!');
-      })
-      .catch(err => {
-        console.error('Failed to copy link: ', err);
-      });
-    setCopyBtn("check")
-  }
-  const baseUrl = window.location.origin;
-  const url = "formsView/"+tableRowId;
-  const body = "I've invited you to fill in a form: " + baseUrl+"/"+ url
-  const [formsEmailData, setFormsEmailData] = useState<any>({ to: '', body: body })
-  //  useEffect(())
-  function handleEmailSubmit(_data: any) {
-    debugger
-    dispatch(SaveFormsSendResponse(_data) as any);
-  }
+
   return (
     <>
       <div className="row">
-
-        <div className=" col-md-10">
-          {alert.showAlert && alertOne && (
-            <RdsAlert
-              alertmessage={alert.message}
-              colorVariant={alert.success ? "success" : "danger"}
-              style={{ marginBottom: "0" }}
-            ></RdsAlert>
-          )}
-        </div>
         <div className="col d-flex justify-content-end mb-3">
           <RdsOffcanvas
             canvasTitle={"NEW FORM"}
             onclick={offCanvasHandler}
             placement="end"
+            
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton
@@ -247,11 +208,11 @@ const Forms = () => {
               </div>
             </>
           </RdsOffcanvas>
-
         </div>
 
         <div className="col-md-12 mb-3">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+
             <div>
               <RdsCompDatatable
                 tableHeaders={tableHeaders}
@@ -261,56 +222,10 @@ const Forms = () => {
                 recordsPerPage={5}
                 recordsPerPageSelectListOption={true}
                 onActionSelection={scopeSelection}
+                // onDrop={handleDrop} onDragOver={handleDragOver}
               ></RdsCompDatatable>
-              <RdsOffcanvas
-                canvasTitle={"SEND FORM"}
-                onclick={offCanvasHandler}
-                placement="end"
-                offcanvaswidth={650}
-                backDrop={false}
-                scrolling={false}
-                preventEscapeKey={false}
-                offId="send"
-              >
-                <>
-                  <div className="row">
-                    <RdsNavtabs
-                      navtabsItems={navtabsSendItems}
-                      type="tabs"
-                      isNextPressed={showNextSendTab}
-                      activeNavTabId={activeNavTabSendId}
-                      activeNavtabOrder={(activeNavTabSendId) => {
-                        setActiveNavTabSendId(activeNavTabSendId), setShowNextSendTab(false);
-                      }}
-                    />
-                    {activeNavTabSendId == 0 && showNextSendTab === false && (
-                      <>
-                        <div>
-                          <RdsCompFormsEmail formsEmailData={formsEmailData} handleSubmit={(data: any) => { handleEmailSubmit(data) }} ></RdsCompFormsEmail>
-                        </div>
-                      </>
-                    )}
-                    {activeNavTabSendId == 1 && showNextSendTab === false && (
-                      <>
-                        <div className="row ps-2">
-                          <div>
-                            <RdsLabel label="Link"></RdsLabel>
-                          </div>
-                          <div className="input-group mb-3 mt-3">
-                            <RdsInput value={'http://localhost:8080/formsPreview/'+ tableRowId}></RdsInput>
-                            <div className="input-group-text" id="basic-addon12">
-                              <RdsIcon name={copybtn} height="20px" width="20px" fill={false} stroke={true} onClick={handleCopyLink} />
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </>
-              </RdsOffcanvas>
             </div>
-
-            <RdsCompAlertPopup messageAlert="Form will be deleted with all the questions in it, do you confirm?" alertID="Delete" onSuccess={onDeleteHandler} />
+            <RdsCompAlertPopup alertID="Delete" onSuccess={onDeleteHandler} />
 
           </div>
         </div>
