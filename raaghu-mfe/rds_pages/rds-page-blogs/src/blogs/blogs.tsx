@@ -57,7 +57,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   };
 
   const dispatch = useAppDispatch();
-  
+
   useEffect(() => {
     debugger;
     dispatch(fetchBlogsData() as any);
@@ -125,16 +125,20 @@ const Blogs = (props: RdsPageResourcesProps) => {
   function handleEnabled(event: any) {
     setFormData({ ...formData, enabled: event });
   }
-  function handleRequired(event:any){
-	setFormData({ ...formData, required: event });
+  function handleRequired(event: any) {
+    setFormData({ ...formData, required: event });
   }
-  function handleEmphasize(event:any){
-	setFormData({ ...formData, emphasize: event });
+  function handleEmphasize(event: any) {
+    setFormData({ ...formData, emphasize: event });
   }
-  function handleShowInDiscovery(event:any){
-	setFormData({ ...formData, showInDiscoveryDocument: event });
+  function handleShowInDiscovery(event: any) {
+    setFormData({ ...formData, showInDiscoveryDocument: event });
   }
 
+  return (
+    <>
+    </>
+  )
 
   // return (
   //   <div>
@@ -157,7 +161,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //             canvasTitle={("New Blog")}
   //             onclick={offCanvasHandler}
   //             placement="end"
-              
+
   //             offcanvasbutton={
   //               <div>
   //                 <RdsButton
@@ -255,7 +259,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //         offId="blogs-edit-off"
   //         placement="end"
   //         canvasTitle="Edit Blog"
-          
+
   //         children={
   //           <>
   //             <RdsInput
@@ -284,7 +288,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //                 //   setValue(e.target.value);
   //                 // }}
   //                 ></RdsInput>
-                  
+
   //                 <div className="d-flex footer-buttons mb-3">
   //                   <RdsButton
   //                     label="CANCEL"
@@ -317,7 +321,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //         offId="features"
   //         placement="end"
   //         canvasTitle="Features"
-          
+
   //         children={
   //           <>
   //             <div className=" mb-4">
@@ -330,7 +334,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //             }}
   //           ></RdsCheckbox>
   //         </div>
-	// 	  <div className=" mb-4">
+  // 	  <div className=" mb-4">
   //           <RdsCheckbox
   //             id="1"
   //             label="Reactions"
@@ -340,7 +344,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //             }}
   //           ></RdsCheckbox>
   //         </div>
-	// 	  <div className=" mb-4">
+  // 	  <div className=" mb-4">
   //           <RdsCheckbox
   //             id="2"
   //             label="Ratings"
@@ -350,7 +354,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //             }}
   //           ></RdsCheckbox>
   //         </div>
-	// 	  <div className=" mb-4">
+  // 	  <div className=" mb-4">
   //           <RdsCheckbox
   //             id="3"
   //             label="Tags"
@@ -411,7 +415,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   //           offId="features"
   //           placement="end"
   //           canvasTitle="Edit"
-           
+
   //           children={
   //             <>
   //             hii

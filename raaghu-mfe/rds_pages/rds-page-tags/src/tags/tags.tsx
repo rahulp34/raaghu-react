@@ -165,7 +165,12 @@ const Tags = () => {
             recordsPerPage={recordsPerPage} noDataTitle={'No Tags Available'}></RdsCompDatatable>
         </div>
       </div>
-      <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} cancelButtonColor="danger" deleteButtonColor="danger" />
+      <RdsCompAlertPopup 
+      alertID="delete" 
+      onSuccess={confirmDelete} 
+      // cancelButtonColor="danger" 
+      // deleteButtonColor="danger" 
+      />
     </>
   );
 };
