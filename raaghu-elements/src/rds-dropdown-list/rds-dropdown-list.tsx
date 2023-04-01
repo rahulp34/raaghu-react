@@ -31,11 +31,9 @@ export interface RdsDropdownListProps {
 }
 
 const RdsDropdownList = (props: RdsDropdownListProps) => {
-  let nextId = 0;
   const [checkedCategoryList, setCheckedCategoryList] = useState<any>([]);
   const [isTouch, setIsTouch] = useState(false);
   // to fetch the index of the selected language
-  let id=props.id ||'dropdown_id'
   const lang = localStorage.getItem("i18nextLng");
   let index = props.listItems.findIndex((item) => item.val === lang);
   const[toggle, setToggle] = useState('show'); 
@@ -55,10 +53,9 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   const onClickHandler = (index: number, val: string) => {
     setSelectedOption(index);
     setIsTouch(true);
-    var myDropdown = document.querySelector('.dropdown-raaghu') as any;
-    var dropdownMenu = myDropdown.querySelector('.dropdown-menu');
-    dropdownMenu.classList.remove('show')
-    dropdownMenu.classList.add('hide');
+    var dropdownMenu = document.getElementById(props.id as string);
+    dropdownMenu?.classList.remove('show')
+    dropdownMenu?.classList.add('hide');
     setToggle('show');
   };
   let IconWidth = props.listItems[selectedOption].iconWidth || "16px";
@@ -102,18 +99,16 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
     debugger
     var myDropdown = document.querySelector('.dropdown-raaghu') as any;
     var dropdownToggle = myDropdown.querySelector('.dropdown-raaghu-button');
-    var dropdownMenu = myDropdown.querySelector('.dropdown-menu');
-    
+    var dropdownMenu = document.getElementById(props.id as string);
     if(toggle == 'show'){
-      dropdownMenu.classList.remove('hide')
-      dropdownMenu.classList.add(toggle);
+      dropdownMenu?.classList.remove('hide')
+      dropdownMenu?.classList.add(toggle);
       setToggle('hide');
     }
     else{
-      dropdownMenu.classList.remove('show')
-      dropdownMenu.classList.add(toggle);
+      dropdownMenu?.classList.remove('show')
+      dropdownMenu?.classList.add(toggle);
       setToggle('show');
-
     }
     
   }
@@ -206,7 +201,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
         </span>
 
         {/* DropdownList items */}
-        <ul className="dropdown-menu" aria-labelledby={id}>
+        <ul className="dropdown-menu" id={props.id} aria-labelledby={props.id}>
           {props.listItems?.map((language: any, i: any) => (
             <li
             className="ps-1"
