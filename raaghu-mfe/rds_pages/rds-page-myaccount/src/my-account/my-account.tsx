@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
 import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
-import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile } from "../../../../libs/state-management/my-account/my-account-slice";
+import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
 
 
  const navtabsItems = [
@@ -15,8 +15,8 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
  const MyAccount = (props:any) => { 
     const [activeNavTabId, setActiveNavTabId] = useState(0);
     const data = useAppSelector((state) => state.persistedReducer.myaccount);
-    const [twoFactorData,setFormData] = useState(props.changePasswordData);
-
+    const [twoFactorData,setFormData] = useState(false);
+    // console.log("This is two factor data", twoFactorData);
 
     const [changePasswordData, setchangePassword] = useState<any>({
         currentPassword: "",
@@ -32,7 +32,17 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
         phoneNumber:""    
     });
 
+    const [profilePicture, setPicture] = useState<any>({
+        userName: "", 
+        name:"",
+        surname:"",
+        email:"",
+        phoneNumber:""    
+    });
+
     const dispatch = useAppDispatch();
+
+    
     
     function handlePasswordDataSubmit(formData: any) {
         console.log("Data", formData);
@@ -40,7 +50,8 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     }
 
     function handleTwoFactorSubmit(value:boolean) {
-        setFormData({twoFactorData:value})
+        setFormData(value);
+        dispatch(setTwoFactorEnabled(value) as any)
         console.log("Two factor Data", value);
     }
 
@@ -52,6 +63,11 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     function handleVerifyEmailDataSubmit(email:any) {
         console.log("email", email);
         dispatch(sendEmailVerifyProfile(email) as any);
+    }
+
+    function handleProfilePictureDataSubmit(type:any) {
+        console.log("type ", type);
+        // dispatch(sendEmailVerifyProfile(type) as any);
     }
 
     useEffect(() => {
@@ -71,6 +87,12 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
         }
       }, [data.changePasswordData]);
 
+      useEffect(() => {
+        if (data.profilePicture) {
+            setchangePassword(data.profilePicture);
+        }
+      }, [data.profilePicture]);
+
 
  
     return (
@@ -89,7 +111,11 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                         />                                               
                     </div>
                     {activeNavTabId == 0 && (
-                        <RdsCompProfilePicture></RdsCompProfilePicture>
+                        <RdsCompProfilePicture
+                        handleProfileDataSubmit={(formData: any) => {
+                            handleProfilePictureDataSubmit(formData);
+                            }}
+                            profilePicture={profilePicture}></RdsCompProfilePicture>
                     )}
                     {activeNavTabId == 1 && (
                         <RdsCompChangePassword
@@ -111,8 +137,8 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                         
                     )}
                     {activeNavTabId == 3 && (
-                       <form onSubmit={handlePasswordDataSubmit}>
-                        <div className="mt-4 py-4">
+                        <>
+                         <div className="mt-4 py-4">
                             <RdsCheckbox
                                 label="Two factor enabled"
                                 onChange={(e:any) =>{handleTwoFactorSubmit(e.target.checked)}}
@@ -125,10 +151,13 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                             colorVariant ='primary'                 
                             block = {false}                 
                             type = "submit"
-                            onClick={()=>{handlePasswordDataSubmit(twoFactorData)}}				
+                            onClick={()=>{handleTwoFactorSubmit(twoFactorData)}}				
                             />      
                         </div>
-                       </form>
+                        </>
+                    //    <form onSubmit={handletwoFactorDataSubmit}>
+                       
+                    //    </form>
                     )}                                                           
             </div>
         </div>
