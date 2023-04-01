@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RdsCompChangePassword from './RdsCompChangePassword';
+import RdsCompChangePassword from './rds-comp-change-password';
 
 it('It should mount', () => {
   const div = document.createElement('div');
