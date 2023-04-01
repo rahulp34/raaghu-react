@@ -124,5 +124,8 @@ export const PortConfig = {
   },
   "rdsComponents": {
     "port": "8103"
+  },
+  "components": {
+    "port": "8104"
   }
 }

@@ -130,5 +130,8 @@ export const MfeConfig = {
   },
   "rdsComponents": {
     "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
+  },
+  "components": {
+    "url": "components@http://localhost:8104/remoteEntry.js"
   }
 }

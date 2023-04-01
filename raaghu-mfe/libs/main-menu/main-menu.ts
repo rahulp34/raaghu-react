@@ -243,7 +243,14 @@ const MainMenu = [
               "subTitle": "tags",
             },
       ]
-  }
+  },
+  {
+    "key": "9",
+    "label": "Components",
+    "icon": "card_image",
+    "path": "/components",
+    "subTitle": "Components",
+  },
 ]
 
 export default MainMenu;

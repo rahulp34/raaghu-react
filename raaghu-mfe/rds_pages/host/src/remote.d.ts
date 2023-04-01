@@ -201,3 +201,8 @@ declare module "RdsComponents/RdsComponents" {
 	const RdsComponentsComponent: React.ComponentType;
 	export default RdsComponentsComponent;
 }
+
+declare module "Components/Components" {
+	const ComponentsComponent: React.ComponentType;
+	export default ComponentsComponent;
+}
