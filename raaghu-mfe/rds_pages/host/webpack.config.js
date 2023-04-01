@@ -146,9 +146,8 @@ module.exports = (env, argv) => {
           Elements: mfeConfigJSON["elements"].url,
           PersonalData: mfeConfigJSON["personalData"].url,
           MyAccount: mfeConfigJSON["myAccount"].url,
-          PaymentRequests: mfeConfigJSON["paymentRequests"].url,
+          PaymentRequests: mfeConfigJSON["paymentRequests"].url
      RdsComponents: mfeConfigJSON["rdsComponents"].url,
-     Components: mfeConfigJSON["components"].url,
 },
         shared: {
           ...devdeps,
