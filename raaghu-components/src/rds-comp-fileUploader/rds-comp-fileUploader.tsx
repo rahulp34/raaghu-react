@@ -1,9 +1,20 @@
+
 import React from "react";
-import { RdsButton, RdsFileUploader } from "raaghu-react-elements";
+import { RdsButton, RdsFileUploader } from "../../../../raaghu-react/raaghu-elements/src";
 import "./rds-comp-fileUploader.scss";
 
+export interface RdsCompFileUploaderProps{
+onClick:any
+preFileInfo?:any
+}
 
-const RdsCompFileUploader = (props: any) => {
+const RdsCompFileUploader = (props: RdsCompFileUploaderProps) => {
+  function folder(data:any){
+    
+    props.preFileInfo(data);
+   
+    
+  }
   return (
     <>
       <div className="row">
@@ -33,8 +44,9 @@ const RdsCompFileUploader = (props: any) => {
             <RdsFileUploader
               colorVariant="primary"
               extensions=""
-              multiple
-              placeholder="" size={""} label={""} limit={10}            />
+              multiple={true}
+              placeholder="" size={""} label={""} limit={10} 
+              getFileUploaderInfo={(data:any)=>folder(data)}            />
           </div>
         </div>
       </div>
@@ -56,7 +68,7 @@ const RdsCompFileUploader = (props: any) => {
                   // isDisabled={""}
                   colorVariant="primary"
                   class="me-2"
-                  //onClick={addDataHandler}
+                  onClick={props.onClick}
                 ></RdsButton>
               </div>
     </>
