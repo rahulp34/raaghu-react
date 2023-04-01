@@ -64,7 +64,7 @@ const TextTemplate = () => {
         setTableData(data);
       }
 
-      if (textTemplate.languages.localization.languages !== null || textTemplate.languages.localization.languages !== undefined) {
+      if (textTemplate?.languages?.localization?.languages !== null || textTemplate.languages.localization.languages !== undefined) {
         const data: any = [];
         textTemplate.languages.localization.languages.forEach((ele: any) => {
           const item = {
@@ -156,7 +156,7 @@ const TextTemplate = () => {
         </div>
       </div>
       <RdsOffcanvas placement={"end"} backDrop={false} scrolling={false} preventEscapeKey={false} offId={"Edit"}
-        canvasTitle={"Contents"} >
+        canvasTitle={"Contents"}>
         <form>
           <div className="px-2">
             <div className="form-group mb-4 d-flex">

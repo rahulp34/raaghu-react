@@ -30,7 +30,6 @@ export {default as RdsCompUserPermission} from "./rds-comp-user-permission/rds-c
 export {default as RdsCompUserBasics} from "./rds-comp-user-basics/rds-comp-user-basics"
 export {default as RdsCompNewLanguage} from "./rds-comp-new-language/rds-comp-new-language";
 export {default as RdsCompDynamicEntityProperty} from './rds-comp-dynamic-entity-property/rds-comp-dynamic-entity-property';
-export {default as RdsCompRoleList} from './rds-comp-role-list/rds-comp-role-list'
 export {default as RdsCompIconList} from './rds-comp-icon-list/rds-comp-icon-list'
 export {default as RdsCompEdition} from './rds-comp-edition/rds-comp-edition'
 export {default as RdsCompFeatures} from './rds-comp-new-features/rds-comp-new-features'
@@ -49,6 +48,8 @@ export {default as RdsCompUserRoles} from './rds-comp-user-roles/rds-comp-user-r
 export {default as RdsDirectoryList} from './rds-comp-directory-list/rds-comp-directory-list'
 export {default as RdsCompFormsBasic} from './rds-comp-forms-basic/rds-comp-forms-basic'
 export {default as RdsCompFormsQuestions} from './rds-comp-forms-question/rds-comp-forms-questions'
+export {default as RdsCompFormsEmail} from './rds-comp-forms-email/rds-comp-forms-email'
+export {default as RdsCompFormsResponse} from './rds-comp-forms-response/rds-comp-forms-response'
 export {default as RdsCompFormsSettings} from './rds-comp-forms-setting/rds-comp-forms-setting'
 export {default as RdsCompQuestions} from './rds-comp-questions/rds-comp-questions'
 export {default as RdsCompPermissionTreeNew} from './rds-comp-permission-tree-new/rds-comp-permission-tree-new'

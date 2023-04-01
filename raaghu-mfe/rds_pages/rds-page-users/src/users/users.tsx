@@ -56,7 +56,6 @@ const Users = () => {
   });
   const [userRolesData, setUseRolesData] = useState<any>();
   const [editRolesData, setEditRoleData] = useState<any>();
-  const [clickedFirstTime, setClickedFirstTime] = useState(false)
   const [userPermission, setUserPermission] = useState<any>([]);
   const [tableData, setTableData] = useState<any[]>([])
 //    {userName:"abc", name:"abc", roles:"admin dsd", emailAddress: "asdf@abc.abc"}]);
@@ -215,6 +214,15 @@ const Users = () => {
       });
       setTableData(tempTableData);
     }
+    setUserData({
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      twoFactorEnabled: false,
+      userName: "",
+      password: "",
+    });
   }, [data.users]);
 
   useEffect(() => {
@@ -254,9 +262,8 @@ const Users = () => {
   }, [data.organizationUnit]);
 
   useEffect(() => {   
-    if (clickedFirstTime && data.editUser) {
+    if (data.editUser) {
       setUserData(data.editUser);
-      setClickedFirstTime(true);
     }
   }, [data.editUser]);
 

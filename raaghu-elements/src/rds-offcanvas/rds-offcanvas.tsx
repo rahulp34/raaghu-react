@@ -32,6 +32,22 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
       : "100% "
   }`;
   let isCanvasTitle =props.canvasTitle !== "" && props.canvasTitle !== undefined;
+  useEffect(()=>{
+    const a = document.querySelectorAll('[data-bs-toggle]');
+    a.forEach((element)=>{
+      element.addEventListener('click',()=>{
+        const b = document.querySelectorAll('.offcanvas-backdrop')
+        b.forEach((el:any, index:number) => {
+          if(index!=0){
+            el.classList.remove('offcanvas-backdrop');
+            el.classList.remove('fade');
+            el.classList.remove('show');
+          }
+        })
+      })
+    })
+  },[])
+  
   
   return (
     <>

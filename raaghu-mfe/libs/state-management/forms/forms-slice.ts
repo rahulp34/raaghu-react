@@ -153,7 +153,15 @@ export const getFormsSettings = createAsyncThunk(
   }
 );
 
-
+//response send
+export const SaveFormsSendResponse= createAsyncThunk(
+  "forms/SaveFormsSendResponse",
+  (data: any) => {
+    return proxy.invite(data).then((result: any) => {
+      return result;
+    });
+  }
+);
 //reducer
 const formsSlice = createSlice({
   name: "forms",
@@ -375,6 +383,29 @@ const formsSlice = createSlice({
       state.alertMessage = "Something Went Wrong";
       state.success = false;
     });
+
+        //Save response
+        builder.addCase(SaveFormsSendResponse.pending, (state) => {
+          state.loading = true;
+        });
+    
+        builder.addCase(
+          SaveFormsSendResponse.fulfilled,
+          (state, action: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = "";
+            state.alert = true;
+            state.alertMessage = "Data added Successfully";
+            state.success = true;
+          }
+        );
+        builder.addCase(SaveFormsSendResponse.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || "Something Went Wrong";
+          state.alert = true;
+          state.alertMessage = "Something Went Wrong";
+          state.success = false;
+        });
   },
 });
 
