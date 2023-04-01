@@ -1,10 +1,9 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useState, useEffect } from "react";
 
 import RdsIcon from "../rds-icon";
 import RdsBadge from "../rds-badge";
 import "./rds-dropdown-list.scss";
-import { PROPERTY_TYPES } from "@babel/types";
-import { useEffect } from "react";
+import { Dropdown } from "bootstrap";
 export interface RdsDropdownListProps {
   id?:string, 
   reset?: boolean;
@@ -25,7 +24,7 @@ export interface RdsDropdownListProps {
   multiSelect?: boolean;
   xOffset?: string;
   yOffset?: string;
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   selectedItems?: (selectedItems: any) => void;
   selectedIndex?: (selectedindex: number) => void;
 }
@@ -48,18 +47,22 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
 
   const [selectedOption, setSelectedOption] = useState<number>(index);
 
-  // using onClickHandler to change the language
+  // using handlerLIstItem to change the language
 
-  const onClickHandler = (index: number, val: string) => {
+  const handlerLIstItem = (event: React.MouseEvent<HTMLLIElement>,index: number, val: string) => { 
+ console.log(event.target)
     setSelectedOption(index);
     setIsTouch(true);
+    if (props.onClick) {
+      props.onClick(event,val);
+    }
     var dropdownMenu = document.getElementById(props.id as string);
     dropdownMenu?.classList.remove('show')
     dropdownMenu?.classList.add('hide');
     setToggle('show');
   };
-  let IconWidth = props.listItems[selectedOption].iconWidth || "16px";
-  let IconHeight = props.listItems[selectedOption].iconHeight || "12px";
+  let IconWidth = props.listItems[selectedOption]?.iconWidth || "16px";
+  let IconHeight = props.listItems[selectedOption]?.iconHeight || "12px";
 
   const uncheckHandler = (e: any, item: any) => {
     const newChildTreeunits = checkedCategoryList.filter(
@@ -95,8 +98,8 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       props.selectedItems != undefined &&
       props.selectedItems(checkedCategoryList);
   }, [checkedCategoryList]);
+  
   function clickedOnHarshit(e:any){
-    debugger
     var myDropdown = document.querySelector('.dropdown-raaghu') as any;
     var dropdownToggle = myDropdown.querySelector('.dropdown-raaghu-button');
     var dropdownMenu = document.getElementById(props.id as string);
@@ -112,11 +115,13 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
     }
     
   }
+  
   return (
-      <div className="dropdown-raaghu w-100 position-relative">
-        <span
-          className="dropdown-raaghu-button"
-          onClick={clickedOnHarshit}
+      <div className="dropdown w-100 position-relative">
+        <span 
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+         // data-bs-offset={offset} 
         >
           <div className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}>
         {/* simple dropdown  */}
@@ -206,15 +211,12 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
             <li
             className="ps-1"
               key={i}
-              onMouseDown={() => {
-                onClickHandler(i, language.val);
-              }}
+              onClick={(event)=>{handlerLIstItem(event,i, language.val)}}
             >
               <a
-                data-name={language.val}
                 id={i}
                 className="ps-2 dropdown-item fab-dropdown-item d-flex"
-                onClick={props.onClick}
+                // onClick={()=>{anchorhandler}}
                 style={{ cursor: "pointer" }}
               >
                 {props.multiSelect && (
@@ -240,9 +242,10 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                       />
                     </div>
                 )}
-                {language.icon && (
+                {language.icon &&
+                <>
                   <div
-                    className="ms-2">
+                    className={`${language.icon =="isNull"?"ms-4 me-2 ":"ms-2 me-2"}`}>
                     <RdsIcon
                       name={language.icon}
                       height={language.iconWidth ? language.iconWidth : "20px"}
@@ -250,8 +253,8 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                       fill={false}
                       stroke={true}
                     ></RdsIcon>
-                  </div>
-                )}
+                  </div></>
+                }
 
                 <span
                   className="ms-1"
