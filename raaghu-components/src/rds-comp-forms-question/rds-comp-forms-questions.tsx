@@ -1,8 +1,7 @@
 import moment from "moment";
-import { RdsIcon } from "raaghu-react-elements";
+import { RdsIcon, RdsToggle, } from "raaghu-react-elements";
 import React, { useEffect, useState } from "react";
-import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
+import { RdsButton, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
 
 export interface RdsCompFormsQuestionProps {
     formQuestionsData?: any;
@@ -18,9 +17,16 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
         { option: "multiple choice", value: 3 },
         { option: "checkboxes", value: 4 },
         { option: "dropdown", value: 5 }]
-
+    function setIsRequired(index: number, value: boolean) {
+        const tempquestions = questions.map((res: any) => {
+            return res;
+        });
+        tempquestions[index].isEdit = true;
+        tempquestions[index].isRequired = value;
+        setQuestions(tempquestions);
+        props.handleQuestions(tempquestions);
+    }
     function setTitle(index: number, value: any) {
-
         const tempquestions = questions.map((res: any) => {
             return res;
         });
@@ -28,8 +34,8 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
         tempquestions[index].title = value;
         setQuestions(tempquestions);
         props.handleQuestions(tempquestions);
-
     }
+
     function setDescription(index: number, value: any) {
         const tempquestions = questions.map((res: any) => {
             return res;
@@ -111,35 +117,42 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
             return res;
         });
         setReadOnly(false);
-        tempquestions[index].choices.push({ value: 'Option' })
+        // tempquestions[index].choices.push({ value: 'Option' })
+        tempquestions[index].choices.splice(-1, 0, { value: 'Option' })
         setQuestions(tempquestions);
     }
     const [readOnly, setReadOnly] = useState(false);
 
     function handleAddOtherChoices(index: any) {
-
         const tempquestions = questions.map((res: any) => {
             return res;
         });
         if (!tempquestions[index].hasOtherOption) {
-            const tempquestions = [...questions];
             tempquestions[index].choices.push({ value: "Other...", readOnly: true });
-            setReadOnly(true);
-            setQuestions(tempquestions);
             tempquestions[index].hasOtherOption = true;
         }
+        setReadOnly(true);
+        setQuestions(tempquestions);
     }
 
     useEffect(() => {
-        setQuestions(props.formQuestionsData.map((res: any) => {
-            return { ...res, isEdit: false };
+        debugger
+        setQuestions(props.formQuestionsData?.map((res: any) => {
+            const choices = res.choices?.map((choice: any, i: any) => {
+                    if (choice.value === "Other...") {
+                        return { ...choice, readOnly: true };
+                    } else {
+                        return { ...choice, readOnly: false };
+                    }
+                })
+            return { ...res,choices,isEdit: false };
         }))
     }, [props.formQuestionsData])
 
     return (
         <>
             <div className="row ">
-                {questions.length && questions.map((element: any, i: number) => (<>
+                {questions?.length && questions?.map((element: any, i: number) => (<>
                     <form className="mb-5">
                         <div className="row">
                             <div className="col-6 mb-1">
@@ -149,6 +162,10 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                 </> : ' '}
                             </div>
                             <div className="col-6 d-flex justify-content-end">
+                                <div className="d-flex px-3">
+                                <RdsToggle iconOnUncheck={"false"} iconOnCheck={"true"} checked={element.isRequired} onClick={(e: any) => setIsRequired(i, e.target.checked)} ></RdsToggle>
+                                <RdsLabel label="Required"></RdsLabel>
+                                </div> 
                                 <RdsIcon
                                     width="17px"
                                     height="17px"
@@ -156,6 +173,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                     stroke={true}
                                     colorVariant="danger"
                                     onClick={() => { props.deleteQuestion(element) }}
+                                    classes="cursor-pointer"
                                 ></RdsIcon>
                             </div>
                         </div>
@@ -212,18 +230,17 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                                         onChange={(e: any) => setOption(i, idx, e.target.value)}
                                                         value={elements.value}
                                                         name={"option"}
-                                                        readonly={readOnly}
+                                                        readonly={elements.readOnly}
                                                     ></RdsInput>
                                                     {element.choices.length > 1 && (
                                                         <RdsIcon
-                                                            classes={"input-group-text bg-transparent border-0"}
+                                                            classes={"input-group-text bg-transparent border-0 cursor-pointer"}
                                                             width="17px"
                                                             height="17px"
                                                             name="delete"
                                                             stroke={true}
                                                             colorVariant="danger"
                                                             onClick={() => handleDelete(i, idx)}
-
                                                         ></RdsIcon>
                                                     )}
                                                 </div>
@@ -243,11 +260,11 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                                 }
                                             </div>
                                             <div className="form-control">
-                                                <span onClick={() => { handleAddMoreChoices(i) }} >
+                                                <span onClick={() => { handleAddMoreChoices(i) }}  className="cursor-pointer">
                                                     Add More
                                                 </span>
                                                 {element.questionType !== 5 && !element.hasOtherOption && (<>
-                                                    <span onClick={() => { handleAddOtherChoices(i) }} >
+                                                    <span onClick={() => { handleAddOtherChoices(i) }}  className="cursor-pointer">
                                                         / Add Other
                                                     </span>
                                                 </>)}

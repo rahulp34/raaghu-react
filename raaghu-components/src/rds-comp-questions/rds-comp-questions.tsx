@@ -33,6 +33,7 @@ const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 	}, [props.formQuestionsData])
 
 	function handleGetQuestions(data: any) {
+		
 		props.getQuestionsEditDataFromQuestionComp(data);
 	}
 
