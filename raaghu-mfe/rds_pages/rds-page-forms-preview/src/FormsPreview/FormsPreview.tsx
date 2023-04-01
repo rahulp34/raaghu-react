@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react"; import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../../libs/public.api";
-import { getAll2FormsQuestions, getForms } from "../../../../libs/state-management/forms/forms-slice";
+import { getAll2FormsQuestions } from "../../../../libs/state-management/forms/forms-slice";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
 import {
+  RdsButton,
   RdsCheckbox,
+  RdsDropdown,
+  RdsInput,
   RdsLabel,
+  RdsNavtabs,
+  RdsOffcanvas,
   RdsRadioButton,
   RdsSelectList,
   RdsTextArea,
@@ -17,34 +22,20 @@ const FormsPreview = (props: any) => {
   const forms = useAppSelector((state) => state.persistedReducer.forms);
   useEffect(() => {
     dispatch(getAll2FormsQuestions(props.id) as any);
-    dispatch(getForms(props.id) as any);
-  }, [dispatch]);
+  }, [dispatch])
 
   const [formPreview, setFormPreview] = useState<any>([])
-  const [basicPreviewFormData, setBasicPreviewFormData] = useState<any>([])
-
   useEffect(() => {
     if (forms.formQuestionEdit) {
       setFormPreview(forms.formQuestionEdit);
     }
   }, [forms.formQuestionEdit]);
 
+  const [multipleChoice, setMultipleChoice] = useState<any>([]);
   useEffect(() => {
-    if (forms.editForms) {
-      const tempData = { ...forms.editForms }
-      setBasicPreviewFormData(tempData);
-    }
-  }, [forms.editForms]);
-
-  const [multipleChoice, setMultipleChoice] = useState<any[]>([]);
-
-  useEffect(() => {
-    if (formPreview.length ) {
-      debugger
-      let tempMultiple :any[] = []
-      formPreview.map((ele: any , index:number) => {
-        const temp: any[] = []
-
+    const temp: any[] = []
+    if (formPreview.length) {
+      formPreview.map((ele: any) => {
         if (ele.questionType === 3 && ele.choices && ele.choices.length) {
           ele.choices.map((eles: any) => {
             const item = {
@@ -53,22 +44,16 @@ const FormsPreview = (props: any) => {
             }
             temp.push(item)
           })
+          setMultipleChoice(temp)
         }
-        tempMultiple.push(temp);
       })
-      setMultipleChoice(tempMultiple)
     }
-  }, [formPreview]);
-
+  }, [formPreview])
   const [dropDownList, setDropDownList] = useState<any>([]);
-
   useEffect(() => {
-    if (formPreview.length ) {
-      debugger
-      let tempMultiple :any[] = []
-      formPreview.map((ele: any , index:number) => {
-        const temp: any[] = []
-
+    const temp: any[] = []
+    if (formPreview.length) {
+      formPreview.map((ele: any) => {
         if (ele.questionType === 5 && ele.choices && ele.choices.length) {
           ele.choices.map((eles: any) => {
             const item = {
@@ -77,49 +62,48 @@ const FormsPreview = (props: any) => {
             }
             temp.push(item)
           })
+          setDropDownList(temp)
         }
-        tempMultiple.push(temp);
       })
-      setDropDownList(tempMultiple)
     }
   }, [formPreview])
 
 
   return (
     <>
+      <p>{id}</p>
       <div className="row">
         <div className="col-md-12 mb-3">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-            <div className="container-fluid col-10">
-                <>
-                  <div className="text-center mt-5">
-                    <h3>{basicPreviewFormData.title}</h3>
-                    <h6 className="text-muted fs-5 opacity-75">{basicPreviewFormData.description}</h6>
-                  </div>
-                </>
+            <div className="container-fluid">
+              <div className="text-center">
+                <h3>Form Title</h3>
+                <h6 className="opacity-25">Created this form for testing purpose</h6>
+              </div>
               {formPreview.length && formPreview.map((ele: any, i: number) => (
                 <>
                   {ele.questionType === 1 ? <>
-                    <div className="mt-4">
-                      <div className="d-flex py-2">
-                        <RdsLabel class="pe-4 h5" label={ele.title} required={ele.isRequired}></RdsLabel>
-                        <RdsLabel class="opacity-75 text-muted" label={ele.description}></RdsLabel>
+                    <div className="my-4">
+                      <div className="d-flex">
+                        <RdsLabel class="pe-4" label={ele.title}></RdsLabel>
+                        <RdsLabel class="opacity-25" label={ele.description}></RdsLabel>
                       </div>
                       <RdsTextArea placeholder={""} rows={1}></RdsTextArea>
                     </div>
                   </> : ele.questionType === 3 ? <>
-                    <div className="mt-4">
-                      <div className="d-flex py-2">
-                        <RdsLabel class="pe-4 h5" label={ele.title} required={ele.isRequired}></RdsLabel>
-                        <RdsLabel class="opacity-75 text-muted" label={ele.description}></RdsLabel>
+                    <div className="my-4">
+                      <div className="d-flex">
+                        <RdsLabel class="pe-4" label={ele.title}></RdsLabel>
+                        <RdsLabel class="opacity-25" label={ele.description}></RdsLabel>
                       </div>
-                      <RdsRadioButton itemList={multipleChoice[i]} inline={true}></RdsRadioButton>
+                      <RdsRadioButton itemList={multipleChoice} inline={true}></RdsRadioButton>
+
                     </div>
                   </> : ele.questionType === 4 ? <>
-                    <div className="mt-4">
-                      <div className="d-flex py-2">
-                        <RdsLabel class="pe-4 h5" label={ele.title} required={ele.isRequired}></RdsLabel>
-                        <RdsLabel class="opacity-75 text-muted" label={ele.description}></RdsLabel>
+                    <div className="my-4">
+                      <div className="d-flex">
+                        <RdsLabel class="pe-4" label={ele.title}></RdsLabel>
+                        <RdsLabel class="opacity-25" label={ele.description}></RdsLabel>
                       </div>
                       {ele.choices && ele.choices.length && ele.choices.map((eles: any) => (
                         <RdsCheckbox label={eles.value} checked={undefined} ></RdsCheckbox>
@@ -127,14 +111,15 @@ const FormsPreview = (props: any) => {
                       }
                     </div>
                   </> : ele.questionType === 5 ? <>
-                    <div className="mt-4">
-                      <div className="d-flex py-2">
-                        <RdsLabel class="pe-4 h5" label={ele.title} required={ele.isRequired}></RdsLabel>
-                        <RdsLabel class="opacity-75 text-muted" label={ele.description}></RdsLabel>
+                    <div className="my-4">
+                      <div className="d-flex">
+                        <RdsLabel class="pe-4" label={ele.title}></RdsLabel>
+                        <RdsLabel class="opacity-25" label={ele.description}></RdsLabel>
                       </div>
-                      <RdsSelectList label={""} selectItems={dropDownList[i]}></RdsSelectList>
+                      <RdsSelectList label={""} selectItems={dropDownList}></RdsSelectList>
                     </div>
                   </> : ''}
+
                 </>
               ))}
             </div>

@@ -15,7 +15,7 @@ export interface RdsCompAlertPopupProps {
 const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
   let iconUrl = props.iconUrl || "delete";
   let colorVariant = props.colorVariant || "danger";
-  let alertConfirmation = props.alertConfirmation || "Are you sure?";
+  let alertConfirmation = props.alertConfirmation || "Are you sure to Delete";
   let messageAlert =
     props.messageAlert || "The record will be deleted permanently";
   let CancelButtonLabel = props.cancelButtonLabel || "Cancel";
@@ -30,10 +30,10 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
         showModalFooter={false}
         showModalHeader={false}
         scrollable={false}
-        size='default'
+        size='small'
         verticallyCentered={true}
       >
-        <div className="text-center  py-3 px-4 ">
+        <div className="text-center  py-3 ">
           <p className="align-items-center d-flex justify-content-center">
             <RdsIcon
               height="40px"
@@ -42,16 +42,15 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
               fill={false}
               stroke={true}
               colorVariant={colorVariant}
-              classes="border-danger p-2 border rounded-5"
             />
           </p>
-          <h4 className="text-dark mt-4">
+          <h5 className="text-dark">
             <RdsLabel label={alertConfirmation} />
-          </h4>
+          </h5>
           <span>
-            <RdsLabel class="text-muted" label={messageAlert} />
+            <RdsLabel label={messageAlert} />
           </span>
-          <div className="mt-4 d-flex gap-3 justify-content-center">
+          <div className="mt-3 d-flex gap-3 justify-content-center">
             <RdsButton
               onClick={props.onCancel}
               class="px-2"
@@ -61,16 +60,16 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
               size="'small'"
               type="button"
               tooltipTitle=""
-              colorVariant="danger"
+              colorVariant="primary"
               isOutline={true}
             />
             <RdsButton
               type="button"
-              class="px-2 text-white"
+              class="px-2"
               label={DeleteButtonLabel}
               size="'small'"
               tooltipTitle=""
-              colorVariant="danger"
+              colorVariant="primary"
               databsdismiss="modal"
               arialabel="close"
               onClick={props.onSuccess}

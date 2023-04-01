@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  RdsAlert,
   RdsButton,
-  RdsIcon,
-  RdsInput,
-  RdsLabel,
   RdsNavtabs,
   RdsOffcanvas,
 } from "../../../rds-elements";
 
 import {
-  RdsCompFormsEmail,
-  RdsCompFormsResponse,
   RdsCompFormsSettings, RdsCompQuestions,
 } from "../../../rds-components";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions, getFormsSettings, getForms, updateFormsSettings, SaveFormsSendResponse } from "../../../../libs/state-management/forms/forms-slice";
+import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions, getFormsSettings, getForms, updateFormsSettings } from "../../../../libs/state-management/forms/forms-slice";
 import { useNavigate } from "react-router-dom";
 const FormsView = (props: any) => {
   const navigate = useNavigate();
@@ -45,7 +39,6 @@ const FormsView = (props: any) => {
   }
 
   function getQuestionsEditDataFromQuestionComp(data: any) {
-    
     setTempSaveQuestionsData(data);
   }
   const [formSettingData, setFormSettingData] = useState({
@@ -81,91 +74,59 @@ const FormsView = (props: any) => {
       const tempData = { ...forms.editForms }
       setbasicEditFormData(tempData)
       setTempEditFormData(tempData);
-      setFormsEmailData({ ...formsEmailData, subject: forms.editForms.title })
-      // setFormTitle(forms.editForms.title)
     }
   }, [forms.editForms]);
-  function handleCancleQuestion() {
-    navigate("/forms");
-  }
-  // function handleEditQuestion() {
-  //   const { description, title } = tempEditFormData;
-  //   const forms = {
-  //     id: props.id,
-  //     body: { description, title }
-  //   };
-    
-  //   dispatch(updateForms(forms) as any)
-  //   // .then((res: any) => {
-  //     debugger
-  //   tempSaveQuestionsData.map((res: any) => {
-  //     if (res.id && res.isEdit) {
-  //       const data = {
-  //         id: res.id,
-  //         body: { ...res, formId: props.id }
-  //       };
-  //       debugger
-  //       dispatch(updateFormsQuestions(data) as any)
-  //         .then((res: any) => {
-  //           dispatch(getAll2FormsQuestions(props.id) as any);
-  //         });
-  //     } else if(!res.id) {
-  //       debugger
-  //       const data = {
-  //         id: props.id,
-  //         body: { ...res, formId: props.id }
-  //       };
-  //       debugger
-  //       dispatch(SaveformsQuestions(data) as any)
-  //         .then((res: any) => {
-  //           dispatch(getAll2FormsQuestions(props.id) as any);
-  //         });
-  //     }
-  //   });
-  //   // })
-  // }
   function handleEditQuestion() {
     const { description, title } = tempEditFormData;
     const forms = {
       id: props.id,
       body: { description, title }
-    };
-    dispatch(updateForms(forms) as any)
-      .then((res: any) => {
-        tempSaveQuestionsData.map((res: any) => {
-          if (res.id) {
-            if (res.isEdit) {
+    }
+
+    dispatch(updateForms(forms) as any).then((res: any) => {
+      tempSaveQuestionsData.map((res: any) => {
+        if (res.id) {
+
+          if (res.isEdit) {
             const data = {
               id: res.id,
               body: { ...res, formId: props.id }
-            };
-            dispatch(updateFormsQuestions(data) as any)
-              .then((res: any) => {
-                dispatch(getAll2FormsQuestions(props.id) as any);
-              });
-            }else{}
-          } else {
-            const data = {
-              id: props.id,
-              body: { ...res, formId: props.id }
-            };
-            dispatch(SaveformsQuestions(data) as any)
-              .then((res: any) => {
-                dispatch(getAll2FormsQuestions(props.id) as any);
-              });
+            }
+            dispatch(updateFormsQuestions(data) as any).then((res: any) => {
+              dispatch(getAll2FormsQuestions(props.id) as any);
+            })
           }
-        });
+
+        }
+        else {
+          const data = {
+            id: props.id,
+            body: { ...res, formId: props.id }
+          }
+
+          dispatch(SaveformsQuestions(data) as any).then((res: any) => {
+            dispatch(getForms(props.id) as any);
+          })
+        }
+
       })
-    }
+    }).then((res: any) => {
+      dispatch(getForms(props.id) as any);
+    })
+  }
+
   function deleteQuestion(data: any) {
     dispatch(deleteFormsQuestions(data.id) as any).then((res: any) => {
       dispatch(getAll2FormsQuestions(props.id) as any);
     })
+
   }
   function handlePreview(id: any) {
-    navigate("/formsPreview/" + id);
+    navigate(`/formsPreview/${id}`);
   }
   const offCanvasHandler = () => { };
+
+
   const navtabsEditItems = [
     { label: "Questions", tablink: "#nav-home", id: 0 },
     { label: "Responses", tablink: "#nav-responses", id: 1 },
@@ -173,130 +134,13 @@ const FormsView = (props: any) => {
   const [showNextTab, setShowNextTab] = useState(false);
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 
-  const navtabsSendItems = [
-    { label: "Email", tablink: "#nav-email", id: 0 },
-    { label: "Link", tablink: "#nav-link", id: 1 },
-  ];
-  const [showNextSendTab, setShowNextSendTab] = useState(false);
-  const [activeNavTabSendId, setActiveNavTabSendId] = useState(0);
-  const [copybtn, setCopyBtn] = useState("clipboard")
-  function handleCopyLink(event: any) {
-
-    const linkValueToCopy = event.target.baseURI;
-    navigator.clipboard.writeText(linkValueToCopy)
-      .then(() => {
-        console.log('Link copied to clipboard!');
-      })
-      .catch(err => {
-        console.error('Failed to copy link: ', err);
-      });
-    setCopyBtn("check")
-  }
-  const baseUrl = window.location.origin;
-  const url = "formsView/" + props.id;
-  const body = "I've invited you to fill in a form: " + baseUrl+"/"+url
-  const [formsEmailData, setFormsEmailData] = useState<any>({ to: '', body: body })
-  function handleEmailSubmit(_data: any) { 
-    dispatch(SaveFormsSendResponse(_data) as any);
-  }
-
-  const [alert, setAlert] = useState({
-    showAlert: false,
-    message: "",
-    success: false,
-  });
-  const [alertOne, setAlertOne] = useState(false);
-  useEffect(() => {
-    setAlert({
-      showAlert: forms.alert,
-      message: forms.alertMessage,
-      success: forms.success,
-    });
-    setTimeout(() => {
-      setAlert({
-        showAlert: false,
-        message: "",
-        success: false,
-      });
-    }, 2000);
-  }, [tempSaveQuestionsData]);
   return (
     <>
       <div className="row">
-      <div className=" col-md-6">
-          {alert.showAlert && alertOne && (
-            <RdsAlert
-              alertmessage={alert.message}
-              colorVariant={alert.success ? "success" : "danger"}
-              style={{ marginBottom: "0" }}
-            ></RdsAlert>
-          )}
-        </div>
+
         <div className="col d-flex justify-content-end mb-3">
-          <RdsOffcanvas
-            canvasTitle={"SEND FORM"}
-            onclick={offCanvasHandler}
-            placement="end"
-            offcanvaswidth={650}
-            offcanvasbutton={
-              <div className="d-flex justify-content-end">
-                <RdsButton
-                  type={"button"}
-                  size="small"
-                  label="SEND"
-                  icon="envelope"
-                  iconColorVariant="light"
-                  iconFill={false}
-                  iconStroke={true}
-                  iconHeight="15px"
-                  iconWidth="15px"
-                  colorVariant="primary"
-                  isOutline={true}
-                  class="me-2"
-                ></RdsButton>
-              </div>
-            }
-            backDrop={false}
-            scrolling={false}
-            preventEscapeKey={false}
-            offId="sendForm"
-          >
-            <>
-              <div className="row">
-                <RdsNavtabs
-                  navtabsItems={navtabsSendItems}
-                  type="tabs"
-                  isNextPressed={showNextSendTab}
-                  activeNavTabId={activeNavTabSendId}
-                  activeNavtabOrder={(activeNavTabSendId) => {
-                    setActiveNavTabSendId(activeNavTabSendId), setShowNextSendTab(false);
-                  }}
-                />
-                {activeNavTabSendId == 0 && showNextSendTab === false && (
-                  <>
-                    <div>
-                      <RdsCompFormsEmail formsEmailData={formsEmailData} handleSubmit={(data: any) => { handleEmailSubmit(data) }} ></RdsCompFormsEmail>
-                    </div>
-                  </>
-                )}
-                {activeNavTabSendId == 1 && showNextSendTab === false && (
-                  <>
-                    <div className="row ps-4">
-                      <div>
-                        <RdsLabel label="Link"></RdsLabel>
-                      </div>
-                      <div className="input-group mb-3 mt-3">
-                        <RdsInput value={`${baseUrl}/formsPreview/${props.id}`}></RdsInput>
-                        <div className="input-group-text" id="basic-addon12">
-                          <RdsIcon classes="cursor-pointer" name={copybtn} height="20px" width="20px" fill={false} stroke={true} onClick={handleCopyLink} />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-            </>
-          </RdsOffcanvas>
+          {/* <Link to={`/formsPreview/${props.id}`} target="_blank">Preview Page</Link> */}
+
           <RdsButton
             type={"button"}
             size="small"
@@ -311,7 +155,6 @@ const FormsView = (props: any) => {
             isOutline={true}
             onClick={() => handlePreview(props.id)}
             class="me-2"
-            id="previewButton"
           ></RdsButton>
           <RdsOffcanvas
             canvasTitle={"FORM SETTINGS"}
@@ -401,7 +244,6 @@ const FormsView = (props: any) => {
                         size="small"
                         databsdismiss="offcanvas"
                         isOutline={true}
-                        onClick={handleCancleQuestion}
                       ></RdsButton>
                       <RdsButton
                         label="SAVE"
@@ -418,7 +260,7 @@ const FormsView = (props: any) => {
               )}
               {activeNavTabEditId == 1 && showNextTab === false && (
                 <>
-                  <RdsCompFormsResponse></RdsCompFormsResponse>
+                  <RdsCompFormsSettings formsSettingData={formSettingData}></RdsCompFormsSettings>
                 </>)}
             </div>
 

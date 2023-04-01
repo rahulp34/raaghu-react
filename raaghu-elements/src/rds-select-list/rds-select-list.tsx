@@ -37,7 +37,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
     <Fragment>      <select key={props.id}  value={props.selectedValue} className={`${customSize} ${props.classes}` + ' ' + `${props.selectedValue === '' && 'text-muted' }` }
        disabled={Disabled} multiple={props.isMultiple} aria-label="select example" placeholder={props.placeholder}
        onChange={handleChange}>{}
-        <option  hidden className="text-muted">{props.placeholder}</option>        {props.selectItems?.map((selectItem,i) => (
+        <option  hidden className="text-muted">{props.placeholder}</option>        {props.selectItems.map((selectItem,i) => (
           <option value={selectItem.value}  key={`${selectItem.option}+${i}+${props.id}`}>{props.children}{selectItem.option}</option>        ))}
       </select>    </Fragment>  );
 };
