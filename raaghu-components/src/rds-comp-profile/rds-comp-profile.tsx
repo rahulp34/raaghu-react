@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "raaghu-react-elements";
+import {useNavigate} from "react-router-dom";
 import React from "react";
 import "./rds-comp-profile.scss";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
@@ -16,11 +17,22 @@ export interface RdsCompProfileProps {
 }
 const RdsCompProfile = (props: RdsCompProfileProps) => {
   const [activetab, setAcivetab] = useState("");
+  const navigate = useNavigate();
   const profilePic =
     props.profilePic ||
     "./assets/profile-picture-circle.svg";
   const onSetNavTabHandler = (id: any) => {
     setAcivetab(id);
+    console.log(id);
+    if(id==="nav-MyAccount"){
+      navigate('/my-account');
+    }
+    else if(id==="nav-SecuityLogs"){
+      navigate('/security-logs')
+    }
+    else if(id==="nav-PersonalData"){
+      navigate('/personal-data')
+    }
     props.currNavTabId != undefined && props.currNavTabId(id);
   };
   return (
@@ -65,7 +77,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
       <div className="justify-content-center d-flex   p-2 m-2">
         <div>
           {props.navtabItems.map((item: any, i) => (
-            <div key={i}>
+            <div key={i} data-bs-dismiss="offcanvas">
               <div
                 className={` d-flex mb-4 align-items-baseline gap-1 cursor-pointer  ${
                   activetab == item.id ? " activeBackgraound" : ""

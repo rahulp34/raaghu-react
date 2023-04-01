@@ -43,19 +43,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 			label: "My Account",
 			icon: "manage_authority",
 			subText: "Manage authority accounts",
-			id: "nav-Deligation",
+			id: "nav-MyAccount",
 		},
 		{
 			label: "Security Logs",
 			icon: "login_attempts",
 			subText: "See recent login attempts for your account",
-			id: "nav-Attempts",
+			id: "nav-SecuityLogs",
 		},
 		{
 			label: "Personal Data",
 			icon: "my_settings",
 			subText: "Change your account settings",
-			id: "nav-Settings",
+			id: "nav-PersonalData",
 		},		
 	];
 
@@ -101,7 +101,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <div className="px-2 position-relative border-end">
+          <div className="px-2 cursor-pointer position-relative border-end">
           <RdsDropdownList
            placeholder={props.toggleItems[0].label}
            icon =  "sun"

@@ -4,6 +4,8 @@ import RdsDatepicker from '../../../raaghu-elements/src/rds-datepicker';
 
 export interface RdsCompPollsQuestion{
   widgetList:any[];
+  getPollsQuestion:any
+  pollOptions:any;
 }
 
 function RdsCompPollsQuestion(props:any) {
@@ -21,57 +23,64 @@ function RdsCompPollsQuestion(props:any) {
     resultEndDate:''
   });
  
-  const questionFormData = (event: any) => {
-    event.preventDefault();
-    console.log("dataaa", QuestionData)
-  };
+  // const questionFormData = (event: any) => {
+  //   event.preventDefault();
+  //   console.log("dataaa", QuestionData)
+  // };
  
   function setQuestion(value: any) {
     setQuestionData({ ...QuestionData, question: value });
+    props.getPollsQuestion({ ...QuestionData, question: value });
   }
   function setCode(value: any) {
     setQuestionData({ ...QuestionData, code: value });
+    props.getPollsQuestion({ ...QuestionData, code: value })
   }
   function setName(value: any) {
     setQuestionData({ ...QuestionData, name: value });
+    props.getPollsQuestion({ ...QuestionData, name: value })
   }
   const widgetChange = (event: any) => {
-
-    setQuestionData({
-      ...QuestionData,
-      widget: event,
-    });
+    setQuestionData({ ...QuestionData, widget: event,});
+    props.getPollsQuestion({ ...QuestionData, widget: event,})
   }
     function setShowTime(value: boolean) {
       setQuestionData({ ...QuestionData, time: value });
+      props.getPollsQuestion({ ...QuestionData, time: value })
     }
     function setAllowMultipleVoting(value: boolean) {
       setQuestionData({ ...QuestionData, multipleVoting: value });
+      props.getPollsQuestion({ ...QuestionData, multipleVoting: value })
     }
     function setShowVoteCount(value: boolean) {
       setQuestionData({ ...QuestionData, voteCount: value });
+      props.getPollsQuestion({ ...QuestionData, voteCount: value })
     }
     function setShowResult(value: boolean) {
       setQuestionData({ ...QuestionData, result: value });
+      props.getPollsQuestion({ ...QuestionData, result: value })
     }
     function handleStartDate(data:any){
       debugger
       let date1 = data.toISOString();
       setQuestionData({ ...QuestionData, startDate:date1  }); 
+      props.getPollsQuestion({ ...QuestionData, startDate:date1  })
     }
     function handleEndDate(data:any){
       let date1 = data.toISOString();
       setQuestionData({ ...QuestionData, endDate:date1  }); 
+      props.getPollsQuestion({ ...QuestionData, endDate:date1  })
     }
     function handleResultDatepickerData(data:any){
       let date1 = data.toISOString();
       setQuestionData({ ...QuestionData, resultEndDate:date1  }); 
+      props.getPollsQuestion({ ...QuestionData, resultEndDate:date1  })
     }
 
   return(
     <>
     <div>
-        <form onSubmit={questionFormData}>
+        <form onSubmit={props.getPollsQuestion}>
           <div className="row mt-3">
             <div className="col-6">
               <RdsInput
@@ -201,7 +210,7 @@ function RdsCompPollsQuestion(props:any) {
             ></RdsCheckbox>
             </div>
           </div>
-          <div className="mt-3 d-flex footer-buttons">
+          {/* <div className="mt-3 d-flex footer-buttons">
             <RdsButton
               class="me-2"
               tooltipTitle={""}
@@ -220,7 +229,7 @@ function RdsCompPollsQuestion(props:any) {
               type={"submit"}
               databsdismiss="offcanvas"
             ></RdsButton>
-          </div>
+          </div> */}
         </form>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState, useEffect } from "react";
+import React, { MouseEvent, useState, useEffect, useRef } from "react";
 import {
   RdsIcon,
   RdsBadge,
@@ -13,6 +13,8 @@ export interface RdsCompDatatableProps {
   enablecheckboxselection?: boolean;
   noDataTitle?:string, 
   classes?: string;
+  swapRows?:any
+  isSwap?:any
   tableHeaders: {
     displayName: string;
     key: string;
@@ -49,6 +51,21 @@ export interface RdsCompDatatableProps {
 }
 const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   const [data, setData] = useState(props.tableData);
+  const [array, setArray] = useState<boolean[]>([])
+
+  function openCloseDropDown(data:any){
+    let tempArray:boolean[] = [];
+    array?.map((res:any,index:number)=>{
+      if(index == data){
+        tempArray.push(!array[data]);
+      }
+      else{
+        tempArray.push(false);
+      }
+    }) 
+    setArray(tempArray);
+  }
+
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
     endingRow: props.recordsPerPage,
@@ -58,6 +75,11 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     if (!sort) {
       setData(props.tableData);
     }
+    let tempArray:boolean[] = [];
+    props.tableData.map(res=>{
+      tempArray.push(false);
+    })
+    setArray(tempArray);
   }, [props.tableData]);
   const onPageChangeHandler = (currentPage: number, recordsPerPage: number) => {
     setRowStatus({
@@ -65,6 +87,48 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       endingRow: currentPage * recordsPerPage, //considering that 1st element has '0' index
     });
   };
+  
+const [html, setHtml] = useState("");
+const [index, setIndex] = useState(-1);
+const handleMouseUp = (e:any) => {
+ if(props.isSwap){
+  
+  console.log("Mouse Up-> ");
+  const index1 = e.currentTarget.parentElement.rowIndex;
+  const index2 = index;
+  if (index1 === index2) {
+    e.preventDefault();
+    return;
+  }
+  props.swapRows(index,index1);
+  
+ }
+ return;
+};
+const draggingItem = useRef<any>(null);
+const dragOverItem = useRef<any>(null);
+  const handleDragStart = (e:any, position:any) => {
+    if(props.isSwap){
+    draggingItem.current = position;
+    }
+  };
+  const handleDragEnter = (e:any, position:any) => {
+    if(props.isSwap){
+    dragOverItem.current = position;
+    console.log(e.target.innerHTML);
+    const listCopy = [...data];
+    const draggingItemContent = listCopy[draggingItem.current];
+    listCopy.splice(draggingItem.current, 1);
+    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
+    console.log(draggingItem.current, "      ", dragOverItem.current);
+    
+    draggingItem.current = dragOverItem.current;
+    dragOverItem.current = null;
+    props.swapRows(listCopy)
+    setData(listCopy);
+    }
+  };
+
   const actionOnClickHandler = (
     clickEvent: any,
     tableDataRow: any,
@@ -76,6 +140,12 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       modalId?: string;
     }
   ) => {
+
+    let tempArray:boolean[] = [];
+    array.map((res:any)=>{
+      tempArray.push(false);
+    })
+    setArray(tempArray);
     if (
       action.id == "edit" &&
       action.offId != undefined &&
@@ -111,6 +181,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       }
     });
   };
+  
   const onEditCheck = (
     clickEvent: any,
     tableDataRow: any,
@@ -125,6 +196,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     });
     setData(tempata);
   };
+
   const onEditClose = (
     clickEvent: any,
     tableDataRow: any,
@@ -155,8 +227,8 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       setData(tempUser);
       props.onRowSelect!==undefined&&props.onRowSelect(tempUser)
     }
- 
   };
+ 
   const onSortClickHandler = (
     event: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
     sortOrder: string,
@@ -197,7 +269,8 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
               width="400px"
             >
               <thead style={{whiteSpace:"nowrap"}}>
-                <tr className="align-middle ">
+                <tr className="align-middle " >
+                 {props.isSwap && ( <th></th>)}
                   {props.enablecheckboxselection && (
                     <th scope="col">
                       <input
@@ -270,10 +343,20 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     (props.pagination
                       ? typeof rowStatus.endingRow != "undefined" &&
                         index >= rowStatus.startingRow &&
-                        index < rowStatus.endingRow
+                        index < rowStatus.endingRow 
                       : true) && 
                       (
-                      <tr key={"tableRow-" + index}>
+                      <tr style={{WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', userSelect: 'none',}}
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDragEnter={(e) => handleDragEnter(e, index)}
+                      draggable
+                       key={"tableRow-" + index}>
+                        {props.isSwap && (
+                        <th  >
+                           <RdsIcon name="three_dots_horizontal" height="20px" width="20px" fill={false} stroke={true} />
+                           </th>
+                        )}
                         {props.enablecheckboxselection && (
                           <th scope="row" className="align-middle">
                             <input
@@ -401,13 +484,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                           <td className="align-middle text-center">
                             {!tableDataRow.isEndUserEditing ? (
                               <>
-                                <div className="dropdown">
+                                <div>
                                   <button
                                     className="btn rounded-pill border-0"
                                     type="button"
-                                    data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                     style={{ minWidth: 0 }}
+                                    onClick={()=>openCloseDropDown(index)}
                                   >
                                     <RdsIcon
                                       name={"three_dots"}
@@ -418,7 +501,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                      // class="bi bi-three-dots-vertical"
                                     />
                                   </button>
-                                  <ul className="dropdown-menu ">
+                                  {array[index] && (<ul className="dropdown-menu" style={{display:'block'}}>
                                     {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={
@@ -433,6 +516,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                             data-bs-toggle="modal"
                                             data-bs-target={`#${action?.modalId}`}
                                             aria-controls={action?.modalId}
+                                            data-bs-backdrop={false}
                                             onClick={(e) => {
                                               actionOnClickHandler(
                                                 e,
@@ -451,6 +535,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                               data-bs-toggle="offcanvas"
                                               data-bs-target={`#${action?.offId}`}
                                               aria-controls={action?.offId}
+                                              data-bs-backdrop={false}
                                               onClick={(e) => {
                                                 actionOnClickHandler(
                                                   e,
@@ -467,7 +552,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                         )}
                                       </li>
                                     ))}
-                                  </ul>
+                                  </ul>)}
                                 </div>
                               </>
                             ) : (
@@ -516,6 +601,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                           </td>
                         )}
                       </tr>
+                      
                     )
                 )}
               </tbody>

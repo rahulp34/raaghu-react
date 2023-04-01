@@ -56,7 +56,6 @@ const Users = () => {
   });
   const [userRolesData, setUseRolesData] = useState<any>();
   const [editRolesData, setEditRoleData] = useState<any>();
-  const [clickedFirstTime, setClickedFirstTime] = useState(false)
   const [userPermission, setUserPermission] = useState<any>([]);
   const [tableData, setTableData] = useState<any[]>([])
 //    {userName:"abc", name:"abc", roles:"admin dsd", emailAddress: "asdf@abc.abc"}]);
@@ -100,7 +99,7 @@ const Users = () => {
       datatype: "text",
     },
     {
-      displayName: "Account Lockout",
+      displayName: "Lockout",
       key: "lockoutEnabled",
       datatype: "text",
     },
@@ -127,6 +126,7 @@ const Users = () => {
     { label: "Roles", tablink: "#nav-role", id: 1 },
     { label: "Organization Units", tablink: "#nav-org", id: 2 },
   ];
+  
 
   const offCanvasHandler = () => {};
   const [getUser, setGetUserData] = useState<any>({});
@@ -214,6 +214,15 @@ const Users = () => {
       });
       setTableData(tempTableData);
     }
+    setUserData({
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      twoFactorEnabled: false,
+      userName: "",
+      password: "",
+    });
   }, [data.users]);
 
   useEffect(() => {
@@ -253,9 +262,8 @@ const Users = () => {
   }, [data.organizationUnit]);
 
   useEffect(() => {   
-    if (clickedFirstTime && data.editUser) {
+    if (data.editUser) {
       setUserData(data.editUser);
-      setClickedFirstTime(true);
     }
   }, [data.editUser]);
 
@@ -644,7 +652,17 @@ const Users = () => {
           }}
           justified={false}
         >
-          {activeNavTabIdEdit == 0 && <RdsCompFileUploader />}
+          {activeNavTabIdEdit == 0 && 
+             <RdsCompUserBasics
+             organizationUnit={organizationUnit}
+             userData={userData}
+             isEdit={true}
+             createUser={(e: any) => {
+               getUserData(e);
+             }}
+           />
+          
+          }
 
           {activeNavTabIdEdit == 1 && (
             <>

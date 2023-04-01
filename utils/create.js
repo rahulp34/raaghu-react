@@ -6,7 +6,7 @@ let fs = require("fs");
 // Check whether the arguments passed contain the mfe name and the page name
 if (
   (process.argv[2] === "p" && process.argv.length !== 5) ||
-  ((process.argv[2] === "e" || process.argv[2] === "c") &&
+  ((process.argv[2] === "e" || process.argv[2] === "c" || process.argv[2] === "pr") &&
     process.argv.length !== 4)
 ) {
   console.log("\x1b[31m%s\x1b[0m", "Invalid command..!");
@@ -43,10 +43,10 @@ let camelCaseName = shortName
 let kebabCaseName = shortName.split(" ").join("-").toLowerCase();
 let pageName = formattedName.replace(" ", "");
 
-console.log(formattedName); // Output: "Api Scope"
-console.log(camelCaseName); // Output: "apiScope"
-console.log(kebabCaseName); // Output: "api-scope"
-console.log(pageName); // Output: "ApiScope"
+// console.log(formattedName); // Output: "Api Scope"
+// console.log(camelCaseName); // Output: "apiScope"
+// console.log(kebabCaseName); // Output: "api-scope"
+// console.log(pageName); // Output: "ApiScope"
 
 const newItem = {
   key: `${name}`,
@@ -56,10 +56,7 @@ const newItem = {
   subTitle: "subtitle here",
 };
 
-console.log(newItem);
-const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
-
-const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
+const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
 
 // Get hold of the app folder path inside the mfe
 let appFolderPath = "";
@@ -69,6 +66,8 @@ if (eTc == "e") {
   appFolderPath = path.join(__dirname, "..", "raaghu-components");
 } else if (eTc == "p") {
   appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
+} else if (eTc == "pr") {
+  appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "libs");
 }
 
 function writeFileErrorHandler(err) {
@@ -77,7 +76,7 @@ function writeFileErrorHandler(err) {
 
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
-  if (eTc != "p") {
+  if (eTc == "e" && eTc == "c") {
     let filePath = path.join(appFolderPath, "/src", name, name + ".tsx");
     if (fs.existsSync(filePath)) {
       console.log(
@@ -89,12 +88,19 @@ if (fs.existsSync(appFolderPath)) {
         cwd: appFolderPath,
         stdio: "inherit",
       });
-      // index.tsx
+      // index.ts
       fs.writeFile(
         `${appFolderPath}/src/${name}/index.ts`,
-        `import { default } from './${name}'`,
+        `export { default } from "./${name}";`,
         writeFileErrorHandler
       );
+      // common index.ts
+      fs.appendFile(
+        `${appFolderPath}/src/index.ts`,
+        `export { default as ${name} } from "./${name}";`,
+        writeFileErrorHandler
+      );
+
       console.log(
         "\x1b[32m%s\x1b[0m",
         `index.ts was successfully created at src/${name}/index.ts`
@@ -104,8 +110,7 @@ if (fs.existsSync(appFolderPath)) {
     }
   } else if (eTc == "p") {
 
-    console.log(port);
-    let templateWebpackfile = path.join( __dirname,"../page-template/template/webpack.config.js");
+    let templateWebpackfile = path.join(__dirname, "../page-template/template/webpack.config.js");
     let webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
     let updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
     updatedWebpackConfig = updatedWebpackConfig.replace(/{template_page_name}/g, camelCaseName);
@@ -200,8 +205,6 @@ if (fs.existsSync(appFolderPath)) {
     const updatedExportBlock = `${exportBlock}\n${pageName}Compo,`;
     const updatedPage = `${updatedBlock}\n export {${updatedExportBlock}};`;
 
-    console.log("This is export block: ", updatedPage);
-
     // Use the fs.writeFile method to write the new content to the file, overwriting the old content
     fs.writeFile(filePathForPageComponent, updatedPage, (err) => {
       if (err) throw err;
@@ -209,7 +212,7 @@ if (fs.existsSync(appFolderPath)) {
     });
 
     // Output a message to confirm that the script has run successfully
-    console.log(`Added AbhiCompo to ${filePathForPageComponent}`);
+    console.log(`Added ${pageName}Compo to ${filePathForPageComponent}`);
     // Creating a file for side Nav items
     let sideNavItemPath = path.join(__dirname, `../raaghu-mfe/libs/main-menu`);
     try {
@@ -228,7 +231,7 @@ if (fs.existsSync(appFolderPath)) {
 
     fs.appendFile(
       `${sideNavItemPath}/index.ts`,
-      importStatement,
+      exportStatement,
       "utf8",
       // callback function
       function (err) {
@@ -305,8 +308,8 @@ if (fs.existsSync(appFolderPath)) {
     });
 
     let finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
-    finalWebpackConfig = finalWebpackConfig.replace(camelCaseName,'{template_page_name}');
-    finalWebpackConfig = finalWebpackConfig.replace(pageName,'{template_Page_Name_expose}');
+    finalWebpackConfig = finalWebpackConfig.replace(camelCaseName, '{template_page_name}');
+    finalWebpackConfig = finalWebpackConfig.replace(pageName, '{template_Page_Name_expose}');
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
     // Adding url to the webpack file of the host page
@@ -318,12 +321,12 @@ if (fs.existsSync(appFolderPath)) {
         console.error(err);
         return;
       }
-    
+
       const updatedData = data.replace(
         /(remotes: \{[\s\S]*?)(\n\s*\})/m,
         `$1\n     ${pageName}: mfeConfigJSON["${camelCaseName}"].url,\n}`
       );
-    
+
       fs.writeFile(hostWebpackpath, updatedData, "utf8", (err) => {
         if (err) {
           console.error(err);
@@ -339,19 +342,111 @@ if (fs.existsSync(appFolderPath)) {
     const newScript = `cd rds_pages/rds-page-${camelCaseName} && npm run dev`;
     fs.readFile(packageFile, 'utf-8', function (err, data) {
       if (err) throw err;
-    
+
       // parse the package.json data into an object
       const packageObj = JSON.parse(data);
-    
+
       // add the new command to the "start" script
       packageObj.scripts.start += ` "${newScript}"`;
-    
+
       // write the updated package.json object back to the file
       fs.writeFile(packageFile, JSON.stringify(packageObj, null, 2), 'utf-8', function (err) {
         if (err) throw err;
         console.log('start script updated successfully');
       });
+      //routing Automation
+
+      const componentToAdd = `${pageName}Compo`; // Replace with the name of your component
+      const routeFilePath = path.join(appFolderPath, "host", "src", "Main.tsx"); // Replace with the path to your Main.tsx file
+
+      fs.readFile(routeFilePath, "utf8", (err, data) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        const lines = data.split("\n");
+
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].includes('from "./PageComponent"')) {
+            const importIndex = i;
+            const componentIndex = lines
+              .slice(importIndex)
+              .findIndex(
+                (line) => line.includes("}") && !line.includes("import")
+              );
+
+            if (componentIndex > -1) {
+              lines.splice(
+                importIndex + componentIndex,
+                0,
+                `  ${componentToAdd},`
+              );
+              const result = lines.join("\n");
+
+              fs.writeFile(routeFilePath, result, "utf8", (err) => {
+                if (err) console.error(err);
+              });
+            }
+
+            break;
+          }
+        }
+      });
+
+      const routeToAdd = `<Route path="/${kebabCaseName}" element={<${pageName}Compo />} /> \n`;
+
+      // Read the file contents
+      const fileContent = fs.readFileSync(routeFilePath, { encoding: "utf-8" });
+
+      // Find the position of the last </Routes> tag
+      const lastRoutesTagEndIndex = fileContent.lastIndexOf("</Routes>");
+
+      // Insert the new route element after the last </Routes> tag
+      const newFileContent =
+        fileContent.slice(0, lastRoutesTagEndIndex) +
+        routeToAdd +
+        fileContent.slice(lastRoutesTagEndIndex);
+
+      // Write the modified content back to the file
+      fs.writeFileSync(routeFilePath, newFileContent);
     });
+
+    const sliceFilePath = path.join(__dirname, "..", "raaghu-mfe", "libs", "state-management", `${kebabCaseName}`);
+    // Creating directory inside the src
+    try {
+      if (!fs.existsSync(sliceFilePath)) {
+        fs.mkdirSync(sliceFilePath);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    // Creatign a file in the src/{name}
+    try {
+      fs.writeFileSync(
+        `${sliceFilePath}/${kebabCaseName}-slice.ts`,
+        `\/\/ Add the slice content here`
+      );
+      // file written successfully
+    } catch (err) {
+      console.error(err);
+    }
+  } else if (eTc == "pr") {
+    let filePath = path.join(appFolderPath, "proxy");;
+    if (fs.existsSync(filePath)) {
+      console.log(
+        "\x1b[31m%s\x1b[0m",
+        "proxy already exists in this path."
+      );
+    } else {
+      execSync(
+        `npx openapi --input ${name} --output ${filePath} --client axios`,
+        { cwd: appFolderPath, stdio: "inherit" }
+      );
+
+      console.log("\x1b[32m%s\x1b[0m", `proxy was successfully created!!`);
+      console.log("\x1b[32m%s\x1b[0m", "Done..! \nEnjoy!!");
+    }
   }
 } else {
   if (eTc == "e") {

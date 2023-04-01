@@ -112,5 +112,17 @@ export const PortConfig = {
   },
   "elements": {
     "port": "8100"
+  },
+  "personalData": {
+    "port": "8102"
+  },
+  "myAccount": {
+    "port": "8101"
+  },
+  "paymentRequests": {
+    "port": "8036"
+  },
+  "rdsComponents": {
+    "port": "8103"
   }
 }

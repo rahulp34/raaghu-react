@@ -118,5 +118,17 @@ export const MfeConfig = {
   },
   "elements": {
     "url": "elements@http://localhost:8100/remoteEntry.js"
+  },
+  "personalData": {
+    "url": "personalData@http://localhost:8102/remoteEntry.js"
+  },
+  "myAccount": {
+    "url": "myAccount@http://localhost:8101/remoteEntry.js"
+  },
+  "paymentRequests": {
+    "url": "paymentRequests@http://localhost:8036/remoteEntry.js"
+  },
+  "rdsComponents": {
+    "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
   }
 }
