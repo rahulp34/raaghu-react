@@ -4,13 +4,20 @@ import RdsCompDatatable from "../rds-comp-data-table";
 
 interface RdsCompPollsOptionProps {
   getPollsOptionData?:any
+  optionsData?:any
 }
 
 const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
-  const [tableData, setTableData] = useState<any>([]);
+  const [tableData, setTableData] = useState<any>(props.optionsData);
   const [optionData, setoptionData] = useState<any>({
     option: "",
   });
+
+  useEffect(()=>{
+    if(props.optionsData){
+      setTableData(props.optionsData)
+    }
+  },[props.optionsData])
   
   function optionChange(value: any) {
     setoptionData({ ...optionData, option: value });
@@ -158,7 +165,6 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
   };
 
   useEffect(()=>{
-
       let tempTableData4 = tableData.map((res:any)=>{
         const item = {
           id:res.id,
@@ -200,7 +206,9 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
   
   return (
     <>
-      <form>
+      <div>
+
+      
         <div className=" row mt-3">
           <div className="col-md-5  mb-2">
             <RdsInput
@@ -235,10 +243,8 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
             isSwap={true}
             swapRows={(data:any)=>{getSwappedData(data)}}
           ></RdsCompDatatable>
-          
         </div>
-      
-      </form>
+        </div>
     </>
   );
 };

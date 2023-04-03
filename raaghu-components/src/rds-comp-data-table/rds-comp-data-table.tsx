@@ -74,12 +74,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   useEffect(() => {
     if (!sort) {
       setData(props.tableData);
-    }
-    let tempArray:boolean[] = [];
-    props.tableData.map(res=>{
+      let tempArray:boolean[] = [];
+    props?.tableData?.map(res=>{
       tempArray.push(false);
     })
     setArray(tempArray);
+    }
+    
   }, [props.tableData]);
   const onPageChangeHandler = (currentPage: number, recordsPerPage: number) => {
     setRowStatus({
