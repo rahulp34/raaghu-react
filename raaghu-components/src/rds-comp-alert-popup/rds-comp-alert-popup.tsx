@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { RdsModal, RdsIcon, RdsButton, RdsLabel } from "raaghu-react-elements";
+import { RdsModal, RdsIcon, RdsButton, RdsLabel } from "../rds-elements";
 export interface RdsCompAlertPopupProps {
   alertID: any;
   iconUrl?: string;
@@ -8,6 +8,8 @@ export interface RdsCompAlertPopupProps {
   messageAlert?: string;
   cancelButtonLabel?: string;
   deleteButtonLabel?: string;
+  cancelButtonColor?: string;
+  deleteButtonColor?: string;
 
   onSuccess?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
   onCancel?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -60,7 +62,7 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
               size="'small'"
               type="button"
               tooltipTitle=""
-              colorVariant="primary"
+              colorVariant={props.cancelButtonColor === undefined ? 'primary' : props.cancelButtonColor}
               isOutline={true}
             />
             <RdsButton
@@ -69,7 +71,7 @@ const RdsCompAlertPopup = (props: RdsCompAlertPopupProps) => {
               label={DeleteButtonLabel}
               size="'small'"
               tooltipTitle=""
-              colorVariant="primary"
+              colorVariant={props.deleteButtonColor === undefined ? 'primary' : props.deleteButtonColor}
               databsdismiss="modal"
               arialabel="close"
               onClick={props.onSuccess}

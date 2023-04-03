@@ -76,7 +76,7 @@ const PaymentRequests = () => {
     if (paymentRequests.allPaymentRequests.items !== undefined) {
       const data = paymentRequests.allPaymentRequests.items.map((payment: any) => ({
         id: payment.id,
-        creationTime: format(new Date(payment.creationTime), 'yyyy/dd/MM, HH:MM'),
+        creationTime: format(new Date(payment.creationTime), 'yyyy/dd/MM, HH:MM a'),
         totalPrice: payment.totalPrice,
         currency: payment.currency,
         state: payment.state,
