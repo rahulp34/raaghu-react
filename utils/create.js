@@ -322,7 +322,7 @@ if (fs.existsSync(appFolderPath)) {
     finalWebpackConfig = finalWebpackConfig.replace(pageName, '{template_Page_Name_expose}');
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
-    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}`,'"{import_statement_for_Page_template}"')
+    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,'"{import_statement_for_Page_template}"')
     finalAppFileContent = finalAppFileContent.replace(`<${pageName}/>`,'{"page_template_component_in_app"}');
     fs.writeFileSync(templateAppFilePAth, finalAppFileContent);
     // Adding url to the webpack file of the host page
