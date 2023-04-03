@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompElements from './RdsCompElements';
+import React from 'react';
+import RdsCompElements from './rds-comp-elements';
 
 export default {
   title: "RdsCompElements",
