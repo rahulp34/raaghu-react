@@ -1,9 +1,10 @@
 import React from "react";
+import { RdsCompComponents } from '../../../rds-components';
 
 const Components = () => {
      return(
         <div>
-            hii
+           <RdsCompComponents></RdsCompComponents>
         </div>
      );
 };
