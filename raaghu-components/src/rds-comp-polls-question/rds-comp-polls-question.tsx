@@ -1,33 +1,25 @@
 import { RdsButton, RdsCheckbox, RdsInput, RdsLabel, RdsSelectList } from 'raaghu-react-elements';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import RdsDatepicker from '../../../raaghu-elements/src/rds-datepicker';
 
 export interface RdsCompPollsQuestion{
   widgetList:any[];
   getPollsQuestion:any
-  pollOptions:any;
 }
 
 function RdsCompPollsQuestion(props:any) {
-  const [QuestionData, setQuestionData] = useState({
-    question: '',
-    code: '',
-    name: '',
-    widget:'',
-    time: false,
-    multipleVoting: false,
-    voteCount : false,
-    result:false,
-    startDate:'',
-    endDate:'',
-    resultEndDate:''
-  });
+  const [QuestionData, setQuestionData] = useState(props.questionData);
  
-  // const questionFormData = (event: any) => {
-  //   event.preventDefault();
-  //   console.log("dataaa", QuestionData)
-  // };
- 
+  const questionFormData = (event: any) => {
+    event.preventDefault();
+    console.log("dataaa", QuestionData)
+  };
+ useEffect(()=>{
+  if(props.questionData){
+    console.log(props.questionData)
+    setQuestionData(props.questionData);
+  }
+ },[props.questionData])
   function setQuestion(value: any) {
     setQuestionData({ ...QuestionData, question: value });
     props.getPollsQuestion({ ...QuestionData, question: value });
@@ -45,23 +37,23 @@ function RdsCompPollsQuestion(props:any) {
     props.getPollsQuestion({ ...QuestionData, widget: event,})
   }
     function setShowTime(value: boolean) {
-      setQuestionData({ ...QuestionData, time: value });
-      props.getPollsQuestion({ ...QuestionData, time: value })
+      setQuestionData({ ...QuestionData, showHoursLeft: value });
+      props.getPollsQuestion({ ...QuestionData, showHoursLeft: value })
     }
     function setAllowMultipleVoting(value: boolean) {
-      setQuestionData({ ...QuestionData, multipleVoting: value });
-      props.getPollsQuestion({ ...QuestionData, multipleVoting: value })
+      debugger
+      setQuestionData({ ...QuestionData, allowMultipleVote: value });
+      props.getPollsQuestion({ ...QuestionData, allowMultipleVote: value })
     }
     function setShowVoteCount(value: boolean) {
-      setQuestionData({ ...QuestionData, voteCount: value });
-      props.getPollsQuestion({ ...QuestionData, voteCount: value })
+      setQuestionData({ ...QuestionData, showVoteCount: value });
+      props.getPollsQuestion({ ...QuestionData, showVoteCount: value })
     }
     function setShowResult(value: boolean) {
-      setQuestionData({ ...QuestionData, result: value });
-      props.getPollsQuestion({ ...QuestionData, result: value })
+      setQuestionData({ ...QuestionData, showResultWithoutGivingVote: value });
+      props.getPollsQuestion({ ...QuestionData, showResultWithoutGivingVote: value })
     }
     function handleStartDate(data:any){
-      debugger
       let date1 = data.toISOString();
       setQuestionData({ ...QuestionData, startDate:date1  }); 
       props.getPollsQuestion({ ...QuestionData, startDate:date1  })
@@ -73,14 +65,14 @@ function RdsCompPollsQuestion(props:any) {
     }
     function handleResultDatepickerData(data:any){
       let date1 = data.toISOString();
-      setQuestionData({ ...QuestionData, resultEndDate:date1  }); 
-      props.getPollsQuestion({ ...QuestionData, resultEndDate:date1  })
+      setQuestionData({ ...QuestionData, resultShowingEndDate:date1  }); 
+      props.getPollsQuestion({ ...QuestionData, resultShowingEndDate:date1  })
     }
 
   return(
     <>
     <div>
-        <form onSubmit={props.getPollsQuestion}>
+
           <div className="row mt-3">
             <div className="col-6">
               <RdsInput
@@ -89,7 +81,6 @@ function RdsCompPollsQuestion(props:any) {
                 placeholder=""
                 inputType="text"
                 value={QuestionData.question}
-               
                 onChange={(e: any) => {
                   setQuestion(e.target.value);
                 }}
@@ -101,7 +92,7 @@ function RdsCompPollsQuestion(props:any) {
                 label="Code"
                 placeholder=""
                 inputType="text"
-                required={false}
+                required={true}
                 value={QuestionData.code}
                 onChange={(e: any) => {
                   setCode(e.target.value);
@@ -115,7 +106,7 @@ function RdsCompPollsQuestion(props:any) {
                 label="Name"
                 placeholder=""
                 inputType="text"
-                required={false}
+                required={true}
                 value={QuestionData.name}
                 onChange={(e: any) => {
                   setName(e.target.value);
@@ -141,7 +132,7 @@ function RdsCompPollsQuestion(props:any) {
             <RdsDatepicker
             onDatePicker={handleStartDate}
             DatePickerLabel="Start Date"
-            type="default"
+            type="default" 
           />
             </div>
           <div className="col-6">
@@ -157,20 +148,20 @@ function RdsCompPollsQuestion(props:any) {
             <RdsCheckbox
               id="0"
               label="Show remaining time"
-              checked={QuestionData.time}
+              checked={QuestionData.showHoursLeft}
               onChange={(e: any) => {
                 setShowTime(e.target.checked);
               }}
             ></RdsCheckbox>
             </div>
           </div>
-           <div className="row mt-2">
+           <div className="row mt-3">
             <div className="col-12">
              <RdsDatepicker
-             onDatePicker={handleResultDatepickerData}
-            DatePickerLabel="Result Showing End Date"
-            type="default"
-          /> 
+              onDatePicker={handleResultDatepickerData}
+              DatePickerLabel="Result Showing End Date"
+              type="default"
+             />
             </div>
            </div>
           <div className="row mt-2">
@@ -178,7 +169,7 @@ function RdsCompPollsQuestion(props:any) {
             <RdsCheckbox
               id="0"
               label="Allow multiple voting"
-              checked={QuestionData.multipleVoting}
+              checked={QuestionData.allowMultipleVote}
               onChange={(e: any) => {
                 setAllowMultipleVoting(e.target.checked);
               }}
@@ -191,7 +182,7 @@ function RdsCompPollsQuestion(props:any) {
             <RdsCheckbox
               id="0"
               label="Show vote count"
-              checked={QuestionData.voteCount}
+              checked={QuestionData.showVoteCount}
               onChange={(e: any) => {
                 setShowVoteCount(e.target.checked);
               }}
@@ -202,8 +193,8 @@ function RdsCompPollsQuestion(props:any) {
             <div className="col-12">
             <RdsCheckbox
               id="0"
-              label="Allow multiple voting"
-              checked={QuestionData.result}
+              label="Show result without giving vote"
+              checked={QuestionData.showResultWithoutGivingVote}
               onChange={(e: any) => {
                 setShowResult(e.target.checked);
               }}
@@ -230,7 +221,7 @@ function RdsCompPollsQuestion(props:any) {
               databsdismiss="offcanvas"
             ></RdsButton>
           </div> */}
-        </form>
+        
       </div>
     </>
   );

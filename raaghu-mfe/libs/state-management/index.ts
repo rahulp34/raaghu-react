@@ -32,8 +32,8 @@ import commentsReducer from './comments/comments-slice';
 import tagsReducer from './tags/tags-slice';
 import myAccountReducer from './my-account/my-account-slice';
 import paymentRequestsReducer from './payment-requests/paymentRequests-slice';
-
 import pollsReducer from "./polls/polls-slice";
+
 const persistConfig={
   key: "root",
   storage,
