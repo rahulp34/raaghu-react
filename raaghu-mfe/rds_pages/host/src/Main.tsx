@@ -237,7 +237,6 @@ const Main = (props: MainProps) => {
     }
   }, [Data.localization]);
 
-  debugger;
   console.log("Concatenated :", concatenated);
   const sideNavItems = concatenated;
 
