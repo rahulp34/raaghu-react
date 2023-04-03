@@ -1,14 +1,16 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../libs/state-management";
+import { useSelector } from 'react-redux';
 import "./App.scss";
 import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../libs/state-management/hooks";
-import { fetchLocalization } from "../../../libs/state-management/localization/localization-slice";
+  localizationService,
+  configurationService,
+  store,
+  clearToken,
+  grantedpolicies,
+} from "../../../libs/raaghu-core";
+import { useAppSelector} from '../../../libs/state-management/hooks'
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
@@ -65,115 +67,45 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const [isAuth, setIsAuth] = useState<boolean>();
-  const dataHost = useAppSelector((state) => state.persistedReducer.host);
+  const isAuth =localStorage.getItem("auth");
+  const [languageData, setLanguageData] = useState([]);
+  const [storeData, setStoreData] = useState({
+    languages: store.languages,
+    auth: store.auth,
+    localization: store.localization,
+  });
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const [checkingFirstTime, setChecking] = useState(false);
-  let accessToken: string | undefined | null =
-    localStorage.getItem("access_token");
+  // const dispatch = useAppDispatch();
+  // const [checkingFirstTime, setChecking] = useState(false);
+  // let accessToken: string | undefined | null =
+  //   localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
-  console.log("This is the current path ", currentPath);
-
-  const auth: any = useSelector(
-    (state: RootState) => state.persistedReducer.login.isAuth
-  );
-
-  console.log("auth", isAuth);
-  const location = useLocation();
-
+  
+console.log("session store.language", storeData.languages,storeData.localization, isAuth, localStorage.getItem("auth"))
   useEffect(() => {
-    const loginCredentials = localStorage.getItem("persist:root");
-    if (loginCredentials != null) {
-      let credentials = JSON.parse(loginCredentials);
-      let parsedCredentials = JSON.parse(credentials.login);
-      accessToken = parsedCredentials.accessToken;
-    }
+    console.log("hello ")
+    if (localStorage.getItem('auth') && true ) {
+      if (currentPath !== "/dashboard" && currentPath !=="/") {
+    // const loginCredentials = localStorage.getItem("persist:root");
+    // if (loginCredentials != null) {
+    //   let credentials = JSON.parse(loginCredentials);
+    //   let parsedCredentials = JSON.parse(credentials.login);
+    //   accessToken = parsedCredentials.accessToken;
+    // }
 
-    // setIsAuth(true);
-    if (localStorage.getItem("access_token")) {
-      setIsAuth(true);
-      if (currentPath !== "/dashobard" && currentPath != "/") {
+    // // setIsAuth(true);
+    // if (localStorage.getItem("access_token")) {
+    //   setIsAuth(true);
+    //   if (currentPath !== "/dashobard" && currentPath != "/") {
         navigate(currentPath);
       } else {
         navigate("/dashboard");
       }
     }
-    if (localStorage.getItem("access_token") == null) {
+    else {
       navigate("/login");
     }
-  }, [localStorage.getItem("access_token")]);
-
-  useEffect(() => {
-    dispatch(fetchApplicationConfig() as any);
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (
-      checkingFirstTime &&
-      dataHost.configuration &&
-      !dataHost.configuration.currentUser.isAuthenticated
-    ) {
-      navigate("/login");
-    } else {
-      setChecking(true);
-      navigate(location.pathname);
-    }
-  }, [dataHost.configuration]);
-
-  // datas for changing language from dropdown on top-nav in dashboard
-
-  const languageItems = [
-    {
-      label: "EN(US)",
-      val: "en",
-      icon: "us",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "English(IND)",
-      val: "en",
-      icon: "in",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Français",
-      val: "fr",
-      icon: "fr",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Deutsch",
-      val: "de",
-      icon: "de",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Português (Brasil)",
-      val: "pt-BR",
-      icon: "br",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Türkçe",
-      val: "tr",
-      icon: "tr",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Italiano",
-      val: "it",
-      icon: "it",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-  ];
+  }, [localStorage.getItem("auth")]);
   const toggleItems = [
     {
       label: "Light",
@@ -191,6 +123,25 @@ const Main = (props: MainProps) => {
     },
   ];
 
+  // useEffect(() => {
+  //   dispatch(fetchApplicationConfig() as any);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (checkingFirstTime&&
+  //     dataHost.configuration &&
+  //     !dataHost.configuration.currentUser.isAuthenticated
+  //   ) {
+  //     navigate("/login");
+  //   }
+  //   else{
+  //     setChecking(true);
+  //     navigate(location.pathname)
+  //   }
+  // }, [dataHost.configuration]);
+
+  // datas for changing language from dropdown on top-nav in dashboard
+
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
   let newobjectArray = objectArray
@@ -204,40 +155,64 @@ const Main = (props: MainProps) => {
     []
   );
 
-  const { t } = useTranslation();
-  const { i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language);
+  const { t, i18n } = useTranslation();
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")||"en-GB");
 
-  const onClickHandler = (e: any) => {
-    setCurrentLanguage(e.target.getAttribute("data-name"));
+  const onClickHandler = (e: any, val: any) => {
+    setCurrentLanguage(val);
+    localStorage.setItem("currentLang", JSON.stringify(val))
   };
-  const Data = useAppSelector(
-    (state: any) => state.persistedReducer.localization
-  ) as any;
+  // const storeData.languages=storeData.languages
+  //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
 
   useEffect(() => {
-    dispatch(fetchLocalization(currentLanguage) as any);
+    console.log("session useEffect from main 1")
+      configurationService(currentLanguage).then(async(res: any) => {
+      await console.log(" session this is res currentCulture",res.localization.currentCulture.cultureName)
+      await localizationService(currentLanguage).then(async (resp:any)=>{
+         console.log(" session this is res lang",resp)
+         i18n.changeLanguage(currentLanguage);
+         var data1 = {};
+         const translation = resp?.resources;
+         console.log("this is res tran",translation)
+         if (translation) {
+           Object.keys(translation).forEach((key) => {
+             data1 = { ...data1, ...translation[key].texts };
+           });
+           i18n.addResourceBundle(
+             currentLanguage,
+             "translation",
+             data1,
+             false,
+             true
+           );
+         }
+       })
+ 
+        await  setStoreData({
+         ...storeData,
+         languages: res.localization,
+         auth: res.auth,
+       });
+       const tempdata = await res.localization.languages.map((item: any) => {
+           return {
+             label: item.displayName,
+             val: item.cultureName,
+             icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+             iconWidth: "20px",
+             iconHeight: "20px",
+           };
+          
+         }
+        )
+        setLanguageData(tempdata)
+     });
+    // Do something with the data
+
+    //  dispatch(fetchConfiguration(currentLanguage) as any).then((res:any) => { dispatch(fetchLocalization(res.localization.currentCulture.cultureName) as any);  });
+
   }, [currentLanguage]);
 
-  useEffect(() => {
-    i18n.changeLanguage(currentLanguage);
-    var data1 = {};
-    const translation = Data.localization.resources;
-    if (translation) {
-      Object.keys(translation).forEach((key) => {
-        data1 = { ...data1, ...translation[key].texts };
-      });
-      i18n.addResourceBundle(
-        currentLanguage,
-        "translation",
-        data1,
-        false,
-        true
-      );
-    }
-  }, [Data.localization]);
-
-  console.log("Concatenated :", concatenated);
   const sideNavItems = concatenated;
 
   // OnClickHandler for side nav to reflect title and subtitle on TopNav
@@ -288,10 +263,17 @@ const Main = (props: MainProps) => {
   };
 
   const logout = () => {
-    localStorage.clear();
-    setIsAuth(false);
+   // clearToken(); //
+     localStorage.clear();
+    // setIsAuth(false);
+    console.log("session in logout ", isAuth)
+    store.accessToken=null
+    //  localStorage.setItem("auth", JSON.stringify(false));
+    // localStorage.setItem("token",JSON.stringify(null))
+  
     navigate("/login");
   };
+
   let logo = "./assets/raaghu_logs.png";
   return (
     <Suspense>
@@ -315,9 +297,12 @@ const Main = (props: MainProps) => {
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageItems={languageItems}
+                languageLable={storeData.languages?.currentCulture?.displayName ||"English (United Kingdom)"}
+                //languageLable ="English"
+                languageIcon="gb"
+                languageItems={languageData}
                 toggleItems={toggleItems}
-                // brandName="raaghu"
+                brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -327,7 +312,7 @@ const Main = (props: MainProps) => {
                 navbarTitle={t(currentTitle) || ""}
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => {
-                  console.log("Hey Chat Button Clicked!!");
+                  console.log(" session Hey Chat Button Clicked!!");
                 }}
               />
             </div>

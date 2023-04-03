@@ -80,6 +80,100 @@ import {
       })
     }
   );
+
+  export const fetchFileDescriptorId= createAsyncThunk(
+    "FileManagement/fetchFileDescriptor",
+    (data:any)=>{
+      return proxy.fileDescriptorGET(data.id).then((result:any)=>{
+        return result;
+      })
+    }
+  )  
+
+  export const updateFileDescriptor= createAsyncThunk(
+    "FileManagement/updateFileDescriptor",
+    (data:any)=>{
+      return proxy.fileDescriptorPOST(data.id,data.body).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const DeleteFileDescriptor= createAsyncThunk(
+    "FileManagement/DeleteFileDescriptor",
+    (data:any)=>{
+      return proxy.fileDescriptorDELETE(data.id).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const fetchFileDescriptor= createAsyncThunk(
+    "FileManagement/fetchFileDescriptor",
+    (data:any)=>{
+      return proxy.fileDescriptorGET2(data.directoryId).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const uploadFileDescriptor= createAsyncThunk(
+    "FileManagement/uploadFileDescriptor",
+    (data:any)=>{
+      return proxy.upload2(data.directoryId, data.name, 
+       data.extraProperties,data.file,undefined).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const moveFileDescriptor= createAsyncThunk(
+    "FileManagement/moveFileDescriptor",
+    (data:any)=>{
+      return proxy.movePOST2(data.body, undefined).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const infoFileDescriptor= createAsyncThunk(
+    "FileManagement/infoFileDescriptor",
+    (data:any)=>{
+      debugger
+      return proxy.preUploadInfo(data, undefined).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const fetchFileContentDescriptor= createAsyncThunk(
+    "FileManagement/fetchFileContentDescriptor",
+    (data:any)=>{
+      return proxy.content(data.id, undefined).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const fetchFileTokenDescriptor= createAsyncThunk(
+    "FileManagement/fetchFileTokenDescriptor",
+    (data:any)=>{
+      return proxy.token(data.id, undefined).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+  export const fetchFileDownloadDescriptor= createAsyncThunk(
+    "FileManagement/fetchFileDownloadDescriptor",
+    (data:any)=>{
+      return proxy.download(data.id, data.token).then((result:any)=>{
+        return result
+      })
+    }
+  )
+
+
   
   const FileManagementSlice = createSlice({
     name: "FileManagement",

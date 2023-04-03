@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompChangePassword from './RdsCompChangePassword';
+import React from 'react';
+import RdsCompChangePassword from './rds-comp-change-password';
 
 export default {
   title: "RdsCompChangePassword",

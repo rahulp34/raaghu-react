@@ -33,16 +33,14 @@ jobs:
           cache: "npm"
           cache-dependency-path: "./raaghu-mfe"
 
-      #    - uses: microsoft/variable-substitution@v1
-      #      with:
-      #        files: '**/appconfig.json'
-      #      env:
-      #        appBaseUrl: ${{ secrets.APPBASEURL_STAGING }}
-      #        remoteServiceBaseUrl: ${{ secrets.REMOTESERVICEBASEURL_STAGING }}
-
       - name: npm install at root directory
         run: |
-          npm install --force
+          npm install
+
+      - name: npm install raaghu-core
+        working-directory: raaghu-core
+        run: |
+          npm install
 
       - name: npm install raaghu-elements
         working-directory: raaghu-elements
@@ -57,7 +55,7 @@ jobs:
       - name: npm install, build, and test raaghu-mfe
         working-directory: raaghu-mfe
         run: |
-          npm install --force
+          npm install
           npm run build
           cp web.config rds_pages/host/dist
 

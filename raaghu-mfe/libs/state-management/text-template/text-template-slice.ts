@@ -24,7 +24,7 @@ export const textTemplateInitialState: TextTemplateState = {
 const proxy = new ServiceProxy();
 
 export const getAllTemplates = createAsyncThunk("TextTemplate/GetAllTemplates", () => {
-  return proxy.templateDefinitions(undefined, 'id DESC', 0, 10).then((result:any) => {
+  return proxy.templateDefinitions(undefined, undefined, 0, 10).then((result:any) => {
     return result;
   });
 });

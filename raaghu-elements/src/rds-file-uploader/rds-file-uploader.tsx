@@ -11,11 +11,13 @@ export interface RdsFileUploaderProps {
   limit: number;
   label:string;
   onFileArray?: (files: any[]) => void;
+  getFileUploaderInfo?:any;
 }
 
 const fileholder: any = [];
 const filenameholder: any = [];
 const filesize: any = [];
+
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const [FileArray, setFileArray] = useState(fileholder);
@@ -39,16 +41,22 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     let tempFA = FileArray.filter((Farray: any, i: number) => i !== id);
     setFileArray(tempFA);
   };
-
+const [fileUploaderData , setFileUploaderData] = useState<any>([]);
   const onchangehandler = (event: any) => {
     setFileSize([...FileSize, event.target.files[0].size]);
-
+    
     let files = event.target.files;
     setfileName([...fileName, event.target.files[0].name]);
+    debugger
+    console.log("sdsadadad",event.target.files)
+      props.getFileUploaderInfo({...fileUploaderData ,size : event.target.files[0].size, fileName : event.target.files[0].name})
 
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
+    
+
     reader.onload = (event) => {
+      
       setFileArray([...FileArray, event.target?.result]);
     };
 
@@ -71,6 +79,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             </div>
 
             <div>
+              <form>
               <input
                 multiple
                 className={` input text-${props.colorVariant} form-control  ${size} `}
@@ -79,6 +88,8 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                 accept={props.extensions}
                 onChange={(event) => onchangehandler(event)}
               />
+              </form>
+              
             </div>
           </div>
         </div>
@@ -211,7 +222,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   } 
                   }`}
                 >
-                  File size exceed {props.limit} MB
+                  {/* File size exceed {props.limit} MB */}
                 </div>
               </div>
             </div>

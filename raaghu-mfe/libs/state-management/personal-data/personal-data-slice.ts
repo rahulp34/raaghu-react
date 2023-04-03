@@ -2,19 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
-    personalData: { items : any[]};
-     // permission:any;
-    // allClaims:any;
-    // claims:any;
+    personalData: { items: any[] };
     error: string;
     status: "pending" | "loading" | "error" | "success";
 };
 
 export const initialState: InitialState = {
-    personalData: { items : []},
-    // permission:[],
-    // allClaims:null,
-    // claims:null,
+    personalData: { items: [] },
     error: "",
     status: "pending",
 };
@@ -61,23 +55,17 @@ export const deletePersonalData = createAsyncThunk(
 
 export const downloadTokenPersonalData = createAsyncThunk(
     "PersonalData/downloadTokenPersonalData",
-    async () => {
-        return proxy.downloadToken(undefined).then(
+    async (id: any) => {
+        debugger
+        return proxy.downloadToken(id).then(
             (result: any) => {
-                console.log('fetched data , ', result.items)
-                return result.items
+                console.log('fetched data , ', result)
+                return result;
 
             }
         );
     }
 );
-
-
-
-
-
-
-
 
 const PersonalDataSlice = createSlice({
     name: "PersonalData",
@@ -97,7 +85,7 @@ const PersonalDataSlice = createSlice({
         );
         builder.addCase(requestPersonalData.rejected, (state, action) => {
             state.status = "error";
-            state.personalData = { items : []};;
+            state.personalData = { items: [] };;
             state.error = action.error.message || "Something went wrong";
         });
 
@@ -114,7 +102,7 @@ const PersonalDataSlice = createSlice({
         );
         builder.addCase(getPersonalData.rejected, (state, action) => {
             state.status = "error";
-            state.personalData = { items : []};;
+            state.personalData = { items: [] };;
             state.error = action.error.message || "Something went wrong";
         });
 
@@ -132,7 +120,7 @@ const PersonalDataSlice = createSlice({
         );
         builder.addCase(deletePersonalData.rejected, (state, action) => {
             state.status = "error";
-            state.personalData = { items : []};;
+            state.personalData = { items: [] };;
             state.error = action.error.message || "Something went wrong";
         });
 
@@ -150,11 +138,11 @@ const PersonalDataSlice = createSlice({
         );
         builder.addCase(downloadTokenPersonalData.rejected, (state, action) => {
             state.status = "error";
-            state.personalData = { items : []};;
+            state.personalData = { items: [] };;
             state.error = action.error.message || "Something went wrong";
         });
 
-        
+
     }
 
 });

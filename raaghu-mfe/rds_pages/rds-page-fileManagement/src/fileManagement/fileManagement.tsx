@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import './fileManagement.scss';
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
 import RdsCompDirectoryList, {
   DirectoryItem,
@@ -21,11 +22,14 @@ import {
   fetchDirectoryDescriptor,
   fetchEditDirectory,
   fetchSubDirectory,
+  infoFileDescriptor,
   saveDirectoryDescriptor,
   updateDirectoryDescriptor,
+  uploadFileDescriptor,
   useAppDispatch,
 } from "../../../../libs/public.api";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
+import { size } from "lodash-es";
 
 const FileManagement = () => {
   const { t } = useTranslation();
@@ -34,8 +38,10 @@ const FileManagement = () => {
 
   const [path, setPath] = useState("");
   const [name, setName] = useState("");
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
   const [id, setId] = useState("");
+  const[uploadFile,setuploadFile]= useState()
+
   const[RenameFolder,setRenameFolder]=useState<any>({})
 
   const [directories, setDirectories] = useState<any[]>([
@@ -95,6 +101,7 @@ const FileManagement = () => {
         };
       });
       setTableData(tempdata);
+      setData(tempdata)
     }
   }, [file.directoryDescriptor]);
 
@@ -121,6 +128,16 @@ const FileManagement = () => {
       dispatch(fetchDirectoryDescriptor(undefined) as any);
     })
     setRenameFolder("")
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ])
   };
   useEffect(()=>{
     if(file.editDirectory){
@@ -234,9 +251,7 @@ const FileManagement = () => {
     // dispatch(fetchSubDirectory(event.name) as any);
   }
 
-  function AddChildren(event: any) {
-    dispatch;
-  }
+
   const addDataHandler = () => {
     dTo.name = name;
     dTo.parentId = folderId;
@@ -274,10 +289,41 @@ const FileManagement = () => {
       dispatch(fetchDirectoryDescriptor(undefined) as any);
     })
   }
+  const SetSearchName=(e:any)=>{
+    let temparr=data.filter((data:any)=>
+    data.name.toLowerCase().includes(e.target.value.toLowerCase()))
+    setTableData(temparr) 
+  }
 
   function setValue(value: string) { 
     throw new Error("Function not implemented.");
   }
+  const UploadedFile=()=>{
+    dispatch (uploadFileDescriptor(id) as any).then((res:any)=>{
+      // dispatch(fetchDirectoryDescriptor(id) as any);
+    // dispatch(fetchSubDirectory(id) as any);
+      })
+  }
+  const[uploadFiles , setUploadFiles]= useState<any>([]);
+ function preUploadFileInfo(_data:any){
+  debugger
+  console.log(uploadFiles);
+  // _data?.forEach((res:any) => {
+    const data:any = {
+      directoryId : null,
+     fileName : _data.fileName,
+     size : _data.size
+    }
+    setUploadFiles([data]);
+
+  // })
+  
+    
+  }
+
+  useEffect(()=>{
+    dispatch(infoFileDescriptor(uploadFiles) as any);
+  },[uploadFiles])
 
   return (
     <div className="New Folder">
@@ -373,7 +419,7 @@ const FileManagement = () => {
             </div>
           }
         >
-          <RdsCompFileUploader></RdsCompFileUploader>
+          <RdsCompFileUploader onClick={UploadedFile} preFileInfo={(data:any)=>preUploadFileInfo(data)}></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
@@ -399,7 +445,10 @@ const FileManagement = () => {
               <div className="col md-4 d-flex "></div>
 
               <div className="col md-4 d-flex justify-content-end">
-                <RdsSearch placeholder={"Search"} size={"5px"}></RdsSearch>
+                <RdsSearch placeholder={"Search"} size={"5px"}
+                onChange={SetSearchName}
+                
+                ></RdsSearch>
               </div>
             </div>
 

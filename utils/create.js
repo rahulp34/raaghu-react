@@ -56,9 +56,7 @@ const newItem = {
   subTitle: "subtitle here",
 };
 
-const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
-
-const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
+const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
 
 // Get hold of the app folder path inside the mfe
 let appFolderPath = "";
@@ -90,12 +88,19 @@ if (fs.existsSync(appFolderPath)) {
         cwd: appFolderPath,
         stdio: "inherit",
       });
-      // index.tsx
+      // index.ts
       fs.writeFile(
         `${appFolderPath}/src/${name}/index.ts`,
-        `import { default } from './${name}'`,
+        `export { default } from "./${name}";`,
         writeFileErrorHandler
       );
+      // common index.ts
+      fs.appendFile(
+        `${appFolderPath}/src/index.ts`,
+        `export { default as ${name} } from "./${name}";`,
+        writeFileErrorHandler
+      );
+
       console.log(
         "\x1b[32m%s\x1b[0m",
         `index.ts was successfully created at src/${name}/index.ts`
@@ -243,7 +248,7 @@ if (fs.existsSync(appFolderPath)) {
 
     fs.appendFile(
       `${sideNavItemPath}/index.ts`,
-      importStatement,
+      exportStatement,
       "utf8",
       // callback function
       function (err) {

@@ -3,15 +3,16 @@ import {Link, useNavigate} from "react-router-dom";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 import {
-	RdsDropdownList,
+	
 	RdsIcon,
 	RdsNotification,
 	RdsOffcanvas,
 	RdsAvatar,
 } from "raaghu-react-elements";
+import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
 
 export interface RdsCompTopNavigationProps {
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
   onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
@@ -23,6 +24,8 @@ export interface RdsCompTopNavigationProps {
   profileTitle?: string;
   profileName?: string;
   logo?:string, 
+  languageLable:string;
+  languageIcon:string;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -60,6 +63,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 		setLinkAccount(true);
 	};
 
+  const onClickHandler =(e: any, val: any) =>{
+    if (props.onClick) {
+      props.onClick(e,val);
+    }
+  }
+
   return (
     <div>
       <nav
@@ -92,7 +101,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <div className="px-2 position-relative border-end">
+          <div className="px-2 cursor-pointer position-relative border-end">
           <RdsDropdownList
            placeholder={props.toggleItems[0].label}
            icon =  "sun"
@@ -105,12 +114,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
      
           <div className="px-2 position-relative border-end">
           <RdsDropdownList
-           placeholder={props.languageItems[0].label}
-           icon =  "us"
+           placeholder={props.languageLable}
+           icon =  {props.languageIcon}
            iconFill = {false }
            iconStroke ={ true}
             listItems={props.languageItems}
-            onClick={props.onClick}
+            onClick={onClickHandler}
           ></RdsDropdownList>
           </div>
          <div className="me-3 ms-3 position-relative">

@@ -238,7 +238,7 @@ export const RdsCompDirectoryList = ({
             />
           </button>
         )}
-        <span className="me-2 ms-1">
+        <span className="me-2 ">
           <RdsIcon
             name="folder"
             height="15px"
@@ -253,7 +253,7 @@ export const RdsCompDirectoryList = ({
         </span>
         <span>{item.name}</span>
         {item.children && (
-          <span className="ms-2 mt-2">&nbsp;({item.children.length})</span>
+          <span className=" mt-2">&nbsp;({item.children.length})</span>
         )}
       </div>
       {item.children && expandedItems.includes(item.id) && (
