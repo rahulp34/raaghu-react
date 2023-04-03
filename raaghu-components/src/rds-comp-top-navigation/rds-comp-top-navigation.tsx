@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 import {
@@ -18,6 +18,7 @@ export interface RdsCompTopNavigationProps {
   notifications?: any[];
   languageItems: any[];
   toggleItems: any[];
+  componentsList: any[];
   navbarTitle?: string;
   navbarSubTitle?: string;
   brandName?: string;
@@ -30,38 +31,38 @@ export interface RdsCompTopNavigationProps {
 }
 
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
-	const [LinkAccount, setLinkAccount] = useState(false);
+  const [LinkAccount, setLinkAccount] = useState(false);
   const navigate = useNavigate();
-	const navtabItems = [
-		{
-			label: "Linked Accounts",
-			icon: "manage_linked",
-			subText: "Manage accounts linked to your account",
-			id: "nav-LinkAccount",
-		},
-		{
-			label: "My Account",
-			icon: "manage_authority",
-			subText: "Manage authority accounts",
-			id: "nav-MyAccount",
-		},
-		{
-			label: "Security Logs",
-			icon: "login_attempts",
-			subText: "See recent login attempts for your account",
-			id: "nav-SecuityLogs",
-		},
-		{
-			label: "Personal Data",
-			icon: "my_settings",
-			subText: "Change your account settings",
-			id: "nav-PersonalData",
-		},		
-	];
+  const navtabItems = [
+    {
+      label: "Linked Accounts",
+      icon: "manage_linked",
+      subText: "Manage accounts linked to your account",
+      id: "nav-LinkAccount",
+    },
+    {
+      label: "My Account",
+      icon: "manage_authority",
+      subText: "Manage authority accounts",
+      id: "nav-MyAccount",
+    },
+    {
+      label: "Security Logs",
+      icon: "login_attempts",
+      subText: "See recent login attempts for your account",
+      id: "nav-SecuityLogs",
+    },
+    {
+      label: "Personal Data",
+      icon: "my_settings",
+      subText: "Change your account settings",
+      id: "nav-PersonalData",
+    },
+  ];
 
-	const ChangeId = (e: any) => {
-		setLinkAccount(true);
-	};
+  const ChangeId = (e: any) => {
+    setLinkAccount(true);
+  };
 
   const onClickHandler =(e: any, val: any) =>{
     if (props.onClick) {
@@ -75,28 +76,35 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 fixed-top`}
       >
         <div className="d-flex align-items-center">
-          <span className="navbar-brand p-0 m-0" onClick={()=>{navigate("/dashboard")}}>
-           <img
+          <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
+            <img
               className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-              // width="70"
+            // width="70"
             ></img>
             
           </span>
           <div>
-            <div className="text-bold fs-6" 
+            <div className="text-bold fs-6"
             >
               {props.navbarTitle}
             </div>
             <div
-            className="text-muted fs-6"
+              className="text-muted fs-6"
             >
               {props.navbarSubTitle}
             </div>
           </div>
         </div>
-        <div className="d-flex me-2 align-items-center">
+              <div className="d-flex me-2 align-items-center">
+                  <div className="px-2 cursor-pointer position-relative border-end">
+                      <RdsDropdownList
+                          placeholder="Components"
+                          listItems={props.componentsList}
+                      // onClick={props.toggleTheme}
+                      ></RdsDropdownList>
+                  </div>
           <div className="px-2 cursor-pointer position-relative border-end">
           <RdsDropdownList
            placeholder={props.toggleItems[0].label}
@@ -106,9 +114,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           listItems={props.toggleItems}
             id={"toggleItem"}
             // onClick={props.toggleTheme}
-          ></RdsDropdownList>
+            ></RdsDropdownList>
           </div>
-     
+
           <div className="px-2 position-relative border-end">
           <RdsDropdownList
            placeholder={props.languageLable}
@@ -120,13 +128,13 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
            onClick={onClickHandler}
           ></RdsDropdownList>
           </div>
-         <div className="me-3 ms-3 position-relative">
+          <div className="me-3 ms-3 position-relative">
             <a
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              role ='button'
+              role='button'
               tabIndex={0}
-              className ="text-decoration-none"
+              className="text-decoration-none"
             >
               <RdsIcon
                 name="notification"
@@ -147,7 +155,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
           <div
             className="me-3 px-3 border-start border-end"
-            role ='button'
+            role='button'
             tabIndex={0}
           >
             <RdsIcon
@@ -161,7 +169,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 
           <Link to="/chats"
             className="me-3 pe-3 border-end"
-            role ='button'
+            role='button'
             onClick={props.onChatClickHandler}
           >
             <RdsIcon
@@ -186,20 +194,20 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                 <img className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
                   src="./assets/profile-picture-circle.svg"
                 ></img>
-                  <div className="ms-2 fw-bold fs-6">
-                    <div className="text-nowrap">
-                      {props.profileTitle}
-                    </div>
-                    <div
-                      className="text-nowrap text-muted"
-                    >
-                      {props.profileName}
-                    </div>
+                <div className="ms-2 fw-bold fs-6">
+                  <div className="text-nowrap">
+                    {props.profileTitle}
                   </div>
-                  <span className="ms-3">
-                    <RdsIcon
-                      name="chevron_down"
-                      height="12px"
+                  <div
+                    className="text-nowrap text-muted"
+                  >
+                    {props.profileName}
+                  </div>
+                </div>
+                <span className="ms-3">
+                  <RdsIcon
+                    name="chevron_down"
+                    height="12px"
                     width="12px"
                     fill={false}
                     stroke={true}

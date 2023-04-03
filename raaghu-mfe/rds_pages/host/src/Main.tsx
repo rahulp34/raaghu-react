@@ -293,6 +293,7 @@ const Main = (props: MainProps) => {
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
+                componentsList={componentsList}
                 // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
@@ -438,11 +439,11 @@ const Main = (props: MainProps) => {
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements" element={<ElementsCompo />} />
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
-                      <Route path="/my-account" element={<MyAccountCompo/>}/>
+                      <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                   
-</Routes>
+
+                    </Routes>
                   </Suspense>
                 </div>
               </div>
