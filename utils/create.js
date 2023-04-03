@@ -117,6 +117,14 @@ if (fs.existsSync(appFolderPath)) {
     updatedWebpackConfig = updatedWebpackConfig.replace(/{template_Page_Name_expose}/g, pageName);
     fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
 
+    // updating import statetement and compontnt in App.tsx file in template file
+    let templateAppFilePAth = path.join(__dirname, "../page-template/template/src/App.tsx");
+    let templateAppFileContent = fs.readFileSync(templateAppFilePAth,'utf-8');
+    let upodatedtemplateAppfileContent = templateAppFileContent.replace(/"{import_statement_for_Page_template}"/g, `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`)
+    upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(/{"page_template_component_in_app"}/g, `<${pageName}></${pageName}>`);
+    console.log(upodatedtemplateAppfileContent);
+    fs.writeFileSync(templateAppFilePAth, upodatedtemplateAppfileContent);
+
     let filePath = path.join(appFolderPath, name);
 
     // Path to create a new directory in the src directory in the template
@@ -136,7 +144,16 @@ if (fs.existsSync(appFolderPath)) {
     try {
       fs.writeFileSync(
         `${dirName}/${kebabCaseName}.tsx`,
-        `import React from "react"; \n //Edit this file and export this in App.tsx`
+        `import React from "react";\n
+
+        const ${pageName} = ()=>{
+          \treturn(
+            \t<>
+            \t<div>${formattedName} Page</div>
+            \t</>
+          \t)
+        }
+        export default ${pageName};`
       );
       // file written successfully
     } catch (err) {
@@ -312,6 +329,9 @@ if (fs.existsSync(appFolderPath)) {
     finalWebpackConfig = finalWebpackConfig.replace(pageName, '{template_Page_Name_expose}');
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
+    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,'"{import_statement_for_Page_template}"')
+    finalAppFileContent = finalAppFileContent.replace(`<${pageName}></${pageName}>`,'{"page_template_component_in_app"}');
+    fs.writeFileSync(templateAppFilePAth, finalAppFileContent);
     // Adding url to the webpack file of the host page
     const hostWebpackpath = "raaghu-mfe/rds_pages/host/webpack.config.js";
 
@@ -432,6 +452,7 @@ if (fs.existsSync(appFolderPath)) {
       console.error(err);
     }
   } else if (eTc == "pr") {
+    console.log("Proxy is being generated!!");
     let filePath = path.join(appFolderPath, "proxy");;
     if (fs.existsSync(filePath)) {
       console.log(
@@ -444,8 +465,8 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      console.log("\x1b[32m%s\x1b[0m", `proxy was successfully created!!`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..! \nEnjoy!!");
+      console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
+      console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   }
 } else {
