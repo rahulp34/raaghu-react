@@ -116,7 +116,7 @@ if (fs.existsSync(appFolderPath)) {
     let templateAppFilePAth = path.join(__dirname, "../page-template/template/src/App.tsx");
     let templateAppFileContent = fs.readFileSync(templateAppFilePAth,'utf-8');
     let upodatedtemplateAppfileContent = templateAppFileContent.replace(/"{import_statement_for_Page_template}"/g, `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`)
-    upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(/{"page_template_component_in_app"}/g, `<${pageName}/>`);
+    upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(/{"page_template_component_in_app"}/g, `<${pageName}></${pageName}>`);
     console.log(upodatedtemplateAppfileContent);
     fs.writeFileSync(templateAppFilePAth, upodatedtemplateAppfileContent);
 
@@ -139,11 +139,13 @@ if (fs.existsSync(appFolderPath)) {
     try {
       fs.writeFileSync(
         `${dirName}/${kebabCaseName}.tsx`,
-        `const ${pageName} = ()=>{
+        `import React from "react";\n
+
+        const ${pageName} = ()=>{
           \treturn(
-            \t\t<>
-            \t\t\t<div>${formattedName} Page</div>
-            \t\t</>
+            \t<>
+            \t<div>${formattedName} Page</div>
+            \t</>
           \t)
         }
         export default ${pageName};`
@@ -323,7 +325,7 @@ if (fs.existsSync(appFolderPath)) {
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
     let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,'"{import_statement_for_Page_template}"')
-    finalAppFileContent = finalAppFileContent.replace(`<${pageName}/>`,'{"page_template_component_in_app"}');
+    finalAppFileContent = finalAppFileContent.replace(`<${pageName}></${pageName}>`,'{"page_template_component_in_app"}');
     fs.writeFileSync(templateAppFilePAth, finalAppFileContent);
     // Adding url to the webpack file of the host page
     const hostWebpackpath = "raaghu-mfe/rds_pages/host/webpack.config.js";
