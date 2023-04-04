@@ -1,124 +1,203 @@
-import React, { FC } from 'react';
-import { RdsCompElementsWrapper } from './rds-comp-elements.styled';
-import { RdsAccordion, RdsAddressDetail, RdsAlert, RdsAppDetail, RdsAvatar, RdsBadge, RdsBankCardDetail, RdsBanner, RdsBenefit, RdsButton, RdsIcon, RdsLabel } from 'raaghu-react-elements';
-import RdsAccordionItem from '../../../raaghu-elements/src/rds-accordion/rds-accordion-item';
+import React, { Suspense, useState } from 'react';
+import { renderToString } from 'react-dom/server';
+import { RdsAddressDetail, RdsAlert, RdsAppDetail, RdsAvatar, RdsBadge, RdsBankCardDetail, RdsBanner, RdsBenefit, RdsButton, RdsIcon, RdsLabel } from 'raaghu-react-elements';
+import "./rds-comp-elements.scss"
+// import { code_snippet } from './elements/accordion';
 
 export interface RdsCompElementsProps { }
 
-const RdsCompElements = () => {
+
+const RdsCompElements = (props: any) => {
+
+   const [code_snippet, setCode] = React.useState("");
+
+   const [identity, setIdentity] = useState<number>();
+
+   debugger
+   const ComponentElement = React.lazy(() => import('./elements/' + props.type + '.tsx'));
+   // const ComponentCode = import('./elements/' + props.type + '.tsx');
+   console.log("Component: ", ComponentElement);
+
+   // const [searchParams, setSearchParams] = useSearchParams();
+   // console.log("Props: ", props, code_snippet);
+
+
+   // const Accordion_text =
+   //    <RdsAccordion
+   //       accordionId='1'
+   //       accordionType='Default' >
+   //       <RdsAccordionItem id={'1'} defaultOpen={false} title={'Section 1 Title'}>
+   //          <h1>Hello</h1>
+   //       </RdsAccordionItem>
+   //       <RdsAccordionItem id={'2'} title={'Section 2 Title'}>
+   //          <h1>Hello2</h1>
+   //       </RdsAccordionItem>
+   //       <RdsAccordionItem id={'3'} title={'Section 3 Title'}>
+   //          <h1>Hello3</h1>
+   //       </RdsAccordionItem>
+   //    </RdsAccordion>
+
+   //    const Address_Detail = ` <RdsAddressDetail
+   // addressLine1="Address Line 1"
+   // addressLine2="Address Line 2"
+   // addressLine3="Address Line 3"
+   // cardborder={true}
+   // header="Address Header"
+   // withIcon={true} children={undefined}></RdsAddressDetail>`
+
+   //    const Alert = ` <RdsAddressDetail
+   // addressLine1="Address Line 1"
+   // addressLine2="Address Line 2"
+   // addressLine3="Address Line 3"
+   // cardborder={true}
+   // header="Address Header"
+   // withIcon={true} children={undefined}></RdsAddressDetail>`
+
+   //    const AppDetail = `  <RdsAppDetail
+   // appDetailsItem={{
+   //    icon: 'zapier',
+   //    iconColor: 'warning',
+   //    iconFill: true,
+   //    iconHeight: '30px',
+   //    iconStroke: true,
+   //    iconWidth: '30px',
+   //    route: '/home',
+   //    routeLabel: 'View integration',
+   //    selected: true,
+   //    subtitle: 'Build custom automation and intefrations with app',
+   //    title: 'Zapier'
+   // }}
+   // />`
+
+   const copy_click = (text: any) => {
+      navigator.clipboard.writeText(text);
+   }
+
+   const setChildCode = (message: any) => {
+      console.log("setChildCode:", message);
+      // setCode(message);
+   };
+
    return (
       <>
-
          {/* <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
 
          </div> */}
          <div className="card p-2 border-0 rounded-0 mt-4">
+
             <div className='card-header'>
-               <h5><RdsLabel>Accordion</RdsLabel></h5>
+               <h5><RdsLabel> <span className='text-capitalize'>{props.type}</span> </RdsLabel></h5>
             </div>
             <div className='card-body pt-0'>
                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Accordion - Default</RdsLabel>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3 mt-2">
+                     <RdsLabel>Preview</RdsLabel>
+                     <div className='mb-4 mt-3'>
+                        <Suspense fallback={<div>Page is Loading...</div>}>
+                           <ComponentElement onChange={(event: any) => setChildCode(event)} />
+                        </Suspense>
                      </div>
-                     <RdsAccordion
-                        accordionId="1"
-                        accordionType="Default"
-                     >
-                        <RdsAccordionItem id={"1"} defaultOpen={false} title={"Section 1 Title"}>
-                           <h1>Hello</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"2"} title={"Section 2 Title"}>
-                           <h1>Hello2</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"3"} title={"Section 3 Title"}>
-                           <h1>Hello3</h1>
-                        </RdsAccordionItem>
-                     </RdsAccordion>
+
                   </div>
                   <div className="col-md-6">
-                     <div className='mb-2'>
-                        <RdsLabel>Accordion - Flush</RdsLabel>
+                     <RdsLabel>Code</RdsLabel>
+                     <div onClick={() => copy_click(code_snippet)} className="bg-light bg-opacity-100 p-4 rounded-4 mt-4">
+                        <span className='float-end'>
+                           {/* <RdsButton
+                              // class="me-2"
+                              label=""
+                              type="button"
+                              isOutline={false}
+                              colorVariant=""
+                              size="small"
+                              icon = "clipboard"
+                              block = {false}
+                              iconFill = {false}
+                              iconStroke = {true}
+                              iconHeight = "15px"
+                              iconWidth = "15px"
+                              onClick={() => {
+                                 // copy_click(code_snippet)
+                              }}
+                           ></RdsButton> */}
+                            <RdsIcon
+                  name="clipboard"
+                  width="17px"
+                  height="17px"
+                  fill={false}
+                  stroke={true}
+                ></RdsIcon>
+
+               {/* { identity ? (
+                <span className="text-success">Copied</span>
+              ) : (
+                <span>copy </span>
+              )} */}
+              {/* Copy{" "} */}
+              {/* { identity ? (
+                ""
+              ) : (
+                <RdsIcon
+                  name="clipboard"
+                  width="12px"
+                  height="12px"
+                  fill={false}
+                  stroke={true}
+                ></RdsIcon>
+              )} */}
+                           </span>
+                        <pre className="language-html">
+                           <code className="language-html">
+                              {/* {code_snippet} */}
+                              {ComponentElement.name}
+                           </code>
+                        </pre>
                      </div>
-                     <RdsAccordion
-                        accordionId="4"
-                        accordionType="flush"
-                     >
-                        <RdsAccordionItem id={"4"} defaultOpen={false} title={"Section 1 Title"}>
-                           <h1>Hello</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"5"} title={"Section 2 Title"}>
-                           <h1>Hello2</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"6"} title={"Section 3 Title"}>
-                           <h1>Hello3</h1>
-                        </RdsAccordionItem>
-                     </RdsAccordion>
-                  </div>
-               </div>
-               <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Accordion - Always Open</RdsLabel>
-                     </div>
-                     <RdsAccordion
-                        accordionId="1"
-                        accordionType=""
-                     >
-                        <RdsAccordionItem id={"7"} AlwaysOpen title={"Section 1 Title"}>
-                           <h1>Hello</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"8"} AlwaysOpen title={"Section 2 Title"}>
-                           <h1>Hello2</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"9"} AlwaysOpen title={"Section 3 Title"}>
-                           <h1>Hello3</h1>
-                        </RdsAccordionItem>
-                     </RdsAccordion>
-                  </div>
-                  <div className="col-md-6">
-                     <div className='mb-2'>
-                        <RdsLabel>Accordion - Stack Open</RdsLabel>
-                     </div>
-                     <RdsAccordion
-                        accordionId="10"
-                        accordionType=""
-                     >
-                        <RdsAccordionItem id={"10"} defaultOpen={true} title={"Section 1 Title"}>
-                           <h1>Hello</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"11"} title={"Section 2 Title"}>
-                           <h1>Hello2</h1>
-                        </RdsAccordionItem>
-                        <RdsAccordionItem id={"12"} title={"Section 3 Title"}>
-                           <h1>Hello3</h1>
-                        </RdsAccordionItem>
-                     </RdsAccordion>
                   </div>
                </div>
             </div>
-
-
          </div>
-
+         {/* 
          <div className="card p-2 border-0 rounded-0 mt-4">
             <div className='card-header'>
                <h5><RdsLabel>Address Detail</RdsLabel></h5>
             </div>
             <div className='card-body pt-0'>
                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Address Detail - Default</RdsLabel>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3 mt-2">
+                     <RdsLabel>Preview</RdsLabel>
+                     <div className="mb-4 mt-3">
+                        <RdsAddressDetail
+                           addressLine1="Address Line 1"
+                           addressLine2="Address Line 2"
+                           addressLine3="Address Line 3"
+                           cardborder={true}
+                           header="Address Header"
+                           withIcon={true} children={undefined}></RdsAddressDetail>
                      </div>
-                     <RdsAddressDetail
-                        addressLine1="Address Line 1"
-                        addressLine2="Address Line 2"
-                        addressLine3="Address Line 3"
-                        cardborder={true}
-                        header="Address Header"
-                        withIcon={true} children={undefined}></RdsAddressDetail>
+
+                  </div>
+                  <div className="col-md-6">
+                     <RdsLabel>Code</RdsLabel>
+                     <div className="bg-light bg-opacity-100 p-4 rounded-4 mt-4">
+                        <span className='float-end'>
+                           <RdsButton
+                              // class="me-2"
+                              label="Copy"
+                              type="button"
+                              isOutline={true}
+                              colorVariant="primary"
+                              size="small"
+                              onClick={() => {
+                                 navigator.clipboard.writeText(Address_Detail);
+                              }}
+                           ></RdsButton></span>
+                        <pre className="language-html">
+                           <code className="language-html">
+                              {Address_Detail}
+                           </code>
+                        </pre>
+                     </div>
                   </div>
                </div>
             </div>
@@ -132,63 +211,77 @@ const RdsCompElements = () => {
             </div>
             <div className='card-body pt-0'>
                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Alert - Default</RdsLabel>
-                     </div>
-                     <RdsAlert
-                        alertmessage="This is default alert"
-                        position="top"
-                        dismisable={false}
-                        colorVariant="primary"
-                     />
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Alert - WithIcon</RdsLabel>
-                     </div>
-                     <RdsAlert
-                        alertmessage="This is alert width icon"
-                        icon="information"
-                        iconHeight="20px"
-                        iconStroke={true}
-                        iconWidth="20px"
-                        position="top"
-                        colorVariant="primary"
-                     />
-                  </div>
-               </div>
-               <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Alert - WithCloseButton</RdsLabel>
-                     </div>
-                     <RdsAlert
-                        alertmessage="This is close alert"
-                        dismisable
-                        icon="information"
-                        iconHeight="20px"
-                        iconStroke
-                        iconWidth="20px"
-                        position="top"
-                        colorVariant='primary'
-                     />
-                  </div>
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>Alert - WithDelayAlert</RdsLabel>
-                     </div>
-                     <RdsAlert
-                        alertmessage="This is close alert"
-                        delay={5000}
-                        icon="information"
-                        iconHeight="20px"
-                        iconStroke
-                        iconWidth="20px"
-                        position="top" colorVariant='primary' />
-                  </div>
-               </div>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-4">
+                     <RdsLabel>Preview</RdsLabel>
+                     <div className="mb-4 mt-3">
+                        <div className="mb-2">
+                           <RdsAlert
+                              alertmessage="This is default alert"
+                              position="top"
+                              dismisable={false}
+                              colorVariant="primary"
+                           />
+                        </div>
+                        <div className="mb-2">
+                           <RdsAlert
+                              alertmessage="This is alert width icon"
+                              icon="information"
+                              iconHeight="20px"
+                              iconStroke={true}
+                              iconWidth="20px"
+                              position="top"
+                              colorVariant="primary"
+                           />
+                        </div>
+                        <div className="mb-2">
+                           <RdsAlert
+                              alertmessage="This is close alert"
+                              dismisable
+                              icon="information"
+                              iconHeight="20px"
+                              iconStroke
+                              iconWidth="20px"
+                              position="top"
+                              colorVariant='primary'
+                           />
+                        </div>
+                        <div className="mb-2">
+                           <RdsAlert
+                              alertmessage="This is close alert"
+                              delay={5000}
+                              icon="information"
+                              iconHeight="20px"
+                              iconStroke
+                              iconWidth="20px"
+                              position="top" colorVariant='primary' />
+                        </div>
 
+                     </div>
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
+                     <RdsLabel>Code</RdsLabel>
+                     <div className="bg-light bg-opacity-100 p-4 rounded-4 mt-3">
+                        <span className='float-end'>
+                           <RdsButton
+                              // class="me-2"
+                              label="Copy"
+                              type="button"
+                              isOutline={true}
+                              colorVariant="primary"
+                              size="small"
+                              onClick={() => {
+                                 navigator.clipboard.writeText(Alert);
+                              }}
+                           ></RdsButton></span>
+                        <pre className="language-html">
+                           <code className="language-html">
+                              {Alert}
+                           </code>
+                        </pre>
+                     </div>
+
+                  </div>
+               </div>
             </div>
          </div>
 
@@ -198,25 +291,48 @@ const RdsCompElements = () => {
             </div>
             <div className='card-body pt-0'>
                <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
-                     <div className='mb-2'>
-                        <RdsLabel>App Detail - Default</RdsLabel>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-4">
+                     <RdsLabel>Preview</RdsLabel>
+                     <div className="mb-4 mt-3">
+                        <RdsAppDetail
+                           appDetailsItem={{
+                              icon: 'zapier',
+                              iconColor: 'warning',
+                              iconFill: true,
+                              iconHeight: '30px',
+                              iconStroke: true,
+                              iconWidth: '30px',
+                              route: '/home',
+                              routeLabel: 'View integration',
+                              selected: true,
+                              subtitle: 'Build custom automation and intefrations with app',
+                              title: 'Zapier'
+                           }}
+                        />
                      </div>
-                     <RdsAppDetail
-                        appDetailsItem={{
-                           icon: 'zapier',
-                           iconColor: 'warning',
-                           iconFill: true,
-                           iconHeight: '30px',
-                           iconStroke: true,
-                           iconWidth: '30px',
-                           route: '/home',
-                           routeLabel: 'View integration',
-                           selected: true,
-                           subtitle: 'Build custom automation and intefrations with app',
-                           title: 'Zapier'
-                        }}
-                     />
+                  </div>
+                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3">
+                     <RdsLabel>Code</RdsLabel>
+                     <div className="bg-light bg-opacity-100 p-4 rounded-4 mt-3">
+                        <span className='float-end'>
+                           <RdsButton
+                              // class="me-2"
+                              label="Copy"
+                              type="button"
+                              isOutline={true}
+                              colorVariant="primary"
+                              size="small"
+                              onClick={() => {
+                                 navigator.clipboard.writeText(AppDetail);
+                              }}
+                           ></RdsButton></span>
+                        <pre className="language-html">
+                           <code className="language-html">
+                              {AppDetail}
+                           </code>
+                        </pre>
+                     </div>
+
                   </div>
                </div>
             </div>
@@ -544,7 +660,7 @@ const RdsCompElements = () => {
                   </div>
                </div>
             </div>
-         </div>
+         </div> */}
       </>
    );
 };

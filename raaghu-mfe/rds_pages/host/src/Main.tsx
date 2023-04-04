@@ -297,7 +297,7 @@ console.log("session store.language", storeData.languages,storeData.localization
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageLable={storeData.languages?.currentCulture?.displayName ||"English (United Kingdom)"}
+                languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
                 //languageLable ="English"
                 languageIcon="gb"
                 languageItems={languageData}
@@ -313,8 +313,7 @@ console.log("session store.language", storeData.languages,storeData.localization
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => {
                   console.log(" session Hey Chat Button Clicked!!");
-                }}
-              />
+                } } elementList={[]}              />
             </div>
             <div
               className="

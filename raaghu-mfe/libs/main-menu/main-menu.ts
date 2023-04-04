@@ -1,3 +1,4 @@
+import Children from 'react';
 const MainMenu = [
     {
       "key": "0",
@@ -12,13 +13,6 @@ const MainMenu = [
       "icon": "icons",
       "path": "/icons",
       "subTitle": "icons",
-    },
-    {
-      "key": "8",
-      "label": "Elements",
-      "icon": "icons",
-      "path": "/elements",
-      "subTitle": "Elements"
     },
     {
       "key": "2",
@@ -243,7 +237,35 @@ const MainMenu = [
               "subTitle": "tags",
             },
       ]
-  }
+  },
+  {
+    "key": "8",
+    "label": "Elements",
+    "icon": "icons",
+    "children": [
+        {
+            "key": "8-0",
+            "label": "Accordion",
+            "icon": "accordion",
+            "path": "/elements/accordion",
+            "subTitle": "Accordion",
+        },
+        {
+            "key": "8-1",
+            "label": "Alert",
+            "icon": "alert",
+            "path": "/elements/alert",
+            "subTitle": "Alert",
+        },
+        {
+          "key": "8-2",
+          "label": "App Detail",
+          "icon": "alert",
+          "path": "/elements/appDetail",
+          "subTitle": "Alert",
+      }
+    ]
+}
 ]
 
 export default MainMenu;
