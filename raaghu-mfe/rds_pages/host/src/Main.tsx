@@ -302,7 +302,7 @@ console.log("session store.language", storeData.languages,storeData.localization
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
-                brandName="raaghu"
+                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"

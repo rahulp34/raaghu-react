@@ -20,7 +20,7 @@ const Chats = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchChatsData() as any);
+    // dispatch(fetchChatsData() as any);
   }, [dispatch]);
 
   const onStartConversationHandler = () => {
