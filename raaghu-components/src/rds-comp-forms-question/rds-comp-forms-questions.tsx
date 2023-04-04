@@ -163,7 +163,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                             </div>
                             <div className="col-6 d-flex justify-content-end">
                                 <div className="d-flex px-3">
-                                <RdsToggle iconOnUncheck={"false"} iconOnCheck={"true"} onClick={(e: any) => setIsRequired(i, e.target.checked)} ></RdsToggle>
+                                <RdsToggle iconOnUncheck={"false"} iconOnCheck={"true"} onClick={(e: any) => setIsRequired(i, e?.target?.checked)} ></RdsToggle>
                                 <RdsLabel label="Required"></RdsLabel>
                                 </div> 
                                 <RdsIcon
