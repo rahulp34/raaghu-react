@@ -83,10 +83,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               // width="70"
             ></img>
             
-            <span className="title fw-bold text-lowercase m-2 cursor-pointer">
-      
-             <b >{props.brandName}</b>
-            </span>
           </span>
           <div>
             <div className="text-bold fs-6" 
@@ -107,7 +103,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
            icon =  "sun"
            iconFill = {false }
            iconStroke ={true}
-            listItems={props.toggleItems}
+          listItems={props.toggleItems}
+            id={"toggleItem"}
             // onClick={props.toggleTheme}
           ></RdsDropdownList>
           </div>
@@ -118,8 +115,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
            icon =  {props.languageIcon}
            iconFill = {false }
            iconStroke ={ true}
-            listItems={props.languageItems}
-            onClick={onClickHandler}
+           id={"languageDropdown"}
+           listItems={props.languageItems}
+           onClick={onClickHandler}
           ></RdsDropdownList>
           </div>
          <div className="me-3 ms-3 position-relative">

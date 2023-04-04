@@ -18,7 +18,7 @@ import {
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
 
-import { AuthGuard } from "../../../libs/public.api";
+import { AuthGuard, useAppDispatch } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
 import {
@@ -67,7 +67,7 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const isAuth =localStorage.getItem("auth");
+  
   const [languageData, setLanguageData] = useState([]);
   const [storeData, setStoreData] = useState({
     languages: store.languages,
@@ -75,37 +75,27 @@ const Main = (props: MainProps) => {
     localization: store.localization,
   });
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  // const [checkingFirstTime, setChecking] = useState(false);
+  const dispatch = useAppDispatch();
+  const dataHost = useAppSelector((state) => state.host);
+
+  const [checkingFirstTime, setChecking] = useState(false);
   // let accessToken: string | undefined | null =
   //   localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
   
-console.log("session store.language", storeData.languages,storeData.localization, isAuth, localStorage.getItem("auth"))
-  useEffect(() => {
-    console.log("hello ")
-    if (localStorage.getItem('auth') && true ) {
-      if (currentPath !== "/dashboard" && currentPath !=="/") {
-    // const loginCredentials = localStorage.getItem("persist:root");
-    // if (loginCredentials != null) {
-    //   let credentials = JSON.parse(loginCredentials);
-    //   let parsedCredentials = JSON.parse(credentials.login);
-    //   accessToken = parsedCredentials.accessToken;
-    // }
-
-    // // setIsAuth(true);
-    // if (localStorage.getItem("access_token")) {
-    //   setIsAuth(true);
-    //   if (currentPath !== "/dashobard" && currentPath != "/") {
-        navigate(currentPath);
-      } else {
-        navigate("/dashboard");
-      }
-    }
-    else {
-      navigate("/login");
-    }
-  }, [localStorage.getItem("auth")]);
+  // useEffect(() => {
+  //   console.log("hello ")
+  //   if (localStorage.getItem('auth') && true ) {
+  //     if (currentPath !== "/dashboard" && currentPath !=="/") {
+  //       navigate(currentPath);
+  //     } else {
+  //       navigate("/dashboard");
+  //     }
+  //   }
+  //   else {
+  //     navigate("/login");
+  //   }
+  // }, [localStorage.getItem("auth")]);
   const toggleItems = [
     {
       label: "Light",
@@ -123,22 +113,22 @@ console.log("session store.language", storeData.languages,storeData.localization
     },
   ];
 
-  // useEffect(() => {
-  //   dispatch(fetchApplicationConfig() as any);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchApplicationConfig() as any);
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (checkingFirstTime&&
-  //     dataHost.configuration &&
-  //     !dataHost.configuration.currentUser.isAuthenticated
-  //   ) {
-  //     navigate("/login");
-  //   }
-  //   else{
-  //     setChecking(true);
-  //     navigate(location.pathname)
-  //   }
-  // }, [dataHost.configuration]);
+  useEffect(() => {
+    if (checkingFirstTime&&
+      dataHost.configuration &&
+      !dataHost.configuration.currentUser.isAuthenticated
+    ) {
+      navigate("/login");
+    }
+    else{
+      setChecking(true);
+      navigate(location.pathname)
+    }
+  }, [dataHost.configuration]);
 
   // datas for changing language from dropdown on top-nav in dashboard
 
@@ -266,7 +256,7 @@ console.log("session store.language", storeData.languages,storeData.localization
    // clearToken(); //
      localStorage.clear();
     // setIsAuth(false);
-    console.log("session in logout ", isAuth)
+    // console.log("session in logout ", isAuth)
     store.accessToken=null
     //  localStorage.setItem("auth", JSON.stringify(false));
     // localStorage.setItem("token",JSON.stringify(null))
@@ -292,7 +282,7 @@ console.log("session store.language", storeData.languages,storeData.localization
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {isAuth && (
+      {location.pathname!='/login' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
