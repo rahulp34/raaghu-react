@@ -34,6 +34,9 @@ const FileManagementCompo = React.lazy(
   () => import("FileManagement/FileManagement")
 );
 const FormsCompo = React.lazy(() => import("Forms/Forms"));
+
+const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
+const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
 const BloggerCompo = React.lazy(() => import("Blogger/Blogger"));
 const ClientCompo = React.lazy(() => import("Client/Client"));
 const PollsCompo = React.lazy(() => import("Polls/Polls"));
@@ -43,8 +46,6 @@ const UrlForwardingCompo = React.lazy(
 const PaymentPlansCompo = React.lazy(() => import("PaymentPlans/PaymentPlans"));
 const BlogsCompo = React.lazy(() => import("Blogs/Blogs"));
 const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
-const FormsViewCompo = React.lazy(() => import("FormsView/FormsView"));
-const FormsPreviewCompo = React.lazy(() => import("FormsPreview/FormsPreview"));
 const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
