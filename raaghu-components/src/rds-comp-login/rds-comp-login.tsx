@@ -84,8 +84,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     <div>
       <div className="text-center">
       <h2 > <b> Login </b> </h2>
-      <button>turn spinner off</button>
-
         <div>
           <small className="pb-5 d-flex justify-content-center">
             Current Tenant : Not Selected{" "}
