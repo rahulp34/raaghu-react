@@ -1,19 +1,21 @@
 import type { Model } from '../../../client/interfaces/Model';
 import type { OperationResponse } from '../../../client/interfaces/OperationResponse';
 
-function areEqual(a: Model, b: Model): boolean {
+const areEqual = (a: Model, b: Model): boolean => {
     const equal = a.type === b.type && a.base === b.base && a.template === b.template;
     if (equal && a.link && b.link) {
         return areEqual(a.link, b.link);
     }
     return equal;
-}
+};
 
-export function getOperationResults(operationResponses: OperationResponse[]): OperationResponse[] {
+export const getOperationResults = (operationResponses: OperationResponse[]): OperationResponse[] => {
     const operationResults: OperationResponse[] = [];
 
+    // Filter out success response codes, but skip "204 No Content"
     operationResponses.forEach(operationResponse => {
-        if (operationResponse.code && operationResponse.code >= 200 && operationResponse.code < 300) {
+        const { code } = operationResponse;
+        if (code && code !== 204 && code >= 200 && code < 300) {
             operationResults.push(operationResponse);
         }
     });
@@ -24,9 +26,9 @@ export function getOperationResults(operationResponses: OperationResponse[]): Op
             name: '',
             code: 200,
             description: '',
-            export: 'interface',
-            type: 'any',
-            base: 'any',
+            export: 'generic',
+            type: 'void',
+            base: 'void',
             template: null,
             link: null,
             isDefinition: false,
@@ -47,4 +49,4 @@ export function getOperationResults(operationResponses: OperationResponse[]): Op
             }) === index
         );
     });
-}
+};

@@ -2,16 +2,21 @@ import type { OperationResponse } from '../../../client/interfaces/OperationResp
 import { getPattern } from '../../../utils/getPattern';
 import type { OpenApi } from '../interfaces/OpenApi';
 import type { OpenApiResponse } from '../interfaces/OpenApiResponse';
-import { getComment } from './getComment';
+import type { OpenApiSchema } from '../interfaces/OpenApiSchema';
 import { getModel } from './getModel';
+import { getRef } from './getRef';
 import { getType } from './getType';
 
-export function getOperationResponse(openApi: OpenApi, response: OpenApiResponse, responseCode: number): OperationResponse {
+export const getOperationResponse = (
+    openApi: OpenApi,
+    response: OpenApiResponse,
+    responseCode: number
+): OperationResponse => {
     const operationResponse: OperationResponse = {
         in: 'response',
         name: '',
         code: responseCode,
-        description: getComment(response.description)!,
+        description: response.description || null,
         export: 'generic',
         type: 'any',
         base: 'any',
@@ -27,27 +32,17 @@ export function getOperationResponse(openApi: OpenApi, response: OpenApiResponse
         properties: [],
     };
 
-    // We support basic properties from response headers, since both
-    // fetch and XHR client just support string types.
-    if (response.headers) {
-        for (const name in response.headers) {
-            if (response.headers.hasOwnProperty(name)) {
-                operationResponse.in = 'header';
-                operationResponse.name = name;
-                operationResponse.type = 'string';
-                operationResponse.base = 'string';
-                return operationResponse;
-            }
-        }
-    }
-
     // If this response has a schema, then we need to check two things:
     // if this is a reference then the parameter is just the 'name' of
-    // this reference type. Otherwise it might be a complex schema and
-    // then we need to parse the schema!
-    if (response.schema) {
-        if (response.schema.$ref) {
-            const model = getType(response.schema.$ref);
+    // this reference type. Otherwise, it might be a complex schema,
+    // and then we need to parse the schema!
+    let schema = response.schema;
+    if (schema) {
+        if (schema.$ref?.startsWith('#/responses/')) {
+            schema = getRef<OpenApiSchema>(openApi, schema);
+        }
+        if (schema.$ref) {
+            const model = getType(schema.$ref);
             operationResponse.export = 'reference';
             operationResponse.type = model.type;
             operationResponse.base = model.base;
@@ -55,7 +50,7 @@ export function getOperationResponse(openApi: OpenApi, response: OpenApiResponse
             operationResponse.imports.push(...model.imports);
             return operationResponse;
         } else {
-            const model = getModel(openApi, response.schema);
+            const model = getModel(openApi, schema);
             operationResponse.export = model.export;
             operationResponse.type = model.type;
             operationResponse.base = model.base;
@@ -86,5 +81,19 @@ export function getOperationResponse(openApi: OpenApi, response: OpenApiResponse
         }
     }
 
+    // We support basic properties from response headers, since both
+    // fetch and XHR client just support string types.
+    if (response.headers) {
+        for (const name in response.headers) {
+            if (response.headers.hasOwnProperty(name)) {
+                operationResponse.in = 'header';
+                operationResponse.name = name;
+                operationResponse.type = 'string';
+                operationResponse.base = 'string';
+                return operationResponse;
+            }
+        }
+    }
+
     return operationResponse;
-}
+};
