@@ -59,6 +59,9 @@ const Forms = () => {
           const lastDate = new Date(e.lastModificationTime);
           updatedDate = `${("0" + lastDate.getDate()).slice(-2)}/${("0" + (lastDate.getMonth() + 1)).slice(-2)}/${lastDate.getFullYear()}, ${("0" + lastDate.getHours()).slice(-2)}:${("0" + lastDate.getMinutes()).slice(-2)} ${lastDate.getHours() >= 12 ? "PM" : "AM"}`;
         }
+        else {
+          updatedDate = '--'
+        }
         const item = {
           title: e.title,
           description: e.description,

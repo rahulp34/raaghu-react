@@ -19,7 +19,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions, getFormsSettings, getForms, updateFormsSettings, SaveFormsSendResponse } from "../../../../libs/state-management/forms/forms-slice";
+import { fetchForms, SaveformsQuestions, updateForms, getAll2FormsQuestions, updateFormsQuestions, deleteFormsQuestions, getFormsSettings, getForms, updateFormsSettings, SaveFormsSendResponse, getFormsResponses, getFormsResponsesCount } from "../../../../libs/state-management/forms/forms-slice";
 import { useNavigate } from "react-router-dom";
 const FormsView = (props: any) => {
   const navigate = useNavigate();
@@ -35,6 +35,14 @@ const FormsView = (props: any) => {
   useEffect(() => {
     dispatch(getFormsSettings(props.id) as any);
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getFormsResponses(props.id) as any);
+  },[dispatch])
+
+  useEffect(() => {
+dispatch(getFormsResponsesCount(props.id) as any);
+  },[dispatch])
 
   const [basicEditFormData1, setbasicEditFormData] = useState<any>();
   const [tempEditFormData, setTempEditFormData] = useState<any>();
@@ -88,50 +96,13 @@ const FormsView = (props: any) => {
   function handleCancleQuestion() {
     navigate("/forms");
   }
-  // function handleEditQuestion() {
-  //   const { description, title } = tempEditFormData;
-  //   const forms = {
-  //     id: props.id,
-  //     body: { description, title }
-  //   };
-    
-  //   dispatch(updateForms(forms) as any)
-  //   // .then((res: any) => {
-  //     debugger
-  //   tempSaveQuestionsData.map((res: any) => {
-  //     if (res.id && res.isEdit) {
-  //       const data = {
-  //         id: res.id,
-  //         body: { ...res, formId: props.id }
-  //       };
-  //       debugger
-  //       dispatch(updateFormsQuestions(data) as any)
-  //         .then((res: any) => {
-  //           dispatch(getAll2FormsQuestions(props.id) as any);
-  //         });
-  //     } else if(!res.id) {
-  //       debugger
-  //       const data = {
-  //         id: props.id,
-  //         body: { ...res, formId: props.id }
-  //       };
-  //       debugger
-  //       dispatch(SaveformsQuestions(data) as any)
-  //         .then((res: any) => {
-  //           dispatch(getAll2FormsQuestions(props.id) as any);
-  //         });
-  //     }
-  //   });
-  //   // })
-  // }
   function handleEditQuestion() {
     const { description, title } = tempEditFormData;
     const forms = {
       id: props.id,
       body: { description, title }
     };
-    dispatch(updateForms(forms) as any)
-      .then((res: any) => {
+    dispatch(updateForms(forms) as any).then((res: any) => {
         tempSaveQuestionsData.map((res: any) => {
           if (res.id) {
             if (res.isEdit) {
@@ -142,6 +113,7 @@ const FormsView = (props: any) => {
             dispatch(updateFormsQuestions(data) as any)
               .then((res: any) => {
                 dispatch(getAll2FormsQuestions(props.id) as any);
+                setAlertOne(true);
               });
             }else{}
           } else {
@@ -156,6 +128,7 @@ const FormsView = (props: any) => {
           }
         });
       })
+      setAlertOne(true);
     }
   function deleteQuestion(data: any) {
     dispatch(deleteFormsQuestions(data.id) as any).then((res: any) => {
@@ -219,7 +192,19 @@ const FormsView = (props: any) => {
         success: false,
       });
     }, 2000);
-  }, [tempSaveQuestionsData]);
+  }, [basicEditFormData1]);
+
+  useEffect(() => {
+    if(forms.getResponses){
+      debugger
+    }
+  },[forms.getResponses]);
+
+  useEffect(() => {
+    if(forms.getResponsesCount){
+      debugger
+    }
+  },[forms.getResponsesCount]);
   return (
     <>
       <div className="row">
@@ -418,7 +403,7 @@ const FormsView = (props: any) => {
               )}
               {activeNavTabEditId == 1 && showNextTab === false && (
                 <>
-                  <RdsCompFormsResponse></RdsCompFormsResponse>
+                  <RdsCompFormsResponse ></RdsCompFormsResponse>
                 </>)}
             </div>
 

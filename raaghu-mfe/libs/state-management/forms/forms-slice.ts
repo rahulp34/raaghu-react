@@ -5,6 +5,7 @@ import {
   AnyAction,
 } from "@reduxjs/toolkit";
 import { CreateQuestionDto, ServiceProxy, UpdatePermissionsDto } from "../../shared/service-proxy";
+import { unset } from "lodash-es";
 
 type InitialStateForms = {
   loading: boolean;
@@ -17,6 +18,8 @@ type InitialStateForms = {
   alertMessage: string;
   success: boolean;
   getSettings:any;
+  getResponses:any;
+  getResponsesCount:any;
 };
 
 export const InitialStateForms: InitialStateForms = {
@@ -29,7 +32,9 @@ export const InitialStateForms: InitialStateForms = {
   alert: false,
   alertMessage: "",
   success: false,
-  getSettings:null
+  getSettings:null,
+  getResponses:null,
+  getResponsesCount:null
 };
 
 const proxy = new ServiceProxy();
@@ -162,6 +167,34 @@ export const SaveFormsSendResponse= createAsyncThunk(
     });
   }
 );
+
+export const getFormsResponses = createAsyncThunk(
+  "forms/getFormsResponses",
+  (id: string) => {
+    return proxy.responsesGET3(id, undefined,undefined,0,30).then((result: any) => {
+      return result;
+    });
+  }
+);
+
+export const deleteFormsResponses = createAsyncThunk(
+  "forms/deleteFormsResponses",
+  (id: string) => {
+    return proxy.responsesDELETE2(id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+
+export const getFormsResponsesCount = createAsyncThunk(
+  "forms/getFormsResponsesCount",
+  (id: string) => {
+    return proxy.responsesCount(id, undefined).then((result: any) => {
+      return result;
+    });
+  }
+);
+
 //reducer
 const formsSlice = createSlice({
   name: "forms",
@@ -406,6 +439,43 @@ const formsSlice = createSlice({
           state.alertMessage = "Something Went Wrong";
           state.success = false;
         });
+
+        builder.addCase(getFormsResponses.pending, (state) => {
+          state.loading = true;
+        });
+    
+        builder.addCase(getFormsResponses.fulfilled, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.getResponses= action.payload;
+        });
+        builder.addCase(getFormsResponses.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || "Somethingwentwrong";
+        });
+
+        builder.addCase(getFormsResponsesCount.pending, (state) => {
+          state.loading = true;
+        });
+    
+        builder.addCase(getFormsResponsesCount.fulfilled, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.getResponsesCount= action.payload;
+        });
+        builder.addCase(getFormsResponsesCount.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || "Somethingwentwrong";
+        });
+        
+    builder.addCase(
+      deleteFormsResponses.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = "";
+        state.alert = true;
+        state.alertMessage = "Data deleted Successfully";
+        state.success = true;
+      }
+    );
   },
 });
 
