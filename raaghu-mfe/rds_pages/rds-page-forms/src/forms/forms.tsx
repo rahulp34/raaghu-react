@@ -20,7 +20,9 @@ import { useNavigate } from 'react-router-dom';
 import { deleteForms, fetchForms, getForms, Saveforms, getAll2FormsQuestions, SaveFormsSendResponse } from "../../../../libs/state-management/forms/forms-slice";
 const Forms = () => {
   const dispatch = useAppDispatch();
-  const forms = useAppSelector((state) => state.persistedReducer.forms);
+  // const forms = useAppSelector((state) => state.persistedReducer.forms);
+  const forms = useAppSelector((state) => state.forms);
+
   const navigate = useNavigate();
   const [formsData, setFormsData] = useState<any>([])
   const [alert, setAlert] = useState({

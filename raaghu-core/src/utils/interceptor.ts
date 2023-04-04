@@ -5,7 +5,7 @@ import {store} from '../../../raaghu-mfe/libs/raaghu-core'
   baseURL: "https://raaghu-react.azurewebsites.net"
 });
 
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use((config:any) => {
   const token = store.accessToken;
   if (token) {
     var Token = JSON.parse(token)
