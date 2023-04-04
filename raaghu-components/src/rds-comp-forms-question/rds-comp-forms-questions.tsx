@@ -1,5 +1,5 @@
 import moment from "moment";
-import { RdsIcon, RdsToggle, } from "raaghu-react-elements";
+import { RdsIcon, RdsToggle, } from "../rds-elements";
 import React, { useEffect, useState } from "react";
 import { RdsButton, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "raaghu-react-elements";
+import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
 export interface RdsCompLoginProps {
   onLogin: (email: string, password: string) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
+  turnSpinnerOff?:any
 }
 
 const RdsCompLogin: React.FC<RdsCompLoginProps> = (
@@ -73,11 +74,17 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   // 	console.log(isForgotPasswordClicked);
   // }, [isForgotPasswordClicked])
   const [checked, setChecked] = useState(false);
+  const [turnSpinnerOff, setTurnSpinnerOff] = useState(false);
+  
+  useEffect(()=>{
+    setTurnSpinnerOff(true);
+  },[props.turnSpinnerOff])
 
   return (
     <div>
       <div className="text-center">
       <h2 > <b> Login </b> </h2>
+      <button>turn spinner off</button>
 
         <div>
           <small className="pb-5 d-flex justify-content-center">
@@ -172,6 +179,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
             <RdsButton
               label="Login"
               colorVariant="primary"
+              turnSpinnerOff={turnSpinnerOff}
+              showLoadingSpinner={true}
               isDisabled={!isFormValid}
               block={true}
               tooltipTitle={""}

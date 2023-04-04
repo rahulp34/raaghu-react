@@ -23,6 +23,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       if(res!= undefined){
         localStorage.setItem("auth", JSON.stringify(true));
         const lang =localStorage.getItem("currentLang")||"en-GB"
+        setTurnSpinnerOff(true)
          navigate('/dashboard')
 
           configurationService(lang).then(async(res: any) => {
@@ -52,6 +53,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     }
    await sessionService(API_URL, grant_type, email, password, client_id, scope).then(async(res:any)=>{
     await hello(res)
+    localStorage.setItem('accessToken',JSON.stringify(res))
     })
     };
  // localStorage.setItem("auth", JSON.stringify(false));
@@ -60,6 +62,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     // props.onForgotPassword(isForgotPasswordClicked);
   };
   const { t } = useTranslation();
+  const [turnSpinnerOff, setTurnSpinnerOff]= useState(false);
   return (
     <div className="login-background">
       <div
@@ -78,6 +81,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 <RdsCompLogin
                   onLogin={loginHandler}
                   onForgotPassword={forgotPasswordHandler}
+                  turnSpinnerOff={turnSpinnerOff}
                 />
               </div>
             </div>
