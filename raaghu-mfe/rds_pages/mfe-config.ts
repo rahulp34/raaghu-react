@@ -83,10 +83,10 @@ export const MfeConfig = {
   "forms": {
     "url": "forms@http://localhost:8037/remoteEntry.js"
   },
-  "formsView": {
+  "forms-view": {
     "url": "formsView@http://localhost:8038/remoteEntry.js"
   },
-  "formsPreview": {
+  "forms-preview": {
     "url": "formsPreview@http://localhost:8039/remoteEntry.js"
   },
   "blogger": {

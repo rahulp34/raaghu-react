@@ -70,7 +70,6 @@ export interface LanguageProps {
 const Language = (props: LanguageProps) => {
   const [Data, setData] = useState<any>([{}]);
 
-
   const [dataEmit, setdataEmit] = useState<{
     check: boolean;
     displayName: any;
@@ -86,17 +85,11 @@ const Language = (props: LanguageProps) => {
   const [formValid, setformValid] = useState(true);
 
   useEffect(() => {
-
-    if (
-      dataEmit.displayName &&
-      dataEmit.displayName.trim() !== ""
-    ) {
+    if (dataEmit.displayName && dataEmit.displayName.trim() !== "") {
       setformValid(false);
     } else {
       setformValid(true)
     }
-
-
   }, [dataEmit.displayName]);
   const [name, setname] = useState<
     {
@@ -107,10 +100,6 @@ const Language = (props: LanguageProps) => {
   >([{ option: "", id: "" }]);
 
   const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
-
-
-
-
 
   // const [data,setdata] = useState(useAppSelector((state) => state.persistedReducer.language))
   const data = useAppSelector((state) => state.persistedReducer.language);
@@ -156,17 +145,13 @@ const Language = (props: LanguageProps) => {
                   badgeType={"rectangle"}
                   colorVariant={"success"}
                 ></RdsBadge>
-
               ) : (
-
                 <RdsBadge
                   label={"Inactive"}
                   size={"medium"}
                   badgeType={"rectangle"}
                   colorVariant={"danger"}
                 ></RdsBadge>
-
-
               )}
             </>
           ),
@@ -207,7 +192,8 @@ const Language = (props: LanguageProps) => {
     name: string;
     item: string;
     displayName: string;
-  }) => {
+  }) =>
+   {
     cultureModel.isEnabled = data.check;
     cultureModel.cultureName = data.name;
     cultureModel.displayName = data.displayName;
@@ -215,15 +201,25 @@ const Language = (props: LanguageProps) => {
     cultureModel.flagIcon = data.name;
 
     dispatch(postNewLanguage(cultureModel) as any).then((res: any) => {
-      if (res.type == "language/postNewLanguage/rejected"
-      ) { setAlert({ ...Alert, show: true, message: "your request has been denied", color: "danger" }) } else {
-        setAlert({ ...Alert, show: true, message: "Language added Successfully", color: "success" })
+      if (res.type == "language/postNewLanguage/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Language added Successfully",
+          color: "success",
+        });
       }
       dispatch(fetchLanguages() as any);
     });
 
     setname([]);
-
   };
 
   const model = new UpdateLanguageDto();
@@ -231,42 +227,44 @@ const Language = (props: LanguageProps) => {
   const onEditHandler = (data: {
     check: boolean;
     displayName: string;
-    flag: string,
-    id: string
+    flag: string;
+    id: string;
   }) => {
-
     model.displayName = data.displayName;
     model.isEnabled = data.check;
     model.flagIcon = data.flag;
-    const idd = data.id
+    const idd = data.id;
     dispatch(updateLanguage({ idd, model }) as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
-    setAlert({ ...Alert, show: true, message: "Languages edited Succesfully", color: "success" })
+    setAlert({
+      ...Alert,
+      show: true,
+      message: "Languages edited Succesfully",
+      color: "success",
+    });
   };
 
-
-
-
-  const onActionSelection = (
-    rowData: any, actionId: any
-  ) => {
-
-
-    setdataEmit({ ...dataEmit, displayName: rowData.name, check: rowData.enable, flag: rowData.flag, id: rowData.id })
-
-
-
+  const onActionSelection = (rowData: any, actionId: any) => {
+    setdataEmit({
+      ...dataEmit,
+      displayName: rowData.name,
+      check: rowData.enable,
+      flag: rowData.flag,
+      id: rowData.id,
+    });
 
     if (actionId == "defaa") {
       dispatch(defaultLanguage(rowData.id) as any).then((res: any) => {
         dispatch(fetchLanguages() as any);
       });
-      setAlert({ ...Alert, show: true, message: "Languages set as default Succesfully", color: "success" })
+      setAlert({
+        ...Alert,
+        show: true,
+        message: "Languages set as default Succesfully",
+        color: "success",
+      });
     }
-
-
-
   };
 
   const onNewLangHandler = () => {
@@ -277,10 +275,13 @@ const Language = (props: LanguageProps) => {
     dispatch(deleteLanguage(dataEmit.id) as any).then((res: any) => {
       dispatch(fetchLanguages() as any);
     });
-    setAlert({ ...Alert, show: true, message: "Languages deleted Succesfully", color: "success" })
+    setAlert({
+      ...Alert,
+      show: true,
+      message: "Languages deleted Succesfully",
+      color: "success",
+    });
   };
-
-
 
   const inputChangeHandler = (event: any) => {
     setdataEmit({ ...dataEmit, displayName: event.target.value });
@@ -288,7 +289,6 @@ const Language = (props: LanguageProps) => {
   const checkboxHandler = (event: any) => {
     setdataEmit({ ...dataEmit, check: event.target.checked });
   };
-
 
   useEffect(() => {
     // Set a 3-second timer to update the state
@@ -312,12 +312,11 @@ const Language = (props: LanguageProps) => {
                   colorVariant={Alert.color}
                 ></RdsAlert>
               )}
-
             </div>
             <div className="col-md-8 d-flex justify-content-end ">
               <RdsOffcanvas
                 offcanvasbutton={
-                  <div style={{ height: "35.98px" }}>
+                  <div className="my-1">
                     <RdsButton
                       type={"button"}
                       label="New Language"
@@ -339,7 +338,6 @@ const Language = (props: LanguageProps) => {
                 preventEscapeKey={false}
                 offId={"Language"}
                 canvasTitle={"New Language"}
-
               >
                 <RdsCompNewLanguage
                   onSaveHandler={onSaveHandler}
@@ -374,14 +372,11 @@ const Language = (props: LanguageProps) => {
               preventEscapeKey={false}
               offId={"languagesEdit"}
               canvasTitle={"Edit Language"}
-
             >
               <form>
                 <div className="row">
-
                   <div className="col-md-6 mb-3">
                     <div className="form-group mt-3">
-
                       <RdsInput
                         size="small"
                         label="Display Name"
@@ -429,8 +424,6 @@ const Language = (props: LanguageProps) => {
                   </div>
                 </div>
               </div>
-
-
             </RdsOffcanvas>
 
             <RdsCompAlertPopup

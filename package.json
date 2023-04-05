@@ -63,6 +63,6 @@
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
     "create:page": "node utils/create.js p",
-    "create:proxy": "node utils/create.js pr"
+    "create:proxy": "node utils/generateProxy.js proxy"
   }
 }

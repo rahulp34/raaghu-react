@@ -38,6 +38,7 @@ export interface ApplicationConnectTokenDTO {
   expires_in: any
 }
 export interface ApplicationConfigurationRequestOptions {
+  api_url:string,
   language:string
   includeLocalizationResources: boolean
 }
@@ -61,6 +62,7 @@ export interface ApplicationApiDescriptionModel {
 }
 
 export interface ApplicationApiDescriptionModelRequestDto {
+  api_url: string
  
   includeTypes: boolean
 }
@@ -190,6 +192,8 @@ export interface ApplicationApiDescriptionModel {
 }
 
 export interface ApplicationApiDescriptionModelRequestDto {
+  api_url: string
+
   includeTypes: boolean
 }
 
@@ -294,6 +298,7 @@ export interface ApplicationLocalizationDto {
 }
 
 export interface ApplicationLocalizationRequestDto {
+  api_url:string,
   cultureName: string,
   onlyDynamics: boolean
 }

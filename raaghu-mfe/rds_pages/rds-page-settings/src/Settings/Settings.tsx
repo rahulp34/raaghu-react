@@ -42,7 +42,7 @@ const navtabsItems = [
   { label: "Feature Management", tablink: "#nav-profile", id: 3 },
 ];
 const Settings = (props: RdsCompSettingsProps) => {
-  const data = useAppSelector((state) => state.persistedReducer.settings);
+  const data = useAppSelector((state) => state.settings);
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [emailSettings, setEmailSettings] = useState<any>({
     defaultFromDisplayName: "",

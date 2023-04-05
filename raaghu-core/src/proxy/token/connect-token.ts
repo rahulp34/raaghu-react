@@ -8,7 +8,7 @@ export const getToken = async function getAbpApplicationTokenService(
   options: ApplicationConnectTokenRequestOptions
 ): Promise<ApplicationConnectTokenDTO> {
  
-  return RestService<ApplicationConnectTokenDTO>('/connect/token', {
+  return RestService<ApplicationConnectTokenDTO>(options.api_url,'/connect/token', {
     params: {
       grant_type: options.grant_type,
       username: options.username,
@@ -30,48 +30,4 @@ export const getToken = async function getAbpApplicationTokenService(
   })
 }
 
-// const requestBody = {
-//     grant_type: 'password',
-//     username: 'your_username',
-//     password: 'your_password',
-//     client_id: 'your_client_id',
-//     scope: 'address email phone profile roles BookStore'
-//   };
 
-//   const config: AxiosRequestConfig = {
-//     method: 'POST',
-//     url: `${api_url}/connect/token`,
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded'
-//     },
-//     data: new URLSearchParams(requestBody).toString()
-//   };
-// const tokenResponse = await RestService<TokenResponse>(api_url, 'token', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     data: requestBody.toString(),
-//   });
-
-// const loginHandler = (API_Url:any , email: any, password: any, scope:any, grant_type:any, client_id:any, ) => {
-//     const requestBody = {
-//       grant_type: "password",
-//       username: email, // "admin",
-//       password: password, //"1q2w3E*"
-//       client_id: "raaghu",
-//       scope: "address email phone profile roles BookStore",
-//     };
-//     fetch("https://raaghu-react.azurewebsites.net/connect/token", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/x-www-form-urlencoded",
-//     },
-//     body: new URLSearchParams(requestBody).toString(),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       localStorage.setItem("access_token", JSON.stringify(data.access_token));
-
-//     });
-//   };
