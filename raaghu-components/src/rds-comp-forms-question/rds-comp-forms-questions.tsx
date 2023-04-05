@@ -1,7 +1,6 @@
 import moment from "moment";
-import { RdsIcon, RdsToggle, } from "../rds-elements";
 import React, { useEffect, useState } from "react";
-import { RdsButton, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
+import { RdsButton, RdsInput, RdsLabel, RdsSelectList, RdsTextArea, RdsIcon, RdsToggle, } from "../rds-elements";
 
 export interface RdsCompFormsQuestionProps {
     formQuestionsData?: any;

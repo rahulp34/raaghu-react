@@ -2,14 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
-import {
-	
-	RdsIcon,
-	RdsNotification,
-	RdsOffcanvas,
-	RdsAvatar,
-} from "raaghu-react-elements";
-import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
+import { RdsDropdownList, RdsIcon, RdsNotification, RdsOffcanvas } from "../rds-elements";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;

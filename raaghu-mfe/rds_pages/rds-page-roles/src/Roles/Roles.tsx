@@ -45,7 +45,7 @@ const Roles = (props: RdsPageRolesProps) => {
   });
   const enablecheckboxselection = true;
   const dispatch = useAppDispatch();
-  const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
+  const Data = useAppSelector((state) => state.roles) as any;
   const { t } = useTranslation();
   const [claimsTable, setClaimsTableData] = useState<any[]>([])
 
@@ -289,7 +289,6 @@ const Roles = (props: RdsPageRolesProps) => {
             <div className="footer-buttons my-2">
                       <div className="row">
                         <div className="col-md-12 d-flex">
-                          <div className="flex-grow-1"></div>
                           <div>
                             <RdsButton
                               label="Cancel"
