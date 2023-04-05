@@ -68,7 +68,7 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  
+
   const [languageData, setLanguageData] = useState([]);
   const [storeData, setStoreData] = useState({
     languages: store.languages,
@@ -83,7 +83,7 @@ const Main = (props: MainProps) => {
   // let accessToken: string | undefined | null =
   //   localStorage.getItem("access_token");
   let currentPath = window.location.pathname;
-  
+
   // useEffect(() => {
   //   console.log("hello ")
   //   if (localStorage.getItem('auth') && true ) {
@@ -114,18 +114,29 @@ const Main = (props: MainProps) => {
     },
   ];
 
+  const componentsList = [
+    {
+      label: "Light",
+      val: "light",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+    },
+  ];
+
   useEffect(() => {
     dispatch(fetchApplicationConfig() as any);
   }, [dispatch]);
 
   useEffect(() => {
-    if (checkingFirstTime&&
+    if (checkingFirstTime &&
       dataHost.configuration &&
       !dataHost.configuration.currentUser.isAuthenticated
     ) {
       navigate("/login");
     }
-    else{
+    else {
       setChecking(true);
       navigate(location.pathname)
     }
@@ -147,7 +158,7 @@ const Main = (props: MainProps) => {
   );
 
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")||"en-GB");
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang") || "en-GB");
 
   const onClickHandler = (e: any, val: any) => {
     setCurrentLanguage(val);
@@ -158,46 +169,46 @@ const Main = (props: MainProps) => {
 
   useEffect(() => {
     console.log("session useEffect from main 1")
-      configurationService(currentLanguage).then(async(res: any) => {
-      await console.log(" session this is res currentCulture",res.localization.currentCulture.cultureName)
-      await localizationService(currentLanguage).then(async (resp:any)=>{
-         console.log(" session this is res lang",resp)
-         i18n.changeLanguage(currentLanguage);
-         var data1 = {};
-         const translation = resp?.resources;
-         console.log("this is res tran",translation)
-         if (translation) {
-           Object.keys(translation).forEach((key) => {
-             data1 = { ...data1, ...translation[key].texts };
-           });
-           i18n.addResourceBundle(
-             currentLanguage,
-             "translation",
-             data1,
-             false,
-             true
-           );
-         }
-       })
- 
-        await  setStoreData({
-         ...storeData,
-         languages: res.localization,
-         auth: res.auth,
-       });
-       const tempdata = await res.localization.languages.map((item: any) => {
-           return {
-             label: item.displayName,
-             val: item.cultureName,
-             icon: item.flagIcon !== null ? item.flagIcon : "isNull",
-             iconWidth: "20px",
-             iconHeight: "20px",
-           };
-          
-         }
-        )
-        setLanguageData(tempdata)
-     });
+    configurationService(currentLanguage).then(async (res: any) => {
+      await console.log(" session this is res currentCulture", res.localization.currentCulture.cultureName)
+      await localizationService(currentLanguage).then(async (resp: any) => {
+        console.log(" session this is res lang", resp)
+        i18n.changeLanguage(currentLanguage);
+        var data1 = {};
+        const translation = resp?.resources;
+        console.log("this is res tran", translation)
+        if (translation) {
+          Object.keys(translation).forEach((key) => {
+            data1 = { ...data1, ...translation[key].texts };
+          });
+          i18n.addResourceBundle(
+            currentLanguage,
+            "translation",
+            data1,
+            false,
+            true
+          );
+        }
+      })
+
+      await setStoreData({
+        ...storeData,
+        languages: res.localization,
+        auth: res.auth,
+      });
+      const tempdata = await res.localization.languages.map((item: any) => {
+        return {
+          label: item.displayName,
+          val: item.cultureName,
+          icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        };
+
+      }
+      )
+      setLanguageData(tempdata)
+    });
     // Do something with the data
 
     //  dispatch(fetchConfiguration(currentLanguage) as any).then((res:any) => { dispatch(fetchLocalization(res.localization.currentCulture.cultureName) as any);  });
@@ -254,14 +265,14 @@ const Main = (props: MainProps) => {
   };
 
   const logout = () => {
-   // clearToken(); //
-     localStorage.clear();
+    // clearToken(); //
+    localStorage.clear();
     // setIsAuth(false);
     // console.log("session in logout ", isAuth)
-    store.accessToken=null
+    store.accessToken = null
     //  localStorage.setItem("auth", JSON.stringify(false));
     // localStorage.setItem("token",JSON.stringify(null))
-  
+
     navigate("/login");
   };
 
@@ -283,12 +294,12 @@ const Main = (props: MainProps) => {
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname!='/login' && (
+      {location.pathname != '/login' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageLable={storeData.languages?.currentCulture?.displayName ||"English (United Kingdom)"}
+                languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
                 //languageLable ="English"
                 languageIcon="gb"
                 languageItems={languageData}
