@@ -98,8 +98,8 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       props.selectedItems != undefined &&
       props.selectedItems(checkedCategoryList);
   }, [checkedCategoryList]);
-  
-  function clickedOnHarshit(e:any){
+
+  function clickedOnDropDown(e:any){
     var myDropdown = document.querySelector('.dropdown-raaghu') as any;
     var dropdownToggle = myDropdown.querySelector('.dropdown-raaghu-button');
     var dropdownMenu = document.getElementById(props.id as string);
@@ -117,11 +117,10 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   }
   
   return (
-      <div className="dropdown w-100 position-relative">
-        <span 
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-         // data-bs-offset={offset} 
+      <div className="dropdown-raaghu w-100 position-relative">
+        <span
+          className="dropdown-raaghu-button"
+          onClick={clickedOnDropDown}
         >
           <div className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}>
         {/* simple dropdown  */}

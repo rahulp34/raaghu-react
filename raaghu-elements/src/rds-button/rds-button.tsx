@@ -1,4 +1,4 @@
-import React, { Component, FC } from "react";
+import React, { Component, FC, useEffect, useState } from "react";
 import "./rds-button.scss";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
@@ -13,14 +13,22 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
   const icon1 = props.isRounded ? " rounded-pill " : "";
   const blockWidth = props.block === true ? "w-100" : "";
   const spinner = props.showLoadingSpinner ? " spinner" : "";
-  const classes = `${outline}${mode}${icon}${icon1} ${blockWidth} ${spinner} ${props.class}`;
+  const [classes, setClasses] =useState(`${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`);
   const btnType = props.type === "submit" ? "submit" : "button";
 
   const buttonClick = (evt: any) => {
-    if (!props.showLoadingSpinner && !props.isDisabled) {
-      props.onClick != undefined && props.onClick(evt);
+    if (props.showLoadingSpinner){
+      let tempClasses = classes;
+      setClasses(`${tempClasses} ${spinner}`)
     }
+    props.onClick != undefined && props.onClick(evt);
   };
+  console.log(classes)
+  useEffect(()=>{
+    let tempClasses = classes.replace('spinner', '');
+    console.log(classes)
+    setClasses(tempClasses);
+  },[props.turnSpinnerOff])
   const iconClasses =
     props.hasOwnProperty("icon") && props.hasOwnProperty("label")
       ? "me-2 d-inline-block"
