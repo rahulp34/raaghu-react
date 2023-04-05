@@ -2,6 +2,7 @@
 let path = require("path");
 let { execSync } = require("child_process");
 let fs = require("fs");
+// let generate = require("../raaghu-proxy/index.ts");
 
 // Check whether the arguments passed contain the mfe name and the page name
 if (
@@ -58,7 +59,9 @@ const newItem = {
   subTitle: "subtitle here",
 };
 
-const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
+const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
+
+const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
 
 // Get hold of the app folder path inside the mfe
 let appFolderPath = "";
@@ -632,6 +635,8 @@ if (fs.existsSync(appFolderPath)) {
         `npx openapi --input ${name} --output ${filePath} --client axios`,
         { cwd: appFolderPath, stdio: "inherit" }
       );
+
+      // generate(name, filePath, 'axios');
 
       console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
       console.log("\x1b[32m%s\x1b[0m", "Done..!");

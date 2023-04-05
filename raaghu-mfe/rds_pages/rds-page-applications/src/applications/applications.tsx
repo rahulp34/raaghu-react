@@ -22,7 +22,7 @@ import { fetchApplications, deleteApplications, saveApplications, getScopes, get
 
 const Applications = () => {
   const dispatch = useAppDispatch();
-  const application = useAppSelector((state) => state.persistedReducer.applications);
+  const application = useAppSelector((state) => state.applications);
   const [applicationId, setApplicationId] = useState("");
   const [permissionKeyName, setPermissionKeyName] = useState("")
   const [editApplicationData, setEditApplicationData] = useState<any>({});
@@ -209,19 +209,10 @@ const Applications = () => {
     clientUri: '',
     logoUri: '',
   })
-  const [applicationData, setApplicationData] = useState<any>(
-    {
-      id: '',
-      clientId: '',
-      displayName: '',
-      type: '',
-    });
-
+  const [applicationData, setApplicationData] = useState<any>([]);
   const [scopesListData, setScopesListData] = useState<any>([]);
   const [permissionListData, setPermissionListData] = useState<any>([]);
   const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
-
-
   const offCanvasHandler = () => { };
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 

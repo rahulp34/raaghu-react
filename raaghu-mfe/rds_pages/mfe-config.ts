@@ -81,13 +81,13 @@ export const MfeConfig = {
     "url": "fileManagement@http://localhost:8027/remoteEntry.js"
   },
   "forms": {
-    "url": "forms@http://localhost:8037/remoteEntry.js"
+    "url": "forms@https://abpstagereact.raaghu.io/rds-page-forms/remoteEntry.js"
   },
-  "formsView": {
-    "url": "formsView@http://localhost:8038/remoteEntry.js"
+  "forms-view": {
+    "url": "formsView@https://abpstagereact.raaghu.io/rds-page-forms-view/remoteEntry.js"
   },
-  "formsPreview": {
-    "url": "formsPreview@http://localhost:8039/remoteEntry.js"
+  "forms-preview": {
+    "url": "formsPreview@https://abpstagereact.raaghu.io/rds-page-forms-preview/remoteEntry.js"
   },
   "blogger": {
     "url": "blogger@http://localhost:8028/remoteEntry.js"

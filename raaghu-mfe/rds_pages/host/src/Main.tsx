@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useSelector } from 'react-redux';
 import "./App.scss";
 import {
   localizationService,
@@ -10,7 +9,7 @@ import {
   clearToken,
   grantedpolicies,
 } from "../../../libs/raaghu-core";
-import { useAppSelector} from '../../../libs/state-management/hooks'
+import { useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
@@ -67,7 +66,6 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const isAuth =localStorage.getItem("auth");
   const [languageData, setLanguageData] = useState([]);
   const [storeData, setStoreData] = useState({
     languages: store.languages,
@@ -75,34 +73,21 @@ const Main = (props: MainProps) => {
     localization: store.localization,
   });
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  // const [checkingFirstTime, setChecking] = useState(false);
-  // let accessToken: string | undefined | null =
-  //   localStorage.getItem("access_token");
-  let currentPath = window.location.pathname;
-  
-console.log("session store.language", storeData.languages,storeData.localization, isAuth, localStorage.getItem("auth"))
-  useEffect(() => {
-    console.log("hello ")
-    if (localStorage.getItem('auth') && true ) {
-      if (currentPath !== "/dashboard" && currentPath !=="/") {
-    // const loginCredentials = localStorage.getItem("persist:root");
-    // if (loginCredentials != null) {
-    //   let credentials = JSON.parse(loginCredentials);
-    //   let parsedCredentials = JSON.parse(credentials.login);
-    //   accessToken = parsedCredentials.accessToken;
-    // }
 
-    // // setIsAuth(true);
-    // if (localStorage.getItem("access_token")) {
-    //   setIsAuth(true);
-    //   if (currentPath !== "/dashobard" && currentPath != "/") {
-        navigate(currentPath);
+  let API_URL: string =
+    process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
+
+  let currentPath = window.location.pathname;
+
+  useEffect(() => {
+    console.log("hello ");
+    if (localStorage.getItem("auth") && true) {
+      if (currentPath !== "/dashboard" && currentPath !== "/") {
+       navigate(currentPath);
       } else {
         navigate("/dashboard");
       }
-    }
-    else {
+    } else {
       navigate("/login");
     }
   }, [localStorage.getItem("auth")]);
@@ -144,73 +129,74 @@ console.log("session store.language", storeData.languages,storeData.localization
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
-  let newobjectArray = objectArray
-    .map((item) => {
-      return item[1];
-    })
-    .reverse();
-  console.log("newobject :", newobjectArray);
+  let newobjectArray = objectArray.map((item) => {
+    return item[1];
+  });
   const concatenated = newobjectArray.reduce(
     (acc: any, arr: any) => acc.concat(arr),
     []
   );
 
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")||"en-GB");
+  const [currentLanguage, setCurrentLanguage] = useState(
+    localStorage.getItem("currentLang") || "en-GB"
+  );
 
   const onClickHandler = (e: any, val: any) => {
     setCurrentLanguage(val);
-    localStorage.setItem("currentLang", JSON.stringify(val))
+    localStorage.setItem("currentLang", JSON.stringify(val));
   };
   // const storeData.languages=storeData.languages
   //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
 
   useEffect(() => {
-    console.log("session useEffect from main 1")
-      configurationService(currentLanguage).then(async(res: any) => {
-      await console.log(" session this is res currentCulture",res.localization.currentCulture.cultureName)
-      await localizationService(currentLanguage).then(async (resp:any)=>{
-         console.log(" session this is res lang",resp)
-         i18n.changeLanguage(currentLanguage);
-         var data1 = {};
-         const translation = resp?.resources;
-         console.log("this is res tran",translation)
-         if (translation) {
-           Object.keys(translation).forEach((key) => {
-             data1 = { ...data1, ...translation[key].texts };
-           });
-           i18n.addResourceBundle(
-             currentLanguage,
-             "translation",
-             data1,
-             false,
-             true
-           );
-         }
-       })
- 
-        await  setStoreData({
-         ...storeData,
-         languages: res.localization,
-         auth: res.auth,
-       });
-       const tempdata = await res.localization.languages.map((item: any) => {
-           return {
-             label: item.displayName,
-             val: item.cultureName,
-             icon: item.flagIcon !== null ? item.flagIcon : "isNull",
-             iconWidth: "20px",
-             iconHeight: "20px",
-           };
-          
-         }
-        )
-        setLanguageData(tempdata)
-     });
+    console.log("session useEffect from main 1");
+    configurationService(API_URL, currentLanguage).then(async (res: any) => {
+      await console.log(
+        " session this is res currentCulture",
+        res.localization.currentCulture.cultureName
+      );
+      await localizationService(API_URL, currentLanguage).then(
+        async (resp: any) => {
+          console.log(" session this is res lang", resp);
+          i18n.changeLanguage(currentLanguage);
+          var data1 = {};
+          const translation = resp?.resources;
+          console.log("this is res tran", translation);
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              data1 = { ...data1, ...translation[key].texts };
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data1,
+              false,
+              true
+            );
+          }
+        }
+      );
+
+      await setStoreData({
+        ...storeData,
+        languages: res.localization,
+        auth: res.auth,
+      });
+      const tempdata = await res.localization.languages.map((item: any) => {
+        return {
+          label: item.displayName,
+          val: item.cultureName,
+          icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        };
+      });
+      setLanguageData(tempdata);
+    });
     // Do something with the data
 
     //  dispatch(fetchConfiguration(currentLanguage) as any).then((res:any) => { dispatch(fetchLocalization(res.localization.currentCulture.cultureName) as any);  });
-
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -263,14 +249,11 @@ console.log("session store.language", storeData.languages,storeData.localization
   };
 
   const logout = () => {
-   // clearToken(); //
-     localStorage.clear();
+    // clearToken(); //
+    localStorage.clear();
     // setIsAuth(false);
-    console.log("session in logout ", isAuth)
-    store.accessToken=null
-    //  localStorage.setItem("auth", JSON.stringify(false));
-    // localStorage.setItem("token",JSON.stringify(null))
-  
+    store.accessToken = null;
+   
     navigate("/login");
   };
 
@@ -292,17 +275,18 @@ console.log("session store.language", storeData.languages,storeData.localization
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {isAuth && (
+      {location.pathname != '/login' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageLable={storeData.languages?.currentCulture?.displayName ||"English (United Kingdom)"}
-                //languageLable ="English"
+                languageLable={
+                  storeData.languages?.currentCulture?.displayName ||
+                  "English (United Kingdom)"
+                }
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
-                brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"

@@ -166,7 +166,7 @@ const MainMenu = [
               "key": "3-6-0",
               "label": "Blogging",
               "icon": "blog",
-              "path": "/blog",
+              "path": "/blogger",
               "subTitle": "Blogs, Posts, Articles",
             },
           ],

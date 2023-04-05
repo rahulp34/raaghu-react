@@ -3,58 +3,78 @@ import {
   RdsButton,
   RdsOffcanvas,
   RdsNavtabs,
-  RdsModal,
   RdsProgressBar,
   RdsLabel,
+  RdsAlert,
+  RdsIcon,
 } from "../../../rds-elements";
 import {
+  RdsCompAlertPopup,
   RdsCompDatatable,
   RdsCompPollsOption,
   RdsCompPollsQuestion,
 } from "../../../rds-components";
+import './Polls.scss'
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import { GetPolls, SavePolls } from "../../../../libs/state-management/polls/polls-slice";
+import {
+  deletePolls,
+  fetchPollsData,
+  GetPolls,
+  resultData,
+  SavePolls,
+  UpdatePollsData,
+  Widgets,
+} from "../../../../libs/state-management/polls/polls-slice";
+
 const Polls = (props: any) => {
   const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.persistedReducer.polls);
-
-  const offCanvasHandler = () => {};
+  const polls = useAppSelector((state) => state.persistedReducer.polls);
   const navtabsItems = [
     { label: "Question", tablink: "#nav-question", id: 0 },
     { label: "Option", tablink: "#nav-option", id: 1 },
   ];
+
   const navtabsItemsEdit = [
-    { label: "Question", tablink: "#nav-question", id: 0 },
-    { label: "Option", tablink: "#nav-option", id: 1 },
+    { label: "Question", tablink: "#nav-questionEdit", id: 0 },
+    { label: "Option", tablink: "#nav-optionEdit", id: 1 },
   ];
+
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState<any>(0);
   const tableHeaders = [
     {
       displayName: "Question",
       key: "question",
       datatype: "text",
-      sortable: false,
+      sortable: true,
+      required: true,
+      dataLength: 30,
     },
     {
       displayName: "Name",
       key: "name",
       datatype: "text",
-      sortable: false,
+      sortable: true,
+      required: true,
+      dataLength: 30,
     },
     {
       displayName: "Code",
       key: "code",
       datatype: "text",
-      sortable: false,
+      sortable: true,
+      required: true,
+      dataLength: 30,
     },
     {
       displayName: "Vote Count",
       key: "votecount",
       datatype: "number",
-      sortable: false,
+      sortable: true,
+      required: true,
+      dataLength: 30,
     },
   ];
   const actions = [
@@ -62,60 +82,205 @@ const Polls = (props: any) => {
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
     { id: "result", displayName: "Show Result", offId: "show_result" },
     {
-      id: "Copy Widget Code",
-      displayName: "widgetcode",
+      id: "entity-widgetcode-off",
+      displayName: "Copy Widget Code",
       offId: "entity-widgetcode-off",
     },
   ];
-  const [pollsData, setpollsData] = useState<any[]>([
-    {
-      question: "test question",
-      name: "question 1",
-      code: "3et5rewj",
-      votecount: 5,
-    },
-    {
-      question: "test question 2",
-      name: "question 2",
-      code: "6ry8u434",
-      votecount: 2,
-    },
-  ]);
+  const [questionData, setQuestionData] = useState({
+    question: '',
+    code: '',
+    name: '',
+    widget:'',
+    time: false,
+    allowMultipleVote: false,
+    voteCount : false,
+    result:false,
+    startDate:'',
+    endDate:'',
+    resultEndDate:''
+  });
+  const [alert, setAlert] = useState({
+    showAlert: false,
+    message: "",
+    success: false,
+  });
+  const [alertOne, setAlertOne] = useState(false);
   const [activeNavTabId, setActiveNavTabId] = useState(0);
-  const [getCreateNewPollsOptionData, setGetCreateNewPollsOptionData] =
-    useState<any[]>([]);
-
+  const [getCreateNewPollsOptionData, setGetCreateNewPollsOptionData] = useState<any[]>([]);
+ const [pollsOptionsData, setPollsOptionsData]= useState([])
+ 
   function getPollsOptionData(data: any) {
-    let tempPollsOptionData = data.map((res: any) => {
-      const item = {
-        id: res.id,
-        text: res.text,
-        order: res.order,
-        voteCount: res.voteCount,
-      };
-      return item;
-    });
-    debugger;
-    setGetCreateNewPollsOptionData(tempPollsOptionData);
+    setPollsOptionsData(data);
+  } 
+  function getPollsEditOptionData(data: any) {
+    setEditPollsOptionData(data);
+  } 
+  
+  const [editQuestionData, setEditQuestionData] = useState({
+    question: '',
+    code: '',
+    name: '',
+    widget:'',
+    showHoursLeft: false,
+    allowMultipleVote: false,
+    voteCount : false,
+    result:false,
+    startDate:'',
+    endDate:'',
+    resultEndDate:'',
+    pollOptions : []
+  })
+  const[editPollsOptionData, setEditPollsOptionData] = useState([]);
+
+  useEffect(()=>{
+    
+    if(polls.fetchPollsEdit){
+      setEditQuestionData(polls.fetchPollsEdit);
+      let tempOptionsData = polls.fetchPollsEdit.pollOptions.map((res:any)=>{
+        const item = {
+          id:res.id,
+          text:res.text,
+          order:res.order,
+          voteCount:res.voteCount,
+          actions: (
+            <>
+              <div className="d-flex justify-content-center">
+                <div className="mx-3">
+                <RdsIcon
+                  width="17px"
+                  height="17px"
+                  name="pencil"
+                  stroke={true}
+                  colorVariant="primary"
+                  onClick={()=>{}}
+                ></RdsIcon>
+                 </div>
+                  <RdsIcon
+                  width="17px"
+                  height="17px"
+                  name="delete"
+                  stroke={true}
+                  colorVariant="danger"
+                  onClick={()=>{}}
+                ></RdsIcon>
+              </div>
+            </>
+          ),
+        }
+        return item;
+      })
+      setEditPollsOptionData(tempOptionsData)
+      // 
+    }
+  },[polls.fetchPollsEdit])
+
+  
+  const [pollsResultData, setPollsResultData]=useState<any>([]);
+  useEffect(()=>{
+    debugger
+    if(polls.resultData){
+      // polls.resultData.pollResultDetails.map((res:any)=>{
+        setPollsResultData(polls.resultData.pollResultDetails)
+    }
+  },[polls.resultData])
+  const[rowDataId, setRowDataId]= useState<any>()
+  function scopeSelection(rowData:any , actionId:any) {
+    setRowDataId(rowData.id);
+    dispatch(resultData(rowData.id)as any)
+    dispatch(fetchPollsData(rowData.id) as any)
+    if(actionId === 'entity-widgetcode-off'){
+      
+      dispatch(Widgets() as any).then((result: any) => {
+        dispatch(GetPolls() as any);
+        setAlertOne(true);
+      }); 
+    }
   }
-  const[allData , setallData] = useState<any>()
+  const editDataHandler = () => {
+    
+    let removeIdsFromPollsOptions= editPollsOptionData.map((res:any, index:number)=>{
+      let item:any;
+      if(res.id.length > 30){
+        item = {
+          id:res.id,
+          order:index+1,
+          text:res.text,
+          voteCount:res.voteCount
+        }
+      }
+      else{
+        item = {
+          order:index+1,
+          text:res.text,
+          voteCount:res.voteCount
+        }
+      }
+      return item;
+    })
+    debugger
+    const data = {...editQuestionData, pollOptions: removeIdsFromPollsOptions}
+    dispatch(UpdatePollsData({ id: rowDataId,body:data }) as any).then(
+      (res: any) => {
+        dispatch(GetPolls() as any);
+      }
+    );
+    setAlertOne(true);
+  };
+
+
   function OnSave() {
     console.log(getCreateNewPollsOptionData, "Polls Data here");
-    debugger
-    setallData({...getCreateNewPollQuestion , pollOptions:getCreateNewPollsOptionData})
- dispatch(SavePolls(allData) as any);
+    const allData = {
+      ...questionData, pollOptions: getCreateNewPollsOptionData,
+    };
+    dispatch(SavePolls(allData) as any);
+    setAlertOne(true);
+  }
 
-  }
-  const [showNextTab , setShowNextTab] = useState(false);
-  const [getCreateNewPollQuestion, setGetCreateNewPollQuestion] = useState({});
+  //const [getCreateNewPollQuestion, setGetCreateNewPollQuestion] = useState({});
+  
   function getPollsQuestion(data: any) {
-    debugger;
-    setGetCreateNewPollQuestion(data);
+    debugger
+    setQuestionData(data);
   }
+
+  function deleteHandler(data:any){
+    console.log(data);
+     dispatch(deletePolls(rowDataId) as any).then((result: any) => {
+      dispatch(GetPolls() as any);
+      setAlertOne(true);
+    });
+  }
+  
   useEffect(() => {
-    debugger;
     dispatch(GetPolls() as any);
   }, [dispatch]);
+  const [getDataPolls, setGetDataPolls] = useState<any>([]);
+
+  useEffect(() => {
+    let temp: any[] = [];
+    if (polls.GetPolls?.items) {
+      polls.GetPolls.items?.map((res: any) => {
+
+        const item = {
+          question: res.question,
+          code: res.code,
+          name: res.name,
+          votecount: res.voteCount,
+          id: res.id
+        };
+        temp.push(item);
+      });
+      setGetDataPolls(temp);
+    }
+  }, [polls.GetPolls]);
+
+
+  function getEditPollsQuestionData(data:any){ 
+    debugger
+    setEditQuestionData(data);
+  }
   return (
     <div>
       <div className="col-md-12 text-end pb-3 desktop-btn">
@@ -126,18 +291,27 @@ const Polls = (props: any) => {
           colorVariant="primary"
           showLoadingSpinner={false}
           databstoggle="offcanvas"
-          databstarget="#userOffcanvas"
+          databstarget="#pollsOffcanvas"
           icon={"plus"}
           iconWidth={"12px"}
           iconHeight={"12px"}
         ></RdsButton>
       </div>
+      <div className=" col-md-10">
+          {alert.showAlert && alertOne && (
+          <RdsAlert
+            alertmessage={alert.message}
+            colorVariant={alert.success ? "success" : "danger"}
+            style={{ marginBottom: "0" }}
+          ></RdsAlert>
+        )}
+          </div>
       <div className="col-lg-3 col-md-3 mb-2 d-flex justify-content-end">
         <RdsOffcanvas
-          backDrop={false}
+          backDrop={true}
           scrolling={true}
           preventEscapeKey={false}
-          offId="userOffcanvas"
+          offId="pollsOffcanvas"
           canvasTitle={"New"}
           placement="end"
         >
@@ -146,25 +320,24 @@ const Polls = (props: any) => {
             type={"tabs"}
             activeNavTabId={activeNavTabId}
             activeNavtabOrder={(activeNavTabId) => {
-              setActiveNavTabId(activeNavTabId),
-              setShowNextTab(false)
+              setActiveNavTabId(activeNavTabId);
             }}
             justified={false}
-            isNextPressed={showNextTab}
           >
-            {activeNavTabId == 0 && showNextTab === false &&(
+            {activeNavTabId == 0 && (
               <RdsCompPollsQuestion
                 widgetList={[
                   { option: "a", value: "a" },
                   { option: "b", value: "b" },
                 ]}
                 getPollsQuestion={(data: any) => getPollsQuestion(data)}
-                pollOptions ={getCreateNewPollsOptionData}
+                questionData={questionData}
               ></RdsCompPollsQuestion>
+              
             )}
-
-            {activeNavTabId == 1 && showNextTab === false &&(
+            {activeNavTabId == 1 && (
               <RdsCompPollsOption
+                optionsData={pollsOptionsData}
                 getPollsOptionData={getPollsOptionData}
               ></RdsCompPollsOption>
             )}
@@ -176,6 +349,7 @@ const Polls = (props: any) => {
                 colorVariant="primary"
                 block={true}
                 size="small"
+                databsdismiss="offcanvas"
                 tooltipTitle={""}
                 type="button"
                 isOutline={true}
@@ -187,6 +361,7 @@ const Polls = (props: any) => {
                 size="small"
                 colorVariant="primary"
                 block={true}
+                databsdismiss="offcanvas"
                 tooltipTitle={""}
                 type="button"
                 onClick={OnSave}
@@ -197,7 +372,6 @@ const Polls = (props: any) => {
 
         <RdsOffcanvas
           canvasTitle="Edit"
-          onclick={offCanvasHandler}
           placement="end"
           offId="entity-edit-off"
           offcanvaswidth={650}
@@ -212,20 +386,22 @@ const Polls = (props: any) => {
             activeNavtabOrder={(activeNavTabIdEdit) => {
               setActiveNavTabIdEdit(activeNavTabIdEdit);
             }}
-            justified={false}
-          >
+            justified={false}>
+
             {activeNavTabIdEdit == 0 && (
               <RdsCompPollsQuestion
                 widgetList={[
                   { option: "a", value: "a" },
                   { option: "b", value: "b" },
                 ]}
+                questionData={editQuestionData}
+                getPollsQuestion={getEditPollsQuestionData}
               ></RdsCompPollsQuestion>
             )}
 
             {activeNavTabIdEdit == 1 && (
               <>
-                <RdsCompPollsOption></RdsCompPollsOption>
+                <RdsCompPollsOption  optionsData={editPollsOptionData}  getPollsOptionData={getPollsEditOptionData}></RdsCompPollsOption>
               </>
             )}
           </RdsNavtabs>
@@ -246,6 +422,7 @@ const Polls = (props: any) => {
               isOutline={false}
               colorVariant="primary"
               databsdismiss="offcanvas"
+              onClick={editDataHandler}
             ></RdsButton>
           </div>
         </RdsOffcanvas>
@@ -254,17 +431,21 @@ const Polls = (props: any) => {
         <RdsCompDatatable
           tableHeaders={tableHeaders}
           actions={actions}
-          tableData={pollsData}
+          tableData={getDataPolls}
           pagination={true}
           recordsPerPage={10}
           recordsPerPageSelectListOption={true}
+          onActionSelection={scopeSelection}
         ></RdsCompDatatable>
+         <RdsCompAlertPopup
+            alertID="dynamic_delete_off"
+            onSuccess={deleteHandler}
+          />
       </div>
 
       <div>
         <RdsOffcanvas
           canvasTitle="Results"
-          onclick={offCanvasHandler}
           placement="end"
           offId="show_result"
           offcanvaswidth={700}
@@ -272,20 +453,39 @@ const Polls = (props: any) => {
           scrolling={false}
           preventEscapeKey={false}
         >
-          {" "}
-          <div className="row mx-4">
-            <RdsLabel label="Result-1" size="16px"></RdsLabel>
+          {pollsResultData.length && pollsResultData.map((e:any)=>(<>
+            <div className="row mx-4">
+            <RdsLabel  label={e.text} size="16px"></RdsLabel>
           </div>
-          <div className="row p-4">
+          {/* <div className="row p-4">
             <RdsProgressBar
               colorVariant="primary"
               displaypercentage
               height={15}
-              progressWidth={38}
+              progressWidth={e.voteCount}
               role="single"
               striped="default"
             />
-          </div>
+          </div> */}
+          <div className="input-group mb-3">
+            <div className="form-control border-0">
+            <RdsProgressBar
+              colorVariant="primary"
+              displaypercentage
+              height={15}
+              progressWidth={e.voteCount}
+              role="single"
+              striped="default"
+            /> 
+            </div>
+          <div className="input-group-prepend">
+    <span className="input-group-text border-0 bg-transparent" id="basic-addon1">
+    <RdsLabel  label={`${e.voteCount}%`} size="16px"></RdsLabel>
+    </span>
+  </div>
+</div>
+          </>))}
+         
           <div className="footer-buttons justify-content-end bottom-0 pt-0">
             <RdsButton
               class="me-2"

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../../libs/state-managemen
 // import { RdsButton, RdsLabel, RdsOffcanvas, RdsSelectList, RdsTextArea } from "../rds-elements";
 import { clearCache, createNewBlog, deleteBlog, getAllBlogs, getBlogById, updateBlog } from "../../../../libs/state-management/blogger/blogger-slice";
 import { RdsCompAlertPopup, RdsCompDatatable } from "../../../rds-components";
+import { format } from "date-fns";
 
 const Blogger = () => {
 
@@ -43,22 +44,14 @@ const Blogger = () => {
   // Get all alogs API
   useEffect(() => {
     if (blogs.allblogs.items) {
-      const allData = blogs.allblogs.items.map((blog: any) => {
-        const creationTimeFormat = new Date(blog.creationTime);
-        const gethours = parseInt(creationTimeFormat.getHours().toString());
-        const timeFormat = gethours > 12 ? (gethours - 12).toString() + ':' + creationTimeFormat.getMinutes() + ' PM' :
-          gethours.toString() + ':' + creationTimeFormat.getMinutes() + ' AM';
-        const getCreationTime = creationTimeFormat.getDate().toString() + '/' + creationTimeFormat.getUTCMonth().toString() + '/' +
-          creationTimeFormat.getFullYear().toString() + ', ' + timeFormat;
-        return {
+      const allData = blogs.allblogs.items.map((blog: any) => ({
           id: blog.id,
           name: blog.name,
           shortName: blog.shortName,
           description: blog.description,
-          creationTime: getCreationTime,
+        creationTime: format(new Date(blog.creationTime), 'yyyy/dd/MM, HH:MM a'),
           concurrencyStamp: blog.concurrencyStamp.toString()
-        }
-      });
+      }));
       setTableData(allData);
     }
   }, [blogs.allblogs])
@@ -175,7 +168,7 @@ const Blogger = () => {
             recordsPerPage={5} noDataTitle={'No Blogs Available'}></RdsCompDatatable>
         </div>
       </div>
-      <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
+      <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} deleteButtonColor="danger" cancelButtonColor="danger" />
       <RdsCompAlertPopup alertID="clearCache" onSuccess={clearCacheFn} deleteButtonLabel={'Clear Cache'}
         alertConfirmation={'Are you sure to Clear Cache'} messageAlert={'Cache will be cleared'} iconUrl={''} />
     </>
