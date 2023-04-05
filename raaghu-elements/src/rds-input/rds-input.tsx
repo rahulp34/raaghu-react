@@ -26,7 +26,7 @@ export interface RdsInputProps {
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
-  onKeyDown?:React.KeyboardEventHandler<HTMLInputElement>
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>
 
   customClasses?: string;
   formName?: string;
@@ -92,7 +92,7 @@ const RdsInput = (props: RdsInputProps) => {
       {!props.tooltipTitle && (
         <div className="input-group">
           <input
-            type={props.inputType}
+            type={props.inputType == 'password' ? showPassword ? 'text' : 'password' : props.inputType}
             className={inputClasses}
             id={props.id}
             placeholder={props.placeholder}
@@ -106,67 +106,72 @@ const RdsInput = (props: RdsInputProps) => {
             disabled={props.isDisabled}
             readOnly={props.readonly}
           />
-
-
-
-<RdsIcon
-              name={
-                showPassword
-                  ? "eye"
-                  : "eye_slash"
-              }
-              height="20px"
-              width="20px"
+          {props.inputType === "password" && (
+            <RdsIcon
+              name={showPassword ? "eye" : "eye_slash"}
+              classes="password-toggle"
+              height="16px"
+              width="16px"
               fill={false}
               stroke={true}
               onClick={() => setShowPassword(!showPassword)}
             />
-
-
-
-          
+          )}
         </div>
       )}
 
-				{props.tooltipTitle && (
-					<Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
-						<input
-							type={props.inputType}
-							className={inputClasses}
-							id={props.id}
-							placeholder={props.placeholder}
-							name={props.name}
-							form={props.formName}
-							required={props.required}
-							onFocus={props.onFocus}
-							onBlur={handleBlur}
-							onKeyDown={props.onKeyDown}
-							value={value}
-							onChange={props.onChange}
-							disabled={props.isDisabled}
-							readOnly={props.readonly}
-						></input>
-					</Tooltip>
-				)}
-
-        {props.labelPositon == "bottom" && (
-          <>
-            {props.label && (
-              <>
-                <label htmlFor={props.id} className="form-label">
-                </label>
-                {props.required && (
-                  <span className="text-danger ms-1">*</span>
-                )}
-              </>
+      {props.tooltipTitle && (
+        <Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
+          <div className="input-group">
+            <input
+              type={props.inputType == 'password' ? showPassword ? 'text' : 'password' : props.inputType}
+              className={inputClasses}
+              id={props.id}
+              placeholder={props.placeholder}
+              name={props.name}
+              form={props.formName}
+              required={props.required}
+              onFocus={props.onFocus}
+              onBlur={handleBlur}
+              onKeyDown={props.onKeyDown}
+              value={value}
+              onChange={props.onChange}
+              disabled={props.isDisabled}
+              readOnly={props.readonly}
+            ></input>
+            {props.inputType === "password" && (
+              <RdsIcon
+                name={showPassword ? "eye" : "eye_slash"}
+                classes="password-toggle"
+                height="20px"
+                width="20px"
+                fill={false}
+                stroke={true}
+                onClick={() => setShowPassword(!showPassword)}
+              />
             )}
-          </>
-        )}
-        {props.required && <div className="form-control-feedback">
-           {props.required && !props.value && haserror &&  (<span className="text-danger">{props.label} is required </span>)}
-        </div>}
-      </>
-    );
-  }
+          </div>
+        </Tooltip>
+      )}
+
+      {props.labelPositon == "bottom" && (
+        <>
+          {props.label && (
+            <>
+              <label htmlFor={props.id} className="form-label">
+              </label>
+              {props.required && (
+                <span className="text-danger ms-1">*</span>
+              )}
+            </>
+          )}
+        </>
+      )}
+      {props.required && <div className="form-control-feedback">
+        {props.required && !props.value && haserror && (<span className="text-danger">{props.label} is required </span>)}
+      </div>}
+    </>
+  );
+}
 
 export default RdsInput;
