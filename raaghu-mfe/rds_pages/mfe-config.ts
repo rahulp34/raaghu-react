@@ -83,10 +83,10 @@ export const MfeConfig = {
   "forms": {
     "url": "forms@https://abpstagereact.raaghu.io/rds-page-forms/remoteEntry.js"
   },
-  "forms-view": {
+  "formsView": {
     "url": "formsView@https://abpstagereact.raaghu.io/rds-page-forms-view/remoteEntry.js"
   },
-  "forms-preview": {
+  "formsPreview": {
     "url": "formsPreview@https://abpstagereact.raaghu.io/rds-page-forms-preview/remoteEntry.js"
   },
   "blogger": {
@@ -105,7 +105,7 @@ export const MfeConfig = {
     "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
   },
   "paymentPlans": {
-    "url": "paymentPlans@http://localhost:8031/remoteEntry.js"
+    "url": "paymentPlans@http://localhost:8131/remoteEntry.js"
   },
   "blogs": {
     "url": "blogs@http://localhost:8032/remoteEntry.js"
@@ -130,5 +130,8 @@ export const MfeConfig = {
   },
   "rdsComponents": {
     "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
+  },
+  "menus": {
+    "url": "menus@http://localhost:8090/remoteEntry.js"
   }
 }

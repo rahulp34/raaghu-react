@@ -53,6 +53,7 @@ const PersonalDataCompo = React.lazy(() => import("Elements/Elements"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 const RdsComponentsCompo = React.lazy(() => import("RdsComponents/RdsComponents"));
 const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
+const MenusCompo = React.lazy(() => import("Menus/Menus"));
 
 export {
   DashboardCompo,
@@ -94,5 +95,6 @@ export {
   FormsPreviewCompo,
   CommentsCompo,
   TagsCompo,
-  PaymentRequestsCompo
+  PaymentRequestsCompo,
+  MenusCompo,
 };

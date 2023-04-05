@@ -73,8 +73,8 @@ polls:pollsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store:any = configureStore({
-  reducer:  persistedReducer,
+export const store = configureStore({
+  reducer: { persistedReducer },
 });
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
