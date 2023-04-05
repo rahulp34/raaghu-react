@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import './fileManagement.scss';
+import "./fileManagement.scss";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
 import RdsCompDirectoryList, {
   DirectoryItem,
 } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
 import RdsCompFileUploader from "../../../../../raaghu-components/src/rds-comp-fileUploader/rds-comp-fileUploader";
-import {
-  RdsCompAlertPopup,
-} from "../../../rds-components";
+import { RdsCompAlertPopup } from "../../../rds-components";
 import {
   RdsAlert,
   RdsBreadcrumb,
   RdsButton,
+  RdsIcon,
+  RdsIconLabel,
   RdsInput,
+  RdsLabel,
   RdsOffcanvas,
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
@@ -23,6 +24,7 @@ import {
   fetchEditDirectory,
   fetchSubDirectory,
   infoFileDescriptor,
+  moveFileDescriptor,
   saveDirectoryDescriptor,
   updateDirectoryDescriptor,
   uploadFileDescriptor,
@@ -30,6 +32,7 @@ import {
 } from "../../../../libs/public.api";
 import { useAppSelector } from "../../../../libs/state-management/hooks";
 import { size } from "lodash-es";
+import RdsCompFileMover from "../../../../../raaghu-components/src/rds-comp-file-mover";
 
 const FileManagement = () => {
   const { t } = useTranslation();
@@ -40,10 +43,13 @@ const FileManagement = () => {
   const [name, setName] = useState("");
   const [data, setData] = useState([]);
   const [id, setId] = useState("");
-  const[uploadFile,setuploadFile]= useState()
-
-  const[RenameFolder,setRenameFolder]=useState<any>({})
-
+  const [uploadFile, setuploadFile] = useState();
+  const [totalFiles, setTotaFiles] = useState<any[]>([]);
+  const [uploadFiles, setUploadFiles] = useState<any>([]);
+  const[moveNewFolder,setMoveNewFolder]= useState<any>({})
+  const [RenameFolder, setRenameFolder] = useState<any>({});
+  const[moveFile,setMoveFile]= useState<any>({})
+  const [folderId, setFolderId] = useState<string>("");
   const [directories, setDirectories] = useState<any[]>([
     {
       name: "All",
@@ -54,24 +60,6 @@ const FileManagement = () => {
       children: [],
     },
   ]);
-
- 
-
-  const tableHeaders = [
-    {
-      displayName: "Name",
-      key: "name",
-      datatype: "avatarTitleInfo",
-      sortable: true,
-    },
-    {
-      displayName: "Size",
-      key: "size",
-      datatype: "text",
-      sortable: true,
-    },
-  ];
-
   const [tableData, setTableData] = useState<any[]>([
     {
       id: 1,
@@ -89,61 +77,6 @@ const FileManagement = () => {
       size: "1MB",
     },
   ]);
-
-  useEffect(() => {
-    if (file.directoryDescriptor?.items.length) {
-      const tempdata = file.directoryDescriptor.items.map((item: any) => {
-        return {
-          id: item.id,
-          name: item.name,
-          isDirectory: item.isDirectory,
-          size: item.size,
-        };
-      });
-      setTableData(tempdata);
-      setData(tempdata)
-    }
-  }, [file.directoryDescriptor]);
-
-
-  const actions = [
-    { id: "rename", displayName: "Rename", offId: "Rename" },
-    { id: "delete", displayName: "Delete", modalId: "DeleteFile" },
-    { id: "move", displayName: "Move", offId: "Move" },
-  ];
-
-  const onActionHandler=(rowData:any , actionId: any)=>{
-   if(actionId="Rename "){
-    setFolderId(rowData.id)
-    console.log(rowData)
-    setRenameFolder(rowData.name);
-    setName(rowData.name); 
-   }
-  } 
-  const UpdateFolderName = () => {
-    let dto ={body:{name:name},
-              id: folderId}
-    dispatch(updateDirectoryDescriptor((dto))as any).then((res:any)=>{
-      dispatch(fetchSubDirectory(undefined) as any);
-      dispatch(fetchDirectoryDescriptor(undefined) as any);
-    })
-    setRenameFolder("")
-    setDirectories([
-      {
-        name: "All",
-        path: "/all",
-        parentId: null,
-        id: null,
-        hasChildren: false,
-        children: [],
-      },
-    ])
-  };
-  useEffect(()=>{
-    if(file.editDirectory){
-      setRenameFolder(file.editDirectory)
-    }
-  },[file.editDirectory])
 
   const [breadItems, setbreadCrumItems] = useState<any[]>([
     {
@@ -185,6 +118,114 @@ const FileManagement = () => {
       iconColor: "primary",
     },
   ]);
+
+  const tableHeaders = [
+    {
+      displayName: "Name",
+      key: "name",
+      datatype: "avatarTitleInfo",
+      sortable: true,
+    },
+    {
+      displayName: "Size",
+      key: "size",
+      datatype: "text",
+      sortable: true,
+    },
+  ];
+
+  useEffect(() => {
+    if (file.directoryDescriptor?.items.length) {
+      const tempdata = file.directoryDescriptor.items.map((item: any) => {
+        return {
+          id: item.id,
+          name: item.name,
+          isDirectory: item.isDirectory,
+          size: item.size,
+        };
+      });
+      setTableData(tempdata);
+      setData(tempdata);
+    }
+  }, [file.directoryDescriptor]);
+
+  const actions = [
+    { id: "rename", displayName: "Rename", offId: "Rename" },
+    { id: "delete", displayName: "Delete", modalId: "DeleteFile" },
+    { id: "move", displayName: "Move", offId: "Move" },
+  ];
+
+  const onActionHandler = (rowData: any, actionId: any) => {
+    if ((actionId = "Rename ")) {
+      setFolderId(rowData.id);
+      setRenameFolder(rowData.name);
+      setName(rowData.name);
+    }
+
+    if((actionId="Move")){
+      setFolderId(rowData.id);
+      console.log(rowData);
+      setMoveFile(rowData.id)
+
+
+    }
+  };
+
+
+  const UpdateFolderName = () => {
+    let dto = { body: { name: name }, id: folderId };
+    dispatch(updateDirectoryDescriptor(dto) as any).then((res: any) => {
+      dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    });
+    setRenameFolder("");
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ]);
+  };
+  useEffect(() => {
+    if (file.editDirectory) {
+      setRenameFolder(file.editDirectory);
+    }
+  }, [file.editDirectory]);
+
+  const movefolder=()=>{   
+    debugger   
+      const files={
+        body:{
+          id:folderId,
+          newDirectoryId:moveNewFolder,
+        }
+      }
+      dispatch(moveFileDescriptor(files) as any).then((res:any)=>{
+        dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+      setMoveNewFolder("");
+      setDirectories([
+        {
+          name: "All",
+          path: "/all",
+          parentId: null,
+          id: null,
+          hasChildren: false,
+          children: [],
+        },
+      ]);
+    })
+  }
+  useEffect(() => {
+    if (file.moveDirectory) {
+      setMoveFile(file.moveDirectory);
+    }
+  }, [file.moveDirectory]);
+
 
   function recursiveFunctionAddData(directories: any, data: any) {
     return directories.map((el: any) => {
@@ -236,7 +277,6 @@ const FileManagement = () => {
     // directories.
   }
 
-  const [folderId, setFolderId] = useState<string>("");
   function setPathValue(event: any) {
     let id = undefined;
     if (event && event.id) {
@@ -251,6 +291,19 @@ const FileManagement = () => {
     // dispatch(fetchSubDirectory(event.name) as any);
   }
 
+  function setFolderPath(event:any){
+    let id= undefined;
+    if(event & event.id){
+      id=event.id;
+    }
+    else{
+      id=undefined
+    }
+    setMoveFile(id);
+      dispatch(fetchDirectoryDescriptor(id) as any);
+    dispatch(fetchSubDirectory(id) as any);
+
+  }
 
   const addDataHandler = () => {
     dTo.name = name;
@@ -269,61 +322,72 @@ const FileManagement = () => {
         hasChildren: false,
         children: [],
       },
-    ])
-    
+    ]);
   };
 
-  const onDeleteFile=()=>{
-    dispatch(deleteDirectoryDescriptor(folderId )as any).then((res:any)=>{
+  const onDeleteFile = () => {
+    dispatch(deleteDirectoryDescriptor(folderId) as any).then((res: any) => {
       setDirectories([
-    {
-      name: "All",
-      path: "/all",
-      parentId: null,
-      id: null,
-      hasChildren: false,
-      children: [],
-    },
-  ])
+        {
+          name: "All",
+          path: "/all",
+          parentId: null,
+          id: null,
+          hasChildren: false,
+          children: [],
+        },
+      ]);
       dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
-    })
-  }
-  const SetSearchName=(e:any)=>{
-    let temparr=data.filter((data:any)=>
-    data.name.toLowerCase().includes(e.target.value.toLowerCase()))
-    setTableData(temparr) 
-  }
+    });
+  };
+  const SetSearchName = (e: any) => {
+    let temparr = data.filter((data: any) =>
+      data.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setTableData(temparr);
+  };
 
-  function setValue(value: string) { 
+  function setValue(value: string) {
     throw new Error("Function not implemented.");
   }
-  const UploadedFile=()=>{
-    dispatch (uploadFileDescriptor(id) as any).then((res:any)=>{
-      // dispatch(fetchDirectoryDescriptor(id) as any);
-    // dispatch(fetchSubDirectory(id) as any);
-      })
-  }
-  const[uploadFiles , setUploadFiles]= useState<any>([]);
- function preUploadFileInfo(_data:any){
-  debugger
-  console.log(uploadFiles);
-  // _data?.forEach((res:any) => {
-    const data:any = {
-      directoryId : null,
-     fileName : _data.fileName,
-     size : _data.size
-    }
-    setUploadFiles([data]);
+  const UploadedFile = () => {
+    debugger;
+    totalFiles.map((e: any) => {
+      const body = {
+        directoryId: folderId,
+        extraProperties: undefined,
+        name: e.name,
+        file: { data: {}, fileName: e.name },
+      };
+      dispatch(uploadFileDescriptor(body) as any);
+      dispatch(fetchSubDirectory(folderId) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    });
+  };
 
-  // })
-  
-    
+ 
+
+  function preUploadFileInfo(_data: any) {
+    let tempUploadfiles: any[] = [];
+    let tempfiles: any[] = [];
+
+    [..._data.files].map((res: any) => {
+      const data: any = {
+        directoryId: folderId,
+        fileName: res.name,
+        size: res.size,
+      };
+      tempUploadfiles.push(data);
+      tempfiles.push(res);
+    });
+    setTotaFiles(totalFiles.concat(tempfiles));
+    setUploadFiles(uploadFiles.concat(tempUploadfiles));
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(infoFileDescriptor(uploadFiles) as any);
-  },[uploadFiles])
+  }, [uploadFiles]);
 
   return (
     <div className="New Folder">
@@ -419,10 +483,13 @@ const FileManagement = () => {
             </div>
           }
         >
-          <RdsCompFileUploader onClick={UploadedFile} preFileInfo={(data:any)=>preUploadFileInfo(data)}></RdsCompFileUploader>
+          <RdsCompFileUploader
+            onClick={UploadedFile}
+            preFileInfo={(data: any) => preUploadFileInfo(data)}
+          ></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
+      <div className="card pt-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
         <div className="row">
           <div className="col-md-3 pt-3">
             <RdsCompDirectoryList
@@ -445,9 +512,10 @@ const FileManagement = () => {
               <div className="col md-4 d-flex "></div>
 
               <div className="col md-4 d-flex justify-content-end">
-                <RdsSearch placeholder={"Search"} size={"5px"}
-                onChange={SetSearchName}
-                
+                <RdsSearch
+                  placeholder={"Search"}
+                  size={"5px"}
+                  onChange={SetSearchName}
                 ></RdsSearch>
               </div>
             </div>
@@ -508,15 +576,65 @@ const FileManagement = () => {
                   </div>
                 </div>
               </RdsOffcanvas>
-              <RdsCompAlertPopup alertID="DeleteFile" onSuccess={onDeleteFile} /> 
+              <RdsOffcanvas
+                canvasTitle={"MOVE"}
+                placement="end"
+                offcanvaswidth={650}
+                backDrop={false}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"Move"}
+              >
+                <div>
+                  <div className="pt-3">
+                    <RdsLabel label="Move To Under" size="15px"></RdsLabel>
+                  </div>
+                  <div className="mt-3 p-2 border">
+                    <RdsIconLabel
+                      icon="home"
+                      iconSize="small"
+                      label="All FIles"
+                      size="small"
+                      fill={false}
+                    />
+                  </div>
+                  <div className="mt-3 pb-1 border-bottom">
+                    
+                      <RdsLabel label="Folder Name" size="14px">
+                      <RdsIcon
+                        name={"up"}
+                        height="12px"
+                        width="12px"
+                        stroke={true}
+                      />
+                    
+                    
+                      <RdsIcon
+                        name={"down"}
+                        height="12px"
+                        width="12px"
+                        stroke={true}
+                      />
+                      </RdsLabel>
+                  </div>
+                  <RdsCompFileMover
+                    items={directories}
+                    path={setPathValue}
+                    selectedItemId={directories[0].id} 
+                    onClick={movefolder}               
+                    ></RdsCompFileMover>
+                </div>
+             
+              </RdsOffcanvas>
+              <RdsCompAlertPopup
+                alertID="DeleteFile"
+                onSuccess={onDeleteFile}
+              />
             </div>
-            
           </div>
         </div>
       </div>
-       
     </div>
-    
   );
 };
 

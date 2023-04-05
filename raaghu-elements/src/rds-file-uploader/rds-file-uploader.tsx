@@ -44,22 +44,15 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
 const [fileUploaderData , setFileUploaderData] = useState<any>([]);
   const onchangehandler = (event: any) => {
     setFileSize([...FileSize, event.target.files[0].size]);
-    
     let files = event.target.files;
-    setfileName([...fileName, event.target.files[0].name]);
-    debugger
-    console.log("sdsadadad",event.target.files)
-      props.getFileUploaderInfo({...fileUploaderData ,size : event.target.files[0].size, fileName : event.target.files[0].name})
 
+    setfileName([...fileName, event.target.files[0].name]);
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
-    
-
     reader.onload = (event) => {
-      
       setFileArray([...FileArray, event.target?.result]);
     };
-
+    props.getFileUploaderInfo({...fileUploaderData, files:event.target.files})
     if (props.multiple) {
       event.target.value = null;
     }
@@ -81,7 +74,7 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
             <div>
               <form>
               <input
-                multiple
+                
                 className={` input text-${props.colorVariant} form-control  ${size} `}
                 type="file"
                 name="file"
@@ -144,6 +137,7 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
                   name="file"
                   accept={props.extensions}
                   onChange={onchangehandler}
+                  multiple
                 />
               </div>
             </div>
