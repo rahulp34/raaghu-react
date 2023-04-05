@@ -108,7 +108,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-
+    const componentsList = [
+        {
+            label: "Light",
+            val: "light",
+        },
+        {
+            label: "Dark",
+            val: "dark",
+        },
+    ];
   // useEffect(() => {
   //   dispatch(fetchApplicationConfig() as any);
   // }, [dispatch]);
