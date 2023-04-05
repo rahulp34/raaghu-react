@@ -6,7 +6,9 @@ let fs = require("fs");
 // Check whether the arguments passed contain the mfe name and the page name
 if (
   (process.argv[2] === "p" && process.argv.length !== 5) ||
-  ((process.argv[2] === "e" || process.argv[2] === "c" || process.argv[2] === "pr") &&
+  ((process.argv[2] === "e" ||
+    process.argv[2] === "c" ||
+    process.argv[2] === "pr") &&
     process.argv.length !== 4)
 ) {
   console.log("\x1b[31m%s\x1b[0m", "Invalid command..!");
@@ -76,7 +78,7 @@ function writeFileErrorHandler(err) {
 
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
-  if (eTc == "e" && eTc == "c") {
+  if (eTc == "e" || eTc == "c") {
     let filePath = path.join(appFolderPath, "/src", name, name + ".tsx");
     if (fs.existsSync(filePath)) {
       console.log(
@@ -109,19 +111,39 @@ if (fs.existsSync(appFolderPath)) {
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   } else if (eTc == "p") {
-
-    let templateWebpackfile = path.join(__dirname, "../page-template/template/webpack.config.js");
-    let webpackConfig = fs.readFileSync(templateWebpackfile, 'utf-8');
-    let updatedWebpackConfig = webpackConfig.replace(/template_port_number/g, port);
-    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_page_name}/g, camelCaseName);
-    updatedWebpackConfig = updatedWebpackConfig.replace(/{template_Page_Name_expose}/g, pageName);
+    let templateWebpackfile = path.join(
+      __dirname,
+      "../page-template/template/webpack.config.js"
+    );
+    let webpackConfig = fs.readFileSync(templateWebpackfile, "utf-8");
+    let updatedWebpackConfig = webpackConfig.replace(
+      /template_port_number/g,
+      port
+    );
+    updatedWebpackConfig = updatedWebpackConfig.replace(
+      /{template_page_name}/g,
+      camelCaseName
+    );
+    updatedWebpackConfig = updatedWebpackConfig.replace(
+      /{template_Page_Name_expose}/g,
+      pageName
+    );
     fs.writeFileSync(templateWebpackfile, updatedWebpackConfig);
 
     // updating import statetement and compontnt in App.tsx file in template file
-    let templateAppFilePAth = path.join(__dirname, "../page-template/template/src/App.tsx");
-    let templateAppFileContent = fs.readFileSync(templateAppFilePAth,'utf-8');
-    let upodatedtemplateAppfileContent = templateAppFileContent.replace(/"{import_statement_for_Page_template}"/g, `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`)
-    upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(/{"page_template_component_in_app"}/g, `<${pageName}></${pageName}>`);
+    let templateAppFilePAth = path.join(
+      __dirname,
+      "../page-template/template/src/App.tsx"
+    );
+    let templateAppFileContent = fs.readFileSync(templateAppFilePAth, "utf-8");
+    let upodatedtemplateAppfileContent = templateAppFileContent.replace(
+      /"{import_statement_for_Page_template}"/g,
+      `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`
+    );
+    upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(
+      /{"page_template_component_in_app"}/g,
+      `<${pageName}></${pageName}>`
+    );
     console.log(upodatedtemplateAppfileContent);
     fs.writeFileSync(templateAppFilePAth, upodatedtemplateAppfileContent);
 
@@ -303,38 +325,61 @@ if (fs.existsSync(appFolderPath)) {
 
     // Updating in remote.d.ts file
 
-    fs.readFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', 'utf8', (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      // Add the new module declaration
-      const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
-      const updatedContent = data + newDeclaration;
-
-      // Write the updated content back to the file
-      fs.writeFile('raaghu-mfe/rds_pages/host/src/remote.d.ts', updatedContent, 'utf8', (err) => {
+    fs.readFile(
+      "raaghu-mfe/rds_pages/host/src/remote.d.ts",
+      "utf8",
+      (err, data) => {
         if (err) {
           console.error(err);
           return;
         }
 
-        console.log('remote.d.ts file updated successfully!');
-      });
-    });
+        // Add the new module declaration
+        const newDeclaration = `\ndeclare module "${pageName}/${pageName}" {\n\tconst ${pageName}Component: React.ComponentType;\n\texport default ${pageName}Component;\n}\n`;
+        const updatedContent = data + newDeclaration;
 
-    let finalWebpackConfig = updatedWebpackConfig.replace(port, 'template_port_number');
-    finalWebpackConfig = finalWebpackConfig.replace(camelCaseName, '{template_page_name}');
-    finalWebpackConfig = finalWebpackConfig.replace(pageName, '{template_Page_Name_expose}');
+        // Write the updated content back to the file
+        fs.writeFile(
+          "raaghu-mfe/rds_pages/host/src/remote.d.ts",
+          updatedContent,
+          "utf8",
+          (err) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+
+            console.log("remote.d.ts file updated successfully!");
+          }
+        );
+      }
+    );
+
+    let finalWebpackConfig = updatedWebpackConfig.replace(
+      port,
+      "template_port_number"
+    );
+    finalWebpackConfig = finalWebpackConfig.replace(
+      camelCaseName,
+      "{template_page_name}"
+    );
+    finalWebpackConfig = finalWebpackConfig.replace(
+      pageName,
+      "{template_Page_Name_expose}"
+    );
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
-    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,'"{import_statement_for_Page_template}"')
-    finalAppFileContent = finalAppFileContent.replace(`<${pageName}></${pageName}>`,'{"page_template_component_in_app"}');
+    let finalAppFileContent = upodatedtemplateAppfileContent.replace(
+      `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,
+      '"{import_statement_for_Page_template}"'
+    );
+    finalAppFileContent = finalAppFileContent.replace(
+      `<${pageName}></${pageName}>`,
+      '{"page_template_component_in_app"}'
+    );
     fs.writeFileSync(templateAppFilePAth, finalAppFileContent);
     // Adding url to the webpack file of the host page
     const hostWebpackpath = "raaghu-mfe/rds_pages/host/webpack.config.js";
-
 
     fs.readFile(hostWebpackpath, "utf8", (err, data) => {
       if (err) {
@@ -358,9 +403,9 @@ if (fs.existsSync(appFolderPath)) {
 
     // Adding start script to the package.json
 
-    const packageFile = 'raaghu-mfe/package.json';
+    const packageFile = "raaghu-mfe/package.json";
     const newScript = `cd rds_pages/rds-page-${camelCaseName} && npm run dev`;
-    fs.readFile(packageFile, 'utf-8', function (err, data) {
+    fs.readFile(packageFile, "utf-8", function (err, data) {
       if (err) throw err;
 
       // parse the package.json data into an object
@@ -370,10 +415,15 @@ if (fs.existsSync(appFolderPath)) {
       packageObj.scripts.start += ` "${newScript}"`;
 
       // write the updated package.json object back to the file
-      fs.writeFile(packageFile, JSON.stringify(packageObj, null, 2), 'utf-8', function (err) {
-        if (err) throw err;
-        console.log('start script updated successfully');
-      });
+      fs.writeFile(
+        packageFile,
+        JSON.stringify(packageObj, null, 2),
+        "utf-8",
+        function (err) {
+          if (err) throw err;
+          console.log("start script updated successfully");
+        }
+      );
       //routing Automation
 
       const componentToAdd = `${pageName}Compo`; // Replace with the name of your component
@@ -432,7 +482,14 @@ if (fs.existsSync(appFolderPath)) {
       fs.writeFileSync(routeFilePath, newFileContent);
     });
 
-    const sliceFilePath = path.join(__dirname, "..", "raaghu-mfe", "libs", "state-management", `${kebabCaseName}`);
+    const sliceFilePath = path.join(
+      __dirname,
+      "..",
+      "raaghu-mfe",
+      "libs",
+      "state-management",
+      `${kebabCaseName}`
+    );
     // Creating directory inside the src
     try {
       if (!fs.existsSync(sliceFilePath)) {
@@ -445,20 +502,131 @@ if (fs.existsSync(appFolderPath)) {
     try {
       fs.writeFileSync(
         `${sliceFilePath}/${kebabCaseName}-slice.ts`,
-        `\/\/ Add the slice content here`
+        `
+        import { createSlice, createAsyncThunk, PayloadAction, } from "@reduxjs/toolkit";\n
+        export interface ${camelCaseName}InitialState {
+          loading: boolean;
+          ${camelCaseName}s: any;
+          error: string;
+        }; \n
+        export const ${camelCaseName}State: ${camelCaseName}InitialState = {
+          loading: false,
+          ${camelCaseName}s: {},
+          error: "",
+        };
+
+        \/\/ Add your Api call here
+
+        const ${camelCaseName}Slice = createSlice({
+          name: "${camelCaseName}",
+          initialState: ${camelCaseName}State,
+          reducers: {},
+          extraReducers: (builder) => {
+            \/\/ Add your extraReducers here
+          }})\n
+          export default ${camelCaseName}Slice.reducer;
+        `
       );
       // file written successfully
     } catch (err) {
       console.error(err);
     }
+    const reducerFilePath = path.join(
+      __dirname,
+      "..",
+      "raaghu-mfe",
+      "libs",
+      "state-management",
+      "index.ts"
+    );
+
+    // Import statement to add
+    const importStatementForReducer =
+      `import ${camelCaseName}Reducer from "./${camelCaseName}/${camelCaseName}-slice";`;
+
+    // Root reducer property to add
+    const rootReducerProperty = `${camelCaseName}: ${camelCaseName}Reducer,`;
+
+    // Read the content of the index.ts file
+    const reducerFilecontent = fs.readFileSync(reducerFilePath, "utf-8");
+
+    // Check if the import statement already exists in the file
+    if (reducerFilecontent.includes(importStatementForReducer)) {
+      console.log("Import statement already exists.");
+    } else {
+      fs.readFile(reducerFilePath, 'utf8', (err, data) => {
+        if (err) {
+          throw err;
+        }
+      
+        // Insert the new import statement 
+        const updatedData = `${data.slice(0, 0)}${importStatementForReducer}\n${data.slice(0)}\n`;
+      
+        fs.writeFile(reducerFilePath, updatedData, 'utf8', (err) => {
+          if (err) {
+            throw err;
+          }
+          console.log('Import statement added successfully!');
+        });
+      });
+    }
+
+    // Check if the rootReducer property already exists in the file
+    if (reducerFilecontent.includes(rootReducerProperty)) {
+      console.log("Root reducer property already exists.");
+    } else {
+      // Add the rootReducer property at the end of the rootReducer object
+      fs.writeFileSync(
+        reducerFilePath,
+        reducerFilecontent.replace(
+          /const rootReducer = combineReducers\({/,
+          `const rootReducer = combineReducers({\n  ${rootReducerProperty}`
+        )
+      );
+      console.log("Root reducer property added successfully.");
+    }
+
+    const publicApiFilePath = path.join(
+      __dirname,
+      "..",
+      "raaghu-mfe",
+      "libs",
+      "state-management",
+      "public.api.ts"
+    );
+
+    // Import statement to add
+    const importStatementForPublicApi =
+      `export * from './${camelCaseName}/${camelCaseName}-slice";`;
+
+    // Read the content of the index.ts file
+    const publicApiFileContent = fs.readFileSync(publicApiFilePath, "utf-8");
+
+    // Check if the import statement already exists in the file
+    if (publicApiFileContent.includes(importStatementForPublicApi)) {
+      console.log("Import statement already exists.");
+    } else {
+      fs.readFile(publicApiFilePath, 'utf8', (err, data) => {
+        if (err) {
+          throw err;
+        }
+      
+        // Insert the new import statement 
+        const updatedData = `${data.slice(0, 0)}${importStatementForPublicApi}\n${data.slice(0)}\n`;
+      
+        fs.writeFile(publicApiFilePath, updatedData, 'utf8', (err) => {
+          if (err) {
+            throw err;
+          }
+          console.log('Export statement added successfully!');
+        });
+      });
+    }
   } else if (eTc == "pr") {
     console.log("Proxy is being generated!!");
-    let filePath = path.join(appFolderPath, "proxy");;
+    let filePath = path.join(appFolderPath, "proxy");
     if (fs.existsSync(filePath)) {
-      console.log(
-        "\x1b[31m%s\x1b[0m",
-        "proxy already exists in this path."
-      );
+      console.log("\x1b[31m%s\x1b[0m", "proxy already exists in this path.");
     } else {
       execSync(
         `npx openapi --input ${name} --output ${filePath} --client axios`,
