@@ -139,7 +139,6 @@ import {
       builder.addCase(
         fetchAllClaims.fulfilled,
         (state, action: PayloadAction<any>) => {
-          debugger
           state.status = "success";
           state.allClaims = action.payload;
           state.error = "";

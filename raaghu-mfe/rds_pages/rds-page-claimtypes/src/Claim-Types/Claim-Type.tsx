@@ -28,12 +28,7 @@ import { use } from "i18next";
 const ClaimType = () => {
   const [tableDataRowid, setTableDataRowId] = useState(0);
 
-  const [alert, setAlert] = useState({
-    showAlert: false,
-    message: "",
-    success: false,
-  });
-  const [alertOne, setAlertOne] = useState(false);
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
 
   const { t } = useTranslation();
   const offCanvasHandler = () => { };
@@ -128,21 +123,6 @@ const ClaimType = () => {
     }
   }, [claimTypesUser]);
 
-  useEffect(() => {
-    setAlert({
-      showAlert: claimTypeData.alert,
-      message: claimTypeData.alertMessage,
-      success: claimTypeData.success,
-    });
-    setTimeout(() => {
-      setAlert({
-        showAlert: false,
-        message: "",
-        success: false,
-      });
-    }, 2000);
-  }, [claimTypesUser]);
-
   const [claimsData, setClaimsData] = useState<any>({
     name: '',
     required: false,
@@ -167,9 +147,23 @@ const ClaimType = () => {
 
   const DeleteHandler = (e: any) => {
     dispatch(deleteClaimTypesData(tableDataRowid) as any).then((res: any) => {
+      if (res.type == "claimTypes/deleteClaimTypesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Claim Type deleted Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchClaimTypesData() as any);
     });
-    setAlertOne(true);
   };
 
   const tableHeaders = [
@@ -213,6 +207,21 @@ const ClaimType = () => {
   const submitHandler = (data: any) => {
     
     dispatch(addClaimTypesData(data) as any).then((res: any) => {
+      if (res.type == "claimTypes/addClaimTypesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Claim Type added Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchClaimTypesData() as any);
     });
     setClaimsData({
@@ -225,7 +234,6 @@ const ClaimType = () => {
       valueType: '',
       valueTypeAsString: '',
     })
-    setAlertOne(true);
   };
   const valueType = [
     { option: 'String', value: 0 },
@@ -243,94 +251,119 @@ const ClaimType = () => {
     dispatch(
       editClaimTypesData(dTo) as any
     ).then((res: any) => {
-      dispatch(fetchClaimTypesData() as any).then((res: any) => {
-        dispatch(fetchClaimTypesData() as any);
-      });
+      if (res.type == "claimTypes/editClaimTypesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Claim Type edited Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchClaimTypesData() as any)
     });
-    setAlertOne(true);
   };
+  useEffect(() => {
+    // Set a 3-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [claimTypesUser]);
 
   return (
-    <div>
-      {alert.showAlert && alertOne && (
-        <RdsAlert
-          alertmessage={alert.message}
-          colorVariant={alert.success ? "success" : "danger"}
-          style={{ marginBottom: "0" }}
+    <div className="row">
+    <div className="col-md-12 mb-3 ">
+      <div className="row ">
+        <div className="col-md-4">
+          {Alert.show && (
+          <RdsAlert
+          alertmessage={Alert.message}
+          colorVariant={Alert.color}
         ></RdsAlert>
-      )}
-      <div>
-        <div className="d-flex justify-content-end">
-          <div>
-            <RdsOffcanvas
-              canvasTitle={t("New Claim Type")}
-              onclick={offCanvasHandler}
-              placement="end"
-              
-              offcanvasbutton={
-                <div className="d-flex justify-content-end">
-                  <RdsButton
-                    icon="plus"
-                    label={t("New Claim Type") || ""}
-                    iconColorVariant="light"
-                    iconHeight="15px"
-                    iconWidth="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    block={false}
-                    size="small"
-                    type="button"
-                    colorVariant="primary"
-                  ></RdsButton>
-                </div>
-              }
-              backDrop={false}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"tenant"}
-            >
-              <RdsCompNewClaimType
-                claimsData={claimsData}
-                valueType={valueType}
-                onSubmit={submitHandler}
-              ></RdsCompNewClaimType>
-            </RdsOffcanvas>
-          </div>
-        </div>
-        </div>
-        <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
-          <RdsCompDatatable
-            tableHeaders={tableHeaders}
-            actions={actions}
-            tableData={Data!}
-            pagination={true}
-            recordsPerPage={10}
-            recordsPerPageSelectListOption={true}
-            onActionSelection={onActionSelection}
-          ></RdsCompDatatable>
-          <RdsCompAlertPopup
-            alertID="dynamic_delete_off"
-            onSuccess={DeleteHandler}
-          />
-          <RdsOffcanvas
-            canvasTitle="EDIT EDITION"
-            onclick={offCanvasHandler}
-            placement="end"
-            offId="dynamic-edit-off"
-            
-            backDrop={false}
-            scrolling={false}
-            preventEscapeKey={false}
-          >
-            <RdsCompNewClaimType
-              claimsData={editClaimData}
-              valueType={valueType}
-              onSubmit={onEditHandler}
-            ></RdsCompNewClaimType>
-          </RdsOffcanvas>
-        </div>
-     
+    )}  
     </div>
+    <div className="col-md-8 d-flex justify-content-end ">
+    <RdsOffcanvas
+        canvasTitle={t("New Claim Type")}
+        onclick={offCanvasHandler}
+        placement="end"
+        
+        offcanvasbutton={
+          <div className="d-flex justify-content-end my-1">
+            <RdsButton
+              icon="plus"
+              label={t("New Claim Type") || ""}
+              iconColorVariant="light"
+              iconHeight="15px"
+              iconWidth="15px"
+              iconFill={false}
+              iconStroke={true}
+              block={false}
+              size="small"
+              type="button"
+              colorVariant="primary"
+            ></RdsButton>
+          </div>
+        }
+        backDrop={false}
+        scrolling={false}
+        preventEscapeKey={false}
+        offId={"tenant"}
+      >
+        <RdsCompNewClaimType
+          claimsData={claimsData}
+          valueType={valueType}
+          onSubmit={submitHandler}
+        ></RdsCompNewClaimType>
+      </RdsOffcanvas>
+    </div>
+  </div>
+</div>
+
+<div className="col-md-12">
+  <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+  <RdsCompDatatable
+      tableHeaders={tableHeaders}
+      actions={actions}
+      tableData={Data!}
+      pagination={true}
+      recordsPerPage={10}
+      recordsPerPageSelectListOption={true}
+      onActionSelection={onActionSelection}
+    ></RdsCompDatatable>
+    <RdsCompAlertPopup
+      alertID="dynamic_delete_off"
+      onSuccess={DeleteHandler}
+    />
+    <RdsOffcanvas
+      canvasTitle="Edit Claim type"
+      onclick={offCanvasHandler}
+      placement="end"
+      offId="dynamic-edit-off"
+      
+      backDrop={false}
+      scrolling={false}
+      preventEscapeKey={false}
+    >
+      <RdsCompNewClaimType
+        claimsData={editClaimData}
+        valueType={valueType}
+        onSubmit={onEditHandler}
+      ></RdsCompNewClaimType>
+    </RdsOffcanvas>
+  </div>
+</div>
+</div>
+
   );
 };
 
