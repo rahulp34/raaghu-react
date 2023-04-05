@@ -56,7 +56,9 @@ const newItem = {
   subTitle: "subtitle here",
 };
 
-const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
+const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
+
+const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
 
 // Get hold of the app folder path inside the mfe
 let appFolderPath = "";

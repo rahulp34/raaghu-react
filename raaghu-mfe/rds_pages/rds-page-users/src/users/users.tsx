@@ -151,9 +151,9 @@ const Users = () => {
   useEffect(() => {
     if (data.users) {
       let tempTableData: any[] = [];
-      data.users.items.map((item: any) => {
+      data?.users?.items?.map((item: any) => {
         let rolesNames: string = "";
-        item.roleNames.map((res: any) => {
+        item?.roleNames?.map((res: any) => {
           rolesNames = rolesNames + `${res} `;
         });
         const data = {
@@ -270,7 +270,7 @@ const Users = () => {
   useEffect(() => {
     let tempRoleData: any[] = [];
     if (data.roles) {
-      data.roles.items.map((el: any) => {
+      data?.roles?.items?.map((el: any) => {
         const data3 = {
           name: el.name,
           isChecked: false,
@@ -285,7 +285,7 @@ const Users = () => {
     let editRolesUserData: any[] = [];
     if (data.editUserRoles) {
       if (userRolesData) {
-        userRolesData.map((el: any) => {
+        userRolesData?.map((el: any) => {
           let isChecked = false;
           data.editUserRoles.items.forEach((item: any) => {
             if (item.name == el.name) {
@@ -498,8 +498,8 @@ const Users = () => {
   }
 
   function recursionFunction(organizationUnit: any, selectedOrgUnit: any) {
-    return organizationUnit.map((el: any) => {
-      selectedOrgUnit.map((e: any) => {
+    return organizationUnit?.map((el: any) => {
+      selectedOrgUnit?.map((e: any) => {
         if (el.data.id == e.id) {
           el.selected = true;
         }
