@@ -34,10 +34,10 @@ export class BlogsService {
      * @throws ApiError
      */
     public static getBlogsByShortname({
-shortName,
-}: {
-shortName: string,
-}): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
+        shortName,
+    }: {
+        shortName: string,
+    }): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/blogs/by-shortname/{shortName}',
@@ -60,10 +60,10 @@ shortName: string,
      * @throws ApiError
      */
     public static getBlogs1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/blogs/{id}',

@@ -18,10 +18,10 @@ export class BlogPostAdminService {
      * @throws ApiError
      */
     public static postBlogsBlogPosts({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts',
@@ -43,24 +43,24 @@ requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
      * @throws ApiError
      */
     public static getBlogsBlogPosts({
-filter,
-blogId,
-authorId,
-tagId,
-status,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-blogId?: string,
-authorId?: string,
-tagId?: string,
-status?: Volo_CmsKit_Blogs_BlogPostStatus,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        blogId,
+        authorId,
+        tagId,
+        status,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        blogId?: string,
+        authorId?: string,
+        tagId?: string,
+        status?: Volo_CmsKit_Blogs_BlogPostStatus,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/blogs/blog-posts',
@@ -90,10 +90,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static deleteBlogsBlogPosts({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}',
@@ -116,10 +116,10 @@ id: string,
      * @throws ApiError
      */
     public static getBlogsBlogPosts1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}',
@@ -142,12 +142,12 @@ id: string,
      * @throws ApiError
      */
     public static putBlogsBlogPosts({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogPostDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogPostDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}',
@@ -172,10 +172,10 @@ requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogPostDto,
      * @throws ApiError
      */
     public static postBlogsBlogPostsPublish({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}/publish',
@@ -198,10 +198,10 @@ id: string,
      * @throws ApiError
      */
     public static postBlogsBlogPostsDraft({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}/draft',
@@ -224,10 +224,10 @@ id: string,
      * @throws ApiError
      */
     public static postBlogsBlogPostsCreateAndPublish({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts/create-and-publish',
@@ -249,10 +249,10 @@ requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
      * @throws ApiError
      */
     public static postBlogsBlogPostsSendToReview({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts/{id}/send-to-review',
@@ -275,10 +275,10 @@ id: string,
      * @throws ApiError
      */
     public static postBlogsBlogPostsCreateAndSendToReview({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogPostDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogPostDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs/blog-posts/create-and-send-to-review',

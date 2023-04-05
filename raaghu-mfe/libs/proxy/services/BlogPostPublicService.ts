@@ -16,12 +16,12 @@ export class BlogPostPublicService {
      * @throws ApiError
      */
     public static getBlogPosts({
-blogSlug,
-blogPostSlug,
-}: {
-blogSlug: string,
-blogPostSlug: string,
-}): CancelablePromise<Volo_CmsKit_Contents_BlogPostCommonDto> {
+        blogSlug,
+        blogPostSlug,
+    }: {
+        blogSlug: string,
+        blogPostSlug: string,
+    }): CancelablePromise<Volo_CmsKit_Contents_BlogPostCommonDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/blog-posts/{blogSlug}/{blogPostSlug}',
@@ -45,20 +45,20 @@ blogPostSlug: string,
      * @throws ApiError
      */
     public static getBlogPosts1({
-blogSlug,
-authorId,
-tagId,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-blogSlug: string,
-authorId?: string,
-tagId?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        blogSlug,
+        authorId,
+        tagId,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        blogSlug: string,
+        authorId?: string,
+        tagId?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/blog-posts/{blogSlug}',
@@ -88,16 +88,16 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getBlogPostsAuthors({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/blog-posts/authors',
@@ -123,10 +123,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getBlogPostsAuthors1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Users_CmsUserDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Users_CmsUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/blog-posts/authors/{id}',

@@ -10,3 +10,4 @@ export type Volo_CmsKit_Public_Newsletters_CreateNewsletterRecordInput = {
     privacyPolicyUrl?: string | null;
     additionalPreferences?: Array<string> | null;
 };
+

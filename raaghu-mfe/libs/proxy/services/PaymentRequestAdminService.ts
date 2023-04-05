@@ -17,24 +17,24 @@ export class PaymentRequestAdminService {
      * @throws ApiError
      */
     public static getPaymentRequests({
-filter,
-creationDateMax,
-creationDateMin,
-paymentType,
-status,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-creationDateMax?: string,
-creationDateMin?: string,
-paymentType?: Volo_Payment_Requests_PaymentType,
-status?: Volo_Payment_Requests_PaymentRequestState,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        creationDateMax,
+        creationDateMin,
+        paymentType,
+        status,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        creationDateMax?: string,
+        creationDateMin?: string,
+        paymentType?: Volo_Payment_Requests_PaymentType,
+        status?: Volo_Payment_Requests_PaymentRequestState,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment-admin/payment-requests',
@@ -64,10 +64,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getPaymentRequests1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment-admin/payment-requests/{id}',

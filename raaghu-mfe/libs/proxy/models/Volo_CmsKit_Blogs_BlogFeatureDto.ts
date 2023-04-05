@@ -7,3 +7,4 @@ export type Volo_CmsKit_Blogs_BlogFeatureDto = {
     featureName?: string | null;
     isEnabled?: boolean;
 };
+

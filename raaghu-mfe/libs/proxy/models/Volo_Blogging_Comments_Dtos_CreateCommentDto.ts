@@ -7,3 +7,4 @@ export type Volo_Blogging_Comments_Dtos_CreateCommentDto = {
     postId?: string;
     text: string;
 };
+

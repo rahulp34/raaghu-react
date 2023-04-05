@@ -19,10 +19,10 @@ export class DirectoryDescriptorsService {
      * @throws ApiError
      */
     public static getDirectoryDescriptor({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/directory-descriptor/{id}',
@@ -45,12 +45,12 @@ id: string,
      * @throws ApiError
      */
     public static postDirectoryDescriptor({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_FileManagement_Directories_RenameDirectoryInput,
-}): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_FileManagement_Directories_RenameDirectoryInput,
+    }): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/directory-descriptor/{id}',
@@ -75,10 +75,10 @@ requestBody?: Volo_FileManagement_Directories_RenameDirectoryInput,
      * @throws ApiError
      */
     public static deleteDirectoryDescriptor({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/file-management/directory-descriptor/{id}',
@@ -101,10 +101,10 @@ id: string,
      * @throws ApiError
      */
     public static getDirectoryDescriptorSubDirectories({
-parentId,
-}: {
-parentId?: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        parentId,
+    }: {
+        parentId?: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/directory-descriptor/sub-directories',
@@ -127,10 +127,10 @@ parentId?: string,
      * @throws ApiError
      */
     public static postDirectoryDescriptor1({
-requestBody,
-}: {
-requestBody?: Volo_FileManagement_Directories_CreateDirectoryInput,
-}): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_FileManagement_Directories_CreateDirectoryInput,
+    }): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/directory-descriptor',
@@ -152,18 +152,18 @@ requestBody?: Volo_FileManagement_Directories_CreateDirectoryInput,
      * @throws ApiError
      */
     public static getDirectoryDescriptor1({
-filter,
-id,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-id?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        id,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        id?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/directory-descriptor',
@@ -190,10 +190,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postDirectoryDescriptorMove({
-requestBody,
-}: {
-requestBody?: Volo_FileManagement_Directories_MoveDirectoryInput,
-}): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_FileManagement_Directories_MoveDirectoryInput,
+    }): CancelablePromise<Volo_FileManagement_Directories_DirectoryDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/directory-descriptor/move',

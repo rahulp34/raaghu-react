@@ -34,10 +34,10 @@ export class ContactSettingService {
      * @throws ApiError
      */
     public static postContactSettings({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Contact_UpdateCmsKitContactSettingDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Contact_UpdateCmsKitContactSettingDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/contact/settings',

@@ -17,10 +17,10 @@ export class PageAdminService {
      * @throws ApiError
      */
     public static getPages({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/pages/{id}',
@@ -43,12 +43,12 @@ id: string,
      * @throws ApiError
      */
     public static putPages({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Pages_UpdatePageInputDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Pages_UpdatePageInputDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/pages/{id}',
@@ -73,10 +73,10 @@ requestBody?: Volo_CmsKit_Admin_Pages_UpdatePageInputDto,
      * @throws ApiError
      */
     public static deletePages({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/pages/{id}',
@@ -99,16 +99,16 @@ id: string,
      * @throws ApiError
      */
     public static getPages1({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/pages',
@@ -134,10 +134,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postPages({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Pages_CreatePageInputDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Pages_CreatePageInputDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Pages_PageDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/pages',
@@ -159,10 +159,10 @@ requestBody?: Volo_CmsKit_Admin_Pages_CreatePageInputDto,
      * @throws ApiError
      */
     public static putPagesSetashomepage({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/pages/setashomepage/{id}',

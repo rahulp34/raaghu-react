@@ -15,3 +15,4 @@ export type Acme_BookStore_Books_Dto_BookDto = {
     publishDate?: string;
     price?: number;
 };
+

@@ -8,3 +8,4 @@ export type Volo_Abp_Account_SendPasswordResetCodeDto = {
     returnUrl?: string | null;
     returnUrlHash?: string | null;
 };
+

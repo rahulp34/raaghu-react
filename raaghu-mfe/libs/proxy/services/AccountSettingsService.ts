@@ -37,10 +37,10 @@ export class AccountSettingsService {
      * @throws ApiError
      */
     public static putSettings({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_AccountSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_AccountSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/account-admin/settings',
@@ -81,10 +81,10 @@ requestBody?: Volo_Abp_Account_AccountSettingsDto,
      * @throws ApiError
      */
     public static putSettingsTwoFactor({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_AccountTwoFactorSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_AccountTwoFactorSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/account-admin/settings/two-factor',
@@ -125,10 +125,10 @@ requestBody?: Volo_Abp_Account_AccountTwoFactorSettingsDto,
      * @throws ApiError
      */
     public static putSettingsRecaptcha({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_AccountRecaptchaSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_AccountRecaptchaSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/account-admin/settings/recaptcha',
@@ -169,10 +169,10 @@ requestBody?: Volo_Abp_Account_AccountRecaptchaSettingsDto,
      * @throws ApiError
      */
     public static putSettingsExternalProvider({
-requestBody,
-}: {
-requestBody?: Array<Volo_Abp_Account_UpdateExternalProviderDto>,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Array<Volo_Abp_Account_UpdateExternalProviderDto>,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/account-admin/settings/external-provider',

@@ -8,3 +8,4 @@ export type Volo_Blogging_Admin_Blogs_UpdateBlogDto = {
     description?: string | null;
     concurrencyStamp?: string | null;
 };
+

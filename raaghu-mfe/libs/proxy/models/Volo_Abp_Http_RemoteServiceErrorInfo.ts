@@ -11,3 +11,4 @@ export type Volo_Abp_Http_RemoteServiceErrorInfo = {
     data?: Record<string, any> | null;
     validationErrors?: Array<Volo_Abp_Http_RemoteServiceValidationErrorInfo> | null;
 };
+

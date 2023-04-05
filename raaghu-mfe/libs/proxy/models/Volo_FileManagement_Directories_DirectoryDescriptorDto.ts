@@ -13,3 +13,4 @@ export type Volo_FileManagement_Directories_DirectoryDescriptorDto = {
     parentId?: string | null;
     concurrencyStamp?: string | null;
 };
+

@@ -34,10 +34,10 @@ export class GdprRequestService {
      * @throws ApiError
      */
     public static getRequestsDownloadToken({
-id,
-}: {
-id?: string,
-}): CancelablePromise<Volo_Abp_Gdpr_DownloadTokenResultDto> {
+        id,
+    }: {
+        id?: string,
+    }): CancelablePromise<Volo_Abp_Gdpr_DownloadTokenResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/gdpr/requests/download-token',
@@ -60,12 +60,12 @@ id?: string,
      * @throws ApiError
      */
     public static getRequestsData({
-requestId,
-token,
-}: {
-requestId: string,
-token?: string,
-}): CancelablePromise<Blob> {
+        requestId,
+        token,
+    }: {
+        requestId: string,
+        token?: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/gdpr/requests/data/{requestId}',
@@ -110,16 +110,16 @@ token?: string,
      * @throws ApiError
      */
     public static getRequestsList({
-userId,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-userId: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        userId,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        userId: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/gdpr/requests/list',

@@ -13,3 +13,4 @@ export type Volo_Abp_Identity_IdentitySettingsDto = {
     signIn?: Volo_Abp_Identity_IdentitySignInSettingsDto;
     user?: Volo_Abp_Identity_IdentityUserSettingsDto;
 };
+

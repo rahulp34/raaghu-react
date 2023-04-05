@@ -34,10 +34,10 @@ export class GlobalResourceAdminService {
      * @throws ApiError
      */
     public static postGlobalResources({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_GlobalResources_GlobalResourcesUpdateDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_GlobalResources_GlobalResourcesUpdateDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/global-resources',

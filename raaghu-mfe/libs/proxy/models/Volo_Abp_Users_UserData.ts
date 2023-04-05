@@ -14,3 +14,4 @@ export type Volo_Abp_Users_UserData = {
     phoneNumber?: string | null;
     phoneNumberConfirmed?: boolean;
 };
+

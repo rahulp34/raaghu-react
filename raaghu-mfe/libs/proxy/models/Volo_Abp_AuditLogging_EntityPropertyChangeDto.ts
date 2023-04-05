@@ -11,3 +11,4 @@ export type Volo_Abp_AuditLogging_EntityPropertyChangeDto = {
     propertyName?: string | null;
     propertyTypeFullName?: string | null;
 };
+

@@ -16,12 +16,12 @@ export class TextTemplateContentsService {
      * @throws ApiError
      */
     public static getTemplateContents({
-templateName,
-cultureName,
-}: {
-templateName: string,
-cultureName?: string,
-}): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TextTemplateContentDto> {
+        templateName,
+        cultureName,
+    }: {
+        templateName: string,
+        cultureName?: string,
+    }): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TextTemplateContentDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/text-template-management/template-contents',
@@ -45,10 +45,10 @@ cultureName?: string,
      * @throws ApiError
      */
     public static putTemplateContents({
-requestBody,
-}: {
-requestBody?: Volo_Abp_TextTemplateManagement_TextTemplates_UpdateTemplateContentInput,
-}): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TextTemplateContentDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_TextTemplateManagement_TextTemplates_UpdateTemplateContentInput,
+    }): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TextTemplateContentDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/text-template-management/template-contents',
@@ -70,10 +70,10 @@ requestBody?: Volo_Abp_TextTemplateManagement_TextTemplates_UpdateTemplateConten
      * @throws ApiError
      */
     public static putTemplateContentsRestoreToDefault({
-requestBody,
-}: {
-requestBody?: Volo_Abp_TextTemplateManagement_TextTemplates_RestoreTemplateContentInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_TextTemplateManagement_TextTemplates_RestoreTemplateContentInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/text-template-management/template-contents/restore-to-default',

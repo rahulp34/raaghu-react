@@ -10,3 +10,4 @@ export type Volo_CmsKit_Public_GlobalResources_GlobalResourceDto = {
     name?: string | null;
     value?: string | null;
 };
+

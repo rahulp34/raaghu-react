@@ -12,3 +12,4 @@ export type Volo_Blogging_Posts_BlogUserDto = {
     phoneNumberConfirmed?: boolean;
     extraProperties?: Record<string, any> | null;
 };
+

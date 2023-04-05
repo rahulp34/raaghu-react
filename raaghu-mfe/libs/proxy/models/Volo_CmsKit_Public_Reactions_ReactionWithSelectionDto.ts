@@ -9,3 +9,4 @@ export type Volo_CmsKit_Public_Reactions_ReactionWithSelectionDto = {
     count?: number;
     isSelectedByCurrentUser?: boolean;
 };
+

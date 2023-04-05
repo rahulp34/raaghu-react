@@ -13,3 +13,4 @@ export type Volo_CmsKit_Admin_Menus_MenuItemUpdateInput = {
     pageId?: string | null;
     concurrencyStamp?: string | null;
 };
+

@@ -14,10 +14,10 @@ export class AbpApplicationConfigurationService {
      * @throws ApiError
      */
     public static getApplicationConfiguration({
-includeLocalizationResources,
-}: {
-includeLocalizationResources?: boolean,
-}): CancelablePromise<Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationConfigurationDto> {
+        includeLocalizationResources,
+    }: {
+        includeLocalizationResources?: boolean,
+    }): CancelablePromise<Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationConfigurationDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/application-configuration',

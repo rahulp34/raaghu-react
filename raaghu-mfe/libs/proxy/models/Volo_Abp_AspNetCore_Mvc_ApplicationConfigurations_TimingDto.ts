@@ -7,3 +7,4 @@ import type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimeZone } from 
 export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimingDto = {
     timeZone?: Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimeZone;
 };
+

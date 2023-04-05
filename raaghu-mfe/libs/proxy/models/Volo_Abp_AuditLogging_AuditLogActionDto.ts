@@ -13,3 +13,4 @@ export type Volo_Abp_AuditLogging_AuditLogActionDto = {
     executionTime?: string;
     executionDuration?: number;
 };
+

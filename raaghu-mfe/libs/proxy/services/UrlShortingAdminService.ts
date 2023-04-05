@@ -17,16 +17,16 @@ export class UrlShortingAdminService {
      * @throws ApiError
      */
     public static getUrlShorting({
-shortenedUrlFilter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-shortenedUrlFilter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        shortenedUrlFilter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        shortenedUrlFilter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/url-shorting',
@@ -52,10 +52,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postUrlShorting({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_UrlShorting_CreateShortenedUrlDto,
-}): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_UrlShorting_CreateShortenedUrlDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/url-shorting',
@@ -77,10 +77,10 @@ requestBody?: Volo_CmsKit_Admin_UrlShorting_CreateShortenedUrlDto,
      * @throws ApiError
      */
     public static getUrlShorting1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/url-shorting/{id}',
@@ -103,12 +103,12 @@ id: string,
      * @throws ApiError
      */
     public static putUrlShorting({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_UrlShorting_UpdateShortenedUrlDto,
-}): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_UrlShorting_UpdateShortenedUrlDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/url-shorting/{id}',
@@ -133,10 +133,10 @@ requestBody?: Volo_CmsKit_Admin_UrlShorting_UpdateShortenedUrlDto,
      * @throws ApiError
      */
     public static deleteUrlShorting({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/url-shorting/{id}',

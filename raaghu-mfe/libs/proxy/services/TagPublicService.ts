@@ -14,12 +14,12 @@ export class TagPublicService {
      * @throws ApiError
      */
     public static getTags({
-entityType,
-entityId,
-}: {
-entityType: string,
-entityId: string,
-}): CancelablePromise<Array<Volo_CmsKit_Tags_TagDto>> {
+        entityType,
+        entityId,
+    }: {
+        entityType: string,
+        entityId: string,
+    }): CancelablePromise<Array<Volo_CmsKit_Tags_TagDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/tags/{entityType}/{entityId}',

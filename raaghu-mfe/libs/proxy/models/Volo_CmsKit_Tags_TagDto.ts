@@ -8,3 +8,4 @@ export type Volo_CmsKit_Tags_TagDto = {
     name?: string | null;
     concurrencyStamp?: string | null;
 };
+

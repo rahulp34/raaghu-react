@@ -9,3 +9,4 @@ export type Volo_CmsKit_Users_CmsUserDto = {
     name?: string | null;
     surname?: string | null;
 };
+

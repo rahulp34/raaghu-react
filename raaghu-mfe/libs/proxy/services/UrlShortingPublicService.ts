@@ -14,10 +14,10 @@ export class UrlShortingPublicService {
      * @throws ApiError
      */
     public static getUrlShorting({
-source,
-}: {
-source?: string,
-}): CancelablePromise<Volo_CmsKit_Public_UrlShorting_ShortenedUrlDto> {
+        source,
+    }: {
+        source?: string,
+    }): CancelablePromise<Volo_CmsKit_Public_UrlShorting_ShortenedUrlDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/url-shorting',

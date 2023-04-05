@@ -14,12 +14,12 @@ export class ContactService {
      * @throws ApiError
      */
     public static getContactContacts({
-filter,
-includeOtherContacts,
-}: {
-filter?: string,
-includeOtherContacts?: boolean,
-}): CancelablePromise<Array<Volo_Chat_Users_ChatContactDto>> {
+        filter,
+        includeOtherContacts,
+    }: {
+        filter?: string,
+        includeOtherContacts?: boolean,
+    }): CancelablePromise<Array<Volo_Chat_Users_ChatContactDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/chat/contact/contacts',

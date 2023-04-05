@@ -10,3 +10,4 @@ export type Volo_Abp_TextTemplateManagement_TextTemplates_TemplateDefinitionDto 
     isInlineLocalized?: boolean;
     defaultCultureName?: string | null;
 };
+

@@ -20,3 +20,4 @@ export type Volo_CmsKit_Public_Polls_PollWithDetailsDto = {
     resultShowingEndDate?: string | null;
     creationTime?: string;
 };
+

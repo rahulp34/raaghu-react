@@ -10,3 +10,4 @@ export type Volo_CmsKit_Public_Contact_ContactCreateInput = {
     message: string;
     recaptchaToken?: string | null;
 };
+

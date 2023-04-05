@@ -10,3 +10,4 @@ export type Acme_BookStore_Books_Dto_CreateUpdateBookDto = {
     publishDate: string;
     price: number;
 };
+

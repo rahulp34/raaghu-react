@@ -10,3 +10,4 @@ export type Volo_Forms_Forms_UpdateFormSettingInputDto = {
     isQuiz?: boolean;
     requiresLogin?: boolean;
 };
+

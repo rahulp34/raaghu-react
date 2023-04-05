@@ -31,3 +31,4 @@ export type Volo_Abp_AuditLogging_AuditLogDto = {
     entityChanges?: Array<Volo_Abp_AuditLogging_EntityChangeDto> | null;
     actions?: Array<Volo_Abp_AuditLogging_AuditLogActionDto> | null;
 };
+

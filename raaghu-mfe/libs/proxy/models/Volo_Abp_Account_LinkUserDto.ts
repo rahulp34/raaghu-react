@@ -9,3 +9,4 @@ export type Volo_Abp_Account_LinkUserDto = {
     targetTenantName?: string | null;
     directlyLinked?: boolean;
 };
+

@@ -15,3 +15,4 @@ export type Volo_CmsKit_Public_Comments_CommentDto = {
     author?: Volo_CmsKit_Public_Comments_CmsUserDto;
     concurrencyStamp?: string | null;
 };
+

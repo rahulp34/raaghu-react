@@ -6,3 +6,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocaliz
     texts?: Record<string, string | null> | null;
     baseResources?: Array<string> | null;
 };
+

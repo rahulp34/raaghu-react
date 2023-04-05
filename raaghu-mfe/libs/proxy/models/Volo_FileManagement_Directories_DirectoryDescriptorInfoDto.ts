@@ -8,3 +8,4 @@ export type Volo_FileManagement_Directories_DirectoryDescriptorInfoDto = {
     parentId?: string | null;
     hasChildren?: boolean;
 };
+

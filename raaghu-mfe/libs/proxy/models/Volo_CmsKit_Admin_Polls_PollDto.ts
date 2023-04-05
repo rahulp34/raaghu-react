@@ -14,3 +14,4 @@ export type Volo_CmsKit_Admin_Polls_PollDto = {
     endDate?: string | null;
     creationTime?: string;
 };
+

@@ -10,3 +10,4 @@ export type Volo_CmsKit_Admin_Blogs_UpdateBlogPostDto = {
     coverImageMediaId?: string | null;
     concurrencyStamp?: string | null;
 };
+

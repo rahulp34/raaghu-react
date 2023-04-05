@@ -10,3 +10,4 @@ export type Volo_Abp_Http_Modeling_InterfaceMethodApiDescriptionModel = {
     parametersOnMethod?: Array<Volo_Abp_Http_Modeling_MethodParameterApiDescriptionModel> | null;
     returnValue?: Volo_Abp_Http_Modeling_ReturnValueApiDescriptionModel;
 };
+

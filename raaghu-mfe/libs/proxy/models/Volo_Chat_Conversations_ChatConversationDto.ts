@@ -9,3 +9,4 @@ export type Volo_Chat_Conversations_ChatConversationDto = {
     messages?: Array<Volo_Chat_Messages_ChatMessageDto> | null;
     targetUserInfo?: Volo_Chat_Users_ChatTargetUserInfo;
 };
+

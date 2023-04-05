@@ -10,3 +10,4 @@ export type Volo_Abp_LanguageManagement_Dto_LanguageTextDto = {
     name?: string | null;
     value?: string | null;
 };
+

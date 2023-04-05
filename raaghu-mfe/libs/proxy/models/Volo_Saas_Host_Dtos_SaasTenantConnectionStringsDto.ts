@@ -9,3 +9,4 @@ export type Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto = {
     default?: string | null;
     databases?: Array<Volo_Saas_Host_Dtos_SaasTenantDatabaseConnectionStringsDto> | null;
 };
+

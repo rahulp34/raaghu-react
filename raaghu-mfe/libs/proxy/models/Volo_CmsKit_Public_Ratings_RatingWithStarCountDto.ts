@@ -7,3 +7,4 @@ export type Volo_CmsKit_Public_Ratings_RatingWithStarCountDto = {
     count?: number;
     isSelectedByCurrentUser?: boolean;
 };
+

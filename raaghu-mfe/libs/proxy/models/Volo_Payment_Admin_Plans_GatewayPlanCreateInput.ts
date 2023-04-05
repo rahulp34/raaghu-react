@@ -7,3 +7,4 @@ export type Volo_Payment_Admin_Plans_GatewayPlanCreateInput = {
     gateway: string;
     externalId: string;
 };
+

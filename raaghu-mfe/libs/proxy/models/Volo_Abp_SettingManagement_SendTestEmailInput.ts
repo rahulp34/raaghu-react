@@ -8,3 +8,4 @@ export type Volo_Abp_SettingManagement_SendTestEmailInput = {
     subject: string;
     body?: string | null;
 };
+

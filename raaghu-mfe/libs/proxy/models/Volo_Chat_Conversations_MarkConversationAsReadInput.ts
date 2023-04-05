@@ -5,3 +5,4 @@
 export type Volo_Chat_Conversations_MarkConversationAsReadInput = {
     targetUserId?: string;
 };
+

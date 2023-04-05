@@ -11,3 +11,4 @@ export type Volo_Chat_Messages_ChatMessageDto = {
     readDate?: string;
     side?: Volo_Chat_Messages_ChatMessageSide;
 };
+

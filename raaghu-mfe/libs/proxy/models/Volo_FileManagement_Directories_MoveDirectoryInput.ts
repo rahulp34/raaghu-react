@@ -7,3 +7,4 @@ export type Volo_FileManagement_Directories_MoveDirectoryInput = {
     newParentId?: string | null;
     concurrencyStamp?: string | null;
 };
+

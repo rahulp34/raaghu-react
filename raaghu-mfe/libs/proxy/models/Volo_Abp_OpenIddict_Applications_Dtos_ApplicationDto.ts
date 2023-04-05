@@ -24,3 +24,4 @@ export type Volo_Abp_OpenIddict_Applications_Dtos_ApplicationDto = {
     clientUri?: string | null;
     logoUri?: string | null;
 };
+

@@ -16,3 +16,4 @@ export type Volo_Forms_Responses_FormResponseDto = {
     email?: string | null;
     answers?: Array<string> | null;
 };
+

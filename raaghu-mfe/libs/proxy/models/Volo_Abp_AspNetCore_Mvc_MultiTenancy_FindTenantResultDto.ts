@@ -8,3 +8,4 @@ export type Volo_Abp_AspNetCore_Mvc_MultiTenancy_FindTenantResultDto = {
     name?: string | null;
     isActive?: boolean;
 };
+

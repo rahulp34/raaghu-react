@@ -5,3 +5,4 @@
 export type Volo_Abp_Gdpr_DownloadTokenResultDto = {
     token?: string | null;
 };
+

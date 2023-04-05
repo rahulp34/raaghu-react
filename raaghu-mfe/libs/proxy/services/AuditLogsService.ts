@@ -21,38 +21,38 @@ export class AuditLogsService {
      * @throws ApiError
      */
     public static getAuditLogs({
-startTime,
-endTime,
-url,
-userName,
-applicationName,
-clientIpAddress,
-correlationId,
-httpMethod,
-httpStatusCode,
-maxExecutionDuration,
-minExecutionDuration,
-hasException,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-startTime?: string,
-endTime?: string,
-url?: string,
-userName?: string,
-applicationName?: string,
-clientIpAddress?: string,
-correlationId?: string,
-httpMethod?: string,
-httpStatusCode?: System_Net_HttpStatusCode,
-maxExecutionDuration?: number,
-minExecutionDuration?: number,
-hasException?: boolean,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        startTime,
+        endTime,
+        url,
+        userName,
+        applicationName,
+        clientIpAddress,
+        correlationId,
+        httpMethod,
+        httpStatusCode,
+        maxExecutionDuration,
+        minExecutionDuration,
+        hasException,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        startTime?: string,
+        endTime?: string,
+        url?: string,
+        userName?: string,
+        applicationName?: string,
+        clientIpAddress?: string,
+        correlationId?: string,
+        httpMethod?: string,
+        httpStatusCode?: System_Net_HttpStatusCode,
+        maxExecutionDuration?: number,
+        minExecutionDuration?: number,
+        hasException?: boolean,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs',
@@ -89,10 +89,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getAuditLogs1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_AuditLogging_AuditLogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_AuditLogging_AuditLogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/{id}',
@@ -115,12 +115,12 @@ id: string,
      * @throws ApiError
      */
     public static getAuditLogsStatisticsErrorRate({
-startDate,
-endDate,
-}: {
-startDate?: string,
-endDate?: string,
-}): CancelablePromise<Volo_Abp_AuditLogging_GetErrorRateOutput> {
+        startDate,
+        endDate,
+    }: {
+        startDate?: string,
+        endDate?: string,
+    }): CancelablePromise<Volo_Abp_AuditLogging_GetErrorRateOutput> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/statistics/error-rate',
@@ -144,12 +144,12 @@ endDate?: string,
      * @throws ApiError
      */
     public static getAuditLogsStatisticsAverageExecutionDurationPerDay({
-startDate,
-endDate,
-}: {
-startDate?: string,
-endDate?: string,
-}): CancelablePromise<Volo_Abp_AuditLogging_GetAverageExecutionDurationPerDayOutput> {
+        startDate,
+        endDate,
+    }: {
+        startDate?: string,
+        endDate?: string,
+    }): CancelablePromise<Volo_Abp_AuditLogging_GetAverageExecutionDurationPerDayOutput> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/statistics/average-execution-duration-per-day',
@@ -173,26 +173,26 @@ endDate?: string,
      * @throws ApiError
      */
     public static getAuditLogsEntityChanges({
-auditLogId,
-entityChangeType,
-entityId,
-entityTypeFullName,
-startDate,
-endDate,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-auditLogId?: string,
-entityChangeType?: Volo_Abp_Auditing_EntityChangeType,
-entityId?: string,
-entityTypeFullName?: string,
-startDate?: string,
-endDate?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        auditLogId,
+        entityChangeType,
+        entityId,
+        entityTypeFullName,
+        startDate,
+        endDate,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        auditLogId?: string,
+        entityChangeType?: Volo_Abp_Auditing_EntityChangeType,
+        entityId?: string,
+        entityTypeFullName?: string,
+        startDate?: string,
+        endDate?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/entity-changes',
@@ -223,12 +223,12 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getAuditLogsEntityChangesWithUsername({
-entityId,
-entityTypeFullName,
-}: {
-entityId?: string,
-entityTypeFullName?: string,
-}): CancelablePromise<Array<Volo_Abp_AuditLogging_EntityChangeWithUsernameDto>> {
+        entityId,
+        entityTypeFullName,
+    }: {
+        entityId?: string,
+        entityTypeFullName?: string,
+    }): CancelablePromise<Array<Volo_Abp_AuditLogging_EntityChangeWithUsernameDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/entity-changes-with-username',
@@ -252,10 +252,10 @@ entityTypeFullName?: string,
      * @throws ApiError
      */
     public static getAuditLogsEntityChangeWithUsername({
-entityChangeId,
-}: {
-entityChangeId: string,
-}): CancelablePromise<Volo_Abp_AuditLogging_EntityChangeWithUsernameDto> {
+        entityChangeId,
+    }: {
+        entityChangeId: string,
+    }): CancelablePromise<Volo_Abp_AuditLogging_EntityChangeWithUsernameDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/entity-change-with-username/{entityChangeId}',
@@ -278,10 +278,10 @@ entityChangeId: string,
      * @throws ApiError
      */
     public static getAuditLogsEntityChanges1({
-entityChangeId,
-}: {
-entityChangeId: string,
-}): CancelablePromise<Volo_Abp_AuditLogging_EntityChangeDto> {
+        entityChangeId,
+    }: {
+        entityChangeId: string,
+    }): CancelablePromise<Volo_Abp_AuditLogging_EntityChangeDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audit-logging/audit-logs/entity-changes/{entityChangeId}',

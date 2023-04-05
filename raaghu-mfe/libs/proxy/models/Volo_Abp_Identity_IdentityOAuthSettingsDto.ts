@@ -12,3 +12,4 @@ export type Volo_Abp_Identity_IdentityOAuthSettingsDto = {
     validateEndpoints?: boolean;
     validateIssuerName?: boolean;
 };
+

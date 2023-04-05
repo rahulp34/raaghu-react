@@ -9,3 +9,4 @@ export type Volo_Abp_LanguageManagement_Dto_UpdateLanguageDto = {
     isEnabled?: boolean;
     concurrencyStamp?: string | null;
 };
+

@@ -15,10 +15,10 @@ export class UserLookupService {
      * @throws ApiError
      */
     public static getUsersLookup({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Users_UserData> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Users_UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/{id}',
@@ -41,10 +41,10 @@ id: string,
      * @throws ApiError
      */
     public static getUsersLookupByUsername({
-userName,
-}: {
-userName: string,
-}): CancelablePromise<Volo_Abp_Users_UserData> {
+        userName,
+    }: {
+        userName: string,
+    }): CancelablePromise<Volo_Abp_Users_UserData> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/by-username/{userName}',
@@ -67,16 +67,16 @@ userName: string,
      * @throws ApiError
      */
     public static getUsersLookupSearch({
-sorting,
-filter,
-skipCount,
-maxResultCount,
-}: {
-sorting?: string,
-filter?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        sorting,
+        filter,
+        skipCount,
+        maxResultCount,
+    }: {
+        sorting?: string,
+        filter?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/search',
@@ -102,10 +102,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getUsersLookupCount({
-filter,
-}: {
-filter?: string,
-}): CancelablePromise<number> {
+        filter,
+    }: {
+        filter?: string,
+    }): CancelablePromise<number> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/lookup/count',

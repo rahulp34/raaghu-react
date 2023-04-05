@@ -19,3 +19,4 @@ export type Volo_Abp_Identity_OrganizationUnitDto = {
     displayName?: string | null;
     roles?: Array<Volo_Abp_Identity_OrganizationUnitRoleDto> | null;
 };
+

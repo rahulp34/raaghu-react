@@ -7,3 +7,4 @@ import type { Volo_Abp_Http_RemoteServiceErrorInfo } from './Volo_Abp_Http_Remot
 export type Volo_Abp_Http_RemoteServiceErrorResponse = {
     error?: Volo_Abp_Http_RemoteServiceErrorInfo;
 };
+

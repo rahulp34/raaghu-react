@@ -7,3 +7,4 @@ export type Volo_Abp_Account_ResetPasswordDto = {
     resetToken: string;
     password: string;
 };
+

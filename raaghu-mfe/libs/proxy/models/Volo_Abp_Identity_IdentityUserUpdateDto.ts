@@ -15,3 +15,4 @@ export type Volo_Abp_Identity_IdentityUserUpdateDto = {
     organizationUnitIds?: Array<string> | null;
     concurrencyStamp?: string | null;
 };
+

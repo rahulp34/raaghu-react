@@ -7,3 +7,4 @@ export type Volo_Saas_Host_Dtos_EditionCreateDto = {
     displayName: string;
     planId?: string | null;
 };
+

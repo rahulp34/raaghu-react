@@ -7,3 +7,4 @@ export type Volo_Abp_AspNetCore_Mvc_MultiTenancy_CurrentTenantDto = {
     name?: string | null;
     isAvailable?: boolean;
 };
+

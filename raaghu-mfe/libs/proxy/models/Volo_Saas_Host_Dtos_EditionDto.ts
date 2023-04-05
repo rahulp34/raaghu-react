@@ -10,3 +10,4 @@ export type Volo_Saas_Host_Dtos_EditionDto = {
     planName?: string | null;
     concurrencyStamp?: string | null;
 };
+

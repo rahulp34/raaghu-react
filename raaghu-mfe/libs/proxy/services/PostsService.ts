@@ -17,12 +17,12 @@ export class PostsService {
      * @throws ApiError
      */
     public static getPostsAll({
-blogId,
-tagName,
-}: {
-blogId: string,
-tagName?: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        blogId,
+        tagName,
+    }: {
+        blogId: string,
+        tagName?: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/posts/{blogId}/all',
@@ -48,10 +48,10 @@ tagName?: string,
      * @throws ApiError
      */
     public static getPostsAllByTime({
-blogId,
-}: {
-blogId: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        blogId,
+    }: {
+        blogId: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/posts/{blogId}/all/by-time',
@@ -74,12 +74,12 @@ blogId: string,
      * @throws ApiError
      */
     public static getPostsRead({
-url,
-blogId,
-}: {
-url: string,
-blogId?: string,
-}): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
+        url,
+        blogId,
+    }: {
+        url: string,
+        blogId?: string,
+    }): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/posts/read',
@@ -103,10 +103,10 @@ blogId?: string,
      * @throws ApiError
      */
     public static getPosts({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/posts/{id}',
@@ -129,12 +129,12 @@ id: string,
      * @throws ApiError
      */
     public static putPosts({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Blogging_Posts_UpdatePostDto,
-}): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Blogging_Posts_UpdatePostDto,
+    }): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/blogging/posts/{id}',
@@ -159,10 +159,10 @@ requestBody?: Volo_Blogging_Posts_UpdatePostDto,
      * @throws ApiError
      */
     public static deletePosts({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/blogging/posts/{id}',
@@ -185,10 +185,10 @@ id: string,
      * @throws ApiError
      */
     public static postPosts({
-requestBody,
-}: {
-requestBody?: Volo_Blogging_Posts_CreatePostDto,
-}): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Blogging_Posts_CreatePostDto,
+    }): CancelablePromise<Volo_Blogging_Posts_PostWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/blogging/posts',

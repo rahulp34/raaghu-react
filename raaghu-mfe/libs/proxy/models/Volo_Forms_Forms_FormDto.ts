@@ -22,3 +22,4 @@ export type Volo_Forms_Forms_FormDto = {
     isQuiz?: boolean;
     concurrencyStamp?: string | null;
 };
+

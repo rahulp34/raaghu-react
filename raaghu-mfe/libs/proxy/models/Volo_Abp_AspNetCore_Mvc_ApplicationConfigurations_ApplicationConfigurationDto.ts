@@ -28,3 +28,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationConfigu
     objectExtensions?: Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ObjectExtensionsDto;
     extraProperties?: Record<string, any> | null;
 };
+

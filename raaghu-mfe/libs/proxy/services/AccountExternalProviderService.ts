@@ -34,12 +34,12 @@ export class AccountExternalProviderService {
      * @throws ApiError
      */
     public static getExternalProviderByName({
-tenantId,
-name,
-}: {
-tenantId?: string,
-name?: string,
-}): CancelablePromise<Volo_Abp_Account_ExternalProviders_ExternalProviderItemWithSecretDto> {
+        tenantId,
+        name,
+    }: {
+        tenantId?: string,
+        name?: string,
+    }): CancelablePromise<Volo_Abp_Account_ExternalProviders_ExternalProviderItemWithSecretDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/external-provider/by-name',

@@ -10,3 +10,4 @@ export type Volo_Abp_LanguageManagement_Dto_CreateLanguageDto = {
     flagIcon?: string | null;
     isEnabled?: boolean;
 };
+

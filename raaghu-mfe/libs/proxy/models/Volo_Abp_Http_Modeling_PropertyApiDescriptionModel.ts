@@ -14,3 +14,4 @@ export type Volo_Abp_Http_Modeling_PropertyApiDescriptionModel = {
     maximum?: string | null;
     regex?: string | null;
 };
+

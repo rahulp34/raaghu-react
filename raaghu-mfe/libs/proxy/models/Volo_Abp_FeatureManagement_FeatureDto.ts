@@ -15,3 +15,4 @@ export type Volo_Abp_FeatureManagement_FeatureDto = {
     depth?: number;
     parentName?: string | null;
 };
+

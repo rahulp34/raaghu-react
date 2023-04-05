@@ -9,3 +9,4 @@ export type Volo_Abp_FeatureManagement_FeatureGroupDto = {
     displayName?: string | null;
     features?: Array<Volo_Abp_FeatureManagement_FeatureDto> | null;
 };
+

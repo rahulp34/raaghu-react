@@ -7,3 +7,4 @@ export type Volo_CmsKit_Admin_Menus_PageLookupDto = {
     title?: string | null;
     slug?: string | null;
 };
+

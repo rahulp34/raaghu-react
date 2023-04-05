@@ -10,3 +10,4 @@ export type Volo_CmsKit_Admin_Blogs_CreateBlogPostDto = {
     content?: string | null;
     coverImageMediaId?: string | null;
 };
+

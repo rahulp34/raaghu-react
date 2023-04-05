@@ -8,3 +8,4 @@ export type Volo_Abp_PermissionManagement_GetPermissionListResultDto = {
     entityDisplayName?: string | null;
     groups?: Array<Volo_Abp_PermissionManagement_PermissionGroupDto> | null;
 };
+

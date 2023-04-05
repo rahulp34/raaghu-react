@@ -6,3 +6,4 @@ export type Volo_CmsKit_Public_Newsletters_PreferenceDetailsDto = {
     preference?: string | null;
     isEnabled?: boolean;
 };
+

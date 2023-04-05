@@ -11,3 +11,4 @@ export type Volo_Abp_Account_UpdateProfileDto = {
     phoneNumber?: string | null;
     concurrencyStamp?: string | null;
 };
+

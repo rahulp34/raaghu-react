@@ -11,3 +11,4 @@ export type Volo_Abp_Account_ExternalProviders_ExternalProviderItemWithSecretDto
     properties?: Array<Volo_Abp_Account_ExternalProviders_ExternalProviderSettingsProperty> | null;
     secretProperties?: Array<Volo_Abp_Account_ExternalProviders_ExternalProviderSettingsProperty> | null;
 };
+

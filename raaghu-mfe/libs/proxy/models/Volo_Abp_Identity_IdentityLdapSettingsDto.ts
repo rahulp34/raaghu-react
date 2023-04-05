@@ -11,3 +11,4 @@ export type Volo_Abp_Identity_IdentityLdapSettingsDto = {
     ldapUserName?: string | null;
     ldapPassword?: string | null;
 };
+

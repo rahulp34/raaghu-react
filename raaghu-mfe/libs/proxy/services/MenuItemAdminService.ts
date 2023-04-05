@@ -38,10 +38,10 @@ export class MenuItemAdminService {
      * @throws ApiError
      */
     public static postMenuItems({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Menus_MenuItemCreateInput,
-}): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Menus_MenuItemCreateInput,
+    }): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/menu-items',
@@ -63,10 +63,10 @@ requestBody?: Volo_CmsKit_Admin_Menus_MenuItemCreateInput,
      * @throws ApiError
      */
     public static getMenuItems1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/menu-items/{id}',
@@ -89,12 +89,12 @@ id: string,
      * @throws ApiError
      */
     public static putMenuItems({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Menus_MenuItemUpdateInput,
-}): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Menus_MenuItemUpdateInput,
+    }): CancelablePromise<Volo_CmsKit_Menus_MenuItemDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/menu-items/{id}',
@@ -119,10 +119,10 @@ requestBody?: Volo_CmsKit_Admin_Menus_MenuItemUpdateInput,
      * @throws ApiError
      */
     public static deleteMenuItems({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/menu-items/{id}',
@@ -145,12 +145,12 @@ id: string,
      * @throws ApiError
      */
     public static putMenuItemsMove({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Menus_MenuItemMoveInput,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Menus_MenuItemMoveInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/menu-items/{id}/move',
@@ -175,16 +175,16 @@ requestBody?: Volo_CmsKit_Admin_Menus_MenuItemMoveInput,
      * @throws ApiError
      */
     public static getMenuItemsLookupPages({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/menu-items/lookup/pages',

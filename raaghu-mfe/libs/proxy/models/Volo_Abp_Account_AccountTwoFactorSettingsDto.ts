@@ -9,3 +9,4 @@ export type Volo_Abp_Account_AccountTwoFactorSettingsDto = {
     isRememberBrowserEnabled?: boolean;
     usersCanChange?: boolean;
 };
+

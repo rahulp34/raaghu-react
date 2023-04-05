@@ -12,3 +12,4 @@ export type Volo_Blogging_Posts_UpdatePostDto = {
     tags?: string | null;
     concurrencyStamp?: string | null;
 };
+

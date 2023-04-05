@@ -8,3 +8,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ex
     fields?: Array<Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumFieldDto> | null;
     localizationResource?: string | null;
 };
+

@@ -8,3 +8,4 @@ export type Volo_Forms_Choices_ChoiceDto = {
     isCorrect?: boolean;
     value?: string | null;
 };
+

@@ -7,3 +7,4 @@ export type Volo_Abp_Identity_IdentityRoleClaimDto = {
     claimType?: string | null;
     claimValue?: string | null;
 };
+

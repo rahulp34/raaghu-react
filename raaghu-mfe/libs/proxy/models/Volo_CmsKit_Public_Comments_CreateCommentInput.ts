@@ -6,3 +6,4 @@ export type Volo_CmsKit_Public_Comments_CreateCommentInput = {
     text: string;
     repliedCommentId?: string | null;
 };
+

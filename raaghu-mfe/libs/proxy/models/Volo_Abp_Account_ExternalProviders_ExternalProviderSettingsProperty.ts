@@ -6,3 +6,4 @@ export type Volo_Abp_Account_ExternalProviders_ExternalProviderSettingsProperty 
     name?: string | null;
     value?: string | null;
 };
+

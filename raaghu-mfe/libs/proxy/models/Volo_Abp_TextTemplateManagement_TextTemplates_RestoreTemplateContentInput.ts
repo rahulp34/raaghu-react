@@ -6,3 +6,4 @@ export type Volo_Abp_TextTemplateManagement_TextTemplates_RestoreTemplateContent
     templateName: string;
     cultureName?: string | null;
 };
+

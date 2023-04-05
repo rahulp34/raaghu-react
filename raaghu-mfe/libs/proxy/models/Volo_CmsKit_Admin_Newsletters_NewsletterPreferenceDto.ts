@@ -7,3 +7,4 @@ export type Volo_CmsKit_Admin_Newsletters_NewsletterPreferenceDto = {
     source?: string | null;
     sourceUrl?: string | null;
 };
+

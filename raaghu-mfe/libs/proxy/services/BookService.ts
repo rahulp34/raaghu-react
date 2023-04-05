@@ -16,10 +16,10 @@ export class BookService {
      * @throws ApiError
      */
     public static postBook({
-requestBody,
-}: {
-requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
-}): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
+        requestBody,
+    }: {
+        requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
+    }): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/app/book',
@@ -41,14 +41,14 @@ requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
      * @throws ApiError
      */
     public static getBook({
-sorting,
-skipCount,
-maxResultCount,
-}: {
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/app/book',
@@ -73,12 +73,12 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static putBook({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
-}): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
+    }): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/app/book/{id}',
@@ -103,10 +103,10 @@ requestBody?: Acme_BookStore_Books_Dto_CreateUpdateBookDto,
      * @throws ApiError
      */
     public static deleteBook({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/app/book/{id}',
@@ -129,10 +129,10 @@ id: string,
      * @throws ApiError
      */
     public static getBook1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Acme_BookStore_Books_Dto_BookDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/app/book/{id}',

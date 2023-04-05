@@ -18,3 +18,4 @@ export type Volo_Blogging_Comments_Dtos_CommentWithDetailsDto = {
     writer?: Volo_Blogging_Posts_BlogUserDto;
     concurrencyStamp?: string | null;
 };
+

@@ -17,10 +17,10 @@ export class CommentsService {
      * @throws ApiError
      */
     public static getCommentsHierarchical({
-postId,
-}: {
-postId: string,
-}): CancelablePromise<Array<Volo_Blogging_Comments_Dtos_CommentWithRepliesDto>> {
+        postId,
+    }: {
+        postId: string,
+    }): CancelablePromise<Array<Volo_Blogging_Comments_Dtos_CommentWithRepliesDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/comments/hierarchical/{postId}',
@@ -43,10 +43,10 @@ postId: string,
      * @throws ApiError
      */
     public static postComments({
-requestBody,
-}: {
-requestBody?: Volo_Blogging_Comments_Dtos_CreateCommentDto,
-}): CancelablePromise<Volo_Blogging_Comments_Dtos_CommentWithDetailsDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Blogging_Comments_Dtos_CreateCommentDto,
+    }): CancelablePromise<Volo_Blogging_Comments_Dtos_CommentWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/blogging/comments',
@@ -68,12 +68,12 @@ requestBody?: Volo_Blogging_Comments_Dtos_CreateCommentDto,
      * @throws ApiError
      */
     public static putComments({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Blogging_Comments_Dtos_UpdateCommentDto,
-}): CancelablePromise<Volo_Blogging_Comments_Dtos_CommentWithDetailsDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Blogging_Comments_Dtos_UpdateCommentDto,
+    }): CancelablePromise<Volo_Blogging_Comments_Dtos_CommentWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/blogging/comments/{id}',
@@ -98,10 +98,10 @@ requestBody?: Volo_Blogging_Comments_Dtos_UpdateCommentDto,
      * @throws ApiError
      */
     public static deleteComments({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/blogging/comments/{id}',

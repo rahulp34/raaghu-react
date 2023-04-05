@@ -15,16 +15,16 @@ export class TextTemplateDefinitionsService {
      * @throws ApiError
      */
     public static getTemplateDefinitions({
-filterText,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filterText?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filterText,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filterText?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/text-template-management/template-definitions',
@@ -50,10 +50,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getTemplateDefinitions1({
-name,
-}: {
-name: string,
-}): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TemplateDefinitionDto> {
+        name,
+    }: {
+        name: string,
+    }): CancelablePromise<Volo_Abp_TextTemplateManagement_TextTemplates_TemplateDefinitionDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/text-template-management/template-definitions/{name}',

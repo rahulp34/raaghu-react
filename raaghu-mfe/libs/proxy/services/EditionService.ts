@@ -20,10 +20,10 @@ export class EditionService {
      * @throws ApiError
      */
     public static getEditions({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/editions/{id}',
@@ -46,12 +46,12 @@ id: string,
      * @throws ApiError
      */
     public static putEditions({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Saas_Host_Dtos_EditionUpdateDto,
-}): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Saas_Host_Dtos_EditionUpdateDto,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/saas/editions/{id}',
@@ -76,10 +76,10 @@ requestBody?: Volo_Saas_Host_Dtos_EditionUpdateDto,
      * @throws ApiError
      */
     public static deleteEditions({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/saas/editions/{id}',
@@ -102,16 +102,16 @@ id: string,
      * @throws ApiError
      */
     public static getEditions1({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/editions',
@@ -137,10 +137,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postEditions({
-requestBody,
-}: {
-requestBody?: Volo_Saas_Host_Dtos_EditionCreateDto,
-}): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Saas_Host_Dtos_EditionCreateDto,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_EditionDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/saas/editions',
@@ -200,12 +200,12 @@ requestBody?: Volo_Saas_Host_Dtos_EditionCreateDto,
      * @throws ApiError
      */
     public static postSubscription({
-editionId,
-tenantId,
-}: {
-editionId?: string,
-tenantId?: string,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
+        editionId,
+        tenantId,
+    }: {
+        editionId?: string,
+        tenantId?: string,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/saas/subscription',

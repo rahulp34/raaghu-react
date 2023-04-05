@@ -9,3 +9,4 @@ export type Volo_Abp_Http_Modeling_ModuleApiDescriptionModel = {
     remoteServiceName?: string | null;
     controllers?: Record<string, Volo_Abp_Http_Modeling_ControllerApiDescriptionModel> | null;
 };
+

@@ -9,3 +9,4 @@ export type Volo_Abp_OpenIddict_Scopes_Dtos_UpdateScopeInput = {
     description?: string | null;
     resources?: Array<string> | null;
 };
+

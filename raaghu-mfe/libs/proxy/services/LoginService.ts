@@ -16,10 +16,10 @@ export class LoginService {
      * @throws ApiError
      */
     public static postLogin({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_UserLoginInfo,
-}): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_UserLoginInfo,
+    }): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/login',
@@ -41,10 +41,10 @@ requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_UserL
      * @throws ApiError
      */
     public static postLinkLogin({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_LinkUserLoginInfo,
-}): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_LinkUserLoginInfo,
+    }): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/linkLogin',
@@ -85,10 +85,10 @@ requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_LinkU
      * @throws ApiError
      */
     public static postCheckPassword({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_UserLoginInfo,
-}): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_UserLoginInfo,
+    }): CancelablePromise<Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_AbpLoginResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/checkPassword',

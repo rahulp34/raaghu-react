@@ -15,3 +15,4 @@ export type Volo_FileManagement_Files_FileDescriptorDto = {
     size?: number;
     concurrencyStamp?: string | null;
 };
+

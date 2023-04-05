@@ -15,12 +15,12 @@ export class PlanService {
      * @throws ApiError
      */
     public static getPlans({
-planId,
-gateway,
-}: {
-planId: string,
-gateway: string,
-}): CancelablePromise<Volo_Payment_Plans_GatewayPlanDto> {
+        planId,
+        gateway,
+    }: {
+        planId: string,
+        gateway: string,
+    }): CancelablePromise<Volo_Payment_Plans_GatewayPlanDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment/plans/{planId}/{gateway}',
@@ -63,10 +63,10 @@ gateway: string,
      * @throws ApiError
      */
     public static getPlans2({
-planId,
-}: {
-planId: string,
-}): CancelablePromise<Volo_Payment_Plans_PlanDto> {
+        planId,
+    }: {
+        planId: string,
+    }): CancelablePromise<Volo_Payment_Plans_PlanDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment/plans/{planId}',
@@ -89,10 +89,10 @@ planId: string,
      * @throws ApiError
      */
     public static getPlansMany({
-ids,
-}: {
-ids?: Array<string>,
-}): CancelablePromise<Array<Volo_Payment_Plans_PlanDto>> {
+        ids,
+    }: {
+        ids?: Array<string>,
+    }): CancelablePromise<Array<Volo_Payment_Plans_PlanDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment/plans/many',

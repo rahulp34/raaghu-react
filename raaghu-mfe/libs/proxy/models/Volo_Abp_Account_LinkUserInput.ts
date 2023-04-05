@@ -7,3 +7,4 @@ export type Volo_Abp_Account_LinkUserInput = {
     tenantId?: string | null;
     token: string;
 };
+

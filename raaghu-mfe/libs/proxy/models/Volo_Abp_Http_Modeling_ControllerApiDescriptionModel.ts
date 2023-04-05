@@ -15,3 +15,4 @@ export type Volo_Abp_Http_Modeling_ControllerApiDescriptionModel = {
     interfaces?: Array<Volo_Abp_Http_Modeling_ControllerInterfaceApiDescriptionModel> | null;
     actions?: Record<string, Volo_Abp_Http_Modeling_ActionApiDescriptionModel> | null;
 };
+

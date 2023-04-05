@@ -19,16 +19,16 @@ export class PollAdminService {
      * @throws ApiError
      */
     public static getPoll({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/poll',
@@ -54,10 +54,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postPoll({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Polls_CreatePollDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Polls_CreatePollDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/poll',
@@ -79,10 +79,10 @@ requestBody?: Volo_CmsKit_Admin_Polls_CreatePollDto,
      * @throws ApiError
      */
     public static getPoll1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/poll/{id}',
@@ -105,12 +105,12 @@ id: string,
      * @throws ApiError
      */
     public static putPoll({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Polls_UpdatePollDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Polls_UpdatePollDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Polls_PollWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/poll/{id}',
@@ -135,10 +135,10 @@ requestBody?: Volo_CmsKit_Admin_Polls_UpdatePollDto,
      * @throws ApiError
      */
     public static deletePoll({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/poll/{id}',
@@ -180,10 +180,10 @@ id: string,
      * @throws ApiError
      */
     public static getPollResult({
-id,
-}: {
-id?: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Polls_GetResultDto> {
+        id,
+    }: {
+        id?: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Polls_GetResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/poll/result',

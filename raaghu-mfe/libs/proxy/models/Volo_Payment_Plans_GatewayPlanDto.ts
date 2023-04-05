@@ -8,3 +8,4 @@ export type Volo_Payment_Plans_GatewayPlanDto = {
     gateway?: string | null;
     externalId?: string | null;
 };
+

@@ -9,3 +9,4 @@ export type Volo_Abp_Account_ProfilePictureSourceDto = {
     source?: string | null;
     fileContent?: string | null;
 };
+

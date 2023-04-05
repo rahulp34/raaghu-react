@@ -8,3 +8,4 @@ export type Volo_CmsKit_Public_Comments_CmsUserDto = {
     name?: string | null;
     surname?: string | null;
 };
+

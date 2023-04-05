@@ -15,30 +15,30 @@ export class SecurityLogService {
      * @throws ApiError
      */
     public static getSecurityLogs({
-startTime,
-endTime,
-applicationName,
-identity,
-action,
-userName,
-clientId,
-correlationId,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-startTime?: string,
-endTime?: string,
-applicationName?: string,
-identity?: string,
-action?: string,
-userName?: string,
-clientId?: string,
-correlationId?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        startTime,
+        endTime,
+        applicationName,
+        identity,
+        action,
+        userName,
+        clientId,
+        correlationId,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        startTime?: string,
+        endTime?: string,
+        applicationName?: string,
+        identity?: string,
+        action?: string,
+        userName?: string,
+        clientId?: string,
+        correlationId?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/security-logs',
@@ -71,10 +71,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getSecurityLogs1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Identity_IdentitySecurityLogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Identity_IdentitySecurityLogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/security-logs/{id}',
@@ -97,30 +97,30 @@ id: string,
      * @throws ApiError
      */
     public static getSecurityLogsMy({
-startTime,
-endTime,
-applicationName,
-identity,
-action,
-userName,
-clientId,
-correlationId,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-startTime?: string,
-endTime?: string,
-applicationName?: string,
-identity?: string,
-action?: string,
-userName?: string,
-clientId?: string,
-correlationId?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        startTime,
+        endTime,
+        applicationName,
+        identity,
+        action,
+        userName,
+        clientId,
+        correlationId,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        startTime?: string,
+        endTime?: string,
+        applicationName?: string,
+        identity?: string,
+        action?: string,
+        userName?: string,
+        clientId?: string,
+        correlationId?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/security-logs/my',
@@ -153,10 +153,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getSecurityLogsMy1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Identity_IdentitySecurityLogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Identity_IdentitySecurityLogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/security-logs/my/{id}',

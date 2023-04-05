@@ -14,16 +14,16 @@ export class MediaDescriptorAdminService {
      * @throws ApiError
      */
     public static postMedia({
-entityType,
-name,
-formData,
-}: {
-entityType: string,
-name: string,
-formData?: {
-File?: Blob;
-},
-}): CancelablePromise<Volo_CmsKit_Admin_MediaDescriptors_MediaDescriptorDto> {
+        entityType,
+        name,
+        formData,
+    }: {
+        entityType: string,
+        name: string,
+        formData?: {
+            File?: Blob;
+        },
+    }): CancelablePromise<Volo_CmsKit_Admin_MediaDescriptors_MediaDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/media/{entityType}',
@@ -51,10 +51,10 @@ File?: Blob;
      * @throws ApiError
      */
     public static deleteMedia({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/media/{id}',

@@ -8,3 +8,4 @@ export type Volo_CmsKit_Public_Newsletters_NewsletterEmailOptionsDto = {
     additionalPreferences?: Array<string> | null;
     displayAdditionalPreferences?: Array<string> | null;
 };
+

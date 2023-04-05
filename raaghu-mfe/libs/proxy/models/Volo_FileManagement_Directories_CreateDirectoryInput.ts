@@ -7,3 +7,4 @@ export type Volo_FileManagement_Directories_CreateDirectoryInput = {
     parentId?: string | null;
     name: string;
 };
+

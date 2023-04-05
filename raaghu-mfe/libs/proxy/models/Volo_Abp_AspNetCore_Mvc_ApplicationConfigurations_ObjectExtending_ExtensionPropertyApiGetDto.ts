@@ -5,3 +5,4 @@
 export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiGetDto = {
     isAvailable?: boolean;
 };
+

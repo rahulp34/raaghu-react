@@ -14,10 +14,10 @@ export class PagesPublicService {
      * @throws ApiError
      */
     public static getPages({
-slug,
-}: {
-slug: string,
-}): CancelablePromise<Volo_CmsKit_Contents_PageDto> {
+        slug,
+    }: {
+        slug: string,
+    }): CancelablePromise<Volo_CmsKit_Contents_PageDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/pages/{slug}',

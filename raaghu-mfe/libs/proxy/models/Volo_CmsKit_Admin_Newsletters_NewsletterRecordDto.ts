@@ -7,3 +7,4 @@ export type Volo_CmsKit_Admin_Newsletters_NewsletterRecordDto = {
     emailAddress?: string | null;
     creationTime?: string;
 };
+

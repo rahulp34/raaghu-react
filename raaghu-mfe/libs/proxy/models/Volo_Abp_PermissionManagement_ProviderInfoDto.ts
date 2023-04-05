@@ -6,3 +6,4 @@ export type Volo_Abp_PermissionManagement_ProviderInfoDto = {
     providerName?: string | null;
     providerKey?: string | null;
 };
+

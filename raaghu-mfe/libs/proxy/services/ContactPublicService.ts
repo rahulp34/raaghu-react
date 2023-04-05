@@ -14,10 +14,10 @@ export class ContactPublicService {
      * @throws ApiError
      */
     public static postContacts({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Public_Contact_ContactCreateInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Public_Contact_ContactCreateInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-public/contacts',

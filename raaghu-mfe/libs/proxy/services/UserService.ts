@@ -32,10 +32,10 @@ export class UserService {
      * @throws ApiError
      */
     public static postLinkUserLink({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_LinkUserInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_LinkUserInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/link-user/link',
@@ -57,10 +57,10 @@ requestBody?: Volo_Abp_Account_LinkUserInput,
      * @throws ApiError
      */
     public static postLinkUserUnlink({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_UnLinkUserInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_UnLinkUserInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/link-user/unlink',
@@ -82,10 +82,10 @@ requestBody?: Volo_Abp_Account_UnLinkUserInput,
      * @throws ApiError
      */
     public static postLinkUserIsLinked({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_IsLinkedInput,
-}): CancelablePromise<boolean> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_IsLinkedInput,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/link-user/is-linked',
@@ -126,10 +126,10 @@ requestBody?: Volo_Abp_Account_IsLinkedInput,
      * @throws ApiError
      */
     public static postLinkUserVerifyLinkToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_VerifyLinkTokenInput,
-}): CancelablePromise<boolean> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_VerifyLinkTokenInput,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/link-user/verify-link-token',
@@ -170,10 +170,10 @@ requestBody?: Volo_Abp_Account_VerifyLinkTokenInput,
      * @throws ApiError
      */
     public static postLinkUserVerifyLinkLoginToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_VerifyLinkLoginTokenInput,
-}): CancelablePromise<boolean> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_VerifyLinkLoginTokenInput,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/link-user/verify-link-login-token',
@@ -214,10 +214,10 @@ requestBody?: Volo_Abp_Account_VerifyLinkLoginTokenInput,
      * @throws ApiError
      */
     public static getUsers({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}',
@@ -240,12 +240,12 @@ id: string,
      * @throws ApiError
      */
     public static putUsers({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Abp_Identity_IdentityUserUpdateDto,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Abp_Identity_IdentityUserUpdateDto,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}',
@@ -270,10 +270,10 @@ requestBody?: Volo_Abp_Identity_IdentityUserUpdateDto,
      * @throws ApiError
      */
     public static deleteUsers({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/identity/users/{id}',
@@ -296,30 +296,30 @@ id: string,
      * @throws ApiError
      */
     public static getUsers1({
-filter,
-roleId,
-organizationUnitId,
-userName,
-phoneNumber,
-emailAddress,
-isLockedOut,
-notActive,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-roleId?: string,
-organizationUnitId?: string,
-userName?: string,
-phoneNumber?: string,
-emailAddress?: string,
-isLockedOut?: boolean,
-notActive?: boolean,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        roleId,
+        organizationUnitId,
+        userName,
+        phoneNumber,
+        emailAddress,
+        isLockedOut,
+        notActive,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        roleId?: string,
+        organizationUnitId?: string,
+        userName?: string,
+        phoneNumber?: string,
+        emailAddress?: string,
+        isLockedOut?: boolean,
+        notActive?: boolean,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users',
@@ -352,10 +352,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postUsers({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Identity_IdentityUserCreateDto,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Identity_IdentityUserCreateDto,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/identity/users',
@@ -377,10 +377,10 @@ requestBody?: Volo_Abp_Identity_IdentityUserCreateDto,
      * @throws ApiError
      */
     public static getUsersRoles({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/roles',
@@ -403,12 +403,12 @@ id: string,
      * @throws ApiError
      */
     public static putUsersRoles({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Abp_Identity_IdentityUserUpdateRolesDto,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Abp_Identity_IdentityUserUpdateRolesDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/roles',
@@ -490,10 +490,10 @@ requestBody?: Volo_Abp_Identity_IdentityUserUpdateRolesDto,
      * @throws ApiError
      */
     public static getUsersClaims({
-id,
-}: {
-id: string,
-}): CancelablePromise<Array<Volo_Abp_Identity_IdentityUserClaimDto>> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Array<Volo_Abp_Identity_IdentityUserClaimDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/claims',
@@ -516,12 +516,12 @@ id: string,
      * @throws ApiError
      */
     public static putUsersClaims({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Array<Volo_Abp_Identity_IdentityUserClaimDto>,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Array<Volo_Abp_Identity_IdentityUserClaimDto>,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/claims',
@@ -546,10 +546,10 @@ requestBody?: Array<Volo_Abp_Identity_IdentityUserClaimDto>,
      * @throws ApiError
      */
     public static getUsersOrganizationUnits({
-id,
-}: {
-id: string,
-}): CancelablePromise<Array<Volo_Abp_Identity_OrganizationUnitDto>> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Array<Volo_Abp_Identity_OrganizationUnitDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/organization-units',
@@ -572,12 +572,12 @@ id: string,
      * @throws ApiError
      */
     public static putUsersLock({
-id,
-lockoutEnd,
-}: {
-id: string,
-lockoutEnd: string,
-}): CancelablePromise<any> {
+        id,
+        lockoutEnd,
+    }: {
+        id: string,
+        lockoutEnd: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/lock/{lockoutEnd}',
@@ -601,10 +601,10 @@ lockoutEnd: string,
      * @throws ApiError
      */
     public static putUsersUnlock({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/unlock',
@@ -627,10 +627,10 @@ id: string,
      * @throws ApiError
      */
     public static getUsersByUsername({
-username,
-}: {
-username: string,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        username,
+    }: {
+        username: string,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-username/{username}',
@@ -653,10 +653,10 @@ username: string,
      * @throws ApiError
      */
     public static getUsersByEmail({
-email,
-}: {
-email: string,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        email,
+    }: {
+        email: string,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/by-email/{email}',
@@ -679,10 +679,10 @@ email: string,
      * @throws ApiError
      */
     public static getUsersTwoFactorEnabled({
-id,
-}: {
-id: string,
-}): CancelablePromise<boolean> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/identity/users/{id}/two-factor-enabled',
@@ -705,12 +705,12 @@ id: string,
      * @throws ApiError
      */
     public static putUsersTwoFactor({
-id,
-enabled,
-}: {
-id: string,
-enabled: boolean,
-}): CancelablePromise<any> {
+        id,
+        enabled,
+    }: {
+        id: string,
+        enabled: boolean,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/two-factor/{enabled}',
@@ -734,12 +734,12 @@ enabled: boolean,
      * @throws ApiError
      */
     public static putUsersChangePassword({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Abp_Identity_IdentityUserUpdatePasswordInput,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Abp_Identity_IdentityUserUpdatePasswordInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/users/{id}/change-password',
@@ -821,10 +821,10 @@ requestBody?: Volo_Abp_Identity_IdentityUserUpdatePasswordInput,
      * @throws ApiError
      */
     public static postUsersImportExternalUser({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Identity_ImportExternalUserInput,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Identity_ImportExternalUserInput,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/identity/users/import-external-user',

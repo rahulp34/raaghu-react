@@ -7,3 +7,4 @@ export type Volo_FileManagement_Files_FileUploadPreInfoRequest = {
     fileName?: string | null;
     size?: number;
 };
+

@@ -11,3 +11,4 @@ export type Volo_Blogging_Posts_CreatePostDto = {
     tags?: string | null;
     description?: string | null;
 };
+

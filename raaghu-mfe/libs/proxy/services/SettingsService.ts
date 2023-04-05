@@ -36,10 +36,10 @@ export class SettingsService {
      * @throws ApiError
      */
     public static putSettings({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Identity_IdentitySettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Identity_IdentitySettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/settings',
@@ -80,10 +80,10 @@ requestBody?: Volo_Abp_Identity_IdentitySettingsDto,
      * @throws ApiError
      */
     public static putSettingsLdap({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Identity_IdentityLdapSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Identity_IdentityLdapSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/settings/ldap',
@@ -124,10 +124,10 @@ requestBody?: Volo_Abp_Identity_IdentityLdapSettingsDto,
      * @throws ApiError
      */
     public static putSettingsOauth({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Identity_IdentityOAuthSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Identity_IdentityOAuthSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/identity/settings/oauth',
@@ -149,10 +149,10 @@ requestBody?: Volo_Abp_Identity_IdentityOAuthSettingsDto,
      * @throws ApiError
      */
     public static postSettingsSendOnEnter({
-requestBody,
-}: {
-requestBody?: Volo_Chat_Settings_SendOnEnterSettingDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Chat_Settings_SendOnEnterSettingDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/chat/settings/send-on-enter',

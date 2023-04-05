@@ -15,3 +15,4 @@ export type Volo_Abp_LanguageManagement_Dto_LanguageDto = {
     isDefaultLanguage?: boolean;
     concurrencyStamp?: string | null;
 };
+

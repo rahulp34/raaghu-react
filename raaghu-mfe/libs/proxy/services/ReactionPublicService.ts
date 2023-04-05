@@ -14,12 +14,12 @@ export class ReactionPublicService {
      * @throws ApiError
      */
     public static getReactions({
-entityType,
-entityId,
-}: {
-entityType: string,
-entityId: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        entityType,
+        entityId,
+    }: {
+        entityType: string,
+        entityId: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/reactions/{entityType}/{entityId}',
@@ -43,14 +43,14 @@ entityId: string,
      * @throws ApiError
      */
     public static putReactions({
-entityType,
-entityId,
-reaction,
-}: {
-entityType: string,
-entityId: string,
-reaction: string,
-}): CancelablePromise<any> {
+        entityType,
+        entityId,
+        reaction,
+    }: {
+        entityType: string,
+        entityId: string,
+        reaction: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-public/reactions/{entityType}/{entityId}/{reaction}',
@@ -75,14 +75,14 @@ reaction: string,
      * @throws ApiError
      */
     public static deleteReactions({
-entityType,
-entityId,
-reaction,
-}: {
-entityType: string,
-entityId: string,
-reaction: string,
-}): CancelablePromise<any> {
+        entityType,
+        entityId,
+        reaction,
+    }: {
+        entityType: string,
+        entityId: string,
+        reaction: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-public/reactions/{entityType}/{entityId}/{reaction}',

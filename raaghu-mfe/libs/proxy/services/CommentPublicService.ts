@@ -17,12 +17,12 @@ export class CommentPublicService {
      * @throws ApiError
      */
     public static getComments({
-entityType,
-entityId,
-}: {
-entityType: string,
-entityId: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        entityType,
+        entityId,
+    }: {
+        entityType: string,
+        entityId: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/comments/{entityType}/{entityId}',
@@ -46,14 +46,14 @@ entityId: string,
      * @throws ApiError
      */
     public static postComments({
-entityType,
-entityId,
-requestBody,
-}: {
-entityType: string,
-entityId: string,
-requestBody?: Volo_CmsKit_Public_Comments_CreateCommentInput,
-}): CancelablePromise<Volo_CmsKit_Public_Comments_CommentDto> {
+        entityType,
+        entityId,
+        requestBody,
+    }: {
+        entityType: string,
+        entityId: string,
+        requestBody?: Volo_CmsKit_Public_Comments_CreateCommentInput,
+    }): CancelablePromise<Volo_CmsKit_Public_Comments_CommentDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-public/comments/{entityType}/{entityId}',
@@ -79,12 +79,12 @@ requestBody?: Volo_CmsKit_Public_Comments_CreateCommentInput,
      * @throws ApiError
      */
     public static putComments({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Public_Comments_UpdateCommentInput,
-}): CancelablePromise<Volo_CmsKit_Public_Comments_CommentDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Public_Comments_UpdateCommentInput,
+    }): CancelablePromise<Volo_CmsKit_Public_Comments_CommentDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-public/comments/{id}',
@@ -109,10 +109,10 @@ requestBody?: Volo_CmsKit_Public_Comments_UpdateCommentInput,
      * @throws ApiError
      */
     public static deleteComments({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-public/comments/{id}',

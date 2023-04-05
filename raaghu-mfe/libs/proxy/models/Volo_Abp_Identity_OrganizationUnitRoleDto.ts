@@ -8,3 +8,4 @@ export type Volo_Abp_Identity_OrganizationUnitRoleDto = {
     organizationUnitId?: string;
     roleId?: string;
 };
+

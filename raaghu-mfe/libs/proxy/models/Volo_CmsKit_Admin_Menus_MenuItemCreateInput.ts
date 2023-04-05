@@ -14,3 +14,4 @@ export type Volo_CmsKit_Admin_Menus_MenuItemCreateInput = {
     cssClass?: string | null;
     pageId?: string | null;
 };
+

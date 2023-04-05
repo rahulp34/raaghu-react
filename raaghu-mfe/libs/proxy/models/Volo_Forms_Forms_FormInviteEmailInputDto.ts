@@ -7,3 +7,4 @@ export type Volo_Forms_Forms_FormInviteEmailInputDto = {
     subject?: string | null;
     body?: string | null;
 };
+

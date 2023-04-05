@@ -16,3 +16,4 @@ export type Volo_CmsKit_Admin_Pages_PageDto = {
     isHomePage?: boolean;
     concurrencyStamp?: string | null;
 };
+

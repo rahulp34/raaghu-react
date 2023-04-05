@@ -14,12 +14,12 @@ export class BlogFeatureService {
      * @throws ApiError
      */
     public static getBlogsFeatures({
-blogId,
-featureName,
-}: {
-blogId: string,
-featureName: string,
-}): CancelablePromise<Volo_CmsKit_Blogs_BlogFeatureDto> {
+        blogId,
+        featureName,
+    }: {
+        blogId: string,
+        featureName: string,
+    }): CancelablePromise<Volo_CmsKit_Blogs_BlogFeatureDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit/blogs/{blogId}/features/{featureName}',

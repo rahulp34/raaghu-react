@@ -8,3 +8,4 @@ export type Volo_Payment_Plans_PlanDto = {
     name?: string | null;
     concurrencyStamp?: string | null;
 };
+

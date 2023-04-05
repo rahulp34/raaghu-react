@@ -16,3 +16,4 @@ export type Volo_Saas_Host_Dtos_SaasTenantCreateDto = {
     adminPassword: string;
     connectionStrings?: Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto;
 };
+

@@ -28,10 +28,10 @@ export class AccountService {
      * @throws ApiError
      */
     public static postRegister({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_RegisterDto,
-}): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_RegisterDto,
+    }): CancelablePromise<Volo_Abp_Identity_IdentityUserDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/register',
@@ -53,10 +53,10 @@ requestBody?: Volo_Abp_Account_RegisterDto,
      * @throws ApiError
      */
     public static postSendPasswordResetCode({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_SendPasswordResetCodeDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_SendPasswordResetCodeDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-password-reset-code',
@@ -78,10 +78,10 @@ requestBody?: Volo_Abp_Account_SendPasswordResetCodeDto,
      * @throws ApiError
      */
     public static postVerifyPasswordResetToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_VerifyPasswordResetTokenInput,
-}): CancelablePromise<boolean> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_VerifyPasswordResetTokenInput,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/verify-password-reset-token',
@@ -103,10 +103,10 @@ requestBody?: Volo_Abp_Account_VerifyPasswordResetTokenInput,
      * @throws ApiError
      */
     public static postResetPassword({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_ResetPasswordDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_ResetPasswordDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/reset-password',
@@ -128,10 +128,10 @@ requestBody?: Volo_Abp_Account_ResetPasswordDto,
      * @throws ApiError
      */
     public static getConfirmationState({
-id,
-}: {
-id?: string,
-}): CancelablePromise<Volo_Abp_Account_IdentityUserConfirmationStateDto> {
+        id,
+    }: {
+        id?: string,
+    }): CancelablePromise<Volo_Abp_Account_IdentityUserConfirmationStateDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/confirmation-state',
@@ -154,10 +154,10 @@ id?: string,
      * @throws ApiError
      */
     public static postSendPhoneNumberConfirmationToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_SendPhoneNumberConfirmationTokenDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_SendPhoneNumberConfirmationTokenDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-phone-number-confirmation-token',
@@ -179,10 +179,10 @@ requestBody?: Volo_Abp_Account_SendPhoneNumberConfirmationTokenDto,
      * @throws ApiError
      */
     public static postSendEmailConfirmationToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_SendEmailConfirmationTokenDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_SendEmailConfirmationTokenDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-email-confirmation-token',
@@ -204,10 +204,10 @@ requestBody?: Volo_Abp_Account_SendEmailConfirmationTokenDto,
      * @throws ApiError
      */
     public static postVerifyEmailConfirmationToken({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_VerifyEmailConfirmationTokenInput,
-}): CancelablePromise<boolean> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_VerifyEmailConfirmationTokenInput,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/verify-email-confirmation-token',
@@ -229,10 +229,10 @@ requestBody?: Volo_Abp_Account_VerifyEmailConfirmationTokenInput,
      * @throws ApiError
      */
     public static postConfirmPhoneNumber({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_ConfirmPhoneNumberInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_ConfirmPhoneNumberInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/confirm-phone-number',
@@ -254,10 +254,10 @@ requestBody?: Volo_Abp_Account_ConfirmPhoneNumberInput,
      * @throws ApiError
      */
     public static postConfirmEmail({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_ConfirmEmailInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_ConfirmEmailInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/confirm-email',
@@ -279,14 +279,14 @@ requestBody?: Volo_Abp_Account_ConfirmEmailInput,
      * @throws ApiError
      */
     public static postProfilePicture({
-type,
-formData,
-}: {
-type?: Volo_Abp_Account_ProfilePictureType,
-formData?: {
-ImageContent?: Blob;
-},
-}): CancelablePromise<any> {
+        type,
+        formData,
+    }: {
+        type?: Volo_Abp_Account_ProfilePictureType,
+        formData?: {
+            ImageContent?: Blob;
+        },
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/profile-picture',
@@ -311,10 +311,10 @@ ImageContent?: Blob;
      * @throws ApiError
      */
     public static getProfilePicture({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_Account_ProfilePictureSourceDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_Account_ProfilePictureSourceDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/profile-picture/{id}',
@@ -337,12 +337,12 @@ id: string,
      * @throws ApiError
      */
     public static getTwoFactorProviders({
-userId,
-token,
-}: {
-userId: string,
-token: string,
-}): CancelablePromise<Array<string>> {
+        userId,
+        token,
+    }: {
+        userId: string,
+        token: string,
+    }): CancelablePromise<Array<string>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/two-factor-providers',
@@ -366,10 +366,10 @@ token: string,
      * @throws ApiError
      */
     public static postSendTwoFactorCode({
-requestBody,
-}: {
-requestBody?: Volo_Abp_Account_SendTwoFactorCodeInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_Account_SendTwoFactorCodeInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/account/send-two-factor-code',
@@ -391,30 +391,30 @@ requestBody?: Volo_Abp_Account_SendTwoFactorCodeInput,
      * @throws ApiError
      */
     public static getSecurityLogs({
-startTime,
-endTime,
-applicationName,
-identity,
-action,
-userName,
-clientId,
-correlationId,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-startTime?: string,
-endTime?: string,
-applicationName?: string,
-identity?: string,
-action?: string,
-userName?: string,
-clientId?: string,
-correlationId?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        startTime,
+        endTime,
+        applicationName,
+        identity,
+        action,
+        userName,
+        clientId,
+        correlationId,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        startTime?: string,
+        endTime?: string,
+        applicationName?: string,
+        identity?: string,
+        action?: string,
+        userName?: string,
+        clientId?: string,
+        correlationId?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/security-logs',
@@ -447,10 +447,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getProfilePictureFile({
-id,
-}: {
-id: string,
-}): CancelablePromise<Blob> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/profile-picture-file/{id}',
@@ -473,10 +473,10 @@ id: string,
      * @throws ApiError
      */
     public static getRecaptchaValidate({
-captchaResponse,
-}: {
-captchaResponse?: string,
-}): CancelablePromise<any> {
+        captchaResponse,
+    }: {
+        captchaResponse?: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/account/recaptcha-validate',

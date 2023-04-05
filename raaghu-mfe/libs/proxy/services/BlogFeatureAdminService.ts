@@ -15,10 +15,10 @@ export class BlogFeatureAdminService {
      * @throws ApiError
      */
     public static getBlogsFeatures({
-blogId,
-}: {
-blogId: string,
-}): CancelablePromise<Array<Volo_CmsKit_Blogs_BlogFeatureDto>> {
+        blogId,
+    }: {
+        blogId: string,
+    }): CancelablePromise<Array<Volo_CmsKit_Blogs_BlogFeatureDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/blogs/{blogId}/features',
@@ -41,12 +41,12 @@ blogId: string,
      * @throws ApiError
      */
     public static putBlogsFeatures({
-blogId,
-requestBody,
-}: {
-blogId: string,
-requestBody?: Volo_CmsKit_Admin_Blogs_BlogFeatureInputDto,
-}): CancelablePromise<any> {
+        blogId,
+        requestBody,
+    }: {
+        blogId: string,
+        requestBody?: Volo_CmsKit_Admin_Blogs_BlogFeatureInputDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/blogs/{blogId}/features',

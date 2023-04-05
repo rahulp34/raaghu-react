@@ -11,3 +11,4 @@ export type Volo_Abp_PermissionManagement_PermissionGroupDto = {
     displayNameResource?: string | null;
     permissions?: Array<Volo_Abp_PermissionManagement_PermissionGrantInfoDto> | null;
 };
+

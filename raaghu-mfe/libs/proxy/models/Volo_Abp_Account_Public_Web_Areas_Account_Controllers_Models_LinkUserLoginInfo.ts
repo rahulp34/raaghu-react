@@ -6,3 +6,4 @@ export type Volo_Abp_Account_Public_Web_Areas_Account_Controllers_Models_LinkUse
     linkUserId: string;
     linkTenantId?: string | null;
 };
+

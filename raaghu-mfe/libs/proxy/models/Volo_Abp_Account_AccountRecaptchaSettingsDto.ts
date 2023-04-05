@@ -11,3 +11,4 @@ export type Volo_Abp_Account_AccountRecaptchaSettingsDto = {
     version?: number;
     score?: number;
 };
+

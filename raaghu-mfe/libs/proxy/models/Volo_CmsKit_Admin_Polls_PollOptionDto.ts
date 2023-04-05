@@ -8,3 +8,4 @@ export type Volo_CmsKit_Admin_Polls_PollOptionDto = {
     order?: number;
     voteCount?: number;
 };
+

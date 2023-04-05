@@ -9,3 +9,4 @@ export type Volo_CmsKit_Admin_UrlShorting_ShortenedUrlDto = {
     source?: string | null;
     target?: string | null;
 };
+

@@ -12,3 +12,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ex
     onEditForm?: Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiFormDto;
     lookup?: Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiLookupDto;
 };
+

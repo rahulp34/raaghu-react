@@ -13,3 +13,4 @@ export type Volo_Abp_Identity_CreateClaimTypeDto = {
     description?: string | null;
     valueType?: Volo_Abp_Identity_IdentityClaimValueType;
 };
+

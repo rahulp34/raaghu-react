@@ -17,12 +17,12 @@ export class PaymentRequestService {
      * @throws ApiError
      */
     public static postComplete({
-paymentMethod,
-requestBody,
-}: {
-paymentMethod: string,
-requestBody?: Record<string, string>,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
+        paymentMethod,
+        requestBody,
+    }: {
+        paymentMethod: string,
+        requestBody?: Record<string, string>,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/payment/{paymentMethod}/complete',
@@ -47,10 +47,10 @@ requestBody?: Record<string, string>,
      * @throws ApiError
      */
     public static postRequests({
-requestBody,
-}: {
-requestBody?: Volo_Payment_Requests_PaymentRequestCreateDto,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Payment_Requests_PaymentRequestCreateDto,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/payment/requests',
@@ -72,10 +72,10 @@ requestBody?: Volo_Payment_Requests_PaymentRequestCreateDto,
      * @throws ApiError
      */
     public static getRequests({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/payment/requests/{id}',
@@ -98,14 +98,14 @@ id: string,
      * @throws ApiError
      */
     public static postWebhook({
-paymentMethod,
-payload,
-headers,
-}: {
-paymentMethod: string,
-payload?: string,
-headers?: Record<string, string>,
-}): CancelablePromise<boolean> {
+        paymentMethod,
+        payload,
+        headers,
+    }: {
+        paymentMethod: string,
+        payload?: string,
+        headers?: Record<string, string>,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/payment/{paymentMethod}/webhook',
@@ -134,12 +134,12 @@ headers?: Record<string, string>,
      * @throws ApiError
      */
     public static postStart({
-paymentMethod,
-requestBody,
-}: {
-paymentMethod: string,
-requestBody?: Volo_Payment_Requests_PaymentRequestStartDto,
-}): CancelablePromise<Volo_Payment_Requests_PaymentRequestStartResultDto> {
+        paymentMethod,
+        requestBody,
+    }: {
+        paymentMethod: string,
+        requestBody?: Volo_Payment_Requests_PaymentRequestStartDto,
+    }): CancelablePromise<Volo_Payment_Requests_PaymentRequestStartResultDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/payment/{paymentMethod}/start',

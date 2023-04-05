@@ -15,3 +15,4 @@ export type Volo_Abp_Account_ProfileDto = {
     hasPassword?: boolean;
     concurrencyStamp?: string | null;
 };
+

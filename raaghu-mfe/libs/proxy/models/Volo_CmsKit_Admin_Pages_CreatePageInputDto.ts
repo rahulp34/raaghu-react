@@ -9,3 +9,4 @@ export type Volo_CmsKit_Admin_Pages_CreatePageInputDto = {
     script?: string | null;
     style?: string | null;
 };
+

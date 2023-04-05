@@ -9,3 +9,4 @@ export type Volo_CmsKit_Public_Polls_GetResultDto = {
     pollVoteCount?: number;
     pollResultDetails?: Array<Volo_CmsKit_Public_Polls_PollResultDto> | null;
 };
+

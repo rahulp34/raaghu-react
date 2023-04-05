@@ -9,3 +9,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ob
     modules?: Record<string, Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ModuleExtensionDto> | null;
     enums?: Record<string, Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumDto> | null;
 };
+

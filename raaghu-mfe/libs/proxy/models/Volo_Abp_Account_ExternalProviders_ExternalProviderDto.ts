@@ -7,3 +7,4 @@ import type { Volo_Abp_Account_ExternalProviders_ExternalProviderItemDto } from 
 export type Volo_Abp_Account_ExternalProviders_ExternalProviderDto = {
     providers?: Array<Volo_Abp_Account_ExternalProviders_ExternalProviderItemDto> | null;
 };
+

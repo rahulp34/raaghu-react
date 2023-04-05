@@ -35,10 +35,10 @@ export class EmailSettingsService {
      * @throws ApiError
      */
     public static postEmailing({
-requestBody,
-}: {
-requestBody?: Volo_Abp_SettingManagement_UpdateEmailSettingsDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_SettingManagement_UpdateEmailSettingsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/setting-management/emailing',
@@ -60,10 +60,10 @@ requestBody?: Volo_Abp_SettingManagement_UpdateEmailSettingsDto,
      * @throws ApiError
      */
     public static postEmailingSendTestEmail({
-requestBody,
-}: {
-requestBody?: Volo_Abp_SettingManagement_SendTestEmailInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Abp_SettingManagement_SendTestEmailInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/setting-management/emailing/send-test-email',

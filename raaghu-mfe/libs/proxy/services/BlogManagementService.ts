@@ -36,10 +36,10 @@ export class BlogManagementService {
      * @throws ApiError
      */
     public static postBlogsAdmin({
-requestBody,
-}: {
-requestBody?: Volo_Blogging_Admin_Blogs_CreateBlogDto,
-}): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Blogging_Admin_Blogs_CreateBlogDto,
+    }): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/blogging/blogs/admin',
@@ -61,10 +61,10 @@ requestBody?: Volo_Blogging_Admin_Blogs_CreateBlogDto,
      * @throws ApiError
      */
     public static getBlogsAdmin1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/blogs/admin/{id}',
@@ -87,12 +87,12 @@ id: string,
      * @throws ApiError
      */
     public static putBlogsAdmin({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Blogging_Admin_Blogs_UpdateBlogDto,
-}): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Blogging_Admin_Blogs_UpdateBlogDto,
+    }): CancelablePromise<Volo_Blogging_Blogs_Dtos_BlogDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/blogging/blogs/admin/{id}',
@@ -117,10 +117,10 @@ requestBody?: Volo_Blogging_Admin_Blogs_UpdateBlogDto,
      * @throws ApiError
      */
     public static deleteBlogsAdmin({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/blogging/blogs/admin/{id}',
@@ -143,10 +143,10 @@ id: string,
      * @throws ApiError
      */
     public static getBlogsAdminClearCache({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/blogs/admin/clear-cache/{id}',

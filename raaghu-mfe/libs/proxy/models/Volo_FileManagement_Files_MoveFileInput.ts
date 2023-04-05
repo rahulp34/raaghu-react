@@ -7,3 +7,4 @@ export type Volo_FileManagement_Files_MoveFileInput = {
     newDirectoryId?: string | null;
     concurrencyStamp?: string | null;
 };
+

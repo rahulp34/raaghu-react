@@ -8,3 +8,4 @@ export type Volo_CmsKit_Admin_Blogs_BlogDto = {
     slug?: string | null;
     concurrencyStamp?: string | null;
 };
+

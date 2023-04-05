@@ -16,14 +16,14 @@ export class RatingPublicService {
      * @throws ApiError
      */
     public static putRatings({
-entityType,
-entityId,
-requestBody,
-}: {
-entityType: string,
-entityId: string,
-requestBody?: Volo_CmsKit_Public_Ratings_CreateUpdateRatingInput,
-}): CancelablePromise<Volo_CmsKit_Public_Ratings_RatingDto> {
+        entityType,
+        entityId,
+        requestBody,
+    }: {
+        entityType: string,
+        entityId: string,
+        requestBody?: Volo_CmsKit_Public_Ratings_CreateUpdateRatingInput,
+    }): CancelablePromise<Volo_CmsKit_Public_Ratings_RatingDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-public/ratings/{entityType}/{entityId}',
@@ -49,12 +49,12 @@ requestBody?: Volo_CmsKit_Public_Ratings_CreateUpdateRatingInput,
      * @throws ApiError
      */
     public static deleteRatings({
-entityType,
-entityId,
-}: {
-entityType: string,
-entityId: string,
-}): CancelablePromise<any> {
+        entityType,
+        entityId,
+    }: {
+        entityType: string,
+        entityId: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-public/ratings/{entityType}/{entityId}',
@@ -78,12 +78,12 @@ entityId: string,
      * @throws ApiError
      */
     public static getRatings({
-entityType,
-entityId,
-}: {
-entityType: string,
-entityId: string,
-}): CancelablePromise<Array<Volo_CmsKit_Public_Ratings_RatingWithStarCountDto>> {
+        entityType,
+        entityId,
+    }: {
+        entityType: string,
+        entityId: string,
+    }): CancelablePromise<Array<Volo_CmsKit_Public_Ratings_RatingWithStarCountDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/ratings/{entityType}/{entityId}',

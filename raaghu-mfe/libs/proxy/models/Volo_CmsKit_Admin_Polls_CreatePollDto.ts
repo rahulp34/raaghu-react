@@ -18,3 +18,4 @@ export type Volo_CmsKit_Admin_Polls_CreatePollDto = {
     resultShowingEndDate?: string | null;
     pollOptions?: Array<Volo_CmsKit_Admin_Polls_PollOptionDto> | null;
 };
+

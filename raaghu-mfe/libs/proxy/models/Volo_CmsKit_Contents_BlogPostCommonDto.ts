@@ -18,3 +18,4 @@ export type Volo_CmsKit_Contents_BlogPostCommonDto = {
     coverImageMediaId?: string | null;
     author?: Volo_CmsKit_Users_CmsUserDto;
 };
+

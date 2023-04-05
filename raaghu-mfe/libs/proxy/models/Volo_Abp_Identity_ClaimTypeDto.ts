@@ -17,3 +17,4 @@ export type Volo_Abp_Identity_ClaimTypeDto = {
     valueTypeAsString?: string | null;
     concurrencyStamp?: string | null;
 };
+

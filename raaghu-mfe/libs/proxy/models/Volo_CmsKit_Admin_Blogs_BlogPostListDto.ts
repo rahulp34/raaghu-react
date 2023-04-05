@@ -17,3 +17,4 @@ export type Volo_CmsKit_Admin_Blogs_BlogPostListDto = {
     lastModificationTime?: string | null;
     status?: Volo_CmsKit_Blogs_BlogPostStatus;
 };
+

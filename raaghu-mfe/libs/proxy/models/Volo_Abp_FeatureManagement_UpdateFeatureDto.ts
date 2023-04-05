@@ -6,3 +6,4 @@ export type Volo_Abp_FeatureManagement_UpdateFeatureDto = {
     name?: string | null;
     value?: string | null;
 };
+

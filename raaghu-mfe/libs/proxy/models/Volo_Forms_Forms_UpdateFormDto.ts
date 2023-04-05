@@ -7,3 +7,4 @@ export type Volo_Forms_Forms_UpdateFormDto = {
     description?: string | null;
     concurrencyStamp?: string | null;
 };
+

@@ -20,3 +20,4 @@ export type Volo_CmsKit_Menus_MenuItemDto = {
     pageId?: string | null;
     concurrencyStamp?: string | null;
 };
+

@@ -10,3 +10,4 @@ export type Volo_CmsKit_Admin_Newsletters_NewsletterRecordWithDetailsDto = {
     preferences?: Array<Volo_CmsKit_Admin_Newsletters_NewsletterPreferenceDto> | null;
     creationTime?: string;
 };
+

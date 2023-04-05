@@ -14,12 +14,12 @@ export class AbpApplicationLocalizationService {
      * @throws ApiError
      */
     public static getApplicationLocalization({
-cultureName,
-onlyDynamics,
-}: {
-cultureName: string,
-onlyDynamics?: boolean,
-}): CancelablePromise<Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationDto> {
+        cultureName,
+        onlyDynamics,
+    }: {
+        cultureName: string,
+        onlyDynamics?: boolean,
+    }): CancelablePromise<Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/application-localization',

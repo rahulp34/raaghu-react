@@ -7,3 +7,4 @@ import type { Volo_Abp_PermissionManagement_UpdatePermissionDto } from './Volo_A
 export type Volo_Abp_PermissionManagement_UpdatePermissionsDto = {
     permissions?: Array<Volo_Abp_PermissionManagement_UpdatePermissionDto> | null;
 };
+

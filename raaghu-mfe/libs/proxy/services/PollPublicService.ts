@@ -16,10 +16,10 @@ export class PollPublicService {
      * @throws ApiError
      */
     public static getPollFindbywidget({
-widgetName,
-}: {
-widgetName?: string,
-}): CancelablePromise<Volo_CmsKit_Public_Polls_PollWithDetailsDto> {
+        widgetName,
+    }: {
+        widgetName?: string,
+    }): CancelablePromise<Volo_CmsKit_Public_Polls_PollWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/poll/findbywidget',
@@ -42,10 +42,10 @@ widgetName?: string,
      * @throws ApiError
      */
     public static getPollFindbycode({
-code,
-}: {
-code?: string,
-}): CancelablePromise<Volo_CmsKit_Public_Polls_PollWithDetailsDto> {
+        code,
+    }: {
+        code?: string,
+    }): CancelablePromise<Volo_CmsKit_Public_Polls_PollWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/poll/findbycode',
@@ -68,10 +68,10 @@ code?: string,
      * @throws ApiError
      */
     public static getPollShowresult({
-id,
-}: {
-id?: string,
-}): CancelablePromise<Volo_CmsKit_Public_Polls_GetResultDto> {
+        id,
+    }: {
+        id?: string,
+    }): CancelablePromise<Volo_CmsKit_Public_Polls_GetResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/poll/showresult',
@@ -94,12 +94,12 @@ id?: string,
      * @throws ApiError
      */
     public static postPoll({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Public_Polls_SubmitPollInput,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Public_Polls_SubmitPollInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-public/poll/{id}',

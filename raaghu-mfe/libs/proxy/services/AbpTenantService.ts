@@ -14,10 +14,10 @@ export class AbpTenantService {
      * @throws ApiError
      */
     public static getMultiTenancyTenantsByName({
-name,
-}: {
-name: string,
-}): CancelablePromise<Volo_Abp_AspNetCore_Mvc_MultiTenancy_FindTenantResultDto> {
+        name,
+    }: {
+        name: string,
+    }): CancelablePromise<Volo_Abp_AspNetCore_Mvc_MultiTenancy_FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-name/{name}',
@@ -40,10 +40,10 @@ name: string,
      * @throws ApiError
      */
     public static getMultiTenancyTenantsById({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Abp_AspNetCore_Mvc_MultiTenancy_FindTenantResultDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Abp_AspNetCore_Mvc_MultiTenancy_FindTenantResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/multi-tenancy/tenants/by-id/{id}',

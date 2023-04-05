@@ -8,3 +8,4 @@ export type Volo_Chat_Users_ChatTargetUserInfo = {
     surname?: string | null;
     username?: string | null;
 };
+

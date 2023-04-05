@@ -20,3 +20,4 @@ export type Volo_Abp_Identity_OrganizationUnitWithDetailsDto = {
     roles?: Array<Volo_Abp_Identity_IdentityRoleDto> | null;
     concurrencyStamp?: string | null;
 };
+

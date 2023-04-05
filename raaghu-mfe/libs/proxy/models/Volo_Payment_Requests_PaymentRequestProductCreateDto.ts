@@ -15,3 +15,4 @@ export type Volo_Payment_Requests_PaymentRequestProductCreateDto = {
     planId?: string | null;
     extraProperties?: Record<string, Volo_Payment_IPaymentRequestProductExtraParameterConfiguration> | null;
 };
+

@@ -6,3 +6,4 @@ export type Volo_Abp_Account_VerifyPasswordResetTokenInput = {
     userId?: string;
     resetToken: string;
 };
+

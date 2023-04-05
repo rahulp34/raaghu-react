@@ -17,10 +17,10 @@ export class BlogAdminService {
      * @throws ApiError
      */
     public static getBlogs({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/blogs/{id}',
@@ -43,12 +43,12 @@ id: string,
      * @throws ApiError
      */
     public static putBlogs({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/blogs/{id}',
@@ -73,10 +73,10 @@ requestBody?: Volo_CmsKit_Admin_Blogs_UpdateBlogDto,
      * @throws ApiError
      */
     public static deleteBlogs({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/blogs/{id}',
@@ -99,16 +99,16 @@ id: string,
      * @throws ApiError
      */
     public static getBlogs1({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/blogs',
@@ -134,10 +134,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postBlogs({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogDto,
-}): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Blogs_CreateBlogDto,
+    }): CancelablePromise<Volo_CmsKit_Admin_Blogs_BlogDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/blogs',

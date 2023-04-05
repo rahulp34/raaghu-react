@@ -8,3 +8,4 @@ export type Volo_FileManagement_Files_FileIconInfo = {
     icon?: string | null;
     type?: Volo_FileManagement_Files_FileIconType;
 };
+

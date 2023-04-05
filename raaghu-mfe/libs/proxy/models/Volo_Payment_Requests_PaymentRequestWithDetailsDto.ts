@@ -18,3 +18,4 @@ export type Volo_Payment_Requests_PaymentRequestWithDetailsDto = {
     totalPrice?: number;
     creationTime?: string;
 };
+

@@ -9,3 +9,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ex
     valuePropertyName?: string | null;
     filterParamName?: string | null;
 };
+

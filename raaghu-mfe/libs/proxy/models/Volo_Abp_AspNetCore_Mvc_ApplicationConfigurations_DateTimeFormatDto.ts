@@ -11,3 +11,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_DateTimeFormatDto 
     shortTimePattern?: string | null;
     longTimePattern?: string | null;
 };
+

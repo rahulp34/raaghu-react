@@ -16,10 +16,10 @@ export class ConversationService {
      * @throws ApiError
      */
     public static postConversationSendMessage({
-requestBody,
-}: {
-requestBody?: Volo_Chat_Messages_SendMessageInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Chat_Messages_SendMessageInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/chat/conversation/send-message',
@@ -41,14 +41,14 @@ requestBody?: Volo_Chat_Messages_SendMessageInput,
      * @throws ApiError
      */
     public static getConversationConversation({
-targetUserId,
-skipCount,
-maxResultCount,
-}: {
-targetUserId?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Chat_Conversations_ChatConversationDto> {
+        targetUserId,
+        skipCount,
+        maxResultCount,
+    }: {
+        targetUserId?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Chat_Conversations_ChatConversationDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/chat/conversation/conversation',
@@ -73,10 +73,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postConversationMarkConversationAsRead({
-requestBody,
-}: {
-requestBody?: Volo_Chat_Conversations_MarkConversationAsReadInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Chat_Conversations_MarkConversationAsReadInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/chat/conversation/mark-conversation-as-read',

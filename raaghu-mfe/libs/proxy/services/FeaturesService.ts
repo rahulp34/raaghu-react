@@ -15,12 +15,12 @@ export class FeaturesService {
      * @throws ApiError
      */
     public static getFeatures({
-providerName,
-providerKey,
-}: {
-providerName?: string,
-providerKey?: string,
-}): CancelablePromise<Volo_Abp_FeatureManagement_GetFeatureListResultDto> {
+        providerName,
+        providerKey,
+    }: {
+        providerName?: string,
+        providerKey?: string,
+    }): CancelablePromise<Volo_Abp_FeatureManagement_GetFeatureListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/feature-management/features',
@@ -44,14 +44,14 @@ providerKey?: string,
      * @throws ApiError
      */
     public static putFeatures({
-providerName,
-providerKey,
-requestBody,
-}: {
-providerName?: string,
-providerKey?: string,
-requestBody?: Volo_Abp_FeatureManagement_UpdateFeaturesDto,
-}): CancelablePromise<any> {
+        providerName,
+        providerKey,
+        requestBody,
+    }: {
+        providerName?: string,
+        providerKey?: string,
+        requestBody?: Volo_Abp_FeatureManagement_UpdateFeaturesDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/feature-management/features',
@@ -77,12 +77,12 @@ requestBody?: Volo_Abp_FeatureManagement_UpdateFeaturesDto,
      * @throws ApiError
      */
     public static deleteFeatures({
-providerName,
-providerKey,
-}: {
-providerName?: string,
-providerKey?: string,
-}): CancelablePromise<any> {
+        providerName,
+        providerKey,
+    }: {
+        providerName?: string,
+        providerKey?: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/feature-management/features',

@@ -9,3 +9,4 @@ export type Volo_Abp_Validation_StringValues_IStringValueType = {
     readonly properties?: Record<string, any> | null;
     validator?: Volo_Abp_Validation_StringValues_IValueValidator;
 };
+

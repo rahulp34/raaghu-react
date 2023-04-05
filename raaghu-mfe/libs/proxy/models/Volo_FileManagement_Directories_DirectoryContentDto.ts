@@ -17,3 +17,4 @@ export type Volo_FileManagement_Directories_DirectoryContentDto = {
     iconInfo?: Volo_FileManagement_Files_FileIconInfo;
     concurrencyStamp?: string | null;
 };
+

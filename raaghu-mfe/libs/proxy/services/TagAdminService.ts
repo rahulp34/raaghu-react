@@ -18,10 +18,10 @@ export class TagAdminService {
      * @throws ApiError
      */
     public static postTags({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Admin_Tags_TagCreateDto,
-}): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Admin_Tags_TagCreateDto,
+    }): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-admin/tags',
@@ -43,16 +43,16 @@ requestBody?: Volo_CmsKit_Admin_Tags_TagCreateDto,
      * @throws ApiError
      */
     public static getTags({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/tags',
@@ -78,10 +78,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static deleteTags({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/cms-kit-admin/tags/{id}',
@@ -104,10 +104,10 @@ id: string,
      * @throws ApiError
      */
     public static getTags1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/tags/{id}',
@@ -130,12 +130,12 @@ id: string,
      * @throws ApiError
      */
     public static putTags({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_CmsKit_Admin_Tags_TagUpdateDto,
-}): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_CmsKit_Admin_Tags_TagUpdateDto,
+    }): CancelablePromise<Volo_CmsKit_Tags_TagDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-admin/tags/{id}',

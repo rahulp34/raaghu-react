@@ -8,3 +8,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_En
     properties?: Record<string, Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyDto> | null;
     configuration?: Record<string, any> | null;
 };
+

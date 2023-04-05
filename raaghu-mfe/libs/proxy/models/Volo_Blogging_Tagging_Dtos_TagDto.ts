@@ -15,3 +15,4 @@ export type Volo_Blogging_Tagging_Dtos_TagDto = {
     description?: string | null;
     usageCount?: number;
 };
+

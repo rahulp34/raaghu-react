@@ -12,3 +12,4 @@ export type Volo_Abp_Account_RegisterDto = {
     returnUrlHash?: string | null;
     captchaResponse?: string | null;
 };
+

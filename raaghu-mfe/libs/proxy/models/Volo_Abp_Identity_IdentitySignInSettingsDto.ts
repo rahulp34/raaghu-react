@@ -7,3 +7,4 @@ export type Volo_Abp_Identity_IdentitySignInSettingsDto = {
     enablePhoneNumberConfirmation?: boolean;
     requireConfirmedPhoneNumber?: boolean;
 };
+

@@ -25,3 +25,4 @@ export type Volo_Forms_Responses_QuestionWithAnswersDto = {
     choices?: Array<Volo_Forms_Choices_ChoiceDto> | null;
     answers?: Array<Volo_Forms_Answers_AnswerDto> | null;
 };
+

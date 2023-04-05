@@ -22,10 +22,10 @@ export class TenantService {
      * @throws ApiError
      */
     public static getTenants({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/tenants/{id}',
@@ -48,12 +48,12 @@ id: string,
      * @throws ApiError
      */
     public static putTenants({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Saas_Host_Dtos_SaasTenantUpdateDto,
-}): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Saas_Host_Dtos_SaasTenantUpdateDto,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/saas/tenants/{id}',
@@ -78,10 +78,10 @@ requestBody?: Volo_Saas_Host_Dtos_SaasTenantUpdateDto,
      * @throws ApiError
      */
     public static deleteTenants({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/saas/tenants/{id}',
@@ -104,26 +104,26 @@ id: string,
      * @throws ApiError
      */
     public static getTenants1({
-filter,
-getEditionNames,
-editionId,
-expirationDateMin,
-expirationDateMax,
-activationState,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-getEditionNames?: boolean,
-editionId?: string,
-expirationDateMin?: string,
-expirationDateMax?: string,
-activationState?: Volo_Saas_TenantActivationState,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        getEditionNames,
+        editionId,
+        expirationDateMin,
+        expirationDateMax,
+        activationState,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        getEditionNames?: boolean,
+        editionId?: string,
+        expirationDateMin?: string,
+        expirationDateMax?: string,
+        activationState?: Volo_Saas_TenantActivationState,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/tenants',
@@ -154,10 +154,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static postTenants({
-requestBody,
-}: {
-requestBody?: Volo_Saas_Host_Dtos_SaasTenantCreateDto,
-}): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Saas_Host_Dtos_SaasTenantCreateDto,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/saas/tenants',
@@ -198,10 +198,10 @@ requestBody?: Volo_Saas_Host_Dtos_SaasTenantCreateDto,
      * @throws ApiError
      */
     public static getTenantsConnectionStrings({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/tenants/{id}/connection-strings',
@@ -224,12 +224,12 @@ id: string,
      * @throws ApiError
      */
     public static putTenantsConnectionStrings({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/saas/tenants/{id}/connection-strings',
@@ -254,10 +254,10 @@ requestBody?: Volo_Saas_Host_Dtos_SaasTenantConnectionStringsDto,
      * @throws ApiError
      */
     public static postTenantsApplyDatabaseMigrations({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/saas/tenants/{id}/apply-database-migrations',
@@ -299,10 +299,10 @@ id: string,
      * @throws ApiError
      */
     public static getTenantsCheckConnectionString({
-connectionString,
-}: {
-connectionString?: string,
-}): CancelablePromise<boolean> {
+        connectionString,
+    }: {
+        connectionString?: string,
+    }): CancelablePromise<boolean> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/saas/tenants/check-connection-string',
@@ -325,12 +325,12 @@ connectionString?: string,
      * @throws ApiError
      */
     public static putTenantsSetPassword({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Saas_Host_Dtos_SaasTenantSetPasswordDto,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Saas_Host_Dtos_SaasTenantSetPasswordDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/saas/tenants/{id}/set-password',

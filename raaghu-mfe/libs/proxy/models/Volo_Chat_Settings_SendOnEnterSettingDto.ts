@@ -5,3 +5,4 @@
 export type Volo_Chat_Settings_SendOnEnterSettingDto = {
     sendOnEnter?: boolean;
 };
+

@@ -16,3 +16,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocaliz
     languagesMap?: Record<string, Array<Volo_Abp_NameValue> | null> | null;
     languageFilesMap?: Record<string, Array<Volo_Abp_NameValue> | null> | null;
 };
+

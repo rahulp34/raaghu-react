@@ -6,3 +6,4 @@ export type Volo_Blogging_Files_RawFileDto = {
     bytes?: string | null;
     readonly isFileEmpty?: boolean;
 };
+

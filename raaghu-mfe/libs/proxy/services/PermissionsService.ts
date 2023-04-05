@@ -15,12 +15,12 @@ export class PermissionsService {
      * @throws ApiError
      */
     public static getPermissions({
-providerName,
-providerKey,
-}: {
-providerName?: string,
-providerKey?: string,
-}): CancelablePromise<Volo_Abp_PermissionManagement_GetPermissionListResultDto> {
+        providerName,
+        providerKey,
+    }: {
+        providerName?: string,
+        providerKey?: string,
+    }): CancelablePromise<Volo_Abp_PermissionManagement_GetPermissionListResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/permission-management/permissions',
@@ -44,14 +44,14 @@ providerKey?: string,
      * @throws ApiError
      */
     public static putPermissions({
-providerName,
-providerKey,
-requestBody,
-}: {
-providerName?: string,
-providerKey?: string,
-requestBody?: Volo_Abp_PermissionManagement_UpdatePermissionsDto,
-}): CancelablePromise<any> {
+        providerName,
+        providerKey,
+        requestBody,
+    }: {
+        providerName?: string,
+        providerKey?: string,
+        requestBody?: Volo_Abp_PermissionManagement_UpdatePermissionsDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/permission-management/permissions',

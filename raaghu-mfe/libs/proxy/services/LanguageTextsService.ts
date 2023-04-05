@@ -15,24 +15,24 @@ export class LanguageTextsService {
      * @throws ApiError
      */
     public static getLanguageTexts({
-filter,
-resourceName,
-baseCultureName,
-targetCultureName,
-getOnlyEmptyValues,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-resourceName?: string,
-baseCultureName?: string,
-targetCultureName?: string,
-getOnlyEmptyValues?: boolean,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        resourceName,
+        baseCultureName,
+        targetCultureName,
+        getOnlyEmptyValues,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        resourceName?: string,
+        baseCultureName?: string,
+        targetCultureName?: string,
+        getOnlyEmptyValues?: boolean,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/language-management/language-texts',
@@ -62,16 +62,16 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getLanguageTexts1({
-resourceName,
-cultureName,
-name,
-baseCultureName,
-}: {
-resourceName: string,
-cultureName: string,
-name: string,
-baseCultureName?: string,
-}): CancelablePromise<Volo_Abp_LanguageManagement_Dto_LanguageTextDto> {
+        resourceName,
+        cultureName,
+        name,
+        baseCultureName,
+    }: {
+        resourceName: string,
+        cultureName: string,
+        name: string,
+        baseCultureName?: string,
+    }): CancelablePromise<Volo_Abp_LanguageManagement_Dto_LanguageTextDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/language-management/language-texts/{resourceName}/{cultureName}/{name}',
@@ -99,16 +99,16 @@ baseCultureName?: string,
      * @throws ApiError
      */
     public static putLanguageTexts({
-resourceName,
-cultureName,
-name,
-value,
-}: {
-resourceName: string,
-cultureName: string,
-name: string,
-value?: string,
-}): CancelablePromise<any> {
+        resourceName,
+        cultureName,
+        name,
+        value,
+    }: {
+        resourceName: string,
+        cultureName: string,
+        name: string,
+        value?: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/language-management/language-texts/{resourceName}/{cultureName}/{name}',
@@ -136,14 +136,14 @@ value?: string,
      * @throws ApiError
      */
     public static putLanguageTextsRestore({
-resourceName,
-cultureName,
-name,
-}: {
-resourceName: string,
-cultureName: string,
-name: string,
-}): CancelablePromise<any> {
+        resourceName,
+        cultureName,
+        name,
+    }: {
+        resourceName: string,
+        cultureName: string,
+        name: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/language-management/language-texts/{resourceName}/{cultureName}/{name}/restore',

@@ -10,3 +10,4 @@ export type Volo_CmsKit_Admin_Pages_UpdatePageInputDto = {
     style?: string | null;
     concurrencyStamp?: string | null;
 };
+

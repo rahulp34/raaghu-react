@@ -15,3 +15,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_CurrentCultureDto 
     nativeName?: string | null;
     dateTimeFormat?: Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_DateTimeFormatDto;
 };
+

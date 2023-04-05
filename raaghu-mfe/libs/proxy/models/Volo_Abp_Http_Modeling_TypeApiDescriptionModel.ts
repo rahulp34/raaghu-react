@@ -12,3 +12,4 @@ export type Volo_Abp_Http_Modeling_TypeApiDescriptionModel = {
     genericArguments?: Array<string> | null;
     properties?: Array<Volo_Abp_Http_Modeling_PropertyApiDescriptionModel> | null;
 };
+

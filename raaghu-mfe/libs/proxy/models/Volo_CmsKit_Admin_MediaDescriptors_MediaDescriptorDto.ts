@@ -8,3 +8,4 @@ export type Volo_CmsKit_Admin_MediaDescriptors_MediaDescriptorDto = {
     mimeType?: string | null;
     size?: number;
 };
+

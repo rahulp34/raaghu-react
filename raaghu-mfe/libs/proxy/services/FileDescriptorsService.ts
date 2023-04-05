@@ -20,10 +20,10 @@ export class FileDescriptorsService {
      * @throws ApiError
      */
     public static getFileDescriptor({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/file-descriptor/{id}',
@@ -46,12 +46,12 @@ id: string,
      * @throws ApiError
      */
     public static postFileDescriptor({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_FileManagement_Files_RenameFileInput,
-}): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_FileManagement_Files_RenameFileInput,
+    }): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/file-descriptor/{id}',
@@ -76,10 +76,10 @@ requestBody?: Volo_FileManagement_Files_RenameFileInput,
      * @throws ApiError
      */
     public static deleteFileDescriptor({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/file-management/file-descriptor/{id}',
@@ -102,10 +102,10 @@ id: string,
      * @throws ApiError
      */
     public static getFileDescriptor1({
-directoryId,
-}: {
-directoryId?: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
+        directoryId,
+    }: {
+        directoryId?: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_ListResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/file-descriptor',
@@ -128,18 +128,18 @@ directoryId?: string,
      * @throws ApiError
      */
     public static postFileDescriptorUpload({
-name,
-directoryId,
-extraProperties,
-formData,
-}: {
-name: string,
-directoryId?: string,
-extraProperties?: Record<string, any>,
-formData?: {
-File?: Blob;
-},
-}): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
+        name,
+        directoryId,
+        extraProperties,
+        formData,
+    }: {
+        name: string,
+        directoryId?: string,
+        extraProperties?: Record<string, any>,
+        formData?: {
+            File?: Blob;
+        },
+    }): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/file-descriptor/upload',
@@ -166,10 +166,10 @@ File?: Blob;
      * @throws ApiError
      */
     public static postFileDescriptorMove({
-requestBody,
-}: {
-requestBody?: Volo_FileManagement_Files_MoveFileInput,
-}): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_FileManagement_Files_MoveFileInput,
+    }): CancelablePromise<Volo_FileManagement_Files_FileDescriptorDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/file-descriptor/move',
@@ -191,10 +191,10 @@ requestBody?: Volo_FileManagement_Files_MoveFileInput,
      * @throws ApiError
      */
     public static postFileDescriptorPreUploadInfo({
-requestBody,
-}: {
-requestBody?: Array<Volo_FileManagement_Files_FileUploadPreInfoRequest>,
-}): CancelablePromise<Array<Volo_FileManagement_Files_FileUploadPreInfoDto>> {
+        requestBody,
+    }: {
+        requestBody?: Array<Volo_FileManagement_Files_FileUploadPreInfoRequest>,
+    }): CancelablePromise<Array<Volo_FileManagement_Files_FileUploadPreInfoDto>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/file-management/file-descriptor/pre-upload-info',
@@ -216,10 +216,10 @@ requestBody?: Array<Volo_FileManagement_Files_FileUploadPreInfoRequest>,
      * @throws ApiError
      */
     public static getFileDescriptorContent({
-id,
-}: {
-id?: string,
-}): CancelablePromise<string> {
+        id,
+    }: {
+        id?: string,
+    }): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/file-descriptor/content',
@@ -242,10 +242,10 @@ id?: string,
      * @throws ApiError
      */
     public static getFileDescriptorDownloadToken({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_FileManagement_Files_DownloadTokenResultDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_FileManagement_Files_DownloadTokenResultDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/file-descriptor/download/{id}/token',
@@ -268,12 +268,12 @@ id: string,
      * @throws ApiError
      */
     public static getFileDescriptorDownload({
-id,
-token,
-}: {
-id: string,
-token?: string,
-}): CancelablePromise<Blob> {
+        id,
+        token,
+    }: {
+        id: string,
+        token?: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/file-management/file-descriptor/download/{id}',

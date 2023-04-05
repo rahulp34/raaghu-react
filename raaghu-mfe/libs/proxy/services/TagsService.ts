@@ -14,14 +14,14 @@ export class TagsService {
      * @throws ApiError
      */
     public static getTagsPopular({
-blogId,
-resultCount,
-minimumPostCount,
-}: {
-blogId: string,
-resultCount?: number,
-minimumPostCount?: number,
-}): CancelablePromise<Array<Volo_Blogging_Tagging_Dtos_TagDto>> {
+        blogId,
+        resultCount,
+        minimumPostCount,
+    }: {
+        blogId: string,
+        resultCount?: number,
+        minimumPostCount?: number,
+    }): CancelablePromise<Array<Volo_Blogging_Tagging_Dtos_TagDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/tags/popular/{blogId}',

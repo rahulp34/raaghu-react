@@ -18,3 +18,4 @@ export type Volo_Abp_Http_Modeling_ActionApiDescriptionModel = {
     allowAnonymous?: boolean | null;
     implementFrom?: string | null;
 };
+

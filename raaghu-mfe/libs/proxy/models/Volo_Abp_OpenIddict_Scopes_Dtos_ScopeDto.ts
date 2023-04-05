@@ -11,3 +11,4 @@ export type Volo_Abp_OpenIddict_Scopes_Dtos_ScopeDto = {
     buildIn?: boolean;
     resources?: Array<string> | null;
 };
+

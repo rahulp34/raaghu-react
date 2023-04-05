@@ -8,3 +8,4 @@ export type Volo_Abp_AuditLogging_EntityChangeWithUsernameDto = {
     entityChange?: Volo_Abp_AuditLogging_EntityChangeDto;
     userName?: string | null;
 };
+

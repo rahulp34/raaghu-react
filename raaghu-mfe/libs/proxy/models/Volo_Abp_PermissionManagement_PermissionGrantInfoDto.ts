@@ -12,3 +12,4 @@ export type Volo_Abp_PermissionManagement_PermissionGrantInfoDto = {
     allowedProviders?: Array<string> | null;
     grantedProviders?: Array<Volo_Abp_PermissionManagement_ProviderInfoDto> | null;
 };
+

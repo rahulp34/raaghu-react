@@ -9,3 +9,4 @@ export type Volo_Abp_Account_ExternalProviders_ExternalProviderItemDto = {
     enabled?: boolean;
     properties?: Array<Volo_Abp_Account_ExternalProviders_ExternalProviderSettingsProperty> | null;
 };
+

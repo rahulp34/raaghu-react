@@ -7,3 +7,4 @@ import type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocal
 export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationDto = {
     resources?: Record<string, Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationResourceDto> | null;
 };
+

@@ -6,3 +6,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ex
     name?: string | null;
     value?: any;
 };
+

@@ -6,3 +6,4 @@ export type Volo_CmsKit_Admin_Tags_TagCreateDto = {
     entityType: string;
     name: string;
 };
+

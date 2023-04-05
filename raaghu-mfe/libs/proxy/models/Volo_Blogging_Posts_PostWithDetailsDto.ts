@@ -26,3 +26,4 @@ export type Volo_Blogging_Posts_PostWithDetailsDto = {
     tags?: Array<Volo_Blogging_Tagging_Dtos_TagDto> | null;
     concurrencyStamp?: string | null;
 };
+

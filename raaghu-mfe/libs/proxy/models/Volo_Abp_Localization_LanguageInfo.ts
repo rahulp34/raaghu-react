@@ -9,3 +9,4 @@ export type Volo_Abp_Localization_LanguageInfo = {
     readonly twoLetterISOLanguageName?: string | null;
     flagIcon?: string | null;
 };
+

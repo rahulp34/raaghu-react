@@ -14,3 +14,4 @@ export type Volo_Abp_Http_Modeling_ParameterApiDescriptionModel = {
     bindingSourceId?: string | null;
     descriptorName?: string | null;
 };
+

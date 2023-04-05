@@ -14,3 +14,4 @@ export type Volo_Chat_Users_ChatContactDto = {
     lastMessageDate?: string | null;
     unreadMessageCount?: number;
 };
+

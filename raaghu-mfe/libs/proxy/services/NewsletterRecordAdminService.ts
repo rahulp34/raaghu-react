@@ -16,16 +16,16 @@ export class NewsletterRecordAdminService {
      * @throws ApiError
      */
     public static getNewsletter({
-preference,
-source,
-skipCount,
-maxResultCount,
-}: {
-preference?: string,
-source?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        preference,
+        source,
+        skipCount,
+        maxResultCount,
+    }: {
+        preference?: string,
+        source?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/newsletter',
@@ -51,10 +51,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getNewsletter1({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_CmsKit_Admin_Newsletters_NewsletterRecordWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_CmsKit_Admin_Newsletters_NewsletterRecordWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/newsletter/{id}',
@@ -77,12 +77,12 @@ id: string,
      * @throws ApiError
      */
     public static getNewsletterCsvDetail({
-preference,
-source,
-}: {
-preference?: string,
-source?: string,
-}): CancelablePromise<Array<Volo_CmsKit_Admin_Newsletters_NewsletterRecordCsvDto>> {
+        preference,
+        source,
+    }: {
+        preference?: string,
+        source?: string,
+    }): CancelablePromise<Array<Volo_CmsKit_Admin_Newsletters_NewsletterRecordCsvDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/newsletter/csv-detail',
@@ -125,12 +125,12 @@ source?: string,
      * @throws ApiError
      */
     public static getNewsletterExportCsv({
-preference,
-source,
-}: {
-preference?: string,
-source?: string,
-}): CancelablePromise<Blob> {
+        preference,
+        source,
+    }: {
+        preference?: string,
+        source?: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-admin/newsletter/export-csv',

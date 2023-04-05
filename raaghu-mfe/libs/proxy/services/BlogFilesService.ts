@@ -15,10 +15,10 @@ export class BlogFilesService {
      * @throws ApiError
      */
     public static getFiles({
-name,
-}: {
-name: string,
-}): CancelablePromise<Volo_Blogging_Files_RawFileDto> {
+        name,
+    }: {
+        name: string,
+    }): CancelablePromise<Volo_Blogging_Files_RawFileDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/files/{name}',
@@ -41,10 +41,10 @@ name: string,
      * @throws ApiError
      */
     public static getFilesWww({
-name,
-}: {
-name: string,
-}): CancelablePromise<Blob> {
+        name,
+    }: {
+        name: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/blogging/files/www/{name}',
@@ -67,14 +67,14 @@ name: string,
      * @throws ApiError
      */
     public static postFilesImagesUpload({
-name,
-formData,
-}: {
-name: string,
-formData?: {
-File: Blob;
-},
-}): CancelablePromise<Volo_Blogging_Files_FileUploadOutputDto> {
+        name,
+        formData,
+    }: {
+        name: string,
+        formData?: {
+            File: Blob;
+        },
+    }): CancelablePromise<Volo_Blogging_Files_FileUploadOutputDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/blogging/files/images/upload',

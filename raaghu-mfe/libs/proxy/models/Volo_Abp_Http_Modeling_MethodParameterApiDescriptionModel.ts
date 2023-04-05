@@ -10,3 +10,4 @@ export type Volo_Abp_Http_Modeling_MethodParameterApiDescriptionModel = {
     isOptional?: boolean;
     defaultValue?: any;
 };
+

@@ -17,3 +17,4 @@ export type Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_Ex
     configuration?: Record<string, any> | null;
     defaultValue?: any;
 };
+

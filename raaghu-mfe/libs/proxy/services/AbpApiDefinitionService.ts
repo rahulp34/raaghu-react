@@ -14,10 +14,10 @@ export class AbpApiDefinitionService {
      * @throws ApiError
      */
     public static getApiDefinition({
-includeTypes,
-}: {
-includeTypes?: boolean,
-}): CancelablePromise<Volo_Abp_Http_Modeling_ApplicationApiDescriptionModel> {
+        includeTypes,
+    }: {
+        includeTypes?: boolean,
+    }): CancelablePromise<Volo_Abp_Http_Modeling_ApplicationApiDescriptionModel> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/abp/api-definition',

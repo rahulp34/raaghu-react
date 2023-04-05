@@ -6,3 +6,4 @@ export type Volo_Abp_NameValue = {
     name?: string | null;
     value?: string | null;
 };
+

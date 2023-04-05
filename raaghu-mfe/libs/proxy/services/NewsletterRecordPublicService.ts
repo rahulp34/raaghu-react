@@ -17,10 +17,10 @@ export class NewsletterRecordPublicService {
      * @throws ApiError
      */
     public static postNewsletter({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Public_Newsletters_CreateNewsletterRecordInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Public_Newsletters_CreateNewsletterRecordInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/cms-kit-public/newsletter',
@@ -42,10 +42,10 @@ requestBody?: Volo_CmsKit_Public_Newsletters_CreateNewsletterRecordInput,
      * @throws ApiError
      */
     public static putNewsletter({
-requestBody,
-}: {
-requestBody?: Volo_CmsKit_Public_Newsletters_UpdatePreferenceRequestInput,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_CmsKit_Public_Newsletters_UpdatePreferenceRequestInput,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/cms-kit-public/newsletter',
@@ -67,10 +67,10 @@ requestBody?: Volo_CmsKit_Public_Newsletters_UpdatePreferenceRequestInput,
      * @throws ApiError
      */
     public static getNewsletterEmailAddress({
-emailAddress,
-}: {
-emailAddress?: string,
-}): CancelablePromise<Array<Volo_CmsKit_Public_Newsletters_NewsletterPreferenceDetailsDto>> {
+        emailAddress,
+    }: {
+        emailAddress?: string,
+    }): CancelablePromise<Array<Volo_CmsKit_Public_Newsletters_NewsletterPreferenceDetailsDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/newsletter/emailAddress',
@@ -93,10 +93,10 @@ emailAddress?: string,
      * @throws ApiError
      */
     public static getNewsletterPreferenceOptions({
-preference,
-}: {
-preference?: string,
-}): CancelablePromise<Volo_CmsKit_Public_Newsletters_NewsletterEmailOptionsDto> {
+        preference,
+    }: {
+        preference?: string,
+    }): CancelablePromise<Volo_CmsKit_Public_Newsletters_NewsletterEmailOptionsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit-public/newsletter/preference-options',

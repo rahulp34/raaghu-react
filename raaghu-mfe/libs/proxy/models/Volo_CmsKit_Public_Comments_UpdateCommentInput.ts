@@ -6,3 +6,4 @@ export type Volo_CmsKit_Public_Comments_UpdateCommentInput = {
     text: string;
     concurrencyStamp?: string | null;
 };
+

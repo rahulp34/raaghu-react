@@ -7,3 +7,4 @@ export type Volo_Saas_Host_Dtos_SaasTenantDatabaseConnectionStringsDto = {
     databaseName?: string | null;
     connectionString?: string | null;
 };
+

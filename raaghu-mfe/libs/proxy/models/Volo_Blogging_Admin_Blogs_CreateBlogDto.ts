@@ -7,3 +7,4 @@ export type Volo_Blogging_Admin_Blogs_CreateBlogDto = {
     shortName: string;
     description?: string | null;
 };
+

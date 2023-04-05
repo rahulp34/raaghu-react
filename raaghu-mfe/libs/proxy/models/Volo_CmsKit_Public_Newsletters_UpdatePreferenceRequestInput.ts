@@ -11,3 +11,4 @@ export type Volo_CmsKit_Public_Newsletters_UpdatePreferenceRequestInput = {
     sourceUrl: string;
     securityCode: string;
 };
+

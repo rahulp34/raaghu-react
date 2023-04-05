@@ -9,3 +9,4 @@ export type Volo_Abp_Http_Modeling_ApplicationApiDescriptionModel = {
     modules?: Record<string, Volo_Abp_Http_Modeling_ModuleApiDescriptionModel> | null;
     types?: Record<string, Volo_Abp_Http_Modeling_TypeApiDescriptionModel> | null;
 };
+

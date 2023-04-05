@@ -12,10 +12,10 @@ export class MediaDescriptorService {
      * @throws ApiError
      */
     public static getMedia({
-id,
-}: {
-id: string,
-}): CancelablePromise<Blob> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/cms-kit/media/{id}',

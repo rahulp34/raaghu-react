@@ -6,3 +6,4 @@ export type Volo_Abp_Account_UnLinkUserInput = {
     userId?: string;
     tenantId?: string | null;
 };
+

@@ -10,3 +10,4 @@ export type Volo_CmsKit_Contents_PageDto = {
     script?: string | null;
     style?: string | null;
 };
+

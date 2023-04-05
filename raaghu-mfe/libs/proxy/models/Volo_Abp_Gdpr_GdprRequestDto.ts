@@ -7,3 +7,4 @@ export type Volo_Abp_Gdpr_GdprRequestDto = {
     creationTime?: string;
     readyTime?: string;
 };
+

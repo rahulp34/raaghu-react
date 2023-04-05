@@ -16,3 +16,4 @@ export type Volo_Blogging_Blogs_Dtos_BlogDto = {
     description?: string | null;
     concurrencyStamp?: string | null;
 };
+

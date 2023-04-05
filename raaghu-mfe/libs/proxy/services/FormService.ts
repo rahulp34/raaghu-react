@@ -29,10 +29,10 @@ export class FormService {
      * @throws ApiError
      */
     public static get({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/responses/{id}',
@@ -55,12 +55,12 @@ id: string,
      * @throws ApiError
      */
     public static post({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Forms_Responses_UpdateResponseDto,
-}): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Forms_Responses_UpdateResponseDto,
+    }): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/responses/{id}',
@@ -85,10 +85,10 @@ requestBody?: Volo_Forms_Responses_UpdateResponseDto,
      * @throws ApiError
      */
     public static delete({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/responses/{id}',
@@ -111,16 +111,16 @@ id: string,
      * @throws ApiError
      */
     public static get1({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/responses',
@@ -146,12 +146,12 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static post1({
-formId,
-requestBody,
-}: {
-formId?: string,
-requestBody?: Volo_Forms_Responses_CreateResponseDto,
-}): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
+        formId,
+        requestBody,
+    }: {
+        formId?: string,
+        requestBody?: Volo_Forms_Responses_CreateResponseDto,
+    }): CancelablePromise<Volo_Forms_Responses_FormResponseDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/responses',
@@ -176,10 +176,10 @@ requestBody?: Volo_Forms_Responses_CreateResponseDto,
      * @throws ApiError
      */
     public static getQuestionsWithAnswers({
-id,
-}: {
-id: string,
-}): CancelablePromise<Array<Volo_Forms_Responses_QuestionWithAnswersDto>> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Array<Volo_Forms_Responses_QuestionWithAnswersDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/responses/{id}/questions-with-answers',
@@ -202,10 +202,10 @@ id: string,
      * @throws ApiError
      */
     public static getFormDetails({
-formId,
-}: {
-formId: string,
-}): CancelablePromise<Volo_Forms_Forms_FormDto> {
+        formId,
+    }: {
+        formId: string,
+    }): CancelablePromise<Volo_Forms_Forms_FormDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/responses/form-details/{formId}',
@@ -228,10 +228,10 @@ formId: string,
      * @throws ApiError
      */
     public static getResponse({
-userId,
-}: {
-userId: string,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        userId,
+    }: {
+        userId: string,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/responses/{userId}/response',
@@ -254,10 +254,10 @@ userId: string,
      * @throws ApiError
      */
     public static get2({
-input,
-}: {
-input?: Volo_Forms_Questions_GetQuestionListDto,
-}): CancelablePromise<Array<Volo_Forms_Questions_QuestionDto>> {
+        input,
+    }: {
+        input?: Volo_Forms_Questions_GetQuestionListDto,
+    }): CancelablePromise<Array<Volo_Forms_Questions_QuestionDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/questions',
@@ -280,10 +280,10 @@ input?: Volo_Forms_Questions_GetQuestionListDto,
      * @throws ApiError
      */
     public static get3({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/questions/{id}',
@@ -306,12 +306,12 @@ id: string,
      * @throws ApiError
      */
     public static put({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Forms_Questions_UpdateQuestionDto,
-}): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Forms_Questions_UpdateQuestionDto,
+    }): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/questions/{id}',
@@ -336,10 +336,10 @@ requestBody?: Volo_Forms_Questions_UpdateQuestionDto,
      * @throws ApiError
      */
     public static delete1({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/questions/{id}',
@@ -362,16 +362,16 @@ id: string,
      * @throws ApiError
      */
     public static get4({
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms',
@@ -397,10 +397,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static post2({
-requestBody,
-}: {
-requestBody?: Volo_Forms_Forms_CreateFormDto,
-}): CancelablePromise<Volo_Forms_Forms_FormDto> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Forms_Forms_CreateFormDto,
+    }): CancelablePromise<Volo_Forms_Forms_FormDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/forms',
@@ -422,18 +422,18 @@ requestBody?: Volo_Forms_Forms_CreateFormDto,
      * @throws ApiError
      */
     public static getResponses({
-id,
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-id: string,
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
+        id,
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        id: string,
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Volo_Abp_Application_Dtos_PagedResultDto_1> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}/responses',
@@ -462,10 +462,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static deleteResponses({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/forms/{id}/responses',
@@ -488,18 +488,18 @@ id: string,
      * @throws ApiError
      */
     public static getDownloadResponsesCsv({
-id,
-filter,
-sorting,
-skipCount,
-maxResultCount,
-}: {
-id: string,
-filter?: string,
-sorting?: string,
-skipCount?: number,
-maxResultCount?: number,
-}): CancelablePromise<Blob> {
+        id,
+        filter,
+        sorting,
+        skipCount,
+        maxResultCount,
+    }: {
+        id: string,
+        filter?: string,
+        sorting?: string,
+        skipCount?: number,
+        maxResultCount?: number,
+    }): CancelablePromise<Blob> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}/download-responses-csv',
@@ -528,10 +528,10 @@ maxResultCount?: number,
      * @throws ApiError
      */
     public static getResponsesCount({
-id,
-}: {
-id: string,
-}): CancelablePromise<number> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<number> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}/responses-count',
@@ -554,10 +554,10 @@ id: string,
      * @throws ApiError
      */
     public static post3({
-requestBody,
-}: {
-requestBody?: Volo_Forms_Forms_FormInviteEmailInputDto,
-}): CancelablePromise<any> {
+        requestBody,
+    }: {
+        requestBody?: Volo_Forms_Forms_FormInviteEmailInputDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/invite',
@@ -579,10 +579,10 @@ requestBody?: Volo_Forms_Forms_FormInviteEmailInputDto,
      * @throws ApiError
      */
     public static get5({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Forms_Forms_FormWithDetailsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Forms_Forms_FormWithDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}',
@@ -605,12 +605,12 @@ id: string,
      * @throws ApiError
      */
     public static put1({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Forms_Forms_UpdateFormDto,
-}): CancelablePromise<Volo_Forms_Forms_FormDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Forms_Forms_UpdateFormDto,
+    }): CancelablePromise<Volo_Forms_Forms_FormDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/forms/{id}',
@@ -635,10 +635,10 @@ requestBody?: Volo_Forms_Forms_UpdateFormDto,
      * @throws ApiError
      */
     public static delete2({
-id,
-}: {
-id: string,
-}): CancelablePromise<any> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/forms/{id}',
@@ -661,12 +661,12 @@ id: string,
      * @throws ApiError
      */
     public static putSettings({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Forms_Forms_UpdateFormSettingInputDto,
-}): CancelablePromise<any> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Forms_Forms_UpdateFormSettingInputDto,
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/forms/{id}/settings',
@@ -691,10 +691,10 @@ requestBody?: Volo_Forms_Forms_UpdateFormSettingInputDto,
      * @throws ApiError
      */
     public static getSettings({
-id,
-}: {
-id: string,
-}): CancelablePromise<Volo_Forms_Forms_FormSettingsDto> {
+        id,
+    }: {
+        id: string,
+    }): CancelablePromise<Volo_Forms_Forms_FormSettingsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}/settings',
@@ -717,12 +717,12 @@ id: string,
      * @throws ApiError
      */
     public static getQuestions({
-id,
-input,
-}: {
-id: string,
-input?: Volo_Forms_Questions_GetQuestionListDto,
-}): CancelablePromise<Array<Volo_Forms_Questions_QuestionDto>> {
+        id,
+        input,
+    }: {
+        id: string,
+        input?: Volo_Forms_Questions_GetQuestionListDto,
+    }): CancelablePromise<Array<Volo_Forms_Questions_QuestionDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/forms/{id}/questions',
@@ -748,12 +748,12 @@ input?: Volo_Forms_Questions_GetQuestionListDto,
      * @throws ApiError
      */
     public static postQuestions({
-id,
-requestBody,
-}: {
-id: string,
-requestBody?: Volo_Forms_Questions_CreateQuestionDto,
-}): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
+        id,
+        requestBody,
+    }: {
+        id: string,
+        requestBody?: Volo_Forms_Questions_CreateQuestionDto,
+    }): CancelablePromise<Volo_Forms_Questions_QuestionDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/forms/{id}/questions',

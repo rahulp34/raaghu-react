@@ -13,3 +13,4 @@ export type Volo_Abp_SettingManagement_EmailSettingsDto = {
     defaultFromAddress?: string | null;
     defaultFromDisplayName?: string | null;
 };
+
