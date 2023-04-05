@@ -14,8 +14,8 @@ const FormsPreview = (props: any) => {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
-  // const forms = useAppSelector((state) => state.persistedReducer.forms);
-    const forms = useAppSelector((state) => state.forms);
+  const forms = useAppSelector((state) => state.persistedReducer.forms);
+    //const forms = useAppSelector((state) => state.forms);
 
   useEffect(() => {
     dispatch(getAll2FormsQuestions(props.id) as any);

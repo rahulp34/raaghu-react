@@ -21,7 +21,7 @@ import { deleteForms, fetchForms, getForms, Saveforms, getAll2FormsQuestions, Sa
 const Forms = () => {
   const dispatch = useAppDispatch();
   // const forms = useAppSelector((state) => state.persistedReducer.forms);
-  const forms = useAppSelector((state) => state.forms);
+  const forms = useAppSelector((state) => state.persistedReducer.forms);
 
   const navigate = useNavigate();
   const [formsData, setFormsData] = useState<any>([])
