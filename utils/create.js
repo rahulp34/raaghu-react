@@ -2,6 +2,7 @@
 let path = require("path");
 let { execSync } = require("child_process");
 let fs = require("fs");
+// let generate = require("../raaghu-proxy/index.ts");
 
 // Check whether the arguments passed contain the mfe name and the page name
 if (
@@ -78,7 +79,7 @@ function writeFileErrorHandler(err) {
 
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
-  if (eTc == "e" && eTc == "c") {
+  if (eTc == "e" || eTc == "c") {
     let filePath = path.join(appFolderPath, "/src", name, name + ".tsx");
     if (fs.existsSync(filePath)) {
       console.log(
@@ -121,7 +122,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // updating import statetement and compontnt in App.tsx file in template file
     let templateAppFilePAth = path.join(__dirname, "../page-template/template/src/App.tsx");
-    let templateAppFileContent = fs.readFileSync(templateAppFilePAth,'utf-8');
+    let templateAppFileContent = fs.readFileSync(templateAppFilePAth, 'utf-8');
     let upodatedtemplateAppfileContent = templateAppFileContent.replace(/"{import_statement_for_Page_template}"/g, `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`)
     upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(/{"page_template_component_in_app"}/g, `<${pageName}></${pageName}>`);
     console.log(upodatedtemplateAppfileContent);
@@ -331,8 +332,8 @@ if (fs.existsSync(appFolderPath)) {
     finalWebpackConfig = finalWebpackConfig.replace(pageName, '{template_Page_Name_expose}');
     fs.writeFileSync(templateWebpackfile, finalWebpackConfig);
 
-    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,'"{import_statement_for_Page_template}"')
-    finalAppFileContent = finalAppFileContent.replace(`<${pageName}></${pageName}>`,'{"page_template_component_in_app"}');
+    let finalAppFileContent = upodatedtemplateAppfileContent.replace(`import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`, '"{import_statement_for_Page_template}"')
+    finalAppFileContent = finalAppFileContent.replace(`<${pageName}></${pageName}>`, '{"page_template_component_in_app"}');
     fs.writeFileSync(templateAppFilePAth, finalAppFileContent);
     // Adding url to the webpack file of the host page
     const hostWebpackpath = "raaghu-mfe/rds_pages/host/webpack.config.js";
@@ -455,7 +456,7 @@ if (fs.existsSync(appFolderPath)) {
     }
   } else if (eTc == "pr") {
     console.log("Proxy is being generated!!");
-    let filePath = path.join(appFolderPath, "proxy");;
+    let filePath = path.join(appFolderPath, "proxy");
     if (fs.existsSync(filePath)) {
       console.log(
         "\x1b[31m%s\x1b[0m",
@@ -466,6 +467,8 @@ if (fs.existsSync(appFolderPath)) {
         `npx openapi --input ${name} --output ${filePath} --client axios`,
         { cwd: appFolderPath, stdio: "inherit" }
       );
+
+      // generate(name, filePath, 'axios');
 
       console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
       console.log("\x1b[32m%s\x1b[0m", "Done..!");

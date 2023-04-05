@@ -62,7 +62,8 @@ export interface ApplicationApiDescriptionModel {
 }
 
 export interface ApplicationApiDescriptionModelRequestDto {
- api_url:string,
+  api_url: string
+ 
   includeTypes: boolean
 }
 
@@ -191,6 +192,8 @@ export interface ApplicationApiDescriptionModel {
 }
 
 export interface ApplicationApiDescriptionModelRequestDto {
+  api_url: string
+
   includeTypes: boolean
 }
 
