@@ -59,6 +59,7 @@ import {
   ElementsCompo,
   PersonalDataCompo,
   PaymentRequestsCompo,
+  MenusCompo,
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
