@@ -357,7 +357,6 @@ const Roles = (props: RdsPageRolesProps) => {
             <div className="footer-buttons my-2">
                       <div className="row">
                         <div className="col-md-12 d-flex">
-                          <div className="flex-grow-1"></div>
                           <div>
                             <RdsButton
                               label="Cancel"
