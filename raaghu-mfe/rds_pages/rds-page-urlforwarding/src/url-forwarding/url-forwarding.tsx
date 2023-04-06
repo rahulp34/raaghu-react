@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RdsButton, RdsOffcanvas, RdsInput, RdsNavtabs } from 'raaghu-react-elements'
+import { RdsButton, RdsOffcanvas, RdsAlert, RdsNavtabs } from 'raaghu-react-elements'
 import {
   RdsCompDatatable,
   RdsCompAlertPopup,
@@ -14,6 +14,7 @@ import { deleteurlShortingData, editUrlShortingsData, fetchUrlShortingsData, sav
 
 
 const UrlForwarding = () => {
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [data, setData] = useState({
     urlForwardings: [],
   });
@@ -42,7 +43,23 @@ const UrlForwarding = () => {
   }, [Data.urlShortings]);
 
   const handlerDeleteConfirm = () => {
-    dispatch(deleteurlShortingData(id) as any).then(() => {
+    dispatch(deleteurlShortingData(id) as any).then((res:any) => {
+      if (res.type == "urlForwardingSlice/deleteurlShortingData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Url-forwarding deleted Successfully",
+          color: "success",
+        });
+      }
+
       dispatch(fetchUrlShortingsData() as any);
     });
   };
@@ -76,7 +93,6 @@ const UrlForwarding = () => {
 
   const[editUrlShortingData, setEditUrlForwardingsData] = useState({source:"",target:""});
   useEffect(()=>{
-    debugger
     if(Data.editUrlShortings){
       setEditUrlForwardingsData(Data.editUrlShortings);
     }
@@ -84,7 +100,22 @@ const UrlForwarding = () => {
 
 
   const handlerEditUrlForwardings = () => {
-    dispatch(updateUrlShortingData({ id: id, body : newUrlForwardingEditData}) as any).then(() => {
+    dispatch(updateUrlShortingData({ id: id, body : newUrlForwardingEditData}) as any).then((res:any) => {
+      if (res.type == "urlForwardingSlice/updateUrlShortingData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Url-forwarding updated Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchUrlShortingsData() as any);
     });
   };
@@ -96,19 +127,51 @@ const UrlForwarding = () => {
   }
   
   function getUrlForwardingsDataForEdit(data:any){
-    debugger
     setNewUrlForwardingEditData(data)
   }
   const handlerNewUrlForwardings = () => {
-    dispatch(saveUrlShortingData(newUrlForwardingData) as any).then(() => {
+    dispatch(saveUrlShortingData(newUrlForwardingData) as any).then((res:any) => {
+      if (res.type == "urlForwardingSlice/saveUrlShortingData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Url-forwarding created Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchUrlShortingsData() as any);
     });
   };
+  useEffect(() => {
+    // Set a 2-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [Data]);
   return (
-    <>
-      <div>
-         <div className="d-flex justify-content-end">
-          <RdsButton
+    <div className="row">
+    <div className="col-md-12 mb-3 ">
+      <div className="row ">
+        <div className="col-md-4">
+          {Alert.show && (
+            <RdsAlert
+              alertmessage={Alert.message}
+              colorVariant={Alert.color}
+            ></RdsAlert>
+          )} 
+        </div>
+        <div className="col-md-8 d-flex justify-content-end my-1">
+        <RdsButton
             icon="plus"
             label="Forward an URL"
             iconColorVariant="light"
@@ -125,8 +188,11 @@ const UrlForwarding = () => {
           ></RdsButton>
         </div>
       </div>
-      <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
-        <RdsCompDatatable
+    </div>
+
+    <div className="col-md-12">
+      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+      <RdsCompDatatable
           classes="table__userTable"
           tableHeaders={tableHeader}
           tableData={data?.urlForwardings}
@@ -217,7 +283,8 @@ const UrlForwarding = () => {
           onSuccess={handlerDeleteConfirm}
         ></RdsCompAlertPopup>
       </div>
-    </>
+    </div>
+  </div>
   );
 }
 

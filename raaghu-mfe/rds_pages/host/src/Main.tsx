@@ -59,7 +59,10 @@ import {
   ElementsCompo,
   PersonalDataCompo,
   PaymentRequestsCompo,
+  MenusCompo,
   MyAccountCompo,
+  ComponentsCompo,
+  PagesCompo,
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -80,7 +83,6 @@ const Main = (props: MainProps) => {
   let currentPath = window.location.pathname;
 
   useEffect(() => {
-    console.log("hello ");
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
        navigate(currentPath);
@@ -107,7 +109,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-
+    const componentsList = [
+        {
+            label: "Light",
+            val: "light",
+        },
+        {
+            label: "Dark",
+            val: "dark",
+        },
+    ];
   // useEffect(() => {
   //   dispatch(fetchApplicationConfig() as any);
   // }, [dispatch]);
@@ -150,20 +161,15 @@ const Main = (props: MainProps) => {
   //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
 
   useEffect(() => {
-    console.log("session useEffect from main 1");
+   
     configurationService(API_URL, currentLanguage).then(async (res: any) => {
-      await console.log(
-        " session this is res currentCulture",
-        res.localization.currentCulture.cultureName
-      );
+     
       await localizationService(API_URL, currentLanguage).then(
         async (resp: any) => {
-          console.log(" session this is res lang", resp);
           i18n.changeLanguage(currentLanguage);
           var data1 = {};
           const translation = resp?.resources;
-          console.log("this is res tran", translation);
-          if (translation) {
+           if (translation) {
             Object.keys(translation).forEach((key) => {
               data1 = { ...data1, ...translation[key].texts };
             });
@@ -194,10 +200,7 @@ const Main = (props: MainProps) => {
       });
       setLanguageData(tempdata);
     });
-    // Do something with the data
-
-    //  dispatch(fetchConfiguration(currentLanguage) as any).then((res:any) => { dispatch(fetchLocalization(res.localization.currentCulture.cultureName) as any);  });
-  }, [currentLanguage]);
+    }, [currentLanguage]);
 
   const sideNavItems = concatenated;
 
@@ -249,7 +252,6 @@ const Main = (props: MainProps) => {
   };
 
   const logout = () => {
-    // clearToken(); //
     localStorage.clear();
     // setIsAuth(false);
     store.accessToken = null;
@@ -280,13 +282,13 @@ const Main = (props: MainProps) => {
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageLable={
-                  storeData.languages?.currentCulture?.displayName ||
-                  "English (United Kingdom)"
-                }
+                languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
+                //languageLable ="English"
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
+                componentsList={componentsList}
+                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -297,8 +299,7 @@ const Main = (props: MainProps) => {
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => {
                   console.log(" session Hey Chat Button Clicked!!");
-                }}
-              />
+                } } elementList={[]}              />
             </div>
             <div
               className="
@@ -429,14 +430,15 @@ const Main = (props: MainProps) => {
                       />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
-                      <Route path="/elements" element={<ElementsCompo />} />
-                      <Route
-                        path="/personal-data"
-                        element={<PersonalDataCompo />}
-                      />
+                      <Route path="/elements/:type" element={<ElementsCompo />} />
+                      <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
+                      <Route path="/menus" element={<MenusCompo />} />
+                      <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                    </Routes>
+
+                    <Route path="/pages" element={<PagesCompo />} /> 
+</Routes>
                   </Suspense>
                 </div>
               </div>

@@ -217,11 +217,11 @@ export const RdsCompDirectoryList = ({
   };
 
   const renderDirectoryItem = (item: DirectoryItem) => (
-    <div key={item.name}>
-      <div className="d-flex align-items-center ">
+    <>
+      <div  key={item.name} className="d-flex align-items-center ">
         {item.hasChildren && (
           <button
-            className=" me-2 border-0 bg-white"
+            className=" me-1 border-0 bg-white"
             onClick={handleClick(item.id, item.name)}
           >
             <RdsIcon
@@ -238,7 +238,7 @@ export const RdsCompDirectoryList = ({
             />
           </button>
         )}
-        <span className="me-2 ">
+        <span className="me-1 ">
           <RdsIcon
             name="folder"
             height="15px"
@@ -257,7 +257,7 @@ export const RdsCompDirectoryList = ({
         )}
       </div>
       {item.children && expandedItems.includes(item.id) && (
-        <ul className="pl-4">
+        <ul className="pl-0">
           <RdsCompDirectoryList
             items={item.children}
             path={path}
@@ -265,7 +265,7 @@ export const RdsCompDirectoryList = ({
           />
         </ul>
       )}
-    </div>
+    </>
   );
 
   const renderDirectoryItems = (items: DirectoryItem[]) => {
