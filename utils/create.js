@@ -304,7 +304,7 @@ if (fs.existsSync(appFolderPath)) {
 
     fs.appendFile(
       `${sideNavItemPath}/index.ts`,
-      exportStatement,
+      importStatement,
       "utf8",
       // callback function
       function (err) {
@@ -631,7 +631,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // Import statement to add
     const importStatementForPublicApi =
-      `export * from './${camelCaseName}/${camelCaseName}-slice";`;
+      `export * from "./${camelCaseName}/${camelCaseName}-slice";`;
 
     // Read the content of the index.ts file
     const publicApiFileContent = fs.readFileSync(publicApiFilePath, "utf-8");
