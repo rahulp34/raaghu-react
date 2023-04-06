@@ -1,4 +1,5 @@
 import { from } from "form-data";
+import rdsCompFileMover from "./rds-comp-file-mover";
 
 export {default as RdsCompAdminDashboard} from "./rds-comp-admin-dashboard/rds-comp-admin-dashboard";
 export {default as RdsCompForgotPassword} from "./rds-comp-forgot-password/rds-comp-forgot-password";
@@ -69,3 +70,4 @@ export { default as RdsCompElements} from './rds-comp-elements/rds-comp-elements
 export {default as RdsCompChangePassword} from './rds-comp-change-password/rds-comp-change-password';
 export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-personal-info';
 export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';
+export {default as rdsCompFileMover} from './rds-comp-file-mover/rds-comp-file-mover'

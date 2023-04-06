@@ -11,12 +11,14 @@ import {
     subDirectories: any;
     directoryDescriptor: any;
     editDirectory:any;
+    moveDirectory:any;
     error: string;
     status: "pending" | "loading" | "error" | "success";
   };
   export const fileInitialState: fileInitialState = {
     subDirectories: null,
     directoryDescriptor: null,
+    moveDirectory:null,
     editDirectory:null,
     error: "",
     status: "pending",
@@ -139,7 +141,6 @@ import {
   export const infoFileDescriptor= createAsyncThunk(
     "FileManagement/infoFileDescriptor",
     (data:any)=>{
-      debugger
       return proxy.preUploadInfo(data, undefined).then((result:any)=>{
         return result
       })
@@ -262,6 +263,17 @@ import {
       });
       builder.addCase(
         saveDirectoryDescriptor.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          state.status = "success";
+          state.error = "";
+        }
+      );
+
+      builder.addCase(uploadFileDescriptor.pending, (state) => {
+        state.status = "loading";
+      });
+      builder.addCase(
+        uploadFileDescriptor.fulfilled,
         (state, action: PayloadAction<any>) => {
           state.status = "success";
           state.error = "";
