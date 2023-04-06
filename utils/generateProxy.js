@@ -1,8 +1,8 @@
 'use strict';
 
-// let { execSync } = require("child_process");
-const OpenAPI = require('../raaghu-core/dist/build-proxy');
-const fetch = require('node-fetch');
+let { execSync } = require("child_process");
+const OpenAPI = require('raaghu-core/dist/build-proxy');
+// const fetch = require('node-fetch');
 
 let eTc = process.argv[2];
 let url = process.argv[3];
@@ -27,17 +27,18 @@ const generate = async (input, output) => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const generateRealWorldSpecs = async () => {
-    // execSync(
-    //     `curl -o swaggerJSON.json ${url}`,
-    //     { cwd: '.', stdio: "inherit" }
-    // )
+    console.log("\x1b[32m%s\x1b[0m", `Downloading swagger json...`);
+    execSync(
+        `curl -o swaggerJSON.json ${url}`,
+        { cwd: '.', stdio: "inherit" }
+    )
 
     // const response = await fetch('https://raaghu-react.azurewebsites.net/swagger/v1/swagger.json');
     // const response = require('../swaggerJSON.json');
-    const response = await fetch(url);
+    // const response = await fetch(url);
 
-    const list = await response.json();
-    // const list = require('../swaggerJSON.json');
+    // const list = await response.json();
+    const list = require('../swaggerJSON.json');
     // delete list['api.video'];
     // delete list['apideck.com:vault'];
     // delete list['amazonaws.com:mediaconvert'];
@@ -64,7 +65,9 @@ const generateRealWorldSpecs = async () => {
 
     // for (let i = 0; i < specs.length; i++) {
     //     const spec = specs[i];
+    console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
     await generate(list, `./raaghu-mfe/libs/${eTc}`);
+    console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
     // }
 };
 
