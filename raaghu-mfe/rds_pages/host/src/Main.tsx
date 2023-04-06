@@ -61,6 +61,7 @@ import {
   PaymentRequestsCompo,
   MyAccountCompo,
   ComponentsCompo,
+  PagesCompo,
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -447,7 +448,8 @@ const Main = (props: MainProps) => {
                       <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
 
-                    </Routes>
+                    <Route path="/pages" element={<PagesCompo />} /> 
+</Routes>
                   </Suspense>
                 </div>
               </div>

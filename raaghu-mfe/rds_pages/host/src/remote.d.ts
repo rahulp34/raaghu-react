@@ -200,3 +200,8 @@ declare module "Components/Components" {
 	const ComponentsComponent: React.ComponentType;
 	export default ComponentsComponent;
 }
+
+declare module "Pages/Pages" {
+	const PagesComponent: React.ComponentType;
+	export default PagesComponent;
+}

@@ -130,5 +130,8 @@ export const MfeConfig = {
   },
   "components": {
     "url": "components@http://localhost:8104/remoteEntry.js"
+  },
+  "pages": {
+    "url": "pages@http://localhost:8106/remoteEntry.js"
   }
 }

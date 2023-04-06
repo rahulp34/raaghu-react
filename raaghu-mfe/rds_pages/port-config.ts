@@ -124,5 +124,8 @@ export const PortConfig = {
   },
   "components": {
     "port": "8104"
+  },
+  "pages": {
+    "port": "8106"
   }
 }
