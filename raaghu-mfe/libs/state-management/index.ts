@@ -34,6 +34,7 @@ import tagsReducer from "./tags/tags-slice";
 import myAccountReducer from "./my-account/my-account-slice";
 import paymentRequestsReducer from "./payment-requests/paymentRequests-slice";
 import pollsReducer from "./polls/polls-slice";
+import globalResourcesReducer from './global-resources/globalResources-slice';
 
 const persistConfig={
   key: "root",
@@ -71,7 +72,8 @@ const rootReducer = combineReducers({
   host: hostReducer,
   myaccount: myAccountReducer,
   paymentRequests: paymentRequestsReducer,
-  polls: pollsReducer
+polls:pollsReducer,
+globalResources:globalResourcesReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
