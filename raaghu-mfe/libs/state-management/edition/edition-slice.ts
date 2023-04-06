@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { ServiceProxy } from "../../shared/service-proxy";
 import { useAppDispatch } from "../../state-management/hooks";
+import {EditionService} from "../../proxy/services/EditionService";
+import {BlogFeatureAdminService} from "../../proxy/services/BlogFeatureAdminService";
+import {FeaturesService} from "../../proxy/services/FeaturesService";
+
 type InitialState = {
   loading: boolean;
   users: any;
@@ -26,7 +30,7 @@ const proxy = new ServiceProxy();
 export const fetchEditionData = createAsyncThunk(
   "edition/fetchEditionData",
   () => {
-    return proxy.editionsGET2(undefined, 'id DESC', undefined, 1000).then((result) => {
+    return EditionService.getEditions1({filter:undefined, sorting:'id DESC', skipCount:undefined, maxResultCount:1000}).then((result) => {
       console.log("result", result);
       return result;
     });
@@ -36,7 +40,7 @@ export const fetchEditionData = createAsyncThunk(
 export const deleteEditionData = createAsyncThunk(
   "edition/deleteEditionData",
   (id: any) => {
-    return proxy.editionsDELETE(id).then((result) => {
+    return EditionService.deleteEditions(id).then((result) => {
       return result;
     });
   }
@@ -45,7 +49,7 @@ export const deleteEditionData = createAsyncThunk(
 export const addEditionData = createAsyncThunk(
   "edition/addEditionData",
   (value: any) => {
-    return proxy.editionsPOST(value).then((result) => {
+    return EditionService.postEditions(value).then((result) => {
       return result;
     });
   }
@@ -54,7 +58,7 @@ export const addEditionData = createAsyncThunk(
 export const editEditionData = createAsyncThunk(
   "edition/editEditionData",
   ({ id, dTo }: { id: any; dTo: any }) => {
-    return proxy.editionsPUT(id, dTo).then((result) => {
+    return EditionService.putEditions({id:id, requestBody:dTo}).then((result) => {
       return result;
     });
   }
@@ -63,7 +67,7 @@ export const editEditionData = createAsyncThunk(
 export const fetchFeaturesEdition = createAsyncThunk(
   "edition/fetchFeaturesEdition",
   (id: any) => { 
-    return proxy.featuresGET("E", id, undefined).then((result: any) => {
+    return FeaturesService.getFeatures({providerName:"E",providerKey:id}).then((result: any) => {
       return result;
     });
   }
@@ -71,7 +75,7 @@ export const fetchFeaturesEdition = createAsyncThunk(
 export const saveFeaturesEdition = createAsyncThunk(
   "edition/saveFeaturesEdition",
   (data: any) => { 
-    return proxy.featuresPUT("E", data.id, data.body).then((result: any) => {
+    return BlogFeatureAdminService.putBlogsFeatures({blogId:"E",requestBody:data.body}).then((result: any) => {
       return result;
     });
   }
@@ -79,7 +83,7 @@ export const saveFeaturesEdition = createAsyncThunk(
 export const restoreToDefaultFeaturesEdition = createAsyncThunk(
   "edition/restoreToDefaultFeaturesEdition",
   (id: any) => { 
-    return proxy.featuresDELETE("E", id, undefined).then((result: any) => {
+    return FeaturesService.deleteFeatures({providerName:"E", providerKey:id}).then((result: any) => {
       return result;
     });
   }
