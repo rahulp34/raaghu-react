@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsCompDynamicEntityProperty from "./rds-comp-dynamic-entity-property";
+import React from "react";
 
 export default {
   title: "Components/ Dynamic Entity Properties",

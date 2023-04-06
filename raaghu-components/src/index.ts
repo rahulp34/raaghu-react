@@ -1,6 +1,3 @@
-import { from } from "form-data";
-import rdsCompFileMover from "./rds-comp-file-mover";
-
 export {default as RdsCompAdminDashboard} from "./rds-comp-admin-dashboard/rds-comp-admin-dashboard";
 export {default as RdsCompForgotPassword} from "./rds-comp-forgot-password/rds-comp-forgot-password";
 export {default as RdsCompLogin} from "./rds-comp-login/rds-comp-login";

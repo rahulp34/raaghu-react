@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "raaghu-react-elements";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./rds-comp-profile.scss";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
@@ -24,13 +24,13 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
   const onSetNavTabHandler = (id: any) => {
     setAcivetab(id);
     console.log(id);
-    if(id==="nav-MyAccount"){
+    if (id === "nav-MyAccount") {
       navigate('/my-account');
     }
-    else if(id==="nav-SecuityLogs"){
+    else if (id === "nav-SecuityLogs") {
       navigate('/security-logs')
     }
-    else if(id==="nav-PersonalData"){
+    else if (id === "nav-PersonalData") {
       navigate('/personal-data')
     }
     props.currNavTabId != undefined && props.currNavTabId(id);
@@ -46,19 +46,19 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             height="120px"
             className="profil_image_Class"
           ></img>
-          <span className="cursor-pointer position-absolute bottom-0" style={{right:'2px'}}>
-          <RdsButton    
+          <span className="cursor-pointer position-absolute bottom-0" style={{ right: '2px' }}>
+            <RdsButton
               class="btn btn-icon btn-sm position-relative rounded-circle bg-white"
               icon="pencil"
-              isOutline={true}           
-              size= "small"
-              roundedButton={true}                        
+              isOutline={true}
+              size="small"
+              roundedButton={true}
               iconFill={false}
               iconStroke={true}
               iconColorVariant="light"
               iconHeight="16px"
-              iconWidth="16px" 
-              type={"button"}/>
+              iconWidth="16px"
+              type={"button"} />
             {/* <RdsIcon             
               name="pencil"
               fill={false}
@@ -79,9 +79,8 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           {props.navtabItems.map((item: any, i) => (
             <div key={i} data-bs-dismiss="offcanvas">
               <div
-                className={` d-flex mb-4 align-items-baseline gap-1 cursor-pointer  ${
-                  activetab == item.id ? " activeBackgraound" : ""
-                }`}
+                className={` d-flex mb-4 align-items-baseline gap-1 cursor-pointer  ${activetab == item.id ? " activeBackgraound" : ""
+                  }`}
                 onClick={() => onSetNavTabHandler(item.id)}
               >
                 <span className="me-2">
@@ -96,9 +95,8 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
                 </span>
                 <div>
                   <div
-                    className={`fw-semibold  ${
-                      activetab == item.id ? " text-primary" : ""
-                    }`}
+                    className={`fw-semibold  ${activetab == item.id ? " text-primary" : ""
+                      }`}
                   >
                     {item.label}
                   </div>
@@ -123,7 +121,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           ))}
         </div>
       </div>
-      
+
       <div className="mt-5 d-flex justify-content-center">
         <RdsButton
           label="Logout"
@@ -140,4 +138,3 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
 };
 
 export default RdsCompProfile;
- 

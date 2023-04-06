@@ -47,7 +47,7 @@ const Roles = (props: RdsPageRolesProps) => {
   });
   const enablecheckboxselection = true;
   const dispatch = useAppDispatch();
-  const Data = useAppSelector((state) => state.persistedReducer.roles) as any;
+  const Data = useAppSelector((state) => state.roles) as any;
   const { t } = useTranslation();
   const [claimsTable, setClaimsTableData] = useState<any[]>([])
 
