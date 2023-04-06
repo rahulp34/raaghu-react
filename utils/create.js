@@ -4,6 +4,7 @@ let { execSync } = require("child_process");
 let fs = require("fs");
 // let generate = require("../raaghu-proxy/index.ts");
 
+console.log("\x1b[32m%s\x1b[0m", process.argv);
 // Check whether the arguments passed contain the mfe name and the page name
 if (
   (process.argv[2] === "p" && process.argv.length !== 5) ||
@@ -79,6 +80,7 @@ function writeFileErrorHandler(err) {
   if (err) console.log("\x1b[31m%s\x1b[0m", err);
 }
 
+console.log("\x1b[32m%s\x1b[0m", "Creating component..!");
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
   if (eTc == "e" || eTc == "c") {
@@ -108,7 +110,7 @@ if (fs.existsSync(appFolderPath)) {
 
       console.log(
         "\x1b[32m%s\x1b[0m",
-        `index.ts was successfully created at src/${name}/index.ts`
+        `index.ts is successfully created at src/${name}/index.ts`
       );
 
       console.log("\x1b[32m%s\x1b[0m", "Done..!");
@@ -140,7 +142,7 @@ if (fs.existsSync(appFolderPath)) {
     );
     let templateAppFileContent = fs.readFileSync(templateAppFilePAth, "utf-8");
     let upodatedtemplateAppfileContent = templateAppFileContent.replace(
-      /"{import_statement_for_Page_template}"/g,
+      /{"import_statement_for_Page_template"}/g,
       `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`
     );
     upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(
@@ -199,8 +201,8 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      console.log("\x1b[32m%s\x1b[0m", `${name} page is successfully created..!`);
+      // console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
 
     // Deleting the directory from the src in the template.
@@ -250,7 +252,7 @@ if (fs.existsSync(appFolderPath)) {
     // Use the fs.writeFile method to write the new content to the file, overwriting the old content
     fs.writeFile(filePathForPageComponent, updatedPage, (err) => {
       if (err) throw err;
-      console.log("The content has been overwritten!");
+      // console.log("The content has been overwritten!");
     });
 
     // Output a message to confirm that the script has run successfully
@@ -279,7 +281,7 @@ if (fs.existsSync(appFolderPath)) {
       function (err) {
         if (err) throw err;
         // if no error
-        console.log("Data is appended to file successfully.");
+        // console.log("Data is appended to file successfully.");
       }
     );
 
@@ -352,7 +354,7 @@ if (fs.existsSync(appFolderPath)) {
               return;
             }
 
-            console.log("remote.d.ts file updated successfully!");
+            // console.log("remote.d.ts file updated successfully!");
           }
         );
       }
@@ -374,7 +376,7 @@ if (fs.existsSync(appFolderPath)) {
 
     let finalAppFileContent = upodatedtemplateAppfileContent.replace(
       `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,
-      '"{import_statement_for_Page_template}"'
+      '{"import_statement_for_Page_template"}'
     );
     finalAppFileContent = finalAppFileContent.replace(
       `<${pageName}></${pageName}>`,
@@ -400,7 +402,7 @@ if (fs.existsSync(appFolderPath)) {
           console.error(err);
           return;
         }
-        console.log("webpack.config.js updated successfully!");
+        // console.log("webpack.config.js updated successfully!");
       });
     });
 
@@ -424,7 +426,7 @@ if (fs.existsSync(appFolderPath)) {
         "utf-8",
         function (err) {
           if (err) throw err;
-          console.log("start script updated successfully");
+          // console.log("start script updated successfully");
         }
       );
       //routing Automation
@@ -555,7 +557,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // Check if the import statement already exists in the file
     if (reducerFilecontent.includes(importStatementForReducer)) {
-      console.log("Import statement already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Import statement already exists.");
     } else {
       fs.readFile(reducerFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -569,14 +571,14 @@ if (fs.existsSync(appFolderPath)) {
           if (err) {
             throw err;
           }
-          console.log('Import statement added successfully!');
+          // console.log('Import statement added successfully!');
         });
       });
     }
 
     // Check if the rootReducer property already exists in the file
     if (reducerFilecontent.includes(rootReducerProperty)) {
-      console.log("Root reducer property already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Root reducer property already exists.");
     } else {
       // Add the rootReducer property at the end of the rootReducer object
       fs.writeFileSync(
@@ -586,7 +588,7 @@ if (fs.existsSync(appFolderPath)) {
           `const rootReducer = combineReducers({\n  ${rootReducerProperty}`
         )
       );
-      console.log("Root reducer property added successfully.");
+      // console.log("Root reducer property added successfully.");
     }
 
     const publicApiFilePath = path.join(
@@ -607,7 +609,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // Check if the import statement already exists in the file
     if (publicApiFileContent.includes(importStatementForPublicApi)) {
-      console.log("Import statement already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Import statement already exists.");
     } else {
       fs.readFile(publicApiFilePath, 'utf8', (err, data) => {
         if (err) {
@@ -621,7 +623,7 @@ if (fs.existsSync(appFolderPath)) {
           if (err) {
             throw err;
           }
-          console.log('Export statement added successfully!');
+          // console.log('Export statement added successfully!');
         });
       });
     }
@@ -639,7 +641,7 @@ if (fs.existsSync(appFolderPath)) {
       // generate(name, filePath, 'axios');
 
       console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      // console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   }
 } else {
