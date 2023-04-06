@@ -22,7 +22,7 @@ import { fetchApplications, deleteApplications, saveApplications, getScopes, get
 
 const Applications = () => {
   const dispatch = useAppDispatch();
-  const application = useAppSelector((state) => state.applications);
+  const application = useAppSelector((state) => state.persistedReducer.applications);
   const [applicationId, setApplicationId] = useState("");
   const [permissionKeyName, setPermissionKeyName] = useState("")
   const [editApplicationData, setEditApplicationData] = useState<any>({});

@@ -55,4 +55,3 @@ const forgotPasswordSlice  = createSlice({
 
 export const forgotPasswordReducer = forgotPasswordSlice.reducer;
 export const forgotPasswordActions = forgotPasswordSlice.actions;
-export const message = (state: RootState) => state.persistedReducer.forgotPassword.message

@@ -105,7 +105,7 @@ export const MfeConfig = {
     "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
   },
   "paymentPlans": {
-    "url": "paymentPlans@http://localhost:8031/remoteEntry.js"
+    "url": "paymentPlans@http://localhost:8131/remoteEntry.js"
   },
   "blogs": {
     "url": "blogs@http://localhost:8032/remoteEntry.js"
@@ -127,7 +127,10 @@ export const MfeConfig = {
   },
   "paymentRequests": {
     "url": "paymentRequests@http://localhost:8036/remoteEntry.js"
-  },
+    },
+    "menus": {
+        "url": "menus@http://localhost:8090/remoteEntry.js"
+    },
   "components": {
     "url": "components@http://localhost:8104/remoteEntry.js"
   },

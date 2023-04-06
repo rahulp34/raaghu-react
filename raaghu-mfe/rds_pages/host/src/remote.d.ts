@@ -205,3 +205,8 @@ declare module "Pages/Pages" {
 	const PagesComponent: React.ComponentType;
 	export default PagesComponent;
 }
+
+declare module "Menus/Menus" {
+	const MenusComponent: React.ComponentType;
+	export default MenusComponent;
+}

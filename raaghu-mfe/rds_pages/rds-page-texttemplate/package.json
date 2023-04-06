@@ -1,5 +1,5 @@
 {
-  "name": "rds-page-text-template",
+  "name": "text-template",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
