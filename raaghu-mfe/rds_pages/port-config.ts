@@ -121,11 +121,14 @@ export const PortConfig = {
   },
   "paymentRequests": {
     "port": "8036"
+    },
+    "menus": {
+        "port": "8090"
+    },
+  "components": {
+    "port": "8104"
   },
-  "rdsComponents": {
-    "port": "8103"
-  },
-  "menus":{
-    "port":"8090"
+  "pages": {
+    "port": "8106"
   }
 }

@@ -59,8 +59,10 @@ import {
   ElementsCompo,
   PersonalDataCompo,
   PaymentRequestsCompo,
+  MenusCompo,
   MyAccountCompo,
-  MenusCompo
+  ComponentsCompo,
+  PagesCompo,
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -107,7 +109,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-
+    const componentsList = [
+        {
+            label: "Light",
+            val: "light",
+        },
+        {
+            label: "Dark",
+            val: "dark",
+        },
+    ];
   // useEffect(() => {
   //   dispatch(fetchApplicationConfig() as any);
   // }, [dispatch]);
@@ -276,6 +287,7 @@ const Main = (props: MainProps) => {
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
+                componentsList={componentsList}
                 // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
@@ -419,14 +431,14 @@ const Main = (props: MainProps) => {
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
                       <Route path="/elements/:type" element={<ElementsCompo />} />
-                      <Route
-                        path="/personal-data"
-                        element={<PersonalDataCompo />}
-                      />
+                      <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
+                      <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                    </Routes>
+
+                    <Route path="/pages" element={<PagesCompo />} /> 
+</Routes>
                   </Suspense>
                 </div>
               </div>

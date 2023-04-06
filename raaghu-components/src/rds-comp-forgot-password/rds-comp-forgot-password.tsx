@@ -16,21 +16,23 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 
 	const isEmailValid = (email: any) => {
 		if (!email || email.length === 0) {
+			debugger
 			return false;
 		}
 		return true;
 	};
 
-	const emailhandleChange = (event: {
-		target: { value: React.SetStateAction<string> };
-	}) => {
-		if (!isEmailValid(event.target.value)) {
-			setError1("Email is invalid");
-		} else {
-			setError1("");
-		}
-		setEmail(event.target.value);
-	};
+	// const emailhandleChange = (event: {
+	// 	target: { value: React.SetStateAction<string> };
+	// }) => {
+	// 	debugger
+	// 	// if (!isEmailValid(event.target.value)) {
+	// 	// 	setError1("Email is invalid");
+	// 	// } else {
+	// 	// 	setError1("");
+	// 	// }
+	// 	setEmail(event.target.value);
+	// };
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		props.onForgotPassword != undefined && props.onForgotPassword(email);
@@ -55,13 +57,16 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 						<div>
 							<form onSubmit={onSubmit}>
 								<div className="form-group mb-3 text-start">
-									<RdsInput
-										required={false}
+								<RdsInput
+										size="medium"
 										label="Enter email to receive reset password link"
-										onChange={emailhandleChange}
-										size="default"
 										inputType="email"
+										isDisabled={false}
+										readonly={false}
 										placeholder="Email"
+										value={email}
+										onChange={(e: any) => setEmail(e.target.value)}
+										required={false}
 									></RdsInput>
 									<div className="row d-flex justify-content-between mt-2">
 										<div className="col-md-12">

@@ -20,6 +20,7 @@ export interface RdsCompTopNavigationProps {
   languageItems: any[];
   toggleItems: any[];
   elementList: any[];
+  componentsList: any[];
   navbarTitle?: string;
   navbarSubTitle?: string;
   brandName?: string;
@@ -163,7 +164,14 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             </div>
           </div>
         </div>
-        <div className="d-flex me-2 align-items-center">
+              <div className="d-flex me-2 align-items-center">
+                  <div className="px-2 cursor-pointer position-relative border-end">
+                      <RdsDropdownList
+                          placeholder="Components"
+                          listItems={props.componentsList}
+                      // onClick={props.toggleTheme}
+                      ></RdsDropdownList>
+                  </div>
           <div className="px-2 cursor-pointer position-relative border-end">
           {/* <RdsDropdownList
            placeholder={props.toggleItems[0].label}

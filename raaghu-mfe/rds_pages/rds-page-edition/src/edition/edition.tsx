@@ -43,7 +43,7 @@ const Edition = (props: RdsPageEditionProps) => {
   const { t } = useTranslation();
 
   const editionuser = useAppSelector(
-    (state) => state.persistedReducer.edition
+    (state) => state.edition
   ) as any;
   const dispatch = useAppDispatch();
 
