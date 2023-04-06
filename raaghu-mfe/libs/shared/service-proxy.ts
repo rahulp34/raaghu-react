@@ -13819,9 +13819,14 @@ export class ServiceProxy {
             method: "POST",
             url: url_,
             headers: {
-                "Accept": "text/plain"
+                'Accept': 'text/plain',
+                'Content-Type':'multipart/form-data',
+                
             },
+           
             cancelToken
+           
+
         };
 
         return this.instance.request(options_).catch((_error: any) => {

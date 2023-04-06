@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
-import { RdsDropdownList, RdsIcon, RdsNotification, RdsOffcanvas } from "../rds-elements";
+
+import {
+	RdsIcon,
+	RdsNotification,
+	RdsOffcanvas,
+	RdsAvatar,
+} from "raaghu-react-elements";
+import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
+import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
+
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
@@ -11,6 +19,7 @@ export interface RdsCompTopNavigationProps {
   notifications?: any[];
   languageItems: any[];
   toggleItems: any[];
+  elementList: any[];
   componentsList: any[];
   navbarTitle?: string;
   navbarSubTitle?: string;
@@ -25,7 +34,23 @@ export interface RdsCompTopNavigationProps {
 
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [LinkAccount, setLinkAccount] = useState(false);
+
+  const [visible, setVisible] = useState(false);
+
   const navigate = useNavigate();
+
+  const onSelectElementValue = (e: any) => {
+    // console.log(e.dataset.name)
+    //console.log(e.target.innerText)
+    const selectValue = e.target.innerText;
+    debugger
+    if (selectValue === "Alert") {
+      navigate('/elements');
+      setVisible(true)
+    }
+    // console.log(selectValue)
+  };
+
   const navtabItems = [
     {
       label: "Linked Accounts",
@@ -53,6 +78,51 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     },
   ];
 
+  const elementList = [
+    {
+      label: "Accordion",
+      val: "Accordion",
+      icon: "",
+      path : "/elements/accordion",
+      iconWidth: "20px",
+      iconHeight: "20px",
+    },
+    {
+      label: "Address Detail",
+      val: "Address Detail",
+      icon: "",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "Alert",
+      val: "Alert",
+      icon: "",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "App Detail",
+      val: "App Detail",
+      icon: "",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "Avatar",
+      val: "Avatar",
+      icon: "",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "Badge",
+      val: "Badge",
+      icon: "",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    }
+  ];
   const ChangeId = (e: any) => {
     setLinkAccount(true);
   };
@@ -66,7 +136,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   return (
     <div>
       <nav
-        className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 fixed-top`}
+        className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 min-width fixed-top`}
       >
         <div className="d-flex align-items-center">
           <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
@@ -74,9 +144,13 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-            // width="70"
+             width="64%"
             ></img>
-            
+
+            {/* <span className="title fw-bold text-lowercase m-2 cursor-pointer">
+
+              <b >{props.brandName}</b>
+            </span> */}
           </span>
           <div>
             <div className="text-bold fs-6"
@@ -99,7 +173,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                       ></RdsDropdownList>
                   </div>
           <div className="px-2 cursor-pointer position-relative border-end">
-          <RdsDropdownList
+          {/* <RdsDropdownList
            placeholder={props.toggleItems[0].label}
            icon =  "sun"
            iconFill = {false }
@@ -107,10 +181,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           listItems={props.toggleItems}
             id={"toggleItem"}
             // onClick={props.toggleTheme}
-            ></RdsDropdownList>
-          </div>
+          ></RdsDropdownList> */}
 
-          <div className="px-2 position-relative border-end">
+          <RdsDropdownList
+           placeholder="Elements"
+           icon =  ""
+           iconFill = {false }
+           iconStroke ={true}
+            listItems={elementList}
+            // onClick={props.toggleTheme}
+          ></RdsDropdownList>
+          </div>
+     
+          <div className="px-2 position-relative border-end me-3">
           <RdsDropdownList
            placeholder={props.languageLable}
            icon =  {props.languageIcon}
@@ -121,45 +204,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
            onClick={onClickHandler}
           ></RdsDropdownList>
           </div>
-          <div className="me-3 ms-3 position-relative">
-            <a
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              role='button'
-              tabIndex={0}
-              className="text-decoration-none"
-            >
-              <RdsIcon
-                name="notification"
-                height="20px"
-                width="20px"
-                fill={false}
-                stroke={true}
-              ></RdsIcon>
-            </a>
-            <div
-              className="dropdown-menu fab-dropdown border-0 shadow p-0 position-absolute  ">
-              <RdsNotification
-                notifications={props.notifications!}
-                colorVariant="primary"
-                footerText="2 days ago"
-              ></RdsNotification>
-            </div>
-          </div>
-          <div
-            className="me-3 px-3 border-start border-end"
-            role='button'
-            tabIndex={0}
-          >
-            <RdsIcon
-              name="gear"
-              height="20px"
-              width="20px"
-              fill={false}
-              stroke={true}
-            ></RdsIcon>
-          </div>
-
           <Link to="/chats"
             className="me-3 pe-3 border-end"
             role='button'

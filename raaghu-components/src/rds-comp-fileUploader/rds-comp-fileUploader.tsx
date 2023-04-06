@@ -10,10 +10,7 @@ preFileInfo?:any
 
 const RdsCompFileUploader = (props: RdsCompFileUploaderProps) => {
   function folder(data:any){
-    
     props.preFileInfo(data);
-   
-    
   }
   return (
     <>
