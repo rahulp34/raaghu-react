@@ -9,6 +9,7 @@ import {
 	RdsAvatar,
 } from "raaghu-react-elements";
 import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
+import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
 
 
 export interface RdsCompTopNavigationProps {
@@ -164,7 +165,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         </div>
         <div className="d-flex me-2 align-items-center">
           <div className="px-2 cursor-pointer position-relative border-end">
-          <RdsDropdownList
+          {/* <RdsDropdownList
            placeholder={props.toggleItems[0].label}
            icon =  "sun"
            iconFill = {false }
@@ -172,10 +173,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           listItems={props.toggleItems}
             id={"toggleItem"}
             // onClick={props.toggleTheme}
+          ></RdsDropdownList> */}
+
+          <RdsDropdownList
+           placeholder="Elements"
+           icon =  ""
+           iconFill = {false }
+           iconStroke ={true}
+            listItems={elementList}
+            // onClick={props.toggleTheme}
           ></RdsDropdownList>
           </div>
      
-          <div className="px-2 position-relative border-end">
+          <div className="px-2 position-relative border-end me-3">
           <RdsDropdownList
            placeholder={props.languageLable}
            icon =  {props.languageIcon}
@@ -186,45 +196,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
            onClick={onClickHandler}
           ></RdsDropdownList>
           </div>
-         <div className="me-3 ms-3 position-relative">
-            <a
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              role='button'
-              tabIndex={0}
-              className="text-decoration-none"
-            >
-              <RdsIcon
-                name="notification"
-                height="20px"
-                width="20px"
-                fill={false}
-                stroke={true}
-              ></RdsIcon>
-            </a>
-            <div
-              className="dropdown-menu fab-dropdown border-0 shadow p-0 position-absolute  ">
-              <RdsNotification
-                notifications={props.notifications!}
-                colorVariant="primary"
-                footerText="2 days ago"
-              ></RdsNotification>
-            </div>
-          </div> 
-          <div
-            className="me-3 px-3 border-start border-end"
-            role='button'
-            tabIndex={0}
-          >
-            <RdsIcon
-              name="gear"
-              height="20px"
-              width="20px"
-              fill={false}
-              stroke={true}
-            ></RdsIcon>
-          </div>
-
           <Link to="/chats"
             className="me-3 pe-3 border-end"
             role='button'

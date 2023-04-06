@@ -285,6 +285,7 @@ const Main = (props: MainProps) => {
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
+                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -426,7 +427,7 @@ const Main = (props: MainProps) => {
                       />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
-                      <Route path="/elements" element={<ElementsCompo />} />
+                      <Route path="/elements/:type" element={<ElementsCompo />} />
                       <Route
                         path="/personal-data"
                         element={<PersonalDataCompo />}

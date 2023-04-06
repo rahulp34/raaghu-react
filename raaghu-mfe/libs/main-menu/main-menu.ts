@@ -184,88 +184,66 @@ const MainMenu = [
     
     {
       "key": "6",
-      "label": "Payment Plans",
+      "label": "Payment",
       "icon": "card_image",
-      "path": "/paymentPlans",
-      "subTitle": "Payment Plans",
+      "children": [
+        {
+            "key": "6-0-0",
+            "label": "Payment Plans",
+            "icon": "card_image",
+            "path": "/paymentPlans",
+            "subTitle": "Payment Plans",
+        },
+        {
+          "key": "6-0-1",
+          "label": "Payment Requests",
+          "icon": "card_image",
+          "path": "/paymentRequests",
+          "subTitle": "Payment Requests",
+        }]
     },
     {
       "key": "7",
-      "label": "Payment Requests",
-      "icon": "card_image",
-      "path": "/paymentRequests",
-      "subTitle": "Payment Requests",
-    },
-    {
-      "key": "8",
       "label": "CMS",
       "icon": "pages",
       "children": [
           {
-              "key": "8-0-0",
+              "key": "7-0-0",
               "label": "Blogs",
               "icon": "tenant",
               "path": "/blogs",
               "subTitle": "Manage your blogs",
           },
           {
-            "key": "8-0-1",
+            "key": "7-0-1",
             "label": "Polls",
             "icon": "icons",
             "path": "/polls",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
-            "key": "8-0-2",
+            "key": "7-0-2",
             "label": "Url Forwarding",
             "icon": "icons",
             "path": "/url-forwarding",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
-            "key": "8-0-3",
+            "key": "7-0-3",
             "label": "Comments",
             "icon": "question_chat",
             "path": "/comments",
             "subTitle": "Comments",
           },
               {
-              "key": "8-0-4",
+              "key": "7-0-4",
               "label": "Tags",
               "icon": "tag",
               "path": "/tags",
               "subTitle": "tags",
             },
       ]
-  },
-  {
-    "key": "8",
-    "label": "Elements",
-    "icon": "icons",
-    "children": [
-        {
-            "key": "8-0",
-            "label": "Accordion",
-            "icon": "accordion",
-            "path": "/elements/accordion",
-            "subTitle": "Accordion",
-        },
-        {
-            "key": "8-1",
-            "label": "Alert",
-            "icon": "alert",
-            "path": "/elements/alert",
-            "subTitle": "Alert",
-        },
-        {
-          "key": "8-2",
-          "label": "App Detail",
-          "icon": "alert",
-          "path": "/elements/appDetail",
-          "subTitle": "Alert",
-      }
-    ]
-}
+  }
 ]
 
 export default MainMenu;

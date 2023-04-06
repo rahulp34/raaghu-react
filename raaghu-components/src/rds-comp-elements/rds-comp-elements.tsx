@@ -1,17 +1,17 @@
 import React, { Suspense, useState } from 'react';
-import { renderToString } from 'react-dom/server';
-import { RdsAddressDetail, RdsAlert, RdsAppDetail, RdsAvatar, RdsBadge, RdsBankCardDetail, RdsBanner, RdsBenefit, RdsButton, RdsIcon, RdsLabel } from 'raaghu-react-elements';
-import "./rds-comp-elements.scss"
-// import { code_snippet } from './elements/accordion';
+
+import "./rds-comp-elements.scss";
+import code_snippet from "./elements/accordion"
+import { RdsLabel, RdsIcon } from '../rds-elements';
 
 export interface RdsCompElementsProps { }
 
 
 const RdsCompElements = (props: any) => {
 
-   const [code_snippet, setCode] = React.useState("");
+   // const [code_snippet, setCode] = React.useState("");
 
-   const [identity, setIdentity] = useState<number>();
+   const [show, setShow] = useState<boolean>(false);
 
    debugger
    const ComponentElement = React.lazy(() => import('./elements/' + props.type + '.tsx'));
@@ -22,20 +22,20 @@ const RdsCompElements = (props: any) => {
    // console.log("Props: ", props, code_snippet);
 
 
-   // const Accordion_text =
-   //    <RdsAccordion
-   //       accordionId='1'
-   //       accordionType='Default' >
-   //       <RdsAccordionItem id={'1'} defaultOpen={false} title={'Section 1 Title'}>
-   //          <h1>Hello</h1>
-   //       </RdsAccordionItem>
-   //       <RdsAccordionItem id={'2'} title={'Section 2 Title'}>
-   //          <h1>Hello2</h1>
-   //       </RdsAccordionItem>
-   //       <RdsAccordionItem id={'3'} title={'Section 3 Title'}>
-   //          <h1>Hello3</h1>
-   //       </RdsAccordionItem>
-   //    </RdsAccordion>
+   const Accordion_text =
+     ` <RdsAccordion
+         accordionId='1'
+         accordionType='Default' >
+         <RdsAccordionItem id={'1'} defaultOpen={false} title={'Section 1 Title'}>
+            <h1>Hello</h1>
+         </RdsAccordionItem>
+         <RdsAccordionItem id={'2'} title={'Section 2 Title'}>
+            <h1>Hello2</h1>
+         </RdsAccordionItem>
+         <RdsAccordionItem id={'3'} title={'Section 3 Title'}>
+            <h1>Hello3</h1>
+         </RdsAccordionItem>
+      </RdsAccordion>`
 
    //    const Address_Detail = ` <RdsAddressDetail
    // addressLine1="Address Line 1"
@@ -70,7 +70,9 @@ const RdsCompElements = (props: any) => {
    // />`
 
    const copy_click = (text: any) => {
+      setShow(true)
       navigator.clipboard.writeText(text);
+      
    }
 
    const setChildCode = (message: any) => {
@@ -80,10 +82,7 @@ const RdsCompElements = (props: any) => {
 
    return (
       <>
-         {/* <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
-
-         </div> */}
-         <div className="card p-2 border-0 rounded-0 mt-4">
+         <div className="card p-2 border-0 rounded-0 mt-4 vh-88">
 
             <div className='card-header'>
                <h5><RdsLabel> <span className='text-capitalize'>{props.type}</span> </RdsLabel></h5>
@@ -101,55 +100,31 @@ const RdsCompElements = (props: any) => {
                   </div>
                   <div className="col-md-6">
                      <RdsLabel>Code</RdsLabel>
-                     <div onClick={() => copy_click(code_snippet)} className="bg-light bg-opacity-100 p-4 rounded-4 mt-4">
-                        <span className='float-end'>
-                           {/* <RdsButton
-                              // class="me-2"
-                              label=""
-                              type="button"
-                              isOutline={false}
-                              colorVariant=""
-                              size="small"
-                              icon = "clipboard"
-                              block = {false}
-                              iconFill = {false}
-                              iconStroke = {true}
-                              iconHeight = "15px"
-                              iconWidth = "15px"
-                              onClick={() => {
-                                 // copy_click(code_snippet)
-                              }}
-                           ></RdsButton> */}
-                            <RdsIcon
-                  name="clipboard"
-                  width="17px"
-                  height="17px"
-                  fill={false}
-                  stroke={true}
-                ></RdsIcon>
-
-               {/* { identity ? (
-                <span className="text-success">Copied</span>
-              ) : (
-                <span>copy </span>
-              )} */}
-              {/* Copy{" "} */}
-              {/* { identity ? (
-                ""
-              ) : (
-                <RdsIcon
-                  name="clipboard"
-                  width="12px"
-                  height="12px"
-                  fill={false}
-                  stroke={true}
-                ></RdsIcon>
-              )} */}
-                           </span>
+                     <div  className="bg-light bg-opacity-100 p-4 rounded-4 mt-4">
+                        <span className='float-end cursor-pointer'>
+                          { show ? ( <RdsIcon
+                              name="check"
+                              width="12px"
+                              height="12px"
+                              colorVariant='primary'
+                              fill={false}
+                              stroke={true}
+                           ></RdsIcon>) : (
+                              <RdsIcon
+                              name="clipboard"
+                              width="17px"
+                              height="17px"
+                              fill={false}
+                              stroke={true}
+                              onClick={() => copy_click(Accordion_text)}
+                           ></RdsIcon>
+                           )
+                        }
+                        </span>
                         <pre className="language-html">
                            <code className="language-html">
-                              {/* {code_snippet} */}
-                              {ComponentElement.name}
+                              {/* {ComponentElement.name} */}
+                              {Accordion_text}
                            </code>
                         </pre>
                      </div>

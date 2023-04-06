@@ -1,5 +1,5 @@
 const RdsComponents =[{
-  "key": "rds-page-rds-components",
+  "key": "9",
   "label": "Rds Components",
   "icon": "icons",
   "path": "/rds-components",
