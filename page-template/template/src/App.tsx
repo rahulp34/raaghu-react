@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 const App = () => {
   <Suspense>
     {"page_template_component_in_app"}
-  </Suspense>;
+  </Suspense>
 };
 
 export default App;
