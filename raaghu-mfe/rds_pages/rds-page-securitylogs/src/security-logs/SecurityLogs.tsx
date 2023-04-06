@@ -11,10 +11,7 @@ export interface RdsPageSecurityLogsProps {
 
 }
 
-
 const SecurityLogs = (props: RdsPageSecurityLogsProps) => {  
-  
-
     return (
         <RdsCompSecurityLogs
          tableHeaders={props.securityLogsTableHeaders}

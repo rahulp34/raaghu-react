@@ -201,3 +201,8 @@ declare module "RdsComponents/RdsComponents" {
 	const RdsComponentsComponent: React.ComponentType;
 	export default RdsComponentsComponent;
 }
+
+declare module "Menus/Menus" {
+	const MenusComponent: React.ComponentType;
+	export default MenusComponent;
+}

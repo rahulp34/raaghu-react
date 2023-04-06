@@ -242,6 +242,13 @@ const MainMenu = [
               "path": "/tags",
               "subTitle": "tags",
             },
+            {
+              "key": "7-0-5",
+              "label": "Menus",
+              "icon": "icons",
+              "path": "/menus",
+              "subTitle": "menus"
+            },
       ]
   }
 ]

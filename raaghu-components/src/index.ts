@@ -67,3 +67,4 @@ export { default as RdsCompElements} from './rds-comp-elements/rds-comp-elements
 export {default as RdsCompChangePassword} from './rds-comp-change-password/rds-comp-change-password';
 export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-personal-info';
 export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';
+export {default as rdsCompFileMover} from './rds-comp-file-mover/rds-comp-file-mover'
