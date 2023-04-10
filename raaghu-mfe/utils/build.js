@@ -24,7 +24,7 @@ let mfeConfigJSON = mfeConfig.substring(mfeConfig.indexOf("{"), mfeConfig.lastIn
 mfeConfigJSON = JSON.parse(mfeConfigJSON);
 if (appConfig.replaceUrl == "true") {
 
-  console.log('Changing URLs in .env file...');
+  console.log('Changing URLs in configuration file...');
   fs.copyFileSync(mfeFilePath, mfeFilePathTemp);
   // console.log("file path mayank2",mfeConfigJSON);
 
