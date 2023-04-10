@@ -63,6 +63,7 @@ import {
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
+  BlogPostCompo,
   GlobalResourcesCompo
 } from "./PageComponent";
 export interface MainProps {
@@ -112,12 +113,12 @@ const Main = (props: MainProps) => {
   ];
     const componentsList = [
         {
-            label: "Light",
-            val: "light",
+            label: "Account",
+            val: "Account",
         },
         {
-            label: "Dark",
-            val: "dark",
+            label: "AddressInput",
+            val: "AddressInput",
         },
     ];
   // useEffect(() => {
@@ -440,6 +441,7 @@ const Main = (props: MainProps) => {
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
 
                     <Route path="/pages" element={<PagesCompo />} /> 
+<Route path="/blog-post" element={<BlogPostCompo />} /> 
 </Routes>
                   </Suspense>
                 </div>

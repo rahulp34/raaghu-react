@@ -1,3 +1,4 @@
+import blogPostReducer from "./blog-post/blog-post-slice";
 import pagesReducer from "./pages/pages-slice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { loginReducer } from "./public.api";
@@ -42,6 +43,7 @@ const persistConfig={
   blacklist: ["forgotPassword"],
 };
 const rootReducer = combineReducers({
+  blogPost: blogPostReducer,
   pages: pagesReducer,
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,
@@ -84,4 +86,5 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
 
