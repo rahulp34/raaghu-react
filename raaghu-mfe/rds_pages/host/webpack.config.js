@@ -150,6 +150,7 @@ module.exports = (env, argv) => {
           Menus: mfeConfigJSON["menus"].url,
           Components: mfeConfigJSON["components"].url,
           Pages: mfeConfigJSON["pages"].url,
+          BlogPost: mfeConfigJSON["blogPost"].url,
           GlobalResources: mfeConfigJSON["globalResources"].url
         },
         shared: {

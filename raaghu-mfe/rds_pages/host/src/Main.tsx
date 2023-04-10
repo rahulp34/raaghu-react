@@ -63,7 +63,8 @@ import {
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
-  GlobalResourcesCompo,
+  BlogPostCompo,
+  GlobalResourcesCompo
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -110,16 +111,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-  const componentsList = [
-    {
-      label: "Light",
-      val: "light",
-    },
-    {
-      label: "Dark",
-      val: "dark",
-    },
-  ];
+    const componentsList = [
+        {
+            label: "Account",
+            val: "Account",
+        },
+        {
+            label: "AddressInput",
+            val: "AddressInput",
+        },
+    ];
   // useEffect(() => {
   //   dispatch(fetchApplicationConfig() as any);
   // }, [dispatch]);
@@ -440,7 +441,8 @@ const Main = (props: MainProps) => {
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
 
-                    </Routes>
+                      <Route path="/blog-post" element={<BlogPostCompo />} /> 
+</Routes>
                   </Suspense>
                 </div>
               </div>
