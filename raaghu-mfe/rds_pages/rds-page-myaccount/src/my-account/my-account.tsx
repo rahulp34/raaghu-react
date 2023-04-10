@@ -14,7 +14,7 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
 
  const MyAccount = (props:any) => { 
     const [activeNavTabId, setActiveNavTabId] = useState(0);
-    const data = useAppSelector((state) => state.myaccount);
+    const data = useAppSelector((state) => state.persistedReducer.myaccount);
     const [twoFactorData,setFormData] = useState(false);
 
     const [changePasswordData, setchangePassword] = useState<any>({
@@ -80,10 +80,10 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
       }, [data.changePasswordData]);
 
       useEffect(() => {
-        if (data.setPicture) {
-            setPicture(data.setPicture);
+        if (data.profilePicture) {
+            setPicture(data.profilePicture);
         }
-      }, [data.setPicture]);
+      }, [data.profilePicture]);
 
 
  
