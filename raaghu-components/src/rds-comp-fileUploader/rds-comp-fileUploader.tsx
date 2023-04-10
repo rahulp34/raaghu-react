@@ -1,8 +1,7 @@
 
 import React from "react";
-import "./rds-comp-fileUploader.scss";
 import { RdsButton, RdsFileUploader } from "../rds-elements";
-
+import "./rds-comp-fileUploader.scss";
 export interface RdsCompFileUploaderProps{
 onClick:any
 preFileInfo?:any

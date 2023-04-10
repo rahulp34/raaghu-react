@@ -21,18 +21,18 @@ import {
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import {
-  deleteLanguage,
-  fetchCultureList,
-  defaultLanguage,
-  fetchLanguages,
-  postNewLanguage,
-  updateLanguage,
+	deleteMenuItem,
+	postMenuItems,
+	editMenuItem,
+	getMenuItem,
+	getAllMenuItems
 } from "../../../../libs/state-management/public.api";
 import {
   CreateLanguageDto,
   UpdateLanguageDto,
 } from "../../../../libs/shared/service-proxy";
 import RdsCompNewMenuProps from "../../../../../raaghu-components/src/rds-comp-new-menu/rds-comp-new-menu"
+
 
 const Menus = () => {
   const [Data, setData] = useState<any>({url: '',
@@ -52,13 +52,65 @@ const Menus = () => {
     //   children: [],
     // },
   ]);
+ const dispatch = useAppDispatch(); 
  
 
  
 const handlerAddMenu =()=>{}
-const handlerSaveAddMenu =(data:any)=>{
-	console.log("you save this data",data )
-}
+
+const handlerSaveAddMenu = (data: 
+	{  url?: string;
+		  displayName?: string;
+		  isActive?: boolean;
+		  icon?: string;
+		  target?: string;
+		  elementId?: string;
+		  cssClass?: string;}
+	) =>
+   {
+	let dto:any ={
+		parentId: '',
+    displayName: '',
+    isActive:'',
+    url:'',
+    icon:'',
+    order:'',
+    target: '',
+    elementId: '',
+    cssClass: '',
+    pageId:'',
+	}
+	dto.parentId= "piwef";
+    dto.displayName= data.displayName;
+    dto.isActive= data?.isActive;
+    dto.url= data?.url;
+    dto.icon= data?.icon;
+    dto.target= data?.target;
+    dto.elementId= data?.elementId;
+    dto.cssClass= data?.cssClass;
+
+    dispatch(postMenuItems(dto) as any).then((res: any) => {
+      // if (res.type == "language/postNewLanguage/rejected") {
+      //   setAlert({
+      //     ...Alert,
+      //     show: true,
+      //     message: "your request has been denied",
+      //     color: "danger",
+      //   });
+      // } else {
+      //   setAlert({
+      //     ...Alert,
+      //     show: true,
+      //     message: "Language added Successfully",
+      //     color: "success",
+      //   });
+      // }
+      dispatch(getAllMenuItems() as any);
+    });
+
+    // setname([]);
+  };
+
 const handlerEditMenu =()=>{}
 const handlerDeleteMenu =()=>{}
 const handlerAddSubMenu =()=>{}
