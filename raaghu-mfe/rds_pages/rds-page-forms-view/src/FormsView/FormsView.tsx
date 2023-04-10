@@ -88,7 +88,6 @@ const FormsView = (props: any) => {
       const tempData = { ...forms.editForms }
       setbasicEditFormData(tempData)
       setTempEditFormData(tempData);
-      debugger
       setFormsEmailData({ ...formsEmailData, subject: forms.editForms.title })
       // setFormTitle(forms.editForms.title)
     }
