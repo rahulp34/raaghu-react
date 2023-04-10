@@ -39,36 +39,10 @@ const generateRealWorldSpecs = async () => {
 
     // const list = await response.json();
     const list = require('../swaggerJSON.json');
-    // delete list['api.video'];
-    // delete list['apideck.com:vault'];
-    // delete list['amazonaws.com:mediaconvert'];
-    // delete list['bungie.net'];
-    // delete list['docusign.net'];
-    // delete list['googleapis.com:adsense'];
-    // delete list['googleapis.com:servicebroker'];
-    // delete list['kubernetes.io'];
-    // delete list['microsoft.com:graph'];
-    // delete list['presalytics.io:ooxml'];
-    // delete list['stripe.com'];
 
-    // const specs = Object.entries(list).map(([name, api]) => {
-    //     // const latestVersion = api.versions[api.preferred];
-    //     return {
-    //         name: name
-    //             .replace(/^[^a-zA-Z]+/g, '')
-    //             .replace(/[^\w\-]+/g, '-')
-    //             .trim()
-    //             .toLowerCase(),
-    //         // url: latestVersion.swaggerYamlUrl || latestVersion.swaggerUrl,
-    //     };
-    // });
-
-    // for (let i = 0; i < specs.length; i++) {
-    //     const spec = specs[i];
     console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
     await generate(list, `./raaghu-mfe/libs/${eTc}`);
     console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
-    // }
 };
 
 const main = async () => {

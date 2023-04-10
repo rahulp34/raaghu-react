@@ -8,7 +8,7 @@ import {
   store,
   clearToken,
   grantedpolicies,
-} from "../../../libs/raaghu-core";
+} from "raaghu-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
@@ -63,6 +63,8 @@ import {
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
+  BlogPostCompo,
+  GlobalResourcesCompo
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -111,12 +113,12 @@ const Main = (props: MainProps) => {
   ];
     const componentsList = [
         {
-            label: "Light",
-            val: "light",
+            label: "Account",
+            val: "Account",
         },
         {
-            label: "Dark",
-            val: "dark",
+            label: "AddressInput",
+            val: "AddressInput",
         },
     ];
   // useEffect(() => {
@@ -430,6 +432,7 @@ const Main = (props: MainProps) => {
                       />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
+                      <Route path="/globalResources" element={<GlobalResourcesCompo />} />
                       <Route path="/elements/:type" element={<ElementsCompo />} />
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
@@ -438,6 +441,7 @@ const Main = (props: MainProps) => {
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
 
                     <Route path="/pages" element={<PagesCompo />} /> 
+<Route path="/blog-post" element={<BlogPostCompo />} /> 
 </Routes>
                   </Suspense>
                 </div>

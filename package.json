@@ -61,9 +61,10 @@
   "scripts": {
     "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
+    "create:core": "node utils/create.js core",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
-    "create:module": "node utils/create.js p",
+    "create:module": "node utils/create.js m",
     "create:page": "node utils/create.js p",
     "create:proxy": "node utils/generateProxy.js proxy"
   }
