@@ -212,6 +212,7 @@ const formsSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.forms = action.payload;
+        
       }
     );
 

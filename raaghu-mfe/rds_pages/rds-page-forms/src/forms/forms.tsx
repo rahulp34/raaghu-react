@@ -32,7 +32,6 @@ const Forms = () => {
   });
   const [alertOne, setAlertOne] = useState(false);
   useEffect(() => {
-
     setAlert({
       showAlert: forms.alert,
       message: forms.alertMessage,
