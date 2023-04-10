@@ -24,7 +24,7 @@ const TextTemplate = () => {
   // Use State constants
   const [tableData, setTableData] = useState([]);
   const dispatch = useAppDispatch();
-  const textTemplate = useAppSelector((state) => state.persistedReducer.textTemplate);
+  const textTemplate = useAppSelector((state) => state.textTemplate);
   const [name, setName] = useState('');
   const [referenceContent, setReferenceContent] = useState('');
   const [targetContent, setTargetContent] = useState('');
@@ -66,7 +66,7 @@ const TextTemplate = () => {
 
       if (textTemplate?.languages?.localization?.languages !== null || textTemplate.languages.localization.languages !== undefined) {
         const data: any = [];
-        textTemplate.languages.localization.languages.forEach((ele: any) => {
+        textTemplate?.languages?.localization?.languages?.forEach((ele: any) => {
           const item = {
             value: ele.cultureName,
             option: ele.displayName,

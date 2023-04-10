@@ -4,7 +4,7 @@ import { RdsCompElements } from "../../../rds-components";
 const Elements = (props: any) => {
      return(
         <div>
-            <RdsCompElements type={props.type}></RdsCompElements>
+            {/* <RdsCompElements type={props.type}></RdsCompElements> */}
         </div>
      );
 };

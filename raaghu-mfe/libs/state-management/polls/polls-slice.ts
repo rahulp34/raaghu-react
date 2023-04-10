@@ -27,7 +27,7 @@ const proxy = new ServiceProxy();
 
 export const GetPolls = createAsyncThunk('Polls/GetPolls',() => {
     return proxy.pollGET(undefined,undefined,0,1000).then((result:any) =>{
-      debugger
+      
         console.log("result",result)
         return result
     })
