@@ -1,132 +1,278 @@
 import React, { useEffect, useState } from "react";
-import {
-  RdsAlert,
-  RdsBadge,
-  RdsButton,
-  RdsCheckbox,
-  RdsIcon,
-  RdsInput,
-  RdsOffcanvas,
-} from "../../../rds-elements";
-import {
-  RdsCompAlertPopup,
-  RdsCompNewLanguage,
-} from "../../../rds-components";
-import RdsCompDirectoryList, {
-	DirectoryItem,
-  } from "../../../../../raaghu-components/src/rds-comp-directory-list/rds-comp-directory-list";
-
+import { RdsAlert, RdsButton, RdsOffcanvas } from "../../../rds-elements";
+import { RdsCompAlertPopup } from "../../../rds-components";
+import RdsCompMenuDirectory from "../../../../../raaghu-components/src/rds-comp-menus-directories/rds-comp-menus-directories";
+import { createTree } from "../../../../libs/shared/array-to-tree-converter";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import {
-	deleteMenuItem,
-	postMenuItems,
-	editMenuItem,
-	getMenuItem,
-	getAllMenuItems
+  deleteMenuItem,
+  postMenuItems,
+  editMenuItem,
+  getAllMenuItems,
 } from "../../../../libs/state-management/public.api";
-import {
-  CreateLanguageDto,
-  UpdateLanguageDto,
-} from "../../../../libs/shared/service-proxy";
-import RdsCompNewMenuProps from "../../../../../raaghu-components/src/rds-comp-new-menu/rds-comp-new-menu"
-
+import RdsCompNewMenu from "../../../../../raaghu-components/src/rds-comp-new-menu/rds-comp-new-menu";
 
 const Menus = () => {
-  const [Data, setData] = useState<any>({url: '',
-	  displayName: "",
-	  isActive: true,
-	  icon: "string",
-	  target: "string",
-	  elementId: "string",
-	  cssClass: "string",});
-  const [directories, setDirectories] = useState<any[]>([
-    // {
-    //   name: "All",
-    //   path: "/all",
-    //   parentId: null,
-    //   id: null,
-    //   hasChildren: false,
-    //   children: [],
-    // },
-  ]);
- const dispatch = useAppDispatch(); 
- 
+  //useState of the component
+  const [Data, setData] = useState<any>({
+    url: "",
+    displayName: "",
+    isActive: true,
+    icon: "",
+    target: "",
+    elementId: "",
+    cssClass: "",
+  });
+  const [id, setId] = useState({
+    id: null,
+    parentId: null,
+  });
+  const [directories, setDirectories] = useState<any[]>([]);
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
+  let dto: any = {
+    parentId: null,
+    displayName: "",
+    isActive: "",
+    url: "",
+    icon: "",
+    order: 0,
+    target: "",
+    elementId: "",
+    cssClass: "",
+    pageId: "",
+  };
+  const dispatch = useAppDispatch();
+  // dispatcing action
+  useEffect(() => {
+    dispatch(getAllMenuItems() as any);
+  }, [dispatch]);
 
- 
-const handlerAddMenu =()=>{}
+  // taking data form redux store
+  const menuData = useAppSelector(
+    (state) => state.persistedReducer.menus.menus
+  );
+  // updating directories data based on  menus data
+  useEffect(() => {
+    const updateOrganizationTree = () => {
+      let data = createTree(
+        menuData,
+        "parentId",
+        "id",
+        null,
+        "children",
+        [
+          {
+            target: "label",
+            source: "displayName",
+          },
+          {
+            target: "expandedIcon",
+            value: "fa fa-folder-open text-warning",
+          },
+          {
+            target: "collapsedIcon",
+            value: "fa fa-folder text-warning",
+          },
+          {
+            target: "expanded",
+            value: true,
+          },
+        ],
+        1
+      );
+      setDirectories(data);
+    };
+    updateOrganizationTree();
+  }, [menuData]);
 
-const handlerSaveAddMenu = (data: 
-	{  url?: string;
-		  displayName?: string;
-		  isActive?: boolean;
-		  icon?: string;
-		  target?: string;
-		  elementId?: string;
-		  cssClass?: string;}
-	) =>
-   {
-	let dto:any ={
-		parentId: '',
-    displayName: '',
-    isActive:'',
-    url:'',
-    icon:'',
-    order:'',
-    target: '',
-    elementId: '',
-    cssClass: '',
-    pageId:'',
-	}
-	dto.parentId= "piwef";
-    dto.displayName= data.displayName;
-    dto.isActive= data?.isActive;
-    dto.url= data?.url;
-    dto.icon= data?.icon;
-    dto.target= data?.target;
-    dto.elementId= data?.elementId;
-    dto.cssClass= data?.cssClass;
+  // Set a 2-second timer to update the state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [menuData]);
 
+  // add a menu
+  const handlerSaveAddRootMenu = (data: {
+    url?: string;
+    displayName?: string;
+    isActive?: boolean;
+    icon?: string;
+    target?: string;
+    elementId?: string;
+    cssClass?: string;
+  }) => {
+    dto.displayName = data.displayName;
+    dto.isActive = data.isActive;
+    dto.url = data.url == "" ? null : data.url;
+    dto.icon = data.icon == "" ? null : data.icon;
+    dto.target = data.target == "" ? null : data.target;
+    dto.elementId = data.elementId == "" ? null : data.elementId;
+    dto.cssClass = data.cssClass == "" ? null : data.cssClass;
     dispatch(postMenuItems(dto) as any).then((res: any) => {
-      // if (res.type == "language/postNewLanguage/rejected") {
-      //   setAlert({
-      //     ...Alert,
-      //     show: true,
-      //     message: "your request has been denied",
-      //     color: "danger",
-      //   });
-      // } else {
-      //   setAlert({
-      //     ...Alert,
-      //     show: true,
-      //     message: "Language added Successfully",
-      //     color: "success",
-      //   });
-      // }
+      if (res.type == "menu/postMenuItems/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Menu added Successfully",
+          color: "success",
+        });
+      }
       dispatch(getAllMenuItems() as any);
     });
-
-    // setname([]);
+  };
+  // add a sub-menu
+  const handlerAddSubMenu = (data: any) => {
+    setId({ ...id, parentId: data.id });
+    setData({
+      ...Data,
+      url: "",
+      displayName: "",
+      isActive: true,
+      icon: "",
+      target: "",
+      elementId: "",
+      cssClass: "",
+    });
   };
 
-const handlerEditMenu =()=>{}
-const handlerDeleteMenu =()=>{}
-const handlerAddSubMenu =()=>{}
-  const setPathValue=()=>{}
+  const handlerSaveAddsubMenu = (data: {
+    url?: string;
+    displayName?: string;
+    isActive?: boolean;
+    icon?: string;
+    target?: string;
+    elementId?: string;
+    cssClass?: string;
+  }) => {
+    dto.parentId = id.parentId;
+    dto.displayName = data.displayName;
+    dto.isActive = data.isActive;
+    dto.url = data.url == "" ? null : data.url;
+    dto.icon = data.icon == "" ? null : data.icon;
+    dto.target = data.target == "" ? null : data.target;
+    dto.elementId = data.elementId == "" ? null : data.elementId;
+    dto.cssClass = data.cssClass == "" ? null : data.cssClass;
+    dispatch(postMenuItems(dto) as any).then((res: any) => {
+      if (res.type == "menu/postMenuItems/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Sub-menu added Successfully",
+          color: "success",
+        });
+      }
+      dispatch(getAllMenuItems() as any);
+    });
+  };
+  // edit a menu
+  const handlerEditMenu = (data: any) => {
+    setId({ ...id, id: data.id });
+    setData({
+      ...Data,
+      url: data.url,
+      displayName: data.displayName,
+      isActive: data.isActive,
+      icon: data.icon,
+      target: data.target,
+      elementId: data.elementId,
+      cssClass: data.cssClass,
+    });
+  };
+  const handlerSaveEditMenu = (data: {
+    url?: string;
+    displayName?: string;
+    isActive?: boolean;
+    icon?: string;
+    target?: string;
+    elementId?: string;
+    cssClass?: string;
+  }) => {
+    dto.displayName = data.displayName;
+    dto.isActive = data.isActive;
+    dto.url = data.url == "" ? null : data.url;
+    dto.icon = data.icon == "" ? null : data.icon;
+    dto.target = data.target == "" ? null : data.target;
+    dto.elementId = data.elementId == "" ? null : data.elementId;
+    dto.cssClass = data.cssClass == "" ? null : data.cssClass;
+
+    dispatch(editMenuItem({ id: id.id, model: dto }) as any).then(
+      (res: any) => {
+        if (res.type == "menu/editMenuItem/rejected") {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Menu edited Successfully",
+            color: "success",
+          });
+        }
+        dispatch(getAllMenuItems() as any);
+      }
+    );
+  };
+
+  //delete a menu
+  const handlerDeleteMenu = (id: any) => {
+    setId({ ...id, id: id });
+  };
+  const handlerDelete = () => {
+    dispatch(deleteMenuItem(id.id) as any).then((res: any) => {
+      if (res.type == "menu/deleteMenuItem/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Menu deleted Successfully",
+          color: "success",
+        });
+      }
+      dispatch(getAllMenuItems() as any);
+    });
+  };
   return (
     <>
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
             <div className="col-md-4">
-             {/* {Alert.show && (
+              {Alert.show && (
                 <RdsAlert
                   alertmessage={Alert.message}
                   colorVariant={Alert.color}
                 ></RdsAlert>
-              )}  */}
+              )}
             </div>
             <div className="col-md-8 d-flex justify-content-end ">
               <RdsOffcanvas
@@ -134,7 +280,7 @@ const handlerAddSubMenu =()=>{}
                   <div className="my-1">
                     <RdsButton
                       type={"button"}
-                      label="New Menu"
+                      label="Add Root Menu Item"
                       iconColorVariant="light"
                       size="small"
                       colorVariant="primary"
@@ -142,7 +288,7 @@ const handlerAddSubMenu =()=>{}
                       iconFill={false}
                       iconStroke={true}
                       iconHeight="12px"
-                      onClick={handlerAddMenu}
+                      onClick={() => {}}
                       iconWidth="12px"
                     ></RdsButton>
                   </div>
@@ -154,7 +300,10 @@ const handlerAddSubMenu =()=>{}
                 offId={"Language"}
                 canvasTitle={"New Menu"}
               >
-				<RdsCompNewMenuProps menusData={Data} onSubmit={handlerSaveAddMenu}  />
+                <RdsCompNewMenu
+                  menusData={Data}
+                  onSubmit={handlerSaveAddRootMenu}
+                />
               </RdsOffcanvas>
             </div>
           </div>
@@ -162,78 +311,42 @@ const handlerAddSubMenu =()=>{}
 
         <div className="col-md-12">
           <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch">
-			<h4>Menu Items</h4>
-			{directories.length===0&&<h6>There is no menu item yet!</h6>}
-		  <RdsCompDirectoryList
+            <h4>Menu Items</h4>
+            {directories.length === 0 && <h6>There is no menu item yet!</h6>}
+            <RdsCompMenuDirectory
               items={directories}
-              path={setPathValue}
-              selectedItemId={directories[0]?.id}
-            ></RdsCompDirectoryList>
-            {/* <RdsOffcanvas
+              offId="menus"
+              onCreateSubMenu={handlerAddSubMenu}
+              onDeleteMenu={handlerDeleteMenu}
+              onMenuEdit={handlerEditMenu}
+            ></RdsCompMenuDirectory>
+            <RdsOffcanvas
               placement={"end"}
               backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"languagesEdit"}
-              canvasTitle={"Edit Language"}
+              offId={"amenus"}
+              canvasTitle={"New Sub Menu"}
             >
-              <form>
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    <div className="form-group mt-3">
-                      <RdsInput
-                        size="small"
-                        label="Display Name"
-                        placeholder="Enter Display Name"
-                        value={dataEmit.displayName}
-                        onChange={inputChangeHandler}
-                        required={true}
-                      ></RdsInput>
-                    </div>
-                  </div>
-                </div>
-
-                <RdsCheckbox
-                  label="is Enabled"
-                  checked={dataEmit.check}
-                  onChange={checkboxHandler}
-                ></RdsCheckbox>
-              </form>
-
-              <div className="footer-buttons my-2">
-                <div className="row">
-                  <div className="col-md-12 d-flex">
-                    <div>
-                      <RdsButton
-                        label="Cancel"
-                        type="button"
-                        colorVariant="primary"
-                        size="small"
-                        databsdismiss="offcanvas"
-                        isOutline={true}
-                      ></RdsButton>
-                    </div>
-                    <div>
-                      <RdsButton
-                        label="Save"
-                        type="button"
-                        size="small"
-                        isDisabled={formValid}
-                        class="ms-2"
-                        colorVariant="primary"
-                        databsdismiss="offcanvas"
-                        onClick={() => onEditHandler(dataEmit)}
-                      ></RdsButton>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <RdsCompNewMenu
+                menusData={Data}
+                onSubmit={handlerSaveAddsubMenu}
+              />
             </RdsOffcanvas>
-
+            <RdsOffcanvas
+              placement={"end"}
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              offId={"bmenus"}
+              canvasTitle={"Edit Menu"}
+            >
+              <RdsCompNewMenu menusData={Data} onSubmit={handlerSaveEditMenu} />
+            </RdsOffcanvas>
             <RdsCompAlertPopup
-              alertID={"languagesDel"}
-              onSuccess={onDeleteHandler}
-            ></RdsCompAlertPopup> */}
+              alertID="deleteMenu"
+              onSuccess={handlerDelete}
+            ></RdsCompAlertPopup>
           </div>
         </div>
       </div>

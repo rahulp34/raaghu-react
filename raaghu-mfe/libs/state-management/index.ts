@@ -37,6 +37,7 @@ import paymentRequestsReducer from "./payment-requests/paymentRequests-slice";
 import newslettersReducer from './newsletters/newsletters-slice';
 import pollsReducer from "./polls/polls-slice";
 import globalResourcesReducer from './global-resources/globalResources-slice';
+import menusReducer from "./menus/menus-slice"
 
 const persistConfig={
   key: "root",
@@ -77,7 +78,8 @@ const rootReducer = combineReducers({
   paymentRequests: paymentRequestsReducer,
   polls:pollsReducer,
   globalResources:globalResourcesReducer,
-  newsletters:newslettersReducer
+  newsletters:newslettersReducer,
+  menus:menusReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

@@ -1,20 +1,18 @@
 import {
   createSlice,
-  createAsyncThunk, 
+  createAsyncThunk,
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 import { MenuItemAdminService, MenuItemPublicService } from "../../proxy";
 
-import {ServiceProxy} from '../../shared/service-proxy'
 
 type MenuState = {
   loading: boolean;
   menus: any;
   error: string;
 };
-
 
 export const MenusState: MenuState = {
   loading: false,
@@ -24,7 +22,6 @@ export const MenusState: MenuState = {
 
 // Generates pending, fulfilled and rejected action types
 
-const proxy = new ServiceProxy()
 
 export const getAllMenuItems = createAsyncThunk(
   "menu/getAllMenuItems",
@@ -46,15 +43,15 @@ export const getMenuItem = createAsyncThunk(
   );
 export const editMenuItem = createAsyncThunk(
   "menu/editMenuItem",
-  async (id:any) => {
-    return await MenuItemAdminService.putMenuItems({id:id,requestBody:undefined}).then((result:any)=>{
+  async ({id, model}:{id:any, model:any}) => {
+    return await MenuItemAdminService.putMenuItems({id:id,requestBody:model}).then((result:any)=>{
       return result
     })
 
   }
 );
 
-export const postMenuItems= createAsyncThunk(
+export const postMenuItems = createAsyncThunk(
   "menu/postMenuItems",
  (dto:any) => {
     return MenuItemAdminService.postMenuItems(dto).then((result:any)=>{
@@ -63,8 +60,7 @@ export const postMenuItems= createAsyncThunk(
   }
 );
 
-
-export const deleteMenuItem= createAsyncThunk(
+export const deleteMenuItem = createAsyncThunk(
   "menu/deleteMenuItem",
  (id:any) => {
     return MenuItemAdminService.deleteMenuItems({id:id}).then((result:any)=>{
@@ -75,7 +71,7 @@ export const deleteMenuItem= createAsyncThunk(
 
 const menuSlice = createSlice({
   name: "menu",
-  initialState:MenusState,
+  initialState: MenusState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllMenuItems.pending, (state) => {
