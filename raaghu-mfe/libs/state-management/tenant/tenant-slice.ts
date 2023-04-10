@@ -57,14 +57,6 @@ export const createTenant= createAsyncThunk(
   }
 )
 
-export const featureTenant= createAsyncThunk(
-  "tenant/featureTenant",
-  (data:any)=>{
-    return proxy.featuresGET("T", "").then((result:any)=>{
-      return result
-    })
-  }
-)
 
 export const deleteTenant= createAsyncThunk(
   "tenant/deleteTenant",
@@ -85,14 +77,6 @@ export const editTenant= createAsyncThunk(
   }
 )
 
-export const fetchFeature = createAsyncThunk(
-  "tenant/fetchFeature",
-  (id:any)=>{
-    return proxy.tenantsGET(id).then((result:any)=>{
-      return result
-    })
-  }
-)
 
 export const editEdition= createAsyncThunk(
   "tenant/editEdition",
@@ -115,7 +99,7 @@ export const tenantPut= createAsyncThunk(
 export const tenantFeaturesGet= createAsyncThunk(
   "tenant/tenantFeaturesGet",
   (data:any)=>{
-    return proxy.featuresGET("T",data.id).then((result:any)=>{
+    return proxy.featuresGET2("T", data.id).then((result:any)=>{
       return result
     })
   }

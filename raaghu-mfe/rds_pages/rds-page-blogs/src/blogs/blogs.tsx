@@ -140,7 +140,6 @@ const Blogs = (props: RdsPageResourcesProps) => {
 
       <div className="row align-items-center">
         <div className="d-flex justify-content-between">
-          <h4>Blogs</h4>
 
           <div className="col-lg-8 col-md-8">
           {alert.showAlert && alertOne && (

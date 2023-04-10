@@ -243,15 +243,22 @@ const Main = (props: MainProps) => {
   const subTitle = getSubTitle(displayName, sideNavItems);
   const [currentTitle, setCurrentTitle] = useState(displayName);
   const [currentSubTitle, setCurrentSubTitle] = useState(subTitle);
-
+  const [breacrumItem, setBreadCrumItem] = useState<any[]>([])
   const sideNavOnClickHandler = (e: any) => {
+    debugger
     const subTitle = getSubTitle(
       e.target.getAttribute("data-name"),
       sideNavItems
     );
     setCurrentSubTitle(subTitle);
     setCurrentTitle(e.target.getAttribute("data-name"));
+    //setBreadCrumItem(recursiveFunction(menus.MainMenu,e.target.getAttribute("data-name")))
   };
+  // function recursiveFunction(menus:any, searchName:string){
+  //   return menus.map((res:any)=>{
+
+  //   })
+  // }
 
   const logout = () => {
     localStorage.clear();
@@ -279,7 +286,7 @@ const Main = (props: MainProps) => {
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname != '/login' && (
+      {location.pathname != '/login' && location.pathname != '/forgot-password' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
