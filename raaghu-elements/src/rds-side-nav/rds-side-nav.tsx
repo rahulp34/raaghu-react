@@ -20,7 +20,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
   };
 
   const onDivCollapse = () => {
-    debugger
+    
     // callback(!collapse);
     console.log(collapse)
     setcollapse(!collapse);

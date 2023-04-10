@@ -18,7 +18,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
     console.log("hello handleSubmit", propertyData)
   }
   function headerKeyhandleChange(value: any) {
-    debugger
+    
     setPropertyData({ ...propertyData, key: value });
   }
   function headerValuehandleChange(value: any) {
@@ -74,7 +74,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
   };
   function onDelete(key: any) {
     console.log("hello")
-    debugger
+    
     let tempPropertyData = tableData.filter((el: any) => (el.key != key))
     setTableData(tempPropertyData)
   }

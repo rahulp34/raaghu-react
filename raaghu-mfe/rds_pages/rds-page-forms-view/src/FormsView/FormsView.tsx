@@ -197,13 +197,13 @@ dispatch(getFormsResponsesCount(props.id) as any);
 
   useEffect(() => {
     if(forms.getResponses){
-      debugger
+      
     }
   },[forms.getResponses]);
 
   useEffect(() => {
     if(forms.getResponsesCount){
-      debugger
+      
     }
   },[forms.getResponsesCount]);
   return (

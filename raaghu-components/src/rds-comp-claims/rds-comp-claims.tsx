@@ -34,7 +34,7 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
   const actions= [{ id: "delete", displayName: "delete", modalId: "noModal" }];
 
   const handleAddItem = () => {
-    debugger  
+      
     let newTempData: any;
     newTempData = {
       id: selectedData.id,
@@ -63,7 +63,7 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
   
   function onActionSelection(data:any){
     let tempTableData = tableData.filter((res:any)=>{
-      debugger
+      
       if((res.claimType!=data.claimType)|| (res.claimType == data.claimType && res.claimValue != data.claimValue)){
         return res;
       }

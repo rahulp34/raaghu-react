@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
 import { useAppDispatch } from "../../state-management/hooks";
 import {EditionService} from "../../proxy/services/EditionService";
 import {BlogFeatureAdminService} from "../../proxy/services/BlogFeatureAdminService";
@@ -24,8 +23,6 @@ const initialState: InitialState = {
   success: false,
   featureIdentitySettings: null,
 };
-
-const proxy = new ServiceProxy();
 
 export const fetchEditionData = createAsyncThunk(
   "edition/fetchEditionData",

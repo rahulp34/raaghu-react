@@ -178,7 +178,7 @@ const Polls = (props: any) => {
   
   const [pollsResultData, setPollsResultData]=useState<any>([]);
   useEffect(()=>{
-    debugger
+    
     if(polls.resultData){
       // polls.resultData.pollResultDetails.map((res:any)=>{
         setPollsResultData(polls.resultData.pollResultDetails)
@@ -218,7 +218,7 @@ const Polls = (props: any) => {
       }
       return item;
     })
-    debugger
+    
     const data = {...editQuestionData, pollOptions: removeIdsFromPollsOptions}
     dispatch(UpdatePollsData({ id: rowDataId,body:data }) as any).then(
       (res: any) => {
@@ -241,7 +241,7 @@ const Polls = (props: any) => {
   //const [getCreateNewPollQuestion, setGetCreateNewPollQuestion] = useState({});
   
   function getPollsQuestion(data: any) {
-    debugger
+    
     setQuestionData(data);
   }
 
@@ -278,7 +278,7 @@ const Polls = (props: any) => {
 
 
   function getEditPollsQuestionData(data:any){ 
-    debugger
+    
     setEditQuestionData(data);
   }
   return (

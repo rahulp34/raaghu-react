@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction } from "@reduxjs/toolkit";
-import { ContactCreateInput, ServiceProxy } from "../../shared/service-proxy";
+import { ContactCreateInput} from "../../shared/service-proxy";
+import {ConversationService} from "../../proxy/services/ConversationService"
+import {ContactService} from "../../proxy/services/ContactService"
+import {SettingsService} from "../../proxy/services/SettingsService"
 
 type chatInitialState = {
   loading: boolean;
@@ -16,13 +19,12 @@ export const chatInitialState: chatInitialState = {
   status:"pending"
 };
 
-const proxy = new ServiceProxy();
 
 export const fetchChatsData = createAsyncThunk(
     "chats/fetchChatsData",
     (data:any) => { 
-      return proxy
-        .conversation(data.targetUserId,undefined,undefined,undefined)
+      return ConversationService
+        .getConversationConversation({targetUserId:data.targetUserId, skipCount:undefined, maxResultCount:undefined})
         .then((result: any) => {
           return result;
         });
@@ -32,8 +34,8 @@ export const fetchChatsData = createAsyncThunk(
   export const putMessageData = createAsyncThunk(
     "chats/putMessageData",
     (data:any) => { 
-      return proxy
-        .sendMessage(data.body,undefined)
+      return ConversationService
+        .postConversationSendMessage(data.body)
         .then((result: any) => {
           return result;
         });
@@ -43,8 +45,8 @@ export const fetchChatsData = createAsyncThunk(
   export const ReadConversationData  = createAsyncThunk(
     "chats/ReadConversationData",
     (data:any) => { 
-      return proxy
-        .markConversationAsRead(data.body,undefined)
+      return ConversationService
+        .postConversationMarkConversationAsRead(data.body)
         .then((result: any) => {
           return result;
         });
@@ -54,8 +56,8 @@ export const fetchChatsData = createAsyncThunk(
   export const fetchChatContactsData  = createAsyncThunk(
     "chats/fetchChatContactsData",
     (data:any) => { 
-      return proxy
-        .contactsAll(data.filter,data.includeOtherContacts,undefined)
+      return ContactService
+        .getContactContacts({filter:data.filter, includeOtherContacts:data.includeOtherContacts})
         .then((result: any) => {
           return result;
         });
@@ -64,8 +66,8 @@ export const fetchChatsData = createAsyncThunk(
   export const enterSendChat  = createAsyncThunk(
     "chats/enterSendChat",
     (data:any) => { 
-      return proxy
-        .sendOnEnter(data.body,undefined)
+      return SettingsService
+        .postSettingsSendOnEnter(data.body)
         .then((result:any) => {
           return result;
         });

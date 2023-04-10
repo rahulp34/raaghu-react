@@ -16,7 +16,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 
 	const isEmailValid = (email: any) => {
 		if (!email || email.length === 0) {
-			debugger
+			
 			return false;
 		}
 		return true;
@@ -25,7 +25,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 	// const emailhandleChange = (event: {
 	// 	target: { value: React.SetStateAction<string> };
 	// }) => {
-	// 	debugger
+	// 	
 	// 	// if (!isEmailValid(event.target.value)) {
 	// 	// 	setError1("Email is invalid");
 	// 	// } else {

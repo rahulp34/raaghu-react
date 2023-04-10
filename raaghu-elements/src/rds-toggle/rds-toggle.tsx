@@ -13,11 +13,11 @@ const RdsToggle = (props: RdsToggleProps) => {
   const [checked, setChecked] = useState(props.checked);
 
   useEffect(() => {
-    debugger
+    
     setChecked(props.checked)
   }, [props.checked])
   const onChangeHandler = () => {
-    debugger
+    
     setChecked((prev) => !prev);
   };
 
