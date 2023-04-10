@@ -2,7 +2,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { RdsIcon, RdsToggle, RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "raaghu-react-elements";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-// import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
 
 export interface RdsCompFormsQuestionProps {
     formQuestionsData?: any;
@@ -205,7 +204,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                 <RdsSelectList
                                     label={"Type"}
                                     selectItems={questionsTypeList}
-                                    selectedValue={element.questionType}
+                                    //selectedValue={element.questionType}
                                     onSelectListChange={(selectedOption: any) => setSelectedOption(i, selectedOption)}
                                 ></RdsSelectList>
                             </div>

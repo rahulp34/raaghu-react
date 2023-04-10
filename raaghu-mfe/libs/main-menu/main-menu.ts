@@ -262,7 +262,13 @@ const MainMenu = [
               "icon": "tag",
               "path": "/globalResources",
               "subTitle": "Global Resources",
-            }
+            },
+
+            {"key": "7-0-8",
+            "label": "Newsletters",
+            "icon": "icons",
+            "path": "/newsletters",
+            "subTitle": "Newsletters"}
       ]
   },
     //   {

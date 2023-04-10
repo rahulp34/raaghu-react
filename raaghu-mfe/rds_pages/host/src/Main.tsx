@@ -62,7 +62,8 @@ import {
   ComponentsCompo,
   PagesCompo,
   BlogPostCompo,
-  GlobalResourcesCompo
+  GlobalResourcesCompo,
+  NewslettersCompo,
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -515,9 +516,9 @@ const Main = (props: MainProps) => {
                       <Route path="/menus" element={<MenusCompo />} />
                       <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-
-                    <Route path="/pages" element={<PagesCompo />} /> 
-<Route path="/blog-post" element={<BlogPostCompo />} /> 
+                     <Route path="/pages" element={<PagesCompo />} /> 
+                     <Route path="/blog-post" element={<BlogPostCompo />} /> 
+                   <Route path="/newsletters" element={<NewslettersCompo />} /> 
 </Routes>
                   </Suspense>
                 </div>
