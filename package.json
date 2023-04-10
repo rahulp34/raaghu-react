@@ -16,7 +16,7 @@
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
     "raaghu-core": "^1.0.2",
-    "raaghu-themes": "^0.0.18",
+    "raaghu-themes": "^0.0.19",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
     "react-datepicker": "^4.8.0",
@@ -61,6 +61,7 @@
   "scripts": {
     "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
+    "install-all": "node utils/install-all.js",
     "create:core": "node utils/create.js core",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
