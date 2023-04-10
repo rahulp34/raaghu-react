@@ -29,6 +29,7 @@ export interface RdsCompTopNavigationProps {
   logo?:string, 
   languageLable:string;
   languageIcon:string;
+  breacrumItem?:any;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -50,33 +51,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
     // console.log(selectValue)
   };
-
-  const navtabItems = [
-    {
-      label: "Linked Accounts",
-      icon: "manage_linked",
-      subText: "Manage accounts linked to your account",
-      id: "nav-LinkAccount",
-    },
-    {
-      label: "My Account",
-      icon: "manage_authority",
-      subText: "Manage authority accounts",
-      id: "nav-MyAccount",
-    },
-    {
-      label: "Security Logs",
-      icon: "login_attempts",
-      subText: "See recent login attempts for your account",
-      id: "nav-SecuityLogs",
-    },
-    {
-      label: "Personal Data",
-      icon: "my_settings",
-      subText: "Change your account settings",
-      id: "nav-PersonalData",
-    },
-  ];
 
   const elementList = [
     {
@@ -123,9 +97,41 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       iconHeight: "17px",
     }
   ];
-  const ChangeId = (e: any) => {
-    setLinkAccount(true);
-  };
+  
+	const navtabItems = [
+		{
+			label: "Linked Accounts",
+			icon: "manage_linked",
+			subText: "Manage accounts linked to your account",
+			id: "nav-LinkAccount",
+		},
+		{
+			label: "My Account",
+			icon: "manage_authority",
+			subText: "Manage authority accounts",
+			id: "nav-MyAccount",
+		},
+		{
+			label: "Security Logs",
+			icon: "login_attempts",
+			subText: "See recent login attempts for your account",
+			id: "nav-SecuityLogs",
+		},
+		{
+			label: "Personal Data",
+			icon: "my_settings",
+			subText: "Change your account settings",
+			id: "nav-PersonalData",
+		},		
+	];
+  const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem)
+  useEffect(()=>{
+    setBreadCrumItem(props.breacrumItem)
+  },[props.breacrumItem])
+  
+	const ChangeId = (e: any) => {
+		setLinkAccount(true);
+	};
 
   const onClickHandler =(e: any, val: any) =>{
     if (props.onClick) {
@@ -160,7 +166,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             <div
               className="text-muted fs-6"
             >
-              <RdsBreadcrumb role="advance" breadItems={[{id:'a', label:'a',icon:"",active:false},{id:'b', label:'b',icon:"",active:false}]}></RdsBreadcrumb>
+              <RdsBreadcrumb role="advance" breadItems={breacrumItem}></RdsBreadcrumb>
             </div>
           </div>
         </div>
