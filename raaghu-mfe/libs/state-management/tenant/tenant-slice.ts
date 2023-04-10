@@ -1,5 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {  ServiceProxy } from "../../shared/service-proxy";
+import {TenantService} from "../../proxy/services/TenantService"
+import { BlogFeatureService } from "../../proxy/services/BlogFeatureService";
+import { EditionService, FeaturesService } from "../../proxy";
 
 export interface TenantState {
   loading:boolean;
@@ -21,27 +24,33 @@ export const tenantInitialState: TenantState = {
 
 };
 
-
-
-
-
-const proxy= new ServiceProxy()
  
 export const fetchTenant= createAsyncThunk(
   "tenant/fetchTenant",
   ()=>{
  
-    return proxy.tenantsGET2(undefined, undefined, undefined, undefined, undefined, undefined,'id DESC', undefined, 1000).then((result:any)=>{
+    return TenantService.getTenants1({
+      filter:undefined,
+      getEditionNames: undefined,
+      editionId: undefined,
+      expirationDateMin:undefined,
+      expirationDateMax: undefined,
+      activationState: undefined,
+      sorting: 'id DESC',
+      skipCount: undefined,
+      maxResultCount: undefined,
+    }).then((result:any)=>{
       return result.items;
     }
     )
   }
+  
 )
  
 export const fetchEdition= createAsyncThunk(
   "tenant/fetchEdition",
   ()=>{
-    return proxy.editionsGET2(undefined, undefined, undefined, 1000 ).then((result:any)=>{
+    return TenantService.getTenantsLookupEditions().then((result:any)=>{
       return result
     })
   }
@@ -51,17 +60,25 @@ export const fetchEdition= createAsyncThunk(
 export const createTenant= createAsyncThunk(
   "tenant/createTenant",
   (data:any)=>{
-    return proxy.tenantsPOST(data.data).then((result:any)=>{
+    return TenantService.postTenants(data.data).then((result:any)=>{
       return result
     })
   }
 )
 
+export const featureTenant= createAsyncThunk(
+  "tenant/featureTenant",
+  (data:any)=>{
+    return BlogFeatureService.getBlogsFeatures({blogId:"T", featureName: ""}).then((result:any)=>{
+      return result
+    })
+  }
+)
 
 export const deleteTenant= createAsyncThunk(
   "tenant/deleteTenant",
   (id:string)=>{
-    return proxy.tenantsDELETE(id).then((result:any)=>{
+    return TenantService.deleteTenants({id:id}).then((result:any)=>{
       return result
     })
   }
@@ -71,17 +88,25 @@ export const deleteTenant= createAsyncThunk(
 export const editTenant= createAsyncThunk(
   "tenant/editTenant",
   (id:any)=>{
-    return proxy.tenantsGET(id).then((result:any)=>{
+    return TenantService.getTenants({id:id}).then((result:any)=>{
       return result
     })
   }
 )
 
+export const fetchFeature = createAsyncThunk(
+  "tenant/fetchFeature",
+  (id:any)=>{
+    return TenantService.getTenants({id:id}).then((result:any)=>{
+      return result
+    })
+  }
+)
 
 export const editEdition= createAsyncThunk(
   "tenant/editEdition",
   (id:string)=>{
-    return proxy.editionsGET(id).then((result:any)=>{
+    return EditionService.getEditions({id:id}).then((result:any)=>{
       return result
     })
   }
@@ -90,7 +115,7 @@ export const editEdition= createAsyncThunk(
 export const tenantPut= createAsyncThunk(
   "tenant/tenantPut",
   (data:any)=>{
-    return proxy.tenantsPUT(data.id,data.body).then((result:any)=>{
+    return TenantService.putTenants({id:data.id,requestBody:data.body}).then((result:any)=>{
       return result
     })
   }
@@ -99,7 +124,7 @@ export const tenantPut= createAsyncThunk(
 export const tenantFeaturesGet= createAsyncThunk(
   "tenant/tenantFeaturesGet",
   (data:any)=>{
-    return proxy.featuresGET2("T", data.id).then((result:any)=>{
+    return BlogFeatureService.getBlogsFeatures({blogId:"T",featureName:data.id}).then((result:any)=>{
       return result
     })
   }
@@ -108,7 +133,7 @@ export const tenantFeaturesGet= createAsyncThunk(
 export const saveFeaturesEdition = createAsyncThunk(
   "edition/saveFeaturesEdition",
   (data: any) => { 
-    return proxy.featuresPUT("T", data.id, data.body).then((result: any) => {
+    return FeaturesService.putFeatures({providerName:"T", providerKey:data.id, requestBody:data.body}).then((result: any) => {
       return result;
     });
   }
@@ -116,7 +141,7 @@ export const saveFeaturesEdition = createAsyncThunk(
 export const restoreToDefaultFeaturesEdition = createAsyncThunk(
   "edition/restoreToDefaultFeaturesEdition",
   (id: any) => { 
-    return proxy.featuresDELETE("T", id, undefined).then((result: any) => {
+    return FeaturesService.deleteFeatures({providerName:"T",providerKey: id}).then((result: any) => {
       return result;
     });
   }
