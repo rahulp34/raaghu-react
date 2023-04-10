@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
 import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
-import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setProfilePictures, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
+import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setProfilePicture, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
 
 
  const navtabsItems = [
@@ -59,7 +59,7 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     function handleProfileDataSubmit(type:any) {
         console.log("type ", type);
         // dispatch(setProfilePictures(type) as any);
-        console.log(dispatch(setProfilePictures(type) as any));
+        console.log(dispatch(setProfilePicture(type) as any));
     }
 
     useEffect(() => {
