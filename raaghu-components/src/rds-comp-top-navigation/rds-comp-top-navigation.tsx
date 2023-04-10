@@ -169,30 +169,10 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                       <RdsDropdownList
                           placeholder="Components"
                           listItems={props.componentsList}
+                          id={"component"}
                       // onClick={props.toggleTheme}
                       ></RdsDropdownList>
-                  </div>
-          <div className="px-2 cursor-pointer position-relative border-end">
-          {/* <RdsDropdownList
-           placeholder={props.toggleItems[0].label}
-           icon =  "sun"
-           iconFill = {false }
-           iconStroke ={true}
-          listItems={props.toggleItems}
-            id={"toggleItem"}
-            // onClick={props.toggleTheme}
-          ></RdsDropdownList> */}
-
-          <RdsDropdownList
-           placeholder="Elements"
-           icon =  ""
-           iconFill = {false }
-           iconStroke ={true}
-            listItems={elementList}
-            // onClick={props.toggleTheme}
-          ></RdsDropdownList>
-          </div>
-     
+                  </div>     
           <div className="px-2 position-relative border-end me-3">
           <RdsDropdownList
            placeholder={props.languageLable}

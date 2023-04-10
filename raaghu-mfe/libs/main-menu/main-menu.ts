@@ -249,6 +249,13 @@ const MainMenu = [
               "path": "/menus",
               "subTitle": "menus"
             },
+            {
+              "key": "7-0-6",
+              "label": "Blog Post",
+              "icon": "icons",
+              "path": "/blog-post",
+              "subTitle": "subtitle here"
+            }
       ]
   },
     //   {

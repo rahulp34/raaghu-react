@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
-{"import_statement_for_Page_template"};
+import BlogPost from "./blog-post/blog-post";
 
 const App = () => (
   <Suspense>
-    {"page_template_component_in_app"}
+    <BlogPost></BlogPost>
   </Suspense>
 );
 
