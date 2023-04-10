@@ -151,6 +151,7 @@ module.exports = (env, argv) => {
           Components: mfeConfigJSON["components"].url,
           Pages: mfeConfigJSON["pages"].url,
           NewPage: mfeConfigJSON["newPage"].url,
+          GlobalResources: mfeConfigJSON["globalResources"].url
         },
         shared: {
           ...devdeps,
