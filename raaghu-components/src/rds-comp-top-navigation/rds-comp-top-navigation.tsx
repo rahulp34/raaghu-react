@@ -43,7 +43,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     // console.log(e.dataset.name)
     //console.log(e.target.innerText)
     const selectValue = e.target.innerText;
-    debugger
+    
     if (selectValue === "Alert") {
       navigate('/elements');
       setVisible(true)

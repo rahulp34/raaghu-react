@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { ClaimTypeService } from "../../proxy/services/ClaimTypeService";
 
 type InitialState = {
   loading: boolean;
@@ -21,13 +21,11 @@ const initialState: InitialState = {
   editClaimsData:[]
 };
 
-const proxy = new ServiceProxy();
-
 export const fetchClaimTypesData = createAsyncThunk(
   "claimTypes/fetchClaimTypesData",
   () => { 
-    return proxy
-      .claimTypesGET(undefined, 'id DESC', undefined, undefined)
+    return ClaimTypeService
+      .getClaimTypes({filter:undefined, sorting:'id DESC', skipCount:undefined, maxResultCount:undefined})
       .then((result: any) => {
         console.log("result ClaimType", result);
         return result.items;
@@ -38,7 +36,7 @@ export const fetchClaimTypesData = createAsyncThunk(
 export const deleteClaimTypesData = createAsyncThunk(
   "claimTypes/deleteClaimTypesData",
   (id: any) => {
-    return proxy.claimTypesDELETE(id!).then((result: any) => {
+    return ClaimTypeService.deleteClaimTypes(id!).then((result: any) => {
       return result.items;
     });
   }
@@ -47,7 +45,7 @@ export const deleteClaimTypesData = createAsyncThunk(
 export const addClaimTypesData = createAsyncThunk(
   "claimTypes/addClaimTypesData",
   (claimTypeDto: any) => {
-    return proxy.claimTypesPOST(claimTypeDto).then((result:any)=>{
+    return ClaimTypeService.postClaimTypes(claimTypeDto).then((result:any)=>{
       return result.items;
     })
   }
@@ -56,7 +54,7 @@ export const addClaimTypesData = createAsyncThunk(
 export const getClaimTypesData = createAsyncThunk(
   "claimTypes/getClaimTypesData",
   (id:string) => {
-    return proxy.claimTypesGET2(id,undefined).then((result:any)=>{
+    return ClaimTypeService.getClaimTypes1({id:id}).then((result:any)=>{
       return result;
     })
   }
@@ -65,7 +63,7 @@ export const getClaimTypesData = createAsyncThunk(
 export const editClaimTypesData = createAsyncThunk(
   "claimTypes/editClaimTypesData",
   ({id ,claimTypeDto}:{id: any, claimTypeDto: any}) => {
-    return proxy.claimTypesPUT(id, claimTypeDto).then((result:any)=>{
+    return ClaimTypeService.putClaimTypes({id, requestBody:claimTypeDto}).then((result:any)=>{
       return result.items;
     })
   }

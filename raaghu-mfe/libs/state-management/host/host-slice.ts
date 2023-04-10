@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import {AbpApplicationConfigurationService} from "../../proxy/services/AbpApplicationConfigurationService"
 
 type hostInitialState = {
   loading : boolean,
@@ -13,10 +13,9 @@ const hostInitialState : hostInitialState = {
   error : "",
 }
 
-const proxy =new ServiceProxy();
 
 export const fetchApplicationConfig = createAsyncThunk('host/fetchApplicationConfig',() => {
-    return proxy.applicationConfiguration(false).then((result:any) =>{
+    return AbpApplicationConfigurationService.getApplicationConfiguration({includeLocalizationResources:false}).then((result:any) =>{
         console.log("result",result)
         return result
     })

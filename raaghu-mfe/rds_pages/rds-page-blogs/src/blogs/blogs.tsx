@@ -59,7 +59,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    debugger;
+    ;
     dispatch(fetchBlogsData() as any);
   }, [dispatch]);
 
@@ -134,6 +134,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   function handleShowInDiscovery(event: any) {
     setFormData({ ...formData, showInDiscoveryDocument: event });
   }
+
   return (
     <div>
 
