@@ -210,3 +210,8 @@ declare module "Menus/Menus" {
 	const MenusComponent: React.ComponentType;
 	export default MenusComponent;
 }
+
+declare module "NewPage/NewPage" {
+	const NewPageComponent: React.ComponentType;
+	export default NewPageComponent;
+}

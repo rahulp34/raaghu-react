@@ -1,8 +1,9 @@
 import React from "react";
 import { RdsCompPages } from "../../../rds-components";
-import { RdsButton } from "raaghu-react-elements";
+import { RdsButton, RdsSearch } from "raaghu-react-elements";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
+// import { useNavigate } from "react-router-dom";
 
 export interface RdsPagePagesProps {
 	// pagesTableHeaders: any;
@@ -11,7 +12,7 @@ export interface RdsPagePagesProps {
 	// pagesTableRecords: any
 
 }
-
+// const navigate = useNavigate();
 const tableHeaders = [
 	{
 		displayName: t("Details"),
@@ -83,6 +84,13 @@ const tableData = [
 
 ]
 
+const handlerRequestData= () => {
+    // navigate("/new-page");
+	alert("hii")
+  }
+
+  
+
 
 const Pages = (props: any) => {
 	const { t } = useTranslation();
@@ -104,20 +112,22 @@ const Pages = (props: any) => {
 							size="small"
 							type="button"
 							colorVariant="primary"
-							//onClick={handlerRequestData}
+							onClick={handlerRequestData}
 							class="mx-2"
 						></RdsButton>
 					</div>
 				</div>
 
 				<div className="my-3">
-					<div className="card">
-						<div className="card-body">
+					<div className="border-0 card p-3 pt-4 rounded-0">
 							<div className="row">
-								<div className="col-3">
-									hi
+								<div className="col-md-12">
+									<RdsSearch
+										iconside="right"
+										placeholder="Search"
+										size="small" />
 								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>

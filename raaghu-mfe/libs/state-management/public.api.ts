@@ -1,3 +1,4 @@
+export * from "./new-page/new-page-slice";
 export * from "./pages/pages-slice";
 export * from "./login/login-slice";
 export * from "./index";
@@ -16,3 +17,4 @@ export * from './url-forwarding/url-forwarding-slice';
 export * from './host/host-slice';
 export * from './my-account/my-account-slice';
 export * from './forms/forms-slice';
+

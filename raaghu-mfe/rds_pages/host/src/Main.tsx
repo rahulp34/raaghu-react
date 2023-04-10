@@ -63,6 +63,7 @@ import {
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
+  NewPageCompo,
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -85,7 +86,7 @@ const Main = (props: MainProps) => {
   useEffect(() => {
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
-       navigate(currentPath);
+        navigate(currentPath);
       } else {
         navigate("/dashboard");
       }
@@ -109,16 +110,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-    const componentsList = [
-        {
-            label: "Light",
-            val: "light",
-        },
-        {
-            label: "Dark",
-            val: "dark",
-        },
-    ];
+  const componentsList = [
+    {
+      label: "Light",
+      val: "light",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+    },
+  ];
   // useEffect(() => {
   //   dispatch(fetchApplicationConfig() as any);
   // }, [dispatch]);
@@ -161,15 +162,15 @@ const Main = (props: MainProps) => {
   //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
 
   useEffect(() => {
-   
+
     configurationService(API_URL, currentLanguage).then(async (res: any) => {
-     
+
       await localizationService(API_URL, currentLanguage).then(
         async (resp: any) => {
           i18n.changeLanguage(currentLanguage);
           var data1 = {};
           const translation = resp?.resources;
-           if (translation) {
+          if (translation) {
             Object.keys(translation).forEach((key) => {
               data1 = { ...data1, ...translation[key].texts };
             });
@@ -200,7 +201,7 @@ const Main = (props: MainProps) => {
       });
       setLanguageData(tempdata);
     });
-    }, [currentLanguage]);
+  }, [currentLanguage]);
 
   const sideNavItems = concatenated;
 
@@ -255,7 +256,7 @@ const Main = (props: MainProps) => {
     localStorage.clear();
     // setIsAuth(false);
     store.accessToken = null;
-   
+
     navigate("/login");
   };
 
@@ -299,7 +300,7 @@ const Main = (props: MainProps) => {
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => {
                   console.log(" session Hey Chat Button Clicked!!");
-                } } elementList={[]}              />
+                }} elementList={[]} />
             </div>
             <div
               className="
@@ -435,10 +436,11 @@ const Main = (props: MainProps) => {
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
                       <Route path="/components" element={<ComponentsCompo />} />
+                      <Route path="/pages" element={<PagesCompo />} />
+                      <Route path="/new-page" element={<NewPageCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
 
-                    <Route path="/pages" element={<PagesCompo />} /> 
-</Routes>
+                    </Routes>
                   </Suspense>
                 </div>
               </div>

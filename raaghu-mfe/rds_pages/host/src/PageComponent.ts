@@ -56,6 +56,7 @@ const MenusCompo = React.lazy(() => import("Menus/Menus"));
 
 const ComponentsCompo = React.lazy(() => import("Components/Components"));
 const PagesCompo = React.lazy(() => import("Pages/Pages"));
+const NewPageCompo = React.lazy(() => import("NewPage/NewPage"));
 export {
     DashboardCompo,
     LoginCompo,
@@ -99,4 +100,5 @@ export {
     MenusCompo,
     ComponentsCompo,
     PagesCompo,
+    NewPageCompo,
 };
