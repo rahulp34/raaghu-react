@@ -83,10 +83,10 @@ export const MfeConfig = {
   "forms": {
     "url": "forms@http://localhost:8037/remoteEntry.js"
   },
-  "formsView": {
+  "forms-view": {
     "url": "formsView@http://localhost:8038/remoteEntry.js"
   },
-  "formsPreview": {
+  "forms-preview": {
     "url": "formsPreview@http://localhost:8039/remoteEntry.js"
   },
   "blogger": {
@@ -105,7 +105,7 @@ export const MfeConfig = {
     "url": "urlForwarding@http://localhost:8097/remoteEntry.js"
   },
   "paymentPlans": {
-    "url": "paymentPlans@http://localhost:8031/remoteEntry.js"
+    "url": "paymentPlans@http://localhost:8131/remoteEntry.js"
   },
   "blogs": {
     "url": "blogs@http://localhost:8032/remoteEntry.js"
@@ -128,7 +128,19 @@ export const MfeConfig = {
   "paymentRequests": {
     "url": "paymentRequests@http://localhost:8036/remoteEntry.js"
   },
-  "rdsComponents": {
-    "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
+  "menus": {
+    "url": "menus@http://localhost:8090/remoteEntry.js"
+  },
+  "components": {
+    "url": "components@http://localhost:8104/remoteEntry.js"
+  },
+  "pages": {
+    "url": "pages@http://localhost:8106/remoteEntry.js"
+  },
+  "blogPost": {
+    "url": "blogPost@http://localhost:8107/remoteEntry.js"
+  },
+  "globalResources": {
+    "url": "globalResources@http://localhost:8040/remoteEntry.js"
   }
 }

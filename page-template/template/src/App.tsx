@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-"{import_statement_for_Page_template}";
+{"import_statement_for_Page_template"};
 
 const App = () => (
   <Suspense>

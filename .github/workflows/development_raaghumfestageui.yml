@@ -37,11 +37,6 @@ jobs:
         run: |
           npm install
 
-      - name: npm install raaghu-core
-        working-directory: raaghu-core
-        run: |
-          npm install
-
       - name: npm install raaghu-elements
         working-directory: raaghu-elements
         run: |
@@ -56,6 +51,7 @@ jobs:
         working-directory: raaghu-mfe
         run: |
           npm install
+          npm run create:proxy
           npm run build
           cp web.config rds_pages/host/dist
 

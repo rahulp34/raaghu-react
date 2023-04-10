@@ -5,6 +5,7 @@ import {
   RdsButton,
   RdsOffcanvas,
   RdsNavtabs,
+  RdsAlert
 } from "../../../../../raaghu-elements/src";
 
 import {
@@ -33,6 +34,7 @@ interface RdsPageRolesProps {}
 
 const Roles = (props: RdsPageRolesProps) => {
   const [activeTab, setActiveTab] = useState("basic");
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [data, setData] = useState({
     roles: [],
     permission: [],
@@ -105,10 +107,34 @@ const Roles = (props: RdsPageRolesProps) => {
     });
   };
   const handlerDeleteConfirm = () => {
-    dispatch(deleteRoles(id) as any).then(() => {
+    dispatch(deleteRoles(id) as any).then((res:any) => {
+      if (res.type == "Roles/deleteRoles/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Role deleted Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchRoles() as any);
     });
   };
+  useEffect(() => {
+    // Set a 3-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 3000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [data.roles]);
 
   const tableHeader = [
     {
@@ -169,7 +195,22 @@ const Roles = (props: RdsPageRolesProps) => {
       isPublic: checked.public,
       name: val,
     };
-    dispatch(addRolesUnit(dto) as any).then(() => {
+    dispatch(addRolesUnit(dto) as any).then((res: any) => {
+      if (res.type == "Roles/addRolesUnit/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Role added Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchRoles() as any);
     });
   };
@@ -181,7 +222,22 @@ const Roles = (props: RdsPageRolesProps) => {
       concurrencyStamp: undefined,
       extraProperties: {},
     };
-    dispatch(editRoles({ id: id, dTo: dto }) as any).then(() => {
+    dispatch(editRoles({ id: id, dTo: dto }) as any).then((res:any) => {
+      if (res.type == "Roles/editRoles/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Role edited Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchRoles() as any);
     });
   };
@@ -191,9 +247,18 @@ const Roles = (props: RdsPageRolesProps) => {
   };
   return (
     <>
-      <div>
-        <div className="d-flex justify-content-end">
-          <RdsButton
+     <div className="row ">
+            <div className="col-md-4">
+              {Alert.show && (
+                <RdsAlert
+                  alertmessage={Alert.message}
+                  colorVariant={Alert.color}
+                ></RdsAlert>
+              )}
+            </div>
+            <div className="col-md-8 d-flex justify-content-end my-1">
+             
+            <RdsButton
             icon="plus"
             label="New Role"
             iconColorVariant="light"
@@ -209,8 +274,11 @@ const Roles = (props: RdsPageRolesProps) => {
             databstarget="#newRole"
             onClick={handlerNewRole}
           ></RdsButton>
-        </div>
-      </div>
+                  </div>
+               
+            </div>
+        
+    
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
           classes="table__userTable"
@@ -289,7 +357,6 @@ const Roles = (props: RdsPageRolesProps) => {
             <div className="footer-buttons my-2">
                       <div className="row">
                         <div className="col-md-12 d-flex">
-                          <div className="flex-grow-1"></div>
                           <div>
                             <RdsButton
                               label="Cancel"
@@ -317,36 +384,6 @@ const Roles = (props: RdsPageRolesProps) => {
                         </div>
                       </div>
                     </div>
-
-
-
-
-            {/* <div
-              className="d-flex"
-              style={{ position: "absolute", bottom: "2%" }}
-            > <div className="flex-grow-1"></div>
-              <div className="me-3">
-                <RdsButton
-                  type={"button"}
-                  label="cancel"
-                  isOutline={true}
-                  colorVariant="primary"
-                  databsdismiss="offcanvas"
-                  databstoggle="offcanvas"
-                  databstarget="#newRole"
-                ></RdsButton>
-              </div>
-              <RdsButton
-                type={"button"}
-                label="save"
-                isDisabled={val === ""}
-                colorVariant="primary"
-                onClick={handlerAddRole}
-                databsdismiss="offcanvas"
-                databstoggle="offcanvas"
-                databstarget="#newRole"
-              ></RdsButton>
-            </div> */}
           </div>
         </RdsOffcanvas>
         <RdsOffcanvas

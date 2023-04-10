@@ -8,6 +8,7 @@ export interface RdsIconLabelProps {
   icon: string;
   size: string;
   iconSize: string;
+  fill:boolean;
 }
 
 const RdsIconLabel = (props: RdsIconLabelProps) => {
@@ -27,10 +28,10 @@ const RdsIconLabel = (props: RdsIconLabelProps) => {
           name={props.icon}
           height={size}
           width={size}
-          fill={true}
+          fill={props.fill}
           stroke={true}
         ></RdsIcon>
-        <div className="labelClass">
+        <div className="labelClass ms-2">
           <RdsLabel label={props.label} size={fontSize}></RdsLabel>
         </div>
       </div>

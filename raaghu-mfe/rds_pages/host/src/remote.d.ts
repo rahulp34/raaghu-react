@@ -196,8 +196,26 @@ declare module "PaymentRequests/PaymentRequests" {
 	const PaymentRequestsComponent : React.ComponentType;
 	export default PaymentRequestsComponent;
 }
+declare module "Components/Components" {
+	const ComponentsComponent: React.ComponentType;
+	export default ComponentsComponent;
+}
 
-declare module "RdsComponents/RdsComponents" {
-	const RdsComponentsComponent: React.ComponentType;
-	export default RdsComponentsComponent;
+declare module "Pages/Pages" {
+	const PagesComponent: React.ComponentType;
+	export default PagesComponent;
+}
+
+declare module "Menus/Menus" {
+	const MenusComponent: React.ComponentType;
+	export default MenusComponent;
+}
+
+declare module "BlogPost/BlogPost" {
+	const BlogPostComponent: React.ComponentType;
+	export default BlogPostComponent;
+}
+declare module "GlobalResources/GlobalResources" {
+	const GlobalResourcesComponent: React.ComponentType;
+	export default GlobalResourcesComponent;
 }

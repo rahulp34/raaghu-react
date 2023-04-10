@@ -65,7 +65,7 @@ const RdsSideNavChild = ({
          <span className="collpase-button">
 
            <RdsIcon
-                name="chevron_right_double "
+                name="chevron_right_double"
                 height="15px"
                 width="15px"
                 stroke={true}

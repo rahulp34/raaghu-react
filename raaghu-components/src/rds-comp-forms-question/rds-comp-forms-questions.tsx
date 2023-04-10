@@ -1,7 +1,8 @@
 import moment from "moment";
-import { RdsIcon, RdsToggle, } from "raaghu-react-elements";
 import React, { useEffect, useState } from "react";
-import { RdsButton, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
+import { RdsIcon, RdsToggle, RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "raaghu-react-elements";
+import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
+// import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
 
 export interface RdsCompFormsQuestionProps {
     formQuestionsData?: any;
@@ -163,7 +164,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                             </div>
                             <div className="col-6 d-flex justify-content-end">
                                 <div className="d-flex px-3">
-                                <RdsToggle iconOnUncheck={"false"} iconOnCheck={"true"} onClick={(e: any) => setIsRequired(i, e.target.checked)} ></RdsToggle>
+                                {/* <RdsToggle iconOnUncheck={"false"} iconOnCheck={"true"} onClick={(e: any) => setIsRequired(i, e?.target?.checked)} ></RdsToggle> */}
                                 <RdsLabel label="Required"></RdsLabel>
                                 </div> 
                                 <RdsIcon

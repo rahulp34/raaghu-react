@@ -1,3 +1,5 @@
+export * from "./blog-post/blog-post-slice";
+export * from "./pages/pages-slice";
 export * from "./login/login-slice";
 export * from "./index";
 export * from "./forgot-password/forgotpassword-slice";

@@ -15,6 +15,7 @@
     "i18next-http-backend": "^2.1.1",
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
+    "raaghu-core": "^1.0.2",
     "raaghu-themes": "^0.0.18",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
@@ -60,9 +61,11 @@
   "scripts": {
     "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
+    "create:core": "node utils/create.js core",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
+    "create:module": "node utils/create.js m",
     "create:page": "node utils/create.js p",
-    "create:proxy": "node utils/create.js pr"
+    "create:proxy": "node utils/generateProxy.js proxy"
   }
 }

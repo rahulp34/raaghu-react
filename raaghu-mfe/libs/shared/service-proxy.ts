@@ -10,7 +10,7 @@
 
 import axios, { AxiosError } from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
-import Instance  from '../../../raaghu-core/src/utils/interceptor';
+import Instance  from './interceptor';
 
 export class ServiceProxy {
     private instance: AxiosInstance;
@@ -13819,9 +13819,14 @@ export class ServiceProxy {
             method: "POST",
             url: url_,
             headers: {
-                "Accept": "text/plain"
+                'Accept': 'text/plain',
+                'Content-Type':'multipart/form-data',
+                
             },
+           
             cancelToken
+           
+
         };
 
         return this.instance.request(options_).catch((_error: any) => {

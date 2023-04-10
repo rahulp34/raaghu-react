@@ -209,19 +209,10 @@ const Applications = () => {
     clientUri: '',
     logoUri: '',
   })
-  const [applicationData, setApplicationData] = useState<any>(
-    {
-      id: '',
-      clientId: '',
-      displayName: '',
-      type: '',
-    });
-
+  const [applicationData, setApplicationData] = useState<any>([]);
   const [scopesListData, setScopesListData] = useState<any>([]);
   const [permissionListData, setPermissionListData] = useState<any>([]);
   const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
-
-
   const offCanvasHandler = () => { };
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 

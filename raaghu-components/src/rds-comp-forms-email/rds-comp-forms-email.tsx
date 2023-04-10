@@ -1,4 +1,4 @@
-import { RdsButton, RdsInput, RdsTextArea, RdsTextEditor } from "raaghu-react-elements";
+import { RdsButton, RdsInput, RdsTextArea, RdsTextEditor } from "../rds-elements";
 import React, { useEffect, useState } from "react";
 
 export interface RdsCompFormsEmailProps {

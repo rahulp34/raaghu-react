@@ -1,5 +1,5 @@
 {
-  "name": "rds-page-roles",
+  "name": "roles",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",

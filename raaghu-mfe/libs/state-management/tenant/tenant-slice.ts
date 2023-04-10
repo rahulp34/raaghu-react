@@ -30,8 +30,8 @@ const proxy= new ServiceProxy()
 export const fetchTenant= createAsyncThunk(
   "tenant/fetchTenant",
   ()=>{
+ 
     return proxy.tenantsGET2(undefined, undefined, undefined, undefined, undefined, undefined,'id DESC', undefined, 1000).then((result:any)=>{
-      console.log("result",result)
       return result.items;
     }
     )
@@ -116,7 +116,6 @@ export const tenantFeaturesGet= createAsyncThunk(
   "tenant/tenantFeaturesGet",
   (data:any)=>{
     return proxy.featuresGET("T",data.id).then((result:any)=>{
-      // debugger;
       return result
     })
   }
