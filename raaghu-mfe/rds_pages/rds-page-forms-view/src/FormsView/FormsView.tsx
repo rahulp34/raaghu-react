@@ -42,7 +42,7 @@ const FormsView = (props: any) => {
   useEffect(() => {
     dispatch(getFormsResponsesCount(props.id) as any);
   }, [dispatch])
-
+  const [alertOne, setAlertOne] = useState(false);
   const [basicEditFormData1, setbasicEditFormData] = useState<any>();
   const [tempEditFormData, setTempEditFormData] = useState<any>();
   const [tempQuestionsData, setTempQuestionsData] = useState<any>([]);
@@ -181,19 +181,19 @@ const FormsView = (props: any) => {
     success: false,
   });
   useEffect(() => {
+    setAlert({
+      showAlert: forms.alert,
+      message: forms.alertMessage,
+      success: forms.success,
+    });
+    setTimeout(() => {
       setAlert({
-        showAlert: forms.alert,
-        message: forms.alertMessage,
-        success: forms.success,
+        showAlert: false,
+        message: "",
+        success: false,
       });
-      setTimeout(() => {
-        setAlert({
-          showAlert: false,
-          message: "",
-          success: false,
-        });
-      }, 2000);
-    
+    }, 2000);
+
   }, [forms.alertMessage]);
 
   useEffect(() => {
@@ -212,7 +212,7 @@ const FormsView = (props: any) => {
     <>
       <div className="row">
         <div className=" col-md-6">
-          {alert.showAlert && alertOne &&(
+          {alert.showAlert && alertOne && (
             <RdsAlert
               alertmessage={alert.message}
               colorVariant={alert.success ? "success" : "danger"}
@@ -273,11 +273,12 @@ const FormsView = (props: any) => {
                       <div>
                         <RdsLabel label="Link"></RdsLabel>
                       </div>
-                      <div className="input-group mb-3 mt-3">
-                        <RdsInput value={`${baseUrl}/formsPreview/${props.id}`}></RdsInput>
-                        <div className="input-group-text" id="basic-addon12">
+                      <div className="input-group mb-3">
+                        <input type="text" className="form-control" value={`${baseUrl}/formsPreview/${props.id}`} />
+                          <span className="input-group-text">
                           <RdsIcon classes="cursor-pointer" name={copybtn} height="20px" width="20px" fill={false} stroke={true} onClick={handleCopyLink} />
-                        </div>
+
+                          </span>
                       </div>
                     </div>
                   </>
