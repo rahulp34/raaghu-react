@@ -255,6 +255,13 @@ const MainMenu = [
               "icon": "icons",
               "path": "/blog-post",
               "subTitle": "subtitle here"
+            },
+              {
+               "kay": "7-0-7",
+              "label": "Global Resources",
+              "icon": "tag",
+              "path": "/globalResources",
+              "subTitle": "Global Resources",
             }
       ]
   },

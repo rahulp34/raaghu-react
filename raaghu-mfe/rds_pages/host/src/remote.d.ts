@@ -215,3 +215,7 @@ declare module "BlogPost/BlogPost" {
 	const BlogPostComponent: React.ComponentType;
 	export default BlogPostComponent;
 }
+declare module "GlobalResources/GlobalResources" {
+	const GlobalResourcesComponent: React.ComponentType;
+	export default GlobalResourcesComponent;
+}

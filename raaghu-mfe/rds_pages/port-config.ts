@@ -133,5 +133,8 @@ export const PortConfig = {
   },
   "blogPost": {
     "port": "8107"
+  },
+  "globalResources": {
+    "port": "8040"
   }
 }
