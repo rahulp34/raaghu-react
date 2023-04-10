@@ -34,7 +34,7 @@ const Blogger = () => {
 
   // dispatch and selectores for API calling ===============
   const dispatch = useAppDispatch();
-  const blogs = useAppSelector((state) => state.persistedReducer.blogger);
+  const blogs = useAppSelector((state) => state.blogger);
 
   // Use Effects ==================
   useEffect(() => {

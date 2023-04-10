@@ -264,7 +264,7 @@ const checkboxlabel = [
 
 const Tenant = (props: RdsPageTenantProps) => {
   const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
-  const data = useAppSelector((state) => state.persistedReducer.tenant);
+  const data = useAppSelector((state) => state.tenant);
   const { t } = useTranslation();
 
   const [featuresData, setFeaturesData] = useState<any>([]);

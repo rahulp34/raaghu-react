@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
 import {ServiceProxy} from '../../shared/service-proxy'
-import { featureTenant } from "../public.api";
 
 type InitialStateSettings = {
   loading: boolean;
