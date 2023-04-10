@@ -69,4 +69,5 @@ export {default as RdsCompPersonalInfo} from './rds-comp-personal-info/rds-comp-
 export {default as RdsCompProfilePicture} from './rds-comp-profile-picture/rds-comp-profile-picture';
 export {default as rdsCompFileMover} from './rds-comp-file-mover/rds-comp-file-mover';
 export { default as RdsCompComponents } from './rds-comp-components/rds-comp-components';
+export { default as RdsCompBlogPost } from "./rds-comp-blog-post";
 export {default as RdsCompSyntaxHighlighter} from './rds-comp-syntax-highlighter/rds-comp-syntax-highlighter';

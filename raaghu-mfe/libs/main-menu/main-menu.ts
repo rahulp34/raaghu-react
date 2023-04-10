@@ -251,6 +251,13 @@ const MainMenu = [
             },
             {
               "key": "7-0-6",
+              "label": "Blog Post",
+              "icon": "icons",
+              "path": "/blog-post",
+              "subTitle": "subtitle here"
+            },
+              {
+               "kay": "7-0-7",
               "label": "Global Resources",
               "icon": "tag",
               "path": "/globalResources",

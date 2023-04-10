@@ -80,10 +80,7 @@ for(const page of Object.keys(mfeConfigJSON)) {
 for (const copy of Object.keys(mfeConfigJSON)){
   if(copy != 'host'){
     fs.mkdir(`${pastepath}/rds-page-${copy}`, (err)=>{
-      if(err){
-        console.log("directory building failed");
-      }
-      else {
+      if(!err){
         console.log(`${copy} folder created successfully `);
       }
     })
