@@ -67,18 +67,18 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
               ) : (
                 <li
                   key={breadItem.id}
-                  className={`breadcrumb-item  ${
+                  className={`breadcrumb-items  ${
                     breadItem.active ? "active" : ""
                   }`}
-                  id={`breadcrumbItems+${breadItem.id}`}
+                  id={`breadcrumbItem+${breadItem.id}`}
                   onClick={() => onClickHandler(breadItem.id)}
                 >
                   <span >
                     <RdsIcon
                       name="chevron_right"
                       stroke={true}
-                      height="12px"
-                      width="18px"
+                      height="8px"
+                      width="14px"
                     />
                   </span>
                   {breadItem.icon && (
