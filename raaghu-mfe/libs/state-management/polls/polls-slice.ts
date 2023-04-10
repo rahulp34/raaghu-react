@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import { ServiceProxy } from "../../shared/service-proxy";
+import { PollAdminService } from "../../proxy";
 
 type pollsInitialState = {
   loading : boolean,
@@ -26,43 +27,43 @@ const PollsInitialState : pollsInitialState = {
 const proxy = new ServiceProxy();
 
 export const GetPolls = createAsyncThunk('Polls/GetPolls',() => {
-    return proxy.pollGET(undefined,undefined,0,1000).then((result:any) =>{
-      
+    return PollAdminService.getPoll({filter:undefined,sorting:undefined,skipCount:0,maxResultCount:1000}).then((result:any) =>{
+      debugger
         console.log("result",result)
         return result
     })
 })
 
 export const SavePolls = createAsyncThunk('Polls/SavePolls',(data:any) => {
-  return proxy.pollPOST(data).then((result:any) =>{
+  return PollAdminService.postPoll({requestBody:data}).then((result:any) =>{
       return result
   })
 })
 
 export const deletePolls = createAsyncThunk('Polls/deletePolls',  (id:any) => {
-  return proxy.pollDELETE(id).then((result:any) =>{
+  return PollAdminService.deletePoll({id:id}).then((result:any) =>{
       return result
       
   })
 })
 
 export const Widgets = createAsyncThunk('Polls/Widgets',  () => {
-  return proxy.widgets(undefined).then((result:any) =>{
+  return PollAdminService.getPollWidgets().then((result:any) =>{
       return result;
   })
 })
 export const fetchPollsData = createAsyncThunk('Polls/fetchPollsData',  (id:any) => {
-  return proxy.pollGET2(id,undefined).then((result:any) =>{
+  return PollAdminService.getPoll1({id:id}).then((result:any) =>{
       return result;
   })
 })
 export const resultData = createAsyncThunk('Polls/resultData',  (id:any) => {
-  return proxy.result(id,undefined).then((result:any) =>{
+  return PollAdminService.getPollResult({id:id}).then((result:any) =>{
       return result;
   })
 })
 export const UpdatePollsData = createAsyncThunk('Polls/UpdatePollsData',  (data:any) => {
-  return proxy.pollPUT(data.id,data.body).then((result:any) =>{
+  return PollAdminService.putPoll({id:data.id,requestBody:data.body}).then((result:any) =>{
       return result;
   })
 })

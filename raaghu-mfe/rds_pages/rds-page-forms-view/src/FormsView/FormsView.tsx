@@ -25,7 +25,9 @@ const FormsView = (props: any) => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
+  // const forms = useAppSelector((state) => state.persistedReducer.forms);
   const forms = useAppSelector((state) => state.persistedReducer.forms);
+
 
   useEffect(() => {
     dispatch(fetchForms() as any);

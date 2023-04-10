@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { BlogManagementService } from "../../proxy";
 import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
@@ -18,37 +19,37 @@ const initialState: InitialState = {
 const proxy = new ServiceProxy()
 
 export const getAllBlogs = createAsyncThunk('Blogs/GetAll', () => {
-  return proxy.adminGET().then((result: any) => {
+  return BlogManagementService.getBlogsAdmin().then((result: any) => {
     return result;
   })
 });
 
 export const createNewBlog = createAsyncThunk('Blogs/Create', (data: any) => {
-  return proxy.adminPOST(data.data).then((result: any) => {
+  return BlogManagementService.postBlogsAdmin({requestBody:data.data}).then((result: any) => {
     return result;
   })
 });
 
 export const getBlogById = createAsyncThunk('Blogs/GetById', (data: any) => {
-  return proxy.adminGET2(data.id).then((result: any) => {
+  return BlogManagementService.getBlogsAdmin1({id:data.id}).then((result: any) => {
     return result;
   })
 });
 
 export const updateBlog = createAsyncThunk('Blogs/Update', (data: any) => {
-  return proxy.adminPUT(data.id, data.data).then((result: any) => {
+  return BlogManagementService.putBlogsAdmin({id:data.id, requestBody:data.data}).then((result: any) => {
     return result;
   })
 });
 
 export const deleteBlog = createAsyncThunk('Blogs/Delete', (data: any) => {
-  return proxy.adminDELETE(data.id).then((result: any) => {
+  return BlogManagementService.deleteBlogsAdmin({id:data.id}).then((result: any) => {
     return result;
   })
 });
 
 export const clearCache = createAsyncThunk('Blogs/ClearCache', (data: any) => {
-  return proxy.clearCache(data.id).then((result: any) => {
+  return BlogManagementService.getBlogsAdminClearCache({id:data.id}).then((result: any) => {
     return result;
   })
 });

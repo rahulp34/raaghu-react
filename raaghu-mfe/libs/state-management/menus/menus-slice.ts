@@ -5,6 +5,7 @@ import {
   AnyAction,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { MenuItemAdminService, MenuItemPublicService } from "../../proxy";
 
 import {ServiceProxy} from '../../shared/service-proxy'
 
@@ -28,7 +29,7 @@ const proxy = new ServiceProxy()
 export const getAllMenuItems = createAsyncThunk(
   "menu/getAllMenuItems",
   async () => {
-    return await proxy.menuItemsAll(undefined).then((result:any)=>{
+    return await MenuItemPublicService.getMenuItems().then((result:any)=>{
       return result
     })
 
@@ -37,7 +38,7 @@ export const getAllMenuItems = createAsyncThunk(
 export const getMenuItem = createAsyncThunk(
     "menu/getMenuItem",
     async (id:any) => {
-      return await proxy.menuItemsGET2(id,undefined).then((result:any)=>{
+      return await MenuItemAdminService.getMenuItems1({id:id}).then((result:any)=>{
         return result
       })
   
@@ -46,7 +47,7 @@ export const getMenuItem = createAsyncThunk(
 export const editMenuItem = createAsyncThunk(
   "menu/editMenuItem",
   async (id:any) => {
-    return await proxy.menuItemsPUT(id,undefined).then((result:any)=>{
+    return await MenuItemAdminService.putMenuItems({id:id,requestBody:undefined}).then((result:any)=>{
       return result
     })
 
@@ -56,7 +57,7 @@ export const editMenuItem = createAsyncThunk(
 export const postMenuItems= createAsyncThunk(
   "menu/postMenuItems",
  (dto:any) => {
-    return proxy.menuItemsPOST(dto).then((result:any)=>{
+    return MenuItemAdminService.postMenuItems(dto).then((result:any)=>{
      return result
     })
   }
@@ -65,7 +66,7 @@ export const postMenuItems= createAsyncThunk(
 export const deleteMenuItem= createAsyncThunk(
   "menu/deleteMenuItem",
  (id:any) => {
-    return proxy.menuItemsDELETE(id).then((result:any)=>{
+    return MenuItemAdminService.deleteMenuItems({id:id}).then((result:any)=>{
      return result
     })
   }
