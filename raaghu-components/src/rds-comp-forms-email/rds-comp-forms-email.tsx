@@ -12,7 +12,6 @@ const RdsCompFormsEmail = (props: RdsCompFormsEmailProps) => {
         setEmailData({ ...emailData, to: value })
     }
     function setSubject(value: any) {
-        debugger
         setEmailData({ ...emailData, subject: value })
     }
     function setBody(value: any) {
