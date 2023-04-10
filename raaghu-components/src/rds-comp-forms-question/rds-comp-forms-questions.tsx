@@ -204,7 +204,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                 <RdsSelectList
                                     label={"Type"}
                                     selectItems={questionsTypeList}
-                                    //selectedValue={element.questionType}
+                                    // selectedValue={element.questionType}
                                     onSelectListChange={(selectedOption: any) => setSelectedOption(i, selectedOption)}
                                 ></RdsSelectList>
                             </div>
