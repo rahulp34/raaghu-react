@@ -214,8 +214,3 @@ declare module "GlobalResources/GlobalResources" {
 	const GlobalResourcesComponent: React.ComponentType;
 	export default GlobalResourcesComponent;
 }
-
-declare module "NewPage/NewPage" {
-	const NewPageComponent: React.ComponentType;
-	export default NewPageComponent;
-}

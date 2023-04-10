@@ -3,4 +3,3 @@ export { default as MainMenu } from './main-menu';
 // export {default as Elements} from './elements';
 export {default as Components} from './components';
 export {default as Pages} from './pages';
-export {default as NewPage} from './new-page';

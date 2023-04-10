@@ -57,7 +57,6 @@ const GlobalResourcesCompo = React.lazy(() => import("GlobalResources/GlobalReso
 
 const ComponentsCompo = React.lazy(() => import("Components/Components"));
 const PagesCompo = React.lazy(() => import("Pages/Pages"));
-const NewPageCompo = React.lazy(() => import("NewPage/NewPage"));
 export {
     DashboardCompo,
     LoginCompo,
@@ -102,5 +101,4 @@ export {
     ComponentsCompo,
     PagesCompo,
     GlobalResourcesCompo,
-    NewPageCompo,
 };

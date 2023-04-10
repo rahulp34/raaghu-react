@@ -1,4 +1,3 @@
-import newPageReducer from "./new-page/new-page-slice";
 import pagesReducer from "./pages/pages-slice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { loginReducer } from "./public.api";
@@ -43,7 +42,6 @@ const persistConfig={
   blacklist: ["forgotPassword"],
 };
 const rootReducer = combineReducers({
-  newPage: newPageReducer,
   pages: pagesReducer,
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,

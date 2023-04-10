@@ -3,7 +3,7 @@ import { RdsCompPages } from "../../../rds-components";
 import { RdsButton, RdsSearch } from "raaghu-react-elements";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface RdsPagePagesProps {
 	// pagesTableHeaders: any;
@@ -12,7 +12,7 @@ export interface RdsPagePagesProps {
 	// pagesTableRecords: any
 
 }
-// const navigate = useNavigate();
+//  const navigate = useNavigate();
 const tableHeaders = [
 	{
 		displayName: t("Details"),
@@ -84,16 +84,21 @@ const tableData = [
 
 ]
 
-const handlerRequestData= () => {
-    // navigate("/new-page");
-	alert("hii")
-  }
+
 
   
 
 
 const Pages = (props: any) => {
 	const { t } = useTranslation();
+	 const navigate = useNavigate();
+
+	 const handlerRequestData= () => {
+    
+		// alert("hii")
+		navigate("/new-page");
+	  }
+
 	return (
 		<>
 			<div>
@@ -102,7 +107,7 @@ const Pages = (props: any) => {
 					<div className="d-flex justify-content-end">
 						<RdsButton
 							icon="plus"
-							label={("New Page") || ""}
+							label={("New Page")}
 							iconColorVariant="light"
 							iconHeight="15px"
 							iconWidth="15px"
