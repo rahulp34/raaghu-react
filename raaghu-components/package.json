@@ -64,7 +64,7 @@
     "@babel/runtime": "^7.21.0",
     "bootstrap": "^5.2.3",
     "prismjs": "^1.29.0",
-    "raaghu-react-elements": "^0.6.0",
+    "raaghu-react-elements": "^0.8.0",
     "react-simple-code-editor": "^0.13.1"
   }
 }
