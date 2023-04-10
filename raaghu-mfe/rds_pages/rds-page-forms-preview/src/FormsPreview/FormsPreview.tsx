@@ -99,7 +99,7 @@ const FormsPreview = (props: any) => {
                     <h6 className="text-muted fs-5 opacity-75">{basicPreviewFormData.description}</h6>
                   </div>
                 </>
-              {formPreview.length && formPreview.map((ele: any, i: number) => (
+              {formPreview?.map((ele: any, i: number) => (
                 <>
                   {ele.questionType === 1 ? <>
                     <div className="mt-4">
