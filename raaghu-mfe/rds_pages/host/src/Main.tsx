@@ -5,9 +5,7 @@ import "./App.scss";
 import {
   localizationService,
   configurationService,
-  store,
   clearToken,
-  grantedpolicies,
 } from "raaghu-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
 import {
@@ -73,11 +71,11 @@ export interface MainProps {
 
 const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState([]);
-  const [storeData, setStoreData] = useState({
-    languages: store.languages,
-    auth: store.auth,
-    localization: store.localization,
-  });
+  // const [storeData, setStoreData] = useState({
+  //   languages: store.languages,
+  //   auth: store.auth,
+  //   localization: store.localization,
+  // });
   const navigate = useNavigate();
 
   let API_URL: string =
@@ -88,7 +86,7 @@ const Main = (props: MainProps) => {
   useEffect(() => {
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
-       navigate(currentPath);
+        navigate(currentPath);
       } else {
         navigate("/dashboard");
       }
@@ -165,9 +163,9 @@ const Main = (props: MainProps) => {
 
   useEffect(() => {
    
-    configurationService(API_URL, currentLanguage).then(async (res: any) => {
+    configurationService().then(async (res: any) => {
      
-      await localizationService(API_URL, currentLanguage).then(
+      await localizationService(currentLanguage).then(
         async (resp: any) => {
           i18n.changeLanguage(currentLanguage);
           var data1 = {};
@@ -244,23 +242,96 @@ const Main = (props: MainProps) => {
   const subTitle = getSubTitle(displayName, sideNavItems);
   const [currentTitle, setCurrentTitle] = useState(displayName);
   const [currentSubTitle, setCurrentSubTitle] = useState(subTitle);
+  const [breacrumItem, setBreadCrumItem] = useState<any[]>([])
 
   const sideNavOnClickHandler = (e: any) => {
+    const pageName = e.target.getAttribute("data-name");
     const subTitle = getSubTitle(
-      e.target.getAttribute("data-name"),
+      pageName,
       sideNavItems
     );
     setCurrentSubTitle(subTitle);
-    setCurrentTitle(e.target.getAttribute("data-name"));
+    setCurrentTitle(pageName);
+    let a = recursiveFunction(concatenated,pageName)    
+    a = a.filter((res:any)=> res?true:false)[0].reverse();
+    if(!a.length){
+      setBreadCrumItem([a]);
+    }
+    else{
+      setBreadCrumItem(a);
+    }
   };
+
+  function recursiveFunction(menus:any, searchName:string){
+    return menus.map((res:any)=>{
+      if(res.label == searchName){
+        const item = {
+          id:res.label,
+          label: res.label,
+          icon:''
+        }
+        return item;
+      }
+      else{
+        if(res.children){
+          let item = recursiveFunction(res.children, searchName);
+          item = item.filter((res:any)=> res?true:false)
+          if(item != null && item[0]!=null){
+            if(!item[0].id){
+              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+            }
+            else{
+              return item.concat([{id:res.label, label:res.label, icon:''}])
+            }
+          }
+        }
+        return null;
+      }
+    })
+  }
+  function recursiveFunction1(menus:any, searchName:string){
+    return menus.map((res:any)=>{
+      if(res.path &&  res.path == searchName){
+        const item = {
+          id:res.label,
+          label: res.label,
+          icon:''
+        }
+        return item;
+      }
+      else{
+        if(res.children){
+          let item = recursiveFunction1(res.children, searchName);
+          item = item.filter((res:any)=> res?true:false)
+          if(item != null && item[0]!=null){
+            if(!item[0].id){
+              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+            }
+            else{
+              return item.concat([{id:res.label, label:res.label, icon:''}])
+            }
+          }
+        }
+        return null;
+      }
+    })
+  }
 
   const logout = () => {
     localStorage.clear();
-    // setIsAuth(false);
-    store.accessToken = null;
-   
+    //store.accessToken = null;
     navigate("/login");
   };
+  useEffect(()=>{
+    let a = recursiveFunction1(concatenated,currentPath)
+    a = a.filter((res:any)=> res?true:false)[0].reverse();
+    if(!a.length){
+      setBreadCrumItem([a]);
+    }
+    else{
+      setBreadCrumItem(a);
+    }
+  },[menus.MainMenu])
 
   let logo = "./assets/raaghu_logs.png";
   return (
@@ -280,13 +351,18 @@ const Main = (props: MainProps) => {
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname != '/login' && (
+      {location.pathname != '/login' && location.pathname != '/forgot-password' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                //languageLable ="English"
+                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
+                languageLable ="English"
+                // languageLable={
+                //   storeData.languages?.currentCulture?.displayName ||
+                //   "English (United Kingdom)"
+                // }
+                breacrumItem={breacrumItem}
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}

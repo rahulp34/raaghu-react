@@ -136,7 +136,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
     }
 
     useEffect(() => {
-        debugger
+        
         setQuestions(props.formQuestionsData?.map((res: any) => {
             const choices = res.choices?.map((choice: any, i: any) => {
                     if (choice.value === "Other...") {
@@ -152,8 +152,8 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
     return (
         <>
             <div className="row ">
-                {questions?.length && questions?.map((element: any, i: number) => (<>
-                    <form className="mb-5">
+                {questions?.map((element: any, i: number) => (<>
+                    <form className="mb-3">
                         <div className="row">
                             <div className="col-6 mb-1">
                                 <h5 className="fw-bold">Question {i + 1}</h5>
@@ -211,7 +211,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                             {element.questionType !== 1 && (
                                 <>
                                     {element && element.choices && element?.choices?.map((elements: any, idx: number) => (<>
-                                        <div className="col-3 pt-2 mt-4 pe-0">
+                                        <div className="col-3 pt-2 mt-4 ">
                                             <div className="d-flex pt-1 ">
                                                 <div className="input-group">
                                                     <div className="input-group-text rounded-0" id="basic-addon1">
@@ -234,7 +234,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                                     ></RdsInput>
                                                     {element.choices.length > 1 && (
                                                         <RdsIcon
-                                                            classes={"input-group-text bg-transparent border-0 cursor-pointer"}
+                                                            classes={"input-group-text bg-transparent border-0 cursor-pointer p-0 ps-3"}
                                                             width="17px"
                                                             height="17px"
                                                             name="delete"
@@ -248,7 +248,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                         </div>
                                     </>
                                     ))}
-                                    <div className="col-3 pe-0 pt-1 d-flex align-items-center ">
+                                    <div className="col-3 pt-1 d-flex align-items-center ">
                                         <div className="input-group  pt-2 mt-4">
                                             <div className="input-group-text rounded-0" id="basic-addon1">
                                                 {element.questionType == 3 ? <>
@@ -277,8 +277,8 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                     </form>
                 </>
                 ))}
-                <div className="row ">
-                    <div className="d-flex justify-content-end mt-4 ">
+                <div className="row p-0">
+                    <div className="d-flex justify-content-end p-0">
                         <RdsButton
                             type={"button"}
                             size="small"

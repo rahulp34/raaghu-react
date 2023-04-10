@@ -3,80 +3,110 @@ import {
   createAsyncThunk,
   PayloadAction,
   AnyAction,
-} from "@reduxjs/toolkit"; 
+} from "@reduxjs/toolkit";
 import axios from "axios";
-
-
-import {ServiceProxy} from '../../shared/service-proxy'
+import { LanguageTextsService } from "../../proxy/services/LanguageTextsService";
+import { LanguagesService } from "../../proxy/services/LanguagesService";
 
 type InitialState = {
   loading: boolean;
   languagesText: any;
-  resources:any;
-  languagesTextEdit:any;
+  resources: any;
+  languagesTextEdit: any;
   error: string;
 };
 export const languageTextState: InitialState = {
   loading: false,
   languagesText: [],
-  resources:[],
-  languagesTextEdit:{},
+  resources: [],
+  languagesTextEdit: {},
   error: "",
 };
 
 // Generates pending, fulfilled and rejected action types
 
-const proxy = new ServiceProxy()
-
 export const fetchLanguagesText = createAsyncThunk(
   "languageText/fetchLanguagesText",
-  async ({resourceName,baseCultureName,targetCultureName,getOnlyEmptyValues}:{resourceName:any, baseCultureName:any,targetCultureName:any, getOnlyEmptyValues:any}) => {
-    return await proxy.languageTextsGET(undefined,resourceName, baseCultureName, targetCultureName, getOnlyEmptyValues,  'id DESC',  0 , 100,  undefined).then((result:any)=>{
+  async ({
+    resourceName,
+    baseCultureName,
+    targetCultureName,
+    getOnlyEmptyValues,
+  }: {
+    resourceName: any;
+    baseCultureName: any;
+    targetCultureName: any;
+    getOnlyEmptyValues: any;
+  }) => {
+    return await LanguageTextsService.getLanguageTexts({
+      filter: undefined,
+      resourceName: resourceName,
+      baseCultureName: baseCultureName,
+      targetCultureName: targetCultureName,
+      getOnlyEmptyValues: getOnlyEmptyValues,
+      sorting: "id DESC",
+      skipCount: 0,
+      maxResultCount: 100,
+    }).then((result: any) => {
       return result;
-    })
+    });
   }
 );
 
 export const fetchResources = createAsyncThunk(
   "languageText/fetchResources",
-  async ()=>{
-    return await proxy.resources().then((result:any)=>{
-      return result
-    })
+  async () => {
+    return await LanguagesService.getLanguagesResources().then((result: any) => {
+      return result;
+    });
   }
-)
+);
 
 export const putLanguages = createAsyncThunk(
   "languageText/putLanguages",
-  async({resourceName, cultureName, Name , value}:{resourceName:any , cultureName:any, Name:any, value:any})=>{
-    return await proxy.languageTextsPUT(resourceName, cultureName, Name, value, undefined).then((result:any)=>{
-      return result
-    })
+  async ({
+    resourceName,
+    cultureName,
+    Name,
+    value,
+  }: {
+    resourceName: any;
+    cultureName: any;
+    Name: any;
+    value: any;
+  }) => {
+    return await LanguageTextsService
+      .putLanguageTexts({resourceName:resourceName, cultureName:cultureName, name:Name, value:value})
+      .then((result: any) => {
+        return result;
+      });
   }
-)
-
-
-
+);
 
 export const restore = createAsyncThunk(
   "languageText/restore",
-  async ({resourceName, cultureName, Name}:{resourceName:any , cultureName:any, Name:any})=>{
-    return await proxy.restore(resourceName, cultureName, Name,  undefined).then((result:any)=>{
-      return result
-    })
+  async ({
+    resourceName,
+    cultureName,
+    Name,
+  }: {
+    resourceName: any;
+    cultureName: any;
+    Name: any;
+  }) => {
+    return await LanguageTextsService
+      .putLanguageTextsRestore({resourceName:resourceName, cultureName:cultureName, name:Name})
+      .then((result: any) => {
+        return result;
+      });
   }
-)
-
-
-
+);
 
 const languageTextSlice = createSlice({
   name: "languageText",
-  initialState:languageTextState,
+  initialState: languageTextState,
   reducers: {},
   extraReducers: (builder) => {
-
-
     builder.addCase(fetchLanguagesText.pending, (state) => {
       state.loading = true;
     });
@@ -96,8 +126,6 @@ const languageTextSlice = createSlice({
       state.error = action.error.message || "Something went wrong";
     });
 
-
-
     builder.addCase(fetchResources.pending, (state) => {
       state.loading = true;
     });
@@ -116,11 +144,6 @@ const languageTextSlice = createSlice({
       state.resources = [];
       state.error = action.error.message || "Something went wrong";
     });
-
-
-
-
-
   },
 });
 

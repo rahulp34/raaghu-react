@@ -10,7 +10,7 @@ function RdsCompUrlForwardings(props: RdsCompUrlForwardingsProps){
 	const[formData, setFormData] = useState(props.urlForwardingData)
 
 	useEffect(()=>{
-		debugger
+		
 		setFormData(props.urlForwardingData)
 	},[props.urlForwardingData])
 

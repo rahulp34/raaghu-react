@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
 import { useAppDispatch } from "../../state-management/hooks";
+import {BlogAdminService} from "../../proxy/services/BlogAdminService"
+import {BlogPostAdminService} from "../../proxy/services/BlogPostAdminService"
+import {BlogFeatureAdminService} from "../../proxy/services/BlogFeatureAdminService"
+
 type InitialState = {
   loading: boolean;
   blogs: any;
@@ -21,13 +24,11 @@ const initialState: InitialState = {
   featureIdentitySettings: null,
 };
 
-const proxy = new ServiceProxy();
-
 export const fetchBlogsData = createAsyncThunk(
   "blogs/fetchBlogsData",
   () => {
-    debugger
-    return proxy.blogsGET2(undefined, undefined, 10, 5,  undefined).then((result) => {
+    
+    return BlogAdminService.getBlogs1({filter:undefined, sorting:undefined, skipCount:10, maxResultCount:5}).then((result) => {
       console.log("resultblog", result);
       return result;
     });
@@ -37,7 +38,7 @@ export const fetchBlogsData = createAsyncThunk(
 export const deleteBlogsData = createAsyncThunk(
   "blogs/deleteBlogsData",
   (id: any) => {
-    return proxy.blogsDELETE(id).then((result) => {
+    return BlogAdminService.deleteBlogs(id).then((result) => {
       return result;
     });
   }
@@ -46,7 +47,7 @@ export const deleteBlogsData = createAsyncThunk(
 export const addBlogsData = createAsyncThunk(
   "blogs/addBlogsData",
   (data: any) => {
-    return proxy.blogsPOST(data.data).then((result) => {
+    return BlogAdminService.postBlogs(data.data).then((result) => {
       return result;
     });
   }
@@ -55,7 +56,7 @@ export const addBlogsData = createAsyncThunk(
 export const editBlogsData = createAsyncThunk(
   "blogs/editBlogsData",
   ({ id, dTo }: { id: any; dTo: any }) => {
-    return proxy.blogPostsPUT(id, dTo).then((result) => {
+    return BlogPostAdminService.putBlogsBlogPosts({id:id, requestBody:dTo}).then((result) => {
       return result;
     });
   }
@@ -64,7 +65,7 @@ export const editBlogsData = createAsyncThunk(
 export const fetchFeaturesBlogs = createAsyncThunk(
   "blogs/fetchFeaturesBlogs",
   (id: any) => { 
-    return proxy.featuresAll("E", id).then((result: any) => {
+    return BlogFeatureAdminService.getBlogsFeatures({blogId:id}).then((result: any) => {
       return result;
     });
   }
