@@ -22,40 +22,52 @@ function getPortNumber() {
   return max + 1 == 8080 ? 8081 : max + 1;
 }
 
+let eTc = process.argv[2];
+if (eTc == "core") {
+  var mfeFolderPath = path.join(__dirname, "..", "raaghu-mfe");
+  execSync(`npm install --save raaghu-core`, {
+    cwd: ".",
+    stdio: "inherit",
+  });
+  execSync(`npm install --save raaghu-core`, {
+    cwd: mfeFolderPath,
+    stdio: "inherit",
+  });
+  console.log("\x1b[32m%s\x1b[0m", `raaghu-core successfully installed!!`);
+  return;
+}
+
 // Check whether the arguments passed contain the mfe name and the page name
 if (
   ((process.argv[2] === "e" || process.argv[2] === "c") && process.argv.length !== 4) ||
-  ((process.argv[2] === "m" || process.argv[2] === "p") && process.argv.length !== 4)
+  (process.argv[2] === "p" && process.argv.length !== 4) ||
+  (process.argv[2] === "m" && process.argv.length !== 5)
 ) {
-  console.log("\x1b[31m%s\x1b[0m", "Invalid command..!");
+  console.log("\x1b[31m%s\x1b[0m", "Invalid command!!");
   process.exit(0);
 }
 
+let nameArr = process.argv[3].split("=");
+let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+let port = getPortNumber();
+
 // Get hold of the app folder path inside the mfe
-let appFolderPath = "";
+let appFolderPath = ".";
 if (eTc == "e") {
-  let nameArr = process.argv[3].split("=");
-  let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
   appFolderPath = path.join(__dirname, "..", "raaghu-elements");
 } else if (eTc == "c") {
-  let nameArr = process.argv[3].split("=");
-  let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
   appFolderPath = path.join(__dirname, "..", "raaghu-components");
 } else if (eTc == "p") {
-  let nameArr = process.argv[3].split("=");
-  let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
   appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
 } else if (eTc == "m") {
-  let moduleArr = process.argv[3].split("=");
-  let module = moduleArr.length == 2 ? moduleArr[1] : moduleArr[0];
+  // let moduleArr = process.argv[3].split("=");
+  // const module = moduleArr.length == 2 ? moduleArr[1] : moduleArr[0];
   let nameArr = process.argv[4].split("=");
-  const name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+  name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
   appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
 }
 
 // Parse the name of the mfe and the page name
-let eTc = process.argv[2];
-let port = getPortNumber();
 let shortName = name.replace(/^rds-page-/, "");
 
 // Convert name to "formattedName"
@@ -79,7 +91,7 @@ let camelCaseName = shortName
 
 // Convert name to "kebabCaseName"
 let kebabCaseName = shortName.split(" ").join("-").toLowerCase();
-let pageName = formattedName.replace(" ", "");
+let pageName = formattedName.replaceAll(" ", "");
 
 // console.log(formattedName); // Output: "Api Scope"
 // console.log(camelCaseName); // Output: "apiScope"
@@ -135,9 +147,9 @@ if (fs.existsSync(appFolderPath)) {
         `index.ts is successfully created at src/${name}/index.ts`
       );
 
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
-  } else if (eTc == "p") {
+  } else if (eTc == "m" || eTc == "p") {
     let templateWebpackfile = path.join(
       __dirname,
       "../page-template/template/webpack.config.js"
@@ -223,8 +235,8 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      console.log("\x1b[32m%s\x1b[0m", `${name} page is successfully created..!`);
-      // console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      console.log("\x1b[32m%s\x1b[0m", `${name} page is successfully created!!`);
+      // console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
 
     // Deleting the directory from the src in the template.
@@ -652,10 +664,10 @@ if (fs.existsSync(appFolderPath)) {
   }
 } else {
   if (eTc == "e") {
-    console.log("\x1b[31m%s\x1b[0m", "The elements folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The elements folder is missing!!");
   } else if (eTc == "c") {
-    console.log("\x1b[31m%s\x1b[0m", "The components folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The components folder is missing!!");
   } else if (eTc == "p") {
-    console.log("\x1b[31m%s\x1b[0m", "The pages folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The pages folder is missing!!");
   }
 }

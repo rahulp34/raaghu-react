@@ -7,7 +7,7 @@ import {
   sessionService,
   localizationService,
   configurationService,
-} from "../../../../libs/raaghu-core";
+} from "raaghu-core";
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }

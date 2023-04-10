@@ -8,7 +8,7 @@ import {
   store,
   clearToken,
   grantedpolicies,
-} from "../../../libs/raaghu-core";
+} from "raaghu-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
