@@ -196,18 +196,6 @@ const FormsView = (props: any) => {
 
   }, [forms.alertMessage]);
 
-  useEffect(() => {
-    if (forms.getResponses) {
-      debugger
-    }
-  }, [forms.getResponses]);
-
-  useEffect(() => {
-    if (forms.getResponsesCount) {
-      debugger
-    }
-  }, [forms.getResponsesCount]);
-
   return (
     <>
       <div className="row">

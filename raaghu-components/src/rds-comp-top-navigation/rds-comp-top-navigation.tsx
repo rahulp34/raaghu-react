@@ -10,7 +10,7 @@ import {
 } from "raaghu-react-elements";
 import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
 import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
-
+import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
@@ -43,7 +43,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     // console.log(e.dataset.name)
     //console.log(e.target.innerText)
     const selectValue = e.target.innerText;
-    debugger
+    
     if (selectValue === "Alert") {
       navigate('/elements');
       setVisible(true)
@@ -160,7 +160,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             <div
               className="text-muted fs-6"
             >
-              {props.navbarSubTitle}
+              <RdsBreadcrumb role="advance" breadItems={[{id:'a', label:'a',icon:"",active:false},{id:'b', label:'b',icon:"",active:false}]}></RdsBreadcrumb>
             </div>
           </div>
         </div>

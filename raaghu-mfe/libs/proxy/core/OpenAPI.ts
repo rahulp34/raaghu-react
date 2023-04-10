@@ -18,13 +18,13 @@ export type OpenAPIConfig = {
     ENCODE_PATH?: (path: string) => string;
 };
 
-let token = localStorage.getItem('access_token');
+let token = localStorage.getItem('accessToken');
 if (token) {
     token = JSON.parse(token);
 }
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: process.env.REACT_APP_API_URL || '',
+    BASE: process.env.REACT_APP_API_URL || 'https://raaghu-react.azurewebsites.net',
     VERSION: '1',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

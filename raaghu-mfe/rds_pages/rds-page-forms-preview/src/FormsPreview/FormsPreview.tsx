@@ -42,7 +42,7 @@ const FormsPreview = (props: any) => {
 
   useEffect(() => {
     if (formPreview.length ) {
-      debugger
+      
       let tempMultiple :any[] = []
       formPreview.map((ele: any , index:number) => {
         const temp: any[] = []
@@ -66,7 +66,7 @@ const FormsPreview = (props: any) => {
 
   useEffect(() => {
     if (formPreview.length ) {
-      debugger
+      
       let tempMultiple :any[] = []
       formPreview.map((ele: any , index:number) => {
         const temp: any[] = []

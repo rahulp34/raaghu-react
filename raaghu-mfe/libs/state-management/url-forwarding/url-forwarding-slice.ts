@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { UrlShortingAdminService } from "../../proxy/services/UrlShortingAdminService";
 
 type UrlForwardingInitialState = {
   loading : boolean,
@@ -15,36 +15,35 @@ const UrlForwardingInitialState : UrlForwardingInitialState = {
   error : "",
 }
 
-const proxy =new ServiceProxy();
 
 export const fetchUrlShortingsData = createAsyncThunk('urlForwardingSlice/fetchUrlShortingsData',() => {
-    return proxy.urlShortingGET('','id DESC',0,1000).then((result:any) =>{
+    return UrlShortingAdminService.getUrlShorting({shortenedUrlFilter:'', sorting:'id DESC', skipCount:0, maxResultCount:1000}).then((result:any) =>{
         console.log("result",result)
         return result
     })
 })
 
 export const editUrlShortingsData = createAsyncThunk('urlForwardingSlice/editUrlShortingsData',(id:any) => {
-  return proxy.urlShortingGET2(id).then((result:any) =>{
+  return UrlShortingAdminService.getUrlShorting1(id).then((result:any) =>{
       console.log("result",result)
       return result
   })
 })
 
 export const deleteurlShortingData = createAsyncThunk('urlForwardingSlice/deleteurlShortingData',  (id:any) => {
-  return proxy.urlShortingDELETE(id).then((result:any) =>{
+  return UrlShortingAdminService.deleteUrlShorting(id).then((result:any) =>{
       return result
   })
 })
 
 export const saveUrlShortingData = createAsyncThunk('urlForwardingSlice/saveUrlShortingData',  (data:any) => {
-  return proxy.urlShortingPOST(data).then((result:any) =>{
+  return UrlShortingAdminService.postUrlShorting(data).then((result:any) =>{
       return result.items;
   })
 })
 
 export const updateUrlShortingData = createAsyncThunk('urlForwardingSlice/updateUrlShortingData',  (data:any) => {
-  return proxy.urlShortingPUT(data.id,data.body).then((result:any) =>{
+  return UrlShortingAdminService.putUrlShorting({id:data.id,requestBody:data.body}).then((result:any) =>{
       return result.items;
   })
 })

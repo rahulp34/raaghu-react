@@ -177,7 +177,7 @@ const Forms = () => {
   const [formsEmailData, setFormsEmailData] = useState<any>({ to: '', body: body })
   //  useEffect(())
   function handleEmailSubmit(_data: any) {
-    debugger
+    
     dispatch(SaveFormsSendResponse(_data) as any);
   }
   return (

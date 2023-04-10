@@ -137,7 +137,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
     }
 
     useEffect(() => {
-        debugger
+        
         setQuestions(props.formQuestionsData?.map((res: any) => {
             const choices = res.choices?.map((choice: any, i: any) => {
                     if (choice.value === "Other...") {

@@ -87,7 +87,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     const a = document.querySelectorAll('[data-bs-toggle]');
     a.forEach((element)=>{
       element.addEventListener('click',()=>{
-        debugger
+        
         const b = document.querySelectorAll('.offcanvas-backdrop')
         b.forEach((el:any, index:number) => {
           if(index!=0){
