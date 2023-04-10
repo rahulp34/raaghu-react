@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./rds-breadcrumb.scss";
 import RdsIcon from "../rds-icon";
 import { BrowserRouter, Routes } from "react-router-dom";
@@ -25,12 +25,20 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
     setdata(tempData);
   };
 
+  useEffect(()=>{
+    debugger
+    if(props.breadItems.length > 0){
+      setdata(props.breadItems);
+    }
+    
+  },[props.breadItems])
+
   return (
     <Fragment>
       {Role === "advance" && (
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
-            {data.map((breadItem, index) => {
+            {data?.map((breadItem, index) => {
               return index == 0 ? (
                 <li
                   key={breadItem.id}
