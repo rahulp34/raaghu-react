@@ -130,5 +130,8 @@ export const PortConfig = {
   },
   "pages": {
     "port": "8106"
+  },
+  "globalResources": {
+    "port": "8040"
   }
 }

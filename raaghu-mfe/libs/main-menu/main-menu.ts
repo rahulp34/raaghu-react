@@ -249,6 +249,13 @@ const MainMenu = [
               "path": "/menus",
               "subTitle": "menus"
             },
+            {
+              "key": "7-0-6",
+              "label": "Global Resources",
+              "icon": "tag",
+              "path": "/globalResources",
+              "subTitle": "Global Resources",
+            }
       ]
   },
     //   {

@@ -53,6 +53,7 @@ const PersonalDataCompo = React.lazy(() => import("Elements/Elements"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
 const MenusCompo = React.lazy(() => import("Menus/Menus"));
+const GlobalResourcesCompo = React.lazy(() => import("GlobalResources/GlobalResources"));
 
 const ComponentsCompo = React.lazy(() => import("Components/Components"));
 const PagesCompo = React.lazy(() => import("Pages/Pages"));
@@ -99,4 +100,5 @@ export {
     MenusCompo,
     ComponentsCompo,
     PagesCompo,
+    GlobalResourcesCompo
 };

@@ -63,6 +63,7 @@ import {
   MyAccountCompo,
   ComponentsCompo,
   PagesCompo,
+  GlobalResourcesCompo
 } from "./PageComponent";
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
@@ -430,6 +431,7 @@ const Main = (props: MainProps) => {
                       />
                       <Route path="/comments" element={<CommentsCompo />} />
                       <Route path="/tags" element={<TagsCompo />} />
+                      <Route path="/globalResources" element={<GlobalResourcesCompo />} />
                       <Route path="/elements/:type" element={<ElementsCompo />} />
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
