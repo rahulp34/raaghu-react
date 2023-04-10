@@ -1,9 +1,14 @@
-li#breadcrumbItems::before {
+li#breadcrumbItem::before {
   display: none;
+
   float: left;
   color: var(--bs-breadcrumb-divider-color);
-  content: var(--bs-breadcrumb-divider, "") !important;
+  //content: var(--bs-breadcrumb-divider, "") !important;
 }
-.theme-light .breadcrumb-item + .breadcrumb-item::before {
+.theme-light .breadcrumb-items + .breadcrumb-items::before {
   display: none;
+}
+
+.breadcrumb-items + .breadcrumb-items{
+  padding-left: none;
 }

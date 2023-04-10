@@ -13,7 +13,7 @@ const RdsCompElements = (props: any) => {
 
    const [show, setShow] = useState<boolean>(false);
 
-   debugger
+   
    const ComponentElement = React.lazy(() => import('./elements/' + props.type + '.tsx'));
    // const ComponentCode = import('./elements/' + props.type + '.tsx');
    console.log("Component: ", ComponentElement);

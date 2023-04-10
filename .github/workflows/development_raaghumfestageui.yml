@@ -51,7 +51,6 @@ jobs:
         working-directory: raaghu-mfe
         run: |
           npm install
-          npm run create:proxy
           npm run build
           cp web.config rds_pages/host/dist
 

@@ -74,7 +74,7 @@ const RdsCompFeatures = (props: RdsCompFeatureProps) => {
                     {
                       feature.valueType.validator.name === 'NULL' ? (
                         <div className="form-group mb-2">
-                          <RdsSelectList label={feature.displayName} selectItems={feature.valueType.itemSource.items.map((x: any) => ({ ...x, option: x.value }))}
+                          <RdsSelectList label={feature.displayName} selectItems={feature.valueType?.itemSource?.items?.map((x: any) => ({ ...x, option: x.value }))}
                             onSelectListChange={(e: any) => onChangeFn(e, feature)}></RdsSelectList>
                           <div>{feature.description}</div>
                         </div>

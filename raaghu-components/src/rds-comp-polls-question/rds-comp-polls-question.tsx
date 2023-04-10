@@ -41,7 +41,7 @@ function RdsCompPollsQuestion(props:any) {
       props.getPollsQuestion({ ...QuestionData, showHoursLeft: value })
     }
     function setAllowMultipleVoting(value: boolean) {
-      debugger
+      
       setQuestionData({ ...QuestionData, allowMultipleVote: value });
       props.getPollsQuestion({ ...QuestionData, allowMultipleVote: value })
     }

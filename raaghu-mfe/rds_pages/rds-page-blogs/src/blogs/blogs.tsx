@@ -59,7 +59,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    debugger;
+    ;
     dispatch(fetchBlogsData() as any);
   }, [dispatch]);
 
@@ -136,16 +136,10 @@ const Blogs = (props: RdsPageResourcesProps) => {
   }
 
   return (
-    <>
-    </>
-  )
-
-  return (
     <div>
 
       <div className="row align-items-center">
         <div className="d-flex justify-content-between">
-          <h4>Blogs</h4>
 
           <div className="col-lg-8 col-md-8">
           {alert.showAlert && alertOne && (

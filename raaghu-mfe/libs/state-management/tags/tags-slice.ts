@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { TagAdminService } from "../../proxy/services/TagAdminService";
 
 type InitialState = {
   allTags: any,
@@ -17,40 +17,39 @@ const initialState: InitialState = {
   error: "",
 }
 
-const proxy = new ServiceProxy()
 
 export const getAllTags = createAsyncThunk('Tags/GetAllTags', (data: any) => {
-  return proxy.tagsGET(data.filter, data.sorting, data.skipCount, data.maxResultCount, data.cancelToken).then((result: any) => {
+  return TagAdminService.getTags({filter:data.filter, sorting:data.sorting, skipCount:data.skipCount, maxResultCount:data.maxResultCount}).then((result: any) => {
       return result;
     })
 });
 
 export const createTag = createAsyncThunk('Tags/CreateTag', (data: any) => {
-  return proxy.tagsPOST(data.body, data.cancelToken).then((result: any) => {
+  return TagAdminService.postTags(data.body).then((result: any) => {
       return result;
     })
 });
 
 export const getTagById = createAsyncThunk('Tags/GetTagById', (data: any) => {
-  return proxy.tagsGET2(data.id, data.cancelToken).then((result: any) => {
+  return TagAdminService.getTags1(data.id).then((result: any) => {
       return result;
     })
 });
 
 export const updateTag = createAsyncThunk('Tags/UpdateTag', (data: any) => {
-  return proxy.tagsPUT(data.id, data.body, data.cancelToken).then((result: any) => {
+  return TagAdminService.putTags({id:data.id,requestBody: data.body}).then((result: any) => {
       return result;
     });
 });
 
 export const deleteTag = createAsyncThunk('Tags/DeleteTag', (data: any) => {
-  return proxy.tagsDELETE(data.id, data.cancelToken).then((result: any) => {
+  return TagAdminService.deleteTags(data.id).then((result: any) => {
       return result;
     })
 });
 
 export const tagDefinations = createAsyncThunk('Tags/TagDefinations', (data: any) => {
-  return proxy.tagDefinitions(data.cancelToken).then((result: any) => {
+  return TagAdminService.getTagsTagDefinitions().then((result: any) => {
       return result;
     })
 });

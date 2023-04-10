@@ -56,7 +56,7 @@ export const deletePersonalData = createAsyncThunk(
 export const downloadTokenPersonalData = createAsyncThunk(
     "PersonalData/downloadTokenPersonalData",
     async (id: any) => {
-        debugger
+        
         return proxy.downloadToken(id).then(
             (result: any) => {
                 console.log('fetched data , ', result)
