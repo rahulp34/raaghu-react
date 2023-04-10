@@ -99,7 +99,7 @@ export const PortConfig = {
     "port": "8097"
   },
   "paymentPlans": {
-    "port": "8031"
+    "port": "8131"
   },
   "blogs": {
     "port": "8032"
@@ -121,8 +121,17 @@ export const PortConfig = {
   },
   "paymentRequests": {
     "port": "8036"
+    },
+    "menus": {
+        "port": "8090"
+    },
+  "components": {
+    "port": "8104"
   },
-  "rdsComponents": {
-    "port": "8103"
+  "pages": {
+    "port": "8106"
+  },
+  "globalResources": {
+    "port": "8040"
   }
 }

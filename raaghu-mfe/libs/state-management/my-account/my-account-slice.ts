@@ -16,7 +16,7 @@ type InitialStateMyAccount = {
     loading:false,
     personalInfo:null,
     changePasswordData:null,
-    profilePicture:null,
+    profilePicture:0,
     twoFactor:false,
     error:""
  }
@@ -56,9 +56,9 @@ type InitialStateMyAccount = {
     }
   )
 
-  export const setProfilePicture = createAsyncThunk(   
-    "myProfile/setProfilePicture",(data:any)=>{
-    return myAccountService.profilePicturePOST(0,data?.imageContent).then((result:any)=>{
+  export const setProfilePictures = createAsyncThunk(   
+    "myProfile/setProfilePictures",(data:any)=>{
+    return myAccountService.profilePicturePOST(undefined,undefined).then((result:any)=>{
         console.log("result",data)
         return result;
         
@@ -141,17 +141,17 @@ type InitialStateMyAccount = {
         state.error = action.error.message || "Something went wrong";     
       });   
 
-      builder.addCase(setProfilePicture.pending, (state) => {
+      builder.addCase(setProfilePictures.pending, (state) => {
         state.loading = true;
       });
   
       builder.addCase(
-        setProfilePicture.fulfilled,(state, action: PayloadAction<any>) => {
+        setProfilePictures.fulfilled,(state, action: PayloadAction<any>) => {
           state.loading = false;
           state.profilePicture= action.payload;
         }     
       );
-      builder.addCase(setProfilePicture.rejected, (state, action) => {       
+      builder.addCase(setProfilePictures.rejected, (state, action) => {       
         state.loading = false;            
         state.error = action.error.message || "Something went wrong";     
       });   

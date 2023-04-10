@@ -1,4 +1,4 @@
-import { RdsButton, RdsInput, RdsTextArea, RdsTextEditor } from "raaghu-react-elements";
+import { RdsButton, RdsInput, RdsTextArea, RdsTextEditor } from "../rds-elements";
 import React, { useEffect, useState } from "react";
 
 export interface RdsCompFormsEmailProps {
@@ -33,8 +33,8 @@ const RdsCompFormsEmail = (props: RdsCompFormsEmailProps) => {
         <>
             <div className="ps-2">
                     <RdsInput required={true} inputType="email" label="To" value={emailData.to} onChange={(e) => setTo(e.target.value)}></RdsInput>
-                    <RdsInput label="Subject" value={emailData.subject} onChange={(e) => setSubject(e.target.value)}></RdsInput>
-                    <RdsTextEditor  label="Body" value={emailData.body}  onChange={(e) => setBody(e)} placeholder={""} ></RdsTextEditor >
+                    <RdsInput label="Subject" value={emailData.subject} onChange={(e:any) => setSubject(e.target.value)}></RdsInput>
+                    <RdsTextEditor label={"Body"} value={emailData.body}  onChange={(e:any) => setBody(e)} placeholder={""} ></RdsTextEditor >
                     <div className="footer-buttons my-2">
                         <div className="row">
                             <div className="col-md-12 d-flex">

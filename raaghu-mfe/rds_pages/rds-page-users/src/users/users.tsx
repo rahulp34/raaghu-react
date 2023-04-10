@@ -15,6 +15,7 @@ import {
   RdsButton,
   RdsIcon,
   RdsInput,
+  RdsAlert,
   RdsNavtabs,
   RdsOffcanvas,
 } from "../../../rds-elements";
@@ -57,7 +58,8 @@ const Users = () => {
   const [userRolesData, setUseRolesData] = useState<any>();
   const [editRolesData, setEditRoleData] = useState<any>();
   const [userPermission, setUserPermission] = useState<any>([]);
-  const [tableData, setTableData] = useState<any[]>([])
+  const [tableData, setTableData] = useState<any[]>([]);
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
 //    {userName:"abc", name:"abc", roles:"admin dsd", emailAddress: "asdf@abc.abc"}]);
 
   const tableHeaders = [
@@ -439,6 +441,21 @@ const Users = () => {
       organizationUnitIds: orgUnitIds,
     };
     dispatch(createUser(tempData) as any).then((res: any) => {
+      if (res.type == "user/createuser/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "User created Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchUsers() as any);
     });
     setUserData({
@@ -483,6 +500,21 @@ const Users = () => {
     }
     dispatch(updateUser({ id: userId, body: updateData }) as any).then(
       (res: any) => {
+        if (res.type == "user/updateUser/rejected") {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "User updated Successfully",
+            color: "success",
+          });
+        }
         dispatch(fetchUsers() as any);
       }
     );
@@ -515,19 +547,48 @@ const Users = () => {
 
   function deleteHandler(data: any) {
     console.log(data);
-    dispatch(deleteUser(userId) as any).then((result: any) => {
+    dispatch(deleteUser(userId) as any).then((res: any) => {
+      if (res.type == "user/deleteUser/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "User deleted Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchUsers() as any);
     });
   }
+  useEffect(() => {
+    // Set a 2-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
 
-  
-  
-
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [data.users]);
   return (
-    <>
-      <div className="row">
-        <div className="col-md-12 text-end pb-3 desktop-btn">
-          <RdsButton
+    <div className="row">
+    <div className="col-md-12 mb-3 ">
+      <div className="row ">
+        <div className="col-md-4">
+          {Alert.show && (
+            <RdsAlert
+              alertmessage={Alert.message}
+              colorVariant={Alert.color}
+            ></RdsAlert>
+          )}
+        </div>
+        <div className="col-md-8 d-flex justify-content-end my-1">
+        <RdsButton
             label="New User"
             showLoadingSpinner={false}
             databstoggle="offcanvas"
@@ -544,8 +605,12 @@ const Users = () => {
             colorVariant="primary"
           ></RdsButton>
         </div>
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-          <RdsCompDatatable
+      </div>
+    </div>
+
+    <div className="col-md-12">
+      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+      <RdsCompDatatable
           tableHeaders={tableHeaders}
           actions={actions}
           tableData={tableData}
@@ -558,10 +623,9 @@ const Users = () => {
             alertID="user_delete_off"
             onSuccess={deleteHandler}
           />
-        </div>
       </div>
-
-      <RdsOffcanvas
+    </div>
+    <RdsOffcanvas
         backDrop={false}
         scrolling={true}
         preventEscapeKey={false}
@@ -744,7 +808,7 @@ const Users = () => {
           ></RdsButton>
         </div>
       </RdsOffcanvas>
-    </>
+  </div>
   );
 };
 

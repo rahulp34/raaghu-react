@@ -1,3 +1,4 @@
+import pagesReducer from "./pages/pages-slice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { loginReducer } from "./public.api";
 import { forgotPasswordReducer } from "./forgot-password/forgotpassword-slice";
@@ -33,6 +34,7 @@ import tagsReducer from "./tags/tags-slice";
 import myAccountReducer from "./my-account/my-account-slice";
 import paymentRequestsReducer from "./payment-requests/paymentRequests-slice";
 import pollsReducer from "./polls/polls-slice";
+import globalResourcesReducer from './global-resources/globalResources-slice';
 
 const persistConfig={
   key: "root",
@@ -40,6 +42,7 @@ const persistConfig={
   blacklist: ["forgotPassword"],
 };
 const rootReducer = combineReducers({
+  pages: pagesReducer,
   login: loginReducer,
   forgotPassword: forgotPasswordReducer,
   subscription: subscriptionReducer,
@@ -69,14 +72,16 @@ const rootReducer = combineReducers({
   host: hostReducer,
   myaccount: myAccountReducer,
   paymentRequests: paymentRequestsReducer,
-  polls: pollsReducer
+polls:pollsReducer,
+globalResources:globalResourcesReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store: any = configureStore({
-  reducer: persistedReducer,
+export const store = configureStore({
+  reducer: { persistedReducer },
 });
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
+

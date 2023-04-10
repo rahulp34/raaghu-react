@@ -1,7 +1,7 @@
 
 import React from "react";
-import { RdsButton, RdsFileUploader } from "../../../../raaghu-react/raaghu-elements/src";
 import "./rds-comp-fileUploader.scss";
+import { RdsButton, RdsFileUploader } from "../rds-elements";
 
 export interface RdsCompFileUploaderProps{
 onClick:any
@@ -10,10 +10,7 @@ preFileInfo?:any
 
 const RdsCompFileUploader = (props: RdsCompFileUploaderProps) => {
   function folder(data:any){
-    
     props.preFileInfo(data);
-   
-    
   }
   return (
     <>

@@ -2,25 +2,72 @@
 let path = require("path");
 let { execSync } = require("child_process");
 let fs = require("fs");
-// let generate = require("../raaghu-proxy/index.ts");
+const portFilePath = path.join(__dirname, '../raaghu-mfe/rds_pages/', 'port-config.ts');
+
+function getPortNumber() {
+  let portConfig = fs.readFileSync(portFilePath).toString();
+  let portConfigJSON = JSON.parse(portConfig.substring(portConfig.indexOf("{"), portConfig.lastIndexOf("}") + 1));
+  let portKeys = Object.keys(portConfigJSON);
+  let portArr = portKeys.map((val) => {
+    return Number(portConfigJSON[val].port);
+  }).filter((val) => { return val != 8080 });
+
+  let max = Math.max(...portArr);
+  let min = Math.min(...portArr);
+  for (let i = min; i <= max; i++) {
+    if (!portArr.includes(i) && i != 8080) {
+      return (i);
+    }
+  }
+  return max + 1 == 8080 ? 8081 : max + 1;
+}
+
+let eTc = process.argv[2];
+if (eTc == "core") {
+  var mfeFolderPath = path.join(__dirname, "..", "raaghu-mfe");
+  execSync(`npm install --save raaghu-core`, {
+    cwd: ".",
+    stdio: "inherit",
+  });
+  execSync(`npm install --save raaghu-core`, {
+    cwd: mfeFolderPath,
+    stdio: "inherit",
+  });
+  console.log("\x1b[32m%s\x1b[0m", `raaghu-core successfully installed!!`);
+  return;
+}
 
 // Check whether the arguments passed contain the mfe name and the page name
 if (
-  (process.argv[2] === "p" && process.argv.length !== 5) ||
-  ((process.argv[2] === "e" ||
-    process.argv[2] === "c" ||
-    process.argv[2] === "pr") &&
-    process.argv.length !== 4)
+  ((process.argv[2] === "e" || process.argv[2] === "c") && process.argv.length !== 4) ||
+  (process.argv[2] === "p" && process.argv.length !== 4) ||
+  (process.argv[2] === "m" && process.argv.length !== 5)
 ) {
-  console.log("\x1b[31m%s\x1b[0m", "Invalid command..!");
+  console.log("\x1b[31m%s\x1b[0m", "Invalid command!!");
   process.exit(0);
 }
 
-// Parse the name of the mfe and the page name
-let eTc = process.argv[2];
-let name = process.argv[3];
-let port = process.argv[4];
+let nameArr = process.argv[3].split("=");
+let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+let port = getPortNumber();
 
+// Get hold of the app folder path inside the mfe
+let appFolderPath = ".";
+if (eTc == "e") {
+  appFolderPath = path.join(__dirname, "..", "raaghu-elements");
+} else if (eTc == "c") {
+  appFolderPath = path.join(__dirname, "..", "raaghu-components");
+} else if (eTc == "p") {
+  appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
+} else if (eTc == "m") {
+  // let moduleArr = process.argv[3].split("=");
+  // const module = moduleArr.length == 2 ? moduleArr[1] : moduleArr[0];
+  let nameArr = process.argv[4].split("=");
+  name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+  appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
+}
+
+// Parse the name of the mfe and the page name
 let shortName = name.replace(/^rds-page-/, "");
 
 // Convert name to "formattedName"
@@ -44,7 +91,7 @@ let camelCaseName = shortName
 
 // Convert name to "kebabCaseName"
 let kebabCaseName = shortName.split(" ").join("-").toLowerCase();
-let pageName = formattedName.replace(" ", "");
+let pageName = formattedName.replaceAll(" ", "");
 
 // console.log(formattedName); // Output: "Api Scope"
 // console.log(camelCaseName); // Output: "apiScope"
@@ -59,21 +106,7 @@ const newItem = {
   subTitle: "subtitle here",
 };
 
-const importStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
-
-const exportFile = "raaghu-mfe/rds_pages/host/src/PageComponent.ts";
-
-// Get hold of the app folder path inside the mfe
-let appFolderPath = "";
-if (eTc == "e") {
-  appFolderPath = path.join(__dirname, "..", "raaghu-elements");
-} else if (eTc == "c") {
-  appFolderPath = path.join(__dirname, "..", "raaghu-components");
-} else if (eTc == "p") {
-  appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
-} else if (eTc == "pr") {
-  appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "libs");
-}
+const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
 
 function writeFileErrorHandler(err) {
   if (err) console.log("\x1b[31m%s\x1b[0m", err);
@@ -82,11 +115,14 @@ function writeFileErrorHandler(err) {
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
   if (eTc == "e" || eTc == "c") {
+
+    console.log("\x1b[32m%s\x1b[0m", "Creating " + (eTc == "e" ? "element" : "component") + "...");
+
     let filePath = path.join(appFolderPath, "/src", name, name + ".tsx");
     if (fs.existsSync(filePath)) {
       console.log(
         "\x1b[31m%s\x1b[0m",
-        name + ".tsx already exists in this path."
+        name + ".tsx already exists on this path."
       );
     } else {
       execSync(`npx generate-react-cli component ${name}`, {
@@ -102,18 +138,18 @@ if (fs.existsSync(appFolderPath)) {
       // common index.ts
       fs.appendFile(
         `${appFolderPath}/src/index.ts`,
-        `export { default as ${name} } from "./${name}";`,
+        `export { default as ${pageName} } from "./${name}";`,
         writeFileErrorHandler
       );
 
       console.log(
         "\x1b[32m%s\x1b[0m",
-        `index.ts was successfully created at src/${name}/index.ts`
+        `index.ts is successfully created at src/${name}/index.ts`
       );
 
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
-  } else if (eTc == "p") {
+  } else if (eTc == "m" || eTc == "p") {
     let templateWebpackfile = path.join(
       __dirname,
       "../page-template/template/webpack.config.js"
@@ -140,14 +176,14 @@ if (fs.existsSync(appFolderPath)) {
     );
     let templateAppFileContent = fs.readFileSync(templateAppFilePAth, "utf-8");
     let upodatedtemplateAppfileContent = templateAppFileContent.replace(
-      /"{import_statement_for_Page_template}"/g,
+      /{"import_statement_for_Page_template"}/g,
       `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`
     );
     upodatedtemplateAppfileContent = upodatedtemplateAppfileContent.replace(
       /{"page_template_component_in_app"}/g,
       `<${pageName}></${pageName}>`
     );
-    console.log(upodatedtemplateAppfileContent);
+    // console.log(upodatedtemplateAppfileContent);
     fs.writeFileSync(templateAppFilePAth, upodatedtemplateAppfileContent);
 
     let filePath = path.join(appFolderPath, name);
@@ -191,7 +227,7 @@ if (fs.existsSync(appFolderPath)) {
     if (fs.existsSync(filePath)) {
       console.log(
         "\x1b[31m%s\x1b[0m",
-        name + " page is already exists in this path."
+        name + " page is already exists on this path."
       );
     } else {
       execSync(
@@ -199,8 +235,8 @@ if (fs.existsSync(appFolderPath)) {
         { cwd: appFolderPath, stdio: "inherit" }
       );
 
-      console.log("\x1b[32m%s\x1b[0m", `${name} page was successfully created`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
+      console.log("\x1b[32m%s\x1b[0m", `${name} page is successfully created!!`);
+      // console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
 
     // Deleting the directory from the src in the template.
@@ -250,11 +286,11 @@ if (fs.existsSync(appFolderPath)) {
     // Use the fs.writeFile method to write the new content to the file, overwriting the old content
     fs.writeFile(filePathForPageComponent, updatedPage, (err) => {
       if (err) throw err;
-      console.log("The content has been overwritten!");
+      // console.log("The content has been overwritten!");
     });
 
     // Output a message to confirm that the script has run successfully
-    console.log(`Added ${pageName}Compo to ${filePathForPageComponent}`);
+    // console.log(`Added ${pageName}Compo to ${filePathForPageComponent}`);
     // Creating a file for side Nav items
     let sideNavItemPath = path.join(__dirname, `../raaghu-mfe/libs/main-menu`);
     try {
@@ -273,13 +309,13 @@ if (fs.existsSync(appFolderPath)) {
 
     fs.appendFile(
       `${sideNavItemPath}/index.ts`,
-      exportStatement,
+      importStatement,
       "utf8",
       // callback function
       function (err) {
         if (err) throw err;
         // if no error
-        console.log("Data is appended to file successfully.");
+        // console.log("Data is appended to file successfully.");
       }
     );
 
@@ -352,7 +388,7 @@ if (fs.existsSync(appFolderPath)) {
               return;
             }
 
-            console.log("remote.d.ts file updated successfully!");
+            // console.log("remote.d.ts file updated successfully!");
           }
         );
       }
@@ -374,7 +410,7 @@ if (fs.existsSync(appFolderPath)) {
 
     let finalAppFileContent = upodatedtemplateAppfileContent.replace(
       `import ${pageName} from "./${kebabCaseName}/${kebabCaseName}"`,
-      '"{import_statement_for_Page_template}"'
+      '{"import_statement_for_Page_template"}'
     );
     finalAppFileContent = finalAppFileContent.replace(
       `<${pageName}></${pageName}>`,
@@ -400,7 +436,7 @@ if (fs.existsSync(appFolderPath)) {
           console.error(err);
           return;
         }
-        console.log("webpack.config.js updated successfully!");
+        // console.log("webpack.config.js updated successfully!");
       });
     });
 
@@ -424,7 +460,7 @@ if (fs.existsSync(appFolderPath)) {
         "utf-8",
         function (err) {
           if (err) throw err;
-          console.log("start script updated successfully");
+          // console.log("start script updated successfully");
         }
       );
       //routing Automation
@@ -555,28 +591,28 @@ if (fs.existsSync(appFolderPath)) {
 
     // Check if the import statement already exists in the file
     if (reducerFilecontent.includes(importStatementForReducer)) {
-      console.log("Import statement already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Import statement already exists.");
     } else {
       fs.readFile(reducerFilePath, 'utf8', (err, data) => {
         if (err) {
           throw err;
         }
-      
+
         // Insert the new import statement 
         const updatedData = `${data.slice(0, 0)}${importStatementForReducer}\n${data.slice(0)}\n`;
-      
+
         fs.writeFile(reducerFilePath, updatedData, 'utf8', (err) => {
           if (err) {
             throw err;
           }
-          console.log('Import statement added successfully!');
+          // console.log('Import statement added successfully!');
         });
       });
     }
 
     // Check if the rootReducer property already exists in the file
     if (reducerFilecontent.includes(rootReducerProperty)) {
-      console.log("Root reducer property already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Root reducer property already exists.");
     } else {
       // Add the rootReducer property at the end of the rootReducer object
       fs.writeFileSync(
@@ -586,7 +622,7 @@ if (fs.existsSync(appFolderPath)) {
           `const rootReducer = combineReducers({\n  ${rootReducerProperty}`
         )
       );
-      console.log("Root reducer property added successfully.");
+      // console.log("Root reducer property added successfully.");
     }
 
     const publicApiFilePath = path.join(
@@ -600,54 +636,38 @@ if (fs.existsSync(appFolderPath)) {
 
     // Import statement to add
     const importStatementForPublicApi =
-      `export * from './${camelCaseName}/${camelCaseName}-slice";`;
+      `export * from "./${camelCaseName}/${camelCaseName}-slice";`;
 
     // Read the content of the index.ts file
     const publicApiFileContent = fs.readFileSync(publicApiFilePath, "utf-8");
 
     // Check if the import statement already exists in the file
     if (publicApiFileContent.includes(importStatementForPublicApi)) {
-      console.log("Import statement already exists.");
+      console.log("\x1b[31m%s\x1b[0m", "Import statement already exists.");
     } else {
       fs.readFile(publicApiFilePath, 'utf8', (err, data) => {
         if (err) {
           throw err;
         }
-      
+
         // Insert the new import statement 
         const updatedData = `${data.slice(0, 0)}${importStatementForPublicApi}\n${data.slice(0)}\n`;
-      
+
         fs.writeFile(publicApiFilePath, updatedData, 'utf8', (err) => {
           if (err) {
             throw err;
           }
-          console.log('Export statement added successfully!');
+          // console.log('Export statement added successfully!');
         });
       });
-    }
-  } else if (eTc == "pr") {
-    console.log("Proxy is being generated!!");
-    let filePath = path.join(appFolderPath, "proxy");
-    if (fs.existsSync(filePath)) {
-      console.log("\x1b[31m%s\x1b[0m", "proxy already exists in this path.");
-    } else {
-      execSync(
-        `npx openapi --input ${name} --output ${filePath} --client axios`,
-        { cwd: appFolderPath, stdio: "inherit" }
-      );
-
-      // generate(name, filePath, 'axios');
-
-      console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
-      console.log("\x1b[32m%s\x1b[0m", "Done..!");
     }
   }
 } else {
   if (eTc == "e") {
-    console.log("\x1b[31m%s\x1b[0m", "The elements folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The elements folder is missing!!");
   } else if (eTc == "c") {
-    console.log("\x1b[31m%s\x1b[0m", "The components folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The components folder is missing!!");
   } else if (eTc == "p") {
-    console.log("\x1b[31m%s\x1b[0m", "The pages folder is missing..!");
+    console.log("\x1b[31m%s\x1b[0m", "The pages folder is missing!!");
   }
 }
