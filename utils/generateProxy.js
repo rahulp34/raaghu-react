@@ -43,14 +43,23 @@ const generateRealWorldSpecs = async () => {
     const list = require('../swaggerJSON.json');
 
     console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
-    // await generate(list, `./raaghu-mfe/libs/${eTc}`);
+    await generate(list, `./raaghu-mfe/libs/${eTc}`);
+
+    // Replacing the API URL in the .env file
+    const envConfig = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'rds_pages', 'host', '.env'
+    );
+    let envConfigContent = fs.readFileSync(envConfig, "utf-8");
+    envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
+    fs.writeFileSync(envConfig, envConfigContent, "utf-8");
+
 
     // Replacing the BASE URL in the OpenAPI.ts file
     const OpenAPIConfig = path.resolve(
         __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'core', 'OpenAPI.ts'
     );
     let OpenAPIConfigContent = fs.readFileSync(OpenAPIConfig, "utf-8");
-    OpenAPIConfigContent = OpenAPIConfigContent.replace(`BASE: process.env.REACT_APP_API_URL || '',`, `BASE: process.env.REACT_APP_API_URL || '${url}',`);
+    OpenAPIConfigContent = OpenAPIConfigContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(OpenAPIConfig, OpenAPIConfigContent, "utf-8");
 
     // Replacing the BASE URL in the Login.tsx file
@@ -58,7 +67,7 @@ const generateRealWorldSpecs = async () => {
         __dirname, '../', 'raaghu-mfe', 'rds_pages', 'rds-page-login', 'src', 'Login', 'Login.tsx'
     );
     let LoginTSXContent = fs.readFileSync(LoginTSX, "utf-8");
-    LoginTSXContent = LoginTSXContent.replace(`process.env.REACT_APP_API_URL || ''`, `process.env.REACT_APP_API_URL || '${url}'`);
+    LoginTSXContent = LoginTSXContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(LoginTSX, LoginTSXContent, "utf-8");
 
     // Replacing the BASE URL in the interceptor.ts file
@@ -66,7 +75,7 @@ const generateRealWorldSpecs = async () => {
         __dirname, '../', 'raaghu-mfe', 'libs', 'shared', 'interceptor.ts'
     );
     let interceptorContent = fs.readFileSync(interceptor, "utf-8");
-    interceptorContent = interceptorContent.replace(`baseURL: process.env.REACT_APP_API_URL || ''`, `baseURL: process.env.REACT_APP_API_URL || '${url}'`);
+    interceptorContent = interceptorContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(interceptor, interceptorContent, "utf-8");
 
     console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
