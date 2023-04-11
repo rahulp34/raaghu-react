@@ -311,7 +311,6 @@ const Menus = () => {
 
         <div className="col-md-12">
           <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch">
-            <h4>Menu Items</h4>
             {directories.length === 0 && <h6>There is no menu item yet!</h6>}
             <RdsCompMenuDirectory
               items={directories}
