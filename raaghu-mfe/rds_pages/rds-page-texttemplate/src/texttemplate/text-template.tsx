@@ -24,7 +24,7 @@ const TextTemplate = () => {
   // Use State constants
   const [tableData, setTableData] = useState([]);
   const dispatch = useAppDispatch();
-  const textTemplate = useAppSelector((state) => state.textTemplate);
+  const textTemplate = useAppSelector((state) => state.persistedReducer.textTemplate);
   const [name, setName] = useState('');
   const [referenceContent, setReferenceContent] = useState('');
   const [targetContent, setTargetContent] = useState('');
