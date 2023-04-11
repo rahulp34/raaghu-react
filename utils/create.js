@@ -309,7 +309,7 @@ if (fs.existsSync(appFolderPath)) {
 
     fs.appendFile(
       `${sideNavItemPath}/index.ts`,
-      importStatement,
+      exportStatement,
       "utf8",
       // callback function
       function (err) {
@@ -581,7 +581,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // Import statement to add
     const importStatementForReducer =
-      `import ${camelCaseName}Reducer from "./${camelCaseName}/${camelCaseName}-slice";`;
+      `import ${camelCaseName}Reducer from "./${kebabCaseName}/${kebabCaseName}-slice";`;
 
     // Root reducer property to add
     const rootReducerProperty = `${camelCaseName}: ${camelCaseName}Reducer,`;
@@ -636,7 +636,7 @@ if (fs.existsSync(appFolderPath)) {
 
     // Import statement to add
     const importStatementForPublicApi =
-      `export * from "./${camelCaseName}/${camelCaseName}-slice";`;
+      `export * from "./${kebabCaseName}/${kebabCaseName}-slice";`;
 
     // Read the content of the index.ts file
     const publicApiFileContent = fs.readFileSync(publicApiFilePath, "utf-8");
