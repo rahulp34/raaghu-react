@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { RdsCompBlogPost } from "../../../rds-components";
+import React, { useState ,useEffect } from "react";
+import { RdsCompBlogPost, RdsCompBlogPostNew } from "../../../rds-components";
 import { RdsButton, RdsDropdownList, RdsSearch } from "../../../../../raaghu-elements/src";
 import { useTranslation } from "react-i18next";
 import { RdsOffcanvas } from 'raaghu-react-elements';
+import { addBlogPostData, getAllBlogPost } from "../../../../libs/state-management/blog-post/blog-post-slice";
+import { useAppDispatch } from "../../../../libs/public.api";
+
 
 const BlogPost = () => {
 	const { t } = useTranslation();
@@ -118,34 +121,87 @@ const BlogPost = () => {
 		{ id: "delete", displayName: "Delete", modalId: "blogsPost_delete_off" },
 	];
 
+
+	const dispatch = useAppDispatch();
+
+	useEffect(()=>{
+		 dispatch(getAllBlogPost() as any)
+	},[dispatch]);
+
   function createNewCanvasFn(event: any) {
     event.preventDefault();
     setActionId("new");
   }
 
+  const blogPostOffCanvashandler =()=>{};
+
+  const [blogPostData, setBlogPostData] = useState<any>({
+	file : "",
+	title: "",
+	blog : "",
+	slug : "",
+	description : "",
+	tag : ""
+});
+
+const postSubmitHandler = (data: any)=>{
+      
+	 dispatch(addBlogPostData(data) as any).then((res : any)=>{
+
+	 });
+
+	 setBlogPostData({
+		file : "",
+		title: "",
+		blog : "",
+		slug : "",
+		description : "",
+		tag : ""
+	  })
+}
+
 	return (
 		<>
 			<div>
 				<div className="row align-items-center">
-					<div className="d-flex justify-content-end">
-						<RdsButton
-							icon="plus"
-							label={"New Page" || ""}
-							iconColorVariant="light"
-							iconHeight="15px"
-							iconWidth="15px"
-							iconFill={false}
-							iconStroke={true}
-							block={false}
-							size="small"
-							type="button"
-							colorVariant="primary"
-							//onClick={handlerRequestData}
-
-							class="mx-2"
-						></RdsButton>
-					</div>
+					<div className="col-md-12 d-flex justify-content-end">
+              <RdsOffcanvas
+                canvasTitle={"Blog Post"}
+                placement="end" 
+				onClose={blogPostOffCanvashandler}
+                offcanvasbutton={
+                  <div className="d-flex justify-content-end my-1">
+                    <RdsButton
+                      icon="plus"
+                      label={"New Blog Post"}
+                      iconColorVariant="light"
+                      iconHeight="15px"
+                      iconWidth="15px"
+                      iconFill={false}
+                      iconStroke={true}
+                      block={false}
+                      size="small"
+                      type="button"
+                      colorVariant="primary"
+                      onClick={(e: any) => createNewCanvasFn(e)}
+                    ></RdsButton>
+                  </div>
+                }
+                backDrop={true}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"blogPost"}
+              >
+                <div className="mt-3">
+                  <RdsCompBlogPostNew 
+				  blogPostData={blogPostData}
+				   onSubmit={postSubmitHandler}
+				  />
+                </div>
+              </RdsOffcanvas>
+            </div>
 				</div>
+
 
 				<div className="my-3">
 					<div className="card p-2 border-0 rounded-0 pt-4">
@@ -156,6 +212,7 @@ const BlogPost = () => {
 									borderDropdown
 									listItems={dropDownList}
 									placeholder="Select a Status"
+									id={"selectStatus"}
 								/>
 							</div>
 							<div className="col-md-10">
@@ -179,44 +236,7 @@ const BlogPost = () => {
 						recordsPerPage={10}
 					></RdsCompBlogPost>
 				</div>
-				<div className="col-md-8 d-flex justify-content-end ">
-              <RdsOffcanvas
-                canvasTitle={"Blog Post"}
-                placement="end"
-                offcanvasbutton={
-                  <div className="d-flex justify-content-end my-1 ">
-                    <RdsButton
-                      icon="plus"
-                      label={"New Blog Post"}
-                      iconColorVariant="light"
-                      iconHeight="15px"
-                      iconWidth="15px"
-                      iconFill={false}
-                      iconStroke={true}
-                      block={false}
-                      size="small"
-                      type="button"
-                      colorVariant="primary"
-                      onClick={(e: any) => createNewCanvasFn(e)}
-                    ></RdsButton>
-                  </div>
-                }
-                backDrop={true}
-                scrolling={false}
-                preventEscapeKey={false}
-                offId={"blogPost"}
-              >
-                <div className="mt-3">
-					<p>Hello This is RdsOffcanvas</p>
-                  {/* <RdsCompTenantInformation
-                    editions={editionList}
-                    onSaveHandler={(e: any) => saveTenant(e)}
-                    tenantInformationData1={basicTenantInformation}
-                    emittedDataTenantData={getTenantData}
-                  /> */}
-                </div>
-              </RdsOffcanvas>
-            </div>
+			
 			</div>
 		</>
 	);

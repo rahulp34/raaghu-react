@@ -67,8 +67,8 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
       {props.multiple == false ? (
         <div className="row p-2">
           <div className="">
-            <div>
-             <label className={`label fw-bold  ${SIZE} `}>{props.label}</label>
+            <div className="mb-2">
+             <label className={`label  ${SIZE} `}>{props.label}</label>
             </div>
 
             <div>
@@ -90,7 +90,7 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
         <div className="row p-2">
           <div className="p-0">
             <div className="labelbox">
-            <label className={`label fw-bold  ${SIZE} `}>{props.label}</label>
+            <label className={`label  ${SIZE} `}>{props.label}</label>
               <label className={`label ${SIZE}`}>
                 Maximum {props.limit} MB
               </label>

@@ -3,18 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
 import {
-	RdsIcon,
-	RdsNotification,
-	RdsOffcanvas,
-	RdsAvatar,
+  RdsIcon,
+  RdsNotification,
+  RdsOffcanvas,
+  RdsAvatar,
 } from "raaghu-react-elements";
 import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
 import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 
 export interface RdsCompTopNavigationProps {
-  onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
-  onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
+  onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
@@ -57,7 +57,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       label: "Accordion",
       val: "Accordion",
       icon: "",
-      path : "/elements/accordion",
+      path: "/elements/accordion",
       iconWidth: "20px",
       iconHeight: "20px",
     },
@@ -133,9 +133,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 		setLinkAccount(true);
 	};
 
-  const onClickHandler =(e: any, val: any) =>{
+  const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
-      props.onClick(e,val);
+      props.onClick(e, val);
     }
   }
 
@@ -150,7 +150,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-             width="64%"
+              width="64%"
             ></img>
 
             {/* <span className="title fw-bold text-lowercase m-2 cursor-pointer">
@@ -170,25 +170,25 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             </div>
           </div>
         </div>
-              <div className="d-flex me-2 align-items-center">
-                  <div className="px-2 cursor-pointer position-relative border-end">
-                      <RdsDropdownList
-                          placeholder="Components"
-                          listItems={props.componentsList}
-                          id={"component"}
-                      // onClick={props.toggleTheme}
-                      ></RdsDropdownList>
-                  </div>     
+        <div className="d-flex me-2 align-items-center">
+          <div className="px-2 cursor-pointer position-relative border-end">
+            <RdsDropdownList
+              placeholder="Components"
+              listItems={props.componentsList}
+              id={"component"}
+            // onClick={props.toggleTheme}
+            ></RdsDropdownList>
+          </div>
           <div className="px-2 position-relative border-end me-3">
-          <RdsDropdownList
-           placeholder={props.languageLable}
-           icon =  {props.languageIcon}
-           iconFill = {false }
-           iconStroke ={ true}
-           id={"languageDropdown"}
-           listItems={props.languageItems}
-           onClick={onClickHandler}
-          ></RdsDropdownList>
+            <RdsDropdownList
+              placeholder={props.languageLable}
+              icon={props.languageIcon}
+              iconFill={false}
+              iconStroke={true}
+              id={"languageDropdown"}
+              listItems={props.languageItems}
+              onClick={onClickHandler}
+            ></RdsDropdownList>
           </div>
           <Link to="/chats"
             className="me-3 pe-3 border-end"
