@@ -268,7 +268,15 @@ const MainMenu = [
             "label": "Newsletters",
             "icon": "icons",
             "path": "/newsletters",
-            "subTitle": "Newsletters"}
+            "subTitle": "Newsletters"
+          },
+          {
+            "key": "7-0-9",
+            "label": "Pages",
+            "icon": "icons",
+            "path": "/pages",
+            "subTitle": "subtitle here"
+          }
       ]
   },
     //   {

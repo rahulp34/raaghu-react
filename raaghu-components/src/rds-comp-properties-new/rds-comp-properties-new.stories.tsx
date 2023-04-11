@@ -3,7 +3,7 @@ import React from 'react';
 import RdsCompPropertiesNew from './rds-comp-properties-new';
 
 export default {
-  title: "RdsCompPropertiesNew",
+  title: "<components/ RdsCompPropertiesNew",
 };
 
 export const Default = () => <RdsCompPropertiesNew />;
