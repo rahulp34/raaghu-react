@@ -184,13 +184,8 @@ const Main = (props: MainProps) => {
           }
         }
       );
-
-      await setStoreData({
-        ...storeData,
-        languages: res.localization,
-        auth: res.auth,
-      });
-      const tempdata = await res.localization.languages.map((item: any) => {
+      debugger
+      const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -252,12 +247,14 @@ const Main = (props: MainProps) => {
     );
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
-    let a = recursiveFunction(concatenated,pageName)    
-    a = a.filter((res:any)=> res?true:false)[0].reverse();
-    if(!a.length){
-      setBreadCrumItem([a]);
+    let a = recursiveFunction(concatenated,pageName) 
+    debugger   
+    a = a.filter((res:any)=> res?true:false);
+    if(a[0].id){
+      setBreadCrumItem(a);
     }
     else{
+      a = a[0].reverse();
       setBreadCrumItem(a);
     }
   };
@@ -324,12 +321,13 @@ const Main = (props: MainProps) => {
   };
   useEffect(()=>{
     let a = recursiveFunction1(concatenated,currentPath)
-    a = a.filter((res:any)=> res?true:false)[0].reverse();
-    if(!a.length){
-      setBreadCrumItem([a]);
+    debugger
+    a = a.filter((res:any)=> res?true:false)
+    if(a[0].id){
+      setBreadCrumItem(a);
     }
     else{
-      setBreadCrumItem(a);
+      setBreadCrumItem(a[0].reverse());
     }
   },[menus.MainMenu])
 
