@@ -21,7 +21,7 @@ import {
 
 const Newsletters = (props: any) => {
    const dispatch = useAppDispatch();
-   const newsletters = useAppSelector((state) => state.newsletters);
+   const newsletters = useAppSelector((state) => state.persistedReducer.newsletters);
   const [NewsLetterData, setNewsLetterData] = useState({
     preference: "",
   });
@@ -69,8 +69,8 @@ const Newsletters = (props: any) => {
   const [newsLettersData, setNewsLettersData] = useState<any>([]);
   useEffect(() => {
     let temp: any[] = [];
-    if (newsletters.GetAllNewsLetters?.items) {
-      newsletters.GetAllNewsLetters.items?.map((res: any) => {
+    if (newsletters.GetAllNewsLetters.items) {
+      newsletters.GetAllNewsLetters.items.map((res: any) => {
         const item = {
           details: res.details,
           emailaddress:res.emailaddress,
