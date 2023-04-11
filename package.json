@@ -59,7 +59,7 @@
     "typescript": "<4.8"
   },
   "scripts": {
-    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006 -s ./.storybook/images",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "install-all": "node utils/install-all.js",
     "create:core": "node utils/create.js core",
