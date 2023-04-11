@@ -2,21 +2,34 @@
 let path = require("path");
 let { execSync } = require("child_process");
 let fs = require("fs");
-const portFilePath = path.join(__dirname, '../raaghu-mfe/rds_pages/', 'port-config.ts');
+const portFilePath = path.join(
+  __dirname,
+  "../raaghu-mfe/rds_pages/",
+  "port-config.ts"
+);
 
 function getPortNumber() {
   let portConfig = fs.readFileSync(portFilePath).toString();
-  let portConfigJSON = JSON.parse(portConfig.substring(portConfig.indexOf("{"), portConfig.lastIndexOf("}") + 1));
+  let portConfigJSON = JSON.parse(
+    portConfig.substring(
+      portConfig.indexOf("{"),
+      portConfig.lastIndexOf("}") + 1
+    )
+  );
   let portKeys = Object.keys(portConfigJSON);
-  let portArr = portKeys.map((val) => {
-    return Number(portConfigJSON[val].port);
-  }).filter((val) => { return val != 8080 });
+  let portArr = portKeys
+    .map((val) => {
+      return Number(portConfigJSON[val].port);
+    })
+    .filter((val) => {
+      return val != 8080;
+    });
 
   let max = Math.max(...portArr);
   let min = Math.min(...portArr);
   for (let i = min; i <= max; i++) {
     if (!portArr.includes(i) && i != 8080) {
-      return (i);
+      return i;
     }
   }
   return max + 1 == 8080 ? 8081 : max + 1;
@@ -39,7 +52,8 @@ if (eTc == "core") {
 
 // Check whether the arguments passed contain the mfe name and the page name
 if (
-  ((process.argv[2] === "e" || process.argv[2] === "c") && process.argv.length !== 4) ||
+  ((process.argv[2] === "e" || process.argv[2] === "c") &&
+    process.argv.length !== 4) ||
   (process.argv[2] === "p" && process.argv.length !== 4) ||
   (process.argv[2] === "m" && process.argv.length !== 5)
 ) {
@@ -98,14 +112,6 @@ let pageName = formattedName.replaceAll(" ", "");
 // console.log(kebabCaseName); // Output: "api-scope"
 // console.log(pageName); // Output: "ApiScope"
 
-const newItem = {
-  key: `${name}`,
-  label: `${formattedName}`,
-  icon: "icons",
-  path: `/${kebabCaseName}`,
-  subTitle: "subtitle here",
-};
-
 const exportStatement = `\r\nexport {default as ${pageName}} from './${kebabCaseName}';`;
 
 function writeFileErrorHandler(err) {
@@ -115,8 +121,10 @@ function writeFileErrorHandler(err) {
 // Generate the page component using angular-cli
 if (fs.existsSync(appFolderPath)) {
   if (eTc == "e" || eTc == "c") {
-
-    console.log("\x1b[32m%s\x1b[0m", "Creating " + (eTc == "e" ? "element" : "component") + "...");
+    console.log(
+      "\x1b[32m%s\x1b[0m",
+      "Creating " + (eTc == "e" ? "element" : "component") + "..."
+    );
 
     let filePath = path.join(appFolderPath, "/src", name, name + ".tsx");
     if (fs.existsSync(filePath)) {
@@ -150,6 +158,31 @@ if (fs.existsSync(appFolderPath)) {
       console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
   } else if (eTc == "m" || eTc == "p") {
+    let newItem;
+    if (eTc == "m") {
+      newItem = {
+        key: `${process.argv[3].split("=")[1]}`,
+        label: `${process.argv[3].split("=")[1]}`,
+        icon: "pages",
+        children: [
+          {
+            key: `${name}`,
+            label: `${formattedName}`,
+            icon: "icons",
+            path: `/${kebabCaseName}`,
+            subTitle: "subtitle here",
+          },
+        ],
+      };
+    } else {
+      newItem = {
+        key: `${name}`,
+        label: `${formattedName}`,
+        icon: "icons",
+        path: `/${kebabCaseName}`,
+        subTitle: "subtitle here",
+      };
+    }
     let templateWebpackfile = path.join(
       __dirname,
       "../page-template/template/webpack.config.js"
@@ -598,7 +631,7 @@ if (fs.existsSync(appFolderPath)) {
           throw err;
         }
 
-        // Insert the new import statement 
+        // Insert the new import statement
         const updatedData = `${data.slice(0, 0)}${importStatementForReducer}\n${data.slice(0)}\n`;
 
         fs.writeFile(reducerFilePath, updatedData, 'utf8', (err) => {
@@ -650,7 +683,7 @@ if (fs.existsSync(appFolderPath)) {
           throw err;
         }
 
-        // Insert the new import statement 
+        // Insert the new import statement
         const updatedData = `${data.slice(0, 0)}${importStatementForPublicApi}\n${data.slice(0)}\n`;
 
         fs.writeFile(publicApiFilePath, updatedData, 'utf8', (err) => {
