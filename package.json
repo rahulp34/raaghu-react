@@ -62,6 +62,7 @@
     "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
     "install-all": "node utils/install-all.js",
+    "start": "node utils/start-scripts.js",
     "create:core": "node utils/create.js core",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",
