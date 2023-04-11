@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import "./App.scss";
 import {
   localizationService,
-  configurationService,
   clearToken,
 } from "raaghu-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
@@ -14,6 +13,7 @@ import {
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
+import { configurationService } from "../../../../raaghu-react-core/src"
 
 import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
@@ -168,7 +168,7 @@ const Main = (props: MainProps) => {
 
   useEffect(() => {
    
-    configurationService().then(async (res: any) => {
+    configurationService("", "").then(async (res: any) => {
      
       await localizationService(currentLanguage).then(
         async (resp: any) => {
@@ -325,10 +325,10 @@ const Main = (props: MainProps) => {
   useEffect(()=>{
     let a = recursiveFunction1(concatenated,currentPath)
     a = a.filter((res:any)=> res?true:false)
-    if(a[0].id){
+    if(a.length &&  a[0].id){
       setBreadCrumItem(a);
     }
-    else{
+    else if(a.length){
       setBreadCrumItem(a[0].reverse());
     }
   },[menus.MainMenu])
