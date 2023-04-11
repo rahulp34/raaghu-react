@@ -1,6 +1,7 @@
 
 import React, { forwardRef, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
 import "./rds-datepicker.scss";
 
@@ -8,7 +9,7 @@ export interface RdsDatepickerProps {
   selectedDate?:any
   dateForEdit?:any
   DatePickerLabel?: string;
-  onDatePicker: (date: any) => void;
+  onDatePicker: (start: any, end?: any) => void;
   type?: "default" | "advanced";
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
@@ -101,7 +102,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       {props.type !== "advanced" && (
         <>
      {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
-          <div className="input-group input-group-datePicker borde mb-3">
+          <div className="input-group input-group-datePicker mb-3">
             <DatePicker
               selected={startDate}
               onChange={(date) => {
