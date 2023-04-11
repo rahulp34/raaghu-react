@@ -3,7 +3,7 @@ import React from 'react';
 import RdsCompElements from './rds-comp-elements';
 
 export default {
-  title: "RdsCompElements",
+  title: "<components/RdsCompElements",
 };
 
 export const Default = () => <RdsCompElements />;

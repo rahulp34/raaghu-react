@@ -143,9 +143,6 @@ export const MfeConfig = {
   "globalResources": {
     "url": "globalResources@http://localhost:8040/remoteEntry.js"
   },
-  "rdsComponents": {
-    "url": "rdsComponents@http://localhost:8103/remoteEntry.js"
-  },
   "newsletters": {
     "url": "newsletters@http://localhost:8122/remoteEntry.js"
   }
