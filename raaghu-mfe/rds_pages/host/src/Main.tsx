@@ -3,8 +3,8 @@ import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./App.scss";
 import {
-  localizationService,
   configurationService,
+  localizationService,
   clearToken,
 } from "raaghu-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
@@ -141,6 +141,11 @@ const Main = (props: MainProps) => {
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
+  const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
+
+  if (index !== -1) {
+    objectArray.splice(0, 0, objectArray.splice(index, 1)[0]);
+  }
   let newobjectArray = objectArray.map((item) => {
     return item[1];
   });
@@ -320,10 +325,10 @@ const Main = (props: MainProps) => {
   useEffect(()=>{
     let a = recursiveFunction1(concatenated,currentPath)
     a = a.filter((res:any)=> res?true:false)
-    if(a[0].id){
+    if(a.length &&  a[0].id){
       setBreadCrumItem(a);
     }
-    else{
+    else if(a.length){
       setBreadCrumItem(a[0].reverse());
     }
   },[menus.MainMenu])
