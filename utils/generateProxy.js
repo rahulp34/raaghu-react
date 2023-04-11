@@ -53,7 +53,6 @@ const generateRealWorldSpecs = async () => {
     envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(envConfig, envConfigContent, "utf-8");
 
-
     // Replacing the BASE URL in the OpenAPI.ts file
     const OpenAPIConfig = path.resolve(
         __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'core', 'OpenAPI.ts'
@@ -77,6 +76,23 @@ const generateRealWorldSpecs = async () => {
     let interceptorContent = fs.readFileSync(interceptor, "utf-8");
     interceptorContent = interceptorContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(interceptor, interceptorContent, "utf-8");
+
+    // Replacing the BASE URL in the index.ts file
+    const OpenAPIIndex = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'index.ts'
+    );
+    let OpenAPIIndexContent = fs.readFileSync(OpenAPIIndex, "utf-8");
+    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+    fs.writeFileSync(OpenAPIIndex, OpenAPIIndexContent, "utf-8");
+    fs.appendFile(
+        OpenAPIIndex,
+        `export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\nexport type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`,
+        "utf8",
+        function (err) {
+            if (err) throw err;
+        }
+    );
 
     console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
 };
