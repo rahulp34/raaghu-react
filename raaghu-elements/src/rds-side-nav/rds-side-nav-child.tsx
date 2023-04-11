@@ -123,7 +123,7 @@ const Node = ({
         <NavLink
           to={node.path}
           onClick={onClickHandler}
-          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
+          className={`routingLink d-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
             } text-decoration-none`}
         >
           <div className="d-flex">
@@ -238,7 +238,7 @@ const Node = ({
                 <>
                   <a
                     aria-expanded={childVisibility}
-                    className={`nav-link child d-inline-flex cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    className={`nav-link child d-flex align-items-center cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
                     onClick={(e) => setChildVisibility((v) => !v)}>
                     <RdsIcon
                       name={node.icon}
@@ -262,7 +262,7 @@ const Node = ({
                   <div id="menuWithChildren2">
                     <a
                       aria-expanded={childVisibility}
-                      className={`nav-link child d-inline-flex cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                      className={`nav-link child d-flex align-items-center cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
                       onClick={(e) => setChildVisibility((v) => !v)}>
                       <RdsIcon
                         name={node.icon}

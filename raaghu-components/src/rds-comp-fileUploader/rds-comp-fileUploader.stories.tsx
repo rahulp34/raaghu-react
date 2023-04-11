@@ -3,10 +3,10 @@ import React from 'react';
 import RdsCompFileUploader from './rds-comp-fileUploader';
 
 export default {
-  title: "RdsCompFileUploader",
+  title: "<components / RdsCompFileUploader",
 };
 
-export const Default = () => <RdsCompFileUploader />;
+export const Default = () => <RdsCompFileUploader onClick={undefined} />;
 
 Default.story = {
   name: 'default',

@@ -171,14 +171,14 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <div className="px-2 cursor-pointer position-relative border-end">
+          {/* <div className="px-2 cursor-pointer position-relative border-end">
             <RdsDropdownList
               placeholder="Components"
               listItems={props.componentsList}
               id={"component"}
             // onClick={props.toggleTheme}
             ></RdsDropdownList>
-          </div>
+          </div> */}
           <div className="px-2 position-relative border-end me-3">
             <RdsDropdownList
               placeholder={props.languageLable}

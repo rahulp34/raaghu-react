@@ -3,7 +3,7 @@ import React from 'react';
 import RdsCompPollsOption from './rds-comp-polls-option';
 
 export default {
-  title: "RdsCompPollsOption",
+  title: "<components /RdsCompPollsOption",
 };
 
 export const Default = () => <RdsCompPollsOption />;

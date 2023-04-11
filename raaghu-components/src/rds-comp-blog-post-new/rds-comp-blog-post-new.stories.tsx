@@ -3,7 +3,7 @@ import React from 'react';
 import RdsCompBlogPostNew from './rds-comp-blog-post-new';
 
 export default {
-  title: "RdsCompBlogPostNew",
+  title: "<components/RdsCompBlogPostNew",
 };
 
 export const Default = () => <RdsCompBlogPostNew onSubmit={undefined} />;
