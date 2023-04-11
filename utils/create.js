@@ -158,10 +158,6 @@ if (fs.existsSync(appFolderPath)) {
       console.log("\x1b[32m%s\x1b[0m", "Done!!");
     }
   } else if (eTc == "m" || eTc == "p") {
-    console.log(
-      "This is the provided argument: ",
-      process.argv[3].split("=")[1]
-    );
     let newItem;
     if (eTc == "m") {
       newItem = {
