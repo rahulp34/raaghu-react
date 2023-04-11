@@ -16,6 +16,7 @@ import {
   RdsIcon,
   RdsInput,
   RdsAlert,
+  RdsInputGroup,
   RdsNavtabs,
   RdsOffcanvas,
 } from "../../../rds-elements";
@@ -122,6 +123,7 @@ const Users = () => {
     { label: "Roles", tablink: "#nav-role", id: 1 },
     { label: "Organization Units", tablink: "#nav-org", id: 2 },
     { label: "Permissions", tablink: "#nav-profile", id: 3 },
+    { label: "Set Password", tablink: "#set-password", id: 4 },
   ];
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
@@ -571,6 +573,9 @@ const Users = () => {
     const timer = setTimeout(() => {
       setAlert({ ...Alert, show: false });
     }, 2000);
+  function inputValueFn(){
+
+  }
 
     // Clean up the timer when the component unmounts or when the state changes
     return () => clearTimeout(timer);
@@ -725,7 +730,6 @@ const Users = () => {
                getUserData(e);
              }}
            />
-          
           }
 
           {activeNavTabIdEdit == 1 && (
@@ -786,6 +790,27 @@ const Users = () => {
               </div>
             </>
           )}
+          {/* {activeNavTabIdEdit == 4 && (
+            <>
+            <div className="row">
+              <div className="col-md-5 mt-2 h-68  ">
+                <RdsInputGroup 
+                  buttonColorVariant="primary"
+                  inputGroupLabel="Source"
+                  icon="refresh_sync" 
+                  iconHeight="15px"
+                  iconWidth="15px"
+                  iconFill={false}
+                  iconStroke={true}
+                  iconColorVariant="light"
+                  inputValue={inputValueFn}
+                  outline={false}
+                  placeholder="Source"
+                />
+                </div>
+              </div>
+            </>
+          )} */}
         </RdsNavtabs>
 
         <div className="footer-buttons justify-content-end bottom-0 pt-0">

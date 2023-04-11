@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RdsCompBlogPost from './RdsCompBlogPost';
+import RdsCompBlogPost from './rds-comp-blog-post';
 
 it('It should mount', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<RdsCompBlogPost />, div);
+  ReactDOM.render(<RdsCompBlogPost tableHeaders={[]} />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

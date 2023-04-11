@@ -197,7 +197,7 @@ const FileManagement = () => {
   }, [file.editDirectory]);
 
   const movefolder=()=>{   
-    debugger   
+       
       const files={
         body:{
           id:folderId,
@@ -352,7 +352,7 @@ const FileManagement = () => {
     throw new Error("Function not implemented.");
   }
   const UploadedFile = () => {
-    debugger;
+    ;
     totalFiles.map((e: any) => {
       const body = {
         directoryId: folderId,

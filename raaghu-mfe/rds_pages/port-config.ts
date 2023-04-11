@@ -136,5 +136,11 @@ export const PortConfig = {
   },
   "globalResources": {
     "port": "8040"
+  },
+  "rdsComponents": {
+    "port": "8103"
+  },
+  "newsletters": {
+    "port": "8122"
   }
 }

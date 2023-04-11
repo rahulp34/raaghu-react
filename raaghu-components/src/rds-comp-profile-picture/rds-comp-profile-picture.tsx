@@ -1,49 +1,63 @@
 // import { RdsButton, RdsInput, RdsRadioButton,RdsCheckbox } from "raaghu-react-elements";
 import React, { FC, useState,useEffect } from "react";
-import { RdsButton, RdsCheckbox, RdsRadioButton } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsFileUploader, RdsRadioButton } from "../rds-elements";
 import { RdsCompProfilePictureWrapper } from "./rds-comp-profile-picture.styled";
 
 interface RdsCompProfilePictureProps {}
 
-export enum type{
-  profileAvatar,
-  profileGravatar,
-  profileUploadFile
-}
-
 const RdsCompProfilePicture = (props: any) => {
-  const [formData,setFormData] = useState(props.profilePictureData);
-  const type="";
+  // const [formData,setFormData] = useState(props.profilePictureData);
+  const [avatarImg, setAvatarImg] = useState<string>('./assets/profile-picture-circle.svg');
+  const [type, setavatarType] = useState(0);
+  const [show, setShow] = useState<boolean>(false);
+  const [newProfileImage,setNewProfileImage]=useState<string>('')
 
-  useEffect( () => {  
-    setFormData(props.profilePictureData);
- }, [props.profilePictureData]);
+  function profileImage(data:any){  
+    // props.preFileInfo(data);
+    console.log("Image :",data.fileName);
+    setAvatarImg(data[0]);
+    console.log(setAvatarImg(data[0]));
+  }
 
- const handleProfileDataSubmit = (event: any) => {
-  event.preventDefault();     
- console.log("formData is",formData)
+//   useEffect( () => {  
+//     setFormData(props.profilePictureData);
+//  }, [props.profilePictureData]);
+
+ const handleProfileDataSubmit = (event: any) => {   
+ console.log("formData is",event)
 };
 
-function setProfilePicture(value:boolean){
-	setFormData({...formData,type:value})
-  }
+// function setProfilePicture(value:number){
+// 	setFormData({...formData,type:value})
+//   }
 
 const onClickSetProfilePicture=(event:any)=>{
+  // debugger
   if(event.target.value=="Use Default Avatar"){
-    alert(0);
+    // alert(0);
+    setAvatarImg('./assets/profile-picture-circle.svg');
+    setavatarType(0); 
+    setShow(false);   
+
   }
   else if(event.target.value=="Use Gravatar"){
-    alert(1);
+    // alert(1);
+    setAvatarImg('./assets/Avatar-rds-mascot.svg');
+    setavatarType(1);  
+    setShow(false);   
   }
   else if(event.target.value=="Upload File"){
-    alert(2)
+    // alert(2);
+    setavatarType(2);
+    // profileImage(event) 
+    setShow(true);  
   }
-  console.log(event.target.value);
+  // console.log(event.target.value);
 }
 
   const profileList = [
     {
-      checked: false,
+      checked: true,
       id: 0,
       label: "Use Default Avatar",
       name: "radio_button",
@@ -66,43 +80,59 @@ const onClickSetProfilePicture=(event:any)=>{
   ];
 
   return (
-    <form onSubmit={handleProfileDataSubmit}>
+    <form >
       <div className="row py-4 mt-4">
         <div className="col-4">
           <img
-            src="./assets/edit-pic.png"
+            src={avatarImg}
             alt="profilePic"
             width="130px"
             height="120px"
             className="profil_image_Class"
           ></img>
         </div>
-        <div className="col-4 my-3">
-          {/* <RdsRadioButton 
+        <div className="col-8 my-3">
+          <RdsRadioButton 
             displayType="Default"
-            itemList={profileList} 
-            // checked={formData.type}           
+            itemList={profileList}
+            // id={type} 
+            // checked={type}        
+            onChange={() => setavatarType(type)}   
             onClick={onClickSetProfilePicture}
-            /> */}
-             <RdsCheckbox
-                label="Use Default Avatar"
-                onChange={(e:any) =>{setProfilePicture(e.target.checked)}}
-                checked={formData}
-              ></RdsCheckbox>  
-              
+            />              
         </div>
+      </div>
+      <div className="row">
+        <div className="col-md-4">
+          
+        </div>
+        { show && (
+          <div className="col-md-8">
+            <RdsFileUploader
+            colorVariant="primary"
+            extensions=""
+            multiple={false}
+            placeholder="" size={""} label={"Select New Image"} limit={10}
+            getFileUploaderInfo={(data:any)=>profileImage(data)} 
+          /> 
+      </div>
+        )       
+      }
+        
+      </div>
+
         <div className="col-12 col-md-12 footer-buttons">
           <RdsButton
             label="Save Changes"
             colorVariant="primary"
             block={false}
-            type="submit"
+            type="button"
             onClick={() => {
-              props.handleProfileDataSubmit(formData);
+              handleProfileDataSubmit(type);
             }}
           />
         </div>
-      </div>
+     
     </form>
   );
 };

@@ -14,7 +14,7 @@ export interface LoginProps {
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
   let API_URL: string =
-    process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
+    process.env.REACT_APP_API_URL || "https://localhost:44300";
   let grant_type = process.env.REACT_APP_GRANT_TYPE || "password";
   let client_id = process.env.REACT_APP_CLIENT_ID || "raaghu";
   let scope =

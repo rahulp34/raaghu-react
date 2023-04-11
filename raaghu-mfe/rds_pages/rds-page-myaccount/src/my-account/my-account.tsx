@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
 import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
-import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
+import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setProfilePicture, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
 
 
  const navtabsItems = [
@@ -16,7 +16,6 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     const [activeNavTabId, setActiveNavTabId] = useState(0);
     const data = useAppSelector((state) => state.persistedReducer.myaccount);
     const [twoFactorData,setFormData] = useState(false);
-    // console.log("This is two factor data", twoFactorData);
 
     const [changePasswordData, setchangePassword] = useState<any>({
         currentPassword: "",
@@ -33,19 +32,13 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     });
 
     const [profilePicture, setPicture] = useState<any>({
-        userName: "", 
-        name:"",
-        surname:"",
-        email:"",
-        phoneNumber:""    
+        type:0,
+        // imageContent:""
     });
 
     const dispatch = useAppDispatch();
-
-    
     
     function handlePasswordDataSubmit(formData: any) {
-        console.log("Data", formData);
         dispatch(changepasswordProfile(formData) as any);
     }
 
@@ -56,18 +49,17 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     }
 
     function handlePersonalInfoSubmit(formData:any) {
-        console.log("Personal Info Data", formData);
         dispatch(saveMyProfile(formData) as any);
     }
 
     function handleVerifyEmailDataSubmit(email:any) {
-        console.log("email", email);
         dispatch(sendEmailVerifyProfile(email) as any);
     }
 
-    function handleProfilePictureDataSubmit(type:any) {
+    function handleProfileDataSubmit(type:any) {
         console.log("type ", type);
-        // dispatch(sendEmailVerifyProfile(type) as any);
+        // dispatch(setProfilePictures(type) as any);
+        console.log(dispatch(setProfilePicture(type) as any));
     }
 
     useEffect(() => {
@@ -89,7 +81,7 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
 
       useEffect(() => {
         if (data.profilePicture) {
-            setchangePassword(data.profilePicture);
+            setPicture(data.profilePicture);
         }
       }, [data.profilePicture]);
 
@@ -112,8 +104,8 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                     </div>
                     {activeNavTabId == 0 && (
                         <RdsCompProfilePicture
-                        handleProfileDataSubmit={(formData: any) => {
-                            handleProfilePictureDataSubmit(formData);
+                        handleProfileDataSubmit={(type: any) => {
+                            handleProfileDataSubmit(type);
                             }}
                             profilePicture={profilePicture}></RdsCompProfilePicture>
                     )}

@@ -2,7 +2,6 @@
 
 import { RdsIcon, RdsButton } from "raaghu-react-elements";
 import React, { useState } from "react";
-//import { RdsButton, RdsIcon } from "../../../../raaghu-react/raaghu-elements/src";
 
 export interface FileItem {
   id: string;

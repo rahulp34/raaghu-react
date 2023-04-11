@@ -1,18 +1,21 @@
 
-import React, { forwardRef, MouseEventHandler, useState } from "react";
-import "./rds-datepicker.scss";
+import React, { forwardRef, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
+import "./rds-datepicker.scss";
+
 export interface RdsDatepickerProps {
+  selectedDate?:any
+  dateForEdit?:any
   DatePickerLabel?: string;
-  onDatePicker: (start: any, end?: any) => void;
+  onDatePicker: (date: any) => void;
   type?: "default" | "advanced";
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
   const onRangeChange = (dates: [any, any]) => {
+
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
@@ -21,9 +24,6 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         " - " +
         (end != null ? end.toDateString().slice(4) : "")
     );
-    {
-      props.onDatePicker(start, end);
-    }
   };
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <li
@@ -90,24 +90,30 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     );
   };
 
+  useEffect(()=>{
+    if(props.dateForEdit){
+    setStartDate(props.dateForEdit)
+  }  
+  },[props.dateForEdit])  
+
   return (
     <div>
-      {props.type != "advanced" && (
+      {props.type !== "advanced" && (
         <>
      {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
-          <div className="input-group input-group-datePicker mb-3">
+          <div className="input-group input-group-datePicker borde mb-3">
             <DatePicker
               selected={startDate}
               onChange={(date) => {
                 if (date != null) setStartDate(date);
                 else setStartDate(new Date());
-
+                props.selectedDate(date)
                 props.onDatePicker(startDate)
               }}
               className="datepicker__input"
               wrapperClassName="datepicker__wrapper"
             />
-            <div className="input-group-append datepicker__icon-box" >
+            <div className="input-group-append datepicker__icon-box">
               <span className="input-group-text" id="basic-addon2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

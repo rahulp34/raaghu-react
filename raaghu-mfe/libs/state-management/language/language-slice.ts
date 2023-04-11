@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 
 import {ServiceProxy} from '../../shared/service-proxy'
+import { LanguagesService } from '../../proxy';
 
 type InitialState = {
   loading: boolean;
@@ -31,7 +32,7 @@ const proxy = new ServiceProxy()
 export const fetchLanguages = createAsyncThunk(
   "language/fetchLanguages",
   async () => {
-    return await proxy.languagesGET(undefined,  undefined,  undefined,  undefined,  undefined, 'id DESC', undefined, 1000).then((result:any)=>{
+    return await LanguagesService.getLanguages({filter:undefined,  resourceName:undefined,  baseCultureName:undefined,  targetCultureName:undefined, getOnlyEmptyValues: undefined,sorting: 'id DESC', skipCount:undefined, maxResultCount:1000}).then((result:any)=>{
       return result
     })
 
@@ -40,7 +41,7 @@ export const fetchLanguages = createAsyncThunk(
 export const fetchCultureList = createAsyncThunk(
   "language/fetchCultureList",
   async () => {
-    return await proxy.cultureList().then((result:any)=>{
+    return await LanguagesService.getLanguagesCultureList().then((result:any)=>{
       return result
     })
 
@@ -51,7 +52,7 @@ export const fetchCultureList = createAsyncThunk(
 export const postNewLanguage= createAsyncThunk(
   "language/postNewLanguage",
  (cultureModel:any) => {
-    return proxy.languagesPOST(cultureModel).then((result:any)=>{
+    return LanguagesService.postLanguages({requestBody:cultureModel}).then((result:any)=>{
      return result
     })
   }
@@ -62,7 +63,7 @@ export const postNewLanguage= createAsyncThunk(
 export const deleteLanguage= createAsyncThunk(
   "language/deleteLanguage",
  (id:any) => {
-    return proxy.languagesDELETE(id).then((result:any)=>{
+    return LanguagesService.deleteLanguages({id:id}).then((result:any)=>{
      return result
     })
   }
@@ -70,7 +71,7 @@ export const deleteLanguage= createAsyncThunk(
 export const defaultLanguage= createAsyncThunk(
   "language/defaultLanguage",
  (id:any) => {
-    return proxy.setAsDefault(id).then((result:any)=>{
+    return LanguagesService.putLanguagesSetAsDefault({id:id}).then((result:any)=>{
      return result
     })
   }
@@ -78,7 +79,7 @@ export const defaultLanguage= createAsyncThunk(
 export const updateLanguage= createAsyncThunk(
   "language/updateLanguage",
   ({idd, model}:{idd:any, model:any}) => {
-    return proxy.languagesPUT(idd,model).then((result:any)=>{
+    return LanguagesService.putLanguages({id:idd,requestBody:model}).then((result:any)=>{
      return result
     })
   }

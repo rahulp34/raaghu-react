@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompPersonalInfo from './RdsCompPersonalInfo';
+import React from 'react';
+import RdsCompPersonalInfo from './rds-comp-personal-info';
 
 export default {
   title: "RdsCompPersonalInfo",

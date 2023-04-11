@@ -24,7 +24,7 @@ let mfeConfigJSON = mfeConfig.substring(mfeConfig.indexOf("{"), mfeConfig.lastIn
 mfeConfigJSON = JSON.parse(mfeConfigJSON);
 if (appConfig.replaceUrl == "true") {
 
-  console.log('Changing URLs in .env file...');
+  console.log('Changing URLs in configuration file...');
   fs.copyFileSync(mfeFilePath, mfeFilePathTemp);
   // console.log("file path mayank2",mfeConfigJSON);
 
@@ -80,10 +80,7 @@ for(const page of Object.keys(mfeConfigJSON)) {
 for (const copy of Object.keys(mfeConfigJSON)){
   if(copy != 'host'){
     fs.mkdir(`${pastepath}/rds-page-${copy}`, (err)=>{
-      if(err){
-        console.log("directory building failed");
-      }
-      else {
+      if(!err){
         console.log(`${copy} folder created successfully `);
       }
     })

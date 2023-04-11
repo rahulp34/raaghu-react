@@ -43,7 +43,7 @@ const Edition = (props: RdsPageEditionProps) => {
   const { t } = useTranslation();
 
   const editionuser = useAppSelector(
-    (state) => state.edition
+    (state) => state.persistedReducer.edition
   ) as any;
   const dispatch = useAppDispatch();
 
@@ -94,34 +94,57 @@ const Edition = (props: RdsPageEditionProps) => {
       { value: true },
     ]);
 
+  // useEffect(() => {
+  //   if (editionuser.featureIdentitySettings) {
+  //     let tempFeatureData: any[] = [];
+  //     editionuser.featureIdentitySettings.groups.map((item: any) => {
+  //       item.features.map((e: any) => {
+  //         let data: any = {};
+  //         if (e.value == "true" || e.value == "True") {
+  //           data = {
+  //             name: e.name,
+  //             value: true,
+  //           };
+  //         } else if (e.value == "False" || e.value == "false") {
+  //           data = {
+  //             name: e.name,
+  //             value: false,
+  //           };
+  //         } else {
+  //           data = {
+  //             name: e.name,
+  //             value: e.value,
+  //           };
+  //         }
+  //         tempFeatureData.push(data);
+  //       });
+  //     });
+  //     console.log("features  data", tempFeatureData);
+  //     // compData = tempFeatureData;
+  //     setfeatureIdentitySettings(tempFeatureData);
+  //   }
+  // }, [editionuser.featureIdentitySettings]);
+
   useEffect(() => {
     if (editionuser.featureIdentitySettings) {
-      let tempFeatureData: any[] = [];
-      editionuser.featureIdentitySettings.groups.map((item: any) => {
-        item.features.map((e: any) => {
-          let data: any = {};
-          if (e.value == "true" || e.value == "True") {
-            data = {
-              name: e.name,
-              value: true,
+      // setFeaturesData(editionuser.featureIdentitySettings.groups);
+      const sample = editionuser.featureIdentitySettings.groups.map((x: any) => {
+        return {
+          name: x.name,
+          displayName: x.displayName,
+          features: x.features.map((f: any) => {
+            return {
+              ...f,
+              valueType: {
+                name: f.valueType.name,
+                validator: f.valueType.validator,
+                itemSource: f.valueType.itemSource,
+              },
             };
-          } else if (e.value == "False" || e.value == "false") {
-            data = {
-              name: e.name,
-              value: false,
-            };
-          } else {
-            data = {
-              name: e.name,
-              value: e.value,
-            };
-          }
-          tempFeatureData.push(data);
-        });
+          }),
+        };
       });
-      console.log("features  data", tempFeatureData);
-      // compData = tempFeatureData;
-      setfeatureIdentitySettings(tempFeatureData);
+      setfeatureIdentitySettings(sample);
     }
   }, [editionuser.featureIdentitySettings]);
 
@@ -137,7 +160,6 @@ const Edition = (props: RdsPageEditionProps) => {
     { id: "editEdition", displayName: "Edit", offId: "dynamic-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
-
 
   const onActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
@@ -193,15 +215,16 @@ const Edition = (props: RdsPageEditionProps) => {
     });
     const data1 = {
       id: tableDataRowid,
-      body:{features: tempData},
+      body: { features: tempData },
     };
     console.log("This is temp Data ", tempData);
     dispatch(saveFeaturesEdition(data1) as any);
   }
 
   function restoreFeatures(data: any) {
-    dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then((res: any) => {
-    });
+    dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then(
+      (res: any) => {}
+    );
   }
 
   // navtabs
@@ -230,7 +253,6 @@ const Edition = (props: RdsPageEditionProps) => {
             canvasTitle="NEW EDITION"
             onclick={offCanvasHandler}
             placement="end"
-            
             offcanvasbutton={
               <div className="d-flex justify-content-end">
                 <RdsButton
@@ -254,42 +276,42 @@ const Edition = (props: RdsPageEditionProps) => {
             offId={"Edition"}
           >
             <div>
-                <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Placeholder"
-                    label="Edition Name"
-                    labelPositon="top"
-                    id=""
-                    value={value}
-                    required={true}
-                    onChange={(e) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <div className="d-flex footer-buttons">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      isDisabled={value === ""}
-                      colorVariant="primary"
-                      class="me-2"
-                      onClick={addDataHandler}
-                    ></RdsButton>
-                  </div>
+              <div className="pt-3">
+                <RdsInput
+                  size="medium"
+                  inputType="text"
+                  placeholder="Add Placeholder"
+                  label="Edition Name"
+                  labelPositon="top"
+                  id=""
+                  value={value}
+                  required={true}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                ></RdsInput>
+                <div className="d-flex footer-buttons">
+                  <RdsButton
+                    label="CANCEL"
+                    databsdismiss="offcanvas"
+                    type={"button"}
+                    size="small"
+                    isOutline={true}
+                    colorVariant="primary"
+                    class="me-2"
+                  ></RdsButton>
+                  <RdsButton
+                    label="SAVE"
+                    type={"button"}
+                    size="small"
+                    databsdismiss="offcanvas"
+                    isDisabled={value === ""}
+                    colorVariant="primary"
+                    class="me-2"
+                    onClick={addDataHandler}
+                  ></RdsButton>
                 </div>
+              </div>
             </div>
           </RdsOffcanvas>
         </div>
@@ -314,7 +336,6 @@ const Edition = (props: RdsPageEditionProps) => {
           onclick={offCanvasHandler}
           placement="end"
           offId="dynamic-edit-off"
-          
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

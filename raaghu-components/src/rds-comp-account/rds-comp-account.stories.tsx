@@ -1,4 +1,5 @@
 /* eslint-disable */
+import React from 'react';
 import RdsCompAccount from './rds-comp-account';
 
 export default {
