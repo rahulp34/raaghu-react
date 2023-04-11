@@ -31,8 +31,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
         const lang =localStorage.getItem("currentLang")||"en-GB"
         setTurnSpinnerOff(true)
         navigate('/dashboard')
-        configurationService(API_URL, lang).then(async (res: any) => {
-          await localizationService(API_URL, lang).then(async (resp: any) => {
+        configurationService().then(async (res: any) => {
+          await localizationService(lang).then(async (resp: any) => {
             i18n.changeLanguage(lang);
             var data1 = {};
             const translation = resp?.resources;

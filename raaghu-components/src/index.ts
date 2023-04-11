@@ -71,3 +71,4 @@ export {default as rdsCompFileMover} from './rds-comp-file-mover/rds-comp-file-m
 export { default as RdsCompComponents } from './rds-comp-components/rds-comp-components';
 export { default as RdsCompBlogPost } from "./rds-comp-blog-post";
 export {default as RdsCompSyntaxHighlighter} from './rds-comp-syntax-highlighter/rds-comp-syntax-highlighter';
+export { default as RdsCompBlogPostNew } from "./rds-comp-blog-post-new";
