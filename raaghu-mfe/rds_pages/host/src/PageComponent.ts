@@ -106,5 +106,5 @@ export {
     PagesCompo,
     BlogPostCompo,
     GlobalResourcesCompo,
-    NewslettersCompo
+    NewslettersCompo,
 };
