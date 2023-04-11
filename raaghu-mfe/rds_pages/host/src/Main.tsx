@@ -141,6 +141,11 @@ const Main = (props: MainProps) => {
 
   // OnClickHandler for language change
   const objectArray = Object.entries(menus);
+  const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
+
+  if (index !== -1) {
+    objectArray.splice(0, 0, objectArray.splice(index, 1)[0]);
+  }
   let newobjectArray = objectArray.map((item) => {
     return item[1];
   });
