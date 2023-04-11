@@ -184,7 +184,6 @@ const Main = (props: MainProps) => {
           }
         }
       );
-      debugger
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -248,7 +247,6 @@ const Main = (props: MainProps) => {
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
     let a = recursiveFunction(concatenated,pageName) 
-    debugger   
     a = a.filter((res:any)=> res?true:false);
     if(a[0].id){
       setBreadCrumItem(a);
@@ -321,7 +319,6 @@ const Main = (props: MainProps) => {
   };
   useEffect(()=>{
     let a = recursiveFunction1(concatenated,currentPath)
-    debugger
     a = a.filter((res:any)=> res?true:false)
     if(a[0].id){
       setBreadCrumItem(a);
