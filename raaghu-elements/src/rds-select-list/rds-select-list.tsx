@@ -13,6 +13,7 @@ export interface RdsSelectProps {
   children?: React.ReactNode;
   someCallback?: any;
   onSelectListChange?: any;
+  placeholder?:string
 }
 const RdsSelectList = (props: RdsSelectProps) => {
   const [selectedOption, setselectedoption] = useState(props.selectedValue);
