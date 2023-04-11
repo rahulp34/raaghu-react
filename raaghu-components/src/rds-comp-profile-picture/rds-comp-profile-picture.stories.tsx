@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import RdsCompProfilePicture from './RdsCompProfilePicture';
+import RdsCompProfilePicture from './rds-comp-profile-picture';
 
 export default {
   title: "RdsCompProfilePicture",

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RdsCompPollsOption from './RdsCompPollsOption';
+import RdsCompPollsOption from './rds-comp-polls-option';
 
 it('It should mount', () => {
   const div = document.createElement('div');
