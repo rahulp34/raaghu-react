@@ -44,7 +44,7 @@ import { useTranslation } from "react-i18next";
 const Users = () => {
 
   const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.user);
+  const data = useAppSelector((state) => state.persistedReducer.user);
   const [userId, setUserId] = useState("");
   const [userData, setUserData] = useState<any>({
     name: "",
@@ -790,7 +790,7 @@ const Users = () => {
               </div>
             </>
           )}
-          {activeNavTabIdEdit == 4 && (
+          {/* {activeNavTabIdEdit == 4 && (
             <>
             <div className="row">
               <div className="col-md-5 mt-2 h-68  ">
@@ -810,7 +810,7 @@ const Users = () => {
                 </div>
               </div>
             </>
-          )}
+          )} */}
         </RdsNavtabs>
 
         <div className="footer-buttons justify-content-end bottom-0 pt-0">

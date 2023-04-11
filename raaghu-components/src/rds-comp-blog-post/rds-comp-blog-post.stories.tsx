@@ -1,5 +1,5 @@
 /* eslint-disable */
-import RdsCompBlogPost from './RdsCompBlogPost';
+import RdsCompBlogPost from './rds-comp-blog-post';
 
 export default {
   title: "RdsCompBlogPost",
