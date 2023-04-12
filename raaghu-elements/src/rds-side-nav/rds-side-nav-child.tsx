@@ -38,7 +38,7 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`list-style mb-0 py-2 ps-1 sideNav ${count == 1
+        className={`list-style mb-0 py-3 ps-1 sideNav ${count == 1
           ? "list-unstyled"
           : count == 2
             ? "list-unstyled fw-normal pb-1 small ms-1 "
@@ -58,7 +58,7 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center border p-1 rounded-circle ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -66,8 +66,8 @@ const RdsSideNavChild = ({
 
            <RdsIcon
                 name="chevron_right_double"
-                height="15px"
-                width="15px"
+                height="12px"
+                width="12px"
                 stroke={true}
                 fill={false}
                 onClick={onCollapse}

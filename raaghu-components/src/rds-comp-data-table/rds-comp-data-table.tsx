@@ -520,7 +520,7 @@ const dragOverItem = useRef<any>(null);
                                      // class="bi bi-three-dots-vertical"
                                     />
                                   </button>
-                                  {array[index] && (<ul className="dropdown-menu" style={{display:'block', maxWidth:'200px'}}>
+                                  {array[index] && (<ul className="dropdown-menu" style={{display:'block', maxWidth:'200px', right:'80px'}}>
                                     {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={

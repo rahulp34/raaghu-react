@@ -109,10 +109,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 style={{
                   zIndex: "3",
                   backgroundSize: "cover",
-                  top: 240,
-                  left: 196,
-                  width: 50,
-                  height: 50,
+                  top: 244,
+                  left: 200,
+                  width: 42,
+                  height: 39,
                 }}
                 src="./assets/raaghu_icon.png"
               ></img>
