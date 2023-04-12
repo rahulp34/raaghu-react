@@ -38,15 +38,15 @@ function getPortNumber() {
 let eTc = process.argv[2];
 if (eTc == "core") {
   var mfeFolderPath = path.join(__dirname, "..", "raaghu-mfe");
-  execSync(`npm install --save raaghu-react-core`, {
+  execSync(`npm install --save raaghu-core`, {
     cwd: ".",
     stdio: "inherit",
   });
-  execSync(`npm install --save raaghu-react-core`, {
+  execSync(`npm install --save raaghu-core`, {
     cwd: mfeFolderPath,
     stdio: "inherit",
   });
-  console.log("\x1b[32m%s\x1b[0m", `raaghu-react-core successfully installed!!`);
+  console.log("\x1b[32m%s\x1b[0m", `raaghu-core successfully installed!!`);
   return;
 }
 

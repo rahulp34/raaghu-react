@@ -2,7 +2,7 @@
 let path = require("path");
 let fs = require("fs");
 let { execSync } = require("child_process");
-const OpenAPI = require('raaghu-react-core/dist/build-proxy');
+const OpenAPI = require('raaghu-core/dist/build-proxy');
 // const fetch = require('node-fetch');
 
 const eTc = process.argv[2];
