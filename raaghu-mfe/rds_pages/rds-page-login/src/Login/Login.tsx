@@ -7,7 +7,7 @@ import {
   sessionService,
   localizationService,
   configurationService,
-} from "raaghu-core";
+} from "raaghu-react-core";
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
