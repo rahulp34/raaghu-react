@@ -6,7 +6,7 @@ import {
   configurationService,
   localizationService,
   clearToken,
-} from "raaghu-core";
+} from "raaghu-react-core";
 import { useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
