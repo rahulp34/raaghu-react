@@ -4,7 +4,7 @@ import {
     PayloadAction,
     AnyAction,
   } from "@reduxjs/toolkit";
- import {getAppConfig} from 'raaghu-react-core'
+ import {getAppConfig} from 'raaghu-core'
  
   
   type configlInitialState = {
