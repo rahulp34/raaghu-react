@@ -73,8 +73,8 @@ const Users = () => {
       sortable: true,
     },
     {
-      displayName: "Name",
-      key: "name",
+      displayName: "Email Address",
+      key: "emailAddress",
       datatype: "text",
       dataLength: 30,
       required: true,
@@ -89,23 +89,56 @@ const Users = () => {
       sortable: true,
     },
     {
-      displayName: "Email Address",
-      key: "emailAddress",
+      displayName: "Phone Number",
+      key: "phoneNumber",
       datatype: "text",
       dataLength: 30,
       required: true,
       sortable: true,
     },
     {
+      displayName: "Name",
+      key: "name",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+    {
+      displayName: "Surname",
+      key: "surname",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    }, 
+    {
       displayName: "Active",
       key: "isActive",
       datatype: "text",
     },
     {
-      displayName: "Lockout",
+      displayName: "Account Lockout",
       key: "lockoutEnabled",
       datatype: "text",
     },
+    {
+      displayName: "Creation Time",
+      key: "creationTime",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+    {
+      displayName: "Last Modification Time",
+      key: "lastModification",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+   
   ];
 
   const actions = [
@@ -154,22 +187,38 @@ const Users = () => {
 
   useEffect(() => {
     if (data.users) {
+      
       let tempTableData: any[] = [];
       data?.users?.items?.map((item: any) => {
         let rolesNames: string = "";
         item?.roleNames?.map((res: any) => {
           rolesNames = rolesNames + `${res} `;
         });
+        
+        const date = new Date(item.creationTime);
+        const creationDate = `${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}, ${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+        let updatedDate = '';
+        if (item.lastModificationTime) {
+          const lastDate = new Date(item.lastModificationTime);
+          updatedDate = `${("0" + lastDate.getDate()).slice(-2)}/${("0" + (lastDate.getMonth() + 1)).slice(-2)}/${lastDate.getFullYear()}, ${("0" + lastDate.getHours()).slice(-2)}:${("0" + lastDate.getMinutes()).slice(-2)} ${lastDate.getHours() >= 12 ? "PM" : "AM"}`;
+        }
+        else {
+          updatedDate = '--'
+        }
         const data = {
           id: item.id,
           userName: item.userName,
           name: item.name,
           roles: rolesNames,
           emailAddress: item.email,
+          phoneNumber:item.phoneNumber,
+          surname:item.surname,
+          creationTime:creationDate,
+          lastModification:updatedDate,
           isActive :(
             <>
               {item.isActive == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -178,7 +227,7 @@ const Users = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"
@@ -192,7 +241,7 @@ const Users = () => {
           lockoutEnabled :(
             <>
               {item.lockoutEnabled == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -201,7 +250,7 @@ const Users = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"
