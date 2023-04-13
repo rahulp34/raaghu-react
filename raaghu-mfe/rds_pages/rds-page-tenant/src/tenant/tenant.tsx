@@ -411,9 +411,9 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   useEffect(() => {
     if (data.edition)
-      if (data.edition.items.length) {
+      if (data.edition?.length) {
         let editionData1: any[] = [];
-        data.edition.items.map((item: any) => {
+        data.edition.map((item: any) => {
           const newItem = {
             option: item.displayName,
             value: item.id,
