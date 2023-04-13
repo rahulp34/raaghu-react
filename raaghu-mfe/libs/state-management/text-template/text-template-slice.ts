@@ -2,7 +2,6 @@ import { TextTemplate } from "./text-template.models";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { ServiceProxy, UpdateTemplateContentInput } from "../../shared/service-proxy";
-import { isNullOrUndef } from "chart.js/dist/helpers/helpers.core";
 import { useDispatch } from "react-redux";
 import {TextTemplateDefinitionsService} from "../../proxy/services/TextTemplateDefinitionsService"
 import {TextTemplateContentsService} from "../../proxy/services/TextTemplateContentsService"
