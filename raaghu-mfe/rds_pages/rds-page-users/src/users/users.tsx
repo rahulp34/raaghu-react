@@ -16,16 +16,17 @@ import {
   RdsIcon,
   RdsInput,
   RdsAlert,
-  RdsInputGroup,
   RdsNavtabs,
   RdsOffcanvas,
+  RdsInputGroup,
 } from "../../../rds-elements";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
-
+// import changePassword from "../../../../libs/state-management/user/user-slice"
 import {
+  changePassword,
   createUser,
   deleteUser,
   fetchEditUser,
@@ -45,7 +46,7 @@ const Users = () => {
 
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.persistedReducer.user);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(""); 
   const [userData, setUserData] = useState<any>({
     name: "",
     surname: "",
@@ -114,7 +115,7 @@ const Users = () => {
     {
       id: "set_password",
       displayName: "Set Password",
-      modalId: "set_password",
+      offId: "set_password",
     },
   ];
 
@@ -425,6 +426,7 @@ const Users = () => {
     dispatch(getPermission(rowData.id) as any);
     dispatch(fetchEditUserRoles(rowData.id) as any);
     dispatch(getSelectedOrgUnit(rowData.id) as any);
+
     setActiveNavTabIdEdit(0);
   };
 
@@ -546,6 +548,45 @@ const Users = () => {
       }
     });
   }
+  const [password, setPassword] = useState("");
+  
+    function generatePassword() {
+      debugger
+      const length = 10;
+      const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]<>?";
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset[randomIndex];
+      }
+      setPassword(password);
+  } 
+  const setPasswordData = (event: any) => {
+    setUserData({...userData, password:event.target.value})
+    
+  };
+  function setPasswordButton(){
+    debugger
+     let data = {id:userId, requestBody:{newPassword:password}} 
+     dispatch(changePassword(data) as any).then((res: any) => {
+      if (res.type == "user/changePassword/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Password Changed Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchUsers() as any);
+    });
+  }
 
   function deleteHandler(data: any) {
     console.log(data);
@@ -573,10 +614,7 @@ const Users = () => {
     const timer = setTimeout(() => {
       setAlert({ ...Alert, show: false });
     }, 2000);
-  function inputValueFn(){
-
-  }
-
+  
     // Clean up the timer when the component unmounts or when the state changes
     return () => clearTimeout(timer);
   }, [data.users]);
@@ -790,27 +828,7 @@ const Users = () => {
               </div>
             </>
           )}
-          {/* {activeNavTabIdEdit == 4 && (
-            <>
-            <div className="row">
-              <div className="col-md-5 mt-2 h-68  ">
-                <RdsInputGroup 
-                  buttonColorVariant="primary"
-                  inputGroupLabel="Source"
-                  icon="refresh_sync" 
-                  iconHeight="15px"
-                  iconWidth="15px"
-                  iconFill={false}
-                  iconStroke={true}
-                  iconColorVariant="light"
-                  inputValue={inputValueFn}
-                  outline={false}
-                  placeholder="Source"
-                />
-                </div>
-              </div>
-            </>
-          )} */}
+         
         </RdsNavtabs>
 
         <div className="footer-buttons justify-content-end bottom-0 pt-0">
@@ -829,6 +847,81 @@ const Users = () => {
             isOutline={false}
             colorVariant="primary"
             onClick={updateUserData}
+            databsdismiss="offcanvas"
+          ></RdsButton>
+        </div>
+      </RdsOffcanvas>
+
+      <RdsOffcanvas
+        canvasTitle="Set Password"
+        onclick={offCanvasHandler}
+        placement="end"
+        offId="set_password"
+        backDrop={false}
+        scrolling={false}
+        onClose={(e) => {
+          offcanvasClose();
+        }}
+        preventEscapeKey={false}
+      >     
+               <div className="row">
+                <div className="col-md-6">
+                <RdsInput
+                value={password}
+                placeholder="Enter Password"
+                inputType="text"
+                label="Enter New Password"
+                required={true}
+                onChange={(e)=>{setPasswordData(e)}}
+              ></RdsInput>
+                </div>
+                <div className="col-md-6" style={{marginTop:'29px'}}>
+                <RdsButton
+
+            class=""
+            label="Auto-generate"
+            type="button"
+            icon="refresh_sync"
+            iconHeight="15px"
+            iconWidth="15px"
+            size="medium"
+            isOutline={true}
+            colorVariant="primary"
+            onClick={generatePassword}
+           
+          ></RdsButton>
+                </div>
+               </div>
+         {/* <RdsInputGroup 
+            buttonColorVariant="primary"
+            inputGroupLabel="Password"
+            icon="refresh_sync" 
+            iconHeight="15px"
+            iconWidth="15px"
+            iconFill={false}
+            iconStroke={true}
+            iconColorVariant="light"
+            inputValue={generatePassword}
+            outline={false}
+            value={password}
+             /> */}
+
+       <div className="footer-buttons justify-content-end bottom-0 pt-0">
+          <RdsButton
+            class="me-2"
+            label="CANCEL"
+            type="button"
+            databsdismiss="offcanvas"
+            isOutline={true}
+            colorVariant="primary"
+          ></RdsButton>
+          <RdsButton
+            class="me-2"
+            label="SAVE"
+            type="button"
+            isOutline={false}
+            colorVariant="primary"
+            onClick={setPasswordButton}
             databsdismiss="offcanvas"
           ></RdsButton>
         </div>
