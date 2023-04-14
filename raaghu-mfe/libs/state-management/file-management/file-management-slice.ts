@@ -17,7 +17,7 @@ type fileInitialState = {
   error: string;
   status: "pending" | "loading" | "error" | "success";
 };
-export const fileInitialState: fileInitialState = {
+const fileInitialState: fileInitialState = {
   fileOrFolder:null,
   directoryId: null,
   subDirectories: null,
