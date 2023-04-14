@@ -136,5 +136,5 @@ export const PortConfig = {
   },
   "globalResources": {
     "port": "8040"
-  },
+  }
 }

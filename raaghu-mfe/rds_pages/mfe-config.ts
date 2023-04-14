@@ -142,5 +142,5 @@ export const MfeConfig = {
   },
   "globalResources": {
     "url": "globalResources@http://localhost:8040/remoteEntry.js"
-  },
+  }
 }

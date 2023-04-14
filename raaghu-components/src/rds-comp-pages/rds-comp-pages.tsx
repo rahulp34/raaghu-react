@@ -22,6 +22,7 @@ export interface RdsCompPagesProps {
    tableData?: any[];
    pagination?: boolean;
    recordsPerPage?: number;
+   onActionSelection?(rowData: any, actionId: any): void;
 }
 
 
@@ -35,6 +36,7 @@ const RdsCompPages = (props: RdsCompPagesProps) => {
          tableData={props.tableData!}
          pagination={props.pagination!}
          recordsPerPage={props.recordsPerPage}
+         onActionSelection={props.onActionSelection!}
       ></RdsCompDatatable>
    );
 

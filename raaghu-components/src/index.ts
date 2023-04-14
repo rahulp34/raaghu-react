@@ -72,3 +72,4 @@ export { default as RdsCompComponents } from './rds-comp-components/rds-comp-com
 export { default as RdsCompBlogPost } from "./rds-comp-blog-post";
 export {default as RdsCompSyntaxHighlighter} from './rds-comp-syntax-highlighter/rds-comp-syntax-highlighter';
 export { default as RdsCompPages } from "./rds-comp-pages/rds-comp-pages";
+export { default as RdsCompNewPage } from "./rds-comp-newPage/rds-comp-newPage";
