@@ -26,7 +26,6 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
   };
 
   useEffect(()=>{
-    debugger
     if(props.breadItems.length > 0){
       setdata(props.breadItems);
     }
@@ -35,9 +34,10 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
 
   return (
     <Fragment>
+      <>
       {Role === "advance" && (
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
+          <ol className="breadcrumb m-0">
             {data?.map((breadItem, index) => {
               return index == 0 ? (
                 <li
@@ -118,6 +118,8 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
           </ol>
         </nav>
       )}
+      </>
+      
       {/* {Role === "default" && (
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">

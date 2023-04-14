@@ -4,7 +4,6 @@ import {
   PayloadAction,
   AnyAction,
 } from "@reduxjs/toolkit";
-import { CreateQuestionDto, UpdatePermissionsDto } from "../../shared/service-proxy";
 import { unset } from "lodash-es";
 import {FormService} from "../../proxy/services/FormService";
 

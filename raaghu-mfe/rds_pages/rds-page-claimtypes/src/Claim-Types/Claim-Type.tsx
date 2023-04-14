@@ -72,7 +72,7 @@ const ClaimType = () => {
           static :(
             <>
               {item.isStatic == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -81,7 +81,7 @@ const ClaimType = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"
@@ -95,7 +95,7 @@ const ClaimType = () => {
           required: (
             <>
               {item.required == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -104,7 +104,7 @@ const ClaimType = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"

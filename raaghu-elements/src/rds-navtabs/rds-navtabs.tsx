@@ -48,16 +48,16 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
             : props.type === "tabs"
             ? " justify-content-start nav-tabs"
             : props.type === "vertical"
-            ? " flex-column nav-pills col-12 vh-75 border-end border-end"
+            ? " flex-column nav-pills col-12 h-100 border-end border-end"
             : " nav-tabs") +
           (props.fill ? " nav-fill" : "") +
           (props.justified ? " nav-justified" : "")
         }
       >
         {props.navtabsItems.map((navtabsItem) => (
-          <li className="nav-item p-1" key={navtabsItem.id}>
+          <li className="nav-item p-1 cursor-pointer" key={navtabsItem.id}>
             <a className={
-                "nav-link rounded-0 py-3 px-3 pe-auto" +
+                "nav-link rounded-0 py-3 px-3 pe-auto " +
                 (navtabsItem.id === activeTabKey ||
                   navtabsItem.id === activeNavTabId
                   ?( props.type === "tabs" ?" border-bottom border-primary border-3 text-primary ":" active") 
