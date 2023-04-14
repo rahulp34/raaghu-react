@@ -26,10 +26,7 @@ import {
   postNewLanguage,
   updateLanguage,
 } from "../../../../libs/state-management/public.api";
-import {
-  CreateLanguageDto,
-  UpdateLanguageDto,
-} from "../../../../libs/shared/service-proxy";
+
 
 const tableHeaders = [
   {
@@ -188,7 +185,12 @@ const Language = (props: LanguageProps) => {
     }
   }, [data.cultureList, data.languages]);
 
-  const cultureModel = new CreateLanguageDto();
+  let cultureModel = {
+    isEnabled:false,
+    cultureName:"",
+    displayName :'',
+   uiCultureName :'',
+    flagIcon:'' };
 
   const onSaveHandler = (data: {
     check: boolean;
@@ -225,8 +227,11 @@ const Language = (props: LanguageProps) => {
 
     setname([]);
   };
-
-  const model = new UpdateLanguageDto();
+  const model = {
+    isEnabled: false,
+    displayName: '',
+    flagIcon: '',
+  }
 
   const onEditHandler = (data: {
     check: boolean;
