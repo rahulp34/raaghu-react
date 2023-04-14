@@ -196,7 +196,7 @@ const FileManagement = () => {
   }, [file.editDirectory]);
 
   const movefolder = (e:any) => {
-    debugger;
+    
     const files = {
       body: {
         id: folderId,
@@ -204,7 +204,7 @@ const FileManagement = () => {
         // formData: { File: new Blob([e], { type: e.type }) },
       },
     };
-    debugger
+    
     if(isDirectory){
       dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
         dispatch(fetchSubDirectory(undefined) as any);
@@ -272,7 +272,7 @@ const FileManagement = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    debugger
+    
     if (file.subDirectories) {
       let parsedDirectory = JSON.parse(JSON.stringify(directories));
       file.subDirectories.items.map((el: any) => {
@@ -405,7 +405,7 @@ const FileManagement = () => {
     dispatch(infoFileDescriptor(uploadFiles) as any);
   }, [uploadFiles]);
   const UploadedFile = () => {
-    debugger;
+    
     totalFiles.map((e: any) => {
       const body = {
         relativePath: null,
@@ -416,7 +416,6 @@ const FileManagement = () => {
       };
       console.log(body);
       // setUploadFile(totalFiles[0])
-      debugger;
       dispatch(uploadFileDescriptor(body) as any);
       dispatch(fetchSubDirectory(folderId) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
@@ -464,6 +463,7 @@ const FileManagement = () => {
                 required={true}
                 onChange={(e) => {
                   setName(e.target.value);
+
                 }}
               ></RdsInput>
               <div className="d-flex footer-buttons">
