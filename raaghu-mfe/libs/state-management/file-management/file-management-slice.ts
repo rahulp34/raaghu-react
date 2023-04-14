@@ -1,13 +1,49 @@
 import {
-    createSlice,
-    createAsyncThunk,
-    PayloadAction,
-    AnyAction,
-  } from "@reduxjs/toolkit";
-  import {ServiceProxy} from '../../shared/service-proxy'
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  AnyAction,
+} from "@reduxjs/toolkit";
 import { DirectoryDescriptorsService, FileDescriptorsService } from "../../proxy";
- 
-  
+
+
+type fileInitialState = {
+  fileOrFolder:null;
+  directoryId: null;
+  subDirectories: any;
+  directoryDescriptor: any;
+  editDirectory:any;
+  moveDirectory:any;
+  error: string;
+  status: "pending" | "loading" | "error" | "success";
+};
+export const fileInitialState: fileInitialState = {
+  fileOrFolder:null,
+  directoryId: null,
+  subDirectories: null,
+  directoryDescriptor: null,
+  moveDirectory:null,
+  editDirectory:null,
+  error: "",
+  status: "pending",
+};
+
+export const fetchSubDirectory = createAsyncThunk(
+  "FileManagement/fetchSubDirectory",
+  (data:any)=>{
+    return DirectoryDescriptorsService.getDirectoryDescriptorSubDirectories({parentId:data}).then((result:any)=>{
+      return result;
+    })
+  }
+);
+
+export const fetchDirectoryDescriptor = createAsyncThunk(
+  "FileManagement/fetchDirectoryDescriptor",
+  (data:any)=>{
+    return DirectoryDescriptorsService.getDirectoryDescriptor1({filter:undefined,id:data,sorting:undefined,skipCount:undefined,maxResultCount:1000}).then((result:any)=>{
+      return result;
+    })
+    
   type fileInitialState = {
     fileOrFolder:null;
     directoryId: null;
@@ -190,113 +226,47 @@ import { DirectoryDescriptorsService, FileDescriptorsService } from "../../proxy
     }
   )
 
-
-  
-  const FileManagementSlice = createSlice({
-    name: "FileManagement",
-    initialState:fileInitialState,
-    reducers:{},
-    extraReducers: (builder) => {
-      builder.addCase(fetchSubDirectory.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        fetchSubDirectory.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.subDirectories = action.payload;
-          state.error = "";
-        }
-      );
-      builder.addCase(fetchSubDirectory.rejected, (state, action) => {
-        state.status = "error";
-        state.error = action.error.message || "Something went wrong";
-      });
+    builder.addCase(fetchEditDirectory.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      fetchEditDirectory.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.editDirectory = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(fetchEditDirectory.rejected, (state, action: PayloadAction<any>) => {
+      state.status = "error";
+      //state.error = action.error.message || "Something went wrong";
+    });
+    
 
 
-      builder.addCase(fetchDirectoryDescriptor.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        fetchDirectoryDescriptor.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.directoryDescriptor = action.payload;
-          state.error = "";
-        }
-      );
-      builder.addCase(fetchDirectoryDescriptor.rejected, (state, action) => {
-        state.status = "error";
-        state.error = action.error.message || "Something went wrong";
-      });
+    builder.addCase(saveDirectoryDescriptor.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      saveDirectoryDescriptor.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.error = "";
+      }
+    );
+
+    builder.addCase(uploadFileDescriptor.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(
+      uploadFileDescriptor.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.status = "success";
+        state.error = "";
+      }
+    );
 
 
-
-      builder.addCase(deleteDirectoryDescriptor.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        deleteDirectoryDescriptor.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.error = "";
-        }
-      );
-      
-      
-      builder.addCase(updateDirectoryDescriptor.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        updateDirectoryDescriptor.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.error = "";
-        }
-      );
-
-
-      builder.addCase(fetchEditDirectory.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        fetchEditDirectory.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.editDirectory = action.payload;
-          state.error = "";
-        }
-      );
-      builder.addCase(fetchEditDirectory.rejected, (state, action: PayloadAction<any>) => {
-        state.status = "error";
-        //state.error = action.error.message || "Something went wrong";
-      });
-      
-
-
-      builder.addCase(saveDirectoryDescriptor.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        saveDirectoryDescriptor.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.error = "";
-        }
-      );
-
-      builder.addCase(uploadFileDescriptor.pending, (state) => {
-        state.status = "loading";
-      });
-      builder.addCase(
-        uploadFileDescriptor.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.status = "success";
-          state.error = "";
-        }
-      );
-
-  
-    },
-  });
-  export default FileManagementSlice.reducer;
+  },
+});
+export default FileManagementSlice.reducer;

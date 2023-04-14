@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { BlogManagementService } from "../../proxy";
-import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
   allblogs: any,
@@ -16,7 +15,6 @@ const initialState: InitialState = {
   error: "",
 }
 
-const proxy = new ServiceProxy()
 
 export const getAllBlogs = createAsyncThunk('Blogs/GetAll', () => {
   return BlogManagementService.getBlogsAdmin().then((result: any) => {

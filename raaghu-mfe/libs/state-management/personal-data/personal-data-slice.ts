@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { GdprRequestService, PlanAdminService } from "../../proxy";
-import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
     personalData: { items: any[] };
@@ -14,7 +13,6 @@ export const initialState: InitialState = {
     status: "pending",
 };
 
-const proxy = new ServiceProxy()
 
 export const getPersonalData = createAsyncThunk(
     "PersonalData/getPersonalData",

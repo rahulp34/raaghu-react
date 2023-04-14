@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import { ScopesService } from "../../proxy";
-import { ServiceProxy } from "../../shared/service-proxy";
 
 
 type InitialState = {

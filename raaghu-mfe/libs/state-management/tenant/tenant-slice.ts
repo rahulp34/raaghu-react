@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {  ServiceProxy } from "../../shared/service-proxy";
 import {TenantService} from "../../proxy/services/TenantService"
 import { BlogFeatureService } from "../../proxy/services/BlogFeatureService";
 import { EditionService, FeaturesService } from "../../proxy";

@@ -160,7 +160,7 @@ const Main = (props: MainProps) => {
 
   const onClickHandler = (e: any, val: any) => {
     setCurrentLanguage(val);
-    localStorage.setItem("currentLang", JSON.stringify(val));
+    localStorage.setItem("currentLang",val);
   };
   // const storeData.languages=storeData.languages
   //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
@@ -168,23 +168,27 @@ const Main = (props: MainProps) => {
   useEffect(() => {
    
     configurationService(API_URL, currentLanguage).then(async (res: any) => {
-     
       await localizationService(API_URL, currentLanguage).then(
         async (resp: any) => {
-          i18n.changeLanguage(currentLanguage);
-          var data1 = {};
+          let data1 = {};
+          let data2 = {};
           const translation = resp?.resources;
            if (translation) {
             Object.keys(translation).forEach((key) => {
-              data1 = { ...data1, ...translation[key].texts };
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
             });
             i18n.addResourceBundle(
               currentLanguage,
               "translation",
-              data1,
+              data2,
               false,
               true
             );
+            i18n.changeLanguage(currentLanguage);
           }
         }
       );
