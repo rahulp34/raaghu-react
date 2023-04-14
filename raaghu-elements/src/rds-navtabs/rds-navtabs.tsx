@@ -48,7 +48,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
             : props.type === "tabs"
             ? " justify-content-start nav-tabs"
             : props.type === "vertical"
-            ? " flex-column nav-pills col-12 vh-75 border-end border-end"
+            ? " flex-column nav-pills col-12 h-100 border-end border-end"
             : " nav-tabs") +
           (props.fill ? " nav-fill" : "") +
           (props.justified ? " nav-justified" : "")
