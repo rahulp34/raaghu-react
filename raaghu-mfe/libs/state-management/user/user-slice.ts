@@ -3,7 +3,9 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { OrganizationUnitService, PermissionsService, RoleService } from "../../proxy";
+import { UserService } from "../../proxy/services/UserService";
+
 
 
 export interface UserState {
@@ -16,6 +18,9 @@ export interface UserState {
   error: string;
   permission:any;
   editorganizationUnit : any;
+  alert: boolean;
+  alertMessage: string;
+  success: boolean;
 };
 export const UserInitialState: UserState = {
   loading: false,
@@ -26,17 +31,20 @@ export const UserInitialState: UserState = {
   organizationUnit:null,
   error: "",
   permission:null,
-  editorganizationUnit:null
+  editorganizationUnit:null,
+  alert: false,
+  alertMessage: "",
+  success: false,
 };
 
 // Generates pending, fulfilled and rejected action types
 
-const proxy = new ServiceProxy();
+
 
 export const fetchUsers = createAsyncThunk(
   "user/fetchUsers",
   () => {
-    return proxy.usersGET2(undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,0,1000).then((result:any)=>{
+    return UserService.getUsers1({filter:undefined,roleId:undefined,organizationUnitId:undefined,userName:undefined,phoneNumber:undefined,emailAddress:undefined,isLockedOut:undefined,notActive:undefined,sorting:undefined,skipCount:0,maxResultCount:1000}).then((result:any)=>{
         return result;
     })
   }
@@ -45,7 +53,7 @@ export const fetchUsers = createAsyncThunk(
 export const fetchOrganizationUnits = createAsyncThunk(
   "user/fetchOrganizationUnit",
   () => {
-    return proxy.organizationUnitsGET(undefined,'id DESC',0,1000).then((result:any)=>{
+    return OrganizationUnitService.getOrganizationUnits({filter:undefined,sorting:'id DESC',skipCount:0,maxResultCount:1000}).then((result:any)=>{
       return result;
     })
   }
@@ -54,7 +62,7 @@ export const fetchOrganizationUnits = createAsyncThunk(
 export const fetchRoles = createAsyncThunk(
   "user/fetchRoles",
   () => {
-    return proxy.rolesGET3(undefined,undefined,0,1000,undefined).then((result:any)=>{
+    return RoleService.getRoles1({filter:undefined,sorting:undefined,skipCount:0,maxResultCount:1000}).then((result:any)=>{
       return result;
     })
   }
@@ -63,7 +71,7 @@ export const fetchRoles = createAsyncThunk(
 export const fetchEditUser = createAsyncThunk(
   "user/fetchEditUser",
   (id:any) => {
-    return proxy.usersGET(id).then((result:any)=>{
+    return UserService.getUsers({id:id}).then((result:any)=>{
       return result;
     })
   }
@@ -71,7 +79,7 @@ export const fetchEditUser = createAsyncThunk(
 
 export const fetchEditUserRoles = createAsyncThunk("user/fetchEditUserRoles",
 (id:any)=>{
-  return proxy.rolesGET4(id).then((result)=>{
+  return UserService.getUsersRoles({id:id}).then((result)=>{
     return result;
   })
 })
@@ -85,7 +93,7 @@ export const fetchEditUserRoles = createAsyncThunk("user/fetchEditUserRoles",
 
 export const updateUser = createAsyncThunk("user/updateUser",
 (data:any)=>{
-  return proxy.usersPUT(data.id, data.body).then((result:any)=>{
+  return UserService.putUsers({id:data.id, requestBody:data.body}).then((result:any)=>{
     console.log("successfully updated user")
     return result;
   })
@@ -94,53 +102,57 @@ export const updateUser = createAsyncThunk("user/updateUser",
 export const createUser = createAsyncThunk(
   "user/createuser",
   (data:any)=>{
-    return proxy.usersPOST(data).then((result:any)=>{
+    return UserService.postUsers({requestBody:data}).then((result:any)=>{
       return result;
     })
   }
 )
 
 export const deleteUser = createAsyncThunk("user/deleteUser",(data:any)=>{
-  return proxy.usersDELETE(data).then(result=>{
+  return UserService.deleteUsers({id:data}).then(result=>{
     return result;
   })
 })
 
 export const getPermission = createAsyncThunk("user/getPermission", (key:string) => {
-  return proxy.permissionsGET("U",key,undefined).then((result:any)=>{
+  return PermissionsService.getPermissions({providerName:"U",providerKey:key}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const updatePermission = createAsyncThunk("user/updatePermission", (data:any) => {
-  return proxy.permissionsPUT("U",data.key,data.permissions,undefined).then((result:any)=>{
+  return PermissionsService.putPermissions({providerName:"U",providerKey:data.key,requestBody:data.permissions}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const fetchOrgUnit = createAsyncThunk("user/updatePermission", (data:any) => {
-  return proxy.availableOrganizationUnits(undefined).then((result:any)=>{
+  return UserService.getUsersAvailableOrganizationUnits().then((result:any)=>{
      return result;
   }) 
 });
 
 export const getSelectedOrgUnit = createAsyncThunk("user/getSelectedOrgUnit", (id:string) => {
-  return proxy.organizationUnitsAll(id,undefined).then((result:any)=>{
+  return UserService.getUsersOrganizationUnits({id:id}).then((result:any)=>{
      return result;
   }) 
 });
 
 
 export const fetchRolesForEdit = createAsyncThunk("user/fetchRoles", (data:any) => {
-  return proxy.assignableRoles(undefined).then((result:any)=>{
+  return UserService.getUsersAssignableRoles().then((result:any)=>{
      return result;
   }) 
 });
-
+export const changePassword= createAsyncThunk("user/changePassword", (data:any) => {
+  return UserService.putUsersChangePassword(data).then((result:any)=>{
+     return result;
+  }) 
+});
 // export const getRolesForEdit = createAsyncThunk("user/getRoles", (id:string) => {
-//   return proxy.rolesPUT(id,undefined).then((result:any)=>{
+//   return proxy.rolesPUT(id,undefined).then((result:any)=>{ 
 //      return result;
-//   }) 
+//   }
 // });
 
 const userSlice = createSlice({
@@ -260,6 +272,24 @@ const userSlice = createSlice({
       deleteUser.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(changePassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(changePassword.pending, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(
+      changePassword.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.alertMessage = "Password Chaged Successfully";
         state.error = "";
       }
     );

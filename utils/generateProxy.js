@@ -1,11 +1,13 @@
 'use strict';
-
+let path = require("path");
+let fs = require("fs");
 let { execSync } = require("child_process");
 const OpenAPI = require('raaghu-core/dist/build-proxy');
 // const fetch = require('node-fetch');
 
-let eTc = process.argv[2];
-let url = process.argv[3];
+const eTc = process.argv[2];
+const url = process.argv[3];
+const completeURL = url + '/swagger/v1/swagger.json';
 
 const generate = async (input, output) => {
     await OpenAPI.generate({
@@ -29,7 +31,7 @@ const generate = async (input, output) => {
 const generateRealWorldSpecs = async () => {
     console.log("\x1b[32m%s\x1b[0m", `Downloading swagger json...`);
     execSync(
-        `curl -o swaggerJSON.json ${url}`,
+        `curl -o swaggerJSON.json ${completeURL}`,
         { cwd: '.', stdio: "inherit" }
     )
 
@@ -42,6 +44,56 @@ const generateRealWorldSpecs = async () => {
 
     console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
     await generate(list, `./raaghu-mfe/libs/${eTc}`);
+
+    // Replacing the API URL in the .env file
+    const envConfig = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'rds_pages', 'host', '.env'
+    );
+    let envConfigContent = fs.readFileSync(envConfig, "utf-8");
+    envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
+    fs.writeFileSync(envConfig, envConfigContent, "utf-8");
+
+    // Replacing the BASE URL in the OpenAPI.ts file
+    const OpenAPIConfig = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'core', 'OpenAPI.ts'
+    );
+    let OpenAPIConfigContent = fs.readFileSync(OpenAPIConfig, "utf-8");
+    OpenAPIConfigContent = OpenAPIConfigContent.replace(`<API_URL>`, `${url}`);
+    fs.writeFileSync(OpenAPIConfig, OpenAPIConfigContent, "utf-8");
+
+    // Replacing the BASE URL in the Login.tsx file
+    const LoginTSX = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'rds_pages', 'rds-page-login', 'src', 'Login', 'Login.tsx'
+    );
+    let LoginTSXContent = fs.readFileSync(LoginTSX, "utf-8");
+    LoginTSXContent = LoginTSXContent.replace(`<API_URL>`, `${url}`);
+    fs.writeFileSync(LoginTSX, LoginTSXContent, "utf-8");
+
+    // Replacing the BASE URL in the interceptor.ts file
+    const interceptor = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'libs', 'shared', 'interceptor.ts'
+    );
+    let interceptorContent = fs.readFileSync(interceptor, "utf-8");
+    interceptorContent = interceptorContent.replace(`<API_URL>`, `${url}`);
+    fs.writeFileSync(interceptor, interceptorContent, "utf-8");
+
+    // Replacing the BASE URL in the index.ts file
+    const OpenAPIIndex = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'index.ts'
+    );
+    let OpenAPIIndexContent = fs.readFileSync(OpenAPIIndex, "utf-8");
+    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+    fs.writeFileSync(OpenAPIIndex, OpenAPIIndexContent, "utf-8");
+    fs.appendFile(
+        OpenAPIIndex,
+        `export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\nexport type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`,
+        "utf8",
+        function (err) {
+            if (err) throw err;
+        }
+    );
+
     console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
 };
 

@@ -25,8 +25,8 @@ const FormsView = (props: any) => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
+  // const forms = useAppSelector((state) => state.persistedReducer.forms);
   const forms = useAppSelector((state) => state.persistedReducer.forms);
-  // const forms = useAppSelector((state) => state.forms);
 
 
   useEffect(() => {
@@ -39,12 +39,12 @@ const FormsView = (props: any) => {
 
   useEffect(() => {
     dispatch(getFormsResponses(props.id) as any);
-  },[dispatch])
+  }, [dispatch])
 
   useEffect(() => {
-dispatch(getFormsResponsesCount(props.id) as any);
-  },[dispatch])
-
+    dispatch(getFormsResponsesCount(props.id) as any);
+  }, [dispatch])
+  const [alertOne, setAlertOne] = useState(false);
   const [basicEditFormData1, setbasicEditFormData] = useState<any>();
   const [tempEditFormData, setTempEditFormData] = useState<any>();
   const [tempQuestionsData, setTempQuestionsData] = useState<any>([]);
@@ -54,7 +54,7 @@ dispatch(getFormsResponsesCount(props.id) as any);
   }
 
   function getQuestionsEditDataFromQuestionComp(data: any) {
-    
+
     setTempSaveQuestionsData(data);
   }
   const [formSettingData, setFormSettingData] = useState({
@@ -104,9 +104,9 @@ dispatch(getFormsResponsesCount(props.id) as any);
       body: { description, title }
     };
     dispatch(updateForms(forms) as any).then((res: any) => {
-        tempSaveQuestionsData.map((res: any) => {
-          if (res.id) {
-            if (res.isEdit) {
+      tempSaveQuestionsData.map((res: any) => {
+        if (res.id) {
+          if (res.isEdit) {
             const data = {
               id: res.id,
               body: { ...res, formId: props.id }
@@ -116,21 +116,23 @@ dispatch(getFormsResponsesCount(props.id) as any);
                 dispatch(getAll2FormsQuestions(props.id) as any);
                 setAlertOne(true);
               });
-            }else{}
-          } else {
-            const data = {
-              id: props.id,
-              body: { ...res, formId: props.id }
-            };
-            dispatch(SaveformsQuestions(data) as any)
-              .then((res: any) => {
-                dispatch(getAll2FormsQuestions(props.id) as any);
-              });
-          }
-        });
-      })
+          } else { }
+        } else {
+          const data = {
+            id: props.id,
+            body: { ...res, formId: props.id }
+          };
+          dispatch(SaveformsQuestions(data) as any)
+            .then((res: any) => {
+              dispatch(getAll2FormsQuestions(props.id) as any);
+              setAlertOne(true);
+            });
+        }
+      });
       setAlertOne(true);
-    }
+    })
+    setAlertOne(true);
+  }
   function deleteQuestion(data: any) {
     dispatch(deleteFormsQuestions(data.id) as any).then((res: any) => {
       dispatch(getAll2FormsQuestions(props.id) as any);
@@ -168,9 +170,9 @@ dispatch(getFormsResponsesCount(props.id) as any);
   }
   const baseUrl = window.location.origin;
   const url = "formsView/" + props.id;
-  const body = "I've invited you to fill in a form: " + baseUrl+"/"+url
+  const body = "I've invited you to fill in a form: " + baseUrl + "/" + url
   const [formsEmailData, setFormsEmailData] = useState<any>({ to: '', body: body })
-  function handleEmailSubmit(_data: any) { 
+  function handleEmailSubmit(_data: any) {
     dispatch(SaveFormsSendResponse(_data) as any);
   }
 
@@ -179,7 +181,6 @@ dispatch(getFormsResponsesCount(props.id) as any);
     message: "",
     success: false,
   });
-  const [alertOne, setAlertOne] = useState(false);
   useEffect(() => {
     setAlert({
       showAlert: forms.alert,
@@ -193,23 +194,13 @@ dispatch(getFormsResponsesCount(props.id) as any);
         success: false,
       });
     }, 2000);
-  }, [basicEditFormData1]);
 
-  useEffect(() => {
-    if(forms.getResponses){
-      debugger
-    }
-  },[forms.getResponses]);
+  }, [forms.alertMessage]);
 
-  useEffect(() => {
-    if(forms.getResponsesCount){
-      debugger
-    }
-  },[forms.getResponsesCount]);
   return (
     <>
       <div className="row">
-      <div className=" col-md-6">
+        <div className=" col-md-6">
           {alert.showAlert && alertOne && (
             <RdsAlert
               alertmessage={alert.message}
@@ -271,11 +262,12 @@ dispatch(getFormsResponsesCount(props.id) as any);
                       <div>
                         <RdsLabel label="Link"></RdsLabel>
                       </div>
-                      <div className="input-group mb-3 mt-3">
-                        <RdsInput value={`${baseUrl}/formsPreview/${props.id}`}></RdsInput>
-                        <div className="input-group-text" id="basic-addon12">
+                      <div className="input-group mb-3">
+                        <input type="text" className="form-control" value={`${baseUrl}/formsPreview/${props.id}`} />
+                          <span className="input-group-text">
                           <RdsIcon classes="cursor-pointer" name={copybtn} height="20px" width="20px" fill={false} stroke={true} onClick={handleCopyLink} />
-                        </div>
+
+                          </span>
                       </div>
                     </div>
                   </>
@@ -379,25 +371,29 @@ dispatch(getFormsResponsesCount(props.id) as any);
                 <>
                   <div>
                     <RdsCompQuestions basicEditFormData={basicEditFormData1} formQuestionsData={tempQuestionsData} getBasicEditDataFromQuestionComp={(data: any) => { getEditDataFromQuestionComponent(data) }} getQuestionsEditDataFromQuestionComp={(data: any) => { getQuestionsEditDataFromQuestionComp(data) }} deleteQuestion={(data: any) => { deleteQuestion(data) }}></RdsCompQuestions>
-                    <div className=" d-flex align-items-center">
-                      <RdsButton
-                        label="Cancel"
-                        type="button"
-                        colorVariant="primary"
-                        size="small"
-                        databsdismiss="offcanvas"
-                        isOutline={true}
-                        onClick={handleCancleQuestion}
-                      ></RdsButton>
-                      <RdsButton
-                        label="SAVE"
-                        type="button"
-                        isOutline={false}
-                        size="small"
-                        colorVariant="primary"
-                        onClick={handleEditQuestion}
-                        class="ms-3"
-                      ></RdsButton>
+                    <div className="bottom-0 position-absolute my-5">
+                      <div className="row">
+                        <div className="col-md-12 d-flex">
+                          <RdsButton
+                            label="Cancel"
+                            type="button"
+                            colorVariant="primary"
+                            size="small"
+                            databsdismiss="offcanvas"
+                            isOutline={true}
+                            onClick={handleCancleQuestion}
+                          ></RdsButton>
+                          <RdsButton
+                            label="SAVE"
+                            type="button"
+                            isOutline={false}
+                            size="small"
+                            colorVariant="primary"
+                            onClick={handleEditQuestion}
+                            class="ms-3"
+                          ></RdsButton>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </>

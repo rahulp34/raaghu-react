@@ -7,16 +7,16 @@ const MainMenu = [
       "path": "/dashboard",
       "subTitle": "Statistics and reports",
     },
-    {
-      "key": "1",
-      "label": "Icons",
-      "icon": "icons",
-      "path": "/icons",
-      "subTitle": "icons",
-    },
+    // {
+    //   "key": "1",
+    //   "label": "Icons",
+    //   "icon": "icons",
+    //   "path": "/icons",
+    //   "subTitle": "icons",
+    // },
     {
       "key": "2",
-      "label": "Saas",
+      "label": "Menu_Saas",
       "icon": "pages",
       "children": [
         {
@@ -37,12 +37,12 @@ const MainMenu = [
     },
     {
       "key": "3",
-      "label": "Administration",
+      "label": "Menu_Administration",
       "icon": "pages",
       "children": [
         {
           "key": "3-0",
-          "label": "Identity Management",
+          "label": "Menu_IdentityManagement",
           "icon": "organization",
           "children": [
             {
@@ -86,12 +86,12 @@ const MainMenu = [
         },
         {
           "key": "3-1",
-          "label": "OpenId",
+          "label": "Menu_OpenIddict",
           "icon": "tenant",
           "children": [
             {
               "key": "3-1-0",
-              "label": "Applications",
+              "label": "MySecurityLogs_Application",
               "icon": "tenant",
               "path": "/applications",
               "subTitle": 
@@ -111,7 +111,7 @@ const MainMenu = [
         },
         {
           "key": "3-2",
-          "label": "Language Management",
+          "label": "LanguageManagement",
           "icon": "tenant",
           "children": [
             {
@@ -132,14 +132,14 @@ const MainMenu = [
         },
         {
           "key": "3-3",
-          "label": "Text-Template",
+          "label": "Menu_TextTemplates",
           "icon": "languages",
           "path": "/text-template",
           "subTitle": "Manage user interface languages",
         },
         {
           "key": "3-4",
-          "label": "Audit Logs",
+          "label": "Permission_AuditLogs",
           "icon": "audit_logs",
           "path": "/audit-logs",
           "subTitle": "",
@@ -153,12 +153,12 @@ const MainMenu = [
         },
          {
           "key": "3-6",
-          "label": "Blogging",
+          "label": "Permission_Blogging",
           "icon": "tenant",
           "children": [
             {
               "key": "3-6-0",
-              "label": "Blogging",
+              "label": "Permission_Blogging",
               "icon": "blog",
               "path": "/blogger",
               "subTitle": "Blogs, Posts, Articles",
@@ -169,14 +169,14 @@ const MainMenu = [
     },
     {
       "key": "4",
-      "label": "File Management",
+      "label": "Menu_FileManagement",
       "icon": "icons",
       "path": "/fileManagement",
       "subTitle": "File Management",
     },
     {
       "key": "5",
-      "label": "Forms",
+      "label": "Permission_Forms",
       "icon": "icons",
       "path": "/forms",
       "subTitle": "Forms",
@@ -184,19 +184,19 @@ const MainMenu = [
     
     {
       "key": "6",
-      "label": "Payment",
+      "label": "Menu_PaymentManagement",
       "icon": "card_image",
       "children": [
         {
             "key": "6-0-0",
-            "label": "Payment Plans",
+            "label": "Menu_Plans",
             "icon": "card_image",
             "path": "/paymentPlans",
             "subTitle": "Payment Plans",
         },
         {
           "key": "6-0-1",
-          "label": "Payment Requests",
+          "label": "Menu_PaymentRequests",
           "icon": "card_image",
           "path": "/paymentRequests",
           "subTitle": "Payment Requests",
@@ -204,7 +204,7 @@ const MainMenu = [
     },
     {
       "key": "7",
-      "label": "CMS",
+      "label": "Cms",
       "icon": "pages",
       "children": [
           {
@@ -223,7 +223,7 @@ const MainMenu = [
           },
           {
             "key": "7-0-2",
-            "label": "Url Forwarding",
+            "label": "UrlForwarding",
             "icon": "icons",
             "path": "/url-forwarding",
             "subTitle": "Blogs, Posts, Articles",
@@ -251,18 +251,32 @@ const MainMenu = [
             },
             {
               "key": "7-0-6",
-              "label": "Blog Post",
+              "label": "BlogPosts",
               "icon": "icons",
               "path": "/blog-post",
               "subTitle": "subtitle here"
             },
               {
                "kay": "7-0-7",
-              "label": "Global Resources",
+              "label": "Permission_GlobalResources",
               "icon": "tag",
               "path": "/globalResources",
               "subTitle": "Global Resources",
-            }
+            },
+
+            {"key": "7-0-8",
+            "label": "Newsletters",
+            "icon": "icons",
+            "path": "/newsletters",
+            "subTitle": "Newsletters"
+          },
+          {
+            "key": "7-0-9",
+            "label": "Pages",
+            "icon": "icons",
+            "path": "/pages",
+            "subTitle": "subtitle here"
+          }
       ]
   },
     //   {

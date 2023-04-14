@@ -4,7 +4,9 @@ import {
     PayloadAction,
     AnyAction,
   } from "@reduxjs/toolkit";
-  import {ServiceProxy} from '../../shared/service-proxy'
+  import {RoleService} from '../../proxy/services/RoleService'
+ 
+import { PermissionsService } from "../../proxy";
   
   type InitialState = {
     roles: any;
@@ -22,12 +24,15 @@ import {
     error: "",
     status: "pending",
   };
-  const proxy = new ServiceProxy()
+
   //Roles unit
   export const fetchRoles = createAsyncThunk(
     "Roles/fetchRoles",
   async  () => {
-       return proxy.rolesGET3(undefined, 'id DESC',0,1000).then(
+       RoleService.getRoles1({ filter: undefined,
+        sorting: 'id DESC',
+        skipCount: 0,
+        maxResultCount: 1000 }).then(
         (result:any)=>{
             console.log('fetched data , ',result.items  )
           return result.items
@@ -39,7 +44,7 @@ import {
 
   export const fetchAllClaims = createAsyncThunk(
     "Roles/fetchAllClaims",() => {
-       return proxy.allClaimTypes().then((result:any)=>{
+       RoleService.getRolesAllClaimTypes().then((result:any)=>{
           return result
         }
       );
@@ -48,7 +53,7 @@ import {
   
   export const fetchClaims = createAsyncThunk(
     "Roles/fetchClaims",(data:any) => {
-       return proxy.claimsAll(data).then((result:any)=>{
+       RoleService.getRolesClaims({id:data.id}).then((result:any)=>{
           return result
         }
       );
@@ -57,7 +62,7 @@ import {
   
   export const putClaims = createAsyncThunk(
     "Roles/putClaims",(data:any) => {
-       return proxy.claims(data.id, data.body).then((result:any)=>{
+       RoleService.putRolesClaims({id:data.id, requestBody:data.body}).then((result:any)=>{
           return result
         }
       );
@@ -66,24 +71,24 @@ import {
 
   export const addRolesUnit = createAsyncThunk(
     "Roles/addRolesUnit",
-    async (dto: any) => {
-       const result = await proxy.rolesPOST(dto);
+    (dto: any) => {
+       const result =RoleService.postRoles({requestBody:dto});
       return result;
     }
   );
   export const editRoles = createAsyncThunk(
     "Roles/editRoles",
-    async ({ id, dTo }: { id: any; dTo: any }) => {
+    ({ id, dTo }: { id: any; dTo: any }) => {
       console.log('dTo from slice ',dTo )
-      const result = await proxy.rolesPUT2(id, dTo);
+      const result =RoleService.putRoles({id:id, requestBody:dTo});
       return result;
     }
   );
   
   export const deleteRoles = createAsyncThunk(
     "Roles/deleteRoles",
-    async (id: any) => {
-      const result = await proxy.rolesDELETE2(id);
+    (id: any) => {
+      const result =RoleService.deleteRoles({id:id});
       return result;
     }
   );
@@ -91,8 +96,8 @@ import {
   //permissionsGET
   export const fetchPermission = createAsyncThunk(
     "Roles/fetchPermission",
-  async  (key:any) => {
-       return proxy.permissionsGET('R' , key).then(
+  (key:any) => {
+    PermissionsService.getPermissions({providerName:'R' ,providerKey: key}).then(
         (result:any)=>{
             console.log('fetched data , ',result  )
           return result.groups
@@ -105,8 +110,8 @@ import {
   //permissionsPUT
   export const editPermisstion = createAsyncThunk(
     "Roles/editPermisstion",
-    async ({ key, dTo }: { key: any; dTo: any }) => {
-      const result = await proxy.permissionsPUT('R', key,dTo);
+    ({ key, dTo }: { key: any; dTo: any }) => {
+      const result =PermissionsService.putPermissions({providerName:'R',providerKey: key,requestBody:dTo});
       return result;
     }
   );

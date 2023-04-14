@@ -34,8 +34,10 @@ import commentsReducer from "./comments/comments-slice";
 import tagsReducer from "./tags/tags-slice";
 import myAccountReducer from "./my-account/my-account-slice";
 import paymentRequestsReducer from "./payment-requests/paymentRequests-slice";
+import newslettersReducer from './newsletters/newsletters-slice';
 import pollsReducer from "./polls/polls-slice";
 import globalResourcesReducer from './global-resources/globalResources-slice';
+import menusReducer from "./menus/menus-slice"
 
 const persistConfig={
   key: "root",
@@ -74,8 +76,10 @@ const rootReducer = combineReducers({
   host: hostReducer,
   myaccount: myAccountReducer,
   paymentRequests: paymentRequestsReducer,
-polls:pollsReducer,
-globalResources:globalResourcesReducer
+  polls:pollsReducer,
+  globalResources:globalResourcesReducer,
+  newsletters:newslettersReducer,
+  menus:menusReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

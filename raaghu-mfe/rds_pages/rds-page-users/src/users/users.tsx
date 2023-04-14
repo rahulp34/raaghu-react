@@ -18,13 +18,15 @@ import {
   RdsAlert,
   RdsNavtabs,
   RdsOffcanvas,
+  RdsInputGroup,
 } from "../../../rds-elements";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
-
+// import changePassword from "../../../../libs/state-management/user/user-slice"
 import {
+  changePassword,
   createUser,
   deleteUser,
   fetchEditUser,
@@ -44,7 +46,7 @@ const Users = () => {
 
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.persistedReducer.user);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(""); 
   const [userData, setUserData] = useState<any>({
     name: "",
     surname: "",
@@ -72,8 +74,8 @@ const Users = () => {
       sortable: true,
     },
     {
-      displayName: "Name",
-      key: "name",
+      displayName: "Email Address",
+      key: "emailAddress",
       datatype: "text",
       dataLength: 30,
       required: true,
@@ -88,23 +90,56 @@ const Users = () => {
       sortable: true,
     },
     {
-      displayName: "Email Address",
-      key: "emailAddress",
+      displayName: "Phone Number",
+      key: "phoneNumber",
       datatype: "text",
       dataLength: 30,
       required: true,
       sortable: true,
     },
     {
+      displayName: "Name",
+      key: "name",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+    {
+      displayName: "Surname",
+      key: "surname",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    }, 
+    {
       displayName: "Active",
       key: "isActive",
       datatype: "text",
     },
     {
-      displayName: "Lockout",
+      displayName: "Account Lockout",
       key: "lockoutEnabled",
       datatype: "text",
     },
+    {
+      displayName: "Creation Time",
+      key: "creationTime",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+    {
+      displayName: "Last Modification Time",
+      key: "lastModification",
+      datatype: "text",
+      dataLength: 30,
+      required: true,
+      sortable: true,
+    },
+   
   ];
 
   const actions = [
@@ -113,7 +148,7 @@ const Users = () => {
     {
       id: "set_password",
       displayName: "Set Password",
-      modalId: "set_password",
+      offId: "set_password",
     },
   ];
 
@@ -122,6 +157,7 @@ const Users = () => {
     { label: "Roles", tablink: "#nav-role", id: 1 },
     { label: "Organization Units", tablink: "#nav-org", id: 2 },
     { label: "Permissions", tablink: "#nav-profile", id: 3 },
+    { label: "Set Password", tablink: "#set-password", id: 4 },
   ];
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
@@ -152,22 +188,38 @@ const Users = () => {
 
   useEffect(() => {
     if (data.users) {
+      
       let tempTableData: any[] = [];
       data?.users?.items?.map((item: any) => {
         let rolesNames: string = "";
         item?.roleNames?.map((res: any) => {
           rolesNames = rolesNames + `${res} `;
         });
+        
+        const date = new Date(item.creationTime);
+        const creationDate = `${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}, ${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+        let updatedDate = '';
+        if (item.lastModificationTime) {
+          const lastDate = new Date(item.lastModificationTime);
+          updatedDate = `${("0" + lastDate.getDate()).slice(-2)}/${("0" + (lastDate.getMonth() + 1)).slice(-2)}/${lastDate.getFullYear()}, ${("0" + lastDate.getHours()).slice(-2)}:${("0" + lastDate.getMinutes()).slice(-2)} ${lastDate.getHours() >= 12 ? "PM" : "AM"}`;
+        }
+        else {
+          updatedDate = '--'
+        }
         const data = {
           id: item.id,
           userName: item.userName,
           name: item.name,
           roles: rolesNames,
           emailAddress: item.email,
+          phoneNumber:item.phoneNumber,
+          surname:item.surname,
+          creationTime:creationDate,
+          lastModification:updatedDate,
           isActive :(
             <>
               {item.isActive == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -176,7 +228,7 @@ const Users = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"
@@ -190,7 +242,7 @@ const Users = () => {
           lockoutEnabled :(
             <>
               {item.lockoutEnabled == true ? (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="check"
                     height="17px"
@@ -199,7 +251,7 @@ const Users = () => {
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "3px" }}>
+                <div style={{ strokeWidth: "2px" }}>
                   <RdsIcon
                     name="cancel"
                     height="17px"
@@ -423,6 +475,7 @@ const Users = () => {
     dispatch(getPermission(rowData.id) as any);
     dispatch(fetchEditUserRoles(rowData.id) as any);
     dispatch(getSelectedOrgUnit(rowData.id) as any);
+
     setActiveNavTabIdEdit(0);
   };
 
@@ -544,6 +597,45 @@ const Users = () => {
       }
     });
   }
+  const [password, setPassword] = useState("");
+  
+    function generatePassword() {
+      debugger
+      const length = 10;
+      const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]<>?";
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset[randomIndex];
+      }
+      setPassword(password);
+  } 
+  const setPasswordData = (event: any) => {
+    setUserData({...userData, password:event.target.value})
+    
+  };
+  function setPasswordButton(){
+    debugger
+     let data = {id:userId, requestBody:{newPassword:password}} 
+     dispatch(changePassword(data) as any).then((res: any) => {
+      if (res.type == "user/changePassword/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Password Changed Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchUsers() as any);
+    });
+  }
 
   function deleteHandler(data: any) {
     console.log(data);
@@ -571,7 +663,7 @@ const Users = () => {
     const timer = setTimeout(() => {
       setAlert({ ...Alert, show: false });
     }, 2000);
-
+  
     // Clean up the timer when the component unmounts or when the state changes
     return () => clearTimeout(timer);
   }, [data.users]);
@@ -626,7 +718,7 @@ const Users = () => {
       </div>
     </div>
     <RdsOffcanvas
-        backDrop={false}
+        backDrop={true}
         scrolling={true}
         preventEscapeKey={false}
         canvasTitle={canvasTitle}
@@ -725,7 +817,6 @@ const Users = () => {
                getUserData(e);
              }}
            />
-          
           }
 
           {activeNavTabIdEdit == 1 && (
@@ -786,6 +877,7 @@ const Users = () => {
               </div>
             </>
           )}
+         
         </RdsNavtabs>
 
         <div className="footer-buttons justify-content-end bottom-0 pt-0">
@@ -804,6 +896,81 @@ const Users = () => {
             isOutline={false}
             colorVariant="primary"
             onClick={updateUserData}
+            databsdismiss="offcanvas"
+          ></RdsButton>
+        </div>
+      </RdsOffcanvas>
+
+      <RdsOffcanvas
+        canvasTitle="Set Password"
+        onclick={offCanvasHandler}
+        placement="end"
+        offId="set_password"
+        backDrop={false}
+        scrolling={false}
+        onClose={(e) => {
+          offcanvasClose();
+        }}
+        preventEscapeKey={false}
+      >     
+               <div className="row">
+                <div className="col-md-6">
+                <RdsInput
+                value={password}
+                placeholder="Enter Password"
+                inputType="text"
+                label="Enter New Password"
+                required={true}
+                onChange={(e)=>{setPasswordData(e)}}
+              ></RdsInput>
+                </div>
+                <div className="col-md-6" style={{marginTop:'29px'}}>
+                <RdsButton
+
+            class=""
+            label="Auto-generate"
+            type="button"
+            icon="refresh_sync"
+            iconHeight="15px"
+            iconWidth="15px"
+            size="medium"
+            isOutline={true}
+            colorVariant="primary"
+            onClick={generatePassword}
+           
+          ></RdsButton>
+                </div>
+               </div>
+         {/* <RdsInputGroup 
+            buttonColorVariant="primary"
+            inputGroupLabel="Password"
+            icon="refresh_sync" 
+            iconHeight="15px"
+            iconWidth="15px"
+            iconFill={false}
+            iconStroke={true}
+            iconColorVariant="light"
+            inputValue={generatePassword}
+            outline={false}
+            value={password}
+             /> */}
+
+       <div className="footer-buttons justify-content-end bottom-0 pt-0">
+          <RdsButton
+            class="me-2"
+            label="CANCEL"
+            type="button"
+            databsdismiss="offcanvas"
+            isOutline={true}
+            colorVariant="primary"
+          ></RdsButton>
+          <RdsButton
+            class="me-2"
+            label="SAVE"
+            type="button"
+            isOutline={false}
+            colorVariant="primary"
+            onClick={setPasswordButton}
             databsdismiss="offcanvas"
           ></RdsButton>
         </div>

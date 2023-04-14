@@ -136,5 +136,8 @@ export const PortConfig = {
   },
   "globalResources": {
     "port": "8040"
+  },
+  "newsletters": {
+    "port": "8122"
   }
 }

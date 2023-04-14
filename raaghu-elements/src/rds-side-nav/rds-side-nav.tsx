@@ -20,7 +20,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
   };
 
   const onDivCollapse = () => {
-    debugger
+    
     // callback(!collapse);
     console.log(collapse)
     setcollapse(!collapse);
@@ -31,7 +31,7 @@ const RdsSideNav = (props: RdsSideNavProps) => {
     <>
       <nav
         id="sidebar"
-        className={`bd-links min-vh-100 ps-2 position-relative  ${ 
+        className={`bd-links min-vh-100 ps-2 position-relative sidebar  ${ 
           dataFromChild ? "toggle toggle-sidebar-menu" : ""
         }`}
       >

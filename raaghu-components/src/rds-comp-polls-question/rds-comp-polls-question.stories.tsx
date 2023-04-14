@@ -3,7 +3,7 @@ import React from 'react';
 import RdsCompPollsQuestion from './rds-comp-polls-question';
 
 export default {
-  title: "RdsCompPollsQuestion",
+  title: "<components /RdsCompPollsQuestion",
 };
 
 export const Default = () => <RdsCompPollsQuestion />;

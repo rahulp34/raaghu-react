@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
+    "@types/react": "^18.0.34",
     "bootstrap": "^5.2.3",
     "chart.js": "^4.0.1",
     "draft-js": "^0.11.7",
@@ -15,8 +16,8 @@
     "i18next-http-backend": "^2.1.1",
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
-    "raaghu-core": "^1.0.2",
-    "raaghu-themes": "^0.0.18",
+    "raaghu-core": "^1.0.5",
+    "raaghu-themes": "^0.0.21",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
     "react-datepicker": "^4.8.0",
@@ -59,8 +60,10 @@
     "typescript": "<4.8"
   },
   "scripts": {
-    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006",
+    "storybook": "set NODE_OPTIONS=--openssl-legacy-provider && start-storybook -p 6006 -s ./.storybook/images",
     "build-storybook": "set NODE_OPTIONS=--openssl-legacy-provider && build-storybook",
+    "install-all": "node utils/install-all.js",
+    "start": "node utils/start-scripts.js",
     "create:core": "node utils/create.js core",
     "create:element": "node utils/create.js e",
     "create:component": "node utils/create.js c",

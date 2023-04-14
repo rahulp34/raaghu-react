@@ -1,11 +1,12 @@
 /* eslint-disable */
-import RdsCompBlogPost from './RdsCompBlogPost';
+import React from 'react';
+import RdsCompBlogPost from './rds-comp-blog-post';
 
 export default {
-  title: "RdsCompBlogPost",
+  title: "<components/RdsCompBlogPost",
 };
 
-export const Default = () => <RdsCompBlogPost />;
+export const Default = () => <RdsCompBlogPost tableHeaders={[]} />;
 
 Default.story = {
   name: 'default',

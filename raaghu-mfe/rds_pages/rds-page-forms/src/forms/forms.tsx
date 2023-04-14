@@ -32,7 +32,6 @@ const Forms = () => {
   });
   const [alertOne, setAlertOne] = useState(false);
   useEffect(() => {
-
     setAlert({
       showAlert: forms.alert,
       message: forms.alertMessage,
@@ -178,7 +177,7 @@ const Forms = () => {
   const [formsEmailData, setFormsEmailData] = useState<any>({ to: '', body: body })
   //  useEffect(())
   function handleEmailSubmit(_data: any) {
-    debugger
+    
     dispatch(SaveFormsSendResponse(_data) as any);
   }
   return (

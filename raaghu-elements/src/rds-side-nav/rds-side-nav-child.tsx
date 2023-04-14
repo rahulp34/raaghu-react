@@ -6,6 +6,7 @@ import RdsToggle from "../rds-toggle/rds-toggle";
 import RdsDropdown from "../rds-dropdown";
 import { getVisibleSelectionRect } from "draft-js";
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const RdsSideNavChild = ({
   data,
@@ -38,7 +39,7 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`list-style mb-0 py-2 ps-1 sideNav ${count == 1
+        className={`list-style mb-0 py-3 ps-1 sideNav ${count == 1
           ? "list-unstyled"
           : count == 2
             ? "list-unstyled fw-normal pb-1 small ms-1 "
@@ -58,14 +59,14 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center border p-1 rounded-circle ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
          <span className="collpase-button">
 
            <RdsIcon
-                name="chevron_right_double"
+                name="chevron_right_arrow"
                 height="15px"
                 width="15px"
                 stroke={true}
@@ -113,7 +114,8 @@ const Node = ({
 }) => {
   const [childVisibility, setChildVisibility] = useState(false);
   const hasChild = node.children ? true : false;
-  const [active, setActive] = useState(null)
+  const [active, setActive] = useState(null);
+  const { t, i18n } = useTranslation();
 
   return (
 
@@ -123,7 +125,7 @@ const Node = ({
         <NavLink
           to={node.path}
           onClick={onClickHandler}
-          className={`routingLink d-inline-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
+          className={`routingLink d-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
             } text-decoration-none`}
         >
           <div className="d-flex">
@@ -152,7 +154,7 @@ const Node = ({
                 </div>
                 : null}
               <div className="me-3" data-name={node.label}>
-                {!collapse && <>{node.label}</>}
+                {!collapse && <>{t(node.label)}</>}
               </div>
             </div>
           </div>
@@ -203,7 +205,7 @@ const Node = ({
                                     id="side-dropdown3"
                                     className="pe-auto list-unstyled "
                                   >
-                                    {item.label}
+                                    {t(item.label)}
                                   </a>
                                   <ul
                                     className="dropdown-menu shadow p-3 ms-3 position-fixed "
@@ -213,14 +215,14 @@ const Node = ({
                                       <>
                                         <li className="list" id={subItem.id}  >
                                           <NavLink className="dropdown-item " to={subItem.path}>
-                                            {subItem.label}
+                                            {t(subItem.label)}
                                           </NavLink>
                                         </li>
                                       </>
                                     ))}
                                   </ul>
                                 </div>
-                              </> : <>{item.label}</>}
+                              </> : <>{t(item.label)}</>}
                             </NavLink>
                           </li>
                         </>
@@ -238,7 +240,7 @@ const Node = ({
                 <>
                   <a
                     aria-expanded={childVisibility}
-                    className={`nav-link child d-inline-flex cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    className={`nav-link child d-flex align-items-center cursor-pointer ${childVisibility == true ? 'collapsed ' : ' '}`}
                     onClick={(e) => setChildVisibility((v) => !v)}>
                     <RdsIcon
                       name={node.icon}
@@ -248,7 +250,7 @@ const Node = ({
                       width="20px"
                       classes="me-3"
                     ></RdsIcon>
-                    <span className="text-capitalize">{node.label}</span>
+                    <span className="text-capitalize">{t(node.label)}</span>
                   </a>
                 </>
               )}
@@ -260,9 +262,8 @@ const Node = ({
               {!collapse && (
                 <>
                   <div id="menuWithChildren2">
-                    <a
-                      aria-expanded={childVisibility}
-                      className={`nav-link child d-inline-flex cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
+                    <a aria-expanded={childVisibility}
+                      className={`nav-link child d-flex align-items-center cursor-pointer  ${childVisibility == true ? 'collapsed ' : ' '}`}
                       onClick={(e) => setChildVisibility((v) => !v)}>
                       <RdsIcon
                         name={node.icon}
@@ -272,7 +273,7 @@ const Node = ({
                         width="20px"
                         classes="me-3"
                       ></RdsIcon>
-                      <span className="text-capitalize">{node.label}</span>
+                      <span className="text-capitalize">{t(node.label)}</span>
                     </a>
                   </div>
                 </>

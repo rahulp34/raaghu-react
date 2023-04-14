@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RdsButton, RdsOffcanvas, RdsAlert, RdsNavtabs } from 'raaghu-react-elements'
+import { RdsButton, RdsOffcanvas, RdsAlert, RdsNavtabs } from '../../../../../raaghu-elements/src'
 import {
   RdsCompDatatable,
   RdsCompAlertPopup,

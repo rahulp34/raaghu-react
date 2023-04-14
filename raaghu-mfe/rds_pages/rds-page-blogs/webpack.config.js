@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
     entry: "./src/index.ts",
     mode: process.env.NODE_ENV || "development",
     devServer: {
-      port: 8031,
+      port: 8032,
       open: false,
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -53,6 +53,11 @@ module.exports = (env, argv) => {
             plugins: [
               "react-hot-loader/babel",
               ["@babel/plugin-proposal-class-properties", { loose: true }],
+              ["@babel/plugin-proposal-private-methods", { loose: true }],
+							[
+								"@babel/plugin-proposal-private-property-in-object",
+								{ loose: true },
+							],
             ],
           },
         },

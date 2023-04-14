@@ -17,4 +17,6 @@ export * from './url-forwarding/url-forwarding-slice';
 export * from './host/host-slice';
 export * from './my-account/my-account-slice';
 export * from './forms/forms-slice';
-
+export * from './polls/polls-slice';
+export * from './newsletters/newsletters-slice';
+export * from "./menus/menus-slice";

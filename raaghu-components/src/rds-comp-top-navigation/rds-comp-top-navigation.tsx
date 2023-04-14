@@ -3,18 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
 import {
-	RdsIcon,
-	RdsNotification,
-	RdsOffcanvas,
-	RdsAvatar,
+  RdsIcon,
+  RdsNotification,
+  RdsOffcanvas,
+  RdsAvatar,
 } from "raaghu-react-elements";
 import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
 import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
-
+import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 
 export interface RdsCompTopNavigationProps {
-  onClick?: (event: React.MouseEvent<HTMLLIElement>,  val: string) => void;
-  onChatClickHandler?:(event: React.MouseEvent<HTMLAnchorElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
+  onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
@@ -26,9 +26,10 @@ export interface RdsCompTopNavigationProps {
   brandName?: string;
   profileTitle?: string;
   profileName?: string;
-  logo?:string, 
-  languageLable:string;
-  languageIcon:string;
+  logo?: string,
+  languageLable: string;
+  languageIcon: string;
+  breacrumItem?: any;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -43,7 +44,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     // console.log(e.dataset.name)
     //console.log(e.target.innerText)
     const selectValue = e.target.innerText;
-    debugger
+
     if (selectValue === "Alert") {
       navigate('/elements');
       setVisible(true)
@@ -51,39 +52,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     // console.log(selectValue)
   };
 
-  const navtabItems = [
-    {
-      label: "Linked Accounts",
-      icon: "manage_linked",
-      subText: "Manage accounts linked to your account",
-      id: "nav-LinkAccount",
-    },
-    {
-      label: "My Account",
-      icon: "manage_authority",
-      subText: "Manage authority accounts",
-      id: "nav-MyAccount",
-    },
-    {
-      label: "Security Logs",
-      icon: "login_attempts",
-      subText: "See recent login attempts for your account",
-      id: "nav-SecuityLogs",
-    },
-    {
-      label: "Personal Data",
-      icon: "my_settings",
-      subText: "Change your account settings",
-      id: "nav-PersonalData",
-    },
-  ];
-
   const elementList = [
     {
       label: "Accordion",
       val: "Accordion",
       icon: "",
-      path : "/elements/accordion",
+      path: "/elements/accordion",
       iconWidth: "20px",
       iconHeight: "20px",
     },
@@ -123,13 +97,46 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       iconHeight: "17px",
     }
   ];
+
+  const navtabItems = [
+    {
+      label: "Linked Accounts",
+      icon: "manage_linked",
+      subText: "Manage accounts linked to your account",
+      id: "nav-LinkAccount",
+    },
+    {
+      label: "My Account",
+      icon: "manage_authority",
+      subText: "Manage authority accounts",
+      id: "nav-MyAccount",
+    },
+    {
+      label: "Security Logs",
+      icon: "login_attempts",
+      subText: "See recent login attempts for your account",
+      id: "nav-SecuityLogs",
+    },
+    {
+      label: "Personal Data",
+      icon: "my_settings",
+      subText: "Change your account settings",
+      id: "nav-PersonalData",
+    },
+  ];
+  const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem)
+  useEffect(() => {
+    debugger
+    setBreadCrumItem(props.breacrumItem)
+  }, [props.breacrumItem])
+
   const ChangeId = (e: any) => {
     setLinkAccount(true);
   };
 
-  const onClickHandler =(e: any, val: any) =>{
+  const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
-      props.onClick(e,val);
+      props.onClick(e, val);
     }
   }
 
@@ -144,7 +151,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               className="ms-1 cursor-pointer"
               src={props?.logo}
               alt="logo"
-             width="64%"
+              width="64%"
             ></img>
 
             {/* <span className="title fw-bold text-lowercase m-2 cursor-pointer">
@@ -153,36 +160,37 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             </span> */}
           </span>
           <div>
-            <div className="text-bold fs-6"
-            >
+            <div className="text-bold">
               {props.navbarTitle}
             </div>
-            <div
-              className="text-muted fs-6"
-            >
-              {props.navbarSubTitle}
-            </div>
+            {breacrumItem.length > 1 && (
+              <div className="text-muted fs-7">
+                <>
+                  <RdsBreadcrumb role="advance" breadItems={breacrumItem}></RdsBreadcrumb>
+                </>
+              </div>
+            )}
           </div>
         </div>
-              <div className="d-flex me-2 align-items-center">
-                  <div className="px-2 cursor-pointer position-relative border-end">
-                      <RdsDropdownList
-                          placeholder="Components"
-                          listItems={props.componentsList}
-                          id={"component"}
-                      // onClick={props.toggleTheme}
-                      ></RdsDropdownList>
-                  </div>     
+        <div className="d-flex me-2 align-items-center">
+          {/* <div className="px-2 cursor-pointer position-relative border-end">
+            <RdsDropdownList
+              placeholder="Components"
+              listItems={props.componentsList}
+              id={"component"}
+            // onClick={props.toggleTheme}
+            ></RdsDropdownList>
+          </div> */}
           <div className="px-2 position-relative border-end me-3">
-          <RdsDropdownList
-           placeholder={props.languageLable}
-           icon =  {props.languageIcon}
-           iconFill = {false }
-           iconStroke ={ true}
-           id={"languageDropdown"}
-           listItems={props.languageItems}
-           onClick={onClickHandler}
-          ></RdsDropdownList>
+            <RdsDropdownList
+              placeholder={props.languageLable}
+              icon={props.languageIcon}
+              iconFill={false}
+              iconStroke={true}
+              id={"languageDropdown"}
+              listItems={props.languageItems}
+              onClick={onClickHandler}
+            ></RdsDropdownList>
           </div>
           <Link to="/chats"
             className="me-3 pe-3 border-end"

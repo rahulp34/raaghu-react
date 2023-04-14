@@ -1,27 +1,90 @@
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { BlogPostAdminService } from "../../proxy/services/BlogPostAdminService";
+import { ClaimTypeService } from "../../proxy/services/ClaimTypeService";
+import Users from "../../../rds_pages/rds-page-users/src/users/users";
 
-        import { createSlice, createAsyncThunk, PayloadAction, } from "@reduxjs/toolkit";
+export interface blogPostInitialState {
+  loading: boolean;
+  blogPosts: [];
+  error: string;
+  allblogpost: [];
+}
 
-        export interface blogPostInitialState {
-          loading: boolean;
-          blogPosts: any;
-          error: string;
-        }; 
+export const blogPostState: blogPostInitialState = {
+  loading: false,
+  blogPosts: [],
+  allblogpost: [],
+  error: "",
+};
 
-        export const blogPostState: blogPostInitialState = {
-          loading: false,
-          blogPosts: {},
-          error: "",
-        };
+export const getAllBlogPost = createAsyncThunk("BlogPost/GetAll", () => {
+  return BlogPostAdminService.getBlogsBlogPosts({
+    filter: undefined,
+    blogId: undefined,
+    authorId: undefined,
+    tagId: undefined,
+    status: undefined,
+    sorting: undefined,
+    skipCount: 0,
+    maxResultCount: 1000,
+  }).then((result: any) => {
+    return result;
+  });
+});
 
-        // Add your Api call here
+export const addBlogPostData = createAsyncThunk(
+  "BlogPostTypes/addBlogPostTypesData",
+  (claimTypeDto: any) => {
+    return ClaimTypeService.postClaimTypes(claimTypeDto).then((result: any) => {
+      return result.items;
+    });
+  }
+);
 
-        const blogPostSlice = createSlice({
-          name: "blogPost",
-          initialState: blogPostState,
-          reducers: {},
-          extraReducers: (builder) => {
-            // Add your extraReducers here
-          }})
+// Add your Api call here
 
-          export default blogPostSlice.reducer;
-        
+const blogPostSlice = createSlice({
+  name: "blogPost",
+  initialState: blogPostState,
+  reducers: {},
+  extraReducers: (builder) => {
+    // Add your extraReducers here
+    builder.addCase(getAllBlogPost.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      getAllBlogPost.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.allblogpost = action.payload;
+        state.error = "";
+      }
+    );
+    builder.addCase(getAllBlogPost.rejected, (state, action) => {
+      state.loading = false;
+      state.allblogpost = [];
+      state.error = action.error.message || "Something Went Wrong";
+    });
+
+    builder.addCase(addBlogPostData.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      addBlogPostData.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.allblogpost = action.payload;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(addBlogPostData.rejected, (state, action) => {
+      state.loading = false;
+      state.allblogpost = [];
+      state.error = "";
+    });
+  },
+});
+
+export default blogPostSlice.reducer;

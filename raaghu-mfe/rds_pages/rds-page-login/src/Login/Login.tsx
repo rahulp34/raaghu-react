@@ -14,7 +14,7 @@ export interface LoginProps {
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
   let API_URL: string =
-    process.env.REACT_APP_API_URL || "https://localhost:44300";
+    process.env.REACT_APP_API_URL || 'https://raaghu-react.azurewebsites.net';
   let grant_type = process.env.REACT_APP_GRANT_TYPE || "password";
   let client_id = process.env.REACT_APP_CLIENT_ID || "raaghu";
   let scope =
@@ -31,8 +31,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
         const lang =localStorage.getItem("currentLang")||"en-GB"
         setTurnSpinnerOff(true)
         navigate('/dashboard')
-        configurationService().then(async (res: any) => {
-          await localizationService(lang).then(async (resp: any) => {
+        configurationService(API_URL, i18n.language).then(async (res: any) => {
+          await localizationService(API_URL, lang).then(async (resp: any) => {
             i18n.changeLanguage(lang);
             var data1 = {};
             const translation = resp?.resources;
@@ -109,10 +109,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 style={{
                   zIndex: "3",
                   backgroundSize: "cover",
-                  top: 240,
-                  left: 196,
-                  width: 50,
-                  height: 50,
+                  top: 244,
+                  left: 200,
+                  width: 42,
+                  height: 39,
                 }}
                 src="./assets/raaghu_icon.png"
               ></img>

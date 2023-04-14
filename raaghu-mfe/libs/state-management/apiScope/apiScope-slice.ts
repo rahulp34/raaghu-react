@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { ScopesService } from "../../proxy";
+
 
 type InitialState = {
   loading : boolean,
@@ -18,37 +19,37 @@ const initialState : InitialState = {
 
 }
 
-const proxy =new ServiceProxy()
+
 
 export const fetchScopesData = createAsyncThunk('Scopes/fetchScopesData',() => {
-    return proxy.scopesGET2(undefined,'id DESC',undefined,1000).then((result:any) =>{
+    return ScopesService.getScopes1({filter:undefined,sorting:'id DESC',skipCount:undefined,maxResultCount:1000}).then((result:any) =>{
         console.log("result",result)
         return result
     })
 })
 export const editScopesData = createAsyncThunk('Scopes/editScopesData',(id:any) => {
-  return proxy.scopesGET(id).then((result:any) =>{
+  return ScopesService.getScopes({id:id}).then((result:any) =>{
       console.log("result",result)
       return result
   })
 })
 export const deleteScopesData = createAsyncThunk('Scopes/deleteScopesData',  (id:any) => {
 
-  return proxy.scopesDELETE(id).then((result:any) =>{
+  return ScopesService.deleteScopes({id:id}).then((result:any) =>{
       return result
   })
 })
 
 export const getScopesData = createAsyncThunk('Scopes/getScopesData',  (ScopeDto:any) => {
 
-  return proxy.scopesPOST(ScopeDto).then((result:any) =>{
+  return ScopesService.postScopes({requestBody:ScopeDto}).then((result:any) =>{
       return result.items;
   })
 })
 
 export const updateScopesData = createAsyncThunk('Scopes/updateScopesData',  ({id,updateScopeDto}:{id:any,updateScopeDto:any}) => {
 
-  return proxy.scopesPUT(id,updateScopeDto).then((result:any) =>{
+  return ScopesService.putScopes({id:id,requestBody:updateScopeDto}).then((result:any) =>{
       return result.items;
   })
 })

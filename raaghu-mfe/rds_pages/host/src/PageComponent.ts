@@ -58,7 +58,10 @@ const GlobalResourcesCompo = React.lazy(() => import("GlobalResources/GlobalReso
 const ComponentsCompo = React.lazy(() => import("Components/Components"));
 const PagesCompo = React.lazy(() => import("Pages/Pages"));
 const BlogPostCompo = React.lazy(() => import("BlogPost/BlogPost"));
- export {
+
+const NewslettersCompo = React.lazy(() => import("Newsletters/Newsletters"));
+
+export {
     DashboardCompo,
     LoginCompo,
     ForgotPasswordCompo,
@@ -102,5 +105,6 @@ const BlogPostCompo = React.lazy(() => import("BlogPost/BlogPost"));
     ComponentsCompo,
     PagesCompo,
     BlogPostCompo,
-    GlobalResourcesCompo
+    GlobalResourcesCompo,
+    NewslettersCompo,
 };

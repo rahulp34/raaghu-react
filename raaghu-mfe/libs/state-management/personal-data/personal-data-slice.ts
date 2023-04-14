@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { GdprRequestService, PlanAdminService } from "../../proxy";
 
 type InitialState = {
     personalData: { items: any[] };
@@ -13,16 +13,14 @@ export const initialState: InitialState = {
     status: "pending",
 };
 
-const proxy = new ServiceProxy()
 
 export const getPersonalData = createAsyncThunk(
     "PersonalData/getPersonalData",
     async (userId: any) => {
-        return proxy.list(userId, undefined, undefined, undefined, undefined).then(
+        return GdprRequestService.getRequestsList({userId:userId,sorting: undefined,skipCount :undefined,maxResultCount: undefined}).then(
             (result: any) => {
                 console.log('fetched data , ', result.items)
                 return result;
-
             }
         );
     }
@@ -30,7 +28,7 @@ export const getPersonalData = createAsyncThunk(
 export const requestPersonalData = createAsyncThunk(
     "PersonalData/requestPersonalData",
     async () => {
-        return proxy.prepareData(undefined).then(
+        return GdprRequestService.postRequestsPrepareData().then(
             (result: any) => {
                 console.log('fetched data , ', result.items)
                 return result.items
@@ -43,7 +41,7 @@ export const requestPersonalData = createAsyncThunk(
 export const deletePersonalData = createAsyncThunk(
     "PersonalData/deletePersonalData",
     async () => {
-        return proxy.requestsDELETE(undefined).then(
+        return GdprRequestService.deleteRequests().then(
             (result: any) => {
                 console.log('fetched data , ', result.items)
                 return result.items
@@ -56,8 +54,8 @@ export const deletePersonalData = createAsyncThunk(
 export const downloadTokenPersonalData = createAsyncThunk(
     "PersonalData/downloadTokenPersonalData",
     async (id: any) => {
-        debugger
-        return proxy.downloadToken(id).then(
+        
+        return GdprRequestService.getRequestsDownloadToken({id:id}).then(
             (result: any) => {
                 console.log('fetched data , ', result)
                 return result;

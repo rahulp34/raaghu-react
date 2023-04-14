@@ -19,11 +19,13 @@ import {
   RdsSearch,
 } from "../../../../../raaghu-elements/src";
 import {
+  DeleteFileDescriptor,
   deleteDirectoryDescriptor,
   fetchDirectoryDescriptor,
   fetchEditDirectory,
   fetchSubDirectory,
   infoFileDescriptor,
+  moveDirectoryDescriptor,
   moveFileDescriptor,
   saveDirectoryDescriptor,
   updateDirectoryDescriptor,
@@ -43,13 +45,20 @@ const FileManagement = () => {
   const [name, setName] = useState("");
   const [data, setData] = useState([]);
   const [id, setId] = useState("");
-  const [uploadFile, setuploadFile] = useState();
+  const [uploadFile, setUploadFile] = useState();
   const [totalFiles, setTotaFiles] = useState<any[]>([]);
   const [uploadFiles, setUploadFiles] = useState<any>([]);
-  const[moveNewFolder,setMoveNewFolder]= useState<any>({})
+  const [moveNewFolder, setMoveNewFolder] = useState<string>("");
   const [RenameFolder, setRenameFolder] = useState<any>({});
-  const[moveFile,setMoveFile]= useState<any>({})
+  const [addedFile, setAddedFile] = useState<any>([]);
+  const [moveFile, setMoveFile] = useState<any>({});
+  const [files, setFiles] = useState([]);
+  const[formData,setformData]=useState<any>("")
   const [folderId, setFolderId] = useState<string>("");
+  const [datafolderId, setDataFolderId] = useState<string>("");
+  const [isDirectory, setDirectory] = useState<string>();
+  const [datafolderParentId, setdatafolderParentId] = useState<any>();
+
   const [directories, setDirectories] = useState<any[]>([
     {
       name: "All",
@@ -60,64 +69,49 @@ const FileManagement = () => {
       children: [],
     },
   ]);
-  const [tableData, setTableData] = useState<any[]>([
-    {
-      id: 1,
-      name: "RDS.ppt",
-      size: "987.66KB, ",
-    },
-    {
-      id: 2,
-      name: "RDS-Logo.png",
-      size: "512KB",
-    },
-    {
-      id: 2,
-      name: "RDS-elements.xd",
-      size: "1MB",
-    },
-  ]);
+  const [tableData, setTableData] = useState<any[]>([]);
 
-  const [breadItems, setbreadCrumItems] = useState<any[]>([
-    {
-      label: "All",
-      id: 1,
-      //route: "#",
-      disabled: false,
-      icon: "home",
-      iconFill: false,
-      iconstroke: true,
-      iconWidth: "12px",
-      iconHeight: "12px",
-      iconColor: "primary",
-      active: false,
-    },
-    {
-      label: "Parent 1",
-      id: 2,
-      //route: "",
-      disabled: false,
-      icon: "",
-      iconFill: false,
-      iconstroke: true,
-      iconWidth: "7px",
-      iconHeight: "7px",
-      iconColor: "primary",
-      active: false,
-    },
-    {
-      label: "child 1",
-      id: 3,
-      active: false,
-      disabled: true,
-      icon: "",
-      iconFill: false,
-      iconstroke: true,
-      iconWidth: "7px",
-      iconHeight: "7px",
-      iconColor: "primary",
-    },
-  ]);
+  const [breadItems, setbreadCrumItems] = useState<any>([])
+  // const [breadItems, setbreadCrumItems] = useState<any>([
+  //   {
+  //     label: "All",
+  //     // id: 1,
+  //     //route: "#",
+  //   //   disabled: false,
+  //   //   icon: "home",
+  //   //   iconFill: false,
+  //   //   iconstroke: true,
+  //   //   iconWidth: "12px",
+  //   //   iconHeight: "12px",
+  //   //   iconColor: "primary",
+  //   //   active: false,
+  //   },
+  //   {
+  //     label: "Parent 1",
+  //     // id: 2,
+  //     //route: "",
+  //     // disabled: false,
+  //     // icon: "",
+  //     // iconFill: false,
+  //     // iconstroke: true,
+  //     // iconWidth: "7px",
+  //     // iconHeight: "7px",
+  //     // iconColor: "primary",
+  //     // active: false,
+  //   },
+  //   {
+  //     label: "child 1",
+  //     // id: 3,
+  //     // active: false,
+  //     // disabled: true,
+  //     // icon: "",
+  //     // iconFill: false,
+  //     // iconstroke: true,
+  //     // iconWidth: "7px",
+  //     // iconHeight: "7px",
+  //     // iconColor: "primary",
+  //   },
+  // ]);
 
   const tableHeaders = [
     {
@@ -133,6 +127,10 @@ const FileManagement = () => {
       sortable: true,
     },
   ];
+  interface FileOrFolder {
+    id: string;
+    mimeType?: string;
+  }
 
   useEffect(() => {
     if (file.directoryDescriptor?.items.length) {
@@ -162,15 +160,16 @@ const FileManagement = () => {
       setName(rowData.name);
     }
 
-    if((actionId="Move")){
+    if ((actionId = "Move")) {
       setFolderId(rowData.id);
       console.log(rowData);
-      setMoveFile(rowData.id)
-
-
+      setMoveFile(rowData.id);
     }
+    setdatafolderParentId(rowData.parentId);
+    setRenameFolder(rowData.name);
+    setDataFolderId(rowData.id);
+    setDirectory(rowData.isDirectory);
   };
-
 
   const UpdateFolderName = () => {
     let dto = { body: { name: name }, id: folderId };
@@ -196,36 +195,49 @@ const FileManagement = () => {
     }
   }, [file.editDirectory]);
 
-  const movefolder=()=>{   
-    debugger   
-      const files={
-        body:{
-          id:folderId,
-          newDirectoryId:moveNewFolder,
-        }
-      }
-      dispatch(moveFileDescriptor(files) as any).then((res:any)=>{
+  const movefolder = (e:any) => {
+    
+    const files = {
+      body: {
+        id: folderId,
+        newParentId: moveNewFolder,
+        // formData: { File: new Blob([e], { type: e.type }) },
+      },
+    };
+    
+    if(isDirectory){
+      dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
         dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
-      setMoveNewFolder("");
-      setDirectories([
-        {
-          name: "All",
-          path: "/all",
-          parentId: null,
-          id: null,
-          hasChildren: false,
-          children: [],
-        },
-      ]);
-    })
-  }
+      })
+    }else{
+      dispatch(moveFileDescriptor(files)as any).then((res:any) => {
+        dispatch(fetchSubDirectory(undefined) as any);
+        dispatch(fetchDirectoryDescriptor(undefined) as any);
+      })
+    }
+    // if(formData){
+    // }
+    // else{
+    // }
+      
+      // setDirectories([
+      //   {
+      //     name: "All",
+      //     path: "/all",
+      //     parentId: null,
+      //     id: null,
+      //     hasChildren: false,
+      //     children: [],
+      //   },
+      // ]);
+  
+  };
   useEffect(() => {
     if (file.moveDirectory) {
       setMoveFile(file.moveDirectory);
     }
   }, [file.moveDirectory]);
-
 
   function recursiveFunctionAddData(directories: any, data: any) {
     return directories.map((el: any) => {
@@ -255,17 +267,20 @@ const FileManagement = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchSubDirectory(undefined) as any);
-    dispatch(fetchDirectoryDescriptor(undefined) as any);
+    dispatch(fetchSubDirectory(folderId) as any);
+    dispatch(fetchDirectoryDescriptor(folderId) as any);
   }, [dispatch]);
 
   useEffect(() => {
+    
     if (file.subDirectories) {
       let parsedDirectory = JSON.parse(JSON.stringify(directories));
       file.subDirectories.items.map((el: any) => {
         let tempData = recursiveFunctionAddData(parsedDirectory, el);
         setDirectories(tempData);
+        setbreadCrumItems({...breadItems, label:el.name})
       });
+      
     }
   }, [file.subDirectories]);
   const dTo: {
@@ -278,6 +293,7 @@ const FileManagement = () => {
   }
 
   function setPathValue(event: any) {
+    
     let id = undefined;
     if (event && event.id) {
       id = event.id;
@@ -291,18 +307,16 @@ const FileManagement = () => {
     // dispatch(fetchSubDirectory(event.name) as any);
   }
 
-  function setFolderPath(event:any){
-    let id= undefined;
-    if(event & event.id){
-      id=event.id;
+  function setFolderPath(event: any) {
+    let id = undefined;
+    if (event && event.id) {
+      id = event.id;
+    } else {
+      id = undefined;
     }
-    else{
-      id=undefined
-    }
-    setMoveFile(id);
-      dispatch(fetchDirectoryDescriptor(id) as any);
+    setMoveNewFolder(id);
+    dispatch(fetchDirectoryDescriptor(id) as any);
     dispatch(fetchSubDirectory(id) as any);
-
   }
 
   const addDataHandler = () => {
@@ -325,22 +339,40 @@ const FileManagement = () => {
     ]);
   };
 
+  // const onDeleteFile = () => {
+  //   dispatch(deleteDirectoryDescriptor(folderId) as any).then((res: any) => {
+  //     setDirectories([
+  //       {
+  //         name: "All",
+  //         path: "/all",
+  //         parentId: null,
+  //         id: null,
+  //         hasChildren: false,
+  //         children: [],
+  //       },
+  //     ]);
+
+  //     dispatch(fetchSubDirectory(undefined) as any);
+  //     dispatch(fetchDirectoryDescriptor(undefined) as any);
+  //   });
+  // };
+
   const onDeleteFile = () => {
-    dispatch(deleteDirectoryDescriptor(folderId) as any).then((res: any) => {
-      setDirectories([
-        {
-          name: "All",
-          path: "/all",
-          parentId: null,
-          id: null,
-          hasChildren: false,
-          children: [],
-        },
-      ]);
-      dispatch(fetchSubDirectory(undefined) as any);
-      dispatch(fetchDirectoryDescriptor(undefined) as any);
-    });
+    if (isDirectory) {
+      dispatch(deleteDirectoryDescriptor(datafolderId) as any).then(
+        (res: any) => {
+          dispatch(fetchSubDirectory(undefined) as any);
+          dispatch(fetchDirectoryDescriptor(undefined) as any);
+        }
+      );
+    } else {
+      dispatch(DeleteFileDescriptor(datafolderId) as any).then((res: any) => {
+        dispatch(fetchSubDirectory(undefined) as any);
+        dispatch(fetchDirectoryDescriptor(undefined) as any);
+      });
+    }
   };
+
   const SetSearchName = (e: any) => {
     let temparr = data.filter((data: any) =>
       data.name.toLowerCase().includes(e.target.value.toLowerCase())
@@ -351,22 +383,6 @@ const FileManagement = () => {
   function setValue(value: string) {
     throw new Error("Function not implemented.");
   }
-  const UploadedFile = () => {
-    debugger;
-    totalFiles.map((e: any) => {
-      const body = {
-        directoryId: folderId,
-        extraProperties: undefined,
-        name: e.name,
-        file: { data: {}, fileName: e.name },
-      };
-      dispatch(uploadFileDescriptor(body) as any);
-      dispatch(fetchSubDirectory(folderId) as any);
-      dispatch(fetchDirectoryDescriptor(undefined) as any);
-    });
-  };
-
- 
 
   function preUploadFileInfo(_data: any) {
     let tempUploadfiles: any[] = [];
@@ -388,6 +404,23 @@ const FileManagement = () => {
   useEffect(() => {
     dispatch(infoFileDescriptor(uploadFiles) as any);
   }, [uploadFiles]);
+  const UploadedFile = () => {
+    
+    totalFiles.map((e: any) => {
+      const body = {
+        relativePath: null,
+        name: e.name,
+        directoryId: folderId,
+        extraProperties: {},
+        formData: { File: new Blob([e], { type: e.type }) },
+      };
+      console.log(body);
+      // setUploadFile(totalFiles[0])
+      dispatch(uploadFileDescriptor(body) as any);
+      dispatch(fetchSubDirectory(folderId) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+    });
+  };
 
   return (
     <div className="New Folder">
@@ -430,6 +463,7 @@ const FileManagement = () => {
                 required={true}
                 onChange={(e) => {
                   setName(e.target.value);
+
                 }}
               ></RdsInput>
               <div className="d-flex footer-buttons">
@@ -503,6 +537,7 @@ const FileManagement = () => {
             <div className="row mt-3 ms-3">
               <div className="col-md-4 d-flex justify-comtent-start">
                 {/* <RdsBreadcrumb breadItems={directories}/> */}
+                
                 <RdsBreadcrumb
                   breadItems={breadItems}
                   role="advance"
@@ -527,6 +562,7 @@ const FileManagement = () => {
                 pagination={false}
                 actions={actions}
                 onActionSelection={onActionHandler}
+                noDataTitle="No data"
               />
               <RdsOffcanvas
                 canvasTitle={"RENAME"}
@@ -599,32 +635,48 @@ const FileManagement = () => {
                     />
                   </div>
                   <div className="mt-3 pb-1 border-bottom">
-                    
-                      <RdsLabel label="Folder Name" size="14px">
+                    <RdsLabel label="Folder Name" size="14px">
                       <RdsIcon
                         name={"up"}
                         height="12px"
                         width="12px"
                         stroke={true}
                       />
-                    
-                    
+
                       <RdsIcon
                         name={"down"}
                         height="12px"
                         width="12px"
                         stroke={true}
                       />
-                      </RdsLabel>
+                    </RdsLabel>
                   </div>
                   <RdsCompFileMover
                     items={directories}
-                    path={setPathValue}
-                    selectedItemId={directories[0].id} 
-                    onClick={movefolder}               
-                    ></RdsCompFileMover>
+                    path={setFolderPath}
+                    selectedItemId={directories[0].id}
+                  ></RdsCompFileMover>
+                  <div className="d-flex footer-buttons ms-2">
+                    <RdsButton
+                      label="CANCEL"
+                      databsdismiss="offcanvas"
+                      type={"button"}
+                      size="small"
+                      isOutline={true}
+                      colorVariant="primary"
+                      class="me-2"
+                    ></RdsButton>
+                    <RdsButton
+                      label="MOVE"
+                      type={"button"}
+                      size="small"
+                      databsdismiss="offcanvas"
+                      colorVariant="primary"
+                      class="me-2"
+                      onClick={movefolder}
+                    ></RdsButton>
+                  </div>
                 </div>
-             
               </RdsOffcanvas>
               <RdsCompAlertPopup
                 alertID="DeleteFile"
@@ -639,23 +691,3 @@ const FileManagement = () => {
 };
 
 export default FileManagement;
-
-{
-  /* <div className="col-md-9">
-<div className="row">
-  <div className="col-md-3 d-flex justify-content-start">
-    hi
-  </div>
-</div>
-</div> */
-}
-
-// useEffect(() => {
-//   if(path=="All"){
-//     setTableData(tableData1)
-//   }
-//   if(path=="Parent 1"){
-//     setTableData(tableData2)
-//   }
-// console.log(path,"bredCrumbs Path");
-// },[path])

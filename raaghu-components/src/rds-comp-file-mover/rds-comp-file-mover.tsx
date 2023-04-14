@@ -2,7 +2,6 @@
 
 import { RdsIcon, RdsButton } from "raaghu-react-elements";
 import React, { useState } from "react";
-//import { RdsButton, RdsIcon } from "../../../../raaghu-react/raaghu-elements/src";
 
 export interface FileItem {
   id: string;
@@ -15,7 +14,7 @@ export interface RdsCompFileMoverProps {
   items: any;
   path: any;
   selectedItemId?: string;
-  onClick:any;
+  
   
 }
 
@@ -26,7 +25,7 @@ export const RdsCompFileMover = ({
 }: RdsCompFileMoverProps) => {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  const handleClick = (id: string) => () => {
+  const handleClick = (id: string, name:string) => () => {
     if (expandedItems.includes(id)) {
       setExpandedItems(expandedItems.filter((item) => item !== id));
     } else {
@@ -35,7 +34,7 @@ export const RdsCompFileMover = ({
     path({ id });
   };
 
-  const renderFileItem = (item: FileItem, onClick:any) => (
+  const renderFileItem = (item: FileItem) => (
     <>
     <div key={item.name}>
       <div className="d-flex align-items-center pt-2 me-3">
@@ -50,7 +49,7 @@ export const RdsCompFileMover = ({
             width="6px"
             fill={false}
             stroke={true}
-            onClick={handleClick(item.id)}
+            onClick={handleClick(item.id,item.name)}
           />
         )}
         <RdsIcon
@@ -60,7 +59,7 @@ export const RdsCompFileMover = ({
           fill={false}
           stroke={true}
           colorVariant={selectedItemId === item.id ? "primary" : undefined}
-          onClick={handleClick(item.id)}
+          onClick={handleClick(item.id,item.name)}
         />
         <span className="ms-2">{item.name}</span>
       </div>
@@ -70,32 +69,10 @@ export const RdsCompFileMover = ({
             items={item.children}
             path={path}
             selectedItemId={selectedItemId}
-            onClick={undefined}
+          
           />
         </div>
       )}
-      <div className="d-flex footer-buttons ms-2">
-        <RdsButton
-          label="CANCEL"
-          databsdismiss="offcanvas"
-          type={"button"}
-          size="small"
-          isOutline={true}
-          colorVariant="primary"
-          class="me-2"
-        ></RdsButton>
-        <RdsButton
-          label="MOVE"
-          type={"button"}
-          size="small"
-          databsdismiss="offcanvas"
-          // isDisabled={""}
-          colorVariant="primary"
-          class="me-2"
-          onClick={onClick}
-          
-        ></RdsButton>
-      </div>
     </div>
     </>
   );

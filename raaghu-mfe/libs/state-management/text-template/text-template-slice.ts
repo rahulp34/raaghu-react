@@ -1,10 +1,11 @@
 import { TextTemplate } from "./text-template.models";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
-import { ServiceProxy, UpdateTemplateContentInput } from "../../shared/service-proxy";
 import { isNullOrUndef } from "chart.js/dist/helpers/helpers.core";
 import { useDispatch } from "react-redux";
-
+import {TextTemplateDefinitionsService} from "../../proxy/services/TextTemplateDefinitionsService"
+import {TextTemplateContentsService} from "../../proxy/services/TextTemplateContentsService"
+import {AbpApplicationConfigurationService} from "../../proxy/services/AbpApplicationConfigurationService"
 export interface TextTemplateState {
   textTemplate: any;
   templateData: any;
@@ -21,38 +22,37 @@ export const textTemplateInitialState: TextTemplateState = {
   loading: false,
 };
 
-const proxy = new ServiceProxy();
 
 export const getAllTemplates = createAsyncThunk("TextTemplate/GetAllTemplates", () => {
-  return proxy.templateDefinitions(undefined, undefined, 0, 10).then((result:any) => {
+  return TextTemplateDefinitionsService.getTemplateDefinitions({filterText:undefined, sorting:undefined, skipCount:0, maxResultCount:10}).then((result:any) => {
     return result;
   });
 });
 
 export const getTemplateContent = createAsyncThunk("TextTemplate/GetTemplate", (data: any) => {
-  return proxy.templateContentsGET(data.template, data.culture).then((result:any) => {
+  return TextTemplateContentsService.getTemplateContents({templateName:data.template, cultureName:data.culture }).then((result:any) => {
     return result;
   })
 });
 
 export const saveTemplateContent = createAsyncThunk("TextTemplate/SaveTemplate", (data: any) => {
-  return proxy.templateContentsPUT(data).then((result:any) => {
+  return TextTemplateContentsService.putTemplateContents(data).then((result:any) => {
     return result;
   })
 });
 
 export const restoreToDefault = createAsyncThunk("TextTemplate/RestoreToDefault", (data: any) => {
-  return proxy.restoreToDefault(data).then((result:any) => {
+  return TextTemplateContentsService.putTemplateContentsRestoreToDefault(data).then((result:any) => {
     return result;
   }).then(() => {
-    return proxy.templateContentsGET(data.templateName, undefined).then((result:any) => {
+    return TextTemplateContentsService.getTemplateContents(data.templateName).then((result:any) => {
       return result;
     })
   })
 });
 
 export const allLanguagesCulture = createAsyncThunk("TextTemplate/AllLanguagesCulture", () => {
-  return proxy.applicationConfiguration(false).then((result:any) => {
+  return AbpApplicationConfigurationService.getApplicationConfiguration({includeLocalizationResources:false}).then((result:any) => {
     return result;
   })
 });

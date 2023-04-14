@@ -63,11 +63,27 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
   const checkboxHandler = (event: any) => {
     setdataEmit({ ...dataEmit, check: event.target.checked });
   };
-  const langNamesHandler = (event: any) => {
-    setdataEmit({ ...dataEmit, name: event.target.selectedOptions[0].id });
+  const langNamesHandler = (value: any) => {
+    debugger
+    setdataEmit({ ...dataEmit, name: value ,item:value});
+    let displayName=''
+    props.languageNames.map((res:any)=>{
+        if(res.value==value){
+          displayName=res.option
+        }
+    })
+    setdataEmit((prev:any)=>{ return {...prev, displayName:displayName}  });
   };
-  const langItemHandler = (event: any) => {
-    setdataEmit({ ...dataEmit, item: event.target.selectedOptions[0].id });
+  const langItemHandler = (value: any) => {
+    debugger
+    setdataEmit({ ...dataEmit, name: value,item:value });
+    let displayName=''
+    props.languageNames.map((res:any)=>{
+        if(res.value==value){
+          displayName=res.option
+        }
+    })
+    setdataEmit((prev:any)=>{ return {...prev, displayName:displayName}  });
   };
 
   const onSaveHandler = (data: any) => {
@@ -83,7 +99,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
   };
 
   const inputChangeHandler = (event: any) => {
-    setdataEmit({ ...dataEmit, displayName: event.target.value });
+   setdataEmit({ ...dataEmit, displayName:event.target.value });
   };
   return (
     <>
@@ -97,8 +113,10 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                 </div>
                 <RdsSelectList
                   // id={"1"}
+                  placeholder="Select Culture Name"
                   label={dataEmit.name}
                   selectItems={props.languageNames}
+                  selectedValue={dataEmit.name}
                   onSelectListChange={langNamesHandler}
                 ></RdsSelectList>
               </div>
@@ -117,22 +135,24 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                 value={dataEmit.displayName}
                 onChange={inputChangeHandler}
                 required={true}
-              ></RdsInput>
+                ></RdsInput>
             </div>
           </div>
         </div>
         {!props.edit && (
           <div className="row">
             <div className="col-md-6 mb-3">
-              <div className="form-group mt-3">
+              <div className="form-group">
                 <div className="mb-2">
                   <RdsLabel label="Ui Culture" required={true}></RdsLabel>
                 </div>
                 <RdsSelectList
                   // id={"2"}
+                   placeholder="Select Culture Name"
                   label={dataEmit.item}
                   selectItems={props.languageItems}
                   onSelectListChange={langItemHandler}
+                  selectedValue={dataEmit.item}
                 ></RdsSelectList>
               </div>
             </div>

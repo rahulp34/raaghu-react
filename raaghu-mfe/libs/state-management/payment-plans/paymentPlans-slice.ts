@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { PlanAdminService } from "../../proxy";
 
 type InitialState = {
   allPaymentPlans: any,
@@ -19,60 +19,59 @@ const initialState: InitialState = {
   error: "",
 }
 
-const proxy = new ServiceProxy()
 
 // Plans
 export const getAllPaymentPlans = createAsyncThunk('PaymentPlans/GetAll', (data: any) => {
-  return proxy.plansGET3(data.filter, data.sorting, 0, 1000, data.cancelToken).then((result: any) => {
+  return PlanAdminService.getPlans({filter:data.filter,sorting: data.sorting, skipCount:0, maxResultCount:1000}).then((result: any) => {
     return result;
   })
 });
 
 export const createNewPlan = createAsyncThunk('PaymentPlans/CreatePlan', (data: any) => {
-  return proxy.plansPOST(data.body, data.cancelToken).then((result: any) => {
+  return PlanAdminService.postPlans({requestBody:data.body}).then((result: any) => {
     return result;
   })
 });
 
 export const deletePlan = createAsyncThunk('PaymentPlans/DeletePlan', (data: any) => {
-  return proxy.plansDELETE(data.id, data.cancelToken).then((result: any) => {
+  return PlanAdminService.deletePlans({id:data.id}).then((result: any) => {
     return result;
   })
 });
 
 export const getPlanById = createAsyncThunk('PaymentPlans/GetPlanById', (data: any) => {
-  return proxy.plansGET4(data.id).then((result: any) => {
+  return PlanAdminService.getPlans1({id:data.id}).then((result: any) => {
     return result;
   })
 });
 
 export const updatePlan = createAsyncThunk('PaymentPlans/UpdatePlan', (data: any) => {
-  return proxy.plansPUT(data.id, data.body, data.cancelToken).then((result: any) => {
+  return PlanAdminService.putPlans({id:data.id,requestBody: data.body}).then((result: any) => {
     return result;
   })
 });
 
 // Gateway Plan
 export const createGatewayPlan = createAsyncThunk('PaymentPlans/CreateGatewayPlan', (data: any) => {
-  return proxy.externalPlansPOST(data.planId, data.body, data.cancelToken).then((result: any) => {
+  return PlanAdminService.postPlansExternalPlans({planId:data.planId,requestBody: data.body}).then((result: any) => {
     return result;
   })
 });
 
 export const getAllGatewayPlansByPlanId = createAsyncThunk('PaymentPlans/GetAllGatewayPlansByPlanId', (data: any) => {
-  return proxy.externalPlansGET(data.planId, data.filter, data.sorting, data.skipCount, data.maxResultCount, data.cancelToken).then((result: any) => {
+  return PlanAdminService.getPlansExternalPlans({planId:data.planId,filter: data.filter,sorting: data.sorting, skipCount:data.skipCount, maxResultCount:data.maxResultCount}).then((result: any) => {
     return result;
   })
 });
 
 export const deleteGatewayPlan = createAsyncThunk('PaymentPlans/DeleteGatewayPlan', (data: any) => {
-  return proxy.externalPlansDELETE(data.planId, data.gateway, data.cancelToken).then((result: any) => {
+  return PlanAdminService.deletePlansExternalPlans({planId:data.planId, gateway:data.gateway}).then((result: any) => {
     return result;
   })
 });
 
 export const updateGatewayPlan = createAsyncThunk('PaymentPlans/UpdateGatewayPlan', (data: any) => {
-  return proxy.externalPlansPUT(data.planId, data.gateway, data.body, data.cancelToken).then((result: any) => {
+  return PlanAdminService.putPlansExternalPlans({planId:data.planId, gateway:data.gateway, requestBody:data.body}).then((result: any) => {
     return result;
   })
 });

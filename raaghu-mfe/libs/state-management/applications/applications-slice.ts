@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
-import {ServiceProxy, UpdatePermissionsDto} from '../../shared/service-proxy'
+import {ApplicationsService} from "../../proxy/services/ApplicationsService"
+import {ScopesService} from "../../proxy/services/ScopesService"
+import {PermissionsService} from "../../proxy/services/PermissionsService"
 
 type InitialStateApplication = {
   loading: boolean;
@@ -25,54 +27,51 @@ export const InitialStateApplication:InitialStateApplication= {
   success: false,
 };
 
-// Generates pending, fulfilled and rejected action types
-const proxy = new ServiceProxy();
-
 //effects and actions
 export const fetchApplications = createAsyncThunk("applications/fetchApplications", () => {
-  return proxy.applicationsGET2(undefined, 'id DESC', 0, 30, undefined).then((result:any)=>{
+  return ApplicationsService.getApplications1({filter:undefined, sorting:'id DESC', skipCount:0, maxResultCount:30}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const deleteApplications = createAsyncThunk("applications/deleteApplications", (id:string) => {
-  return proxy.applicationsDELETE(id,undefined,).then((result:any)=>{
+  return ApplicationsService.deleteApplications({id}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const saveApplications = createAsyncThunk("applications/saveApplications", (data:any) => {
-  return proxy.applicationsPOST(data,undefined).then((result:any)=>{
+  return ApplicationsService.postApplications(data).then((result:any)=>{
      return result;
   }) 
 });
 
 export const updateApplications = createAsyncThunk("applications/updateApplications", (data:any) => {
-  return proxy.applicationsPUT(data.id, data.body,undefined).then((result:any)=>{
+  return ApplicationsService.putApplications({id:data.id, requestBody:data.body}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const getApplications = createAsyncThunk("applications/getApplications", (id:string) => {
-  return proxy.applicationsGET(id,undefined).then((result:any)=>{
+  return ApplicationsService.getApplications({id}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const getScopes = createAsyncThunk("applications/getScopes", () => {
-  return proxy.allAll(undefined).then((result:any)=>{
+  return ScopesService.getScopesAll().then((result:any)=>{
      return result;
   }) 
 });
 
 export const getPermission = createAsyncThunk("applications/getPermission", (key:string) => {
-  return proxy.permissionsGET("C",key,undefined).then((result:any)=>{
+  return PermissionsService.getPermissions({providerName:"C",providerKey:key}).then((result:any)=>{
      return result;
   }) 
 });
 
 export const updatePermission = createAsyncThunk("applications/updatePermission", (data:any) => {
-  return proxy.permissionsPUT("C",data.key,data.permissions,undefined).then((result:any)=>{
+  return PermissionsService.putPermissions({ providerName:"C", providerKey:data.key, requestBody:data.permissions}).then((result:any)=>{
      return result;
   }) 
 });

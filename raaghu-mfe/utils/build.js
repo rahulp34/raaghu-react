@@ -5,8 +5,8 @@ const appConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '/appconfig.js
 const mfeFilePath = path.join(__dirname, '../rds_pages/', 'mfe-config.ts');
 const mfeFilePathTemp = path.join(__dirname, '../rds_pages/', 'mfe-configtemp.ts');
 const portFilePath = path.join(__dirname, '../rds_pages/', 'port-config.ts');
-const pastepath = path.join(__dirname,"../rds_pages/host/dist");
-const copypath = path.join(__dirname,'../rds_pages')
+const pastepath = path.join(__dirname, "../rds_pages/host/dist");
+const copypath = path.join(__dirname, '../rds_pages')
 
 if (process.argv.length > 3) {
   console.log('Invalid command');
@@ -24,12 +24,12 @@ let mfeConfigJSON = mfeConfig.substring(mfeConfig.indexOf("{"), mfeConfig.lastIn
 mfeConfigJSON = JSON.parse(mfeConfigJSON);
 if (appConfig.replaceUrl == "true") {
 
-  console.log('Changing URLs in .env file...');
+  console.log('Changing URLs in configuration file...');
   fs.copyFileSync(mfeFilePath, mfeFilePathTemp);
   // console.log("file path mayank2",mfeConfigJSON);
 
   let portConfig = fs.readFileSync(portFilePath).toString();
-  let portConfigJSON = portConfig.substring(portConfig.indexOf("{"), portConfig.lastIndexOf("}") +1);
+  let portConfigJSON = portConfig.substring(portConfig.indexOf("{"), portConfig.lastIndexOf("}") + 1);
   // portConfigJSON = portConfigJSON.replace(/\'/g, "\"");
   // portConfigJSON = portConfigJSON.replace(/([a-zA-Z]*): {/g, "\"$1\": {");
   // portConfigJSON = portConfigJSON.replace(/url:/g, "\"port\":");
@@ -49,16 +49,16 @@ if (appConfig.replaceUrl == "true") {
       let port = portConfigJSON[portConf].port;
       if (portConfig == port) {
         pathConf = portConf
-          if (portConf == "host") {
-            url = url.replace(/((http|https):\/\/localhost:)\d{4}/g, appConfig.appBaseUrl);
-          } else {
-              url = url.replace(/((http|https):\/\/localhost:)\d{4}/g, appConfig.appBaseUrl + "/" + "rds-page-"+ pathConf);
-          }
-          mfeConfigJSON[mfeConf].url = url;
-          break;
+        if (portConf == "host") {
+          url = url.replace(/((http|https):\/\/localhost:)\d{4}/g, appConfig.appBaseUrl);
+        } else {
+          url = url.replace(/((http|https):\/\/localhost:)\d{4}/g, appConfig.appBaseUrl + "/" + "rds-page-" + pathConf);
+        }
+        mfeConfigJSON[mfeConf].url = url;
+        break;
       }
     }
-      // console.log("Updated mfeConfig : ",mfeConfigJSON);
+    // console.log("Updated mfeConfig : ",mfeConfigJSON);
   }
 
   mfeConfig = mfeConfig.substring(0, mfeConfig.indexOf("{")) + JSON.stringify(mfeConfigJSON, null, 2);
@@ -68,19 +68,19 @@ if (appConfig.replaceUrl == "true") {
 }
 
 
-for(const page of Object.keys(mfeConfigJSON)) {
+for (const page of Object.keys(mfeConfigJSON)) {
   // console.log(page);
-  if(page=='host'){
+  if (page == 'host') {
     execSync(`concurrently \"cd rds_pages\\host && npm run build\"`, { cwd: process.cwd(), stdio: 'inherit' });
-  }else{
+  } else {
     execSync(`concurrently \"cd rds_pages\\rds-page-${page} && npm run build\"`, { cwd: process.cwd(), stdio: 'inherit' });
   }
 }
 
-for (const copy of Object.keys(mfeConfigJSON)){
-  if(copy != 'host'){
-    fs.mkdir(`${pastepath}/rds-page-${copy}`, (err)=>{
-      if(!err){
+for (const copy of Object.keys(mfeConfigJSON)) {
+  if (copy != 'host') {
+    fs.mkdir(`${pastepath}/rds-page-${copy}`, (err) => {
+      if (!err) {
         console.log(`${copy} folder created successfully `);
       }
     })
@@ -104,10 +104,10 @@ for (const copy of Object.keys(mfeConfigJSON)){
 
 console.log('Deleting temporary files...');
 if (appConfig.replaceUrl == "true") {
-    fs.copyFileSync(mfeFilePathTemp, mfeFilePath);
-    if (fs.existsSync(mfeFilePathTemp)) {
-        fs.unlinkSync(mfeFilePathTemp)
-    }
+  fs.copyFileSync(mfeFilePathTemp, mfeFilePath);
+  if (fs.existsSync(mfeFilePathTemp)) {
+    fs.unlinkSync(mfeFilePathTemp)
+  }
 }
 
 console.log('Done...');

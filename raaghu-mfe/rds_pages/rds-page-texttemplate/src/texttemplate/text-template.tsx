@@ -66,7 +66,7 @@ const TextTemplate = () => {
 
       if (textTemplate?.languages?.localization?.languages !== null || textTemplate.languages.localization.languages !== undefined) {
         const data: any = [];
-        textTemplate.languages.localization.languages.forEach((ele: any) => {
+        textTemplate?.languages?.localization?.languages?.forEach((ele: any) => {
           const item = {
             value: ele.cultureName,
             option: ele.displayName,
