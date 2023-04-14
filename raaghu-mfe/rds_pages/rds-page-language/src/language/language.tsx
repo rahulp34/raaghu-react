@@ -197,7 +197,7 @@ const Language = (props: LanguageProps) => {
     displayName: string;
   }) =>
    {
-    debugger
+    
     cultureModel.isEnabled = data.check;
     cultureModel.cultureName = data.name;
     cultureModel.displayName = data.displayName;
