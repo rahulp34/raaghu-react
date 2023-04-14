@@ -126,7 +126,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   ];
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem)
   useEffect(() => {
-    debugger
+    
     setBreadCrumItem(props.breacrumItem)
   }, [props.breacrumItem])
 
