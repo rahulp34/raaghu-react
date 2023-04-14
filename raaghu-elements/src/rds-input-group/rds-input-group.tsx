@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import RdsButton from "../rds-button";
 import RdsInput from "../rds-input";
 import { colors } from "../../libs/types";
@@ -40,10 +40,15 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
 
   const formName = "input-group_" + Math.random().toString(36).substr(2, 9);
   function changeValue(e:any){
-    debugger
+    
     setValue(e.target.value)
   }
-
+useEffect(()=>{
+  if(props.value){
+    setValue(props.value)    
+  }
+    
+},[props.value])
   return (
     <Fragment>
       <form
@@ -55,7 +60,7 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
           <label className={inputGroupLabelClasses}>
             {" "}
             {props.inputGroupLabel}{" "}
-          </label>
+          </label> 
         )}
         <div className={inputGroupDivClasses}>
           <div className="flex-grow-1">

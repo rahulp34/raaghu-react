@@ -1,7 +1,6 @@
 import { TextTemplate } from "./text-template.models";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
-import { ServiceProxy, UpdateTemplateContentInput } from "../../shared/service-proxy";
 import { isNullOrUndef } from "chart.js/dist/helpers/helpers.core";
 import { useDispatch } from "react-redux";
 import {TextTemplateDefinitionsService} from "../../proxy/services/TextTemplateDefinitionsService"
@@ -23,7 +22,6 @@ export const textTemplateInitialState: TextTemplateState = {
   loading: false,
 };
 
-const proxy = new ServiceProxy();
 
 export const getAllTemplates = createAsyncThunk("TextTemplate/GetAllTemplates", () => {
   return TextTemplateDefinitionsService.getTemplateDefinitions({filterText:undefined, sorting:undefined, skipCount:0, maxResultCount:10}).then((result:any) => {

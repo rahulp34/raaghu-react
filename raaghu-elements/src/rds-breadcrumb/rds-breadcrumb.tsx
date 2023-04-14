@@ -26,7 +26,6 @@ const RdsBreadcrumb = (props: breadcrumbprop) => {
   };
 
   useEffect(()=>{
-    debugger
     if(props.breadItems.length > 0){
       setdata(props.breadItems);
     }

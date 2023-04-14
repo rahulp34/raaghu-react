@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { PlanAdminService } from "../../proxy";
-import { ServiceProxy } from "../../shared/service-proxy";
 
 type InitialState = {
   allPaymentPlans: any,
@@ -20,7 +19,6 @@ const initialState: InitialState = {
   error: "",
 }
 
-const proxy = new ServiceProxy()
 
 // Plans
 export const getAllPaymentPlans = createAsyncThunk('PaymentPlans/GetAll', (data: any) => {
