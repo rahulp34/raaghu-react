@@ -33,25 +33,25 @@ import {
 
 const tableHeaders = [
   {
-    displayName: "Language",
-    key: "languageName",
-    datatype: "children",
-    sortable: false,
-  },
-  {
     displayName: "Display Name",
     key: "code",
     datatype: "text",
     sortable: true,
   },
   {
-    displayName: "Country",
-    key: "creationTime",
+    displayName: "Culture Name",
+    key: "languageName",
     datatype: "children",
     sortable: true,
   },
   {
-    displayName: "Status",
+    displayName: "UI Culture Name",
+    key: "languageName",
+    datatype: "children",
+    sortable: true,
+  },
+  {
+    displayName: "Enabled",
     key: "isenabled",
     datatype: "children",
     sortable: false,
@@ -93,11 +93,10 @@ const Language = (props: LanguageProps) => {
   }, [dataEmit.displayName]);
   const [name, setname] = useState<
     {
-      option: string;
-
-      id: string;
+      option: string
+      value: string;
     }[]
-  >([{ option: "", id: "" }]);
+  >([{ option: "", value: "" }]);
 
   const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
 
@@ -114,7 +113,7 @@ const Language = (props: LanguageProps) => {
       const tempData = data.languages.items.map((item: any) => {
         return {
           id: item.id,
-          languageName: (
+          code: (
             <>
               {item.isDefaultLanguage ? (
                 <span className=" d-flex align-items-center ">
@@ -131,28 +130,32 @@ const Language = (props: LanguageProps) => {
               )}
             </>
           ),
-          code: item.cultureName,
+          languageName: item.cultureName,
           enable: item.isEnabled,
           flag: item.flagIcon,
-          name: item.displayName,
+          name: item.cultureName,
           isDefault: item.isDefaultLanguage,
           isenabled: (
             <>
               {item.isEnabled ? (
-                <RdsBadge
-                  label={"Active"}
-                  size={"medium"}
-                  badgeType={"rectangle"}
-                  colorVariant={"success"}
-                ></RdsBadge>
-              ) : (
-                <RdsBadge
-                  label={"Inactive"}
-                  size={"medium"}
-                  badgeType={"rectangle"}
-                  colorVariant={"danger"}
-                ></RdsBadge>
-              )}
+                  <div style={{ strokeWidth: "3px" }}>
+                    <RdsIcon
+                      name="check"
+                      height="17px"
+                      width="15px"
+                      colorVariant="success"
+                    />
+                  </div>
+                ) : (
+                  <div style={{ strokeWidth: "3px" }}>
+                    <RdsIcon
+                      name="cancel"
+                      height="17px"
+                      width="15px"
+                      colorVariant="danger"
+                    />
+                  </div>
+                )}
             </>
           ),
           creationTime: (
@@ -178,7 +181,7 @@ const Language = (props: LanguageProps) => {
       const tempName = data.cultureList.map((items: any) => {
         return {
           option: items.displayName,
-          id: items.name,
+          value: items.name,
         };
       });
       setname(tempName);
@@ -194,6 +197,7 @@ const Language = (props: LanguageProps) => {
     displayName: string;
   }) =>
    {
+    debugger
     cultureModel.isEnabled = data.check;
     cultureModel.cultureName = data.name;
     cultureModel.displayName = data.displayName;

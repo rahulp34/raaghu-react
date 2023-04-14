@@ -18,6 +18,9 @@ export interface UserState {
   error: string;
   permission:any;
   editorganizationUnit : any;
+  alert: boolean;
+  alertMessage: string;
+  success: boolean;
 };
 export const UserInitialState: UserState = {
   loading: false,
@@ -28,7 +31,10 @@ export const UserInitialState: UserState = {
   organizationUnit:null,
   error: "",
   permission:null,
-  editorganizationUnit:null
+  editorganizationUnit:null,
+  alert: false,
+  alertMessage: "",
+  success: false,
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -138,11 +144,15 @@ export const fetchRolesForEdit = createAsyncThunk("user/fetchRoles", (data:any) 
      return result;
   }) 
 });
-
+export const changePassword= createAsyncThunk("user/changePassword", (data:any) => {
+  return UserService.putUsersChangePassword(data).then((result:any)=>{
+     return result;
+  }) 
+});
 // export const getRolesForEdit = createAsyncThunk("user/getRoles", (id:string) => {
-//   return proxy.rolesPUT(id,undefined).then((result:any)=>{
+//   return proxy.rolesPUT(id,undefined).then((result:any)=>{ 
 //      return result;
-//   }) 
+//   }
 // });
 
 const userSlice = createSlice({
@@ -262,6 +272,24 @@ const userSlice = createSlice({
       deleteUser.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
+        state.error = "";
+      }
+    );
+
+    builder.addCase(changePassword.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something went wrong";
+    });
+
+    builder.addCase(changePassword.pending, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(
+      changePassword.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.alertMessage = "Password Chaged Successfully";
         state.error = "";
       }
     );
