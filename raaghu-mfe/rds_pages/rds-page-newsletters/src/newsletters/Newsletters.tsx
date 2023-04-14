@@ -83,7 +83,7 @@ const Newsletters = (props: any) => {
   }, [newsletters.GetAllNewsLetters]);
 
   useEffect(()=>{
-    debugger
+    
     
   },[dispatch])
   function inputValueFn(data:any){

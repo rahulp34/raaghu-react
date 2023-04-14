@@ -40,7 +40,7 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
 
   const formName = "input-group_" + Math.random().toString(36).substr(2, 9);
   function changeValue(e:any){
-    debugger
+    
     setValue(e.target.value)
   }
 useEffect(()=>{

@@ -186,6 +186,7 @@
 
 import React, { useState } from "react";
 import { RdsIcon } from "../rds-elements";
+import { RdsLabel } from "raaghu-react-elements";
 
 export interface DirectoryItem {
   id: string;
@@ -230,15 +231,15 @@ export const RdsCompDirectoryList = ({
                   ? "chevron_down"
                   : "chevron_right"
               }
-              height="8px"
-              width="6px"
+              height="12px"
+              width="12px"
               fill={false}
               stroke={true}
               onClick={handleClick(item.id, item.name,)}
             />
           </button>
         )}
-        <span className="me-1 ">
+        <span className="me-1 d-flex align-items-center" onClick={handleClick(item.id, item.name)}>
           <RdsIcon
             name="folder"
             height="15px"
@@ -248,22 +249,23 @@ export const RdsCompDirectoryList = ({
             colorVariant={
               selectedItemId === item.id ? "primary" : undefined
             }
-            onClick={handleClick(item.id, item.name)}
+            
           />
-        </span>
-        <span>{item.name}</span>
+           <RdsLabel class="px-2" label={item.name}></RdsLabel>
         {item.children && (
-          <span className=" mt-2">&nbsp;({item.children.length})</span>
+          <RdsLabel  label={`(${item.children.length})`}></RdsLabel>
         )}
+        </span>
+       
       </div>
       {item.children && expandedItems.includes(item.id) && (
-        <ul className="pl-0">
+        
           <RdsCompDirectoryList
             items={item.children}
             path={path}
             selectedItemId={selectedItemId}
           />
-        </ul>
+        
       )}
     </>
   );
@@ -272,7 +274,7 @@ export const RdsCompDirectoryList = ({
     return items.map(renderDirectoryItem);
   };
 
-  return <ul>{renderDirectoryItems(items)}</ul>;
+  return <ul className="pt-2">{renderDirectoryItems(items)}</ul>;
 };
 
 export default RdsCompDirectoryList;

@@ -78,7 +78,7 @@ const Main = (props: MainProps) => {
   // });
   const navigate = useNavigate();
 
-  let API_URL: string | undefined = process.env.REACT_APP_API_URL;
+  let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
 
   let currentPath = window.location.pathname;
 
