@@ -4,13 +4,14 @@ import { RdsButton, RdsOffcanvas, RdsSearch } from "raaghu-react-elements";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 import { useAppDispatch, useAppSelector, } from "../../../../libs/state-management/hooks";
-import { deletePageData, editPageData, fetchEditPagesData, fetchPagesData, postPagesData } from "../../../../libs/state-management/pages/pages-slice";
+import { deletePageData, editPageData, fetchEditPagesData, fetchPagesData, isHomePageChangeData, postPagesData } from "../../../../libs/state-management/pages/pages-slice";
 
 const Pages = (props: any) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const [tableData, setTableData] = useState<any>([]);
 	const [actionId, setActionId] = useState("new");
+	const [tempIsHomePageId,settempIsHomePageId]=useState(true);
 	const pageData = useAppSelector((state) => state.persistedReducer.pages);
 	const pageDatas = useAppSelector((state) => state.persistedReducer.pages.pagesData);
 	const pageEdit = useAppSelector((state) => state.persistedReducer.pages.pagesDataEdit);
@@ -81,7 +82,17 @@ const Pages = (props: any) => {
 			setEditClaimData(pagesDataTable)
 		}
 	}, [pageEdit]);
-	
+
+	const [homePageId, setHomePageId] = useState("");
+
+	useEffect(() => {
+		// dispatch(isHomePageChangeData(tableDataRowid) as any
+		// ).then((res: any) => {
+		// 	console.log("yyyyyyyyyyy", res)
+		// });
+		// dispatch(fetchPagesData() as any);
+	});
+
 
 	useEffect(() => {
 
@@ -137,7 +148,6 @@ const Pages = (props: any) => {
 					id: dataPages.id
 				}
 			}, []);
-			console.log("gredfubhewksufahweiu", pagesDataTable);
 			setTableData(pagesDataTable);
 		}
 	}, [pageDatas]);
@@ -215,25 +225,12 @@ const Pages = (props: any) => {
 		else if (actionId === "delete") {
 			setTableDataRowId(rowData.id);
 		}
-		else if (actionId === "isHomePageStatus" && rowData.isHomePage.props.children === "false") {
-			// debugger
-			//rowData.isHomePage.props.children==="true"
-			alert("hiiiii")
-			// if(rowData.id.isHomePage == true){
-			// dataPages.isHomePage == true ? ("true") : ("true")
-			//  }
-			// else{
-			// 	rowData.id.isHomePage == "true";
-			// }
-			//dataPages.isHomePage == true ? ("true") : ("true")
-
-
-			// if (actionId == "isHomePageStatus") {
-			// 	rowData.id.isHomePage == true ? ("false") : ("true")
-			// }
-
-
-
+		else if (actionId === "isHomePageStatus") {
+			const tempIsHomePageId = String(rowData.id);
+			setHomePageId(tempIsHomePageId);
+			dispatch(isHomePageChangeData(tempIsHomePageId) as any).then((res: any) => {
+			})
+			dispatch(fetchPagesData() as any);
 		}
 	};
 
@@ -337,11 +334,8 @@ const Pages = (props: any) => {
 							onSubmit={onEditHandler}
 							newPageData={editClaimData} />
 					</RdsOffcanvas>
-
-
 				</div>
 			</div>
-
 		</>
 	)
 }

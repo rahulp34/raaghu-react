@@ -74,9 +74,9 @@ export const fetchEditPagesData = createAsyncThunk(
 
 export const isHomePageChangeData = createAsyncThunk(
   "pages/isHomePageChangeData",
-  ({ id }: { id: any}) => {
-    return pagesService.setashomepage(id).then((result: any) => {
-      return result.items;
+  (id :string) => {
+    return pagesService.setashomepage(id, undefined).then((result: any) => {
+      return result;
     })
   }
 )
