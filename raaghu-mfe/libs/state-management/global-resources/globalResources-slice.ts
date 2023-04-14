@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { GlobalResourcePublicService } from "../../proxy/services/GlobalResourcePublicService";
+import { GlobalResourceAdminService } from "../../proxy/services/GlobalResourceAdminService";
 
 type InitialState = {
   style: any;
@@ -17,28 +18,27 @@ const initialState: InitialState = {
   error: "",
 }
 
-const proxy = new ServiceProxy()
 
 export const getStyle = createAsyncThunk('GlobalResources/GetStyle', () => {
-  return proxy.style().then((result: any) => {
+  return GlobalResourcePublicService.getGlobalResourcesStyle().then((result: any) => {
     return result;
   })
 });
 
 export const getScript = createAsyncThunk('GlobalResources/GetScript', () => {
-  return proxy.script().then((result: any) => {
+  return GlobalResourcePublicService.getGlobalResourcesScript().then((result: any) => {
     return result;
   })
 });
 
 export const getGlobalResources = createAsyncThunk('GlobalResources/GetGlobalResources', () => {
-  return proxy.globalResourcesGET().then((result: any) => {
+  return GlobalResourceAdminService.getGlobalResources().then((result: any) => {
     return result;
   })
 });
 
 export const saveGlobalResources = createAsyncThunk('GlobalResources/SaveGlobalResources', (data: any) => {
-  return proxy.globalResourcesPOST(data.body).then((result: any) => {
+  return GlobalResourceAdminService.postGlobalResources(data.body).then((result: any) => {
     return result;
   })
 });

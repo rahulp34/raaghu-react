@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "./App.scss";
 import Main from "./Main";
 import { Link } from "react-router-dom";

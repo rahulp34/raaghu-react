@@ -7,7 +7,6 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import {ServiceProxy} from '../../shared/service-proxy'
 import { LanguagesService } from '../../proxy';
 
 type InitialState = {
@@ -26,8 +25,6 @@ export const initialState: InitialState = {
 };
 
 // Generates pending, fulfilled and rejected action types
-
-const proxy = new ServiceProxy()
 
 export const fetchLanguages = createAsyncThunk(
   "language/fetchLanguages",

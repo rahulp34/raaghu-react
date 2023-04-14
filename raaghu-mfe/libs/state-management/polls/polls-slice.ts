@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
 import { PollAdminService } from "../../proxy";
 
 type pollsInitialState = {
@@ -24,11 +23,10 @@ const PollsInitialState : pollsInitialState = {
  success: false,
 }
 
-const proxy = new ServiceProxy();
 
 export const GetPolls = createAsyncThunk('Polls/GetPolls',() => {
     return PollAdminService.getPoll({filter:undefined,sorting:undefined,skipCount:0,maxResultCount:1000}).then((result:any) =>{
-      debugger
+      
         console.log("result",result)
         return result
     })

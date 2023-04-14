@@ -150,7 +150,6 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             <div className="">
               <RdsInput
                 value={userData.password}
-                placeholder="****"
                 inputType="password"
                 label="Password"
                 name="password"
@@ -189,44 +188,8 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
           
         </div>
-        <div className="row"> 
-      
-          <div className="col-lg-6 col-md-6">
-         
-        <label className="mb-2">
-        Organization Unit<span className="text-danger"> *</span>
-          </label>
-      
-            {/* <div className="">
-            <RdsSelectList
-								label="Select Organization Unit(s)"
-								selectItems={organizationUnit}
-								// selectItems={props.typeList}
-								// selectedValue={basicApplicationData.type}
-								onSelectListChange={(e: any) => setOrganizationUnitData(e.target.value)}
-							></RdsSelectList>
-              
-            </div> */}
-          </div>
-          
-          <div className="col-lg-6 col-md-6">
-          <div className="">
-        <label className="mb-2">
-        Roles<span className="text-danger"> *</span>
-          </label>
-      </div>
-            {/* <div className="mb-2">
-            <RdsSelectList
-								label="Select Roles"
-								selectItems={roles}
-								onSelectListChange={(e: any) => setRolesData(e.target.value)}
-						></RdsSelectList>
-            </div> */}
-          </div>
-        
-        </div>
         {props.isEdit && (<div className="row my-2">
-          <div className="mb-2 text-muted">
+          <div className="mb-2 ">
             <RdsCheckbox
               id="0"
               label="Two Factor Authentication"
@@ -236,7 +199,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
         </div>)}
         <div className="row my-2">
-          <div className="mb-2 text-muted">
+          <div className="mb-2 ">
             <RdsCheckbox
               id="0"
               label="Active"
@@ -246,7 +209,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
         </div>
         <div className="row my-2">
-          <div className="mb-2 text-muted">
+          <div className="mb-2 ">
             <RdsCheckbox
               id="0"
               label="Account Lockout"

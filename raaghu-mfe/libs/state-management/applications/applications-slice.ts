@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction, } from "@reduxjs/toolkit";
-import { UpdatePermissionsDto} from '../../shared/service-proxy'
 import {ApplicationsService} from "../../proxy/services/ApplicationsService"
 import {ScopesService} from "../../proxy/services/ScopesService"
 import {PermissionsService} from "../../proxy/services/PermissionsService"

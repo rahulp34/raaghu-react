@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { NewsletterRecordAdminService } from "../../proxy/services/NewsletterRecordAdminService";
 
 type NewsLettersInitialState = {
   loading: boolean;
@@ -27,21 +27,19 @@ const NewslettersInitialState: NewsLettersInitialState = {
   success: false,
 };
 
-const proxy = new ServiceProxy();
-
 export const GetAllNewsLetters = createAsyncThunk(
   "newsletters/GetNewsLettersData",
   (data: any) => {
-    return proxy
-      .newsletterGET(data.preference, data.source, 0, 1000, undefined)
+    return NewsletterRecordAdminService
+      .getNewsletter({ preference:data.preference, source:data.source, skipCount:0, maxResultCount:1000})
       .then((result: any) => {
         return result;
       });
   }
 );
 export const csvDetails = createAsyncThunk("newsletters/csvDetails", () => {
-  return proxy
-    .csvDetail(undefined, undefined, undefined)
+  return NewsletterRecordAdminService
+    .getNewsletterCsvDetail({preference:undefined, source:undefined})
     .then((result: any) => {
       return result;
     });
@@ -49,14 +47,14 @@ export const csvDetails = createAsyncThunk("newsletters/csvDetails", () => {
 export const preferencesData = createAsyncThunk(
   "newsletters/preferencesData",
   () => {
-    return proxy.preferences(undefined).then((result: any) => {
+    return NewsletterRecordAdminService.getNewsletterPreferences().then((result: any) => {
       return result;
     });
   }
 );
 export const exportCsv = createAsyncThunk("NewsLetters/exportCsv", () => {
-  return proxy
-    .exportCsv(undefined, undefined, undefined)
+  return NewsletterRecordAdminService
+    .getNewsletterExportCsv({preference:undefined, source:undefined})
     .then((result: any) => {
       return result;
     });
@@ -64,7 +62,7 @@ export const exportCsv = createAsyncThunk("NewsLetters/exportCsv", () => {
 export const fetchNewsLetterData = createAsyncThunk(
   "NewsLetters/fetchNewsLetterData",
   (id: any) => {
-    return proxy.newsletterGET2(id, undefined).then((result: any) => {
+    return NewsletterRecordAdminService.getNewsletter1(id).then((result: any) => {
       return result;
     });
   }
