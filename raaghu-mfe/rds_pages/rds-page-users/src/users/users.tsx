@@ -718,7 +718,7 @@ const Users = () => {
       </div>
     </div>
     <RdsOffcanvas
-        backDrop={false}
+        backDrop={true}
         scrolling={true}
         preventEscapeKey={false}
         canvasTitle={canvasTitle}

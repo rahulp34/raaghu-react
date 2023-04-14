@@ -626,7 +626,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         </td>
                       )}
                     </tr>
-
                   )
               )}
             </tbody>
@@ -648,4 +647,3 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   );
 };
 export default RdsCompDatatable;
-
