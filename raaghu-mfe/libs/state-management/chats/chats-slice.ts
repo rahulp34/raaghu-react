@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction, AnyAction } from "@reduxjs/toolkit";
-import { ContactCreateInput} from "../../shared/service-proxy";
 import {ConversationService} from "../../proxy/services/ConversationService"
 import {ContactService} from "../../proxy/services/ContactService"
 import {SettingsService} from "../../proxy/services/SettingsService"
