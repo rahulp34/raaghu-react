@@ -54,18 +54,18 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   const [data, setData] = useState(props.tableData);
   const [array, setArray] = useState<boolean[]>([])
 
-  function openCloseDropDown(data: any) {
-    let tempArray: boolean[] = [];
-    array?.map((res: any, index: number) => {
-      if (index == data) {
-        tempArray.push(!array[data]);
-      }
-      else {
-        tempArray.push(false);
-      }
-    })
-    setArray(tempArray);
-  }
+  // function openCloseDropDown(data: any) {
+  //   let tempArray: boolean[] = [];
+  //   array?.map((res: any, index: number) => {
+  //     if (index == data) {
+  //       tempArray.push(!array[data]);
+  //     }
+  //     else {
+  //       tempArray.push(false);
+  //     }
+  //   })
+  //   setArray(tempArray);
+  // }
 
   const [rowStatus, setRowStatus] = useState({
     startingRow: 0,
