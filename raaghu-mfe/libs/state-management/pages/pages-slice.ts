@@ -1,6 +1,6 @@
 
 import { createSlice, createAsyncThunk, PayloadAction, } from "@reduxjs/toolkit";
-import { ServiceProxy } from "../../shared/service-proxy";
+import { PageAdminService } from "../../proxy/services/PageAdminService";
 
 export interface pagesInitialState {
   loading: boolean;
@@ -22,20 +22,20 @@ export const pagesState: pagesInitialState = {
   success: false,
 };
 
-const pagesService = new ServiceProxy();
+//const pagesService = new PageAdminService();
 
 // Add your Api call here
 export const fetchPagesData = createAsyncThunk(
   "pages/fetchPagesData", () => {
-    return pagesService.pagesGET3(undefined, undefined, undefined, undefined, undefined).then((result: any) => {
-      return result;
+    return PageAdminService.getPages1({filter:undefined, sorting:'id DESC', skipCount:undefined, maxResultCount:undefined}).then((result: any) => {
+      return result.items;
     })
   }
 )
 
 export const postPagesData = createAsyncThunk(
   "pages/postPagesData", (PageDto: any) => {
-    return pagesService.pagesPOST(PageDto).then((result: any) => {
+    return PageAdminService.postPages({requestBody:PageDto}).then((result: any) => {
       console.log("test pagedata", result)
       return result.items;
 
@@ -46,7 +46,7 @@ export const postPagesData = createAsyncThunk(
 export const deletePageData = createAsyncThunk(
   "pages/deletePageData",
   (id: any) => {
-    return pagesService.pagesDELETE(id!).then((result: any) => {
+    return PageAdminService.deletePages({id:id}).then((result: any) => {
       console.log("test pagedata delete", result)
      
       return result;
@@ -56,8 +56,8 @@ export const deletePageData = createAsyncThunk(
 
 export const editPageData = createAsyncThunk(
   "pages/editPageData",
-  ({ id, UpdatePageInputDto }: { id: any, UpdatePageInputDto: any }) => {
-    return pagesService.pagesPUT(id, UpdatePageInputDto, undefined).then((result: any) => {
+  ({ id, UpdatePageInputDto }:{ id: any, UpdatePageInputDto: any }) => {
+    return PageAdminService.putPages({id, requestBody:UpdatePageInputDto}).then((result: any) => {
       return result.items;
     })
   }
@@ -66,7 +66,7 @@ export const editPageData = createAsyncThunk(
 export const fetchEditPagesData = createAsyncThunk(
   "pages/fetchEditPagesData",
   (id: string) => {
-    return pagesService.pagesGET2(id, undefined).then((result: any) => {
+    return PageAdminService.getPages({id:id}).then((result: any) => {
       return result;
     })
   }
@@ -75,7 +75,7 @@ export const fetchEditPagesData = createAsyncThunk(
 export const isHomePageChangeData = createAsyncThunk(
   "pages/isHomePageChangeData",
   (id :string) => {
-    return pagesService.setashomepage(id, undefined).then((result: any) => {
+    return PageAdminService.putPagesSetashomepage({id:id}).then((result: any) => {
       return result;
     })
   }
