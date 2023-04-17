@@ -19,9 +19,9 @@ export type OpenAPIConfig = {
 };
 
 let token = localStorage.getItem('accessToken');
-if (token) {
-    token = JSON.parse(token);
-}
+// if (token) {
+//     token = JSON.parse(token);
+// }
 
 export const OpenAPI: OpenAPIConfig = {
     BASE: process.env.REACT_APP_API_URL || 'https://raaghu-react.azurewebsites.net',

@@ -51,7 +51,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
    await sessionService(API_URL, grant_type, email, password, client_id, scope).then(async(res:any)=>{
     await hello(res)
-    localStorage.setItem('accessToken',JSON.stringify(res))
+    localStorage.setItem('accessToken',res)
     })
     };
  // localStorage.setItem("auth", JSON.stringify(false));

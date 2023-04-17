@@ -5,7 +5,7 @@ import {
   AnyAction,
 } from "@reduxjs/toolkit";
 import { unset } from "lodash-es";
-import {FormService} from "../../proxy/services/FormService";
+import { FormService } from "../../proxy/services/FormService";
 
 type InitialStateForms = {
   loading: boolean;
@@ -17,9 +17,9 @@ type InitialStateForms = {
   alert: boolean;
   alertMessage: string;
   success: boolean;
-  getSettings:any;
-  getResponses:any;
-  getResponsesCount:any;
+  getSettings: any;
+  getResponses: any;
+  getResponsesCount: any;
 };
 
 export const InitialStateForms: InitialStateForms = {
@@ -32,32 +32,34 @@ export const InitialStateForms: InitialStateForms = {
   alert: false,
   alertMessage: "",
   success: false,
-  getSettings:null,
-  getResponses:null,
-  getResponsesCount:null
+  getSettings: null,
+  getResponses: null,
+  getResponsesCount: null,
 };
-
 
 //effects and actions
 export const fetchForms = createAsyncThunk("forms/fetchForms", () => {
-  return FormService
-    .get4({filter:undefined, sorting:'id DESC', skipCount:0, maxResultCount:30})
-    .then((result: any) => {
-      return result;
-    });
+  return FormService.get4({
+    filter: undefined,
+    sorting: "id DESC",
+    skipCount: 0,
+    maxResultCount: 30,
+  }).then((result: any) => {
+    return result;
+  });
 });
 
 export const deleteForms = createAsyncThunk(
   "forms/deleteForms",
   (id: string) => {
-    return FormService.delete2({id}).then((result: any) => {
+    return FormService.delete2({ id }).then((result: any) => {
       return result;
     });
   }
 );
 
 export const Saveforms = createAsyncThunk("forms/Saveforms", (data: any) => {
-  return FormService.post2(data).then((result: any) => {
+  return FormService.post2({ requestBody: data }).then((result: any) => {
     return result;
   });
 });
@@ -65,39 +67,39 @@ export const Saveforms = createAsyncThunk("forms/Saveforms", (data: any) => {
 export const updateForms = createAsyncThunk(
   "forms/updateForms",
   (data: any) => {
-    return FormService.put1({id:data.id, requestBody:data.body}).then((result: any) => {
-      return result;
-    });
+    return FormService.put1({ id: data.id, requestBody: data.body }).then(
+      (result: any) => {
+        return result;
+      }
+    );
   }
 );
 
 export const getForms = createAsyncThunk("forms/getForms", (id: string) => {
-  return FormService.get5({id}).then((result: any) => {
+  return FormService.get5({ id }).then((result: any) => {
     return result;
   });
 });
 
 //Forms Questions
 
-export const 
-SaveformsQuestions = createAsyncThunk(
+export const SaveformsQuestions = createAsyncThunk(
   "forms/SaveformsQuestions",
-  (data:any) => {
-    
-     let temp = data.body;
+  (data: any) => {
+    let temp = data.body;
     //  temp.index = data.body.index
-    return FormService
-      .postQuestions({id:data.id,requestBody:temp})
-      .then((result: any) => {
+    return FormService.postQuestions({ id: data.id, requestBody: temp }).then(
+      (result: any) => {
         return result;
-      });
+      }
+    );
   }
 );
 
 export const deleteFormsQuestions = createAsyncThunk(
   "forms/deleteFormsQuestions",
   (id: string) => {
-    return FormService.delete1({id}).then((result: any) => {
+    return FormService.delete1({ id }).then((result: any) => {
       return result;
     });
   }
@@ -106,18 +108,18 @@ export const deleteFormsQuestions = createAsyncThunk(
 export const updateFormsQuestions = createAsyncThunk(
   "forms/updateFormsQuestions",
   (data: any) => {
-    return FormService
-      .put({id:data.id, requestBody:data.body})
-      .then((result: any) => {
+    return FormService.put({ id: data.id, requestBody: data.body }).then(
+      (result: any) => {
         return result;
-      });
+      }
+    );
   }
 );
 
 export const getFormsQuestionsForEdit = createAsyncThunk(
   "forms/getFormsQuestionsForEdit",
   (id: string) => {
-    return FormService.get3({id}).then((result: any) => {
+    return FormService.get3({ id }).then((result: any) => {
       return result;
     });
   }
@@ -126,7 +128,7 @@ export const getFormsQuestionsForEdit = createAsyncThunk(
 export const getAllFormsQuestions = createAsyncThunk(
   "forms/getAllFormsQuestions",
   () => {
-    return FormService.get2({input:undefined}).then((result: any) => {
+    return FormService.get2({ input: undefined }).then((result: any) => {
       return result;
     });
   }
@@ -135,15 +137,20 @@ export const getAllFormsQuestions = createAsyncThunk(
 export const getAll2FormsQuestions = createAsyncThunk(
   "forms/getAll2FormsQuestions",
   (id: string) => {
-    return FormService.getQuestions({id:id, input:undefined}).then((result: any) => {
-      return result;
-    });
+    return FormService.getQuestions({ id: id, input: undefined }).then(
+      (result: any) => {
+        return result;
+      }
+    );
   }
 );
 export const updateFormsSettings = createAsyncThunk(
   "forms/updateFormsSettings",
   (data: any) => {
-    return FormService.putSettings({id:data.id, requestBody:data.body}).then((result: any) => {
+    return FormService.putSettings({
+      id: data.id,
+      requestBody: data.body,
+    }).then((result: any) => {
       return result;
     });
   }
@@ -151,17 +158,17 @@ export const updateFormsSettings = createAsyncThunk(
 export const getFormsSettings = createAsyncThunk(
   "forms/getFormsSettings",
   (id: string) => {
-    return FormService.getSettings({id}).then((result: any) => {
+    return FormService.getSettings({ id }).then((result: any) => {
       return result;
     });
   }
 );
 
 //response send
-export const SaveFormsSendResponse= createAsyncThunk(
+export const SaveFormsSendResponse = createAsyncThunk(
   "forms/SaveFormsSendResponse",
   (data: any) => {
-    return FormService.post3(data).then((result: any) => {
+    return FormService.post3({requestBody: data}).then((result: any) => {
       return result;
     });
   }
@@ -170,7 +177,13 @@ export const SaveFormsSendResponse= createAsyncThunk(
 export const getFormsResponses = createAsyncThunk(
   "forms/getFormsResponses",
   (id: string) => {
-    return FormService.getResponses({id:id, filter:undefined, sorting:undefined, skipCount:0, maxResultCount:30}).then((result: any) => {
+    return FormService.getResponses({
+      id: id,
+      filter: undefined,
+      sorting: undefined,
+      skipCount: 0,
+      maxResultCount: 30,
+    }).then((result: any) => {
       return result;
     });
   }
@@ -179,7 +192,7 @@ export const getFormsResponses = createAsyncThunk(
 export const deleteFormsResponses = createAsyncThunk(
   "forms/deleteFormsResponses",
   (id: string) => {
-    return FormService.deleteResponses({id}).then((result: any) => {
+    return FormService.deleteResponses({ id }).then((result: any) => {
       return result;
     });
   }
@@ -188,7 +201,7 @@ export const deleteFormsResponses = createAsyncThunk(
 export const getFormsResponsesCount = createAsyncThunk(
   "forms/getFormsResponsesCount",
   (id: string) => {
-    return FormService.getResponsesCount({id}).then((result: any) => {
+    return FormService.getResponsesCount({ id }).then((result: any) => {
       return result;
     });
   }
@@ -211,7 +224,6 @@ const formsSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.forms = action.payload;
-        
       }
     );
 
@@ -227,7 +239,7 @@ const formsSlice = createSlice({
         state.loading = false;
         state.error = "";
         state.alert = true;
-        state.alertMessage = "Data deleted Successfully";
+        state.alertMessage = "Form deleted Successfully";
         state.success = true;
       }
     );
@@ -243,7 +255,7 @@ const formsSlice = createSlice({
         state.loading = false;
         state.error = "";
         state.alert = true;
-        state.alertMessage = "Data added Successfully";
+        state.alertMessage = "Form added Successfully";
         state.success = true;
       }
     );
@@ -266,7 +278,7 @@ const formsSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.alert = true;
-        state.alertMessage = "Data edited successfully";
+        state.alertMessage = "Form edited successfully";
         state.success = true;
       }
     );
@@ -309,7 +321,7 @@ const formsSlice = createSlice({
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
-    
+
     builder.addCase(getFormsQuestionsForEdit.pending, (state) => {
       state.loading = true;
     });
@@ -337,7 +349,7 @@ const formsSlice = createSlice({
         state.loading = false;
         state.error = "";
         state.alert = true;
-        state.alertMessage = "Data added Successfully";
+        state.alertMessage = "Question added Successfully";
         state.success = true;
       }
     );
@@ -355,7 +367,7 @@ const formsSlice = createSlice({
         state.loading = false;
         state.error = "";
         state.alert = true;
-        state.alertMessage = "Data deleted Successfully";
+        state.alertMessage = "Question deleted Successfully";
         state.success = true;
       }
     );
@@ -369,7 +381,7 @@ const formsSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.alert = true;
-        state.alertMessage = "Data edited successfully";
+        state.alertMessage = "Question edited successfully";
         state.success = true;
       }
     );
@@ -380,16 +392,19 @@ const formsSlice = createSlice({
       state.alertMessage = "Something Went Wrong";
       state.success = false;
     });
- 
+
     //settings
     builder.addCase(getFormsSettings.pending, (state) => {
       state.loading = true;
     });
 
-    builder.addCase(getFormsSettings.fulfilled, (state, action: PayloadAction<any>) => {
-      state.loading = false;
-      state.getSettings= action.payload;
-    });
+    builder.addCase(
+      getFormsSettings.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.getSettings = action.payload;
+      }
+    );
     builder.addCase(getFormsSettings.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Somethingwentwrong";
@@ -405,7 +420,7 @@ const formsSlice = createSlice({
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.alert = true;
-        state.alertMessage = "Data edited successfully";
+        state.alertMessage = "Setting edited successfully";
         state.success = true;
       }
     );
@@ -417,62 +432,68 @@ const formsSlice = createSlice({
       state.success = false;
     });
 
-        //Save response
-        builder.addCase(SaveFormsSendResponse.pending, (state) => {
-          state.loading = true;
-        });
-    
-        builder.addCase(
-          SaveFormsSendResponse.fulfilled,
-          (state, action: PayloadAction<any>) => {
-            state.loading = false;
-            state.error = "";
-            state.alert = true;
-            state.alertMessage = "Data added Successfully";
-            state.success = true;
-          }
-        );
-        builder.addCase(SaveFormsSendResponse.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message || "Something Went Wrong";
-          state.alert = true;
-          state.alertMessage = "Something Went Wrong";
-          state.success = false;
-        });
+    //Save response
+    builder.addCase(SaveFormsSendResponse.pending, (state) => {
+      state.loading = true;
+    });
 
-        builder.addCase(getFormsResponses.pending, (state) => {
-          state.loading = true;
-        });
-    
-        builder.addCase(getFormsResponses.fulfilled, (state, action: PayloadAction<any>) => {
-          state.loading = false;
-          state.getResponses= action.payload;
-        });
-        builder.addCase(getFormsResponses.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message || "Somethingwentwrong";
-        });
+    builder.addCase(
+      SaveFormsSendResponse.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.error = "";
+        state.alert = true;
+        state.alertMessage = "Response added Successfully";
+        state.success = true;
+      }
+    );
+    builder.addCase(SaveFormsSendResponse.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Something Went Wrong";
+      state.alert = true;
+      state.alertMessage = "Something Went Wrong";
+      state.success = false;
+    });
 
-        builder.addCase(getFormsResponsesCount.pending, (state) => {
-          state.loading = true;
-        });
-    
-        builder.addCase(getFormsResponsesCount.fulfilled, (state, action: PayloadAction<any>) => {
-          state.loading = false;
-          state.getResponsesCount= action.payload;
-        });
-        builder.addCase(getFormsResponsesCount.rejected, (state, action) => {
-          state.loading = false;
-          state.error = action.error.message || "Somethingwentwrong";
-        });
-        
+    builder.addCase(getFormsResponses.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      getFormsResponses.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.getResponses = action.payload;
+      }
+    );
+    builder.addCase(getFormsResponses.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Somethingwentwrong";
+    });
+
+    builder.addCase(getFormsResponsesCount.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(
+      getFormsResponsesCount.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.getResponsesCount = action.payload;
+      }
+    );
+    builder.addCase(getFormsResponsesCount.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Somethingwentwrong";
+    });
+
     builder.addCase(
       deleteFormsResponses.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
         state.error = "";
         state.alert = true;
-        state.alertMessage = "Data deleted Successfully";
+        state.alertMessage = "Response deleted Successfully";
         state.success = true;
       }
     );
