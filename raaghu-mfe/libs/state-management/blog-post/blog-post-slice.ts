@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { BlogPostAdminService } from "../../proxy/services/BlogPostAdminService";
-import { ClaimTypeService } from "../../proxy/services/ClaimTypeService";
-import Users from "../../../rds_pages/rds-page-users/src/users/users";
+import { BlogPostAdminService } from "../../proxy";
+
 
 export interface blogPostInitialState {
   loading: boolean;
@@ -34,10 +33,21 @@ export const getAllBlogPost = createAsyncThunk("BlogPost/GetAll", () => {
 
 export const addBlogPostData = createAsyncThunk(
   "BlogPostTypes/addBlogPostTypesData",
-  (claimTypeDto: any) => {
-    return ClaimTypeService.postClaimTypes(claimTypeDto).then((result: any) => {
+  (data: any) => {
+    return BlogPostAdminService.postBlogsBlogPostsCreateAndPublish(data).then((result: any) => {
       return result.items;
     });
+  }
+);
+
+
+
+export const editBlogPostData = createAsyncThunk(
+  "BlogPostTypes/editBlogPostTypesData",
+  ({id ,postTypeDto}:{id: any, postTypeDto: any}) => {
+    return BlogPostAdminService.putBlogsBlogPosts({id, requestBody:postTypeDto}).then((result:any)=>{
+      return result.items;
+    })
   }
 );
 
@@ -84,6 +94,23 @@ const blogPostSlice = createSlice({
       state.allblogpost = [];
       state.error = "";
     });
+
+    builder.addCase(editBlogPostData.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(
+      editBlogPostData.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false;
+        state.allblogpost = action.payload;
+        state.error = "";
+    
+      });
+    builder.addCase(editBlogPostData.rejected, (state, action) => {
+      state.loading = false;
+      state.allblogpost = [];
+      state.error = action.error.message || "Something Went Wrong";
+    })
   },
 });
 
