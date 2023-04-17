@@ -1,15 +1,17 @@
-import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction, createAction} from "@reduxjs/toolkit";
 import {AbpApplicationConfigurationService} from "../../proxy/services/AbpApplicationConfigurationService"
 
 type hostInitialState = {
   loading : boolean,
   configuration : any,
+  callLogin:any
   error : string,
 }
 
 const hostInitialState : hostInitialState = {
   loading : false,
   configuration : null,
+  callLogin:null,
   error : "",
 }
 
@@ -20,12 +22,19 @@ export const fetchApplicationConfig = createAsyncThunk('host/fetchApplicationCon
         return result
     })
 })
+export const callLoginAction = createAction<any>('host/callLoginAction');
+
 
 
 const hostSlice = createSlice({
   name: 'host',
   initialState:hostInitialState,
-  reducers:{},
+  reducers:{
+    callLoginAction: (state, action: PayloadAction<any>) => {
+      debugger
+      state.callLogin = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchApplicationConfig.pending, (state) => {
       state.loading = true
@@ -41,5 +50,6 @@ const hostSlice = createSlice({
     });
   },
 })
+
 
 export default hostSlice.reducer

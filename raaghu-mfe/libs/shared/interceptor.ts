@@ -5,12 +5,10 @@ import axios from 'axios';
 });
 
 instance.interceptors.request.use((config:any) => {
-  let token = localStorage.getItem('accessToken');
-  if (token) {
-    var Token = JSON.parse(token)
-  }
+  let token = sessionStorage.getItem('accessToken');
+
   if(token){
-    config.headers.Authorization = `Bearer ${Token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
