@@ -40,7 +40,6 @@ const RdsSelectList = (props: RdsSelectProps) => {
     } else {
       props.onSelectListChange(e.target.value);
       setselectedoption(e.target.value);
-      console.log("thos console aaye", e);
     }
   };
   const Size = `${props.hasOwnProperty("size") ? props.size : "md"}`;
