@@ -11,13 +11,14 @@ const Pages = (props: any) => {
 	const dispatch = useAppDispatch();
 	const [tableData, setTableData] = useState<any>([]);
 	const [actionId, setActionId] = useState("new");
-	const [tempIsHomePageId,settempIsHomePageId]=useState(true);
+	const [tempIsHomePageId, settempIsHomePageId] = useState(true);
 	const pageData = useAppSelector((state) => state.persistedReducer.pages);
 	const pageDatas = useAppSelector((state) => state.persistedReducer.pages.pagesData);
 	const pageEdit = useAppSelector((state) => state.persistedReducer.pages.pagesDataEdit);
 	const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
 	const offCanvasHandler = () => { };
 	const [editClaimData, setEditClaimData] = useState<any>({});
+	const [filterData, setFilterData] = useState({ filter: undefined || '', sorting: undefined || '', skipCount: 0, maxResultCount: 1000 });
 
 	const [newPageData, setNewPageData] = useState<any>({
 		title: '',
@@ -63,7 +64,7 @@ const Pages = (props: any) => {
 	const actions = [
 		{ id: "edit", displayName: "Edit", offId: "dynamic-edit-off" },
 		{ id: "delete", displayName: "Delete", modalId: "page_del" },
-		{ id: "isHomePageStatus", displayName: "Change Home Page Status", offId: "" },
+		{ id: "isHomePageStatus", displayName: "Change Home Page Status" },
 	];
 
 	function createNewCanvasFn(event: any) {
@@ -73,7 +74,7 @@ const Pages = (props: any) => {
 	}
 
 	useEffect(() => {
-		dispatch(fetchPagesData() as any);
+		dispatch(fetchPagesData(filterData) as any);
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -85,19 +86,12 @@ const Pages = (props: any) => {
 
 	const [homePageId, setHomePageId] = useState("");
 
-	useEffect(() => {
-		// dispatch(isHomePageChangeData(tableDataRowid) as any
-		// ).then((res: any) => {
-		// 	console.log("yyyyyyyyyyy", res)
-		// });
-		// dispatch(fetchPagesData() as any);
-	});
 
 
 	useEffect(() => {
 
 		if (pageDatas) {
-			const pagesDataTable = pageDatas.map((dataPages: any) => {
+			const pagesDataTable = pageDatas?.map((dataPages: any) => {
 				const date = new Date(dataPages.creationTime);
 				let day = date.getDate();
 				let month = date.getMonth() + 1;
@@ -139,11 +133,12 @@ const Pages = (props: any) => {
 					script: dataPages.script,
 					style: dataPages.style,
 					creationTime: creationDate,
-					isHomePage: (
-						<>
-							{dataPages.isHomePage == true ? ("true") : ("false")}
-						</>
-					),
+					isHomePage: dataPages.isHomePage.toString(),
+					// isHomePage: (
+					// 	<>
+					// 		{dataPages.isHomePage ? ("true") : ("false")}
+					// 	</>
+					// ),
 					lastModificationTime: modifiedDate,
 					id: dataPages.id
 				}
@@ -151,6 +146,14 @@ const Pages = (props: any) => {
 			setTableData(pagesDataTable);
 		}
 	}, [pageDatas]);
+
+	const filterSearchHandler = (e: any) => {
+		let temparr = tableData.filter((tableData: any) =>
+			tableData.title.toLowerCase().includes(e.target.value.toLowerCase())
+		);
+		setTableData(temparr);
+	};
+
 
 	const submitHandler = (data: any) => {
 		debugger
@@ -170,7 +173,7 @@ const Pages = (props: any) => {
 					color: "success",
 				});
 			}
-			dispatch(fetchPagesData() as any);
+			dispatch(fetchPagesData(filterData) as any);
 		});
 		setNewPageData({
 			title: '',
@@ -206,9 +209,9 @@ const Pages = (props: any) => {
 					color: "success",
 				});
 			}
-			dispatch(fetchPagesData() as any);
+			dispatch(fetchPagesData(filterData) as any);
 		});
-		dispatch(fetchPagesData() as any);
+		dispatch(fetchPagesData(filterData) as any);
 	};
 
 
@@ -230,7 +233,7 @@ const Pages = (props: any) => {
 			setHomePageId(tempIsHomePageId);
 			dispatch(isHomePageChangeData(tempIsHomePageId) as any).then((res: any) => {
 			})
-			dispatch(fetchPagesData() as any);
+			dispatch(fetchPagesData(filterData) as any);
 		}
 	};
 
@@ -251,7 +254,7 @@ const Pages = (props: any) => {
 					color: "success",
 				});
 			}
-			dispatch(fetchPagesData() as any);
+			dispatch(fetchPagesData(filterData) as any);
 		});
 	};
 
@@ -304,7 +307,9 @@ const Pages = (props: any) => {
 								<RdsSearch
 									iconside="right"
 									placeholder="Search"
-									size="small" />
+									size="small"
+									onSearchClick={() => dispatch(fetchPagesData(filterData))}
+									onChange={(event) => setFilterData({ ...filterData, filter: event.target.value })} />
 							</div>
 
 						</div>
@@ -326,7 +331,7 @@ const Pages = (props: any) => {
 						placement="end"
 						offId="dynamic-edit-off"
 
-						backDrop={false}
+						backDrop={true}
 						scrolling={false}
 						preventEscapeKey={false}
 					>
