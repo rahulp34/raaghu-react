@@ -184,7 +184,7 @@ const Forms = () => {
     <>
       <div className="row">
 
-        <div className=" col-md-10">
+        <div className=" col-md-6">
           {alert.showAlert && alertOne && (
             <RdsAlert
               alertmessage={alert.message}
@@ -193,7 +193,7 @@ const Forms = () => {
             ></RdsAlert>
           )}
         </div>
-        <div className="col d-flex justify-content-end mb-3">
+        <div className="col-6 d-flex justify-content-end mb-3">
           <RdsOffcanvas
             canvasTitle={"NEW FORM"}
             onclick={offCanvasHandler}
