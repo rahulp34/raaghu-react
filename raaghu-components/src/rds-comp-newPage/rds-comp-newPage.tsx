@@ -8,7 +8,7 @@ interface RdsCompNewPageProps {
    content?: string;
    script?: string;
    style?: string;
-   onSubmit: any;
+   onSubmit?: any;
    newPageData?: any;
 }
 
