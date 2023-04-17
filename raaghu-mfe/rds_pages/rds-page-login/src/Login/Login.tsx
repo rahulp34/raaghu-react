@@ -4,57 +4,25 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
 import {
-  sessionService,
   localizationService,
   configurationService,
-} from "raaghu-core";
+} from "raaghu-react-core";
+import { useAppDispatch } from "../../../../libs/state-management";
+import { callLoginAction } from "../../../../libs/public.api";
+
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
-  let API_URL: string =
-    process.env.REACT_APP_API_URL || 'https://raaghu-react.azurewebsites.net';
-  let grant_type = process.env.REACT_APP_GRANT_TYPE || "password";
-  let client_id = process.env.REACT_APP_CLIENT_ID || "raaghu";
-  let scope =
-    process.env.REACT_APP_SCOPE ||
-    "address email phone profile roles BookStore";
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
-  async function loginHandler(email: any, password: any) {
-    function hello(res: any) {
-      localStorage.setItem("access_token", JSON.stringify(res));
-      if (res != undefined) {
-        localStorage.setItem("auth", JSON.stringify(true));
-        const lang =localStorage.getItem("currentLang")||"en-GB"
-        setTurnSpinnerOff(true)
-        navigate('/dashboard')
-        configurationService(API_URL, i18n.language).then(async (res: any) => {
-          await localizationService(API_URL, lang).then(async (resp: any) => {
-            i18n.changeLanguage(lang);
-            var data1 = {};
-            const translation = resp?.resources;
-            if (translation) {
-              Object.keys(translation).forEach((key) => {
-                data1 = { ...data1, ...translation[key].texts };
-              });
-              i18n.addResourceBundle(lang, "translation", data1, false, true);
-            }
-          });
-        });
-      } else {
-        localStorage.setItem("auth", JSON.stringify(false));
-      }
-    }
 
-   await sessionService(API_URL, grant_type, email, password, client_id, scope).then(async(res:any)=>{
-      await hello(res)
-        // localStorage.setItem('accessToken',res);
-        sessionStorage.setItem('accessToken', res);
-      })
-    };
+  function loginHandler(email: any, password: any) {
+    dispatch(callLoginAction({email,password}) as any)
+  };
  // localStorage.setItem("auth", JSON.stringify(false));
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
