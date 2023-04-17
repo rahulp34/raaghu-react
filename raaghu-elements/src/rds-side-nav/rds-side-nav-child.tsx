@@ -39,7 +39,7 @@ const RdsSideNavChild = ({
   return (
     <>
       <ul
-        className={`list-style mb-0 py-3 ps-1 sideNav ${count == 1
+        className={`list-style mb-0 ps-1 sideNav ${count == 1
           ? "list-unstyled"
           : count == 2
             ? "list-unstyled fw-normal pb-1 small ms-1 "
@@ -59,7 +59,7 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center border p-1 rounded-circle ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center shadow-sm border p-1 rounded-circle ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}

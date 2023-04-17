@@ -80,29 +80,6 @@ const Auditpayload = ()=>{
   
 
   useEffect(() => {
-    
-    // dispatch(auditLogsData(payload) as any);
-    // const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
-    //   console.log(auditDataTable);
-    //   return {
-    //     id: dataAudit.id,
-    //     httpStatusCode: dataAudit.httpStatusCode,
-    //     userName: dataAudit.userName,
-    //     clientIpAddress: dataAudit.clientIpAddress,
-    //     // executionTime: dataAudit.executionTime,
-    //     executionDuration: dataAudit.executionDuration,
-    //     applicationName: dataAudit.applicationName,
-    //     browserInfo: dataAudit.browserInfo,
-    //     httpMethod: dataAudit.httpMethod,
-    //     url: dataAudit.url,
-    //     clientName: dataAudit.clientName,
-    //     exceptions: dataAudit.exceptions,
-    //     correlationId: dataAudit.correlationId,
-    //     comments: dataAudit.comments,
-    //     // extraProperties : dataAudit.extraProperties
-    //   };
-    // }, []);
-    // setAuditData(auditDataTable);
     Auditpayload();
   }, [dispatch]);
 
