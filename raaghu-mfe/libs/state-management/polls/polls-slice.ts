@@ -26,7 +26,7 @@ const PollsInitialState : pollsInitialState = {
 
 export const GetPolls = createAsyncThunk('Polls/GetPolls',() => {
     return PollAdminService.getPoll({filter:undefined,sorting:undefined,skipCount:0,maxResultCount:1000}).then((result:any) =>{
-      debugger
+      
         console.log("result",result)
         return result
     })
