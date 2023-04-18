@@ -1,68 +1,87 @@
-import React, { useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { colors } from "../../libs/types";
-import "./rds-toast.scss"
+import "./rds-toast.scss";
+import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsToastProps {
-  colorVariant?:colors;
+  colorVariant?: colors;
+  withIcon?:boolean;
   headerTitle: string;
   message: string;
-  delay:number;
-  autohide:boolean;
-  borderColor:string;
-  showHeader:boolean;
+  delay: number;
+  autohide: boolean;
+  borderColor: string;
+  showHeader: boolean;
+  iconName?:string;
 }
 const RdsToast = (props: RdsToastProps) => {
-   const[clicked, setClicked] = useState(false)
-   let delay = props.delay || 5000;
-   const handler = props.hasOwnProperty("autohide")&&props.autohide==true;
-   console.log("delay - " + delay)
+  let borderColor = "border border-" + props.borderColor || " ";
+  let bg = " bg-" + props.colorVariant || "light";
+  const [state, setState] = useState("show");
 
-   useEffect(() => {
-    if(handler==true){
-        setTimeout(() => {
-            setClicked(true)
-           }, delay); 
-
+  useEffect(() => {
+    if (props.autohide) {
+      var toastTimer = setTimeout(() => {
+        setState("hide");
+      }, props.delay || 3000);
     }
-  } ,[handler]);
 
-  
-  const closeHandler =()=>{
-    setClicked(true)
-  }
- let borderColor ="border border-"+ props.borderColor||" "
-  const isHeader = props.hasOwnProperty("showHeader")&&props.showHeader==true;
-   let bg = " bg-"+props.colorVariant||"light"
-   let classes =`${clicked==true? ' toast closed ' :' showed toast '}`;
+    return () => {
+      clearTimeout(toastTimer);
+    };
+  });
+
   return (
     <>
-      <div className={`${bg}`+`${classes}` +`${borderColor}`}
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true" >
-       {isHeader==true &&  <div><div className="toast-header p-2 d-flex justify-content-between">
-          <strong className="text-bold "> {props.headerTitle} </strong>
-            <button
-            type="button"
-            className="btn-close align-self-baseline"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-            onClick={closeHandler}
-            ></button>
-          
+      <div className="toast-container">
+        <div
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          className={`toast fade ${state} ${bg} ${borderColor}`}
+          id="toastId"
+        >
+          {props.showHeader && (
+            <div>
+              <div className="toast-header p-2 d-flex justify-content-between align-items-end">
+              <div className="me-2">
+                 {props.withIcon && (<RdsIcon name={props.iconName} height="18px" width="18px" stroke={true} fill={false}></RdsIcon> )}
+                </div> 
+
+                <strong className="me-auto text-dark">
+                  {" "}
+                  {props.headerTitle}{" "}
+                </strong>
+                <button
+                  type="button"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                  className="btn-close"
+                ></button>
+              </div>
+              <div className="toast-body">{props.message}</div>
+            </div>
+          )}
+
+          {!props.showHeader && (
+            <div className="m-1 toastbody ">
+              <div className="d-flex justify-content-between     align-items-baseline  ">
+                <div className="toast-body toastbody d-flex justify-content-between  align-items-end ">
+                <div className="me-2">
+                {props.withIcon && (<RdsIcon name={props.iconName} height="18px" width="18px" stroke={true} fill={false}></RdsIcon> )}
+                </div> 
+                  {props.message}
+                </div>
+                <button
+                  type="button"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                  className="btn-close"
+                ></button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="toast-body">{props.message}</div></div>}
-        {isHeader==false && <div  className="m-1 toastbody "> 
-          <div className="toast-body toastbody ">{props.message}</div>
-            <button
-                    type="button"
-                    className="btn-close align-self-baseline"
-                    data-bs-dismiss="toast"
-                    aria-label="Close"
-                    onClick={closeHandler}
-            ></button>
-          </div>
-            }
       </div>
     </>
   );
