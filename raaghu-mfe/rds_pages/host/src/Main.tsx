@@ -193,7 +193,7 @@ const Main = (props: MainProps) => {
           }
         }
       );
-      debugger
+      
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -272,9 +272,9 @@ const Main = (props: MainProps) => {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
-        debugger
+        
         await localizationService(lang).then(async (resp: any) => {
-          debugger
+          
           i18n.changeLanguage(lang);
           var data1 = {};
           const translation = resp?.resources;

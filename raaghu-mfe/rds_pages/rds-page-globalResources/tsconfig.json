@@ -24,8 +24,8 @@
 		"jsx": "react-jsx",
 	},
 	"include": [
-		"src",
-		"../../libs/shared/i18n.ts"	],
+		"src"
+	],
 	"exclude": [
 		"./dist/**/*",
 		"./node_modules/**/*",

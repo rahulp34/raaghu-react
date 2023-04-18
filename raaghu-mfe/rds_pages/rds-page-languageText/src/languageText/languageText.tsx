@@ -169,7 +169,7 @@ const LanguageText = (props: LanguageTextProps) => {
   }, [data.languagesText]);
 
   const baseCultureHandler = (e: any) => {
-    debugger
+    
     setDisplayList((prevState) => ({
       ...prevState,
       baseCulture: e.target.selectedOptions[0].id,
