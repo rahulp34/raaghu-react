@@ -47,6 +47,8 @@ Default.args = {
   message: 'This is a sample toast',
   colorVariant: 'light',
   showHeader:true,
+  withIcon:true,
+  iconName:"folder"
 };
 export const toastWithAutohide = Template.bind({});
 toastWithAutohide.args = {
@@ -54,15 +56,19 @@ toastWithAutohide.args = {
   message: 'This is a sample toast',
   delay:5000,
   autohide: true,
+  withIcon:true,
   showHeader:true,
+  iconName:"folder",
   colorVariant: 'light'
 };
 export const toastWithoutHeader = Template.bind({});
 toastWithoutHeader.args = {
   headerTitle: 'Toast',
   autohide: false,
+  withIcon:true,
   delay:5000,
   showHeader: false,
   message: 'This is a sample toast',
   colorVariant: 'light',
+  iconName:"folder",
 };
