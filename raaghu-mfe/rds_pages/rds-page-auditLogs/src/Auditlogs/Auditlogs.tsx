@@ -357,6 +357,7 @@ const Auditpayload = ()=>{
 
         <div className="row mx-3 my-5">
           <RdsCompDatatable
+           actionPosition="right"
             classes="table__userTable"
             tableHeaders={AuditTableData}
             tableData={auditData}

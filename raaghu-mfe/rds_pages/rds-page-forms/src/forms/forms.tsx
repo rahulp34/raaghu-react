@@ -258,6 +258,7 @@ const Forms = () => {
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
             <div>
               <RdsCompDatatable
+               actionPosition="right"
                 tableHeaders={tableHeaders}
                 tableData={formsData}
                 actions={actions}

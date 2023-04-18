@@ -119,8 +119,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
     });
     setWebhookheaderfile([]);
   };
-  const onActionSelection = (rowData: any, actionId: any) => {
-	};
+  const onActionSelection = (rowData: any, actionId: any) => {};
 
   const tableHeaders = [
       {
@@ -128,7 +127,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
         key: "headerKey",
         datatype: "text",
         sortable: true,
-	isEndUserEditing:true, 
+        isEndUserEditing: true,
       },
       {
         displayName: "Header Value",
@@ -144,11 +143,11 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
       headerKey: user.headerKey,
       headerValue: user.headerValue,
     });
-    setUser((prev)=>({
-         ...prev,
-         headerKey: "",
-         headerValue: "",
-        }));
+    setUser((prev) => ({
+      ...prev,
+      headerKey: "",
+      headerValue: "",
+    }));
   };
 
   return (
@@ -232,6 +231,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
 
           {webhookheaderfile.length != 0 && (
             <RdsCompDatatable
+              actionPosition="right"
               classes="table__userTable"
               tableHeaders={tableHeaders}
               actions={actions}

@@ -589,6 +589,7 @@ const FileManagement = () => {
 
             <div className="row mt-3 ms-3">
               <RdsCompDataTable
+               actionPosition="right"
                 tableHeaders={tableHeaders}
                 tableData={tableData}
                 pagination={false}

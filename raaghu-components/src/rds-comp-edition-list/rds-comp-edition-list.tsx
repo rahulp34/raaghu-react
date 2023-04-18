@@ -1,53 +1,48 @@
-import React ,  { MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
 import { RdsButton, RdsIcon } from "raaghu-react-elements";
 export interface RdsCompEditionListProps {
-	enablecheckboxselection?: boolean;
-	tableHeaders: {
-		displayName: string;
-		key: string;
-		datatype: string;
-		dataLength?: number;
-		required?: boolean;
-		sortable?: boolean;
-		colWidth?: string;
-		disabled?: boolean;
-		enablecheckboxselection?:boolean;
-		isEndUserEditing?: boolean;
-	}[];
-	actions: {
-		displayName: string;
-		id: string;
-	}[];
-	tableData: any[];
-	pagination: boolean;
-	recordsPerPage?: number;
-	recordsPerPageSelectListOption?: boolean;
-	onActionSelection(arg: any): void;
-	onNewTenantClick(
-		event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-	): void;
+  enablecheckboxselection?: boolean;
+  tableHeaders: {
+    displayName: string;
+    key: string;
+    datatype: string;
+    dataLength?: number;
+    required?: boolean;
+    sortable?: boolean;
+    colWidth?: string;
+    disabled?: boolean;
+    enablecheckboxselection?: boolean;
+    isEndUserEditing?: boolean;
+  }[];
+  actions: {
+    displayName: string;
+    id: string;
+  }[];
+  tableData: any[];
+  pagination: boolean;
+  recordsPerPage?: number;
+  recordsPerPageSelectListOption?: boolean;
+  onActionSelection(arg: any): void;
+  onNewTenantClick(
+    event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ): void;
 }
 const RdsCompEditionList = (props: RdsCompEditionListProps) => {
-
-    return (
-        <div className='row'>
-
-          
-                <RdsCompDatatable
-				            enablecheckboxselection = {props.enablecheckboxselection}
-                    tableHeaders={props.tableHeaders}
-                    actions={props.actions}
-                    tableData={props.tableData}
-                    pagination={props.pagination}
-                    recordsPerPage={props.recordsPerPage}
-                    onActionSelection={props.onActionSelection}
-                    recordsPerPageSelectListOption={props.recordsPerPageSelectListOption}
-                ></RdsCompDatatable>
-      
-        </div >
-
-    );
-
+  return (
+    <div className="row">
+      <RdsCompDatatable
+        actionPosition="right"
+        enablecheckboxselection={props.enablecheckboxselection}
+        tableHeaders={props.tableHeaders}
+        actions={props.actions}
+        tableData={props.tableData}
+        pagination={props.pagination}
+        recordsPerPage={props.recordsPerPage}
+        onActionSelection={props.onActionSelection}
+        recordsPerPageSelectListOption={props.recordsPerPageSelectListOption}
+      ></RdsCompDatatable>
+    </div>
+  );
 };
 export default RdsCompEditionList;

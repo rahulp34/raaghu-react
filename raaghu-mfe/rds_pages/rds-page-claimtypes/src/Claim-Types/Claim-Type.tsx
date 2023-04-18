@@ -331,7 +331,8 @@ const ClaimType = () => {
 
 <div className="col-md-12">
   <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-  <RdsCompDatatable
+  <RdsCompDatatable 
+   actionPosition="right"
       tableHeaders={tableHeaders}
       actions={actions}
       tableData={Data!}

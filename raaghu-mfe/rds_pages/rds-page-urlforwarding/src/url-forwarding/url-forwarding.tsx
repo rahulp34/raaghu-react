@@ -193,6 +193,7 @@ const UrlForwarding = () => {
     <div className="col-md-12">
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
       <RdsCompDatatable
+         actionPosition="right"
           classes="table__userTable"
           tableHeaders={tableHeader}
           tableData={data?.urlForwardings}

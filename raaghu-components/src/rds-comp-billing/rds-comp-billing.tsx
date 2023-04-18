@@ -38,6 +38,7 @@ const RdsCompBilling = (props: RdsCompBillingProp) => {
           <p>Check your billing history.</p>
           <div>
             <RdsCompDatatable
+             actionPosition="right"
               tableHeaders={props.billingHeaders}
               actions={props.actions}
               tableData={props.billingData}

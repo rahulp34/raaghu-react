@@ -98,7 +98,7 @@ const LanguageText = (props: LanguageTextProps) => {
   let filter:string;
   useEffect(() => {
     dispatch(fetchResources() as any);
-    let API_URL : string | undefined = process.env.REACT_APP_API_URL;
+     let API_URL= "https://raaghu-react.azurewebsites.net";
    
     const lang =localStorage.getItem("currentLang")||"en-GB"
     configurationService(API_URL).then((result: any) => {
@@ -392,6 +392,7 @@ dispatch(
             </div>
             <div className="p-2">
               <RdsCompDatatable
+                actionPosition="right"
                 classes="table__userTable"
                 tableHeaders={tableHeaders}
                 pagination={true}
