@@ -33,20 +33,19 @@ export const fetchLanguagesText = createAsyncThunk(
     targetCultureName,
     getOnlyEmptyValues,
   }: {
-    resourceName: any;
-    baseCultureName: any;
-    targetCultureName: any;
-    getOnlyEmptyValues: any;
-  }) => {
+    resourceName: string,
+    baseCultureName: string,
+    targetCultureName: string,
+    getOnlyEmptyValues: boolean,
+}) => {
     return await LanguageTextsService.getLanguageTexts({
-      filter: undefined,
-      resourceName: resourceName,
+      resourceName:resourceName,
       baseCultureName: baseCultureName,
       targetCultureName: targetCultureName,
-      getOnlyEmptyValues: getOnlyEmptyValues,
-      sorting: "id DESC",
-      skipCount: 0,
-      maxResultCount: 100,
+      getOnlyEmptyValues:getOnlyEmptyValues,
+      sorting:"name asc",
+      skipCount:0,
+      maxResultCount:10,
     }).then((result: any) => {
       return result;
     });

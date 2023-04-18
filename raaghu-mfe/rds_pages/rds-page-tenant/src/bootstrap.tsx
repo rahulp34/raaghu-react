@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import React from "react";
 import App from "./App";
-import "../../../libs/shared/i18n";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "../../../libs/public.api";
 

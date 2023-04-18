@@ -116,7 +116,7 @@ export const updateFileDescriptor= createAsyncThunk(
 export const DeleteFileDescriptor= createAsyncThunk(
   "FileManagement/DeleteFileDescriptor",
   (data:any)=>{
-    debugger
+    
     return FileDescriptorsService.deleteFileDescriptor({id:data}).then((result:any)=>{
       return result
     })

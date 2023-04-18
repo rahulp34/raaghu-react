@@ -3,30 +3,29 @@ import { useTranslation } from "react-i18next";
 
 import {
   RdsCompApiScopeBasicResource,
-  RdsCompTenantSettings,
   RdsCompDatatable,
-  RdsCompAlertPopup
+  RdsCompAlertPopup,
 } from "../../../rds-components";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
-import { RdsButton, RdsOffcanvas, RdsLabel, RdsInput, RdsTextArea, RdsAlert, RdsModal } from "../../../rds-elements";
-import { fetchScopesData, deleteScopesData, getScopesData, updateScopesData, editScopesData } from "../../../../libs/state-management/apiScope/apiScope-slice"
-//import { entityChangesWithUsername } from "../../../../libs/state-management/audit-logs/audit-log-slice";
-interface RdsPageScopeProps { }
+import {
+  RdsButton,
+  RdsOffcanvas,
+  RdsAlert,
+  RdsModal,
+} from "../../../rds-elements";
+import {
+  fetchScopesData,
+  deleteScopesData,
+  getScopesData,
+  updateScopesData,
+  editScopesData,
+} from "../../../../libs/state-management/apiScope/apiScope-slice";
 
-const ApiScope = (props: RdsPageScopeProps) => {
-  console.log("ApiScope  HHHHHHHHHHHHHHHHHHHHH", process.env.REACT_APP_API_URL)
-  const { t } = useTranslation();
-  const scopeuser = useAppSelector((state) => state.persistedReducer.scopes);
-  
+const ApiScope = () => {
   const [scopeData, setScopeData] = useState<any[]>([{}]);
-  const [newScopeData, setnewScopeData] = useState({
-    name: "",
-    displayName: "",
-    description: "",
-  });
   const [editscopeData, setEditScopeData] = useState({
     id: "",
     name: "",
@@ -34,107 +33,141 @@ const ApiScope = (props: RdsPageScopeProps) => {
     description: "",
     resources: [""],
   });
-  const [showalert, setShowAlert] = useState({
-    color:true,
-    show:false,
-    message:'',
-  })
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
+  const [tableDataid, setTableDataRowId] = useState(0);
+  //object destructuring of useTranslation hook
+  const { t } = useTranslation();
 
+  //get state from global store
+  const scopeUser = useAppSelector((state) => state.persistedReducer.scopes);
 
+  //Dispatch action
   const dispatch = useAppDispatch();
+
+  //all useEffects
   useEffect(() => {
     dispatch(fetchScopesData() as any);
   }, [dispatch]);
 
   useEffect(() => {
-    if (scopeuser.users?.items) {
-      const setData1 = scopeuser.users.items.map((scope: any) => {
+    if (scopeUser.users?.items) {
+      const setData1 = scopeUser.users.items.map((scope: any) => {
         return {
           id: scope.id,
           name: scope.name,
           displayName: scope.displayName,
           description: scope.description,
-          
-        }
-      })
-      setScopeData(setData1)
+        };
+      });
+      setScopeData(setData1);
     }
-  }, [scopeuser.users]);
-
+  }, [scopeUser.users]);
 
   useEffect(() => {
-    if (scopeuser.editScope?.id != null) {
+    if (scopeUser.editScope?.id != null) {
       setEditScopeData({
-        id: scopeuser.editScope.id,
-        name: scopeuser.editScope.name,
-        displayName: scopeuser.editScope.displayName,
-        description: scopeuser.editScope.description,
-        resources: scopeuser.editScope.resources
-      })
+        id: scopeUser.editScope.id,
+        name: scopeUser.editScope.name,
+        displayName: scopeUser.editScope.displayName,
+        description: scopeUser.editScope.description,
+        resources: scopeUser.editScope.resources,
+      });
     }
-  }
-    , [scopeuser.editScope]);
+  }, [scopeUser.editScope]);
 
-    useEffect(() => {
-      setnewScopeData({
-            name: '',
-            displayName:'',
-            description:''   
-        })
-     }, [scopeuser.users]);
-  
-  useEffect(() => { 
-			const timer = setTimeout(() => {
-        setShowAlert({
-          color: true,
-          show: false,
-          message :""
-        })
-			}, 3000);
+  useEffect(() => {
+    // Set a 3-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 3000);
 
+    return () => clearTimeout(timer);
+  }, [scopeUser.users]);
 
-      return ()=>clearTimeout(timer)
-		}
-    , [scopeuser.users]);
+  //Selection of action for data table
+  const handlerActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
 
-  const [tableDataid, setTableDataRowId] = useState(0);
-
-  const scopeSelection = (rowData: any, actionId: any) => {
-    setTableDataRowId(rowData.id)
- 
     dispatch(editScopesData(rowData.id) as any);
-
   };
-
-  const success = () => {
-    dispatch(deleteScopesData(tableDataid) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
-    setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
+  //delete the scope
+  const handlerDeleteScope = () => {
+    dispatch(deleteScopesData(tableDataid) as any).then((res: any) => {
+      if (res.type == "Scopes/deleteScopesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Scope deleted Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchScopesData() as any);
+    });
   };
-
-
-  const submit = (data: any) => {
+  //Add the scope
+  const handlerAddScope = (data: any) => {
     const newDto = {
       name: data.email,
       displayName: data.fullname,
       description: data.message,
-      resources : data.resources,
+      resources: data.resources,
     };
-    dispatch(getScopesData(newDto) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
-    setShowAlert({color:true,show:true,message:"Scope added Successfully"})
-  
-  }
-
-
-  const edit = (data: any) => {
+    dispatch(getScopesData(newDto) as any).then((res: any) => {
+      if (res.type == "Scopes/getScopesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Scope Added Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchScopesData() as any);
+    });
+  };
+  //Edit the scope
+  const handlerEditScope = (data: any) => {
     const editDto = {
       name: data.email,
       displayName: data.fullname,
       description: data.message,
-
     };
-    dispatch(updateScopesData({ id: tableDataid, updateScopeDto: editDto }) as any).then((res: any) => { dispatch(fetchScopesData() as any); });
-    setShowAlert({color:true,show:true,message:"Scope Edited Successfully"})
-  }
+    dispatch(
+      updateScopesData({ id: tableDataid, updateScopeDto: editDto }) as any
+    ).then((res: any) => {
+      if (res.type == "Scopes/updateScopesData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Scope edited Successfully",
+          color: "success",
+        });
+      }
+      dispatch(fetchScopesData() as any);
+    });
+  };
+
+  //headers for data table
   const tableHeaders = [
     {
       displayName: t("Name"),
@@ -155,33 +188,29 @@ const ApiScope = (props: RdsPageScopeProps) => {
       sortable: false,
     },
   ];
-
+  //Actions for data table
   const actions = [
     { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
     { id: "history", displayName: "Change History", modalId: "change_history" },
     { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
   ];
 
-  const offCanvasHandler = () => { 
-    
-  };
-
   return (
-    <div>
-       <div className="row align-items-center">
-        <div className="col-lg-9 col-md-9">
-      { showalert.show && <RdsAlert alertmessage={showalert.message} colorVariant={showalert.color? "success":""} />}
-        </div>
-
-        {/* <div className="d-flex justify-content-between"> */}
-        <div className="col-lg-3 col-md-3 mb-2 d-flex justify-content-end">
+    <div className="row">
+      <div className="col-md-12 mb-3 ">
+        <div className="row ">
+          <div className="col-md-4">
+            {Alert.show && (
+              <RdsAlert
+                alertmessage={Alert.message}
+                colorVariant={Alert.color}
+              ></RdsAlert>
+            )}
+          </div>
+          <div className="col-md-8 d-flex justify-content-end ">
             <RdsOffcanvas
-              canvasTitle={t("New Scope")}
-              onclick={offCanvasHandler}
-              placement="end"
-              
               offcanvasbutton={
-                <div>
+                <div className="my-1">
                   <RdsButton
                     icon="plus"
                     label={t("New Scope") || ""}
@@ -197,21 +226,25 @@ const ApiScope = (props: RdsPageScopeProps) => {
                   ></RdsButton>
                 </div>
               }
-              backDrop={false}
+              placement={"end"}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"apiScope"}
+              offId={"apiScope1"}
+              canvasTitle={"New Scope"}
             >
-
               <RdsCompApiScopeBasicResource
-                onSuccess={submit} email={newScopeData.name} fullname={newScopeData.displayName} message={newScopeData.description} />
-
+                onSuccess={handlerAddScope}
+                email=""
+                fullname=""
+                message=""
+              />
             </RdsOffcanvas>
           </div>
-
         </div>
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
-          {/* <h5 className="m-2" >Scopes</h5> */}
+      </div>
+      <div className="col-md-12">
+        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
           <RdsCompDatatable
             tableHeaders={tableHeaders}
             actions={actions}
@@ -219,7 +252,7 @@ const ApiScope = (props: RdsPageScopeProps) => {
             pagination={true}
             recordsPerPage={10}
             recordsPerPageSelectListOption={true}
-            onActionSelection={scopeSelection}
+            onActionSelection={handlerActionSelection}
           ></RdsCompDatatable>
           <RdsOffcanvas
             backDrop={true}
@@ -228,36 +261,44 @@ const ApiScope = (props: RdsPageScopeProps) => {
             offId="entity-edit-off"
             placement="end"
             canvasTitle="Edit"
-          
             children={
               <RdsCompApiScopeBasicResource
-                onSuccess={edit} email={editscopeData.name} fullname={editscopeData.displayName} message={editscopeData.description} />
+                onSuccess={handlerEditScope}
+                email={editscopeData.name}
+                fullname={editscopeData.displayName}
+                message={editscopeData.description}
+              />
             }
           ></RdsOffcanvas>
           <RdsModal
             modalId="change_history"
-            modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope" 
+            size="large"
+            // modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope"
             modalAnimation="modal fade"
-            showModalHeader={true}
+            showModalHeader={false}
           >
-       
+            <h4>Volo.Abp.OpenIddict.Scopes.OpenIddictScope</h4>
             <p>({editscopeData.id})</p>
-            <p className="text-center" >No Change(s)</p>
+            <p className="text-center">No Change(s)</p>
             <div className="text-end">
-
-              <RdsButton type={"button"} colorVariant="primary" label="Close" databsdismiss="modal" databstarget="change_history"></RdsButton>
+              <RdsButton
+                type={"button"}
+                colorVariant="primary"
+                label="Close"
+                databsdismiss="modal"
+                databstarget="change_history"
+              ></RdsButton>
             </div>
-           
           </RdsModal>
           <RdsCompAlertPopup
             alertID="dynamic_delete_off"
             messageAlert="The selected Resource will be Deleted Permanently "
             alertConfirmation="Are you sure"
             deleteButtonLabel="Yes"
-            onSuccess={success}
+            onSuccess={handlerDeleteScope}
           />
         </div>
-      
+      </div>
     </div>
   );
 };
