@@ -101,7 +101,7 @@ const LanguageText = (props: LanguageTextProps) => {
     let API_URL : string | undefined = process.env.REACT_APP_API_URL;
    
     const lang =localStorage.getItem("currentLang")||"en-GB"
-    configurationService(API_URL, lang).then((result: any) => {
+    configurationService(API_URL).then((result: any) => {
       const tempNames = result.localization.languages.map(
         (item: any) => {
           return {
