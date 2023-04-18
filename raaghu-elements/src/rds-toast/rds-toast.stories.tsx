@@ -19,7 +19,8 @@ export default {
         "light",
       ],
       control: { type: "select" },
-    }, borderColor: {
+    }, 
+    borderColor: {
         options: [
           "primary",
           "secondary",
@@ -44,43 +45,23 @@ export const Default = Template.bind({});
 Default.args = {
   headerTitle: 'Toast',
   message: 'This is a sample toast',
-  headerColorVariant: 'light',
-  showHeader:true,
-};
-
-export const withBorderDisplay = Template.bind({});
-withBorderDisplay.args = {
-  headerTitle: 'Toast',
   colorVariant: 'light',
-  borderColor:"primary",
-  message: 'This is a sample toast',
   showHeader:true,
-  
 };
-
 export const toastWithAutohide = Template.bind({});
 toastWithAutohide.args = {
   headerTitle: 'Toast',
   message: 'This is a sample toast',
+  delay:5000,
   autohide: true,
   showHeader:true,
   colorVariant: 'light'
 };
-
-export const toastWithDelay = Template.bind({});
-toastWithDelay.args = {
-  headerTitle: 'Toast',
-  autohide: true,
-  showHeader:true,
-  message: 'This is a sample toast',
-  delay: 5000,
-  colorVariant: 'light'
-};
-
-
 export const toastWithoutHeader = Template.bind({});
 toastWithoutHeader.args = {
   headerTitle: 'Toast',
+  autohide: false,
+  delay:5000,
   showHeader: false,
   message: 'This is a sample toast',
   colorVariant: 'light',
