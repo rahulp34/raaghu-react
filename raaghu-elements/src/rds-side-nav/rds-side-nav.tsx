@@ -19,6 +19,16 @@ const RdsSideNav = (props: RdsSideNavProps) => {
     setDataFromChild(data);
   };
 
+  const logo = "./assets/raaghu_logs.png";
+  const   afterLogo = "./assets/raaghu_icon.png";
+
+  const images =  {
+     logo ,
+     afterLogo 
+  }
+  
+  const image = (collapse) ? logo : afterLogo;
+
   const onDivCollapse = () => {
     
     // callback(!collapse);
@@ -31,10 +41,37 @@ const RdsSideNav = (props: RdsSideNavProps) => {
     <>
       <nav
         id="sidebar"
-        className={`bd-links min-vh-100 ps-2 p-3 position-relative sidebar  ${ 
+        className={`bd-links min-vh-100 ps-2 position-relative sidebar overflow-visible ${ 
           dataFromChild ? "toggle toggle-sidebar-menu" : ""
         }`}
       >
+         <div className="mb-4 mt-1">
+            <span className="navbar-brand p-0 m-0">
+              {/* { collapse=== true ? {<img
+              className="ms-1 cursor-pointer"
+              src={logo}
+              alt="logo"
+              width="64%"
+            ></img>} : {
+            <img
+            className="ms-1 cursor-pointer"
+            src={afterLogo}
+            alt="logo"
+            width="64%"
+          ></img>}} */}
+            <img
+              className="ms-1 cursor-pointer"
+              src={collapse === true ? afterLogo : logo}
+              alt="logo"
+              width="64%"
+            />
+
+            {/* <span className="title fw-bold text-lowercase m-2 cursor-pointer">
+
+              <b >{props.brandName}</b>
+            </span> */}
+          </span>
+    </div>
         <RdsSideNavChild
           callback={handleChildData}
           data={props.sideNavItems}

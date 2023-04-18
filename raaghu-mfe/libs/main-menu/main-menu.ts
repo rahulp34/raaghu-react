@@ -7,29 +7,29 @@ const MainMenu = [
       "path": "/dashboard",
       "subTitle": "Statistics and reports",
     },
-    // {
-    //   "key": "1",
-    //   "label": "Icons",
-    //   "icon": "icons",
-    //   "path": "/icons",
-    //   "subTitle": "icons",
-    // },
+    {
+      "key": "1",
+      "label": "Icons",
+      "icon": "icons",
+      "path": "/icons",
+      "subTitle": "icons",
+    },
     {
       "key": "2",
       "label": "Menu_Saas",
-      "icon": "pages",
+      "icon": "saas",
       "children": [
         {
           "key": "2-0",
           "label": "Tenants",
-          "icon": "tenant",
+          "icon": "bullet",
           "path": "/tenant",
           "subTitle": "Manage your tenants",
         },
         {
           "key": "2-1",
           "label": "Editions",
-          "icon": "editions",
+          "icon": "bullet",
           "path": "/edition",
           "subTitle": "Manage editions and features of the application",
         },
@@ -38,17 +38,17 @@ const MainMenu = [
     {
       "key": "3",
       "label": "Menu_Administration",
-      "icon": "pages",
+      "icon": "administration",
       "children": [
         {
           "key": "3-0",
           "label": "Menu_IdentityManagement",
-          "icon": "organization",
+          "icon": "bullet",
           "children": [
             {
               "key": "3-0-0",
               "label": "Organization units",
-              "icon": "tenant",
+              "icon": "bullet",
               "path": "/organization-unit",
               "subTitle": 
                 "Use organization units to organize users and entities"
@@ -57,28 +57,28 @@ const MainMenu = [
             {
               "key": "3-0-1",
               "label": "Roles",
-              "icon": "roles",
+              "icon": "bullet",
               "path": "/role",
               "subTitle": "Use roles to group permissions",
             },
             {
               "key": "3-0-2",
               "label": "Users",
-              "icon": "users",
+              "icon": "bullet",
               "path": "/users",
               "subTitle": "Manage users and permissions",
             },
             {
               "key": "3-0-3",
               "label": "Claim Types",
-              "icon": "users",
+              "icon": "bullet",
               "path": "/claim-types",
               "subTitle": "Manage users and permissions",
             },
             {
               "key": "3-0-4",
               "label": "Security-logs",
-              "icon": "users",
+              "icon": "bullet",
               "path": "/security-logs",
               "subTitle": "Manage users and permissions",
             },
@@ -87,12 +87,12 @@ const MainMenu = [
         {
           "key": "3-1",
           "label": "Menu_OpenIddict",
-          "icon": "tenant",
+          "icon": "bullet",
           "children": [
             {
               "key": "3-1-0",
               "label": "MySecurityLogs_Application",
-              "icon": "tenant",
+              "icon": "bullet",
               "path": "/applications",
               "subTitle": 
                 "Use organization units to organize users and entities"
@@ -101,7 +101,7 @@ const MainMenu = [
             {
               "key": "3-1-1",
               "label": "Scopes",
-              "icon": "tenant",
+              "icon": "bullet",
               "path": "/api-scope",
               "subTitle": 
                 "Use organization units to organize users and entities"
@@ -112,19 +112,19 @@ const MainMenu = [
         {
           "key": "3-2",
           "label": "LanguageManagement",
-          "icon": "tenant",
+          "icon": "bullet",
           "children": [
             {
               "key": "3-2-0",
               "label": "Language",
-              "icon": "languages",
+              "icon": "bullet",
               "path": "/language",
               "subTitle": "Manage user interface languages",
             },
             {
               "key": "3-2-1",
               "label": "Language-Text",
-              "icon": "languages",
+              "icon": "bullet",
               "path": "/language-text",
               "subTitle": "Manage user interface languages",
             },
@@ -133,33 +133,33 @@ const MainMenu = [
         {
           "key": "3-3",
           "label": "Menu_TextTemplates",
-          "icon": "languages",
+          "icon": "bullet",
           "path": "/text-template",
           "subTitle": "Manage user interface languages",
         },
         {
           "key": "3-4",
           "label": "Permission_AuditLogs",
-          "icon": "audit_logs",
+          "icon": "bullet",
           "path": "/audit-logs",
           "subTitle": "",
         },
         {
           "key": "3-5",
           "label": "Settings",
-          "icon": "setting",
+          "icon": "bullet",
           "path": "/settings",
           "subTitle": "Show and change application settings",
         },
          {
           "key": "3-6",
           "label": "Permission_Blogging",
-          "icon": "tenant",
+          "icon": "bullet",
           "children": [
             {
               "key": "3-6-0",
               "label": "Permission_Blogging",
-              "icon": "blog",
+              "icon": "bullet",
               "path": "/blogger",
               "subTitle": "Blogs, Posts, Articles",
             },
@@ -170,14 +170,14 @@ const MainMenu = [
     {
       "key": "4",
       "label": "Menu_FileManagement",
-      "icon": "icons",
+      "icon": "file_management",
       "path": "/fileManagement",
       "subTitle": "File Management",
     },
     {
       "key": "5",
       "label": "Permission_Forms",
-      "icon": "icons",
+      "icon": "forms",
       "path": "/forms",
       "subTitle": "Forms",
     },
@@ -185,19 +185,19 @@ const MainMenu = [
     {
       "key": "6",
       "label": "Menu_PaymentManagement",
-      "icon": "card_image",
+      "icon": "payment",
       "children": [
         {
             "key": "6-0-0",
             "label": "Menu_Plans",
-            "icon": "card_image",
+            "icon": "bullet",
             "path": "/paymentPlans",
             "subTitle": "Payment Plans",
         },
         {
           "key": "6-0-1",
           "label": "Menu_PaymentRequests",
-          "icon": "card_image",
+          "icon": "bullet",
           "path": "/paymentRequests",
           "subTitle": "Payment Requests",
         }]
@@ -210,70 +210,70 @@ const MainMenu = [
           {
               "key": "7-0-0",
               "label": "Blogs",
-              "icon": "tenant",
+              "icon": "bullet",
               "path": "/blogs",
               "subTitle": "Manage your blogs",
           },
           {
             "key": "7-0-1",
             "label": "Polls",
-            "icon": "icons",
+            "icon": "bullet",
             "path": "/polls",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
             "key": "7-0-2",
             "label": "UrlForwarding",
-            "icon": "icons",
+            "icon": "bullet",
             "path": "/url-forwarding",
             "subTitle": "Blogs, Posts, Articles",
           },
           {
             "key": "7-0-3",
             "label": "Comments",
-            "icon": "question_chat",
+            "icon": "bullet",
             "path": "/comments",
             "subTitle": "Comments",
           },
               {
               "key": "7-0-4",
               "label": "Tags",
-              "icon": "tag",
+              "icon": "bullet",
               "path": "/tags",
               "subTitle": "tags",
             },
             {
               "key": "7-0-5",
               "label": "Menus",
-              "icon": "icons",
+              "icon": "bullet",
               "path": "/menus",
               "subTitle": "menus"
             },
             {
               "key": "7-0-6",
               "label": "BlogPosts",
-              "icon": "icons",
+              "icon": "bullet",
               "path": "/blog-post",
               "subTitle": "subtitle here"
             },
               {
                "kay": "7-0-7",
               "label": "Permission_GlobalResources",
-              "icon": "tag",
+              "icon": "bullet",
               "path": "/globalResources",
               "subTitle": "Global Resources",
             },
 
             {"key": "7-0-8",
             "label": "Newsletters",
-            "icon": "icons",
+            "icon": "bullet",
             "path": "/newsletters",
             "subTitle": "Newsletters"
           },
           {
             "key": "7-0-9",
             "label": "Pages",
-            "icon": "icons",
+            "icon": "bullet",
             "path": "/pages",
             "subTitle": "subtitle here"
           }
