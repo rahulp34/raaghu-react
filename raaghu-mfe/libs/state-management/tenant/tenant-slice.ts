@@ -57,9 +57,10 @@ export const fetchEdition= createAsyncThunk(
 )
 
 export const createTenant= createAsyncThunk(
+  
   "tenant/createTenant",
   (data:any)=>{
-    return TenantService.postTenants(data.data).then((result:any)=>{
+    return TenantService.postTenants({requestBody:data}).then((result:any)=>{
       return result
     })
   }

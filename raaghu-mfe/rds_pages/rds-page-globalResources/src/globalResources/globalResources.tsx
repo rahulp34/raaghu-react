@@ -5,7 +5,6 @@ import { RdsCompSyntaxHighlighter } from "../../../rds-components";
 import { getGlobalResources, saveGlobalResources } from "../../../../libs/state-management/global-resources/globalResources-slice";
 
 const GlobalResources = () => {
-
   // variables
   const navtabsItems = [
     { label: "Script", tablink: "#script", id: 0 },
@@ -39,7 +38,8 @@ const GlobalResources = () => {
   return (
     <>
       <div className="row">
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+      <div className="col-md-12">
+          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
           <RdsNavtabs navtabsItems={navtabsItems} type="tabs" isNextPressed={showTenantSettings} activeNavTabId={activeNavTabId}
             activeNavtabOrder={(activeNavTabId) => {
               setActiveNavTabId(activeNavTabId),
@@ -68,6 +68,7 @@ const GlobalResources = () => {
             </form>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

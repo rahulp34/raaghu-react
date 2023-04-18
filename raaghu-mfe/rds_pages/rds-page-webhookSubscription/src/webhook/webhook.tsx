@@ -102,7 +102,8 @@ const Webhook = (props: RdsPageWebhookSubscriptionProps) => {
         )}
 
         {webhookItem.length > 0 && (
-          <RdsCompDatatable
+          <RdsCompDatatable 
+          actionPosition="right"
             classes="table__userTable"
             tableHeaders={tableHeaders}
             tableData={webhookItem}

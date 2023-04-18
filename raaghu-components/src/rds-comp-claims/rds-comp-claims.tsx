@@ -1,10 +1,7 @@
-import React, { useState, useEffect, Children, useReducer } from "react";
-import RdsCompAlertPopup from "../rds-comp-alert-popup";
+import React, { useState} from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
-import RdsCompDataTable from "../rds-comp-data-table";
 import {
   RdsButton,
-  RdsIcon,
   RdsInput,
   RdsLabel,
   RdsSelectList,
@@ -121,6 +118,7 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
 
         <div className="row mt-3 ">
           <RdsCompDatatable
+           actionPosition="right"
             tableHeaders={tableHeaders}
             tableData={tableData}
             pagination={true}

@@ -283,6 +283,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
         <div className="m-4">
           
             <RdsCompDatatable
+             actionPosition="right"
               classes="table__userTable"
               tableHeaders={dPHeader}
               tableData={dPItem}
@@ -300,6 +301,7 @@ const DynamicProperty = (props: RdsPageWebhookSubscriptionProps) => {
       {activeTab == "dynamicEntityProps" && (
         <div className="m-4">
            <RdsCompDatatable
+            actionPosition="right"
               classes="table__userTable"
               tableHeaders={entityPItemheader}
               tableData={entityPItem}

@@ -96,6 +96,7 @@ const RdsCompLoginAttempts = (props: RdsCompLoginAttemptsProps) => {
       {!page && (
         <div className="table">
           <RdsCompDatatable
+            actionPosition="right"
             tableHeaders={props.tableHeaders}
             tableData={Tdata}
             pagination={false}

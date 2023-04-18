@@ -131,6 +131,7 @@ const PersonalData = (props: any) => {
             </div>
             <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
                 <RdsCompDatatable
+                 actionPosition="right"
                     tableHeaders={tableHeaders}
                     actions={actions}
                     tableData={personalTableData}

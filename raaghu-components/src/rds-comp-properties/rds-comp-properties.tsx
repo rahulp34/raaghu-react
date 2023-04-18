@@ -57,6 +57,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
     <>
       <form onSubmit={handleSubmit}>
         <RdsCompDatatable
+          actionPosition="right"
           tableHeaders={props.propertyHeaders}
           tableData={props.propertyData}
           pagination={false}
@@ -66,7 +67,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
         <div className=" fw-normal row" mb-3 mt-2>
           <div className="col-md-5 col-sm-12mb-3">
             <RdsInput
-            label="Key"
+              label="Key"
               placeholder="Enter a key"
               inputType="text"
               onChange={headerKeyhandleChange}
@@ -76,7 +77,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
           </div>
           <div className="col-md-5 col-sm-12 mb-3">
             <RdsInput
-            label="Value"
+              label="Value"
               placeholder="Enter a value"
               inputType="text"
               onChange={headerValuehandleChange}
