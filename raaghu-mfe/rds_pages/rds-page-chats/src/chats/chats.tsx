@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../libs/state-management/hooks";
 import {
-  fetchChatsData
+  fetchChatsData,
+  fetchChatContactsData
 } from "../../../../libs/state-management/chats/chats-slice";
 import { RdsButton, RdsIcon, RdsInput, RdsSearch } from "../../../rds-elements";
 import { useTranslation } from "react-i18next";
 
 const Chats = () => {
   const [conversationVisibility, setConversationVisibility] = useState(false);
-
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const chatsData = useAppSelector(
     (state) => state.persistedReducer.chats
@@ -20,13 +21,14 @@ const Chats = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dispatch(fetchChatsData() as any);
+    dispatch(fetchChatContactsData(false) as any);
   }, [dispatch]);
 
   const onStartConversationHandler = () => {
+    dispatch(fetchChatContactsData(true) as any);
     setConversationVisibility(true);
   };
-console.log('aaya kya data ',chatsData )
+
   const opponentText = [
     {
       text: "Hello Amit, How are you doing today? I'm doing great!! How are you doing Today??",
@@ -50,6 +52,13 @@ console.log('aaya kya data ',chatsData )
   ]);
 
   const [enteredText, setEnteredText] = useState("");
+
+  useEffect(() => {
+    // Scroll to the bottom of the container
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [opponentText]);
 
   const onChangehandler = (e: any) => {
     setEnteredText(e.target.value);
@@ -225,7 +234,11 @@ console.log('aaya kya data ',chatsData )
 
         {conversationVisibility && (
           <div className="col-lg-8 col-md-8 d-flex flex-column pt-5 ps-2 pe-2 pb-1 justify-content-between">
-            <div>
+            <div ref={containerRef} style={{
+                  height: "68vh",
+                  overflowY: "scroll",
+                  padding: "2%"
+            }}>
               {/* opponent text */}
               <div className="mb-4">
                 <div className="d-flex">
@@ -256,24 +269,6 @@ console.log('aaya kya data ',chatsData )
                         </div>
                       </div>
                     ))}
-                    {/* <div
-                      className="p-3 mb-2"
-                      style={{
-                        backgroundColor: "#E4ECFF",
-                        marginLeft: "20px",
-                        borderRadius: "20px 20px 20px 0",
-                        maxWidth: "534px",
-                        width: "fit-content",
-                      }}
-                    >
-                      <div>Just say hello, atleast</div>
-                      <div
-                        className="mt-1"
-                        style={{ color: "#BEBEBE", fontSize: "13px" }}
-                      >
-                        17:45
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>

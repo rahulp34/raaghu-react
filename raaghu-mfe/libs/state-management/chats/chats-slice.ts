@@ -54,9 +54,9 @@ export const fetchChatsData = createAsyncThunk(
 
   export const fetchChatContactsData  = createAsyncThunk(
     "chats/fetchChatContactsData",
-    (data:any) => { 
+    (data:boolean) => { 
       return ContactService
-        .getContactContacts({filter:data.filter, includeOtherContacts:data.includeOtherContacts})
+        .getContactContacts({filter:undefined, includeOtherContacts:data})
         .then((result: any) => {
           return result;
         });
