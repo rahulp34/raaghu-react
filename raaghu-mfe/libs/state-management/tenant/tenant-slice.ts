@@ -60,15 +60,6 @@ export const createTenant= createAsyncThunk(
   
   "tenant/createTenant",
   (data:any)=>{
-    // name: string;
-    // editionId?: string | null;
-    // activationState?: Volo_Saas_TenantActivationState;
-    // activationEndDate?: string | null;
-    // editionEndDateUtc?: string | null;
-    // adminEmailAddress: string;
-    // adminPassword: string;
-    // connectionStrings?
-    debugger
     return TenantService.postTenants({requestBody:data}).then((result:any)=>{
       return result
     })
