@@ -3,27 +3,7 @@
 const path = require('path');
 const child_process_1 = require("child_process");
 
-function getArgs() {
-    const args = {};
-    process.argv
-        .slice(2, process.argv.length)
-        .forEach(arg => {
-            const longArg = arg.split('=');
-            let longArgFlag = '';
-            if (arg.slice(0, 2) === '--') {
-                longArgFlag = longArg[0].slice(2, longArg[0].length);
-            } else {
-                longArgFlag = longArg[0];
-            }
-            const longArgValue = longArg.length > 1 ? longArg[1] : true;
-            args[longArgFlag] = longArgValue;
-
-        });
-    return args;
-}
-
 function startCmd(name, cmd) {
-    // console.log('Starting: ', name, cmd);
     const process = child_process_1.exec(cmd);
     process.stdout.on('data', (chunk) => {
         console.log(name, chunk);
@@ -43,12 +23,11 @@ function startApps(apps) {
 
 async function start() {
 
-    const args = getArgs();
+    const args = process.env.npm_config_projects ? process.env.npm_config_projects : undefined;
 
-    if (args != undefined && args != null && Object.keys(args).length > 0) {
+    if (args != undefined && args != null) {
         console.log('Starting...', args);
-        let argsKeys = Object.keys(args);
-        let projectToBuildArray = args[argsKeys[0]].split(',');
+        let projectToBuildArray = args.split(',');
 
         startApps(projectToBuildArray);
 

@@ -50,16 +50,6 @@ if (eTc == "core") {
   process.exit(0);
 }
 
-// Check whether the arguments passed contain the mfe name and the page name
-// if (
-//   ((process.argv[2] === "e" || process.argv[2] === "c" ||
-//     process.argv[2] === "p" || process.argv[2] === "m") &&
-//     process.argv.length !== 3)
-// ) {
-//   console.log("\x1b[31m%s\x1b[0m", "Invalid command!!");
-//   process.exit(0);
-// }
-
 if (
   (process.argv[2] === "e" || process.argv[2] === "c") && process.env.npm_config_name == undefined ||
   (process.argv[2] === "p" || process.argv[2] === "m") && (process.env.npm_config_moduleName == undefined || process.env.npm_config_pageName == undefined)
