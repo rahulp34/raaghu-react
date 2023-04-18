@@ -1,5 +1,6 @@
 /* eslint-disable */
-import RdsCompNewPage from './RdsCompNewPage';
+import React from 'react';
+import RdsCompNewPage from './rds-comp-newPage';
 
 export default {
   title: "RdsCompNewPage",

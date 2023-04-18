@@ -17,35 +17,39 @@ export interface RdsCompBlogPostNewProps {
 
 const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
 
-   const [user, setData] = useState(props.blogPostData);
+   const [postData, setData] = useState(props.blogPostData);
    useEffect(()=>{
       setData(props.blogPostData)
    },[props.blogPostData]);
 
-   // const allFieldsAreEmpty = Object.values(user).every((value) => value === "");
+   // const allFieldsAreEmpty = Object.values(postData).every((value) => value === "");
 
-   const fileArrayHandler = (files: any) => {
-      setData({ ...user, file: files })
+   // const fileArrayHandler = (files: any) => {
+   //    setData({ ...postData, file: files })
+   // }
+
+   const onTitleChangeHandler = (value: any) =>{
+      setData({ ...postData, title: value })
    }
 
-   const onTitleChangeHandler = (e: any) =>{
-      setData({ ...user, title: e.target.innerText })
-   }
+   // const onSelectPostListValue = (value: any) => {
+   //    setData({ ...postData, blog: value});
+   //  };
 
-   const onSelectPostListValue = (e: any) => {
-      setData({ ...user, blog: e.target.innerText });
-    };
+   // const onSelectPostListValue = (value: any) => {
+   //    setData({ ...postData, blogList: value });
+   //  };
 
-   const onSlugChangedHandler = (e : any) => {
-      setData({ ...user, slug: e.target.innerText });
+   const onSlugChangedHandler = (value : any) => {
+      setData({ ...postData, slug: value });
    };
 
-   const onDecChangedHandler = (e : any)=> {
-      setData({ ...user, description: e.target.innerText})
+   const onDecChangedHandler = (value : any)=> {
+      setData({ ...postData, description: value})
    };
 
-   const onTagChangedHandler = (e : any)=>{
-      setData({ ...user, tag: e.target.innerText})
+   const onTagChangedHandler = (value : any)=>{
+      setData({ ...postData, tag: value})
    };
 
    const blogList = [
@@ -58,6 +62,10 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
          val: "blogName1"
       },
    ];
+
+   function profileImage(data: any) {
+      
+   }
 
    return (
       <>
@@ -73,7 +81,8 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      size="mid"
                      limit={0}
                      label="Cover Image" 
-                     onFileArray={fileArrayHandler}
+                     // onFileArray={(e: any)=>fileArrayHandler(e.target.Value)}
+                     // getFileUploaderInfo={(data:any)=>profileImage(data)}
                      />
                </div>
                <div className="form-group pb-3 px-2">
@@ -90,19 +99,22 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      // reset={isReset}
                      listItems={blogList}
                      id={"postList"}
-                     onClick={onSelectPostListValue}
+                     // onClick={(e:any)=>onSelectPostListValue(e.target.value)}
                   />
                </div>
 
                <div className="form-group px-2">
                   <RdsInput
                      inputType="text"
+                     size="medium"
                      required={true}
+                     isDisabled={false}
                      label="Title"
-                     value={user.title}
+                     readonly={false}
+                     value={postData.title}
                      name="title"
                      placeholder="Enter Title"
-                     onChange={onTitleChangeHandler}
+                     onChange={(e:any)=>onTitleChangeHandler(e.target.value)}
                   ></RdsInput>
                </div>
                <div className="form-group px-2">
@@ -111,17 +123,17 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      required={true}
                      label={"Slug"}
                      name="slug"
-                     value={user.slug}
+                     value={postData.slug}
                      placeholder="Enter Slug"
-                     onChange={onSlugChangedHandler}
+                     onChange={(e:any)=>onSlugChangedHandler(e.target.value)}
                   ></RdsInput>
                </div>
                <div className="form-group px-2">
                   <RdsTextArea
                      label="Short description"
                      placeholder="Enter Description"
-                     onChange={onDecChangedHandler}
-                     value={user.description}
+                     onChange={(e:any)=>onDecChangedHandler(e.target.value)}
+                     value={postData.description}
                      rows={3}
                   />
                </div>
@@ -133,9 +145,9 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      inputType="text"
                      required={true}
                      label={"Tag"}
-                     value={user.tag}
+                     value={postData.tag}
                      placeholder="Enter Tag"
-                     onChange={onTagChangedHandler}
+                     onChange={(e:any)=>onTagChangedHandler(e.target.value)}
                   ></RdsInput>
                </div>
                </form>
@@ -162,7 +174,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
 							size="small"
                      // isDisabled={allFieldsAreEmpty}
                      onClick={() => {
-                        props.onSubmit(user);
+                        props.onSubmit(postData);
                       }}
 						></RdsButton>
 					</div>

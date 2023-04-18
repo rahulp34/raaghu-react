@@ -600,7 +600,7 @@ const Users = () => {
   const [password, setPassword] = useState("");
   
     function generatePassword() {
-      debugger
+      
       const length = 10;
       const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]<>?";
       let password = "";
@@ -615,7 +615,7 @@ const Users = () => {
     
   };
   function setPasswordButton(){
-    debugger
+    
      let data = {id:userId, requestBody:{newPassword:password}} 
      dispatch(changePassword(data) as any).then((res: any) => {
       if (res.type == "user/changePassword/rejected") {

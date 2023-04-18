@@ -1,7 +1,6 @@
 import blogPostReducer from "./blog-post/blog-post-slice";
 import pagesReducer from "./pages/pages-slice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { loginReducer } from "./public.api";
 import { forgotPasswordReducer } from "./forgot-password/forgotpassword-slice";
 import editionReducer from "./edition/edition-slice";
 import { subscriptionReducer } from "./subscription/subscription-slice";
@@ -47,7 +46,6 @@ const persistConfig={
 const rootReducer = combineReducers({
   blogPost: blogPostReducer,
   pages: pagesReducer,
-  login: loginReducer,
   forgotPassword: forgotPasswordReducer,
   subscription: subscriptionReducer,
   edition: editionReducer,

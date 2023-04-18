@@ -77,10 +77,6 @@ export const isHomePageChangeData = createAsyncThunk(
   }
 )
 
-
-
-
-
 const pagesSlice = createSlice({
   name: "pages",
   initialState: pagesState,

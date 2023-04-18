@@ -45,6 +45,7 @@ module.exports = (env, argv) => {
           options: {
             cacheDirectory: true,
             babelrc: false,
+            compact: true,
             presets: [
               [
                 "@babel/preset-env",

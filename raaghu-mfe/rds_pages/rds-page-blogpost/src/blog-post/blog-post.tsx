@@ -145,9 +145,11 @@ const BlogPost = () => {
 });
 
 const postSubmitHandler = (data: any)=>{
-      
+	console.log("Dta check", blogPostData);
 	 dispatch(addBlogPostData(data) as any).then((res : any)=>{
+      console.log(res)
 
+	  dispatch(getAllBlogPost() as any);
 	 });
 
 	 setBlogPostData({
@@ -158,7 +160,7 @@ const postSubmitHandler = (data: any)=>{
 		description : "",
 		tag : ""
 	  })
-}
+};
 
 	return (
 		<>
@@ -205,7 +207,7 @@ const postSubmitHandler = (data: any)=>{
 
 				<div className="my-3">
 					<div className="card p-2 border-0 rounded-0 pt-4">
-						{/* <div className="card-body"> */}
+				
 						<div className="row">
 							<div className="col-2">
 								<RdsDropdownList
@@ -223,7 +225,6 @@ const postSubmitHandler = (data: any)=>{
 								/>
 							</div>
 						</div>
-						{/* </div> */}
 					</div>
 				</div>
 

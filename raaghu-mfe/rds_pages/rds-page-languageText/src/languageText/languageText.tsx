@@ -4,7 +4,6 @@ import { RdsCompDatatable } from "../../../rds-components";
 import {
   RdsAlert,
   RdsButton,
-  RdsInput,
   RdsOffcanvas,
   RdsSelectList,
   RdsTextArea,
@@ -20,7 +19,9 @@ import {
   putLanguages,
   restore,
 } from "../../../../libs/state-management/public.api";
-import { ServiceProxy } from "../../../../libs/shared/service-proxy";
+import {
+  configurationService,
+} from "raaghu-core";
 
 export interface LanguageTextProps {
   languagetableHeaders: any;
@@ -71,26 +72,25 @@ const target = [
 const LanguageText = (props: LanguageTextProps) => {
   const data = useAppSelector((state) => state.persistedReducer.languagesText);
   const dispatch = useAppDispatch();
-  const proxy = new ServiceProxy();
-  const [name, setname] = useState<{ option: string; id: any }[]>([]);
-  const [res, setres] = useState<{ option: string; id: any }[]>([]);
-  const [tableData, settableData] = useState([]);
-  const [Alert, setAlert] = useState({show:false,message:"",color:""});
-  const [textEdit, settextEdit] = useState({
+  const [name, setName] = useState<{ option: string; id: any }[]>([]);
+  const [res, setRes] = useState<{ option: string; id: any }[]>([]);
+  const [tableData, setTableData] = useState([]);
+  const [Alert, setAlert] = useState({show:false, message:"", color:""});
+  const [textEdit, setTextEdit] = useState({
     base: "",
     target: " ",
     key: "",
     resource: "",
   });
 
-  const [displaylist, setdisplaylist] = useState({
+  const [displaylist, setDisplayList] = useState({
     baseCulture: name.length > 0 ? name[1].option : "",
     targetCulture: name.length > 0 ? name[1].option : "",
     resourceName: res.length > 0 ? res[1].option : "",
     targetvalue: target[0].option,
   });
 
-  const [codes, setcodes] = useState({
+  const [codes, setCodes] = useState({
     baseCulture: "",
     targetCulture: "",
     resource: "",
@@ -98,7 +98,9 @@ const LanguageText = (props: LanguageTextProps) => {
 
   useEffect(() => {
     dispatch(fetchResources() as any);
-    proxy.applicationConfiguration(undefined).then((result: any) => {
+    let API_URL: string | undefined = process.env.REACT_APP_API_URL;
+    const lang =localStorage.getItem("currentLang")||"en-GB"
+    configurationService(API_URL, lang).then((result: any) => {
       const tempNames = result.localization.languages.map(
         (item: any, i: any) => {
           return {
@@ -107,17 +109,17 @@ const LanguageText = (props: LanguageTextProps) => {
           };
         }
       );
-      setdisplaylist({
+      setDisplayList({
         ...displaylist,
         baseCulture: tempNames.length > 0 ? tempNames[0].option : "",
         targetCulture: tempNames.length > 0 ? tempNames[1].option : "",
       });
-      setcodes({
+      setCodes({
         ...codes,
         baseCulture: tempNames.length > 0 ? tempNames[0].id : "",
         targetCulture: tempNames.length > 0 ? tempNames[1].id : "",
       });
-      setname(tempNames);
+      setName(tempNames);
     });
   }, []);
 
@@ -129,7 +131,7 @@ const LanguageText = (props: LanguageTextProps) => {
         };
       });
 
-      setres(tempres);
+      setRes(tempres);
     }
   }, [data.resources]);
 
@@ -162,41 +164,42 @@ const LanguageText = (props: LanguageTextProps) => {
           resourcename: item.resourceName,
         };
       });
-      settableData(temptableData);
+      setTableData(temptableData);
     }
   }, [data.languagesText]);
 
   const baseCultureHandler = (e: any) => {
-    setdisplaylist((prevState) => ({
+    debugger
+    setDisplayList((prevState) => ({
       ...prevState,
       baseCulture: e.target.selectedOptions[0].id,
     }));
 
-    setcodes({ ...codes, baseCulture: e.target.selectedOptions[0].id });
+    setCodes({ ...codes, baseCulture: e.target.selectedOptions[0].id });
   };
   const targetCultureHandler = (e: any) => {
-    setdisplaylist((prevState) => ({
+    setDisplayList((prevState) => ({
       ...prevState,
       targetCulture: e.target.selectedOptions[0].id,
     }));
 
-    setcodes({ ...codes, targetCulture: e.target.selectedOptions[0].id });
+    setCodes({ ...codes, targetCulture: e.target.selectedOptions[0].id });
   };
   const resourceNameHandler = (e: any) => {
-    setdisplaylist((prevState) => ({
+    setDisplayList((prevState) => ({
       ...prevState,
       resourceName: e.target.selectedOptions[0].value,
     }));
   };
   const TargetHandler = (e: any) => {
-    setdisplaylist((prevState) => ({
+    setDisplayList((prevState) => ({
       ...prevState,
       targetvalue: e.target.selectedOptions[0].value,
     }));
   };
 
   const onActionSelection = (rowData:any, actionId:any ) => {
-    settextEdit({
+    setTextEdit({
       ...textEdit,
       base: rowData.basevalue,
       target: rowData.value ? rowData.value : "",
@@ -206,7 +209,7 @@ const LanguageText = (props: LanguageTextProps) => {
   };
 
   const onTextEdit = (e: any) => {
-    settextEdit({ ...textEdit, target: e.target.value });
+    setTextEdit({ ...textEdit, target: e.target.value });
   };
 
   const onRestore = () => {
@@ -277,15 +280,13 @@ const LanguageText = (props: LanguageTextProps) => {
       <div className="row">
         <div className="col-md-12">
         <div className="row ">
-            <div className="col-md-4" style={{position: "absolute" , 
-    zIndex: "0"}}>
+            <div className="col-md-4" style={{position: "absolute" , zIndex: "0"}}>
               {Alert.show && (
                 <RdsAlert
                 alertmessage={Alert.message}
                 colorVariant={Alert.color}
               ></RdsAlert>
-              )}
-              
+              )}             
             </div>
             </div>
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">

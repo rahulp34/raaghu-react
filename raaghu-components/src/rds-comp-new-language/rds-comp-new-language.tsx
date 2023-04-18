@@ -64,7 +64,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
     setdataEmit({ ...dataEmit, check: event.target.checked });
   };
   const langNamesHandler = (value: any) => {
-    debugger
+    
     setdataEmit({ ...dataEmit, name: value ,item:value});
     let displayName=''
     props.languageNames.map((res:any)=>{
@@ -75,7 +75,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
     setdataEmit((prev:any)=>{ return {...prev, displayName:displayName}  });
   };
   const langItemHandler = (value: any) => {
-    debugger
+    
     setdataEmit({ ...dataEmit, name: value,item:value });
     let displayName=''
     props.languageNames.map((res:any)=>{

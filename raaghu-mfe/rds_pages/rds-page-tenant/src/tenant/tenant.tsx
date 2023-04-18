@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
   createTenant,
   deleteTenant,
@@ -19,7 +19,6 @@ import {
   RdsCompTenantList,
   RdsCompTenantInformation,
   RdsCompAlertPopup,
-  RdsCompClaims,
 } from "../../../rds-components";
 import {
   RdsButton,
@@ -27,7 +26,6 @@ import {
   RdsNavtabs,
   RdsAlert,
 } from "../../../rds-elements";
-import { SaasTenantUpdateDto } from "../../../../libs/shared/service-proxy";
 import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-features/rds-comp-new-features";
 import { useTranslation } from "react-i18next";
 
@@ -38,229 +36,6 @@ const actions = [
   { id: "delete", displayName: "Delete", modalId: "Del" },
 ];
 
-const featuresData1 = [
-  {
-    name: "Identity",
-    displayName: "Identity",
-    features: [
-      {
-        name: "Identity.TwoFactor",
-        displayName: "Two factor behaviour",
-        value: "Optional",
-        provider: { name: "D", key: null },
-        description:
-          "Set two factor behaviour. Optional values: Optional,Disabled,Forced",
-        valueType: {
-          itemSource: {
-            items: [
-              {
-                value: "Optional",
-                displayText: {
-                  resourceName: "AbpIdentity",
-                  name: "Feature:TwoFactor.Optional",
-                },
-              },
-              {
-                value: "Disabled",
-                displayText: {
-                  resourceName: "AbpIdentity",
-                  name: "Feature:TwoFactor.Disabled",
-                },
-              },
-              {
-                value: "Forced",
-                displayText: {
-                  resourceName: "AbpIdentity",
-                  name: "Feature:TwoFactor.Forced",
-                },
-              },
-            ],
-          },
-          name: "SelectionStringValueType",
-          properties: {},
-          validator: {
-            name: "NULL",
-            properties: {},
-          },
-        },
-        depth: 0,
-        parentName: null,
-      },
-      {
-        name: "Identity.MaxUserCount",
-        displayName: "Maximum user count",
-        value: "0",
-        provider: {
-          name: "D",
-          key: null,
-        },
-        description: "0 = unlimited",
-        valueType: {
-          name: "FreeTextStringValueType",
-          properties: {},
-          validator: {
-            name: "NUMERIC",
-            properties: {
-              MinValue: 0,
-              MaxValue: 2147483647,
-            },
-          },
-        },
-        depth: 0,
-        parentName: null,
-      },
-      {
-        name: "Account.EnableLdapLogin",
-        displayName: "LDAP Login",
-        value: "False",
-        provider: {
-          name: "D",
-          key: null,
-        },
-        description: null,
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: {
-            name: "BOOLEAN",
-            properties: {},
-          },
-        },
-        depth: 0,
-        parentName: null,
-      },
-      {
-        name: "Identity.EnableOAuthLogin",
-        displayName: "OAuth Login",
-        value: "False",
-        provider: {
-          name: "D",
-          key: null,
-        },
-        description: null,
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: {
-            name: "BOOLEAN",
-            properties: {},
-          },
-        },
-        depth: 0,
-        parentName: null,
-      },
-    ],
-  },
-  {
-    name: "SettingManagement",
-    displayName: "Setting Management",
-    features: [
-      {
-        name: "SettingManagement.Enable",
-        displayName: "Enable setting management",
-        value: "true",
-        provider: { name: "D", key: null },
-        description: "Enable setting management system in the application.",
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: { name: "BOOLEAN", properties: {} },
-        },
-        depth: 0,
-        parentName: null,
-      },
-      {
-        name: "SettingManagement.AllowChangingEmailSettings",
-        displayName: "Allow changing email settings.",
-        value: "false",
-        provider: { name: "D", key: null },
-        description: null,
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: { name: "BOOLEAN", properties: {} },
-        },
-        depth: 1,
-        parentName: "SettingManagement.Enable",
-      },
-    ],
-  },
-  {
-    name: "LanguageManagement",
-    displayName: "Language Management",
-    features: [
-      {
-        name: "LanguageManagement.Enable",
-        displayName: "Enable language management",
-        value: "true",
-        provider: { name: "D", key: null },
-        description: "Enable language management system in the application.",
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: { name: "BOOLEAN", properties: {} },
-        },
-        depth: 0,
-        parentName: null,
-      },
-    ],
-  },
-  {
-    name: "TextManagement",
-    displayName: "Text Template Management",
-    features: [
-      {
-        name: "TextManagement.Enable",
-        displayName: "Enable text template management",
-        value: "true",
-        provider: { name: "D", key: null },
-        description: "Enable text management system in the application.",
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: { name: "BOOLEAN", properties: {} },
-        },
-        depth: 0,
-        parentName: null,
-      },
-    ],
-  },
-  {
-    name: "AuditLogging",
-    displayName: "Audit Logging",
-    features: [
-      {
-        name: "AuditLogging.Enable",
-        displayName: "Enabled audit logging page",
-        value: "true",
-        provider: { name: "D", key: null },
-        description: "Enable audit logging page in the application.",
-        valueType: {
-          name: "ToggleStringValueType",
-          properties: {},
-          validator: { name: "BOOLEAN", properties: {} },
-        },
-        depth: 0,
-        parentName: null,
-      },
-    ],
-  },
-];
-
-const checkboxlabel = [
-  {
-    id: "1",
-    label: "Shared Database",
-    checked: false,
-    name: "shared database",
-  },
-  {
-    id: "2",
-    label: "Separated Database",
-    checked: false,
-    name: "separated database",
-  },
-];
 
 const Tenant = (props: RdsPageTenantProps) => {
   const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
@@ -329,9 +104,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     { label: "Features", tablink: "#nav-profile", id: 1 },
   ];
 
-  const [emittedFeaturesData, setEmittedFeaturesData] = useState([]);
-
-  const treeData: any[] = [];
+  const [emittedFeaturesData, setEmittedFeaturesData] = useState([])
 
   const [tableDataRowid, setTableDataRowId] = useState(0);
 
@@ -347,8 +120,6 @@ const Tenant = (props: RdsPageTenantProps) => {
       dispatch(tenantFeaturesGet(rowData) as any);
     } else if (actionId === "delete") setTenantid(rowData.id);
   };
-
-  const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showTenantSettings, setShowTenantSettings] = useState(false);
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState(0);
   const [actionId, setActionId] = useState("new");
