@@ -194,6 +194,32 @@ const FileManagement = () => {
       setRenameFolder(file.editDirectory);
     }
   }, [file.editDirectory]);
+  
+  const handleDragAndDrop=(sourceId:string, destinationId:string)=>{
+    const files = {
+      body: {
+        id: sourceId,
+        newParentId: destinationId,
+        // formData: { File: new Blob([e], { type: e.type }) },
+      },    
+    };
+    debugger
+      dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
+        dispatch(fetchSubDirectory(undefined) as any);
+      dispatch(fetchDirectoryDescriptor(undefined) as any);
+      })
+      setDirectories([
+        {
+          name: "All",
+          path: "/all",
+          parentId: null,
+          id: null,
+          hasChildren: false,
+          children: [],
+        },
+      ]);
+  
+  } 
 
   const movefolder = (e:any) => {
     
@@ -216,21 +242,16 @@ const FileManagement = () => {
         dispatch(fetchDirectoryDescriptor(undefined) as any);
       })
     }
-    // if(formData){
-    // }
-    // else{
-    // }
-      
-      // setDirectories([
-      //   {
-      //     name: "All",
-      //     path: "/all",
-      //     parentId: null,
-      //     id: null,
-      //     hasChildren: false,
-      //     children: [],
-      //   },
-      // ]);
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ]);
   
   };
   useEffect(() => {
@@ -356,6 +377,7 @@ const FileManagement = () => {
   //     dispatch(fetchDirectoryDescriptor(undefined) as any);
   //   });
   // };
+  
 
   const onDeleteFile = () => {
     if (isDirectory) {
@@ -371,6 +393,16 @@ const FileManagement = () => {
         dispatch(fetchDirectoryDescriptor(undefined) as any);
       });
     }
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ]);
   };
 
   const SetSearchName = (e: any) => {
@@ -387,7 +419,6 @@ const FileManagement = () => {
   function preUploadFileInfo(_data: any) {
     let tempUploadfiles: any[] = [];
     let tempfiles: any[] = [];
-
     [..._data.files].map((res: any) => {
       const data: any = {
         directoryId: folderId,
@@ -530,6 +561,7 @@ const FileManagement = () => {
               items={directories}
               path={setPathValue}
               selectedItemId={directories[0].id}
+              onDragAndDrop={handleDragAndDrop}
             ></RdsCompDirectoryList>
           </div>
 
