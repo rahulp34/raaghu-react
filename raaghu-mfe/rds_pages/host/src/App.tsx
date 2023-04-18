@@ -16,7 +16,6 @@ const App = () => {
     }
   };
   document.documentElement.setAttribute("theme", themes);
-console.log("session root level ",localStorage.getItem("auth"), localStorage.getItem("token") )
   return (
     <Suspense>
       <Main toggleTheme={toggleTheme}></Main>

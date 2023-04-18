@@ -339,6 +339,7 @@ const Edition = (props: RdsPageEditionProps) => {
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
+          className="overflow-hidden"
         >
           <RdsNavtabs
             navtabsItems={navtabsItems}

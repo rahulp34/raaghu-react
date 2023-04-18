@@ -32,7 +32,7 @@ const RdsCompProfilePicture = (props: any) => {
 //   }
 
 const onClickSetProfilePicture=(event:any)=>{
-  // debugger
+  // 
   if(event.target.value=="Use Default Avatar"){
     // alert(0);
     setAvatarImg('./assets/profile-picture-circle.svg');

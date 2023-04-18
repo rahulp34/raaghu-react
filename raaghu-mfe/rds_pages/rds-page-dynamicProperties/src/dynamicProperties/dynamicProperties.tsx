@@ -1,5 +1,4 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import { EditionCreateDto } from "../../../../libs/public.api";
 import {
   RdsCompDatatable,
   RdsCompInformation,

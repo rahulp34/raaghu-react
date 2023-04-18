@@ -5,19 +5,20 @@ import "./App.scss";
 import {
   configurationService,
   localizationService,
+  sessionService,
   clearToken,
-} from "raaghu-core";
-import { useAppSelector } from "../../../libs/state-management/hooks";
+} from "raaghu-react-core";
+import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
+//import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
-import { AuthGuard } from "../../../libs/public.api";
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { fetchApplicationConfig } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction,  } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -77,6 +78,9 @@ const Main = (props: MainProps) => {
   //   localization: store.localization,
   // });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
+
 
   let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
 
@@ -119,9 +123,9 @@ const Main = (props: MainProps) => {
             val: "AddressInput",
         },
     ];
-  // useEffect(() => {
-  //   dispatch(fetchApplicationConfig() as any);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(callLoginAction(null) as any)
+  }, [dispatch]);
 
   // useEffect(() => {
   //   if (checkingFirstTime&&
@@ -162,18 +166,15 @@ const Main = (props: MainProps) => {
     setCurrentLanguage(val);
     localStorage.setItem("currentLang",val);
   };
-  // const storeData.languages=storeData.languages
-  //selector: (state: { persistedReducer: EmptyObject & { localization: localInitialState; configuration: configlInitialState; } & PersistPartial; }) => any,
-
+  
   useEffect(() => {
-   
-    configurationService(API_URL, currentLanguage).then(async (res: any) => {
-      await localizationService(API_URL, currentLanguage).then(
+    configurationService(currentLanguage).then(async (res: any) => {
+      await localizationService(currentLanguage).then(
         async (resp: any) => {
           let data1 = {};
           let data2 = {};
           const translation = resp?.resources;
-           if (translation) {
+          if (translation) {
             Object.keys(translation).forEach((key) => {
               Object.keys(translation[key].texts).forEach((k1)=>{
                 let k2 = k1.replace(/[^\w\s]/gi,'_');
@@ -192,6 +193,7 @@ const Main = (props: MainProps) => {
           }
         }
       );
+      debugger
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -203,7 +205,7 @@ const Main = (props: MainProps) => {
       });
       setLanguageData(tempdata);
     });
-    }, [currentLanguage]);
+  }, [currentLanguage]);
 
   const sideNavItems = concatenated;
 
@@ -264,6 +266,39 @@ const Main = (props: MainProps) => {
       setBreadCrumItem(a);
     }
   };
+
+  function hello(res: any) {
+      localStorage.setItem("auth", JSON.stringify(true));
+      const lang =localStorage.getItem("currentLang")||"en-GB"
+      navigate('/dashboard')
+      configurationService(lang).then(async (res: any) => {
+        debugger
+        await localizationService(lang).then(async (resp: any) => {
+          debugger
+          i18n.changeLanguage(lang);
+          var data1 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              data1 = { ...data1, ...translation[key].texts };
+            });
+            i18n.addResourceBundle(lang, "translation", data1, false, true);
+          }
+        });
+      });
+  }
+  useEffect(()=>{
+    if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
+        if(res){
+          await hello(res)
+          sessionStorage.setItem('accessToken',res)
+        }
+      });
+      dispatch(callLoginAction(null) as any);
+    }
+  },[dataHost])
+  
 
   function recursiveFunction(menus:any, searchName:string){
     return menus.map((res:any)=>{
@@ -343,9 +378,7 @@ const Main = (props: MainProps) => {
         <Route
           path="/login"
           element={
-            <AuthGuard>
               <LoginCompo />
-            </AuthGuard>
           }
         ></Route>
         <Route
@@ -381,7 +414,7 @@ const Main = (props: MainProps) => {
                 navbarSubTitle={t(currentSubTitle) || ""}
                 onChatClickHandler={() => {
                   console.log(" session Hey Chat Button Clicked!!");
-                } } elementList={[]}              />
+                }} elementList={[]} />
             </div>
             <div
               className="
@@ -518,6 +551,7 @@ const Main = (props: MainProps) => {
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
                       <Route path="/components" element={<ComponentsCompo />} />
+                      <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                      <Route path="/pages" element={<PagesCompo />} /> 
                      <Route path="/blog-post" element={<BlogPostCompo />} /> 

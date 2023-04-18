@@ -38,31 +38,37 @@ function getPortNumber() {
 let eTc = process.argv[2];
 if (eTc == "core") {
   var mfeFolderPath = path.join(__dirname, "..", "raaghu-mfe");
-  execSync(`npm install --save raaghu-core`, {
+  execSync(`npm install --save raaghu-react-core`, {
     cwd: ".",
     stdio: "inherit",
   });
-  execSync(`npm install --save raaghu-core`, {
+  execSync(`npm install --save raaghu-react-core`, {
     cwd: mfeFolderPath,
     stdio: "inherit",
   });
-  console.log("\x1b[32m%s\x1b[0m", `raaghu-core successfully installed!!`);
-  return;
+  console.log("\x1b[32m%s\x1b[0m", `raaghu-react-core successfully installed!!`);
+  process.exit(0);
 }
 
 // Check whether the arguments passed contain the mfe name and the page name
+// if (
+//   ((process.argv[2] === "e" || process.argv[2] === "c" ||
+//     process.argv[2] === "p" || process.argv[2] === "m") &&
+//     process.argv.length !== 3)
+// ) {
+//   console.log("\x1b[31m%s\x1b[0m", "Invalid command!!");
+//   process.exit(0);
+// }
+
 if (
-  ((process.argv[2] === "e" || process.argv[2] === "c") &&
-    process.argv.length !== 4) ||
-  (process.argv[2] === "p" && process.argv.length !== 4) ||
-  (process.argv[2] === "m" && process.argv.length !== 5)
+  (process.argv[2] === "e" || process.argv[2] === "c") && process.env.npm_config_name == undefined ||
+  (process.argv[2] === "p" || process.argv[2] === "m") && (process.env.npm_config_moduleName == undefined || process.env.npm_config_pageName == undefined)
 ) {
   console.log("\x1b[31m%s\x1b[0m", "Invalid command!!");
   process.exit(0);
 }
 
-let nameArr = process.argv[3].split("=");
-let name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+let name = process.env.npm_config_name;
 let port = getPortNumber();
 
 // Get hold of the app folder path inside the mfe
@@ -72,12 +78,10 @@ if (eTc == "e") {
 } else if (eTc == "c") {
   appFolderPath = path.join(__dirname, "..", "raaghu-components");
 } else if (eTc == "p") {
+  name = process.env.npm_config_pageName;
   appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
 } else if (eTc == "m") {
-  // let moduleArr = process.argv[3].split("=");
-  // const module = moduleArr.length == 2 ? moduleArr[1] : moduleArr[0];
-  let nameArr = process.argv[4].split("=");
-  name = nameArr.length == 2 ? nameArr[1] : nameArr[0];
+  name = process.env.npm_config_pageName;
   appFolderPath = path.join(__dirname, "..", "raaghu-mfe", "rds_pages");
 }
 
@@ -161,8 +165,8 @@ if (fs.existsSync(appFolderPath)) {
     let newItem;
     if (eTc == "m") {
       newItem = {
-        key: `${process.argv[3].split("=")[1]}`,
-        label: `${process.argv[3].split("=")[1]}`,
+        key: `${process.env.npm_config_moduleName}`,
+        label: `${process.env.npm_config_moduleName}`,
         icon: "pages",
         children: [
           {
@@ -403,7 +407,7 @@ if (fs.existsSync(appFolderPath)) {
       (err, data) => {
         if (err) {
           console.error(err);
-          return;
+          process.exit(0);
         }
 
         // Add the new module declaration
@@ -418,7 +422,7 @@ if (fs.existsSync(appFolderPath)) {
           (err) => {
             if (err) {
               console.error(err);
-              return;
+              process.exit(0);
             }
 
             // console.log("remote.d.ts file updated successfully!");
@@ -456,7 +460,7 @@ if (fs.existsSync(appFolderPath)) {
     fs.readFile(hostWebpackpath, "utf8", (err, data) => {
       if (err) {
         console.error(err);
-        return;
+        process.exit(0);
       }
 
       const updatedData = data.replace(
@@ -467,7 +471,7 @@ if (fs.existsSync(appFolderPath)) {
       fs.writeFile(hostWebpackpath, updatedData, "utf8", (err) => {
         if (err) {
           console.error(err);
-          return;
+          process.exit(0);
         }
         // console.log("webpack.config.js updated successfully!");
       });
@@ -504,7 +508,7 @@ if (fs.existsSync(appFolderPath)) {
       fs.readFile(routeFilePath, "utf8", (err, data) => {
         if (err) {
           console.error(err);
-          return;
+          process.exit(0);
         }
 
         const lines = data.split("\n");
