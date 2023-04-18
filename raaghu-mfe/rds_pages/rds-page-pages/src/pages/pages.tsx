@@ -68,7 +68,7 @@ const Pages = (props: any) => {
 	];
 
 	function createNewCanvasFn(event: any) {
-		debugger
+		
 		event.preventDefault();
 		setActionId("new");
 	}
@@ -156,7 +156,7 @@ const Pages = (props: any) => {
 
 
 	const submitHandler = (data: any) => {
-		debugger
+		
 		dispatch(postPagesData(data) as any).then((res: any) => {
 			if (res.type == "pages/postPagesData/rejected") {
 				setAlert({
