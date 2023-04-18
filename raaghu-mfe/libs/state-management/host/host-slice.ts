@@ -31,7 +31,7 @@ const hostSlice = createSlice({
   initialState:hostInitialState,
   reducers:{
     callLoginAction: (state, action: PayloadAction<any>) => {
-      debugger
+      
       state.callLogin = action.payload;
     },
   },
