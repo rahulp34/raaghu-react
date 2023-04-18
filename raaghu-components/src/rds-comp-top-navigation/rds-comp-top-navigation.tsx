@@ -143,10 +143,10 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   return (
     <div>
       <nav
-        className={`navbar d-flex justify-content-between p-0 ps-2 pe-3 min-width fixed-top`}
+        className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
       >
         <div className="d-flex align-items-center">
-          <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
+          {/* <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
             <img
               className="ms-1 cursor-pointer"
               src={props?.logo}
@@ -154,11 +154,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               width="64%"
             ></img>
 
-            {/* <span className="title fw-bold text-lowercase m-2 cursor-pointer">
+            <span className="title fw-bold text-lowercase m-2 cursor-pointer">
 
               <b >{props.brandName}</b>
-            </span> */}
-          </span>
+            </span>
+          </span> */}
           <div>
             <div className="text-bold">
               {props.navbarTitle}
