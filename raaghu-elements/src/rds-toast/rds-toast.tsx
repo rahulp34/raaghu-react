@@ -13,6 +13,10 @@ export interface RdsToastProps {
   borderColor: string;
   showHeader: boolean;
   iconName?:string;
+  iconColorvariant?:string;
+  iconHeight?:string;
+  iconWidth?:string;
+  iconFill?:boolean;
 }
 const RdsToast = (props: RdsToastProps) => {
   let borderColor = "border border-" + props.borderColor || " ";
@@ -45,7 +49,7 @@ const RdsToast = (props: RdsToastProps) => {
             <div>
               <div className="toast-header p-2 d-flex justify-content-between align-items-end">
               <div className="me-2">
-                 {props.withIcon && (<RdsIcon name={props.iconName} height="18px" width="18px" stroke={true} fill={false}></RdsIcon> )}
+                 {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
                 </div> 
 
                 <strong className="me-auto text-dark">
@@ -68,7 +72,7 @@ const RdsToast = (props: RdsToastProps) => {
               <div className="d-flex justify-content-between     align-items-baseline  ">
                 <div className="toast-body toastbody d-flex justify-content-between  align-items-end ">
                 <div className="me-2">
-                {props.withIcon && (<RdsIcon name={props.iconName} height="18px" width="18px" stroke={true} fill={false}></RdsIcon> )}
+                {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
                 </div> 
                   {props.message}
                 </div>
