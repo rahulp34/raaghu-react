@@ -36,7 +36,6 @@ const RdsSelectList = (props: RdsSelectProps) => {
         }
       }
       props.someCallback(value);
-      console.log("value", value);
     } else {
       props.onSelectListChange(e.target.value);
       setselectedoption(e.target.value);
