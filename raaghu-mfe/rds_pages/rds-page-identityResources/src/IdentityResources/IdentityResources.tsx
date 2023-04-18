@@ -240,6 +240,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
           {/* <h5 className="m-2" >Scopes</h5> */}
           <RdsCompDatatable
+           actionPosition="right"
             tableHeaders={tableHeaders}
             actions={actions}
             tableData={scopeData}

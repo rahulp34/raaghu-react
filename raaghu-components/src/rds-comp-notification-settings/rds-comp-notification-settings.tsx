@@ -1,6 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import RdsCompDatatable from "../rds-comp-data-table";
-import { RdsButton, RdsDatePicker } from "raaghu-react-elements";
+import React, { useEffect, useState } from "react";
 import "./rds-comp-notification-settings.scss";
 
 export interface RdsCompNotificationSettingsProps {

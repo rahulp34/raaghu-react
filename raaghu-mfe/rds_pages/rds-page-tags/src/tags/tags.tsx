@@ -327,6 +327,7 @@ const Tags = () => {
       <div className="col-md-12">
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
           <RdsCompDatatable
+          actionPosition="right"
             tableHeaders={tableHeaders}
             tableData={tableData}
             pagination={tableHeaders.length > recordsPerPage}

@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   createTenant,
   deleteTenant,
@@ -202,6 +202,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   }, [data.editTenant]);
 
   function saveTenant(data: any) {
+    
     const updateitem = { id: data.id, body: data };
     const createItem = { data: data };
     if (actionId === "editTenant") {
@@ -234,7 +235,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         dispatch(saveFeaturesEdition(features));
       }
     } else {
-      dispatch(createTenant(createItem) as any).then((res: any) => {
+      dispatch(createTenant(createItem.data) as any).then((res: any) => {
         if (res.type == "tenant/createTenant/rejected") {
           setAlert({
             ...Alert,
@@ -246,7 +247,7 @@ const Tenant = (props: RdsPageTenantProps) => {
           setAlert({
             ...Alert,
             show: true,
-            message: "Tenant created Successfully",
+            message: "Tenant added Successfully",
             color: "success",
           });
         }
