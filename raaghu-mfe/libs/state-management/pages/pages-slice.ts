@@ -1,6 +1,6 @@
 
 import { createSlice, createAsyncThunk, PayloadAction, } from "@reduxjs/toolkit";
-import { PageAdminService } from "../../proxy";
+import { PageAdminService } from "../../proxy/services/PageAdminService";
 
 export interface pagesInitialState {
   loading: boolean;
@@ -22,23 +22,21 @@ export const pagesState: pagesInitialState = {
   success: false,
 };
 
-// const pagesService = new ServiceProxy();
+//const pagesService = new PageAdminService();
 
 // Add your Api call here
 export const fetchPagesData = createAsyncThunk(
-  "pages/fetchPagesData", () => {
-    return PageAdminService.getPages1({filter: undefined, sorting: undefined, skipCount: undefined, maxResultCount: undefined}).then((result: any) => {
-      return result;
+  "pages/fetchPagesData", (data: any) => {
+    return PageAdminService.getPages1(data).then((result: any) => {
+      return result.items;
     })
   }
 )
 
 export const postPagesData = createAsyncThunk(
   "pages/postPagesData", (PageDto: any) => {
-    return PageAdminService.postPages(PageDto).then((result: any) => {
-      console.log("test pagedata", result)
+    return PageAdminService.postPages({ requestBody: PageDto }).then((result: any) => {
       return result.items;
-
     })
   }
 )
@@ -46,9 +44,7 @@ export const postPagesData = createAsyncThunk(
 export const deletePageData = createAsyncThunk(
   "pages/deletePageData",
   (id: any) => {
-    return PageAdminService.deletePages(id!).then((result: any) => {
-      console.log("test pagedata delete", result)
-     
+    return PageAdminService.deletePages({ id: id }).then((result: any) => {
       return result;
     });
   }
@@ -57,7 +53,7 @@ export const deletePageData = createAsyncThunk(
 export const editPageData = createAsyncThunk(
   "pages/editPageData",
   ({ id, UpdatePageInputDto }: { id: any, UpdatePageInputDto: any }) => {
-    return PageAdminService.putPages({ id: id, requestBody: UpdatePageInputDto }).then((result: any) => {
+    return PageAdminService.putPages({ id, requestBody: UpdatePageInputDto }).then((result: any) => {
       return result.items;
     })
   }
@@ -74,7 +70,7 @@ export const fetchEditPagesData = createAsyncThunk(
 
 export const isHomePageChangeData = createAsyncThunk(
   "pages/isHomePageChangeData",
-  (id :string) => {
+  (id: string) => {
     return PageAdminService.putPagesSetashomepage({ id: id }).then((result: any) => {
       return result;
     })
@@ -162,7 +158,7 @@ const pagesSlice = createSlice({
       }
     );
     builder.addCase(editPageData.rejected, (state, action) => {
-       state.loading = false;
+      state.loading = false;
       state.pagesData = [];
       state.error = action.error.message || "Something Went Wrong";
       state.alert = true;
@@ -198,7 +194,7 @@ const pagesSlice = createSlice({
       }
     );
     builder.addCase(isHomePageChangeData.rejected, (state, action) => {
-       state.loading = false;
+      state.loading = false;
       state.pagesData = [];
       state.error = action.error.message || "Something Went Wrong";
       state.alert = true;
