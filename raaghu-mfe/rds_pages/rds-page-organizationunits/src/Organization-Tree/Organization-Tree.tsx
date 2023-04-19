@@ -400,6 +400,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       {activeTab === "member" && (
                         <div className="row">
                           <RdsCompDatatable
+                            actionPosition="right"
                             classes="table__userTable"
                             tableHeaders={tableHeadersMembers}
                             tableData={user.members}
@@ -415,6 +416,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       {activeTab === "role" && (
                         <div className="row">
                           <RdsCompDatatable
+                           actionPosition="right"
                             classes="table__userTable"
                             tableHeaders={tableHeadersRoles}
                             tableData={user.roles}
@@ -450,6 +452,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               <div className="form-group mb-3">
                 <div className="col-md-12  mt-2">
                   <RdsCompDatatable
+                   actionPosition="right"
                     classes="table__userTable"
                     tableHeaders={tableHeadersMembers}
                     tableData={user.usersList}
@@ -515,6 +518,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               <div className="form-group mb-3">
                 <div className="col-md-12  mt-2">
                   <RdsCompDatatable
+                   actionPosition="right"
                     classes="table__userTable"
                     tableHeaders={tableHeadersRoles}
                     tableData={user.rolesList}

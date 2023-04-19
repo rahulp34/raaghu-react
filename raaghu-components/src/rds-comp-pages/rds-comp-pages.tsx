@@ -1,7 +1,6 @@
 import React from 'react';
 import RdsCompDatatable from '../rds-comp-data-table';
 import { useTranslation } from 'react-i18next';
-import { t } from 'i18next';
 
 export interface RdsCompPagesProps {
    tableHeaders: {
@@ -25,12 +24,11 @@ export interface RdsCompPagesProps {
    onActionSelection?(rowData: any, actionId: any): void;
 }
 
-
-
 const RdsCompPages = (props: RdsCompPagesProps) => {
    const { t } = useTranslation();
    return (
       <RdsCompDatatable
+      actionPosition="right"
          tableHeaders={props.tableHeaders}
          actions={props.actions}
          tableData={props.tableData!}

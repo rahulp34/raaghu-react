@@ -10,6 +10,7 @@ export interface RdsLabelProps {
 	fontWeight?: number | string;
 	color?: string;
 	required?: boolean;
+	
 }
 
 const RdsLabel = (props: RdsLabelProps) => {

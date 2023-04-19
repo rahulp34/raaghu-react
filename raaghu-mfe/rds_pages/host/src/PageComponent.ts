@@ -14,7 +14,7 @@ const RolesCompo = React.lazy(() => import("Roles/Roles"));
 const OrganizationUnitsCompo = React.lazy(
     () => import("OrganizationUnits/OrganizationUnits")
 );
-const LanguageCompo = React.lazy(() => import("Language/Language"));
+const LanguageCompo = React.lazy(() => import("Language/Language")); 
 const LanguageTextCompo = React.lazy(() => import("LanguageText/LanguageText"));
 const DynamicPropertyCompo = React.lazy(
     () => import("DynamicProperties/DynamicProperties")
@@ -49,7 +49,7 @@ const ApiResourcesCompo = React.lazy(() => import("ApiResources/ApiResources"));
 const CommentsCompo = React.lazy(() => import("Comments/Comments"));
 const TagsCompo = React.lazy(() => import("Tags/Tags"));
 const ElementsCompo = React.lazy(() => import("Elements/Elements"));
-const PersonalDataCompo = React.lazy(() => import("Elements/Elements"));
+const PersonalDataCompo = React.lazy(() => import("PersonalData/PersonalData"));
 const MyAccountCompo = React.lazy(() => import("MyAccount/MyAccount"));
 const PaymentRequestsCompo = React.lazy(() => import("PaymentRequests/PaymentRequests"));
 const MenusCompo = React.lazy(() => import("Menus/Menus"));

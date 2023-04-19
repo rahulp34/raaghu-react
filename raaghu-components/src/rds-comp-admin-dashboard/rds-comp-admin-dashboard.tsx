@@ -20,7 +20,7 @@ const RdsCompAdminDashboard = () => {
 	const { t } = useTranslation();
 	let user = 'Host Admin';
 	return (
-		<div>
+		<div className="mx-3 mt-3 px-3">
 			<div className="dark">
 				<div className="mb-3">
 					<h5><label htmlFor="label" className="fw-bold">Hello, {user} !</label></h5>

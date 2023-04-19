@@ -193,7 +193,7 @@ const Main = (props: MainProps) => {
           }
         }
       );
-      debugger
+      
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -272,9 +272,9 @@ const Main = (props: MainProps) => {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
-        debugger
+        
         await localizationService(lang).then(async (resp: any) => {
-          debugger
+          
           i18n.changeLanguage(lang);
           var data1 = {};
           const translation = resp?.resources;
@@ -390,7 +390,30 @@ const Main = (props: MainProps) => {
       {location.pathname != '/login' && location.pathname != '/forgot-password' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
-            <div className="header align-items-stretch">
+            <div
+              className="
+							page
+        d-flex
+        flex-column-fluid
+        align-items-stretch
+        container-fluid
+        px-0"
+            >
+              <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
+                <div className="aside ng-tns-c99-0" id="aside">
+                  <div className="mx-2">
+                    <RdsCompSideNavigation
+                      sideNavItems={sideNavItems}
+                      onClick={sideNavOnClickHandler}
+                      toggleTheme={props.toggleTheme}
+                    ></RdsCompSideNavigation>
+                  </div>
+                </div>
+                <div
+                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
+                  id="FixedHeaderOverFlow"
+                >
+                      <div className="header align-items-stretch">
               <RdsCompTopNavigation
                 //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
                 languageLable ="English"
@@ -416,29 +439,6 @@ const Main = (props: MainProps) => {
                   console.log(" session Hey Chat Button Clicked!!");
                 }} elementList={[]} />
             </div>
-            <div
-              className="
-							page
-        d-flex
-        flex-column-fluid
-        align-items-stretch
-        container-fluid
-        px-0"
-            >
-              <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0 main-body">
-                <div className="aside ng-tns-c99-0" id="aside">
-                  <div className="mx-2 pt-2">
-                    <RdsCompSideNavigation
-                      sideNavItems={sideNavItems}
-                      onClick={sideNavOnClickHandler}
-                      toggleTheme={props.toggleTheme}
-                    ></RdsCompSideNavigation>
-                  </div>
-                </div>
-                <div
-                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper pt-3 px-sm-0 px-lg-3 "
-                  id="FixedHeaderOverFlow"
-                >
                   <Suspense>
                     <Routes>
                       <Route

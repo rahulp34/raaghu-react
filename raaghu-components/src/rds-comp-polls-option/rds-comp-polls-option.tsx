@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
 
 interface RdsCompPollsOptionProps {
-  getPollsOptionData?:any
-  optionsData?:any
+  getPollsOptionData?: any;
+  optionsData?: any;
 }
 
 const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
@@ -13,12 +13,12 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     option: "",
   });
 
-  useEffect(()=>{
-    if(props.optionsData){
-      setTableData(props.optionsData)
+  useEffect(() => {
+    if (props.optionsData) {
+      setTableData(props.optionsData);
     }
-  },[props.optionsData])
-  
+  }, [props.optionsData]);
+
   function optionChange(value: any) {
     setoptionData({ ...optionData, option: value });
   }
@@ -38,22 +38,22 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     },
   ];
   const style = { marginTop: "29px" };
-  const[areWeEditing, setAreWeEditing] = useState(false);
-  const[dataId, setDataId] =useState("");
+  const [areWeEditing, setAreWeEditing] = useState(false);
+  const [dataId, setDataId] = useState("");
 
-  function handleEdit(data:any){
+  function handleEdit(data: any) {
     setAreWeEditing(true);
     setDataId(data);
-    let editData = tableData.find((element:any)=>element.id == data)
+    let editData = tableData.find((element: any) => element.id == data);
     setoptionData({ ...optionData, option: editData.text });
   }
-  function handleDelete(data:any){
-    let tempTableData1 :any[] =[];
-    tableData.map((res:any)=>{
-      if(res.id != data){
+  function handleDelete(data: any) {
+    let tempTableData1: any[] = [];
+    tableData.map((res: any) => {
+      if (res.id != data) {
         tempTableData1.push(res);
       }
-    })
+    });
     setTableData(tempTableData1);
     setUpdateTable(!updateTable);
   }
@@ -64,7 +64,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     const uniqueID = `${randomNumber}-${timestamp}`;
     return uniqueID;
   }
-  
+
   // const handleSwap = (index1:any, index2:any) => {
   //   const newData = [...tableData];
   //   [newData[index1-1], newData[index2-1]] = [newData[index2-1], newData[index1-1]];
@@ -73,85 +73,91 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
   //   setTableData(newData);
   //   setUpdateTable(!updateTable);
   // };
-  function getSwappedData(data:any){
+  function getSwappedData(data: any) {
     setTableData(data);
   }
   const [updateTable, setUpdateTable] = useState(false);
-    
-  function handleAddItem(event:any){
+
+  function handleAddItem(event: any) {
     event.preventDefault();
-    if(areWeEditing){
+    if (areWeEditing) {
       setAreWeEditing(false);
-      let tempTableData2 :any[] =[];
-      tableData.map((res:any)=>{
-        if(res.id == dataId){
+      let tempTableData2: any[] = [];
+      tableData.map((res: any) => {
+        if (res.id == dataId) {
           res.text = optionData.option;
         }
         tempTableData2.push(res);
-      })
+      });
       setTableData(tempTableData2);
-    }
-    else{
-      let tempTableData3 = tableData.map((res:any)=>{
+    } else {
+      let tempTableData3 = tableData.map((res: any) => {
         const item = {
-          id:res.id,
-          text:res.text,
-          order:res.order,
-          voteCount:0,
+          id: res.id,
+          text: res.text,
+          order: res.order,
+          voteCount: 0,
           actions: (
             <>
               <div className="d-flex justify-content-center">
                 <div className="mx-2">
+                  <RdsIcon
+                    width="17px"
+                    height="17px"
+                    name="edit"
+                    stroke={true}
+                    colorVariant="primary"
+                    onClick={() => {
+                      handleEdit(res.id);
+                    }}
+                  ></RdsIcon>
+                </div>
+                <RdsIcon
+                  width="17px"
+                  height="17px"
+                  name="delete"
+                  stroke={true}
+                  colorVariant="danger"
+                  onClick={() => {
+                    handleDelete(res.id);
+                  }}
+                ></RdsIcon>
+              </div>
+            </>
+          ),
+        };
+        return item;
+      });
+      let id = generateUniqueID();
+      let newTempData: any = {
+        id: id,
+        text: optionData.option,
+        order: tableData.length + 1,
+        voteCount: 0,
+        actions: (
+          <>
+            <div className="d-flex justify-content-center">
+              <div className="mx-2">
                 <RdsIcon
                   width="17px"
                   height="17px"
                   name="edit"
                   stroke={true}
                   colorVariant="primary"
-                  onClick={()=>{handleEdit(res.id)}}
-                ></RdsIcon>
-                 </div>
-                  <RdsIcon
-                  width="17px"
-                  height="17px"
-                  name="delete"
-                  stroke={true}
-                  colorVariant="danger"
-                  onClick={()=>{handleDelete(res.id)}}
+                  onClick={() => {
+                    handleEdit(id);
+                  }}
                 ></RdsIcon>
               </div>
-            </>
-          ),
-        }
-        return item;
-        
-      })
-      let id= generateUniqueID();
-      let newTempData:any = {
-        id:id,
-        text: optionData.option,
-        order:tableData.length+1,
-        voteCount:0,
-        actions: (
-          <>
-            <div className="d-flex justify-content-center">
-              <div className="mx-2">
               <RdsIcon
-                width="17px"
-                height="17px"
-                name="edit"
-                stroke={true}
-                colorVariant="primary"
-                onClick={()=>{handleEdit(id)}}
-              ></RdsIcon>
-               </div>
-                <RdsIcon
                 width="17px"
                 height="17px"
                 name="delete"
                 stroke={true}
                 colorVariant="danger"
-                onClick={()=>{handleDelete(id)}}
+                onClick={() => {
+                  handleDelete(id);
+                }}
               ></RdsIcon>
             </div>
           </>
@@ -162,53 +168,53 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     }
     setoptionData({ option: "" });
     setUpdateTable(!updateTable);
-  };
+  }
 
-  useEffect(()=>{
-      let tempTableData4 = tableData.map((res:any)=>{
-        const item = {
-          id:res.id,
-          text:res.text,
-          order:res.order,
-          voteCount:res.voteCount,
-          actions: (
-            <>
-              <div className="d-flex justify-content-center">
-                <div className="mx-3">
+  useEffect(() => {
+    let tempTableData4 = tableData.map((res: any) => {
+      const item = {
+        id: res.id,
+        text: res.text,
+        order: res.order,
+        voteCount: res.voteCount,
+        actions: (
+          <>
+            <div className="d-flex justify-content-center">
+              <div className="mx-3">
                 <RdsIcon
                   width="17px"
                   height="17px"
                   name="pencil"
                   stroke={true}
                   colorVariant="primary"
-                  onClick={()=>{handleEdit(res.id)}}
-                ></RdsIcon>
-                 </div>
-                  <RdsIcon
-                  width="17px"
-                  height="17px"
-                  name="delete"
-                  stroke={true}
-                  colorVariant="danger"
-                  onClick={()=>{handleDelete(res.id)}}
+                  onClick={() => {
+                    handleEdit(res.id);
+                  }}
                 ></RdsIcon>
               </div>
-            </>
-          ),
-        }
-        return item;
-      }) 
-    setTableData(tempTableData4)
+              <RdsIcon
+                width="17px"
+                height="17px"
+                name="delete"
+                stroke={true}
+                colorVariant="danger"
+                onClick={() => {
+                  handleDelete(res.id);
+                }}
+              ></RdsIcon>
+            </div>
+          </>
+        ),
+      };
+      return item;
+    });
+    setTableData(tempTableData4);
     props.getPollsOptionData(tempTableData4);
+  }, [updateTable]);
 
-  },[updateTable])
-
-  
   return (
     <>
       <div>
-
-      
         <div className=" row mt-3">
           <div className="col-md-5  mb-2">
             <RdsInput
@@ -237,14 +243,17 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
         </div>
         <div className="mt-3">
           <RdsCompDatatable
+            actionPosition="right"
             tableHeaders={tableHeaders}
             tableData={tableData}
             pagination={false}
             isSwap={true}
-            swapRows={(data:any)=>{getSwappedData(data)}}
+            swapRows={(data: any) => {
+              getSwappedData(data);
+            }}
           ></RdsCompDatatable>
         </div>
-        </div>
+      </div>
     </>
   );
 };

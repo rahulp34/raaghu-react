@@ -44,6 +44,7 @@ export interface RdsCompDatatableProps {
   onRowSelect?: (data: any) => void
   tableStyle?: any;
   alignmentType?: any;
+  actionPosition?:"right"|"left",
 
   // onSortSelection(arg: {
   //    sortClickEvent: MouseEvent<HTMLSpanElement, globalThis.MouseEvent>;
@@ -269,6 +270,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
   };
   const style = { marginTop: '150px', marginBottom: '100px' }
   let Classes = props.classes;
+
+  let actionPosition =props.hasOwnProperty("actionPosition")&&props.actionPosition ==="right"?true:false;
+
   return (
     <>
       {data?.length == 0 && (
@@ -290,6 +294,17 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
           >
             <thead style={{ whiteSpace: "nowrap" }}>
               <tr className="align-middle " >
+              {actionPosition!=true&&props.tableHeaders &&
+                  props.tableHeaders?.length > 0 &&
+                  props.actions &&
+                  props.actions?.length > 0 && (
+                    <th
+                      className="text-center fw-bold"
+                      style={{ fontWeight: 500, color: "black" }}
+                    >
+                      Actions
+                    </th>
+                  )}
                 {props.isSwap && (<th></th>)}
                 {props.enablecheckboxselection && (
                   <th scope="col">
@@ -344,7 +359,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     </div>
                   </th>
                 ))}
-                {props.tableHeaders &&
+                {actionPosition&&props.tableHeaders &&
                   props.tableHeaders?.length > 0 &&
                   props.actions &&
                   props.actions?.length > 0 && (
@@ -366,12 +381,138 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     index < rowStatus.endingRow
                     : true) &&
                   (
+                    
                     <tr style={{ WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', userSelect: 'none', }}
                       onDragStart={(e) => handleDragStart(e, index)}
                       onDragOver={(e) => e.preventDefault()}
                       onDragEnter={(e) => handleDragEnter(e, index)}
                       draggable
                       key={"tableRow-" + index}>
+                         {actionPosition!=true&&props.actions && props.actions?.length > 0 && (
+                        <td className="align-middle text-center">
+                          {!tableDataRow.isEndUserEditing ? (
+                            <>
+                              <div className="btn-group">
+                                <button
+                                  className="btn rounded-pill border-0"
+                                  type="button"
+                                  aria-expanded="false"
+                                  style={{ minWidth: 0 }}
+                                  //onClick={() => openCloseDropDown(index)}
+                                  data-bs-toggle="dropdown"
+                                  data-bs-auto-close="true"
+                                  id="dropdownMenuButton"
+                                >
+                                  <RdsIcon
+                                    name={"three_dots"}
+                                    height="14px"
+                                    width="14px"
+                                    stroke={true}
+                                    fill={true}
+                                  // class="bi bi-three-dots-vertical"
+                                  />
+                                </button>
+                                {/* array[index] &&  */}
+                                {(
+                                  <ul  aria-labelledby="dropdownMenuButton" className="dropdown-menu" style={{maxWidth: '200px' }}>
+                                    {props.actions?.map((action, actionIndex) => (
+                                      <li
+                                        key={
+                                          "action-" +
+                                          actionIndex +
+                                          "-inside-tableRow" +
+                                          index
+                                        }
+                                      >
+                                        {action.modalId != undefined ? (
+                                          <a
+                                            data-bs-toggle="modal"
+                                            data-bs-target={`#${action?.modalId}`}
+                                            aria-controls={action?.modalId}
+                                            data-bs-backdrop={false}
+                                            onClick={(e) => {
+                                              actionOnClickHandler(
+                                                e,
+                                                tableDataRow,
+                                                tableDataRow.id,
+                                                action
+                                              );
+                                            }}
+                                            className="dropdown-item text-wrap"
+                                          >
+                                            {action.displayName}
+                                          </a>
+                                        ) : (
+                                          <>
+                                            <a
+                                              data-bs-toggle="offcanvas"
+                                              data-bs-target={`#${action?.offId}`}
+                                              aria-controls={action?.offId}
+                                              data-bs-backdrop={false}
+                                              onClick={(e) => {
+                                                actionOnClickHandler(
+                                                  e,
+                                                  tableDataRow,
+                                                  tableDataRow.id,
+                                                  action
+                                                );
+                                              }}
+                                              className="dropdown-item text-wrap"
+                                            >
+                                              {action.displayName}
+                                            </a>
+                                          </>
+                                        )}
+                                      </li>
+                                    ))}
+                                  </ul>)}
+                              </div>
+                            </>
+                          ) : (
+                            <div className="d-flex">
+                              <RdsButton
+                                class="action"
+                                colorVariant="primary"
+                                size="medium"
+                                tooltipTitle={""}
+                                type={"button"}
+                                onClick={(e) => {
+                                  onEditCheck(e, tableDataRow, tableDataRow.id);
+                                }}
+                              >
+                                <RdsIcon
+                                  name={"check"}
+                                  height="14px"
+                                  width="14px"
+                                  stroke={true}
+                                  fill={false}
+                                // class="bi bi-check2"
+                                />
+                              </RdsButton>
+                              <RdsButton
+                                class="ms-2 text-white"
+                                colorVariant="danger"
+                                tooltipPlacement="top"
+                                size="medium"
+                                tooltipTitle={""}
+                                type={"button"}
+                                onClick={(e) => {
+                                  onEditClose(e, tableDataRow, tableDataRow.id);
+                                }}
+                              >
+                                <RdsIcon
+                                  name={"close"}
+                                  height="14px"
+                                  width="14px"
+                                  stroke={true}
+                                  fill={true}
+                                // class="bi bi-close"
+                                />
+                              </RdsButton>
+                            </div>
+                          )}
+                        </td>
+                      )}
                       {props.isSwap && (
                         <th  >
                           <RdsIcon name="three_dots_horizontal" height="20px" width="20px" fill={false} stroke={true} />
@@ -397,7 +538,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                             "-inside-tableRow" +
                             index
                           }
-                          className="px-2"
+                          className="px-2 align-middle"
                         >
                           {!tableDataRow.isEndUserEditing ? (
                             <div>
@@ -500,7 +641,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                           )}
                         </td>
                       ))}
-                      {props.actions && props.actions?.length > 0 && (
+                      {actionPosition&&props.actions && props.actions?.length > 0 && (
                         <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>

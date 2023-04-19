@@ -1,6 +1,6 @@
 
 import React  from 'react'
-import{RdsCompDatatable, RdsCompSecurityLogs} from "../../../rds-components";
+import{ RdsCompSecurityLogs} from "../../../rds-components";
 import { useTranslation } from "react-i18next";
 
 export interface RdsPageSecurityLogsProps {

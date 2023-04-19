@@ -16,12 +16,7 @@ const hostInitialState : hostInitialState = {
 }
 
 
-export const fetchApplicationConfig = createAsyncThunk('host/fetchApplicationConfig',() => {
-    return AbpApplicationConfigurationService.getApplicationConfiguration({includeLocalizationResources:false}).then((result:any) =>{
-        console.log("result",result)
-        return result
-    })
-})
+
 export const callLoginAction = createAction<any>('host/callLoginAction');
 
 
@@ -31,23 +26,11 @@ const hostSlice = createSlice({
   initialState:hostInitialState,
   reducers:{
     callLoginAction: (state, action: PayloadAction<any>) => {
-      debugger
+      
       state.callLogin = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchApplicationConfig.pending, (state) => {
-      state.loading = true
-    });
-    builder.addCase(fetchApplicationConfig.fulfilled, (state , action : PayloadAction<any>) =>{
-      state.loading = false
-      state.configuration = action.payload
-      state.error = ''
-    });
-    builder.addCase(fetchApplicationConfig.rejected, (state , action) => {
-      state.loading = false
-      state.error = action.error.message || 'Something Went Wrong'
-    });
   },
 })
 

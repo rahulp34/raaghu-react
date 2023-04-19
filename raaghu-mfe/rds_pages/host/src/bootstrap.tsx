@@ -4,9 +4,6 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../../libs/public.api";
 import { Provider } from "react-redux";
-import "../../../libs/shared/i18n";
-
-
 
 (ReactDOM as any).createRoot(document.getElementById("root")).render(
 	<Provider store={store}>

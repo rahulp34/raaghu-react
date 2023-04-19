@@ -281,6 +281,7 @@ const Roles = (props: RdsPageRolesProps) => {
     
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
+         actionPosition="right"
           classes="table__userTable"
           tableHeaders={tableHeader}
           tableData={data?.roles}

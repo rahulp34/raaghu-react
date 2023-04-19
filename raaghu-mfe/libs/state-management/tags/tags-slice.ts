@@ -25,13 +25,13 @@ export const getAllTags = createAsyncThunk('Tags/GetAllTags', (data: any) => {
 });
 
 export const createTag = createAsyncThunk('Tags/CreateTag', (data: any) => {
-  return TagAdminService.postTags(data.body).then((result: any) => {
+  return TagAdminService.postTags({ requestBody: data.body }).then((result: any) => {
       return result;
     })
 });
 
 export const getTagById = createAsyncThunk('Tags/GetTagById', (data: any) => {
-  return TagAdminService.getTags1(data.id).then((result: any) => {
+  return TagAdminService.getTags1({id: data.id}).then((result: any) => {
       return result;
     })
 });
@@ -43,7 +43,7 @@ export const updateTag = createAsyncThunk('Tags/UpdateTag', (data: any) => {
 });
 
 export const deleteTag = createAsyncThunk('Tags/DeleteTag', (data: any) => {
-  return TagAdminService.deleteTags(data.id).then((result: any) => {
+  return TagAdminService.deleteTags({id: data.id}).then((result: any) => {
       return result;
     })
 });
