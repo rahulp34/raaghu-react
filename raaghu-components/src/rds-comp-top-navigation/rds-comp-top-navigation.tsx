@@ -145,7 +145,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       <nav
         className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
       >
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center mx-4">
           {/* <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
             <img
               className="ms-1 cursor-pointer"
