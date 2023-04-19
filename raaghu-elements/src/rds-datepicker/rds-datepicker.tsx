@@ -11,13 +11,14 @@ export interface RdsDatepickerProps {
   DatePickerLabel?: string;
   onDatePicker: (start: any, end?: any) => void;
   type?: "default" | "advanced";
+  customDate?:any;
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
 
   const onRangeChange = (dates: [any, any]) => {
-  
+    props.customDate(dates)
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
@@ -26,6 +27,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
         " - " +
         (end != null ? end.toDateString().slice(4) : "")
     );
+
   };
   
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
@@ -136,7 +138,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       )}
       {props.type === "advanced" && (
         <>
-         {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
+         {props.DatePickerLabel && <div className="mb-2">{props.DatePickerLabel}</div>}
           <div className="dropdown border" style={{borderRadius:'5px'}}>
             <button
               className="btn dropdown-toggle border"
@@ -145,6 +147,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
               data-bs-toggle="dropdown"
               data-bs-auto-close="outside"
               aria-expanded="false"
+              style={{width:'275px'}}
             >
               {/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar3" viewBox="0 0 16 16">
                                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
@@ -160,7 +163,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
               {/* (StartDate:any,EndDate:any)=>props.DatePicker */}
               <span className="ps-3 pe-1 ">{dropdownDisplayValue}</span>
             </button>
-            <ul className="dropdown-menu show" style={{overflow:'visible'}}>
+            <ul className="dropdown-menu" style={{overflow:'visible'}}>
               <li className="daterange__dropdown-item dropdown-item px-2 pb-2 border-bottom">
                 {" "}
                 <strong>
