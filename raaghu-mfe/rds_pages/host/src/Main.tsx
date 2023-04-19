@@ -80,10 +80,6 @@ const Main = (props: MainProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
-
-
-  let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
-
   let currentPath = window.location.pathname;
 
   useEffect(() => {
