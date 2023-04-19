@@ -1,19 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { colors } from "../../libs/types";
 import "./rds-toast.scss";
+import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsToastProps {
   colorVariant?: colors;
+  withIcon?:boolean;
   headerTitle: string;
   message: string;
   delay: number;
   autohide: boolean;
   borderColor: string;
   showHeader: boolean;
+  iconName?:string;
+  iconColorvariant?:string;
+  iconHeight?:string;
+  iconWidth?:string;
+  iconFill?:boolean;
 }
 const RdsToast = (props: RdsToastProps) => {
   let borderColor = "border border-" + props.borderColor || " ";
   let bg = " bg-" + props.colorVariant || "light";
+  const [state, setState] = useState("show");
+
+  useEffect(() => {
+    if (props.autohide) {
+      var toastTimer = setTimeout(() => {
+        setState("hide");
+      }, props.delay || 3000);
+    }
+
+    return () => {
+      clearTimeout(toastTimer);
+    };
+  });
+
   return (
     <>
       <div className="toast-container">
@@ -21,15 +42,16 @@ const RdsToast = (props: RdsToastProps) => {
           role="alert"
           aria-live="assertive"
           aria-atomic="true"
-          className={`toast fade show ${bg} ${borderColor}`}
+          className={`toast fade ${state} ${bg} ${borderColor}`}
           id="toastId"
-          data-bs-autohide="true"
-          data-bs-delay="1000"
-          
         >
           {props.showHeader && (
             <div>
-              <div className="toast-header p-2 d-flex justify-content-between">
+              <div className="toast-header p-2 d-flex justify-content-between align-items-end">
+              <div className="me-2">
+                 {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
+                </div> 
+
                 <strong className="me-auto text-dark">
                   {" "}
                   {props.headerTitle}{" "}
@@ -48,7 +70,10 @@ const RdsToast = (props: RdsToastProps) => {
           {!props.showHeader && (
             <div className="m-1 toastbody ">
               <div className="d-flex justify-content-between     align-items-baseline  ">
-                <div className="toast-body toastbody d-flex justify-content-between toast-text ">
+                <div className="toast-body toastbody d-flex justify-content-between  align-items-end ">
+                <div className="me-2">
+                {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
+                </div> 
                   {props.message}
                 </div>
                 <button
@@ -66,40 +91,3 @@ const RdsToast = (props: RdsToastProps) => {
   );
 };
 export default RdsToast;
-
-
-  // <div className="toast-container position-absolute p-3 start-0">
-  //   <div
-  //     role="alert"
-  //     aria-live="assertive"
-  //     aria-atomic="true"
-  //     className="toast fade hide border border-undefined"
-  //     id="toastId"
-  //     data-bs-autohide="true"
-  //     data-bs-delay="1000"
-  //   >
-  //     <div _ngcontent-xvo-c47="" className="toast-header toast-success">
-  //       <strong _ngcontent-xvo-c47="" className="me-auto">
-  //         Toast
-  //       </strong>
-  //       <button
-  //         _ngcontent-xvo-c47=""
-  //         type="button"
-  //         data-bs-dismiss="toast"
-  //         aria-label="Close"
-  //         className="btn-close"
-  //       ></button>
-  //     </div>
-  //     <div _ngcontent-xvo-c47="" className="toast-body">
-  //       <div _ngcontent-xvo-c47="">
-  //         <div
-  //           _ngcontent-xvo-c47=""
-  //           className="d-flex justify-content-between toast-text"
-  //         >
-  //           <div _ngcontent-xvo-c47=""> This is a sample toast </div>
-  //           <div _ngcontent-xvo-c47=""></div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </div>

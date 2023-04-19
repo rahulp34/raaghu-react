@@ -59,7 +59,7 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center shadow-sm border p-1 rounded-circle ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center rounded-end shadow-sm p-1 ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -128,10 +128,8 @@ const Node = ({
           className={`routingLink d-flex align-items-center list-unstyled ${count == 1 ? "text-capitalize" : ""
             } text-decoration-none`}
         >
-          <div className="d-flex">
-            <div className="col d-flex align-items-center py-2 ">
               {count == 1 ? (
-                <div>
+             
                   <RdsIcon
                     name={node.icon}
                     fill={false}
@@ -140,9 +138,9 @@ const Node = ({
                     width="20px"
                     classes="me-3"
                   ></RdsIcon>
-                </div>
+            
               ) : count == 2 ?
-                <div className="px-1">
+               
                   <RdsIcon
                     name={node.icon}
                     fill={false}
@@ -151,13 +149,10 @@ const Node = ({
                     width="20px"
                     classes="me-3"
                   ></RdsIcon>
-                </div>
                 : null}
               <div className="me-3" data-name={node.label}>
                 {!collapse && <>{t(node.label)}</>}
               </div>
-            </div>
-          </div>
         </NavLink>
       )}
 
