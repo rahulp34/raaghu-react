@@ -389,7 +389,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                       draggable
                       key={"tableRow-" + index}>
                          {actionPosition!=true&&props.actions && props.actions?.length > 0 && (
-                        <td className="align-top text-center">
+                        <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
                               <div className="btn-group">
@@ -538,7 +538,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                             "-inside-tableRow" +
                             index
                           }
-                          className="px-2"
+                          className="px-2 align-middle"
                         >
                           {!tableDataRow.isEndUserEditing ? (
                             <div>
@@ -642,7 +642,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         </td>
                       ))}
                       {actionPosition&&props.actions && props.actions?.length > 0 && (
-                        <td className="align-top text-center">
+                        <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
                               <div className="btn-group">
