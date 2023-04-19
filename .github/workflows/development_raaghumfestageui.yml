@@ -33,11 +33,14 @@ jobs:
           cache: "npm"
           cache-dependency-path: "./raaghu-mfe"
 
-      - name: npm install, build, and test raaghu-mfe
-        working-directory: raaghu-mfe
+      - name: npm install at root directory
         run: |
           npm run install-all
           npm run create:proxy https://raaghu-react.azurewebsites.net
+
+      - name: npm install, build, and test raaghu-mfe
+        working-directory: raaghu-mfe
+        run: |
           npm run build
           cp web.config rds_pages/host/dist
 
