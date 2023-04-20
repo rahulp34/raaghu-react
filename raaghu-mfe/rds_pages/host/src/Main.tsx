@@ -285,6 +285,7 @@ const Main = (props: MainProps) => {
   }
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
           await hello(res)
@@ -397,7 +398,14 @@ const Main = (props: MainProps) => {
             >
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                 <div className="aside ng-tns-c99-0" id="aside">
-                  <div className="mx-2">
+                  <div>
+                    <img
+                        className="ms-1 cursor-pointer sidenav-logo"
+                        src={logo}
+                        alt="logo"
+                    ></img>
+                  </div>
+                  <div className="mx-2 mt-6">
                     <RdsCompSideNavigation
                       sideNavItems={sideNavItems}
                       onClick={sideNavOnClickHandler}

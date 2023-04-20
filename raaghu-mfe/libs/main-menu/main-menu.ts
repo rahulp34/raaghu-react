@@ -199,7 +199,7 @@ const MainMenu = [
   {
     "key": "7",
     "label": "Cms",
-    "icon": "pages",
+    "icon": "cms",
     "children": [
       {
         "key": "7-0-0",
