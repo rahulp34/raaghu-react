@@ -167,7 +167,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 <a
                   className="link-primary text-decoration-none float-end"
                   href="javascript:void(0)"
-                  style={{ textDecoration: "none" }}
                   onClick={forgotPasswordHandler}
                 >
                   Forgot password ?
