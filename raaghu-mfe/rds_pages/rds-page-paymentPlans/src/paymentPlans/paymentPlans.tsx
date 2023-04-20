@@ -331,6 +331,7 @@ const PaymentPlans = () => {
                     size="small"
                     type="button"
                     colorVariant="primary"
+                    showLoadingSpinner={true}
                     onClick={createpaymentPlansFn}
                   ></RdsButton>
                 </div>
@@ -419,6 +420,7 @@ const PaymentPlans = () => {
                     tooltipTitle={""}
                     type={"submit"}
                     databsdismiss="offcanvas"
+                    showLoadingSpinner={true}
                     onClick={(event) => saveUpdatePaymentPlans(event)}
                   ></RdsButton>
                 </div>

@@ -310,6 +310,7 @@ const ClaimType = () => {
               block={false}
               size="small"
               type="button"
+              showLoadingSpinner={true}
               colorVariant="primary"
             ></RdsButton>
           </div>

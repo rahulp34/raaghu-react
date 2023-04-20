@@ -88,6 +88,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 										size="medium"
 										colorVariant="primary"
 										tooltipTitle={""}
+										showLoadingSpinner={true}
 										type={"submit"}
 									></RdsButton>
 

@@ -165,6 +165,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     block={false}
                     size="small"
                     type="button"
+                    showLoadingSpinner={true}
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
@@ -220,6 +221,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       isDisabled={value === ""}
                       colorVariant="primary"
                       class="me-2"
+                      showLoadingSpinner={true}
                       onClick={addDataHandler}
                     ></RdsButton>
                   </div>
@@ -295,6 +297,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                   //isDisabled={value === ""}
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                   //onClick={addDataHandler}
                 ></RdsButton>
               </div>

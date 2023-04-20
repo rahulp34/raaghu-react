@@ -229,6 +229,7 @@ const FormsView = (props: any) => {
                   iconWidth="15px"
                   colorVariant="primary"
                   isOutline={true}
+                  showLoadingSpinner={true}
                   class="me-2"
                 ></RdsButton>
               </div>

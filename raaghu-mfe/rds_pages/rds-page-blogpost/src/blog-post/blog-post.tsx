@@ -185,6 +185,7 @@ const postSubmitHandler = (data: any)=>{
                       size="small"
                       type="button"
                       colorVariant="primary"
+					  showLoadingSpinner={true}
                       onClick={(e: any) => createNewCanvasFn(e)}
                     ></RdsButton>
                   </div>

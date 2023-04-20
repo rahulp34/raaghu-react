@@ -464,6 +464,7 @@ dispatch(
                         colorVariant="primary"
                         databsdismiss="offcanvas"
                         onClick={SaveHandler}
+                        showLoadingSpinner={true}
                       ></RdsButton>
                     </div>
                   </div>

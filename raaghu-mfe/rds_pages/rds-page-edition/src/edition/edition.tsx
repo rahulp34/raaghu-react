@@ -265,6 +265,7 @@ const Edition = (props: RdsPageEditionProps) => {
                   iconWidth="15px"
                   iconFill={false}
                   iconStroke={true}
+                  showLoadingSpinner={true}
                   colorVariant="primary"
                   label="NEW EDITION"
                 />
@@ -304,6 +305,7 @@ const Edition = (props: RdsPageEditionProps) => {
                     label="SAVE"
                     type={"button"}
                     size="small"
+                    showLoadingSpinner={true}
                     databsdismiss="offcanvas"
                     isDisabled={value === ""}
                     colorVariant="primary"

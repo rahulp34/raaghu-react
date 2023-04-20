@@ -337,6 +337,7 @@ const Language = (props: LanguageProps) => {
                       iconStroke={true}
                       iconHeight="12px"
                       onClick={onNewLangHandler}
+                      showLoadingSpinner={true}
                       iconWidth="12px"
                     ></RdsButton>
                   </div>

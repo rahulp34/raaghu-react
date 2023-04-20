@@ -225,6 +225,7 @@ const Chats = () => {
                   label="Start conversation"
                   colorVariant="primary"
                   onClick={onStartConversationHandler}
+                  showLoadingSpinner={true}
                   size="medium"
                 ></RdsButton>
               </div>

@@ -371,6 +371,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                       size="small"
                       type="button"
                       colorVariant="primary"
+                      showLoadingSpinner={true}
                       onClick={(e: any) => createNewCanvasFn(e)}
                     ></RdsButton>
                   </div>
@@ -463,6 +464,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                   <RdsButton
                     class="me-2"
                     label="Create"
+                    showLoadingSpinner={true}
                     size="small"
                     colorVariant="primary"
                     tooltipTitle={""}
