@@ -60,7 +60,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
               height={props.iconHeight}
               fill={props.iconFill}
               stroke={props.iconStroke}
-              isAnimate={false}
+              // isAnimate={false}
             />
           </span>
         )
@@ -93,7 +93,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
             height={props.iconHeight}
             fill={props.iconFill}
             stroke={props.iconStroke}
-            isAnimate={false}
+            // isAnimate={false}
           />
         </span>
       )
