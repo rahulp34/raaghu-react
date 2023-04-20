@@ -19,3 +19,4 @@ export * from './forms/forms-slice';
 export * from './polls/polls-slice';
 export * from './newsletters/newsletters-slice';
 export * from "./menus/menus-slice";
+export * from "./roles/roles-slice"
