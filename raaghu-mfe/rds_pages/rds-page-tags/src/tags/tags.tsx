@@ -58,8 +58,8 @@ const Tags = () => {
     },
   ];
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "tags" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
+    { id: "edit", displayName: "Edit", offId: "tag-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "tag-delete-off" },
   ];
   const recordsPerPage: number = 10;
 
@@ -257,7 +257,7 @@ const Tags = () => {
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"tags"}
+              offId="tag-edit-off"
             >
               <form>
                 {!isEdit && (
@@ -339,7 +339,7 @@ const Tags = () => {
             noDataTitle={"No Tags Available"}
           ></RdsCompDatatable>
           <RdsCompAlertPopup
-            alertID="delete"
+            alertID="tag-delete-off"
             onSuccess={confirmDelete} //cancelButtonColor="danger" deleteButtonColor="danger"
           />
         </div>

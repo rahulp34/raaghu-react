@@ -145,8 +145,8 @@ const Roles = (props: RdsPageRolesProps) => {
     },
   ];
   let actions: any = [
-    { id: "delete", displayName: "Delete", modalId: "deleteRolesof" },
-    { id: "edit", displayName: "Edit", offId: "editRoleof" },
+    { id: "delete", displayName: "Delete", modalId: "role-delete-off" },
+    { id: "edit", displayName: "Edit", offId: "role-edit-off" },
   ];
   const handlerActions = (rowData: any, actionId: any) => {
     setId(rowData.id);
@@ -391,7 +391,7 @@ const Roles = (props: RdsPageRolesProps) => {
           placement="end"
           canvasTitle="Edit Role"
           
-          offId="editRoleof"
+          offId="role-edit-off"
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}
@@ -501,7 +501,7 @@ const Roles = (props: RdsPageRolesProps) => {
                   colorVariant="primary"
                   databsdismiss="offcanvas"
                   databstoggle="offcanvas"
-                  databstarget="#editRoleof"
+                  databstarget="#role-edit-off"
                 ></RdsButton>
               </div>
               <RdsButton
@@ -512,13 +512,13 @@ const Roles = (props: RdsPageRolesProps) => {
                 onClick={handlerEditRole}
                 databsdismiss="offcanvas"
                 databstoggle="offcanvas"
-                databstarget="#editRoleof"
+                databstarget="#role-edit-off"
               ></RdsButton>
             </div>
           </div>
         </RdsOffcanvas> */}
         <RdsCompAlertPopup
-          alertID={`deleteRolesof`}
+          alertID="role-delete-off"
           onSuccess={handlerDeleteConfirm}
         ></RdsCompAlertPopup>
       </div>

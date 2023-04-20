@@ -173,9 +173,9 @@ const IdentityResources = (props: IdentityResourcesProps) => {
   ];
 
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
-    { id: "history", displayName: "Change History", modalId: "change_history" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "edit", displayName: "Edit", offId: "idenReso-edit-off" },
+    { id: "history", displayName: "Change History", modalId: "idenReso-history-offc" },
+    { id: "delete", displayName: "Delete", modalId: "idenReso-delete-off" },
   ];
 
   const offCanvasHandler = () => { 
@@ -194,7 +194,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
             colorVariant="primary"
             showLoadingSpinner={false}
             databstoggle="offcanvas"
-            databstarget="#userOffcanvas"
+            databstarget="#IdentiRes-new-off"
             icon={"plus"}
             iconWidth={"12px"}
             iconHeight={"12px"}
@@ -206,7 +206,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
              backDrop={false}
              scrolling={true}
              preventEscapeKey={false}
-             offId="userOffcanvas"
+             offId="IdentiRes-new-off"
              canvasTitle={t("New Scope")}
              placement="end"
               
@@ -249,19 +249,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
             recordsPerPageSelectListOption={true}
             onActionSelection={scopeSelection}
           ></RdsCompDatatable>
-          {/* <RdsOffcanvas
-            backDrop={true}
-            preventEscapeKey={true}
-            scrolling={false}
-            offId="entity-edit-off"
-            placement="end"
-            canvasTitle="Edit"
-            
-            children={
-              <RdsCompApiScopeBasicResource
-                onSuccess={edit} email={editscopeData.name} fullname={editscopeData.displayName} message={editscopeData.description} />
-            }
-          ></RdsOffcanvas> */}
+       
         
         </div>
       

@@ -359,8 +359,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         }}
                         data-bs-dismiss="offcanvas"
                         databstoggle="offcanvas"
-                        databstarget="#addMemberOff"
-                        ariacontrols="addMemberOff"
+                        databstarget="#oMember-add-off"
+                        ariacontrols="oMember-add-off"
                       ></RdsButton>
                     )}
                     {activeTab === "role" && (
@@ -375,8 +375,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         type="button"
                         data-bs-dismiss="offcanvas"
                         databstoggle="offcanvas"
-                        databstarget="#addRoleOff"
-                        ariacontrols="addRoleOff"
+                        databstarget="#oRole-add-off"
+                        ariacontrols="oRole-add-off"
                         onClick={() => {
                           dispatch(FetchRoleListOrganizationUnit() as any);
                         }}
@@ -441,7 +441,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Member"
         
-        offId="addMemberOff"
+        offId="oMember-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -478,7 +478,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addMemberOff"
+                      databstarget="#oMember-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -494,7 +494,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       onClick={handlerUserPush}
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addMemberOff"
+                      databstarget="#oMember-add-off"
                     ></RdsButton>
                   </div>
                 </div>
@@ -507,7 +507,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Roles"
         
-        offId="addRoleOff"
+        offId="oRole-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -544,7 +544,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addRoleOff"
+                      databstarget="#oRole-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -560,7 +560,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       onClick={handlerRolePush}
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addRoleOff"
+                      databstarget="#oRole-add-off"
                     ></RdsButton>
                   </div>
                 </div>
@@ -615,7 +615,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Edit Organization Unit"
         
-        offId={`boganization`}
+        offId="boganization"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}

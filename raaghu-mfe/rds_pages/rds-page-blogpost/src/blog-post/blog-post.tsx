@@ -192,7 +192,7 @@ const postSubmitHandler = (data: any)=>{
                 backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"blogPost"}
+                offId="blog-post-add-off"
               >
                 <div className="mt-3">
                   <RdsCompBlogPostNew 
