@@ -203,7 +203,6 @@ const FileManagement = () => {
         // formData: { File: new Blob([e], { type: e.type }) },
       },    
     };
-    debugger
       dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
         dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
@@ -607,7 +606,7 @@ const FileManagement = () => {
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Rename"}
+                offId="fileManage-rename-off"
               >
                 <div>
                   <div className="pt-3">

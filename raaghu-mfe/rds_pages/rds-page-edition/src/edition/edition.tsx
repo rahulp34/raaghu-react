@@ -157,8 +157,8 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   const actions = [
-    { id: "editEdition", displayName: "Edit", offId: "dynamic-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "editEdition", displayName: "Edit", offId: "edition-new-off" },
+    { id: "delete", displayName: "Delete", modalId: "edition-delete-offc" },
   ];
 
   const onActionSelection = (rowData: any, actionId: any) => {
@@ -330,7 +330,7 @@ const Edition = (props: RdsPageEditionProps) => {
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
         <RdsCompAlertPopup
-          alertID="dynamic_delete_off"
+          alertID="edition-delete-offc"
           onSuccess={deleteHandler}
         />
 
@@ -338,7 +338,7 @@ const Edition = (props: RdsPageEditionProps) => {
           canvasTitle="NEW EDITION"
           onclick={offCanvasHandler}
           placement="end"
-          offId="dynamic-edit-off"
+          offId="edition-new-off"
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

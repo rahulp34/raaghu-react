@@ -52,9 +52,9 @@ const ApiResources = (props: RdsPageResourcesProps) => {
     ];
 
     const actions = [
-        { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
-        { id: "history", displayName: "Change History", modalId: "change_history" },
-        { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+        { id: "edit", displayName: "Edit", offId: "apiReso-edit-off" },
+        { id: "history", displayName: "Change History", modalId: "apiReso-change-his-off" },
+        { id: "delete", displayName: "Delete", modalId: "apiReso-delete-off" },
     ];
 
     const navtabsItems = [
@@ -289,7 +289,7 @@ const ApiResources = (props: RdsPageResourcesProps) => {
                             backDrop={false}
                             scrolling={false}
                             preventEscapeKey={false}
-                            offId={"client"}
+                            offId={"apiResourceAddOff"}
                         >
                             <RdsNavtabs
                                 navtabsItems={navtabsItems}
@@ -331,41 +331,6 @@ const ApiResources = (props: RdsPageResourcesProps) => {
                     recordsPerPageSelectListOption={true}
                     onActionSelection={scopeSelection}
                 ></RdsCompDatatable>
-
-                {/* <RdsOffcanvas
-             backDrop={true}
-             preventEscapeKey={true}
-             scrolling={false}
-             offId="entity-edit-off"
-             placement="end"
-             canvasTitle="Edit"
-             
-             children={
-               <RdsCompScopeBasicResource saveApiScopeData={(data:any)=>{updateScope(data)}} />
-             }
-           ></RdsOffcanvas>
-           <RdsModal
-             modalId="change_history"
-             modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope" 
-             modalAnimation="modal fade"
-             showModalHeader={true}
-           >
-        
-             <p>({editscopeData.id})</p>
-             <p className="text-center" >No Change(s)</p>
-             <div className="text-end">
- 
-               <RdsButton type={"button"} colorVariant="primary" label="Close" databsdismiss="modal" databstarget="change_history"></RdsButton>
-             </div>
-            
-           </RdsModal>
-           <RdsCompAlertPopup
-             alertID="dynamic_delete_off"
-             messageAlert="The selected Resource will be Deleted Permanently "
-             alertConfirmation="Are you sure"
-             deleteButtonLabel="Yes"
-             onSuccess={success}
-           /> */}
             </div>
 
         </div>

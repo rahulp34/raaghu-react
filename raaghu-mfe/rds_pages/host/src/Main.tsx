@@ -18,7 +18,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction,  } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -83,6 +83,7 @@ const Main = (props: MainProps) => {
   let currentPath = window.location.pathname;
 
   useEffect(() => {
+    sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
         navigate(currentPath);
@@ -109,16 +110,16 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-    const componentsList = [
-        {
-            label: "Account",
-            val: "Account",
-        },
-        {
-            label: "AddressInput",
-            val: "AddressInput",
-        },
-    ];
+  const componentsList = [
+    {
+      label: "Account",
+      val: "Account",
+    },
+    {
+      label: "AddressInput",
+      val: "AddressInput",
+    },
+  ];
   useEffect(() => {
     dispatch(callLoginAction(null) as any)
   }, [dispatch]);
@@ -145,9 +146,9 @@ const Main = (props: MainProps) => {
 
   const onClickHandler = (e: any, val: any) => {
     setCurrentLanguage(val);
-    localStorage.setItem("currentLang",val);
+    localStorage.setItem("currentLang", val);
   };
-  
+
   useEffect(() => {
     configurationService(currentLanguage).then( (res: any) => {
       const tempdata = res.localization?.languages?.map((item: any) => {
@@ -235,12 +236,12 @@ const Main = (props: MainProps) => {
     );
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
-    let a = recursiveFunction(concatenated,pageName) 
-    a = a.filter((res:any)=> res?true:false);
-    if(a[0].id){
+    let a = recursiveFunction(concatenated, pageName)
+    a = a.filter((res: any) => res ? true : false);
+    if (a[0].id) {
       setBreadCrumItem(a);
     }
-    else{
+    else {
       a = a[0].reverse();
       setBreadCrumItem(a);
     }
@@ -267,9 +268,10 @@ const Main = (props: MainProps) => {
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
         const lang =localStorage.getItem("currentLang")||"en-GB"
-        
       });
+    });
   }
+
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
@@ -281,29 +283,29 @@ const Main = (props: MainProps) => {
       });
       dispatch(callLoginAction(null) as any);
     }
-  },[dataHost])
-  
+  }, [dataHost])
 
-  function recursiveFunction(menus:any, searchName:string){
-    return menus.map((res:any)=>{
-      if(res.label == searchName){
+
+  function recursiveFunction(menus: any, searchName: string) {
+    return menus.map((res: any) => {
+      if (res.label == searchName) {
         const item = {
-          id:res.label,
+          id: res.label,
           label: res.label,
-          icon:''
+          icon: ''
         }
         return item;
       }
-      else{
-        if(res.children){
+      else {
+        if (res.children) {
           let item = recursiveFunction(res.children, searchName);
-          item = item.filter((res:any)=> res?true:false)
-          if(item != null && item[0]!=null){
-            if(!item[0].id){
-              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+          item = item.filter((res: any) => res ? true : false)
+          if (item != null && item[0] != null) {
+            if (!item[0].id) {
+              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
             }
-            else{
-              return item.concat([{id:res.label, label:res.label, icon:''}])
+            else {
+              return item.concat([{ id: res.label, label: res.label, icon: '' }])
             }
           }
         }
@@ -311,26 +313,26 @@ const Main = (props: MainProps) => {
       }
     })
   }
-  function recursiveFunction1(menus:any, searchName:string){
-    return menus.map((res:any)=>{
-      if(res.path &&  res.path == searchName){
+  function recursiveFunction1(menus: any, searchName: string) {
+    return menus.map((res: any) => {
+      if (res.path && res.path == searchName) {
         const item = {
-          id:res.label,
+          id: res.label,
           label: res.label,
-          icon:''
+          icon: ''
         }
         return item;
       }
-      else{
-        if(res.children){
+      else {
+        if (res.children) {
           let item = recursiveFunction1(res.children, searchName);
-          item = item.filter((res:any)=> res?true:false)
-          if(item != null && item[0]!=null){
-            if(!item[0].id){
-              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+          item = item.filter((res: any) => res ? true : false)
+          if (item != null && item[0] != null) {
+            if (!item[0].id) {
+              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
             }
-            else{
-              return item.concat([{id:res.label, label:res.label, icon:''}])
+            else {
+              return item.concat([{ id: res.label, label: res.label, icon: '' }])
             }
           }
         }
@@ -344,16 +346,16 @@ const Main = (props: MainProps) => {
     //store.accessToken = null;
     navigate("/login");
   };
-  useEffect(()=>{
-    let a = recursiveFunction1(concatenated,currentPath)
-    a = a.filter((res:any)=> res?true:false)
-    if(a.length &&  a[0].id){
+  useEffect(() => {
+    let a = recursiveFunction1(concatenated, currentPath)
+    a = a.filter((res: any) => res ? true : false)
+    if (a.length && a[0].id) {
       setBreadCrumItem(a);
     }
-    else if(a.length){
+    else if (a.length) {
       setBreadCrumItem(a[0].reverse());
     }
-  },[menus.MainMenu])
+  }, [menus.MainMenu])
 
   let logo = "./assets/raaghu_logs.png";
   return (
@@ -362,7 +364,7 @@ const Main = (props: MainProps) => {
         <Route
           path="/login"
           element={
-              <LoginCompo />
+            <LoginCompo />
           }
         ></Route>
         <Route
@@ -387,9 +389,9 @@ const Main = (props: MainProps) => {
                 <div className="aside ng-tns-c99-0" id="aside">
                   <div>
                     <img
-                        className="ms-1 cursor-pointer sidenav-logo"
-                        src={logo}
-                        alt="logo"
+                      className="ms-1 cursor-pointer sidenav-logo"
+                      src={logo}
+                      alt="logo"
                     ></img>
                   </div>
                   <div className="mx-2 mt-6">
@@ -404,32 +406,32 @@ const Main = (props: MainProps) => {
                   className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                   id="FixedHeaderOverFlow"
                 >
-                      <div className="header align-items-stretch">
-              <RdsCompTopNavigation
-                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
-                // languageLable={
-                //   storeData.languages?.currentCulture?.displayName ||
-                //   "English (United Kingdom)"
-                // }
-                breacrumItem={breacrumItem}
-                languageIcon="gb"
-                languageItems={languageData}
-                toggleItems={toggleItems}
-                componentsList={componentsList}
-                // brandName="raaghu"
-                onClick={onClickHandler}
-                profileTitle="Host Admin"
-                profileName="admin"
-                onLogout={logout}
-                logo={logo}
-                toggleTheme={props.toggleTheme}
-                navbarTitle={t(currentTitle) || ""}
-                navbarSubTitle={t(currentSubTitle) || ""}
-                onChatClickHandler={() => {
-                  console.log(" session Hey Chat Button Clicked!!");
-                }} elementList={[]} />
-            </div>
+                  <div className="header align-items-stretch">
+                    <RdsCompTopNavigation
+                      //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
+                      languageLable="English"
+                      // languageLable={
+                      //   storeData.languages?.currentCulture?.displayName ||
+                      //   "English (United Kingdom)"
+                      // }
+                      breacrumItem={breacrumItem}
+                      languageIcon="gb"
+                      languageItems={languageData}
+                      toggleItems={toggleItems}
+                      componentsList={componentsList}
+                      // brandName="raaghu"
+                      onClick={onClickHandler}
+                      profileTitle="Host Admin"
+                      profileName="admin"
+                      onLogout={logout}
+                      logo={logo}
+                      toggleTheme={props.toggleTheme}
+                      navbarTitle={t(currentTitle) || ""}
+                      navbarSubTitle={t(currentSubTitle) || ""}
+                      onChatClickHandler={() => {
+                        console.log(" session Hey Chat Button Clicked!!");
+                      }} elementList={[]} />
+                  </div>
                   <Suspense>
                     <Routes>
                       <Route
@@ -544,10 +546,10 @@ const Main = (props: MainProps) => {
                       <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                     <Route path="/pages" element={<PagesCompo />} /> 
-                     <Route path="/blog-post" element={<BlogPostCompo />} /> 
-                   <Route path="/newsletters" element={<NewslettersCompo />} /> 
-</Routes>
+                      <Route path="/pages" element={<PagesCompo />} />
+                      <Route path="/blog-post" element={<BlogPostCompo />} />
+                      <Route path="/newsletters" element={<NewslettersCompo />} />
+                    </Routes>
                   </Suspense>
                 </div>
               </div>

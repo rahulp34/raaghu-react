@@ -32,8 +32,8 @@ import { useTranslation } from "react-i18next";
 interface RdsPageTenantProps {}
 
 const actions = [
-  { id: "editTenant", displayName: "Edit", offId: "Edit" },
-  { id: "delete", displayName: "Delete", modalId: "Del" },
+  { id: "editTenant", displayName: "Edit", offId: "tenant-edit-off" },
+  { id: "delete", displayName: "Delete", modalId: "tenant-delete-off" },
 ];
 
 
@@ -376,10 +376,10 @@ const Tenant = (props: RdsPageTenantProps) => {
                     ></RdsButton>
                   </div>
                 }
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"tenant"}
+                offId={"tenant-new-off"}
               >
                 <div className="mt-3">
                   <RdsCompTenantInformation
@@ -409,10 +409,10 @@ const Tenant = (props: RdsPageTenantProps) => {
             <RdsOffcanvas
               canvasTitle={"Edit Tenant"}
               placement="end"
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"Edit"}
+              offId={"tenant-edit-off"}
             >
               <RdsNavtabs
                 navtabsItems={navtabsItems}
@@ -476,7 +476,7 @@ const Tenant = (props: RdsPageTenantProps) => {
               )}
             </RdsOffcanvas>
           </div>
-          <RdsCompAlertPopup alertID="Del" onSuccess={onDeleteHandler} />
+          <RdsCompAlertPopup alertID="tenant-delete-off" onSuccess={onDeleteHandler} />
         </div>
 
       </div>
