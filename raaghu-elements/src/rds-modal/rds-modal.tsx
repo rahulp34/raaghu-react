@@ -68,8 +68,7 @@ const RdsModal = (props: RdsModalProps) => {
     <>
       {/* Button trigger modal */}
       {props.modalbutton && (
-        <div
-          style={{ cursor: "pointer" }}
+        <div className="cursor-pointer"
           data-bs-toggle="modal"
           data-bs-target={`#${props.modalId}`}
         >

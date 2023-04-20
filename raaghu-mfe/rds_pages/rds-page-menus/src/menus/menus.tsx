@@ -298,7 +298,7 @@ const Menus = () => {
                 backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Language"}
+                offId={"menu-add-off"}
                 canvasTitle={"New Menu"}
               >
                 <RdsCompNewMenu

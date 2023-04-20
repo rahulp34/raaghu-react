@@ -98,7 +98,7 @@ const scrollableTemplate: ComponentStory<typeof RdsModal> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  modalId: "modal1",
+  modalId: "modal1234",
   modalAnimation: "modal fade",
   showModalFooter: true,
   showModalHeader: true,

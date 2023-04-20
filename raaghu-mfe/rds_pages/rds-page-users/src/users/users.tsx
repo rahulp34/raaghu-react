@@ -144,7 +144,7 @@ const Users = () => {
 
   const actions = [
     { id: "user_edit_offcanvas", displayName: "Edit", offId: "user-edit-off" },
-    { id: "user_delete", displayName: "Delete", modalId: "user_delete_off" },
+    { id: "user_delete", displayName: "Delete", modalId: "user-delete-off" },
     {
       id: "set_password",
       displayName: "Set Password",
@@ -713,7 +713,7 @@ const Users = () => {
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
           <RdsCompAlertPopup
-            alertID="user_delete_off"
+            alertID="user-delete-off"
             onSuccess={deleteHandler}
           />
       </div>
@@ -783,6 +783,7 @@ const Users = () => {
             isOutline={false}
             colorVariant="primary"
             onClick={createNewUser}
+            showLoadingSpinner={true}
             databsdismiss="offcanvas"
           ></RdsButton>
         </div>
@@ -870,6 +871,7 @@ const Users = () => {
                         class="ms-2"
                         colorVariant="primary"
                         databsdismiss="offcanvas"
+                        showLoadingSpinner={true}
                         onClick={handleSelectesPermission}
                       ></RdsButton>
                     </div>
@@ -897,6 +899,7 @@ const Users = () => {
             isOutline={false}
             colorVariant="primary"
             onClick={updateUserData}
+            showLoadingSpinner={true}
             databsdismiss="offcanvas"
           ></RdsButton>
         </div>
@@ -937,8 +940,8 @@ const Users = () => {
             size="medium"
             isOutline={true}
             colorVariant="primary"
+            showLoadingSpinner={true}
             onClick={generatePassword}
-           
           ></RdsButton>
                 </div>
                </div>

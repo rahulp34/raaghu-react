@@ -18,7 +18,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction,  } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -83,6 +83,7 @@ const Main = (props: MainProps) => {
   let currentPath = window.location.pathname;
 
   useEffect(() => {
+    sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
         navigate(currentPath);
@@ -109,36 +110,21 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
   ];
-    const componentsList = [
-        {
-            label: "Account",
-            val: "Account",
-        },
-        {
-            label: "AddressInput",
-            val: "AddressInput",
-        },
-    ];
+  const componentsList = [
+    {
+      label: "Account",
+      val: "Account",
+    },
+    {
+      label: "AddressInput",
+      val: "AddressInput",
+    },
+  ];
   useEffect(() => {
     dispatch(callLoginAction(null) as any)
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (checkingFirstTime&&
-  //     dataHost.configuration &&
-  //     !dataHost.configuration.currentUser.isAuthenticated
-  //   ) {
-  //     navigate("/login");
-  //   }
-  //   else{
-  //     setChecking(true);
-  //     navigate(location.pathname)
-  //   }
-  // }, [dataHost.configuration]);
-
-  // datas for changing language from dropdown on top-nav in dashboard
-
-  // OnClickHandler for language change
+  
   const objectArray = Object.entries(menus);
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
 
@@ -160,37 +146,12 @@ const Main = (props: MainProps) => {
 
   const onClickHandler = (e: any, val: any) => {
     setCurrentLanguage(val);
-    localStorage.setItem("currentLang",val);
+    localStorage.setItem("currentLang", val);
   };
-  
+
   useEffect(() => {
-    configurationService(currentLanguage).then(async (res: any) => {
-      await localizationService(currentLanguage).then(
-        async (resp: any) => {
-          let data1 = {};
-          let data2 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              Object.keys(translation[key].texts).forEach((k1)=>{
-                let k2 = k1.replace(/[^\w\s]/gi,'_');
-                let value1 = translation[key].texts[k1]
-                data2 = {...data2,[k2]:value1}
-              })              
-            });
-            i18n.addResourceBundle(
-              currentLanguage,
-              "translation",
-              data2,
-              false,
-              true
-            );
-            i18n.changeLanguage(currentLanguage);
-          }
-        }
-      );
-      
-      const tempdata = await res.localization?.languages?.map((item: any) => {
+    configurationService(currentLanguage).then( (res: any) => {
+      const tempdata = res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -201,6 +162,29 @@ const Main = (props: MainProps) => {
       });
       setLanguageData(tempdata);
     });
+    localizationService(currentLanguage).then(
+       (resp: any) => {
+        let data2 = {};
+        const translation = resp?.resources;
+        if (translation) {
+          Object.keys(translation).forEach((key) => {
+            Object.keys(translation[key].texts).forEach((k1)=>{
+              let k2 = k1.replace(/[^\w\s]/gi,'_');
+              let value1 = translation[key].texts[k1]
+              data2 = {...data2,[k2]:value1}
+            })              
+          });
+          i18n.addResourceBundle(
+            currentLanguage,
+            "translation",
+            data2,
+            false,
+            true
+          );
+          i18n.changeLanguage(currentLanguage);
+        }
+      }
+    );
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -252,70 +236,76 @@ const Main = (props: MainProps) => {
     );
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
-    let a = recursiveFunction(concatenated,pageName) 
-    a = a.filter((res:any)=> res?true:false);
-    if(a[0].id){
+    let a = recursiveFunction(concatenated, pageName)
+    a = a.filter((res: any) => res ? true : false);
+    if (a[0].id) {
       setBreadCrumItem(a);
     }
-    else{
+    else {
       a = a[0].reverse();
       setBreadCrumItem(a);
     }
   };
+
+  useEffect(()=>{
+    const lang =localStorage.getItem("currentLang")||"en-GB";
+    localizationService(lang).then((resp: any) => {
+      i18n.changeLanguage(lang);
+      var data1 = {};
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          data1 = { ...data1, ...translation[key].texts };
+        });
+        i18n.addResourceBundle(lang, "translation", data1, false, true);
+      }
+    });
+  },[])
 
   function hello(res: any) {
       localStorage.setItem("auth", JSON.stringify(true));
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
-        
-        await localizationService(lang).then(async (resp: any) => {
-          
-          i18n.changeLanguage(lang);
-          var data1 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              data1 = { ...data1, ...translation[key].texts };
-            });
-            i18n.addResourceBundle(lang, "translation", data1, false, true);
-          }
-        });
+        const lang =localStorage.getItem("currentLang")||"en-GB"
       });
+    });
   }
+
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
-          await hello(res)
           sessionStorage.setItem('accessToken',res)
+          await hello(res)
         }
       });
       dispatch(callLoginAction(null) as any);
     }
-  },[dataHost])
-  
+  }, [dataHost])
 
-  function recursiveFunction(menus:any, searchName:string){
-    return menus.map((res:any)=>{
-      if(res.label == searchName){
+
+  function recursiveFunction(menus: any, searchName: string) {
+    return menus.map((res: any) => {
+      if (res.label == searchName) {
         const item = {
-          id:res.label,
+          id: res.label,
           label: res.label,
-          icon:''
+          icon: ''
         }
         return item;
       }
-      else{
-        if(res.children){
+      else {
+        if (res.children) {
           let item = recursiveFunction(res.children, searchName);
-          item = item.filter((res:any)=> res?true:false)
-          if(item != null && item[0]!=null){
-            if(!item[0].id){
-              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+          item = item.filter((res: any) => res ? true : false)
+          if (item != null && item[0] != null) {
+            if (!item[0].id) {
+              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
             }
-            else{
-              return item.concat([{id:res.label, label:res.label, icon:''}])
+            else {
+              return item.concat([{ id: res.label, label: res.label, icon: '' }])
             }
           }
         }
@@ -323,26 +313,26 @@ const Main = (props: MainProps) => {
       }
     })
   }
-  function recursiveFunction1(menus:any, searchName:string){
-    return menus.map((res:any)=>{
-      if(res.path &&  res.path == searchName){
+  function recursiveFunction1(menus: any, searchName: string) {
+    return menus.map((res: any) => {
+      if (res.path && res.path == searchName) {
         const item = {
-          id:res.label,
+          id: res.label,
           label: res.label,
-          icon:''
+          icon: ''
         }
         return item;
       }
-      else{
-        if(res.children){
+      else {
+        if (res.children) {
           let item = recursiveFunction1(res.children, searchName);
-          item = item.filter((res:any)=> res?true:false)
-          if(item != null && item[0]!=null){
-            if(!item[0].id){
-              return item[0].concat([{id:res.label, label:res.label, icon:''}])
+          item = item.filter((res: any) => res ? true : false)
+          if (item != null && item[0] != null) {
+            if (!item[0].id) {
+              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
             }
-            else{
-              return item.concat([{id:res.label, label:res.label, icon:''}])
+            else {
+              return item.concat([{ id: res.label, label: res.label, icon: '' }])
             }
           }
         }
@@ -356,16 +346,16 @@ const Main = (props: MainProps) => {
     //store.accessToken = null;
     navigate("/login");
   };
-  useEffect(()=>{
-    let a = recursiveFunction1(concatenated,currentPath)
-    a = a.filter((res:any)=> res?true:false)
-    if(a.length &&  a[0].id){
+  useEffect(() => {
+    let a = recursiveFunction1(concatenated, currentPath)
+    a = a.filter((res: any) => res ? true : false)
+    if (a.length && a[0].id) {
       setBreadCrumItem(a);
     }
-    else if(a.length){
+    else if (a.length) {
       setBreadCrumItem(a[0].reverse());
     }
-  },[menus.MainMenu])
+  }, [menus.MainMenu])
 
   let logo = "./assets/raaghu_logs.png";
   return (
@@ -374,7 +364,7 @@ const Main = (props: MainProps) => {
         <Route
           path="/login"
           element={
-              <LoginCompo />
+            <LoginCompo />
           }
         ></Route>
         <Route
@@ -397,7 +387,14 @@ const Main = (props: MainProps) => {
             >
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                 <div className="aside ng-tns-c99-0" id="aside">
-                  <div className="mx-2">
+                  <div>
+                    <img
+                      className="ms-1 cursor-pointer sidenav-logo"
+                      src={logo}
+                      alt="logo"
+                    ></img>
+                  </div>
+                  <div className="mx-2 mt-6">
                     <RdsCompSideNavigation
                       sideNavItems={sideNavItems}
                       onClick={sideNavOnClickHandler}
@@ -550,10 +547,10 @@ const Main = (props: MainProps) => {
                       <Route path="/components" element={<ComponentsCompo />} />
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                     <Route path="/pages" element={<PagesCompo />} /> 
-                     <Route path="/blog-post" element={<BlogPostCompo />} /> 
-                   <Route path="/newsletters" element={<NewslettersCompo />} /> 
-</Routes>
+                      <Route path="/pages" element={<PagesCompo />} />
+                      <Route path="/blog-post" element={<BlogPostCompo />} />
+                      <Route path="/newsletters" element={<NewslettersCompo />} />
+                    </Routes>
                   </Suspense>
                   </div>
                 </div>

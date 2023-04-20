@@ -49,8 +49,8 @@ const Comments = () => {
   ];
 
   const [actions, setActions] = useState([
-    { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
+    { id: "edit", displayName: "Edit", offId: "comments-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "comments-delete-off" },
   ]);
 
   // Use States ================

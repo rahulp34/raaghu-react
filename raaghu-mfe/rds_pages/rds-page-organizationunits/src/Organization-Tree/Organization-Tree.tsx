@@ -354,13 +354,14 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         iconFill={false}
                         colorVariant="primary"
                         type="button"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchUsersOrganizationUnit() as any);
                         }}
                         data-bs-dismiss="offcanvas"
                         databstoggle="offcanvas"
-                        databstarget="#addMemberOff"
-                        ariacontrols="addMemberOff"
+                        databstarget="#oMember-add-off"
+                        ariacontrols="oMember-add-off"
                       ></RdsButton>
                     )}
                     {activeTab === "role" && (
@@ -377,6 +378,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         databstoggle="offcanvas"
                         databstarget="#addRoleOff"
                         ariacontrols="addRoleOff"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchRoleListOrganizationUnit() as any);
                         }}
@@ -441,7 +443,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Member"
         
-        offId="addMemberOff"
+        offId="oMember-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -478,7 +480,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addMemberOff"
+                      databstarget="#oMember-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -495,6 +497,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addMemberOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>
@@ -507,7 +510,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Roles"
         
-        offId="addRoleOff"
+        offId="oRole-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -545,7 +548,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addRoleOff"
+                      databstarget="#oRole-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -562,6 +565,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addRoleOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>
@@ -616,7 +620,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Edit Organization Unit"
         
-        offId={`boganization`}
+        offId="boganization"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}

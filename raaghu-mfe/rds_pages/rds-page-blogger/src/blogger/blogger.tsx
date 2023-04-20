@@ -59,9 +59,9 @@ const Blogger = () => {
     },
   ];
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "blog" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
-    { id: "clearCache", displayName: "Clear Cache", modalId: "clearCache" },
+    { id: "edit", displayName: "Edit", offId: "blogger-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "blogger-delete-off" },
+    { id: "clearCache", displayName: "Clear Cache", modalId: "blogger-clear-off" },
   ];
 
   // Use States ================
@@ -209,6 +209,7 @@ const Blogger = () => {
                   size="small"
                   type="button"
                   colorVariant="primary"
+                  showLoadingSpinner={true}
                   onClick={createBlogFn}
                 ></RdsButton>
               </div>
@@ -216,7 +217,7 @@ const Blogger = () => {
             backDrop={false}
             scrolling={false}
             preventEscapeKey={false}
-            offId={"blog"}
+            offId={"blogger-edit-off"}
           >
             <form>
               <div className="form-group">
@@ -282,6 +283,7 @@ const Blogger = () => {
                   tooltipTitle={""}
                   type={"submit"}
                   databsdismiss="offcanvas"
+                  showLoadingSpinner={true}
                   onClick={(event) => saveUpdateBlog(event)}
                 ></RdsButton>
               </div>
@@ -305,13 +307,13 @@ const Blogger = () => {
       </div>
       </div></div>
       <RdsCompAlertPopup
-        alertID="delete"
+        alertID="blogger-delete-off"
         onSuccess={confirmDelete}
         deleteButtonColor="danger"
         cancelButtonColor="danger"
       />
       <RdsCompAlertPopup
-        alertID="clearCache"
+        alertID="blogger-clear-off"
         onSuccess={clearCacheFn}
         deleteButtonLabel={"Clear Cache"}
         alertConfirmation={"Are you sure to Clear Cache"}

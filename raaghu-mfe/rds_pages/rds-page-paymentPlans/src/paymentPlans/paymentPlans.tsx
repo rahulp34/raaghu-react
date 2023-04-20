@@ -56,8 +56,8 @@ const PaymentPlans = () => {
 
   // Use States ================
   const [actions, setActions] = useState([
-    { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
+    { id: "edit", displayName: "Edit", offId: "payPlan-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
     {
       id: "manageGatewayPlans",
       displayName: "Manage Gateway Plans",
@@ -297,8 +297,9 @@ const PaymentPlans = () => {
     };
     dispatch(getAllGatewayPlansByPlanId(item));
     setActions([
-      { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-      { id: "delete", displayName: "Delete", modalId: "delete" },
+      { id: "edit", displayName: "Edit", offId: "payPlan-edit-off" },
+      { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
+     
     ]);
   }
 
@@ -331,6 +332,7 @@ const PaymentPlans = () => {
                     size="small"
                     type="button"
                     colorVariant="primary"
+                    showLoadingSpinner={true}
                     onClick={createpaymentPlansFn}
                   ></RdsButton>
                 </div>
@@ -338,7 +340,7 @@ const PaymentPlans = () => {
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"paymentPlans"}
+              offId="payPlan-edit-off"
             >
               <form>
                 {managePlan ? (
@@ -419,6 +421,7 @@ const PaymentPlans = () => {
                     tooltipTitle={""}
                     type={"submit"}
                     databsdismiss="offcanvas"
+                    showLoadingSpinner={true}
                     onClick={(event) => saveUpdatePaymentPlans(event)}
                   ></RdsButton>
                 </div>

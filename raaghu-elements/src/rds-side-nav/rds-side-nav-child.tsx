@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import RdsIcon from "../rds-icon";
 import "./rds-side-nav-new.scss";
-import RdsToggle from "../rds-toggle/rds-toggle";
-import RdsDropdown from "../rds-dropdown";
-import { getVisibleSelectionRect } from "draft-js";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
@@ -151,7 +147,10 @@ const Node = ({
                   ></RdsIcon>
                 : null}
               <div className="me-3" data-name={node.label}>
-                {!collapse && <>{t(node.label)}</>}
+                {!collapse && <>
+                  
+                {t(node.label)}
+                </>}
               </div>
         </NavLink>
       )}
@@ -210,6 +209,14 @@ const Node = ({
                                       <>
                                         <li className="list" id={subItem.id}  >
                                           <NavLink className="dropdown-item " to={subItem.path}>
+                                          <RdsIcon
+                        name={subItem.icon}
+                        fill={false}
+                        stroke={true}
+                        height="20px"
+                        width="20px"
+                        classes="me-3"
+                      ></RdsIcon>
                                             {t(subItem.label)}
                                           </NavLink>
                                         </li>
