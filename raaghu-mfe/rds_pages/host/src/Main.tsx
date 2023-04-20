@@ -285,6 +285,7 @@ const Main = (props: MainProps) => {
   }
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
           await hello(res)
