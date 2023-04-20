@@ -359,6 +359,7 @@ const TextTemplate = () => {
                   databsdismiss={"offcanvas"}
                   isDisabled={targetContent === ""}
                   onClick={(e: any) => onSaveFn(e)}
+                  showLoadingSpinner={true}
                 ></RdsButton>
               </div>
             </div>

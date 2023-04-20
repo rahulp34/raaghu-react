@@ -476,6 +476,7 @@ const FileManagement = () => {
                 block={false}
                 size="small"
                 type="button"
+                showLoadingSpinner={true}
                 colorVariant="primary"
               ></RdsButton>
             </div>
@@ -515,6 +516,7 @@ const FileManagement = () => {
                   isDisabled={name === ""}
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                   onClick={addDataHandler}
                 ></RdsButton>
               </div>
@@ -544,6 +546,7 @@ const FileManagement = () => {
                 type="button"
                 colorVariant="primary"
                 isOutline={true}
+                showLoadingSpinner={true}
               ></RdsButton>
             </div>
           }
@@ -640,6 +643,7 @@ const FileManagement = () => {
                         colorVariant="primary"
                         class="me-2"
                         onClick={UpdateFolderName}
+                        showLoadingSpinner={true}
                       ></RdsButton>
                     </div>
                   </div>
@@ -706,6 +710,7 @@ const FileManagement = () => {
                       databsdismiss="offcanvas"
                       colorVariant="primary"
                       class="me-2"
+                      showLoadingSpinner={true}
                       onClick={movefolder}
                     ></RdsButton>
                   </div>

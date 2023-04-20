@@ -185,6 +185,7 @@ const UrlForwarding = () => {
             colorVariant="primary"
             databstoggle="offcanvas"
             databstarget="#newUrlForwarding"
+            showLoadingSpinner={true}
           ></RdsButton>
         </div>
       </div>
@@ -238,6 +239,7 @@ const UrlForwarding = () => {
                 databsdismiss="offcanvas"
                 databstoggle="offcanvas"
                 databstarget="#newUrlForwarding"
+                showLoadingSpinner={true}
               ></RdsButton>
             </div>
           </div>
@@ -275,6 +277,7 @@ const UrlForwarding = () => {
                 databsdismiss="offcanvas"
                 databstoggle="offcanvas"
                 databstarget="#editUrlForwardingoff"
+                showLoadingSpinner={true}
               ></RdsButton>
             </div>
           </div>

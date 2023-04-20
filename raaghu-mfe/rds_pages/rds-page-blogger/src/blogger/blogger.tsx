@@ -208,6 +208,7 @@ const Blogger = () => {
                   size="small"
                   type="button"
                   colorVariant="primary"
+                  showLoadingSpinner={true}
                   onClick={createBlogFn}
                 ></RdsButton>
               </div>
@@ -281,6 +282,7 @@ const Blogger = () => {
                   tooltipTitle={""}
                   type={"submit"}
                   databsdismiss="offcanvas"
+                  showLoadingSpinner={true}
                   onClick={(event) => saveUpdateBlog(event)}
                 ></RdsButton>
               </div>

@@ -212,6 +212,7 @@ const Forms = () => {
                   iconWidth="15px"
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                 ></RdsButton>
               </div>
             }
@@ -243,6 +244,7 @@ const Forms = () => {
                         class="ms-2"
                         colorVariant="primary"
                         databsdismiss="offcanvas"
+                        showLoadingSpinner={true}
                         onClick={() => handleNewFormData()}
                       ></RdsButton>
                     </div>

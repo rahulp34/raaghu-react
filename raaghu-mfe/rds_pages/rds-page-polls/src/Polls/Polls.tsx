@@ -295,6 +295,7 @@ const Polls = (props: any) => {
           icon={"plus"}
           iconWidth={"12px"}
           iconHeight={"12px"}
+          showLoadingSpinner={true}
         ></RdsButton>
       </div>
       <div className=" col-md-10">
@@ -364,6 +365,7 @@ const Polls = (props: any) => {
                 databsdismiss="offcanvas"
                 tooltipTitle={""}
                 type="button"
+                showLoadingSpinner={true}
                 onClick={OnSave}
               />
             </div>
@@ -422,6 +424,7 @@ const Polls = (props: any) => {
               isOutline={false}
               colorVariant="primary"
               databsdismiss="offcanvas"
+              showLoadingSpinner={true}
               onClick={editDataHandler}
             ></RdsButton>
           </div>
