@@ -62,8 +62,8 @@ const Pages = (props: any) => {
 	];
 
 	const actions = [
-		{ id: "edit", displayName: "Edit", offId: "dynamic-edit-off" },
-		{ id: "delete", displayName: "Delete", modalId: "page_del" },
+		{ id: "edit", displayName: "Edit", offId: "page-edit-off" },
+		{ id: "delete", displayName: "Delete", modalId: "page-delete-off" },
 		{ id: "isHomePageStatus", displayName: "Change Home Page Status" },
 	];
 
@@ -288,7 +288,7 @@ const Pages = (props: any) => {
 							backDrop={true}
 							scrolling={false}
 							preventEscapeKey={false}
-							offId={"blogPost"}
+							offId="page-new-off"
 						>
 							<div className="mt-3">
 								<RdsCompNewPage
@@ -297,7 +297,7 @@ const Pages = (props: any) => {
 							</div>
 						</RdsOffcanvas>
 					</div>
-					<RdsCompAlertPopup alertID="page_del" onSuccess={onDeleteHandler} />
+					<RdsCompAlertPopup alertID="page-delete-off" onSuccess={onDeleteHandler} />
 				</div>
 
 				<div className="my-3">
@@ -329,7 +329,7 @@ const Pages = (props: any) => {
 						canvasTitle="Edit Page"
 						onclick={offCanvasHandler}
 						placement="end"
-						offId="dynamic-edit-off"
+						offId="page-edit-off"
 
 						backDrop={true}
 						scrolling={false}

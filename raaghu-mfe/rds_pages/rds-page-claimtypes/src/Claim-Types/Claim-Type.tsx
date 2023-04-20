@@ -200,8 +200,8 @@ const ClaimType = () => {
   ];
 
   const actions = [
-    { id: "editClaim", displayName: "Edit", offId: "dynamic-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "editClaim", displayName: "Edit", offId: "claimType-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "claimType-delete-off" },
   ];
 
   const submitHandler = (data: any) => {
@@ -317,7 +317,7 @@ const ClaimType = () => {
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
-        offId={"tenant"}
+        offId={"claimType-add-off"}
       >
         <RdsCompNewClaimType
           claimsData={claimsData}
@@ -342,14 +342,14 @@ const ClaimType = () => {
       onActionSelection={onActionSelection}
     ></RdsCompDatatable>
     <RdsCompAlertPopup
-      alertID="dynamic_delete_off"
+      alertID="claimType-delete-off"
       onSuccess={DeleteHandler}
     />
     <RdsOffcanvas
       canvasTitle="Edit Claim type"
       onclick={offCanvasHandler}
       placement="end"
-      offId="dynamic-edit-off"
+      offId="claimType-edit-off"
       
       backDrop={false}
       scrolling={false}

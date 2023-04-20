@@ -1,10 +1,6 @@
 //Edit this file and export this in App.tsx
 import React, { useEffect, useState } from "react";
 import {
-  RdsButton,
-  RdsCheckbox,
-  RdsInput,
-  // RdsInputGroup,
   RdsLabel,
   RdsSelectList,
 } from "raaghu-react-elements";
