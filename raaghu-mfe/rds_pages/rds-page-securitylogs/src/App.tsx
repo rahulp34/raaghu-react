@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSecurityLogs } from "../../../libs/state-management/security-logs/security-logs-slice";
 import { RdsCompAlertPopup } from "../../rds-components";
 import { useTranslation } from "react-i18next";
-import { DateTime } from "luxon";
+
 // import { CSVLink } from "react-csv";
 import { format } from 'date-fns'
 
@@ -84,6 +84,8 @@ const SecurityLogsPage = () => {
     userName: "",
     id: "",
     userId: "",
+    startDate:'',
+    endDate:''
   });
 
 
@@ -117,6 +119,7 @@ const SecurityLogsPage = () => {
   const dispatch = useAppDispatch();
 
   const securityLogs = () => {
+    debugger
     const securityLogsParamsData = {
       action: selectFilterValue.action,
       identity: selectFilterValue.identity,
@@ -124,6 +127,8 @@ const SecurityLogsPage = () => {
       userName: selectFilterValue.userName,
       applicationName: selectFilterValue.applicationName,
       clientIpAddress: selectFilterValue.clientIpAddress,
+      startDate:selectFilterValue.startDate,
+      endDate:selectFilterValue.endDate
 
     }
     dispatch(fetchSecurityLogs(securityLogsParamsData) as any);
@@ -177,14 +182,14 @@ const SecurityLogsPage = () => {
   const onApplicationNameFilter = (event: any) => {
     setSelectFilterValue({
       ...selectFilterValue,
-      applicationName: event?.target?.value,
+      applicationName:event?.target?.value,
     });
   }
 
   const onUserNameFilter = (event: any) => {
     setSelectFilterValue({
       ...selectFilterValue,
-      applicationName: event?.target?.value,
+      userName: event?.target?.value,
     });
     return securityLogsData;
   }
@@ -192,7 +197,21 @@ const SecurityLogsPage = () => {
   // function onDatePicker(start: any, end: any): void {
   //   throw new Error("Function not implemented.");
   // }
-  const onDatePicker = () => {};
+  // function handleStartDate(data:any){
+  //   let date1 = data.toISOString();
+  //   setQuestionData({ ...QuestionData, startDate:date1  }); 
+  //   props.getPollsQuestion({ ...QuestionData, startDate:date1  })
+  // }
+  function onDatePicker  (startEndDate:any) {
+    debugger
+    const [start, end] = startEndDate;
+    setSelectFilterValue({
+      ...selectFilterValue,
+      startDate:start.toISOString(),
+      endDate:end.toISOString(),
+    }); 
+
+  };
 
   return (
     <Suspense>
@@ -231,17 +250,20 @@ const SecurityLogsPage = () => {
           <div className="card">
             <div className="card-body">
               <div className="row">
-                <div className="col-3">
+                <div className="col-3" style={{marginTop:'-3px'}}>
                   <RdsDatePicker
                     DatePickerLabel="Select Date"  
-                    onDatePicker={onDatePicker}
+                    onDatePicker={(s:any)=>onDatePicker(s)}
                     type="advanced"
+                    selectedDate={selectFilterValue.startDate}
+                    customDate={onDatePicker}
                   ></RdsDatePicker>
                 </div>
                 <div className="col-3">
                   <RdsInput
                     label="Application Name"
                     placeholder="Application Name"
+                    value={selectFilterValue.applicationName}
                     onChange={onApplicationNameFilter}></RdsInput>
                 </div>
                 <div className="col-3">
@@ -249,19 +271,22 @@ const SecurityLogsPage = () => {
                     label="Identity"
                     placeholder="Identity"
                     onChange={onIdentityFilter}
+                    value={selectFilterValue.identity}
                   ></RdsInput>
                 </div>
                 <div className="col-3">
                   <RdsInput label="Username"
                     placeholder="Username"
+                    value={selectFilterValue.userName}
                     onChange={onUserNameFilter}></RdsInput>
                 </div>
               </div>
-              <div className="row">
+              <div className="row mt-3">
                 <div className="col-3">
                   <RdsInput
                     label="Actions"
                     placeholder="Actions"
+                    value={selectFilterValue.action}
                     onChange={onActionFilter}
                   ></RdsInput>
                 </div>
