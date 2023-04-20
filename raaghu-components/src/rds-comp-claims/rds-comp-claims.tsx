@@ -28,7 +28,7 @@ const RdsCompClaims = (props: RdsCompClaimsProps) => {
     roleId: props.id,
   });
   const [tableData, setTableData] = useState<any>(props.claimsTable);
-  const actions= [{ id: "delete", displayName: "delete", modalId: "noModal" }];
+  const actions= [{ id: "delete", displayName: "delete", modalId: "claimComp-delete-off" }];
 
   const handleAddItem = () => {
       

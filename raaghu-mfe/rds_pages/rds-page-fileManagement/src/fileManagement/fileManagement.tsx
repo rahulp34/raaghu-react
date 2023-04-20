@@ -203,7 +203,6 @@ const FileManagement = () => {
         // formData: { File: new Blob([e], { type: e.type }) },
       },    
     };
-    debugger
       dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
         dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
@@ -476,6 +475,7 @@ const FileManagement = () => {
                 block={false}
                 size="small"
                 type="button"
+                showLoadingSpinner={true}
                 colorVariant="primary"
               ></RdsButton>
             </div>
@@ -515,6 +515,7 @@ const FileManagement = () => {
                   isDisabled={name === ""}
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                   onClick={addDataHandler}
                 ></RdsButton>
               </div>
@@ -544,6 +545,7 @@ const FileManagement = () => {
                 type="button"
                 colorVariant="primary"
                 isOutline={true}
+                showLoadingSpinner={true}
               ></RdsButton>
             </div>
           }
@@ -604,7 +606,7 @@ const FileManagement = () => {
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Rename"}
+                offId="fileManage-rename-off"
               >
                 <div>
                   <div className="pt-3">
@@ -640,6 +642,7 @@ const FileManagement = () => {
                         colorVariant="primary"
                         class="me-2"
                         onClick={UpdateFolderName}
+                        showLoadingSpinner={true}
                       ></RdsButton>
                     </div>
                   </div>
@@ -706,6 +709,7 @@ const FileManagement = () => {
                       databsdismiss="offcanvas"
                       colorVariant="primary"
                       class="me-2"
+                      showLoadingSpinner={true}
                       onClick={movefolder}
                     ></RdsButton>
                   </div>

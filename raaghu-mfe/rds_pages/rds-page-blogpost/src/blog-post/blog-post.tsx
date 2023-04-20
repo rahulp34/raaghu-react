@@ -185,6 +185,7 @@ const postSubmitHandler = (data: any)=>{
                       size="small"
                       type="button"
                       colorVariant="primary"
+					  showLoadingSpinner={true}
                       onClick={(e: any) => createNewCanvasFn(e)}
                     ></RdsButton>
                   </div>
@@ -192,7 +193,7 @@ const postSubmitHandler = (data: any)=>{
                 backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"blogPost"}
+                offId="blog-post-add-off"
               >
                 <div className="mt-3">
                   <RdsCompBlogPostNew 

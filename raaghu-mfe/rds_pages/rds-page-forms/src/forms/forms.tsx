@@ -133,8 +133,8 @@ const Forms = () => {
 
   const actions = [
     { id: "view", displayName: "View", offId: "view" },
-    { id: "send", displayName: "Send", offId: "Send" },
-    { id: "delete", displayName: "Delete", modalId: "Delete" },
+    { id: "send", displayName: "Send", offId: "forms-send-offc" },
+    { id: "delete", displayName: "Delete", modalId: "form-delete-off" },
   ];
 
 
@@ -212,13 +212,14 @@ const Forms = () => {
                   iconWidth="15px"
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                 ></RdsButton>
               </div>
             }
             backDrop={false}
             scrolling={false}
             preventEscapeKey={false}
-            offId="application"
+            offId="form-new-off"
           >
             <>
               <RdsCompFormsBasic basicInfo={basicFormData} handleNewFormData={(data: any) => handleGetFormData(data)} />
@@ -243,6 +244,7 @@ const Forms = () => {
                         class="ms-2"
                         colorVariant="primary"
                         databsdismiss="offcanvas"
+                        showLoadingSpinner={true}
                         onClick={() => handleNewFormData()}
                       ></RdsButton>
                     </div>
@@ -275,7 +277,7 @@ const Forms = () => {
                 backDrop={false}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId="send"
+                offId="forms-send-offc"
               >
                 <>
                   <div className="row">
@@ -315,7 +317,7 @@ const Forms = () => {
               </RdsOffcanvas>
             </div>
 
-            <RdsCompAlertPopup messageAlert="Form will be deleted with all the questions in it, do you confirm?" alertID="Delete" onSuccess={onDeleteHandler} />
+            <RdsCompAlertPopup messageAlert="Form will be deleted with all the questions in it, do you confirm?" alertID="form-delete-off" onSuccess={onDeleteHandler} />
 
           </div>
         </div>
