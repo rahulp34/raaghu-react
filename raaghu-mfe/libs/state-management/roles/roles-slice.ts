@@ -6,12 +6,10 @@ import {
 } from "@reduxjs/toolkit";
 import { RoleService } from "../../proxy/services/RoleService";
 
-
 import { PermissionsService } from "../../proxy";
 
 type InitialState = {
   roles: any;
-
   permission: any;
   allClaims: any;
   claims: any;
@@ -28,84 +26,74 @@ export const rolesInitialState: InitialState = {
 };
 
 //Roles unit
-export const fetchRoles = createAsyncThunk(
-  "Roles/fetchRoles",
-async() => {
-     RoleService.getRoles1({ filter: undefined,
-      sorting: 'id DESC',
+export const fetchRolesInRoles = createAsyncThunk(
+  "Roles/fetchRolesInRoles",
+  async () => {
+    const result = await RoleService.getRoles1({
+      filter: undefined,
+      sorting: "id DESC",
       skipCount: 0,
-      maxResultCount: 1000 }).then(
-      (result:any)=>{
-          console.log('fetched data , ',result.items  )
-        return result.items
-
-      }
-    ); 
+      maxResultCount: 1000,
+    });
+    return result.items;
   }
 );
 
-export const fetchAllClaims = createAsyncThunk(
-  "Roles/fetchAllClaims",() => {
-     RoleService.getRolesAllClaimTypes().then((result:any)=>{
-        return result
-      }
-    );
-  }
-);
+export const fetchAllClaims = createAsyncThunk("Roles/fetchAllClaims", () => {
+  RoleService.getRolesAllClaimTypes().then((result: any) => {
+    return result;
+  });
+});
 
 export const fetchClaims = createAsyncThunk(
-  "Roles/fetchClaims",(data:any) => {
-     RoleService.getRolesClaims({id:data.id}).then((result:any)=>{
-        return result
-      }
-    );
+  "Roles/fetchClaims",
+  (data: any) => {
+    RoleService.getRolesClaims({ id: data.id }).then((result: any) => {
+      return result;
+    });
   }
 );
 
-export const putClaims = createAsyncThunk(
-  "Roles/putClaims",(data:any) => {
-     RoleService.putRolesClaims({id:data.id, requestBody:data.body}).then((result:any)=>{
-        return result
-      }
-    );
-  }
-);
+export const putClaims = createAsyncThunk("Roles/putClaims", (data: any) => {
+  RoleService.putRolesClaims({ id: data.id, requestBody: data.body }).then(
+    (result: any) => {
+      return result;
+    }
+  );
+});
 
 export const addRolesUnit = createAsyncThunk(
   "Roles/addRolesUnit",
   (dto: any) => {
-     const result =RoleService.postRoles({requestBody:dto});
+    const result = RoleService.postRoles({ requestBody: dto });
     return result;
   }
 );
 export const editRoles = createAsyncThunk(
   "Roles/editRoles",
   ({ id, dTo }: { id: any; dTo: any }) => {
-    console.log('dTo from slice ',dTo )
-    const result =RoleService.putRoles({id:id, requestBody:dTo});
+    console.log("dTo from slice ", dTo);
+    const result = RoleService.putRoles({ id: id, requestBody: dTo });
     return result;
   }
 );
 
-export const deleteRoles = createAsyncThunk(
-  "Roles/deleteRoles",
-  (id: any) => {
-    const result =RoleService.deleteRoles({id:id});
-    return result;
-  }
-);
+export const deleteRoles = createAsyncThunk("Roles/deleteRoles", (id: any) => {
+  const result = RoleService.deleteRoles({ id: id });
+  return result;
+});
 
 //permissionsGET
 export const fetchPermission = createAsyncThunk(
   "Roles/fetchPermission",
-(key:any) => {
-  PermissionsService.getPermissions({providerName:'R' ,providerKey: key}).then(
-      (result:any)=>{
-          console.log('fetched data , ',result  )
-        return result.groups
-
-      }
-    ); 
+  (key: any) => {
+    PermissionsService.getPermissions({
+      providerName: "R",
+      providerKey: key,
+    }).then((result: any) => {
+      console.log("fetched data , ", result);
+      return result.groups;
+    });
   }
 );
 
@@ -113,33 +101,37 @@ export const fetchPermission = createAsyncThunk(
 export const editPermisstion = createAsyncThunk(
   "Roles/editPermisstion",
   ({ key, dTo }: { key: any; dTo: any }) => {
-    const result =PermissionsService.putPermissions({providerName:'R',providerKey: key,requestBody:dTo});
+    const result = PermissionsService.putPermissions({
+      providerName: "R",
+      providerKey: key,
+      requestBody: dTo,
+    });
     return result;
   }
 );
 const RolesSlice = createSlice({
   name: "Roles",
-  initialState:rolesInitialState,
-  reducers:{},
+  initialState: rolesInitialState,
+  reducers: {},
   extraReducers: (builder) => {
     //Roles unit reducer
-    builder.addCase(fetchRoles.pending, (state) => {
+    builder.addCase(fetchRolesInRoles.pending, (state) => {
       state.status = "loading";
     });
     builder.addCase(
-      fetchRoles.fulfilled,
+      fetchRolesInRoles.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.status = "success";
         state.roles = action.payload;
         state.error = "";
       }
     );
-    builder.addCase(fetchRoles.rejected, (state, action) => {
+    builder.addCase(fetchRolesInRoles.rejected, (state, action) => {
       state.status = "error";
       state.roles = [];
       state.error = action.error.message || "Something went wrong";
     });
-    
+
     builder.addCase(fetchAllClaims.pending, (state) => {
       state.status = "loading";
     });
@@ -155,7 +147,6 @@ const RolesSlice = createSlice({
       state.status = "error";
       state.error = action.error.message || "Something went wrong";
     });
-    
 
     builder.addCase(fetchClaims.pending, (state) => {
       state.status = "loading";
@@ -238,7 +229,7 @@ const RolesSlice = createSlice({
       state.permission = [];
       state.error = action.error.message || "Something Went Wrong";
     });
-    
+
     builder.addCase(putClaims.pending, (state) => {
       state.status = "loading";
     });
@@ -249,7 +240,6 @@ const RolesSlice = createSlice({
         state.error = "";
       }
     );
-
-  }
+  },
 });
 export default RolesSlice.reducer;
