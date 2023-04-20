@@ -269,7 +269,7 @@ const Main = (props: MainProps) => {
       configurationService(lang).then(async (res: any) => {
         const lang =localStorage.getItem("currentLang")||"en-GB"
       });
-    });
+   
   }
 
   useEffect(()=>{
