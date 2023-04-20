@@ -114,6 +114,7 @@ const RdsInput = (props: RdsInputProps) => {
               width="16px"
               fill={false}
               stroke={true}
+              colorVariant="primary"
               onClick={() => setShowPassword(!showPassword)}
             />
           )}
@@ -147,6 +148,7 @@ const RdsInput = (props: RdsInputProps) => {
                 width="20px"
                 fill={false}
                 stroke={true}
+                colorVariant="primary"
                 onClick={() => setShowPassword(!showPassword)}
               />
             )}
