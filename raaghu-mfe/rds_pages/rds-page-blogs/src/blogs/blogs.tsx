@@ -135,8 +135,8 @@ const Blogs = (props: RdsPageResourcesProps) => {
   }
 
   return (
-    <div>
-      <div className="row align-items-center">
+    <div className="container-fluid p-0 m-0">
+      <div className="row"><div className="col-md-12">
         <div className="d-flex justify-content-between">
           <div className="col-lg-8 col-md-8">
             {alert.showAlert && alertOne && (
@@ -227,7 +227,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
               </div>
             </RdsOffcanvas>
           </div>
-        </div>
+        </div></div>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable

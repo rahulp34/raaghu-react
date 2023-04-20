@@ -88,7 +88,9 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
 
  
     return (
-     <div className="mt-4">
+        <div className="container-fluid m-0 p-0">
+            <div className="row">
+     <div className="col-md-12">
         <div className="card border-0 px-4 h-100 rounded-0 card-full-stretch">
             <div className="card-body">                
                     <div className="col-12 cursor-pointer">
@@ -153,7 +155,9 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                     )}                                                           
             </div>
         </div>
-     </div>      
+     </div> 
+     </div>
+        </div>     
       );
 }
 

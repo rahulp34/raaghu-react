@@ -247,6 +247,7 @@ const Roles = (props: RdsPageRolesProps) => {
   };
   return (
     <>
+    <div className="container-fluid p-0 m-0">
      <div className="row ">
             <div className="col-md-4">
               {Alert.show && (
@@ -277,7 +278,7 @@ const Roles = (props: RdsPageRolesProps) => {
                   </div>
                
             </div>
-        
+            </div>
     
       <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable

@@ -13,13 +13,19 @@ export interface RdsPageSecurityLogsProps {
 
 const SecurityLogs = (props: RdsPageSecurityLogsProps) => {  
     return (
+      <div className="container-fluid p-0 m-0">
+        <div className="row">
+          <div className="col-md-12">
         <RdsCompSecurityLogs
          tableHeaders={props.securityLogsTableHeaders}
          tableData={props.securityLogsTableData}
          pagination={true}
          recordsPerPage={10}
          recordsPerPageSelectListOption={true}
-         ></RdsCompSecurityLogs>            
+         ></RdsCompSecurityLogs> 
+         </div>
+        </div>
+      </div>           
       );
 }
 

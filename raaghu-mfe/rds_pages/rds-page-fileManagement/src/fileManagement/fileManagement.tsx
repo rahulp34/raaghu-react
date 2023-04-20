@@ -454,7 +454,9 @@ const FileManagement = () => {
   };
 
   return (
-    <div className="New Folder">
+    <div className="container-fluid p-0 m-0">
+      <div className="row">
+        <div className="col-md-12">
       <div className="d-flex justify-content-end">
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
@@ -719,7 +721,8 @@ const FileManagement = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></div>
+      </div>
   );
 };
 

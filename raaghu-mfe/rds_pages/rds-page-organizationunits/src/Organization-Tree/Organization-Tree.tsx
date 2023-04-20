@@ -303,9 +303,9 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
 
   return (
     <div>
-      <div>
+      <div className="container-fluid p-0 m-0">
         <div className="row">
-          <div className="col-md-6 gutter-b">
+          <div className="col-md-6">
             <div>
               <div className="card p-2 vh-88 rounded-0 border-0">
                 <div className="card-header bg-transparent">
@@ -512,6 +512,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         scrolling={false}
         preventEscapeKey={false}
       >
+        <div className="container-fluid">
         <div className="row form-style">
           <form>
             <div className="tab-content">
@@ -567,7 +568,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               </div>
             </div>
           </form>
-        </div>
+        </div></div>
       </RdsOffcanvas>
       <RdsOffcanvas
         placement="end"

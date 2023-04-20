@@ -26,6 +26,7 @@ export interface RdsCompSecurityLogsProps {
 
 const RdsCompSecurityLogs = (props: RdsCompSecurityLogsProps) => {
   return (
+   <div className="container-fluid"><div className="row"><div className="col-md-12">
     <div className="card  border-0">
       <RdsCompDatatable
         actionPosition="right"
@@ -36,7 +37,7 @@ const RdsCompSecurityLogs = (props: RdsCompSecurityLogsProps) => {
         recordsPerPage={props.recordsPerPage}
         recordsPerPageSelectListOption={props.recordsPerPageSelectListOption}
       ></RdsCompDatatable>
-    </div>
+    </div></div></div></div>
   );
 };
 

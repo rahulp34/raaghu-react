@@ -247,6 +247,7 @@ const TextTemplate = () => {
   // DOM
   return (
     <>
+    <div className="container-fluid m-0 p-0">
       <div className="row">
         <div className="col-md-12 mb-3">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
@@ -264,6 +265,7 @@ const TextTemplate = () => {
             ></RdsCompDatatable>
           </div>
         </div>
+      </div>
       </div>
       <RdsOffcanvas
         placement={"end"}
