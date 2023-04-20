@@ -354,6 +354,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         iconFill={false}
                         colorVariant="primary"
                         type="button"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchUsersOrganizationUnit() as any);
                         }}
@@ -377,6 +378,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         databstoggle="offcanvas"
                         databstarget="#addRoleOff"
                         ariacontrols="addRoleOff"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchRoleListOrganizationUnit() as any);
                         }}
@@ -495,6 +497,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addMemberOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>
@@ -561,6 +564,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addRoleOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>

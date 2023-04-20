@@ -272,6 +272,7 @@ const Roles = (props: RdsPageRolesProps) => {
             colorVariant="primary"
             databstoggle="offcanvas"
             databstarget="#newRole"
+            showLoadingSpinner={true}
             onClick={handlerNewRole}
           ></RdsButton>
                   </div>

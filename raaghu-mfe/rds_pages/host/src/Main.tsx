@@ -123,22 +123,7 @@ const Main = (props: MainProps) => {
     dispatch(callLoginAction(null) as any)
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (checkingFirstTime&&
-  //     dataHost.configuration &&
-  //     !dataHost.configuration.currentUser.isAuthenticated
-  //   ) {
-  //     navigate("/login");
-  //   }
-  //   else{
-  //     setChecking(true);
-  //     navigate(location.pathname)
-  //   }
-  // }, [dataHost.configuration]);
-
-  // datas for changing language from dropdown on top-nav in dashboard
-
-  // OnClickHandler for language change
+  
   const objectArray = Object.entries(menus);
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
 
@@ -164,33 +149,8 @@ const Main = (props: MainProps) => {
   };
   
   useEffect(() => {
-    configurationService(currentLanguage).then(async (res: any) => {
-      await localizationService(currentLanguage).then(
-        async (resp: any) => {
-          let data1 = {};
-          let data2 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              Object.keys(translation[key].texts).forEach((k1)=>{
-                let k2 = k1.replace(/[^\w\s]/gi,'_');
-                let value1 = translation[key].texts[k1]
-                data2 = {...data2,[k2]:value1}
-              })              
-            });
-            i18n.addResourceBundle(
-              currentLanguage,
-              "translation",
-              data2,
-              false,
-              true
-            );
-            i18n.changeLanguage(currentLanguage);
-          }
-        }
-      );
-      
-      const tempdata = await res.localization?.languages?.map((item: any) => {
+    configurationService(currentLanguage).then( (res: any) => {
+      const tempdata = res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -201,6 +161,29 @@ const Main = (props: MainProps) => {
       });
       setLanguageData(tempdata);
     });
+    localizationService(currentLanguage).then(
+       (resp: any) => {
+        let data2 = {};
+        const translation = resp?.resources;
+        if (translation) {
+          Object.keys(translation).forEach((key) => {
+            Object.keys(translation[key].texts).forEach((k1)=>{
+              let k2 = k1.replace(/[^\w\s]/gi,'_');
+              let value1 = translation[key].texts[k1]
+              data2 = {...data2,[k2]:value1}
+            })              
+          });
+          i18n.addResourceBundle(
+            currentLanguage,
+            "translation",
+            data2,
+            false,
+            true
+          );
+          i18n.changeLanguage(currentLanguage);
+        }
+      }
+    );
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -263,24 +246,28 @@ const Main = (props: MainProps) => {
     }
   };
 
+  useEffect(()=>{
+    const lang =localStorage.getItem("currentLang")||"en-GB";
+    localizationService(lang).then((resp: any) => {
+      i18n.changeLanguage(lang);
+      var data1 = {};
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          data1 = { ...data1, ...translation[key].texts };
+        });
+        i18n.addResourceBundle(lang, "translation", data1, false, true);
+      }
+    });
+  },[])
+
   function hello(res: any) {
       localStorage.setItem("auth", JSON.stringify(true));
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
+        const lang =localStorage.getItem("currentLang")||"en-GB"
         
-        await localizationService(lang).then(async (resp: any) => {
-          
-          i18n.changeLanguage(lang);
-          var data1 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              data1 = { ...data1, ...translation[key].texts };
-            });
-            i18n.addResourceBundle(lang, "translation", data1, false, true);
-          }
-        });
       });
   }
   useEffect(()=>{
@@ -288,8 +275,8 @@ const Main = (props: MainProps) => {
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
-          await hello(res)
           sessionStorage.setItem('accessToken',res)
+          await hello(res)
         }
       });
       dispatch(callLoginAction(null) as any);

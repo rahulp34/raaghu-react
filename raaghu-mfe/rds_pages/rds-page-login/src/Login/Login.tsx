@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
-import {
-  localizationService,
-  configurationService,
-} from "raaghu-react-core";
+
 import { useAppDispatch } from "../../../../libs/state-management";
 import { callLoginAction } from "../../../../libs/public.api";
 
@@ -26,11 +23,8 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   // localStorage.setItem("auth", JSON.stringify(false));
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
-    // navigate("/forgot-password");
-    // props.onForgotPassword(isForgotPasswordClicked);
   };
   const { t } = useTranslation();
-  const [turnSpinnerOff, setTurnSpinnerOff] = useState(false);
   return (
     <div className="login-background">
       <div
@@ -47,7 +41,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 <RdsCompLogin
                   onLogin={loginHandler}
                   onForgotPassword={forgotPasswordHandler}
-                  turnSpinnerOff={turnSpinnerOff}
                 />
               </div>
             </div>

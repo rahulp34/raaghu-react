@@ -5,7 +5,6 @@ import { Navigate, NavigationType, useNavigate } from "react-router-dom";
 export interface RdsCompLoginProps {
   onLogin: (email: string, password: string) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
-  turnSpinnerOff?:any
 }
 
 const RdsCompLogin: React.FC<RdsCompLoginProps> = (
@@ -76,9 +75,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const [checked, setChecked] = useState(false);
   const [turnSpinnerOff, setTurnSpinnerOff] = useState(false);
   
-  useEffect(()=>{
-    setTurnSpinnerOff(true);
-  },[props.turnSpinnerOff])
 
   return (
     <div>
@@ -176,7 +172,6 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
             <RdsButton
               label="Login"
               colorVariant="primary"
-              turnSpinnerOff={turnSpinnerOff}
               showLoadingSpinner={true}
               isDisabled={!isFormValid}
               block={true}
