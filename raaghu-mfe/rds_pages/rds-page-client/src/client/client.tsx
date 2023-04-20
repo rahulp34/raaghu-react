@@ -233,9 +233,9 @@ const Client = (props: RdsPageScopeProps) => {
 
 
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
-    { id: "history", displayName: "Change History", modalId: "change_history" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "edit", displayName: "Edit", offId: "client-edit-off" },
+    { id: "history", displayName: "Change History", modalId: "client-history-off" },
+    { id: "delete", displayName: "Delete", modalId: "client-delete-off" },
   ];
   const offCanvasHandler = () => { 
     
@@ -272,7 +272,7 @@ const Client = (props: RdsPageScopeProps) => {
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"client"}
+              offId={"client-add-off"}
             >
                    <RdsNavtabs
           navtabsItems={navtabsItems}

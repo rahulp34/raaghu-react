@@ -29,8 +29,8 @@ const NewslettersInitialState: NewsLettersInitialState = {
 
 export const GetAllNewsLetters = createAsyncThunk(
   "newsletters/GetNewsLettersData",
-  (data: any) => {
-    return NewsletterRecordAdminService
+  async(data: any) => {
+     return await NewsletterRecordAdminService
       .getNewsletter({ preference:data.preference, source:data.source, skipCount:0, maxResultCount:1000})
       .then((result: any) => {
         return result;

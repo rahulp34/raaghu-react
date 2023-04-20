@@ -144,7 +144,7 @@ const Users = () => {
 
   const actions = [
     { id: "user_edit_offcanvas", displayName: "Edit", offId: "user-edit-off" },
-    { id: "user_delete", displayName: "Delete", modalId: "user_delete_off" },
+    { id: "user_delete", displayName: "Delete", modalId: "user-delete-off" },
     {
       id: "set_password",
       displayName: "Set Password",
@@ -712,7 +712,7 @@ const Users = () => {
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
           <RdsCompAlertPopup
-            alertID="user_delete_off"
+            alertID="user-delete-off"
             onSuccess={deleteHandler}
           />
       </div>
