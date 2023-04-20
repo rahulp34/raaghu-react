@@ -19,7 +19,7 @@ import {
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import {
-  fetchRoles,
+  fetchRolesInRoles,
   addRolesUnit,
   editRoles,
   deleteRoles,
@@ -53,7 +53,7 @@ const Roles = (props: RdsPageRolesProps) => {
 
   
   useEffect(() => {
-    dispatch(fetchRoles() as any);
+    dispatch(fetchRolesInRoles() as any);
     dispatch(fetchAllClaims() as any);
   }, [dispatch]);
   useEffect(() => {
@@ -123,7 +123,7 @@ const Roles = (props: RdsPageRolesProps) => {
           color: "success",
         });
       }
-      dispatch(fetchRoles() as any);
+      dispatch(fetchRolesInRoles() as any);
     });
   };
   useEffect(() => {
@@ -211,7 +211,7 @@ const Roles = (props: RdsPageRolesProps) => {
           color: "success",
         });
       }
-      dispatch(fetchRoles() as any);
+      dispatch(fetchRolesInRoles() as any);
     });
   };
   const handlerEditRole = () => {
@@ -238,7 +238,7 @@ const Roles = (props: RdsPageRolesProps) => {
           color: "success",
         });
       }
-      dispatch(fetchRoles() as any);
+      dispatch(fetchRolesInRoles() as any);
     });
   };
   const handlerNewRole = () => {
@@ -292,7 +292,7 @@ const Roles = (props: RdsPageRolesProps) => {
           onActionSelection={handlerActions}
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
-        <RdsOffcanvas
+        {/* <RdsOffcanvas
           placement="end"
           canvasTitle="New Role"
           
@@ -516,7 +516,7 @@ const Roles = (props: RdsPageRolesProps) => {
               ></RdsButton>
             </div>
           </div>
-        </RdsOffcanvas>
+        </RdsOffcanvas> */}
         <RdsCompAlertPopup
           alertID={`deleteRolesof`}
           onSuccess={handlerDeleteConfirm}
