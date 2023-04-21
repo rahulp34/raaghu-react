@@ -109,7 +109,7 @@ const RdsInput = (props: RdsInputProps) => {
           {props.inputType === "password" && (
             <RdsIcon
               name={showPassword ? "eye" : "eye_slash"}
-              classes="password-toggle opacity-50"
+              classes="password-toggle opacity-25"
               height="16px"
               width="16px"
               fill={false}
@@ -142,7 +142,7 @@ const RdsInput = (props: RdsInputProps) => {
             {props.inputType === "password" && (
               <RdsIcon
                 name={showPassword ? "eye" : "eye_slash"}
-                classes="password-toggle opacity-50"
+                classes="password-toggle opacity-25"
                 height="20px"
                 width="20px"
                 fill={false}
