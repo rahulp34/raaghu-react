@@ -60,7 +60,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
         aria-controls={props.ariacontrols}
         id={props.id}
       >
-        {showLoadingSpinner === false && props.icon && (
+        {props.icon && (
           <span className={iconClasses}>
             <RdsIcon
               name={props.icon}
@@ -77,7 +77,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
           {props.label}
         </span>
         )}
-        {showLoadingSpinner === false && <>{props.children}</>}
+        {<>{props.children}</>}
       </button>
     </Tooltip>) : <button
       type={btnType}
@@ -93,7 +93,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
       aria-controls={props.ariacontrols}
       id={props.id}
     >
-      {showLoadingSpinner === false && props.icon && (
+      {props.icon && (
         <span className={iconClasses}>
           <RdsIcon
             name={props.icon}
