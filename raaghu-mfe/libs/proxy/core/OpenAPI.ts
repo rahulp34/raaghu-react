@@ -21,7 +21,7 @@ export type OpenAPIConfig = {
 let token = sessionStorage.getItem('accessToken');
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: sessionStorage.getItem("REACT_APP_API_URL") || '<API_URL>',
+    BASE: sessionStorage.getItem("REACT_APP_API_URL") || 'https://raaghu-react.azurewebsites.net',
     VERSION: '1',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

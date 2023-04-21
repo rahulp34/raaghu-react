@@ -294,7 +294,7 @@ const Roles = (props: RdsPageRolesProps) => {
           onActionSelection={handlerActions}
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
-        {/* <RdsOffcanvas
+        <RdsOffcanvas
           placement="end"
           canvasTitle="New Role"
           
@@ -518,7 +518,7 @@ const Roles = (props: RdsPageRolesProps) => {
               ></RdsButton>
             </div>
           </div>
-        </RdsOffcanvas> */}
+        </RdsOffcanvas>
         <RdsCompAlertPopup
           alertID="role-delete-off"
           onSuccess={handlerDeleteConfirm}

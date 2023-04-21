@@ -250,16 +250,26 @@ const Main = (props: MainProps) => {
   useEffect(()=>{
     const lang =localStorage.getItem("currentLang")||"en-GB";
     localizationService(lang).then((resp: any) => {
-      i18n.changeLanguage(lang);
-      var data1 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          data1 = { ...data1, ...translation[key].texts };
-        });
-        i18n.addResourceBundle(lang, "translation", data1, false, true);
-      }
-    });
+      let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
   },[])
 
   function hello(res: any) {
@@ -267,8 +277,29 @@ const Main = (props: MainProps) => {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
-        const lang =localStorage.getItem("currentLang")||"en-GB"
       });
+      localizationService(currentLanguage).then((resp: any) => {
+          let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
+
   }
 
   useEffect(()=>{
