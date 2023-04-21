@@ -14,7 +14,7 @@ export interface RdsIconProps {
   borderRadius?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
   opacity?: string;
-  // isAnimate?: boolean;
+  isAnimate?: boolean;
   classes?: any;
 }
 
@@ -83,9 +83,9 @@ const RdsIcon = (props: RdsIconProps) => {
     } else {
       svg.style.stroke = "none";
     }
-    // if (props.isAnimate) {
-    //   svg.classList.add("jiggle");
-    // }
+    if (props.isAnimate) {
+      svg.classList.add("jiggle");
+    }
 
     return (
       svg || document.createElementNS("http://www.w3.org/2000/svg", "path")
