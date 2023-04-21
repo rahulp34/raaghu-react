@@ -1,30 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import RdsAccordionItem from '../../../../raaghu-elements/src/rds-accordion/rds-accordion-item';
-import { RdsAddressDetail } from '../../rds-elements';
+import React from 'react';
+import { RdsAppDetail } from '../../rds-elements';
 
 
 export const code_actual = () => {
-
-   const code_snippet = ` <RdsAddressDetail
-    addressLine1="Address Line 1"
-   addressLine2="Address Line 2"
-    addressLine3="Address Line 3"
-   cardborder={true}
-    header="Address Header"
-    withIcon={true} children={undefined}></RdsAddressDetail>`;
-
-   const setChildCode = () => {
-      return code_snippet;
-   };
-
    return (
-    <RdsAddressDetail
-     addressLine1="Address Line 1"
-     addressLine2="Address Line 2"
-     addressLine3="Address Line 3"
-     cardborder={true}
-     header="Address Header"
-     withIcon={true} children={undefined}></RdsAddressDetail>
+      <RdsAppDetail appDetailsItem={{
+         title: "Zapier",
+         subtitle: "Build custom automation and intefrations with app",
+         icon: "zapier",
+         selected: true,
+         iconHeight: "30px",
+         iconWidth: "30px",
+         iconFill: true,
+         iconColor: "warning",
+         iconStroke: true,
+         routeLabel: "View integration"
+     }} />
    )
 }
 

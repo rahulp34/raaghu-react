@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RdsAlert } from '../../rds-elements';
 
 
-export const code_actual = (props: any) => {
+export const code_actual = () => {
 
-  const code_snippet = `<RdsAlert
-   alertmessage="This is default alert"
-   position="top"
-   dismisable={false}
-   colorVariant="primary" />;`;
 
   return (
     <RdsAlert
