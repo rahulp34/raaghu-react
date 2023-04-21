@@ -1,6 +1,7 @@
 import React from "react";
 import "./rds-file-uploader.scss";
 import { useState, useEffect } from "react";
+import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsFileUploaderProps {
   placeholder?: string;
@@ -9,15 +10,14 @@ export interface RdsFileUploaderProps {
   multiple?: boolean;
   extensions: string;
   limit: number;
-  label:string;
+  label: string;
   onFileArray?: (files: any[]) => void;
-  getFileUploaderInfo?:any;
+  getFileUploaderInfo?: any;
 }
 
 const fileholder: any = [];
 const filenameholder: any = [];
 const filesize: any = [];
-
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const [FileArray, setFileArray] = useState(fileholder);
@@ -41,7 +41,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     let tempFA = FileArray.filter((Farray: any, i: number) => i !== id);
     setFileArray(tempFA);
   };
-const [fileUploaderData , setFileUploaderData] = useState<any>([]);
+  const [fileUploaderData, setFileUploaderData] = useState<any>([]);
   const onchangehandler = (event: any) => {
     setFileSize([...FileSize, event.target.files[0].size]);
     let files = event.target.files;
@@ -52,51 +52,52 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
     reader.onload = (event) => {
       setFileArray([...FileArray, event.target?.result]);
     };
-    props.getFileUploaderInfo({...fileUploaderData, files:event.target.files})
+    props.getFileUploaderInfo({
+      ...fileUploaderData,
+      files: event.target.files,
+    });
     if (props.multiple) {
       event.target.value = null;
     }
   };
- 
-    useEffect(() => {
-      props.onFileArray != undefined && props.onFileArray(FileArray);
-    }, [FileArray]);
+
+  useEffect(() => {
+    props.onFileArray != undefined && props.onFileArray(FileArray);
+  }, [FileArray]);
 
   return (
     <>
-      {props.multiple == false ? (
+      {props.multiple === false ? (
         <div className="row p-2">
           <div className="">
             <div className="mb-2">
-             <label className={`label  ${SIZE} `}>{props.label}</label>
+              <label className={`label  ${SIZE} `}>{props.label}</label>
             </div>
 
             <div>
               <form>
-              <input
-                
-                className={` input text-${props.colorVariant} form-control  ${size} `}
-                type="file"
-                name="file"
-                accept={props.extensions}
-                onChange={(event) => onchangehandler(event)}
-              />
+                <input
+                  className={` input text-${props.colorVariant} form-control  ${size} `}
+                  type="file"
+                  name="file"
+                  accept={props.extensions}
+                  onChange={(event) => onchangehandler(event)}
+                />
               </form>
-              
             </div>
           </div>
         </div>
       ) : (
         <div className="row p-2">
-          <div className="p-0">
+          <div className="pl-2">
             <div className="labelbox">
-            <label className={`label  ${SIZE} `}>{props.label}</label>
+              <label className={`label  ${SIZE} `}>{props.label}</label>
               <label className={`label ${SIZE}`}>
                 Maximum {props.limit} MB
               </label>
             </div>
 
-            <div className={`row fullbox  ${borderColor}`}>
+            <div className={`row fullbox`}>
               <div className="col-6 leftinnerbox">
                 <div className="row lefttext">
                   <h6
@@ -106,7 +107,12 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
                         : `text-dark`
                     } `}
                   >
-                    Drag and drop files
+                    Drag and drop files                    
+                  </h6>
+                  <h6
+                   className="text-muted"
+                  >
+                    (All Files)                
                   </h6>
                 </div>
                 <div className="row lefttext">
@@ -117,22 +123,31 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
                 </div>
               </div>
               <div className="col-6 rightbox ">
-                <svg
+                <RdsIcon
+                  name={"upload_data"}
+                  height="16px"
+                  width="16px"
+                  stroke={true}
+                  fill={false}
+                />
+
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="currentColor"
                   className="bi bi-upload upload "
                   viewBox="0 0 16 16"
+                  
                 >
                   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
                   <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                </svg>
+                </svg> */}
               </div>
 
               <div className=" row inputbox">
                 <input
-                  className={` col-md-6 input mulinput   ${size} `}
+                  className={` col-md-12 input mulinput   ${size} `}
                   type="file"
                   name="file"
                   accept={props.extensions}
@@ -146,10 +161,17 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
           </div>
           {fileName.map((filename: string, i: number) => (
             <div>
-              <div key={i} className="displayname col-md-6 namebox">
-                <div className=" disbox col-lg-6 col-md-6 d-flex">
-                  <div className="fileicon">
-                    <svg
+              <div key={i} className="displayname col-md-12 namebox">
+                <div className=" disbox col-lg-10 col-md-10 d-flex">
+                  <div className="fileicon px-2">
+                    <RdsIcon
+                      name={"file"}
+                      height="16px"
+                      width="16px"
+                      stroke={true}
+                      fill={false}
+                    />
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -158,21 +180,21 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
                       viewBox="0 0 16 16"
                     >
                       <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
-                    </svg>
+                    </svg> */}
                   </div>
                   <div className="filename ">
                     <div
                       className={`${
-                        fileName[i].length > 24
+                        fileName[i].length > 60
                           ? ` text-${props.colorVariant}`
                           : "disname"
                       }`}
                     >
-                      {fileName[i].substr(0, 24)}...
+                      {fileName[i].substr(0, 60)}...
                     </div>
                     <div
                       className={` ${SIZE} ${
-                        fileName[i].length < 24
+                        fileName[i].length < 60
                           ? ` text-${props.colorVariant}`
                           : "disname"
                       }`}
@@ -181,7 +203,7 @@ const [fileUploaderData , setFileUploaderData] = useState<any>([]);
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-6 closeIcon">
+                <div className="col-lg-2 col-md-2 closeIcon">
                   <span
                     className={` size ${SIZE} ${
                       props.colorVariant
