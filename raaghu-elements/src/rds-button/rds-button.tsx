@@ -3,7 +3,7 @@ import "./rds-button.scss";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
 import Tooltip from "../rds-tooltip/rds-tooltip";
-import RdsIcon from "../rds-icon";
+import RdsIcon from "../rds-icon/rds-icon";
 
 const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
 
@@ -22,7 +22,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
       setClasses(`${tempClasses} ${spinner}`)
       setTurnSpinnerOff(1);
     }
-    props.onClick != undefined && props.onClick(evt);
+    props.onClick !== undefined && props.onClick(evt);
   };
   console.log(classes)
   useEffect(()=>{
