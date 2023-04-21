@@ -181,7 +181,8 @@ const Blogger = () => {
   // DOM
   return (
     <>
-      <div className="row">
+    <div className="container-fluid m-0 p-0">
+      <div className="row"><div className="col-md-12">
         <div className="d-flex justify-content-end ">
           <RdsOffcanvas
             canvasTitle={canvasTitle}
@@ -304,6 +305,7 @@ const Blogger = () => {
           ></RdsCompDatatable>
         </div>
       </div>
+      </div></div>
       <RdsCompAlertPopup
         alertID="blogger-delete-off"
         onSuccess={confirmDelete}

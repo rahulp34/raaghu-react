@@ -222,6 +222,9 @@ const Auditpayload = ()=>{
   };
 
   return (
+    <div className="container-fluid p-0 m-0">
+      <div className="row">
+        <div className="col-md-12">
     <div className="card p-2 h-100 border-0 rounded-0 vh-100">
       <div className="mt-3">
         <div className="grid mx-4 mb-4">
@@ -407,6 +410,9 @@ const Auditpayload = ()=>{
           ></ActionOperationLogsOffCanvas>
         )}
       </RdsOffcanvas>
+    </div>
+    </div>
+      </div>
     </div>
   );
 };

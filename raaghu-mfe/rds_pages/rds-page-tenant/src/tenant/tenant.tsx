@@ -342,6 +342,7 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   return (
     <>
+    <div className="container-fluid m-0 p-0">
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
@@ -479,7 +480,7 @@ const Tenant = (props: RdsPageTenantProps) => {
           <RdsCompAlertPopup alertID="tenant-delete-off" onSuccess={onDeleteHandler} />
         </div>
 
-      </div>
+      </div></div>
     </>
   );
 };

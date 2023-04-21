@@ -89,7 +89,7 @@ const Chats = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+    <div className="container-fluid m-0 p-0">
       <div className="row p-3">
         <div className="col-lg-4 col-md-4" style={{ height: "630px" }}>
           <div className="border h-100 pt-4 ps-3 pe-3">

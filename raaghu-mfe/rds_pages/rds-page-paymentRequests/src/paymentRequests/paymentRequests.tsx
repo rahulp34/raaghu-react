@@ -210,7 +210,8 @@ const PaymentRequests = () => {
   // DOM
   return (
     <>
-      <div className="row">
+    <div className="container-fluid m-0 p-0">
+      <div className="row"><div className="col-md-12">
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
           <form>
             <div className="d-flex  mb-3 row">
@@ -312,7 +313,7 @@ const PaymentRequests = () => {
             ></RdsCompDatatable>
           </RdsOffcanvas>
         </div>
-      </div>
+      </div></div></div>
     </>
   );
 };

@@ -13,8 +13,8 @@ const RdsCompTenantDashboard = () => {
 		return;
 	};
 	return (
-		<div>
-			<div className="dark">
+		
+		<div className="container-fluid p-0 m-0">
 				<div className="row">
 					<div className="col-md-6">
 						<RdsWidget
@@ -946,7 +946,7 @@ const RdsCompTenantDashboard = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		
 	);
 };
 

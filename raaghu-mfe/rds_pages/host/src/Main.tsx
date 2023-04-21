@@ -269,7 +269,7 @@ const Main = (props: MainProps) => {
       configurationService(lang).then(async (res: any) => {
         const lang =localStorage.getItem("currentLang")||"en-GB"
       });
-    });
+   
   }
 
   useEffect(()=>{
@@ -406,32 +406,33 @@ const Main = (props: MainProps) => {
                   className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                   id="FixedHeaderOverFlow"
                 >
-                  <div className="header align-items-stretch">
-                    <RdsCompTopNavigation
-                      //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                      languageLable="English"
-                      // languageLable={
-                      //   storeData.languages?.currentCulture?.displayName ||
-                      //   "English (United Kingdom)"
-                      // }
-                      breacrumItem={breacrumItem}
-                      languageIcon="gb"
-                      languageItems={languageData}
-                      toggleItems={toggleItems}
-                      componentsList={componentsList}
-                      // brandName="raaghu"
-                      onClick={onClickHandler}
-                      profileTitle="Host Admin"
-                      profileName="admin"
-                      onLogout={logout}
-                      logo={logo}
-                      toggleTheme={props.toggleTheme}
-                      navbarTitle={t(currentTitle) || ""}
-                      navbarSubTitle={t(currentSubTitle) || ""}
-                      onChatClickHandler={() => {
-                        console.log(" session Hey Chat Button Clicked!!");
-                      }} elementList={[]} />
-                  </div>
+                      <div className="header align-items-stretch">
+              <RdsCompTopNavigation
+                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
+                languageLable ="English"
+                // languageLable={
+                //   storeData.languages?.currentCulture?.displayName ||
+                //   "English (United Kingdom)"
+                // }
+                breacrumItem={breacrumItem}
+                languageIcon="gb"
+                languageItems={languageData}
+                toggleItems={toggleItems}
+                componentsList={componentsList}
+                // brandName="raaghu"
+                onClick={onClickHandler}
+                profileTitle="Host Admin"
+                profileName="admin"
+                onLogout={logout}
+                logo={logo}
+                toggleTheme={props.toggleTheme}
+                navbarTitle={t(currentTitle) || ""}
+                navbarSubTitle={t(currentSubTitle) || ""}
+                onChatClickHandler={() => {
+                  console.log(" session Hey Chat Button Clicked!!");
+                }} elementList={[]} />
+            </div>
+            <div className="m-3">
                   <Suspense>
                     <Routes>
                       <Route
@@ -551,6 +552,7 @@ const Main = (props: MainProps) => {
                       <Route path="/newsletters" element={<NewslettersCompo />} />
                     </Routes>
                   </Suspense>
+                  </div>
                 </div>
               </div>
             </div>

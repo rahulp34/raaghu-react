@@ -196,6 +196,7 @@ const ApiScope = () => {
   ];
 
   return (
+    <div className="container-fluid">
     <div className="row">
       <div className="col-md-12 mb-3 ">
         <div className="row ">
@@ -300,7 +301,7 @@ const ApiScope = () => {
           />
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

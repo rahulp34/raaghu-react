@@ -44,8 +44,9 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
 
   return (
     <>
-      <div className="row justify-center p-3 bg-light text-center">
-        <div className="mt-4">
+    <div className="container-fluid p-0 m-0">
+      <div className="row">
+        <div>
           <RdsSearch
             placeholder="Search Icon"
             size={""}
@@ -94,6 +95,7 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
             </a>
           </div>
         ))}
+      </div>
       </div>
     </>
   );

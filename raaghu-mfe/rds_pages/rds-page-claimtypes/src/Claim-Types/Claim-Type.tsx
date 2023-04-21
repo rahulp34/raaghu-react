@@ -280,6 +280,7 @@ const ClaimType = () => {
   }, [claimTypesUser]);
 
   return (
+    <div className="container-fluid">
     <div className="row">
     <div className="col-md-12 mb-3 ">
       <div className="row ">
@@ -328,8 +329,8 @@ const ClaimType = () => {
       </RdsOffcanvas>
     </div>
   </div>
-</div>
-
+</div></div>
+<div className="row">
 <div className="col-md-12">
   <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
   <RdsCompDatatable 
@@ -365,7 +366,7 @@ const ClaimType = () => {
   </div>
 </div>
 </div>
-
+</div>
   );
 };
 

@@ -282,7 +282,8 @@ const Polls = (props: any) => {
     setEditQuestionData(data);
   }
   return (
-    <div>
+    <div className="container-fluid p-0 m-0">
+    <div className="row">
       <div className="col-md-12 text-end pb-3 desktop-btn">
         <RdsButton
           label="New poll"
@@ -502,7 +503,7 @@ const Polls = (props: any) => {
           </div>
         </RdsOffcanvas>
       </div>
-    </div>
+    </div></div>
   );
 };
 export default Polls;
