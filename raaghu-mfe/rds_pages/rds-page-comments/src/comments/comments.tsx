@@ -49,8 +49,8 @@ const Comments = () => {
   ];
 
   const [actions, setActions] = useState([
-    { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
+    { id: "edit", displayName: "Edit", offId: "comments-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "comments-delete-off" },
   ]);
 
   // Use States ================
@@ -137,6 +137,7 @@ const Comments = () => {
   // DOM
   return (
     <>
+    <div className="container-fluid m-0 p-0">
       <div className="row">
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
           <form>
@@ -200,7 +201,7 @@ const Comments = () => {
             noDataTitle={"No Comments Available"}
           ></RdsCompDatatable>
         </div>
-      </div>
+      </div></div>
       <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
     </>
   );

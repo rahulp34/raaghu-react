@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
 import {
-  RdsIcon,
   RdsNotification,
   RdsOffcanvas,
   RdsAvatar,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 import RdsDropdownList from '../../../raaghu-elements/src/rds-dropdown-list/index'
 import Elements from '../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements';
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
+import { RdsIcon } from "../rds-elements";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -140,12 +140,13 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
   }
 
+
   return (
     <div>
       <nav
         className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
       >
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center mx-4">
           {/* <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
             <img
               className="ms-1 cursor-pointer"
@@ -181,7 +182,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             // onClick={props.toggleTheme}
             ></RdsDropdownList>
           </div> */}
-          <div className="px-2 position-relative border-end me-3">
+          <div className="px-2 position-relative me-3">
             <RdsDropdownList
               placeholder={props.languageLable}
               icon={props.languageIcon}
@@ -198,11 +199,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             onClick={props.onChatClickHandler}
           >
             <RdsIcon
-              name="question_chat"
+              name="chat"
               height="20px"
               width="20px"
               fill={false}
-              stroke={true}
+              stroke={true} colorVariant="primary"
             ></RdsIcon>
           </Link>
 

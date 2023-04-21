@@ -157,8 +157,8 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   const actions = [
-    { id: "editEdition", displayName: "Edit", offId: "dynamic-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "editEdition", displayName: "Edit", offId: "edition-new-off" },
+    { id: "delete", displayName: "Delete", modalId: "edition-delete-offc" },
   ];
 
   const onActionSelection = (rowData: any, actionId: any) => {
@@ -237,8 +237,8 @@ const Edition = (props: RdsPageEditionProps) => {
   const [showNextEdtiTab, setShowNextEditTab] = useState(false);
 
   return (
-    <div className="tenant">
-      <div className="row align-items-center">
+    <div className="container-fluid p-0 m-0">
+      <div className="row">
         <div className="col-lg-8 col-md-8">
           {alert.showAlert && alertOne && (
             <RdsAlert
@@ -265,6 +265,7 @@ const Edition = (props: RdsPageEditionProps) => {
                   iconWidth="15px"
                   iconFill={false}
                   iconStroke={true}
+                  showLoadingSpinner={true}
                   colorVariant="primary"
                   label="NEW EDITION"
                 />
@@ -304,6 +305,7 @@ const Edition = (props: RdsPageEditionProps) => {
                     label="SAVE"
                     type={"button"}
                     size="small"
+                    showLoadingSpinner={true}
                     databsdismiss="offcanvas"
                     isDisabled={value === ""}
                     colorVariant="primary"
@@ -328,7 +330,7 @@ const Edition = (props: RdsPageEditionProps) => {
           recordsPerPageSelectListOption={true}
         ></RdsCompDatatable>
         <RdsCompAlertPopup
-          alertID="dynamic_delete_off"
+          alertID="edition-delete-offc"
           onSuccess={deleteHandler}
         />
 
@@ -336,7 +338,7 @@ const Edition = (props: RdsPageEditionProps) => {
           canvasTitle="NEW EDITION"
           onclick={offCanvasHandler}
           placement="end"
-          offId="dynamic-edit-off"
+          offId="edition-new-off"
           backDrop={false}
           scrolling={false}
           preventEscapeKey={false}

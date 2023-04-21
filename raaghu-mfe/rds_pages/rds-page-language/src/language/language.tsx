@@ -55,8 +55,8 @@ const tableHeaders = [
   },
 ];
 const actions = [
-  { id: "edit", displayName: "Edit", offId: "languagesEdit" },
-  { id: "delete", displayName: "Delete", modalId: "languagesDel" },
+  { id: "edit", displayName: "Edit", offId: "language-edit-off" },
+  { id: "delete", displayName: "Delete", modalId: "language-delete-off" },
   { id: "defaa", displayName: "set as default language" },
 ];
 
@@ -311,6 +311,7 @@ const Language = (props: LanguageProps) => {
 
   return (
     <>
+    <div className="container-fluid p-0 m-0">
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
@@ -337,6 +338,7 @@ const Language = (props: LanguageProps) => {
                       iconStroke={true}
                       iconHeight="12px"
                       onClick={onNewLangHandler}
+                      showLoadingSpinner={true}
                       iconWidth="12px"
                     ></RdsButton>
                   </div>
@@ -380,7 +382,7 @@ const Language = (props: LanguageProps) => {
               backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"languagesEdit"}
+              offId={"language-edit-off"}
               canvasTitle={"Edit Language"}
             >
               <form>
@@ -437,12 +439,12 @@ const Language = (props: LanguageProps) => {
             </RdsOffcanvas>
 
             <RdsCompAlertPopup
-              alertID={"languagesDel"}
+              alertID={"language-delete-off"}
               onSuccess={onDeleteHandler}
             ></RdsCompAlertPopup>
           </div>
         </div>
-      </div>
+      </div></div>
     </>
   );
 };

@@ -78,9 +78,9 @@ const Polls = (props: any) => {
     },
   ];
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
-    { id: "result", displayName: "Show Result", offId: "show_result" },
+    { id: "edit", displayName: "Edit", offId: "poll-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "poll-delete-off" },
+    { id: "result", displayName: "Show Result", offId: "show-result-off" },
     {
       id: "entity-widgetcode-off",
       displayName: "Copy Widget Code",
@@ -282,16 +282,17 @@ const Polls = (props: any) => {
     setEditQuestionData(data);
   }
   return (
-    <div>
+    <div className="container-fluid p-0 m-0">
+    <div className="row">
       <div className="col-md-12 text-end pb-3 desktop-btn">
         <RdsButton
           label="New poll"
           type="button"
           size="medium"
           colorVariant="primary"
-          showLoadingSpinner={false}
+          showLoadingSpinner={true}
           databstoggle="offcanvas"
-          databstarget="#pollsOffcanvas"
+          databstarget="#poll-new-off"
           icon={"plus"}
           iconWidth={"12px"}
           iconHeight={"12px"}
@@ -311,7 +312,7 @@ const Polls = (props: any) => {
           backDrop={true}
           scrolling={true}
           preventEscapeKey={false}
-          offId="pollsOffcanvas"
+          offId="poll-new-off"
           canvasTitle={"New"}
           placement="end"
         >
@@ -364,6 +365,7 @@ const Polls = (props: any) => {
                 databsdismiss="offcanvas"
                 tooltipTitle={""}
                 type="button"
+                showLoadingSpinner={true}
                 onClick={OnSave}
               />
             </div>
@@ -373,7 +375,7 @@ const Polls = (props: any) => {
         <RdsOffcanvas
           canvasTitle="Edit"
           placement="end"
-          offId="entity-edit-off"
+          offId="poll-edit-off"
           offcanvaswidth={650}
           backDrop={false}
           scrolling={false}
@@ -422,6 +424,7 @@ const Polls = (props: any) => {
               isOutline={false}
               colorVariant="primary"
               databsdismiss="offcanvas"
+              showLoadingSpinner={true}
               onClick={editDataHandler}
             ></RdsButton>
           </div>
@@ -439,7 +442,7 @@ const Polls = (props: any) => {
           onActionSelection={scopeSelection}
         ></RdsCompDatatable>
          <RdsCompAlertPopup
-            alertID="dynamic_delete_off"
+            alertID="poll-delete-off"
             onSuccess={deleteHandler}
           />
       </div>
@@ -448,7 +451,7 @@ const Polls = (props: any) => {
         <RdsOffcanvas
           canvasTitle="Results"
           placement="end"
-          offId="show_result"
+          offId="show-result-off"
           offcanvaswidth={700}
           backDrop={false}
           scrolling={false}
@@ -499,7 +502,7 @@ const Polls = (props: any) => {
           </div>
         </RdsOffcanvas>
       </div>
-    </div>
+    </div></div>
   );
 };
 export default Polls;

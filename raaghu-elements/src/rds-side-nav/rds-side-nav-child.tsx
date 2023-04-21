@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import RdsIcon from "../rds-icon";
 import "./rds-side-nav-new.scss";
-import RdsToggle from "../rds-toggle/rds-toggle";
-import RdsDropdown from "../rds-dropdown";
-import { getVisibleSelectionRect } from "draft-js";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 
@@ -59,7 +55,7 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center rounded-end shadow-sm p-1 ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -73,6 +69,7 @@ const RdsSideNavChild = ({
                 fill={false}
                 onClick={onCollapse}
                 colorVariant="primary"
+                // isAnimate={false}
               ></RdsIcon>
        </span>
             {/* </div> */}
@@ -137,6 +134,7 @@ const Node = ({
                     height="20px"
                     width="20px"
                     classes="me-3"
+                    // isAnimate={true}
                   ></RdsIcon>
             
               ) : count == 2 ?
@@ -148,10 +146,14 @@ const Node = ({
                     height="20px"
                     width="20px"
                     classes="me-3"
+                    // isAnimate={false}
                   ></RdsIcon>
                 : null}
               <div className="me-3" data-name={node.label}>
-                {!collapse && <>{t(node.label)}</>}
+                {!collapse && <>
+                  
+                {t(node.label)}
+                </>}
               </div>
         </NavLink>
       )}
@@ -179,6 +181,7 @@ const Node = ({
                         height="20px"
                         width="20px"
                         classes="me-3"
+                        // isAnimate = {false}
                       ></RdsIcon>
                     </a>
                     <ul
@@ -210,6 +213,15 @@ const Node = ({
                                       <>
                                         <li className="list" id={subItem.id}  >
                                           <NavLink className="dropdown-item " to={subItem.path}>
+                                          <RdsIcon
+                        name={subItem.icon}
+                        fill={false}
+                        stroke={true}
+                        height="20px"
+                        width="20px"
+                        classes="me-3"
+                        // isAnimate = {false}
+                      ></RdsIcon>
                                             {t(subItem.label)}
                                           </NavLink>
                                         </li>
@@ -244,6 +256,7 @@ const Node = ({
                       height="20px"
                       width="20px"
                       classes="me-3"
+                      // isAnimate = {false}
                     ></RdsIcon>
                     <span className="text-capitalize">{t(node.label)}</span>
                   </a>
@@ -267,6 +280,7 @@ const Node = ({
                         height="20px"
                         width="20px"
                         classes="me-3"
+                        // isAnimate = {false}
                       ></RdsIcon>
                       <span className="text-capitalize">{t(node.label)}</span>
                     </a>

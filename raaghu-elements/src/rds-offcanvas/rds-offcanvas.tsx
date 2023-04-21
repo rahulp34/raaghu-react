@@ -18,7 +18,7 @@ export interface RdsOffcanvasProps {
 }
 const RdsOffcanvas = (props: RdsOffcanvasProps) => {
   let preventEscapeKey =`${props.hasOwnProperty('preventEscapeKey')?props.preventEscapeKey :true}` 
- let Backdrop = `${props.hasOwnProperty('modalBackdrop')?props.backDrop :true}`
+ let Backdrop = `${props.hasOwnProperty('backDrop')?props.backDrop :true}`
  
   let align = ` offcanvas offcanvas-${props.placement} ${
     props.placement == "start" || props.placement == "end"
@@ -32,22 +32,19 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
       : "100% "
   }`;
   let isCanvasTitle =props.canvasTitle !== "" && props.canvasTitle !== undefined;
-  useEffect(()=>{
-    const a = document.querySelectorAll('[data-bs-toggle]');
-    a.forEach((element)=>{
-      element.addEventListener('click',()=>{
-        const b = document.querySelectorAll('.offcanvas-backdrop')
-        b.forEach((el:any, index:number) => {
-          if(index!=0){
-            el.classList.remove('offcanvas-backdrop');
-            el.classList.remove('fade');
-            el.classList.remove('show');
-          }
-        })
-      })
+
+  const OffCanvasBtn = document.querySelectorAll('[data-bs-toggle="offcanvas"]');
+  OffCanvasBtn.forEach((element)=>{
+    element.addEventListener('click',()=>{
+      const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+      if (allBackdrops.length > 1) {
+        for (let i = 0; i < allBackdrops.length - 1; i++) {
+          allBackdrops[i].remove();
+        }
+      }
     })
-  },[])
-  
+  })
+ 
   
   return (
     <>
@@ -70,7 +67,7 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
         data-bs-padding={0}
         tabIndex={-1}
         id={`${props.offId}`}
-        aria-labelledby={`'canvas' +${props.offId}`}
+        aria-labelledby={`canvas${props.offId}`}
         style={{ width: Width }}
       >
          <div className={`${isCanvasTitle?'offcanvas-header':"offcanvas-header border-0"}`}>

@@ -56,8 +56,8 @@ const PaymentPlans = () => {
 
   // Use States ================
   const [actions, setActions] = useState([
-    { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-    { id: "delete", displayName: "Delete", modalId: "delete" },
+    { id: "edit", displayName: "Edit", offId: "payPlan-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
     {
       id: "manageGatewayPlans",
       displayName: "Manage Gateway Plans",
@@ -297,15 +297,17 @@ const PaymentPlans = () => {
     };
     dispatch(getAllGatewayPlansByPlanId(item));
     setActions([
-      { id: "edit", displayName: "Edit", offId: "paymentPlans" },
-      { id: "delete", displayName: "Delete", modalId: "delete" },
+      { id: "edit", displayName: "Edit", offId: "payPlan-edit-off" },
+      { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
+     
     ]);
   }
 
   // DOM
   return (
     <>
-      <div className="row">
+    <div className="container-fluid p-0 m-0">
+      <div className="row"><div className="col-md-12">
         <div className="d-flex">
           <div className="ms-auto">
             <RdsOffcanvas
@@ -330,6 +332,7 @@ const PaymentPlans = () => {
                     size="small"
                     type="button"
                     colorVariant="primary"
+                    showLoadingSpinner={true}
                     onClick={createpaymentPlansFn}
                   ></RdsButton>
                 </div>
@@ -337,7 +340,7 @@ const PaymentPlans = () => {
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"paymentPlans"}
+              offId="payPlan-edit-off"
             >
               <form>
                 {managePlan ? (
@@ -418,6 +421,7 @@ const PaymentPlans = () => {
                     tooltipTitle={""}
                     type={"submit"}
                     databsdismiss="offcanvas"
+                    showLoadingSpinner={true}
                     onClick={(event) => saveUpdatePaymentPlans(event)}
                   ></RdsButton>
                 </div>
@@ -441,7 +445,7 @@ const PaymentPlans = () => {
             noDataTitle={"No Plans Available"}
           ></RdsCompDatatable>
         </div>
-      </div>
+      </div></div></div>
       <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
       <RdsCompAlertPopup
         alertID="manageGatewayPlans"

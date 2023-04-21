@@ -190,12 +190,13 @@ const ApiScope = () => {
   ];
   //Actions for data table
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "entity-edit-off" },
-    { id: "history", displayName: "Change History", modalId: "change_history" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "edit", displayName: "Edit", offId: "apiScope-edit-off" },
+    { id: "history", displayName: "Change History", modalId: "apiScope-change_history-off" },
+    { id: "delete", displayName: "Delete", modalId: "apiScope-delete-off" },
   ];
 
   return (
+    <div className="container-fluid">
     <div className="row">
       <div className="col-md-12 mb-3 ">
         <div className="row ">
@@ -259,7 +260,7 @@ const ApiScope = () => {
             backDrop={true}
             preventEscapeKey={true}
             scrolling={false}
-            offId="entity-edit-off"
+            offId="apiScope-edit-off"
             placement="end"
             canvasTitle="Edit"
             children={
@@ -272,7 +273,7 @@ const ApiScope = () => {
             }
           ></RdsOffcanvas>
           <RdsModal
-            modalId="change_history"
+            modalId="apiScope-change_history-off"
             size="large"
             // modalTitle="Volo.Abp.OpenIddict.Scopes.OpenIddictScope"
             modalAnimation="modal fade"
@@ -287,12 +288,12 @@ const ApiScope = () => {
                 colorVariant="primary"
                 label="Close"
                 databsdismiss="modal"
-                databstarget="change_history"
+                databstarget="apiScope-change_history-off"
               ></RdsButton>
             </div>
           </RdsModal>
           <RdsCompAlertPopup
-            alertID="dynamic_delete_off"
+            alertID="apiScope-delete-off"
             messageAlert="The selected Resource will be Deleted Permanently "
             alertConfirmation="Are you sure"
             deleteButtonLabel="Yes"
@@ -300,7 +301,7 @@ const ApiScope = () => {
           />
         </div>
       </div>
-    </div>
+    </div></div>
   );
 };
 

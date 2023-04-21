@@ -16,19 +16,19 @@ export const securityLogsState: SecurityLogsState = {
 export const fetchSecurityLogs = createAsyncThunk(
   "securityLogs/fetchSecurityLogs",
   (data: any) => {
-    let date = new Date(data.creationTime);
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    // console.log('time :' ,day,month,year)
-    let currentTime = date.toLocaleString("en-IN", {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: true,
-    });
-    let currentDate = `${year}-${month}-${day}, ${currentTime}`;
-    console.log("time :", currentDate);
+    // let date = new Date(data.creationTime);
+    // let day = date.getDate();
+    // let month = date.getMonth() + 1;
+    // let year = date.getFullYear();
+    // // console.log('time :' ,day,month,year)
+    // let currentTime = date.toLocaleString("en-IN", {
+    //   hour: "numeric",
+    //   minute: "numeric",
+    //   second: "numeric",
+    //   hour12: true,
+    // });
+    // let currentDate = `${year}-${month}-${day}, ${currentTime}`;
+    // console.log("time :", currentDate);
     return SecurityLogService.getSecurityLogs({
       startTime: data?.startDate,
       endTime: data?.endDate,
@@ -57,6 +57,7 @@ const securityLogs = createSlice({
     builder.addCase(
       fetchSecurityLogs.fulfilled,
       (state, action: PayloadAction<any>) => {
+        debugger
         console.log({ actionPayload: action });
         state.loading = false;
         state.securityLogs = action.payload;

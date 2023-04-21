@@ -24,18 +24,24 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
     `${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`
   );
   const btnType = props.type === "submit" ? "submit" : "button";
-
+  const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
     if (props.showLoadingSpinner) {
       let tempClasses = classes;
       setClasses(`${tempClasses} ${spinner}`);
+      setTurnSpinnerOff(1);
     }
     props.onClick != undefined && props.onClick(evt);
   };
   useEffect(() => {
-    let tempClasses = classes.replace("spinner", "");
-    setClasses(tempClasses);
-  }, [props.turnSpinnerOff]);
+    if (turnSpinnerOff) {
+      setTimeout(() => {
+        let tempClasses = classes.replace("spinner", "");
+        setClasses(tempClasses);
+      }, 3000);
+    }
+  }, [turnSpinnerOff, classes]);
+
   const iconClasses =
     props.hasOwnProperty("icon") && props.hasOwnProperty("label")
       ? "me-2 d-inline-block"
@@ -53,6 +59,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
             disabled={props.isDisabled}
             onClick={buttonClick}
             form={props.formName}
+            key={turnSpinnerOff}
             style={props.style}
             aria-label={props.arialabel}
             data-bs-dismiss={props.databsdismiss}
@@ -69,7 +76,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
                   height={props.iconHeight}
                   fill={props.iconFill}
                   stroke={props.iconStroke}
-                  isAnimate={false}
+                  // isAnimate={false}
                 />
               </span>
             )}
@@ -100,7 +107,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
                 height={props.iconHeight}
                 fill={props.iconFill}
                 stroke={props.iconStroke}
-                isAnimate={false}
+                // isAnimate={false}
               />
             </span>
           )}

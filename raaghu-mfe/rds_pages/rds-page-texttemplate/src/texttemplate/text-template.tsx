@@ -66,11 +66,11 @@ const TextTemplate = () => {
     },
   ];
   const actions = [
-    { id: "edit", displayName: "Edit", offId: "Edit" },
+    { id: "edit", displayName: "Edit", offId: "text-temp-edit-off" },
     {
       id: "customizePerCulture",
       displayName: "Customize Per Culture",
-      offId: "Edit",
+      offId: "cust-per-cult",
     },
   ];
 
@@ -247,6 +247,7 @@ const TextTemplate = () => {
   // DOM
   return (
     <>
+    <div className="container-fluid m-0 p-0">
       <div className="row">
         <div className="col-md-12 mb-3">
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
@@ -265,12 +266,13 @@ const TextTemplate = () => {
           </div>
         </div>
       </div>
+      </div>
       <RdsOffcanvas
         placement={"end"}
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
-        offId={"Edit"}
+        offId={"text-temp-edit-off"}
         canvasTitle={"Contents"}
       >
         <form>
@@ -359,6 +361,7 @@ const TextTemplate = () => {
                   databsdismiss={"offcanvas"}
                   isDisabled={targetContent === ""}
                   onClick={(e: any) => onSaveFn(e)}
+                  showLoadingSpinner={true}
                 ></RdsButton>
               </div>
             </div>

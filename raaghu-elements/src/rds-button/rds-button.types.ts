@@ -38,5 +38,4 @@ export interface RdsButtonProps {
     ariacontrols?: string;
     iconColorVariant?: string;
     style?: any;
-    turnSpinnerOff?:any
 };

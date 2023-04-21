@@ -56,7 +56,7 @@ const tableHeaders = [
     sortable: false,
   },
 ];
-const actions = [{ id: "edit", displayName: "Edit", offId: "langtextEdit" }];
+const actions = [{ id: "edit", displayName: "Edit", offId: "lang-text-off" }];
 
 const target = [
   {
@@ -408,7 +408,7 @@ dispatch(
               backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"langtextEdit"}
+              offId={"lang-text-off"}
               canvasTitle={"Edit Language"}
               
             >
@@ -464,6 +464,7 @@ dispatch(
                         colorVariant="primary"
                         databsdismiss="offcanvas"
                         onClick={SaveHandler}
+                        showLoadingSpinner={true}
                       ></RdsButton>
                     </div>
                   </div>

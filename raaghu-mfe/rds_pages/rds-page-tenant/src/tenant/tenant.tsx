@@ -32,8 +32,8 @@ import { useTranslation } from "react-i18next";
 interface RdsPageTenantProps {}
 
 const actions = [
-  { id: "editTenant", displayName: "Edit", offId: "Edit" },
-  { id: "delete", displayName: "Delete", modalId: "Del" },
+  { id: "editTenant", displayName: "Edit", offId: "tenant-edit-off" },
+  { id: "delete", displayName: "Delete", modalId: "tenant-delete-off" },
 ];
 
 
@@ -342,6 +342,7 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   return (
     <>
+    <div className="container-fluid m-0 p-0">
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
@@ -371,14 +372,15 @@ const Tenant = (props: RdsPageTenantProps) => {
                       size="small"
                       type="button"
                       colorVariant="primary"
+                      showLoadingSpinner={true}
                       onClick={(e: any) => createNewCanvasFn(e)}
                     ></RdsButton>
                   </div>
                 }
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"tenant"}
+                offId={"tenant-new-off"}
               >
                 <div className="mt-3">
                   <RdsCompTenantInformation
@@ -408,10 +410,10 @@ const Tenant = (props: RdsPageTenantProps) => {
             <RdsOffcanvas
               canvasTitle={"Edit Tenant"}
               placement="end"
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"Edit"}
+              offId={"tenant-edit-off"}
             >
               <RdsNavtabs
                 navtabsItems={navtabsItems}
@@ -463,6 +465,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                   <RdsButton
                     class="me-2"
                     label="Create"
+                    showLoadingSpinner={true}
                     size="small"
                     colorVariant="primary"
                     tooltipTitle={""}
@@ -474,10 +477,10 @@ const Tenant = (props: RdsPageTenantProps) => {
               )}
             </RdsOffcanvas>
           </div>
-          <RdsCompAlertPopup alertID="Del" onSuccess={onDeleteHandler} />
+          <RdsCompAlertPopup alertID="tenant-delete-off" onSuccess={onDeleteHandler} />
         </div>
 
-      </div>
+      </div></div>
     </>
   );
 };

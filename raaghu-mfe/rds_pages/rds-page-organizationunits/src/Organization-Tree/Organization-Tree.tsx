@@ -255,7 +255,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
     } else {
     }
   };
-
+  
   const handlerUserSelect = (data: any) => {
     const User = data?.reduce((acc: any, curElem: any) => {
       if (curElem.selected) {
@@ -303,9 +303,9 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
 
   return (
     <div>
-      <div>
+      <div className="container-fluid p-0 m-0">
         <div className="row">
-          <div className="col-md-6 gutter-b">
+          <div className="col-md-6">
             <div>
               <div className="card p-2 vh-88 rounded-0 border-0">
                 <div className="card-header bg-transparent">
@@ -354,13 +354,14 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         iconFill={false}
                         colorVariant="primary"
                         type="button"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchUsersOrganizationUnit() as any);
                         }}
                         data-bs-dismiss="offcanvas"
                         databstoggle="offcanvas"
-                        databstarget="#addMemberOff"
-                        ariacontrols="addMemberOff"
+                        databstarget="#oMember-add-off"
+                        ariacontrols="oMember-add-off"
                       ></RdsButton>
                     )}
                     {activeTab === "role" && (
@@ -377,6 +378,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                         databstoggle="offcanvas"
                         databstarget="#addRoleOff"
                         ariacontrols="addRoleOff"
+                        showLoadingSpinner={true}
                         onClick={() => {
                           dispatch(FetchRoleListOrganizationUnit() as any);
                         }}
@@ -441,7 +443,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Member"
         
-        offId="addMemberOff"
+        offId="oMember-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -478,7 +480,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addMemberOff"
+                      databstarget="#oMember-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -495,6 +497,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addMemberOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>
@@ -507,11 +510,12 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Select Roles"
         
-        offId="addRoleOff"
+        offId="oRole-add-off"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
       >
+        <div className="container-fluid">
         <div className="row form-style">
           <form>
             <div className="tab-content">
@@ -544,7 +548,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
-                      databstarget="#addRoleOff"
+                      databstarget="#oRole-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -561,18 +565,18 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       databsdismiss="offcanvas"
                       databstoggle="offcanvas"
                       databstarget="#addRoleOff"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 </div>
               </div>
             </div>
           </form>
-        </div>
+        </div></div>
       </RdsOffcanvas>
       <RdsOffcanvas
         placement="end"
         canvasTitle="New Organization Unit"
-        
         offId="aoganization"
         backDrop={false}
         scrolling={false}
@@ -586,8 +590,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
           value={val}
           onChange={(e) => setVal(e.target.value)}
         ></RdsInput>
-        <div className="d-flex" style={{ position: "absolute", bottom: "15%" }}>
-          <div className="me-3">
+        <div className="d-flex d-flex me-3 footer-buttons my-2 ">
+         
             <RdsButton
               type={"button"}
               label="cancel"
@@ -597,10 +601,11 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               databstoggle="offcanvas"
               databstarget="#aoganization"
             ></RdsButton>
-          </div>
+         
           <RdsButton
             type={"button"}
             label="Save"
+            class="ms-2"
             isDisabled={val === ""}
             colorVariant="primary"
             onClick={handlerAddNestedNode}
@@ -615,7 +620,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Edit Organization Unit"
         
-        offId={`boganization`}
+        offId="boganization"
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
@@ -629,8 +634,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
           size="medium"
           onChange={(e) => setVal(e.target.value)}
         ></RdsInput>
-        <div className="d-flex" style={{ position: "absolute", bottom: "15%" }}>
-          <div className="me-3">
+        <div className="d-flex me-3 footer-buttons my-2 " >
+          
             <RdsButton
               type={"button"}
               label="cancel"
@@ -640,10 +645,11 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               databstoggle="offcanvas"
               databstarget="#boganization"
             ></RdsButton>
-          </div>
+          
           <RdsButton
             type={"button"}
             label="save"
+            class="ms-2"
             colorVariant="primary"
             onClick={handlerEdit}
             databsdismiss="offcanvas"
@@ -669,8 +675,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
           onChange={(e) => setVal(e.target.value)}
           value={val}
         ></RdsInput>
-        <div className="d-flex" style={{ position: "absolute", bottom: "15%" }}>
-          <div className="me-3">
+        <div className="d-flex me-3 footer-buttons my-2 " >
+        
             <RdsButton
               type={"button"}
               label="cancel"
@@ -680,10 +686,11 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               databstoggle="offcanvas"
               databstarget="#coganization"
              ></RdsButton>
-          </div>
+          
           <RdsButton
             type={"button"}
             label="save"
+            class="ms-2"
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"
@@ -710,8 +717,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
           onChange={(e) => setVal(e.target.value)}
           value={val}
         ></RdsInput>
-        <div className="d-flex" style={{ position: "absolute", bottom: "15%" }}>
-          <div className="me-3">
+        <div className="d-flex me-3 footer-buttons my-2  " >
+          
             <RdsButton
               type={"button"}
               label="cancel"
@@ -721,10 +728,11 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               databstoggle="offcanvas"
               databstarget="#doganization"
             ></RdsButton>
-          </div>
+        
           <RdsButton
             type={"button"}
             label="save"
+            class="ms-2"
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"

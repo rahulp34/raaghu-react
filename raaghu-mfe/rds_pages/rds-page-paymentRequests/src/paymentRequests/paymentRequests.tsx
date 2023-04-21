@@ -198,29 +198,33 @@ const PaymentRequests = () => {
       setTableData(data);
     }
   }, [paymentRequests.allPaymentRequests]);
-
+  function onDatePicker  (startEndDate:any) {
+    debugger
+    const [start, end] = startEndDate;
+    setFilterParameters({
+      ...filterParameters,
+      creationDateMax:start.toISOString(),
+      creationDateMin:end.toISOString(),
+    }); 
+  }
   // DOM
   return (
     <>
-      <div className="row">
+    <div className="container-fluid m-0 p-0">
+      <div className="row"><div className="col-md-12">
         <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
           <form>
-            <div className="d-flex justify-content-between mb-3 row">
-              <div className="col-md-6 form-group">
-                <RdsDatepicker
-                  DatePickerLabel="Creation Time"
-                  type="advanced"
-                  onDatePicker={(start: any, end: any) =>
-                    setFilterParameters({
-                      ...filterParameters,
-                      creationDateMin: start,
-                      creationDateMax: end,
-                      sorting: "creationTime desc",
-                    })
-                  }
+            <div className="d-flex  mb-3 row">
+              <div className="col-md-3 form-group" style={{marginTop:'-3px'}}>
+                <RdsDatepicker DatePickerLabel="Creation Time" 
+                type="advanced"
+                onDatePicker={(s:any)=>onDatePicker(s)}
+                selectedDate={filterParameters.creationDateMin} 
+                customDate={onDatePicker}
                 ></RdsDatepicker>
+                    
               </div>
-              <div className="col-md-3 form-group">
+              <div className="col-md-4 form-group">
                 <div className="mb-2">
                   <RdsLabel label={"Payment Type"}></RdsLabel>
                 </div>
@@ -239,7 +243,7 @@ const PaymentRequests = () => {
                   }
                 ></RdsSelectList>
               </div>
-              <div className="col-md-3 form-group">
+              <div className="col-md-4 form-group">
                 <div className="mb-2">
                   <RdsLabel label={"Status"}></RdsLabel>
                 </div>
@@ -309,7 +313,7 @@ const PaymentRequests = () => {
             ></RdsCompDatatable>
           </RdsOffcanvas>
         </div>
-      </div>
+      </div></div></div>
     </>
   );
 };

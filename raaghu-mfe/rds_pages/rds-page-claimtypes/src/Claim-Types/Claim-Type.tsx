@@ -200,8 +200,8 @@ const ClaimType = () => {
   ];
 
   const actions = [
-    { id: "editClaim", displayName: "Edit", offId: "dynamic-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "dynamic_delete_off" },
+    { id: "editClaim", displayName: "Edit", offId: "claimType-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "claimType-delete-off" },
   ];
 
   const submitHandler = (data: any) => {
@@ -280,6 +280,7 @@ const ClaimType = () => {
   }, [claimTypesUser]);
 
   return (
+    <div className="container-fluid">
     <div className="row">
     <div className="col-md-12 mb-3 ">
       <div className="row ">
@@ -310,6 +311,7 @@ const ClaimType = () => {
               block={false}
               size="small"
               type="button"
+              showLoadingSpinner={true}
               colorVariant="primary"
             ></RdsButton>
           </div>
@@ -317,7 +319,7 @@ const ClaimType = () => {
         backDrop={false}
         scrolling={false}
         preventEscapeKey={false}
-        offId={"tenant"}
+        offId={"claimType-add-off"}
       >
         <RdsCompNewClaimType
           claimsData={claimsData}
@@ -327,8 +329,8 @@ const ClaimType = () => {
       </RdsOffcanvas>
     </div>
   </div>
-</div>
-
+</div></div>
+<div className="row">
 <div className="col-md-12">
   <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
   <RdsCompDatatable 
@@ -342,14 +344,14 @@ const ClaimType = () => {
       onActionSelection={onActionSelection}
     ></RdsCompDatatable>
     <RdsCompAlertPopup
-      alertID="dynamic_delete_off"
+      alertID="claimType-delete-off"
       onSuccess={DeleteHandler}
     />
     <RdsOffcanvas
       canvasTitle="Edit Claim type"
       onclick={offCanvasHandler}
       placement="end"
-      offId="dynamic-edit-off"
+      offId="claimType-edit-off"
       
       backDrop={false}
       scrolling={false}
@@ -364,7 +366,7 @@ const ClaimType = () => {
   </div>
 </div>
 </div>
-
+</div>
   );
 };
 

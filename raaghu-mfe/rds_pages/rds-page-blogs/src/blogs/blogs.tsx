@@ -89,8 +89,8 @@ const Blogs = (props: RdsPageResourcesProps) => {
 
   const actions = [
     { id: "edit", displayName: "Edit", offId: "blogs-edit-off" },
-    { id: "features", displayName: "Features", offId: "features" },
-    { id: "delete", displayName: "Delete", modalId: "blogs_delete_off" },
+    { id: "features", displayName: "Features", offId: "blogs-features" },
+    { id: "delete", displayName: "Delete", modalId: "blogs-delete-off" },
   ];
 
   const [formData, setFormData] = useState({
@@ -135,8 +135,8 @@ const Blogs = (props: RdsPageResourcesProps) => {
   }
 
   return (
-    <div>
-      <div className="row align-items-center">
+    <div className="container-fluid p-0 m-0">
+      <div className="row"><div className="col-md-12">
         <div className="d-flex justify-content-between">
           <div className="col-lg-8 col-md-8">
             {alert.showAlert && alertOne && (
@@ -165,6 +165,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     block={false}
                     size="small"
                     type="button"
+                    showLoadingSpinner={true}
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
@@ -172,7 +173,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
               backDrop={false}
               scrolling={false}
               preventEscapeKey={false}
-              offId={"client"}
+              offId={"blog-add-off"}
             >
               <div>
                 <div className="pt-3">
@@ -220,6 +221,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       isDisabled={value === ""}
                       colorVariant="primary"
                       class="me-2"
+                      showLoadingSpinner={true}
                       onClick={addDataHandler}
                     ></RdsButton>
                   </div>
@@ -227,7 +229,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
               </div>
             </RdsOffcanvas>
           </div>
-        </div>
+        </div></div>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
@@ -295,6 +297,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                   //isDisabled={value === ""}
                   colorVariant="primary"
                   class="me-2"
+                  showLoadingSpinner={true}
                   //onClick={addDataHandler}
                 ></RdsButton>
               </div>
@@ -306,7 +309,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           backDrop={true}
           preventEscapeKey={true}
           scrolling={false}
-          offId="features"
+          offId="blogs-features"
           placement="end"
           canvasTitle="Features"
           children={
@@ -387,26 +390,12 @@ const Blogs = (props: RdsPageResourcesProps) => {
         ></RdsOffcanvas>
 
         <RdsCompAlertPopup
-          alertID="blogs_delete_off"
+          alertID="blogs-delete-off"
           messageAlert="The selected Resource will be Deleted Permanently "
           alertConfirmation="Are you sure"
           deleteButtonLabel="Yes"
           onSuccess={success}
         />
-
-        {/* <RdsOffcanvas
-            backDrop={true}
-            preventEscapeKey={true}
-            scrolling={false}
-            offId="features"
-            placement="end"
-            canvasTitle="Edit"
-           
-            children={
-              <>
-              hii
-              </>
-            }></RdsOffcanvas> */}
       </div>
     </div>
   );

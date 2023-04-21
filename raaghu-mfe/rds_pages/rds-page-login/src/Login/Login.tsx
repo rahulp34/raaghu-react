@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
-import {
-  localizationService,
-  configurationService,
-} from "raaghu-react-core";
+
 import { useAppDispatch } from "../../../../libs/state-management";
 import { callLoginAction } from "../../../../libs/public.api";
 
@@ -21,22 +18,17 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const { i18n } = useTranslation();
 
   function loginHandler(email: any, password: any) {
-    dispatch(callLoginAction({email,password}) as any)
+    dispatch(callLoginAction({ email, password }) as any)
   };
- // localStorage.setItem("auth", JSON.stringify(false));
+  // localStorage.setItem("auth", JSON.stringify(false));
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
-    // navigate("/forgot-password");
-    // props.onForgotPassword(isForgotPasswordClicked);
   };
   const { t } = useTranslation();
-  const [turnSpinnerOff, setTurnSpinnerOff]= useState(false);
   return (
     <div className="login-background">
       <div
-        className="align-items-center d-flex justify-content-center login m-auto"
-        style={{ maxWidth: "900px", height: "100vh " }}
-      >
+        className="align-items-center d-flex justify-content-center vh-100 m-auto login-container">
         <div className="container-fluid m-2">
           <div className="bg-white row rounded-3 ">
             <div className="col-md-6">
@@ -49,47 +41,37 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 <RdsCompLogin
                   onLogin={loginHandler}
                   onForgotPassword={forgotPasswordHandler}
-                  turnSpinnerOff={turnSpinnerOff}
                 />
               </div>
             </div>
-            <div
-              className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0"
-              style={{
-                backgroundRepeat: "no-repeat",
-                backgroundColor: "#000",
-                height: 524,
-              }}
-            >
-              <video
-                className="video position-relative"
-                autoPlay
-                muted
-                loop
-                style={{ width: 442, height: 524 }}
-              >
-                <source
-                  src="./assets/building_lights.mp4"
-                  type="video/mp4"
-                ></source>
+            <div className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0 login-card-height"
+              style={{ backgroundImage: "url(../assets/bg_1.png)", backgroundSize: "cover", backgroundPosition: "bottom", backgroundRepeat: "no-repeat", backgroundColor: "#000;" }}>
+              <video id="myVideo" className="video" autoPlay muted loop>
+                <source src="../assets/Comp1.mp4" type="video/mp4" />
               </video>
-              <img
-                className="position-absolute"
-                style={{
-                  zIndex: "3",
-                  backgroundSize: "cover",
-                  top: 244,
-                  left: 200,
-                  width: 42,
-                  height: 39,
-                }}
-                src="./assets/raaghu_icon.png"
-              ></img>
+              <div className="raghu1">
+                  <img src="../assets/fg_raaghu.png"></img>
+                </div>
+              <div className="wrap">
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+                <div className="c"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
