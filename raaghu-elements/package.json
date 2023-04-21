@@ -31,7 +31,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest"
+    "test": "react-scripts test"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
@@ -45,7 +45,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/bootstrap": "^5.2.6",
     "@types/draft-js": "^0.11.10",
-    "@types/jest": "^29.0.3",
+    "@types/jest": "^29.5.1",
     "@types/react": "^18.0.20",
     "@types/react-datepicker": "^4.8.0",
     "@types/styled-components": "^5.1.26",
