@@ -18,7 +18,7 @@ export const Tooltip = (p: {
     return () => t.dispose();
   }, [p.text, p.place]);
 
-  return React.cloneElement(p.children, { ref: childRef });
+  return React.cloneElement(p.children, { ref: childRef, role: "tooltip"});
 };
 
 export default Tooltip;

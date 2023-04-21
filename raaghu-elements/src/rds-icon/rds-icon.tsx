@@ -99,6 +99,7 @@ const RdsIcon = (props: RdsIconProps) => {
       className={props.classes}
       onClick={props.onClick}
       dangerouslySetInnerHTML={{ __html: stringData }}
+      role="img"
     />
   );
 };
