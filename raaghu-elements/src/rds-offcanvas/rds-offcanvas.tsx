@@ -33,17 +33,18 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
   }`;
   let isCanvasTitle =props.canvasTitle !== "" && props.canvasTitle !== undefined;
 
-  const backdDDrops = document.querySelectorAll('[data-bs-toggle="offcanvas"]');
-  backdDDrops.forEach((element)=>{
+  const OffCanvasBtn = document.querySelectorAll('[data-bs-toggle="offcanvas"]');
+  OffCanvasBtn.forEach((element)=>{
     element.addEventListener('click',()=>{
-      const backy = document.querySelectorAll('.offcanvas-backdrop')
-      if (backy.length > 1) {
-        for (let i = 0; i < backy.length - 1; i++) {
-          backy[i].remove();
+      const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+      if (allBackdrops.length > 1) {
+        for (let i = 0; i < allBackdrops.length - 1; i++) {
+          allBackdrops[i].remove();
         }
       }
     })
   })
+ 
   
   return (
     <>
