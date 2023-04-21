@@ -55,7 +55,7 @@ const RdsSideNavChild = ({
       </ul>
       {/* <span> */}
         <div
-          className={`sidenav-footer text-center rounded-end shadow-sm p-1 ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -69,6 +69,7 @@ const RdsSideNavChild = ({
                 fill={false}
                 onClick={onCollapse}
                 colorVariant="primary"
+                // isAnimate={false}
               ></RdsIcon>
        </span>
             {/* </div> */}
@@ -133,6 +134,7 @@ const Node = ({
                     height="20px"
                     width="20px"
                     classes="me-3"
+                    // isAnimate={true}
                   ></RdsIcon>
             
               ) : count == 2 ?
@@ -144,6 +146,7 @@ const Node = ({
                     height="20px"
                     width="20px"
                     classes="me-3"
+                    // isAnimate={false}
                   ></RdsIcon>
                 : null}
               <div className="me-3" data-name={node.label}>
@@ -178,6 +181,7 @@ const Node = ({
                         height="20px"
                         width="20px"
                         classes="me-3"
+                        // isAnimate = {false}
                       ></RdsIcon>
                     </a>
                     <ul
@@ -216,6 +220,7 @@ const Node = ({
                         height="20px"
                         width="20px"
                         classes="me-3"
+                        // isAnimate = {false}
                       ></RdsIcon>
                                             {t(subItem.label)}
                                           </NavLink>
@@ -251,6 +256,7 @@ const Node = ({
                       height="20px"
                       width="20px"
                       classes="me-3"
+                      // isAnimate = {false}
                     ></RdsIcon>
                     <span className="text-capitalize">{t(node.label)}</span>
                   </a>
@@ -274,6 +280,7 @@ const Node = ({
                         height="20px"
                         width="20px"
                         classes="me-3"
+                        // isAnimate = {false}
                       ></RdsIcon>
                       <span className="text-capitalize">{t(node.label)}</span>
                     </a>
