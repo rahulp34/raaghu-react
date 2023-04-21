@@ -21,7 +21,7 @@ import {
 } from "../../../../libs/state-management/public.api";
 import {
   configurationService,
-} from "../../../../../raaghu-core/src/index";
+} from "raaghu-react-core";
 
 export interface LanguageTextProps {
   languagetableHeaders: any;
