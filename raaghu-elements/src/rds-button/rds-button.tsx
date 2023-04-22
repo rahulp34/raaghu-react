@@ -6,48 +6,42 @@ import Tooltip from "../rds-tooltip/rds-tooltip";
 import RdsIcon from "../rds-icon/rds-icon";
 
 const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
-  const outline = `${
-    props.isOutline
-      ? "  btn-outline-" + props.colorVariant
-      : "  align-items-center btn-" + props.colorVariant
-  }`;
-  const mode = props.size
-    ? ` btn-${
-        props.size === "small" ? "sm " : props.size === "large" ? "lg " : "md "
-      }`
-    : "";
+
+  const outline = `${props.isOutline ? "  btn-outline-" + props.colorVariant : "  align-items-center btn-" + props.colorVariant}`;
+  const mode = props.size ? ` btn-${props.size === "small" ? "sm " : props.size === "large" ? "lg " : "md "}` : "";
   const icon = props.isFabIcon ? " btn-icon p-1 rounded-pill " : "";
   const icon1 = props.isRounded ? " rounded-pill " : "";
   const blockWidth = props.block === true ? "w-100" : "";
   const spinner = props.showLoadingSpinner ? " spinner" : "";
-  const [classes, setClasses] = useState(
-    `${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`
-  );
+  const [classes, setClasses] = useState(`${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`);
   const btnType = props.type === "submit" ? "submit" : "button";
   const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
     if (props.showLoadingSpinner) {
       let tempClasses = classes;
-      setClasses(`${tempClasses} ${spinner}`);
+      setClasses(`${tempClasses} ${spinner}`)
       setTurnSpinnerOff(1);
     }
     props.onClick !== undefined && props.onClick(evt);
   };
+  console.log(classes)
   useEffect(() => {
     if (turnSpinnerOff) {
       setTimeout(() => {
-        let tempClasses = classes.replace("spinner", "");
+        let tempClasses = classes.replace('spinner', '');
+        console.log(classes)
         setClasses(tempClasses);
       }, 3000);
     }
-  }, [turnSpinnerOff, classes]);
+  }, [turnSpinnerOff, classes])
+
 
   const iconClasses =
     props.hasOwnProperty("icon") && props.hasOwnProperty("label")
       ? "me-2 d-inline-block"
       : "";
   const showLoadingSpinner = props.showLoadingSpinner || false;
-  const id = props.id || "rds_buttonId_";
+  const id = props.id || 'rds_buttonId_';
 
   return (<>
     {props.tooltip ? (< Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
@@ -74,7 +68,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
               height={props.iconHeight}
               fill={props.iconFill}
               stroke={props.iconStroke}
-              // isAnimate={false}
+            // isAnimate={false}
             />
           </span>
         )
@@ -107,7 +101,7 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
             height={props.iconHeight}
             fill={props.iconFill}
             stroke={props.iconStroke}
-            // isAnimate={false}
+          // isAnimate={false}
           />
         </span>
       )
@@ -116,8 +110,10 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
         {props.label}
       </span>
       )}
-    </>
-  );
+      {showLoadingSpinner === false && <>{props.children}</>}
+    </button>}
+  </>
+  )
 };
 
 export default RdsButton;
