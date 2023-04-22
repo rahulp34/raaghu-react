@@ -49,71 +49,72 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
   const showLoadingSpinner = props.showLoadingSpinner || false;
   const id = props.id || "rds_buttonId_";
 
-  return (
-    <>
-      {props.tooltip ? (
-        <Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
-          <button
-            type={btnType}
-            className={`btn position-relative${classes}`}
-            disabled={props.isDisabled}
-            onClick={buttonClick}
-            form={props.formName}
-            key={turnSpinnerOff}
-            style={props.style}
-            aria-label={props.arialabel}
-            data-bs-dismiss={props.databsdismiss}
-            data-bs-target={props.databstarget}
-            data-bs-toggle={props.databstoggle}
-            aria-controls={props.ariacontrols}
-            id={props.id}
-          >
-            {showLoadingSpinner === false && props.icon && (
-              <span className={iconClasses}>
-                <RdsIcon
-                  name={props.icon}
-                  width={props.iconWidth}
-                  height={props.iconHeight}
-                  fill={props.iconFill}
-                  stroke={props.iconStroke}
-                  // isAnimate={false}
-                />
-              </span>
-            )}
-            {props.label && <span className="btn-text ">{props.label}</span>}
-            {showLoadingSpinner === false && <>{props.children}</>}
-          </button>
-        </Tooltip>
-      ) : (
-        <button
-          type={btnType}
-          className={`btn position-relative ${classes}`}
-          disabled={props.isDisabled}
-          onClick={buttonClick}
-          form={props.formName}
-          style={props.style}
-          aria-label={props.arialabel}
-          data-bs-dismiss={props.databsdismiss}
-          data-bs-target={props.databstarget}
-          data-bs-toggle={props.databstoggle}
-          aria-controls={props.ariacontrols}
-          id={props.id}
-        >
-          {showLoadingSpinner === false && props.icon && (
-            <span className={iconClasses}>
-              <RdsIcon
-                name={props.icon}
-                width={props.iconWidth}
-                height={props.iconHeight}
-                fill={props.iconFill}
-                stroke={props.iconStroke}
-                // isAnimate={false}
-              />
-            </span>
-          )}
-          {props.label && <span className="btn-text ">{props.label}</span>}
-          {showLoadingSpinner === false && <>{props.children}</>}
-        </button>
+  return (<>
+    {props.tooltip ? (< Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
+      <button
+        type={btnType}
+        className={`btn position-relative${classes}`}
+        disabled={props.isDisabled}
+        onClick={buttonClick}
+        form={props.formName}
+        key={turnSpinnerOff}
+        style={props.style}
+        aria-label={props.arialabel}
+        data-bs-dismiss={props.databsdismiss}
+        data-bs-target={props.databstarget}
+        data-bs-toggle={props.databstoggle}
+        aria-controls={props.ariacontrols}
+        id={props.id}
+      >
+        {props.icon && (
+          <span className={iconClasses}>
+            <RdsIcon
+              name={props.icon}
+              width={props.iconWidth}
+              height={props.iconHeight}
+              fill={props.iconFill}
+              stroke={props.iconStroke}
+              // isAnimate={false}
+            />
+          </span>
+        )
+        }
+        {props.label && (<span className="btn-text "  >
+          {props.label}
+        </span>
+        )}
+        {<>{props.children}</>}
+      </button>
+    </Tooltip>) : <button
+      type={btnType}
+      className={`btn position-relative ${classes}`}
+      disabled={props.isDisabled}
+      onClick={buttonClick}
+      form={props.formName}
+      style={props.style}
+      aria-label={props.arialabel}
+      data-bs-dismiss={props.databsdismiss}
+      data-bs-target={props.databstarget}
+      data-bs-toggle={props.databstoggle}
+      aria-controls={props.ariacontrols}
+      id={props.id}
+    >
+      {props.icon && (
+        <span className={iconClasses}>
+          <RdsIcon
+            name={props.icon}
+            width={props.iconWidth}
+            height={props.iconHeight}
+            fill={props.iconFill}
+            stroke={props.iconStroke}
+            // isAnimate={false}
+          />
+        </span>
+      )
+      }
+      {props.label && (<span className="btn-text "  >
+        {props.label}
+      </span>
       )}
     </>
   );
