@@ -91,7 +91,6 @@ const WithIcon: ComponentStory<typeof RdsBadge> = (args) => (
   height="33px"
   fill={false}
   stroke={true}
-  isAnimate={false}
  />
 <RdsBadge {...args}></RdsBadge>
 </span>
