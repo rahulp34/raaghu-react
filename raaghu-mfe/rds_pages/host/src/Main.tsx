@@ -18,7 +18,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction, } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, getProfilePictureHost,  } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -80,7 +80,42 @@ const Main = (props: MainProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
+  const dataHostPic = useAppSelector((state) => state.persistedReducer.host.profilepic);
+
+  function createImageFromBase64(base64String: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = `data:image/png;base64,${base64String}`;
+      img.addEventListener('load', () => {
+        resolve(img);
+      });
+      img.addEventListener('error', (err) => {
+        reject(err);
+      });
+    });
+  }
+  
+
+useEffect(()=> {
+  if(dataHostPic){
+    createImageFromBase64(dataHostPic.fileContent).then((image) => {
+      setProfilePic(image.src)
+    })
+    
+  }
+},[dataHostPic])
+  
+  let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
+
   let currentPath = window.location.pathname;
+  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg")
+  useEffect(() => {
+    let id = localStorage.getItem('userId')
+   
+    dispatch(getProfilePictureHost(id) as any);
+
+},[dispatch]);
+
 
   useEffect(() => {
     sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
@@ -272,6 +307,15 @@ const Main = (props: MainProps) => {
   }
 
   useEffect(()=>{
+    
+    configurationService(currentLanguage).then(async (res: any) => {
+      if(res.currentUser.id){
+        localStorage.setItem('userId', res.currentUser.id)
+      }    });
+
+  },[])
+
+  useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
@@ -381,7 +425,7 @@ const Main = (props: MainProps) => {
         d-flex
         flex-column-fluid
         align-items-stretch
-        container-fluid
+        container-fluid 
         px-0"
             >
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
@@ -409,6 +453,7 @@ const Main = (props: MainProps) => {
               <RdsCompTopNavigation
                 //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
                 languageLable ="English"
+                profilePic={profilePic}
                 // languageLable={
                 //   storeData.languages?.currentCulture?.displayName ||
                 //   "English (United Kingdom)"
