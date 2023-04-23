@@ -186,6 +186,9 @@ useEffect(()=> {
 
   useEffect(() => {
     configurationService(currentLanguage).then( (res: any) => {
+      if(res.currentUser.id){
+        localStorage.setItem('userId',res.currentUser.id);
+      }
       const tempdata = res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -302,6 +305,9 @@ useEffect(()=> {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
+        if(res.currentUser.id){
+          localStorage.setItem('userId',res.currentUser.id);
+        }
         const lang =localStorage.getItem("currentLang")||"en-GB"
       });
   }
