@@ -14,7 +14,7 @@ const RdsCompFileUploader = (props: RdsCompFileUploaderProps) => {
   return (
     <>
       <div className="row">
-        <div
+        {/* <div
           className="col ms-3 me-3 mt-2 "
           style={{
             border: "dashed 2px #D6B7FF",
@@ -28,23 +28,23 @@ const RdsCompFileUploader = (props: RdsCompFileUploaderProps) => {
             flexDirection: "column",
             textAlign: "center",
           }}
-        >
-          <div>
+        > */}
+          {/* <div>
             <img
               src="./assets/File-upload.png"
               style={{ width: "fit-content" }}
             ></img>
-          </div>
+          </div> */}
 
-          <div>
+          
             <RdsFileUploader
-              colorVariant="primary"
+              colorVariant=""
               extensions=""
               multiple={true}
-              placeholder="" size={""} label={""} limit={10} 
+              placeholder="" size={""} label={""} limit={100} 
               getFileUploaderInfo={(data:any)=>folder(data)}            />
-          </div>
-        </div>
+          
+        {/* </div> */}
       </div>
       <div className="d-flex footer-buttons">
                 <RdsButton

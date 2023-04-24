@@ -63,7 +63,18 @@ const RdsModal = (props: RdsModalProps) => {
       ? "fade-flip"
       : " "
   }`;
-  let args;
+  
+  const OffCanvasBtn = document.querySelectorAll('[data-bs-toggle="modal"]');
+  OffCanvasBtn.forEach((element)=>{
+    element.addEventListener('click',()=>{
+      const allBackdrops = document.querySelectorAll('.modal-backdrop')
+      if (allBackdrops.length > 1) {
+        for (let i = 0; i < allBackdrops.length - 1; i++) {
+          allBackdrops[i].remove();
+        }
+      }
+    })
+  })
   return (
     <>
       {/* Button trigger modal */}

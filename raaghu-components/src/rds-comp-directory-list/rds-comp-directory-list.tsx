@@ -54,7 +54,7 @@ export const RdsCompDirectoryList=(props : RdsCompDirectoryListProps) => {
 
   const renderDirectoryItem = (item: DirectoryItem) => {
     const hasChildren = item.children && item.children.length > 0;
-    const isExpanded = expandedItems.includes(item.id);
+    const isExpanded = expandedItems.includes(item.id)
     const isSelected = props.selectedItemId === item.id;
 
     return (
@@ -71,7 +71,7 @@ export const RdsCompDirectoryList=(props : RdsCompDirectoryListProps) => {
         >
           {hasChildren && (
             <button
-              className="me-1 border-0 bg-white"
+              className="me-2 border-0 bg-white"
               onClick={handleClick(item.id, item.name)}
             >
               <RdsIcon
@@ -86,8 +86,8 @@ export const RdsCompDirectoryList=(props : RdsCompDirectoryListProps) => {
           )}
           <RdsIcon
             name="folder"
-            height="15px"
-            width="15px"
+            height="17px"
+            width="20px"
             fill={false}
             stroke={true}
             colorVariant={isSelected ? "primary" : undefined}
@@ -102,7 +102,9 @@ export const RdsCompDirectoryList=(props : RdsCompDirectoryListProps) => {
             <RdsLabel label={`(${item.children.length})`} />
           )}
         </div>
+        
         {item.children && isExpanded && (
+          
           <RdsCompDirectoryList
           items={item.children || []}
           path={props.path}

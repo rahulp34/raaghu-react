@@ -431,7 +431,7 @@ const Main = (props: MainProps) => {
                   console.log(" session Hey Chat Button Clicked!!");
                 }} elementList={[]} />
             </div>
-            <div className="m-3">
+            <div className="m-4">
                   <Suspense>
                     <Routes>
                       <Route
