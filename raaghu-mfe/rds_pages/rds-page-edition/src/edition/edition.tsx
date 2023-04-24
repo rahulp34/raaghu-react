@@ -273,7 +273,7 @@ const Edition = (props: RdsPageEditionProps) => {
                 />
               </div>
             }
-            backDrop={false}
+            backDrop={true}
             scrolling={false}
             preventEscapeKey={false}
             offId={"Edition"}
@@ -341,7 +341,7 @@ const Edition = (props: RdsPageEditionProps) => {
           onclick={offCanvasHandler}
           placement="end"
           offId="edition-new-off"
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
           className="overflow-hidden"

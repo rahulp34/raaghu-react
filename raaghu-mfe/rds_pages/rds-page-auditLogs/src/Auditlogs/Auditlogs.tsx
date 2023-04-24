@@ -235,25 +235,25 @@ const Auditpayload = ()=>{
               type="advanced"
             ></RdsDatePicker>
           </div>
-          <div className="">
+          <div className="mt-4 pt-2">
             <RdsInput
               placeholder="User"
               onChange={onActionFilter}
             ></RdsInput>
           </div>
-          <div className="">
+          <div className="mt-4 pt-2">
             <RdsInput
               placeholder="Url Filter"
               onChange={onUrlFilter}
             ></RdsInput>
           </div>
-          <div className="">
+          <div className="mt-4 pt-2">
             <RdsInput
               placeholder="Min Duration"
               // onChange={onMinDurationFilter}
             ></RdsInput>
           </div>
-          <div className="">
+          <div className="mt-4 pt-2">
             <RdsInput
               placeholder="Max Duration"
               onChange={(event) => handleSearch(event)}
@@ -341,7 +341,7 @@ const Auditpayload = ()=>{
             />
           </div>
         </div>
-        <div className="float-end mx-4">
+        <div className="float-end mx-4 mt-2">
           <RdsButton
             label="Search"
             type="button"
