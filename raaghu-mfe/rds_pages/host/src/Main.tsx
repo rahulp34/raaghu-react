@@ -563,19 +563,13 @@ useEffect(()=> {
                 >
                       <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
+               languageLable ="English"
                 profilePic={profilePic}
-                // languageLable={
-                //   storeData.languages?.currentCulture?.displayName ||
-                //   "English (United Kingdom)"
-                // }
                 breacrumItem={breacrumItem}
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
                 componentsList={componentsList}
-                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -700,7 +694,7 @@ useEffect(()=> {
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
-                      <Route path="/components" element={<ComponentsCompo />} />
+                      <Route path="/components/:type" element={<ComponentsCompo />} />
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                       <Route path="/pages" element={<PagesCompo />} />

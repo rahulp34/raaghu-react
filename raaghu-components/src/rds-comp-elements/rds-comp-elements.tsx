@@ -2,29 +2,24 @@ import React, { Suspense, useEffect, useState } from "react";
 
 import "./rds-comp-elements.scss";
 import { RdsLabel, RdsIcon } from "../rds-elements";
-import code_snippet from "./code_snippet"
+import code_snippet from "./code_snippet";
 
 export interface RdsCompElementsProps {}
 
 const RdsCompElements = (props: any) => {
-  const [codeSnippet, setCodeSnippet] = useState<any>('');
+  const [codeSnippet, setCodeSnippet] = useState<any>("");
 
   const [show, setShow] = useState<boolean>(false);
 
   const ComponentElement = React.lazy(
     () => import("./elements/" + props.type + ".tsx")
   );
-
-  // const ComponentCode = import('./elements/' + props.type + '.tsx');
-  //   console.log("Component: ", ComponentElement);
-
-  // const [searchParams, setSearchParams] = useSearchParams();
   console.log("Props: ", props.type);
 
-
-
   useEffect(() => {
-    const filteredSnippets = code_snippet.filter((snippet) => snippet.hasOwnProperty(props.type))
+    const filteredSnippets = code_snippet.filter((snippet) =>
+      snippet.hasOwnProperty(props.type)
+    );
     const value = Object.values(filteredSnippets[0])[0];
     setCodeSnippet(value);
   }, [props.type]);
