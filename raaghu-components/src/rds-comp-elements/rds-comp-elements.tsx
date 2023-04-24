@@ -1,138 +1,111 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from "react";
 
 import "./rds-comp-elements.scss";
-import code_snippet from "./elements/accordion"
-import { RdsLabel, RdsIcon } from '../rds-elements';
+import { RdsLabel, RdsIcon } from "../rds-elements";
+import code_snippet from "./code_snippet"
 
-export interface RdsCompElementsProps { }
-
+export interface RdsCompElementsProps {}
 
 const RdsCompElements = (props: any) => {
+  const [codeSnippet, setCodeSnippet] = useState<any>('');
 
-   // const [code_snippet, setCode] = React.useState("");
+  const [show, setShow] = useState<boolean>(false);
 
-   const [show, setShow] = useState<boolean>(false);
+  const ComponentElement = React.lazy(
+    () => import("./elements/" + props.type + ".tsx")
+  );
 
-   
-   const ComponentElement = React.lazy(() => import('./elements/' + props.type + '.tsx'));
-   // const ComponentCode = import('./elements/' + props.type + '.tsx');
-   console.log("Component: ", ComponentElement);
+  // const ComponentCode = import('./elements/' + props.type + '.tsx');
+  //   console.log("Component: ", ComponentElement);
 
-   // const [searchParams, setSearchParams] = useSearchParams();
-   // console.log("Props: ", props, code_snippet);
+  // const [searchParams, setSearchParams] = useSearchParams();
+  console.log("Props: ", props.type);
 
 
-   const Accordion_text =
-     ` <RdsAccordion
-         accordionId='1'
-         accordionType='Default' >
-         <RdsAccordionItem id={'1'} defaultOpen={false} title={'Section 1 Title'}>
-            <h1>Hello</h1>
-         </RdsAccordionItem>
-         <RdsAccordionItem id={'2'} title={'Section 2 Title'}>
-            <h1>Hello2</h1>
-         </RdsAccordionItem>
-         <RdsAccordionItem id={'3'} title={'Section 3 Title'}>
-            <h1>Hello3</h1>
-         </RdsAccordionItem>
-      </RdsAccordion>`
 
-   //    const Address_Detail = ` <RdsAddressDetail
-   // addressLine1="Address Line 1"
-   // addressLine2="Address Line 2"
-   // addressLine3="Address Line 3"
-   // cardborder={true}
-   // header="Address Header"
-   // withIcon={true} children={undefined}></RdsAddressDetail>`
+  useEffect(() => {
+    const filteredSnippets = code_snippet.filter((snippet) => snippet.hasOwnProperty(props.type))
+    const value = Object.values(filteredSnippets[0])[0];
+    setCodeSnippet(value);
+  }, [props.type]);
 
-   //    const Alert = ` <RdsAddressDetail
-   // addressLine1="Address Line 1"
-   // addressLine2="Address Line 2"
-   // addressLine3="Address Line 3"
-   // cardborder={true}
-   // header="Address Header"
-   // withIcon={true} children={undefined}></RdsAddressDetail>`
+  const copy_click = (text: any) => {
+    console.log(" prop.type ,", props.type);
+    setShow(true);
+    navigator.clipboard.writeText(text);
+  };
 
-   //    const AppDetail = `  <RdsAppDetail
-   // appDetailsItem={{
-   //    icon: 'zapier',
-   //    iconColor: 'warning',
-   //    iconFill: true,
-   //    iconHeight: '30px',
-   //    iconStroke: true,
-   //    iconWidth: '30px',
-   //    route: '/home',
-   //    routeLabel: 'View integration',
-   //    selected: true,
-   //    subtitle: 'Build custom automation and intefrations with app',
-   //    title: 'Zapier'
-   // }}
-   // />`
+  const setChildCode = (message: any) => {
+    console.log("setChildCode:", message);
+    // setCode(message);
+  };
 
-   const copy_click = (text: any) => {
-      setShow(true)
-      navigator.clipboard.writeText(text);
-      
-   }
-
-   const setChildCode = (message: any) => {
-      console.log("setChildCode:", message);
-      // setCode(message);
-   };
-
-   return (
-      <>
-         <div className="card p-2 border-0 rounded-0 mt-4 vh-88">
-
-            <div className='card-header'>
-               <h5><RdsLabel> <span className='text-capitalize'>{props.type}</span> </RdsLabel></h5>
+  return (
+    <>
+      <div className="card p-2 border-0 rounded-0 mt-4 vh-88">
+        <div className="card-header">
+          <h5>
+            <RdsLabel>
+              {" "}
+              <span className="text-capitalize">{props.type}</span>{" "}
+            </RdsLabel>
+          </h5>
+        </div>
+        <div className="card-body pt-0">
+          <div className="row">
+            <div className="col-lg-6 col-md-6 col-xs-12 mb-3 mt-2">
+              <RdsLabel>Preview</RdsLabel>
+              <div className="mb-4 mt-3">
+                <Suspense fallback={<div>Page is Loading...</div>}>
+                  <ComponentElement
+                    onChange={(event: any) => setChildCode(event)}
+                  />
+                </Suspense>
+              </div>
             </div>
-            <div className='card-body pt-0'>
-               <div className="row">
-                  <div className="col-lg-6 col-md-6 col-xs-12 mb-3 mt-2">
-                     <RdsLabel>Preview</RdsLabel>
-                     <div className='mb-4 mt-3'>
-                        <Suspense fallback={<div>Page is Loading...</div>}>
-                           <ComponentElement onChange={(event: any) => setChildCode(event)} />
-                        </Suspense>
-                     </div>
-
-                  </div>
-                  <div className="col-md-6">
-                     <RdsLabel>Code</RdsLabel>
-                     <div  className="bg-light bg-opacity-100 p-4 rounded-4 mt-4">
-                        <span className='float-end cursor-pointer'>
-                          { show ? ( <RdsIcon
-                              name="check"
-                              width="12px"
-                              height="12px"
-                              colorVariant='primary'
-                              fill={false}
-                              stroke={true}
-                           ></RdsIcon>) : (
-                              <RdsIcon
-                              name="clipboard"
-                              width="17px"
-                              height="17px"
-                              fill={false}
-                              stroke={true}
-                              onClick={() => copy_click(Accordion_text)}
-                           ></RdsIcon>
-                           )
-                        }
-                        </span>
-                        <pre className="language-html">
-                           <code className="language-html">
-                              {/* {ComponentElement.name} */}
-                              {Accordion_text}
-                           </code>
-                        </pre>
-                     </div>
-                  </div>
-               </div>
+            <div className="col-md-6">
+              <RdsLabel>Code</RdsLabel>
+              <div className="bg-light mt-4 p-4 rounded-4 pb-0">
+                <span className="float-end cursor-pointer">
+                  {show ? (
+                    <RdsIcon
+                      name="check"
+                      width="12px"
+                      height="12px"
+                      colorVariant="primary"
+                      fill={false}
+                      stroke={true}
+                    ></RdsIcon>
+                  ) : (
+                    <RdsIcon
+                      name="clipboard"
+                      width="17px"
+                      height="17px"
+                      fill={false}
+                      stroke={true}
+                      onClick={() => copy_click(codeSnippet)}
+                    ></RdsIcon>
+                  )}
+                </span>
+                <pre className="bg-light language-html">
+                  <code className="language-html">
+                    {ComponentElement.name}
+                    {codeSnippet}
+                  </code>
+                </pre>
+              </div>
             </div>
-         </div>
-         {/* 
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default RdsCompElements;
+
+{
+  /* 
          <div className="card p-2 border-0 rounded-0 mt-4">
             <div className='card-header'>
                <h5><RdsLabel>Address Detail</RdsLabel></h5>
@@ -635,9 +608,5 @@ const RdsCompElements = (props: any) => {
                   </div>
                </div>
             </div>
-         </div> */}
-      </>
-   );
-};
-
-export default RdsCompElements;
+         </div> */
+}

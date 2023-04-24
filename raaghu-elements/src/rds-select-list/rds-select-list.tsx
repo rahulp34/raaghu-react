@@ -44,10 +44,10 @@ const RdsSelectList = (props: RdsSelectProps) => {
   const Size = `${props.hasOwnProperty("size") ? props.size : "md"}`;
   const customSize = `${
     Size === "lg"
-      ? "form-select form-select-lg"
+      ? "form-select form-select-lg cursor-pointer"
       : Size === "sm"
-      ? "form-select form-select-sm"
-      : "form-select"
+      ? "form-select form-select-sm cursor-pointer"
+      : "form-select cursor-pointer"
   }`;
   let Disabled = props.isDisabled || false;
   return (

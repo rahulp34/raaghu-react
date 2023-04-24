@@ -492,9 +492,7 @@ const Roles = (props: RdsPageRolesProps) => {
               </div>
             )}
             <div
-              className="d-flex"
-              style={{ position: "absolute", bottom: "2%" }}
-            >
+              className="d-flex position-absolute">
               <div className="me-3">
                 <RdsButton
                   type={"button"}

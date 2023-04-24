@@ -90,7 +90,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
 
   return (
     <>
-      <form className="p-2 mt-2">
+      <form className="mt-2">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6">
             <div>
@@ -127,8 +127,8 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 type="file"
                 id="file"
                 //ref={inputFile}
-                style={{ display: "none" }}
-              />
+                className="d-none"
+                />
             </div>
         </div>
 
