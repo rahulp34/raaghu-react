@@ -55,7 +55,7 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
         }
       >
         {props.navtabsItems.map((navtabsItem) => (
-          <li className="nav-item p-1 cursor-pointer" key={navtabsItem.id}>
+          <li className="nav-item py-1 cursor-pointer" key={navtabsItem.id}>
             <a className={
                 "nav-link rounded-0 py-3 px-3 pe-auto " +
                 (navtabsItem.id === activeTabKey ||
