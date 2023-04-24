@@ -8,7 +8,7 @@ export interface RdsCacheProps {
 	cachedata: any[];
 	recordsperpage: number;
 	pagination?: boolean;
-	onclick: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
+	onclick?: (event: React.MouseEvent<HTMLDivElement>, id: number) => void;
 	alignment?: string;
 }
 

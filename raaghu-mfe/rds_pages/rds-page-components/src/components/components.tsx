@@ -1,12 +1,12 @@
 import React from "react";
-import { RdsCompComponents } from '../../../rds-components';
+import { RdsCompComponents } from "../../../rds-components";
 
-const Components = () => {
-     return(
-        <div>
-           <RdsCompComponents></RdsCompComponents>
-        </div>
-     );
+const Components = (props: any) => {
+  return (
+    <div>
+      <RdsCompComponents type={props.type}></RdsCompComponents>
+    </div>
+  );
 };
 
 export default Components;
