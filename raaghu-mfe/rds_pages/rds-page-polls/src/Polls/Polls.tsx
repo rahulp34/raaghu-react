@@ -290,13 +290,12 @@ const Polls = (props: any) => {
           type="button"
           size="medium"
           colorVariant="primary"
-          showLoadingSpinner={false}
+          showLoadingSpinner={true}
           databstoggle="offcanvas"
           databstarget="#poll-new-off"
           icon={"plus"}
           iconWidth={"12px"}
           iconHeight={"12px"}
-          showLoadingSpinner={true}
         ></RdsButton>
       </div>
       <div className=" col-md-10">
