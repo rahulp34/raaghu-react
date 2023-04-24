@@ -687,7 +687,7 @@ const Users = () => {
         <div className="col-md-8 d-flex justify-content-end my-1">
         <RdsButton
             label="New User"
-            showLoadingSpinner={false}
+            showLoadingSpinner={true}
             databstoggle="offcanvas"
             databstarget="#userOffcanvas"
             icon={"plus"}

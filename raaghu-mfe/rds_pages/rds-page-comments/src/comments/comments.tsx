@@ -87,7 +87,7 @@ const Comments = () => {
 
   useEffect(() => {
     if (comments.allComments) {
-      comments.allComments.items.map((res: any) => ({
+      comments.allComments?.items?.map((res: any) => ({
         id: res.id,
         username: res.author.username,
         entityType: res.entityType,
