@@ -17,8 +17,9 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
 
-  function loginHandler(email: any, password: any) {
-    dispatch(callLoginAction({ email, password }) as any)
+  function loginHandler(email: any, password: any, rememberMe : boolean) {
+    dispatch(callLoginAction({email,password}) as any)
+    localStorage.setItem('rememberMe', rememberMe.toString());
   };
   // localStorage.setItem("auth", JSON.stringify(false));
 

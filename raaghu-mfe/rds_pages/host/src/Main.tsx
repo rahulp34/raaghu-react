@@ -1,13 +1,14 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import * as openApi from '../../../libs/proxy/core/OpenAPI';
 import "./App.scss";
 import {
   configurationService,
   localizationService,
   sessionService,
   clearToken,
-} from "raaghu-react-core";
+} from "../../../../raaghu-react-core/src";
 import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
@@ -66,6 +67,8 @@ import {
   GlobalResourcesCompo,
   NewslettersCompo,
 } from "./PageComponent";
+import type { ApiRequestOptions } from '../../../libs/proxy/core/ApiRequestOptions'
+'../ApiRequestOptions';
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -82,18 +85,53 @@ const Main = (props: MainProps) => {
   const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
   let currentPath = window.location.pathname;
 
-  useEffect(() => {
-    sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
-    if (localStorage.getItem("auth") && true) {
-      if (currentPath !== "/dashboard" && currentPath !== "/") {
-        navigate(currentPath);
-      } else {
-        navigate("/dashboard");
-      }
-    } else {
-      navigate("/login");
+  async function tokenRefresh() {
+    const url = 'https://raaghu-react.azurewebsites.net/connect/token';
+    const params = new URLSearchParams();
+    params.append('grant_type', 'refresh_token');
+    params.append('client_id', 'raaghu');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      params.append('refresh_token', refreshToken);
     }
-  }, [localStorage.getItem("auth")]);
+    let token = sessionStorage.getItem('accessToken');
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${token}`
+      },
+      body: params,
+    });
+    const data = await response.json();
+    return data;
+  }
+//Remember me
+  const rememberMe = localStorage.getItem('rememberMe');
+  if (rememberMe == 'true' && currentPath != '/login' && (sessionStorage.getItem('accessToken') || (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('calledOnce')))) {
+    sessionStorage.setItem('calledOnce', 'true')
+    const loginAccessDate: any = localStorage.getItem('loginAccessDate');
+    const savedDate: any = new Date(loginAccessDate);
+    const currentDate: any = new Date();
+    const diffInSeconds: number = Math.floor((currentDate.getTime() - savedDate.getTime()) / 1000);
+    const expiresIn: any = localStorage.getItem('expiresIn');
+    if (diffInSeconds > expiresIn) {
+      tokenRefresh()
+        .then((data: any) => {  
+          if (sessionStorage.getItem('accessToken') == undefined || sessionStorage.getItem('accessToken') == null) {
+            navigate("/dashboard");
+          }
+          sessionStorage.setItem('accessToken', data.access_token)
+          localStorage.setItem('refreshToken', data.refresh_token)
+          openApi.OpenAPI.TOKEN = data.access_token;
+          localStorage.setItem('loginAccessDate', Date())
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    }
+  }
+
   const toggleItems = [
     {
       label: "Light",
@@ -277,6 +315,9 @@ const Main = (props: MainProps) => {
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
           sessionStorage.setItem('accessToken',res)
+          localStorage.setItem('refreshToken', res.refresh_token)
+          localStorage.setItem('expiresIn', res.expires_in)
+          localStorage.setItem('loginAccessDate', Date());
           await hello(res)
         }
       });
@@ -408,7 +449,7 @@ const Main = (props: MainProps) => {
                       <div className="header align-items-stretch">
               <RdsCompTopNavigation
                 //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
+                languageLable="English"
                 // languageLable={
                 //   storeData.languages?.currentCulture?.displayName ||
                 //   "English (United Kingdom)"
