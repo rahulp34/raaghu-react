@@ -10,6 +10,7 @@ type InitialStateMyAccount = {
     profilePicture: any;
     twoFactor: boolean;
     error: string;
+    getProfilePicData:any
 };
 
 export const initialStateMyAccount: InitialStateMyAccount = {
@@ -17,6 +18,7 @@ export const initialStateMyAccount: InitialStateMyAccount = {
     personalInfo: null,
     changePasswordData: null,
     profilePicture: null,
+    getProfilePicData:null,
     twoFactor: false,
     error: "",
 };
@@ -39,7 +41,14 @@ export const saveMyProfile = createAsyncThunk(
         });
     }
 );
-
+export const getProfilePicture= createAsyncThunk(
+    "myProfile/getProfilePicture",
+    (id: any) => {
+        return AccountService.getProfilePicture({id}).then((result: any) => {
+            return result;
+        });
+    }
+);
 export const sendEmailVerifyProfile = createAsyncThunk(
     "myProfile/sendEmailVerifyProfile",
     (data: any) => {
@@ -64,7 +73,7 @@ export const setProfilePicture = createAsyncThunk(
     "myProfile/setProfilePicture",
     (data: any) => {
         return AccountService
-            .postProfilePicture({ type: 0, formData: data?.imageContent })
+            .postProfilePicture(data)
             .then((result: any) => {
                 console.log("result", data);
                 return result;
@@ -179,6 +188,22 @@ const myAccount = createSlice({
             state.loading = false;
             state.error = action.error.message || "Something went wrong";
         });
+        builder.addCase(getProfilePicture.pending, (state) => {
+            state.loading = true;
+        });
+
+        builder.addCase(
+            getProfilePicture.fulfilled,
+            (state, action: PayloadAction<any>) => {
+                state.loading = false;
+                state.getProfilePicData = action.payload;
+            }
+        );
+        builder.addCase(getProfilePicture.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Something went wrong";
+        });
+        
     },
 });
 

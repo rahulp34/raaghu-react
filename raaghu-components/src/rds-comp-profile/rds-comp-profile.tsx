@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "raaghu-react-elements";
 import { useNavigate } from "react-router-dom";
 import React from "react";
@@ -7,7 +7,7 @@ import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-acc
 
 export interface RdsCompProfileProps {
   navtabItems: any[];
-  profilePic: string;
+  profilePic?: string;
   userName: string;
   userRole: string;
   onEditProfile?: (Event: React.MouseEvent<HTMLElement>) => void;
@@ -18,9 +18,14 @@ export interface RdsCompProfileProps {
 const RdsCompProfile = (props: RdsCompProfileProps) => {
   const [activetab, setAcivetab] = useState("");
   const navigate = useNavigate();
-  const profilePic =
-    props.profilePic ||
-    "./assets/profile-picture-circle.svg";
+  const [profilePic ,setprofilePic] = useState("./assets/profile-picture-circle.svg")
+  useEffect(()=>{
+    if(props.profilePic){
+      setprofilePic(props.profilePic)
+    }
+
+  },[props.profilePic])
+    
   const onSetNavTabHandler = (id: any) => {
     setAcivetab(id);
     console.log(id);
@@ -46,31 +51,8 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             height="120px"
             className="profil_image_Class"
           ></img>
-          <span className="cursor-pointer position-absolute bottom-0" style={{ right: '2px' }}>
-            <RdsButton
-              class="btn btn-icon btn-sm position-relative rounded-circle bg-white"
-              icon="pencil"
-              isOutline={true}
-              size="small"
-              roundedButton={true}
-              iconFill={false}
-              iconStroke={true}
-              iconColorVariant="light"
-              iconHeight="16px"
-              iconWidth="16px"
-              type={"button"} />
-            {/* <RdsIcon             
-              name="pencil"
-              fill={false}
-              stroke={true}
-              width="18px"
-              height="18px"
-              colorVariant="dark"
-              onClick={props.onEditProfile}
-            ></RdsIcon> */}
-          </span>
         </div>
-        <p className="fw-bold text-center m-0">{props.userName}</p>
+        <p className="fw-bold text-center m-0 mt-3">{props.userName}</p>
         <p className="mb-3 text-center text-muted ">{props.userRole}</p>
       </div>
 
