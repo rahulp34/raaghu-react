@@ -80,7 +80,7 @@ const RdsSideNavChild = ({
               >
                  
                 <RdsToggle
-              small={collapse}
+              small={collapse} 
               iconOnUncheck={"sun"}
               iconOnCheck={"moon"}
               onClick={toggleTheme} checked={false}                ></RdsToggle>
