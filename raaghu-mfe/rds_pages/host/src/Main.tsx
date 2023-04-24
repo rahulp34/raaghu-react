@@ -1,13 +1,14 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import * as openApi from '../../../libs/proxy/core/OpenAPI';
 import "./App.scss";
 import {
   configurationService,
   localizationService,
   sessionService,
   clearToken,
-} from "raaghu-react-core";
+} from "../../../../raaghu-react-core/src";
 import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
@@ -66,6 +67,8 @@ import {
   GlobalResourcesCompo,
   NewslettersCompo,
 } from "./PageComponent";
+import openidConfig from "./openid.config";
+'../ApiRequestOptions';
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -128,7 +131,57 @@ useEffect(()=> {
     } else {
       navigate("/login");
     }
-  }, [localStorage.getItem("auth")]);
+  },[])
+  
+  async function tokenRefresh() {
+    const url = 'https://raaghu-react.azurewebsites.net/connect/token';
+    const params = new URLSearchParams();
+    params.append('grant_type', 'refresh_token');
+    params.append('client_id', 'raaghu');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      params.append('refresh_token', refreshToken);
+    }
+    let token = sessionStorage.getItem('accessToken');
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${token}`
+      },
+      body: params,
+    });
+    const data = await response.json();
+    return data;
+  }
+//Remember me
+  const rememberMe = localStorage.getItem('rememberMe');
+  if (rememberMe == 'true' && currentPath != '/login' && (sessionStorage.getItem('accessToken') || (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('calledOnce')))) {
+    
+    sessionStorage.setItem('calledOnce', 'true')
+    const loginAccessDate: any = localStorage.getItem('loginAccessDate');
+    const savedDate: any = new Date(loginAccessDate);
+    const currentDate: any = new Date();
+    const diffInSeconds: number = Math.floor((currentDate.getTime() - savedDate.getTime()) / 1000);
+    console.log(diffInSeconds, 'diffInSeconds');
+    const expiresIn: any = localStorage.getItem('expiresIn');
+    if (diffInSeconds > expiresIn) {
+      tokenRefresh()
+        .then((data: any) => {  
+          if (sessionStorage.getItem('accessToken') == undefined || sessionStorage.getItem('accessToken') == null) {
+            navigate("/dashboard");
+          }
+          sessionStorage.setItem('accessToken', data.access_token)
+          localStorage.setItem('refreshToken', data.refresh_token)
+          openApi.OpenAPI.TOKEN = data.access_token;
+          localStorage.setItem('loginAccessDate', Date())
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    }
+  }
+
   const toggleItems = [
     {
       label: "Light",
@@ -185,11 +238,33 @@ useEffect(()=> {
   };
 
   useEffect(() => {
-    configurationService(currentLanguage).then( (res: any) => {
-      if(res.currentUser.id){
-        localStorage.setItem('userId',res.currentUser.id);
-      }
-      const tempdata = res.localization?.languages?.map((item: any) => {
+    configurationService(currentLanguage).then(async (res: any) => {
+      await localizationService(currentLanguage).then(
+        async (resp: any) => {
+          let data1 = {};
+          let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1) => {
+                let k2 = k1.replace(/[^\w\s]/gi, '_');
+                let value1 = translation[key].texts[k1]
+                data2 = { ...data2, [k2]: value1 }
+              })
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+             );
+            i18n.changeLanguage(currentLanguage);
+          }
+        }
+      );
+
+      const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -301,15 +376,24 @@ useEffect(()=> {
   },[])
 
   function hello(res: any) {
-      localStorage.setItem("auth", JSON.stringify(true));
-      const lang =localStorage.getItem("currentLang")||"en-GB"
-      navigate('/dashboard')
-      configurationService(lang).then(async (res: any) => {
-        if(res.currentUser.id){
-          localStorage.setItem('userId',res.currentUser.id);
+    localStorage.setItem("auth", JSON.stringify(true));
+    const lang = localStorage.getItem("currentLang") || "en-GB"
+    navigate('/dashboard')
+    configurationService(lang).then(async (res: any) => {
+
+      await localizationService(lang).then(async (resp: any) => {
+
+        i18n.changeLanguage(lang);
+        var data1 = {};
+        const translation = resp?.resources;
+        if (translation) {
+          Object.keys(translation).forEach((key) => {
+            data1 = { ...data1, ...translation[key].texts };
+          });
+          i18n.addResourceBundle(lang, "translation", data1, false, true);
         }
-        const lang =localStorage.getItem("currentLang")||"en-GB"
       });
+    });
   }
 
   useEffect(()=>{
@@ -328,6 +412,10 @@ useEffect(()=> {
         if(res){
           sessionStorage.setItem('accessToken',res)
           await hello(res)
+          sessionStorage.setItem('accessToken', res.access_token)
+          localStorage.setItem('refreshToken', res.refresh_token)
+          localStorage.setItem('expiresIn', res.expires_in)
+          localStorage.setItem('loginAccessDate', Date());
         }
       });
       dispatch(callLoginAction(null) as any);
