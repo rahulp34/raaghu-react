@@ -20,7 +20,7 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
   let preventEscapeKey = `${props.hasOwnProperty('preventEscapeKey') ? props.preventEscapeKey : true}`
   let Backdrop = `${props.hasOwnProperty('backDrop') ? props.backDrop : true}`
 
-  let align = ` offcanvas offcanvas-${props.placement} ${props.placement == "start" || props.placement == "end"
+  let align = ` offcanvas p-0 offcanvas-${props.placement} ${props.placement == "start" || props.placement == "end"
       ? " offCanvas_Class"
       : " offCanvasClass"
     }`;
