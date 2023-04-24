@@ -219,21 +219,23 @@ const Users = () => {
           isActive :(
             <>
               {item.isActive == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -242,21 +244,23 @@ const Users = () => {
           lockoutEnabled :(
             <>
               {item.lockoutEnabled == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -928,7 +932,7 @@ const Users = () => {
                 onChange={(e)=>{setPasswordData(e)}}
               ></RdsInput>
                 </div>
-                <div className="col-md-6" style={{marginTop:'29px'}}>
+                <div className="col-md-6 align-items-center mt-2 d-flex">
                 <RdsButton
 
             class=""

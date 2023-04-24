@@ -27,9 +27,9 @@ export interface RdsCompTopNavigationProps {
   languageLable: string;
   languageIcon: string;
   breacrumItem?: any;
+  profilePic?:any
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
 }
-
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [LinkAccount, setLinkAccount] = useState(false);
   const [elementPath, setElementPath] = useState("/elements");
@@ -102,6 +102,14 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   }, [elementPath]);
 
   const handlerLinkElements = () => {};
+  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg");
+  useEffect(()=>{
+    if(props.profilePic){
+      setProfilePic(props.profilePic)
+    }
+
+  },[props.profilePic])
+
   return (
     <div>
       <nav
@@ -199,9 +207,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                 className="d-flex align-items-center"
                 style={{ cursor: "pointer" }}
               >
-                <img
-                  className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
-                  src="./assets/profile-picture-circle.svg"
+                <img className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
+                  src={profilePic}
                 ></img>
                 <div className="ms-2 fw-bold fs-6">
                   <div className="text-nowrap">{props.profileTitle}</div>
@@ -227,7 +234,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           >
             <RdsCompProfile
               navtabItems={navtabItems}
-              profilePic={""}
+
+              profilePic={profilePic}
               userName={"Host Admin"}
               userRole={"admin"}
               onLogout={props.onLogout}

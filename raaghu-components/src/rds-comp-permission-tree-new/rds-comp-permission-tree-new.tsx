@@ -6,7 +6,7 @@ function TreeNode(props:any) {
   const hasChildren = props.node.children && props.node.children.length > 0;
        const[checked, SetChecked] = useState(props.node.selected)
   return (
-    <div className="mx-3 mt-1">
+    <div className="mt-1">
       <div className="my-3">
         <RdsCheckbox
           label ={props.node.label}
@@ -18,7 +18,7 @@ function TreeNode(props:any) {
       </div>
      
       {hasChildren && (
-        <div style={{ marginLeft: "20px" }}>
+        <div className="mx-4">
           {props.node.children.map((child:any) => (
             <TreeNode
               key={child.data?.id}
