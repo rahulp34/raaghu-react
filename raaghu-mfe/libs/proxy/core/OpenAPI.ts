@@ -31,14 +31,14 @@ const getToken: Resolver<string> = () => {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-  BASE:
-  process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net",
-  VERSION: "1",
-  WITH_CREDENTIALS: false,
-  CREDENTIALS: "include",
-  TOKEN: getToken,
-  USERNAME: undefined,
-  PASSWORD: undefined,
-  HEADERS: undefined,
-  ENCODE_PATH: undefined,
+    BASE: sessionStorage.getItem("REACT_APP_API_URL") || '<API_URL>',
+    VERSION: '1',
+    WITH_CREDENTIALS: false,
+    CREDENTIALS: 'include',
+    TOKEN: getToken,
+    USERNAME: undefined,
+    PASSWORD: undefined,
+    HEADERS: undefined,
+    ENCODE_PATH: undefined,
+
 };
