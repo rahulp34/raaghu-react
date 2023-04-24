@@ -8,7 +8,7 @@ import {
   localizationService,
   sessionService,
   clearToken,
-} from "../../../../raaghu-react-core/src";
+} from "raaghu-react-core";
 import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
@@ -19,7 +19,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction, getProfilePictureHost,  } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, getProfilePictureHost  } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
