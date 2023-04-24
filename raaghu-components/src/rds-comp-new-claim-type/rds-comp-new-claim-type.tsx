@@ -62,7 +62,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               value={data.regex}
               placeholder="enter regex"
               name="regex"
-              required={true}
+              required={false}
               onChange={onRegexChangeHandler}
             />
       </div>
@@ -82,7 +82,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             value={data.regexDescription}
             placeholder="enter regex description"
             name="regexDesc"
-            required={true}
+            required={false}
             onChange={onRegexDescChangeHandler}
           />
       </div>
@@ -119,7 +119,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             type={"button"}
             size="small"
             databsdismiss="offcanvas"
-            isDisabled={allFieldsAreEmpty}
+            isDisabled={!data.name}
             colorVariant="primary"
             class="me-2"
             onClick={() => {

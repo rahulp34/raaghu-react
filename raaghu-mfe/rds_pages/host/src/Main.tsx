@@ -510,7 +510,7 @@ useEffect(()=> {
     else if (a.length) {
       setBreadCrumItem(a[0].reverse());
     }
-  }, [menus.MainMenu])
+  }, [])
 
   let logo = "./assets/raaghu_logs.png";
   return (

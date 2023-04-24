@@ -27,7 +27,26 @@ const RdsCompTenantInformation = (props: any) => {
   const [editionList, setEditionList] = useState<any>([]);
   const [tenantInformationData, setTenantInformationData] = useState<any>(props.tenantInformationData1);
   const [databaseUrl , setDatabaseUrl]= useState("");
+  const isEmailValid = (email: any) => {
+    if (!email || email.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isPasswordValid = (password: any) => {
+    if (!password || password.length === 0) {
+      return false;
+    }
+    return true;
+  };
 
+  const isNameValid = (name: any) => {
+    if (!name || name.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isFormValid = isPasswordValid(tenantInformationData.adminPassword) && isEmailValid(tenantInformationData.adminEmailAddress) && isNameValid(tenantInformationData.name);
   useEffect(() => {
     
     setTenantInformationData(props.tenantInformationData1)
@@ -201,6 +220,7 @@ const RdsCompTenantInformation = (props: any) => {
               class="me-2"
               label="Save"
               size="small"
+              isDisabled={!isFormValid}
               colorVariant="primary"
               tooltipTitle={""}
               type={"submit"}
