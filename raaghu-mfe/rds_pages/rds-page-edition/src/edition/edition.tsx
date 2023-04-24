@@ -237,7 +237,7 @@ const Edition = (props: RdsPageEditionProps) => {
   const [showNextEdtiTab, setShowNextEditTab] = useState(false);
 
   return (
-    <div className="container-fluid p-0 m-0">
+    <div className="container-fluid p-0 m-0 h-100">
       <div className="row">
         <div className="col-lg-8 col-md-8">
           {alert.showAlert && alertOne && (
@@ -318,7 +318,7 @@ const Edition = (props: RdsPageEditionProps) => {
           </RdsOffcanvas>
         </div>
       </div>
-      <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch mt-3">
+      <div className="card p-3 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
         <RdsCompDatatable
          actionPosition="right"
           tableHeaders={tableHeaders}

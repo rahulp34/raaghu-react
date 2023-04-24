@@ -11,9 +11,9 @@ export interface RdsCompSideNavigationProps{
 const RdsCompSideNavigation = (props:RdsCompSideNavigationProps) => {
 	const { t } = useTranslation();
 
-  // const toggleTheme =(e: any)=>{
-  //   console.log("Button Clicked", e.target.checked)
-  // }
+   const toggleTheme =(e: any)=>{
+     console.log("Button Clicked", e.target.checked)
+   }
 
   return <RdsSideNav sideNavItems={props.sideNavItems} onClick={props.onClick} toggleTheme={props.toggleTheme} collapse={false}></RdsSideNav>;
 };
