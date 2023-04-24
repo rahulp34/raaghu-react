@@ -287,7 +287,7 @@ const Applications = () => {
                   ></RdsButton>
                 </div>
               }
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
               offId="application"
@@ -313,7 +313,7 @@ const Applications = () => {
                 onclick={offCanvasHandler}
                 placement="end"
                 
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
                 offId="application-edit-off"

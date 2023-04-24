@@ -290,7 +290,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsCheckbox>
 						</div>
 					)}
-					<div className="footer-buttons justify-content-end d-flex bottom-0 pt-0" >
+					<div className="footer-buttons justify-content-start d-flex bottom-0 pt-0" >
 						<RdsButton
 							class="me-2"
 							type={"button"}
