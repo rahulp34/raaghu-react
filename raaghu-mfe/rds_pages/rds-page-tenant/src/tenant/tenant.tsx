@@ -443,6 +443,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                     featuresData={featuresData}
                     onFeatureSelection={onFeatureSelection}
                   />
+                  <div className="footer-buttons">
                   <RdsButton
                     class="me-2"
                     tooltipTitle={""}
@@ -473,6 +474,8 @@ const Tenant = (props: RdsPageTenantProps) => {
                     databsdismiss="offcanvas"
                     onClick={() => saveTenant(emittedDataTenantData)}
                   ></RdsButton>
+                  </div>
+                
                 </div>
               )}
             </RdsOffcanvas>
