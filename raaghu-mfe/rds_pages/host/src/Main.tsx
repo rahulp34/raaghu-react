@@ -239,31 +239,6 @@ useEffect(()=> {
 
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
-      await localizationService(currentLanguage).then(
-        async (resp: any) => {
-          let data1 = {};
-          let data2 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              Object.keys(translation[key].texts).forEach((k1) => {
-                let k2 = k1.replace(/[^\w\s]/gi, '_');
-                let value1 = translation[key].texts[k1]
-                data2 = { ...data2, [k2]: value1 }
-              })
-            });
-            i18n.addResourceBundle(
-              currentLanguage,
-              "translation",
-              data2,
-              false,
-              true
-             );
-            i18n.changeLanguage(currentLanguage);
-          }
-        }
-      );
-
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -275,6 +250,7 @@ useEffect(()=> {
       });
       setLanguageData(tempdata);
     });
+
     localizationService(currentLanguage).then(
        (resp: any) => {
         let data2 = {};
@@ -352,10 +328,24 @@ useEffect(()=> {
     let a = recursiveFunction(concatenated, pageName)
     a = a.filter((res: any) => res ? true : false);
     if (a[0].id) {
+      a = a.map((res:any)=>{
+        return {
+          id:res.id,
+          label:t(res.label),
+          icon:''
+        }
+      })
       setBreadCrumItem(a);
     }
     else {
       a = a[0].reverse();
+      a = a.map((res:any)=>{
+        return {
+          id:res.id,
+          label:t(res.label),
+          icon:''
+        }
+      })
       setBreadCrumItem(a);
     }
   };
@@ -426,10 +416,11 @@ useEffect(()=> {
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
-      sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
+      sessionService(openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
         if(res){
           sessionStorage.setItem('accessToken',res)
           await hello(res)
+          debugger
           sessionStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('refreshToken', res.refresh_token)
           localStorage.setItem('expiresIn', res.expires_in)
@@ -505,9 +496,23 @@ useEffect(()=> {
     let a = recursiveFunction1(concatenated, currentPath)
     a = a.filter((res: any) => res ? true : false)
     if (a.length && a[0].id) {
+      a = a.map((res:any)=>{
+        return {
+          id:res.id,
+          label:t(res.label),
+          icon:''
+        }
+      })
       setBreadCrumItem(a);
     }
     else if (a.length) {
+      a = a.map((res:any)=>{
+        return {
+          id:res.id,
+          label:t(res.label),
+          icon:''
+        }
+      })
       setBreadCrumItem(a[0].reverse());
     }
   }, [])
