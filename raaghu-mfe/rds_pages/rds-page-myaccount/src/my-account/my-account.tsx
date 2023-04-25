@@ -78,7 +78,7 @@ import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile
   }
     useEffect(() => {
         let id = localStorage.getItem('userId')
-        debugger
+        
         dispatch(fetchMyProfile() as any);
         dispatch(getProfilePicture(id) as any);
 

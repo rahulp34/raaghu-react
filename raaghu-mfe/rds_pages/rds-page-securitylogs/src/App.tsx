@@ -119,7 +119,7 @@ const SecurityLogsPage = () => {
   const dispatch = useAppDispatch();
 
   const securityLogs = () => {
-    debugger
+    
     const securityLogsParamsData = {
       action: selectFilterValue.action,
       identity: selectFilterValue.identity,
@@ -203,7 +203,7 @@ const SecurityLogsPage = () => {
   //   props.getPollsQuestion({ ...QuestionData, startDate:date1  })
   // }
   function onDatePicker  (startEndDate:any) {
-    debugger
+    
     const [start, end] = startEndDate;
     setSelectFilterValue({
       ...selectFilterValue,

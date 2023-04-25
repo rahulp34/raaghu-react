@@ -239,6 +239,9 @@ useEffect(()=> {
 
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
+      if(res.currentUser.id){
+        localStorage.setItem('userId', res.currentUser.id)
+      }
       const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
@@ -354,25 +357,48 @@ useEffect(()=> {
     const lang =localStorage.getItem("currentLang")||"en-GB";
     localizationService(lang).then((resp: any) => {
       let data2 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              Object.keys(translation[key].texts).forEach((k1)=>{
-                let k2 = k1.replace(/[^\w\s]/gi,'_');
-                let value1 = translation[key].texts[k1]
-                data2 = {...data2,[k2]:value1}
-              })              
-            });
-            i18n.addResourceBundle(
-              currentLanguage,
-              "translation",
-              data2,
-              false,
-              true
-            );
-            i18n.changeLanguage(currentLanguage);
-          }
-        })
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          Object.keys(translation[key].texts).forEach((k1)=>{
+            let k2 = k1.replace(/[^\w\s]/gi,'_');
+            let value1 = translation[key].texts[k1]
+            data2 = {...data2,[k2]:value1}
+          })              
+        });
+        i18n.addResourceBundle(
+          currentLanguage,
+          "translation",
+          data2,
+          false,
+          true
+        );
+        i18n.changeLanguage(currentLanguage);
+        let breadcrumData = recursiveFunction1(concatenated, currentPath)
+        breadcrumData = breadcrumData.filter((res: any) => res ? true : false)
+        if (breadcrumData.length && breadcrumData[0].id) {
+          breadcrumData = breadcrumData.map((res:any)=>{
+            return {
+              id:res.id,
+              label:t(res.label),
+              icon:''
+            }
+          })
+          setBreadCrumItem(breadcrumData);
+        }
+        else if (breadcrumData.length) {
+          breadcrumData = breadcrumData[0].reverse();
+          breadcrumData = breadcrumData.map((res:any)=>{
+            return {
+              id:res.id,
+              label:t(res.label),
+              icon:''
+            }
+          })
+          setBreadCrumItem(breadcrumData);
+        }
+      }
+    })
   },[])
 
   function hello(res: any) {
@@ -380,6 +406,9 @@ useEffect(()=> {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
+        if(res.currentUser.id){
+          localStorage.setItem('userId', res.currentUser.id)
+        }
       });
       localizationService(currentLanguage).then((resp: any) => {
           let data2 = {};
@@ -405,11 +434,11 @@ useEffect(()=> {
   }
 
   useEffect(()=>{
-    
     configurationService(currentLanguage).then(async (res: any) => {
       if(res.currentUser.id){
         localStorage.setItem('userId', res.currentUser.id)
-      }    });
+      }
+    });
 
   },[])
 
@@ -420,7 +449,7 @@ useEffect(()=> {
         if(res){
           sessionStorage.setItem('accessToken',res)
           await hello(res)
-          debugger
+          
           sessionStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('refreshToken', res.refresh_token)
           localStorage.setItem('expiresIn', res.expires_in)
@@ -492,30 +521,6 @@ useEffect(()=> {
     //store.accessToken = null;
     navigate("/login");
   };
-  useEffect(() => {
-    let a = recursiveFunction1(concatenated, currentPath)
-    a = a.filter((res: any) => res ? true : false)
-    if (a.length && a[0].id) {
-      a = a.map((res:any)=>{
-        return {
-          id:res.id,
-          label:t(res.label),
-          icon:''
-        }
-      })
-      setBreadCrumItem(a);
-    }
-    else if (a.length) {
-      a = a.map((res:any)=>{
-        return {
-          id:res.id,
-          label:t(res.label),
-          icon:''
-        }
-      })
-      setBreadCrumItem(a[0].reverse());
-    }
-  }, [])
 
   let logo = "./assets/raaghu_logs.png";
   return (
