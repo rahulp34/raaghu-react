@@ -181,7 +181,9 @@ const Edition = (props: RdsPageEditionProps) => {
   };
 
   const addDataHandler = () => {
-    dispatch(addEditionData(dTo) as any).then((res: any) => {
+    debugger
+    let requestBody = dTo
+    dispatch(addEditionData({requestBody}) as any).then((res: any) => {
       dispatch(fetchEditionData() as any);
     });
     setValue("");
@@ -271,7 +273,7 @@ const Edition = (props: RdsPageEditionProps) => {
                 />
               </div>
             }
-            backDrop={false}
+            backDrop={true}
             scrolling={false}
             preventEscapeKey={false}
             offId={"Edition"}
@@ -339,7 +341,7 @@ const Edition = (props: RdsPageEditionProps) => {
           onclick={offCanvasHandler}
           placement="end"
           offId="edition-new-off"
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
           className="overflow-hidden"

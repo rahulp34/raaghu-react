@@ -33,14 +33,12 @@ const BlogPost = () => {
 			datatype: "text",
 			sortable: true,
 		},
-
 		{
 			displayName: t("Slug"),
 			key: "slug",
 			datatype: "text",
 			sortable: true,
 		},
-
 		{
 			displayName: t("Creation Time"),
 			key: "creationTime",
@@ -196,12 +194,49 @@ const postSubmitHandler = (data: any)=>{
                 offId="blog-post-add-off"
               >
                 <div className="mt-3">
-                  <RdsCompBlogPostNew 
+                  <RdsCompBlogPostNew  
+				  isEdit={false}
 				  blogPostData={blogPostData}
 				   onSubmit={postSubmitHandler}
 				  />
                 </div>
               </RdsOffcanvas>
+
+			  <RdsOffcanvas
+          canvasTitle="Edit"
+          placement="end"
+          offId="blogsPost-edit-off"
+          offcanvaswidth={650}
+          backDrop={false}
+          scrolling={false}
+          preventEscapeKey={false}
+        >
+          <RdsCompBlogPostNew isEdit={true}
+
+				  blogPostData={blogPostData}
+				   onSubmit={postSubmitHandler}
+				  />
+
+          <div className="footer-buttons justify-content-end bottom-0 pt-0">
+            <RdsButton
+              class="me-2"
+              label="CANCEL"
+              type="button"
+              databsdismiss="offcanvas"
+              isOutline={true}
+              colorVariant="primary"
+            ></RdsButton>
+            <RdsButton
+              class="me-2"
+              label="SAVE"
+              type="button"
+              isOutline={false}
+              colorVariant="primary"
+              databsdismiss="offcanvas"
+            
+            ></RdsButton>
+          </div>
+        </RdsOffcanvas>
             </div>
 				</div>
 

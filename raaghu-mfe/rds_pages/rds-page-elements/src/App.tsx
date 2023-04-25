@@ -4,7 +4,7 @@ import Elements from './elements/elements';
 
 const App = () => {
   const { type } = useParams();
-  console.log(type)
+  console.log("useParams type", type)
   return (
     <Suspense>
       <Elements type={type}></Elements>

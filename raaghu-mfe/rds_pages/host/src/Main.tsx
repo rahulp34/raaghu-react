@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import * as openApi from '../../../libs/proxy/core/OpenAPI';
 import "./App.scss";
 import {
   configurationService,
@@ -18,7 +19,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction, } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, getProfilePictureHost  } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -66,6 +67,8 @@ import {
   GlobalResourcesCompo,
   NewslettersCompo,
 } from "./PageComponent";
+import openidConfig from "./openid.config";
+'../ApiRequestOptions';
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -80,7 +83,42 @@ const Main = (props: MainProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
+  const dataHostPic = useAppSelector((state) => state.persistedReducer.host.profilepic);
+
+  function createImageFromBase64(base64String: string): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = `data:image/png;base64,${base64String}`;
+      img.addEventListener('load', () => {
+        resolve(img);
+      });
+      img.addEventListener('error', (err) => {
+        reject(err);
+      });
+    });
+  }
+  
+
+useEffect(()=> {
+  if(dataHostPic){
+    createImageFromBase64(dataHostPic.fileContent).then((image) => {
+      setProfilePic(image.src)
+    })
+    
+  }
+},[dataHostPic])
+  
+  let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
+
   let currentPath = window.location.pathname;
+  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg")
+  useEffect(() => {
+    let id = localStorage.getItem('userId')
+   
+    dispatch(getProfilePictureHost(id) as any);
+
+},[dispatch]);
+
 
   useEffect(() => {
     sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
@@ -93,7 +131,57 @@ const Main = (props: MainProps) => {
     } else {
       navigate("/login");
     }
-  }, [localStorage.getItem("auth")]);
+  },[])
+  
+  async function tokenRefresh() {
+    const url = 'https://raaghu-react.azurewebsites.net/connect/token';
+    const params = new URLSearchParams();
+    params.append('grant_type', 'refresh_token');
+    params.append('client_id', 'raaghu');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      params.append('refresh_token', refreshToken);
+    }
+    let token = sessionStorage.getItem('accessToken');
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${token}`
+      },
+      body: params,
+    });
+    const data = await response.json();
+    return data;
+  }
+//Remember me
+  const rememberMe = localStorage.getItem('rememberMe');
+  if (rememberMe == 'true' && currentPath != '/login' && (sessionStorage.getItem('accessToken') || (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('calledOnce')))) {
+    
+    sessionStorage.setItem('calledOnce', 'true')
+    const loginAccessDate: any = localStorage.getItem('loginAccessDate');
+    const savedDate: any = new Date(loginAccessDate);
+    const currentDate: any = new Date();
+    const diffInSeconds: number = Math.floor((currentDate.getTime() - savedDate.getTime()) / 1000);
+    console.log(diffInSeconds, 'diffInSeconds');
+    const expiresIn: any = localStorage.getItem('expiresIn');
+    if (diffInSeconds > expiresIn) {
+      tokenRefresh()
+        .then((data: any) => {  
+          if (sessionStorage.getItem('accessToken') == undefined || sessionStorage.getItem('accessToken') == null) {
+            navigate("/dashboard");
+          }
+          sessionStorage.setItem('accessToken', data.access_token)
+          localStorage.setItem('refreshToken', data.refresh_token)
+          openApi.OpenAPI.TOKEN = data.access_token;
+          localStorage.setItem('loginAccessDate', Date())
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    }
+  }
+
   const toggleItems = [
     {
       label: "Light",
@@ -150,8 +238,33 @@ const Main = (props: MainProps) => {
   };
 
   useEffect(() => {
-    configurationService(currentLanguage).then( (res: any) => {
-      const tempdata = res.localization?.languages?.map((item: any) => {
+    configurationService(currentLanguage).then(async (res: any) => {
+      await localizationService(currentLanguage).then(
+        async (resp: any) => {
+          let data1 = {};
+          let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1) => {
+                let k2 = k1.replace(/[^\w\s]/gi, '_');
+                let value1 = translation[key].texts[k1]
+                data2 = { ...data2, [k2]: value1 }
+              })
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+             );
+            i18n.changeLanguage(currentLanguage);
+          }
+        }
+      );
+
+      const tempdata = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -250,16 +363,26 @@ const Main = (props: MainProps) => {
   useEffect(()=>{
     const lang =localStorage.getItem("currentLang")||"en-GB";
     localizationService(lang).then((resp: any) => {
-      i18n.changeLanguage(lang);
-      var data1 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          data1 = { ...data1, ...translation[key].texts };
-        });
-        i18n.addResourceBundle(lang, "translation", data1, false, true);
-      }
-    });
+      let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
   },[])
 
   function hello(res: any) {
@@ -267,9 +390,38 @@ const Main = (props: MainProps) => {
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
       configurationService(lang).then(async (res: any) => {
-        const lang =localStorage.getItem("currentLang")||"en-GB"
       });
+      localizationService(currentLanguage).then((resp: any) => {
+          let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
   }
+
+  useEffect(()=>{
+    
+    configurationService(currentLanguage).then(async (res: any) => {
+      if(res.currentUser.id){
+        localStorage.setItem('userId', res.currentUser.id)
+      }    });
+
+  },[])
 
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
@@ -278,6 +430,10 @@ const Main = (props: MainProps) => {
         if(res){
           sessionStorage.setItem('accessToken',res)
           await hello(res)
+          sessionStorage.setItem('accessToken', res.access_token)
+          localStorage.setItem('refreshToken', res.refresh_token)
+          localStorage.setItem('expiresIn', res.expires_in)
+          localStorage.setItem('loginAccessDate', Date());
         }
       });
       dispatch(callLoginAction(null) as any);
@@ -354,7 +510,7 @@ const Main = (props: MainProps) => {
     else if (a.length) {
       setBreadCrumItem(a[0].reverse());
     }
-  }, [menus.MainMenu])
+  }, [])
 
   let logo = "./assets/raaghu_logs.png";
   return (
@@ -381,7 +537,7 @@ const Main = (props: MainProps) => {
         d-flex
         flex-column-fluid
         align-items-stretch
-        container-fluid
+        container-fluid 
         px-0"
             >
               <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
@@ -407,18 +563,13 @@ const Main = (props: MainProps) => {
                 >
                       <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
-                // languageLable={
-                //   storeData.languages?.currentCulture?.displayName ||
-                //   "English (United Kingdom)"
-                // }
+               languageLable ="English"
+                profilePic={profilePic}
                 breacrumItem={breacrumItem}
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
                 componentsList={componentsList}
-                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -543,7 +694,7 @@ const Main = (props: MainProps) => {
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
-                      <Route path="/components" element={<ComponentsCompo />} />
+                      <Route path="/components/:type" element={<ComponentsCompo />} />
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                       <Route path="/pages" element={<PagesCompo />} />

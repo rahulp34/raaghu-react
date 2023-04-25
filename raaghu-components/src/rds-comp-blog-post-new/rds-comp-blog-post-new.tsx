@@ -8,10 +8,12 @@ export interface RdsCompBlogPostNewProps {
    title?: string;
    blog?: string;
    slug?: string;
+   concurrentMode?:string
    description?: string;
    tag?: string;
    blogPostData ?: any;
    onSubmit:any;
+   isEdit:boolean;
 
 }
 
@@ -43,7 +45,9 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
    const onSlugChangedHandler = (value : any) => {
       setData({ ...postData, slug: value });
    };
-
+  const ConcurrencyStampupdate=(value:any)=>{
+   setData({...postData,concurrentMode:value})
+  }
    const onDecChangedHandler = (value : any)=> {
       setData({ ...postData, description: value})
    };
@@ -66,7 +70,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
    function profileImage(data: any) {
       
    }
-
+  
    return (
       <>
          <div className="row align-items-center">
@@ -128,6 +132,17 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      onChange={(e:any)=>onSlugChangedHandler(e.target.value)}
                   ></RdsInput>
                </div>
+               {props.isEdit && <div className="form-group px-2">
+                  <RdsInput
+                     inputType="text"
+                     required={true}
+                     label={"ConcurrencyStamp"}
+                     name="concurrentMode"
+                     value={postData.concurrentMode}
+                     placeholder=""
+                     onChange={(e:any)=>ConcurrencyStampupdate(e.target.value)}
+                  ></RdsInput>
+               </div>}
                <div className="form-group px-2">
                   <RdsTextArea
                      label="Short description"
