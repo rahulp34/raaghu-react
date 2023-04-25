@@ -1012,13 +1012,13 @@ const RdsCompAdminDashboard = () => {
 									]}
 								></RdsTable>
 							</div>
-							<RdsPagination
+							{/* <RdsPagination
 								totalRecords={10}
 								size="sm"
 								alignmentType="end"
 								recordsPerPage={10}
 								paginationType="advance"
-							></RdsPagination>
+							></RdsPagination> */}
 						</RdsWidget>
 					</div>
 				</div>
