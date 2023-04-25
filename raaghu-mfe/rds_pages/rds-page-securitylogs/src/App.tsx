@@ -250,7 +250,7 @@ const SecurityLogsPage = () => {
           <div className="card">
             <div className="card-body">
               <div className="row">
-                <div className="col-3" style={{marginTop:'-3px'}}>
+                <div className="col-3">
                   <RdsDatePicker
                     DatePickerLabel="Select Date"  
                     onDatePicker={(s:any)=>onDatePicker(s)}

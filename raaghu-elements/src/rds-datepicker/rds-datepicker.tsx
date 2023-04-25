@@ -6,12 +6,12 @@ import RdsIcon from "../rds-icon";
 import "./rds-datepicker.scss";
 
 export interface RdsDatepickerProps {
-  selectedDate?:any
-  dateForEdit?:any
+  selectedDate?: any
+  dateForEdit?: any
   DatePickerLabel?: string;
   onDatePicker: (start: any, end?: any) => void;
   type?: "default" | "advanced";
-  customDate?:any;
+  customDate?: any;
 }
 const RdsDatepicker = (props: RdsDatepickerProps) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -24,12 +24,12 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     setEndDate(end);
     setDropdownDisplayValue(
       start.toDateString().slice(4) +
-        " - " +
-        (end != null ? end.toDateString().slice(4) : "")
+      " - " +
+      (end != null ? end.toDateString().slice(4) : "")
     );
 
   };
-  
+
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <li
       className="example-custom-input dropdown-item d-flex justify-content-between bg-opacity-10 bg-primary"
@@ -95,17 +95,17 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     );
   };
 
-  useEffect(()=>{
-    if(props.dateForEdit){
-    setStartDate(props.dateForEdit)
-  }  
-  },[props.dateForEdit])  
+  useEffect(() => {
+    if (props.dateForEdit) {
+      setStartDate(props.dateForEdit)
+    }
+  }, [props.dateForEdit])
 
   return (
     <div>
       {props.type !== "advanced" && (
         <>
-     {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
+          {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
           <div className="input-group input-group-datePicker mb-3">
             <DatePicker
               selected={startDate}
@@ -138,21 +138,21 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       )}
       {props.type === "advanced" && (
         <>
-         {props.DatePickerLabel && <div className="mb-2">{props.DatePickerLabel}</div>}
-          <div className="dropdown border" style={{borderRadius:'5px'}}>
+          {props.DatePickerLabel && <div className="mb-2">{props.DatePickerLabel}</div>}
+          <div className="dropdown border rounded justify-content-between text-start d-block">
             <button
-              className="btn dropdown-toggle border"
+              className="bg-transparent border-0 d-flex dropdown-toggle py-1 ps-2 w-100 justify-content-between"
               type="button"
               id="abcd"
               data-bs-toggle="dropdown"
               data-bs-auto-close="outside"
               aria-expanded="false"
-              style={{width:'275px'}}
             >
               {/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-calendar3" viewBox="0 0 16 16">
                                 <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                             </svg> */}
+              <span>
               <RdsIcon
                 name="calendar"
                 width="20px"
@@ -162,8 +162,9 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
               ></RdsIcon>
               {/* (StartDate:any,EndDate:any)=>props.DatePicker */}
               <span className="ps-3 pe-1 ">{dropdownDisplayValue}</span>
+              </span>
             </button>
-            <ul className="dropdown-menu" style={{overflow:'visible'}}>
+            <ul className="dropdown-menu overflow-visible">
               <li className="daterange__dropdown-item dropdown-item px-2 pb-2 border-bottom">
                 {" "}
                 <strong>
@@ -171,7 +172,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                 </strong>{" "}
                 <small className="px-1 py-0 ">{dropdownDisplayValue}</small>
               </li>
-              
+
               <li
                 className="daterange__dropdown-item dropdown-item"
                 onClick={todayClickHandler}
@@ -192,26 +193,26 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
               </li>
               <li
                 className="daterange__dropdown-item dropdown-item"
-                onClick={lastFourteenDaysClickHandler} 
+                onClick={lastFourteenDaysClickHandler}
               >
                 Last 14 days
               </li>
               <DatePicker
-      selected={startDate}
-      onChange={onRangeChange}
-      startDate={startDate}
-      endDate={endDate}
-      selectsRange
-      popperPlacement="right"
-      customInput={<ExampleCustomInput />}
-    />
+                selected={startDate}
+                onChange={onRangeChange}
+                startDate={startDate}
+                endDate={endDate}
+                selectsRange
+                popperPlacement="right"
+                customInput={<ExampleCustomInput />}
+              />
             </ul>
           </div>
         </>
       )}
     </div>
   );
-}; 
+};
 export default RdsDatepicker;
 
 
