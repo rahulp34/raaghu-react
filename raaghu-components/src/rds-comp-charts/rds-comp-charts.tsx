@@ -2,9 +2,9 @@ import React, { Suspense, useEffect, useState } from "react";
 import { RdsLabel, RdsIcon } from "../rds-elements";
 import code_snippet from "./code_snippet";
 
-export interface RdsCompComponentsProps {}
+export interface RdsCompChartsProps {}
 
-const RdsCompComponents = (props: any) => {
+const RdsCompCharts = (props: any) => {
   const [codeSnippet, setCodeSnippet] = useState<any>({
     code:"",
     name:""
@@ -13,7 +13,7 @@ const RdsCompComponents = (props: any) => {
   const [show, setShow] = useState<boolean>(false);
 
   const ComponentElement = React.lazy(
-    () => import("./components/" + props.type + ".tsx")
+    () => import("./charts/" + props.type + ".tsx")
   );
 
   useEffect(() => {
@@ -96,4 +96,4 @@ const RdsCompComponents = (props: any) => {
   );
 };
 
-export default RdsCompComponents;
+export default RdsCompCharts;

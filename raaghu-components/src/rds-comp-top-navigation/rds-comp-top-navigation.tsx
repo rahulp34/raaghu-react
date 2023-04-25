@@ -7,6 +7,7 @@ import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/inde
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 import elementList from "./element-list";
 import componentList from "./components-list";
+import chartList from "./charts-list";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -32,13 +33,13 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
-  const [path, setPath] = useState({ elem: "/elements", compo: "/components" });
+  const [path, setPath] = useState({ elem: "/elements", compo: "/components", chart:"/charts" });
   const [navtitle, setNavtitle] = useState(props.navbarTitle);
   const [resetDrop, setResetDrop] = useState({
     elem: false,
     compo: false,
+    chart:false
   });
-  const [isElement, setIsElement] = useState(false);
   const navigate = useNavigate();
 
   const navtabItems = [
@@ -74,9 +75,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
   };
   const handlerElementChange = (e: any, val: string) => {
-    setResetDrop({ ...resetDrop, compo: !resetDrop.compo });
+    setResetDrop({ ...resetDrop, compo: !resetDrop.compo, chart:!resetDrop.chart });
     const paath = `/elements/${val}`;
-    console.log("Component Change ", val, paath);
     let elementBreadCrumb = [
       { id: "Element", label: "Element", icon: "" },
       { id: e.target.textContent, label: e.target.textContent, icon: "" },
@@ -86,9 +86,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     setPath({ ...path, elem: paath });
   };
   const handlerComponentChange = (e: any, val: string) => {
-    setResetDrop({ ...resetDrop, elem: !resetDrop.elem });
+    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, chart:!resetDrop.chart });
     const paath = `/components/${val}`;
-    console.log("Component Change ", val, paath);
     let compoBreadCrumb = [
       { id: "Component", label: "Component", icon: "" },
       { id: e.target.textContent, label: e.target.textContent, icon: "" },
@@ -98,6 +97,19 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     setBreadCrumItem(compoBreadCrumb);
     setPath({ ...path, compo: paath });
   };
+  const handlerChartChange = (e: any, val: string) => {
+    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, compo:!resetDrop.compo });
+    const paath = `/charts/${val}`;
+    let chartBreadCrumb = [
+      { id: "Chart", label: "Chart", icon: "" },
+      { id: e.target.textContent, label: e.target.textContent, icon: "" },
+    ];
+
+    setNavtitle("Chart");
+    setBreadCrumItem(chartBreadCrumb);
+    setPath({ ...path, chart: paath });
+  };
+
   useEffect(() => {
     setBreadCrumItem(props.breacrumItem);
   }, [props.breacrumItem]);
@@ -113,8 +125,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 
   useEffect(() => {
     setNavtitle(props.navbarTitle);
-    if ((navtitle != "Element" && navtitle != "Component" )|| props.navbarTitle != navtitle) {
-      setResetDrop({ ...resetDrop, elem: !resetDrop.elem ,compo: !resetDrop.compo });
+    if ((navtitle != "Element" && navtitle != "Component"&& navtitle!="Chart" )|| props.navbarTitle != navtitle) {
+      setResetDrop({ ...resetDrop, elem: !resetDrop.elem ,compo: !resetDrop.compo, chart:!resetDrop.chart });
     }
   }, [props.breacrumItem, props.navbarTitle]);
 
@@ -124,6 +136,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
     if (navtitle == "Element") {
       navigate(path.elem);
+    }
+    if (navtitle == "Chart") {
+      navigate(path.chart);
     }
   }, [path]);
   return (
@@ -147,6 +162,16 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
+        <RdsDropdownList
+            reset={resetDrop.chart}
+            placeholder="Charts"
+            icon=""
+            iconFill={false}
+            iconStroke={true}
+            id={"chartlDropdown"}
+            listItems={chartList}
+            onClick={handlerChartChange}
+          ></RdsDropdownList>
           <RdsDropdownList
             reset={resetDrop.compo}
             placeholder="Components"
@@ -168,6 +193,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             listItems={elementList}
             onClick={handlerElementChange}
           ></RdsDropdownList>
+
 
           <div className="px-2 position-relative me-3">
             <RdsDropdownList
