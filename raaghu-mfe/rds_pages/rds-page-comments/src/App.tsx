@@ -1,10 +1,12 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Comments from "./comments/comments";
 
-const App = () => (
-  <Suspense>
-    <Comments></Comments>
-  </Suspense>
-);
+const App = () => {
+	return (
+		<div>
+			<Comments></Comments>
+		</div>
+	);
+};
 
 export default App;

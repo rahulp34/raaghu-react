@@ -143,9 +143,9 @@ const Node = ({
                     name={node.icon}
                     fill={false}
                     stroke={true}
-                    height="20px"
-                    width="20px"
-                    classes="me-3"
+                    height="15px"
+                    width="15px"
+                    classes="me-2"
                     // isAnimate={false}
                   ></RdsIcon>
                 : null}
@@ -277,9 +277,9 @@ const Node = ({
                         name={node.icon}
                         fill={false}
                         stroke={true}
-                        height="20px"
-                        width="20px"
-                        classes="me-3"
+                        height="15px"
+                        width="15px"
+                        classes="me-2"
                         // isAnimate = {false}
                       ></RdsIcon>
                       <span className="text-capitalize">{t(node.label)}</span>

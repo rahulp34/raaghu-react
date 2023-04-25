@@ -98,7 +98,22 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 		event.preventDefault();
 	};
 
-	const isBasicApplicationdata = Object.values(basicApplicationData).every((value) => value === "");
+
+    const isClientIdValid = (id: any) => {
+		if (!id || id.length === 0) {
+		  return false;
+		}
+		return true;
+	  };
+	
+	  const isDisplayNameValid = (name: any) => {
+		if (!name || name.length === 0) {
+		  return false;
+		}
+		return true;
+	  };
+
+	  const isFormValid = isClientIdValid(basicApplicationData.clientId) && isDisplayNameValid(basicApplicationData.displayName)
 
 	return (
 		<>
@@ -139,7 +154,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => setClientUrl(e.target.value)}
 								value={basicApplicationData.clientUri}
 								name={"clientUrl"}
-								required={true}
+								required={false}
 							></RdsInput>
 						</div>
 						<div className="col-6 ">
@@ -150,7 +165,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => setLogoUrl(e.target.value)}
 								name={"logoUrl"}
 								value={basicApplicationData.logoUri}
-								required={true}
+								required={false}
 							></RdsInput>
 						</div>
 					</div>
@@ -310,7 +325,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							colorVariant="primary"
 							databsdismiss="offcanvas"
 							size="small"
-							isDisabled={isBasicApplicationdata}
+							isDisabled={!isFormValid}
 							onClick={() => { props.handleSubmit(basicApplicationData) }}
 						></RdsButton>
 					</div>

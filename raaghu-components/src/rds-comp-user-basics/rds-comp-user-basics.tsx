@@ -111,7 +111,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="text"
                 label="Surname"
                 name="surName"
-                required={true}
+                required={false}
                 onChange={(e)=>{setSurname(e)}}
               ></RdsInput>
             </div>
@@ -168,7 +168,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="text"
                 label="User Name"
                 name="userName"
-                required={true}
+                required={false}
                 onChange={(e)=>{setUserName(e)}}
               ></RdsInput>
             </div>
@@ -181,7 +181,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="number"
                 label="Phone Number"
                 name="phone"
-                required={true}
+                required={false}
                 onChange={(e)=>{setPhoneNumber(e)}}
               ></RdsInput>
             </div>

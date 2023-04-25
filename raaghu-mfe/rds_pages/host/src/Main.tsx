@@ -8,7 +8,7 @@ import {
   localizationService,
   sessionService,
   clearToken,
-} from "../../../../raaghu-react-core/src";
+} from "raaghu-react-core";
 import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
@@ -19,7 +19,7 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction, getProfilePictureHost,  } from "../../../libs/state-management/host/host-slice";
+import { callLoginAction, getProfilePictureHost  } from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -363,37 +363,55 @@ useEffect(()=> {
   useEffect(()=>{
     const lang =localStorage.getItem("currentLang")||"en-GB";
     localizationService(lang).then((resp: any) => {
-      i18n.changeLanguage(lang);
-      var data1 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          data1 = { ...data1, ...translation[key].texts };
-        });
-        i18n.addResourceBundle(lang, "translation", data1, false, true);
-      }
-    });
+      let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
   },[])
 
   function hello(res: any) {
-    localStorage.setItem("auth", JSON.stringify(true));
-    const lang = localStorage.getItem("currentLang") || "en-GB"
-    navigate('/dashboard')
-    configurationService(lang).then(async (res: any) => {
-
-      await localizationService(lang).then(async (resp: any) => {
-
-        i18n.changeLanguage(lang);
-        var data1 = {};
-        const translation = resp?.resources;
-        if (translation) {
-          Object.keys(translation).forEach((key) => {
-            data1 = { ...data1, ...translation[key].texts };
-          });
-          i18n.addResourceBundle(lang, "translation", data1, false, true);
-        }
+      localStorage.setItem("auth", JSON.stringify(true));
+      const lang =localStorage.getItem("currentLang")||"en-GB"
+      navigate('/dashboard')
+      configurationService(lang).then(async (res: any) => {
       });
-    });
+      localizationService(currentLanguage).then((resp: any) => {
+          let data2 = {};
+          const translation = resp?.resources;
+          if (translation) {
+            Object.keys(translation).forEach((key) => {
+              Object.keys(translation[key].texts).forEach((k1)=>{
+                let k2 = k1.replace(/[^\w\s]/gi,'_');
+                let value1 = translation[key].texts[k1]
+                data2 = {...data2,[k2]:value1}
+              })              
+            });
+            i18n.addResourceBundle(
+              currentLanguage,
+              "translation",
+              data2,
+              false,
+              true
+            );
+            i18n.changeLanguage(currentLanguage);
+          }
+        })
   }
 
   useEffect(()=>{
@@ -492,7 +510,7 @@ useEffect(()=> {
     else if (a.length) {
       setBreadCrumItem(a[0].reverse());
     }
-  }, [menus.MainMenu])
+  }, [])
 
   let logo = "./assets/raaghu_logs.png";
   return (
@@ -545,19 +563,13 @@ useEffect(()=> {
                 >
                       <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
+               languageLable ="English"
                 profilePic={profilePic}
-                // languageLable={
-                //   storeData.languages?.currentCulture?.displayName ||
-                //   "English (United Kingdom)"
-                // }
                 breacrumItem={breacrumItem}
                 languageIcon="gb"
                 languageItems={languageData}
                 toggleItems={toggleItems}
                 componentsList={componentsList}
-                // brandName="raaghu"
                 onClick={onClickHandler}
                 profileTitle="Host Admin"
                 profileName="admin"
@@ -682,7 +694,7 @@ useEffect(()=> {
                       <Route path="/personal-data" element={<PersonalDataCompo />} />
                       <Route path="/my-account" element={<MyAccountCompo />} />
                       <Route path="/menus" element={<MenusCompo />} />
-                      <Route path="/components" element={<ComponentsCompo />} />
+                      <Route path="/components/:type" element={<ComponentsCompo />} />
                       <Route path="/pages" element={<PagesCompo />} />
                       <Route path="/**/*" element={<RdsCompPageNotFound />} />
                       <Route path="/pages" element={<PagesCompo />} />
