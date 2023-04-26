@@ -3,6 +3,7 @@ import RdsIcon from "../rds-icon";
 import "./rds-side-nav-new.scss";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
+import RdsToggle from "../rds-toggle";
 
 const RdsSideNavChild = ({
   data,
@@ -53,7 +54,21 @@ const RdsSideNavChild = ({
             ></Node>
           ))}
       </ul>
-      {/* <span> */}
+      {/* <span> */
+      /*<div className="darkTheme text-center theme-toggle">
+      <a
+        className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
+      >
+         
+        <RdsToggle
+      small={collapse} 
+      iconOnUncheck={"sun"}
+      iconOnCheck={"moon"}
+      onClick={toggleTheme} checked={false}                ></RdsToggle>
+       
+      </a>
+    </div>*/
+      }
         <div
           className={`sidenav-footer text-center cursor-pointer rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
         >
@@ -73,20 +88,19 @@ const RdsSideNavChild = ({
               ></RdsIcon>
        </span>
             {/* </div> */}
-            {/* <div className="darkTheme text-center">
+            { /*<div className="darkTheme text-center">
               <a
                 className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
               >
                  
                 <RdsToggle
-                  small={collapse}
-                  iconOnUncheck={"sun"}
-                  iconOnCheck={"moon"}
-                  onClick={toggleTheme}
-                ></RdsToggle>
+              small={collapse} 
+              iconOnUncheck={"sun"}
+              iconOnCheck={"moon"}
+              onClick={toggleTheme} checked={false}                ></RdsToggle>
                
               </a>
-            </div> */}
+          </div>*/ }
           {/* </div> */}
         </div>
       {/* </span> */}

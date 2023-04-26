@@ -9,8 +9,9 @@ import {
 	RdsDoughnutChart,
 	RdsBooleanChart,
 	RdsBarChart,
-	RdsTable,
+	
 } from "raaghu-react-elements";
+import { RdsTable } from "../rds-elements";
 import { ScriptableContext } from "chart.js";
 const RdsCompAdminDashboard = () => {
 	const monthlySummaryChartOptions = () => {
@@ -21,7 +22,7 @@ const RdsCompAdminDashboard = () => {
 	let user = 'Host Admin';
 	return (
 		
-			<div className="dark">
+			<div className="dark rds-comp-admin-dashboard">
 				<div className="mb-3">
 					<h5><label htmlFor="label" className="fw-bold">Hello, {user} !</label></h5>
 				</div>
@@ -30,7 +31,7 @@ const RdsCompAdminDashboard = () => {
 						<RdsWidget
 							headerTitle={t("Monthly Summary")}
 							isRefreshRequired={true}
-							colorVariant="white"
+						
 						>
 							<RdsLineChart
 								id="linechart"
@@ -232,7 +233,7 @@ const RdsCompAdminDashboard = () => {
 									<RdsWidget
 										headerTitle={t("Sales")}
 										isRefreshRequired={false}
-										colorVariant="white"
+										
 										height="auto"
 									>
 										<RdsBigNumber
@@ -273,7 +274,7 @@ const RdsCompAdminDashboard = () => {
 								<RdsWidget
 									headerTitle={t("Profit Share")}
 									isRefreshRequired={true}
-									colorVariant={"white"}
+									
 								>
 									<div>
 										<RdsBigNumber bigNumber="$39,330.00"></RdsBigNumber>
@@ -364,7 +365,7 @@ const RdsCompAdminDashboard = () => {
 									<RdsWidget
 										headerTitle={t("Call Overview")}
 										isRefreshRequired={false}
-										colorVariant={"white"}
+									
 										height="auto"
 									>
 										<div>
@@ -536,7 +537,7 @@ const RdsCompAdminDashboard = () => {
 									<RdsWidget
 										headerTitle={t("Sales")}
 										isRefreshRequired={false}
-										colorVariant={"white"}
+										
 										height="auto"
 									>
 										<RdsBigNumber
@@ -557,7 +558,7 @@ const RdsCompAdminDashboard = () => {
 								<RdsWidget
 									headerTitle={t("Daily Sales Growth")}
 									isRefreshRequired={true}
-									colorVariant={"white"}
+									
 								>
 									<div>
 										<RdsBigNumber
@@ -773,7 +774,7 @@ const RdsCompAdminDashboard = () => {
 						<RdsWidget
 							headerTitle={t("Member Activity")}
 							isRefreshRequired={true}
-							colorVariant={"white"}
+							
 						// minHeight="462px"
 						// style={{ overflow: "scroll" }}
 						>
@@ -1027,7 +1028,7 @@ const RdsCompAdminDashboard = () => {
 						<RdsWidget
 							headerTitle={t("To do List")}
 							isRefreshRequired={true}
-							colorVariant={"white"}
+							
 						// minHeight="462px"
 						>
 							<div>

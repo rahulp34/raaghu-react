@@ -342,7 +342,7 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   return (
     <>
-    <div className="container-fluid m-0 p-0">
+    <div className="container-fluid m-0 p-0 h-100">
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
@@ -396,7 +396,7 @@ const Tenant = (props: RdsPageTenantProps) => {
         </div>
 
         <div className="col-md-12">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch-wthlabel">
             <RdsCompTenantList
               tableHeaders={tableHeaders}
               tableData={tableData}
