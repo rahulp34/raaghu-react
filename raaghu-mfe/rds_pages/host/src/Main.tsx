@@ -270,7 +270,7 @@ const Main = (props: MainProps) => {
         return {
           label: item.displayName,
           val: item.cultureName,
-          icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+          icon: item.flagIcon !== null ? item.flagIcon : item.twoLetterISOLanguageName,
           iconWidth: "20px",
           iconHeight: "20px",
         };
@@ -585,7 +585,7 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
+                                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-1"
                     id="FixedHeaderOverFlow"
                   >
                     <div className="header align-items-stretch">
