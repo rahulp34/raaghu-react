@@ -1,5 +1,4 @@
 import React, { useState, Fragment, useEffect } from "react";
-import "./rds-alert.scss";
 import { colors } from "../../libs/types";
 import RdsIcon from "../rds-icon";
 export interface RdsAlertProps {
@@ -56,10 +55,10 @@ const RdsAlert = (props: RdsAlertProps) => {
 							<button
 								type="button"
 								className="btn-close position-right"
+								
 								data-bs-dismiss="alert"
 								aria-label="Close"
-							
-								onClick={() => closeHandler}
+								onClick={(e:any) => closeHandler(e)}
 							></button>
 						)}
 					</div>

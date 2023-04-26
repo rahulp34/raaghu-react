@@ -1,5 +1,4 @@
 import React, { useState, useRef, Fragment, useEffect } from "react";
-
 import "./rds-checkbox.scss";
 
 export interface RdsCheckboxProps {
@@ -22,7 +21,6 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
   const[check,setcheck]=useState(props.checked)
 
   useEffect(() => {
-  console.log("runns")
     setcheck(props.checked)
 
   }, [props.checked])
@@ -49,7 +47,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             disabled={props.isDisabled}
             checked={check}
             id={props.id}
-            name={props.name}
+            name={props.id}
             onChange={props.onChange}
           />
 
@@ -58,7 +56,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
           ) : (
             <label
               className={` form-check-label me-5 ms-2  ${props.labelClass} `}
-              htmlFor="flexCheckDefault"
+              htmlFor={props.id}
             >
               {props.label}
             </label>
