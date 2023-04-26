@@ -7,7 +7,7 @@ import {
   RdsOffcanvas,
   RdsCheckbox,
   RdsAlert,
-} from "raaghu-react-elements";
+} from "../../../rds-elements";
 import {
   addBlogsData,
   editBlogsData,
@@ -165,7 +165,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     block={false}
                     size="small"
                     type="button"
-                    showLoadingSpinner={true}
+                    showLoadingSpinner={false}
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
