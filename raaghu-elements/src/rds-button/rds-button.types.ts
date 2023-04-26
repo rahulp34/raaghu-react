@@ -23,7 +23,7 @@ export interface RdsButtonProps {
     tooltip?: boolean;
     tooltipPlacement?: placements;
     tooltipTitle?: string;
-    type: "button" | "submit";
+    type?: "button" | "submit";
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
     formName?: string;
     iconHeight?: string;

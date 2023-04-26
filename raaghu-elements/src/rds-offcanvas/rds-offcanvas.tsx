@@ -17,25 +17,23 @@ export interface RdsOffcanvasProps {
   className?: string;
 }
 const RdsOffcanvas = (props: RdsOffcanvasProps) => {
-  let preventEscapeKey =`${props.hasOwnProperty('preventEscapeKey')?props.preventEscapeKey :true}` 
- let Backdrop = `${props.hasOwnProperty('backDrop')?props.backDrop :true}`
- 
-  let align = ` offcanvas offcanvas-${props.placement} ${
-    props.placement == "start" || props.placement == "end"
+  let preventEscapeKey = `${props.hasOwnProperty('preventEscapeKey') ? props.preventEscapeKey : true}`
+  let Backdrop = `${props.hasOwnProperty('backDrop') ? props.backDrop : true}`
+
+  let align = ` offcanvas p-0 offcanvas-${props.placement} ${props.placement == "start" || props.placement == "end"
       ? " offCanvas_Class"
       : " offCanvasClass"
-  }`;
+    }`;
   const offcanvasCustomWidth = props.offcanvaswidth || 650;
-  const Width = `${
-    props.placement == "start" || props.placement == "end"
+  const Width = `${props.placement == "start" || props.placement == "end"
       ? `${offcanvasCustomWidth}px`
       : "100% "
-  }`;
-  let isCanvasTitle =props.canvasTitle !== "" && props.canvasTitle !== undefined;
+    }`;
+  let isCanvasTitle = props.canvasTitle !== "" && props.canvasTitle !== undefined;
 
   const OffCanvasBtn = document.querySelectorAll('[data-bs-toggle="offcanvas"]');
-  OffCanvasBtn.forEach((element)=>{
-    element.addEventListener('click',()=>{
+  OffCanvasBtn.forEach((element) => {
+    element.addEventListener('click', () => {
       const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
       if (allBackdrops.length > 1) {
         for (let i = 0; i < allBackdrops.length - 1; i++) {
@@ -44,13 +42,12 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
       }
     })
   })
- 
-  
+
+
   return (
     <>
       {props.offcanvasbutton && (
-        <div className="offcanvas_btn"
-          style={{ cursor: "pointer" }}
+        <div className="offcanvas_btn cursor-pointer"
           onClick={props.onclick}
           data-bs-toggle="offcanvas"
           data-bs-target={`#${props.offId}`}
@@ -70,18 +67,18 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
         aria-labelledby={`canvas${props.offId}`}
         style={{ width: Width }}
       >
-         <div className={`${isCanvasTitle?'offcanvas-header':"offcanvas-header border-0"}`}>
-            {isCanvasTitle && <h5 className="offcanvas-title" id={`'canvas' +${props.offId}`}>
-              {props.canvasTitle}
-            </h5>}
-            <button
-              type="button"
-              className="btn-close text-reset offcanvas-close"
-              onClick={props.onClose}
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
+        <div className={`${isCanvasTitle ? 'offcanvas-header' : "offcanvas-header border-0"}`}>
+          {isCanvasTitle && <h5 className="offcanvas-title" id={`'canvas' +${props.offId}`}>
+            {props.canvasTitle}
+          </h5>}
+          <button
+            type="button"
+            className="btn-close text-reset offcanvas-close"
+            onClick={props.onClose}
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
         <div className={`offcanvas-body ${props.className}`}>
           {props.children}
         </div>

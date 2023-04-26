@@ -1,19 +1,18 @@
-import React, { Component, FC, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import "./rds-button.scss";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
 import Tooltip from "../rds-tooltip/rds-tooltip";
-import RdsIcon from "../rds-icon/rds-icon";
+import RdsIcon from "../rds-icon";
 
-const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
-
+const RdsButton= (props: RdsButtonProps) => {
   const outline = `${props.isOutline ? "  btn-outline-" + props.colorVariant : "  align-items-center btn-" + props.colorVariant}`;
   const mode = props.size ? ` btn-${props.size === "small" ? "sm " : props.size === "large" ? "lg " : "md "}` : "";
   const icon = props.isFabIcon ? " btn-icon p-1 rounded-pill " : "";
   const icon1 = props.isRounded ? " rounded-pill " : "";
   const blockWidth = props.block === true ? "w-100" : "";
   const spinner = props.showLoadingSpinner ? " spinner" : "";
-  const [classes, setClasses] = useState(`${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`);
+  const [classes, setClasses] = useState(`${outline}${mode}${icon}${icon1} ${blockWidth} ${props.class}`);
   const btnType = props.type === "submit" ? "submit" : "button";
   const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
@@ -22,14 +21,12 @@ const RdsButton: FC<RdsButtonProps> = (props: RdsButtonProps) => {
       setClasses(`${tempClasses} ${spinner}`)
       setTurnSpinnerOff(1);
     }
-    props.onClick !== undefined && props.onClick(evt);
+    props.onClick != undefined && props.onClick(evt);
   };
-  console.log(classes)
   useEffect(() => {
     if (turnSpinnerOff) {
       setTimeout(() => {
         let tempClasses = classes.replace('spinner', '');
-        console.log(classes)
         setClasses(tempClasses);
       }, 3000);
     }

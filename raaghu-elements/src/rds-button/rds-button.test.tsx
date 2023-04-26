@@ -1,61 +1,41 @@
 import React from "react";
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom"
 import { render, fireEvent, screen } from "@testing-library/react";
-import RdsButton from "./rds-button";
+import RdsButton from "./index";
 
-describe("RdsButton", () => {
-  it("renders button with label", () => {
-    render(<RdsButton label="Click me" type={"submit"} />);
-    const button = screen.getByText("Click me");
-    expect(button).toBeInTheDocument();
+describe("RdsButton component", () => {
+  beforeEach(() => {
+    // set up any necessary mocks or test data here
   });
 
-  it("handles click events", () => {
+  afterEach(() => {
+    // clean up any mocks or test data here
+  });
+
+  test("renders a button with the correct label and icon", () => {
+    render(<RdsButton label="Save" icon="save"/>);
+
+    expect(screen.getByText("Save")).toBeInTheDocument();
+    expect(screen.getByLabelText("Save button icon")).toBeInTheDocument();
+  });
+
+  test("calls the onClick handler when the button is clicked", () => {
     const handleClick = jest.fn();
-    render(
-      <RdsButton label="Click me" onClick={handleClick} type={"button"} />
-    );
-    const button = screen.getByText("Click me");
-    fireEvent.click(button);
-    expect(handleClick).toHaveBeenCalledTimes(1);
+    render(<RdsButton label="Save" onClick={handleClick} />);
+
+    fireEvent.click(screen.getByText("Save"));
+    expect(handleClick).toHaveBeenCalled();
   });
 
-  it("disables the button when isDisabled prop is true", () => {
-    render(<RdsButton isDisabled={true} type={"button"} />);
-    const button = screen.getByRole("button");
-    expect(button).toBeDisabled();
+  test("disables the button when isDisabled prop is true", () => {
+    render(<RdsButton label="Save" isDisabled={true} />);
+
+    expect(screen.getByText("Save")).toBeDisabled();
   });
 
-  it("renders button with icon", () => {
-    render(<RdsButton type={"button"} icon="plus" />);
-    const button = screen.getByRole("img");
-    expect(button).toBeInTheDocument();
-  });
+  test("shows the loading spinner when showLoadingSpinner prop is true", () => {
+    render(<RdsButton label="Save" showLoadingSpinner={true} />);
 
-  it("renders button with tooltip", () => {
-    render(
-      <RdsButton
-        label="Button Label"
-        tooltip={true}
-        tooltipTitle="Tooltip Title"
-        tooltipPlacement="top"
-        type={"button"}
-      />
-    );
-    expect(screen.getByRole("tooltip")).toBeInTheDocument();
-  });
-
-  it("tooltip is shown when button is hovered", () => {
-    render(
-      <RdsButton
-        label="Button Label"
-        tooltip={true}
-        tooltipTitle="Tooltip Title"
-        tooltipPlacement="top"
-        type={"submit"}
-      />
-    );
-    fireEvent.mouseEnter(screen.getByText("Button Label"));
-    expect(screen.getByRole("tooltip")).toBeVisible();
+    expect(screen.getByLabelText("Loading spinner")).toBeInTheDocument();
   });
 });

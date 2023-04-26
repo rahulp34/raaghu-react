@@ -70,7 +70,7 @@ const RdsSideNavChild = ({
     </div>
       }
         <div
-          className={`sidenav-footer text-center rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center cursor-pointer rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -157,9 +157,9 @@ const Node = ({
                     name={node.icon}
                     fill={false}
                     stroke={true}
-                    height="20px"
-                    width="20px"
-                    classes="me-3"
+                    height="15px"
+                    width="15px"
+                    classes="me-2"
                     // isAnimate={false}
                   ></RdsIcon>
                 : null}
@@ -291,9 +291,9 @@ const Node = ({
                         name={node.icon}
                         fill={false}
                         stroke={true}
-                        height="20px"
-                        width="20px"
-                        classes="me-3"
+                        height="15px"
+                        width="15px"
+                        classes="me-2"
                         // isAnimate = {false}
                       ></RdsIcon>
                       <span className="text-capitalize">{t(node.label)}</span>

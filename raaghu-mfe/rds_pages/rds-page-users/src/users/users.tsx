@@ -178,6 +178,26 @@ const Users = () => {
   const [editOrganizationUnit, setEditOrganizationUnit] = useState<any[]>([]);
   const [permissionKeyName, setPermissionKeyName] = useState(0);
   
+  const isEmailValid = (email: any) => {
+    if (!email || email.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isPasswordValid = (password: any) => {
+    if (!password || password.length === 0) {
+      return false;
+    }
+    return true;
+  };
+
+  const isNameValid = (name: any) => {
+    if (!name || name.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isFormValid = isPasswordValid(getUser.password) && isEmailValid(getUser.email) && isNameValid(getUser.name);
   
   useEffect(() => {
     dispatch(fetchUsers() as any);
@@ -219,21 +239,23 @@ const Users = () => {
           isActive :(
             <>
               {item.isActive == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -242,21 +264,23 @@ const Users = () => {
           lockoutEnabled :(
             <>
               {item.lockoutEnabled == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -683,7 +707,7 @@ const Users = () => {
         <div className="col-md-8 d-flex justify-content-end my-1">
         <RdsButton
             label="New User"
-            showLoadingSpinner={false}
+            showLoadingSpinner={true}
             databstoggle="offcanvas"
             databstarget="#userOffcanvas"
             icon={"plus"}
@@ -780,6 +804,7 @@ const Users = () => {
             label="SAVE"
             type="button"
             size="small"
+            isDisabled={!isFormValid}
             isOutline={false}
             colorVariant="primary"
             onClick={createNewUser}
@@ -928,7 +953,7 @@ const Users = () => {
                 onChange={(e)=>{setPasswordData(e)}}
               ></RdsInput>
                 </div>
-                <div className="col-md-6" style={{marginTop:'29px'}}>
+                <div className="col-md-6 align-items-center mt-2 d-flex">
                 <RdsButton
 
             class=""

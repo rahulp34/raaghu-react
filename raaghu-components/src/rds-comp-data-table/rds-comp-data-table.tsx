@@ -5,10 +5,11 @@ import {
   RdsInput,
   RdsButton,
   RdsPagination,
-  RdsAvatar,
-  RdsIllustration
+  RdsIllustration,
+  RdsAvatar
 } from "raaghu-react-elements";
 import "./rds-comp-data-table.scss";
+
 
 export interface RdsCompDatatableProps {
   enablecheckboxselection?: boolean;
@@ -268,7 +269,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
     setData(sorted);
     sort = true;
   };
-  const style = { marginTop: '150px', marginBottom: '100px' }
   let Classes = props.classes;
 
   let actionPosition =props.hasOwnProperty("actionPosition")&&props.actionPosition ==="right"?true:false;
@@ -292,7 +292,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
             id="sortTable"
             width="400px"
           >
-            <thead style={{ whiteSpace: "nowrap" }}>
+            <thead className="text-nowrap">
               <tr className="align-middle " >
               {actionPosition!=true&&props.tableHeaders &&
                   props.tableHeaders?.length > 0 &&
@@ -300,7 +300,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                   props.actions?.length > 0 && (
                     <th
                       className="text-center fw-bold"
-                      style={{ fontWeight: 500, color: "black" }}
                     >
                       Actions
                     </th>
@@ -365,7 +364,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                   props.actions?.length > 0 && (
                     <th
                       className="text-center fw-bold"
-                      style={{ fontWeight: 500, color: "black" }}
                     >
                       Actions
                     </th>
@@ -382,7 +380,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                     : true) &&
                   (
                     
-                    <tr style={{ WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none', userSelect: 'none', }}
+                    <tr
                       onDragStart={(e) => handleDragStart(e, index)}
                       onDragOver={(e) => e.preventDefault()}
                       onDragEnter={(e) => handleDragEnter(e, index)}
@@ -397,7 +395,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   className="btn rounded-pill border-0"
                                   type="button"
                                   aria-expanded="false"
-                                  style={{ minWidth: 0 }}
                                   //onClick={() => openCloseDropDown(index)}
                                   data-bs-toggle="dropdown"
                                   data-bs-auto-close="true"
@@ -414,7 +411,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                 </button>
                                 {/* array[index] &&  */}
                                 {(
-                                  <ul  aria-labelledby="dropdownMenuButton" className="dropdown-menu" style={{maxWidth: '200px' }}>
+                                  <ul  aria-labelledby="dropdownMenuButton" className="dropdown-menu">
                                     {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={
@@ -650,7 +647,6 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   className="btn rounded-pill border-0"
                                   type="button"
                                   aria-expanded="false"
-                                  style={{ minWidth: 0 }}
                                   //onClick={() => openCloseDropDown(index)}
                                   data-bs-toggle="dropdown"
                                   data-bs-auto-close="true"
@@ -667,7 +663,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                 </button>
                                 {/* array[index] &&  */}
                                 {(
-                                  <ul  aria-labelledby="dropdownMenuButton" className="dropdown-menu" style={{maxWidth: '200px' }}>
+                                  <ul  aria-labelledby="dropdownMenuButton" className="dropdown-menu">
                                     {props.actions?.map((action, actionIndex) => (
                                       <li
                                         key={

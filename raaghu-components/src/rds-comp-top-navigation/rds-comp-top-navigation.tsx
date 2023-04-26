@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
-import { RdsNotification, RdsOffcanvas, RdsAvatar } from "../rds-elements";
+import { RdsIcon, RdsOffcanvas } from "../rds-elements";
 import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/index";
-import Elements from "../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
-import { RdsIcon } from "../rds-elements";
-import elementList from './element-list';
+import elementList from "./element-list";
+import componentList from "./components-list";
+import chartList from "./charts-list";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -15,7 +15,6 @@ export interface RdsCompTopNavigationProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
-  thememodeList:any[];
   toggleItems: any[];
   elementList: any[];
   componentsList: any[];
@@ -28,42 +27,20 @@ export interface RdsCompTopNavigationProps {
   languageLable: string;
   languageIcon: string;
   breacrumItem?: any;
+  profilePic?:any
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
+  onElementSelect?: (selectedElement: any) => void;
 }
-
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
-  const [LinkAccount, setLinkAccount] = useState(false);
-  const [elementPath, setElementPath] = useState("/elements");
-  const [visible, setVisible] = useState(false);
-
+  const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
+  const [path, setPath] = useState({ elem: "/elements", compo: "/components", chart:"/charts" });
+  const [navtitle, setNavtitle] = useState(props.navbarTitle);
+  const [resetDrop, setResetDrop] = useState({
+    elem: false,
+    compo: false,
+    chart:false
+  });
   const navigate = useNavigate();
-
-  const onSelectElementValue = (e: any) => {
-    // console.log(e.dataset.name)
-    //console.log(e.target.innerText)
-    const selectValue = e.target.innerText;
-
-    if (selectValue === "Alert") {
-      navigate("/elements");
-      setVisible(true);
-    }
-    // console.log(selectValue)
-  };
-
-  const thememodeList = [
-    {
-      label: "Default",
-      val: "light",
-    },
-    {
-      label: "Dark",
-      val: "dark",
-    },
-    {
-      label: "SemiDark",
-      val: "semidark",
-    }
-  ];
 
   const navtabItems = [
     {
@@ -91,14 +68,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
-  const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
-  useEffect(() => {
-    setBreadCrumItem(props.breacrumItem);
-  }, [props.breacrumItem]);
-
-  const ChangeId = (e: any) => {
-    setLinkAccount(true);
-  };
 
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
@@ -106,42 +75,80 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
   };
   const handlerElementChange = (e: any, val: string) => {
-    const path = `/elements/${val}`;
-    console.log("handlerElementChange ", val, path);
-    setElementPath(path);
+    setResetDrop({ ...resetDrop, compo: !resetDrop.compo, chart:!resetDrop.chart });
+    const paath = `/elements/${val}`;
+    let elementBreadCrumb = [
+      { id: "Element", label: "Element", icon: "" },
+      { id: e.target.textContent, label: e.target.textContent, icon: "" },
+    ];
+    setNavtitle("Element");
+    setBreadCrumItem(elementBreadCrumb);
+    setPath({ ...path, elem: paath });
   };
-  const toggleTheme =(e: any)=>{
-    console.log("toggleTheme checked", e.target.checked)
-  }
+  const handlerComponentChange = (e: any, val: string) => {
+    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, chart:!resetDrop.chart });
+    const paath = `/components/${val}`;
+    let compoBreadCrumb = [
+      { id: "Component", label: "Component", icon: "" },
+      { id: e.target.textContent, label: e.target.textContent, icon: "" },
+    ];
+
+    setNavtitle("Component");
+    setBreadCrumItem(compoBreadCrumb);
+    setPath({ ...path, compo: paath });
+  };
+  const handlerChartChange = (e: any, val: string) => {
+    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, compo:!resetDrop.compo });
+    const paath = `/charts/${val}`;
+    let chartBreadCrumb = [
+      { id: "Chart", label: "Chart", icon: "" },
+      { id: e.target.textContent, label: e.target.textContent, icon: "" },
+    ];
+
+    setNavtitle("Chart");
+    setBreadCrumItem(chartBreadCrumb);
+    setPath({ ...path, chart: paath });
+  };
 
   useEffect(() => {
-    navigate(elementPath);
-    console.log("useEffect elementPath", elementPath);
-  }, [elementPath]);
+    setBreadCrumItem(props.breacrumItem);
+  }, [props.breacrumItem]);
 
   const handlerLinkElements = () => {};
+  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg");
+  useEffect(()=>{
+    if(props.profilePic){
+      setProfilePic(props.profilePic)
+    }
 
+  },[props.profilePic])
+
+  useEffect(() => {
+    setNavtitle(props.navbarTitle);
+    if ((navtitle != "Element" && navtitle != "Component"&& navtitle!="Chart" )|| props.navbarTitle != navtitle) {
+      setResetDrop({ ...resetDrop, elem: !resetDrop.elem ,compo: !resetDrop.compo, chart:!resetDrop.chart });
+    }
+  }, [props.breacrumItem, props.navbarTitle]);
+
+  useEffect(() => {
+    if (navtitle == "Component") {
+      navigate(path.compo);
+    }
+    if (navtitle == "Element") {
+      navigate(path.elem);
+    }
+    if (navtitle == "Chart") {
+      navigate(path.chart);
+    }
+  }, [path]);
   return (
     <div>
       <nav
         className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
       >
-        <div className="d-flex align-items-center mx-3">
-          {/* <span className="navbar-brand p-0 m-0" onClick={() => { navigate("/dashboard") }}>
-            <img
-              className="ms-1 cursor-pointer"
-              src={props?.logo}
-              alt="logo"
-              width="64%"
-            ></img>
-
-            <span className="title fw-bold text-lowercase m-2 cursor-pointer">
-
-              <b >{props.brandName}</b>
-            </span>
-          </span> */}
+        <div className="d-flex align-items-center mx-4">
           <div>
-            <div className="text-bold">{props.navbarTitle}</div>
+            <div className="text-bold">{navtitle}</div>
             {breacrumItem.length > 1 && (
               <div className="text-muted fs-7">
                 <>
@@ -155,31 +162,38 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          { <div className="px-2 cursor-pointer position-relative border-end">
-            <RdsDropdownList
-              placeholder="Default"
-              listItems={thememodeList}
-              id={"thememode"}
-              onClick={toggleTheme}
-            ></RdsDropdownList>
-            </div> }
+        <RdsDropdownList
+            reset={resetDrop.chart}
+            placeholder="Charts"
+            icon=""
+            iconFill={false}
+            iconStroke={true}
+            id={"chartlDropdown"}
+            listItems={chartList}
+            onClick={handlerChartChange}
+          ></RdsDropdownList>
+          <RdsDropdownList
+            reset={resetDrop.compo}
+            placeholder="Components"
+            icon=""
+            iconFill={false}
+            iconStroke={true}
+            id={"componentlDropdown"}
+            listItems={componentList}
+            onClick={handlerComponentChange}
+          ></RdsDropdownList>
 
-          <Link
-            to={elementPath}
-            className="me-3 pe-3 border-end"
-            role="button"
-            onClick={handlerLinkElements}
-          >
-            <RdsDropdownList
-              placeholder="Elements"
-              icon=""
-              iconFill={false}
-              iconStroke={true}
-              id={"elementlDropdown"}
-              listItems={elementList}
-              onClick={handlerElementChange} // onClick={props.toggleTheme}
-            ></RdsDropdownList>
-          </Link>
+          <RdsDropdownList
+            reset={resetDrop.elem}
+            placeholder="Elements"
+            icon=""
+            iconFill={false}
+            iconStroke={true}
+            id={"elementlDropdown"}
+            listItems={elementList}
+            onClick={handlerElementChange}
+          ></RdsDropdownList>
+
 
           <div className="px-2 position-relative me-3">
             <RdsDropdownList
@@ -218,9 +232,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                 className="d-flex align-items-center"
                 style={{ cursor: "pointer" }}
               >
-                <img
-                  className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
-                  src="./assets/profile-picture-circle.svg"
+                <img className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
+                  src={profilePic}
                 ></img>
                 <div className="ms-2 fw-bold fs-6">
                   <div className="text-nowrap">{props.profileTitle}</div>
@@ -246,7 +259,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           >
             <RdsCompProfile
               navtabItems={navtabItems}
-              profilePic={""}
+
+              profilePic={profilePic}
               userName={"Host Admin"}
               userRole={"admin"}
               onLogout={props.onLogout}

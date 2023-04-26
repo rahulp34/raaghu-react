@@ -57,7 +57,7 @@ const securityLogs = createSlice({
     builder.addCase(
       fetchSecurityLogs.fulfilled,
       (state, action: PayloadAction<any>) => {
-        debugger
+        
         console.log({ actionPayload: action });
         state.loading = false;
         state.securityLogs = action.payload;
