@@ -116,7 +116,20 @@ const Polls = (props: any) => {
   function getPollsEditOptionData(data: any) {
     setEditPollsOptionData(data);
   } 
-  
+  const isCodeValid = (code: any) => {
+    if (!code || code.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isQuestionValid = (question: any) => {
+    if (!question || question.length === 0) {
+      return false;
+    }
+    return true;
+  };
+
+  const isFormValid = isQuestionValid(questionData.question) && isCodeValid(questionData.code);
   const [editQuestionData, setEditQuestionData] = useState({
     question: '',
     code: '',
@@ -360,6 +373,7 @@ const Polls = (props: any) => {
               <RdsButton
                 label="Save"
                 size="small"
+                isDisabled={!isFormValid}
                 colorVariant="primary"
                 block={true}
                 databsdismiss="offcanvas"
@@ -421,6 +435,7 @@ const Polls = (props: any) => {
               class="me-2"
               label="SAVE"
               type="button"
+             
               isOutline={false}
               colorVariant="primary"
               databsdismiss="offcanvas"

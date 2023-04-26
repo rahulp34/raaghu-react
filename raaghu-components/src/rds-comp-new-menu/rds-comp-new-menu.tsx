@@ -21,7 +21,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
     setData(props.menusData);
   }, [props.menusData]);
 
-  const allFieldsAreEmpty = Object.values(data).every((value) => value === "");
+ 
 
   const handlerChangeInput = (e: any,key:any) => {
     setData({ ...data, [key]: e.target.value });
@@ -125,7 +125,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             type={"button"}
             size="small"
             databsdismiss="offcanvas"
-            isDisabled={allFieldsAreEmpty}
+            isDisabled={!data.displayName}
             colorVariant="primary"
             class="me-2"
             onClick={() => {
