@@ -18,7 +18,7 @@ const RdsCompProfilePicture = (props: any) => {
   const [newProfileImage, setNewProfileImage] = useState<string>("");
 
   function profileImage(data: any) {
-    debugger;
+    ;
     const file = data.files[0];
     const reader = new FileReader();
 
@@ -47,7 +47,7 @@ const RdsCompProfilePicture = (props: any) => {
   //   }
 
   const onClickSetProfilePicture = (event: any) => {
-    debugger
+    
     // 
     console.log("type is",type)
     if (event.target.value == "Use Default Avatar") {

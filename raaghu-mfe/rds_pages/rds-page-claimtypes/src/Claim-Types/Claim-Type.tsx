@@ -72,21 +72,23 @@ const ClaimType = () => {
           static :(
             <>
               {item.isStatic == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -95,21 +97,23 @@ const ClaimType = () => {
           required: (
             <>
               {item.required == true ? (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="check"
                     height="17px"
                     width="15px"
                     colorVariant="success"
+                    strokeWidth="2px"
                   />
                 </div>
               ) : (
-                <div style={{ strokeWidth: "2px" }}>
+                <div>
                   <RdsIcon
                     name="cancel"
                     height="17px"
                     width="15px"
                     colorVariant="danger"
+                    strokeWidth="2px"
                   />
                 </div>
               )}
@@ -280,7 +284,7 @@ const ClaimType = () => {
   }, [claimTypesUser]);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid p-0 m-0">
     <div className="row">
     <div className="col-md-12 mb-3 ">
       <div className="row ">

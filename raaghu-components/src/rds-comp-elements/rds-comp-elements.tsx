@@ -7,32 +7,32 @@ import code_snippet from "./code_snippet";
 export interface RdsCompElementsProps {}
 
 const RdsCompElements = (props: any) => {
-  const [codeSnippet, setCodeSnippet] = useState<any>("");
+   const [codeSnippet, setCodeSnippet] = useState<any>({
+      code:"",
+      name:""
+    });
 
   const [show, setShow] = useState<boolean>(false);
 
   const ComponentElement = React.lazy(
     () => import("./elements/" + props.type + ".tsx")
   );
-  console.log("Props: ", props.type);
 
   useEffect(() => {
     const filteredSnippets = code_snippet.filter((snippet) =>
       snippet.hasOwnProperty(props.type)
     );
     const value = Object.values(filteredSnippets[0])[0];
-    setCodeSnippet(value);
+    const name = Object.values(filteredSnippets[0])[1];
+    setCodeSnippet({...codeSnippet, code:value, name:name })
   }, [props.type]);
 
   const copy_click = (text: any) => {
-    console.log(" prop.type ,", props.type);
     setShow(true);
     navigator.clipboard.writeText(text);
   };
 
   const setChildCode = (message: any) => {
-    console.log("setChildCode:", message);
-    // setCode(message);
   };
 
   return (
@@ -42,7 +42,7 @@ const RdsCompElements = (props: any) => {
           <h5>
             <RdsLabel>
               {" "}
-              <span className="text-capitalize">{props.type}</span>{" "}
+              <span className="text-capitalize">{codeSnippet.name}</span>{" "}
             </RdsLabel>
           </h5>
         </div>
@@ -78,14 +78,14 @@ const RdsCompElements = (props: any) => {
                       height="17px"
                       fill={false}
                       stroke={true}
-                      onClick={() => copy_click(codeSnippet)}
+                      onClick={() => copy_click(codeSnippet.code)}
                     ></RdsIcon>
                   )}
                 </span>
                 <pre className="bg-light language-html">
                   <code className="language-html">
                     {ComponentElement.name}
-                    {codeSnippet}
+                    {codeSnippet.code}
                   </code>
                 </pre>
               </div>

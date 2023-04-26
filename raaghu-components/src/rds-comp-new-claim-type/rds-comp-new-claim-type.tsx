@@ -55,7 +55,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onChange={onNameChangeHandler}
           />
       </div>
-      <div className="col-md-6">	
+      <div className="col-md-6 mb-3">	
       {" "}
             <RdsInput
               label="Regex"
@@ -66,7 +66,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               onChange={onRegexChangeHandler}
             />
       </div>
-      <div className="col-md-6">	
+      <div className="col-md-6 mb-3">	
       <RdsLabel label="Value Type" class="pb-2" />
             <RdsSelectList
               label={"Value Type"}
@@ -76,7 +76,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               onSelectListChange={onValueChangeHandler}
             ></RdsSelectList>
       </div>
-      <div className="col-md-12">	
+      <div className="col-md-12  mb-3">	
       <RdsInput
             label="Regex Description"
             value={data.regexDescription}
