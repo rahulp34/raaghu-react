@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import * as openApi from '../../../libs/proxy/core/OpenAPI';
+import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
 import {
   configurationService,
@@ -9,7 +9,10 @@ import {
   sessionService,
   clearToken,
 } from "raaghu-react-core";
-import { useAppDispatch, useAppSelector } from "../../../libs/state-management/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../libs/state-management/hooks";
 import {
   RdsCompSideNavigation,
   RdsCompTopNavigation,
@@ -19,7 +22,10 @@ import * as menus from "../../../libs/main-menu/index";
 //import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
-import { callLoginAction, getProfilePictureHost  } from "../../../libs/state-management/host/host-slice";
+import {
+  callLoginAction,
+  getProfilePictureHost,
+} from "../../../libs/state-management/host/host-slice";
 import {
   DashboardCompo,
   LoginCompo,
@@ -66,9 +72,10 @@ import {
   BlogPostCompo,
   GlobalResourcesCompo,
   NewslettersCompo,
+  ChartCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
-'../ApiRequestOptions';
+("../ApiRequestOptions");
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -82,46 +89,54 @@ const Main = (props: MainProps) => {
   // });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const dataHost = useAppSelector((state) => state.persistedReducer.host.callLogin);
-  const dataHostPic = useAppSelector((state) => state.persistedReducer.host.profilepic);
+  const dataHost = useAppSelector(
+    (state) => state.persistedReducer.host.callLogin
+  );
+  const dataHostPic = useAppSelector(
+    (state) => state.persistedReducer.host.profilepic
+  );
 
-  function createImageFromBase64(base64String: string): Promise<HTMLImageElement> {
+  function createImageFromBase64(
+    base64String: string
+  ): Promise<HTMLImageElement> {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.src = `data:image/png;base64,${base64String}`;
-      img.addEventListener('load', () => {
+      img.addEventListener("load", () => {
         resolve(img);
       });
-      img.addEventListener('error', (err) => {
+      img.addEventListener("error", (err) => {
         reject(err);
       });
     });
   }
-  
 
-useEffect(()=> {
-  if(dataHostPic){
-    createImageFromBase64(dataHostPic.fileContent).then((image) => {
-      setProfilePic(image.src)
-    })
-    
-  }
-},[dataHostPic])
-  
-  let API_URL: string | undefined = process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
+  useEffect(() => {
+    if (dataHostPic) {
+      createImageFromBase64(dataHostPic.fileContent).then((image) => {
+        setProfilePic(image.src);
+      });
+    }
+  }, [dataHostPic]);
+
+  let API_URL: string | undefined =
+    process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
 
   let currentPath = window.location.pathname;
-  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg")
+  const [profilePic, setProfilePic] = useState(
+    "./assets/profile-picture-circle.svg"
+  );
   useEffect(() => {
-    let id = localStorage.getItem('userId')
-   
+    let id = localStorage.getItem("userId");
+
     dispatch(getProfilePictureHost(id) as any);
-
-},[dispatch]);
-
+  }, [dispatch]);
 
   useEffect(() => {
-    sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
+    sessionStorage.setItem(
+      "REACT_APP_API_URL",
+      process.env.REACT_APP_API_URL || ""
+    );
     if (localStorage.getItem("auth") && true) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
         navigate(currentPath);
@@ -131,50 +146,60 @@ useEffect(()=> {
     } else {
       navigate("/login");
     }
-  },[])
-  
+  }, []);
+
   async function tokenRefresh() {
-    const url = 'https://raaghu-react.azurewebsites.net/connect/token';
+    const url = "https://raaghu-react.azurewebsites.net/connect/token";
     const params = new URLSearchParams();
-    params.append('grant_type', 'refresh_token');
-    params.append('client_id', 'raaghu');
-    const refreshToken = localStorage.getItem('refreshToken');
+    params.append("grant_type", "refresh_token");
+    params.append("client_id", "raaghu");
+    const refreshToken = localStorage.getItem("refreshToken");
     if (refreshToken) {
-      params.append('refresh_token', refreshToken);
+      params.append("refresh_token", refreshToken);
     }
-    let token = sessionStorage.getItem('accessToken');
+    let token = sessionStorage.getItem("accessToken");
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${token}`,
       },
       body: params,
     });
     const data = await response.json();
     return data;
   }
-//Remember me
-  const rememberMe = localStorage.getItem('rememberMe');
-  if (rememberMe == 'true' && currentPath != '/login' && (sessionStorage.getItem('accessToken') || (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('calledOnce')))) {
-    
-    sessionStorage.setItem('calledOnce', 'true')
-    const loginAccessDate: any = localStorage.getItem('loginAccessDate');
+  //Remember me
+  const rememberMe = localStorage.getItem("rememberMe");
+  if (
+    rememberMe == "true" &&
+    currentPath != "/login" &&
+    (sessionStorage.getItem("accessToken") ||
+      (!sessionStorage.getItem("accessToken") &&
+        !sessionStorage.getItem("calledOnce")))
+  ) {
+    sessionStorage.setItem("calledOnce", "true");
+    const loginAccessDate: any = localStorage.getItem("loginAccessDate");
     const savedDate: any = new Date(loginAccessDate);
     const currentDate: any = new Date();
-    const diffInSeconds: number = Math.floor((currentDate.getTime() - savedDate.getTime()) / 1000);
-    console.log(diffInSeconds, 'diffInSeconds');
-    const expiresIn: any = localStorage.getItem('expiresIn');
+    const diffInSeconds: number = Math.floor(
+      (currentDate.getTime() - savedDate.getTime()) / 1000
+    );
+    console.log(diffInSeconds, "diffInSeconds");
+    const expiresIn: any = localStorage.getItem("expiresIn");
     if (diffInSeconds > expiresIn) {
       tokenRefresh()
-        .then((data: any) => {  
-          if (sessionStorage.getItem('accessToken') == undefined || sessionStorage.getItem('accessToken') == null) {
+        .then((data: any) => {
+          if (
+            sessionStorage.getItem("accessToken") == undefined ||
+            sessionStorage.getItem("accessToken") == null
+          ) {
             navigate("/dashboard");
           }
-          sessionStorage.setItem('accessToken', data.access_token)
-          localStorage.setItem('refreshToken', data.refresh_token)
+          sessionStorage.setItem("accessToken", data.access_token);
+          localStorage.setItem("refreshToken", data.refresh_token);
           openApi.OpenAPI.TOKEN = data.access_token;
-          localStorage.setItem('loginAccessDate', Date())
+          localStorage.setItem("loginAccessDate", Date());
         })
         .catch((error: any) => {
           console.error(error);
@@ -209,10 +234,9 @@ useEffect(()=> {
     },
   ];
   useEffect(() => {
-    dispatch(callLoginAction(null) as any)
+    dispatch(callLoginAction(null) as any);
   }, [dispatch]);
 
-  
   const objectArray = Object.entries(menus);
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
 
@@ -253,30 +277,28 @@ useEffect(()=> {
       });
       setLanguageData(tempdata);
     });
-
-    localizationService(currentLanguage).then(
-       (resp: any) => {
-        let data2 = {};
-        const translation = resp?.resources;
-        if (translation) {
-          Object.keys(translation).forEach((key) => {
-            Object.keys(translation[key].texts).forEach((k1)=>{
-              let k2 = k1.replace(/[^\w\s]/gi,'_');
-              let value1 = translation[key].texts[k1]
-              data2 = {...data2,[k2]:value1}
-            })              
+    
+    localizationService(currentLanguage).then((resp: any) => {
+      let data2 = {};
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          Object.keys(translation[key].texts).forEach((k1) => {
+            let k2 = k1.replace(/[^\w\s]/gi, "_");
+            let value1 = translation[key].texts[k1];
+            data2 = { ...data2, [k2]: value1 };
           });
-          i18n.addResourceBundle(
-            currentLanguage,
-            "translation",
-            data2,
-            false,
-            true
-          );
-          i18n.changeLanguage(currentLanguage);
-        }
+        });
+        i18n.addResourceBundle(
+          currentLanguage,
+          "translation",
+          data2,
+          false,
+          true
+        );
+        i18n.changeLanguage(currentLanguage);
       }
-    );
+    });
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -318,18 +340,15 @@ useEffect(()=> {
   const subTitle = getSubTitle(displayName, sideNavItems);
   const [currentTitle, setCurrentTitle] = useState(displayName);
   const [currentSubTitle, setCurrentSubTitle] = useState(subTitle);
-  const [breacrumItem, setBreadCrumItem] = useState<any[]>([])
+  const [breacrumItem, setBreadCrumItem] = useState<any[]>([]);
 
   const sideNavOnClickHandler = (e: any) => {
     const pageName = e.target.getAttribute("data-name");
-    const subTitle = getSubTitle(
-      pageName,
-      sideNavItems
-    );
+    const subTitle = getSubTitle(pageName, sideNavItems);
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
-    let a = recursiveFunction(concatenated, pageName)
-    a = a.filter((res: any) => res ? true : false);
+    let a = recursiveFunction(concatenated, pageName);
+    a = a.filter((res: any) => (res ? true : false));
     if (a[0].id) {
       a = a.map((res:any)=>{
         return {
@@ -339,8 +358,7 @@ useEffect(()=> {
         }
       })
       setBreadCrumItem(a);
-    }
-    else {
+    } else {
       a = a[0].reverse();
       a = a.map((res:any)=>{
         return {
@@ -353,18 +371,18 @@ useEffect(()=> {
     }
   };
 
-  useEffect(()=>{
-    const lang =localStorage.getItem("currentLang")||"en-GB";
+  useEffect(() => {
+    const lang = localStorage.getItem("currentLang") || "en-GB";
     localizationService(lang).then((resp: any) => {
       let data2 = {};
       const translation = resp?.resources;
       if (translation) {
         Object.keys(translation).forEach((key) => {
-          Object.keys(translation[key].texts).forEach((k1)=>{
-            let k2 = k1.replace(/[^\w\s]/gi,'_');
-            let value1 = translation[key].texts[k1]
-            data2 = {...data2,[k2]:value1}
-          })              
+          Object.keys(translation[key].texts).forEach((k1) => {
+            let k2 = k1.replace(/[^\w\s]/gi, "_");
+            let value1 = translation[key].texts[k1];
+            data2 = { ...data2, [k2]: value1 };
+          });
         });
         i18n.addResourceBundle(
           currentLanguage,
@@ -458,8 +476,7 @@ useEffect(()=> {
       });
       dispatch(callLoginAction(null) as any);
     }
-  }, [dataHost])
-
+  }, [dataHost]);
 
   function recursiveFunction(menus: any, searchName: string) {
     return menus.map((res: any) => {
@@ -467,26 +484,28 @@ useEffect(()=> {
         const item = {
           id: res.label,
           label: res.label,
-          icon: ''
-        }
+          icon: "",
+        };
         return item;
-      }
-      else {
+      } else {
         if (res.children) {
           let item = recursiveFunction(res.children, searchName);
-          item = item.filter((res: any) => res ? true : false)
+          item = item.filter((res: any) => (res ? true : false));
           if (item != null && item[0] != null) {
             if (!item[0].id) {
-              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
-            }
-            else {
-              return item.concat([{ id: res.label, label: res.label, icon: '' }])
+              return item[0].concat([
+                { id: res.label, label: res.label, icon: "" },
+              ]);
+            } else {
+              return item.concat([
+                { id: res.label, label: res.label, icon: "" },
+              ]);
             }
           }
         }
         return null;
       }
-    })
+    });
   }
   function recursiveFunction1(menus: any, searchName: string) {
     return menus.map((res: any) => {
@@ -494,26 +513,28 @@ useEffect(()=> {
         const item = {
           id: res.label,
           label: res.label,
-          icon: ''
-        }
+          icon: "",
+        };
         return item;
-      }
-      else {
+      } else {
         if (res.children) {
           let item = recursiveFunction1(res.children, searchName);
-          item = item.filter((res: any) => res ? true : false)
+          item = item.filter((res: any) => (res ? true : false));
           if (item != null && item[0] != null) {
             if (!item[0].id) {
-              return item[0].concat([{ id: res.label, label: res.label, icon: '' }])
-            }
-            else {
-              return item.concat([{ id: res.label, label: res.label, icon: '' }])
+              return item[0].concat([
+                { id: res.label, label: res.label, icon: "" },
+              ]);
+            } else {
+              return item.concat([
+                { id: res.label, label: res.label, icon: "" },
+              ]);
             }
           }
         }
         return null;
       }
-    })
+    });
   }
 
   const logout = () => {
@@ -526,199 +547,230 @@ useEffect(()=> {
   return (
     <Suspense>
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <LoginCompo />
-          }
-        ></Route>
+        <Route path="/login" element={<LoginCompo />}></Route>
         <Route
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname != '/login' && location.pathname != '/forgot-password' && (
-        <div className="d-flex flex-column flex-root">
-          <div className="page d-flex flex-column flex-column-fluid">
-            <div
-              className="
+      {location.pathname != "/login" &&
+        location.pathname != "/forgot-password" && (
+          <div className="d-flex flex-column flex-root">
+            <div className="page d-flex flex-column flex-column-fluid">
+              <div
+                className="
 							page
         d-flex
         flex-column-fluid
         align-items-stretch
         container-fluid 
         px-0"
-            >
-              <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
-                <div className="aside ng-tns-c99-0" id="aside">
-                  <div>
-                    <img
-                      className="ms-1 cursor-pointer sidenav-logo"
-                      src={logo}
-                      alt="logo"
-                    ></img>
+              >
+                <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
+                  <div className="aside ng-tns-c99-0" id="aside">
+                    <div>
+                      <img
+                        className="ms-1 cursor-pointer sidenav-logo"
+                        src={logo}
+                        alt="logo"
+                      ></img>
+                    </div>
+                    <div className="mx-2 mt-6">
+                      <RdsCompSideNavigation
+                        sideNavItems={sideNavItems}
+                        onClick={sideNavOnClickHandler}
+                        toggleTheme={props.toggleTheme}
+                      ></RdsCompSideNavigation>
+                    </div>
                   </div>
-                  <div className="mx-2 mt-6">
-                    <RdsCompSideNavigation
-                      sideNavItems={sideNavItems}
-                      onClick={sideNavOnClickHandler}
-                      toggleTheme={props.toggleTheme}
-                    ></RdsCompSideNavigation>
-                  </div>
-                </div>
-                <div
-                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
-                  id="FixedHeaderOverFlow"
-                >
-                      <div className="header align-items-stretch">
-              <RdsCompTopNavigation
-               languageLable ="English"
-                profilePic={profilePic}
-                breacrumItem={breacrumItem}
-                languageIcon="gb"
-                languageItems={languageData}
-                toggleItems={toggleItems}
-                componentsList={componentsList}
-                onClick={onClickHandler}
-                profileTitle="Host Admin"
-                profileName="admin"
-                onLogout={logout}
-                logo={logo}
-                toggleTheme={props.toggleTheme}
-                navbarTitle={t(currentTitle) || ""}
-                navbarSubTitle={t(currentSubTitle) || ""}
-                onChatClickHandler={() => {
-                  console.log(" session Hey Chat Button Clicked!!");
-                }} elementList={[]} />
-            </div>
-            <div className="m-4">
-                  <Suspense>
-                    <Routes>
-                      <Route
-                        path="/dashboard"
-                        element={<DashboardCompo />}
-                      ></Route>
-                      <Route
-                        path="/tenant"
-                        element={<TenantCompo></TenantCompo>}
-                      ></Route>
-                      <Route
-                        path="/edition"
-                        element={<EditionCompo></EditionCompo>}
-                      ></Route>
-                      <Route
-                        path="/settings"
-                        element={<SettingsCompo></SettingsCompo>}
-                      ></Route>
-                      <Route
-                        path="/audit-logs"
-                        element={<AuditlogsCompo></AuditlogsCompo>}
-                      ></Route>
-                      <Route path="/users" element={<UsersCompo />}></Route>
-                      <Route
-                        path="/role"
-                        element={<RolesCompo></RolesCompo>}
-                      ></Route>
-                      <Route
-                        path="/organization-unit"
-                        element={
-                          <OrganizationUnitsCompo></OrganizationUnitsCompo>
-                        }
-                      ></Route>
-                      <Route
-                        path="/language"
-                        element={<LanguageCompo></LanguageCompo>}
-                      ></Route>
-                      <Route
-                        path="/language-text"
-                        element={<LanguageTextCompo></LanguageTextCompo>}
-                      ></Route>
-                      <Route
-                        path="/dynamic-properties"
-                        element={<DynamicPropertyCompo></DynamicPropertyCompo>}
-                      ></Route>
-                      <Route
-                        path="/security-logs"
-                        element={<SecurityLogsCompo />}
-                      ></Route>
+                  <div
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
+                    id="FixedHeaderOverFlow"
+                  >
+                    <div className="header align-items-stretch">
+                      <RdsCompTopNavigation
+                        languageLable="English"
+                        profilePic={profilePic}
+                        breacrumItem={breacrumItem}
+                        languageIcon="gb"
+                        languageItems={languageData}
+                        toggleItems={toggleItems}
+                        componentsList={componentsList}
+                        onClick={onClickHandler}
+                        profileTitle="Host Admin"
+                        profileName="admin"
+                        onLogout={logout}
+                        logo={logo}
+                        toggleTheme={props.toggleTheme}
+                        navbarTitle={t(currentTitle) || ""}
+                        navbarSubTitle={t(currentSubTitle) || ""}
+                        onChatClickHandler={() => {
+                          console.log(" session Hey Chat Button Clicked!!");
+                        }}
+                        elementList={[]}
+                      />
+                    </div>
+                    <div className="m-4">
+                      <Suspense>
+                        <Routes>
+                          <Route
+                            path="/dashboard"
+                            element={<DashboardCompo />}
+                          ></Route>
+                          <Route
+                            path="/tenant"
+                            element={<TenantCompo></TenantCompo>}
+                          ></Route>
+                          <Route
+                            path="/edition"
+                            element={<EditionCompo></EditionCompo>}
+                          ></Route>
+                          <Route
+                            path="/settings"
+                            element={<SettingsCompo></SettingsCompo>}
+                          ></Route>
+                          <Route
+                            path="/audit-logs"
+                            element={<AuditlogsCompo></AuditlogsCompo>}
+                          ></Route>
+                          <Route path="/users" element={<UsersCompo />}></Route>
+                          <Route
+                            path="/role"
+                            element={<RolesCompo></RolesCompo>}
+                          ></Route>
+                          <Route
+                            path="/organization-unit"
+                            element={
+                              <OrganizationUnitsCompo></OrganizationUnitsCompo>
+                            }
+                          ></Route>
+                          <Route
+                            path="/language"
+                            element={<LanguageCompo></LanguageCompo>}
+                          ></Route>
+                          <Route
+                            path="/language-text"
+                            element={<LanguageTextCompo></LanguageTextCompo>}
+                          ></Route>
+                          <Route
+                            path="/dynamic-properties"
+                            element={
+                              <DynamicPropertyCompo></DynamicPropertyCompo>
+                            }
+                          ></Route>
+                          <Route
+                            path="/security-logs"
+                            element={<SecurityLogsCompo />}
+                          ></Route>
 
-                      <Route path="/icons" element={<IconListCompo />}></Route>
-                      <Route
-                        path="/claim-types"
-                        element={<ClaimTypesCompo />}
-                      />
-                      <Route
-                        path="/text-template"
-                        element={<TextTemplateCompo />}
-                      ></Route>
-                      <Route
-                        path="/applications"
-                        element={<ApplicationsCompo />}
-                      ></Route>
-                      <Route path="/scope" element={<ScopeCompo />}></Route>
-                      <Route
-                        path="/identityResources"
-                        element={<IdentityResourcesCompo />}
-                      />
+                          <Route
+                            path="/icons"
+                            element={<IconListCompo />}
+                          ></Route>
+                          <Route
+                            path="/claim-types"
+                            element={<ClaimTypesCompo />}
+                          />
+                          <Route
+                            path="/text-template"
+                            element={<TextTemplateCompo />}
+                          ></Route>
+                          <Route
+                            path="/applications"
+                            element={<ApplicationsCompo />}
+                          ></Route>
+                          <Route path="/scope" element={<ScopeCompo />}></Route>
+                          <Route
+                            path="/identityResources"
+                            element={<IdentityResourcesCompo />}
+                          />
 
-                      <Route path="/api-scope" element={<ApiScopeCompo />} />
-                      <Route
-                        path="/apiResources"
-                        element={<ApiResourcesCompo />}
-                      />
-                      <Route path="/blogs" element={<BlogsCompo />} />
-                      <Route path="/chats" element={<ChatsCompo />} />
-                      <Route
-                        path="/fileManagement"
-                        element={<FileManagementCompo />}
-                      />
-                      <Route path="/forms" element={<FormsCompo />} />
-                      <Route
-                        path="/formsView/:id"
-                        element={<FormsViewCompo />}
-                      />
-                      <Route
-                        path="/formsPreview/:id"
-                        element={<FormsPreviewCompo />}
-                      />
-                      <Route path="/polls" element={<PollsCompo />} />
-                      <Route path="/blogger" element={<BloggerCompo />} />
-                      <Route path="/client" element={<ClientCompo />} />
-                      <Route
-                        path="/url-forwarding"
-                        element={<UrlForwardingCompo />}
-                      />
-                      <Route
-                        path="/paymentPlans"
-                        element={<PaymentPlansCompo />}
-                      />
-                      <Route
-                        path="/paymentRequests"
-                        element={<PaymentRequestsCompo />}
-                      />
-                      <Route path="/comments" element={<CommentsCompo />} />
-                      <Route path="/tags" element={<TagsCompo />} />
-                      <Route path="/globalResources" element={<GlobalResourcesCompo />} />
-                      <Route path="/elements/:type" element={<ElementsCompo />} />
-                      <Route path="/personal-data" element={<PersonalDataCompo />} />
-                      <Route path="/my-account" element={<MyAccountCompo />} />
-                      <Route path="/menus" element={<MenusCompo />} />
-                      <Route path="/components/:type" element={<ComponentsCompo />} />
-                      <Route path="/pages" element={<PagesCompo />} />
-                      <Route path="/**/*" element={<RdsCompPageNotFound />} />
-                      <Route path="/pages" element={<PagesCompo />} />
-                      <Route path="/blog-post" element={<BlogPostCompo />} />
-                      <Route path="/newsletters" element={<NewslettersCompo />} />
-                    </Routes>
-                  </Suspense>
+                          <Route
+                            path="/api-scope"
+                            element={<ApiScopeCompo />}
+                          />
+                          <Route
+                            path="/apiResources"
+                            element={<ApiResourcesCompo />}
+                          />
+                          <Route path="/blogs" element={<BlogsCompo />} />
+                          <Route path="/chats" element={<ChatsCompo />} />
+                          <Route
+                            path="/fileManagement"
+                            element={<FileManagementCompo />}
+                          />
+                          <Route path="/forms" element={<FormsCompo />} />
+                          <Route
+                            path="/formsView/:id"
+                            element={<FormsViewCompo />}
+                          />
+                          <Route
+                            path="/formsPreview/:id"
+                            element={<FormsPreviewCompo />}
+                          />
+                          <Route path="/polls" element={<PollsCompo />} />
+                          <Route path="/blogger" element={<BloggerCompo />} />
+                          <Route path="/client" element={<ClientCompo />} />
+                          <Route
+                            path="/url-forwarding"
+                            element={<UrlForwardingCompo />}
+                          />
+                          <Route
+                            path="/paymentPlans"
+                            element={<PaymentPlansCompo />}
+                          />
+                          <Route
+                            path="/paymentRequests"
+                            element={<PaymentRequestsCompo />}
+                          />
+                          <Route path="/comments" element={<CommentsCompo />} />
+                          <Route path="/tags" element={<TagsCompo />} />
+                          <Route
+                            path="/globalResources"
+                            element={<GlobalResourcesCompo />}
+                          />
+                          <Route
+                            path="/elements/:type"
+                            element={<ElementsCompo />}
+                          />
+                          <Route
+                            path="/personal-data"
+                            element={<PersonalDataCompo />}
+                          />
+                          <Route
+                            path="/my-account"
+                            element={<MyAccountCompo />}
+                          />
+                          <Route path="/menus" element={<MenusCompo />} />
+                          <Route
+                            path="/components/:type"
+                            element={<ComponentsCompo />}
+                          />
+                          <Route path="/pages" element={<PagesCompo />} />
+                          <Route
+                            path="/**/*"
+                            element={<RdsCompPageNotFound />}
+                          />
+                          <Route path="/pages" element={<PagesCompo />} />
+                          <Route
+                            path="/blog-post"
+                            element={<BlogPostCompo />}
+                          />
+                          <Route
+                            path="/newsletters"
+                            element={<NewslettersCompo />}
+                          />
+                          <Route path="/charts/:type" element={<ChartCompo />} />
+                        </Routes>
+                      </Suspense>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </Suspense>
   );
 };

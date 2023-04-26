@@ -153,7 +153,8 @@ module.exports = (env, argv) => {
           BlogPost: mfeConfigJSON["blogPost"].url,
           GlobalResources: mfeConfigJSON["globalResources"].url,
           Newsletters: mfeConfigJSON["newsletters"].url,
-        },
+     Chart: mfeConfigJSON["chart"].url,
+},
         shared: {
           ...devdeps,
           ...deps,

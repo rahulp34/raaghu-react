@@ -19,7 +19,6 @@ export type OpenAPIConfig = {
 };
 
 const getToken: Resolver<string> = () => {
-  
   return new Promise((resolve, reject) => {
     const token = sessionStorage.getItem("accessToken");
     if (token) {

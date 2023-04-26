@@ -124,7 +124,7 @@ export const tenantPut= createAsyncThunk(
 export const tenantFeaturesGet= createAsyncThunk(
   "tenant/tenantFeaturesGet",
   (data:any)=>{
-    return BlogFeatureService.getBlogsFeatures({blogId:"T",featureName:data.id}).then((result:any)=>{
+    return FeaturesService.getFeatures({providerName:"T",providerKey:data.id}).then((result:any)=>{
       return result
     })
   }
