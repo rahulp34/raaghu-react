@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
 import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
-import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyProfile, setProfilePicture, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
+import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile, sendEmailVerifyProfile, setProfilePicture, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
 
 
  const navtabsItems = [
@@ -35,6 +35,7 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
         type:0,
         // imageContent:""
     });
+    const[convertedImage, setConvertedImage] = useState<any>();
 
     const dispatch = useAppDispatch();
     
@@ -55,17 +56,65 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
     function handleVerifyEmailDataSubmit(email:any) {
         dispatch(sendEmailVerifyProfile(email) as any);
     }
+  
+    const [file, setFile] = useState<any>();
+  const [imageData, setImageData] = useState<any>();
+ const[type,setType] = useState(2);
+  function handleFileInputChange(event:any) {
+    setFile(event.target.files[0]);
+  }
+  const[postFile, setPostFile] =useState<any>();
 
-    function handleProfileDataSubmit(type:any) {
-        console.log("type ", type);
-        // dispatch(setProfilePictures(type) as any);
-        console.log(dispatch(setProfilePicture(type) as any));
-    }
-
+  function submitProfilePic() {
+      dispatch(setProfilePicture({
+        type:type,
+        formData: {
+            ImageContent: postFile
+        },
+    }) as any).then((res:any)=>{
+        let id = localStorage.getItem('userId')
+        dispatch(getProfilePicture(id) as any);
+    })
+  }
     useEffect(() => {
+        let id = localStorage.getItem('userId')
+        
         dispatch(fetchMyProfile() as any);
+        dispatch(getProfilePicture(id) as any);
 
     },[dispatch]);
+    function createImageFromBase64(base64String: string): Promise<HTMLImageElement> {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = `data:image/png;base64,${base64String}`;
+          img.addEventListener('load', () => {
+            resolve(img);
+          });
+          img.addEventListener('error', (err) => {
+            reject(err);
+          });
+        });
+      }
+      
+    
+    useEffect(()=>{
+        if(data.getProfilePicData){
+                    // your Base64-encoded string here
+                    createImageFromBase64(data.getProfilePicData.fileContent)
+                    .then((image) => {
+                        // the image has finished loading
+                    setConvertedImage(image.src)
+
+                        // you can now use the image object in your code
+                    })
+                    .catch((err) => {
+                        // there was an error loading the image
+                        console.error(`Error loading image: ${err}`);
+                    });
+
+                   }
+
+    },[data.getProfilePicData])
 
     useEffect(() => {
         if (data.personalInfo) {
@@ -84,7 +133,38 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
             setPicture(data.profilePicture);
         }
       }, [data.profilePicture]);
+    
+      function dataUrlToBlob(dataUrl:any) {
+        const arr = dataUrl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+      }
+      function postProfilePic(data:File, type:number){
+        
+        fileToBlob(data).then((blob) => {
+            console.log(blob);
+            setPostFile(blob)
+        });   
+        setType(type)     
+      }
 
+      function fileToBlob(file: File): Promise<Blob> {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const result = reader.result as string;
+            const blob = new Blob([result], { type: file.type });
+            resolve(blob);
+          };
+          reader.readAsArrayBuffer(file);
+        });
+      }
 
  
     return (
@@ -101,14 +181,14 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                         justified={false}
                         activeNavtabOrder={(activeNavTabId) => {
                             setActiveNavTabId(activeNavTabId);
-                        }}         
-                        />                                               
-                    </div>
-                    {activeNavTabId == 0 && (
+                        }}  
+                        />   
+                    </div> 
+                                        {activeNavTabId == 0 && (
                         <RdsCompProfilePicture
-                        handleProfileDataSubmit={(type: any) => {
-                            handleProfileDataSubmit(type);
-                            }}
+                        handleProfileDataSubmit={submitProfilePic}
+                            postProfilePic={postProfilePic}
+                            profilePictureData={convertedImage}
                             profilePicture={profilePicture}></RdsCompProfilePicture>
                     )}
                     {activeNavTabId == 1 && (
@@ -142,8 +222,8 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                         <div className="mt-3 footer-buttons">
                         <RdsButton
                             label = 'Save'
-                            colorVariant ='primary'                 
-                            block = {false}                 
+                            colorVariant ='primary'
+                            block = {false}
                             type = "submit"
                             onClick={()=>{handleTwoFactorSubmit(twoFactorData)}}				
                             />      
@@ -151,6 +231,7 @@ import { changepasswordProfile, fetchMyProfile, saveMyProfile, sendEmailVerifyPr
                         </>
                     //    <form onSubmit={handletwoFactorDataSubmit}>
                        
+
                     //    </form>
                     )}                                                           
             </div>

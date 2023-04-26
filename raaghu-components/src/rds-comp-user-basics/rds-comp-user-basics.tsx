@@ -90,7 +90,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
 
   return (
     <>
-      <form className="p-2 mt-2">
+      <form className="mt-2">
         <div className="row align-items-center">
           <div className="col-lg-6 col-md-6">
             <div>
@@ -111,7 +111,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="text"
                 label="Surname"
                 name="surName"
-                required={true}
+                required={false}
                 onChange={(e)=>{setSurname(e)}}
               ></RdsInput>
             </div>
@@ -127,8 +127,8 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 type="file"
                 id="file"
                 //ref={inputFile}
-                style={{ display: "none" }}
-              />
+                className="d-none"
+                />
             </div>
         </div>
 
@@ -168,7 +168,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="text"
                 label="User Name"
                 name="userName"
-                required={true}
+                required={false}
                 onChange={(e)=>{setUserName(e)}}
               ></RdsInput>
             </div>
@@ -181,7 +181,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 inputType="number"
                 label="Phone Number"
                 name="phone"
-                required={true}
+                required={false}
                 onChange={(e)=>{setPhoneNumber(e)}}
               ></RdsInput>
             </div>

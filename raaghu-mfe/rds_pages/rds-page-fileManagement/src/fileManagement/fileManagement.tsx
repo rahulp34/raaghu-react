@@ -86,31 +86,6 @@ const FileManagement = () => {
   //   //   iconColor: "primary",
   //   //   active: false,
   //   },
-  //   {
-  //     label: "Parent 1",
-  //     // id: 2,
-  //     //route: "",
-  //     // disabled: false,
-  //     // icon: "",
-  //     // iconFill: false,
-  //     // iconstroke: true,
-  //     // iconWidth: "7px",
-  //     // iconHeight: "7px",
-  //     // iconColor: "primary",
-  //     // active: false,
-  //   },
-  //   {
-  //     label: "child 1",
-  //     // id: 3,
-  //     // active: false,
-  //     // disabled: true,
-  //     // icon: "",
-  //     // iconFill: false,
-  //     // iconstroke: true,
-  //     // iconWidth: "7px",
-  //     // iconHeight: "7px",
-  //     // iconColor: "primary",
-  //   },
   // ]);
 
   const tableHeaders = [
@@ -453,14 +428,12 @@ const FileManagement = () => {
   };
 
   return (
-    <div className="container-fluid p-0 m-0">
-      <div className="row">
-        <div className="col-md-12">
+    <div className="New Folder">
       <div className="d-flex justify-content-end">
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
           offId={"Folder"}
@@ -528,7 +501,7 @@ const FileManagement = () => {
         <RdsOffcanvas
           canvasTitle={"Upload Files"}
           placement="end"
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
           offId={"Files"}
@@ -605,10 +578,10 @@ const FileManagement = () => {
                 canvasTitle={"RENAME"}
                 placement="end"
                 offcanvaswidth={650}
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId="fileManage-rename-off"
+                offId="Rename"
               >
                 <div>
                   <div className="pt-3">
@@ -654,7 +627,7 @@ const FileManagement = () => {
                 canvasTitle={"MOVE"}
                 placement="end"
                 offcanvaswidth={650}
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
                 offId={"Move"}
@@ -725,8 +698,7 @@ const FileManagement = () => {
           </div>
         </div>
       </div>
-    </div></div>
-      </div>
+    </div>
   );
 };
 

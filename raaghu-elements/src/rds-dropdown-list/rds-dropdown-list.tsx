@@ -85,6 +85,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   let border =props.borderDropdown==true ?'border border-1 rounded-1 border-dark" ' :'';
   useEffect(() => {
     setIsTouch(false);
+    console.log("Elemen breac you reset your dropdown")
     setCheckedCategoryList([]);
   }, [props.reset]);
   useEffect(() => {
@@ -119,7 +120,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   return (
       <div className="dropdown-raaghu w-100 position-relative">
         <span
-          className="dropdown-raaghu-button"
+          className="dropdown-raaghu-button cursor-pointer"
           onClick={clickedOnDropDown}
         >
           <div className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}>
@@ -128,14 +129,14 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
               props.placeholder &&
               props.multiSelect !== true && (
             
-                <div>
+                <div className="d-flex align-items-baseline">
                 {props.icon && (
                   <span >
                      <RdsIcon name={props.icon} height={IconHeight} width={IconWidth} fill={props.iconFill}
                     stroke={props.iconStroke} classes ="pe-1" />
                   </span>
                 )}
-                <span className="fs-6 ms-2 me-2 flex-grow-1">
+                <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
                   {props.placeholder}
                 </span>
               </div>
@@ -146,7 +147,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
               props.listItems &&
               props.listItems[0] && (
                 <>
-                  <div>
+                  <div className="d-flex align-items-baseline" >
                     {props.listItems[selectedOption].icon && (
                       <span>
                         <RdsIcon
@@ -159,7 +160,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                       </span>
                     )}
                     <span
-                      className="fs-6 ms-2 me-2 flex-grow-1"
+                      className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap"
                     >
                       {props.listItems[selectedOption].label}
                     </span>

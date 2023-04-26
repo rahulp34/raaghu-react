@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
+import { RdsLabel } from "raaghu-react-elements";
 export interface RdsCompLoginProps {
-  onLogin: (email: string, password: string) => any;
+  onLogin: (email: string, password: string, rememberMe :boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
 
@@ -14,10 +15,10 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
-  const [checkbox,setcheckbox]=useState(false)
+  const [rememberMe,setrememberMe]=useState(false)
 
   const onCheckedHandler = (e:any)=>{
-    setcheckbox(e.target.checked)
+    setrememberMe(e.target.checked)
   }
 
   const isEmailValid = (email: any) => {
@@ -57,7 +58,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
 
   const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onLogin(email, password);
+    
+    props.onLogin(email, password, rememberMe);
     setEmail("");
     setPassword("");
   };
@@ -101,7 +103,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                   <div className="form-check form-switch text-start mb-4">
                     <input
                       className="form-check-input"
-                      type="checkbox"
+                      type="rememberMe"
                       role="switch"
                       checked={checked}
                       onChange={() => setChecked(!checked)}
@@ -156,7 +158,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
             <div className="d-flex justify-content-between mt-2 mb-4">
               <div>
                 <div className="form-group mb-3">
-                  <RdsCheckbox label={"Remember me"} checked={checkbox} onChange={onCheckedHandler}></RdsCheckbox>
+                  <RdsCheckbox label={"Remember me"} checked={rememberMe} onChange={onCheckedHandler}></RdsCheckbox>
                 </div>
               </div>
               <div>
@@ -179,7 +181,15 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               type="submit"
             //onClick= {emailhandleChange}
             />
+          
+          
+           
           </form>
+          <div className="pt-2">
+          <RdsLabel class="text-mute pt-2 secondary " label="©2023 Wai Technologies. All rights reserved " size="0.7rem"></RdsLabel>
+          </div>
+          
+            
         </div>
       </div>
     </div>

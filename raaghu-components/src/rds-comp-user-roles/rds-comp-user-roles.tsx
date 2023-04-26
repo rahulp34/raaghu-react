@@ -31,7 +31,7 @@ const RdsCompUserRoles = (props: RdsCompUserRolesProps) => {
   return (
     <>
       <div className="row">
-        <div className="col-md-12 mt-3 mx-3">
+        <div className="col-md-12">
           {roleData.map((e: any, index: number) => (
             <div className="mt-3">
             <RdsCheckbox
