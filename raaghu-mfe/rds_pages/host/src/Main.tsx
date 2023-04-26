@@ -402,34 +402,34 @@ const Main = (props: MainProps) => {
                   </div>
                 </div>
                 <div
-                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
+                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
                   id="FixedHeaderOverFlow"
                 >
                       <div className="header align-items-stretch">
               <RdsCompTopNavigation
-                //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
-                languageLable ="English"
-                // languageLable={
-                //   storeData.languages?.currentCulture?.displayName ||
-                //   "English (United Kingdom)"
-                // }
-                breacrumItem={breacrumItem}
-                languageIcon="gb"
-                languageItems={languageData}
-                toggleItems={toggleItems}
-                componentsList={componentsList}
-                // brandName="raaghu"
-                onClick={onClickHandler}
-                profileTitle="Host Admin"
-                profileName="admin"
-                onLogout={logout}
-                logo={logo}
-                toggleTheme={props.toggleTheme}
-                navbarTitle={t(currentTitle) || ""}
-                navbarSubTitle={t(currentSubTitle) || ""}
-                onChatClickHandler={() => {
-                  console.log(" session Hey Chat Button Clicked!!");
-                }} elementList={[]} />
+                      //languageLable={storeData.languages?.currentCulture?.displayName || "English (United Kingdom)"}
+                      languageLable="English"
+                      // languageLable={
+                      //   storeData.languages?.currentCulture?.displayName ||
+                      //   "English (United Kingdom)"
+                      // }
+                      breacrumItem={breacrumItem}
+                      languageIcon="gb"
+                      languageItems={languageData}
+                      toggleItems={toggleItems}
+                      componentsList={componentsList}
+                      // brandName="raaghu"
+                      onClick={onClickHandler}
+                      profileTitle="Host Admin"
+                      profileName="admin"
+                      onLogout={logout}
+                      logo={logo}
+                      toggleTheme={props.toggleTheme}
+                      navbarTitle={t(currentTitle) || ""}
+                      navbarSubTitle={t(currentSubTitle) || ""}
+                      onChatClickHandler={() => {
+                        console.log(" session Hey Chat Button Clicked!!");
+                      } } elementList={[]} thememodeList={[]} />
             </div>
             <div className="m-4 h-100">
                   <Suspense>

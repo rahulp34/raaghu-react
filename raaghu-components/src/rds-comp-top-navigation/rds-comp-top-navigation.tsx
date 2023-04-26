@@ -7,7 +7,7 @@ import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/inde
 import Elements from "../../../raaghu-mfe/rds_pages/rds-page-elements/src/elements/elements";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 import { RdsIcon } from "../rds-elements";
-import elementList from './element-list'
+import elementList from './element-list';
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -15,6 +15,7 @@ export interface RdsCompTopNavigationProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   notifications?: any[];
   languageItems: any[];
+  thememodeList:any[];
   toggleItems: any[];
   elementList: any[];
   componentsList: any[];
@@ -49,7 +50,20 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     // console.log(selectValue)
   };
 
-
+  const thememodeList = [
+    {
+      label: "Default",
+      val: "light",
+    },
+    {
+      label: "Dark",
+      val: "dark",
+    },
+    {
+      label: "SemiDark",
+      val: "semidark",
+    }
+  ];
 
   const navtabItems = [
     {
@@ -96,12 +110,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     console.log("handlerElementChange ", val, path);
     setElementPath(path);
   };
+  const toggleTheme =(e: any)=>{
+    console.log("toggleTheme checked", e.target.checked)
+  }
+
   useEffect(() => {
     navigate(elementPath);
     console.log("useEffect elementPath", elementPath);
   }, [elementPath]);
 
   const handlerLinkElements = () => {};
+
   return (
     <div>
       <nav
@@ -136,14 +155,14 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          {/* <div className="px-2 cursor-pointer position-relative border-end">
+          { <div className="px-2 cursor-pointer position-relative border-end">
             <RdsDropdownList
-              placeholder="Components"
-              listItems={props.componentsList}
-              id={"component"}
-            // onClick={props.toggleTheme}
+              placeholder="Default"
+              listItems={thememodeList}
+              id={"thememode"}
+              onClick={toggleTheme}
             ></RdsDropdownList>
-          </div> */}
+            </div> }
 
           <Link
             to={elementPath}

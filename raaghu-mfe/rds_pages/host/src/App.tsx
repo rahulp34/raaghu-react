@@ -13,7 +13,9 @@ const App = () => {
       setThemes("dark");
     } else {
       setThemes("light");
-    }
+    } /*else {
+      setThemes("semi-dark");
+    }*/
   };
   document.documentElement.setAttribute("theme", themes);
   return (
