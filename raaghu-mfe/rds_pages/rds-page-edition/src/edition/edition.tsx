@@ -181,7 +181,7 @@ const Edition = (props: RdsPageEditionProps) => {
   };
 
   const addDataHandler = () => {
-    debugger
+    
     let requestBody = dTo
     dispatch(addEditionData({requestBody}) as any).then((res: any) => {
       dispatch(fetchEditionData() as any);
