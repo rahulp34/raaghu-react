@@ -55,7 +55,7 @@ const RdsSideNavChild = ({
           ))}
       </ul>
       {/* <span> */
-      <div className="darkTheme text-center theme-toggle">
+      /*<div className="darkTheme text-center theme-toggle">
       <a
         className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
       >
@@ -67,7 +67,7 @@ const RdsSideNavChild = ({
       onClick={toggleTheme} checked={false}                ></RdsToggle>
        
       </a>
-    </div>
+    </div>*/
       }
         <div
           className={`sidenav-footer text-center cursor-pointer rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
