@@ -106,7 +106,7 @@ function RdsCompPollsQuestion(props:any) {
                 label="Name"
                 placeholder=""
                 inputType="text"
-                required={true}
+                required={false}
                 value={QuestionData.name}
                 onChange={(e: any) => {
                   setName(e.target.value);

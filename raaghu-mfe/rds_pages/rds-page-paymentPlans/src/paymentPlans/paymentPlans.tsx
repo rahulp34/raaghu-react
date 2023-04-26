@@ -420,6 +420,7 @@ const PaymentPlans = () => {
                     colorVariant="primary"
                     tooltipTitle={""}
                     type={"submit"}
+                    isDisabled={!paymentPlansObj.name}
                     databsdismiss="offcanvas"
                     showLoadingSpinner={true}
                     onClick={(event) => saveUpdatePaymentPlans(event)}
