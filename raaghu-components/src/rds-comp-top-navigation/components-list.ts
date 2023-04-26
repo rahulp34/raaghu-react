@@ -4,7 +4,7 @@ const componentList = [
       val: "cache",
     },
     {
-      label: "Card Detail",
+      label: "Card Detail List",
       val: "cardDetailList",
     }
   ];

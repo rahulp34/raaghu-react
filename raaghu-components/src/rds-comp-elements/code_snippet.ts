@@ -12,6 +12,7 @@ const code_snippet = [
           iconStroke: true,
           routeLabel: "View integration"
       }} />`,
+      name:"App Detail"
   },
   {
     accordion: ` <RdsAccordion
@@ -27,6 +28,7 @@ const code_snippet = [
              <h1>Hello3</h1>
           </RdsAccordionItem>
        </RdsAccordion>`,
+       name:"App Detail"
   },
   {
     alert: `<RdsAlert
@@ -34,6 +36,7 @@ const code_snippet = [
         position="top"
         dismisable={false}
         colorVariant="primary" />;`,
+        name:"Alert"
   },
   {
     addressDetail: `<RdsAddressDetail
@@ -43,18 +46,21 @@ const code_snippet = [
       cardborder={true}
        header="Address Header"
        withIcon={true} children={undefined}></RdsAddressDetail>`,
+       name:"Address Detail"
   },
   {avatar:` <RdsAvatar  size= "small"
   withProfilePic= {true}
   firstName= "Wai"
   lastName="Technologies"
   titleAlign= "horizontal"
-  role= "Developer"`},
+  role= "Developer"`,
+  name:"Avatar"},
   {
     badge:`  <RdsBadge size="medium"
     label= "Badge"
     colorVariant= "danger"
-    badgeType= "rectangle"/>`
+    badgeType= "rectangle"/>`,
+    name:"Badge"
   }
 ];
 export default code_snippet
