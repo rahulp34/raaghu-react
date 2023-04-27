@@ -214,7 +214,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
 
   return (
     <>
-      <div>
+      <div className="container-fluid m-0 p-0">
         <div className=" row mt-3">
           <div className="col-md-5  mb-2">
             <RdsInput
@@ -231,7 +231,6 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
             <RdsButton
               label="Add"
               colorVariant="primary"
-              block={true}
               icon={"plus"}
               iconHeight={"10px"}
               iconWidth={"10px"}

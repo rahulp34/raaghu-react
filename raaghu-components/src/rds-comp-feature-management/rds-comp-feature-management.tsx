@@ -249,7 +249,7 @@ function saveFeaturesData(){
             <h6 className="text-muted my-2">
               Enable audit logging page in the application.
             </h6>
-            <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0">
+            <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0 bg-transparent">
               <RdsButton
                 class="me-2"
                 label="Restore to default"
