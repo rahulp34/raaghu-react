@@ -215,10 +215,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
             >
               <a
                 id={i}
-                className="ps-2 dropdown-item fab-dropdown-item d-flex"
-                // onClick={()=>{anchorhandler}}
-                style={{ cursor: "pointer" }}
-              >
+                className="ps-2 dropdown-item fab-dropdown-item d-flex cursor-pointer">
                 {props.multiSelect && (
                     <div className="form-check">
                       <input

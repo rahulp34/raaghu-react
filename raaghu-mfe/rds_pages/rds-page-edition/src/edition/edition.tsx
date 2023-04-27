@@ -246,8 +246,7 @@ const Edition = (props: RdsPageEditionProps) => {
             <RdsAlert
               alertmessage={alert.message}
               colorVariant={alert.success ? "success" : "danger"}
-              style={{ marginBottom: "0" }}
-            ></RdsAlert>
+             ></RdsAlert>
           )}
         </div>
         <div className="col-lg-4 col-md-4">

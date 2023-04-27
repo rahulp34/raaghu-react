@@ -135,21 +135,23 @@ const Language = (props: LanguageProps) => {
           isenabled: (
             <>
               {item.isEnabled ? (
-                  <div style={{ strokeWidth: "3px" }}>
+                  <div>
                     <RdsIcon
                       name="check"
                       height="17px"
                       width="15px"
                       colorVariant="success"
+                      strokeWidth= "3px"
                     />
                   </div>
                 ) : (
-                  <div style={{ strokeWidth: "3px" }}>
+                  <div>
                     <RdsIcon
                       name="cancel"
                       height="17px"
                       width="15px"
                       colorVariant="danger"
+                      strokeWidth= "3px"
                     />
                   </div>
                 )}
