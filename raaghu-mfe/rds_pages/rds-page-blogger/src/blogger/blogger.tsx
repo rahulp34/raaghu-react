@@ -83,7 +83,21 @@ const Blogger = () => {
   useEffect(() => {
     dispatch(getAllBlogs());
   }, [dispatch]);
+   
+  const isShortNameValid = (password: any) => {
+    if (!password || password.length === 0) {
+      return false;
+    }
+    return true;
+  };
 
+  const isNameValid = (name: any) => {
+    if (!name || name.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isFormValid = isShortNameValid(blogObj.shortName) && isNameValid(blogObj.name);
   // Get all alogs API
   useEffect(() => {
     if (blogs.allblogs.items) {
@@ -249,7 +263,7 @@ const Blogger = () => {
                   placeholder={"Enter Description"}
                   label={"Description"}
                   isRequired={true}
-                  required={true}
+                  required={false}
                   rows={4}
                   value={blogObj.description}
                   onChange={(event) =>
@@ -279,6 +293,7 @@ const Blogger = () => {
                   class="me-2"
                   label={canvasTitle === "Create New Blog" ? "Save" : "Update"}
                   size="small"
+                  isDisabled={!isFormValid}
                   colorVariant="primary"
                   tooltipTitle={""}
                   type={"submit"}

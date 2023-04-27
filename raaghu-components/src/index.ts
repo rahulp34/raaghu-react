@@ -75,3 +75,4 @@ export { default as RdsCompPages } from "./rds-comp-pages/rds-comp-pages";
 export { default as RdsCompNewPage } from "./rds-comp-newPage/rds-comp-newPage";
 export { default as RdsCompBlogPostNew } from "./rds-comp-blog-post-new";
 export {default as RdsCompChangeUserPassword} from './rds-comp-change-user-password/rds-comp-change-user-password';
+export { default as RdsCompCharts } from "./rds-comp-charts";

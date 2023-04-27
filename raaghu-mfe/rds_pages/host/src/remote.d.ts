@@ -229,3 +229,7 @@ declare module "ChangePassword/ChangePassword" {
 	const ChangePasswordComponent: React.ComponentType;
 	export default ChangePasswordComponent;
 }
+declare module "Chart/Chart" {
+	const ChartComponent: React.ComponentType;
+	export default ChartComponent;
+}

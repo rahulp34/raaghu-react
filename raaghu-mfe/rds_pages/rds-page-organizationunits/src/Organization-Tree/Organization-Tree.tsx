@@ -303,15 +303,15 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
 
   return (
     <div>
-      <div className="container-fluid p-0 m-0">
-        <div className="row">
-          <div className="col-md-6">
+      <div className="container-fluid p-0 m-0 h-100">
+        <div className="row h-100">
+          <div className="col-md-6 h-100">
             <div>
-              <div className="card p-2 vh-88 rounded-0 border-0">
+              <div className="card rounded-0 border-0 h-100">
                 <div className="card-header bg-transparent">
                   <h5 className="card-title">Organization Tree</h5>
                 </div>
-                <div className="card-body overflow-auto vh-75">
+                <div className="card-body overflow-auto">
                   <RdsCompOrganizationTree
                     organizationTreeData={oData}
                     onDeleteNode={handlerDeleteNode}
@@ -330,8 +330,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               </div>
             </div>
           </div>
-          <div className="col-md-6 gutter-b">
-            <div className="card p-2  vh-88 rounded-0 border-0">
+          <div className="col-md-6 h-100">
+            <div className="card rounded-0  h-100 border-0">
               {selectedNode === "" && (
                 <div className="card-header bg-transparent">
                   <h5 className="card-title">

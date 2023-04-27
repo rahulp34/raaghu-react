@@ -65,7 +65,7 @@ const RdsAvatar = (props: RdsAvatarProps) => {
 
 	return (
 		<Fragment>
-			<div style={{ display: Aligned }}>
+			<div className={`${Aligned}`}>
 				{WPP === false && !hasName && (
 					<div className={`flex-grow-0 d-flex align-items-center `}>
 						<img src={defaultPP} className={`${imgwidth}`} />
@@ -84,8 +84,8 @@ const RdsAvatar = (props: RdsAvatarProps) => {
 				)}
 				{props.isTitle && (
 					<div
-						className=" flex-grow-0 align-items-center"
-						style={{ display: Aligned }}
+						className={` flex-grow-0 align-items-center ${Aligned}`}
+
 					>
 						<div
 							className={`d-flex justify-content-center bg-${backcolor} me-2 mb-2 align-items-center text-white avatar rounded-circle ${imgwidth}`}

@@ -7,6 +7,7 @@ const code_snippet = [
       { name: "AbpZeroEditionFeatures", id: 4 },
       { name: "AbpTenantSettingsCache", id: 5 }
     ]} recordsperpage ={10}></RdsCompCache>`,
+    name:'Cache'
   },
   {
     cardDetailList: `<RdsCompCardDetailList   cardDatas= {[
@@ -51,6 +52,7 @@ const code_snippet = [
       },
     ]}
     ></RdsCompCardDetailList>`,
+    name:'Card Detail List'
   },
 ];
 export default code_snippet;

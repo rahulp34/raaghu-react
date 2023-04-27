@@ -1,7 +1,7 @@
 import React from 'react';
 import "@testing-library/jest-dom";
 import { render, screen } from '@testing-library/react';
-import RdsIcon from './rds-icon';
+import RdsIcon from '../src/rds-icon/rds-icon';
 
 describe('RdsIcon', ()=>{
     it("Icon renders correctly",()=>{

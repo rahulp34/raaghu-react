@@ -119,7 +119,7 @@ const SecurityLogsPage = () => {
   const dispatch = useAppDispatch();
 
   const securityLogs = () => {
-    debugger
+    
     const securityLogsParamsData = {
       action: selectFilterValue.action,
       identity: selectFilterValue.identity,
@@ -203,7 +203,7 @@ const SecurityLogsPage = () => {
   //   props.getPollsQuestion({ ...QuestionData, startDate:date1  })
   // }
   function onDatePicker  (startEndDate:any) {
-    debugger
+    
     const [start, end] = startEndDate;
     setSelectFilterValue({
       ...selectFilterValue,
@@ -250,7 +250,7 @@ const SecurityLogsPage = () => {
           <div className="card">
             <div className="card-body">
               <div className="row">
-                <div className="col-3" style={{marginTop:'-3px'}}>
+                <div className="col-3">
                   <RdsDatePicker
                     DatePickerLabel="Select Date"  
                     onDatePicker={(s:any)=>onDatePicker(s)}

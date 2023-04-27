@@ -142,5 +142,8 @@ export const PortConfig = {
   },
   "changepassword": {
     "port": "8050"
+  },
+  "chart": {
+    "port": "8018"
   }
 }

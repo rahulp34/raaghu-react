@@ -23,8 +23,23 @@ const UrlForwarding = () => {
   const dispatch = useAppDispatch();
   const Data = useAppSelector((state) => state.persistedReducer.urlForwarding);
   const [urlNewData, setUrlNewData] = useState({source:"", target:""});
+  const[newUrlForwardingData, setNewUrlForwardingData] = useState({source:"",target:""})
+  const[newUrlForwardingEditData, setNewUrlForwardingEditData] = useState({source:"",target:""})
   const { t } = useTranslation();
-  
+  const isSourceValid = (source: any) => {
+    if (!source || source.length === 0) {
+      return false;
+    }
+    return true;
+  };
+
+  const isTargetValid = (target: any) => {
+    if (!target || target.length === 0) {
+      return false;
+    }
+    return true;
+  };
+  const isFormValid = isSourceValid(newUrlForwardingData.source) && isTargetValid(newUrlForwardingData.target);
   useEffect(() => {
     dispatch(fetchUrlShortingsData() as any);
   }, [dispatch]);
@@ -119,8 +134,7 @@ const UrlForwarding = () => {
       dispatch(fetchUrlShortingsData() as any);
     });
   };
-  const[newUrlForwardingData, setNewUrlForwardingData] = useState({source:"",target:""})
-  const[newUrlForwardingEditData, setNewUrlForwardingEditData] = useState({source:"",target:""})
+  
 
   function getUrlForwardingsData(data:any){
     setNewUrlForwardingData(data)
@@ -274,6 +288,7 @@ const UrlForwarding = () => {
                 type={"button"}
                 label="save"
                 colorVariant="primary"
+                isDisabled={!isFormValid}
                 onClick={handlerEditUrlForwardings}
                 databsdismiss="offcanvas"
                 databstoggle="offcanvas"

@@ -148,5 +148,8 @@ export const MfeConfig = {
   },
   "changepassword" : {
     "url" : "changepassword@http://localhost:8050/remoteEntry.js"
+  },
+  "chart": {
+    "url": "chart@http://localhost:8018/remoteEntry.js"
   }
 }

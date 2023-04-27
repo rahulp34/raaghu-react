@@ -199,7 +199,7 @@ const PaymentRequests = () => {
     }
   }, [paymentRequests.allPaymentRequests]);
   function onDatePicker  (startEndDate:any) {
-    debugger
+    
     const [start, end] = startEndDate;
     setFilterParameters({
       ...filterParameters,
