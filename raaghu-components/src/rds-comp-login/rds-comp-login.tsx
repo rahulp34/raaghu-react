@@ -186,7 +186,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
            
           </form>
           <div className="pt-2">
-          <RdsLabel class="text-mute pt-2 secondary " label="©2023 Wai Technologies. All rights reserved " size="0.7rem"></RdsLabel>
+          <RdsLabel class="text-mute pt-2 secondary " label="©2023 WAi Technologies. All rights reserved " size="0.7rem"></RdsLabel>
           </div>
           
             

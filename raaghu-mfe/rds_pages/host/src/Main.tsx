@@ -270,7 +270,7 @@ const Main = (props: MainProps) => {
         return {
           label: item.displayName,
           val: item.cultureName,
-          icon: item.flagIcon !== null ? item.flagIcon : "isNull",
+          icon: item.flagIcon !== null ? item.flagIcon : item.twoLetterISOLanguageName,
           iconWidth: "20px",
           iconHeight: "20px",
         };

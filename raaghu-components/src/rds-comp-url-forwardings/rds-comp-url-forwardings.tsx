@@ -29,11 +29,12 @@ function RdsCompUrlForwardings(props: RdsCompUrlForwardingsProps){
 					<div className="row">
 						<div className="col-md-6">
 							<div className="form-group mb-3">
-								<RdsLabel label="Source" class="mb-1" size="14px"></RdsLabel>
 								<RdsInput
 									inputType="text"
+									label="Source"
 									placeholder="Type"
 									
+									required={true}
 									value={formData.source}
 									onChange={(e:any)=>{handleSource(e.target.value)}}
 								></RdsInput>
@@ -41,10 +42,11 @@ function RdsCompUrlForwardings(props: RdsCompUrlForwardingsProps){
 						</div>
 						<div className="col-md-6">
 							<div className="form-group mb-3">
-								<RdsLabel label="Target" class="mb-1" size="14px"></RdsLabel>
 								<RdsInput
 									inputType="text"
+									label="Target"
 									placeholder="Value"
+									required={false}
 									
 									onChange={(e:any)=>{handleTarget(e.target.value)}}
 									value={formData.target}

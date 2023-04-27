@@ -18,7 +18,7 @@
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
     "raaghu-react-core": "^1.0.9",
-    "raaghu-themes": "^0.0.24",
+    "raaghu-themes": "^0.0.25",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
     "react-datepicker": "^4.8.0",
@@ -35,6 +35,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
     "@mdx-js/react": "1.6",
     "@storybook/addon-actions": "^6.5.13",
     "@storybook/addon-docs": "^6.5.16",
