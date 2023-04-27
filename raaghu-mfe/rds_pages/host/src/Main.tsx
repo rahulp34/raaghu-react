@@ -585,7 +585,7 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-1"
+                                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
                     id="FixedHeaderOverFlow"
                   >
                     <div className="header align-items-stretch">

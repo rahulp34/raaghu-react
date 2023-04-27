@@ -240,7 +240,7 @@ const RdsCompAdminDashboard = () => {
 											subTitleColorVariant="success"
 											subTitle="+$2203"
 											iconFill={true}
-											bigNumber="$3,32,230"
+											bigNumber="$332,230"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_up"
@@ -260,7 +260,7 @@ const RdsCompAdminDashboard = () => {
 											subTitleColorVariant="warning"
 											subTitle="-$1203"
 											iconFill={true}
-											bigNumber="$9,72,900"
+											bigNumber="$972,900"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_down"
@@ -544,7 +544,7 @@ const RdsCompAdminDashboard = () => {
 											subTitleColorVariant="success"
 											subTitle="-$2203"
 											iconFill={true}
-											bigNumber="$3,32,230"
+											bigNumber="$332,230"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_up"
@@ -562,7 +562,7 @@ const RdsCompAdminDashboard = () => {
 								>
 									<div>
 										<RdsBigNumber
-											bigNumber="$3,73,960"
+											bigNumber="$373,960"
 											icon={"triangle_down"}
 											iconHeight={"12px"}
 											subTitle="-$5850"
