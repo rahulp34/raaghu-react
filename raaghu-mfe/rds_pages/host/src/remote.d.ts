@@ -224,3 +224,8 @@ declare module "Newsletters/Newsletters" {
 	const NewslettersComponent: React.ComponentType;
 	export default NewslettersComponent;
 }
+
+declare module "Chart/Chart" {
+	const ChartComponent: React.ComponentType;
+	export default ChartComponent;
+}

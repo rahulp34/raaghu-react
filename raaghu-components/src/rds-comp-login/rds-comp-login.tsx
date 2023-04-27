@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
+import { RdsLabel } from "raaghu-react-elements";
 export interface RdsCompLoginProps {
   onLogin: (email: string, password: string, rememberMe :boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
@@ -180,7 +181,15 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               type="submit"
             //onClick= {emailhandleChange}
             />
+          
+          
+           
           </form>
+          <div className="pt-2">
+          <RdsLabel class="text-mute pt-2 secondary " label="©2023 WAi Technologies. All rights reserved " size="0.7rem"></RdsLabel>
+          </div>
+          
+            
         </div>
       </div>
     </div>

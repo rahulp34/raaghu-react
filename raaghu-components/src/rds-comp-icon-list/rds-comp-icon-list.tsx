@@ -69,7 +69,7 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
                   height="20px"
                   width="20px"
                   fill={false}
-                  stroke={true}
+                  stroke={true} isAnimate = {true}
                 ></RdsIcon>
               </div>
               <span className="text fs-8 text-wrap">{iconName}</span>

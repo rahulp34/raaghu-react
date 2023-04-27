@@ -292,7 +292,7 @@ const Chats = () => {
                             width: "fit-content",
                           }}
                         >
-                          <div className="text-white">{item.text}</div>
+                          <div className="text-white" style={{wordWrap: "break-word"}}>{item.text}</div>
                           <div
                             className="mt-1"
                             style={{

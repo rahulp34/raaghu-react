@@ -1,7 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
 import { render, fireEvent, screen } from "@testing-library/react";
-import RdsButton from "./rds-button";
+import RdsButton from "../src/rds-button/rds-button";
 
 describe("RdsButton", () => {
   it("renders button with label", () => {

@@ -139,5 +139,8 @@ export const PortConfig = {
   },
   "newsletters": {
     "port": "8122"
+  },
+  "chart": {
+    "port": "8018"
   }
 }

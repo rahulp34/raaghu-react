@@ -34,16 +34,14 @@ const RdsTable = (props: RdsTableProps) => {
       >
         <thead
           className={`${props.tableHeightForScroll ? "headFixed" : ""}`}
-          style={{
-            backgroundColor: `${props.backgroundColor}`,
-          }}
+          
         >
           <tr>
             {props.headerDatas.map((headerData) => (
               <th
                 key={headerData.key}
                 scope="col"
-                className={`text-${props.headerTextColor} pl-4`}
+                className={`pl-4`}
                 style={{
                   fontWeight: "400",
                   paddingLeft: "16px",

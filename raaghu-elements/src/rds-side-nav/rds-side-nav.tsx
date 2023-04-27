@@ -23,13 +23,11 @@ const RdsSideNav = (props: RdsSideNavProps) => {
   const logo = "./assets/raaghu_logs.png";
   const afterLogo = "./assets/raaghu_icon.png";
 
-
   const onDivCollapse = () => {
     // callback(!collapse);
     console.log(collapse)
     setcollapse(!collapse);
   }
-
 
   useEffect(() => {
     setcollapse(collapse);

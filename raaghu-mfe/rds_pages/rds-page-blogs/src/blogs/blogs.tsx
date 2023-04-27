@@ -7,7 +7,7 @@ import {
   RdsOffcanvas,
   RdsCheckbox,
   RdsAlert,
-} from "raaghu-react-elements";
+} from "../../../rds-elements";
 import {
   addBlogsData,
   editBlogsData,
@@ -21,7 +21,10 @@ const Blogs = (props: RdsPageResourcesProps) => {
   const { t } = useTranslation();
   const [blogsData, setResourceData] = useState<any>([]);
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState({
+    name:"",
+    slug:""
+  });
   const [alertOne, setAlertOne] = useState(false);
   const [alert, setAlert] = useState({
     showAlert: false,
@@ -39,7 +42,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
         dispatch(fetchBlogsData() as any);
       }
     );
-    setValue("");
+    setValue({name:'',slug:''});
     setAlertOne(true);
   };
 
@@ -117,7 +120,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
     dispatch(addBlogsData(dTo) as any).then((res: any) => {
       dispatch(fetchBlogsData() as any);
     });
-    setValue("");
+    setValue({name:'',slug:''});
     setAlertOne(true);
   };
 
@@ -165,7 +168,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     block={false}
                     size="small"
                     type="button"
-                    showLoadingSpinner={true}
+                    showLoadingSpinner={false}
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
@@ -184,7 +187,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     label="Name"
                     labelPositon="top"
                     id=""
-                    value={value}
+                    value={value.name}
                     required={true}
                     onChange={(e: any) => {
                       setValue(e.target.value);
@@ -197,7 +200,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                     label="Slug"
                     labelPositon="top"
                     id=""
-                    value={value}
+                    value={value.slug}
                     required={true}
                     onChange={(e: any) => {
                       setValue(e.target.value);
@@ -218,7 +221,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       type={"button"}
                       size="small"
                       databsdismiss="offcanvas"
-                      isDisabled={value === ""}
+                      isDisabled={!value.name}
                       colorVariant="primary"
                       class="me-2"
                       showLoadingSpinner={true}
