@@ -224,3 +224,8 @@ declare module "Newsletters/Newsletters" {
 	const NewslettersComponent: React.ComponentType;
 	export default NewslettersComponent;
 }
+
+declare module "ChangePassword/ChangePassword" {
+	const ChangePasswordComponent: React.ComponentType;
+	export default ChangePasswordComponent;
+}

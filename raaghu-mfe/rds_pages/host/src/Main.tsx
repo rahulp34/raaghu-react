@@ -66,6 +66,7 @@ import {
   BlogPostCompo,
   GlobalResourcesCompo,
   NewslettersCompo,
+  ChangePasswordCompo
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 '../ApiRequestOptions';
@@ -425,10 +426,11 @@ useEffect(()=> {
 
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      localStorage.setItem('datahostEmail',dataHost.email);
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService('password', dataHost.email, dataHost.password, 'raaghu', 'address email roles profile phone BookStore').then(async(res:any)=>{
         if(res){
-          sessionStorage.setItem('accessToken',res)
+          // sessionStorage.setItem('accessToken',res)
           await hello(res)
           sessionStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('refreshToken', res.refresh_token)
@@ -526,9 +528,14 @@ useEffect(()=> {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
+        <Route
+          path="/changepassword"
+          element={<ChangePasswordCompo />}
+        ></Route>
+
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname != '/login' && location.pathname != '/forgot-password' && (
+      {location.pathname != '/login' && location.pathname != '/forgot-password' && location.pathname != '/changepassword' && (
         <div className="d-flex flex-column flex-root">
           <div className="page d-flex flex-column flex-column-fluid">
             <div

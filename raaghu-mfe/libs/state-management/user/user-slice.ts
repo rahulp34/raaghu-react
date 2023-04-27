@@ -21,6 +21,7 @@ export interface UserState {
   alert: boolean;
   alertMessage: string;
   success: boolean;
+  userName : string;
 };
 export const UserInitialState: UserState = {
   loading: false,
@@ -35,6 +36,7 @@ export const UserInitialState: UserState = {
   alert: false,
   alertMessage: "",
   success: false,
+  userName :""
 };
 
 // Generates pending, fulfilled and rejected action types
@@ -146,6 +148,12 @@ export const fetchRolesForEdit = createAsyncThunk("user/fetchRoles", (data:any) 
 });
 export const changePassword= createAsyncThunk("user/changePassword", (data:any) => {
   return UserService.putUsersChangePassword(data).then((result:any)=>{
+     return result;
+  }) 
+});
+
+export const getUsersByUsername= createAsyncThunk("user/getUsersByUsername", (username:string) => {
+  return UserService.getUsersByUsername({username:username}).then((result:any)=>{
      return result;
   }) 
 });
@@ -343,6 +351,21 @@ const userSlice = createSlice({
       }
     );
     builder.addCase(fetchEditUserRoles.rejected,(state,action)=>{
+      state.loading=false;
+      state.error=action.error.message||"Somethingwentwrong";
+    });
+
+    builder.addCase(getUsersByUsername.pending,(state)=>{
+      state.loading=true;
+    });
+
+    builder.addCase(
+      getUsersByUsername.fulfilled,(state,action:PayloadAction<any>)=>{
+        state.loading=false;
+        state.userName = action.payload
+      }
+    );
+    builder.addCase(getUsersByUsername.rejected,(state,action)=>{
       state.loading=false;
       state.error=action.error.message||"Somethingwentwrong";
     });
