@@ -59,7 +59,7 @@ const RdsSideNavChild = ({
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
-         <span className="collpase-button">
+         <span className="collpase-button cursor-pointer">
 
            <RdsIcon
                 name="chevron_right_arrow"

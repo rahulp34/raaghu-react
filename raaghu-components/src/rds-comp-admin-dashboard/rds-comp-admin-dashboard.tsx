@@ -237,9 +237,9 @@ const RdsCompAdminDashboard = () => {
 									>
 										<RdsBigNumber
 											subTitleColorVariant="success"
-											subTitle="+$2203.00"
+											subTitle="+$2203"
 											iconFill={true}
-											bigNumber="$3,32,230.00"
+											bigNumber="$3,32,230"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_up"
@@ -257,9 +257,9 @@ const RdsCompAdminDashboard = () => {
 									>
 										<RdsBigNumber
 											subTitleColorVariant="warning"
-											subTitle="-$1203.00"
+											subTitle="-$1203"
 											iconFill={true}
-											bigNumber="$9,72,900.00"
+											bigNumber="$9,72,900"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_down"
@@ -276,7 +276,7 @@ const RdsCompAdminDashboard = () => {
 									colorVariant={"white"}
 								>
 									<div>
-										<RdsBigNumber bigNumber="$39,330.00"></RdsBigNumber>
+										<RdsBigNumber bigNumber="$39,330"></RdsBigNumber>
 										<div className="col col-sm-12">
 											<RdsDoughnutChart
 												id="doughnutchart"
@@ -541,9 +541,9 @@ const RdsCompAdminDashboard = () => {
 									>
 										<RdsBigNumber
 											subTitleColorVariant="success"
-											subTitle="-$2203.00"
+											subTitle="-$2203"
 											iconFill={true}
-											bigNumber="$3,32,230.00"
+											bigNumber="$3,32,230"
 											iconWidth="12px"
 											iconHeight="12px"
 											icon="triangle_up"
@@ -561,10 +561,10 @@ const RdsCompAdminDashboard = () => {
 								>
 									<div>
 										<RdsBigNumber
-											bigNumber="$3,73,960.412"
+											bigNumber="$3,73,960"
 											icon={"triangle_down"}
 											iconHeight={"12px"}
-											subTitle="-$5850.75"
+											subTitle="-$5850"
 											iconStroke={false}
 											iconFill={true}
 											iconWidth={"12px"}
