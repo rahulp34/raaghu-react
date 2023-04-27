@@ -47,8 +47,8 @@ export const fetchAllClaims = createAsyncThunk("Roles/fetchAllClaims", () => {
 
 export const fetchClaims = createAsyncThunk(
   "Roles/fetchClaims",
-  (data: any) => {
-    RoleService.getRolesClaims({ id: data.id }).then((result: any) => {
+  (id: any) => {
+    RoleService.getRolesClaims({ id: id }).then((result: any) => {
       return result;
     });
   }
@@ -84,18 +84,23 @@ export const deleteRoles = createAsyncThunk("Roles/deleteRoles", (id: any) => {
 });
 
 //permissionsGET
-export const fetchPermission = createAsyncThunk(
-  "Roles/fetchPermission",
-  (key: any) => {
-    PermissionsService.getPermissions({
-      providerName: "R",
-      providerKey: key,
-    }).then((result: any) => {
-      console.log("fetched data , ", result);
-      return result.groups;
-    });
-  }
-);
+// export const fetchPermission = createAsyncThunk(
+//   "Roles/fetchPermission",
+//   (key: any) => {
+//     PermissionsService.getPermissions({
+//       providerName: "R",
+//       providerKey: key,
+//     }).then((result: any) => {
+//       console.log("fetched data , ", result);
+//       return result;
+//     });
+//   }
+// );
+export const fetchPermission = createAsyncThunk("Roles/fetchPermission", (key:string) => {
+  return PermissionsService.getPermissions({providerName:"R",providerKey:key}).then((result:any)=>{
+     return result;
+  }) 
+});
 
 //permissionsPUT
 export const editPermisstion = createAsyncThunk(
