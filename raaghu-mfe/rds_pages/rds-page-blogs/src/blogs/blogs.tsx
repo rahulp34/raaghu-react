@@ -145,9 +145,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
             {alert.showAlert && alertOne && (
               <RdsAlert
                 alertmessage={alert.message}
-                colorVariant={alert.success ? "success" : "danger"}
-                style={{ marginBottom: "0" }}
-              ></RdsAlert>
+                colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
             )}
           </div>
           <div className="d-flex justify-content-end">
