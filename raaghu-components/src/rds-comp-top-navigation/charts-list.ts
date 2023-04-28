@@ -10,6 +10,10 @@ const chartList = [
     {
       label: "Pie Chart",
       val: "pie",
+    },
+    {
+      label: "Boolean Chart",
+      val: "boolean",
     }
   ];
   export default chartList ;
