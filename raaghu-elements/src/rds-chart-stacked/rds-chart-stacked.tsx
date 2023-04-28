@@ -23,7 +23,7 @@ const RdsStackedChart = (props:RdsStackedprops) => {
     ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
     
     const StackedCanvas = new Chart(ctx, {
-      type: "line",
+      type: "bar",
       data: {
         labels: props.labels,
         datasets:props.dataSets
