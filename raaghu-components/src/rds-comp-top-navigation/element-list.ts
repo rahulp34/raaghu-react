@@ -46,23 +46,42 @@ const elementList = [
   {
     label: "Button",
     val: "button",
-  }, {
+  },
+  {
     label: "Button Group",
     val: "buttonGroup",
   },
   {
     label: "Card",
     val: "card",
-  }
-  ,
+  },
   {
     label: "carousel",
     val: "carousel",
-  }
-  ,
+  },
   {
     label: "Checkbox",
     val: "checkbox",
-  }
+  },
+  {
+    label: "Checkbox Group",
+    val: "checkboxGroup",
+  },
+  {
+    label: "Checkbox Parent",
+    val: "checkboxParentChild",
+  },
+  {
+    label: "Collapse",
+    val: "collapse",
+  },
+  {
+    label: "Color Picker",
+    val: "colorPicker",
+  },
+  {
+    label: "Color Switcher",
+    val: "colorSwitcher",
+  },
 ];
 export default elementList;
