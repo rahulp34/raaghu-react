@@ -97,22 +97,27 @@ const RdsCompAdminDashboard = () => {
 										id: 'radio1',
 										label: 'Day',
 										name: 'btnradio',
+										checked: true
 									},
 									{
 										id: 'radio2',
 										label: 'Week',
-										name: 'btnradio'
+										name: 'btnradio',
+										checked: false
 									},
 									{
 										id: 'radio3',
 										label: 'Month',
-										name: 'btnradio'
+										name: 'btnradio',
+										checked: false
 									}
 								]}
 								colorVariant="primary"
-								isOutline
+								isOutline={true}
 								role="radio"
-								size="small" vertical={false} />
+								size="small"
+								vertical={false} 
+								/>
 						</div>
 					</div>
 				</div>

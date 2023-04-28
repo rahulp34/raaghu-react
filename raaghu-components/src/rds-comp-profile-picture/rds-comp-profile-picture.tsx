@@ -117,7 +117,7 @@ const RdsCompProfilePicture = (props: any) => {
             alt="profilePic"
             width="130px"
             height="120px"
-            className="profil_image_Class"
+            className="profil_image_Class rounded-circle"
           ></img>
         </div>
         <div className="col-8 my-3">
