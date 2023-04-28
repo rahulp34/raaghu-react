@@ -188,7 +188,10 @@ useEffect( () => {
         </div>
 
         {condition }
-          <div className="footer-buttons card-footer justify-content-end d-flex  pt-0" >
+          <div className="footer-buttons justify-content-end d-flex bottom-0 pt-2" 
+          style={{
+            zIndex:1
+          }}>
             <RdsButton
               class="me-2"
               label="CANCEL"

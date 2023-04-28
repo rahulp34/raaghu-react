@@ -173,7 +173,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                   ></RdsButton>
                 </div>
               }
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
               offId={"blog-add-off"}
