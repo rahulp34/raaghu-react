@@ -315,9 +315,7 @@ const Polls = (props: any) => {
           {alert.showAlert && alertOne && (
           <RdsAlert
             alertmessage={alert.message}
-            colorVariant={alert.success ? "success" : "danger"}
-            style={{ marginBottom: "0" }}
-          ></RdsAlert>
+            colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
         )}
           </div>
       <div className="col-lg-3 col-md-3 mb-2 d-flex justify-content-end">
@@ -445,6 +443,7 @@ const Polls = (props: any) => {
           </div>
         </RdsOffcanvas>
       </div>
+      <div className="col-md-12">
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
          actionPosition="right"
@@ -461,7 +460,7 @@ const Polls = (props: any) => {
             onSuccess={deleteHandler}
           />
       </div>
-
+      </div>
       <div>
         <RdsOffcanvas
           canvasTitle="Results"

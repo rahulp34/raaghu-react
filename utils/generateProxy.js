@@ -6,7 +6,7 @@ const OpenAPI = require('raaghu-react-core/dist/build-proxy');
 // const fetch = require('node-fetch');
 
 const eTc = process.argv[2];
-const url = process.argv[3];
+const url = process.env.npm_config_url;
 const completeURL = url + '/swagger/v1/swagger.json';
 
 const generate = async (input, output) => {
@@ -31,7 +31,7 @@ const generate = async (input, output) => {
 const generateRealWorldSpecs = async () => {
     console.log("\x1b[32m%s\x1b[0m", `Downloading swagger json...`);
     execSync(
-        `curl -o swaggerJSON.json ${completeURL}`,
+        `curl -o swaggerJSON.json ${completeURL}`, 
         { cwd: '.', stdio: "inherit" }
     )
 

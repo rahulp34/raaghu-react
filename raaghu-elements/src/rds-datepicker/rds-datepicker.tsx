@@ -27,7 +27,6 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       " - " +
       (end != null ? end.toDateString().slice(4) : "")
     );
-
   };
 
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
@@ -61,6 +60,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       today.getMonth(),
       today.getDate() - 1
     );
+    onRangeChange([newDate, newDate]);
     setDropdownDisplayValue(newDate.toDateString().slice(4));
   };
   const todayClickHandler = () => {
@@ -69,7 +69,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       today.getMonth(),
       today.getDate()
     );
-    onRangeChange([newDate, null]);
+    onRangeChange([newDate, newDate]); // set the end date the same as the start date
     setDropdownDisplayValue(newDate.toDateString().slice(4));
   };
   const lastSevenDaysClickHandler = () => {
@@ -102,7 +102,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
   }, [props.dateForEdit])
 
   return (
-    <div>
+    <>
       {props.type !== "advanced" && (
         <>
           {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
@@ -152,15 +152,15 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
                                 <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                             </svg> */}
               <span>
-              <RdsIcon
-                name="calendar"
-                width="20px"
-                height="20px"
-                colorVariant="secondary"
-                stroke={true}
-              ></RdsIcon>
-              {/* (StartDate:any,EndDate:any)=>props.DatePicker */}
-              <span className="ps-3 pe-1 ">{dropdownDisplayValue}</span>
+                <RdsIcon
+                  name="calendar"
+                  width="20px"
+                  height="20px"
+                  colorVariant="secondary"
+                  stroke={true}
+                ></RdsIcon>
+                {/* (StartDate:any,EndDate:any)=>props.DatePicker */}
+                <span className="ps-3 pe-1 ">{dropdownDisplayValue}</span>
               </span>
             </button>
             <ul className="dropdown-menu overflow-visible">
@@ -209,7 +209,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 };
 export default RdsDatepicker;

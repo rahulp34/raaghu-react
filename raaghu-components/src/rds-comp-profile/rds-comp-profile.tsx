@@ -49,7 +49,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             alt="profilePic"
             width="130px"
             height="120px"
-            className="profil_image_Class"
+            className="profil_image_Class rounded-circle"
           ></img>
         </div>
         <p className="fw-bold text-center m-0 mt-3">{props.userName}</p>

@@ -8,6 +8,9 @@ export interface RdsButtonGroupProps {
   size: string;
   role: "checkbox" | "radio" | "button";
   buttonGroupItems: any[];
+  checked?: boolean; 
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
 }
 
 const RdsButtonGroup = (props: RdsButtonGroupProps) => {
@@ -46,6 +49,8 @@ const RdsButtonGroup = (props: RdsButtonGroupProps) => {
                 name={props.role == "radio" ? `${buttonGroupItem.name}` : ""}
                 id={buttonGroupItem.id}
                 autoComplete="off"
+                defaultChecked={buttonGroupItem.checked}
+                onClick = {props.onClick}
               ></input>
               <label
                 className={outlineColorVariant}

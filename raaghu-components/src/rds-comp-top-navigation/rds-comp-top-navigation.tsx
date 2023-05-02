@@ -8,6 +8,7 @@ import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-bread
 import elementList from "./element-list";
 import componentList from "./components-list";
 import chartList from "./charts-list";
+import MultiLevelDropdown from "./multi-level-dropdown";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -27,19 +28,21 @@ export interface RdsCompTopNavigationProps {
   languageLable: string;
   languageIcon: string;
   breacrumItem?: any;
-  profilePic?:any
+  profilePic?: any;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
   onElementSelect?: (selectedElement: any) => void;
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
-  const [path, setPath] = useState({ elem: "/elements", compo: "/components", chart:"/charts" });
-  const [navtitle, setNavtitle] = useState(props.navbarTitle);
-  const [resetDrop, setResetDrop] = useState({
-    elem: false,
-    compo: false,
-    chart:false
+  const [path, setPath] = useState({
+    elem: "/elements",
+    compo: "/components",
+    chart: "/charts",
+    icon: "",
   });
+  const [navtitle, setNavtitle] = useState(props.navbarTitle);
+  const [resetDrop, setResetDrop] = useState(false);
+
   const navigate = useNavigate();
 
   const navtabItems = [
@@ -74,62 +77,92 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       props.onClick(e, val);
     }
   };
-  const handlerElementChange = (e: any, val: string) => {
-    setResetDrop({ ...resetDrop, compo: !resetDrop.compo, chart:!resetDrop.chart });
-    const paath = `/elements/${val}`;
-    let elementBreadCrumb = [
-      { id: "Element", label: "Element", icon: "" },
-      { id: e.target.textContent, label: e.target.textContent, icon: "" },
-    ];
-    setNavtitle("Element");
-    setBreadCrumItem(elementBreadCrumb);
-    setPath({ ...path, elem: paath });
-  };
-  const handlerComponentChange = (e: any, val: string) => {
-    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, chart:!resetDrop.chart });
-    const paath = `/components/${val}`;
-    let compoBreadCrumb = [
-      { id: "Component", label: "Component", icon: "" },
-      { id: e.target.textContent, label: e.target.textContent, icon: "" },
-    ];
+  //UI library dropdown handler
+  const handlerSubMenuselect = (
+    e: any,
+    val: any,
+    label: any,
+    selectedUi: any
+  ) => {
+    //element handling
+    if (selectedUi == "Elements") {
+      const paath = `/elements/${val}`;
+      let elementBreadCrumb = [
+        { id: "UI Library", label: "UI Library", icon: "" },
+        { id: "Element", label: "Elements", icon: "" },
+        { id: e.target.textContent, label: e.target.textContent, icon: "" },
+      ];
+      setNavtitle("Element");
+      setBreadCrumItem(elementBreadCrumb);
+      setPath({ ...path, elem: paath });
+    }
+    //Components  handling
+    if (selectedUi == "Components") {
+      const paath = `/components/${val}`;
+      let compoBreadCrumb = [
+        { id: "UI Library", label: "UI Library", icon: "" },
+        { id: "Component", label: "Components", icon: "" },
+        { id: e.target.textContent, label: e.target.textContent, icon: "" },
+      ];
 
-    setNavtitle("Component");
-    setBreadCrumItem(compoBreadCrumb);
-    setPath({ ...path, compo: paath });
-  };
-  const handlerChartChange = (e: any, val: string) => {
-    setResetDrop({ ...resetDrop, elem: !resetDrop.elem, compo:!resetDrop.compo });
-    const paath = `/charts/${val}`;
-    let chartBreadCrumb = [
-      { id: "Chart", label: "Chart", icon: "" },
-      { id: e.target.textContent, label: e.target.textContent, icon: "" },
-    ];
+      setNavtitle("Component");
+      setBreadCrumItem(compoBreadCrumb);
+      setPath({ ...path, compo: paath });
+    }
+    //Charts  handling
+    if (selectedUi == "Charts") {
+      const paath = `/charts/${val}`;
+      let chartBreadCrumb = [
+        { id: "UI Library", label: "UI Library", icon: "" },
+        { id: "Chart", label: "Charts", icon: "" },
+        { id: e.target.textContent, label: e.target.textContent, icon: "" },
+      ];
 
-    setNavtitle("Chart");
-    setBreadCrumItem(chartBreadCrumb);
-    setPath({ ...path, chart: paath });
+      setNavtitle("Chart");
+      setBreadCrumItem(chartBreadCrumb);
+      setPath({ ...path, chart: paath });
+    }
+    if (label == "Icons") {
+      let iconBreadCrumb = [
+        { id: "UI Library", label: "UI Library", icon: "" },
+        { id: "Icons", label: "Icons", icon: "" },
+      ];
+      setNavtitle("Icon");
+      setBreadCrumItem(iconBreadCrumb);
+      setPath({ ...path, icon: "/icons" });
+    }
   };
 
+  //side effect for breadcrum
   useEffect(() => {
     setBreadCrumItem(props.breacrumItem);
   }, [props.breacrumItem]);
 
   const handlerLinkElements = () => {};
-  const[profilePic, setProfilePic] = useState("./assets/profile-picture-circle.svg");
-  useEffect(()=>{
-    if(props.profilePic){
-      setProfilePic(props.profilePic)
+  const [profilePic, setProfilePic] = useState(
+    "./assets/profile-picture-circle.svg"
+  );
+  useEffect(() => {
+    if (props.profilePic) {
+      setProfilePic(props.profilePic);
     }
+  }, [props.profilePic]);
 
-  },[props.profilePic])
-
+  //side effect for the navtitle adn reset
   useEffect(() => {
     setNavtitle(props.navbarTitle);
-    if ((navtitle != "Element" && navtitle != "Component"&& navtitle!="Chart" )|| props.navbarTitle != navtitle) {
-      setResetDrop({ ...resetDrop, elem: !resetDrop.elem ,compo: !resetDrop.compo, chart:!resetDrop.chart });
+    if (
+      (navtitle != "Element" &&
+        navtitle != "Component" &&
+        navtitle != "Chart") ||
+      props.navbarTitle != navtitle
+    ) {
+      setResetDrop(!resetDrop);
+
     }
   }, [props.breacrumItem, props.navbarTitle]);
 
+  //side effect for the path
   useEffect(() => {
     if (navtitle == "Component") {
       navigate(path.compo);
@@ -140,7 +173,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     if (navtitle == "Chart") {
       navigate(path.chart);
     }
+    if (navtitle == "Icon") {
+      navigate(path.icon);
+    }
   }, [path]);
+
   return (
     <div>
       <nav
@@ -162,39 +199,10 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-        <RdsDropdownList
-            reset={resetDrop.chart}
-            placeholder="Charts"
-            icon=""
-            iconFill={false}
-            iconStroke={true}
-            id={"chartlDropdown"}
-            listItems={chartList}
-            onClick={handlerChartChange}
-          ></RdsDropdownList>
-          <RdsDropdownList
-            reset={resetDrop.compo}
-            placeholder="Components"
-            icon=""
-            iconFill={false}
-            iconStroke={true}
-            id={"componentlDropdown"}
-            listItems={componentList}
-            onClick={handlerComponentChange}
-          ></RdsDropdownList>
-
-          <RdsDropdownList
-            reset={resetDrop.elem}
-            placeholder="Elements"
-            icon=""
-            iconFill={false}
-            iconStroke={true}
-            id={"elementlDropdown"}
-            listItems={elementList}
-            onClick={handlerElementChange}
-          ></RdsDropdownList>
-
-
+          <MultiLevelDropdown
+            reset={resetDrop}
+            onsubmenu={handlerSubMenuselect}
+          ></MultiLevelDropdown>
           <div className="px-2 position-relative me-3">
             <RdsDropdownList
               placeholder={props.languageLable}
@@ -232,7 +240,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
                 className="d-flex align-items-center"
                 style={{ cursor: "pointer" }}
               >
-                <img className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
+                <img
+                  className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
                   src={profilePic}
                 ></img>
                 <div className="ms-2 fw-bold fs-6">
@@ -259,7 +268,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           >
             <RdsCompProfile
               navtabItems={navtabItems}
-
               profilePic={profilePic}
               userName={"Host Admin"}
               userRole={"admin"}
@@ -271,5 +279,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     </div>
   );
 };
+
 
 export default RdsCompTopNavigation;
