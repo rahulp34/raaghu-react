@@ -3,7 +3,6 @@ import Chart from 'chart.js/auto';
 //import "./rds-chart-doughnut.scss"
 
 export interface RdsDoughnutprops {
-
   labels:any[],
   options:any,
   dataSets:any[],
@@ -24,8 +23,8 @@ const RdsDoughnutChart = (props:RdsDoughnutprops) => {
       CanvasId
     ) as HTMLCanvasElement | null;
     ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
-    const title = props.titleText;
-    const subTitle = props.subTitleText;
+    const title = props.titleText||"";
+    const subTitle = props.subTitleText||"";
     let centerText = {
       id: 'counter3',
       beforeDraw(chart:any, args:any, options:any) {

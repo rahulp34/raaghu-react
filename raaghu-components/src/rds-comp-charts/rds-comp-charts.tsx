@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { RdsLabel, RdsIcon } from "../rds-elements";
 import code_snippet from "./code_snippet";
+import code_snippett from "./charts/bar"
 
 export interface RdsCompChartsProps {}
 
@@ -17,6 +18,7 @@ const RdsCompCharts = (props: any) => {
   );
 
   useEffect(() => {
+    ComponentElement
     const filteredSnippets = code_snippet.filter((snippet) =>
       snippet.hasOwnProperty(props.type)
     );
@@ -33,7 +35,7 @@ const RdsCompCharts = (props: any) => {
   const setChildCode = (message: any) => {
     // setCode(message);
   };
-
+console.log(" code_snippett", code_snippett)
   return (
     <>
       <div className="card p-2 border-0 rounded-0 mt-4 vh-88">
