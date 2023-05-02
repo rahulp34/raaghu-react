@@ -346,7 +346,7 @@ dispatch(
       <div className="row">
         <div className="col-md-12">
         <div className="row ">
-            <div className="col-md-4" style={{position: "absolute" , zIndex: "0"}}>
+            <div className="col-md-4">
               {Alert.show && (
                 <RdsAlert
                 alertmessage={Alert.message}
