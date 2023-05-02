@@ -444,7 +444,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         canvasTitle="Select Member"
         
         offId="oMember-add-off"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
       >
@@ -511,7 +511,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         canvasTitle="Select Roles"
         
         offId="oRole-add-off"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
       >
@@ -578,7 +578,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="New Organization Unit"
         offId="aoganization"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
       >
@@ -621,7 +621,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         canvasTitle="Edit Organization Unit"
         
         offId="boganization"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
       >
@@ -662,7 +662,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Add Organiztion Sub-Unit"
         
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
         offId="coganization"
@@ -704,7 +704,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Add Organiztion New Unit"
         
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
         offId="doganization"

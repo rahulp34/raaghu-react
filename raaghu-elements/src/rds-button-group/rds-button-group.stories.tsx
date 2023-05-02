@@ -99,16 +99,19 @@ RadioButtonGroup.args = {
       label: "radio1",
       id: "radio1",
       name: "btnradio",
+      checked: true
     },
     {
       label: "radio2",
       id: "radio2",
       name: "btnradio",
+      checked: false
     },
     {
       label: "radio3",
       id: "radio3",
       name: "btnradio",
+      checked: false
     }
 
   ]
