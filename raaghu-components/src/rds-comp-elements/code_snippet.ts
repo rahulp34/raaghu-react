@@ -853,6 +853,65 @@ const code_snippet = [
   {
     price: `<RdsPrice mrp={100} currentPrice={90} withDiscount={true} /> `,
     name: "Price",
-  }
+  },
+  {
+    productImage: `<RdsProductImage
+    displayType="basic"
+    itemList={[
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+    ]}
+    images={[
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    ]}
+  /> `,
+    name: "Product Image",
+  },
+  {
+    progressBar: ` <RdsProgressBar
+    role="single"
+    colorVariant="primary"
+    striped="default"
+    progressWidth={40}
+    animation={false}
+    height={15}
+    displayLevel={true}
+    displaypercentage={true}
+  /> `,
+    name: "ProgressBar",
+  },
+  {
+    radioButton: `<RdsRadioButton
+    displayType="Default"
+    label="Radio Button"
+    itemList={[
+      {
+        id: 1,
+        label: "Radio Button 1",
+        checked: false,
+        name: "radio_button",
+      },
+      {
+        id: 2,
+        label: "Radio Button 2",
+        checked: false,
+        name: "radio_button",
+      },
+      {
+        id: 3,
+        label: "Radio Button 3",
+        checked: true,
+        name: "radio_button",
+      },
+    ]}
+  /> `,
+    name: "Radio Button",
+  },
+  {
+    range: ` <RdsRange max={200} min={10} colorVariant="danger" rangeType="default" /> `,
+    name: "Range",
+  },
 ];
 export default code_snippet;

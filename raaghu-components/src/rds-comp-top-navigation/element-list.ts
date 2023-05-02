@@ -182,6 +182,19 @@ const elementList = [
   {
     label: "Price",
     val: "price",
+  } ,{
+    label: "Product Image",
+    val: "productImage",
+  },
+  {
+    label: "Progress Bar",
+    val: "progressBar",
+  },
+  {label:"Radio Button",
+  vval:"radioButton"},
+  {
+    label: "Range",
+    val: "range",
   },
 ];
 export default elementList;
