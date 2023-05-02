@@ -9,7 +9,7 @@ import {
   RdsSelectList,
   RdsCounter,
   RdsCheckbox,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 import RdsCompAlertPopup from "../rds-comp-alert-popup";
 import RdsCompNewFeatures from "../rds-comp-new-features";
 
@@ -63,7 +63,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
             <ul className="p-3">
               {props.features.map((item: any) => (
                 <>
-                  <li className="fw-semibold">{item}</li>
+                  <li className="fw-semibold" key={item}>{item}</li>
                 </>
               ))}
             </ul>
@@ -97,7 +97,7 @@ const RdsCompEdition = (props: RdsCompEditionProps) => {
                   isNextPressed={showTenantSettings}
                   activeNavTabId={activeNavTabId}
                   activeNavtabOrder={(activeNavTabId) => {
-                    setActiveNavTabId(activeNavTabId),
+                    setActiveNavTabId(activeNavTabId);
                       setShowTenantSettings(false);
                   }}
                 />

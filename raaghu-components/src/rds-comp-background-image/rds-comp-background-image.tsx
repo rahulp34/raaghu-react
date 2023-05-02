@@ -24,6 +24,7 @@ const RdsCompBackgroundImage = (props:RdsCompBackgroundImageProps) => {
   return (
     <>
       <div
+      role="img"
         className="w-100 d-flex justify-content-center align-items-center text-white bg-img" // *ngIf="imageUrl"
          style={{backgroundImage:getImageUrl(), height:ImgHeight, backgroundSize:props.backgroundSize, backgroundRepeat:props.backgroundRepeat}}
       >

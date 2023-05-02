@@ -32,7 +32,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
-    "coverage": "jest --coverage --watchAll --collectCoverageFrom='!src/**/*.{stories,test,spec}.{ts,tsx}'  --collectCoverageFrom='!src/*/index.ts' "
+    "coverage": "jest --coverage --watchAll --collectCoverageFrom='!src/**/*.{stories,test,spec}.{ts,tsx}'  --collectCoverageFrom='!src/*/index.ts' --collectCoverageFrom='!dist/cjs/__tests__/**.test{*}.d.ts' --collectCoverageFrom='!dist/esm/__tests__/**.test{*}.d.ts'"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

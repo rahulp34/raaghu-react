@@ -44,7 +44,7 @@ const RdsBadge = (props: RdsBadgeProps) => {
           {childrenSide == "left" && <>{props.children}</>}
           {props.label}
           {props.showClose && (
-            <span className="ms-1" role="button" tabIndex={0} aria-hidden="true" onClick={props.onClose}>
+            <span className="ms-1" role="button" data-testid="closeButton" tabIndex={0} aria-hidden="true" onClick={props.onClose}>
               &times;
             </span>
           )}
