@@ -57,12 +57,13 @@ const PaymentPlans = () => {
   // Use States ================
   const [actions, setActions] = useState([
     { id: "edit", displayName: "Edit", offId: "payPlan-edit-off" },
-    { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
     {
       id: "manageGatewayPlans",
       displayName: "Manage Gateway Plans",
       modalId: "manageGatewayPlans",
     },
+    { id: "delete", displayName: "Delete", modalId: "payPlan-delete-off" },
+   
   ]);
   const [plansTableData, setPlansTableData] = useState([]);
   const [gatewayTableData, setGatewayTableData] = useState([]);
