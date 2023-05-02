@@ -83,5 +83,105 @@ const elementList = [
     label: "Color Switcher",
     val: "colorSwitcher",
   },
+  {
+    label: "Counter",
+    val: "counter",
+  },
+  {
+    label: "Date Picker",
+    val: "datePicker",
+  },
+  {
+    label: "Double Range",
+    val: "doubleRange",
+  },
+  {
+    label: "Dropdown",
+    val: "dropdown",
+  },
+  {
+    label: "Dropdown List",
+    val: "dropdownList",
+  },
+  {
+    label: "FabMenu",
+    val: "fabMenu",
+  },
+  {
+    label: "Feature List",
+    val: "featureList",
+  },
+  {
+    label: "File Uploader",
+    val: "fileUploader",
+  },
+  {
+    label: "Icon",
+    val: "icon",
+  },
+  {
+    label: "Icon Label",
+    val: "iconLabel",
+  },
+  {
+    label: "Illustration",
+    val: "illustration",
+  },
+  {
+    label: "Input",
+    val: "input",
+  },
+  {
+    label: "Input Group",
+    val: "inputGroup",
+  },
+  {
+    label: "Label",
+    val: "label",
+  },
+  {
+    label: "Like Dislike",
+    val: "likeDislike",
+  },
+  {
+    label: "List Group",
+    val: "listGroup",
+  },
+  {
+    label: "Modal",
+    val: "modal",
+  },
+  {
+    label: "Navbar",
+    val: "navbar",
+  },
+  {
+    label: "Navtabs",
+    val: "navtabs",
+  },
+  {
+    label: "Notification",
+    val: "notification",
+  },
+  {
+    label: "Offcanvas",
+    val: "offcanvas",
+  },
+  {
+    label: "Pagination",
+    val: "pagination",
+  },
+  {
+    label: "Popover",
+    val: "popover",
+  },
+  {
+    label: "Popular Page",
+    val: "popularPage",
+  },
+  {
+    label: "Price",
+    val: "price",
+  },
 ];
 export default elementList;
