@@ -4,7 +4,7 @@ export interface RdsOffcanvasProps {
   placement: "start" | "end" | "top" | "bottom";
   backDrop: "static" | true | false;
   scrolling: boolean;
-  preventEscapeKey: boolean;
+  preventEscapeKey?: boolean;
   offId: any;
   canvasTitle: string;
   offcanvaswidth?: number;

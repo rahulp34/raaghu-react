@@ -4,7 +4,6 @@ import RdsLabel from "../rds-label";
 import "./rds-team-member.scss";
 
 export interface RdsTeamMemberProps {
-	displayType: string;
 	teamItem: any[];
 }
 

@@ -258,8 +258,9 @@ const code_snippet = [
     errorMessage="error Message"
   />`,
     name: "Checkbox",
-  },{
-    checkboxGroup:`    <RdsCheckboxGroup
+  },
+  {
+    checkboxGroup: `    <RdsCheckboxGroup
     state="Checkbox"
     isSwitch={false}
     isInline={false}
@@ -286,9 +287,10 @@ const code_snippet = [
     ]}
     errorMessage="Error Message"
   />`,
-  name:"checkboxGroup"
-  },{
-    checkboxParentChild:`<RdsCheckboxParentChild
+    name: "checkboxGroup",
+  },
+  {
+    checkboxParentChild: `<RdsCheckboxParentChild
     userData={[
       {
         id: 1,
@@ -353,10 +355,10 @@ const code_snippet = [
       },
     ]}
   />`,
-    name:'CheckBox Parent Child'
+    name: "CheckBox Parent Child",
   },
   {
-    collapse:`   <RdsCollapse
+    collapse: `   <RdsCollapse
     buttonList={
   [
     {
@@ -366,18 +368,18 @@ const code_snippet = [
     }
   ]}
     />`,
-    name:'Collapse'
+    name: "Collapse",
   },
   {
-    colorPicker:` <RdsColorPicker
+    colorPicker: ` <RdsColorPicker
     value="#e1e1e1"
     isDisabled={false}
     label= "Color-Picker" 
     />`,
-    name:'Color Picker'
+    name: "Color Picker",
   },
   {
-    colorSwitcher:` <RdsColorSwitcher
+    colorSwitcher: ` <RdsColorSwitcher
     displayType='rounded'
     header= 'Color'
     defaultValue= {1}
@@ -387,7 +389,529 @@ const code_snippet = [
       { id: 3, color: '#BFEAFF' },
     ]}
     />`,
-    name:'Color Switcher'
-  }
+    name: "Color Switcher",
+  },
+  {
+    counter: `  <RdsCounter
+    counterValue={0}
+    min={0}
+    max={50}
+    width={125}
+    colorVariant="primary"
+    position="top"
+    label="Counter"
+  />`,
+    name: "Counter",
+  },
+  {
+    datePicker: ` <RdsDatePicker
+    onDatePicker={()=>{}}
+    DatePickerLabel= "Select Date"
+    type= "default"
+    /> `,
+    name: "Date Picker",
+  },
+  {
+    doubleRange: ` <RdsDoubleRange
+    max={200}
+    min={10}
+    doubleRangeType="default"
+    />`,
+    name: "DoubleRange",
+  },
+  {
+    dropdown: ` <RdsDropdown
+    colorVariant= "primary"
+    id="dropdownlist"
+    size="mid"
+    darkDropdown={false}
+    label="Dropdown Button"
+    direction="Drop-Down"
+    split={false}
+    listItems={[
+      {
+        label: "Export To Excel",
+        id: "1",
+        path: "",
+      },
+      {
+        label: "Import From Excel",
+        id: "2",
+        path: "",
+      },
+      {
+        label: "Click here download sample import file",
+        id: "3",
+        path: "",
+      },
+    ]}
+    /> `,
+    name: "DropDown",
+  },
+  {
+    dropdownList: ` <RdsDropdownList
+    placeholder="Filter"
+    borderDropdown={true}
+    listItems={[
+      {
+        label: "EN(US)",
+        val: "en",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "English(IND)",
+        val: "en",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "Français",
+        val: "fr",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "Deutsch",
+        val: "de",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "Português (Brasil)",
+        val: "pt-BR",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "Türkçe",
+        val: "tr",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+      {
+        label: "Italiano",
+        val: "it",
+        iconWidth: "20px",
+        iconHeight: "20px",
+      },
+    ]}
+  /> `,
+    name: "Dropdown List",
+  },
+  {
+    fabMenu: `   <RdsFabMenu
+    colorVariant="primary"
+    listItems = {[
+        { value: 'New Role', some: 'value', key: 'new', icon: 'users', iconWidth: '20px', iconHeight: '20px' },
+        { value: 'Refresh', some: 'value', key: 'refresh', icon: 'refresh', iconWidth: '20px', iconHeight: '20px' },
+        { value: 'Export to excel', some: 'value', key: 'export', icon: 'export', iconWidth: '20px', iconHeight: '20px' },
+        { value: 'Delete', some: 'value', key: 'delete', icon: 'delete', iconWidth: '20px', iconHeight: '20px' },
+        { value: 'Click here download sample import file.', some: 'value', key: 'download', icon: 'download', iconWidth: '20px', iconHeight: '20px' },
+    ]}
+    /> `,
+    name: "FabMenu",
+  },
+  {
+    featureList: `<RdsFeatureList
+    heading="Features"
+    itemList={[
+      "Only the best materials",
+      "Ethically and locally made",
+      "Pre-washed and pre-shrunk",
+      "Machine wash cold with similar colors",
+      "Stainless strap loops",
+      "Double stitched construction",
+      "Water-resistant",
+    ]}
+    columns={0}
+  />`,
+    name: "Feature List",
+  },
+  {
+    fileUploader: ` <RdsFileUploader
+    size="mid"
+    multiple={false}
+    extensions=""
+    colorVariant="dark"
+    limit={5}
+    label="Upload file here"
+  />`,
+    name: "File Uploader",
+  },
+  {
+    icon: `<RdsIcon
+    name="users"
+    width="20px"
+    height="20px"
+    fill={true}
+    stroke={true}
+    colorVariant="primary"
+    isAnimate={true}
+  />`,
+    name: "Icon",
+  },
+  {
+    iconLabel: `<RdsIconLabel
+    fill={false}
+    label="User Name"
+    icon="users"
+    size="medium"
+    iconSize="medium"
+  /> `,
+    name: "Icon Label",
+  },
+  {
+    illustration: ` <RdsIllustration
+    colorVariant="light"
+    label="Currently you don't have any data"
+    subLabel="Click on the button above to add data"
+  /> `,
+    name: "Illustration",
+  },
+  {
+    input: ` <RdsInput
+    size="medium"
+    inputType="text"
+    placeholder="Add Placeholder"
+    label="Label"
+    labelPositon="top"
+    id=""
+    value=""
+    required={true}
+  />`,
+    name: "Input",
+  },
+  {
+    inputGroup: ` <RdsInputGroup
+    buttonLabel="BUTTON"
+    buttonColorVariant="primary"
+    placeholder="Placeholder text"
+    size="large"
+    outline={true}
+    inputValue={() => {}}
+    inputGroupLabel="Field Label"
+  /> `,
+    name: "Input Group",
+  },
+  {
+    label: `<RdsLabel label="Label" />`,
+    name: "Label",
+  },
+  {
+    likeDislike: `  <RdsLikeDislike
+    like={30}
+    dislike={23}
+    /> `,
+    name: "Like Dislike",
+  },
+  {
+    listGroup: ` <RdsListGroup
+    labelPosition="top"
+    label="List Group"
+    listItem={[
+      {
+        label: " label 1",
+        disabled: true,
+        badgeLabel: "10",
+        listHeading: "",
+        listContent: "",
+        listTime: "",
+        type: "",
+      },
+      {
+        label: " label 2",
+        disabled: false,
+        badgeLabel: "2",
+        listHeading: "",
+        listContent: "",
+        listTime: "",
+        type: "",
+      },
+      {
+        label: " label 3",
+        disabled: false,
+        badgeLabel: "5",
+        listHeading: "",
+        listContent: "",
+        listTime: "",
+        type: "",
+      },
+    ]}
+  />`,
+    name: "List Group",
+  },{
+    modal: `<RdsModal
+    modalId="modal1234"
+    modalAnimation="modal fade"
+    showModalFooter={true}
+    showModalHeader={true}
+    scrollable={false}
+    verticallyCentered={false}
+    modalTitle="Title"
+    saveChangesName="Save Changes"
+    cancelButtonName="Close"
+    modalbutton={<button className="btn btn-primary">Default</button>}
+  >
+    <p>
+      This is some placeholder content to show the scrolling behavior for
+      modals. Instead of repeating the text the modal, we use an inline style
+      set a minimum height, thereby extending the length of the overall modal
+      and demonstrating the overflow scrolling. When content becomes longer
+      than the height of the viewport, scrolling will move the modal as
+      needed.
+    </p>
+  </RdsModal> `,
+    name: "Modal",
+  },
+  {
+    navbar: `  <RdsNavbar
+    title="Navbar"
+    size="small"
+    navbarItems={[
+      {
+        label: "Home",
+        isActive: true,
+        navclass: "",
+        href: "",
+      },
+      {
+        label: "Features",
+        isActive: false,
+        navclass: "",
+        href: "",
+      },
+      {
+        label: "Pricing",
+        isActive: false,
+        navclass: "",
+        href: "",
+      },
+    ]}
+  />`,
+    name: "Navbar",
+  },
+  {
+    navtabs: `<RdsNavtabs
+    navtabsItems={[
+      {
+        label: "Active",
+        tablink: "#nav-home",
+        ariacontrols: "nav-home",
+        subText: "Active subtext",
+        id: "active",
+      },
+      {
+        label: "Link",
+        tablink: "#nav-profile",
+        ariacontrols: "nav-profile",
+        id: "home",
+      },
+      {
+        label: "Link",
+        tablink: "#nav-contact",
+        ariacontrols: "nav-contact",
+        subText: "Home subtext",
+        id: "about",
+      },
+      {
+        label: "Disabled",
+        tablink: "#nav-deabled",
+        disabled: true,
+        subText: "Disble subtext",
+        id: "disabled",
+      },
+    ]}
+    type="default"
+  /> `,
+    name: "Navtabs",
+  },
+  {
+    notification: `    <RdsNotification
+    colorVariant="primary"
+    footerText="2 days ago"
+    notifications={[
+      {
+        status: "success",
+        title: "Tenant added",
+        urlTitle: "hello",
+        // url:" " ,
+        time: "a month ago",
+        state: 1,
+        userNotificationId: 0,
+        selected: false,
+      },
+
+      {
+        status: "error",
+        title: "Tenant deleted",
+        urlTitle: "hello",
+        time: "a month ago",
+        state: 1,
+        userNotificationId: 1,
+        selected: false,
+      },
+
+      {
+        status: "warn",
+        title: "Tenant added  warn",
+        urlTitle: "hello",
+        time: "a month ago",
+        state: 1,
+        userNotificationId: 2,
+        selected: false,
+      },
+
+      {
+        status: "info",
+        title: "Tenant deleted info",
+        urlTitle: "hello",
+        time: "a month ago",
+        state: 1,
+        userNotificationId: 3,
+        selected: false,
+      },
+    ]}
+  />`,
+    name: "Notification",
+  },
+  {
+    offcanvas: ` <RdsOffcanvas
+    offId="canvasExample"
+    canvasTitle="Offcanvas Title"
+    scrolling={false}
+    placement="end"
+    backDrop="static"
+    offcanvaswidth={650}
+    children={
+      <>
+        <h2 className="p-3">
+          Hello Offcanvas Lorem ipsum dolor sit amet consectetur adipisicing
+          elit.
+        </h2>
+      </>
+    }
+    offcanvasbutton={
+      <a
+        className="btn btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#canvasExample"
+        aria-controls="canvasExample"
+      >
+        Button
+      </a>
+    }
+  /> `,
+    name: "Offcanvas",
+  },
+  {
+    pagination: `<RdsPagination
+    paginationType="default"
+    totalRecords={22}
+    recordsPerPage={5}
+    size="lg"
+    alignmentType="start"
+  /> `,
+    name: "Pagination",
+  },
+  {
+    popover: `<RdsPopover popoverPosition="top" children={<p>Popover</p>} /> `,
+    name: "Popover",
+  },
+  {
+    popularPage: ` <RdsPopularPage
+    itemList={[
+      {
+        title: "Documentation",
+        subtitle: "Learn how to integrate our tools with your app",
+        icon: "folder",
+        route: "/home",
+      },
+      {
+        title: "API References",
+        subtitle: "A Complete API references of our libraries",
+        icon: "code_computer",
+        route: "/home",
+      },
+      {
+        title: "Guides",
+        subtitle: "Installation guides that cover popular setups",
+        icon: "features",
+        route: "/home",
+      },
+      {
+        title: "Blog",
+        subtitle: "Read our latest news and articles",
+        icon: "blog",
+        route: "/home",
+      },
+    ]}
+  /> `,
+    name: "Popular Page",
+  },
+  {
+    price: `<RdsPrice mrp={100} currentPrice={90} withDiscount={true} /> `,
+    name: "Price",
+  },
+  {
+    productImage: `<RdsProductImage
+    displayType="basic"
+    itemList={[
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+    ]}
+    images={[
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+      "https://www.waiin.com/wp-content/uploads/2021/07/Framework-Expertise_01.png",
+      "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmF0dXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    ]}
+  /> `,
+    name: "Product Image",
+  },
+  {
+    progressBar: ` <RdsProgressBar
+    role="single"
+    colorVariant="primary"
+    striped="default"
+    progressWidth={40}
+    animation={false}
+    height={15}
+    displayLevel={true}
+    displaypercentage={true}
+  /> `,
+    name: "ProgressBar",
+  },
+  {
+    radioButton: `<RdsRadioButton
+    displayType="Default"
+    label="Radio Button"
+    itemList={[
+      {
+        id: 1,
+        label: "Radio Button 1",
+        checked: false,
+        name: "radio_button",
+      },
+      {
+        id: 2,
+        label: "Radio Button 2",
+        checked: false,
+        name: "radio_button",
+      },
+      {
+        id: 3,
+        label: "Radio Button 3",
+        checked: true,
+        name: "radio_button",
+      },
+    ]}
+  /> `,
+    name: "Radio Button",
+  },
+  {
+    range: ` <RdsRange max={200} min={10} colorVariant="danger" rangeType="default" /> `,
+    name: "Range",
+  },
 ];
 export default code_snippet;
