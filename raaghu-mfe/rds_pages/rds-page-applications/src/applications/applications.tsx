@@ -260,7 +260,6 @@ const Applications = () => {
           <RdsAlert
             alertmessage={alert.message}
             colorVariant={alert.success ? "success" : "danger"}
-            style={{ marginBottom: "0" }}
           ></RdsAlert>
         )}
           </div>

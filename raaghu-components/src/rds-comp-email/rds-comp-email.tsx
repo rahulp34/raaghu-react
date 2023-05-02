@@ -167,18 +167,14 @@ useEffect( () => {
         </div>
         <div className="row mb-3">
           <div
-            className="col-lg-12 col-md-12 col-sm-12"
-            style={{ fontSize: "14px" }}
-          >
+            className="col-lg-12 col-md-12 col-sm-12">
             <RdsCheckbox label="Use SSL"  onChange={(e:any) =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
           </div>
         </div>
 
         <div className="row mb-3">
           <div
-            className="col-lg-12 col-md-12 col-sm-12"
-            style={{ fontSize: "14px" }}
-          >
+            className="col-lg-12 col-md-12 col-sm-12">
             <RdsCheckbox
               label="Use Default Credentials"
 			  onChange={(e:any) =>{setCredential(e.target.checked)}}
