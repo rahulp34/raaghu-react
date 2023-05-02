@@ -8,13 +8,6 @@ const MainMenu = [
     "subTitle": "Statistics and reports",
   },
   {
-    "key": "1",
-    "label": "Icons",
-    "icon": "icons",
-    "path": "/icons",
-    "subTitle": "icons",
-  },
-  {
     "key": "2",
     "label": "Menu_Saas",
     "icon": "saas",

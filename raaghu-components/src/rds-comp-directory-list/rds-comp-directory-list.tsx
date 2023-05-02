@@ -96,7 +96,7 @@ export const RdsCompDirectoryList=(props : RdsCompDirectoryListProps) => {
           <RdsLabel
             class="px-2"
             label={item.name}
-            color={isSelected ? "black" : undefined}
+           
           />
           {item.children && (
             <RdsLabel label={`(${item.children.length})`} />

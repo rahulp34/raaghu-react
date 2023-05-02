@@ -125,6 +125,9 @@ export const PortConfig = {
   "menus": {
     "port": "8090"
   },
+  "polls":{
+    "port":"8096"
+  },
   "components": {
     "port": "8104"
   },
@@ -139,6 +142,9 @@ export const PortConfig = {
   },
   "newsletters": {
     "port": "8122"
+  },
+  "changepassword": {
+    "port": "8050"
   },
   "chart": {
     "port": "8018"

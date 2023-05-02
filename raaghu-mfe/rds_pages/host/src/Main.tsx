@@ -72,10 +72,13 @@ import {
   BlogPostCompo,
   GlobalResourcesCompo,
   NewslettersCompo,
-  ChartCompo,
+  ChangePasswordCompo,
+  ChartCompo
+,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
+
 export interface MainProps {
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -122,7 +125,7 @@ const Main = (props: MainProps) => {
   let API_URL: string | undefined =
     process.env.REACT_APP_API_URL || "https://raaghu-react.azurewebsites.net";
 
-  let currentPath = window.location.pathname;
+  const currentPath = window.location.pathname;
   const [profilePic, setProfilePic] = useState(
     "./assets/profile-picture-circle.svg"
   );
@@ -147,6 +150,11 @@ const Main = (props: MainProps) => {
       navigate("/login");
     }
   }, []);
+
+  useEffect(() => {
+    
+    showBreadCrum();
+  }, [window.location.pathname]);
 
   async function tokenRefresh() {
     const url = "https://raaghu-react.azurewebsites.net/connect/token";
@@ -251,6 +259,43 @@ const Main = (props: MainProps) => {
     []
   );
 
+  const concatenatedExtended = concatenated.concat([
+    {
+      "label": "Host Admin",
+      "path":"\/host-admin",
+      "icon": "saas",
+      "children": [
+        {
+          label: "Linked Accounts",
+          icon: "manage_linked",
+          path:"",
+          subText: "Manage accounts linked to your account",
+          id: "nav-LinkAccount",
+        },
+        {
+          label: "My Account",
+          icon: "manage_authority",
+          path:"/my-account",
+          subText: "Manage authority accounts",
+          id: "nav-MyAccount",
+        },
+        {
+          label: "Security Logs",
+          icon: "login_attempts",
+          path:"/security-logs",
+          subText: "See recent login attempts for your account",
+          id: "nav-SecuityLogs",
+        },
+        {
+          label: "Personal Data",
+          icon: "my_settings",
+          path:"/personal-data",
+          subText: "Change your account settings",
+          id: "nav-PersonalData",
+        }
+      ]
+    }
+  ])
   const { t, i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState(
     localStorage.getItem("currentLang") || "en-GB"
@@ -347,7 +392,7 @@ const Main = (props: MainProps) => {
     const subTitle = getSubTitle(pageName, sideNavItems);
     setCurrentSubTitle(subTitle);
     setCurrentTitle(pageName);
-    let a = recursiveFunction(concatenated, pageName);
+    let a = recursiveFunction(concatenatedExtended, pageName);
     a = a.filter((res: any) => (res ? true : false));
     if (a[0].id) {
       a = a.map((res:any)=>{
@@ -370,29 +415,9 @@ const Main = (props: MainProps) => {
       setBreadCrumItem(a);
     }
   };
-
-  useEffect(() => {
-    const lang = localStorage.getItem("currentLang") || "en-GB";
-    localizationService(lang).then((resp: any) => {
-      let data2 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          Object.keys(translation[key].texts).forEach((k1) => {
-            let k2 = k1.replace(/[^\w\s]/gi, "_");
-            let value1 = translation[key].texts[k1];
-            data2 = { ...data2, [k2]: value1 };
-          });
-        });
-        i18n.addResourceBundle(
-          currentLanguage,
-          "translation",
-          data2,
-          false,
-          true
-        );
-        i18n.changeLanguage(currentLanguage);
-        let breadcrumData = recursiveFunction1(concatenated, currentPath)
+  function showBreadCrum(){
+    let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath)
+      
         breadcrumData = breadcrumData.filter((res: any) => res ? true : false)
         if (breadcrumData.length && breadcrumData[0].id) {
           breadcrumData = breadcrumData.map((res:any)=>{
@@ -415,6 +440,30 @@ const Main = (props: MainProps) => {
           })
           setBreadCrumItem(breadcrumData);
         }
+  }
+
+  useEffect(() => {
+    const lang = localStorage.getItem("currentLang") || "en-GB";
+    localizationService(lang).then((resp: any) => {
+      let data2 = {};
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          Object.keys(translation[key].texts).forEach((k1) => {
+            let k2 = k1.replace(/[^\w\s]/gi, "_");
+            let value1 = translation[key].texts[k1];
+            data2 = { ...data2, [k2]: value1 };
+          });
+        });
+        i18n.addResourceBundle(
+          currentLanguage,
+          "translation",
+          data2,
+          false,
+          true
+        );
+        i18n.changeLanguage(currentLanguage);
+        showBreadCrum();
       }
     })
   },[])
@@ -462,10 +511,11 @@ const Main = (props: MainProps) => {
 
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      localStorage.setItem('datahostEmail',dataHost.email);
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService(openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
         if(res){
-          sessionStorage.setItem('accessToken',res)
+          // sessionStorage.setItem('accessToken',res)
           await hello(res)
           
           sessionStorage.setItem('accessToken', res.access_token)
@@ -536,6 +586,7 @@ const Main = (props: MainProps) => {
       }
     });
   }
+ 
 
   const logout = () => {
     localStorage.clear();
@@ -552,10 +603,16 @@ const Main = (props: MainProps) => {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
+        <Route
+          path="/changepassword"
+          element={<ChangePasswordCompo />}
+        ></Route>
+
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
-        location.pathname != "/forgot-password" && (
+        location.pathname != "/forgot-password" &&
+        location.pathname != "/changepassword" && (
           <div className="d-flex flex-column flex-root">
             <div className="page d-flex flex-column flex-column-fluid">
               <div
@@ -742,6 +799,7 @@ const Main = (props: MainProps) => {
                             path="/my-account"
                             element={<MyAccountCompo />}
                           />
+                        
                           <Route path="/menus" element={<MenusCompo />} />
                           <Route
                             path="/components/:type"
@@ -761,7 +819,7 @@ const Main = (props: MainProps) => {
                             path="/newsletters"
                             element={<NewslettersCompo />}
                           />
-                          <Route path="/charts/:type" element={<ChartCompo />} />
+                          <Route path="/charts/:type" element={<ChartCompo/>} />
                         </Routes>
                       </Suspense>
                     </div>

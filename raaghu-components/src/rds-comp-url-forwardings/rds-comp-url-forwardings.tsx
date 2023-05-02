@@ -33,7 +33,7 @@ function RdsCompUrlForwardings(props: RdsCompUrlForwardingsProps){
 									inputType="text"
 									label="Source"
 									placeholder="Type"
-									size="small"
+									
 									required={true}
 									value={formData.source}
 									onChange={(e:any)=>{handleSource(e.target.value)}}
@@ -47,7 +47,7 @@ function RdsCompUrlForwardings(props: RdsCompUrlForwardingsProps){
 									label="Target"
 									placeholder="Value"
 									required={false}
-									size="small"
+									
 									onChange={(e:any)=>{handleTarget(e.target.value)}}
 									value={formData.target}
 								></RdsInput>

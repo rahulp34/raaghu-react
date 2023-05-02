@@ -162,7 +162,7 @@ const postSubmitHandler = (data: any)=>{
 
 	return (
 		<>
-			<div>
+			<div className="container-fluid m-0 p-0">
 				<div className="row align-items-center">
 					<div className="col-md-12 d-flex justify-content-end">
               <RdsOffcanvas
@@ -241,8 +241,14 @@ const postSubmitHandler = (data: any)=>{
 				</div>
 
 
-				<div className="my-3">
-					<div className="card p-2 border-0 rounded-0 pt-4">
+				
+				<div className="row">
+					<div className="col-md-12">
+				<div className="card h-100 border-0 rounded-0 card-full-stretch">
+					<div className="container-fluid m-0 py-3">
+				<div className="row">
+					<div className="col-md-12">
+					
 				
 						<div className="row">
 							<div className="col-2">
@@ -260,11 +266,12 @@ const postSubmitHandler = (data: any)=>{
 									size="small"
 								/>
 							</div>
-						</div>
+						
+					</div>
 					</div>
 				</div>
-
-				<div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+				<div className="row">
+					<div className="col-md-12">
 					<RdsCompBlogPost
 						tableHeaders={tableHeaders}
 						tableData={tableData}
@@ -272,8 +279,11 @@ const postSubmitHandler = (data: any)=>{
 						actions={actions}
 						recordsPerPage={10}
 					></RdsCompBlogPost>
+				</div></div>
+				</div></div>
 				</div>
 			
+			</div>
 			</div>
 		</>
 	);

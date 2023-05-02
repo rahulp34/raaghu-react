@@ -130,7 +130,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								name={"clientId"}
 								required={true}
 							></RdsInput>
-							{errorClientId && <span style={{ color: "red" }}>{errorClientId}</span>}
+							{errorClientId && <span className="text-danger">{errorClientId}</span>}
 						</div>
 						<div className="col-6 ">
 							<RdsInput
@@ -142,11 +142,11 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								name={"displayName"}
 								value={basicApplicationData.displayName}
 							></RdsInput>
-							{errorDisplayName && <span style={{ color: "red" }}>{errorDisplayName}</span>}
+							{errorDisplayName && <span className="text-danger">{errorDisplayName}</span>}
 						</div>
 					</div>
 					<div className="row">
-						<div className=" col-6 ">
+						<div className=" col-6 mb-4">
 							<RdsInput
 								label="Client Uri"
 								placeholder="Enter Url"
@@ -157,7 +157,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								required={false}
 							></RdsInput>
 						</div>
-						<div className="col-6 ">
+						<div className="col-6 mb-4">
 							<RdsInput
 								label="Logo Uri"
 								placeholder="Enter Uri"
@@ -178,7 +178,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								selectedValue={basicApplicationData.type}
 								onSelectListChange={setSelectedOption}
 							></RdsSelectList>
-							{errorType && <span style={{ color: "red" }}>{errorType}</span>}
+							{errorType && <span className="text-danger">{errorType}</span>}
 						</div>
 						<div className=" col-6 ">
 							<RdsLabel label="Scopes" class="pb-2" />

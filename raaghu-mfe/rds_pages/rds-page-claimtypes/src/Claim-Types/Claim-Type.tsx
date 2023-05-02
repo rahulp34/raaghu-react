@@ -320,7 +320,7 @@ const ClaimType = () => {
             ></RdsButton>
           </div>
         }
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
         offId={"claimType-add-off"}
@@ -357,7 +357,7 @@ const ClaimType = () => {
       placement="end"
       offId="claimType-edit-off"
       
-      backDrop={false}
+      backDrop={true}
       scrolling={false}
       preventEscapeKey={false}
     >
