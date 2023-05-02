@@ -8,7 +8,6 @@ export interface RdsDropdownProps {
   direction: string;
   role: string;
   listItems: any[];
-
   split: boolean;
   id: string;
   button: ReactNode;
