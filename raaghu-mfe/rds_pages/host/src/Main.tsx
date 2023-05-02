@@ -72,7 +72,9 @@ import {
   BlogPostCompo,
   GlobalResourcesCompo,
   NewslettersCompo,
-  ChartCompo,
+  ChangePasswordCompo,
+  ChartCompo
+,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
@@ -462,10 +464,11 @@ const Main = (props: MainProps) => {
 
   useEffect(()=>{
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
+      localStorage.setItem('datahostEmail',dataHost.email);
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
       sessionService(openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
         if(res){
-          sessionStorage.setItem('accessToken',res)
+          // sessionStorage.setItem('accessToken',res)
           await hello(res)
           
           sessionStorage.setItem('accessToken', res.access_token)
@@ -552,10 +555,16 @@ const Main = (props: MainProps) => {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
+        <Route
+          path="/changepassword"
+          element={<ChangePasswordCompo />}
+        ></Route>
+
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
-        location.pathname != "/forgot-password" && (
+        location.pathname != "/forgot-password" &&
+        location.pathname != "/changepassword" && (
           <div className="d-flex flex-column flex-root">
             <div className="page d-flex flex-column flex-column-fluid">
               <div
@@ -761,7 +770,7 @@ const Main = (props: MainProps) => {
                             path="/newsletters"
                             element={<NewslettersCompo />}
                           />
-                          <Route path="/charts/:type" element={<ChartCompo />} />
+                          <Route path="/charts/:type" element={<ChartCompo/>} />
                         </Routes>
                       </Suspense>
                     </div>

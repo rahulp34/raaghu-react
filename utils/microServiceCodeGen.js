@@ -6,7 +6,8 @@ const OpenAPI = require('raaghu-react-core/dist/build-proxy');
 // const fetch = require('node-fetch');
 
 const eTc = process.argv[2];
-const url = process.env.npm_config_url;
+const url = process.argv[3];
+const urlToReplace = process.argv[4];
 const completeURL = url + '/swagger/v1/swagger.json';
 
 const generate = async (input, output) => {
@@ -31,7 +32,7 @@ const generate = async (input, output) => {
 const generateRealWorldSpecs = async () => {
     console.log("\x1b[32m%s\x1b[0m", `Downloading swagger json...`);
     execSync(
-        `curl -o swaggerJSON.json ${completeURL}`, 
+        `curl -o swaggerJSON.json ${completeURL}`,
         { cwd: '.', stdio: "inherit" }
     )
 
@@ -41,9 +42,16 @@ const generateRealWorldSpecs = async () => {
 
     // const list = await response.json();
     const list = require('../swaggerJSON.json');
-
+    const scope = Object.keys(list.components.securitySchemes.oauth2.flows.authorizationCode.scopes)[0];
+    const proxyGeneratedFileName = (list.info.title).split(" ").map((word, index) => {
+        if (index === 0) {
+          return word;
+        }
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join("")
     console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
-    await generate(list, `./raaghu-mfe/libs/${eTc}`);
+    await generate(list, `./raaghu-mfe/libs/${eTc}/${proxyGeneratedFileName}`);
 
     // Replacing the API URL in the .env file
     const envConfig = path.resolve(
@@ -53,12 +61,25 @@ const generateRealWorldSpecs = async () => {
     envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(envConfig, envConfigContent, "utf-8");
 
+    const envLines = envConfigContent.split('\n');
+    const scopeLineIndex = envLines.findIndex(line => line.startsWith('REACT_APP_SCOPE='));
+    if (scopeLineIndex === -1) {
+        console.error('Error: REACT_APP_SCOPE variable not found in .env file');
+        process.exit(1);
+    }
+    const currentScope = envLines[scopeLineIndex].split('=')[1];
+    const newScopeValue = `${currentScope} ${scope}`;
+    envLines[scopeLineIndex] = `REACT_APP_SCOPE=${newScopeValue.replace(/\s+/g, ' ')}`;
+    const newEnvContent = envLines.join('\n');
+    fs.writeFileSync(envConfig, newEnvContent);
+
     // Replacing the BASE URL in the OpenAPI.ts file
+
     const OpenAPIConfig = path.resolve(
-        __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'core', 'OpenAPI.ts'
+        __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', `${proxyGeneratedFileName}`, 'core', 'OpenAPI.ts'
     );
     let OpenAPIConfigContent = fs.readFileSync(OpenAPIConfig, "utf-8");
-    OpenAPIConfigContent = OpenAPIConfigContent.replace(`<API_URL>`, `${url}`);
+    OpenAPIConfigContent = OpenAPIConfigContent.replace(`<API_URL>`, `${urlToReplace}`);
     fs.writeFileSync(OpenAPIConfig, OpenAPIConfigContent, "utf-8");
 
     // Replacing the BASE URL in the Login.tsx file
