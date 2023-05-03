@@ -29,7 +29,6 @@ export interface RdsCompTopNavigationProps {
   logo?: string;
   languageLable: string;
   languageIcon: string;
-  themeIcon: string;
   themeLabel:string;
   breacrumItem?: any;
   profilePic?: any;
@@ -232,9 +231,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           ></MultiLevelDropdown>
            <div className="px-2 position-relative me-3">
             <RdsDropdownList
-             icon={props.themeIcon}
-             iconFill={false}
-             iconStroke={true}
               placeholder={props.themeLabel}            
               id={"themeDropdown"}
               listItems={props.themeItems}
