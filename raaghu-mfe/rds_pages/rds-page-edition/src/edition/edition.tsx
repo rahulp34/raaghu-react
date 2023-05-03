@@ -336,7 +336,7 @@ const Edition = (props: RdsPageEditionProps) => {
         />
 
         <RdsOffcanvas
-          canvasTitle="NEW EDITION"
+          canvasTitle="New Edition"
           onclick={offCanvasHandler}
           placement="end"
           offId="edition-new-off"

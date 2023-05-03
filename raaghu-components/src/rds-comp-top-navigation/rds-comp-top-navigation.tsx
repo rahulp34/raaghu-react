@@ -9,12 +9,15 @@ import elementList from "./element-list";
 import componentList from "./components-list";
 import chartList from "./charts-list";
 import MultiLevelDropdown from "./multi-level-dropdown";
+
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
+  onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
   notifications?: any[];
   languageItems: any[];
+  themeItems:any[];
   toggleItems: any[];
   elementList: any[];
   componentsList: any[];
@@ -26,6 +29,8 @@ export interface RdsCompTopNavigationProps {
   logo?: string;
   languageLable: string;
   languageIcon: string;
+  themeIcon: string;
+  themeLabel:string;
   breacrumItem?: any;
   profilePic?: any;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -33,6 +38,7 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
+  const [themes, setThemes] = useState("light");
   const [path, setPath] = useState({
     elem: "/elements",
     compo: "/components",
@@ -41,6 +47,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   });
   const [navtitle, setNavtitle] = useState(props.navbarTitle);
   const [resetDrop, setResetDrop] = useState(false);
+
   const navigate = useNavigate();
 
   const navtabItems = [
@@ -69,12 +76,34 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
-
+  const themeItems = [
+    {
+      label: "Light",
+      val:"",
+      id:"light"
+    },
+    {
+      label: "Dark",
+      val:"",
+      id:"dark"
+    },
+    {
+      label: "SemiDark",
+      val:"",
+      id:"semidark"
+    },
+  ];
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
       props.onClick(e, val);
     }
   };
+  const onClicktheme = (e: any) => {
+    if(props.onClickThemeCheck){
+        props.onClickThemeCheck(e);
+    }
+  };
+
   //UI library dropdown handler
   const handlerSubMenuselect = (
     e: any,
@@ -156,6 +185,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       props.navbarTitle != navtitle
     ) {
       setResetDrop(!resetDrop);
+
     }
   }, [props.breacrumItem, props.navbarTitle]);
 
@@ -200,6 +230,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
           ></MultiLevelDropdown>
+           <div className="px-2 position-relative me-3">
+            <RdsDropdownList
+             icon={props.themeIcon}
+             iconFill={false}
+             iconStroke={true}
+              placeholder={props.themeLabel}            
+              id={"themeDropdown"}
+              listItems={props.themeItems}
+              onClick={onClicktheme}
+            ></RdsDropdownList>
+          </div>
           <div className="px-2 position-relative me-3">
             <RdsDropdownList
               placeholder={props.languageLable}
@@ -276,5 +317,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     </div>
   );
 };
+
 
 export default RdsCompTopNavigation;

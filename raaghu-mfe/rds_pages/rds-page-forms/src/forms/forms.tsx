@@ -138,7 +138,7 @@ const Forms = () => {
   ];
 
 
-  const [saveNewFormData, setSaveNewFormData] = useState<any>();
+  const [saveNewFormData, setSaveNewFormData] = useState<any>({title:'',description:''});
   const [basicFormData, setBasicFormData] = useState({
     title: '', description: ''
   });
@@ -239,7 +239,7 @@ const Forms = () => {
                         label="Save"
                         type="button"
                         size="small"
-                        isDisabled={!saveNewFormData.title}
+                        isDisabled={saveNewFormData.title == ''}
                         class="ms-2"
                         colorVariant="primary"
                         databsdismiss="offcanvas"

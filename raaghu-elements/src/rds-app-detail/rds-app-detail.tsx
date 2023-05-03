@@ -29,6 +29,7 @@ const RdsAppDetail = (props: RdsAppDetailProps) => {
 							classes="float-end"
 							checked={false}
 							isSwitch={true}
+							onChange={()=>{}}
 						></RdsCheckbox>
 					</div>
 				</div>

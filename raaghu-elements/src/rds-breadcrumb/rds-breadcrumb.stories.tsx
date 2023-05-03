@@ -6,14 +6,6 @@ export default {
   title: "Elements/Breadcrumb",
   component: RdsBreadcrumb,
   argTypes: {
-    // role: {
-    //   options: [
-    //     "default",
-    //     "advance",
-    //     "arrow"
-    //   ],
-    //   control: { type: "radio" },
-    // },
   },
 } as ComponentMeta<typeof RdsBreadcrumb>;
 
@@ -21,25 +13,6 @@ const Template: ComponentStory<typeof RdsBreadcrumb> = (args) => (
   <RdsBreadcrumb {...args} />
 );
 
-// export const Default = Template.bind({});
-// Default.args = {
-//   role: "default",
-//   breadItems: [{
-//     label: "Home",
-//     route: "#",
-//     disabled: true
-//   },
-//   {
-//     label: "Library",
-//     route: "#",
-//     disabled: true
-//   },
-//   {
-//     label: "Data",
-//     active: true,
-//     disabled: true
-//   }]
-// };
 
 export const Default = Template.bind({});
 Default.args = {

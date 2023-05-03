@@ -5,23 +5,7 @@ export interface RdsScrollspyProps {}
 
 const RdsScrollspy = (props: RdsScrollspyProps) => {
   return (
-    // <>
-    //   <div className="container">
-    //     <div className="row"  id="scrollspy">
-    //       <nav>
-    //         <div>
-    //           <a className="btn btn-primary">First Header</a>
-    //         </div>
-    //         <div>
-    //           <a className="btn btn-primary">Second Header</a>
-    //         </div>
-    //         <div>
-    //           <a className="btn btn-primary">Third Header</a>
-    //         </div>
-    //       </nav>
-    //     </div>
-    //   </div>
-    // </>
+    
     <div className="col-md-10 col-10 container">
       <div id="scrollspy">
         <nav className="navbar navbar-light">

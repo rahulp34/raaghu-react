@@ -61,6 +61,8 @@ export { default as RdsPrice } from "./rds-price";
 export { default as RdsProgressBar } from "./rds-progress-bar";
 export { default as RdsReviewCategory } from "./rds-review-category";
 export { default as RdsScrollspy } from "./rds-scrollspy";
+export {default as RdsStepper} from "./rds-stepper"
+export {default as RdsTag } from "./rds-tag"
 export { default as RdsTeamMember } from "./rds-team-member";
 export { default as RdsTestimonial } from "./rds-testimonial";
 export { default as RdsTooltip } from "./rds-tooltip";
@@ -68,6 +70,7 @@ export { default as RdsWebsiteMatrix } from "./rds-website-matrix";
 export { default as RdsTextEditor } from "./rds-text-editor";
 export { default as RdsFileUploader } from "./rds-file-uploader";
 export { default as RdsToggle } from "./rds-toggle";
+export { default as RdsVideoPlayer } from "./rds-video-player";
 //Charts
 export { default as RdsAreaChart } from "./rds-chart-area";
 export { default as RdsLineChart } from './rds-chart-line';

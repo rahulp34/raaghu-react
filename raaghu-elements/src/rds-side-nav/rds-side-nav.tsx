@@ -7,7 +7,7 @@ export interface RdsSideNavProps {
   sideNavItems: any[];
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
-  collapse: boolean;
+  collapse?: boolean;
 }
 
 

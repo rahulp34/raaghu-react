@@ -3,10 +3,10 @@ import React from "react";
 import "./rds-collapse.scss";
 
 export interface RdsCollapseProps {
-  children: ReactNode;
+  children?: ReactNode;
   buttonList: any[];
-  horizontalCollapse: boolean;
-  multitoggle: boolean;
+  horizontalCollapse?: boolean;
+  multitoggle?: boolean;
 }
 
 const RdsCollapse = (props: RdsCollapseProps) => {
