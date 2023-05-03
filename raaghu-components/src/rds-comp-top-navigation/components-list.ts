@@ -108,5 +108,17 @@ const componentList = [
     label: "Feeds",
     val: "feeds",
   },
+  {
+    label: "Forgot Password",
+    val: "forgotPassword",
+  },
+   {
+    label: "Identity Mangement",
+    val: "identityMangement",
+  }, {
+    label: "Identity Resources Basic",
+    val: "identityResourcesBasic",
+  },
+
 ];
 export default componentList;

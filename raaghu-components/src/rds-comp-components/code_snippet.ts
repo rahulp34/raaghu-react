@@ -1249,5 +1249,41 @@ BillingAddressDetails={()=>{}}
 />`,
     name: "Feeds",
   },
+  {
+    forgotPassword: `<RdsCompForgotPassword />`,
+    name: "Forgot Password",
+  },
+  {
+    identityMangement: `<RdsCompIdentityManagement
+    handleIdentity={() => {}}
+    lockoutSettings={{
+      allowedForNewUsers: false,
+      lockoutDuration: 10,
+      maxFailedAccessAttempts: "",
+    }}
+    passwordSettings={{
+      requiredLength: "",
+      requiredUniqueChars: "",
+      requireDigit: false,
+      requireNonAlphanumeric: false,
+      requireUppercase: false,
+      requireLowercase: false,
+    }}
+    signSettings={{
+      requireConfirmedEmail: false,
+      requireConfirmedPhoneNumber: false,
+      enablePhoneNumberConfirmation: false,
+    }}
+    userSettings={{
+      isEmailUpdateEnabled: false,
+      isUserNameUpdateEnabled: false,
+    }}
+  />`,
+    name: "Identity Management",
+  },
+  {
+    identityResourcesBasic: ` <RdsCompIdentiyResourcseBasic/>`,
+    name: "Identity Resources Basic",
+  },
 ];
 export default code_snippet;
