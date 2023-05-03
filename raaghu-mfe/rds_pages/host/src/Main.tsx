@@ -85,6 +85,8 @@ export interface MainProps {
 
 const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState([]);
+  const [themes, setThemes] = useState("light");
+
   // const [storeData, setStoreData] = useState({
   //   languages: store.languages,
   //   auth: store.auth,
@@ -241,6 +243,31 @@ const Main = (props: MainProps) => {
       val: "AddressInput",
     },
   ];
+
+  const themeItems = [
+    {
+      label: "Light",
+      val:"",
+      icon: "light",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "Dark",
+      val:"",
+      icon: "dark",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      label: "SemiDark",
+      val:"",
+      icon: "semidark",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+  ];
+
   useEffect(() => {
     dispatch(callLoginAction(null) as any);
   }, [dispatch]);
@@ -305,6 +332,38 @@ const Main = (props: MainProps) => {
     setCurrentLanguage(val);
     localStorage.setItem("currentLang", val);
   };
+
+  //  const toggleTheme = (e: any) => {
+  //   if (e.target.checked) {
+  //     setThemes("dark");
+  //     console.log(setThemes("dark"))
+  //   } else {
+  //     setThemes("light");
+  //   } /*else {
+  //     setThemes("semi-dark");
+  //   }*/
+  // };
+
+  const onClickThemeCheck = (e:any)=>{
+    console.log(e.target);
+    if(e.target.innerText=="Light"){
+      setThemes("light")
+    }
+    else if(e.target.innerText=="Dark"){
+      setThemes("dark")
+    }
+    else if(e.target.innerText=="SemiDark"){
+      setThemes("semidark")
+    }
+    // if (e.target.checked) {
+    //   setThemes("dark");
+    //   console.log(setThemes("dark"))
+    // } else {
+    //   setThemes("light");
+    // } /*else {
+    //   setThemes("semi-dark");
+    // }*/
+  }
 
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
@@ -513,7 +572,7 @@ const Main = (props: MainProps) => {
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
       localStorage.setItem('datahostEmail',dataHost.email);
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
-      sessionService(openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
+      sessionService(openidConfig.issuer, openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
         if(res){
           // sessionStorage.setItem('accessToken',res)
           await hello(res)
@@ -595,6 +654,7 @@ const Main = (props: MainProps) => {
   };
 
   let logo = "./assets/raaghu_logs.png";
+  document.documentElement.setAttribute("theme", themes);
   return (
     <Suspense>
       <Routes>
@@ -647,26 +707,26 @@ const Main = (props: MainProps) => {
                   >
                     <div className="header align-items-stretch">
                       <RdsCompTopNavigation
-                        languageLable="English"
-                        profilePic={profilePic}
-                        breacrumItem={breacrumItem}
-                        languageIcon="gb"
-                        languageItems={languageData}
-                        toggleItems={toggleItems}
-                        componentsList={componentsList}
-                        onClick={onClickHandler}
-                        profileTitle="Host Admin"
-                        profileName="admin"
-                        onLogout={logout}
-                        logo={logo}
-                        toggleTheme={props.toggleTheme}
-                        navbarTitle={t(currentTitle) || ""}
-                        navbarSubTitle={t(currentSubTitle) || ""}
-                        onChatClickHandler={() => {
-                          console.log(" session Hey Chat Button Clicked!!");
-                        }}
-                        elementList={[]}
-                      />
+                      languageLable="English"
+                      themeLabel="Theme"
+                      profilePic={profilePic}
+                      breacrumItem={breacrumItem}
+                      languageIcon="gb"
+                      languageItems={languageData}
+                      componentsList={componentsList}
+                      onClick={onClickHandler}
+                      onClickThemeCheck={onClickThemeCheck}
+                      profileTitle="Host Admin"
+                      profileName="admin"
+                      onLogout={logout}
+                      logo={logo}
+                      // toggleTheme={toggleTheme}
+                      themeItems={themeItems}
+                      navbarTitle={t(currentTitle) || ""}
+                      navbarSubTitle={t(currentSubTitle) || ""}
+                      onChatClickHandler={() => {
+                        console.log(" session Hey Chat Button Clicked!!");
+                      } } toggleItems={[]} elementList={[]}                     />
                     </div>
                     <div className="m-4">
                       <Suspense>

@@ -8,9 +8,9 @@ export interface RdsToastProps {
   withIcon?:boolean;
   headerTitle: string;
   message: string;
-  delay: number;
-  autohide: boolean;
-  borderColor: string;
+  delay?: number;
+  autohide?: boolean;
+  borderColor?: string;
   showHeader: boolean;
   iconName?:string;
   iconColorvariant?:string;

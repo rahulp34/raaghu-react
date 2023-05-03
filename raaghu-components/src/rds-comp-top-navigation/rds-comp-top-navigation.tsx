@@ -14,8 +14,10 @@ export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
+  onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
   notifications?: any[];
   languageItems: any[];
+  themeItems:any[];
   toggleItems: any[];
   elementList: any[];
   componentsList: any[];
@@ -27,6 +29,7 @@ export interface RdsCompTopNavigationProps {
   logo?: string;
   languageLable: string;
   languageIcon: string;
+  themeLabel:string;
   breacrumItem?: any;
   profilePic?: any;
   onLogout?: (Event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -34,6 +37,7 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
+  const [themes, setThemes] = useState("light");
   const [path, setPath] = useState({
     elem: "/elements",
     compo: "/components",
@@ -71,12 +75,34 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
-
+  const themeItems = [
+    {
+      label: "Light",
+      val:"",
+      id:"light"
+    },
+    {
+      label: "Dark",
+      val:"",
+      id:"dark"
+    },
+    {
+      label: "SemiDark",
+      val:"",
+      id:"semidark"
+    },
+  ];
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
       props.onClick(e, val);
     }
   };
+  const onClicktheme = (e: any) => {
+    if(props.onClickThemeCheck){
+        props.onClickThemeCheck(e);
+    }
+  };
+
   //UI library dropdown handler
   const handlerSubMenuselect = (
     e: any,
@@ -183,6 +209,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       <nav
         className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
       >
+             {/*  <button className="navbar-toggler px-2" id="humbreger-btn" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button> */}
         <div className="d-flex align-items-center mx-4">
           <div>
             <div className="text-bold">{navtitle}</div>
@@ -203,6 +234,14 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
           ></MultiLevelDropdown>
+           <div className="px-2 position-relative me-3">
+            <RdsDropdownList
+              placeholder={props.themeLabel}            
+              id={"themeDropdown"}
+              listItems={props.themeItems}
+              onClick={onClicktheme}
+            ></RdsDropdownList>
+          </div>
           <div className="px-2 position-relative me-3">
             <RdsDropdownList
               placeholder={props.languageLable}
