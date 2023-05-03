@@ -871,7 +871,7 @@ const RdsCompAdminDashboard = () => {
 					// minHeight="462px"
 					// style={{ overflow: "scroll" }}
 					>
-						<div>
+						<div className="table-responsive">
 							<RdsTable
 								tableHeightForScroll="306px"
 								backgroundColor="white"
