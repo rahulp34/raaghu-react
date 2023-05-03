@@ -5,22 +5,6 @@ import RdsLineChart from "../rds-chart-line";
 import RdsIcon from "../rds-icon";
 import RdsBarChart from "../rds-chart-bar";
 
-const colorVariantArgTypes = {
-	colorVariant: {
-		options: [
-			"primary",
-			"secondary",
-			"success",
-			"info",
-			"warning",
-			"danger",
-			"dark",
-			"light",
-		],
-		control: { type: "select" },
-	},
-};
-
 export default {
 	title: "Elements/BigNumber",
 	component: RdsBigNumber,

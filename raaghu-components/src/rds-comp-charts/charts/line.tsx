@@ -4,13 +4,13 @@ import { RdsLineChart } from "../../rds-elements";
 export const code_actual = () => {
   return (
     <RdsLineChart
-      id="linechartpa"
+      id="multilinechart"
       height={250}
       width={650}
       labels={["January", "February", "March", "April", "May", "Jun", "July"]}
       options={{
-        pointStyle: "star",
-        radius: 7,
+        pointStyle: "circle",
+        radius: 4,
         responsive: true,
         maintainAspectRatio: false,
         aspectRatio: 1,
@@ -31,7 +31,7 @@ export const code_actual = () => {
           },
           title: {
             display: true,
-            text: "Area Chart with boundries",
+            text: "Multi-Line Chart",
           },
         },
         interaction: {
@@ -40,12 +40,28 @@ export const code_actual = () => {
       }}
       dataSets={[
         {
-          label: "My First Dataset",
+          label: "Dataset 1",
           data: [65, 59, 80, 81, 56, 55, 40],
           fill: false,
-          borderColor: "rgb(75, 192, 192)",
+          borderColor: "rgb(75, 192, 192,0.7)",
           tension: 0.1,
-          backgroundColor: "red",
+          backgroundColor: "rgb(75, 192, 192,0.2)",
+        },
+        {
+          label: "Dataset 2",
+          data: [28, 48, 40, 19, 86, 27, 90],
+          fill: false,
+          borderColor: "rgb(192, 75, 192,0.7)",
+          tension: 0.1,
+          backgroundColor: "rgb(192, 75, 192,0.2)",
+        },
+        {
+          label: "Dataset 3",
+          data: [15, 29, 60, 41, 66, 35, 70],
+          fill: false,
+          borderColor: "rgb(192, 192, 75,0.7)",
+          tension: 0.1,
+          backgroundColor: "rgb(192, 192, 75,0.2)",
         },
       ]}
     />

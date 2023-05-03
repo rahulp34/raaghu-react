@@ -6,12 +6,11 @@ export interface RdsDropdownProps {
   darkDropdown: boolean;
   label: string;
   direction: string;
-  role: string;
+  role?: string;
   listItems: any[];
-
   split: boolean;
   id: string;
-  button: ReactNode;
+  button?: ReactNode;
 }
 
 const RdsDropdown = (props: RdsDropdownProps) => {

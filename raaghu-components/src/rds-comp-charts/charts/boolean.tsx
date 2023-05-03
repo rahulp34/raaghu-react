@@ -6,8 +6,8 @@ export const code_actual = () => {
   return (
     <RdsBooleanChart
       id="barcfgdhartpa"
-      height={100}
-      width={100}
+      height={200}
+      width={200}
       labels={["green", "grey"]}
       options={{
         maintainAspectRatio: false,
@@ -58,7 +58,7 @@ export const code_actual = () => {
           data: [20, 10],
           fillStyle: "blue",
           fillRect: [200, 100, 40, 10],
-          backgroundColor: ["#01AE9D", "#E1E1E1"],
+          backgroundColor: ["#7E2EEF", "#BF00BB"],
           borderColor: ["#fff"],
           borderWidth: 1,
           cutout: "90%",

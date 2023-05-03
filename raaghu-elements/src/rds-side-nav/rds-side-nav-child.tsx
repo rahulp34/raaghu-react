@@ -87,23 +87,8 @@ const RdsSideNavChild = ({
                 // isAnimate={false}
               ></RdsIcon>
        </span>
-            {/* </div> */}
-            { /*<div className="darkTheme text-center">
-              <a
-                className={` d-inline-flex align-items-center text-decoration-none text-uppercase`}
-              >
-                 
-                <RdsToggle
-              small={collapse} 
-              iconOnUncheck={"sun"}
-              iconOnCheck={"moon"}
-              onClick={toggleTheme} checked={false}                ></RdsToggle>
-               
-              </a>
-          </div>*/ }
-          {/* </div> */}
-        </div>
-      {/* </span> */}
+            </div>
+
     </>
   );
 };

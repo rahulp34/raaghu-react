@@ -157,8 +157,9 @@ const Roles = (props: RdsPageRolesProps) => {
     },
   ];
   let actions: any = [
-    { id: "delete", displayName: "Delete", modalId: "role-delete-off" },
     { id: "edit", displayName: "Edit", offId: "role-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "role-delete-off" },
+    
   ];
   const handlerActions = (rowData: any, actionId: any) => {
     setId(rowData.id);
@@ -315,7 +316,7 @@ const Roles = (props: RdsPageRolesProps) => {
                 canvasTitle="New Role"
 
                 offId="newRole"
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
               >
@@ -410,7 +411,7 @@ const Roles = (props: RdsPageRolesProps) => {
                 canvasTitle="Edit Role"
 
                 offId="role-edit-off"
-                backDrop={false}
+                backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
               >

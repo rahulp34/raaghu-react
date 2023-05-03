@@ -95,8 +95,9 @@ const UrlForwarding = () => {
   ];
 
   let actions: any = [
-    { id: "delete", displayName: "Delete", modalId: "deleteUrlForwardingoff" },
     { id: "edit", displayName: "Edit", offId: "editUrlForwardingoff" },
+    { id: "delete", displayName: "Delete", modalId: "deleteUrlForwardingoff" }
+    
   ];
 
   const handlerActions = (rowData: any, actionId: any) => {
