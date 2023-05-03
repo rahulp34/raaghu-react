@@ -111,10 +111,10 @@ const Comments = () => {
   }
 
   // On Filter Start Date Selection
-  function onStartDateSelection(start: any): void {}
+  function onStartDateSelection(start: any): void { }
 
   // On Filter Start Date Selection
-  function onEndDateSelection(end: any): void {}
+  function onEndDateSelection(end: any): void { }
 
   // on Filter UserName
   function onFilterUsername(event: any): void {
@@ -132,62 +132,63 @@ const Comments = () => {
   }
 
   // On Delete Confirmation
-  function confirmDelete() {}
+  function confirmDelete() { }
 
   // DOM
   return (
     <>
-    <div className="container-fluid m-0 p-0">
-      <div className="row"><div className="col-md-12">
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
-          <form>
-            <div className="d-flex justify-content-between">
-              <div className="form-group me-2">
-                <RdsDatepicker
-                  DatePickerLabel="Select Start Date"
-                  type="advanced"
-                  onDatePicker={onStartDateSelection}
-                ></RdsDatepicker>
-              </div>
-              <div className="form-group me-2">
-                <RdsDatepicker
-                  DatePickerLabel="Select End Date"
-                  type="advanced"
-                  onDatePicker={onEndDateSelection}
-                ></RdsDatepicker>
-              </div>
-              <div className="form-group me-2">
-                <RdsInput
-                  inputType="text"
-                  label={"Username"}
-                  value={filterUserName}
-                  placeholder={"Enter Username"}
-                  onChange={(event) => onFilterUsername(event)}
-                ></RdsInput>
-              </div>
-              <div className="form-group me-2">
-                <RdsInput
-                  inputType="text"
-                  label={"Entity Type"}
-                  value={filterEntityType}
-                  placeholder={"Enter Entity Type"}
-                  onChange={(event) => onFilterEntityType(event)}
-                ></RdsInput>
-              </div>
-              <div className="form-group d-flex align-items-end">
-                <div>
-                  <RdsButton
-                    colorVariant="primary"
-                    icon={"search"}
-                    type={"submit"}
-                    iconWidth={"16px"}
-                    iconHeight={"20px"}
-                    onClick={(event) => searchByInputValues(event)}
-                  ></RdsButton>
+      <div className="container-fluid m-0 p-0">
+        <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
+          <div className="row">
+            <div className="col-md-11">
+              <div className="row">
+                <div className="col-md-3">
+                  <RdsDatepicker
+                    DatePickerLabel="Select Start Date"
+                    type="advanced"
+                    onDatePicker={onStartDateSelection}
+                  ></RdsDatepicker>
+                </div>
+                <div className="col-md-3">
+                  <RdsDatepicker
+                    DatePickerLabel="Select End Date"
+                    type="advanced"
+                    onDatePicker={onEndDateSelection}
+                  ></RdsDatepicker>
+                </div>
+                <div className="col-md-3">
+                  <RdsInput
+                    inputType="text"
+                    label={"Username"}
+                    value={filterUserName}
+                    placeholder={"Enter Username"}
+                    onChange={(event) => onFilterUsername(event)}
+                  ></RdsInput>
+                </div>
+                <div className="col-md-3">
+                  <RdsInput
+                    inputType="text"
+                    label={"Entity Type"}
+                    value={filterEntityType}
+                    placeholder={"Enter Entity Type"}
+                    onChange={(event) => onFilterEntityType(event)}
+                  ></RdsInput>
                 </div>
               </div>
             </div>
-          </form>
+            <div className="col-md-1 d-flex align-items-end">
+              <RdsButton
+                colorVariant="primary"
+                icon={"search"}
+                type={"submit"}
+                iconWidth={"16px"}
+                iconHeight={"20px"}
+                onClick={(event) => searchByInputValues(event)}
+                class="btn-icon"
+                block={true}
+              ></RdsButton>
+            </div>
+          </div>
           <RdsCompDatatable
             actionPosition="right"
             tableHeaders={tableHeaders}
@@ -200,8 +201,8 @@ const Comments = () => {
             recordsPerPage={5}
             noDataTitle={"No Comments Available"}
           ></RdsCompDatatable>
-        </div></div>
-      </div></div>
+        </div>
+      </div>
       <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
     </>
   );

@@ -190,39 +190,38 @@ const PaymentRequests = () => {
               x.paymentType === 0
                 ? "OneTime"
                 : x.paymentType === 1
-                ? "Subscription"
-                : x.paymentType,
+                  ? "Subscription"
+                  : x.paymentType,
           })),
         })
       );
       setTableData(data);
     }
   }, [paymentRequests.allPaymentRequests]);
-  function onDatePicker  (startEndDate:any) {
-    
+  function onDatePicker(startEndDate: any) {
+
     const [start, end] = startEndDate;
     setFilterParameters({
       ...filterParameters,
-      creationDateMax:start.toISOString(),
-      creationDateMin:end.toISOString(),
-    }); 
+      creationDateMax: start.toISOString(),
+      creationDateMin: end.toISOString(),
+    });
   }
   // DOM
   return (
     <>
-    <div className="container-fluid m-0 p-0">
-      <div className="row"><div className="col-md-12">
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+      <div className="container-fluid m-0 p-0">
+        <div className="card p-3 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
           <form>
             <div className="d-flex  mb-3 row">
-              <div className="col-md-3 form-group" style={{marginTop:'-3px'}}>
-                <RdsDatepicker DatePickerLabel="Creation Time" 
-                type="advanced"
-                onDatePicker={(s:any)=>onDatePicker(s)}
-                selectedDate={filterParameters.creationDateMin} 
-                customDate={onDatePicker}
+              <div className="col-md-4 form-group">
+                <RdsDatepicker DatePickerLabel="Creation Time"
+                  type="advanced"
+                  onDatePicker={(s: any) => onDatePicker(s)}
+                  selectedDate={filterParameters.creationDateMin}
+                  customDate={onDatePicker}
                 ></RdsDatepicker>
-                    
+
               </div>
               <div className="col-md-4 form-group">
                 <div className="mb-2">
@@ -280,7 +279,7 @@ const PaymentRequests = () => {
             </div>
           </form>
           <RdsCompDatatable
-           actionPosition="right"
+            actionPosition="right"
             tableHeaders={tableHeaders}
             tableData={tableData}
             pagination={false}
@@ -295,14 +294,14 @@ const PaymentRequests = () => {
             canvasTitle={canvasTitle}
             placement="end"
             offcanvaswidth={650}
-            onClose={() => function () {}}
+            onClose={() => function () { }}
             backDrop={false}
             scrolling={false}
             preventEscapeKey={false}
             offId={"paymentRequests"}
           >
             <RdsCompDatatable
-             actionPosition="right"
+              actionPosition="right"
               tableHeaders={tableHeadersProducts}
               tableData={tableDataProducts}
               pagination={false}
@@ -313,7 +312,7 @@ const PaymentRequests = () => {
             ></RdsCompDatatable>
           </RdsOffcanvas>
         </div>
-      </div></div></div>
+      </div>
     </>
   );
 };

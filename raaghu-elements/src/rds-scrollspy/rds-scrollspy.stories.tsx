@@ -16,5 +16,4 @@ const Template: ComponentStory<typeof RdsScrollspy> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  
 };

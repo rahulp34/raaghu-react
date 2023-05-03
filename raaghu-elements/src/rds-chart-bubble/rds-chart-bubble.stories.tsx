@@ -12,8 +12,9 @@ const Template: ComponentStory<typeof RdsBubbleChart> = (args) => <RdsBubbleChar
 
 export const Default = Template.bind({});
 Default.args = {
-  chartLabels: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-  chartDataSets: [
+  id:"bubblecha",
+  labels: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  dataSets: [
     {
       label: 'Dataset 1',
       data: [90, 97, 20, 30, 40, 50, 60, 70],
@@ -29,7 +30,7 @@ Default.args = {
   ],
 
 
-  chartOptions: {
+  options: {
     responsive: true,
     radius: 10,
     maintainAspectRatio: false,

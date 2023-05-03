@@ -1,34 +1,34 @@
-import React, { useEffect} from "react";
-import Chart from 'chart.js/auto';
+import React, { useEffect } from "react";
+import Chart from "chart.js/auto";
 import "./rds-chart-bubble.scss";
 
 export interface RdsBubbleChartProps {
-  chartLabels:any[],
-  chartOptions:any,
-  chartDataSets:any[],
-  chartdata: any[],
-  chartWidth: number,
-  chartStyle:string,
+  id: string;
+  labels: any[];
+  options: any;
+  dataSets: any[];
+  chartdata?: any[];
+  chartWidth?: number;
+  chartStyle?: string;
 }
 
 const RdsBubbleChart = (props: RdsBubbleChartProps) => {
- const CanvasId = "myChart";
+  const CanvasId = props.id;
   let ctx;
- 
 
   useEffect(() => {
     const canvasElm = document.getElementById(
       CanvasId
     ) as HTMLCanvasElement | null;
     ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
-    
+
     const lineCanvas = new Chart(ctx, {
       type: "bubble",
       data: {
-        labels: props.chartLabels,
-        datasets:props.chartDataSets
+        labels: props.labels,
+        datasets: props.dataSets,
       },
-      options: props.chartOptions,
+      options: props.options,
     });
   });
 
@@ -40,4 +40,3 @@ const RdsBubbleChart = (props: RdsBubbleChartProps) => {
 };
 
 export default RdsBubbleChart;
-      

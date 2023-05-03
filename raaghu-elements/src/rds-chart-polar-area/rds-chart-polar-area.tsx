@@ -7,7 +7,7 @@ export interface RdsPolarAreaChartProps {
   dataSets:any[],
   width?: number,
   height?:number,
-  chartStyle:string,
+  chartStyle?:string,
   id:string
 }
 

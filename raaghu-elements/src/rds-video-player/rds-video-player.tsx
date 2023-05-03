@@ -2,13 +2,13 @@ import React from "react";
 import "./rds-video-player.scss";
 import ReactPlayer from "react-player";
 export interface RdsVideoPlayerProps {
-  width: "string";
-  height: "string";
+  width: string;
+  height: string;
   autoplay: boolean;
   muted: boolean;
   videoLink: string;
 }
-const rdsVideoPlayer = (props: RdsVideoPlayerProps) => {
+const RdsVideoPlayer = (props: RdsVideoPlayerProps) => {
   return (
     <div>
       <ReactPlayer
@@ -28,4 +28,4 @@ const rdsVideoPlayer = (props: RdsVideoPlayerProps) => {
   );
 };
 
-export default rdsVideoPlayer;
+export default RdsVideoPlayer;

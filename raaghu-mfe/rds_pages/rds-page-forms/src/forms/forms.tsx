@@ -138,7 +138,7 @@ const Forms = () => {
   ];
 
 
-  const [saveNewFormData, setSaveNewFormData] = useState<any>();
+  const [saveNewFormData, setSaveNewFormData] = useState<any>({title:'',description:''});
   const [basicFormData, setBasicFormData] = useState({
     title: '', description: ''
   });
@@ -188,9 +188,7 @@ const Forms = () => {
           {alert.showAlert && alertOne && (
             <RdsAlert
               alertmessage={alert.message}
-              colorVariant={alert.success ? "success" : "danger"}
-              style={{ marginBottom: "0" }}
-            ></RdsAlert>
+              colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
           )}
         </div>
         <div className="col-6 d-flex justify-content-end mb-3">
@@ -241,7 +239,7 @@ const Forms = () => {
                         label="Save"
                         type="button"
                         size="small"
-                        isDisabled={!saveNewFormData.title}
+                        isDisabled={saveNewFormData.title == ''}
                         class="ms-2"
                         colorVariant="primary"
                         databsdismiss="offcanvas"

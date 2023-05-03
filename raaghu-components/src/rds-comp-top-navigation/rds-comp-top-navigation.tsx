@@ -9,6 +9,7 @@ import elementList from "./element-list";
 import componentList from "./components-list";
 import chartList from "./charts-list";
 import MultiLevelDropdown from "./multi-level-dropdown";
+
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -45,6 +46,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   });
   const [navtitle, setNavtitle] = useState(props.navbarTitle);
   const [resetDrop, setResetDrop] = useState(false);
+
   const navigate = useNavigate();
 
   const navtabItems = [
@@ -182,6 +184,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       props.navbarTitle != navtitle
     ) {
       setResetDrop(!resetDrop);
+
     }
   }, [props.breacrumItem, props.navbarTitle]);
 
@@ -315,5 +318,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     </div>
   );
 };
+
 
 export default RdsCompTopNavigation;

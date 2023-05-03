@@ -178,8 +178,9 @@ const Applications = () => {
   ];
 
   const actions = [
-    { id: "delete", displayName: "Delete", modalId: "application-delete-off" },
     { id: "edit", displayName: "Edit", offId: "application-edit-off" },
+    { id: "delete", displayName: "Delete", modalId: "application-delete-off" },
+    
   ];
   const navtabsItems = [
     { label: "Applications Information", tablink: "#nav-home", id: 0 },
@@ -260,13 +261,12 @@ const Applications = () => {
           <RdsAlert
             alertmessage={alert.message}
             colorVariant={alert.success ? "success" : "danger"}
-            style={{ marginBottom: "0" }}
           ></RdsAlert>
         )}
           </div>
           <div className="col d-flex justify-content-end mb-3">
             <RdsOffcanvas
-              canvasTitle={"NEW APPLICATION"}
+              canvasTitle={"New Application"}
               onclick={offCanvasHandler}
               placement="end"
               
