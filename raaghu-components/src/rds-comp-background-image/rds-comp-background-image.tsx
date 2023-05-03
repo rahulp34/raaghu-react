@@ -2,7 +2,7 @@ import React from "react";
 
 export interface RdsCompBackgroundImageProps {
   imageUrl: string,
-  imageHeight:string,
+  imageHeight?:string,
   title: string,
   btnLabel: string,
   subtitle: string,
