@@ -572,7 +572,7 @@ const Main = (props: MainProps) => {
     if(dataHost && dataHost.email != '' && dataHost.password != ''){
       localStorage.setItem('datahostEmail',dataHost.email);
       sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
-      sessionService(openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
+      sessionService(openidConfig.issuer, openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
         if(res){
           // sessionStorage.setItem('accessToken',res)
           await hello(res)
