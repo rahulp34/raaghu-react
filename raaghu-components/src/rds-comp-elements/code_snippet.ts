@@ -912,6 +912,393 @@ const code_snippet = [
   {
     range: ` <RdsRange max={200} min={10} colorVariant="danger" rangeType="default" /> `,
     name: "Range",
+  },{
+    rating: ` <RdsRating
+    rating={3}
+    colorVariant="warning"
+    reviewPosition="right"
+    noOfReviews={123}
+    seeAllOption={false}
+  /> `,
+    name: "Rating",
+  },
+  {
+    reviewCategory: ` <RdsReviewCategory
+    display_type="Basic"
+    item={{
+      name: "Jems Rock",
+      date: new Date(),
+      rating: 4,
+      likes: 50,
+      dislikes: 50,
+      reviewTitle: "Very good and color also nice & fresh look",
+      reviewSubTitle:
+        "After a quick chat with support team, I had a good feeling about this shirt and ordered there of them.",
+      description:
+        "Less than 48 hours later, my delivery arrived. I have not worn anything else since that day! These shirts are so comfortable,yet look classy enough that I can wear them at work or even some formal events.Thank you!",
+    }}
+  />`,
+    name: "Review Category",
+  },
+  {
+    scrollspy: `<RdsScrollspy
+    />`,
+    name: "Scrollspy",
+  },
+  {
+    search: `<RdsSearch placeholder="Search" size="small" iconside="left" /> `,
+    name: "Search",
+  },
+  {
+    selectList: ` <RdsSelectList
+    label="Open select list"
+    isMultiple={false}
+    selectItems={[
+      {
+        option: "One",
+      },
+      {
+        option: "two",
+      },
+      {
+        option: "three",
+      },
+      {
+        option: "four",
+      },
+    ]}
+    isDisabled={false}
+  /> `,
+    name: "Select List",
+  },
+  {
+    sideNav: `  <RdsSideNav
+    sideNavItems={[
+      {
+        id: "0",
+        label: "Dashboard",
+        icon: "home",
+        path: "/dashboard",
+      },
+      {
+        id: "1",
+        label: "Tenant",
+        icon: "tenant",
+        path: "",
+      },
+      {
+        id: "2",
+        label: "Administration",
+        icon: "administration",
+        children: [
+          {
+            id: "2-0",
+            label: "Role",
+            icon: "roles",
+            path: "",
+          },
+          {
+            id: "2-1",
+            label: "Users",
+            icon: "users",
+            path: "",
+          },
+        ],
+      },
+      {
+        id: "3",
+        label: "DEMO Components",
+        icon: "demo_ui",
+        path: "",
+      },
+    ]}
+  /> `,
+    name: "SideNav",
+  },
+  {
+    size: `<RdsSize
+    sizeType= "withoutDescription"
+    sizeData={ [
+      { value: "XXS",inStock:false},
+      { value: "XS", inStock:true},
+      { value: "S", inStock:true},
+      { value: "M", inStock:true},
+      { value: "L", inStock:true},
+      { value: "XL",inStock:true},
+      { value: "XXL",inStock:true},
+    ]}
+    /> `,
+    name: "Size",
+  },
+  {
+    spinner: `<RdsSpinner colorVariant="primary" />`,
+    name: "Spinner",
+  },
+  {
+    stat: `     <RdsStat
+    displayType="basic"
+    colorVariant="primary"
+    items={[
+      {
+        title: "SAM SMITH",
+        value: "2370",
+        icon: "star",
+        iconHeight: "80px",
+        iconWidth: "80px",
+        iconFill: true,
+      },
+    ]}
+  />`,
+    name: "Stat",
+  },
+  {
+    stepper: `<RdsStepper stepperType="simple" /> `,
+    name: "Stepper",
+  },
+  {
+    table: `<RdsTable
+    id="tableId"
+    striped={false}
+    bordered={false}
+    tableHeightForScroll=""
+    colorVariant="none"
+    backgroundColor="white"
+    headerTextColor="black"
+    headerDatas={[
+      { displayName: "Name", dataType: "text", key: "name" },
+      { displayName: "Icon", dataType: "icon", key: "icon" },
+      { displayName: "Price", dataType: "price", key: "price" },
+      {
+        displayName: "Text Number",
+        dataType: "textNumber",
+        key: "textNumber",
+      },
+    ]}
+    tableDatas={[
+      {
+        id: 1,
+        name: "Standard",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+      {
+        id: 2,
+        name: "Premium",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+      {
+        id: 3,
+        name: "Ultimate",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+      {
+        id: 4,
+        name: "Standard",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+      {
+        id: 5,
+        name: "Premium",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+      {
+        id: 6,
+        name: "Ultimate",
+        icon: "home",
+        price: "$20",
+        textNumber: "22aa",
+      },
+    ]}
+  /> `,
+    name: "Table",
+  },
+  {
+    tag: `    <RdsTag
+    tagType="square"
+    role="basic"
+    colorVariant="primary"
+    fillClose={false}
+    tagArray={[
+      "primary",
+      "secondary",
+      "success",
+      "info",
+      "warning",
+      "danger",
+      "dark",
+      "light",
+    ]}
+  /> `,
+    name: "Tag",
+  },
+  {
+    teamMember: `    <RdsTeamMember
+    teamItem={[
+      {
+        title: "Tina",
+        subTitle: "Web Developer",
+        imgLink:
+          "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png?W=100",
+        twitterIcon: "star",
+        linkdineIcon: "star",
+        description: "Lorem ipsum dolor sit amet conr adipiscing elit",
+      },
+    ]}
+  />`,
+    name: "Team Member",
+  },
+  {
+    testimonial: ` <RdsTestimonial
+    testimonialItems={[
+      {
+        img: "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        title: "SAM SMITH",
+        subtitle: "PRODUCT MANAGER",
+        description:
+          "Nulla metus metus ullamcorper vel tincidunt set euismod nibh quisque volutpat",
+        icon: "quote_right",
+        iconHeight: "18px",
+        iconWidth: "18px",
+        iconFill: true,
+        iconStroke: true,
+      },
+
+      {
+        img: "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        title: "King John",
+        subtitle: "PRODUCT MANAGER",
+        description:
+          "Nulla metus metus ullamcorper vel tincidunt set euismod nibh quisque volutpat",
+        icon: "quote_right",
+        iconHeight: "18px",
+        iconWidth: "18px",
+        iconFill: true,
+        iconStroke: true,
+      },
+
+      {
+        img: "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        title: "King John",
+        subtitle: "PRODUCT MANAGER",
+        description:
+          "Nulla metus metus ullamcorper vel tincidunt set euismod nibh quisque volutpat",
+        icon: "quote_right",
+        iconHeight: "18px",
+        iconWidth: "18px",
+        iconFill: true,
+        iconStroke: true,
+      },
+      {
+        img: "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        title: "King John",
+        subtitle: "PRODUCT MANAGER",
+        description:
+          "Nulla metus metus ullamcorper vel tincidunt set euismod nibh quisque volutpat",
+        icon: "quote_right",
+        iconHeight: "18px",
+        iconWidth: "18px",
+        iconFill: true,
+        iconStroke: true,
+      },
+    ]}
+  /> `,
+    name: "Testimonial",
+  },
+  {
+    textArea: `    <RdsTextArea
+    rows={3}
+    readonly={false}
+    label="Example label"
+    placeholder="This is text area..."
+    labelPosition="top"
+    isDisabled={false}
+    isRequired={false}
+  /> `,
+    name: "TextArea",
+  },
+  {
+    textEditor: `<RdsTextEditor /> `,
+    name: "TextEditor",
+  },
+  {
+    toast: `<RdsToast
+    headerTitle= 'Toast'
+    message= 'This is a sample toast'
+    colorVariant= 'light'
+    showHeader={true}
+    withIcon={true}
+    iconName="folder"
+    iconColorvariant="primary"
+    iconHeight="18px"
+    iconWidth="18px"
+    iconFill={false}
+    /> `,
+    name: "Toast",
+  },
+  {
+    toggle: `    <RdsToggle
+    iconOnUncheck= "sun"
+    iconOnCheck= "moon"
+    small={false}
+    checked={false}
+    /> `,
+    name: "Toggle",
+  },
+  {
+    tooltip: `    <RdsTooltip
+    text="This is tooltip"
+    place="right"
+    children={<button className="btn btn-primary">Button</button>}
+  />`,
+    name: "Tooltip",
+  },
+  {
+    videoPlayer: `   <RdsVideoPlayer
+    width="480px"
+    height="240px"
+    autoplay={false}
+    muted={false}
+    videoLink="https=//youtu.be/7sDY4m8KNLc"
+  /> `,
+    name: "Video Player",
+  },
+  {
+    websiteMatrix: ` <RdsWebsiteMatrix
+    item ={{
+      "title": "510+",
+      "link": "Learn more",
+      "subtitle": "Clients Worked with"
+    }}
+    displayType="default"
+    colorVariant= "primary"
+    /> `,
+    name: "Website Matrix",
+  },
+  {
+    widget: ` <RdsWidget
+    colorVariant="gradient-primary"
+    subTitleColorVariant="primary"
+    iconFill={true}
+    iconStroke={true}
+    iconHeight="15px"
+    iconWidth="15px"
+    bigNumber="$13,20,21"
+    subTitle="+$1,203"
+    icon="triangle_up"
+    bigNumberColor="white"
+    headerTitle="Widget"
+    isRefreshRequired={true}
+  /> `,
+    name: "Widget",
   },
 ];
 export default code_snippet;
