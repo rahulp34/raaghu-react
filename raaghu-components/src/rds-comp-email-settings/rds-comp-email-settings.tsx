@@ -1,11 +1,11 @@
 import React from "react";
 import { RdsButton, RdsInput, RdsLabel } from "raaghu-react-elements";
 
-export interface RdsEmailSettingsProps {
+export interface RdsCompEmailSettingsProps {
 	emailSettings: any;
 }
 
-const RdsEmailSettings = (props: RdsEmailSettingsProps) => {
+const RdsCompEmailSettings = (props: RdsCompEmailSettingsProps) => {
 	return (
 		<>
 			<form>
@@ -79,4 +79,4 @@ const RdsEmailSettings = (props: RdsEmailSettingsProps) => {
 	);
 };
 
-export default RdsEmailSettings;
+export default RdsCompEmailSettings;

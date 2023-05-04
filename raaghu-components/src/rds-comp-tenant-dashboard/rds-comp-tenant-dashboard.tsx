@@ -1,13 +1,13 @@
 import React from 'react';
-import { RdsWidget } from "raaghu-react-elements";
+import { RdsTable, RdsWidget } from "raaghu-react-elements";
 import {
 	RdsLineChart,
 	RdsBigNumber,
 	RdsDoughnutChart,
 	RdsBooleanChart,
-	RdsBarChart,
-	RdsTable,
+	RdsBarChart
 } from "raaghu-react-elements";
+
 const RdsCompTenantDashboard = () => {
 	const monthlySummaryChartOptions = () => {
 		return;
@@ -741,7 +741,7 @@ const RdsCompTenantDashboard = () => {
 							isRefreshRequired={true}
 							colorVariant={"white"}
 						>
-							<div>
+							<div className='table-responsive'>
 								<RdsTable
 									headerDatas={[
 										{ displayName: "Member", key: "member", dataType: "html" },

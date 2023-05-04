@@ -37,7 +37,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
       sortable: true,
     },
   ];
-  const style = { marginTop: "29px" };
+  // const style = { marginTop: "29px" };
   const [areWeEditing, setAreWeEditing] = useState(false);
   const [dataId, setDataId] = useState("");
 
@@ -227,7 +227,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
               value={optionData.option}
             ></RdsInput>
           </div>
-          <div className="col-md-3 " style={style}>
+          <div className="col-md-3">
             <RdsButton
               label="Add"
               colorVariant="primary"

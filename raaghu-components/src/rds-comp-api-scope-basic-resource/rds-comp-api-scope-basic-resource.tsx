@@ -6,7 +6,7 @@ export interface RdsCompApiScopeBasicResourceProps {
 	email:any;
 	fullname:any;
 	message:any;
-	 onSuccess?: any;
+	onSuccess?: any;
 	
 }
 

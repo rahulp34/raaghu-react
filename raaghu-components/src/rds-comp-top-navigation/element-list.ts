@@ -182,7 +182,8 @@ const elementList = [
   {
     label: "Price",
     val: "price",
-  } ,{
+  },
+  {
     label: "Product Image",
     val: "productImage",
   },
@@ -190,11 +191,99 @@ const elementList = [
     label: "Progress Bar",
     val: "progressBar",
   },
-  {label:"Radio Button",
-  vval:"radioButton"},
+  
+  { label: "Radio Button", 
+  val: "radioButton" },
   {
     label: "Range",
     val: "range",
+  },{
+    label: "Rating",
+    val: "rating",
   },
+  {
+    label: "Review Category",
+    val: "reviewCategory",
+  },
+  {
+    label: "Scrollspy",
+    val: "scrollspy",
+  },
+  {
+    label: "Search",
+    val: "search",
+  },
+  {
+    label: "Select List",
+    val: "selectList",
+  },
+  {
+    label: "Side Nav",
+    val: "sideNav",
+  },
+  {
+    label: "Size",
+    val: "size",
+  },
+  {
+    label: "Spinner",
+    val: "spinner",
+  },
+  {
+    label: "Stat",
+    val: "stat",
+  },
+  {
+    label: "Stepper",
+    val: "stepper",
+  },
+  {
+    label: "Table",
+    val: "table",
+  },
+  {
+    label: "Tag",
+    val: "tag",
+  },
+  {
+    label: "Team Member",
+    val: "teamMember",
+  },
+  {
+    label: "Testimonial",
+    val: "testimonial",
+  },
+  {
+    label: "Text Area",
+    val: "textArea",
+  },
+  {
+    label: "Text Editor",
+    val: "textEditor",
+  },
+  {
+    label: "Toast",
+    val: "toast",
+  },
+  {
+    label: "Toggle",
+    val: "toggle",
+  },
+  {
+    label: "Tooltip",
+    val: "tooltip",
+  },
+  {
+    label: "Video Player",
+    val: "videoPlayer",
+  },
+  {
+    label: "Website Matrix",
+    val: "websiteMatrix",
+  },
+  {
+    label: "Widget",
+    val: "widget",
+  }
 ];
 export default elementList;

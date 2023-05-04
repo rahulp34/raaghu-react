@@ -72,7 +72,7 @@ const RdsButtonGroup = (props: RdsButtonGroupProps) => {
           aria-label="Basic example"
         >
           {props.buttonGroupItems.map((buttonGroupItem, idx) => (
-            <button type="button" className={outlineColorVariant}>
+            <button type="button" className={outlineColorVariant} key={buttonGroupItem.label}>
               {buttonGroupItem.label}
             </button>
           ))}
