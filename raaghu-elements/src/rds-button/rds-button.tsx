@@ -56,6 +56,7 @@ const RdsButton= (props: RdsButtonProps) => {
         data-bs-toggle={props.databstoggle}
         aria-controls={props.ariacontrols}
         id={props.id}
+        data-testId={props.dataTestId}
       >
         {props.icon && (
           <span className={iconClasses}>
@@ -89,6 +90,7 @@ const RdsButton= (props: RdsButtonProps) => {
       data-bs-toggle={props.databstoggle}
       aria-controls={props.ariacontrols}
       id={props.id}
+      data-testId={props.dataTestId}
     >
       {props.icon && (
         <span className={iconClasses}>

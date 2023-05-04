@@ -56,6 +56,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onMinusClick}
+									dataTestId="minusButton"
 								></RdsButton>
 								<span className={classesForInnerSpan}>{counterValue}</span>
 								<RdsButton
@@ -69,6 +70,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onPlusClick}
+									dataTestId="plusButton"
 								></RdsButton>
 							</div>
 						</div>
@@ -90,6 +92,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onMinusClick}
+									dataTestId="minusButton"
 								></RdsButton>
 								<span className={classesForInnerSpan}>{counterValue}</span>
 								<RdsButton
@@ -103,6 +106,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onPlusClick}
+									dataTestId="plusButton"
 								></RdsButton>
 							</div>
 
@@ -127,6 +131,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onMinusClick}
+									dataTestId="minusButton"
 								></RdsButton>
 								<span className={classesForInnerSpan}>{counterValue}</span>
 								<RdsButton
@@ -140,6 +145,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onPlusClick}
+									dataTestId="plusButton"
 								></RdsButton>
 							</div>
 						</div>
@@ -161,6 +167,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onMinusClick}
+									dataTestId="minusButton"
 								></RdsButton>
 								<span className={classesForInnerSpan}>{counterValue}</span>
 								<RdsButton
@@ -174,6 +181,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 									iconWidth="13px"
 									class={classesForButton}
 									onClick={onPlusClick}
+									dataTestId="plusButton"
 								></RdsButton>
 							</div>
 							<label>{props.label}</label>
@@ -195,6 +203,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 							iconWidth="13px"
 							class={classesForButton}
 							onClick={onMinusClick}
+							dataTestId="minusButton"
 						></RdsButton>
 						<span className={classesForInnerSpan}>{counterValue}</span>
 						<RdsButton
@@ -208,6 +217,7 @@ const RdsCounter = (props: RdsCounterProps) => {
 							iconWidth="13px"
 							class={classesForButton}
 							onClick={onPlusClick}
+							dataTestId="plusButton"
 						></RdsButton>
 					</div>
 				</div>
