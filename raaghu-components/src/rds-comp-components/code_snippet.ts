@@ -294,7 +294,6 @@ itemList={[
     { option: "Zimbabwe" },
     { option: "Åland Islands" }
 ]}
-
 IndianStateList = {[
     { option: "Andhra Pradesh" },
     { option: "Arunachal Pradesh" },
@@ -1168,7 +1167,6 @@ BillingAddressDetails={()=>{}}
       description:
         "The snow-capped mountains set against the backdrop of wide-open skies, Nubra Valley, is among the most beautiful Himalaya places to visit.",
     },
-
     {
       question: "Why Elephant size is too big?",
       description:
@@ -1184,7 +1182,6 @@ BillingAddressDetails={()=>{}}
       description:
         "The snow-capped mountains set against the backdrop of wide-open skies, Nubra Valley, is among the most beautiful Himalaya places to visit.",
     },
-
     {
       question: "Why Elephant size is too big?",
       description:
@@ -1417,19 +1414,6 @@ BillingAddressDetails={()=>{}}
   ]}
 />`,
     name: "Integration",
-  },
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
-  },
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
-  },
-  ,
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
   },
   {
     invoice: `<RdsCompInvoice />`,
