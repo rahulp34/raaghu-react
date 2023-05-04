@@ -35,6 +35,7 @@ const RdsColorSwitcher = (props: RdsColorSwitcherProps) => {
                   id={item.color}
                   style={{ backgroundColor: item.color }}
                   onClick={(e) => selectColor(e,item)}
+                  data-testid={value === item.id ? "selected-color" : undefined}
                 ></div>
               ))}
             </div>
