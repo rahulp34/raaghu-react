@@ -13,7 +13,7 @@ const RdsIllustration = (props: RdsIllustrationProps) => {
   return (
     <Fragment>
       <div className="align-items-center d-flex h-100 justify-content-center">
-        <div className="text-center">
+        <div className="text-center" data-testid="icon" >
           <RdsIcon
             name="file_plus"
             width="120px"
@@ -22,12 +22,12 @@ const RdsIllustration = (props: RdsIllustrationProps) => {
             stroke={true}
             colorVariant={props.colorVariant || "dark"}
           ></RdsIcon>
-            <h5>
-            <label className="mt-4">{props.label}</label>
+          <h5 data-testid="labelElement" >
+            <label className="mt-4" >{props.label}</label>
           </h5>
-          <div className="mt-2 opacity-25">{props.subLabel}</div>
+          <div data-testid="sublabelElement" className="mt-2 opacity-25">{props.subLabel}</div>
         </div>
-        
+
       </div>
     </Fragment>
   );
