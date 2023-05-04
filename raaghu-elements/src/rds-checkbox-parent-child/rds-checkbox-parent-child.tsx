@@ -117,6 +117,7 @@ const RdsCheckboxParentChild = (props: RdsCheckboxParentChildProps) => {
                             : "form-check-input"
                         }`}
                         name={parents?.label}
+                        data-testid = {parents.label}
                         checked={parents?.isSelected}
                         disabled={parents?.disabled}
                         onChange={() => parentHandleChange(parents)}
@@ -134,6 +135,7 @@ const RdsCheckboxParentChild = (props: RdsCheckboxParentChildProps) => {
                                 type="checkbox"
                                 className="form-check-input"
                                 name={child?.id}
+                                data-testid = {child.label}
                                 disabled={child?.disabled}
                                 checked={child?.isSelected}
                                 onChange={() => childHandleChange(child)}
