@@ -17,37 +17,9 @@ const Template: ComponentStory<typeof RdsCompApiResourceBasic> = (args) =>
 export const Default = Template.bind({});
 
 Default.args ={
-    resourceData:{
-        "Name": "",
-        "Displayname": "",
-        "Description": "",
-        checklist:[
-            {
-              "id": 1,
-              "label": "Enables",
-              "checked": false,
-              "disabled": false
-            },
-            {
-              "id": 2,
-              "label": "Required",
-              "checked": false,
-              "disabled": false
-            },
-            {
-                "id": 3,
-                "label": "Emphasize",
-                "checked": false,
-                "disabled": false
-              },
-              {
-                "id": 4,
-                "label": "Show in discovery Documents",
-                "checked": false,
-                "disabled": false
-              },
-          ]
-        
-      }
+  email:"xyz@xyz",
+  fullname:"xyz",
+  message:"xyz",
+  accessTokenSigningAlgorithm:"dfg"
 }
 

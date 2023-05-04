@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import RdsEmailSettings from "./rds-comp-email-settings";
+import RdsCompEmailSettings from "./rds-comp-email-settings";
 
 export default {
   title: "Components/Email Settings",
-  component: RdsEmailSettings,
+  component: RdsCompEmailSettings,
 
-} as ComponentMeta<typeof RdsEmailSettings>;
+} as ComponentMeta<typeof RdsCompEmailSettings>;
 
 
-const Template: ComponentStory<typeof RdsEmailSettings> = (args) => 
-  <RdsEmailSettings {...args} />;
+const Template: ComponentStory<typeof RdsCompEmailSettings> = (args) => 
+  <RdsCompEmailSettings {...args} />;
 
 
 export const Default = Template.bind({});

@@ -12,7 +12,7 @@ function RdsCompPollsQuestion(props:any) {
  
   const questionFormData = (event: any) => {
     event.preventDefault();
-    console.log("dataaa", QuestionData)
+    console.log("Check poll data", QuestionData)
   };
  useEffect(()=>{
   if(props.questionData){

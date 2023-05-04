@@ -14,7 +14,7 @@ const RdsBenefit =(props:RdsBenefitProps) =>{
         
     {/* Default  */} 
     {props.displayType=="default"&& <div className="pt-1 mb-4">
-      <div className="border p-4 text-center bg-light rounded">
+      <div className="border p-4 text-center bg-light rounded" data-testid="defaultAligned">
         <div>
            <RdsIcon name ={props.item.icon} height={props.item.iconHeight} width={props.item.iconWidth} fill={props.item.iconFill} stroke={props.item.iconstroke} colorVariant={props.item.iconColorVarient} />
         </div>
@@ -29,8 +29,8 @@ const RdsBenefit =(props:RdsBenefitProps) =>{
     </div>}
 
       {/* Left Aligned */}
-     {props.displayType=="Left Aligned"&&  <div className="pt-1 ">
-        <div  className="border p-4 text-left bg-light rounded">
+     {props.displayType=="Left Aligned"&&  <div className="pt-1 " >
+        <div  className="border p-4 text-left bg-light rounded" data-testid="leftAligned">
           <div>
             <img src={props.item.imgSrc} alt="" height={props.item.imgHeight} width={props.item.imgWidth}/>
           </div>
@@ -46,7 +46,7 @@ const RdsBenefit =(props:RdsBenefitProps) =>{
       {/* Center Aligned  */}
       {props.displayType =="Center Aligned"  && 
       <div className="pt-1" >
-       <div className="border p-4 text-center bg-light rounded">
+       <div className="border p-4 text-center bg-light rounded" data-testid="centerAligned">
           <div>
             <span className="rounded-circle p-2 bg-secondary bg-opacity-10 d-inline-block">
               <RdsIcon name ={props.item.icon} height={props.item.iconHeight} width={props.item.iconWidth} fill={props.item.iconFill} stroke={props.item.iconstroke} colorVariant={props.item.iconColorVarient} />
@@ -120,5 +120,3 @@ const RdsBenefit =(props:RdsBenefitProps) =>{
     )
 }
 export default RdsBenefit;
-
-  
