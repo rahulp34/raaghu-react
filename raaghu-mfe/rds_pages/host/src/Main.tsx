@@ -84,7 +84,7 @@ export interface MainProps {
 }
 
 const Main = (props: MainProps) => {
-  const [languageData, setLanguageData] = useState([]);
+  const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
 
   // const [storeData, setStoreData] = useState({
@@ -365,12 +365,16 @@ const Main = (props: MainProps) => {
     // }*/
   }
 
+  const[currentLanguageLabel, setCurrentLanguageLabel] = useState("");
+  const[currentLanguageIcon, setCurrentLanguageIcon] = useState("");
+
+
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
       if(res.currentUser.id){
         localStorage.setItem('userId', res.currentUser.id)
       }
-      const tempdata = await res.localization?.languages?.map((item: any) => {
+      const tempdata:any[] = await res.localization?.languages?.map((item: any) => {
         return {
           label: item.displayName,
           val: item.cultureName,
@@ -379,6 +383,11 @@ const Main = (props: MainProps) => {
           iconHeight: "20px",
         };
       });
+      const lang = localStorage.getItem("currentLang");
+      let index = tempdata.findIndex((item:any) => item.val === lang);
+      index = index == -1? 0 : index;
+      setCurrentLanguageLabel(tempdata[index].label);
+      setCurrentLanguageIcon(tempdata[index].icon)
       setLanguageData(tempdata);
     });
     
@@ -531,6 +540,7 @@ const Main = (props: MainProps) => {
       localStorage.setItem("auth", JSON.stringify(true));
       const lang =localStorage.getItem("currentLang")||"en-GB"
       navigate('/dashboard')
+      setCurrentTitle('Dashboard')
       configurationService(lang).then(async (res: any) => {
         if(res.currentUser.id){
           localStorage.setItem('userId', res.currentUser.id)
@@ -707,11 +717,11 @@ const Main = (props: MainProps) => {
                   >
                     <div className="header align-items-stretch">
                       <RdsCompTopNavigation
-                      languageLable="English"
+                      languageLabel={currentLanguageLabel}
                       themeLabel="Theme"
                       profilePic={profilePic}
                       breacrumItem={breacrumItem}
-                      languageIcon="gb"
+                      languageIcon={currentLanguageIcon}
                       languageItems={languageData}
                       componentsList={componentsList}
                       onClick={onClickHandler}

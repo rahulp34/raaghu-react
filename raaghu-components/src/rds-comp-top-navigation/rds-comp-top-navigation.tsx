@@ -27,7 +27,7 @@ export interface RdsCompTopNavigationProps {
   profileTitle?: string;
   profileName?: string;
   logo?: string;
-  languageLable: string;
+  languageLabel: string;
   languageIcon: string;
   themeLabel:string;
   breacrumItem?: any;
@@ -244,7 +244,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
           <div className="position-relative me-3 border-end">
             <RdsDropdownList
-              placeholder={props.languageLable}
+              placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
               iconStroke={true}
