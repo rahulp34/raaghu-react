@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { RdsButton, RdsInput, RdsCheckbox, RdsModal } from "../rds-elements";
+import { RdsLabel, RdsButton, RdsInput, RdsCheckbox, RdsModal } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { Navigate, NavigationType, useNavigate } from "react-router-dom";
-import { RdsLabel } from "raaghu-react-elements";
 export interface RdsCompLoginProps {
   onLogin: (email: string, password: string, rememberMe :boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;

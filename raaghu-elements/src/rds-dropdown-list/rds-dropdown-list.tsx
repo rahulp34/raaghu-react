@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
 
 import RdsIcon from "../rds-icon";
 import RdsBadge from "../rds-badge";
@@ -33,19 +33,15 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   const [checkedCategoryList, setCheckedCategoryList] = useState<any>([]);
   const [isTouch, setIsTouch] = useState(false);
   // to fetch the index of the selected language
-  const lang = localStorage.getItem("i18nextLng");
-  let index = props.listItems.findIndex((item) => item.val === lang);
   const [toggle, setToggle] = useState("show");
 
   //  If language not found then we are updating index to 0
 
-  if (index == -1) {
-    index = 0;
-  }
+ 
 
   //  updating the selected language accordingly
 
-  const [selectedOption, setSelectedOption] = useState<number>(index);
+  const [selectedOption, setSelectedOption] = useState<number>(0);
 
   // using handlerLIstItem to change the language
 
