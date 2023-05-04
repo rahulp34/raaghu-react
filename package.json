@@ -16,6 +16,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "node-sass": "^8.0.0",
+    "openai": "^3.2.1",
     "postcss": "^8.4.19",
     "raaghu-react-core": "^1.0.10",
     "raaghu-themes": "^0.0.27",
@@ -48,16 +49,20 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.1.21",
     "@storybook/testing-library": "^0.0.13",
+    "@types/enzyme": "^3.10.13",
     "@types/jest": "^29.5.1",
     "@types/luxon": "^3.2.0",
     "@types/react-big-calendar": "^0.38.2",
     "@types/react-datepicker": "^4.8.0",
     "@types/validator": "^13.7.10",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "babel-loader": "^8.3.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
+    "enzyme": "^3.11.0",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "react-test-renderer": "^18.2.0",
     "sass-loader": "^13.2.0",
     "storybook-addon-themes": "^6.1.0",
     "style-loader": "^3.3.2",
@@ -76,6 +81,6 @@
     "create:page": "node utils/create.js p",
     "create:proxy": "node utils/generateProxy.js proxy",
     "create:slice": "node utils/generateSlice.js ",
-    "create:micro":"node utils/microServiceCodeGen.js proxy"
+    "create:micro": "node utils/microServiceCodeGen.js proxy"
   }
 }
