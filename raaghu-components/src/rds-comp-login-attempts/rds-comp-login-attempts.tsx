@@ -5,8 +5,9 @@ import "./rds-comp-login-attempts.scss";
 
 export interface RdsCompLoginAttemptsProps {
   Data?: any[];
+
   tableHeaders?: {
-    displayName: string;
+  displayName: string;
     key: string;
     datatype: string;
     dataLength?: number | undefined;
@@ -16,8 +17,10 @@ export interface RdsCompLoginAttemptsProps {
     disabled?: boolean | undefined;
     isEndUserEditing?: boolean | undefined;
   }[];
+
   tableData?: {}[];
   selectvalue?: { value: string; displayText: string }[];
+
   pagination?: boolean;
   onActionSelection(arg: any): any;
 }

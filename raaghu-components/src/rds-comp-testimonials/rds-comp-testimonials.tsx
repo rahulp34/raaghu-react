@@ -4,7 +4,7 @@ import {
 	RdsTestimonial,
 	RdsIcon,
 	RdsCarousel,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 export interface RdsCompTestimonialsProps {
 	testimonialItems?: any;

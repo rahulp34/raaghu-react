@@ -1,6 +1,5 @@
 import { RdsButton, RdsInput } from "raaghu-react-elements";
 import React, {  useEffect, useState } from "react";
-import { RdsCompPersonalInfoWrapper } from "./rds-comp-personal-info.styled";
 
 
 const RdsCompPersonalInfo = (props: any) => {
