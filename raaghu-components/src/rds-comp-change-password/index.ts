@@ -1,1 +1,1 @@
-import { default } from './rds-comp-change-password'
+export { default } from './rds-comp-change-password'
