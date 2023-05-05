@@ -34,7 +34,6 @@ const RdsInput = (props: RdsInputProps) => {
   const [value, setValue] = useState(props.value);
   const [showPassword, setShowPassword] = useState(false);
   const [hasError, setHasError] = useState(false);
-  console.log(" hello input props", props);
 
   useEffect(() => {
     setValue(props.value ?? "");
@@ -56,7 +55,6 @@ const RdsInput = (props: RdsInputProps) => {
   const handlerChange = (e: any) => {
     props.onChange && props.onChange(e);
     if (e.target.value) {
-      console.log(" hello input e.target.value", e.target.value);
       setHasError(true);
     }
   };
