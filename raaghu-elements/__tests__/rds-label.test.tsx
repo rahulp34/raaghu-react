@@ -1,0 +1,40 @@
+import RdsLabel, { RdsLabelProps } from "../src/rds-label/rds-label";
+import React from "react";
+import '@testing-library/jest-dom';
+import { render, screen } from "@testing-library/react";
+
+describe("RdsLabel component", () => {
+    const defaultProps = {
+        label: "Test Label",
+        id: "test-id",
+        required: false,
+        multiline: false,
+        style: { fontSize: "12px", fontWeight: "bold", color: "#ff0000" },
+    };
+
+    it("should render the label text", () => {
+        render(<RdsLabel {...defaultProps} />);
+        expect(screen.getByText(defaultProps.label)).toBeInTheDocument();
+    });
+
+    it("should render a required span if required prop is passed", () => {
+        const testProps = {
+            ...defaultProps,
+            required: true,
+        };
+        render(<RdsLabel {...testProps} />);
+        expect(screen.getByText("*")).toBeInTheDocument();
+    });
+
+
+    it("should render the children prop", () => {
+        const testText = "test";
+        render(<RdsLabel {...defaultProps}>{testText}</RdsLabel>);
+        expect(
+            screen.getByText((content, element) =>
+                content.includes(testText) && element?.nodeName.toLowerCase() === "label"
+            )
+        ).toBeInTheDocument();
+    });
+
+});
