@@ -134,7 +134,6 @@ const Main = (props: MainProps) => {
   );
   useEffect(() => {
     let id = localStorage.getItem("userId");
-
     dispatch(getProfilePictureHost(id) as any);
   }, [dispatch]);
 
@@ -709,7 +708,7 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                    <div>
+                    <div onClick={()=>navigate("/dashboard")}>
                       <img
                         className="ms-1 cursor-pointer sidenav-logo"
                         src={logo}

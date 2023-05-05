@@ -214,7 +214,7 @@ const Forms = () => {
                 ></RdsButton>
               </div>
             }
-            backDrop={false}
+            backDrop={true}
             scrolling={false}
             preventEscapeKey={false}
             offId="form-new-off"
