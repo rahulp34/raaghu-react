@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof RdsCompPermissionTree> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  treeData: [
+  permissions: [
     {
       name: "[Test edition scope feature]",
       id: "testEditionScopeFeature",

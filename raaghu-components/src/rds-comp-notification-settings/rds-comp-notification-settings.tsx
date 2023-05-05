@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./rds-comp-notification-settings.scss";
 
 export interface RdsCompNotificationSettingsProps {
-  onSave: (event: React.MouseEvent, data: any) => void;
-  onCancel: (event: React.MouseEvent) => void;
+  onSave?: (event: React.MouseEvent, data: any) => void;
+  onCancel?: (event: React.MouseEvent) => void;
   default: any[];
 }
 
@@ -82,7 +82,7 @@ const RdsCompNotificationSettings = (
         <div>
           <button
             className="btn buttonname btn-primary"
-            onClick={(event) => props.onSave(event, data)}
+            onClick={(event) =>props.onSave && props.onSave(event, data)}
           >
             save
           </button>
