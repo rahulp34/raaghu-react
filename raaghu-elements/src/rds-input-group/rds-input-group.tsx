@@ -11,13 +11,13 @@ export interface RdsInputGroupProps {
   size?: "small" | "medium" | "large";
   inputGroupLabel?: string;
   outline?: boolean;
-  icon?:string;
+  icon?: string;
   value?: string
-  iconColorVariant?:string
-  iconHeight?:string
-  iconWidth?:string
-  iconFill?:boolean
-  iconStroke?:boolean
+  iconColorVariant?: string
+  iconHeight?: string
+  iconWidth?: string
+  iconFill?: boolean
+  iconStroke?: boolean
   inputValue(arg: string): any;
 }
 
@@ -30,8 +30,8 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
     props.size === "small"
       ? "fs-small-size"
       : props.size === "large"
-      ? "fs-5"
-      : "fs-6";
+        ? "fs-5"
+        : "fs-6";
 
   const buttonClickHandler = (e: any) => {
     e.preventDefault();
@@ -39,19 +39,19 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
   };
 
   const formName = "input-group_" + Math.random().toString(36).substr(2, 9);
-  function changeValue(e:any){
-    
+  function changeValue(e: any) {
+
     setValue(e.target.value)
   }
-useEffect(()=>{
-  if(props.value){
-    setValue(props.value)    
-  }
-    
-},[props.value])
+  useEffect(() => {
+    if (props.value) {
+      setValue(props.value)
+    }
+
+  }, [props.value])
   return (
     <Fragment>
-      <form
+      <form data-testid="rds-input"
         id={formName}
         className="RdsInputGroup__form"
         onSubmit={buttonClickHandler}
@@ -60,10 +60,10 @@ useEffect(()=>{
           <label className={inputGroupLabelClasses}>
             {" "}
             {props.inputGroupLabel}{" "}
-          </label> 
+          </label>
         )}
-        <div className={inputGroupDivClasses}>
-          <div className="flex-grow-1">
+        <div data-testid="rds-icon" className={inputGroupDivClasses}>
+          <div className="flex-grow-1" >
             <RdsInput
               name={formName + "-input"}
               placeholder={props.placeholder}
@@ -87,7 +87,7 @@ useEffect(()=>{
             isOutline={props.outline}
             formName={formName}
             size={props.size}
-            
+
           ></RdsButton>
         </div>
       </form>

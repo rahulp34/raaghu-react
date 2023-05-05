@@ -19,10 +19,10 @@ const RdsFeatureList = (props: RdsFeatureListProps) => {
     return (
         <>
             <div>
-                {props.heading && <div className={` RdsFeatureList__Heading ${color}`}>{props.heading}</div>}
+                {props.heading && <div className={` RdsFeatureList__Heading ${color}`} role="heading">{props.heading}</div>}
                 <div className="row">
                     {columnArray.map(colNumber =>
-                        <div key={"col-" + colNumber} className="col">
+                        <div key={"col-" + colNumber} className="col" data-testId="column">
                             <ul className="RdsFeatureList__Ul">
                                 {props.itemList.map((item, index) =>
                                     <Fragment key={"listitem" + index + "-col" + colNumber}>
