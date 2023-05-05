@@ -1,1 +1,1 @@
-import { default } from './rds-comp-properties-new'
+export { default } from './rds-comp-properties-new'

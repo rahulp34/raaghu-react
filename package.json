@@ -77,6 +77,7 @@
     "create:page": "node utils/create.js p",
     "create:proxy": "node utils/generateProxy.js proxy",
     "create:slice": "node utils/generateSlice.js ",
-    "create:micro": "node utils/microServiceCodeGen.js proxy"
+    "create:micro":"node utils/microServiceCodeGen.js proxy",
+    "create:icons": "node raaghu-elements/src/assets/convert.mjs"
   }
 }
