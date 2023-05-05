@@ -1,1 +1,1 @@
-import { default } from './rds-comp-components'
+export { default } from './rds-comp-components'
