@@ -140,7 +140,7 @@ const RdsCompTenantInformation = (props: any) => {
               />      
             </div>
           </div>
-          <div className="my-3 pb-2 border-bottom text-muted">
+          <div className="my-3 pb-2 border-bottom">
             <label htmlFor="Admin details">{"Admin Details"}</label>
           </div>
           <div className="row mt-4">

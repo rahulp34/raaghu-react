@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { RdsInput, RdsButton } from "raaghu-react-elements";
 import React from "react";
-import img from "./edit-pic.png";
 import "./rds-comp-profile-edit.scss";
 export interface RdsCompProfileEditProps {
   onForgotPassword?: (email?: string) => void;
@@ -45,7 +44,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
         <form onSubmit={formSubmitHandler}>
           <div className="row align-items-center">
             <div className="col-md-3 text-center cursor-pointer sm-p-0">
-              <img src={img} />
+              <img src='./edit-pic.png' />
 
               <input type="file" accept="image/*" style={{ display: "none" }} />
             </div>
