@@ -2,7 +2,6 @@ import React from "react";
 import { RdsAppDetail, RdsButton, RdsSpinner } from "raaghu-react-elements";
 
 export interface RdsCompIntegrationProps {
-	appDetailList: any;
 	integrationList: any[];
 }
 
