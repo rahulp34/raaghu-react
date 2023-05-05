@@ -458,7 +458,7 @@ const RdsCompAdminDashboard = () => {
 								<RdsWidget
 									headerTitle={t("Call Overview")}
 									isRefreshRequired={false}
-									colorVariant={"white"}
+									
 									height="auto"
 								>
 									<div>
@@ -630,7 +630,7 @@ const RdsCompAdminDashboard = () => {
 								<RdsWidget
 									headerTitle={t("Sales")}
 									isRefreshRequired={false}
-									colorVariant={"white"}
+								
 									height="auto"
 								>
 									<RdsBigNumber
@@ -651,7 +651,7 @@ const RdsCompAdminDashboard = () => {
 							<RdsWidget
 								headerTitle={t("Daily Sales Growth")}
 								isRefreshRequired={true}
-								colorVariant={"white"}
+								
 							>
 								<div>
 									<RdsBigNumber
@@ -867,14 +867,14 @@ const RdsCompAdminDashboard = () => {
 					<RdsWidget
 						headerTitle={t("Member Activity")}
 						isRefreshRequired={true}
-						colorVariant={"white"}
+				
 					// minHeight="462px"
 					// style={{ overflow: "scroll" }}
 					>
 						<div className="table-responsive">
 							<RdsTable
 								tableHeightForScroll="306px"
-								backgroundColor="white"
+								
 								headerDatas={[
 									{
 										displayName: t("Member"),
@@ -1121,15 +1121,12 @@ const RdsCompAdminDashboard = () => {
 					<RdsWidget
 						headerTitle={t("To do List")}
 						isRefreshRequired={true}
-						colorVariant={"white"}
+						
 					// minHeight="462px"
 					>
 						<div>
 							<RdsTable
 								tableHeightForScroll="360px"
-								colorVariant="white"
-								backgroundColor="white"
-								headerTextColor="black"
 								headerDatas={[
 									{
 										displayName: t("Project"),

@@ -8,17 +8,17 @@ import Login from "../../rds-page-login/src/Login/Login";
 const App = () => {
   const [themes, setThemes] = useState("light");
 
-  // const toggleTheme = (e: any) => {
-  //   if (e.target.checked) {
-  //     setThemes("dark");
-  //     console.log(setThemes("dark"))
-  //   } else {
-  //     setThemes("light");
-  //   } /*else {
-  //     setThemes("semi-dark");
-  //   }*/
-  // };
-  // document.documentElement.setAttribute("theme", themes);
+  const toggleTheme = (e: any) => {
+    if (e.target.checked) {
+      setThemes("dark");
+      console.log(setThemes("dark"))
+    } else {
+      setThemes("light");
+    } /*else {
+      setThemes("semi-dark");
+    }*/
+  };
+  document.documentElement.setAttribute("theme", themes);
   return (
     <Suspense>
       <Main></Main>

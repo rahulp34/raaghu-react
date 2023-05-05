@@ -70,20 +70,20 @@ const RdsSideNavChild = ({
     </div>*/
       }
         <div
-          className={`sidenav-footer text-center cursor-pointer rounded-end py-2 p-1 ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center cursor-pointer rounded-5 py-1 p-1 ${collapse ? "w-auto" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
-         <span className="collpase-button cursor-pointer">
-
+         <span className="collpase-button cursor-pointer d-flex">
            <RdsIcon
                 name="chevron_right_arrow"
-                height="15px"
-                width="15px"
+                height="10px"
+                width="10px"
                 stroke={true}
                 fill={false}
+                strokeWidth="1"
                 onClick={onCollapse}
-                colorVariant="primary"
+                colorVariant="white"
                 // isAnimate={false}
               ></RdsIcon>
        </span>

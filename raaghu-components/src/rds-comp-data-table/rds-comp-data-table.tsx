@@ -321,7 +321,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                 )}
                 {props?.tableHeaders?.map((tableHeader, index) => (
                   <th scope="col" key={"tableHeader-" + index} >
-                    <div className="header align-items-center d-flex">
+                    <div className="align-items-center d-flex">
                       <span className="fw-bold">
                         {tableHeader.displayName}
                       </span>
