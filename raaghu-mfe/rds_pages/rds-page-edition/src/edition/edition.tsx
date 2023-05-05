@@ -30,7 +30,7 @@ import {
 interface RdsPageEditionProps {}
 
 const Edition = (props: RdsPageEditionProps) => {
-  const [tableDataRowid, setTableDataRowId] = useState(0);
+  const [tableDataRowid, setTableDataRowId] = useState("");
   const [value, setValue] = useState("");
   const [alert, setAlert] = useState({
     showAlert: false,

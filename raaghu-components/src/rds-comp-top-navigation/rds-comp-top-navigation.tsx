@@ -27,7 +27,7 @@ export interface RdsCompTopNavigationProps {
   profileTitle?: string;
   profileName?: string;
   logo?: string;
-  languageLable: string;
+  languageLabel: string;
   languageIcon: string;
   themeLabel:string;
   breacrumItem?: any;
@@ -230,11 +230,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <MultiLevelDropdown
+          <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
-          ></MultiLevelDropdown>
-           <div className="px-2 position-relative me-3">
+          ></MultiLevelDropdown></div>
+           <div className="position-relative me-3 border-end">
             <RdsDropdownList
               placeholder={props.themeLabel}            
               id={"themeDropdown"}
@@ -242,9 +242,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               onClick={onClicktheme}
             ></RdsDropdownList>
           </div>
-          <div className="px-2 position-relative me-3">
+          <div className="position-relative me-3 border-end">
             <RdsDropdownList
-              placeholder={props.languageLable}
+              placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
               iconStroke={true}
