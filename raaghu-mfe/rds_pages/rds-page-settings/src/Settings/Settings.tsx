@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  RdsButton,
-  RdsFabMenu,
   RdsNavtabs,
-  RdsOffcanvas,
 } from "../../../../../raaghu-elements/src/index";
 import {
   RdsCompIdentityManagement,

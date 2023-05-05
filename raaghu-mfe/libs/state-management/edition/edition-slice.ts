@@ -36,8 +36,9 @@ export const fetchEditionData = createAsyncThunk(
 
 export const deleteEditionData = createAsyncThunk(
   "edition/deleteEditionData",
-  (id: any) => {
-    return EditionService.deleteEditions(id).then((result) => {
+  (id: string) => {
+    debugger
+    return EditionService.deleteEditions({id:id}).then((result) => {
       return result;
     });
   }
