@@ -10,10 +10,10 @@ const RdsPopularPage = (props: RdsPopularPageProps) => {
     <>
       <div>
         <label className="text-muted fw-bold">POPULAR PAGES</label>
-        <hr className="mt-4 mb-0"></hr>
+        <hr className="mt-4 mb-0"/>
         <div>
           {props.itemList.map((item: any, index: any) => (
-            <div className="border-bottom d-flex align-items-center py-2 gap-2">
+            <div className="border-bottom d-flex align-items-center py-2 gap-2" data-testId="container-div">
               <div className="p-3">
                 <RdsIcon
                   name={item.icon}
@@ -24,7 +24,6 @@ const RdsPopularPage = (props: RdsPopularPageProps) => {
                   colorVariant="dark"
                 />
               </div>
-
               <div className="w-100">
                 <div className="fw-bold">{item.title}</div>
                 <div className="text-muted">{item.subtitle}</div>
