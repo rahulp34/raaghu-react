@@ -42,8 +42,8 @@ const RdsProgressBar = (props: RdsProgressBarProps) => {
           </div>
           {props.displayLevel && (
             <div className="d-flex justify-content-between">
-              <div>0</div>
-              <div>100</div>
+              <div data-testid="level-indicator-min">0</div>
+              <div data-testid="level-indicator-max">100</div>
             </div>
           )}
         </>
