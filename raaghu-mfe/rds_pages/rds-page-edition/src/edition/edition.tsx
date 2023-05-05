@@ -53,7 +53,6 @@ const Edition = (props: RdsPageEditionProps) => {
 
   useEffect(() => {
     if (editionuser.users?.items) {
-      console.log("getting this dhfoasdjfajdlfj", editionuser.users.items);
       const tempData = editionuser.users.items.map((item: any) => {
         return {
           id: item.id,
