@@ -45,7 +45,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 />
               </div>
             </div>
-            <div className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0 login-card-height"
+            <div className="col-md-6 order-1 order-sm-2 rounded-end position-relative align-items-center p-0 login-card-height d-none d-lg-block"
               style={{ backgroundImage: "url(../assets/bg_1.png)", backgroundSize: "cover", backgroundPosition: "bottom", backgroundRepeat: "no-repeat", backgroundColor: "#000;" }}>
               <video id="myVideo" className="video" autoPlay muted loop>
                 <source src="../assets/Comp1.mp4" type="video/mp4" />

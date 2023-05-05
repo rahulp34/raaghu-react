@@ -294,7 +294,6 @@ itemList={[
     { option: "Zimbabwe" },
     { option: "Åland Islands" }
 ]}
-
 IndianStateList = {[
     { option: "Andhra Pradesh" },
     { option: "Arunachal Pradesh" },
@@ -1168,7 +1167,6 @@ BillingAddressDetails={()=>{}}
       description:
         "The snow-capped mountains set against the backdrop of wide-open skies, Nubra Valley, is among the most beautiful Himalaya places to visit.",
     },
-
     {
       question: "Why Elephant size is too big?",
       description:
@@ -1184,7 +1182,6 @@ BillingAddressDetails={()=>{}}
       description:
         "The snow-capped mountains set against the backdrop of wide-open skies, Nubra Valley, is among the most beautiful Himalaya places to visit.",
     },
-
     {
       question: "Why Elephant size is too big?",
       description:
@@ -1417,19 +1414,6 @@ BillingAddressDetails={()=>{}}
   ]}
 />`,
     name: "Integration",
-  },
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
-  },
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
-  },
-  ,
-  {
-    invoice: `<RdsCompInvoice />`,
-    name: "Invoice",
   },
   {
     invoice: `<RdsCompInvoice />`,
@@ -1853,7 +1837,25 @@ BillingAddressDetails={()=>{}}
     name: "My Setting",
   },
   {
-    newClaimType: `<RdsCompNewClaimType onSubmit ={()=>{}}/>`,
+    newClaimType: `<RdsCompNewClaimType
+    claimsData={{
+      name: "",
+      required: false,
+      isStatic: false,
+      regex: "",
+      regexDescription: "",
+      description: "",
+      valueType: "",
+      valueTypeAsString: "",
+    }}
+    valueType={[
+      { option: "String", value: 0 },
+      { option: "Int", value: 1 },
+      { option: "Boolean", value: 2 },
+      { option: "DateTime", value: 3 },
+    ]}
+    onSubmit={() => {}}
+  ></RdsCompNewClaimType>`,
     name: "New Claim Type",
   },
   {
@@ -1890,7 +1892,7 @@ BillingAddressDetails={()=>{}}
     check={false}
     edit={false}
   ></RdsCompNewLanguage>`,
-    name: "NewLanguage",
+    name: "New Language",
   },
   {
     newProperties: `<RdsCompPropertiesNew />`,
@@ -1905,5 +1907,939 @@ BillingAddressDetails={()=>{}}
   />`,
     name: "New Role",
   },
+  {
+    notificationSettings: `<RdsCompNotificationSettings
+    default={[{ enabled: false, NewUser: false, NewTenant: false }]}
+  />`,
+    name: "Notification Settings",
+  },
+  {
+    orderSummary: `<RdsCompOrderSummary isCheckout={true} />`,
+    name: "Order Summary",
+  },
+  {
+    organizationTree: `<RdsCompOrganizationTree
+    mutable={true}
+    organizationTreeData={[
+      {
+        data: {
+          parentId: null,
+          code: "00001",
+          displayName: "qwerty",
+          memberCount: 0,
+          roleCount: 0,
+          lastModificationTime: "2022-09-30T10:51:06.454+05:30",
+          lastModifierUserId: 1,
+          creationTime: "2022-09-30T09:26:39.630+05:30",
+          creatorUserId: 1,
+          id: 69,
+        },
+        level: 1,
+        selected: false,
+        label: "qwerty",
+        expandedIcon: "fa fa-folder-open text-warning",
+        collapsedIcon: "fa fa-folder text-warning",
+        expanded: true,
+        children: [
+          {
+            data: {
+              parentId: 69,
+              code: "00001.00001",
+              displayName: "test",
+              memberCount: 14,
+              roleCount: 1,
+              lastModifierUserId: null,
+              creationTime: "2022-09-30T09:26:57.564+05:30",
+              creatorUserId: 1,
+              id: 70,
+            },
+            level: 2,
+            selected: false,
+            label: "test",
+            expandedIcon: "fa fa-folder-open text-warning",
+            collapsedIcon: "fa fa-folder text-warning",
+            expanded: true,
+            children: [
+              {
+                data: {
+                  parentId: 70,
+                  code: "00001.00001.00001",
+                  displayName: "child",
+                  memberCount: 0,
+                  roleCount: 0,
+                  lastModifierUserId: null,
+                  creationTime: "2022-09-30T09:27:27.617+05:30",
+                  creatorUserId: 1,
+                  id: 72,
+                },
+                level: 3,
+                selected: false,
+                label: "child",
+                expandedIcon: "fa fa-folder-open text-warning",
+                collapsedIcon: "fa fa-folder text-warning",
+                expanded: true,
+                children: [
+                  {
+                    data: {
+                      parentId: 72,
+                      code: "00001.00001.00001.00001",
+                      displayName: "child",
+                      memberCount: 0,
+                      roleCount: 0,
+                      lastModifierUserId: null,
+                      creationTime: "2022-09-30T09:27:39.368+05:30",
+                      creatorUserId: 1,
+                      id: 73,
+                    },
+                    level: 4,
+                    selected: false,
+                    label: "child",
+                    expandedIcon: "fa fa-folder-open text-warning",
+                    collapsedIcon: "fa fa-folder text-warning",
+                    expanded: true,
+                    children: [],
+                  },
+                  {
+                    data: {
+                      parentId: 72,
+                      code: "00001.00001.00001.00002",
+                      displayName: "child1",
+                      memberCount: 0,
+                      roleCount: 0,
+                      lastModifierUserId: null,
+                      creationTime: "2022-09-30T09:38:27.386+05:30",
+                      creatorUserId: 1,
+                      id: 74,
+                    },
+                    level: 4,
+                    selected: false,
+                    label: "child1",
+                    expandedIcon: "fa fa-folder-open text-warning",
+                    collapsedIcon: "fa fa-folder text-warning",
+                    expanded: true,
+                    children: [],
+                  },
+                ],
+              },
+              {
+                data: {
+                  parentId: 70,
+                  code: "00001.00001.00002",
+                  displayName: "122",
+                  memberCount: 0,
+                  roleCount: 0,
+                  lastModifierUserId: null,
+                  creationTime: "2022-09-30T10:15:12.674+05:30",
+                  creatorUserId: 1,
+                  id: 81,
+                },
+                level: 3,
+                selected: false,
+                label: "122",
+                expandedIcon: "fa fa-folder-open text-warning",
+                collapsedIcon: "fa fa-folder text-warning",
+                expanded: true,
+                children: [],
+              },
+              {
+                data: {
+                  parentId: 70,
+                  code: "00001.00001.00003",
+                  displayName: "test1",
+                  memberCount: 0,
+                  roleCount: 0,
+                  lastModifierUserId: null,
+                  creationTime: "2022-09-30T10:16:13.146+05:30",
+                  creatorUserId: 1,
+                  id: 83,
+                },
+                level: 3,
+                selected: false,
+                label: "test1",
+                expandedIcon: "fa fa-folder-open text-warning",
+                collapsedIcon: "fa fa-folder text-warning",
+                expanded: true,
+                children: [],
+              },
+            ],
+          },
+          {
+            data: {
+              parentId: 69,
+              code: "00001.00002",
+              displayName: "admin",
+              memberCount: 0,
+              roleCount: 0,
+              lastModifierUserId: null,
+              creationTime: "2022-09-30T09:27:11.760+05:30",
+              creatorUserId: 1,
+              id: 71,
+            },
+            level: 2,
+            selected: false,
+            label: "admin",
+            expandedIcon: "fa fa-folder-open text-warning",
+            collapsedIcon: "fa fa-folder text-warning",
+            expanded: true,
+            children: [],
+          },
+        ],
+      },
+      {
+        data: {
+          parentId: null,
+          code: "00002",
+          displayName: "test1",
+          memberCount: 0,
+          roleCount: 0,
+          lastModifierUserId: null,
+          creationTime: "2022-09-30T09:39:59.650+05:30",
+          creatorUserId: 1,
+          id: 75,
+        },
+        level: 1,
+        selected: false,
+        label: "test1",
+        expandedIcon: "fa fa-folder-open text-warning",
+        collapsedIcon: "fa fa-folder text-warning",
+        expanded: true,
+        children: [],
+      },
+    ]}
+    nodeColor={["#6E4D9F", "#0D79AE", "#14A94B", "#FBA919"]}
+  />`,
+    name: "Organization Tree",
+  },
+  {
+    otherSettings: `<RdsCompOtherSettings/>`,
+    name: "Other Settings",
+  },
+  {
+    pageNotFound: `<RdsCompPageNotFound />`,
+    name: "Page Not Found",
+  },
+  {
+    passwordSetting: `<RdsCompPasswordSetting/>`,
+    name: "Password Setting",
+  },
+  {
+    paymentDetail: `<RdsCompPaymentDetail/>`,
+    name: "Payment Detail",
+  },
+  {
+    permissionTree: `<RdsCompPermissionTree
+    permissions={[
+      {
+        name: "[Test edition scope feature]",
+        id: "testEditionScopeFeature",
+        isSelected: false,
+        isIntermediate: false,
+        disabled: false,
+        parent_id: "",
+        children: [],
+      },
+      {
+        name: "Chat",
+        id: "chat",
+        parent_id: "",
+        isSelected: false,
+        isIntermediate: false,
+        disabled: false,
+        children: [
+          {
+            name: "Chat with host",
+            id: "chatwithhost",
+            parent_id: "chat",
+            isSelected: false,
+            isIntermediate: false,
+            disabled: false,
+            children: [],
+          },
+          {
+            name: "Chat with other tenants",
+            id: "chatwithothertenats",
+            parent_id: "chat",
+            isSelected: false,
+            isIntermediate: false,
+            disabled: false,
+            children: [],
+          },
+        ],
+      },
+      {
+        name: "Maximum user count",
+        id: "maximumUserCount",
+        parent_id: "",
+        isSelected: false,
+        isIntermediate: false,
+        disabled: false,
+        children: [],
+      },
+      {
+        name: "Test check feature",
+        id: "testCheckFeature",
+        parent_id: "",
+        isSelected: false,
+        isIntermediate: false,
+        disabled: false,
+        children: [],
+      },
+      {
+        name: "Test check feature",
+        id: "testCheckFeature",
+        parent_id: "",
+        isSelected: true,
+        isIntermediate: false,
+        disabled: false,
+        children: [],
+      },
+    ]}
+    selectedPermissions={() => {}}
+  />`,
+    name: "Permission Tree",
+  },
+  {
+    personalInfo: ` <RdsCompPersonalInfo
+    handlePersonalDataSubmit={() => {}}
+    handleVerifyEmailSubmit={() => {}}
+    personalInfo={{
+      userName: "",
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+    }}
+  />`,
+    name: "Personal Info",
+  },
+  {
+    pollsOption: `<RdsCompPollsOption />`,
+    name: "Polls Option",
+  },
+  {
+    pollsQuestion: `<RdsCompPollsQuestion/>`,
+    name: "PollsQuestion",
+  },
+  {
+    productImage: `<RdsCompProductImage
+    item={{
+      imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+      rating: 3,
+      reviews: "See all 123 reviews",
+      productTitle: "Basic Tee",
+      productDescription:
+        "White tees stain easily, and black tees fade. This is going to be gray for a while.",
+      colorLabel: "White",
+      cost: "$35",
+      badgeWithIcon: { badge: "Quality Assured", icon: "featured" },
+      ColorSwitcherList: [
+        { id: 1, color: "#FFFFFF" },
+        { id: 2, color: "#FDD2FF" },
+        { id: 3, color: "#BFEAFF" },
+      ],
+      showAddToBagButton: true,
+      showBuyNowButton: true,
+      bordered: true,
+    }}
+  />`,
+    name: "Product Image",
+  },
+  {
+    productList: `<RdsCompProductList
+    items={[
+      {
+        imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+        productTitle: "Basic Tee",
+      },
+      {
+        imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+        productTitle: "Basic Tee",
+      },
+      {
+        imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+        productTitle: "Basic Tee",
+      },
+      {
+        imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+        productTitle: "Basic Tee",
+      },
+      {
+        imgUrl: "https://www.linkpicture.com/q/product_img_with_title_1.png",
+        productTitle: "Basic Tee",
+      },
+    ]}
+  />`,
+    name: "Product List",
+  },
+  {
+    profile: ` <RdsCompProfile
+    navtabItems={[
+      {
+        label: "Manage Linked Accounts",
+        icon: "manage_linked",
+        subText: "Manage accounts linked to your account",
+        id: "nav-LinkAccount",
+      },
+      {
+        label: "Manage Authority Delegation",
+        icon: "manage_authority",
+        subText: "Manage authority accounts",
+        id: "nav-Deligation",
+      },
+      {
+        label: "Login Attempts",
+        icon: "login_attempts",
+        subText: "See recent login attempts for your account",
+        id: "nav-Attempts",
+      },
+      {
+        label: "My Settings",
+        icon: "my_settings",
+        subText: "Change your account settings",
+        id: "nav-Settings",
+      },
+      {
+        label: "Download Collected Data",
+        icon: "download_data",
+        subText: "Download data belongs to your account",
+        id: "nav-DownLoad",
+      },
+    ]}
+    profilePic="https://www.freeiconspng.com/thumbs/profile-icon-png/account-profile-user-icon--icon-search-engine-10.png"
+    userName="Host Admin"
+    userRole=" Admin"
+  />`,
+    name: "Profile",
+  },
+  {
+    profilePicture: `<RdsCompProfilePicture />`,
+    name: "Profile Picture",
+  },
+  {
+    properties: `<RdsCompProperties
+    propertyHeaders={[
+      {
+        displayName: "Member",
+        key: "member",
+        datatype: "avatarTitleInfo",
+        sortable: false,
+      },
+      {
+        displayName: "Cases",
+        key: "cases",
+        datatype: "number",
+        sortable: false,
+      },
+      {
+        displayName: "Active",
+        key: "active",
+        datatype: "number",
+        sortable: false,
+      },
+      {
+        displayName: "Closed",
+        key: "closed",
+        datatype: "number",
+        sortable: false,
+      },
+      {
+        displayName: "Rate",
+        key: "rate",
+        datatype: "number",
+        sortable: false,
+      },
+    ]}
+    propertyData={[
+      {
+        cases: 10,
+        member: {
+          avatar:
+            "https://anzstageui.raaghu.io/assets/profile-picture-circle.svg",
+          title: "Brian",
+          info: "Software Developer",
+        },
+        active: 38,
+        closed: 10,
+        rate: 92,
+      },
+      {
+        cases: 18,
+        member: {
+          avatar:
+            "https://anzstageui.raaghu.io/assets/profile-picture-circle.svg",
+          title: "Brian",
+          info: "Software Developer",
+        },
+        active: 342,
+        closed: 25,
+        rate: 42,
+      },
+      {
+        cases: 7,
+        member: {
+          avatar:
+            "https://anzstageui.raaghu.io/assets/profile-picture-circle.svg",
+          title: "Brian",
+          info: "Software Developer",
+        },
+        active: 25,
+        closed: 5,
+        rate: 96,
+      },
+      {
+        cases: 14,
+        member: {
+          avatar:
+            "https://anzstageui.raaghu.io/assets/profile-picture-circle.svg",
+          title: "Brian",
+          info: "Software Developer",
+        },
+        active: 42,
+        closed: 42,
+        rate: 16,
+      },
+    ]}
+    onActionSelection={() => {}}
+  />`,
+    name: "Properties",
+  },
+  {
+    review:`<RdsCompReviews
+    variantType="with-summary-chart"
+    itemList={[
+      {
+        name: "Jijo Fleshman",
+        username: "@jijolife123",
+        date: new Date(),
+        feedIcon: "person",
+        imageUrl:
+          "https://th.bing.com/th/id/OIP.3IsXMskZyheEWqtE3Dr7JwHaGe?pid=ImgDet&rs=1",
+        description:
+          "This bag is of the quality expected for the price. The lining inside the bag seems like satin and it is very strong one It has huge space inside inside as the zipper can be opened in either side.",
+        hashtags: "#newbag #fancybag #designerbag",
+        reviews: "See all 125 reviews",
+        rating: 1,
+      },
+      {
+        name: "Jijo Fleshman",
+        username: "@jijolife123",
+        date: new Date(),
+        feedIcon: "person",
+        imageUrl:
+          "https://th.bing.com/th/id/OIP.3IsXMskZyheEWqtE3Dr7JwHaGe?pid=ImgDet&rs=1",
+        description:
+          "This bag is of the quality expected for the price. The lining inside the bag seems like satin and it is very strong one It has huge space inside inside as the zipper can be opened in either side.",
+        reviews: "See all 125 reviews",
+        replies: "Show replies (3)",
+        rating: 1,
+      },
+      {
+        name: "Jijo Fleshman",
+        username: "@jijolife123",
+        date: new Date(),
+        feedIcon: "person",
+        imageUrl:
+          "https://th.bing.com/th/id/OIP.3IsXMskZyheEWqtE3Dr7JwHaGe?pid=ImgDet&rs=1",
+        description:
+          "This bag is of the quality expected for the price. The lining inside the bag seems like satin and it is very strong one It has huge space inside inside as the zipper can be opened in either side.",
+        reviews: "See all 125 reviews",
+        rating: 1,
+      },
+    ]}
+  />`,
+  name:"Review"
+  },
+  {
+    security:` <RdsCompSecurity
+    checkgroupList={[
+      {
+        id: 1,
+        label: "Require Digit",
+        checked: false,
+        disabled: false,
+      },
+      {
+        id: 2,
+        label: "Require Lowercase",
+        checked: false,
+        disabled: false,
+      },
+      {
+        id: 3,
+        label: "Require Non-Alphanumeric",
+        checked: false,
+        disabled: false,
+      },
+      {
+        id: 4,
+        label: "Require Uppercase",
+        checked: false,
+        disabled: false,
+      },
+    ]}
+  />`,
+    name:"Securiety"
+  },
+  {
+    securietyLogs:`    <RdsCompSecurityLogs
+    enablecheckboxselection={false}
+    tableHeaders={[
+      {
+        displayName: "Edition Name",
+        key: "editionName",
+        datatype: "text",
+        dataLength: 30,
+        required: true,
+        sortable: true,
+      },
+      {
+        displayName: "Price ($)",
+        key: "price",
+        datatype: "number",
+        dataLength: 5,
+        required: false,
+        sortable: true,
+      },
+      {
+        displayName: "Trial Period(Day(s))",
+        key: "trialPeriod",
+        datatype: "number",
+        dataLength: 5,
+        required: true,
+      },
+    ]}
+    actions={[
+      { id: "delete", displayName: "Delete" },
+      { id: "edit", displayName: "Edit" },
+    ]}
+    tableData={[
+      { id: 1, editionName: "Standard", price: 60, trialPeriod: 5 },
+      { id: 2, editionName: "Basic", price: 120, trialPeriod: 10 },
+      { id: 3, editionName: "Premium", price: 250, trialPeriod: 5 },
+      { id: 4, editionName: "Standard", price: 60, trialPeriod: 7 },
+      { id: 5, editionName: "Basic", price: 100, trialPeriod: 15 },
+      { id: 6, editionName: "Standard", price: 60, trialPeriod: 5 },
+      { id: 7, editionName: "Premium", price: 100, trialPeriod: 47 },
+      { id: 8, editionName: "Standard", price: 100, trialPeriod: 53 },
+      { id: 9, editionName: "Standard", price: 100, trialPeriod: 35 },
+      { id: 10, editionName: "Basic", price: 100, trialPeriod: 35 },
+      { id: 11, editionName: "Premium", price: 100, trialPeriod: 95 },
+      { id: 12, editionName: "Standard", price: 100, trialPeriod: 75 },
+      { id: 13, editionName: "Premium", price: 100, trialPeriod: 15 },
+      { id: 14, editionName: "Basic", price: 100, trialPeriod: 45 },
+      { id: 15, editionName: "Standard", price: 100, trialPeriod: 3 },
+      { id: 16, editionName: "Basic", price: 100, trialPeriod: 1 },
+    ]}
+    pagination={true}
+    recordsPerPage={5}
+    recordsPerPageSelectListOption={false}
+  />`,
+    name:"Security Logs"
+  },
+  {
+    shippingAddress:` <RdsCompShippingAddress
+    countryList={[
+      {
+        value: "1",
+        option: "India",
+        isSelected: false,
+      },
+      {
+        value: "2",
+        option: "China",
+        isSelected: false,
+      },
+      {
+        value: "3",
+        option: "Canada",
+        isSelected: false,
+      },
+      {
+        value: "4",
+        option: "Japan",
+        isSelected: false,
+      },
+      {
+        value: "5",
+        option: "Australia",
+        isSelected: false,
+      },
+      {
+        value: "6",
+        option: "USA",
+        isSelected: false,
+      },
+      {
+        value: "7",
+        option: "UK",
+        isSelected: false,
+      },
+    ]}
+  />`,
+    name:"Shipping Address"
+  },
+  {
+    sideNavigation:`<RdsCompSideNavigation
+    sideNavItems={[
+      {
+        key: "0",
+        label: "Dashboard",
+        icon: "home",
+        path: "/dashboard",
+      },
+      {
+        key: "1",
+        label: "UI Components",
+        icon: "demo_ui",
+        path: "/demo-ui",
+      },
+      {
+        key: "2",
+        label: "Icons",
+        icon: "icons",
+        path: "/icons",
+      },
+      {
+        key: "3",
+        label: "Pages",
+        icon: "pages",
+        children: [
+          {
+            key: "3-0",
+            label: "Tenants",
+            icon: "tenant",
+            path: "/tenant",
+          },
+          {
+            key: "3-1",
+            label: "Editions",
+            icon: "editions",
+            path: "/edition",
+          },
+          {
+            key: "3-2",
+            label: "Administration",
+            icon: "administration",
+            children: [
+              {
+                key: "3-2-0",
+                label: "Organization Units",
+                icon: "organization",
+                path: "/organization-unit",
+              },
+              {
+                key: "3-2-1",
+                label: "Roles",
+                icon: "roles",
+                path: "/role",
+              },
+              {
+                key: "3-2-2",
+                label: "Users",
+                icon: "users",
+                path: "/user",
+              },
+              {
+                key: "3-2-3",
+                label: "Language",
+                icon: "languages",
+                path: "/language",
+              },
+              {
+                key: "3-2-4",
+                label: "Audit Logs",
+                icon: "audit_logs",
+                path: "/audit-logs",
+              },
+              {
+                key: "3-2-5",
+                label: "Webhook Subscriptions",
+                icon: "webhook_subscription",
+                path: "/webhook-subscription",
+              },
+              {
+                key: "3-2-6",
+                label: "Maintenance",
+                icon: "maintenance",
+                path: "/maintainance",
+              },
+              {
+                key: "3-2-7",
+                label: "Visual Settings",
+                icon: "visual_settings",
+                path: "/visual-setting",
+              },
+              {
+                key: "3-2-8",
+                label: "Settings",
+                icon: "setting",
+                path: "/settings",
+              },
+            ],
+          },
+        ],
+      },
+    ]}
+  />`,
+    name:"Side Navigation"
+  },
+  {
+    subscription:`<RdsCompSubscription
+    width="226px"
+    subscriptionData={[
+      {
+        name: "BASIC",
+        price: "$232",
+        duration: "2 Year",
+        colorVariant: "info",
+        icon: "basic_subscription",
+        recommended: false,
+        features: [
+          { title: "Maximum User Count", isInclude: true },
+          { title: "Test Check feature", isInclude: false },
+          { title: "Test check feature count 2", isInclude: false },
+        ],
+      },
+      {
+        name: "STANDARD",
+        price: "$432",
+        duration: "2 Year",
+        colorVariant: "success",
+        icon: "standard_subscription",
+        recommended: false,
+        features: [
+          { title: "Maximum User Count", isInclude: true },
+          { title: "Test Check feature", isInclude: true },
+          { title: "Test check feature count 2", isInclude: false },
+        ],
+      },
+      {
+        name: "PREMIUM",
+        price: "$532",
+        duration: "2 Year",
+        colorVariant: "primary",
+        icon: "premium_subscription",
+        recommended: true,
+        features: [
+          { title: "Maximum User Count", isInclude: true },
+          { title: "Test Check feature", isInclude: true },
+          { title: "Test check feature count 2", isInclude: true },
+        ],
+      },
+    ]}
+  />`,
+    name:"Subscription"
+  },
+  {
+    teams:`<RdsCompTeams
+    teamItem={[
+      [
+        {
+          title: "Tina",
+          subTitle: "Web Developer",
+          imgLink:
+            "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png?W=100",
+          twitterIcon: "twitter",
+          linkdineIcon: "linkedin",
+          description: "Lorem ipsum dolor sit amet conr adipiscing elit",
+        },
+      ],
+      [
+        {
+          title: "Wily",
+          subTitle: "Web Developer",
+          imgLink:
+            "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png?W=100",
+          twitterIcon: "twitter",
+          linkdineIcon: "linkedin",
+          description: "Lorem ipsum dolor sit amet conr adipiscing elit",
+        },
+      ],
+      [
+        {
+          title: "Vivek",
+          subTitle: "Web Developer",
+          imgLink:
+            "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png?W=100",
+          twitterIcon: "twitter",
+          linkdineIcon: "linkedin",
+          description: "Lorem ipsum dolor sit amet conr adipiscing elit",
+        },
+      ],
+      [
+        {
+          title: "Riya",
+          subTitle: "Web Developer",
+          imgLink:
+            "https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png?W=100",
+          twitterIcon: "twitter",
+          linkdineIcon: "linkedin",
+          description: "Lorem ipsum dolor sit amet conr adipiscing elit",
+        },
+      ],
+    ]}
+  />`,
+    name:"Teams"
+  },
+  {
+    tenantDashboard:`<RdsCompTenantDashboard />`,
+    name:"Tenant Dashboard"
+  },
+  {
+    tenantList:` <RdsCompTenantList
+    enablecheckboxselection={false}
+    tableHeaders={[
+      {
+        displayName: "Edition Name",
+        key: "editionName",
+        datatype: "text",
+        dataLength: 30,
+        required: true,
+        sortable: true,
+      },
+      {
+        displayName: "Price ($)",
+        key: "price",
+        datatype: "number",
+        dataLength: 5,
+        required: false,
+        sortable: true,
+      },
+      {
+        displayName: "Trial Period(Day(s))",
+        key: "trialPeriod",
+        datatype: "number",
+        dataLength: 5,
+        required: true,
+      },
+    ]}
+    actions={[
+      { id: "delete", displayName: "Delete" },
+      { id: "edit", displayName: "Edit" },
+    ]}
+    tableData={[
+      { id: 1, editionName: "Standard", price: 60, trialPeriod: 5 },
+      { id: 2, editionName: "Basic", price: 120, trialPeriod: 10 },
+      { id: 3, editionName: "Premium", price: 250, trialPeriod: 5 },
+      { id: 4, editionName: "Standard", price: 60, trialPeriod: 7 },
+      { id: 5, editionName: "Basic", price: 100, trialPeriod: 15 },
+      { id: 6, editionName: "Standard", price: 60, trialPeriod: 5 },
+      { id: 7, editionName: "Premium", price: 100, trialPeriod: 47 },
+      { id: 8, editionName: "Standard", price: 100, trialPeriod: 53 },
+      { id: 9, editionName: "Standard", price: 100, trialPeriod: 35 },
+      { id: 10, editionName: "Basic", price: 100, trialPeriod: 35 },
+      { id: 11, editionName: "Premium", price: 100, trialPeriod: 95 },
+      { id: 12, editionName: "Standard", price: 100, trialPeriod: 75 },
+      { id: 13, editionName: "Premium", price: 100, trialPeriod: 15 },
+      { id: 14, editionName: "Basic", price: 100, trialPeriod: 45 },
+      { id: 15, editionName: "Standard", price: 100, trialPeriod: 3 },
+      { id: 16, editionName: "Basic", price: 100, trialPeriod: 1 },
+    ]}
+    pagination={true}
+    recordsPerPage={5}
+    recordsPerPageSelectListOption={false}
+  />`,
+    name:"Tenant List"
+  }
 ];
 export default code_snippet;

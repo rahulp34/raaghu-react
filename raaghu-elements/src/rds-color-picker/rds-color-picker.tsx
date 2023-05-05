@@ -64,6 +64,7 @@ return (
         disabled={props.isDisabled}
         onChange={HandlerChangecolor}
         title="Choose your color"
+        data-testId="colorPicker"
         />
       </span>
       <span>{Color}</span>
