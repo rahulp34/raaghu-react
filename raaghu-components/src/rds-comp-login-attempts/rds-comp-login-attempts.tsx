@@ -4,8 +4,8 @@ import { RdsDatePicker, RdsIllustration } from "raaghu-react-elements";
 import "./rds-comp-login-attempts.scss";
 
 export interface RdsCompLoginAttemptsProps {
-  Data: any[];
-  tableHeaders: {
+  Data?: any[];
+  tableHeaders?: {
     displayName: string;
     key: string;
     datatype: string;
@@ -16,9 +16,9 @@ export interface RdsCompLoginAttemptsProps {
     disabled?: boolean | undefined;
     isEndUserEditing?: boolean | undefined;
   }[];
-  tableData: {}[];
-  selectvalue: { value: string; displayText: string }[];
-  pagination: boolean;
+  tableData?: {}[];
+  selectvalue?: { value: string; displayText: string }[];
+  pagination?: boolean;
   onActionSelection(arg: any): any;
 }
 

@@ -1,1 +1,1 @@
-import { default } from './rds-comp-personal-info'
+export { default } from './rds-comp-personal-info'
