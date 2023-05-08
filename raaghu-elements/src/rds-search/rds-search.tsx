@@ -25,7 +25,7 @@ const RdsSearch = (props: RdsSearchProps) => {
     <div className={searchBarClass}>
    {iconside =="left" ?
    <>
-        <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick}>
+        <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick} data-testId="search-icon" >
           <RdsIcon name="search" fill={false}  stroke={true} height='17px' width="17px" ></RdsIcon>
         </span>
      
@@ -50,8 +50,9 @@ const RdsSearch = (props: RdsSearchProps) => {
         aria-describedby={ariaDescribedby}
         defaultValue=""
         onChange={props.onChange}
+        onKeyDown={props.onKeyPress}
       />
-       <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick}>
+       <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick} data-testId="search-icon">
        <RdsIcon name="search" fill={false}  stroke={true} height='17px' width="17px" ></RdsIcon>
         </span>
      
