@@ -3,7 +3,6 @@ import '@testing-library/jest-dom';
 import RdsIconLabel from '../src/rds-icon-label/rds-icon-label';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { RdsSize } from '../src';
 
 test('should render the label', () => {
   render(<RdsIconLabel label="Icon Label" icon='user' size='medium' iconSize='large' fill={false} />);
