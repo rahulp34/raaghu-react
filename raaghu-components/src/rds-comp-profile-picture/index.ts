@@ -1,1 +1,1 @@
-import { default } from './rds-comp-profile-picture'
+export { default } from './rds-comp-profile-picture'

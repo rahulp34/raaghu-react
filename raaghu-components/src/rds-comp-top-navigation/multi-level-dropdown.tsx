@@ -55,6 +55,7 @@ const MultiLevelDropdown = (props: any) => {
     }
     setCurrUI({ ...currUI, ui: "" });
   }
+  
   //  updating the selected language accordingly
 
   useEffect(() => {

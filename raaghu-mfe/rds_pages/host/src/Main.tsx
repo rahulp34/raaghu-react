@@ -23,6 +23,7 @@ import * as menus from "../../../libs/main-menu/index";
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import {
+  invalidCredentialAction,
   callLoginAction,
   getProfilePictureHost,
 } from "../../../libs/state-management/host/host-slice";
@@ -73,8 +74,7 @@ import {
   GlobalResourcesCompo,
   NewslettersCompo,
   ChangePasswordCompo,
-  ChartCompo
-,
+  ChartCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
@@ -86,6 +86,7 @@ export interface MainProps {
 const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
+  const [count, setCount] = useState(0);
 
   // const [storeData, setStoreData] = useState({
   //   languages: store.languages,
@@ -133,7 +134,6 @@ const Main = (props: MainProps) => {
   );
   useEffect(() => {
     let id = localStorage.getItem("userId");
-
     dispatch(getProfilePictureHost(id) as any);
   }, [dispatch]);
 
@@ -154,7 +154,6 @@ const Main = (props: MainProps) => {
   }, []);
 
   useEffect(() => {
-    
     showBreadCrum();
   }, [window.location.pathname]);
 
@@ -247,30 +246,30 @@ const Main = (props: MainProps) => {
   const themeItems = [
     {
       label: "Light",
-      val:"",
+      val: "",
       icon: "light",
       iconWidth: "17px",
       iconHeight: "17px",
     },
     {
       label: "Dark",
-      val:"",
+      val: "",
       icon: "dark",
       iconWidth: "17px",
       iconHeight: "17px",
     },
     {
       label: "SemiDark",
-      val:"",
+      val: "",
       icon: "semidark",
       iconWidth: "17px",
       iconHeight: "17px",
     },
   ];
 
-  useEffect(() => {
-    dispatch(callLoginAction(null) as any);
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(callLoginAction(null) as any);
+  // }, [dispatch]);
 
   const objectArray = Object.entries(menus);
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
@@ -288,41 +287,41 @@ const Main = (props: MainProps) => {
 
   const concatenatedExtended = concatenated.concat([
     {
-      "label": "Host Admin",
-      "path":"\/host-admin",
-      "icon": "saas",
-      "children": [
+      label: "Host Admin",
+      path: "/host-admin",
+      icon: "saas",
+      children: [
         {
           label: "Linked Accounts",
           icon: "manage_linked",
-          path:"",
+          path: "",
           subText: "Manage accounts linked to your account",
           id: "nav-LinkAccount",
         },
         {
           label: "My Account",
           icon: "manage_authority",
-          path:"/my-account",
+          path: "/my-account",
           subText: "Manage authority accounts",
           id: "nav-MyAccount",
         },
         {
           label: "Security Logs",
           icon: "login_attempts",
-          path:"/security-logs",
+          path: "/security-logs",
           subText: "See recent login attempts for your account",
           id: "nav-SecuityLogs",
         },
         {
           label: "Personal Data",
           icon: "my_settings",
-          path:"/personal-data",
+          path: "/personal-data",
           subText: "Change your account settings",
           id: "nav-PersonalData",
-        }
-      ]
-    }
-  ])
+        },
+      ],
+    },
+  ]);
   const { t, i18n } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState(
     localStorage.getItem("currentLang") || "en-GB"
@@ -344,16 +343,14 @@ const Main = (props: MainProps) => {
   //   }*/
   // };
 
-  const onClickThemeCheck = (e:any)=>{
+  const onClickThemeCheck = (e: any) => {
     console.log(e.target);
-    if(e.target.innerText=="Light"){
-      setThemes("light")
-    }
-    else if(e.target.innerText=="Dark"){
-      setThemes("dark")
-    }
-    else if(e.target.innerText=="SemiDark"){
-      setThemes("semidark")
+    if (e.target.innerText == "Light") {
+      setThemes("light");
+    } else if (e.target.innerText == "Dark") {
+      setThemes("dark");
+    } else if (e.target.innerText == "SemiDark") {
+      setThemes("semidark");
     }
     // if (e.target.checked) {
     //   setThemes("dark");
@@ -363,34 +360,38 @@ const Main = (props: MainProps) => {
     // } /*else {
     //   setThemes("semi-dark");
     // }*/
-  }
+  };
 
-  const[currentLanguageLabel, setCurrentLanguageLabel] = useState("");
-  const[currentLanguageIcon, setCurrentLanguageIcon] = useState("");
-
+  const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
+  const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
 
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
-      if(res.currentUser.id){
-        localStorage.setItem('userId', res.currentUser.id)
+      if (res.currentUser.id) {
+        localStorage.setItem("userId", res.currentUser.id);
       }
-      const tempdata:any[] = await res.localization?.languages?.map((item: any) => {
-        return {
-          label: item.displayName,
-          val: item.cultureName,
-          icon: item.flagIcon !== null ? item.flagIcon : item.twoLetterISOLanguageName,
-          iconWidth: "20px",
-          iconHeight: "20px",
-        };
-      });
+      const tempdata: any[] = await res.localization?.languages?.map(
+        (item: any) => {
+          return {
+            label: item.displayName,
+            val: item.cultureName,
+            icon:
+              item.flagIcon !== null
+                ? item.flagIcon
+                : item.twoLetterISOLanguageName,
+            iconWidth: "20px",
+            iconHeight: "20px",
+          };
+        }
+      );
       const lang = localStorage.getItem("currentLang");
-      let index = tempdata.findIndex((item:any) => item.val === lang);
-      index = index == -1? 0 : index;
+      let index = tempdata.findIndex((item: any) => item.val === lang);
+      index = index == -1 ? 0 : index;
       setCurrentLanguageLabel(tempdata[index].label);
-      setCurrentLanguageIcon(tempdata[index].icon)
+      setCurrentLanguageIcon(tempdata[index].icon);
       setLanguageData(tempdata);
     });
-    
+
     localizationService(currentLanguage).then((resp: any) => {
       let data2 = {};
       const translation = resp?.resources;
@@ -463,51 +464,50 @@ const Main = (props: MainProps) => {
     let a = recursiveFunction(concatenatedExtended, pageName);
     a = a.filter((res: any) => (res ? true : false));
     if (a[0].id) {
-      a = a.map((res:any)=>{
+      a = a.map((res: any) => {
         return {
-          id:res.id,
-          label:t(res.label),
-          icon:''
-        }
-      })
+          id: res.id,
+          label: t(res.label),
+          icon: "",
+        };
+      });
       setBreadCrumItem(a);
     } else {
       a = a[0].reverse();
-      a = a.map((res:any)=>{
+      a = a.map((res: any) => {
         return {
-          id:res.id,
-          label:t(res.label),
-          icon:''
-        }
-      })
+          id: res.id,
+          label: t(res.label),
+          icon: "",
+        };
+      });
       setBreadCrumItem(a);
     }
   };
-  function showBreadCrum(){
-    let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath)
-      
-        breadcrumData = breadcrumData.filter((res: any) => res ? true : false)
-        if (breadcrumData.length && breadcrumData[0].id) {
-          breadcrumData = breadcrumData.map((res:any)=>{
-            return {
-              id:res.id,
-              label:t(res.label),
-              icon:''
-            }
-          })
-          setBreadCrumItem(breadcrumData);
-        }
-        else if (breadcrumData.length) {
-          breadcrumData = breadcrumData[0].reverse();
-          breadcrumData = breadcrumData.map((res:any)=>{
-            return {
-              id:res.id,
-              label:t(res.label),
-              icon:''
-            }
-          })
-          setBreadCrumItem(breadcrumData);
-        }
+  function showBreadCrum() {
+    let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath);
+
+    breadcrumData = breadcrumData.filter((res: any) => (res ? true : false));
+    if (breadcrumData.length && breadcrumData[0].id) {
+      breadcrumData = breadcrumData.map((res: any) => {
+        return {
+          id: res.id,
+          label: t(res.label),
+          icon: "",
+        };
+      });
+      setBreadCrumItem(breadcrumData);
+    } else if (breadcrumData.length) {
+      breadcrumData = breadcrumData[0].reverse();
+      breadcrumData = breadcrumData.map((res: any) => {
+        return {
+          id: res.id,
+          label: t(res.label),
+          icon: "",
+        };
+      });
+      setBreadCrumItem(breadcrumData);
+    }
   }
 
   useEffect(() => {
@@ -533,67 +533,84 @@ const Main = (props: MainProps) => {
         i18n.changeLanguage(currentLanguage);
         showBreadCrum();
       }
-    })
-  },[])
+    });
+  }, []);
 
   function hello(res: any) {
-      localStorage.setItem("auth", JSON.stringify(true));
-      const lang =localStorage.getItem("currentLang")||"en-GB"
-      navigate('/dashboard')
-      setCurrentTitle('Dashboard')
-      configurationService(lang).then(async (res: any) => {
-        if(res.currentUser.id){
-          localStorage.setItem('userId', res.currentUser.id)
-        }
-      });
-      localizationService(currentLanguage).then((resp: any) => {
-          let data2 = {};
-          const translation = resp?.resources;
-          if (translation) {
-            Object.keys(translation).forEach((key) => {
-              Object.keys(translation[key].texts).forEach((k1)=>{
-                let k2 = k1.replace(/[^\w\s]/gi,'_');
-                let value1 = translation[key].texts[k1]
-                data2 = {...data2,[k2]:value1}
-              })              
-            });
-            i18n.addResourceBundle(
-              currentLanguage,
-              "translation",
-              data2,
-              false,
-              true
-            );
-            i18n.changeLanguage(currentLanguage);
-          }
-        })
-  }
-
-  useEffect(()=>{
-    configurationService(currentLanguage).then(async (res: any) => {
-      if(res.currentUser.id){
-        localStorage.setItem('userId', res.currentUser.id)
+    localStorage.setItem("auth", JSON.stringify(true));
+    const lang = localStorage.getItem("currentLang") || "en-GB";
+    navigate("/dashboard");
+    setCurrentTitle("Dashboard");
+    configurationService(lang).then(async (res: any) => {
+      if (res.currentUser.id) {
+        localStorage.setItem("userId", res.currentUser.id);
       }
     });
+    localizationService(currentLanguage).then((resp: any) => {
+      let data2 = {};
+      const translation = resp?.resources;
+      if (translation) {
+        Object.keys(translation).forEach((key) => {
+          Object.keys(translation[key].texts).forEach((k1) => {
+            let k2 = k1.replace(/[^\w\s]/gi, "_");
+            let value1 = translation[key].texts[k1];
+            data2 = { ...data2, [k2]: value1 };
+          });
+        });
+        i18n.addResourceBundle(
+          currentLanguage,
+          "translation",
+          data2,
+          false,
+          true
+        );
+        i18n.changeLanguage(currentLanguage);
+      }
+    });
+  }
 
-  },[])
+  useEffect(() => {
+    configurationService(currentLanguage).then(async (res: any) => {
+      if (res.currentUser.id) {
+        localStorage.setItem("userId", res.currentUser.id);
+      }
+    });
+  }, []);
 
-  useEffect(()=>{
-    if(dataHost && dataHost.email != '' && dataHost.password != ''){
-      localStorage.setItem('datahostEmail',dataHost.email);
-      sessionStorage.setItem('REACT_APP_API_URL', process.env.REACT_APP_API_URL || '');
-      sessionService(openidConfig.issuer, openidConfig.grant_type, dataHost.email, dataHost.password, openidConfig.clientId, openidConfig.scope).then(async(res:any)=>{
-        if(res){
-          // sessionStorage.setItem('accessToken',res)
-          await hello(res)
-          
-          sessionStorage.setItem('accessToken', res.access_token)
-          localStorage.setItem('refreshToken', res.refresh_token)
-          localStorage.setItem('expiresIn', res.expires_in)
-          localStorage.setItem('loginAccessDate', Date());
-        }
-      });
-      dispatch(callLoginAction(null) as any);
+  useEffect(() => {
+    if (dataHost && dataHost.email != "" && dataHost.password != "") {
+      setCount((prevCount) => prevCount + 1);
+      localStorage.setItem("datahostEmail", dataHost.email);
+      sessionStorage.setItem(
+        "REACT_APP_API_URL",
+        process.env.REACT_APP_API_URL || ""
+      );
+      sessionService(
+        openidConfig.issuer,
+        openidConfig.grant_type,
+        dataHost.email,
+        dataHost.password,
+        openidConfig.clientId,
+        openidConfig.scope
+      )
+        .then(async (res: any) => {
+          if (res) {
+            await dispatch(invalidCredentialAction(false));
+            // sessionStorage.setItem('accessToken',res)
+            await hello(res);
+            sessionStorage.setItem("accessToken", res.access_token);
+            localStorage.setItem("refreshToken", res.refresh_token);
+            localStorage.setItem("expiresIn", res.expires_in);
+            localStorage.setItem("loginAccessDate", Date());
+            // await dispatch(callLoginAction(null) as any);
+          }
+        })
+        .catch(() => {
+          if (count != 0) {
+            dispatch(invalidCredentialAction(true));
+          }
+        });
+      // dispatch(callLoginAction(null) as any);
     }
   }, [dataHost]);
 
@@ -655,7 +672,6 @@ const Main = (props: MainProps) => {
       }
     });
   }
- 
 
   const logout = () => {
     localStorage.clear();
@@ -673,11 +689,7 @@ const Main = (props: MainProps) => {
           path="/forgot-password"
           element={<ForgotPasswordCompo />}
         ></Route>
-        <Route
-          path="/changepassword"
-          element={<ChangePasswordCompo />}
-        ></Route>
-
+        <Route path="/changepassword" element={<ChangePasswordCompo />}></Route>
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
@@ -696,7 +708,7 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                    <div>
+                    <div onClick={()=>navigate("/dashboard")}>
                       <img
                         className="ms-1 cursor-pointer sidenav-logo"
                         src={logo}
@@ -712,31 +724,34 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                                  className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
                     id="FixedHeaderOverFlow"
                   >
                     <div className="header align-items-stretch">
                       <RdsCompTopNavigation
-                      languageLabel={currentLanguageLabel}
-                      themeLabel="Theme"
-                      profilePic={profilePic}
-                      breacrumItem={breacrumItem}
-                      languageIcon={currentLanguageIcon}
-                      languageItems={languageData}
-                      componentsList={componentsList}
-                      onClick={onClickHandler}
-                      onClickThemeCheck={onClickThemeCheck}
-                      profileTitle="Host Admin"
-                      profileName="admin"
-                      onLogout={logout}
-                      logo={logo}
-                      // toggleTheme={toggleTheme}
-                      themeItems={themeItems}
-                      navbarTitle={t(currentTitle) || ""}
-                      navbarSubTitle={t(currentSubTitle) || ""}
-                      onChatClickHandler={() => {
-                        console.log(" session Hey Chat Button Clicked!!");
-                      } } toggleItems={[]} elementList={[]}                     />
+                        languageLabel={currentLanguageLabel}
+                        themeLabel="Theme"
+                        profilePic={profilePic}
+                        breacrumItem={breacrumItem}
+                        languageIcon={currentLanguageIcon}
+                        languageItems={languageData}
+                        componentsList={componentsList}
+                        onClick={onClickHandler}
+                        onClickThemeCheck={onClickThemeCheck}
+                        profileTitle="Host Admin"
+                        profileName="admin"
+                        onLogout={logout}
+                        logo={logo}
+                        // toggleTheme={toggleTheme}
+                        themeItems={themeItems}
+                        navbarTitle={t(currentTitle) || ""}
+                        navbarSubTitle={t(currentSubTitle) || ""}
+                        onChatClickHandler={() => {
+                          console.log(" session Hey Chat Button Clicked!!");
+                        }}
+                        toggleItems={[]}
+                        elementList={[]}
+                      />
                     </div>
                     <div className="m-4">
                       <Suspense>
@@ -869,7 +884,7 @@ const Main = (props: MainProps) => {
                             path="/my-account"
                             element={<MyAccountCompo />}
                           />
-                        
+
                           <Route path="/menus" element={<MenusCompo />} />
                           <Route
                             path="/components/:type"
@@ -889,7 +904,10 @@ const Main = (props: MainProps) => {
                             path="/newsletters"
                             element={<NewslettersCompo />}
                           />
-                          <Route path="/charts/:type" element={<ChartCompo/>} />
+                          <Route
+                            path="/charts/:type"
+                            element={<ChartCompo />}
+                          />
                         </Routes>
                       </Suspense>
                     </div>

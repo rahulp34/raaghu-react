@@ -4,6 +4,7 @@ import RdsCompIntegration from "../../rds-comp-integration/rds-comp-integration"
 export const code_actual = () => {
   return (
     <RdsCompIntegration
+    appDetailList={[]}
       integrationList={[
         {
           title: "Zapier",
