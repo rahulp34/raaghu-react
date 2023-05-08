@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RdsIcon from "../rds-icon";
 import "./rds-pagination.scss";
 export interface RdsPaginationProps {
@@ -8,6 +8,8 @@ export interface RdsPaginationProps {
   alignmentType?: string;
   size?: string;
   onPageChange?: (currentPage: number, recordsPerPage: number) => void;
+  currentPage?: number;
+
 }
 const RdsPagination = (props: RdsPaginationProps) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,8 +23,8 @@ const RdsPagination = (props: RdsPaginationProps) => {
     }
   };
   const PageNumbers = [];
-  const continued =[];
-  const previous =[];
+  const continued = [];
+  const previous = [];
   let int: any;
 
 
@@ -46,7 +48,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
     setCurrentPage(current);
 
   };
-  const onPrevious = ( current: any) => {
+  const onPrevious = (current: any) => {
     setCurrentPage(current - 1);
 
   };
@@ -57,39 +59,39 @@ const RdsPagination = (props: RdsPaginationProps) => {
   const displayedPages = PageNumbers.slice(startIndex, endIndex);
 
 
-    let leftBound = currentPage - 2;
-    let rightBound = currentPage + 1;
-  
-    if (leftBound <= 1) {
-      leftBound = 1;
-      rightBound = 5;
-    }
+  let leftBound = currentPage - 2;
+  let rightBound = currentPage + 1;
 
-    if (rightBound >= int) {
-      rightBound = int;
-      leftBound = int - 4;
-    }
-    if (rightBound < int) {
-      continued.push("...");
-      continued.push(int);
-    }
-    if(rightBound >= int && int > 5){
-      previous.push(1);
-      previous.push("...");
-      
-    }
+  if (leftBound <= 1) {
+    leftBound = 1;
+    rightBound = 5;
+  }
 
-  
-    useEffect(() => {
-      props.onPageChange != undefined &&
-        props.onPageChange(currentPage, recordsPerPage);
-    }, [currentPage, recordsPerPage]);
+  if (rightBound >= int) {
+    rightBound = int;
+    leftBound = int - 4;
+  }
+  if (rightBound < int) {
+    continued.push("...");
+    continued.push(int);
+  }
+  if (rightBound >= int && int > 5) {
+    previous.push(1);
+    previous.push("...");
+
+  }
+
+
+  useEffect(() => {
+    props.onPageChange != undefined &&
+      props.onPageChange(currentPage, recordsPerPage);
+  }, [currentPage, recordsPerPage]);
 
   const size = " pagination-" + `${props.size || "sm"}`;
   const align =
     " pagination justify-content-" + `${props.alignmentType || "start"}`;
   return (
-    <div>
+    <div data-testid="page-link">
       {paginType == "default" && (
         <nav aria-label="Page navigation example">
           <ul
@@ -102,7 +104,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
             >
               <a
                 className="page-link b"
-                onClick={() => onPrevious( currentPage)}
+                onClick={() => onPrevious(currentPage)}
               >
                 <RdsIcon
                   name="chevron_left"
@@ -119,8 +121,8 @@ const RdsPagination = (props: RdsPaginationProps) => {
               <li
                 key={number}
                 className={`${number === currentPage
-                    ? "page-item m-1 default-li active"
-                    : "page-item m-1 default-li "
+                  ? "page-item m-1 default-li active"
+                  : "page-item m-1 default-li "
                   }`}
               >
                 <a
@@ -183,13 +185,13 @@ const RdsPagination = (props: RdsPaginationProps) => {
               <li
                 key={number}
                 className={`${number === currentPage
-                    ? "page-item m-1 default-li active"
-                    : "page-item m-1 default-li "
+                  ? "page-item m-1 default-li active"
+                  : "page-item m-1 default-li "
                   }`}
               >
-                <a href="#" 
+                <a href="#"
                   onClick={() => onPage(number)}
-                  className={`${number === 1?"page-link roundeds":""}`}
+                  className={`${number === 1 ? "page-link roundeds" : ""}`}
                 >
                   {number}
                 </a>
@@ -199,11 +201,11 @@ const RdsPagination = (props: RdsPaginationProps) => {
               <li
                 key={number}
                 className={`${number === currentPage
-                    ? "page-item m-1 default-li active"
-                    : "page-item m-1 default-li "
+                  ? "page-item m-1 default-li active"
+                  : "page-item m-1 default-li "
                   }`}
               >
-                <a href="#" 
+                <a href="#"
                   onClick={() => onPage(number)}
                   className="page-link roundeds pe-auto"
                 >
@@ -211,24 +213,24 @@ const RdsPagination = (props: RdsPaginationProps) => {
                 </a>
               </li>
             ))}
-           
+
             {continued.map((number) => (
               <li
                 key={number}
                 className={`${number === currentPage
-                    ? "page-item m-1 default-li active"
-                    : "page-item m-1 default-li "
+                  ? "page-item m-1 default-li active"
+                  : "page-item m-1 default-li "
                   }`}
               >
-                <a href="#" 
+                <a href="#"
                   onClick={() => onPage(number)}
-                  className={`${number === int?"page-link roundeds":""}`}
+                  className={`${number === int ? "page-link roundeds" : ""}`}
                 >
                   {number}
                 </a>
               </li>
             ))}
-         
+
             <li
               className={
                 "page-item m-1 " + `${currentPage == int ? "disabled" : " "}`

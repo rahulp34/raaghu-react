@@ -60,6 +60,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
         disabled={Disabled}
         multiple={props.isMultiple}
         aria-label="select example"
+        data-testId="select-example"
         onChange={handleChange}
       >
         {}

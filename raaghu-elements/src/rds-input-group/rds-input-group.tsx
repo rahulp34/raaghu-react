@@ -51,7 +51,7 @@ const RdsInputGroup = (props: RdsInputGroupProps) => {
   }, [props.value])
   return (
     <Fragment>
-      <form data-testid="rds-input"
+      <form
         id={formName}
         className="RdsInputGroup__form"
         onSubmit={buttonClickHandler}
