@@ -116,7 +116,7 @@ const RdsCompPersonalInfo = (props: any) => {
             required={false}
           ></RdsInput>
         </div>
-        <div className="col-12 col-md-12 footer-buttons">
+        <div className="col-12 col-md-12 footer-buttons mx-3">
           <RdsButton
             label="Save"
             colorVariant="primary"
