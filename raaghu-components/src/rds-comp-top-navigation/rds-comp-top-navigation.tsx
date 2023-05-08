@@ -268,52 +268,53 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               colorVariant="primary"
             ></RdsIcon>
           </Link>
-
-          <RdsOffcanvas
-            className="pb-0"
-            placement="end"
-            offcanvaswidth={307}
-            offId="Profile"
-            offcanvasbutton={
-              <div
-                className="d-flex align-items-center"
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
-                  src={profilePic}
-                ></img>
-                <div className="ms-2 fw-bold fs-6">
-                  <div className="text-nowrap">{props.profileTitle}</div>
-                  <div className="text-nowrap text-muted">
-                    {props.profileName}
+          <div >
+            <RdsOffcanvas
+              className="pb-0"
+              placement="end"
+              offcanvaswidth={307}
+              offId="Profile"
+              offcanvasbutton={
+                <div
+                  className="d-flex align-items-center"
+                  style={{ cursor: "pointer" }}
+                >
+                  <img
+                    className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
+                    src={profilePic}
+                  ></img>
+                  <div className="ms-2 fw-bold fs-6">
+                    <div className="text-nowrap">{props.profileTitle}</div>
+                    <div className="text-nowrap text-muted">
+                      {props.profileName}
+                    </div>
                   </div>
+                  <span className="ms-3">
+                    <RdsIcon
+                      name="chevron_down"
+                      height="12px"
+                      width="12px"
+                      fill={false}
+                      stroke={true}
+                    ></RdsIcon>
+                  </span>
                 </div>
-                <span className="ms-3">
-                  <RdsIcon
-                    name="chevron_down"
-                    height="12px"
-                    width="12px"
-                    fill={false}
-                    stroke={true}
-                  ></RdsIcon>
-                </span>
-              </div>
-            }
-            backDrop={true}
-            scrolling={false}
-            preventEscapeKey={false}
-            canvasTitle={""}
-          >
-            <RdsCompProfile
-              navtabItems={navtabItems}
-              profilePic={profilePic}
-              userName={"Host Admin"}
-              userRole={"admin"}
-              onLogout={props.onLogout}
-            ></RdsCompProfile>
-          </RdsOffcanvas>
-        </div>
+              }
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              canvasTitle={""}
+            >
+              <RdsCompProfile
+                navtabItems={navtabItems}
+                profilePic={profilePic}
+                userName={"Host Admin"}
+                userRole={"admin"}
+                onLogout={props.onLogout}
+              ></RdsCompProfile>
+            </RdsOffcanvas>
+          </div>
+          </div>
       </nav>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RdsInput, RdsLabel } from "raaghu-react-elements";
+import { RdsInput, RdsLabel } from "../rds-elements";
 
 interface RdsCompUrlForwardingsProps{
 	urlForwardingData?:any

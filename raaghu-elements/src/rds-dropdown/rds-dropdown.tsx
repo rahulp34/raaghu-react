@@ -35,11 +35,12 @@ const RdsDropdown = (props: RdsDropdownProps) => {
 
   return (
     <>
-      <div className={`btn-group ${dropdowndirection} `}>
+      <div className={`btn-group ${dropdowndirection} `} role="feed">
         {props.split && (
           <button
             className={`btn btn-${props.colorVariant} ${size}`}
             type="button"
+            data-testId="splitButton"
           >
             {props.label}
           </button>
@@ -83,7 +84,7 @@ const RdsDropdown = (props: RdsDropdownProps) => {
           aria-labelledby={`dropdownMenuButton23${props.id}`}
         >
           {props.listItems.map((listItem) => (
-            <li id={listItem.id}>
+            <li id={listItem.id} role="menuitem">
               <a className="dropdown-item text-wrap" href={listItem.path}>
                 {listItem.label}
               </a>

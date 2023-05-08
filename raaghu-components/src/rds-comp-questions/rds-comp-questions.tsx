@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RdsCompFormsBasic from "../rds-comp-forms-basic/rds-comp-forms-basic";
 import RdsCompFormsQuestions from "../rds-comp-forms-question/rds-comp-forms-questions";
-import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea, RdsToggle } from "../rds-elements";
-
 export interface RdsCompQuestionsProps {
 	handleEditQuestion?: any;
 	formQuestionsData: any[];
@@ -11,7 +9,6 @@ export interface RdsCompQuestionsProps {
 	getQuestionsEditDataFromQuestionComp?: any;
 	deleteQuestion:React.EventHandler<any>
 }
-
 const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 	const [basicEditFormData2, setbasicEditFormData] = useState(props.basicEditFormData);
 	const [formQuestionsData1, setFormQuestionsData] = useState(props.formQuestionsData);
@@ -27,7 +24,6 @@ const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 		setbasicEditFormData(updatedFormData)
 		props.getBasicEditDataFromQuestionComp(updatedFormData);                                                            
 	}
-
 	useEffect(() => {
 		setFormQuestionsData(props.formQuestionsData)
 	}, [props.formQuestionsData])
@@ -36,7 +32,6 @@ const RdsCompQuestions = (props: RdsCompQuestionsProps) => {
 		
 		props.getQuestionsEditDataFromQuestionComp(data);
 	}
-
 	return (
 		<>
 			<div className="row mt-3 ">

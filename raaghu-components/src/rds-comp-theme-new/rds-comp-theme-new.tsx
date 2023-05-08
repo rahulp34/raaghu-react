@@ -4,7 +4,7 @@ import {
   RdsDropdownList,
   RdsLabel,
   RdsSelectList,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 import "./rds-comp-theme-new.scss";
 
