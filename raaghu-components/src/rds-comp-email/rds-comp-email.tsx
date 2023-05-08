@@ -184,10 +184,8 @@ useEffect( () => {
         </div>
 
         {condition }
-          <div className="footer-buttons justify-content-end d-flex bottom-0 pt-2" 
-          style={{
-            zIndex:1
-          }}>
+        <div className="position-absolute bottom-0" style={{right:0}}>
+          <div className="d-flex justify-content-end" >
             <RdsButton
               class="me-2"
               label="CANCEL"
@@ -206,6 +204,9 @@ useEffect( () => {
               onClick={()=>{props.handleSubmit(formData)}}
             ></RdsButton>
           </div>
+        </div>
+
+          
       </form>
     </div>
   );
