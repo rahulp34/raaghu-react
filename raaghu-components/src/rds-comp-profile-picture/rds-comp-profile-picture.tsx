@@ -150,7 +150,7 @@ const RdsCompProfilePicture = (props: any) => {
         )}
       </div>
 
-      <div className="col-12 col-md-12 footer-buttons">
+      <div className="col-12 col-md-12 footer-buttons mx-3">
         <RdsButton
           label="Save Changes"
           colorVariant="primary"

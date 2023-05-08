@@ -219,7 +219,7 @@ import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile
                                 checked={twoFactorData}
                             ></RdsCheckbox>  
                         </div>
-                        <div className="mt-3 footer-buttons">
+                        <div className="mt-3 footer-buttons mx-3">
                         <RdsButton
                             label = 'Save'
                             colorVariant ='primary'
