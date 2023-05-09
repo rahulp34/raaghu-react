@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RdsPagination renders correctly with default props 1`] = `
+<div
+  data-testid="page-link"
+>
+  <nav
+    aria-label="Page navigation example"
+  >
+    <ul
+      class="pagination rounded align-items-center pagination-sm pagination justify-content-start"
+    >
+      <li
+        class="m-1 page-item disabled"
+      >
+        <a
+          class="page-link b"
+        >
+          <span
+            role="img"
+          >
+            <svg
+              id="a"
+              style="height: 15px; width: 15px; fill: none; stroke: #7E2EEf;"
+              viewBox="0 0 12 21"
+            >
+              <path
+                class="icon"
+                d="M11.5,.5L.764,9.962c-.337,.279-.354,.746-.038,1.044,.012,.011,.025,.022,.038,.033l10.736,9.462"
+              />
+            </svg>
+          </span>
+          <span
+            class="ms-1 pagination-prev"
+          >
+            Prev
+          </span>
+        </a>
+      </li>
+      <li
+        class="page-item m-1  "
+      >
+        <a
+          class="page-link"
+        >
+          <span
+            class="pagination-next me-1"
+          >
+            Next
+          </span>
+          <span
+            role="img"
+          >
+            <svg
+              id="a"
+              style="height: 15px; width: 15px; fill: none; stroke: #7E2EEf;"
+              viewBox="0 0 12 21"
+            >
+              <path
+                class="icon"
+                d="M.5,20.5L11.236,11.038c.337-.279,.354-.746,.038-1.044-.012-.011-.025-.022-.038-.033L.5,.5"
+              />
+            </svg>
+          </span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+`;

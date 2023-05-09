@@ -21,7 +21,7 @@ const RdsPopover = (props: RdsPopoverProps) => {
   return (
     <>
 
-      <div className="popoverContainer">
+      <div data-testid="popover-card" className="popoverContainer">
         <button
           type="button"
           className="btn btn-outline-primary btn-sm buttonClass"
@@ -30,17 +30,16 @@ const RdsPopover = (props: RdsPopoverProps) => {
           Popover
         </button>
         <div
-          className={`popoverCard ${
-            props.popoverPosition == "top"
+          className={`popoverCard ${props.popoverPosition == "top"
               ? "popoverTop popoverCardTop"
               : props.popoverPosition == "bottom"
-              ? "popoverBottom popoverCardBottom"
-              : props.popoverPosition == "right"
-              ? "popoverRight popoverCardRight"
-              : props.popoverPosition == "left"
-              ? "popoverLeft popoverCardLeft"
-              : ""
-          }`}
+                ? "popoverBottom popoverCardBottom"
+                : props.popoverPosition == "right"
+                  ? "popoverRight popoverCardRight"
+                  : props.popoverPosition == "left"
+                    ? "popoverLeft popoverCardLeft"
+                    : ""
+            }`}
           style={{ display: displayType, padding: "10px" }}
         >
           <span>{props.children}</span>
