@@ -1,11 +1,11 @@
 import React from "react";
 import "./rds-scrollspy.scss";
 
-export interface RdsScrollspyProps {}
+export interface RdsScrollspyProps { }
 
 const RdsScrollspy = (props: RdsScrollspyProps) => {
   return (
-    
+
     <div className="col-md-10 col-10 container">
       <div id="scrollspy">
         <nav className="navbar navbar-light">

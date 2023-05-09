@@ -4,16 +4,16 @@ import RdsLabel from "../rds-label";
 import RdsLikeDislike from "../rds-like-dislike";
 import RdsRating from "../rds-rating";
 import "./rds-review-category.scss";
-export interface Item{
-		name: string;
-		date?: Date;
-		imageUrl?: string;
-		rating?: 0 | 1 | 2 | 3 | 4 | 5;
-		reviewTitle?: string;
-		reviewSubTitle?: string;
-		description?: string;
-		likes?: number;
-		dislikes?: number;
+export interface Item {
+	name: string;
+	date?: Date;
+	imageUrl?: string;
+	rating?: 0 | 1 | 2 | 3 | 4 | 5;
+	reviewTitle?: string;
+	reviewSubTitle?: string;
+	description?: string;
+	likes?: number;
+	dislikes?: number;
 };
 export interface RdsReviewCategoryProps {
 	display_type: string;
@@ -96,11 +96,11 @@ const RdsReviewCategory = (props: RdsReviewCategoryProps) => {
 								/>
 							</div>}
 							{props.item.likes && props.item.dislikes && <div className="mt-3">
-									<RdsLikeDislike
-										like={props.item.likes}
-										dislike={props.item.dislikes}
-									/>
-								</div>}
+								<RdsLikeDislike
+									like={props.item.likes}
+									dislike={props.item.dislikes}
+								/>
+							</div>}
 						</div>
 						<div className="col-md-8 pe-5">
 							<RdsLabel
@@ -135,23 +135,23 @@ const RdsReviewCategory = (props: RdsReviewCategoryProps) => {
 									/>
 								</div>
 								{props.item.rating && <div className="rating">
-								<RdsRating
-									rating={props.item.rating}
-									colorVariant="warning"
-									reviewPosition="none"
-								/>
-							</div>}
+									<RdsRating
+										rating={props.item.rating}
+										colorVariant="warning"
+										reviewPosition="none"
+									/>
+								</div>}
 							</div>
 						</div>
 						<div className="description mt-1">
 							<RdsLabel label={props.item.description} multiline={true} />
 						</div>
 						{props.item.likes && props.item.dislikes && <div className="mt-2">
-									<RdsLikeDislike
-										like={props.item.likes}
-										dislike={props.item.dislikes}
-									/>
-								</div>}
+							<RdsLikeDislike
+								like={props.item.likes}
+								dislike={props.item.dislikes}
+							/>
+						</div>}
 					</div>
 				</div>
 			)}

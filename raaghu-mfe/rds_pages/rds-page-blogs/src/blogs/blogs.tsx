@@ -245,7 +245,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
         ></RdsCompDatatable>
 
         <RdsOffcanvas
-          backDrop={true}
+          backDrop={false}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-edit-off"
@@ -307,7 +307,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
         ></RdsOffcanvas>
 
         <RdsOffcanvas
-          backDrop={true}
+          backDrop={false}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-features"
