@@ -87,12 +87,9 @@ const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
   const [count, setCount] = useState(0);
+  const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
 
-  // const [storeData, setStoreData] = useState({
-  //   languages: store.languages,
-  //   auth: store.auth,
-  //   localization: store.localization,
-  // });
+ 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector(
@@ -259,7 +256,7 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
     {
-      label: "SemiDark",
+      label: "Semi Dark",
       val: "",
       icon: "semidark",
       iconWidth: "17px",
@@ -332,34 +329,17 @@ const Main = (props: MainProps) => {
     localStorage.setItem("currentLang", val);
   };
 
-  //  const toggleTheme = (e: any) => {
-  //   if (e.target.checked) {
-  //     setThemes("dark");
-  //     console.log(setThemes("dark"))
-  //   } else {
-  //     setThemes("light");
-  //   } /*else {
-  //     setThemes("semi-dark");
-  //   }*/
-  // };
-
   const onClickThemeCheck = (e: any) => {
-    console.log(e.target);
-    if (e.target.innerText == "Light") {
-      setThemes("light");
-    } else if (e.target.innerText == "Dark") {
+    if (e.target.innerText == 'Light' ) {
+      setThemes("light"); 
+      setLogoImage("./assets/raaghu_logs.png");
+    } else if (e.target.innerText == 'Dark') {
       setThemes("dark");
-    } else if (e.target.innerText == "SemiDark") {
+      setLogoImage("./assets/raaghu-logo-white-text.png");
+    } else if (e.target.innerText == 'Semi Dark') {
       setThemes("semidark");
+      setLogoImage("./assets/raaghu-logo-white-text.png");
     }
-    // if (e.target.checked) {
-    //   setThemes("dark");
-    //   console.log(setThemes("dark"))
-    // } else {
-    //   setThemes("light");
-    // } /*else {
-    //   setThemes("semi-dark");
-    // }*/
   };
 
   const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
@@ -708,13 +688,17 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                    <div onClick={()=>navigate("/dashboard")}>
-                      <img
-                        className="ms-1 cursor-pointer sidenav-logo"
-                        src={logo}
-                        alt="logo"
-                      ></img>
-                    </div>
+                 
+                    <div onClick={()=>navigate("/dashboard")} id="raaghuLogo">
+                
+                    <img
+                    className="ms-1 cursor-pointer sidenav-logo"
+                    src={logoImage}
+                    alt="logo"
+                  ></img>
+                 
+                  </div>
+                  
                     <div className="mx-2 mt-6">
                       <RdsCompSideNavigation
                         sideNavItems={sideNavItems}
@@ -741,7 +725,7 @@ const Main = (props: MainProps) => {
                         profileTitle="Host Admin"
                         profileName="admin"
                         onLogout={logout}
-                        logo={logo}
+                        // logo={logo}
                         // toggleTheme={toggleTheme}
                         themeItems={themeItems}
                         navbarTitle={t(currentTitle) || ""}
