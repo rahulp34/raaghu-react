@@ -25,9 +25,10 @@ const RdsSize = (props: RdsSizeProps) => {
                     onClick={() => {
                       setActiveButton(index);
                     }}
-                    className={`${
-                      activeButton === index ? "p-3 border-color" : " p-3"
+                    className={`p-3 ${
+                      activeButton === index ? "border-color" : ""
                     }`}
+                    data-testid={`size-button-${index}`}
                   >
                     <div className="size text-dark fw-medium">{data.value}</div>
                     <div className="description">{data.description}</div>

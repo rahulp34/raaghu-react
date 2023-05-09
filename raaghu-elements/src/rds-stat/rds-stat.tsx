@@ -16,7 +16,7 @@ let textColr= 'text-'+props.textColor||"primary"
     <Fragment>
       {props.displayType == "basic" && (
         <div className="card h-300px w-300px border rounded-0 " >
-          <div className="card-body align-items-center d-flex justify-content-center" style={{backgroundColor:(props.backgroundColorVarient||"white")}}>
+          <div className="card-body align-items-center d-flex justify-content-center" style={{backgroundColor:(props.backgroundColorVarient||"white")}} data-testId="rds-stat">
             {props.items.map((item: any) => (
               <div>
                 <div className="grow mt-4 text-center">
@@ -30,7 +30,7 @@ let textColr= 'text-'+props.textColor||"primary"
                     
                   />
                 </div>
-                <h1 className={"fw-bold mt-4 text-center" +`${textColr}`}>{item.value}</h1>
+                <h1 className={"fw-bold mt-4 text-center " +`${textColr}`}>{item.value}</h1>
                 <div>
                   <label className="fs-5 text-muted text-center">
                     {item.title}
