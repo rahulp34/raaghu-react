@@ -97,7 +97,7 @@ const RdsCompAdminDashboard = () => {
 										id: 'radio1',
 										label: 'Day',
 										name: 'btnradio',
-										checked: true
+										checked: false
 									},
 									{
 										id: 'radio2',
@@ -109,7 +109,7 @@ const RdsCompAdminDashboard = () => {
 										id: 'radio3',
 										label: 'Month',
 										name: 'btnradio',
-										checked: false
+										checked: true
 									}
 								]}
 								colorVariant="primary"

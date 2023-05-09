@@ -9,6 +9,9 @@ import {
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import {
+  validateTenantByName
+} from "raaghu-react-core";
+import {
   callLoginAction,
   invalidCredentialAction,
 } from "../../../../libs/public.api";
@@ -39,6 +42,21 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     localStorage.setItem("rememberMe", rememberMe.toString());
   }
 
+  const [validateTenantName,setValidateTenantName]=useState("Not Selected")
+  function validateTenant(data:any){
+    validateTenantByName(data).then((res)=>{
+      if(res.isActive){
+        setValidateTenantName(data)
+      }
+      else {
+        setValidateTenantName("Not Selected")
+      }
+    }
+    )
+
+    
+  }
+  
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
   const { t } = useTranslation();
 
@@ -74,7 +92,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   password={"" || loginData.callLogin?.password}
                   onLogin={loginHandler}
                   onForgotPassword={forgotPasswordHandler}
-                />
+                  validTenant={validateTenant} 
+                  getvalidTenantName={validateTenantName} 
+                  currentTenant={validateTenantName}                />
+
               </div>
             </div>
             <div
@@ -117,3 +138,5 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 };
 
 export default Login;
+
+
