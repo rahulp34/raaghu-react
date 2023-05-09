@@ -54,5 +54,4 @@ describe("RdsDropdownList", () => {
     fireEvent.click(item1);
     expect(props.onClick).toHaveBeenCalledWith(expect.anything(), "1");
   });
-
 });
