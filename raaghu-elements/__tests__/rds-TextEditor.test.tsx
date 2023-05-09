@@ -1,7 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { RdsTextEditor } from '../src';
+//import { render, screen } from '@testing-library/react';
+//import { RdsTextEditor } from '../src';
 import "@testing-library/jest-dom";
+import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import RdsTextEditor, { RdsTextEditorProps } from "../src/rds-text-editor/rds-text-editor";
 
 module.exports = {
     //...
@@ -22,5 +25,19 @@ describe('RdsTextEditor Component', () => {
         expect(screen.getByRole("textbox")).toBeInTheDocument();
     });
 
+    const defaultProps: RdsTextEditorProps = {
+        label: 'Text Editor',
+    };
+
+    it('renders label', () => {
+        const { getByText } = render(<RdsTextEditor {...defaultProps} />);
+        expect(getByText('Text Editor')).toBeInTheDocument();
+    });
+
+    it("renders the label passed as a prop", () => {
+        render(<RdsTextEditor label="Test Label" />);
+        expect(screen.getByText("Test Label")).toBeInTheDocument();
+    });
 
 });
+
