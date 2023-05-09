@@ -55,5 +55,4 @@ describe("RdsDropdownList", () => {
     expect(props.onClick).toHaveBeenCalledWith(expect.anything(), "1");
   });
 
-
 });
