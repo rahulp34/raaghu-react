@@ -8,7 +8,7 @@ export interface RdsTestimmonialProps {
 export const RdsTestimonial = (props: RdsTestimmonialProps) => {
   return (
     <>
-      <div className="d-flex sm-block row">
+      <div className="d-flex sm-block row " >
         {props.testimonialItems.map((testimonialItem) => (
           <>
             <div className="mb-3 col-lg-4 col-md-4 col-sm-4">
@@ -21,11 +21,11 @@ export const RdsTestimonial = (props: RdsTestimmonialProps) => {
                     height={testimonialItem.iconHeight}
                     width={testimonialItem.iconWidth}
                     colorVariant="primary"
-                   // class="fs-6 me-2"
+                  // class="fs-6 me-2"
                   ></RdsIcon>
                 </div>
-                <div className="card-body p-2 my-3">
-                  <label className="text-muted py-2">
+                <div className="card-body p-2 my-3 ">
+                  <label className="text-muted py-2 ">
                     {testimonialItem.description}
                   </label>
                   <div>
