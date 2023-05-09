@@ -14,6 +14,7 @@ import {
   useAppSelector,
 } from "../../../libs/state-management/hooks";
 import {
+  RdsCompLinkedAccount,
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
@@ -291,7 +292,7 @@ const Main = (props: MainProps) => {
         {
           label: "Linked Accounts",
           icon: "manage_linked",
-          path: "",
+          path: "/linked-accounts",
           subText: "Manage accounts linked to your account",
           id: "nav-LinkAccount",
         },
@@ -867,6 +868,10 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/my-account"
                             element={<MyAccountCompo />}
+                          />
+                          <Route
+                            path="/linked-accounts"
+                            element={<RdsCompLinkedAccount />}
                           />
 
                           <Route path="/menus" element={<MenusCompo />} />
