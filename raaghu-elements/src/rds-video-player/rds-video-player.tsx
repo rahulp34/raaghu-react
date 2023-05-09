@@ -23,6 +23,7 @@ const RdsVideoPlayer = (props: RdsVideoPlayerProps) => {
         loop={props.autoplay}
         muted={props.muted}
         controls={true}
+        data-testid="ReactPlayer"
       />
     </div>
   );
