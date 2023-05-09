@@ -255,7 +255,7 @@ const Tags = () => {
                   ></RdsButton>
                 </div>
               }
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
               offId="tag-edit-off"

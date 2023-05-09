@@ -228,7 +228,7 @@ const Blogger = () => {
                 ></RdsButton>
               </div>
             }
-            backDrop={false}
+            backDrop={true}
             scrolling={false}
             preventEscapeKey={false}
             offId={"blogger-edit-off"}
