@@ -32,6 +32,9 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
     if (id === "nav-MyAccount") {
       navigate('/my-account');
     }
+    else if (id === "nav-LinkAccount") {
+      navigate('/linked-accounts')
+    }
     else if (id === "nav-SecuityLogs") {
       navigate('/security-logs')
     }
@@ -85,7 +88,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
                   <p className="text-muted text-break m-0">{item.subText}</p>
                 </div>
               </div>
-              {/* <RdsOffcanvas
+              <RdsOffcanvas
 								offId={item.id}
 								placement="start"
 								offcanvaswidth={400}
@@ -94,11 +97,11 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
 								preventEscapeKey={false}
 								canvasTitle={""}
 								offcanvasbutton={
-									
+									""
 								}
 							>
 								<RdsCompLinkedAccount></RdsCompLinkedAccount>
-							</RdsOffcanvas> */}
+							</RdsOffcanvas>
             </div>
           ))}
         </div>
