@@ -112,6 +112,7 @@ const RdsCompAdminDashboard = () => {
 						<div>
 							<RdsButtonGroup
 								buttonGroupItems={buttonGroupList}
+
 								colorVariant="primary"
 								isOutline={true}
 								role="radio"
