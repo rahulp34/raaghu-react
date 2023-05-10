@@ -225,7 +225,7 @@ const UrlForwarding = () => {
               placement="end"
               canvasTitle="New Url Forward"
               offId="newUrlForwarding"
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
             >
@@ -262,7 +262,7 @@ const UrlForwarding = () => {
               placement="end"
               canvasTitle="Edit Role"
               offId="editUrlForwardingoff"
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
             >

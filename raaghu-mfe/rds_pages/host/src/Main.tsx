@@ -14,6 +14,7 @@ import {
   useAppSelector,
 } from "../../../libs/state-management/hooks";
 import {
+  RdsCompLinkedAccount,
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
@@ -291,7 +292,7 @@ const Main = (props: MainProps) => {
         {
           label: "Linked Accounts",
           icon: "manage_linked",
-          path: "",
+          path: "/linked-accounts",
           subText: "Manage accounts linked to your account",
           id: "nav-LinkAccount",
         },
@@ -708,10 +709,10 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                     id="FixedHeaderOverFlow"
                   >
-                    <div className="header align-items-stretch">
+                    <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
                       <RdsCompTopNavigation
                         languageLabel={currentLanguageLabel}
                         themeLabel="Theme"
@@ -867,6 +868,10 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/my-account"
                             element={<MyAccountCompo />}
+                          />
+                          <Route
+                            path="/linked-accounts"
+                            element={<RdsCompLinkedAccount />}
                           />
 
                           <Route path="/menus" element={<MenusCompo />} />

@@ -2404,7 +2404,7 @@ BillingAddressDetails={()=>{}}
     name: "Properties",
   },
   {
-    review:`<RdsCompReviews
+    review: `<RdsCompReviews
     variantType="with-summary-chart"
     itemList={[
       {
@@ -2447,10 +2447,10 @@ BillingAddressDetails={()=>{}}
       },
     ]}
   />`,
-  name:"Review"
+    name: "Review",
   },
   {
-    security:` <RdsCompSecurity
+    security: ` <RdsCompSecurity
     checkgroupList={[
       {
         id: 1,
@@ -2478,10 +2478,10 @@ BillingAddressDetails={()=>{}}
       },
     ]}
   />`,
-    name:"Securiety"
+    name: "Securiety",
   },
   {
-    securietyLogs:`    <RdsCompSecurityLogs
+    securietyLogs: `    <RdsCompSecurityLogs
     enablecheckboxselection={false}
     tableHeaders={[
       {
@@ -2534,10 +2534,10 @@ BillingAddressDetails={()=>{}}
     recordsPerPage={5}
     recordsPerPageSelectListOption={false}
   />`,
-    name:"Security Logs"
+    name: "Security Logs",
   },
   {
-    shippingAddress:` <RdsCompShippingAddress
+    shippingAddress: ` <RdsCompShippingAddress
     countryList={[
       {
         value: "1",
@@ -2576,10 +2576,10 @@ BillingAddressDetails={()=>{}}
       },
     ]}
   />`,
-    name:"Shipping Address"
+    name: "Shipping Address",
   },
   {
-    sideNavigation:`<RdsCompSideNavigation
+    sideNavigation: `<RdsCompSideNavigation
     sideNavItems={[
       {
         key: "0",
@@ -2681,10 +2681,10 @@ BillingAddressDetails={()=>{}}
       },
     ]}
   />`,
-    name:"Side Navigation"
+    name: "Side Navigation",
   },
   {
-    subscription:`<RdsCompSubscription
+    subscription: `<RdsCompSubscription
     width="226px"
     subscriptionData={[
       {
@@ -2728,10 +2728,10 @@ BillingAddressDetails={()=>{}}
       },
     ]}
   />`,
-    name:"Subscription"
+    name: "Subscription",
   },
   {
-    teams:`<RdsCompTeams
+    teams: `<RdsCompTeams
     teamItem={[
       [
         {
@@ -2779,14 +2779,14 @@ BillingAddressDetails={()=>{}}
       ],
     ]}
   />`,
-    name:"Teams"
+    name: "Teams",
   },
   {
-    tenantDashboard:`<RdsCompTenantDashboard />`,
-    name:"Tenant Dashboard"
+    tenantDashboard: `<RdsCompTenantDashboard />`,
+    name: "Tenant Dashboard",
   },
   {
-    tenantList:` <RdsCompTenantList
+    tenantList: ` <RdsCompTenantList
     enablecheckboxselection={false}
     tableHeaders={[
       {
@@ -2839,7 +2839,594 @@ BillingAddressDetails={()=>{}}
     recordsPerPage={5}
     recordsPerPageSelectListOption={false}
   />`,
-    name:"Tenant List"
-  }
+    name: "Tenant List",
+  },
+  {
+    tenantManagement: `<RdsCompTenantManagement
+    settingsTenantEditionList={[
+      { option: "one" },
+      { option: "two" },
+      { option: "three" },
+    ]}
+    allowSelfRegistration={false}
+    isNewRegisteredTenantActiveByDefault={false}
+    useCaptchaOnRegistration={false}
+  />`,
+    name: "Tenant Management",
+  },
+  {
+    tenantSetting: `<RdsCompTenantSettings
+    tenantSettingInfo={{}}
+    isTenantInfoValid={false}
+    showEditData={true}
+  />`,
+    name: "Tenant Setting",
+  },
+  {
+    testimonials: `<RdsCompTestimonials
+    displayType="basic"
+    carousalItem={[
+      {
+        id: 1,
+        imgUrl:
+          "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        name: "Sam Smith",
+        roleName: "Product Manager",
+        subTitle:
+          "Nulla metus metus ullamcorper vel tincidunt set euismod nibh quisque volutpat condimentum veilt class patent taciti sociosqu and litara ad litora torquent per conubia nastra.",
+      },
+      {
+        id: 2,
+        imgUrl:
+          "https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455__480.jpg",
+        name: "king John",
+        roleName: "Tech Lead",
+        subTitle:
+          "this is the caption section were u can add the caption for the image",
+      },
+    ]}
+  />`,
+    name: "Testimonials",
+  },
+  {
+    themeNew: ` <RdsCompThemeNew
+    StyleList={[{ option: "Style 1" }, { option: "Style 2" }]}
+    WebList={[{ option: "Public 1" }, { option: "Public 2" }]}
+    MenuList={[{ option: "Placement 1" }, { option: "Placement 2" }]}
+    StatusList={[{ option: "Status 1" }, { option: "Status 2" }]}
+  />`,
+    name: "Theme New",
+  },
+  {
+    urlForwarding: ` <RdsCompUrlForwardings
+    urlForwardingData={{ source: "", target: "" }}
+    emitUrlForwardingData={() => {}}
+  />`,
+    name: "Url Forwarding",
+  },
+  {
+    userBasic: `<RdsCompUserBasics
+    userData={{
+      name: "",
+      surname: "",
+      email: "",
+      phoneNumber: "",
+      lockoutEnabled: true,
+      isActive: true,
+      userName: "",
+      password: "",
+    }}
+    createUser={() => {}}
+  />`,
+    name: "User Basic",
+  },
+  {
+    userClaim: `<RdsCompUserClaim />`,
+    name: "User Claim",
+  },
+  {
+    userManagement: ` <RdsCompUserManagement
+    Usermanagementsettings={[
+      {
+        id: 1,
+        label: "Email Confirmation Required For Login.",
+        checked: false,
+      },
+      {
+        id: 2,
+        label: "Phone Number Verification Enabled (Via SMS)",
+        checked: false,
+      },
+      {
+        id: 3,
+        label: "Use Security Image Question (Captcha) On Login.",
+        checked: false,
+      },
+      {
+        id: 4,
+        title: "Cookie Consent",
+        label: "Cookie Consent Enabled",
+        checked: false,
+      },
+      {
+        id: 5,
+        title: "Session TimeOut Control",
+        label: "Session Time Out Control Enabled",
+        checked: false,
+      },
+      {
+        id: 6,
+        title: "Profile",
+        label: "Allow Using to use Gravatar Profile Picture",
+        checked: false,
+      },
+    ]}
+  />`,
+    name: "User Management",
+  },
+  {
+    userPermission: ` <RdsCompUserPermission
+    tableHeaders={[
+      {
+        displayName: "Name",
+        key: "name",
+        datatype: "avatarTitleInfo",
+        sortable: true,
+      },
+      {
+        displayName: "User ID",
+        key: "userid",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Roles",
+        key: "roles",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Status",
+        key: "status",
+        datatype: "text",
+        sortable: true,
+      },
+    ]}
+    tableData={[
+      {
+        id: 1,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 2,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 120,
+        roles: 10,
+        status: "qwerty",
+      },
+      {
+        id: 3,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 250,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 4,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 7,
+        status: "qwerty",
+      },
+      {
+        id: 5,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 100,
+        roles: 15,
+        status: "qwerty",
+      },
+      {
+        id: 6,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 7,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 100,
+        roles: 47,
+        status: "qwerty",
+      },
+    ]}
+    actions={[
+      { id: "delete", displayName: "Delete" },
+      { id: "edit", displayName: "Edit" },
+      { id: "lock", displayName: "Lock" },
+      { id: "pass", displayName: "Set Password" },
+    ]}
+    enablecheckboxselection={false}
+    onActionSelection={() => {}}
+  />`,
+    name: "User Permission",
+  },
+  {
+    userPermissionNew: `<RdsCompUserPermission
+    tableHeaders={[
+      {
+        displayName: "Name",
+        key: "name",
+        datatype: "avatarTitleInfo",
+        sortable: true,
+      },
+      {
+        displayName: "User ID",
+        key: "userid",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Roles",
+        key: "roles",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Status",
+        key: "status",
+        datatype: "text",
+        sortable: true,
+      },
+    ]}
+    tableData={[
+      {
+        id: 1,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 2,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 120,
+        roles: 10,
+        status: "qwerty",
+      },
+      {
+        id: 3,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 250,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 4,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 7,
+        status: "qwerty",
+      },
+      {
+        id: 5,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 100,
+        roles: 15,
+        status: "qwerty",
+      },
+      {
+        id: 6,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 60,
+        roles: 5,
+        status: "qwerty",
+      },
+      {
+        id: 7,
+        name: {
+          avatar:
+            "https://upload.wikimedia.org/wikipedia/commons/4/4a/AMC%2B_logo.png",
+          title: "Amc Corporation",
+          info: "support@amc.com",
+        },
+        userid: 100,
+        roles: 47,
+        status: "qwerty",
+      },
+    ]}
+    actions={[
+      { id: "delete", displayName: "Delete" },
+      { id: "edit", displayName: "Edit" },
+      { id: "lock", displayName: "Lock" },
+      { id: "pass", displayName: "Set Password" },
+    ]}
+    onActionSelection={() => {}}
+  />`,
+    name: "User Permission New",
+  },
+  {
+    userTable: `<RdsCompUserTable
+    pagination={true}
+    recordsPerPage={5}
+    recordsPerPageSelectListOption={true}
+    onActionSelection={() => {}}
+    tableHeaders={[
+      {
+        displayName: "User Name",
+        key: "userName",
+        datatype: "iconAvatarTitle",
+        sortable: true,
+      },
+      { displayName: "Name", key: "name", datatype: "text", sortable: true },
+      {
+        displayName: "Roles",
+        key: "roles",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Email Address",
+        key: "email",
+        datatype: "text",
+        sortable: true,
+      },
+      {
+        displayName: "Email Confirm",
+        key: "confirmEmail",
+        datatype: "badge",
+        sortable: true,
+      },
+      {
+        displayName: "Status",
+        key: "status",
+        datatype: "badge",
+        sortable: true,
+      },
+      {
+        displayName: "Creation Time",
+        key: "time",
+        datatype: "text",
+        sortable: true,
+      },
+    ]}
+    tableData={[
+      {
+        id: 1,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "barbara",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Admin",
+        status: { badgeColorVariant: "primary", content: "active" },
+        name: "Barbara Garrett",
+        email: "barbara.garrett@gmail.com",
+        confirmEmail: { badgeColorVariant: "danger", content: "No" },
+        time: "11/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 2,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "brandon",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Team Lead",
+        status: { badgeColorVariant: "primary", content: "inactive" },
+        name: "Brandon Carrol",
+        email: "brandon.carrol@gmail.com",
+        confirmEmail: { badgeColorVariant: "danger", content: "No" },
+        time: "12/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 3,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "sandra",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Associate",
+        status: { badgeColorVariant: "primary", content: "active" },
+        name: "Sandra Garrett",
+        email: "sandra.garrett@gmail.com",
+        confirmEmail: { badgeColorVariant: "primary", content: "yes" },
+        time: "11/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 4,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "anthony",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Team Lead",
+        status: { badgeColorVariant: "primary", content: "active" },
+        name: "Anthony Grand",
+        email: "anthony.grand@gmail.com",
+        confirmEmail: { badgeColorVariant: "primary", content: "yes" },
+        time: "12/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 5,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "barbara",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: true,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Admin",
+        status: { badgeColorVariant: "primary", content: "inactive" },
+        name: "Barbara Garrett",
+        email: "barbara.garrett@gmail.com",
+        confirmEmail: { badgeColorVariant: "danger", content: "No" },
+        time: "11/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 6,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "brandon",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Team Lead",
+        status: { badgeColorVariant: "primary", content: "inactive" },
+        name: "Brandon Carrol",
+        email: "brandon.carrol@gmail.com",
+        confirmEmail: { badgeColorVariant: "danger", content: "No" },
+        time: "12/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 7,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "barbara",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: false,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Admin",
+        status: { badgeColorVariant: "primary", content: "inactive" },
+        name: "Barbara Garrett",
+        email: "barbara.garrett@gmail.com",
+        confirmEmail: { badgeColorVariant: "primary", content: "yes" },
+        time: "11/15/2021, 2:44:52 PM",
+      },
+      {
+        id: 8,
+        userName: {
+          avatar:
+            "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
+          title: "brandon",
+          iconName: "lock",
+          iconFill: false,
+          iconStroke: true,
+          iconColor: "danger",
+          iconWidth: "20px",
+          iconHeight: "20px",
+        },
+        roles: "Team Lead",
+        status: { badgeColorVariant: "primary", content: "inactive" },
+        name: "Brandon Carrol",
+        email: "brandon.carrol@gmail.com",
+        confirmEmail: { badgeColorVariant: "primary", content: "yes" },
+        time: "12/15/2021, 2:44:52 PM",
+      },
+    ]}
+    actions={[
+      { id: "delete", displayName: "Delete" },
+      { id: "edit", displayName: "Edit" },
+      { id: "unlock", displayName: "Unlock" },
+    ]}
+  />`,
+    name: "User Table",
+  },
 ];
 export default code_snippet;

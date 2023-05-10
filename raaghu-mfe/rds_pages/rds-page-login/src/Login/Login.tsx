@@ -9,6 +9,9 @@ import {
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
 import {
+  validateTenantByName
+} from "raaghu-react-core";
+import {
   callLoginAction,
   invalidCredentialAction,
 } from "../../../../libs/public.api";
@@ -20,18 +23,22 @@ export interface LoginProps {
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const [Alert, setAlert] = useState({
     show: false,
-    message: "Invalid user name or password",
+    message: "",
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
   const loginData = useAppSelector((state) => state.persistedReducer.host);
   useEffect(() => {
-    setAlert({ ...Alert, show: loginData.invalidCredential });
+    setAlert({
+      ...Alert,
+      message: loginData.invalidCredential?.message,
+      show: loginData.invalidCredential?.invalid,
+    });
   }, [loginData.invalidCredential]);
   useEffect(() => {
     dispatch(callLoginAction(null) as any);
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(invalidCredentialAction(null) as any);
   }, []);
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
@@ -39,11 +46,26 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     localStorage.setItem("rememberMe", rememberMe.toString());
   }
 
+  const [validateTenantName,setValidateTenantName]=useState("Not Selected")
+  function validateTenant(data:any){
+    validateTenantByName(data).then((res)=>{
+      if(res.isActive){
+        setValidateTenantName(data)
+      }
+      else {
+        setValidateTenantName("Not Selected")
+      }
+    }
+    )
+
+    
+  }
+  
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(invalidCredentialAction(null) as any);
   };
   return (
     <div className="login-background">
@@ -53,7 +75,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
             <div className="invalid-popup">
               <RdsAlert
                 dismisable={true}
-                alertmessage={Alert.message}
+                alertmessage={Alert.message + "   "}
                 colorVariant="danger"
                 onDismiss={handlerDismissAlert}
                 reset={Alert.show}
@@ -74,7 +96,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   password={"" || loginData.callLogin?.password}
                   onLogin={loginHandler}
                   onForgotPassword={forgotPasswordHandler}
-                />
+                  validTenant={validateTenant} 
+                  getvalidTenantName={validateTenantName} 
+                  currentTenant={validateTenantName}                />
+
               </div>
             </div>
             <div
@@ -117,3 +142,5 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 };
 
 export default Login;
+
+
