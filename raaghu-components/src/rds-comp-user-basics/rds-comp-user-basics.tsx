@@ -91,7 +91,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   return (
     <>
       <form className="mt-2">
-        <div className="row align-items-center">
+        <div className="row align-items-center mb-3">
           <div className="col-lg-6 col-md-6">
             <div>
               <RdsInput

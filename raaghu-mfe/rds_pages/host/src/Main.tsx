@@ -709,10 +709,10 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                     id="FixedHeaderOverFlow"
                   >
-                    <div className="header align-items-stretch">
+                    <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
                       <RdsCompTopNavigation
                         languageLabel={currentLanguageLabel}
                         themeLabel="Theme"
