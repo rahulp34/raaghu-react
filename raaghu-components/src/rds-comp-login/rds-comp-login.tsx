@@ -5,19 +5,21 @@ import {
   RdsInput,
   RdsCheckbox,
   RdsModal,
+  RdsAlert,
 } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { useNavigate } from "react-router-dom";
 import { use } from "i18next";
 export interface RdsCompLoginProps {
+  error?: any;
   getvalidTenantName: string;
   email: string;
   password: string;
+  onDismissAlert?: () => any;
   onLogin: (email: string, password: string, rememberMe: boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
   currentTenant: any;
   validTenant: any;
-
 }
 
 const RdsCompLogin: React.FC<RdsCompLoginProps> = (
@@ -40,10 +42,10 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   useEffect(() => {
     setPassword(props.password);
   }, [props.password]);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setCurrentTenant(props.currentTenant);
-  },[props.currentTenant])
+  }, [props.currentTenant]);
 
   const onCheckedHandler = (e: any) => {
     setrememberMe(e.target.checked);
@@ -76,7 +78,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   }) => {
     setCurrentTenant(event.target.value);
   };
- 
+
   const isFormValid = isPasswordValid(password) && isEmailValid(email);
 
   const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
@@ -93,17 +95,19 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     console.log(isForgotPasswordClicked);
   };
   const [checked, setChecked] = useState(false);
-  const [currentTenant, setCurrentTenant] = useState(checked?props.currentTenant:"Not Selected");
+  const [currentTenant, setCurrentTenant] = useState(
+    checked ? props.currentTenant : "Not Selected"
+  );
   return (
     <div>
       <div className="text-center">
         <h2>
           <b> Login </b>
         </h2>
-        <div>
-          <small className="pb-5 d-flex justify-content-center">
+        <div className="pb-1">
+          <small className="pb-3 d-flex justify-content-center">
             <RdsLabel
-            label={`current tenant:`+ props.getvalidTenantName}
+              label={`current tenant:` + props.getvalidTenantName}
             ></RdsLabel>
             <span className="ms-1">
               <RdsModal
@@ -135,12 +139,14 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     >
                       Switch to tenant
                     </label> */}
-                    <RdsCheckbox label={`${
-                  checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
-                }`}
-                 checked={checked} isSwitch={checked}
-                 onChange={() => setChecked(!checked)}
-                 ></RdsCheckbox>
+                    <RdsCheckbox
+                      label={`${
+                        checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                      }`}
+                      checked={checked}
+                      isSwitch={checked}
+                      onChange={() => setChecked(!checked)}
+                    ></RdsCheckbox>
                   </div>
                   <RdsInput
                     label="Tenancy Name"
@@ -154,34 +160,48 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                   ></RdsInput>
                 </div>
                 <div className=" mb-2 mt-3 d-flex justify-content-end">
-            <RdsButton
-              class="me-2"
-              tooltipTitle={""}
-              type={"button"}
-              label="Cancel"
-              colorVariant="outline-primary"
-              size="small"
-              databsdismiss="modal"
-            ></RdsButton>
-            <RdsButton
-              class="me-2"
-              label={checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"}
-              size="small"
-              isDisabled={false}
-              colorVariant="primary"
-              tooltipTitle={""}
-              type={"submit"}
-              databsdismiss="modal"
-              onClick={() => {props.validTenant(currentTenant);setChecked(!checked)}}
-            ></RdsButton>
-          </div>
-
-              
+                  <RdsButton
+                    class="me-2"
+                    tooltipTitle={""}
+                    type={"button"}
+                    label="Cancel"
+                    colorVariant="outline-primary"
+                    size="small"
+                    databsdismiss="modal"
+                  ></RdsButton>
+                  <RdsButton
+                    class="me-2"
+                    label={
+                      checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                    }
+                    size="small"
+                    isDisabled={false}
+                    colorVariant="primary"
+                    tooltipTitle={""}
+                    type={"submit"}
+                    databsdismiss="modal"
+                    onClick={() => {
+                      props.validTenant(currentTenant);
+                      setChecked(!checked);
+                    }}
+                  ></RdsButton>
+                </div>
               </RdsModal>
             </span>
           </small>
         </div>
         <div>
+          {props.error?.show == true && (
+            <div className="invalid-popup">
+              <RdsAlert
+                dismisable={true}
+                alertmessage={props.error?.message + "   "}
+                colorVariant="danger"
+                onDismiss={props.onDismissAlert}
+                reset={props.error?.show}
+              />
+            </div>
+          )}
           <form onSubmit={handleSubmit}>
             <div className="form-group text-start">
               <RdsInput
