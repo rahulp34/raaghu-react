@@ -376,7 +376,7 @@ const Language = (props: LanguageProps) => {
               tableData={Data}
               actions={actions}
               onActionSelection={onActionSelection}
-              recordsPerPage={5}
+              recordsPerPage={10}
               recordsPerPageSelectListOption={true}
             ></RdsCompDatatable>
             <RdsOffcanvas
