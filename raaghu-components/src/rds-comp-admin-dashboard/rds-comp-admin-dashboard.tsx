@@ -37,7 +37,26 @@ const RdsCompAdminDashboard = () => {
 	// 	});
 	// };
 
-
+	const buttonGroupList = [
+		{
+			id: 'radio1',
+			label: 'Day',
+			name: 'btnradio',
+			checked: true
+		},
+		{
+			id: 'radio2',
+			label: 'Week',
+			name: 'btnradio',
+			checked: false
+		},
+		{
+			id: 'radio3',
+			label: 'Month',
+			name: 'btnradio',
+			checked: false
+		}
+	]
 
 	const { t } = useTranslation();
 	let user = 'Host Admin';
@@ -92,26 +111,8 @@ const RdsCompAdminDashboard = () => {
 						</div> */}
 						<div>
 							<RdsButtonGroup
-								buttonGroupItems={[
-									{
-										id: 'radio1',
-										label: 'Day',
-										name: 'btnradio',
-										checked: false
-									},
-									{
-										id: 'radio2',
-										label: 'Week',
-										name: 'btnradio',
-										checked: false
-									},
-									{
-										id: 'radio3',
-										label: 'Month',
-										name: 'btnradio',
-										checked: true
-									}
-								]}
+								buttonGroupItems={buttonGroupList}
+
 								colorVariant="primary"
 								isOutline={true}
 								role="radio"

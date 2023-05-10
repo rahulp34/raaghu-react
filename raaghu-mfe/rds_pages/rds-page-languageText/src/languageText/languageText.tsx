@@ -19,9 +19,7 @@ import {
   putLanguages,
   restore,
 } from "../../../../libs/state-management/public.api";
-import {
-  configurationService,
-} from "raaghu-react-core";
+import { configurationService } from "raaghu-react-core";
 
 export interface LanguageTextProps {
   languagetableHeaders: any;
@@ -75,7 +73,7 @@ const LanguageText = (props: LanguageTextProps) => {
   const [name, setName] = useState<{ option: string; id: any }[]>([]);
   const [res, setRes] = useState<{ option: string; id: any }[]>([]);
   const [tableData, setTableData] = useState([]);
-  const [Alert, setAlert] = useState({show:false, message:"", color:""});
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [textEdit, setTextEdit] = useState({
     base: "",
     target: " ",
@@ -95,21 +93,19 @@ const LanguageText = (props: LanguageTextProps) => {
     targetCulture: "",
     resource: "",
   });
-  let filter:string;
+  let filter: string;
   useEffect(() => {
     dispatch(fetchResources() as any);
-     let API_URL= "https://raaghu-react.azurewebsites.net";
-   
-    const lang =localStorage.getItem("currentLang")||"en-GB"
+    let API_URL = "https://raaghu-react.azurewebsites.net";
+
+    const lang = localStorage.getItem("currentLang") || "en-GB";
     configurationService(API_URL).then((result: any) => {
-      const tempNames = result.localization.languages.map(
-        (item: any) => {
-          return {
-            option: item.displayName,
-            id: item.cultureName,
-          };
-        }
-      );
+      const tempNames = result.localization.languages.map((item: any) => {
+        return {
+          option: item.displayName,
+          id: item.cultureName,
+        };
+      });
       setdisplayList({
         ...displayList,
         baseCulture: tempNames.length > 0 ? tempNames[0].option : "",
@@ -143,7 +139,7 @@ const LanguageText = (props: LanguageTextProps) => {
   //     const targetCultureName = codes.targetCulture;
   //     const getOnlyEmptyValues =
   //       displayList.targetvalue == "All" ? false : true;
-      
+
   //     dispatch(
   //       fetchLanguagesText({
   //         resourceName,
@@ -170,19 +166,18 @@ const LanguageText = (props: LanguageTextProps) => {
   }, [data.languagesText]);
 
   const baseCultureHandler = (e: any) => {
-   let baseCult= name.filter((res:any)=>res.option == e)
+    let baseCult = name.filter((res: any) => res.option == e);
     setdisplayList((prevState) => ({
       ...prevState,
       baseCulture: baseCult[0].id,
     }));
-   setCodes({ ...codes, baseCulture: baseCult[0].id });
-  // api call with new baseCulture 
+    setCodes({ ...codes, baseCulture: baseCult[0].id });
+    // api call with new baseCulture
 
     const resourceName = displayList.resourceName;
     const baseCultureName = baseCult[0].id;
     const targetCultureName = codes.targetCulture;
-    const getOnlyEmptyValues =
-      displayList.targetvalue == "All" ? false : true;
+    const getOnlyEmptyValues = displayList.targetvalue == "All" ? false : true;
 
     dispatch(
       fetchLanguagesText({
@@ -194,77 +189,75 @@ const LanguageText = (props: LanguageTextProps) => {
     );
   };
   const targetCultureHandler = (e: any) => {
-   
-    let targetCult= name.filter((res:any)=>res.option == e)
+    let targetCult = name.filter((res: any) => res.option == e);
 
     setdisplayList((prevState) => ({
       ...prevState,
       targetCulture: targetCult[0].id,
     }));
 
-    setCodes({ ...codes, targetCulture:targetCult[0].id });
+    setCodes({ ...codes, targetCulture: targetCult[0].id });
 
-     // api call with new targetCulture 
+    // api call with new targetCulture
 
-     const resourceName = displayList.resourceName;
-     const baseCultureName = codes.baseCulture;
-     const targetCultureName = targetCult[0].id;
-     const getOnlyEmptyValues =
-       displayList.targetvalue == "All" ? false : true;
- 
-     dispatch(
-       fetchLanguagesText({
-         resourceName,
-         baseCultureName,
-         targetCultureName,
-         getOnlyEmptyValues,
-       }) as any
-     );
+    const resourceName = displayList.resourceName;
+    const baseCultureName = codes.baseCulture;
+    const targetCultureName = targetCult[0].id;
+    const getOnlyEmptyValues = displayList.targetvalue == "All" ? false : true;
+
+    dispatch(
+      fetchLanguagesText({
+        resourceName,
+        baseCultureName,
+        targetCultureName,
+        getOnlyEmptyValues,
+      }) as any
+    );
   };
   const resourceNameHandler = (e: any) => {
     setdisplayList((prevState) => ({
       ...prevState,
       resourceName: e,
     }));
-// api call with new targetCulture 
+    // api call with new targetCulture
 
-const resourceName = e;
-const baseCultureName = codes.baseCulture;
-const targetCultureName = codes.targetCulture;
-const getOnlyEmptyValues =
-  displayList.targetvalue == "All" ? false : true;
+    const resourceName = e;
+    const baseCultureName = codes.baseCulture;
+    const targetCultureName = codes.targetCulture;
+    const getOnlyEmptyValues = displayList.targetvalue == "All" ? false : true;
 
-dispatch(
-  fetchLanguagesText({
-    resourceName,
-    baseCultureName,
-    targetCultureName,
-    getOnlyEmptyValues,
-  }) as any
-);
+    dispatch(
+      fetchLanguagesText({
+        resourceName,
+        baseCultureName,
+        targetCultureName,
+        getOnlyEmptyValues,
+      }) as any
+    );
   };
   const handlerTargetValue = (e: any) => {
     setdisplayList((prevState) => ({
       ...prevState,
-      targetvalue:e,
+      targetvalue: e,
     }));
-// api call with new targetCulture 
+    // api call with new targetCulture
 
-const resourceName = displayList.resourceName;
-const baseCultureName = codes.baseCulture;
-const targetCultureName = codes.targetCulture;
-const getOnlyEmptyValues = e == "All" ? false : true;
+    const resourceName = displayList.resourceName;
+    const baseCultureName = codes.baseCulture;
+    const targetCultureName = codes.targetCulture;
+    const getOnlyEmptyValues = e == "All" ? false : true;
 
-dispatch(
-  fetchLanguagesText({
-    resourceName,
-    baseCultureName,
-    targetCultureName,
-    getOnlyEmptyValues,
-  }) as any)
+    dispatch(
+      fetchLanguagesText({
+        resourceName,
+        baseCultureName,
+        targetCultureName,
+        getOnlyEmptyValues,
+      }) as any
+    );
   };
 
-  const onActionSelection = (rowData:any, actionId:any ) => {
+  const onActionSelection = (rowData: any, actionId: any) => {
     setTextEdit({
       ...textEdit,
       base: rowData.basevalue,
@@ -284,7 +277,12 @@ dispatch(
     const Name = textEdit.key;
     dispatch(restore({ resourceName, cultureName, Name }) as any).then(
       (res: any) => {
-        setAlert({...Alert,show:true,message:"Target language restored Succesfully", color:"success"})
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Target language restored Succesfully",
+          color: "success",
+        });
         const resourceName = displayList.resourceName;
         const baseCultureName = codes.baseCulture;
         const targetCultureName = codes.targetCulture;
@@ -299,8 +297,6 @@ dispatch(
             getOnlyEmptyValues,
           }) as any
         );
-
-
       }
     );
   };
@@ -323,7 +319,12 @@ dispatch(
     dispatch(
       putLanguages({ resourceName, cultureName, Name, value }) as any
     ).then((res: any) => {
-      setAlert({...Alert,show:true,message:"Target language edited Succesfully", color:"success"})
+      setAlert({
+        ...Alert,
+        show: true,
+        message: "Target language edited Succesfully",
+        color: "success",
+      });
       const resourceName = displayList.resourceName;
       const baseCultureName = codes.baseCulture;
       const targetCultureName = codes.targetCulture;
@@ -345,16 +346,16 @@ dispatch(
     <>
       <div className="row">
         <div className="col-md-12">
-        <div className="row ">
+          <div className="row ">
             <div className="col-md-4">
               {Alert.show && (
                 <RdsAlert
-                alertmessage={Alert.message}
-                colorVariant={Alert.color}
-              ></RdsAlert>
-              )}             
+                  alertmessage={Alert.message}
+                  colorVariant={Alert.color}
+                ></RdsAlert>
+              )}
             </div>
-            </div>
+          </div>
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
             <div className="row mt-3">
               <div className="col-md-3">
@@ -366,7 +367,7 @@ dispatch(
                 ></RdsSelectList>
               </div>
               <div className="col-md-3">
-              <label className="mb-1">Target Culture Name</label>
+                <label className="mb-1">Target Culture Name</label>
                 <RdsSelectList
                   label={displayList.targetCulture}
                   selectItems={name}
@@ -374,7 +375,7 @@ dispatch(
                 ></RdsSelectList>
               </div>
               <div className="col-md-3">
-              <label className="mb-1">Resource Name</label>
+                <label className="mb-1">Resource Name</label>
                 <RdsSelectList
                   label={displayList.resourceName}
                   selectItems={res}
@@ -382,7 +383,7 @@ dispatch(
                 ></RdsSelectList>
               </div>
               <div className="col-md-3">
-              <label className="mb-1">Target Value</label>
+                <label className="mb-1">Target Value</label>
                 <RdsSelectList
                   label={displayList.targetvalue}
                   onSelectListChange={handlerTargetValue}
@@ -410,7 +411,6 @@ dispatch(
               preventEscapeKey={false}
               offId={"lang-text-off"}
               canvasTitle={"Edit Language"}
-              
             >
               <form>
                 <div className="row">

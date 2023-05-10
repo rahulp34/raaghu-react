@@ -207,7 +207,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   return (
     <div>
       <nav
-        className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
+        className={`navbar d-flex justify-content-between p-2 min-width`}
       >
              {/*  <button className="navbar-toggler px-2" id="humbreger-btn" type="button"
       data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -230,7 +230,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         <div className="d-flex me-2 align-items-center">
-          <div className="position-relative me-3 border-end"><MultiLevelDropdown
+          <div className="position-relative border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
           ></MultiLevelDropdown></div>
