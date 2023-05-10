@@ -390,7 +390,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
-                              <div className="btn-group">
+                              <div className="btn-group dropstart">
                                 <button
                                   className="btn rounded-pill border-0"
                                   type="button"
@@ -642,7 +642,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
-                              <div className="btn-group">
+                              <div className="btn-group dropstart">
                                 <button
                                   className="btn rounded-pill border-0"
                                   type="button"
