@@ -5,18 +5,18 @@ import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsToastProps {
   colorVariant?: colors;
-  withIcon?:boolean;
-  headerTitle: string;
+  withIcon?: boolean;
+  headerTitle?: string;
   message: string;
   delay?: number;
   autohide?: boolean;
   borderColor?: string;
-  showHeader: boolean;
-  iconName?:string;
-  iconColorvariant?:string;
-  iconHeight?:string;
-  iconWidth?:string;
-  iconFill?:boolean;
+  showHeader?: boolean;
+  iconName?: string;
+  iconColorvariant?: string;
+  iconHeight?: string;
+  iconWidth?: string;
+  iconFill?: boolean;
 }
 const RdsToast = (props: RdsToastProps) => {
   let borderColor = "border border-" + props.borderColor || " ";
@@ -48,9 +48,18 @@ const RdsToast = (props: RdsToastProps) => {
           {props.showHeader && (
             <div>
               <div className="toast-header p-2 d-flex justify-content-between align-items-end">
-              <div className="me-2">
-                 {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
-                </div> 
+                <div className="me-2">
+                  {props.withIcon && (
+                    <RdsIcon
+                      name={props.iconName}
+                      colorVariant={props.iconColorvariant}
+                      height={props.iconHeight}
+                      width={props.iconWidth}
+                      stroke={true}
+                      fill={props.iconFill}
+                    ></RdsIcon>
+                  )}
+                </div>
 
                 <strong className="me-auto text-dark">
                   {" "}
@@ -71,9 +80,18 @@ const RdsToast = (props: RdsToastProps) => {
             <div className="m-1 toastbody ">
               <div className="d-flex justify-content-between     align-items-baseline  ">
                 <div className="toast-body toastbody d-flex justify-content-between  align-items-end ">
-                <div className="me-2">
-                {props.withIcon && (<RdsIcon name={props.iconName} colorVariant={props.iconColorvariant} height={props.iconHeight} width={props.iconWidth} stroke={true} fill={props.iconFill}></RdsIcon> )}
-                </div> 
+                  <div className="me-2">
+                    {props.withIcon && (
+                      <RdsIcon
+                        name={props.iconName}
+                        colorVariant={props.iconColorvariant}
+                        height={props.iconHeight}
+                        width={props.iconWidth}
+                        stroke={true}
+                        fill={props.iconFill}
+                      ></RdsIcon>
+                    )}
+                  </div>
                   {props.message}
                 </div>
                 <button

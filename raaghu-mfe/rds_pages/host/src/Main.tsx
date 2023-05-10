@@ -575,23 +575,24 @@ const Main = (props: MainProps) => {
         openidConfig.scope
       )
         .then(async (res: any) => {
-          if (res) {
-            await dispatch(invalidCredentialAction(false));
-            // sessionStorage.setItem('accessToken',res)
+          if (res.access_token) {
+            await dispatch(invalidCredentialAction(null));
             await hello(res);
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
             localStorage.setItem("loginAccessDate", Date());
-            // await dispatch(callLoginAction(null) as any);
           }
         })
-        .catch(() => {
-          if (count != 0) {
-            dispatch(invalidCredentialAction(true));
-          }
+        .catch((error: any) => {
+          dispatch(
+            invalidCredentialAction({
+              invalid: true,
+              message: error.response.data.error_description,
+            })
+          );
         });
-      // dispatch(callLoginAction(null) as any);
+      dispatch(callLoginAction(null) as any);
     }
   }, [dataHost]);
 
