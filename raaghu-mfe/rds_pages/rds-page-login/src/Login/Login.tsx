@@ -23,18 +23,22 @@ export interface LoginProps {
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const [Alert, setAlert] = useState({
     show: false,
-    message: "Invalid user name or password",
+    message: "",
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
   const loginData = useAppSelector((state) => state.persistedReducer.host);
   useEffect(() => {
-    setAlert({ ...Alert, show: loginData.invalidCredential });
+    setAlert({
+      ...Alert,
+      message: loginData.invalidCredential?.message,
+      show: loginData.invalidCredential?.invalid,
+    });
   }, [loginData.invalidCredential]);
   useEffect(() => {
     dispatch(callLoginAction(null) as any);
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(invalidCredentialAction(null) as any);
   }, []);
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
@@ -61,7 +65,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(invalidCredentialAction(null) as any);
   };
   return (
     <div className="login-background">
@@ -71,7 +75,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
             <div className="invalid-popup">
               <RdsAlert
                 dismisable={true}
-                alertmessage={Alert.message}
+                alertmessage={Alert.message + "   "}
                 colorVariant="danger"
                 onDismiss={handlerDismissAlert}
                 reset={Alert.show}
