@@ -52,7 +52,13 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
       } else {
         setValidateTenantName("Not Selected");
       }
-    });
+     
+    }
+    ).catch((err)=>{
+      setValidateTenantName("Not Selected")
+    })
+
+    
   }
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
@@ -80,10 +86,9 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   error={Alert}
                   onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
-                  validTenant={validateTenant}
-                  getvalidTenantName={validateTenantName}
-                  currentTenant={validateTenantName}
-                />
+                  validTenant={validateTenant} 
+                  getvalidTenantName={validateTenantName} 
+                  currentTenant={""}                />
               </div>
             </div>
             <div

@@ -139,14 +139,12 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     >
                       Switch to tenant
                     </label> */}
-                    <RdsCheckbox
-                      label={`${
-                        checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
-                      }`}
-                      checked={checked}
-                      isSwitch={checked}
-                      onChange={() => setChecked(!checked)}
-                    ></RdsCheckbox>
+                    <RdsCheckbox label={`${
+                  checked ? "Switch to the Tenant" : "Switch to the Host"
+                }`}
+                 checked={checked} isSwitch={checked}
+                 onChange={() => setChecked(!checked)}
+                 ></RdsCheckbox>
                   </div>
                   <RdsInput
                     label="Tenancy Name"
