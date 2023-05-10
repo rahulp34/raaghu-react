@@ -668,7 +668,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         
       >
         <RdsInput
-          label={"Add Organization name"}
+        inputType="text"
+          label="Add Organization name"
           labelPositon="top"
           required={true}
           size="medium"

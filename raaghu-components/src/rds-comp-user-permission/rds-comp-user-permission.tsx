@@ -19,7 +19,7 @@ export interface RdsCompUserPermissionProps {
     displayName: string;
     id: string;
   }[];
-  pagination: boolean;
+  pagination?: boolean;
   onActionSelection(arg: any): any;
   enablecheckboxselection?: boolean;
 }
