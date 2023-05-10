@@ -453,6 +453,7 @@ const Main = (props: MainProps) => {
         };
       });
       setBreadCrumItem(a);
+      setCurrentTitle(a[0].label);
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -462,6 +463,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(a.reverse()[0].label);
       setBreadCrumItem(a);
     }
   };
@@ -469,7 +471,7 @@ const Main = (props: MainProps) => {
     let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath);
 
     breadcrumData = breadcrumData.filter((res: any) => (res ? true : false));
-    if (breadcrumData.length && breadcrumData[0].id) {
+    if (breadcrumData.length && breadcrumData[0]. id) {
       breadcrumData = breadcrumData.map((res: any) => {
         return {
           id: res.id,
@@ -477,6 +479,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(breadcrumData[0].label);
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -487,6 +490,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(breadcrumData.reverse()[0].label);
       setBreadCrumItem(breadcrumData);
     }
   }

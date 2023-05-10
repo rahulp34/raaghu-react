@@ -133,7 +133,7 @@ const Users = () => {
     },
     {
       displayName: "Last Modification Time",
-      key: "lastModification",
+      key: "lastModificationTime",
       datatype: "text",
       dataLength: 30,
       required: true,
@@ -216,16 +216,16 @@ const Users = () => {
           rolesNames = rolesNames + `${res} `;
         });
         
-        const date = new Date(item.creationTime);
-        const creationDate = `${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}, ${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)} ${date.getHours() >= 12 ? "PM" : "AM"}`;
-        let updatedDate = '';
-        if (item.lastModificationTime) {
-          const lastDate = new Date(item.lastModificationTime);
-          updatedDate = `${("0" + lastDate.getDate()).slice(-2)}/${("0" + (lastDate.getMonth() + 1)).slice(-2)}/${lastDate.getFullYear()}, ${("0" + lastDate.getHours()).slice(-2)}:${("0" + lastDate.getMinutes()).slice(-2)} ${lastDate.getHours() >= 12 ? "PM" : "AM"}`;
-        }
-        else {
-          updatedDate = '--'
-        }
+        // const date = new Date(item.creationTime);
+        // const creationDate = `${("0" + date.getDate()).slice(-2)}/${("0" + (date.getMonth() + 1)).slice(-2)}/${date.getFullYear()}, ${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)} ${date.getHours() >= 12 ? "PM" : "AM"}`;
+        // let updatedDate = '';
+        // if (item.lastModificationTime) {
+        //   const lastDate = new Date(item.lastModificationTime);
+        //   updatedDate = `${("0" + lastDate.getDate()).slice(-2)}/${("0" + (lastDate.getMonth() + 1)).slice(-2)}/${lastDate.getFullYear()}, ${("0" + lastDate.getHours()).slice(-2)}:${("0" + lastDate.getMinutes()).slice(-2)} ${lastDate.getHours() >= 12 ? "PM" : "AM"}`;
+        // }
+        // else {
+        //   updatedDate = '--'
+        // }
         const data = {
           id: item.id,
           userName: item.userName,
@@ -234,8 +234,8 @@ const Users = () => {
           emailAddress: item.email,
           phoneNumber:item.phoneNumber,
           surname:item.surname,
-          creationTime:creationDate,
-          lastModification:updatedDate,
+          creationTime:item.creationTime,
+          lastModificationTime:item.lastModificationTime,
           isActive :(
             <>
               {item.isActive == true ? (
