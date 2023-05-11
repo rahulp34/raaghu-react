@@ -22,9 +22,15 @@ const RdsCompTenantInformation = (props: any) => {
       name: "radio_button",
     },
   ];
-
   const RadioButton = "Separated Database";
   const [editionList, setEditionList] = useState<any>([]);
+  const[activationStateList, setActivationStateList]=useState<any[]>(
+     [
+      { option: 'Active', value: 1 },
+      { option: 'Active with Limited Time', value: 2 },
+      {option: 'Inactive', value: 0}
+    ]
+  );
   const [tenantInformationData, setTenantInformationData] = useState<any>(props.tenantInformationData1);
   const [databaseUrl , setDatabaseUrl]= useState("");
   const isEmailValid = (email: any) => {
@@ -55,6 +61,10 @@ const RdsCompTenantInformation = (props: any) => {
   useEffect(() => {
     setEditionList(props.editions)
   }, [props.editions])
+  
+  // useEffect(() => {
+  //   setActivationStateList(props.activationStates)
+  // },[props.activationStates])
 
   function handleName(value: any) {
     setTenantInformationData({ ...tenantInformationData, name: value });
@@ -74,6 +84,10 @@ const RdsCompTenantInformation = (props: any) => {
     setDatabaseUrl(value);
     setTenantInformationData({ ...tenantInformationData, connectionStrings: { ...tenantInformationData.connectionStrings, id: value } })
   }
+  function handleActivationState(value: any) {
+    setTenantInformationData({ ...tenantInformationData, activationState: value })
+  }
+
 
   function emitSaveData(event: any) {
     event.preventDefault();
@@ -84,7 +98,7 @@ const RdsCompTenantInformation = (props: any) => {
         name: "",
         activationEndDate: null,
         adminPassword: "",
-        activationState: 0,
+        activationState: "",
         adminEmailAddress: "",
         connectionStrings: { id: "", default: null, databases: [] },
       }
@@ -206,6 +220,19 @@ const RdsCompTenantInformation = (props: any) => {
           </div>
           </>
           )}
+          <div className="row">
+            <div className="col-md-12 sm-p-0">
+              <div className="form-group">
+                <RdsSelectList
+                  label={"Activation State"}
+                  selectItems={activationStateList}
+                  selectedValue={tenantInformationData.activationState}
+                  onSelectListChange={(e: any) => { handleActivationState(e) }}
+                >
+                </RdsSelectList>
+              </div>
+            </div>
+          </div>
           <div className="footer-buttons mb-2 d-flex">
             <RdsButton
               class="me-2"

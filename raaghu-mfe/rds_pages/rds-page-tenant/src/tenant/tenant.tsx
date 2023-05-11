@@ -65,7 +65,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     name: "",
     activationEndDate: null,
     adminPassword: "",
-    activationState: 0,
+    activationState: "",
     adminEmailAddress: "",
     connectionStrings: { id: "", default: null, databases: [] },
   });
@@ -74,7 +74,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     name: "",
     activationEndDate: null,
     adminPassword: "",
-    activationState: 0,
+    activationState:"" ,
     adminEmailAddress: "",
     connectionStrings: { id: "", default: null, databases: [] },
   });
@@ -98,6 +98,12 @@ const Tenant = (props: RdsPageTenantProps) => {
       sortable: true,
     },
   ];
+
+  const tenantActivationState = [
+    { option: 'Active', value: 1 },
+    { option: 'Active with Limited Time', value: 2 },
+    {option: 'Inactive', value: 0}
+  ]
 
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
@@ -133,7 +139,19 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   useEffect(() => {
     if (data.tenants.length) {
+
       const tempData = data.tenants.map((tenant: any) => {
+        let status="";
+        if(tenant.activationState===1){
+          status="Active";
+        }
+        else if(tenant.activationState===2 && tenant.editionEndDateUtc!==null)
+        {
+          status="Active with limited time";
+        }
+        else{
+          status="Inactive";
+        }
         return {
           id: tenant.id,
           tenant: {
@@ -143,7 +161,7 @@ const Tenant = (props: RdsPageTenantProps) => {
             info: "software",
           },
           editionName: tenant.editionName,
-          status: tenant.activationState == 1 ? "Active" : "Inactive",
+          status: status ,
           expiry: tenant.editionEndDateUtc,
         };
       });
@@ -260,7 +278,7 @@ const Tenant = (props: RdsPageTenantProps) => {
       name: "",
       activationEndDate: null,
       adminPassword: "",
-      activationState: 0,
+      activationState: "",
       adminEmailAddress: "",
       connectionStrings: { id: "", default: null, databases: [] },
     });
@@ -269,7 +287,7 @@ const Tenant = (props: RdsPageTenantProps) => {
       name: "",
       activationEndDate: null,
       adminPassword: "",
-      activationState: 0,
+      activationState: "",
       adminEmailAddress: "",
       connectionStrings: { id: "", default: null, databases: [] },
     });
@@ -385,6 +403,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                 <div className="mt-3">
                   <RdsCompTenantInformation
                     editions={editionList}
+                    activationState={tenantActivationState}
                     onSaveHandler={(e: any) => saveTenant(e)}
                     tenantInformationData1={basicTenantInformation}
                     emittedDataTenantData={getTenantData}
@@ -434,6 +453,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                       saveTenant(e);
                     }}
                     emittedDataTenantData={getTenantData}
+                    activationState={tenantActivationState}
                   />
                 </div>
               )}
