@@ -62,7 +62,7 @@ const RdsCompAdminDashboard = () => {
 	let user = 'Host Admin';
 	return (
 
-		<div className="dark">
+		<div className="dark dashboard">
 			<div className="row mb-3">
 				<div className="col-xxl-5 col-xl-5 col-lg-5 col-md-12 col-12">
 					<h5><label htmlFor="label" className="fw-bold">Hello, {user} !</label></h5>
@@ -1117,7 +1117,7 @@ const RdsCompAdminDashboard = () => {
 					</RdsWidget>
 				</div>
 			</div>
-			<div className="row">
+			<div className="row mb-4">
 				<div className="col-md-12">
 					<RdsWidget
 						headerTitle={t("To do List")}
