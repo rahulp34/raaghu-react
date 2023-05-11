@@ -279,7 +279,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
         <div className="h-100 d-flex align-items-center justify-content-center">
           <RdsIllustration
             label={props.noDataTitle}
-            subLabel="Click on the button above to add."
+            //subLabel="Click on the button above to add."
             colorVariant="light"
           />
         </div>
