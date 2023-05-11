@@ -1,6 +1,8 @@
 import React from "react";
+import RdsCompRegister from "../../../../../raaghu-components/src/rds-comp-register";
 
 const Register = (props: any) => {
+	const loginHandler: any = (isLoginClicked: boolean) => { };
 	return (
 		<>
 			<div className="login-background">
@@ -25,16 +27,9 @@ const Register = (props: any) => {
 											<img src="./assets/raaghu_text_logo.svg"></img>
 										</div>
 									</div>
-
-									{/* <RdsCompLogin
-										email={"" || loginData.callLogin?.email}
-										password={"" || loginData.callLogin?.password}
-										onLogin={loginHandler}
-										onForgotPassword={forgotPasswordHandler}
-										validTenant={validateTenant}
-										getvalidTenantName={validateTenantName}
-										currentTenant={validateTenantName} /> */}
-										hiii
+									<RdsCompRegister getvalidTenantName={""} email={""} password={""} onRegister={function (email: string, password: string, username: string): void {
+										throw new Error("Function not implemented.");
+									}} currentTenant={undefined} validTenant={undefined} onLogin={loginHandler}></RdsCompRegister>
 
 								</div>
 							</div>

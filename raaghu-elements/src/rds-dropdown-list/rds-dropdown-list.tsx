@@ -59,7 +59,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
     var dropdownMenu = document.getElementById(props.id as string);
     dropdownMenu?.classList.remove("show");
     dropdownMenu?.classList.add("hide");
-    setToggle("hide");
+    setToggle("show");
   };
   let IconWidth = props.listItems[selectedOption]?.iconWidth || "16px";
   let IconHeight = props.listItems[selectedOption]?.iconHeight || "12px";

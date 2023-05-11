@@ -6,22 +6,80 @@ import {
    RdsCheckbox,
    RdsModal,
  } from "../rds-elements";
+import { useNavigate } from "react-router-dom";
 
-interface RdsCompRegisterProps {}
+export interface RdsCompRegisterProps {
+  error?: any;
+  getvalidTenantName: string;
+  email: string;
+  password: string;
+  onDismissAlert?: () => any;
+  //onLogin: (email: string, password: string, rememberMe: boolean) => any;
+  onLogin: (isLoginClicked?: boolean) => void;
+  onRegister: (email: string, password: string,username: string) => void;
+  currentTenant: any;
+  validTenant: any;
+}
 
 const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
-
+  props: RdsCompRegisterProps
 ) => {
+
+  const navigate = useNavigate();
+
+  const [isLoginClicked, setIsLoginClicked] = useState(false);
+
+  const loginHandler: any = (isLoginClicked: boolean) => {
+    setIsLoginClicked(true);
+    navigate("/login");
+    props.onLogin(isLoginClicked);
+    console.log(isLoginClicked);
+  };
+  const TenancyNameChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setCurrentTenant(event.target.value);
+  };
+
+  const emailhandleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+   // setEmail(event.target.value);
+  };
+  const usernamehandleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+   // setUsername(event.target.value);
+  };
+
+  
+
+  const passwordhandleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    //setPassword(event.target.value);
+  };
+  const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // props.onRegister(email, password, username);
+    // setEmail("");
+    // setPassword("");
+  };
+
+  const [checked, setChecked] = useState(false);
+  const [currentTenant, setCurrentTenant] = useState(
+    checked ? props.currentTenant : "Not Selected"
+  );
    return (
         <div>
       <div className="text-center">
         <h2>
-          <b> Login </b>
+          <b> Register </b>
         </h2>
         <div>
           <small className="pb-5 d-flex justify-content-center">
             <RdsLabel
-            // label={`current tenant:`+ props.getvalidTenantName}
+            label={`current tenant:`+ props.getvalidTenantName}
             ></RdsLabel>
             <span className="ms-1">
               <RdsModal
@@ -33,31 +91,31 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                 verticallyCentered={false}
                 modalbutton={<a className="link-primary"> (Change)</a>}
                 modalTitle="Switch Tenant"
-                // saveChangesName={`${
-                //   checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
-                // }`}
+                saveChangesName={`${
+                  checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                }`}
                 cancelButtonName="CANCEL"
               >
                 <div className="text-start  mb-4 border-bottom">
-                  {/* <div className="form-check form-switch text-start ps-0 mb-4">
+                  <div className="form-check form-switch text-start ps-0 mb-4">
                     <RdsCheckbox label={`${
                   checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
                 }`}
                  checked={checked} isSwitch={checked}
                  onChange={() => setChecked(!checked)}
-                 ></RdsCheckbox> */}
+                 ></RdsCheckbox>
                   </div>
                   <RdsInput
                     label="Tenancy Name"
                     placeholder="Tenancy Name"
                     inputType="email/text"
-                  //   onChange={TenancyNameChange}
-                  //   value={currentTenant}
+                    onChange={TenancyNameChange}
+                    value={currentTenant}
                     name={"currentTenant"}
                     required={true}
-                    //isDisabled={!checked}
+                    isDisabled={!checked}
                   ></RdsInput>
-                {/* </div> */}
+                </div>
                 <div className=" mb-2 mt-3 d-flex justify-content-end">
             <RdsButton
               class="me-2"
@@ -70,14 +128,14 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
             ></RdsButton>
             <RdsButton
               class="me-2"
-             // label={checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"}
+              label={checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"}
               size="small"
               isDisabled={false}
               colorVariant="primary"
               tooltipTitle={""}
               type={"submit"}
               databsdismiss="modal"
-              //onClick={() => {props.validTenant(currentTenant);setChecked(!checked)}}
+              onClick={() => {props.validTenant(currentTenant);setChecked(!checked)}}
             ></RdsButton>
           </div>
 
@@ -87,14 +145,14 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
           </small>
         </div>
         <div>
-          {/* <form onSubmit={handleSubmit}> */}
+          <form onSubmit={handleSubmit}>
             <div className="form-group text-start">
               <RdsInput
-                label="Email/Username"
-                placeholder="Email/Username"
-                inputType="email/text"
-               //  onChange={emailhandleChange}
-               //  value={email}
+                label="Email"
+                placeholder="Email"
+                inputType="email"
+                onChange={emailhandleChange}
+                //value={email}
                 name={"email"}
                 required={true}
               ></RdsInput>
@@ -106,33 +164,14 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                 label="Password"
                 placeholder="Password"
                 inputType="password"
-                //onChange={passwordhandleChange}
+                onChange={passwordhandleChange}
                 name={"password"}
                 //value={password}
               ></RdsInput>
             </div>
-            <div className="d-flex justify-content-between mt-2 mb-4">
-              <div>
-                <div className="form-group mb-3">
-                  {/* <RdsCheckbox
-                    label={"Remember me"}
-                  //   checked={rememberMe}
-                  //   onChange={onCheckedHandler}
-                  ></RdsCheckbox> */}
-                </div>
-              </div>
-              <div>
-                <a
-                  className="link-primary text-decoration-none float-end"
-                  href="javascript:void(0)"
-                  //onClick={forgotPasswordHandler}
-                >
-                  Forgot password ?
-                </a>
-              </div>
-            </div>
+            
             <RdsButton
-              label="Login"
+              label="Register"
               colorVariant="primary"
               showLoadingSpinner={true}
               //isDisabled={!isFormValid}
@@ -140,7 +179,18 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
               tooltipTitle={""}
               type="submit"
             />
-          {/* </form> */}
+            <div className="float-start mt-3">
+              <p>Already registered?  <span><a
+                className="link-primary text-decoration-none"
+                href="javascript:void(0)"
+                onClick={loginHandler}
+              >
+                Login
+              </a></span></p>
+            </div>
+
+            
+          </form>
           <div className="pt-2">
             <RdsLabel
               class="text-mute pt-2 secondary "

@@ -681,11 +681,13 @@ const Main = (props: MainProps) => {
           element={<ForgotPasswordCompo />}
         ></Route>
         <Route path="/changepassword" element={<ChangePasswordCompo />}></Route>
+        <Route path="/register" element={<RegisterCompo />} /> 
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
         location.pathname != "/forgot-password" &&
-        location.pathname != "/changepassword" && (
+        location.pathname != "/changepassword" &&
+        location.pathname != "/register" && (
           <div className="d-flex flex-column flex-root">
             <div className="page d-flex flex-column flex-column-fluid">
               <div
@@ -906,8 +908,7 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/charts/:type"
                             element={<ChartCompo />}
-                          />
-                        <Route path="/register" element={<RegisterCompo />} /> 
+                          />         
 </Routes>
                       </Suspense>
                     </div>

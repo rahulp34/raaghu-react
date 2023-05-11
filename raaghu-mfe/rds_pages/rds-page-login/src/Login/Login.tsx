@@ -63,6 +63,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
+  const registerHandler: any = (isRegisterClicked: boolean) => {};
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
@@ -87,9 +88,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   error={Alert}
                   onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
-                  validTenant={validateTenant} 
-                  getvalidTenantName={validateTenantName} 
-                  currentTenant={""}                />
+                  validTenant={validateTenant}
+                  getvalidTenantName={validateTenantName}
+                  currentTenant={""}
+                  onRegister={registerHandler}                />
               </div>
             </div>
             <div
