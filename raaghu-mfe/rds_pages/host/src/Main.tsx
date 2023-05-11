@@ -76,6 +76,7 @@ import {
   NewslettersCompo,
   ChangePasswordCompo,
   ChartCompo,
+  RegisterCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
@@ -570,6 +571,7 @@ const Main = (props: MainProps) => {
         "REACT_APP_API_URL",
         process.env.REACT_APP_API_URL || ""
       );
+      debugger
       sessionService(
         openidConfig.issuer,
         openidConfig.grant_type,
@@ -579,9 +581,12 @@ const Main = (props: MainProps) => {
         openidConfig.scope
       )
         .then(async (res: any) => {
-          if (res.access_token) {
-            await dispatch(invalidCredentialAction(null));
+          if (res) {
+            debugger
+            await dispatch(invalidCredentialAction(false));
+            // sessionStorage.setItem('accessToken',res)
             await hello(res);
+            debugger
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
@@ -902,7 +907,8 @@ const Main = (props: MainProps) => {
                             path="/charts/:type"
                             element={<ChartCompo />}
                           />
-                        </Routes>
+                        <Route path="/register" element={<RegisterCompo />} /> 
+</Routes>
                       </Suspense>
                     </div>
                   </div>

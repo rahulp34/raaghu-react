@@ -233,3 +233,8 @@ declare module "Chart/Chart" {
 	const ChartComponent: React.ComponentType;
 	export default ChartComponent;
 }
+
+declare module "Register/Register" {
+	const RegisterComponent: React.ComponentType;
+	export default RegisterComponent;
+}
