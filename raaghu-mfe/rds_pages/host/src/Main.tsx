@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
+import { Route, useNavigate, Routes} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
@@ -7,7 +7,6 @@ import {
   configurationService,
   localizationService,
   sessionService,
-  clearToken,
 } from "raaghu-react-core";
 import {
   useAppDispatch,
@@ -20,7 +19,6 @@ import {
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
-//import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import {
@@ -325,10 +323,16 @@ const Main = (props: MainProps) => {
   const [currentLanguage, setCurrentLanguage] = useState(
     localStorage.getItem("currentLang") || "en-GB"
   );
-
   const onClickHandler = (e: any, val: any) => {
-    setCurrentLanguage(val);
+    setCurrentLanguage(val);    
+
     localStorage.setItem("currentLang", val);
+    if(e.target.innerText =='العربية'){
+      document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+    }
+    else if (e.target.innerText !== 'Hindi') {
+      document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+    }
   };
 
   const onClickThemeCheck = (e: any) => {
@@ -351,6 +355,12 @@ const Main = (props: MainProps) => {
     configurationService(currentLanguage).then(async (res: any) => {
       if (res.currentUser.id) {
         localStorage.setItem("userId", res.currentUser.id);
+        if(e.target.innerText =='العربية'){
+          document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+        }
+        else if (e.target.innerText !== 'Hindi') {
+          document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+        }
       }
       const tempdata: any[] = await res.localization?.languages?.map(
         (item: any) => {
@@ -581,10 +591,8 @@ const Main = (props: MainProps) => {
         openidConfig.scope
       )
         .then(async (res: any) => {
-          if (res) {
-            debugger
-            await dispatch(invalidCredentialAction(false));
-            // sessionStorage.setItem('accessToken',res)
+          if (res.access_token) {
+            await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
             await hello(res);
             debugger
             sessionStorage.setItem("accessToken", res.access_token);
@@ -701,7 +709,7 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                 
+                  
                     <div onClick={()=>navigate("/dashboard")} id="raaghuLogo">
                 
                     <img
@@ -750,7 +758,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="m-4">
+                    <div className="layoutmargin mb-top-margin h-100">
                       <Suspense>
                         <Routes>
                           <Route

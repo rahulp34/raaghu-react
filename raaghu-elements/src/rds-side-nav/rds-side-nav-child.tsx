@@ -14,6 +14,7 @@ const RdsSideNavChild = ({
 }: {
   data: any[];
   callback: (data: any) => void;
+  
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   counter: number;
   onClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -26,6 +27,7 @@ const RdsSideNavChild = ({
   const onCollapse = () => {
     console.log(collapse);
     callback(!collapse);
+
     setcollapse(!collapse);
   };
 
@@ -70,7 +72,7 @@ const RdsSideNavChild = ({
     </div>*/
       }
         <div
-          className={`sidenav-footer text-center cursor-pointer rounded-5 py-1 p-1 ${collapse ? "w-auto" : ""}`}
+          className={`sidenav-footer text-center cursor-pointer rounded-5 py-1 p-1 ${collapse ? "" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}
@@ -190,7 +192,7 @@ const Node = ({
                       {node.children.map((item: any) => (
                         <>
                           <li className="list" id={item.id}  >
-                            <NavLink className="dropdown-item " to={item.path} >
+                            <NavLink className="dropdown-item me-2" to={item.path} >
                               {item.children && item.children.length > 0 ? <>
                                 <div className="btn-group dropend">
                                   <a
@@ -257,7 +259,7 @@ const Node = ({
                       classes="me-3"
                       // isAnimate = {false}
                     ></RdsIcon>
-                    <span className="text-capitalize">{t(node.label)}</span>
+                    <span className="text-capitalize me-2">{t(node.label)}</span>
                   </a>
                 </>
               )}
