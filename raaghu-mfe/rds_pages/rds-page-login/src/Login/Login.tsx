@@ -8,9 +8,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
-import {
-  validateTenantByName
-} from "raaghu-react-core";
+import { validateTenantByName } from "raaghu-react-core";
 import {
   callLoginAction,
   invalidCredentialAction,
@@ -46,21 +44,23 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     localStorage.setItem("rememberMe", rememberMe.toString());
   }
 
-  const [validateTenantName,setValidateTenantName]=useState("Not Selected")
-  function validateTenant(data:any){
-    validateTenantByName(data).then((res)=>{
-      if(res.isActive){
-        setValidateTenantName(data)
+  const [validateTenantName, setValidateTenantName] = useState("Not Selected");
+  function validateTenant(data: any) {
+    validateTenantByName(data).then((res) => {
+      if (res.isActive) {
+        setValidateTenantName(data);
+      } else {
+        setValidateTenantName("Not Selected");
       }
-      else {
-        setValidateTenantName("Not Selected")
-      }
+     
     }
-    )
+    ).catch((err)=>{
+      setValidateTenantName("Not Selected")
+    })
 
     
   }
-  
+
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
   const { t } = useTranslation();
 
@@ -71,17 +71,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     <div className="login-background">
       <div className="align-items-center d-flex justify-content-center vh-100 m-auto login-container">
         <div className="container-fluid m-2">
-          {Alert.show == true && (
-            <div className="invalid-popup">
-              <RdsAlert
-                dismisable={true}
-                alertmessage={Alert.message + "   "}
-                colorVariant="danger"
-                onDismiss={handlerDismissAlert}
-                reset={Alert.show}
-              />
-            </div>
-          )}
           <div className="bg-white row rounded-3 ">
             <div className="col-md-6">
               <div className="py-4 px-3">
@@ -90,16 +79,16 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                     <img src="./assets/raaghu_text_logo.svg"></img>
                   </div>
                 </div>
-
                 <RdsCompLogin
                   email={"" || loginData.callLogin?.email}
                   password={"" || loginData.callLogin?.password}
                   onLogin={loginHandler}
+                  error={Alert}
+                  onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
                   validTenant={validateTenant} 
                   getvalidTenantName={validateTenantName} 
-                  currentTenant={validateTenantName}                />
-
+                  currentTenant={""}                />
               </div>
             </div>
             <div
@@ -142,5 +131,3 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 };
 
 export default Login;
-
-

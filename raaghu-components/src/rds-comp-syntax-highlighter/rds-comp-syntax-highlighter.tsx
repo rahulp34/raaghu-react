@@ -1,5 +1,5 @@
 import { languages } from 'prismjs';
-import React from 'react';
+import React, { useState } from 'react';
 import Editor from 'react-simple-code-editor';
 import Prism from 'prismjs';
 // import { highlight, languages } from 'prismjs/components/prism-core';
@@ -21,16 +21,17 @@ export interface RdsCompSyntaxHighlighterProps {
   required?: boolean;
   style?: React.CSSProperties;
   padding?: number;
-  tabSize?: number
+  tabSize?: number; 
   onValueChange: (value: any) => void;
 }
 const RdsCompSyntaxHighlighter = (props: RdsCompSyntaxHighlighterProps) => {
-
+  const [code,setCode] = useState(props.value||"");
+  
   return (
-    <Editor value={props.value} onValueChange={props.onValueChange} highlight={code => Prism.highlight(code, languages.js, languages.js as any)}
+    <Editor value={props.value} onValueChange={(data:any)=>{setCode(data); props.onValueChange}} highlight={()=>Prism.highlight(code, languages.js, languages.js as any)}
       textareaId={props.editorId} disabled={props.disabled} maxLength={props.maxLength} minLength={props.minLength}
-      name={props.name} placeholder={props.placeholder} readOnly={props.readOnly} padding={props.padding}
-      required={props.required} textareaClassName={props.textareaClassName} preClassName={props.preClassName}
+      name={props.name} placeholder={props.placeholder} padding={props.padding}
+      required={props.required}
       tabSize={props.tabSize} style={props.style} autoFocus={true} />
   );
 };
