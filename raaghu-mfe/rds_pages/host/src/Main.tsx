@@ -322,10 +322,16 @@ const Main = (props: MainProps) => {
   const [currentLanguage, setCurrentLanguage] = useState(
     localStorage.getItem("currentLang") || "en-GB"
   );
-
   const onClickHandler = (e: any, val: any) => {
-    setCurrentLanguage(val);
+    setCurrentLanguage(val);    
+
     localStorage.setItem("currentLang", val);
+    if(e.target.innerText =='العربية'){
+      document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+    }
+    else if (e.target.innerText !== 'Hindi') {
+      document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+    }
   };
 
   const onClickThemeCheck = (e: any) => {
@@ -348,6 +354,12 @@ const Main = (props: MainProps) => {
     configurationService(currentLanguage).then(async (res: any) => {
       if (res.currentUser.id) {
         localStorage.setItem("userId", res.currentUser.id);
+        if(e.target.innerText =='العربية'){
+          document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+        }
+        else if (e.target.innerText !== 'Hindi') {
+          document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+        }
       }
       const tempdata: any[] = await res.localization?.languages?.map(
         (item: any) => {
@@ -692,7 +704,7 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                 
+                  
                     <div onClick={()=>navigate("/dashboard")} id="raaghuLogo">
                 
                     <img
@@ -712,7 +724,7 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-35"
                     id="FixedHeaderOverFlow"
                   >
                     <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
@@ -741,7 +753,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="m-4">
+                    <div className="layoutmargin mb-top-margin">
                       <Suspense>
                         <Routes>
                           <Route

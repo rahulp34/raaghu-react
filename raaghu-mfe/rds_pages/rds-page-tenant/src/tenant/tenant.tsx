@@ -377,7 +377,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                 canvasTitle={"NEW TENANT"}
                 placement="end"
                 offcanvasbutton={
-                  <div className="d-flex justify-content-end my-1 ">
+                  <div className="d-flex justify-content-end">
                     <RdsButton
                       icon="plus"
                       label={"New Tenant"}
