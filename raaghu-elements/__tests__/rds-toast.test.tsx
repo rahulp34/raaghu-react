@@ -23,10 +23,15 @@ describe('RdsToast', () => {
 
 
   it('renders the component without icon', () => {
+    /*  render(<RdsToast {...props} withIcon={false} />);
+     expect(screen.getByRole('alert')).toBeInTheDocument();
+     expect(screen.getByText(props.headerTitle)).toBeInTheDocument();
+     expect(screen.getByText(props.message)).toBeInTheDocument();
+     expect(screen.queryByTestId('rds-icon')).toBeNull(); */
     render(<RdsToast {...props} withIcon={false} />);
     expect(screen.getByRole('alert')).toBeInTheDocument();
-    expect(screen.getByText(props.headerTitle)).toBeInTheDocument();
-    expect(screen.getByText(props.message)).toBeInTheDocument();
+    expect(screen.getByText(props.headerTitle!)).toBeInTheDocument(); //using non-null assertion operator
+    expect(screen.getByText(props.message!)).toBeInTheDocument(); //using non-null assertion operator
     expect(screen.queryByTestId('rds-icon')).toBeNull();
   });
 
@@ -61,9 +66,9 @@ describe('RdsToast', () => {
   test('renders toast message without header', () => {
     const { getByRole, getByText, queryByText } = render(
       <RdsToast
-            colorVariant="success"
-            message="This is a test message"
-            showHeader={false} headerTitle={""}      />
+        colorVariant="success"
+        message="This is a test message"
+        showHeader={false} headerTitle={""} />
     );
     const toastContainer = getByRole('alert');
     const toastHeader = queryByText('Header Title');
@@ -72,7 +77,7 @@ describe('RdsToast', () => {
     expect(toastHeader).toBeNull();
     expect(toastMessage).toBeInTheDocument();
   });
-  
+
 });
 
 
