@@ -22,7 +22,7 @@ const hostInitialState: hostInitialState = {
   configuration: null,
   callLogin: null,
   profilepic: null,
-  invalidCredential: null,
+  invalidCredential: { invalid: false, message: "" },
   getProfilePicData: null,
   error: "",
 };

@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
+import { Route, useNavigate, Routes} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
@@ -7,7 +7,6 @@ import {
   configurationService,
   localizationService,
   sessionService,
-  clearToken,
 } from "raaghu-react-core";
 import {
   useAppDispatch,
@@ -20,7 +19,6 @@ import {
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
-//import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import {
@@ -580,7 +578,7 @@ const Main = (props: MainProps) => {
       )
         .then(async (res: any) => {
           if (res.access_token) {
-            await dispatch(invalidCredentialAction(null));
+            await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
             await hello(res);
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
