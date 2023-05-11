@@ -101,18 +101,17 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
               <div className="col-6 leftinnerbox">
                 <div className="row lefttext">
                   <h6
-                    className={` ${SIZE} ${
-                      props.colorVariant
-                        ? ` text-${props.colorVariant}`
-                        : `text-dark`
-                    } `}
+                    className={` ${SIZE} ${props.colorVariant
+                      ? ` text-${props.colorVariant}`
+                      : `text-dark`
+                      } `}
                   >
-                    Drag and drop files                    
+                    Drag and drop files
                   </h6>
                   <h6
-                   className="text-muted"
+                    className="text-muted"
                   >
-                    (All Files)                
+                    (All Files)
                   </h6>
                 </div>
                 <div className="row lefttext">
@@ -132,20 +131,20 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                 />
 
                 {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-upload upload "
-                  viewBox="0 0 16 16"
-                  
-                >
-                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                </svg> */}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-upload upload "
+                    viewBox="0 0 16 16"
+                    
+                  >
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                  </svg> */}
               </div>
 
-              <div className=" row inputbox">
+              <div className=" row inputbox" data-testid="rds-file-uploader-input">
                 <input
                   className={` col-md-12 input mulinput   ${size} `}
                   type="file"
@@ -172,32 +171,30 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                       fill={false}
                     />
                     {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-files"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
-                    </svg> */}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-files"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                      </svg> */}
                   </div>
                   <div className="filename ">
                     <div
-                      className={`${
-                        fileName[i].length > 60
-                          ? ` text-${props.colorVariant}`
-                          : "disname"
-                      }`}
+                      className={`${fileName[i].length > 60
+                        ? ` text-${props.colorVariant}`
+                        : "disname"
+                        }`}
                     >
                       {fileName[i].substr(0, 60)}...
                     </div>
                     <div
-                      className={` ${SIZE} ${
-                        fileName[i].length < 60
-                          ? ` text-${props.colorVariant}`
-                          : "disname"
-                      }`}
+                      className={` ${SIZE} ${fileName[i].length < 60
+                        ? ` text-${props.colorVariant}`
+                        : "disname"
+                        }`}
                     >
                       {fileName[i]}
                     </div>
@@ -205,11 +202,10 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                 </div>
                 <div className="col-lg-2 col-md-2 closeIcon">
                   <span
-                    className={` size ${SIZE} ${
-                      props.colorVariant
-                        ? ` text-${props.colorVariant}`
-                        : `text-dark`
-                    } `}
+                    className={` size ${SIZE} ${props.colorVariant
+                      ? ` text-${props.colorVariant}`
+                      : `text-dark`
+                      } `}
                   >
                     {" "}
                     {(FileSize[i] / 1048576).toFixed(2)} MB{" "}
@@ -231,12 +227,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
 
               <div className="row">
                 <div
-                  className={`col-md-6 ${SIZE} text-danger ${
-                    props.limit > parseFloat((FileSize[i] / 1048576).toFixed(2))
-                      ? "disname"
-                      : ""
-                  } 
-                  }`}
+                  className={`col-md-6 ${SIZE} text-danger ${props.limit > parseFloat((FileSize[i] / 1048576).toFixed(2))
+                    ? "disname"
+                    : ""
+                    } 
+                    }`}
                 >
                   {/* File size exceed {props.limit} MB */}
                 </div>
