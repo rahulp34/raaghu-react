@@ -279,7 +279,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
         <div className="h-100 d-flex align-items-center justify-content-center">
           <RdsIllustration
             label={props.noDataTitle}
-            subLabel="Click on the button above to add."
+            //subLabel="Click on the button above to add."
             colorVariant="light"
           />
         </div>
@@ -390,7 +390,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
-                              <div className="btn-group">
+                              <div className="btn-group dropstart">
                                 <button
                                   className="btn rounded-pill border-0"
                                   type="button"
@@ -539,8 +539,16 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         >
                           {!tableDataRow.isEndUserEditing ? (
                             <div>
-                              {tableHeader.datatype === "text" &&
-                                tableDataRow[tableHeader.key]}
+                              {tableHeader.datatype === "text" &&(
+                                <>
+                                {tableHeader.key.includes("time")|| tableHeader.key.includes("Time")? <>
+                                {`${("0" + new Date(tableDataRow[tableHeader.key]).getDate()).slice(-2)}/${("0" + (new Date(tableDataRow[tableHeader.key]).getMonth() + 1)).slice(-2)}/${new Date(tableDataRow[tableHeader.key]).getFullYear()}, ${("0" + new Date(tableDataRow[tableHeader.key]).getHours()).slice(-2)}:${("0" + new Date(tableDataRow[tableHeader.key]).getMinutes()).slice(-2)} ${new Date(tableDataRow[tableHeader.key]).getHours() >= 12 ? "PM" : "AM"}`}
+                                </>:<>
+                                {tableDataRow[tableHeader.key]}
+                                </>}
+                                </>
+                              )
+                                }
                               {tableHeader.datatype === "number" &&
                                 tableDataRow[tableHeader.key]}
                               {tableHeader.datatype === "badge" && (
@@ -642,7 +650,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                         <td className="align-middle text-center">
                           {!tableDataRow.isEndUserEditing ? (
                             <>
-                              <div className="btn-group">
+                              <div className="btn-group dropstart">
                                 <button
                                   className="btn rounded-pill border-0"
                                   type="button"

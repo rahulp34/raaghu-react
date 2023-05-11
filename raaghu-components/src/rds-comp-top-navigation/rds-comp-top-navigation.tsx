@@ -211,7 +211,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   return (
     <div>
       <nav
-        className={`navbar d-flex justify-content-between p-2 top-0 p-0 pe-3 min-width`}
+        className={`navbar d-flex justify-content-between p-2 min-width`}
       >
              {/*  <button className="navbar-toggler px-2" id="humbreger-btn" type="button"
       data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

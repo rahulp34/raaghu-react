@@ -3,16 +3,16 @@ import { useTranslation } from "react-i18next";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
-import { RdsAlert } from "../../../rds-elements";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../../libs/state-management/hooks";
+import { validateTenantByName } from "raaghu-react-core";
 import {
   callLoginAction,
   invalidCredentialAction,
 } from "../../../../libs/public.api";
-
+import { RdsLabel } from "../../../rds-elements";
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
@@ -20,18 +20,22 @@ export interface LoginProps {
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
   const [Alert, setAlert] = useState({
     show: false,
-    message: "Invalid user name or password",
+    message: "",
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
   const loginData = useAppSelector((state) => state.persistedReducer.host);
   useEffect(() => {
-    setAlert({ ...Alert, show: loginData.invalidCredential });
+    setAlert({
+      ...Alert,
+      message: loginData.invalidCredential?.message,
+      show: loginData.invalidCredential?.invalid,
+    });
   }, [loginData.invalidCredential]);
   useEffect(() => {
     dispatch(callLoginAction(null) as any);
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(invalidCredentialAction({ invalid: false, message: "" }) as any);
   }, []);
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
@@ -39,27 +43,38 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
     localStorage.setItem("rememberMe", rememberMe.toString());
   }
 
+  const [validateTenantName, setValidateTenantName] = useState("Not Selected");
+  function validateTenant(data: any) {
+    validateTenantByName(data).then((res) => {
+      if (res.isActive) {
+        setValidateTenantName(data);
+      } else {
+        setValidateTenantName("Not Selected");
+      }
+     
+    }
+    ).catch((err)=>{
+      setValidateTenantName("Not Selected")
+    })
+
+    
+  }
+
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
-    dispatch(invalidCredentialAction(false) as any);
+    dispatch(
+      invalidCredentialAction({
+        invalid: false,
+        message: "",
+      }) as any
+    );
   };
   return (
     <div className="login-background">
       <div className="align-items-center d-flex justify-content-center vh-100 m-auto login-container">
         <div className="container-fluid m-2">
-          {Alert.show == true && (
-            <div className="invalid-popup">
-              <RdsAlert
-                dismisable={true}
-                alertmessage={Alert.message}
-                colorVariant="danger"
-                onDismiss={handlerDismissAlert}
-                reset={Alert.show}
-              />
-            </div>
-          )}
           <div className="bg-white row rounded-3 ">
             <div className="col-md-6">
               <div className="py-4 px-3">
@@ -68,13 +83,16 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                     <img src="./assets/raaghu_text_logo.svg"></img>
                   </div>
                 </div>
-
                 <RdsCompLogin
                   email={"" || loginData.callLogin?.email}
                   password={"" || loginData.callLogin?.password}
                   onLogin={loginHandler}
+                  error={Alert}
+                  onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
-                />
+                  validTenant={validateTenant} 
+                  getvalidTenantName={validateTenantName} 
+                  currentTenant={""}                />
               </div>
             </div>
             <div

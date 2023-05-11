@@ -367,7 +367,7 @@ const Auditpayload = ()=>{
             tableData={auditData}
             pagination={true}
             recordsPerPage={10}
-            noDataTitle="Currently you do not have operation log"
+            noDataTitle="Currently you do not have Audit log"
             onActionSelection={onActionSelection}
             actions={operationActions}
             recordsPerPageSelectListOption={true}

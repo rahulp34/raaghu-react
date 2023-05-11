@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
+import { Route, useNavigate, Routes} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
@@ -7,19 +7,18 @@ import {
   configurationService,
   localizationService,
   sessionService,
-  clearToken,
 } from "raaghu-react-core";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../libs/state-management/hooks";
 import {
+  RdsCompLinkedAccount,
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
-//import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import {
@@ -291,7 +290,7 @@ const Main = (props: MainProps) => {
         {
           label: "Linked Accounts",
           icon: "manage_linked",
-          path: "",
+          path: "/linked-accounts",
           subText: "Manage accounts linked to your account",
           id: "nav-LinkAccount",
         },
@@ -464,6 +463,7 @@ const Main = (props: MainProps) => {
         };
       });
       setBreadCrumItem(a);
+      setCurrentTitle(a[0].label);
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -473,6 +473,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(a.reverse()[0].label);
       setBreadCrumItem(a);
     }
   };
@@ -480,7 +481,7 @@ const Main = (props: MainProps) => {
     let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath);
 
     breadcrumData = breadcrumData.filter((res: any) => (res ? true : false));
-    if (breadcrumData.length && breadcrumData[0].id) {
+    if (breadcrumData.length && breadcrumData[0]. id) {
       breadcrumData = breadcrumData.map((res: any) => {
         return {
           id: res.id,
@@ -488,6 +489,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(breadcrumData[0].label);
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -498,6 +500,7 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(breadcrumData.reverse()[0].label);
       setBreadCrumItem(breadcrumData);
     }
   }
@@ -586,23 +589,24 @@ const Main = (props: MainProps) => {
         openidConfig.scope
       )
         .then(async (res: any) => {
-          if (res) {
-            await dispatch(invalidCredentialAction(false));
-            // sessionStorage.setItem('accessToken',res)
+          if (res.access_token) {
+            await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
             await hello(res);
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
             localStorage.setItem("loginAccessDate", Date());
-            // await dispatch(callLoginAction(null) as any);
           }
         })
-        .catch(() => {
-          if (count != 0) {
-            dispatch(invalidCredentialAction(true));
-          }
+        .catch((error: any) => {
+          dispatch(
+            invalidCredentialAction({
+              invalid: true,
+              message: error.response.data.error_description,
+            })
+          );
         });
-      // dispatch(callLoginAction(null) as any);
+      dispatch(callLoginAction(null) as any);
     }
   }, [dataHost]);
 
@@ -723,7 +727,7 @@ const Main = (props: MainProps) => {
                     className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-35"
                     id="FixedHeaderOverFlow"
                   >
-                    <div className="header align-items-stretch">
+                    <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
                       <RdsCompTopNavigation
                         languageLabel={currentLanguageLabel}
                         themeLabel="Theme"
@@ -879,6 +883,10 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/my-account"
                             element={<MyAccountCompo />}
+                          />
+                          <Route
+                            path="/linked-accounts"
+                            element={<RdsCompLinkedAccount />}
                           />
 
                           <Route path="/menus" element={<MenusCompo />} />

@@ -35,7 +35,7 @@ const RdsWebsiteMatrix = (props: RdsWebsiteMatrixProps) => {
             {props.item.subtitle}{" "}
           </label>
           {props.item.link && (
-            <div className={"pt-2  fw-medium " + `${textColor}`}>
+            <div className={"pt-2  fw-medium " + `${textColor}`} data-testid="icon">
               <a onClick={onLinkClick}>
                 {props.item.link} {"   "}
                 <RdsIcon
@@ -45,6 +45,7 @@ const RdsWebsiteMatrix = (props: RdsWebsiteMatrixProps) => {
                   fill={false}
                   stroke={true}
                   colorVariant={props.colorVariant}
+
                 />
               </a>
             </div>

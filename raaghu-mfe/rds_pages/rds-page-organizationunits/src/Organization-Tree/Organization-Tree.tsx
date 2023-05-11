@@ -661,14 +661,15 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Add Organiztion Sub-Unit"
-        
+        offId="coganization"
         backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
-        offId="coganization"
+        
       >
         <RdsInput
-          label={"Add Organization name"}
+        inputType="text"
+          label="Add Organization name"
           labelPositon="top"
           required={true}
           size="medium"

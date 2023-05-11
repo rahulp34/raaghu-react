@@ -184,8 +184,8 @@ useEffect( () => {
         </div>
 
         {condition }
-        <div className="position-absolute bottom-0" style={{right:0}}>
-          <div className="d-flex justify-content-end" >
+        <div className="position-relative bottom-0 justify-content-end" style={{right:0}}>
+          <div className=" d-flex justify-content-start mt-3" >
             <RdsButton
               class="me-2"
               label="CANCEL"

@@ -100,11 +100,11 @@ const Roles = (props: RdsPageRolesProps) => {
   const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
   const [rolePermission, setRolePermission] = useState<any>([]);
   useEffect(() => {
-    if (Data.permission) {  
+    if (Data.permission) {
       setRolePermission(Data.permission.groups)
     }
   }, [Data.permission])
-  const handlerSelectedPermission = (permissionsData: any) => { 
+  const handlerSelectedPermission = (permissionsData: any) => {
     setSelectedPermissionListData(permissionsData);
   };
   function handleSelectesPermission() {
@@ -159,7 +159,7 @@ const Roles = (props: RdsPageRolesProps) => {
   let actions: any = [
     { id: "edit", displayName: "Edit", offId: "role-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "role-delete-off" },
-    
+
   ];
   const handlerActions = (rowData: any, actionId: any) => {
     setId(rowData.id);
@@ -174,7 +174,7 @@ const Roles = (props: RdsPageRolesProps) => {
 
       dispatch(fetchClaims(rowData.id) as any)
       dispatch(fetchAllClaims() as any);
-      
+
       dispatch(fetchPermission(rowData.id) as any);
     }
   };
@@ -539,29 +539,35 @@ const Roles = (props: RdsPageRolesProps) => {
                       <RdsCompClaims allClaimsArray={allClaimsArray} claimsTable={claimsTable} id={id}  ></RdsCompClaims>
                     </div>
                   )}
-                  <div
-                    className="d-flex position-absolute">
-                    <div className="me-3">
-                      <RdsButton
-                        type={"button"}
-                        label="cancel"
-                        isOutline={true}
-                        colorVariant="primary"
-                        databsdismiss="offcanvas"
-                        databstoggle="offcanvas"
-                        databstarget="#role-edit-off"
-                      ></RdsButton>
+                  <div className="footer-buttons my-2">
+                    <div className="row">
+                      <div className="col-md-12 d-flex">
+                        <div>
+                          <RdsButton
+                            type={"button"}
+                            label="cancel"
+                            isOutline={true}
+                            colorVariant="primary"
+                            databsdismiss="offcanvas"
+                            databstoggle="offcanvas"
+                            databstarget="#role-edit-off"
+                          ></RdsButton>
+                        </div>
+                        <div>
+                          <RdsButton
+                            type={"button"}
+                            label="save"
+                            isDisabled={val === ""}
+                            colorVariant="primary"
+                            onClick={handlerEditRole}
+                            databsdismiss="offcanvas"
+                            databstoggle="offcanvas"
+                            databstarget="#role-edit-off"
+                            class="ms-2"
+                          ></RdsButton>
+                        </div>
+                      </div>
                     </div>
-                    <RdsButton
-                      type={"button"}
-                      label="save"
-                      isDisabled={val === ""}
-                      colorVariant="primary"
-                      onClick={handlerEditRole}
-                      databsdismiss="offcanvas"
-                      databstoggle="offcanvas"
-                      databstarget="#role-edit-off"
-                    ></RdsButton>
                   </div>
                 </div>
               </RdsOffcanvas>
