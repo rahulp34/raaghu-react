@@ -753,7 +753,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="layoutmargin mb-top-margin h-100">
+                    <div className="layoutmargin mb-top-margin h-100 ">
                       <Suspense>
                         <Routes>
                           <Route
