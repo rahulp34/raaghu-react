@@ -167,13 +167,22 @@ const Blogger = () => {
           description: blogObj.description,
         },
       };
-      dispatch(createNewBlog(data)).then(() => {
-        setAlert({
-          ...Alert,
-          show: true,
-          message: "Blog created Succesfully",
-          color: "success",
-        });
+      dispatch(createNewBlog(data)).then((res) => {
+       if (res.type == "Blogs/Create/rejected") {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Blog created Succesfully",
+            color: "success",
+          });
+        }
         dispatch(getAllBlogs());
       });
     } else if (canvasTitle === "Edit Blog") {
@@ -181,13 +190,22 @@ const Blogger = () => {
         id: blogId,
         data: blogObj,
       };
-      dispatch(updateBlog(data)).then(() => {
-        setAlert({
-          ...Alert,
-          show: true,
-          message: "Blog updated Succesfully",
-          color: "success",
-        });
+      dispatch(updateBlog(data)).then((res) => {
+        if (res.type == "Blogs/Update/rejected") {
+           setAlert({
+             ...Alert,
+             show: true,
+             message: "your request has been denied",
+             color: "danger",
+           });
+         } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Blog updated Succesfully",
+            color: "success",
+          });
+         }
         dispatch(getAllBlogs());
       });
     }
@@ -204,13 +222,22 @@ const Blogger = () => {
   // Delete blog confirmation popup
   function confirmDelete() {
     const item = { id: blogId };
-    dispatch(deleteBlog(item)).then(() => {
-      setAlert({
-        ...Alert,
-        show: true,
-        message: "Blog deleted Succesfully",
-        color: "success",
-      });
+    dispatch(deleteBlog(item)).then((res) => {
+      if (res.type == "Blogs/Delete/rejected") {
+         setAlert({
+           ...Alert,
+           show: true,
+           message: "your request has been denied",
+           color: "danger",
+         });
+       } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Blog deleted Succesfully",
+          color: "success",
+        });
+       } 
       dispatch(getAllBlogs());
     });
   }
@@ -228,7 +255,7 @@ const Blogger = () => {
 
     // Clean up the timer when the component unmounts or when the state changes
     return () => clearTimeout(timer);
-  }, [tableData]);
+  }, [blogs.allblogs]);
   // DOM
   return (
     <>
