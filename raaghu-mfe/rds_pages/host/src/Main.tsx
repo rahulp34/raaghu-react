@@ -724,7 +724,7 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-35"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                     id="FixedHeaderOverFlow"
                   >
                     <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
@@ -753,7 +753,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="layoutmargin mb-top-margin">
+                    <div className="layoutmargin mb-top-margin h-100">
                       <Suspense>
                         <Routes>
                           <Route
