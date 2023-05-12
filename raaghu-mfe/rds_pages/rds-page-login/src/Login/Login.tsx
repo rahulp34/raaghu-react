@@ -40,7 +40,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
     dispatch(callLoginAction({ email, password }) as any);
-    localStorage.setItem("rememberMe", rememberMe.toString());
+    localStorage.setItem("rememberMe", 'true');
   }
 
   const [validateTenantName, setValidateTenantName] = useState("Not Selected");

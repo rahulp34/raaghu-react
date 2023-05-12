@@ -451,6 +451,7 @@ const Main = (props: MainProps) => {
     const pageName = e.target.getAttribute("data-name");
     const subTitle = getSubTitle(pageName, sideNavItems);
     setCurrentSubTitle(subTitle);
+    document.title = `raaghu-${pageName.toLowerCase()}`;
     setCurrentTitle(pageName);
     let a = recursiveFunction(concatenatedExtended, pageName);
     a = a.filter((res: any) => (res ? true : false));
@@ -464,6 +465,8 @@ const Main = (props: MainProps) => {
       });
       setBreadCrumItem(a);
       setCurrentTitle(a[0].label);
+      document.title = `raaghu-${a[0].label.toLowerCase()}`;
+
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -472,9 +475,11 @@ const Main = (props: MainProps) => {
           label: t(res.label),
           icon: "",
         };
-      });
-      setCurrentTitle(a.reverse()[0].label);
+      }); 
       setBreadCrumItem(a);
+      setCurrentTitle(a[a.length - 1].label);
+      document.title = `raaghu-${a[a.length - 1].label.toLowerCase()}`;
+
     }
   };
   function showBreadCrum() {
@@ -490,6 +495,7 @@ const Main = (props: MainProps) => {
         };
       });
       setCurrentTitle(breadcrumData[0].label);
+      document.title = `raaghu-${breadcrumData[0].label.toLowerCase()}`;
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -500,8 +506,9 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
-      setCurrentTitle(breadcrumData.reverse()[0].label);
       setBreadCrumItem(breadcrumData);
+      document.title = `raaghu-${breadcrumData[breadcrumData.length - 1].label.toLowerCase()}`;
+      setCurrentTitle(breadcrumData[breadcrumData.length - 1].label);
     }
   }
 
