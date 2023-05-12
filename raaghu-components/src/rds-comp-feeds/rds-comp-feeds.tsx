@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating } from "raaghu-react-elements";
+import { RdsAvatar, RdsIcon, RdsLikeDislike, RdsRating } from "../rds-elements";
 export interface Item {
   name: string;
   username?: string;
@@ -123,6 +123,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
                     <RdsRating
                       rating={item.rating}
                       colorVariant="warning"
+                      dataTestId="rating"
                     ></RdsRating>
                   </div>
                 )}

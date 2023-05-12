@@ -11,6 +11,7 @@ export interface RdsRatingProps {
   size?: size
   seeAllOption?: boolean
   onSeeAll?: () => void
+  dataTestId?: string
 }
 
 const RdsRating = (props: RdsRatingProps) => {
@@ -18,7 +19,7 @@ const RdsRating = (props: RdsRatingProps) => {
   
   return (
     <div className="d-flex">
-      <div className="Stars"  style={{ "--rating":props.rating ,"--size":props.size} as React.CSSProperties}  aria-label="Rating of this product is 2.3 out of 5."></div>
+      <div className="Stars" data-testId={props.dataTestId}  style={{ "--rating":props.rating ,"--size":props.size} as React.CSSProperties}  aria-label="Rating of this product is 2.3 out of 5."></div>
   
     </div>
   );
