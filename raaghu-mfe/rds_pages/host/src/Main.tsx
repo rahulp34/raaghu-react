@@ -588,7 +588,6 @@ const Main = (props: MainProps) => {
         "REACT_APP_API_URL",
         process.env.REACT_APP_API_URL || ""
       );
-      debugger
       sessionService(
         openidConfig.issuer,
         openidConfig.grant_type,
@@ -601,7 +600,6 @@ const Main = (props: MainProps) => {
           if (res.access_token) {
             await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
             await hello(res);
-            debugger
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
