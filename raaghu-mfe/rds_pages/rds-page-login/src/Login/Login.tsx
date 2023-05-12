@@ -39,7 +39,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }, []);
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
-    debugger
     dispatch(callLoginAction({ email, password }) as any);
     localStorage.setItem("rememberMe", 'true');
   }

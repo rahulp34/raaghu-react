@@ -15,9 +15,8 @@ const initialState: InitialState = {
   error: "",
 };
 
-
 export const getAllComments = createAsyncThunk(
-  "Comments/GetAllComments",
+  "Comments/getAllComments",
   (data: any) => {
     return CommentAdminService.getComments({
       entityType: data.entityType,
@@ -36,7 +35,7 @@ export const getAllComments = createAsyncThunk(
 );
 
 export const getCommentById = createAsyncThunk(
-  "Comments/GetCommentById",
+  "Comments/getCommentById",
   (data: any) => {
     return CommentAdminService.getComments1(data.id).then((result: any) => {
       return result;
@@ -45,18 +44,16 @@ export const getCommentById = createAsyncThunk(
 );
 
 export const deleteComment = createAsyncThunk(
-  "Comments/DeleteComment",
+  "Comments/deleteComment",
   (data: any) => {
-    return CommentAdminService
-      .deleteComments(data.id)
-      .then((result: any) => {
-        return result;
-      });
+    return CommentAdminService.deleteComments(data.id).then((result: any) => {
+      return result;
+    });
   }
 );
 
-const scopeSlice = createSlice({
-  name: "Blogs",
+const commentSlice = createSlice({
+  name: "Comments",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -111,4 +108,4 @@ const scopeSlice = createSlice({
   },
 });
 
-export default scopeSlice.reducer;
+export default commentSlice.reducer;
