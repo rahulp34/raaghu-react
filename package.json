@@ -18,7 +18,7 @@
     "node-sass": "^8.0.0",
     "postcss": "^8.4.19",
     "raaghu-react-core": "^1.0.10",
-    "raaghu-themes": "^0.0.30",
+    "raaghu-themes": "^0.0.29",
     "react": "^18.2.0",
     "react-big-calendar": "^1.5.2",
     "react-datepicker": "^4.8.0",
