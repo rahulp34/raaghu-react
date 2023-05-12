@@ -39,8 +39,8 @@ async  () => {
 );
 export const addOrganizationUnit = createAsyncThunk(
   "OrganizationTree/addOrganizationUnit",
-  async (dto: any) => {
-     const result = await OrganizationUnitService.postOrganizationUnits(dto);
+  async (data: any) => {
+     const result = await OrganizationUnitService.postOrganizationUnits({requestBody:data});
     return result;
   }
 );
