@@ -18,6 +18,7 @@ export interface RdsCompLoginProps {
   onDismissAlert?: () => any;
   onLogin: (email: string, password: string, rememberMe: boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
+  onRegister: (isRegisterClicked?: boolean) => void;
   currentTenant: any;
   validTenant: any;
 }
@@ -26,18 +27,21 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   props: RdsCompLoginProps
 ) => {
   const [email, setEmail] = useState(props.email);
+  const [Alert, setAlert] = useState(props.error);
   const navigate = useNavigate();
   const [password, setPassword] = useState(props.password);
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
+  const [isRegisterClicked, setIsRegisterClicked] = useState(false);
   const [rememberMe, setrememberMe] = useState(false);
-  console.log(
-    " hello login comp props.email props.email",
-    props.email,
-    props.password
-  );
+
   useEffect(() => {
     setEmail(props.email);
   }, [props.email]);
+
+  //side effect of props.error
+  useEffect(() => {
+    setAlert(props.error);
+  }, [props.error]);
 
   useEffect(() => {
     setPassword(props.password);
@@ -94,6 +98,12 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     props.onForgotPassword(isForgotPasswordClicked);
     console.log(isForgotPasswordClicked);
   };
+  const registerHandler: any = (isRegisterClicked: boolean) => {
+    setIsRegisterClicked(true);
+    navigate("/register");
+    props.onRegister(isRegisterClicked);
+    console.log(isRegisterClicked);
+  };
   const [checked, setChecked] = useState(false);
   const [currentTenant, setCurrentTenant] = useState(
     checked ? props.currentTenant : "Not Selected"
@@ -105,7 +115,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
           <b> Login </b>
         </h2>
         <div className="pb-1">
-          <small className="pb-3 d-flex justify-content-center">
+          <small className="pb-2 d-flex justify-content-center">
             <RdsLabel
               label={`current tenant:` + props.getvalidTenantName}
             ></RdsLabel>
@@ -139,12 +149,11 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     >
                       Switch to tenant
                     </label> */}
-                    <RdsCheckbox label={`${
-                  checked ? "Switch to the Tenant" : "Switch to the Host"
-                }`}
-                 checked={checked} isSwitch={checked}
-                 onChange={() => setChecked(!checked)}
-                 ></RdsCheckbox>
+                    <RdsCheckbox label={`${checked ? "Switch to the Tenant" : "Switch to the Host"
+                      }`}
+                      checked={checked} isSwitch={checked}
+                      onChange={() => setChecked(!checked)}
+                    ></RdsCheckbox>
                   </div>
                   <RdsInput
                     label="Tenancy Name"
@@ -189,17 +198,19 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
           </small>
         </div>
         <div>
-          {props.error?.show == true && (
-            <div className="invalid-popup">
-              <RdsAlert
-                dismisable={true}
-                alertmessage={props.error?.message + "   "}
-                colorVariant="danger"
-                onDismiss={props.onDismissAlert}
-                reset={props.error?.show}
-              />
-            </div>
-          )}
+          <div className="invalid-popup mb-2 pb-1">
+            {Alert.show && (
+              <div>
+                <RdsAlert
+                  dismisable={true}
+                  alertmessage={Alert?.message + "   "}
+                  colorVariant="danger"
+                  onDismiss={props.onDismissAlert}
+                  reset={Alert?.show}
+                />
+              </div>
+            )}
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="form-group text-start">
               <RdsInput
@@ -243,7 +254,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                   Forgot password ?
                 </a>
               </div>
-            </div>
+            </div>     
             <RdsButton
               label="Login"
               colorVariant="primary"
@@ -253,11 +264,20 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               tooltipTitle={""}
               type="submit"
             />
+             <div className="float-start mt-3">
+              <p>Not a member yet?  <span><a
+                className="link-primary text-decoration-none"
+                href="javascript:void(0)"
+                onClick={registerHandler}
+              >
+                Register
+              </a></span></p>
+            </div>
           </form>
           <div className="pt-2">
             <RdsLabel
               class="text-mute pt-2 secondary "
-              label="©2023 WAi Technologies. All rights reserved "
+              label="©2023 WAi Technologies. All rights reserved"
               size="0.7rem"
             ></RdsLabel>
           </div>
