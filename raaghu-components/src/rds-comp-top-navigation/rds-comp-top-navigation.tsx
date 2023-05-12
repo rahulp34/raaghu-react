@@ -12,6 +12,7 @@ import MultiLevelDropdown from "./multi-level-dropdown";
 
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
+  
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
@@ -37,6 +38,7 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
+  
   const [themes, setThemes] = useState("light");
   const [path, setPath] = useState({
     elem: "/elements",
@@ -158,6 +160,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       setPath({ ...path, icon: "/icons" });
     }
   };
+  // const collapse = props.collapse;
+
 
   //side effect for breadcrum
   useEffect(() => {
@@ -187,7 +191,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 
     }
   }, [props.breacrumItem, props.navbarTitle]);
-
+  const [expanded, setExpanded] = useState(true);
   //side effect for the path
   useEffect(() => {
     if (navtitle == "Component") {
@@ -214,11 +218,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button> */}
-        <div className="d-flex align-items-center mx-4">
+    
+        <div className="d-flex align-items-center mx-4 breadcrumb-title">
           <div>
             <div className="text-bold">{navtitle}</div>
             {breacrumItem.length > 1 && (
-              <div className="text-muted fs-7">
+              <div className="text-muted fs-7 mob-description">
                 <>
                   <RdsBreadcrumb
                     role="advance"
@@ -229,8 +234,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             )}
           </div>
         </div>
-        <div className="d-flex me-2 align-items-center">
-          <div className="position-relative border-end"><MultiLevelDropdown
+        
+        <span className="d-block d-md-none " onClick={() => setExpanded(!expanded)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-three-dots-vertical"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg></span>
+        {expanded ? (
+        <div className="d-flex me-2 align-items-center right-side-menu">
+          <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
           ></MultiLevelDropdown></div>
@@ -314,7 +322,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               ></RdsCompProfile>
             </RdsOffcanvas>
           </div>
-          </div>
+          </div>) : null}
       </nav>
     </div>
   );
@@ -322,3 +330,4 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 
 
 export default RdsCompTopNavigation;
+

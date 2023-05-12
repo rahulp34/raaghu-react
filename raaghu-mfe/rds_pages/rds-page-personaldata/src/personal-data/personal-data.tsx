@@ -44,7 +44,7 @@ const PersonalData = (props: any) => {
     }
 
     const Personalpayload = () => {
-        const userId = "e4016d1e-144e-1c57-1057-3a09f1f27599"
+        const userId = localStorage.getItem("userId");
         dispatch(getPersonalData(userId) as any);
         if (pData.personalData) {
             const personalDataTable = pData.personalData.items.map((dataPersonal: any) => {

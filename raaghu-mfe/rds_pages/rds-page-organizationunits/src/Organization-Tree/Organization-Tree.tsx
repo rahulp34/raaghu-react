@@ -307,7 +307,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         <div className="row h-100">
           <div className="col-md-6 h-100">
             <div>
-              <div className="card rounded-0 border-0 h-100">
+              <div className="card card-full-stretch rounded-0 border-0 h-100">
                 <div className="card-header bg-transparent">
                   <h5 className="card-title">Organization Tree</h5>
                 </div>
@@ -331,7 +331,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             </div>
           </div>
           <div className="col-md-6 h-100">
-            <div className="card rounded-0  h-100 border-0">
+            <div className="card card-full-stretch rounded-0  h-100 border-0">
               {selectedNode === "" && (
                 <div className="card-header bg-transparent">
                   <h5 className="card-title">

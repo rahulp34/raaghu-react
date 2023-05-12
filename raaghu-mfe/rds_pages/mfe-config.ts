@@ -146,10 +146,13 @@ export const MfeConfig = {
   "newsletters": {
     "url": "newsletters@http://localhost:8122/remoteEntry.js"
   },
-  "changepassword" : {
-    "url" : "changepassword@http://localhost:8050/remoteEntry.js"
+  "changepassword": {
+    "url": "changepassword@http://localhost:8050/remoteEntry.js"
   },
   "chart": {
     "url": "chart@http://localhost:8018/remoteEntry.js"
+  },
+  "register": {
+    "url": "register@http://localhost:8019/remoteEntry.js"
   }
 }
