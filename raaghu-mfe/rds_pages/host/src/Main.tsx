@@ -909,7 +909,6 @@ const Main = (props: MainProps) => {
                             path="/**/*"
                             element={<RdsCompPageNotFound />}
                           />
-                          <Route path="/pages" element={<PagesCompo />} />
                           <Route
                             path="/blog-post"
                             element={<BlogPostCompo />}
