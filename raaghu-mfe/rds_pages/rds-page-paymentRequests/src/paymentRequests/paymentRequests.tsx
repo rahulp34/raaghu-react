@@ -213,8 +213,8 @@ const PaymentRequests = () => {
       <div className="container-fluid m-0 p-0">
         <div className="card p-3 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
           <form>
-            <div className="d-flex  mb-3 row">
-              <div className="col-md-4 form-group">
+            <div className="row mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
+              <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mb-3 form-group">
                 <RdsDatepicker DatePickerLabel="Creation Time"
                   type="advanced"
                   onDatePicker={(s: any) => onDatePicker(s)}
@@ -223,7 +223,7 @@ const PaymentRequests = () => {
                 ></RdsDatepicker>
 
               </div>
-              <div className="col-md-4 form-group">
+              <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mb-3 form-group">
                 <div className="mb-2">
                   <RdsLabel label={"Payment Type"}></RdsLabel>
                 </div>
@@ -242,7 +242,7 @@ const PaymentRequests = () => {
                   }
                 ></RdsSelectList>
               </div>
-              <div className="col-md-4 form-group">
+              <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mb-3 form-group">
                 <div className="mb-2">
                   <RdsLabel label={"Status"}></RdsLabel>
                 </div>

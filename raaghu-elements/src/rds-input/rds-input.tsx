@@ -64,7 +64,7 @@ const RdsInput = (props: RdsInputProps) => {
       {!props.labelPositon && (
         <>
           {props.label && (
-            <label htmlFor={props.id} className="form-label">
+            <label htmlFor={props.id} className="form-label d-inline">
               {props.label}
             </label>
           )}
@@ -75,7 +75,7 @@ const RdsInput = (props: RdsInputProps) => {
         <>
           {props.label && (
             <>
-              <label htmlFor={props.id} className="form-label">
+              <label htmlFor={props.id} className="form-label d-inline">
                 {props.label}
               </label>
               {props.required && <span className="text-danger ms-1">*</span>}
@@ -165,7 +165,7 @@ const RdsInput = (props: RdsInputProps) => {
         <>
           {props.label && (
             <>
-              <label htmlFor={props.id} className="form-label"></label>
+              <label htmlFor={props.id} className="form-label d-inline"></label>
               {props.required && <span className="text-danger ms-1">*</span>}
             </>
           )}

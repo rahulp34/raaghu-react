@@ -139,36 +139,40 @@ const Comments = () => {
     <>
       <div className="container-fluid m-0 p-0">
         <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
-          <div className="row">
-            <div className="col-md-11">
+          <div className="row mb-4">
+            <div className="col-xxl-11 col-xl-11 col-lg-12 col-12 mb-xxl-0 mb-xl-0 mb-lg-3 mb-0">
               <div className="row">
-                <div className="col-md-3">
+                <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                   <RdsDatepicker
                     DatePickerLabel="Select Start Date"
                     type="advanced"
                     onDatePicker={onStartDateSelection}
                   ></RdsDatepicker>
                 </div>
-                <div className="col-md-3">
+                <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                   <RdsDatepicker
                     DatePickerLabel="Select End Date"
                     type="advanced"
                     onDatePicker={onEndDateSelection}
                   ></RdsDatepicker>
                 </div>
-                <div className="col-md-3">
+                <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
+                  <label className="mb-2">
+                    Username
+                  </label>
                   <RdsInput
                     inputType="text"
-                    label={"Username"}
                     value={filterUserName}
                     placeholder={"Enter Username"}
                     onChange={(event) => onFilterUsername(event)}
                   ></RdsInput>
                 </div>
-                <div className="col-md-3">
+                <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
+                  <label className="mb-2">
+                    Entity Type
+                  </label>
                   <RdsInput
                     inputType="text"
-                    label={"Entity Type"}
                     value={filterEntityType}
                     placeholder={"Enter Entity Type"}
                     onChange={(event) => onFilterEntityType(event)}
@@ -176,7 +180,7 @@ const Comments = () => {
                 </div>
               </div>
             </div>
-            <div className="col-md-1 d-flex align-items-end">
+            <div className="col-xxl-1 col-xl-1 col-lg-6 col-md-6 col-12 d-flex align-items-end mb-3">
               <RdsButton
                 colorVariant="primary"
                 icon={"search"}
