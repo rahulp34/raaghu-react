@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
   testEnvironment: "jsdom",
   moduleNameMapper: {
     "\\.(scss|sass|css)$": "<rootDir>/__mocks__/styleMock.ts",
+    "^raaghu-react-elements$": "<rootDir>/node_modules/raaghu-react-elements/dist/types/index.d.ts"
   },
   transform: {
     "^.+\\.tsx?$": "ts-jest",
