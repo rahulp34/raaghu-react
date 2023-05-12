@@ -27,7 +27,6 @@ import {
   updateLanguage,
 } from "../../../../libs/state-management/public.api";
 
-
 const tableHeaders = [
   {
     displayName: "Display Name",
@@ -85,12 +84,12 @@ const Language = (props: LanguageProps) => {
     if (dataEmit.displayName && dataEmit.displayName.trim() !== "") {
       setformValid(false);
     } else {
-      setformValid(true)
+      setformValid(true);
     }
   }, [dataEmit.displayName]);
   const [name, setname] = useState<
     {
-      option: string
+      option: string;
       value: string;
     }[]
   >([{ option: "", value: "" }]);
@@ -135,26 +134,26 @@ const Language = (props: LanguageProps) => {
           isenabled: (
             <>
               {item.isEnabled ? (
-                  <div>
-                    <RdsIcon
-                      name="check"
-                      height="17px"
-                      width="15px"
-                      colorVariant="success"
-                      strokeWidth= "3px"
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <RdsIcon
-                      name="cancel"
-                      height="17px"
-                      width="15px"
-                      colorVariant="danger"
-                      strokeWidth= "3px"
-                    />
-                  </div>
-                )}
+                <div>
+                  <RdsIcon
+                    name="check"
+                    height="17px"
+                    width="15px"
+                    colorVariant="success"
+                    strokeWidth="3px"
+                  />
+                </div>
+              ) : (
+                <div>
+                  <RdsIcon
+                    name="cancel"
+                    height="17px"
+                    width="15px"
+                    colorVariant="danger"
+                    strokeWidth="3px"
+                  />
+                </div>
+              )}
             </>
           ),
           creationTime: (
@@ -188,20 +187,19 @@ const Language = (props: LanguageProps) => {
   }, [data.cultureList, data.languages]);
 
   let cultureModel = {
-    isEnabled:false,
-    cultureName:"",
-    displayName :'',
-   uiCultureName :'',
-    flagIcon:'' };
+    isEnabled: false,
+    cultureName: "",
+    displayName: "",
+    uiCultureName: "",
+    flagIcon: "",
+  };
 
   const onSaveHandler = (data: {
     check: boolean;
     name: string;
     item: string;
     displayName: string;
-  }) =>
-   {
-    
+  }) => {
     cultureModel.isEnabled = data.check;
     cultureModel.cultureName = data.name;
     cultureModel.displayName = data.displayName;
@@ -231,9 +229,9 @@ const Language = (props: LanguageProps) => {
   };
   const model = {
     isEnabled: false,
-    displayName: '',
-    flagIcon: '',
-  }
+    displayName: "",
+    flagIcon: "",
+  };
 
   const onEditHandler = (data: {
     check: boolean;
@@ -313,140 +311,141 @@ const Language = (props: LanguageProps) => {
 
   return (
     <>
-    <div className="container-fluid p-0 m-0">
-      <div className="row">
-        <div className="col-md-12 mb-3 ">
-          <div className="row ">
-            <div className="col-md-4">
-              {Alert.show && (
-                <RdsAlert
-                  alertmessage={Alert.message}
-                  colorVariant={Alert.color}
-                ></RdsAlert>
-              )}
+      <div className="container-fluid p-0 m-0">
+        <div className="row">
+          <div className="col-md-12 mb-3 ">
+            <div className="row ">
+              <div className="col-md-4">
+                {Alert.show && (
+                  <RdsAlert
+                    alertmessage={Alert.message}
+                    colorVariant={Alert.color}
+                  ></RdsAlert>
+                )}
+              </div>
+              <div className="col-md-8 d-flex justify-content-end ">
+                <RdsOffcanvas
+                  offcanvasbutton={
+                    <div className="my-1">
+                      <RdsButton
+                        type={"button"}
+                        label="New Language"
+                        iconColorVariant="light"
+                        size="small"
+                        colorVariant="primary"
+                        icon="plus"
+                        iconFill={false}
+                        iconStroke={true}
+                        iconHeight="12px"
+                        onClick={onNewLangHandler}
+                        showLoadingSpinner={true}
+                        iconWidth="12px"
+                      ></RdsButton>
+                    </div>
+                  }
+                  placement={"end"}
+                  backDrop={true}
+                  scrolling={false}
+                  preventEscapeKey={false}
+                  offId={"Language"}
+                  canvasTitle={"New Language"}
+                >
+                  <RdsCompNewLanguage
+                    onSaveHandler={onSaveHandler}
+                    placeholder="Select Country"
+                    languageItems={name}
+                    languageNames={name}
+                    onClick={undefined}
+                    check={false}
+                    edit={false}
+                  ></RdsCompNewLanguage>
+                </RdsOffcanvas>
+              </div>
             </div>
-            <div className="col-md-8 d-flex justify-content-end ">
+          </div>
+
+          <div className="col-md-12">
+            <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+              <RdsCompDatatable
+                actionPosition="right"
+                classes="table__userTable"
+                tableHeaders={tableHeaders}
+                pagination={true}
+                tableData={Data}
+                actions={actions}
+                onActionSelection={onActionSelection}
+                recordsPerPage={10}
+                recordsPerPageSelectListOption={true}
+              ></RdsCompDatatable>
               <RdsOffcanvas
-                offcanvasbutton={
-                  <div className="my-1">
-                    <RdsButton
-                      type={"button"}
-                      label="New Language"
-                      iconColorVariant="light"
-                      size="small"
-                      colorVariant="primary"
-                      icon="plus"
-                      iconFill={false}
-                      iconStroke={true}
-                      iconHeight="12px"
-                      onClick={onNewLangHandler}
-                      showLoadingSpinner={true}
-                      iconWidth="12px"
-                    ></RdsButton>
-                  </div>
-                }
                 placement={"end"}
                 backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"Language"}
-                canvasTitle={"New Language"}
+                offId={"language-edit-off"}
+                canvasTitle={"Edit Language"}
               >
-                <RdsCompNewLanguage
-                  onSaveHandler={onSaveHandler}
-                  placeholder="Select Country"
-                  languageItems={name}
-                  languageNames={name}
-                  onClick={undefined}
-                  check={false}
-                  edit={false}
-                ></RdsCompNewLanguage>
+                <form>
+                  <div className="row">
+                    <div className="col-md-6 mb-3">
+                      <div className="form-group mt-3">
+                        <RdsInput
+                          size="small"
+                          label="Display Name"
+                          placeholder="Enter Display Name"
+                          value={dataEmit.displayName}
+                          onChange={inputChangeHandler}
+                          required={true}
+                        ></RdsInput>
+                      </div>
+                    </div>
+                  </div>
+
+                  <RdsCheckbox
+                    label="is Enabled"
+                    checked={dataEmit.check}
+                    onChange={checkboxHandler}
+                  ></RdsCheckbox>
+                </form>
+
+                <div className="footer-buttons my-2">
+                  <div className="row">
+                    <div className="col-md-12 d-flex">
+                      <div>
+                        <RdsButton
+                          label="Cancel"
+                          type="button"
+                          colorVariant="primary"
+                          size="small"
+                          databsdismiss="offcanvas"
+                          isOutline={true}
+                        ></RdsButton>
+                      </div>
+                      <div>
+                        <RdsButton
+                          label="Save"
+                          type="button"
+                          size="small"
+                          isDisabled={formValid}
+                          class="ms-2"
+                          colorVariant="primary"
+                          databsdismiss="offcanvas"
+                          onClick={() => onEditHandler(dataEmit)}
+                        ></RdsButton>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </RdsOffcanvas>
+
+              <RdsCompAlertPopup
+                alertID={"language-delete-off"}
+                onSuccess={onDeleteHandler}
+              ></RdsCompAlertPopup>
             </div>
           </div>
         </div>
-
-        <div className="col-md-12">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
-            <RdsCompDatatable
-             actionPosition="right"
-              classes="table__userTable"
-              tableHeaders={tableHeaders}
-              pagination={true}
-              tableData={Data}
-              actions={actions}
-              onActionSelection={onActionSelection}
-              recordsPerPage={5}
-              recordsPerPageSelectListOption={true}
-            ></RdsCompDatatable>
-            <RdsOffcanvas
-              placement={"end"}
-              backDrop={true}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"language-edit-off"}
-              canvasTitle={"Edit Language"}
-            >
-              <form>
-                <div className="row">
-                  <div className="col-md-6 mb-3">
-                    <div className="form-group mt-3">
-                      <RdsInput
-                        size="small"
-                        label="Display Name"
-                        placeholder="Enter Display Name"
-                        value={dataEmit.displayName}
-                        onChange={inputChangeHandler}
-                        required={true}
-                      ></RdsInput>
-                    </div>
-                  </div>
-                </div>
-
-                <RdsCheckbox
-                  label="is Enabled"
-                  checked={dataEmit.check}
-                  onChange={checkboxHandler}
-                ></RdsCheckbox>
-              </form>
-
-              <div className="footer-buttons my-2">
-                <div className="row">
-                  <div className="col-md-12 d-flex">
-                    <div>
-                      <RdsButton
-                        label="Cancel"
-                        type="button"
-                        colorVariant="primary"
-                        size="small"
-                        databsdismiss="offcanvas"
-                        isOutline={true}
-                      ></RdsButton>
-                    </div>
-                    <div>
-                      <RdsButton
-                        label="Save"
-                        type="button"
-                        size="small"
-                        isDisabled={formValid}
-                        class="ms-2"
-                        colorVariant="primary"
-                        databsdismiss="offcanvas"
-                        onClick={() => onEditHandler(dataEmit)}
-                      ></RdsButton>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </RdsOffcanvas>
-
-            <RdsCompAlertPopup
-              alertID={"language-delete-off"}
-              onSuccess={onDeleteHandler}
-            ></RdsCompAlertPopup>
-          </div>
-        </div>
-      </div></div>
+      </div>
     </>
   );
 };

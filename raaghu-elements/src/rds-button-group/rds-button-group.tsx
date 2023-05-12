@@ -49,7 +49,7 @@ const RdsButtonGroup = (props: RdsButtonGroupProps) => {
                 name={props.role == "radio" ? `${buttonGroupItem.name}` : ""}
                 id={buttonGroupItem.id}
                 autoComplete="off"
-                defaultChecked={buttonGroupItem.checked}
+                checked={buttonGroupItem.checked}
                 onClick = {props.onClick}
               ></input>
               <label

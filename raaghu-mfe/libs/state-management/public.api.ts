@@ -1,3 +1,4 @@
+export * from "./register/register-slice";
 export * from "./blog-post/blog-post-slice";
 export * from "./pages/pages-slice";
 export * from "./index";
@@ -20,4 +21,5 @@ export * from './polls/polls-slice';
 export * from './newsletters/newsletters-slice';
 export * from "./menus/menus-slice";
 export * from "./roles/roles-slice"
+
 

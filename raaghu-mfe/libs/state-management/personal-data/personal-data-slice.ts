@@ -17,7 +17,7 @@ export const initialState: InitialState = {
 export const getPersonalData = createAsyncThunk(
     "PersonalData/getPersonalData",
     async (userId: any) => {
-        return GdprRequestService.getRequestsList({userId:userId,sorting: undefined,skipCount :undefined,maxResultCount: undefined}).then(
+        return GdprRequestService.getRequestsList({userId,sorting: undefined,skipCount :undefined,maxResultCount: undefined}).then(
             (result: any) => {
                 console.log('fetched data , ', result.items)
                 return result;

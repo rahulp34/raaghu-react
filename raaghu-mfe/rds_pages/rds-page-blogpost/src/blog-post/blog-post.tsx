@@ -207,7 +207,7 @@ const postSubmitHandler = (data: any)=>{
           placement="end"
           offId="blogsPost-edit-off"
           offcanvaswidth={650}
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
         >

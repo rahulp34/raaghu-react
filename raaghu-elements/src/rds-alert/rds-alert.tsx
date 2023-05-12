@@ -14,7 +14,7 @@ export interface RdsAlertProps {
   position?: "top" | "bottom";
   style?: any;
   onDismiss?: React.MouseEventHandler<HTMLButtonElement>;
-  reset?:boolean
+  reset?: boolean;
 }
 
 const RdsAlert = (props: RdsAlertProps) => {
@@ -30,9 +30,9 @@ const RdsAlert = (props: RdsAlertProps) => {
       }, delay);
     }
   });
-useEffect(()=>{
-	setClicked(false)	
-},[props.reset])
+  useEffect(() => {
+    setClicked(false);
+  }, [props.reset]);
   const closeHandler = (e: any) => {
     props.onDismiss && props.onDismiss(e);
     setClicked(true);
@@ -64,7 +64,7 @@ useEffect(()=>{
             {props.dismisable === true && (
               <button
                 type="button"
-                className="btn-close position-right"
+                className="ps-3 btn-close position-right"
                 data-bs-dismiss="alert"
                 aria-label="Close"
                 onClick={(e: any) => closeHandler(e)}

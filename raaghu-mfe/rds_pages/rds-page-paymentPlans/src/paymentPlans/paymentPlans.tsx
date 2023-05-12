@@ -338,7 +338,7 @@ const PaymentPlans = () => {
                   ></RdsButton>
                 </div>
               }
-              backDrop={false}
+              backDrop={true}
               scrolling={false}
               preventEscapeKey={false}
               offId="payPlan-edit-off"

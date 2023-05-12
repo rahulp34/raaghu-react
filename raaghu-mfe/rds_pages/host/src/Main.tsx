@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
+import { Route, useNavigate, Routes} from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
@@ -7,19 +7,18 @@ import {
   configurationService,
   localizationService,
   sessionService,
-  clearToken,
 } from "raaghu-react-core";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../libs/state-management/hooks";
 import {
+  RdsCompLinkedAccount,
   RdsCompSideNavigation,
   RdsCompTopNavigation,
 } from "../../rds-components";
 // const menus = <Record<string, any>>require("../../../libs/main-menu");
 import * as menus from "../../../libs/main-menu/index";
-//import { localizationService,configurationService, sessionService } from "../../../../raaghu-react-core/src"
 
 import RdsCompPageNotFound from "../../../../raaghu-components/src/rds-comp-page-not-found/rds-comp-page-not-found";
 import {
@@ -75,6 +74,7 @@ import {
   NewslettersCompo,
   ChangePasswordCompo,
   ChartCompo,
+  RegisterCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
@@ -87,12 +87,9 @@ const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
   const [count, setCount] = useState(0);
+  const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
 
-  // const [storeData, setStoreData] = useState({
-  //   languages: store.languages,
-  //   auth: store.auth,
-  //   localization: store.localization,
-  // });
+ 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector(
@@ -259,7 +256,7 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
     {
-      label: "SemiDark",
+      label: "Semi Dark",
       val: "",
       icon: "semidark",
       iconWidth: "17px",
@@ -294,7 +291,7 @@ const Main = (props: MainProps) => {
         {
           label: "Linked Accounts",
           icon: "manage_linked",
-          path: "",
+          path: "/linked-accounts",
           subText: "Manage accounts linked to your account",
           id: "nav-LinkAccount",
         },
@@ -326,40 +323,29 @@ const Main = (props: MainProps) => {
   const [currentLanguage, setCurrentLanguage] = useState(
     localStorage.getItem("currentLang") || "en-GB"
   );
-
   const onClickHandler = (e: any, val: any) => {
-    setCurrentLanguage(val);
+    setCurrentLanguage(val);    
+
     localStorage.setItem("currentLang", val);
+    if(e.target.innerText =='العربية'){
+      document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+    }
+    else if (e.target.innerText !== 'Hindi') {
+      document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+    }
   };
 
-  //  const toggleTheme = (e: any) => {
-  //   if (e.target.checked) {
-  //     setThemes("dark");
-  //     console.log(setThemes("dark"))
-  //   } else {
-  //     setThemes("light");
-  //   } /*else {
-  //     setThemes("semi-dark");
-  //   }*/
-  // };
-
   const onClickThemeCheck = (e: any) => {
-    console.log(e.target);
-    if (e.target.innerText == "Light") {
-      setThemes("light");
-    } else if (e.target.innerText == "Dark") {
+    if (e.target.innerText == 'Light' ) {
+      setThemes("light"); 
+      setLogoImage("./assets/raaghu_logs.png");
+    } else if (e.target.innerText == 'Dark') {
       setThemes("dark");
-    } else if (e.target.innerText == "SemiDark") {
+      setLogoImage("./assets/raaghu-logo-white-text.png");
+    } else if (e.target.innerText == 'Semi Dark') {
       setThemes("semidark");
+      setLogoImage("./assets/raaghu-logo-white-text.png");
     }
-    // if (e.target.checked) {
-    //   setThemes("dark");
-    //   console.log(setThemes("dark"))
-    // } else {
-    //   setThemes("light");
-    // } /*else {
-    //   setThemes("semi-dark");
-    // }*/
   };
 
   const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
@@ -369,6 +355,12 @@ const Main = (props: MainProps) => {
     configurationService(currentLanguage).then(async (res: any) => {
       if (res.currentUser.id) {
         localStorage.setItem("userId", res.currentUser.id);
+        if(e.target.innerText =='العربية'){
+          document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
+        }
+        else if (e.target.innerText !== 'Hindi') {
+          document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+        }
       }
       const tempdata: any[] = await res.localization?.languages?.map(
         (item: any) => {
@@ -460,6 +452,7 @@ const Main = (props: MainProps) => {
     const pageName = e.target.getAttribute("data-name");
     const subTitle = getSubTitle(pageName, sideNavItems);
     setCurrentSubTitle(subTitle);
+    document.title = `raaghu-${pageName.toLowerCase()}`;
     setCurrentTitle(pageName);
     let a = recursiveFunction(concatenatedExtended, pageName);
     a = a.filter((res: any) => (res ? true : false));
@@ -472,6 +465,9 @@ const Main = (props: MainProps) => {
         };
       });
       setBreadCrumItem(a);
+      setCurrentTitle(a[0].label);
+      document.title = `raaghu-${a[0].label.toLowerCase()}`;
+
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -480,15 +476,18 @@ const Main = (props: MainProps) => {
           label: t(res.label),
           icon: "",
         };
-      });
+      }); 
       setBreadCrumItem(a);
+      setCurrentTitle(a[a.length - 1].label);
+      document.title = `raaghu-${a[a.length - 1].label.toLowerCase()}`;
+
     }
   };
   function showBreadCrum() {
     let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath);
 
     breadcrumData = breadcrumData.filter((res: any) => (res ? true : false));
-    if (breadcrumData.length && breadcrumData[0].id) {
+    if (breadcrumData.length && breadcrumData[0]. id) {
       breadcrumData = breadcrumData.map((res: any) => {
         return {
           id: res.id,
@@ -496,6 +495,8 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
+      setCurrentTitle(breadcrumData[0].label);
+      document.title = `raaghu-${breadcrumData[0].label.toLowerCase()}`;
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -507,6 +508,8 @@ const Main = (props: MainProps) => {
         };
       });
       setBreadCrumItem(breadcrumData);
+      document.title = `raaghu-${breadcrumData[breadcrumData.length - 1].label.toLowerCase()}`;
+      setCurrentTitle(breadcrumData[breadcrumData.length - 1].label);
     }
   }
 
@@ -594,23 +597,24 @@ const Main = (props: MainProps) => {
         openidConfig.scope
       )
         .then(async (res: any) => {
-          if (res) {
-            await dispatch(invalidCredentialAction(false));
-            // sessionStorage.setItem('accessToken',res)
+          if (res.access_token) {
+            await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
             await hello(res);
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
             localStorage.setItem("loginAccessDate", Date());
-            // await dispatch(callLoginAction(null) as any);
           }
         })
-        .catch(() => {
-          if (count != 0) {
-            dispatch(invalidCredentialAction(true));
-          }
+        .catch((error: any) => {
+          dispatch(
+            invalidCredentialAction({
+              invalid: true,
+              message: error.response.data.error_description,
+            })
+          );
         });
-      // dispatch(callLoginAction(null) as any);
+      dispatch(callLoginAction(null) as any);
     }
   }, [dataHost]);
 
@@ -690,11 +694,13 @@ const Main = (props: MainProps) => {
           element={<ForgotPasswordCompo />}
         ></Route>
         <Route path="/changepassword" element={<ChangePasswordCompo />}></Route>
+        <Route path="/register" element={<RegisterCompo />} /> 
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
         location.pathname != "/forgot-password" &&
-        location.pathname != "/changepassword" && (
+        location.pathname != "/changepassword" &&
+        location.pathname != "/register" && (
           <div className="d-flex flex-column flex-root">
             <div className="page d-flex flex-column flex-column-fluid">
               <div
@@ -708,13 +714,17 @@ const Main = (props: MainProps) => {
               >
                 <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                   <div className="aside ng-tns-c99-0" id="aside">
-                    <div onClick={()=>navigate("/dashboard")}>
-                      <img
-                        className="ms-1 cursor-pointer sidenav-logo"
-                        src={logo}
-                        alt="logo"
-                      ></img>
-                    </div>
+                  
+                    <div onClick={()=>navigate("/dashboard")} id="raaghuLogo">
+                
+                    <img
+                    className="ms-1 cursor-pointer sidenav-logo"
+                    src={logoImage}
+                    alt="logo"
+                  ></img>
+                 
+                  </div>
+                  
                     <div className="mx-2 mt-6">
                       <RdsCompSideNavigation
                         sideNavItems={sideNavItems}
@@ -724,10 +734,10 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-lg-5"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                     id="FixedHeaderOverFlow"
                   >
-                    <div className="header align-items-stretch">
+                    <div className="align-items-stretch position-sticky top-0 w-100 shadow-sm top-navigation-zindex">
                       <RdsCompTopNavigation
                         languageLabel={currentLanguageLabel}
                         themeLabel="Theme"
@@ -741,7 +751,7 @@ const Main = (props: MainProps) => {
                         profileTitle="Host Admin"
                         profileName="admin"
                         onLogout={logout}
-                        logo={logo}
+                        // logo={logo}
                         // toggleTheme={toggleTheme}
                         themeItems={themeItems}
                         navbarTitle={t(currentTitle) || ""}
@@ -753,7 +763,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="m-4">
+                    <div className="layoutmargin mb-top-margin h-100 ">
                       <Suspense>
                         <Routes>
                           <Route
@@ -884,6 +894,10 @@ const Main = (props: MainProps) => {
                             path="/my-account"
                             element={<MyAccountCompo />}
                           />
+                          <Route
+                            path="/linked-accounts"
+                            element={<RdsCompLinkedAccount />}
+                          />
 
                           <Route path="/menus" element={<MenusCompo />} />
                           <Route
@@ -907,8 +921,8 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/charts/:type"
                             element={<ChartCompo />}
-                          />
-                        </Routes>
+                          />         
+</Routes>
                       </Suspense>
                     </div>
                   </div>

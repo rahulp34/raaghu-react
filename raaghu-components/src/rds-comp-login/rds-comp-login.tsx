@@ -5,36 +5,51 @@ import {
   RdsInput,
   RdsCheckbox,
   RdsModal,
+  RdsAlert,
 } from "../rds-elements";
 import "./rds-comp-login.scss";
 import { useNavigate } from "react-router-dom";
+import { use } from "i18next";
 export interface RdsCompLoginProps {
+  error?: any;
+  getvalidTenantName: string;
   email: string;
   password: string;
+  onDismissAlert?: () => any;
   onLogin: (email: string, password: string, rememberMe: boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
+  onRegister: (isRegisterClicked?: boolean) => void;
+  currentTenant: any;
+  validTenant: any;
 }
 
 const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   props: RdsCompLoginProps
 ) => {
   const [email, setEmail] = useState(props.email);
+  const [Alert, setAlert] = useState(props.error);
   const navigate = useNavigate();
   const [password, setPassword] = useState(props.password);
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
+  const [isRegisterClicked, setIsRegisterClicked] = useState(false);
   const [rememberMe, setrememberMe] = useState(false);
-  console.log(
-    " hello login comp props.email props.email",
-    props.email,
-    props.password
-  );
+
   useEffect(() => {
     setEmail(props.email);
   }, [props.email]);
 
+  //side effect of props.error
+  useEffect(() => {
+    setAlert(props.error);
+  }, [props.error]);
+
   useEffect(() => {
     setPassword(props.password);
   }, [props.password]);
+
+  useEffect(() => {
+    setCurrentTenant(props.currentTenant);
+  }, [props.currentTenant]);
 
   const onCheckedHandler = (e: any) => {
     setrememberMe(e.target.checked);
@@ -62,6 +77,11 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   }) => {
     setPassword(event.target.value);
   };
+  const TenancyNameChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setCurrentTenant(event.target.value);
+  };
 
   const isFormValid = isPasswordValid(password) && isEmailValid(email);
 
@@ -78,34 +98,45 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
     props.onForgotPassword(isForgotPasswordClicked);
     console.log(isForgotPasswordClicked);
   };
+  const registerHandler: any = (isRegisterClicked: boolean) => {
+    setIsRegisterClicked(true);
+    navigate("/register");
+    props.onRegister(isRegisterClicked);
+    console.log(isRegisterClicked);
+  };
   const [checked, setChecked] = useState(false);
+  const [currentTenant, setCurrentTenant] = useState(
+    checked ? props.currentTenant : "Not Selected"
+  );
   return (
     <div>
       <div className="text-center">
         <h2>
           <b> Login </b>
         </h2>
-        <div>
-          <small className="pb-5 d-flex justify-content-center">
-            Current Tenant : Not Selected
+        <div className="pb-1">
+          <small className="pb-2 d-flex justify-content-center">
+            <RdsLabel
+              label={`current tenant:` + props.getvalidTenantName}
+            ></RdsLabel>
             <span className="ms-1">
               <RdsModal
                 modalId="modal1"
                 modalAnimation="modal fade"
-                showModalFooter={true}
+                showModalFooter={false}
                 showModalHeader={true}
                 scrollable={false}
                 verticallyCentered={false}
                 modalbutton={<a className="link-primary"> (Change)</a>}
                 modalTitle="Switch Tenant"
-                saveChangesName={`${
-                  checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
-                }`}
+                // saveChangesName={`${
+                //   checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                // }`}
                 cancelButtonName="CANCEL"
               >
-                <div className="text-start ps-2 mb-3">
-                  <div className="form-check form-switch text-start mb-4">
-                    <input
+                <div className="text-start  mb-4 border-bottom">
+                  <div className="form-check form-switch text-start ps-0 mb-4">
+                    {/* <input
                       className="form-check-input"
                       type="rememberMe"
                       role="switch"
@@ -117,23 +148,69 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                       htmlFor="flexSwitchCheckChecked"
                     >
                       Switch to tenant
-                    </label>
+                    </label> */}
+                    <RdsCheckbox label={`${checked ? "Switch to the Tenant" : "Switch to the Host"
+                      }`}
+                      checked={checked} isSwitch={checked}
+                      onChange={() => setChecked(!checked)}
+                    ></RdsCheckbox>
                   </div>
                   <RdsInput
                     label="Tenancy Name"
                     placeholder="Tenancy Name"
-                    inputType="text"
-                    onChange={emailhandleChange}
-                    value=""
-                    name="name"
+                    inputType="email/text"
+                    onChange={TenancyNameChange}
+                    value={currentTenant}
+                    name={"currentTenant"}
                     required={true}
+                    isDisabled={!checked}
                   ></RdsInput>
+                </div>
+                <div className=" mb-2 mt-3 d-flex justify-content-end">
+                  <RdsButton
+                    class="me-2"
+                    tooltipTitle={""}
+                    type={"button"}
+                    label="Cancel"
+                    colorVariant="outline-primary"
+                    size="small"
+                    databsdismiss="modal"
+                  ></RdsButton>
+                  <RdsButton
+                    class="me-2"
+                    label={
+                      checked ? "SWITCH TO THE TENANT" : "SWITCH TO THE HOST"
+                    }
+                    size="small"
+                    isDisabled={false}
+                    colorVariant="primary"
+                    tooltipTitle={""}
+                    type={"submit"}
+                    databsdismiss="modal"
+                    onClick={() => {
+                      props.validTenant(currentTenant);
+                      setChecked(!checked);
+                    }}
+                  ></RdsButton>
                 </div>
               </RdsModal>
             </span>
           </small>
         </div>
         <div>
+          <div className="invalid-popup mb-2 pb-1">
+            {Alert.show && (
+              <div>
+                <RdsAlert
+                  dismisable={true}
+                  alertmessage={Alert?.message + "   "}
+                  colorVariant="danger"
+                  onDismiss={props.onDismissAlert}
+                  reset={Alert?.show}
+                />
+              </div>
+            )}
+          </div>
           <form onSubmit={handleSubmit}>
             <div className="form-group text-start">
               <RdsInput
@@ -177,7 +254,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                   Forgot password ?
                 </a>
               </div>
-            </div>
+            </div>     
             <RdsButton
               label="Login"
               colorVariant="primary"
@@ -187,11 +264,20 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               tooltipTitle={""}
               type="submit"
             />
+             <div className="float-start mt-3">
+              <p>Not a member yet?  <span><a
+                className="link-primary text-decoration-none"
+                href="javascript:void(0)"
+                onClick={registerHandler}
+              >
+                Register
+              </a></span></p>
+            </div>
           </form>
           <div className="pt-2">
             <RdsLabel
               class="text-mute pt-2 secondary "
-              label="©2023 WAi Technologies. All rights reserved "
+              label="©2023 WAi Technologies. All rights reserved"
               size="0.7rem"
             ></RdsLabel>
           </div>

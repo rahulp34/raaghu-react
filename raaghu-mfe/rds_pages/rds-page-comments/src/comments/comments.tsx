@@ -54,14 +54,7 @@ const Comments = () => {
   ]);
 
   // Use States ================
-  const [tableData, setTableData] = useState([
-    {
-      username: "Test",
-      entityType: "test entity",
-      text: "test Text",
-      creationTime: "21/03/2023",
-    },
-  ]);
+  const [tableData, setTableData] = useState([]);
   const [filterUserName, setFilterUserName] = useState("");
   const [filterEntityType, setFilterEntityType] = useState("");
 
@@ -87,13 +80,14 @@ const Comments = () => {
 
   useEffect(() => {
     if (comments.allComments) {
-      comments.allComments?.items?.map((res: any) => ({
+      const newcomments = comments.allComments?.items?.map((res: any) => ({
         id: res.id,
         username: res.author.username,
         entityType: res.entityType,
         text: res.text,
         creationTime: res.creationTime.toString(),
       }));
+      setTableData(newcomments);
     }
   }, [comments.allComments]);
 
@@ -111,10 +105,10 @@ const Comments = () => {
   }
 
   // On Filter Start Date Selection
-  function onStartDateSelection(start: any): void { }
+  function onStartDateSelection(start: any): void {}
 
   // On Filter Start Date Selection
-  function onEndDateSelection(end: any): void { }
+  function onEndDateSelection(end: any): void {}
 
   // on Filter UserName
   function onFilterUsername(event: any): void {
@@ -132,7 +126,7 @@ const Comments = () => {
   }
 
   // On Delete Confirmation
-  function confirmDelete() { }
+  function confirmDelete() {}
 
   // DOM
   return (
