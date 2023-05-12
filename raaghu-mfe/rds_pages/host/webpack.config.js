@@ -155,6 +155,7 @@ module.exports = (env, argv) => {
           Newsletters: mfeConfigJSON["newsletters"].url,
           Chart: mfeConfigJSON["chart"].url,
           ChangePassword: mfeConfigJSON["changepassword"].url,
+     Register: mfeConfigJSON["register"].url,
 },
         shared: {
           ...devdeps,

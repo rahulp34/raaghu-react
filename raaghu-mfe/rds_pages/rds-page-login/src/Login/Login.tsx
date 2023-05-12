@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import RdsCompLogin from "../../../../../raaghu-components/src/rds-comp-login/rds-comp-login";
-import { RdsAlert } from "../../../rds-elements";
 import {
   useAppDispatch,
   useAppSelector,
@@ -13,7 +12,7 @@ import {
   callLoginAction,
   invalidCredentialAction,
 } from "../../../../libs/public.api";
-
+import { RdsLabel } from "../../../rds-elements";
 export interface LoginProps {
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
 }
@@ -36,12 +35,12 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }, [loginData.invalidCredential]);
   useEffect(() => {
     dispatch(callLoginAction(null) as any);
-    dispatch(invalidCredentialAction(null) as any);
+    dispatch(invalidCredentialAction({ invalid: false, message: "" }) as any);
   }, []);
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
     dispatch(callLoginAction({ email, password }) as any);
-    localStorage.setItem("rememberMe", rememberMe.toString());
+    localStorage.setItem("rememberMe", 'true');
   }
 
   const [validateTenantName, setValidateTenantName] = useState("Not Selected");
@@ -62,10 +61,16 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
+  const registerHandler: any = (isRegisterClicked: boolean) => {};
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
-    dispatch(invalidCredentialAction(null) as any);
+    dispatch(
+      invalidCredentialAction({
+        invalid: false,
+        message: "",
+      }) as any
+    );
   };
   return (
     <div className="login-background">
@@ -86,9 +91,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   error={Alert}
                   onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
-                  validTenant={validateTenant} 
-                  getvalidTenantName={validateTenantName} 
-                  currentTenant={""}                />
+                  validTenant={validateTenant}
+                  getvalidTenantName={validateTenantName}
+                  currentTenant={""}
+                  onRegister={registerHandler}                />
               </div>
             </div>
             <div

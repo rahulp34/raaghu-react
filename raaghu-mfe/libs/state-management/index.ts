@@ -1,3 +1,4 @@
+import registerReducer from "./register/register-slice";
 import blogPostReducer from "./blog-post/blog-post-slice";
 import pagesReducer from "./pages/pages-slice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
@@ -44,6 +45,7 @@ const persistConfig={
   blacklist: ["forgotPassword"],
 };
 const rootReducer = combineReducers({
+  register: registerReducer,
   blogPost: blogPostReducer,
   pages: pagesReducer,
   forgotPassword: forgotPasswordReducer,
@@ -88,6 +90,7 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
 
 
 

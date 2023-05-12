@@ -3,13 +3,14 @@ import { RdsDropdownList, RdsIcon } from "../rds-elements";
 import elementList from "./element-list";
 import componentList from "./components-list";
 import chartList from "./charts-list";
+import Tooltip from "../../../raaghu-elements/src/rds-tooltip/rds-tooltip";
 
 const MultiLevelDropdown = (props: any) => {
   const [currUI, setCurrUI] = useState<any>({
     ui: "",
     list: [],
     placeholder: "UI Library",
-    listItem:""
+    listItem: "",
   });
   const [isTouch, setIsTouch] = useState(false);
   const [toggle, setToggle] = useState("show");
@@ -55,7 +56,7 @@ const MultiLevelDropdown = (props: any) => {
     }
     setCurrUI({ ...currUI, ui: "" });
   }
-  
+
   //  updating the selected language accordingly
 
   useEffect(() => {
@@ -75,7 +76,7 @@ const MultiLevelDropdown = (props: any) => {
         ...currUI,
         ui: "",
         list: [],
-        listItem:"",
+        listItem: "",
         placeholder: "Icons",
       });
       var dropdownMenu = document.getElementById("uiDrop");
@@ -85,13 +86,28 @@ const MultiLevelDropdown = (props: any) => {
     }
 
     if (val === "char") {
-      setCurrUI({ ...currUI, ui: uiList[index].label, list: chartList , listItem:val});
+      setCurrUI({
+        ...currUI,
+        ui: uiList[index].label,
+        list: chartList,
+        listItem: val,
+      });
     }
     if (val === "ele") {
-      setCurrUI({ ...currUI, ui: uiList[index].label, list: elementList, listItem:val });
+      setCurrUI({
+        ...currUI,
+        ui: uiList[index].label,
+        list: elementList,
+        listItem: val,
+      });
     }
     if (val === "comp") {
-      setCurrUI({ ...currUI, ui: uiList[index].label, list: componentList,listItem:val });
+      setCurrUI({
+        ...currUI,
+        ui: uiList[index].label,
+        list: componentList,
+        listItem: val,
+      });
     }
   };
   const handlerSubMenuItem = (
@@ -107,7 +123,7 @@ const MultiLevelDropdown = (props: any) => {
       ...currUI,
       ui: "",
       list: [],
-      listItem:"",
+      listItem: "",
       placeholder: currUI.list[index].label,
     });
     var dropdownMenu = document.getElementById("uiDrop");
@@ -124,33 +140,19 @@ const MultiLevelDropdown = (props: any) => {
       >
         <div className="px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between">
           {/* simple dropdown  */}
-          {isTouch !== true && (
-            <div className="d-flex align-items-baseline">
+          <div className="d-flex align-items-baseline">
+            <Tooltip text="UI Library" place="bottom">
               <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
-                UI Library
+                <RdsIcon
+                  name="ui_library"
+                  fill={false}
+                  stroke={true}
+                  height="20px"
+                  width="20px"
+                  classes="ui-lib"
+                ></RdsIcon>
               </span>
-            </div>
-          )}
-
-          {isTouch === true && currUI.placeholder !== "UI Library" && (
-            <>
-              <div className="d-flex align-items-baseline">
-                <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
-                  {currUI.placeholder}
-                </span>
-              </div>
-            </>
-          )}
-
-          {/* chevron_down icon */}
-          <div>
-            <RdsIcon
-              name={toggle !== "show" ? "chevron_up" : "chevron_down"}
-              fill={false}
-              stroke={true}
-              height="6px"
-              width="12px"
-            ></RdsIcon>
+            </Tooltip>
           </div>
         </div>
       </span>
@@ -158,7 +160,8 @@ const MultiLevelDropdown = (props: any) => {
       {/* DropdownList items */}
       <ul className="dropdown-menu ms-3 " id="uiDrop" aria-labelledby="uiDrop">
         {uiList?.map((listItem: any, i: any) => (
-          <li className={listItem.val ==currUI.listItem?"active": ""}
+          <li
+            className={listItem.val == currUI.listItem ? "active" : ""}
             key={i}
             onClick={(event) => {
               handlerListItem(event, i, listItem.val);
