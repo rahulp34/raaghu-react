@@ -74,6 +74,7 @@ import {
   NewslettersCompo,
   ChangePasswordCompo,
   ChartCompo,
+  RegisterCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
 ("../ApiRequestOptions");
@@ -451,6 +452,7 @@ const Main = (props: MainProps) => {
     const pageName = e.target.getAttribute("data-name");
     const subTitle = getSubTitle(pageName, sideNavItems);
     setCurrentSubTitle(subTitle);
+    document.title = `raaghu-${pageName.toLowerCase()}`;
     setCurrentTitle(pageName);
     let a = recursiveFunction(concatenatedExtended, pageName);
     a = a.filter((res: any) => (res ? true : false));
@@ -464,6 +466,8 @@ const Main = (props: MainProps) => {
       });
       setBreadCrumItem(a);
       setCurrentTitle(a[0].label);
+      document.title = `raaghu-${a[0].label.toLowerCase()}`;
+
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -472,9 +476,11 @@ const Main = (props: MainProps) => {
           label: t(res.label),
           icon: "",
         };
-      });
-      setCurrentTitle(a.reverse()[0].label);
+      }); 
       setBreadCrumItem(a);
+      setCurrentTitle(a[a.length - 1].label);
+      document.title = `raaghu-${a[a.length - 1].label.toLowerCase()}`;
+
     }
   };
   function showBreadCrum() {
@@ -490,6 +496,7 @@ const Main = (props: MainProps) => {
         };
       });
       setCurrentTitle(breadcrumData[0].label);
+      document.title = `raaghu-${breadcrumData[0].label.toLowerCase()}`;
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -500,8 +507,9 @@ const Main = (props: MainProps) => {
           icon: "",
         };
       });
-      setCurrentTitle(breadcrumData.reverse()[0].label);
       setBreadCrumItem(breadcrumData);
+      document.title = `raaghu-${breadcrumData[breadcrumData.length - 1].label.toLowerCase()}`;
+      setCurrentTitle(breadcrumData[breadcrumData.length - 1].label);
     }
   }
 
@@ -686,11 +694,13 @@ const Main = (props: MainProps) => {
           element={<ForgotPasswordCompo />}
         ></Route>
         <Route path="/changepassword" element={<ChangePasswordCompo />}></Route>
+        <Route path="/register" element={<RegisterCompo />} /> 
       </Routes>
       {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
       {location.pathname != "/login" &&
         location.pathname != "/forgot-password" &&
-        location.pathname != "/changepassword" && (
+        location.pathname != "/changepassword" &&
+        location.pathname != "/register" && (
           <div className="d-flex flex-column flex-root">
             <div className="page d-flex flex-column flex-column-fluid">
               <div
@@ -724,10 +734,10 @@ const Main = (props: MainProps) => {
                     </div>
                   </div>
                   <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0 mt-35"
+                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
                     id="FixedHeaderOverFlow"
                   >
-                    <div className="align-items-stretch position-sticky top-0 w-100 shadow" style={{zIndex:99}}>
+                    <div className="align-items-stretch position-sticky top-0 w-100 shadow-sm top-navigation-zindex">
                       <RdsCompTopNavigation
                         languageLabel={currentLanguageLabel}
                         themeLabel="Theme"
@@ -753,7 +763,7 @@ const Main = (props: MainProps) => {
                         elementList={[]}
                       />
                     </div>
-                    <div className="layoutmargin mb-top-margin">
+                    <div className="layoutmargin mb-top-margin h-100 ">
                       <Suspense>
                         <Routes>
                           <Route
@@ -899,7 +909,6 @@ const Main = (props: MainProps) => {
                             path="/**/*"
                             element={<RdsCompPageNotFound />}
                           />
-                          <Route path="/pages" element={<PagesCompo />} />
                           <Route
                             path="/blog-post"
                             element={<BlogPostCompo />}
@@ -911,8 +920,8 @@ const Main = (props: MainProps) => {
                           <Route
                             path="/charts/:type"
                             element={<ChartCompo />}
-                          />
-                        </Routes>
+                          />         
+</Routes>
                       </Suspense>
                     </div>
                   </div>

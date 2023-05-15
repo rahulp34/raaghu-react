@@ -247,69 +247,69 @@ const SecurityLogsPage = () => {
           </div>
         </div>
 
-        <div className="row mb-2"><div className="col-md-12">
-          <div className="card rounded-0 border-0">
-            <div className="card-body">
-              <div className="row">
-                <div className="col-3">
-                  <RdsDatePicker
-                    DatePickerLabel="Select Date"  
-                    onDatePicker={(s:any)=>onDatePicker(s)}
-                    type="advanced"
-                    selectedDate={selectFilterValue.startDate}
-                    customDate={onDatePicker}
-                  ></RdsDatePicker>
-                </div>
-                <div className="col-3">
-                  <RdsInput
-                    label="Application Name"
-                    placeholder="Application Name"
-                    value={selectFilterValue.applicationName}
-                    onChange={onApplicationNameFilter}></RdsInput>
-                </div>
-                <div className="col-3">
-                  <RdsInput
-                    label="Identity"
-                    placeholder="Identity"
-                    onChange={onIdentityFilter}
-                    value={selectFilterValue.identity}
-                  ></RdsInput>
-                </div>
-                <div className="col-3">
-                  <RdsInput label="Username"
-                    placeholder="Username"
-                    value={selectFilterValue.userName}
-                    onChange={onUserNameFilter}></RdsInput>
-                </div>
-              </div>
-              <div className="row mt-3">
-                <div className="col-3">
-                  <RdsInput
-                    label="Actions"
-                    placeholder="Actions"
-                    value={selectFilterValue.action}
-                    onChange={onActionFilter}
-                  ></RdsInput>
-                </div>
-                <div className="col-3 d-flex mt-auto align-items-center ">
-                  <RdsButton
-                    type="button"
-                    colorVariant="primary"
-                    label="Search"
-                    isOutline={false}
-                    icon="search"
-                    iconHeight="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    iconWidth="15px"
-                    iconColorVariant="light"
-                    onClick={securityLogs}
-                  />
+        <div className="row mb-4">
+          <div className="col-md-12">
+            <div className="card rounded-0 border-0">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <RdsDatePicker
+                      DatePickerLabel="Select Date"  
+                      onDatePicker={(s:any)=>onDatePicker(s)}
+                      type="advanced"
+                      selectedDate={selectFilterValue.startDate}
+                      customDate={onDatePicker}
+                    ></RdsDatePicker>
+                  </div>
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <RdsInput
+                      label="Application Name"
+                      placeholder="Application Name"
+                      value={selectFilterValue.applicationName}
+                      onChange={onApplicationNameFilter}></RdsInput>
+                  </div>
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <RdsInput
+                      label="Identity"
+                      placeholder="Identity"
+                      onChange={onIdentityFilter}
+                      value={selectFilterValue.identity}
+                    ></RdsInput>
+                  </div>
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <RdsInput label="Username"
+                      placeholder="Username"
+                      value={selectFilterValue.userName}
+                      onChange={onUserNameFilter}></RdsInput>
+                  </div>
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-4">
+                    <RdsInput
+                      label="Actions"
+                      placeholder="Actions"
+                      value={selectFilterValue.action}
+                      onChange={onActionFilter}
+                    ></RdsInput>
+                  </div>
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-4 mt-auto">
+                    <RdsButton
+                      type="button"
+                      colorVariant="primary"
+                      label="Search"
+                      isOutline={false}
+                      icon="search"
+                      iconHeight="15px"
+                      iconFill={false}
+                      iconStroke={true}
+                      iconWidth="15px"
+                      iconColorVariant="light"
+                      onClick={securityLogs}
+                    />
+                  </div> 
                 </div>
               </div>
             </div>
           </div>
-        </div></div>
+        </div>
 
         <div className="card card-full-stretch rounded-0 border-0">
           <div className="card-body">

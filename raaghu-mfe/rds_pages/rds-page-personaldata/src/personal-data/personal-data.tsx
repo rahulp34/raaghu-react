@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import JSZip from "jszip";
 // import { useTranslation } from "react-i18next";
 import { RdsCompDatatable } from "../../../rds-components";
 import { RdsButton } from "../../../../../raaghu-elements/src";
 import { useAppDispatch, useAppSelector, } from "../../../../libs/state-management/hooks";
-import { deletePersonalData, downloadTokenPersonalData, getPersonalData, requestPersonalData, } from "../../../../libs/state-management/personal-data/personal-data-slice";
+import { RequestsData, deletePersonalData, downloadTokenPersonalData, getPersonalData, requestPersonalData, } from "../../../../libs/state-management/personal-data/personal-data-slice";
 
 const PersonalData = (props: any) => {
     // const { t } = useTranslation();
@@ -40,14 +41,32 @@ const PersonalData = (props: any) => {
     };
 
     const downloadTokenPersonalDataPayload = (id: any) => {
-        dispatch(downloadTokenPersonalData(id) as any);
+        dispatch(downloadTokenPersonalData(id) as any).then((res:any)=>{
+            if (res){
+                const data= JSON.stringify(res);
+                const zip = new JSZip();
+                zip.file("PersonalData.json", data)
+                zip.generateAsync({type:"blob"}).then(function(content:any){
+                    const url= window.URL.createObjectURL(content);
+                    const link= document.createElement("a");
+                    link.href= url;
+                    link.setAttribute("download", "PersonalData.zip");
+                    document.body.appendChild(link);
+                    link.click();
+                })
+            }
+        });
+
+
     }
 
+   
+  
     const Personalpayload = () => {
-        const userId = "e4016d1e-144e-1c57-1057-3a09f1f27599"
+        const userId = localStorage.getItem("userId");
         dispatch(getPersonalData(userId) as any);
         if (pData.personalData) {
-            const personalDataTable = pData.personalData.items.map((dataPersonal: any) => {
+            const personalDataTable = pData.personalData &&pData.personalData.items.map((dataPersonal: any) => {
                 const dateOne = new Date(dataPersonal.readyTime);
                 let dayOne = dateOne.getDate();
                 let monthOne = dateOne.getMonth() + 1;
@@ -113,7 +132,7 @@ const PersonalData = (props: any) => {
                         onClick={handlerRequestData}
                         class="mx-2"
                     ></RdsButton>
-                    <RdsButton
+                    {/* <RdsButton
                         icon="plus"
                         label={("Delete Peronal Data") || ""}
                         iconColorVariant="light"
@@ -126,7 +145,7 @@ const PersonalData = (props: any) => {
                         type="button"
                         colorVariant="danger"
                         onClick={handlerDeletePersonalData}
-                    ></RdsButton>
+                    ></RdsButton> */}
                 </div>
             </div>
             <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">

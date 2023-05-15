@@ -40,7 +40,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
   function loginHandler(email: any, password: any, rememberMe: boolean) {
     dispatch(callLoginAction({ email, password }) as any);
-    localStorage.setItem("rememberMe", rememberMe.toString());
+    localStorage.setItem("rememberMe", 'true');
   }
 
   const [validateTenantName, setValidateTenantName] = useState("Not Selected");
@@ -61,6 +61,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
   }
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {};
+  const registerHandler: any = (isRegisterClicked: boolean) => {};
   const { t } = useTranslation();
 
   const handlerDismissAlert = () => {
@@ -90,9 +91,10 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                   error={Alert}
                   onDismissAlert={handlerDismissAlert}
                   onForgotPassword={forgotPasswordHandler}
-                  validTenant={validateTenant} 
-                  getvalidTenantName={validateTenantName} 
-                  currentTenant={""}                />
+                  validTenant={validateTenant}
+                  getvalidTenantName={validateTenantName}
+                  currentTenant={""}
+                  onRegister={registerHandler}                />
               </div>
             </div>
             <div

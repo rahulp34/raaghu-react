@@ -17,7 +17,7 @@ export const initialState: InitialState = {
 export const getPersonalData = createAsyncThunk(
     "PersonalData/getPersonalData",
     async (userId: any) => {
-        return GdprRequestService.getRequestsList({userId:userId,sorting: undefined,skipCount :undefined,maxResultCount: undefined}).then(
+        return GdprRequestService.getRequestsList({userId,sorting: undefined,skipCount :undefined,maxResultCount: undefined}).then(
             (result: any) => {
                 console.log('fetched data , ', result.items)
                 return result;
@@ -58,6 +58,20 @@ export const downloadTokenPersonalData = createAsyncThunk(
         return GdprRequestService.getRequestsDownloadToken({id:id}).then(
             (result: any) => {
                 console.log('fetched data , ', result)
+                return result;
+
+            }
+        );
+    }
+);
+
+export const RequestsData = createAsyncThunk(
+    "PersonalData/downloadTokenPersonalData",
+    async (data:any) => {
+        
+        return GdprRequestService.getRequestsData({requestId:data.requestId, token:data.token}).then(
+            (result: any) => {
+                
                 return result;
 
             }

@@ -28,3 +28,9 @@
 .nav-tabs .nav-link {
     cursor: pointer;
 }
+
+@media screen and (max-width: 1023px) {
+    .bs-md-0{
+        border-left: 0px solid transparent !important;
+    }
+}

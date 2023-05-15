@@ -68,7 +68,8 @@ const ChangePasswordCompo = React.lazy(() => import("ChangePassword/ChangePasswo
 
 
 const ChartCompo = React.lazy(() => import("Chart/Chart"));
-export {
+const RegisterCompo = React.lazy(() => import("Register/Register"));
+ export {
   DashboardCompo,
   LoginCompo,
   ForgotPasswordCompo,
@@ -115,5 +116,6 @@ export {
   GlobalResourcesCompo,
   NewslettersCompo,
   ChartCompo,
-  ChangePasswordCompo
-};
+  ChangePasswordCompo,
+
+RegisterCompo,};
