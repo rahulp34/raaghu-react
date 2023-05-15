@@ -187,32 +187,32 @@ const Blogs = (props: RdsPageResourcesProps) => {
             >
               <div>
                 <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Name"
-                    label="Name"
-                    labelPositon="top"
-                    id=""
-                    value={value.name}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Slug"
-                    label="Slug"
-                    labelPositon="top"
-                    id=""
-                    value={value.slug}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
+                <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Name"
+                      label="Name"
+                      labelPositon="top"
+                      id=""
+                      value={value.name}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, name: e.target.value });
+                      }}
+                    ></RdsInput>
+                    <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Slug"
+                      label="Slug"
+                      labelPositon="top"
+                      id=""
+                      value={value.slug}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, slug: e.target.value });
+                      }}
+                    ></RdsInput>
                   <div className="d-flex footer-buttons mb-3">
                     <RdsButton
                       label="CANCEL"
