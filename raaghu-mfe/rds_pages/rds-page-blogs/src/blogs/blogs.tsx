@@ -122,14 +122,15 @@ const Blogs = (props: RdsPageResourcesProps) => {
     // setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
   };
 
-  const dTo = {
-    displayName: value,
-  };
   const addDataHandler = () => {
-    dispatch(addBlogsData(dTo) as any).then((res: any) => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(addBlogsData(dto) as any).then((res: any) => {
       dispatch(fetchBlogsData() as any);
     });
-    setValue({name:'',slug:''});
+    setValue({ name: "", slug: "" });
     setAlertOne(true);
   };
 
