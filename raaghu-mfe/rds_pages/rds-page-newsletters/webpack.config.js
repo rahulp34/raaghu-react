@@ -27,13 +27,9 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-
           test: /\.(scss|css)$/,
-
           use: ['style-loader', 'css-loader', 'sass-loader'],
-
           exclude: '/node_modules/',
-
         },
         {
           test: /\.(js|jsx|tsx|ts)$/,
@@ -53,6 +49,11 @@ module.exports = (env, argv) => {
             plugins: [
               "react-hot-loader/babel",
               ["@babel/plugin-proposal-class-properties", { loose: true }],
+              ["@babel/plugin-proposal-private-methods", { loose: true }],
+              [
+                "@babel/plugin-proposal-private-property-in-object",
+                { loose: true },
+              ],
             ],
           },
         },
