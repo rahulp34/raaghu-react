@@ -13,13 +13,16 @@ import {
   editBlogsData,
   fetchBlogsData,
 } from "../../../../libs/state-management/Blogs/blogs-slice";
-import { useAppDispatch } from "../../../../libs/state-management/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../libs/state-management/hooks";
 
 interface RdsPageResourcesProps {}
 
 const Blogs = (props: RdsPageResourcesProps) => {
   const { t } = useTranslation();
-  const [blogsData, setResourceData] = useState<any>([]);
+  const [blogsData, setBlogsData] = useState<any>([]);
 
   const [value, setValue] = useState({
     name:"",
@@ -33,18 +36,12 @@ const Blogs = (props: RdsPageResourcesProps) => {
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
 
-  const editDataHandler = () => {
-    const dTo = {
-      displayName: value,
-    };
-    dispatch(editBlogsData({ id: tableDataRowid, dTo: dTo }) as any).then(
-      (res: any) => {
-        dispatch(fetchBlogsData() as any);
-      }
-    );
-    setValue({name:'',slug:''});
-    setAlertOne(true);
-  };
+  const Data = useAppSelector((state) => state.persistedReducer.blogs) as any;
+  useEffect(() => {
+    if (Array.isArray(Data.blogs)) {
+      setBlogsData(Data.blogs);
+    }
+  }, [Data.blogs]);
 
   const [newResourceData, setnewResourceData] = useState({
     name: "",
@@ -106,21 +103,38 @@ const Blogs = (props: RdsPageResourcesProps) => {
     showInDiscoveryDocument: false,
   });
 
+  const handlerActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    if (actionId === "edit") {
+      setValue({ ...value, name: rowData.name, slug: rowData.slug });
+    }
+  };
+
   const offCanvasHandler = () => {};
 
-  const success = () => {
-    // dispatch(deleteScopeshData(tableDataid) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
-    // setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
-  };
-
-  const dTo = {
-    displayName: value,
-  };
   const addDataHandler = () => {
-    dispatch(addBlogsData(dTo) as any).then((res: any) => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(addBlogsData(dto) as any).then((res: any) => {
       dispatch(fetchBlogsData() as any);
     });
-    setValue({name:'',slug:''});
+    setValue({ name: "", slug: "" });
+    setAlertOne(true);
+  };
+
+  const editDataHandler = () => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(editBlogsData({ id: tableDataRowid, dto: dto }) as any).then(
+      (res: any) => {
+        dispatch(fetchBlogsData() as any);
+      }
+    );
+    setValue({ name: "", slug: "" });
     setAlertOne(true);
   };
 
@@ -178,32 +192,32 @@ const Blogs = (props: RdsPageResourcesProps) => {
             >
               <div>
                 <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Name"
-                    label="Name"
-                    labelPositon="top"
-                    id=""
-                    value={value.name}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Slug"
-                    label="Slug"
-                    labelPositon="top"
-                    id=""
-                    value={value.slug}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
+                <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Name"
+                      label="Name"
+                      labelPositon="top"
+                      id=""
+                      value={value.name}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, name: e.target.value });
+                      }}
+                    ></RdsInput>
+                    <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Slug"
+                      label="Slug"
+                      labelPositon="top"
+                      id=""
+                      value={value.slug}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, slug: e.target.value });
+                      }}
+                    ></RdsInput>
                   <div className="d-flex footer-buttons mb-3">
                     <RdsButton
                       label="CANCEL"
@@ -253,18 +267,18 @@ const Blogs = (props: RdsPageResourcesProps) => {
           canvasTitle="Edit Blog"
           children={
             <>
-              <RdsInput
+         <RdsInput
                 size="medium"
                 inputType="text"
                 placeholder="Add Name"
                 label="Name"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.name}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, name: e.target.value });
+                }}
               ></RdsInput>
               <RdsInput
                 size="medium"
@@ -273,11 +287,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                 label="Slug"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.slug}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, slug: e.target.value });
+                }}
               ></RdsInput>
 
               <div className="d-flex footer-buttons mb-3">
@@ -395,7 +409,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           messageAlert="The selected Resource will be Deleted Permanently "
           alertConfirmation="Are you sure"
           deleteButtonLabel="Yes"
-          onSuccess={success}
+          // onSuccess={success}
         />
       </div>
     </div>

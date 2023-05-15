@@ -28,9 +28,9 @@ export const fetchBlogsData = createAsyncThunk(
   "blogs/fetchBlogsData",
   () => {
     
-    return BlogAdminService.getBlogs1({filter:undefined, sorting:undefined, skipCount:10, maxResultCount:5}).then((result) => {
+    return BlogAdminService.getBlogs1({filter:undefined, sorting:undefined, skipCount:0, maxResultCount:10}).then((result) => {
       console.log("resultblog", result);
-      return result;
+      return result.items;
     });
   }
 );
@@ -55,8 +55,11 @@ export const addBlogsData = createAsyncThunk(
 
 export const editBlogsData = createAsyncThunk(
   "blogs/editBlogsData",
-  ({ id, dTo }: { id: any; dTo: any }) => {
-    return BlogPostAdminService.putBlogsBlogPosts({id:id, requestBody:dTo}).then((result) => {
+  ({ id, dto }: { id: any; dto: any }) => {
+    return BlogAdminService.putBlogs({
+      id: id,
+      requestBody: dto,
+    }).then((result) => {
       return result;
     });
   }

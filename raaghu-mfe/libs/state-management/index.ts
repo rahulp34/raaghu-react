@@ -38,6 +38,7 @@ import newslettersReducer from './newsletters/newsletters-slice';
 import pollsReducer from "./polls/polls-slice";
 import globalResourcesReducer from './global-resources/globalResources-slice';
 import menusReducer from "./menus/menus-slice"
+import blogsReducer from "./Blogs/blogs-slice"
 
 const persistConfig={
   key: "root",
@@ -79,7 +80,8 @@ const rootReducer = combineReducers({
   polls:pollsReducer,
   globalResources:globalResourcesReducer,
   newsletters:newslettersReducer,
-  menus:menusReducer
+  menus:menusReducer,
+  blogs:blogsReducer
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -90,6 +92,7 @@ export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
+
 
 
 
