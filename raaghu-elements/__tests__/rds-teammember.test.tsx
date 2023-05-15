@@ -1,7 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
 import { RdsTeamMember } from "../src";
-import { RdsTeamMemberProps } from "../src/rds-team-member/rds-team-member";
 import "@testing-library/jest-dom/extend-expect";
 
 import { render, screen } from "@testing-library/react";
