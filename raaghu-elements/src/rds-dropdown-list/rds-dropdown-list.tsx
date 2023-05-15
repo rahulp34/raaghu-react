@@ -1,5 +1,4 @@
-import React, {useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import RdsIcon from "../rds-icon";
 import RdsBadge from "../rds-badge";
 import "./rds-dropdown-list.scss";
@@ -34,10 +33,10 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
   const [isTouch, setIsTouch] = useState(false);
   // to fetch the index of the selected language
   const [toggle, setToggle] = useState("show");
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
   //  If language not found then we are updating index to 0
 
- 
+
 
   //  updating the selected language accordingly
 
@@ -118,8 +117,29 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
     }
   }
 
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        // Clicked outside the dropdown, close it here
+        var dropdownMenu = document.getElementById(props.id as string);
+        dropdownMenu?.classList.remove("show");
+        dropdownMenu?.classList.add("hide");
+        setToggle("show");
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [props.id]);
+
+
+
   return (
-    <div className="dropdown-raaghu w-100 position-relative">
+    <div className="dropdown-raaghu w-100 position-relative" ref={dropdownRef}>
       <span
         className="dropdown-raaghu-button cursor-pointer"
         onClick={clickedOnDropDown}
@@ -236,10 +256,9 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                       ).length == 1
                     }
                     onChange={(e) =>
-                      `${
-                        e.target.checked !== true
-                          ? uncheckHandler(e, language)
-                          : checkHandler(e, language)
+                      `${e.target.checked !== true
+                        ? uncheckHandler(e, language)
+                        : checkHandler(e, language)
                       }`
                     }
                     value=""
@@ -250,9 +269,8 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
               {language.icon && (
                 <>
                   <div
-                    className={`${
-                      language.icon == "isNull" ? "ms-4 me-2 " : "ms-2 me-2"
-                    }`}
+                    className={`${language.icon == "isNull" ? "ms-4 me-2 " : "ms-2 me-2"
+                      }`}
                   >
                     <RdsIcon
                       name={language.icon}
