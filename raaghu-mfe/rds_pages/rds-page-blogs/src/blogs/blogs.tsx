@@ -267,18 +267,18 @@ const Blogs = (props: RdsPageResourcesProps) => {
           canvasTitle="Edit Blog"
           children={
             <>
-              <RdsInput
+         <RdsInput
                 size="medium"
                 inputType="text"
                 placeholder="Add Name"
                 label="Name"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.name}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, name: e.target.value });
+                }}
               ></RdsInput>
               <RdsInput
                 size="medium"
@@ -287,11 +287,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                 label="Slug"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.slug}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, slug: e.target.value });
+                }}
               ></RdsInput>
 
               <div className="d-flex footer-buttons mb-3">
