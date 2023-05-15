@@ -156,7 +156,7 @@ const Edition = (props: RdsPageEditionProps) => {
   ];
 
   const actions = [
-    { id: "editEdition", displayName: "Edit", offId: "edition-new-off" },
+    { id: "editEdition", displayName: "Edit", offId: "edition-edit-off" },
     { id: "delete", displayName: "Delete", modalId: "edition-delete-offc" },
   ];
 
@@ -335,10 +335,10 @@ const Edition = (props: RdsPageEditionProps) => {
         />
 
         <RdsOffcanvas
-          canvasTitle="New Edition"
+          canvasTitle="Edit Edition"
           onclick={offCanvasHandler}
           placement="end"
-          offId="edition-new-off"
+          offId="edition-edit-off"
           backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
