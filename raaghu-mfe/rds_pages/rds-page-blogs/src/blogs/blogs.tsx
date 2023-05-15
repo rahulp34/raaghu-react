@@ -13,13 +13,16 @@ import {
   editBlogsData,
   fetchBlogsData,
 } from "../../../../libs/state-management/Blogs/blogs-slice";
-import { useAppDispatch } from "../../../../libs/state-management/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../libs/state-management/hooks";
 
 interface RdsPageResourcesProps {}
 
 const Blogs = (props: RdsPageResourcesProps) => {
   const { t } = useTranslation();
-  const [blogsData, setResourceData] = useState<any>([]);
+  const [blogsData, setBlogsData] = useState<any>([]);
 
   const [value, setValue] = useState({
     name:"",
@@ -33,6 +36,12 @@ const Blogs = (props: RdsPageResourcesProps) => {
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
 
+  const Data = useAppSelector((state) => state.persistedReducer.blogs) as any;
+  useEffect(() => {
+    if (Array.isArray(Data.blogs)) {
+      setBlogsData(Data.blogs);
+    }
+  }, [Data.blogs]);
   const editDataHandler = () => {
     const dTo = {
       displayName: value,
