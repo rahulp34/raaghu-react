@@ -225,193 +225,193 @@ const Auditpayload = ()=>{
     <div className="container-fluid p-0 m-0">
       <div className="row">
         <div className="col-md-12">
-    <div className="card p-2 h-100 border-0 rounded-0 vh-100">
-      <div className="mt-3">
-        <div className="grid mx-4 mb-4">
-          <div className="">
-            <RdsDatePicker
-              DatePickerLabel="Select Date"
-              onDatePicker={onDatePicker}
-              type="advanced"
-            ></RdsDatePicker>
-          </div>
-          <div className="mt-4 pt-2">
-            <RdsInput
-              placeholder="User"
-              onChange={onActionFilter}
-            ></RdsInput>
-          </div>
-          <div className="mt-4 pt-2">
-            <RdsInput
-              placeholder="Url Filter"
-              onChange={onUrlFilter}
-            ></RdsInput>
-          </div>
-          <div className="mt-4 pt-2">
-            <RdsInput
-              placeholder="Min Duration"
-              // onChange={onMinDurationFilter}
-            ></RdsInput>
-          </div>
-          <div className="mt-4 pt-2">
-            <RdsInput
-              placeholder="Max Duration"
-              onChange={(event) => handleSearch(event)}
-            ></RdsInput>
-          </div>
-        </div>
-        <div className="grid mx-4">
-          <div className="">
-            <RdsSelectList
-              label="Http Method"
-              onSelectListChange={HttpMethod}
-              selectItems={[
-                {
-                  option: "GET",
-                },
-                {
-                  option: "POST",
-                },
-                {
-                  option: "DELETE",
-                },
-                {
-                  option: "POST",
-                },
-                {
-                  option: "HEAD",
-                },
-                {
-                  option: "TRACE",
-                },
-              ]}
-            />
-          </div>
-          <div className="">
-            <RdsSelectList
-              label="Http Status Code"
-              onSelectListChange={onHttpStatusCode}
-              selectItems={[
-                {
-                  option: "100 - Continue",
-                },
-                {
-                  option: "101 - Switching Protocols",
-                },
-                {
-                  option: "101 - Switching Protocols",
-                },
-                {
-                  option: "103 - Early Hints",
-                },
-                {
-                  option: "200 - OK",
-                },
-                {
-                  option: "201 - Created",
-                },
-              ]}
-            />
-          </div>
+          <div className="card border-0 rounded-0">
+            <div className="card-body">
+              <div className="align-items-end justify-content-between row">
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsDatePicker
+                    DatePickerLabel="Select Date"
+                    onDatePicker={onDatePicker}
+                    type="advanced"
+                  ></RdsDatePicker>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="User"
+                    onChange={onActionFilter}
+                  ></RdsInput>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="Url Filter"
+                    onChange={onUrlFilter}
+                  ></RdsInput>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="Min Duration"
+                    // onChange={onMinDurationFilter}
+                  ></RdsInput>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="Max Duration"
+                    onChange={(event) => handleSearch(event)}
+                  ></RdsInput>
+                </div>
+              </div>
+              <div className="justify-content-between row">
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsSelectList
+                    label="Http Method"
+                    onSelectListChange={HttpMethod}
+                    selectItems={[
+                      {
+                        option: "GET",
+                      },
+                      {
+                        option: "POST",
+                      },
+                      {
+                        option: "DELETE",
+                      },
+                      {
+                        option: "POST",
+                      },
+                      {
+                        option: "HEAD",
+                      },
+                      {
+                        option: "TRACE",
+                      },
+                    ]}
+                  />
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsSelectList
+                    label="Http Status Code"
+                    onSelectListChange={onHttpStatusCode}
+                    selectItems={[
+                      {
+                        option: "100 - Continue",
+                      },
+                      {
+                        option: "101 - Switching Protocols",
+                      },
+                      {
+                        option: "101 - Switching Protocols",
+                      },
+                      {
+                        option: "103 - Early Hints",
+                      },
+                      {
+                        option: "200 - OK",
+                      },
+                      {
+                        option: "201 - Created",
+                      },
+                    ]}
+                  />
+                </div>
 
-          <div className="">
-            <RdsInput
-              placeholder="Application Name"
-              onChange={onApplicationNameFilter}
-            ></RdsInput>
-          </div>
-          <div className="">
-            <RdsInput
-              placeholder="Correlation ID"
-              onChange={onCorrelationIdFilter}
-            ></RdsInput>
-          </div>
-          <div className="">
-            <RdsSelectList
-              label="Has Exception"
-             onSelectListChange={onHasExceptionFilter}
-              selectItems={[
-                {
-                  option: "Yes",
-                },
-                {
-                  option: "No",
-                },
-              ]}
-            />
-          </div>
-        </div>
-        <div className="float-end mx-4 mt-2">
-          <RdsButton
-            label="Search"
-            type="button"
-            colorVariant="primary"
-            size="small"
-            isOutline={false}
-            icon = "search"
-            iconFill = {false}
-            iconStroke = {true}
-            iconColorVariant = "light"
-            iconHeight = "15px"
-            iconWidth = "15px"
-            onClick={Auditpayload}
-            showLoadingSpinner={true}
-          ></RdsButton>
-        </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="Application Name"
+                    onChange={onApplicationNameFilter}
+                  ></RdsInput>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsInput
+                    placeholder="Correlation ID"
+                    onChange={onCorrelationIdFilter}
+                  ></RdsInput>
+                </div>
+                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                  <RdsSelectList
+                    label="Has Exception"
+                  onSelectListChange={onHasExceptionFilter}
+                    selectItems={[
+                      {
+                        option: "Yes",
+                      },
+                      {
+                        option: "No",
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+              <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mt-2">
+                <RdsButton
+                  label="Search"
+                  type="button"
+                  colorVariant="primary"
+                  size="small"
+                  isOutline={false}
+                  icon = "search"
+                  iconFill = {false}
+                  iconStroke = {true}
+                  iconColorVariant = "light"
+                  iconHeight = "15px"
+                  iconWidth = "15px"
+                  onClick={Auditpayload}
+                  showLoadingSpinner={true}
+                ></RdsButton>
+              </div>
 
-        <div className="row mx-3 my-5">
-          <RdsCompDatatable
-           actionPosition="right"
-            classes="table__userTable"
-            tableHeaders={AuditTableData}
-            tableData={auditData}
-            pagination={true}
-            recordsPerPage={10}
-            noDataTitle="Currently you do not have Audit log"
-            onActionSelection={onActionSelection}
-            actions={operationActions}
-            recordsPerPageSelectListOption={true}
-          ></RdsCompDatatable>
-        </div>
-      </div>
+              <div className="row mx-3 my-5">
+                <RdsCompDatatable
+                actionPosition="right"
+                  classes="table__userTable"
+                  tableHeaders={AuditTableData}
+                  tableData={auditData}
+                  pagination={true}
+                  recordsPerPage={10}
+                  noDataTitle="Currently you do not have Audit log"
+                  onActionSelection={onActionSelection}
+                  actions={operationActions}
+                  recordsPerPageSelectListOption={true}
+                ></RdsCompDatatable>
+              </div>
+            </div>
 
-      <RdsOffcanvas
-        backDrop={true}
-        preventEscapeKey={true}
-        scrolling={false}
-        offId="auditLogs"
-        placement="end"
-        canvasTitle="Detail"
-        onclick={offCanvasHandler}
-        
-        className="mx-1"
-      >
-        <RdsNavtabs
-          navtabsItems={navtabsItems}
-          type="tabs"
-          isNextPressed={showAction}
-          activeNavTabId={activeNavTabId}
-          activeNavtabOrder={(activeNavTabId) => {
-            setActiveNavTabId(activeNavTabId), setShowAction(false);
-          }}
-        />
-        {activeNavTabId == 0 && showAction === false && (
-          <ViewOperationLogsOffCanvas
-            selectedRowData={ auditData.filter(
-              (item: any) => item.id == (tableDataRowid || 1)
-            )}
-          ></ViewOperationLogsOffCanvas>
-        )}
-        {(activeNavTabId == 1 || showAction == true) && (
-          <ActionOperationLogsOffCanvas
-            selectedRowData={auditData.filter(
-              (item: any) => item.id == (tableDataRowid || 1)
-            )}
-          ></ActionOperationLogsOffCanvas>
-        )}
-      </RdsOffcanvas>
-    </div>
-    </div>
+            <RdsOffcanvas
+              backDrop={true}
+              preventEscapeKey={true}
+              scrolling={false}
+              offId="auditLogs"
+              placement="end"
+              canvasTitle="Detail"
+              onclick={offCanvasHandler}
+              
+              className="mx-1"
+            >
+              <RdsNavtabs
+                navtabsItems={navtabsItems}
+                type="tabs"
+                isNextPressed={showAction}
+                activeNavTabId={activeNavTabId}
+                activeNavtabOrder={(activeNavTabId) => {
+                  setActiveNavTabId(activeNavTabId), setShowAction(false);
+                }}
+              />
+              {activeNavTabId == 0 && showAction === false && (
+                <ViewOperationLogsOffCanvas
+                  selectedRowData={ auditData.filter(
+                    (item: any) => item.id == (tableDataRowid || 1)
+                  )}
+                ></ViewOperationLogsOffCanvas>
+              )}
+              {(activeNavTabId == 1 || showAction == true) && (
+                <ActionOperationLogsOffCanvas
+                  selectedRowData={auditData.filter(
+                    (item: any) => item.id == (tableDataRowid || 1)
+                  )}
+                ></ActionOperationLogsOffCanvas>
+              )}
+            </RdsOffcanvas>
+          </div>
+        </div>
       </div>
     </div>
   );

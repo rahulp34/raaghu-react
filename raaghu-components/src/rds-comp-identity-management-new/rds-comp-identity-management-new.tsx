@@ -76,11 +76,11 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
     <div className="pt-4">
       <form onSubmit={handleIdentity}>
         {/* Password Settings */}
-        <div className="border-bottom text-muted fw-bold">
+        <div className="border-bottom pb-2 text-muted fw-bold">
           <RdsLabel label="Password Settings"></RdsLabel>
         </div>
-        <div className="row mt-3">
-          <div className="col-md-4">
+        <div className="row mt-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group">
               <RdsInput
                 size="medium"
@@ -97,7 +97,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-4 sm-p-0 ">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0 ">
             <div className="form-group">
               <RdsInput
                 size="medium"
@@ -114,7 +114,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 mb-3 sm-p-0">
             <RdsCheckbox
               label="Required Non Alpha Numeric Characters"
               checked={passwordSettings.requireNonAlphanumeric}
@@ -125,7 +125,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mb-3 sm-p-0">
             <RdsCheckbox
               label="Required Upper Case"
               checked={passwordSettings.requireUppercase}
@@ -136,7 +136,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mb-3 sm-p-0">
             <RdsCheckbox
               label="Required Lower Case"
               checked={passwordSettings.requireLowercase}
@@ -147,7 +147,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mb-3 sm-p-0">
             <RdsCheckbox
               label="Required Numbers"
               checked={passwordSettings.requireDigit}
@@ -158,11 +158,11 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         {/* Lockout Settings */}
-        <div className="border-bottom text-muted mt-4 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-4 fw-bold">
           <RdsLabel label="Lockout Settings"></RdsLabel>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-4">
+          <div className="col-md-12 mt-4 sm-p-0">
             <RdsCheckbox
               label="Enabled for new users (Whether a new user can be locked out.)"
               checked={lockoutSettings.allowedForNewUsers}
@@ -173,7 +173,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col-md-4 sm-p-0">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group ">
               <RdsInput
                 size="medium"
@@ -188,7 +188,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-4 sm-p-0">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group">
               <RdsInput
                 size="medium"
@@ -206,11 +206,11 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
         </div>
 
         {/* Signin Settings */}
-        <div className="border-bottom text-muted mt-2 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-2 fw-bold">
           <RdsLabel label="Signin Settings"></RdsLabel>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-4">
+          <div className="col-md-12 mt-4 sm-p-0">
             <RdsCheckbox
               label="Require confirmed email  (Whether a confirmed email address is required to sign in.) "
               checked={signSettings.requireConfirmedEmail}
@@ -221,7 +221,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mt-3 sm-p-0">
             <RdsCheckbox
               label="Allow users to confirm their phone number  (Whether the phoneNumber can be confirmed by the user.)"
               checked={signSettings.enablePhoneNumberConfirmation}
@@ -232,7 +232,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mt-3 sm-p-0">
             <RdsCheckbox
               label="Require confirmed phone number  (Whether a confirmed telephone number is required to sign in)."
               checked={signSettings.requireConfirmedPhoneNumber}
@@ -243,11 +243,11 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         {/* User Settings */}
-        <div className="border-bottom text-muted mt-4 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-4 fw-bold">
           <RdsLabel label="User Settings"></RdsLabel>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-4">
+          <div className="col-md-12 mt-4 sm-p-0">
             <RdsCheckbox
               label="Allow users to change their email addresses  (Whether the email can be updated by the user.)"
               checked={userSettings.isEmailUpdateEnabled}
@@ -258,7 +258,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3 mb-4">
+          <div className="col-md-12 mt-3 mb-4 sm-p-0">
             <RdsCheckbox
               label="Allow users to change their usernames  (Whether the username can be updated by the user.)"
               checked={userSettings.isUserNameUpdateEnabled}
