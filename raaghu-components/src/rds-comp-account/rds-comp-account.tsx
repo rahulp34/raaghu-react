@@ -256,11 +256,11 @@ const RdsCompAccount = (props: any) => {
   return (
     <div>
       <form onSubmit={AccountData}>
-        <div className="border-bottom text-muted mt-3 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-3 fw-bold">
           <RdsLabel label="General Settings" size="14px"></RdsLabel>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-3">
+          <div className="col-md-12 mt-4">
             <RdsCheckbox
               label="Enable self registration"
               onChange={(e) => {
@@ -281,10 +281,10 @@ const RdsCompAccount = (props: any) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className="border-bottom text-muted mt-3 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-3 fw-bold">
           <RdsLabel label="Two Factor Authentication" size="14px"></RdsLabel>
         </div>
-        <div className="col-md-3 mt-4">
+        <div className="col-xxl-3 col-xl-3 col-lg-6 col-12 mt-4">
           <RdsSelectList
             label="Select"
             selectItems={props.twoFactList}
@@ -317,7 +317,7 @@ const RdsCompAccount = (props: any) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className="border-bottom text-muted mt-4 fw-bold ">
+        <div className="border-bottom pb-2 text-muted mt-4 fw-bold ">
           <RdsLabel label="Captcha" size="14px"></RdsLabel>
         </div>
 
@@ -344,12 +344,14 @@ const RdsCompAccount = (props: any) => {
           </div>
         </div>
         <div className="row mt-2">
-          <div className="col-md-4 mt-3">
+          <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mt-3">
             <div className="form-group ">
+              <label className="mb-2">
+              Verify Base URL
+              </label>
               <RdsInput
-                name="baseUrl"
-                label="Verify Base URL"
-                labelPositon="top"
+                size="medium"
+                inputType="text"
                 required={true}
                 placeholder="Enter URL"
                 customClasses="form-control"
@@ -360,9 +362,9 @@ const RdsCompAccount = (props: any) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-4 mt-3">
+          <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mt-3">
             <label className="mb-2">
-              Version<span className="text-danger">*</span>
+              Version<span className="text-danger ms-2">*</span>
             </label>
             <RdsSelectList
               label="Select"
@@ -375,13 +377,15 @@ const RdsCompAccount = (props: any) => {
             ></RdsSelectList>
           </div>
 
-          <div className="col-md-4 mt-3">
+          <div className="col-xxl-4 col-xl-4 col-lg-4 col-12 mt-3">
             <div className="form-group ">
+              <label className="mb-2">
+                Score
+              </label>
               <RdsInput
                 name="score"
-                label="Score"
                 required={true}
-                labelPositon="top"
+                size="medium"
                 placeholder="Enter Score"
                 customClasses="form-control"
                 value={accountCaptchData.score}
@@ -393,11 +397,13 @@ const RdsCompAccount = (props: any) => {
           </div>
         </div>
         <div className="row mt-2">
-          <div className="col-md-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-4 col-12">
             <div className="form-group ">
+              <label className="mb-2">
+                Site Key
+              </label>
               <RdsInput
                 name="score"
-                label="Site Key"
                 labelPositon="top"
                 required={true}
                 placeholder="Enter URL"
@@ -409,10 +415,12 @@ const RdsCompAccount = (props: any) => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-4 col-12">
+              <label className="mb-2">
+                Site Secret
+              </label>
             <RdsInput
               name="score"
-              label="Site Secret"
               labelPositon="top"
               required={true}
               placeholder="Enter Secret"
@@ -422,7 +430,7 @@ const RdsCompAccount = (props: any) => {
             ></RdsInput>
           </div>
         </div>
-        <div className="border-bottom text-muted mt-2 fw-bold">
+        <div className="border-bottom pb-2 text-muted mt-2 fw-bold">
           <RdsLabel label="External Provider" size="14px"></RdsLabel>
         </div>
         <div className="row pt-3">
@@ -457,7 +465,7 @@ const RdsCompAccount = (props: any) => {
           </div>
           {twitterCheckBox}
         </div>
-        <div className=" justify-content-end d-flex bottom-0 pt-0">
+        <div className=" justify-content-end d-flex bottom-0 pt-4">
           <RdsButton
             class="me-2"
             label="CANCEL"

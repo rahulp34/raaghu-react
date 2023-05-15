@@ -53,7 +53,7 @@ const FileManagement = () => {
   const [addedFile, setAddedFile] = useState<any>([]);
   const [moveFile, setMoveFile] = useState<any>({});
   const [files, setFiles] = useState([]);
-  const[formData,setformData]=useState<any>("")
+  const [formData, setformData] = useState<any>("")
   const [folderId, setFolderId] = useState<string>("");
   const [datafolderId, setDataFolderId] = useState<string>("");
   const [isDirectory, setDirectory] = useState<string>();
@@ -169,34 +169,34 @@ const FileManagement = () => {
       setRenameFolder(file.editDirectory);
     }
   }, [file.editDirectory]);
-  
-  const handleDragAndDrop=(sourceId:string, destinationId:string)=>{
+
+  const handleDragAndDrop = (sourceId: string, destinationId: string) => {
     const files = {
       body: {
         id: sourceId,
         newParentId: destinationId,
         // formData: { File: new Blob([e], { type: e.type }) },
-      },    
+      },
     };
-      dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
-        dispatch(fetchSubDirectory(undefined) as any);
+    dispatch(moveDirectoryDescriptor(files) as any).then((res: any) => {
+      dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
-      })
-      setDirectories([
-        {
-          name: "All",
-          path: "/all",
-          parentId: null,
-          id: null,
-          hasChildren: false,
-          children: [],
-        },
-      ]);
-  
-  } 
+    })
+    setDirectories([
+      {
+        name: "All",
+        path: "/all",
+        parentId: null,
+        id: null,
+        hasChildren: false,
+        children: [],
+      },
+    ]);
 
-  const movefolder = (e:any) => {
-    
+  }
+
+  const movefolder = (e: any) => {
+
     const files = {
       body: {
         id: folderId,
@@ -204,14 +204,14 @@ const FileManagement = () => {
         // formData: { File: new Blob([e], { type: e.type }) },
       },
     };
-    
-    if(isDirectory){
-      dispatch(moveDirectoryDescriptor(files)as any).then((res:any) => {
+
+    if (isDirectory) {
+      dispatch(moveDirectoryDescriptor(files) as any).then((res: any) => {
         dispatch(fetchSubDirectory(undefined) as any);
-      dispatch(fetchDirectoryDescriptor(undefined) as any);
+        dispatch(fetchDirectoryDescriptor(undefined) as any);
       })
-    }else{
-      dispatch(moveFileDescriptor(files)as any).then((res:any) => {
+    } else {
+      dispatch(moveFileDescriptor(files) as any).then((res: any) => {
         dispatch(fetchSubDirectory(undefined) as any);
         dispatch(fetchDirectoryDescriptor(undefined) as any);
       })
@@ -226,7 +226,7 @@ const FileManagement = () => {
         children: [],
       },
     ]);
-  
+
   };
   useEffect(() => {
     if (file.moveDirectory) {
@@ -267,15 +267,15 @@ const FileManagement = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    
+
     if (file.subDirectories) {
       let parsedDirectory = JSON.parse(JSON.stringify(directories));
       file.subDirectories.items.map((el: any) => {
         let tempData = recursiveFunctionAddData(parsedDirectory, el);
         setDirectories(tempData);
-        setbreadCrumItems({...breadItems, label:el.name})
+        setbreadCrumItems({ ...breadItems, label: el.name })
       });
-      
+
     }
   }, [file.subDirectories]);
   const dTo: {
@@ -288,7 +288,7 @@ const FileManagement = () => {
   }
 
   function setPathValue(event: any) {
-    
+
     let id = undefined;
     if (event && event.id) {
       id = event.id;
@@ -351,7 +351,7 @@ const FileManagement = () => {
   //     dispatch(fetchDirectoryDescriptor(undefined) as any);
   //   });
   // };
-  
+
 
   const onDeleteFile = () => {
     if (isDirectory) {
@@ -410,7 +410,7 @@ const FileManagement = () => {
     dispatch(infoFileDescriptor(uploadFiles) as any);
   }, [uploadFiles]);
   const UploadedFile = () => {
-    
+
     totalFiles.map((e: any) => {
       const body = {
         relativePath: null,
@@ -429,7 +429,7 @@ const FileManagement = () => {
 
   return (
     <div className="New Folder">
-      <div className="d-flex justify-content-end">
+      <div className="d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-end">
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
@@ -438,7 +438,7 @@ const FileManagement = () => {
           preventEscapeKey={false}
           offId={"Folder"}
           offcanvasbutton={
-            <div className="d-flex justify-content-end">
+            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
               <RdsButton
                 icon="plus"
                 label={"Create New Folder"}
@@ -506,7 +506,7 @@ const FileManagement = () => {
           preventEscapeKey={false}
           offId={"Files"}
           offcanvasbutton={
-            <div className="d-flex justify-content-end ms-3">
+            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
               <RdsButton
                 icon="upload_data"
                 label={"UPLOAD FILES"}
@@ -531,74 +531,144 @@ const FileManagement = () => {
           ></RdsCompFileUploader>
         </RdsOffcanvas>
       </div>
-      <div className="card pt-2 h-100 border-0 rounded-0 card-full-stretch mt-3 ">
-        <div className="row">
-          <div className="col-md-3 pt-3">
-            <RdsCompDirectoryList
-              items={directories}
-              path={setPathValue}
-              selectedItemId={directories[0].id}
-              onDragAndDrop={handleDragAndDrop}
-            ></RdsCompDirectoryList>
-          </div>
-
-          <div className="col-md-9 border-start">
-            <div className="row mt-3 ms-3">
-              <div className="col-md-4 d-flex justify-comtent-start">
-                {/* <RdsBreadcrumb breadItems={directories}/> */}
-                
-                <RdsBreadcrumb
-                  breadItems={breadItems}
-                  role="advance"
-                ></RdsBreadcrumb>
-              </div>
-
-              <div className="col md-4 d-flex "></div>
-
-              <div className="col md-4 d-flex justify-content-end">
-                <RdsSearch
-                  placeholder={"Search"}
-                  size={"5px"}
-                  onChange={SetSearchName}
-                ></RdsSearch>
-              </div>
+      <div className="card pt-2 h-100 border-0 rounded-0 mt-3 ">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-xxl-3 col-xl-3 col-lg-3 col-12">
+              <RdsCompDirectoryList
+                items={directories}
+                path={setPathValue}
+                selectedItemId={directories[0].id}
+                onDragAndDrop={handleDragAndDrop}
+              ></RdsCompDirectoryList>
             </div>
 
-            <div className="row mt-3 ms-3">
-              <RdsCompDataTable
-               actionPosition="right"
-                tableHeaders={tableHeaders}
-                tableData={tableData}
-                pagination={false}
-                actions={actions}
-                onActionSelection={onActionHandler}
-                noDataTitle="No data"
-              />
-              <RdsOffcanvas
-                canvasTitle={"RENAME"}
-                placement="end"
-                offcanvaswidth={650}
-                backDrop={true}
-                scrolling={false}
-                preventEscapeKey={false}
-                offId="Rename"
-              >
-                <div>
-                  <div className="pt-3">
-                    <RdsInput
-                      size="medium"
-                      inputType="text"
-                      placeholder="Enter Name"
-                      label="Name"
-                      labelPositon="top"
-                      id=""
-                      value={name}
-                      required={true}
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
-                    ></RdsInput>
-                    <div className="d-flex footer-buttons">
+            <div className="col-xxl-9 col-xl-9 col-lg-9 col-md-12 border-start bs-md-0">
+              <div className="row mt-2">
+                <div className="col-xxl-4 col-xl-4 col-xl-4 col-12 d-flex justify-comtent-start">
+                  {/* <RdsBreadcrumb breadItems={directories}/> */}
+
+                  <RdsBreadcrumb
+                    breadItems={breadItems}
+                    role="advance"
+                  ></RdsBreadcrumb>
+                </div>
+
+                <div className="col-xxl-4 col-xl-4 col-xl-4 col-12 d-flex "></div>
+
+                <div className="col-xxl-4 col-xl-4 col-xl-4 col-12 d-flex justify-content-end">
+                  <RdsSearch
+                    placeholder={"Search"}
+                    size={"5px"}
+                    onChange={SetSearchName}
+                  ></RdsSearch>
+                </div>
+              </div>
+
+              <div className="row">
+                <RdsCompDataTable
+                  actionPosition="right"
+                  tableHeaders={tableHeaders}
+                  tableData={tableData}
+                  pagination={false}
+                  actions={actions}
+                  onActionSelection={onActionHandler}
+                  noDataTitle="No data"
+                />
+                <RdsOffcanvas
+                  canvasTitle={"RENAME"}
+                  placement="end"
+                  offcanvaswidth={650}
+                  backDrop={true}
+                  scrolling={false}
+                  preventEscapeKey={false}
+                  offId="Rename"
+                >
+                  <div>
+                    <div className="pt-3">
+                      <RdsInput
+                        size="medium"
+                        inputType="text"
+                        placeholder="Enter Name"
+                        label="Name"
+                        labelPositon="top"
+                        id=""
+                        value={name}
+                        required={true}
+                        onChange={(e) => {
+                          setName(e.target.value);
+                        }}
+                      ></RdsInput>
+                      <div className="d-flex footer-buttons">
+                        <RdsButton
+                          label="CANCEL"
+                          databsdismiss="offcanvas"
+                          type={"button"}
+                          size="small"
+                          isOutline={true}
+                          colorVariant="primary"
+                          class="me-2"
+                        ></RdsButton>
+                        <RdsButton
+                          label="RENAME"
+                          type={"button"}
+                          size="small"
+                          databsdismiss="offcanvas"
+                          isDisabled={name === ""}
+                          colorVariant="primary"
+                          class="me-2"
+                          onClick={UpdateFolderName}
+                          showLoadingSpinner={true}
+                        ></RdsButton>
+                      </div>
+                    </div>
+                  </div>
+                </RdsOffcanvas>
+                <RdsOffcanvas
+                  canvasTitle={"MOVE"}
+                  placement="end"
+                  offcanvaswidth={650}
+                  backDrop={true}
+                  scrolling={false}
+                  preventEscapeKey={false}
+                  offId={"Move"}
+                >
+                  <div>
+                    <div className="pt-3">
+                      <RdsLabel label="Move To Under" size="15px"></RdsLabel>
+                    </div>
+                    <div className="mt-3 p-2 border">
+                      <RdsIconLabel
+                        icon="home"
+                        iconSize="small"
+                        label="All FIles"
+                        size="small"
+                        fill={false}
+                      />
+                    </div>
+                    <div className="mt-3 pb-1 border-bottom">
+                      <RdsLabel label="Folder Name" size="14px">
+                        <RdsIcon
+                          name={"up"}
+                          height="12px"
+                          width="12px"
+                          stroke={true}
+                        />
+
+                        <RdsIcon
+                          name={"down"}
+                          height="12px"
+                          width="12px"
+                          stroke={true}
+                        />
+                      </RdsLabel>
+                    </div>
+                    <RdsCompFileMover
+                      items={directories}
+                      path={setFolderPath}
+                      selectedItemId={directories[0].id}
+                    ></RdsCompFileMover>
+                    <div className="d-flex footer-buttons ms-2">
                       <RdsButton
                         label="CANCEL"
                         databsdismiss="offcanvas"
@@ -609,91 +679,23 @@ const FileManagement = () => {
                         class="me-2"
                       ></RdsButton>
                       <RdsButton
-                        label="RENAME"
+                        label="MOVE"
                         type={"button"}
                         size="small"
                         databsdismiss="offcanvas"
-                        isDisabled={name === ""}
                         colorVariant="primary"
                         class="me-2"
-                        onClick={UpdateFolderName}
                         showLoadingSpinner={true}
+                        onClick={movefolder}
                       ></RdsButton>
                     </div>
                   </div>
-                </div>
-              </RdsOffcanvas>
-              <RdsOffcanvas
-                canvasTitle={"MOVE"}
-                placement="end"
-                offcanvaswidth={650}
-                backDrop={true}
-                scrolling={false}
-                preventEscapeKey={false}
-                offId={"Move"}
-              >
-                <div>
-                  <div className="pt-3">
-                    <RdsLabel label="Move To Under" size="15px"></RdsLabel>
-                  </div>
-                  <div className="mt-3 p-2 border">
-                    <RdsIconLabel
-                      icon="home"
-                      iconSize="small"
-                      label="All FIles"
-                      size="small"
-                      fill={false}
-                    />
-                  </div>
-                  <div className="mt-3 pb-1 border-bottom">
-                    <RdsLabel label="Folder Name" size="14px">
-                      <RdsIcon
-                        name={"up"}
-                        height="12px"
-                        width="12px"
-                        stroke={true}
-                      />
-
-                      <RdsIcon
-                        name={"down"}
-                        height="12px"
-                        width="12px"
-                        stroke={true}
-                      />
-                    </RdsLabel>
-                  </div>
-                  <RdsCompFileMover
-                    items={directories}
-                    path={setFolderPath}
-                    selectedItemId={directories[0].id}
-                  ></RdsCompFileMover>
-                  <div className="d-flex footer-buttons ms-2">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="MOVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      colorVariant="primary"
-                      class="me-2"
-                      showLoadingSpinner={true}
-                      onClick={movefolder}
-                    ></RdsButton>
-                  </div>
-                </div>
-              </RdsOffcanvas>
-              <RdsCompAlertPopup
-                alertID="DeleteFile"
-                onSuccess={onDeleteFile}
-              />
+                </RdsOffcanvas>
+                <RdsCompAlertPopup
+                  alertID="DeleteFile"
+                  onSuccess={onDeleteFile}
+                />
+              </div>
             </div>
           </div>
         </div>
