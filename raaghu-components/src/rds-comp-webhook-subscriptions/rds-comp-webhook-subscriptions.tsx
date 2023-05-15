@@ -119,23 +119,23 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
     });
     setWebhookheaderfile([]);
   };
-  const onActionSelection = (rowData: any, actionId: any) => {};
+  const onActionSelection = (rowData: any, actionId: any) => { };
 
   const tableHeaders = [
-      {
-        displayName: "Header Key",
-        key: "headerKey",
-        datatype: "text",
-        sortable: true,
-        isEndUserEditing: true,
-      },
-      {
-        displayName: "Header Value",
-        key: "headerValue",
-        datatype: "text",
-        sortable: true,
-      },
-    ],
+    {
+      displayName: "Header Key",
+      key: "headerKey",
+      datatype: "text",
+      sortable: true,
+      isEndUserEditing: true,
+    },
+    {
+      displayName: "Header Value",
+      key: "headerValue",
+      datatype: "text",
+      sortable: true,
+    },
+  ],
     actions = [{ id: "edit", displayName: "Edit" }];
   const additionalHeaderHandleSubmit = (event: any) => {
     webhookheaderfile.push({
@@ -181,7 +181,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
           </div>
 
           <div className=" fw-normal row mb-3 mt-2">
-            <label className="mb-2">Additional Webhook Headers</label>
+            <label className="mb-2" id="webhookEndpoint">Additional Webhook Headers</label>
             <div className="col-5 mb-3">
               <RdsInput
                 placeholder="Header key"
