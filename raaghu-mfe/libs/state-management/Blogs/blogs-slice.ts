@@ -55,8 +55,11 @@ export const addBlogsData = createAsyncThunk(
 
 export const editBlogsData = createAsyncThunk(
   "blogs/editBlogsData",
-  ({ id, dTo }: { id: any; dTo: any }) => {
-    return BlogPostAdminService.putBlogsBlogPosts({id:id, requestBody:dTo}).then((result) => {
+  ({ id, dto }: { id: any; dto: any }) => {
+    return BlogAdminService.putBlogs({
+      id: id,
+      requestBody: dto,
+    }).then((result) => {
       return result;
     });
   }

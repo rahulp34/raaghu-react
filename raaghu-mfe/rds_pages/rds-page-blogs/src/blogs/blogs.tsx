@@ -42,18 +42,6 @@ const Blogs = (props: RdsPageResourcesProps) => {
       setBlogsData(Data.blogs);
     }
   }, [Data.blogs]);
-  const editDataHandler = () => {
-    const dTo = {
-      displayName: value,
-    };
-    dispatch(editBlogsData({ id: tableDataRowid, dTo: dTo }) as any).then(
-      (res: any) => {
-        dispatch(fetchBlogsData() as any);
-      }
-    );
-    setValue({name:'',slug:''});
-    setAlertOne(true);
-  };
 
   const [newResourceData, setnewResourceData] = useState({
     name: "",
@@ -115,12 +103,14 @@ const Blogs = (props: RdsPageResourcesProps) => {
     showInDiscoveryDocument: false,
   });
 
-  const offCanvasHandler = () => {};
-
-  const success = () => {
-    // dispatch(deleteScopeshData(tableDataid) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
-    // setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
+  const handlerActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    if (actionId === "edit") {
+      setValue({ ...value, name: rowData.name, slug: rowData.slug });
+    }
   };
+
+  const offCanvasHandler = () => {};
 
   const addDataHandler = () => {
     const dto = {
@@ -130,6 +120,20 @@ const Blogs = (props: RdsPageResourcesProps) => {
     dispatch(addBlogsData(dto) as any).then((res: any) => {
       dispatch(fetchBlogsData() as any);
     });
+    setValue({ name: "", slug: "" });
+    setAlertOne(true);
+  };
+
+  const editDataHandler = () => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(editBlogsData({ id: tableDataRowid, dto: dto }) as any).then(
+      (res: any) => {
+        dispatch(fetchBlogsData() as any);
+      }
+    );
     setValue({ name: "", slug: "" });
     setAlertOne(true);
   };
@@ -405,7 +409,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           messageAlert="The selected Resource will be Deleted Permanently "
           alertConfirmation="Are you sure"
           deleteButtonLabel="Yes"
-          onSuccess={success}
+          // onSuccess={success}
         />
       </div>
     </div>
