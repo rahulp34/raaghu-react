@@ -666,8 +666,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Add Organiztion Sub-Unit"
         offId="coganization"
-        backDrop={true}
         scrolling={false}
+        backDrop={true}
         preventEscapeKey={false}
         
       >

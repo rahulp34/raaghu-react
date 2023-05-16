@@ -67,7 +67,7 @@ const PaymentPlans = () => {
   ]);
   const [plansTableData, setPlansTableData] = useState([]);
   const [gatewayTableData, setGatewayTableData] = useState([]);
-  const [canvasTitle, setCanvasTitle] = useState("Create New Payment Plans");
+  const [canvasTitle, setCanvasTitle] = useState("CREATE NEW PAYMENT PLANS");
   const [paymentPlansObj, setPaymentPlansObj] = useState({
     id: "",
     name: "",
@@ -371,7 +371,7 @@ const PaymentPlans = () => {
                           required={true}
                           label={"Gateway"}
                           value={gatewayPlansObj.gateway}
-                          placeholder={"Enter Gateway"}
+                          placeholder={"ENTER GATEWAY"}
                           onChange={(event) =>
                             setGatewayPlansObj({
                               ...gatewayPlansObj,
@@ -412,8 +412,8 @@ const PaymentPlans = () => {
                   <RdsButton
                     class="me-2"
                     label={
-                      canvasTitle === "Create New Plan" ||
-                      canvasTitle === "Create New Gateway Plan"
+                      canvasTitle === "CREATE NEW PLAN" ||
+                      canvasTitle === "CREATE NEW GATEWAY PLAN"
                         ? "Save"
                         : "Update"
                     }
