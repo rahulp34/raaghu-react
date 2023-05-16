@@ -126,7 +126,6 @@ module.exports = (env, argv) => {
           TextTemplate: mfeConfigJSON["textTemplate"].url,
           Applications: mfeConfigJSON["applications"].url,
           ApiScope: mfeConfigJSON["apiScope"].url,
-          Scope: mfeConfigJSON["scope"].url,
           SecurityLogs: mfeConfigJSON["securityLogs"].url,
           Chats: mfeConfigJSON["chats"].url,
           FileManagement: mfeConfigJSON["fileManagement"].url,
@@ -155,8 +154,8 @@ module.exports = (env, argv) => {
           Newsletters: mfeConfigJSON["newsletters"].url,
           Chart: mfeConfigJSON["chart"].url,
           ChangePassword: mfeConfigJSON["changepassword"].url,
-     Register: mfeConfigJSON["register"].url,
-},
+          Register: mfeConfigJSON["register"].url
+        },
         shared: {
           ...devdeps,
           ...deps,
