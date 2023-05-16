@@ -79,23 +79,6 @@ export const putBlogsFeatures = createAsyncThunk(
     });
   }
 );
-// export const saveFeaturesEdition = createAsyncThunk(
-//   "edition/saveFeaturesEdition",
-//   (data: any) => {
-//     return proxy.featuresPUT("E", data.id, data.body).then((result: any) => {
-//       return result;
-//     });
-//   }
-// );
-// export const restoreToDefaultFeaturesEdition = createAsyncThunk(
-//   "edition/restoreToDefaultFeaturesEdition",
-//   (id: any) => {
-//     return proxy.featuresDELETE("E", id, undefined).then((result: any) => {
-//       return result;
-//     });
-//   }
-// );
-
 const blogsSlice: any = createSlice({
   name: "blogs",
   initialState,
@@ -183,41 +166,6 @@ const blogsSlice: any = createSlice({
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
-
-    // builder.addCase(saveFeaturesEdition.pending, (state) => {
-    //   state.loading = true;
-    // });
-
-    // builder.addCase(
-    //   saveFeaturesEdition.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.blogsFeature = action.payload;
-    //   }
-    // );
-    // builder.addCase(saveFeaturesEdition.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message || "Something went wrong";
-    // });
-
-    // builder.addCase(restoreToDefaultFeaturesEdition.pending, (state) => {
-    //   state.loading = true;
-    // });
-
-    // builder.addCase(
-    //   restoreToDefaultFeaturesEdition.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.blogsFeature = action.payload;
-    //   }
-    // );
-    // builder.addCase(
-    //   restoreToDefaultFeaturesEdition.rejected,
-    //   (state, action) => {
-    //     state.loading = false;
-    //     state.error = action.error.message || "Something went wrong";
-    //   }
-    // );
   },
 });
 
