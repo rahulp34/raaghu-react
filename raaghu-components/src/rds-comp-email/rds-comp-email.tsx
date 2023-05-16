@@ -50,8 +50,8 @@ useEffect( () => {
   }
  
   const condition =!formData.smtpUseDefaultCredentials?<>
-  <div className="row mt-2">
-        <div className="col-md-4 sm-p-0">
+  <div className="row">
+        <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group ">
             <RdsInput
               value={formData.smtpDomain}
@@ -66,8 +66,8 @@ useEffect( () => {
         </div>
      </div>
 
-   <div className="row mt-2">
-        <div className="col-md-4 sm-p-0">
+   <div className="row">
+        <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group">
             <RdsInput
               value={formData.smtpUserName}
@@ -81,8 +81,8 @@ useEffect( () => {
             </div>
         </div>
      </div>
-     <div className="row mt-2">
-        <div className="col-md-4 sm-p-0">
+     <div className="row">
+        <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group ">
             <RdsInput
               value={formData.smtpPassword}
@@ -105,7 +105,7 @@ useEffect( () => {
     <div className="pt-4">
       <form onSubmit={handleSubmit}>
         <div className="row">
-          <div className="col-md-4 col-sm-4 col-lg-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group">
               <RdsInput
                 placeholder="Email Address"
@@ -126,7 +126,7 @@ useEffect( () => {
               )} */}
             </div>
           </div>
-          <div className="col-md-4 col-sm-4 col-lg-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <RdsInput
               value={formData.defaultFromAddress}
               name="displayName"
@@ -137,10 +137,11 @@ useEffect( () => {
 			        onChange={(e:any) => setUsername(e.target.value)} 
             ></RdsInput>
           </div>
+          <div className="offset-xxl-4 offset-xl-4 offset-lg-4"></div>
         </div>
 
         <div className="row">
-          <div className="col-md-4 col-sm-4 col-lg-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <div className="form-group">
               <RdsInput
                 value={formData.smtpHost}
@@ -153,7 +154,7 @@ useEffect( () => {
               ></RdsInput>
             </div>
           </div>
-          <div className="col-md-4 col-sm-4 col-lg-4">
+          <div className="col-xxl-4 col-xl-4 col-lg-6 col-12 mb-3 sm-p-0">
             <RdsInput
               value={formData.smtpPort}
               name="smtpPort"
@@ -165,16 +166,14 @@ useEffect( () => {
             ></RdsInput>
           </div>
         </div>
-        <div className="row mb-3">
-          <div
-            className="col-lg-12 col-md-12 col-sm-12">
+        <div className="row">
+          <div className="col-lg-12 col-md-12 col-sm-12 mb-3 sm-p-0">
             <RdsCheckbox label="Use SSL"  onChange={(e:any) =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
           </div>
         </div>
 
-        <div className="row mb-3">
-          <div
-            className="col-lg-12 col-md-12 col-sm-12">
+        <div className="row mb-3"> 
+          <div className="col-lg-12 col-md-12 col-sm-12 mb-3 sm-p-0">
             <RdsCheckbox
               label="Use Default Credentials"
 			  onChange={(e:any) =>{setCredential(e.target.checked)}}
@@ -184,7 +183,7 @@ useEffect( () => {
         </div>
 
         {condition }
-        <div className="position-relative bottom-0 justify-content-end" style={{right:0}}>
+        <div className="footer-buttons d-flex justify-content-start" style={{right:0}}>
           <div className=" d-flex justify-content-start mt-3" >
             <RdsButton
               class="me-2"

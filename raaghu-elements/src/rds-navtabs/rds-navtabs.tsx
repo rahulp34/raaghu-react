@@ -43,12 +43,13 @@ const RdsNavtabs = (props: RdsNavtabsProps) => {
       <ul
         className={
           "nav mobile-ul-tabs flex" +
-          (props.type === "pills"
+          (props.type === "pills" 
             ? "  nav-pills"
             : props.type === "tabs"
-            ? " justify-content-start nav-tabs"
+              
+            ? " flex-column flex-lg-row flex-md-row flex-xl-row flex-xxl-row justify-content-start nav-tabs pb-3 pb-lg-0 pb-md-0 pb-xl-0 pb-xxl-0"
             : props.type === "vertical"
-            ? " flex-column nav-pills col-12 h-100 border-end border-end"
+            ? " flex-column nav-pills col-12 h-100 border-end border-end bs-md-0"
             : " nav-tabs") +
           (props.fill ? " nav-fill" : "") +
           (props.justified ? " nav-justified" : "")

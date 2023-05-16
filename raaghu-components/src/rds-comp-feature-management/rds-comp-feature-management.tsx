@@ -9,12 +9,12 @@ import {
   RdsSelectList,
 } from "raaghu-react-elements";
 
-export interface RdsCompFeatureManagementProps{
- featureIdentitySettingsData1?:any;
- saveFeature:any;
- compData?:any;
- twoFactorList?:any;
- restoreFeatures?:( Event:React.MouseEvent<HTMLButtonElement>, ) => void;
+export interface RdsCompFeatureManagementProps {
+  featureIdentitySettingsData1?: any;
+  saveFeature: any;
+  compData?: any;
+  twoFactorList?: any;
+  restoreFeatures?: (Event: React.MouseEvent<HTMLButtonElement>,) => void;
 }
 
 const navtabsItems = [
@@ -29,11 +29,11 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
   const [featureIdentitySettingsData, setfeatureIdentitySettingsData] = useState<any>(props.featureIdentitySettingsData1)
   const [a, setA] = useState(featureIdentitySettingsData[0].value)
   const twoFactChange = (event: any) => {
-    
+
     setA(event.target.value);
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===2){
-        return {...curElem, value:event.target.value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 2) {
+        return { ...curElem, value: event.target.value }
       }
       else return curElem;
     })
@@ -49,24 +49,24 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
 
 
 
-function saveFeaturesData(){
-  let tempdata:any[] = [];
-  
+  function saveFeaturesData() {
+    let tempdata: any[] = [];
 
-  props.featureIdentitySettingsData1.forEach((element:any,index:number) => {
-    if(element.value != featureIdentitySettingsData[index].value){
-      tempdata.push(featureIdentitySettingsData[index]);
-    }
+
+    props.featureIdentitySettingsData1.forEach((element: any, index: number) => {
+      if (element.value != featureIdentitySettingsData[index].value) {
+        tempdata.push(featureIdentitySettingsData[index]);
+      }
     });
 
     props.saveFeature(tempdata);
-}
+  }
 
 
   function setLDAP(value: boolean) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===2){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 2) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
@@ -74,18 +74,18 @@ function saveFeaturesData(){
   }
 
   function setOAuthLogin(value: boolean) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===3){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 3) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
     setfeatureIdentitySettingsData(tempdata);
   }
   function setLanguage(value: boolean) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===4){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 4) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
@@ -93,9 +93,9 @@ function saveFeaturesData(){
   }
 
   function setTextTemplate(value: boolean) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===5){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 5) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
@@ -103,9 +103,9 @@ function saveFeaturesData(){
   }
 
   function setAuditLog(value: boolean) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===6){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 6) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
@@ -113,21 +113,21 @@ function saveFeaturesData(){
   }
 
   function setMaxUser(value: string) {
-    let tempdata=featureIdentitySettingsData.map((curElem:any,index:any)=>{
-      if(index===1){
-        return {...curElem, value:value}
+    let tempdata = featureIdentitySettingsData.map((curElem: any, index: any) => {
+      if (index === 1) {
+        return { ...curElem, value: value }
       }
       else return curElem;
     })
     setfeatureIdentitySettingsData(tempdata);
   }
-  
-  
+
+
   return (
-    <div className="d-flex">
-   
-      <div className="mt-4 ">
-        <div className="col-12"> 
+
+    <>
+    <div className="row">
+      <div className="col-xxl-3 col-xl-3 col-lg-3 col-12 d-xxl-block d-xl-block d-lg-block d-md-table d-flex pb-4 pt-4">
         <RdsNavtabs
           navtabsItems={navtabsItems}
           type="vertical"
@@ -137,25 +137,24 @@ function saveFeaturesData(){
             setActiveNavTabId(activeNavTabId);
           }}
         />
-        </div>
       </div>
 
-      <div className="flex-grow-1 mx-3">
+      <div className="col-xxl-9 col-xl-9 col-lg-9 col-12 pb-4">
         {activeNavTabId == 0 && (
           <>
             <form >
-              <div className=" text-muted mt-3 ">
+              <div className="text-muted pt-4 mb-2">
                 <RdsLabel
                   label="Two Factor Authentication"
                   size="14px"
                 ></RdsLabel>
               </div>
-              <div className="col-md-4">
+              <div className="col-xxl-4 col-xl-4 col-lg-8 col-12 mb-2">
                 <RdsSelectList
                   label="Select"
                   selectItems={props.twoFactorList}
                   // selectedValue={a}
-                  onSelectListChange={(e:any) => {
+                  onSelectListChange={(e: any) => {
                     twoFactChange(e)
                   }}
                   size="medium"
@@ -164,29 +163,26 @@ function saveFeaturesData(){
               <h6 className="text-muted mt-1">
                 Set two factor behaviour.Optional values:Optional,Disabled,Forced
               </h6>
-              <div className="col-md-4 text-muted mt-4 ">
-              <div className="form-group ">
-              <RdsInput
-                size="medium"
-                label="Maximum User Count "
-                inputType="text"
-                isDisabled={false}
-                readonly={false}
-                placeholder="Enter Length"
-                required={true}
-                value={featureIdentitySettingsData[1].value}
-                onChange={(e:any) => setMaxUser(e.target.value)}
-              ></RdsInput>
+              <div className="col-xxl-4 col-xl-4 col-lg-8 col-12 text-muted mt-4 ">
+                <div className="form-group ">
+                  <RdsInput
+                    size="medium"
+                    label="Maximum User Count "
+                    inputType="text"
+                    isDisabled={false}
+                    readonly={false}
+                    placeholder="Enter Length"
+                    required={true}
+                    value={featureIdentitySettingsData[1].value}
+                    onChange={(e: any) => setMaxUser(e.target.value)}
+                  ></RdsInput>
+                </div>
               </div>
-            </div>
-            {/* <h6 className="text-muted">
-            0 = unlimited
-              </h6> */}
               <div className="col-md-12 mt-3">
                 <RdsCheckbox
                   label="LDAP Login"
                   checked={featureIdentitySettingsData[2].value}
-                  onChange={(e:any) => {
+                  onChange={(e: any) => {
                     setLDAP(e.target.checked);
                   }}
                 ></RdsCheckbox>
@@ -195,7 +191,7 @@ function saveFeaturesData(){
                 <RdsCheckbox
                   label="OAuth Login"
                   checked={featureIdentitySettingsData[3].value}
-                  onChange={(e:any) => {
+                  onChange={(e: any) => {
                     setOAuthLogin(e.target.checked);
                   }}
                 ></RdsCheckbox>
@@ -209,7 +205,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable language Management"
                 checked={featureIdentitySettingsData[4].value}
-                onChange={(e:any) => {
+                onChange={(e: any) => {
                   setLanguage(e.target.checked);
                 }}
               ></RdsCheckbox>
@@ -225,7 +221,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable text template Management"
                 checked={featureIdentitySettingsData[5].value}
-                onChange={(e:any) => {
+                onChange={(e: any) => {
                   setTextTemplate(e.target.checked);
                 }}
               ></RdsCheckbox>
@@ -241,7 +237,7 @@ function saveFeaturesData(){
               <RdsCheckbox
                 label="Enable Audit logging page"
                 checked={featureIdentitySettingsData[6].value}
-                onChange={(e:any) => {
+                onChange={(e: any) => {
                   setAuditLog(e.target.checked);
                 }}
               ></RdsCheckbox>
@@ -249,38 +245,46 @@ function saveFeaturesData(){
             <h6 className="text-muted my-2">
               Enable audit logging page in the application.
             </h6>
-            <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0 bg-transparent">
-              <RdsButton
-                class="me-2"
-                label="Restore to default"
-                type="button"
-                isOutline={true}
-                onClick={props.restoreFeatures}
-                colorVariant="primary"
-                size="small"
-              ></RdsButton>
-              <RdsButton
-                class="me-2"
-                label="CANCEL"
-                type="button"
-                isOutline={true}
-                colorVariant="primary"
-                size="small"
-              ></RdsButton>
-              <RdsButton
-                class="me-2"
-                label="SAVE"
-                type="submit"
-                onClick={saveFeaturesData}
-                isOutline={false}
-                colorVariant="primary"
-                size="small"
-              ></RdsButton>
-            </div>
+           
           </>
         )}
       </div>
     </div>
+     <div className="align-items-end bg-transparent d-lg-flex d-md-flex d-xl-flex d-xxl-flex end-0 h-100 justify-content-start position-sm-relative pt-0 pt-4">
+     <div className="mb-3">
+       <RdsButton
+         class="me-2"
+         label="Restore to default"
+         type="button"
+         isOutline={true}
+         onClick={props.restoreFeatures}
+         colorVariant="primary"
+         size="small"
+       ></RdsButton>
+     </div>
+     <div className="mb-3">
+       <RdsButton
+         class="me-2"
+         label="CANCEL"
+         type="button"
+         isOutline={true}
+         colorVariant="primary"
+         size="small"
+       ></RdsButton>
+     </div>
+     <div className="mb-3">
+       <RdsButton
+         class="me-2"
+         label="SAVE"
+         type="submit"
+         onClick={saveFeaturesData}
+         isOutline={false}
+         colorVariant="primary"
+         size="small"
+       ></RdsButton>
+     </div>
+   </div>
+   </>
   );
 };
 

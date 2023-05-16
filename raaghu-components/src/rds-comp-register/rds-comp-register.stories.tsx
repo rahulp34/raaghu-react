@@ -1,5 +1,5 @@
 /* eslint-disable */
-import RdsCompRegister from './RdsCompRegister';
+import RdsCompRegister from './rds-comp-register';
 
 export default {
   title: "RdsCompRegister",

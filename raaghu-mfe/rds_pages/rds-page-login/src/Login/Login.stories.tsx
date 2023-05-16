@@ -4,7 +4,7 @@ import RdsPageLogin from "./Login";
 import { Provider } from "react-redux";
 import { store } from "../../../../libs/public.api";
 import { BrowserRouter } from "react-router-dom";
-import "raaghu-themes/rds-themes/styles/default.scss";
+// import "raaghu-themes/rds-themes/styles/default.scss";
 
 addDecorator((story) => (
 	<BrowserRouter>

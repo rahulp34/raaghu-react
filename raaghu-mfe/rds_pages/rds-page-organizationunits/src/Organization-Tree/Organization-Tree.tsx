@@ -305,7 +305,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
     <div>
       <div className="container-fluid p-0 m-0 h-100">
         <div className="row h-100">
-          <div className="col-md-6 h-100">
+          <div className="col-md-6 h-100 mb-4">
             <div>
               <div className="card card-full-stretch rounded-0 border-0 h-100">
                 <div className="card-header bg-transparent">
@@ -330,8 +330,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               </div>
             </div>
           </div>
-          <div className="col-md-6 h-100">
-            <div className="card card-full-stretch rounded-0  h-100 border-0">
+          <div className="col-md-6 h-100 mb-4">
+            <div className="card rounded-0  h-100 border-0">
               {selectedNode === "" && (
                 <div className="card-header bg-transparent">
                   <h5 className="card-title">
@@ -595,6 +595,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             <RdsButton
               type={"button"}
               label="cancel"
+              size="small"
               isOutline={true}
               colorVariant="primary"
               databsdismiss="offcanvas"
@@ -606,6 +607,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             type={"button"}
             label="Save"
             class="ms-2"
+            size="small"
             isDisabled={val === ""}
             colorVariant="primary"
             onClick={handlerAddNestedNode}
@@ -639,6 +641,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             <RdsButton
               type={"button"}
               label="cancel"
+              size="small"
               isOutline={true}
               colorVariant="primary"
               databsdismiss="offcanvas"
@@ -650,6 +653,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             type={"button"}
             label="save"
             class="ms-2"
+            size="small"
             colorVariant="primary"
             onClick={handlerEdit}
             databsdismiss="offcanvas"
@@ -662,8 +666,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         placement="end"
         canvasTitle="Add Organiztion Sub-Unit"
         offId="coganization"
-        backDrop={true}
         scrolling={false}
+        backDrop={true}
         preventEscapeKey={false}
         
       >
@@ -681,6 +685,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             <RdsButton
               type={"button"}
               label="cancel"
+              size="small"
               colorVariant="primary"
               isOutline={true}
               databsdismiss="offcanvas"
@@ -692,6 +697,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             type={"button"}
             label="save"
             class="ms-2"
+            size="small"
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"
@@ -723,6 +729,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             <RdsButton
               type={"button"}
               label="cancel"
+              size="small"
               colorVariant="primary"
               isOutline={true}
               databsdismiss="offcanvas"
@@ -734,6 +741,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             type={"button"}
             label="save"
             class="ms-2"
+            size="small"
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"

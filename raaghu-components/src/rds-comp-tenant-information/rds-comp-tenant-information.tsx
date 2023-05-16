@@ -115,8 +115,8 @@ const RdsCompTenantInformation = (props: any) => {
     <div>
       <div className="tab-content">
         <form>
-          <div className="row align-items-center">
-            <div className="col-md-6 sm-p-0">
+          <div className="row align-items-center align-items-center flex-column-reverse flex-lg-row flex-md-row">
+            <div className="col-md-6">
               <div className="form-group">
                 <RdsInput
                   inputType="text"
@@ -139,7 +139,7 @@ const RdsCompTenantInformation = (props: any) => {
                 ></RdsSelectList>
               </div>
             </div>
-            <div className="col-md-6 cursor-pointer text-center mt-2 sm-p-0">
+            <div className="col-md-6 cursor-pointer text-center mt-2 pb-xxl-0 pb-xl-0 pb-lg-0 pb-md-0 pb-5">
              
               <img
                 src="./assets/edit-pic.png"
@@ -154,11 +154,11 @@ const RdsCompTenantInformation = (props: any) => {
               />      
             </div>
           </div>
-          <div className="my-3 pb-2 border-bottom">
+          <div className="mt-4 pb-2 border-bottom">
             <label htmlFor="Admin details">{"Admin Details"}</label>
           </div>
-          <div className="row mt-4">
-            <div className="col-md-6 cursor-pointer sm-p-0">
+          <div className="row mt-4 pb-2">
+            <div className="col-md-6 cursor-pointer">
               <div className="form-group">
                 <RdsInput
                   required={true}
@@ -172,7 +172,7 @@ const RdsCompTenantInformation = (props: any) => {
                 ></RdsInput>
               </div>
             </div>
-            <div className="col-md-6 sm-p-0">
+            <div className="col-md-6">
               <div className="form-group">
                 <RdsInput
                   required={true}
@@ -187,8 +187,8 @@ const RdsCompTenantInformation = (props: any) => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-12 sm-p-0">
+          <div className="row pb-2">
+            <div className="col-md-12">
               <div className="form-group">
                 <RdsRadioButton
                   displayType="Default"
@@ -202,7 +202,7 @@ const RdsCompTenantInformation = (props: any) => {
           {databaseUrl == "Separated Database" && (
             <>
             <div className="row">
-            <div className="col-md-12 sm-p-0">
+            <div className="col-md-12">
               <div className="form-group">
                 <RdsInput
                   
@@ -221,7 +221,7 @@ const RdsCompTenantInformation = (props: any) => {
           </>
           )}
           <div className="row">
-            <div className="col-md-12 sm-p-0">
+            <div className="col-md-6">
               <div className="form-group">
                 <RdsSelectList
                   label={"Activation State"}

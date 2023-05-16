@@ -21,15 +21,15 @@ const RdsCompWebsiteLog = (props: RdsCompWebsiteLogProps) => {
 	};
 
 	return (
-		<div>
+		<div data-testid="rds-pagination">
 			{props.websiteLogData && props.websiteLogData.length > 0 && (
-				<div>
+				<div data-testid="rds-comp-website-log">
 					{props.websiteLogData.map(
 						(item: any, index: number) =>
 							(props.pagination
 								? typeof rowStatus.endingRow != "undefined" &&
-								  index >= rowStatus.startingRow &&
-								  index < rowStatus.endingRow
+								index >= rowStatus.startingRow &&
+								index < rowStatus.endingRow
 								: true) && (
 								<div className="px-3" key={index}>
 									<div className="d-flex align-items-center gap-3 border-bottom py-3">
@@ -40,12 +40,12 @@ const RdsCompWebsiteLog = (props: RdsCompWebsiteLogProps) => {
 													item.status == "INFO"
 														? "info"
 														: item.status == "WARN"
-														? "warning"
-														: item.status == "ERROR"
-														? "danger"
-														: "success"
+															? "warning"
+															: item.status == "ERROR"
+																? "danger"
+																: "success"
 												}
-												
+
 											/>
 										</div>
 										<div>

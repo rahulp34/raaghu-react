@@ -322,7 +322,7 @@ const Roles = (props: RdsPageRolesProps) => {
               >
                 <div className="mt-2">
                   <div>
-                    <div className=" mt-4 mb-2 ">
+                    <div>
                       <RdsInput
                         inputType="text"
                         label="Role Name"
@@ -334,7 +334,7 @@ const Roles = (props: RdsPageRolesProps) => {
                         onChange={(e: any) => setVal(e.target.value)}
                       ></RdsInput>
                     </div>
-                    <div className="d-flex mt-4 me-2">
+                    <div className="me-2">
                       <div className="form-check">
                         <input
                           className="form-check-input"
@@ -353,7 +353,7 @@ const Roles = (props: RdsPageRolesProps) => {
                           Default Role
                         </label>
                       </div>
-                      <div className="ms-4 form-check">
+                      <div className="mt-3 form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -539,7 +539,7 @@ const Roles = (props: RdsPageRolesProps) => {
                       <RdsCompClaims allClaimsArray={allClaimsArray} claimsTable={claimsTable} id={id}  ></RdsCompClaims>
                     </div>
                   )}
-                  <div className="footer-buttons my-2">
+                  {/* <div className="footer-buttons my-2">
                     <div className="row">
                       <div className="col-md-12 d-flex">
                         <div>
@@ -564,6 +564,38 @@ const Roles = (props: RdsPageRolesProps) => {
                             databstoggle="offcanvas"
                             databstarget="#role-edit-off"
                             class="ms-2"
+                          ></RdsButton>
+                        </div>
+                      </div>
+                    </div>
+                  </div> */}
+                    <div className="footer-buttons my-2">
+                    <div className="row">
+                      <div className="col-md-12 d-flex">
+                        <div>
+                          <RdsButton
+                            label="Cancel"
+                            type="button"
+                            colorVariant="primary"
+                            size="small"
+                            databsdismiss="offcanvas"
+                            databstoggle="offcanvas"
+                            databstarget="#role-edit-off"
+                            isOutline={true}
+                          ></RdsButton>
+                        </div>
+                        <div>
+                          <RdsButton
+                            label="Save"
+                            type="button"
+                            size="small"
+                            // isDisabled={formValid}
+                            class="ms-2"
+                            colorVariant="primary"
+                            databsdismiss="offcanvas"
+                            databstoggle="offcanvas"
+                            databstarget="#newRole"
+                            onClick={handlerEditRole}
                           ></RdsButton>
                         </div>
                       </div>

@@ -10,6 +10,7 @@ export interface RdsTextAreaProps {
 	isRequired?: boolean;
 	id?: string;
 	required?: boolean;
+	dataTestId?: string;
 	onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	labelPosition?: string;
 	onClick?: (event: React.MouseEvent<HTMLTextAreaElement>) => void;
@@ -45,6 +46,7 @@ const RdsTextArea = (props: RdsTextAreaProps) => {
 					onChange={props.onChange}
 					onClick={props.onClick}
 					value={props.value}
+					data-testId={props.dataTestId}
 				></textarea>
 				{props.labelPosition === "bottom" && (
 					<label className="form-label mt-1">
