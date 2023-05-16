@@ -120,7 +120,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 			<div className="pt-4">
 				<form onSubmit={handleSubmit}>
 					<div className="row">
-						<div className=" col-6 ">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl-6 col-xxl-6">
 							<RdsInput
 								label="Client Id"
 								placeholder="Enter Id"
@@ -132,7 +132,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsInput>
 							{errorClientId && <span className="text-danger">{errorClientId}</span>}
 						</div>
-						<div className="col-6 ">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl-6 col-xxl-6">
 							<RdsInput
 							    required={true}
 								label="Display Name"
@@ -146,7 +146,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 						</div>
 					</div>
 					<div className="row">
-						<div className=" col-6 mb-4">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-4">
 							<RdsInput
 								label="Client Uri"
 								placeholder="Enter Url"
@@ -157,7 +157,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								required={false}
 							></RdsInput>
 						</div>
-						<div className="col-6 mb-4">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-4">
 							<RdsInput
 								label="Logo Uri"
 								placeholder="Enter Uri"
@@ -169,8 +169,8 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsInput>
 						</div>
 					</div>
-					<div className="row pb-3">
-						<div className=" col-6 ">
+					<div className="row">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-3">
 							<RdsLabel label="Type" class="pb-2" />
 							<RdsSelectList
 								label={"Type"}
@@ -180,7 +180,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							></RdsSelectList>
 							{errorType && <span className="text-danger">{errorType}</span>}
 						</div>
-						<div className=" col-6 ">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-3">
 							<RdsLabel label="Scopes" class="pb-2" />
 							<RdsSelectList
 								label={"Ecoped"}
@@ -204,7 +204,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 						)}
 					</div>
 					<div className="row">
-						<div className=" col-6 ">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-0 mb-lg-3 mb-xl-3 mb-xxl-3">
 							<RdsCheckbox
 								classes="py-2"
 								label="Allow Authorization Code Flow"
@@ -231,7 +231,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								isDisabled={isDisabled}
 							></RdsCheckbox>
 						</div>
-						<div className="col-6">
+						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-3">
 							<RdsCheckbox
 								classes="py-2"
 								label="Allow Password Flow"

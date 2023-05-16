@@ -358,7 +358,7 @@ const LanguageText = (props: LanguageTextProps) => {
           </div>
           <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
             <div className="row mt-3">
-              <div className="col-md-3">
+              <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                 <label className="mb-1">Base Culture Name</label>
                 <RdsSelectList
                   label={displayList.baseCulture}
@@ -366,7 +366,7 @@ const LanguageText = (props: LanguageTextProps) => {
                   onSelectListChange={baseCultureHandler}
                 ></RdsSelectList>
               </div>
-              <div className="col-md-3">
+              <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                 <label className="mb-1">Target Culture Name</label>
                 <RdsSelectList
                   label={displayList.targetCulture}
@@ -374,7 +374,7 @@ const LanguageText = (props: LanguageTextProps) => {
                   onSelectListChange={targetCultureHandler}
                 ></RdsSelectList>
               </div>
-              <div className="col-md-3">
+              <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                 <label className="mb-1">Resource Name</label>
                 <RdsSelectList
                   label={displayList.resourceName}
@@ -382,7 +382,7 @@ const LanguageText = (props: LanguageTextProps) => {
                   onSelectListChange={resourceNameHandler}
                 ></RdsSelectList>
               </div>
-              <div className="col-md-3">
+              <div className="col-xxl-3 col-xl-3 col-lg-6 col-md-6 col-12 mb-3">
                 <label className="mb-1">Target Value</label>
                 <RdsSelectList
                   label={displayList.targetvalue}

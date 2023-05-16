@@ -30,7 +30,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
 
    return (
       <div className="row">
-         <div className="col-md-12 sm-p-0">
+         <div className="col-md-12">
             <div className="form-group">
                <RdsInput
                   inputType="text"
@@ -42,7 +42,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
                ></RdsInput>
             </div>
          </div>
-         <div className="col-md-12 sm-p-0">
+         <div className="col-md-12">
             <div className="form-group">
                <RdsInput
                   inputType="text"
