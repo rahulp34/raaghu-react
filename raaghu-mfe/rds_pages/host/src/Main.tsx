@@ -45,7 +45,6 @@ import {
   ApplicationsCompo,
   TextTemplateCompo,
   ApiScopeCompo,
-  ScopeCompo,
   IdentityResourcesCompo,
   SecurityLogsCompo,
   ChatsCompo,
@@ -832,7 +831,6 @@ const Main = (props: MainProps) => {
                             path="/applications"
                             element={<ApplicationsCompo />}
                           ></Route>
-                          <Route path="/scope" element={<ScopeCompo />}></Route>
                           <Route
                             path="/identityResources"
                             element={<IdentityResourcesCompo />}
