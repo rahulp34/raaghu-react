@@ -92,19 +92,18 @@ const Newsletters = (props: any) => {
     dispatch(GetAllNewsLetters(data1) as any);
   }
   return (
-    <div>
+    <div className="card pt-4 px-2 h-100 border-0 rounded-0 card-full-stretch">
       <div className="row">
-        <div className="col-md-5 mx-3 mt-1">
+        <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12 mb-3">
           <RdsLabel class="" label="Preference" size="14px"></RdsLabel>
           <RdsSelectList
             label="Select Roles"
             selectItems={prefenceList}
-            size="lg"
+            size="md"
             onSelectListChange={(e: any) => preferenceChange(e.target.value)}
           ></RdsSelectList>
         </div>
-        <div className="col-md-5 mt-2 h-68  ">
-        
+        <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12 mb-3">
           <RdsInputGroup 
             buttonColorVariant="primary"
             inputGroupLabel="Source"
@@ -117,12 +116,11 @@ const Newsletters = (props: any) => {
             inputValue={inputValueFn}
             outline={false}
             placeholder="Source"
-            
           />
         </div>
       </div>
 
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+      <div>
         <RdsCompDatatable
         actionPosition="right"
           tableHeaders={tableHeaders}

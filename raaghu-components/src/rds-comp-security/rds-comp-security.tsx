@@ -15,7 +15,7 @@ const RdsCompSecurity = (props: RdsCompSecurityProps) => {
 		<>
 			<div className="mt-4">
 				<div>
-					<label className=" mb-2 fw-medium">Password Complexity </label>
+					<label className="mb-2 fw-medium">Password Complexity </label>
 					<div className="fw-normal">
 						<RdsCheckbox label="Use Default Settings" checked={false} />
 						<div className="m-3 ">

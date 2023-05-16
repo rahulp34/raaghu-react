@@ -262,29 +262,30 @@ const SecurityLogsPage = () => {
                     ></RdsDatePicker>
                   </div>
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <label className="mb-2">Application Name</label>
                     <RdsInput
-                      label="Application Name"
                       placeholder="Application Name"
                       value={selectFilterValue.applicationName}
                       onChange={onApplicationNameFilter}></RdsInput>
                   </div>
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
+                    <label className="mb-2">Identity</label>
                     <RdsInput
-                      label="Identity"
                       placeholder="Identity"
                       onChange={onIdentityFilter}
                       value={selectFilterValue.identity}
                     ></RdsInput>
                   </div>
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
-                    <RdsInput label="Username"
+                    <label className="mb-2">Username</label>
+                    <RdsInput
                       placeholder="Username"
                       value={selectFilterValue.userName}
                       onChange={onUserNameFilter}></RdsInput>
                   </div>
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-4">
+                    <label className="mb-2">Actions</label>
                     <RdsInput
-                      label="Actions"
                       placeholder="Actions"
                       value={selectFilterValue.action}
                       onChange={onActionFilter}
