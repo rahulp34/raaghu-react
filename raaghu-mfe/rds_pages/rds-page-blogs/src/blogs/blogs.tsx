@@ -30,6 +30,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
     name: "",
     slug: "",
   });
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [tableDataRowid, setTableDataRowId] = useState('');
   const [blogsFeature, setBlogsFeature] = useState<any>([]);
 
@@ -99,7 +100,21 @@ const Blogs = (props: RdsPageResourcesProps) => {
       slug: value.slug,
     };
     dispatch(addBlogsData(dto) as any).then((res: any) => {
-     
+      if (res.type == "blogs/addBlogsData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Blog added Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchBlogsData() as any);
     });
     setValue({ name: "", slug: "" });
@@ -112,7 +127,21 @@ const Blogs = (props: RdsPageResourcesProps) => {
     };
     dispatch(editBlogsData({ id: tableDataRowid, dto: dto }) as any).then(
       (res: any) => {
-       
+        if (res.type == "blogs/editBlogsData/rejected") {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Blog updated Successfully",
+            color: "success",
+          });
+        }
         dispatch(fetchBlogsData() as any);
       }
     );
@@ -121,7 +150,21 @@ const Blogs = (props: RdsPageResourcesProps) => {
 
   const deleteHandler = () => {
     dispatch(deleteBlogsData(tableDataRowid) as any).then((res: any) => {
-      
+      if (res.type == "blogs/deleteBlogsData/rejected") {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Blogs deleted Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchBlogsData() as any);
     });
   };
@@ -151,12 +194,28 @@ const Blogs = (props: RdsPageResourcesProps) => {
       }
     });
   };
- 
+  useEffect(() => {
+    // Set a 2-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [Data.blogs]);
   return (
     <div className="container-fluid p-0 m-0">
       <div className="row">
         <div className="col-md-12 mb-3 ">
           <div className="row ">
+            <div className="col-md-4">
+              {Alert.show && (
+                <RdsAlert
+                  alertmessage={Alert.message}
+                  colorVariant={Alert.color}
+                ></RdsAlert>
+              )}
+            </div>
             <div className="col-md-8 d-flex justify-content-end my-1">
               <RdsOffcanvas
                 canvasTitle={"New Blog"}
