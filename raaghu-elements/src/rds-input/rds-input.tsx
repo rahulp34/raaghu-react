@@ -19,7 +19,8 @@ export interface RdsInputProps {
   id?: string;
   //required?: boolean;
   required?: boolean;
-
+  dataTestId?: string;
+  
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => any;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => any;
@@ -106,6 +107,7 @@ const RdsInput = (props: RdsInputProps) => {
             onChange={handlerChange}
             disabled={props.isDisabled}
             readOnly={props.readonly}
+            data-testId= {props.dataTestId}
           />
           {props.inputType === "password" && (
             <RdsIcon
@@ -145,6 +147,7 @@ const RdsInput = (props: RdsInputProps) => {
               onChange={handlerChange}
               disabled={props.isDisabled}
               readOnly={props.readonly}
+              data-testId= {props.dataTestId}
             ></input>
             {props.inputType === "password" && (
               <RdsIcon

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { RdsButton, RdsInput, RdsTextArea } from "raaghu-react-elements";
+import { RdsButton, RdsInput, RdsTextArea } from "../rds-elements";
 
 export interface RdsCompContactUsProps {
  
@@ -81,7 +81,7 @@ const RdsCompContactUs = (props:RdsCompContactUsProps) => {
 						placeholder='name@gmail.com'
 						inputType='email'
 						onChange={emailhandleChange}
-						
+						dataTestId="email"
 						value = {email}
 						name = {'email'}
 					></RdsInput>
@@ -94,6 +94,7 @@ const RdsCompContactUs = (props:RdsCompContactUsProps) => {
 						required={true}
 						placeholder='Full Name'
 						inputType = 'text'
+						dataTestId="fullname"
 						onChange = {fullnamehandleChange}
 						name = {'fullname'}
 						value = {fullname}
@@ -107,7 +108,7 @@ const RdsCompContactUs = (props:RdsCompContactUsProps) => {
 					    onChange = {messagehandleChange}
 						rows ={3}
 						value = {message}
-
+						dataTestId="message"
 					/>
 					{error3 && <span style={{color: 'red'}}>{error3}</span>}                                                       
 				</div>

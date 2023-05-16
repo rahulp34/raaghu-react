@@ -12,18 +12,22 @@ import {
   addBlogsData,
   editBlogsData,
   fetchBlogsData,
+  deleteBlogsData,
 } from "../../../../libs/state-management/Blogs/blogs-slice";
-import { useAppDispatch } from "../../../../libs/state-management/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../libs/state-management/hooks";
 
 interface RdsPageResourcesProps {}
 
 const Blogs = (props: RdsPageResourcesProps) => {
   const { t } = useTranslation();
-  const [blogsData, setResourceData] = useState<any>([]);
+  const [blogsData, setBlogsData] = useState<any>([]);
 
   const [value, setValue] = useState({
-    name:"",
-    slug:""
+    name: "",
+    slug: "",
   });
   const [alertOne, setAlertOne] = useState(false);
   const [alert, setAlert] = useState({
@@ -32,48 +36,15 @@ const Blogs = (props: RdsPageResourcesProps) => {
     success: false,
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
-
-  const editDataHandler = () => {
-    const dTo = {
-      displayName: value,
-    };
-    dispatch(editBlogsData({ id: tableDataRowid, dTo: dTo }) as any).then(
-      (res: any) => {
-        dispatch(fetchBlogsData() as any);
-      }
-    );
-    setValue({name:'',slug:''});
-    setAlertOne(true);
-  };
-
-  const [newResourceData, setnewResourceData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
-    displayName: "",
     description: "",
-    accessTokenSigningAlgorithm: "",
+    displayName: "",
+    enabled: false,
+    required: false,
+    emphasize: false,
+    showInDiscoveryDocument: false,
   });
-
-  const [activeNavTabId, setActiveNavTabId] = useState();
-  const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
-
-  const scopeSelection = (rowData: any, actionId: any) => {
-    setTableDataRowId(rowData.id);
-    //dispatch(editScopeshData(rowData.id) as any);
-  };
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchBlogsData() as any);
-  }, [dispatch]);
-
-  const onActionSelection = (rowData: any, actionId: any) => {
-    setTableDataRowId(rowData.id);
-    setValue(rowData.name);
-    if (actionId === "edit") {
-      dispatch(fetchBlogsData() as any);
-    }
-  };
 
   const tableHeaders = [
     {
@@ -96,32 +67,59 @@ const Blogs = (props: RdsPageResourcesProps) => {
     { id: "delete", displayName: "Delete", modalId: "blogs-delete-off" },
   ];
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    displayName: "",
-    enabled: false,
-    required: false,
-    emphasize: false,
-    showInDiscoveryDocument: false,
-  });
+  const Data = useAppSelector((state) => state.persistedReducer.blogs) as any;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (Array.isArray(Data.blogs)) {
+      setBlogsData(Data.blogs);
+    }
+  }, [Data.blogs]);
+
+  console.log("blogsData ", Data.blogs);
+  useEffect(() => {
+    dispatch(fetchBlogsData() as any);
+  }, [dispatch]);
+
+  const handlerActionSelection = (rowData: any, actionId: any) => {
+    setTableDataRowId(rowData.id);
+    if (actionId === "edit") {
+      setValue({ ...value, name: rowData.name, slug: rowData.slug });
+    }
+  };
 
   const offCanvasHandler = () => {};
 
-  const success = () => {
-    // dispatch(deleteScopeshData(tableDataid) as any).then((res: any) => { dispatch(fetchScopeshData() as any); });
-    // setShowAlert({color:true,show:true,message:"Scope Deleted Successfully"})
-  };
-
-  const dTo = {
-    displayName: value,
-  };
   const addDataHandler = () => {
-    dispatch(addBlogsData(dTo) as any).then((res: any) => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(addBlogsData(dto) as any).then((res: any) => {
       dispatch(fetchBlogsData() as any);
     });
-    setValue({name:'',slug:''});
+    setValue({ name: "", slug: "" });
     setAlertOne(true);
+  };
+
+  const editDataHandler = () => {
+    const dto = {
+      name: value.name,
+      slug: value.slug,
+    };
+    dispatch(editBlogsData({ id: tableDataRowid, dto: dto }) as any).then(
+      (res: any) => {
+        dispatch(fetchBlogsData() as any);
+      }
+    );
+    setValue({ name: "", slug: "" });
+    setAlertOne(true);
+  };
+
+  const deleteHandler = () => {
+    dispatch(deleteBlogsData(tableDataRowid) as any).then((res: any) => {
+      dispatch(fetchBlogsData() as any);
+    });
   };
 
   function handleEnabled(event: any) {
@@ -139,98 +137,101 @@ const Blogs = (props: RdsPageResourcesProps) => {
 
   return (
     <div className="container-fluid p-0 m-0">
-      <div className="row"><div className="col-md-12">
-        <div className="d-flex justify-content-between">
-          <div className="col-lg-8 col-md-8">
-            {alert.showAlert && alertOne && (
-              <RdsAlert
-                alertmessage={alert.message}
-                colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
-            )}
-          </div>
-          <div className="d-flex justify-content-end">
-            <RdsOffcanvas
-              canvasTitle={"New Blog"}
-              onclick={offCanvasHandler}
-              placement="end"
-              offcanvasbutton={
-                <div>
-                  <RdsButton
-                    icon="plus"
-                    label={"New Blog" || ""}
-                    iconColorVariant="light"
-                    iconHeight="15px"
-                    iconWidth="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    block={false}
-                    size="small"
-                    type="button"
-                    showLoadingSpinner={false}
-                    colorVariant="primary"
-                  ></RdsButton>
-                </div>
-              }
-              backDrop={true}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"blog-add-off"}
-            >
-              <div>
-                <div className="pt-3">
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Name"
-                    label="Name"
-                    labelPositon="top"
-                    id=""
-                    value={value.name}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <RdsInput
-                    size="medium"
-                    inputType="text"
-                    placeholder="Add Slug"
-                    label="Slug"
-                    labelPositon="top"
-                    id=""
-                    value={value.slug}
-                    required={true}
-                    onChange={(e: any) => {
-                      setValue(e.target.value);
-                    }}
-                  ></RdsInput>
-                  <div className="d-flex footer-buttons mb-3">
+      <div className="row">
+        <div className="col-md-12">
+          <div className="d-flex justify-content-between">
+            <div className="col-lg-8 col-md-8">
+              {alert.showAlert && alertOne && (
+                <RdsAlert
+                  alertmessage={alert.message}
+                  colorVariant={alert.success ? "success" : "danger"}
+                ></RdsAlert>
+              )}
+            </div>
+            <div className="d-flex justify-content-end">
+              <RdsOffcanvas
+                canvasTitle={"New Blog"}
+                onclick={offCanvasHandler}
+                placement="end"
+                offcanvasbutton={
+                  <div>
                     <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
+                      icon="plus"
+                      label={"New Blog" || ""}
+                      iconColorVariant="light"
+                      iconHeight="15px"
+                      iconWidth="15px"
+                      iconFill={false}
+                      iconStroke={true}
+                      block={false}
                       size="small"
-                      isOutline={true}
+                      type="button"
+                      showLoadingSpinner={false}
                       colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      isDisabled={!value.name}
-                      colorVariant="primary"
-                      class="me-2"
-                      showLoadingSpinner={true}
-                      onClick={addDataHandler}
                     ></RdsButton>
                   </div>
+                }
+                backDrop={true}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"blog-add-off"}
+              >
+                <div>
+                  <div className="pt-3">
+                    <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Name"
+                      label="Name"
+                      labelPositon="top"
+                      id=""
+                      value={value.name}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, name: e.target.value });
+                      }}
+                    ></RdsInput>
+                    <RdsInput
+                      size="medium"
+                      inputType="text"
+                      placeholder="Add Slug"
+                      label="Slug"
+                      labelPositon="top"
+                      id=""
+                      value={value.slug}
+                      required={true}
+                      onChange={(e: any) => {
+                        setValue({ ...value, slug: e.target.value });
+                      }}
+                    ></RdsInput>
+                    <div className="d-flex footer-buttons mb-3">
+                      <RdsButton
+                        label="CANCEL"
+                        databsdismiss="offcanvas"
+                        type={"button"}
+                        size="small"
+                        isOutline={true}
+                        colorVariant="primary"
+                        class="me-2"
+                      ></RdsButton>
+                      <RdsButton
+                        label="SAVE"
+                        type={"button"}
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isDisabled={!value.name}
+                        colorVariant="primary"
+                        class="me-2"
+                        showLoadingSpinner={true}
+                        onClick={addDataHandler}
+                      ></RdsButton>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </RdsOffcanvas>
+              </RdsOffcanvas>
+            </div>
           </div>
-        </div></div>
+        </div>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
@@ -241,11 +242,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
           pagination={true}
           recordsPerPage={10}
           recordsPerPageSelectListOption={true}
-          onActionSelection={onActionSelection}
+          onActionSelection={handlerActionSelection}
         ></RdsCompDatatable>
 
         <RdsOffcanvas
-          backDrop={false}
+          backDrop={true}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-edit-off"
@@ -260,11 +261,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                 label="Name"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.name}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, name: e.target.value });
+                }}
               ></RdsInput>
               <RdsInput
                 size="medium"
@@ -273,11 +274,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                 label="Slug"
                 labelPositon="top"
                 id=""
-                //value={value}
+                value={value.slug}
                 required={true}
-                // onChange={(e: any) => {
-                //   setValue(e.target.value);
-                // }}
+                onChange={(e: any) => {
+                  setValue({ ...value, slug: e.target.value });
+                }}
               ></RdsInput>
 
               <div className="d-flex footer-buttons mb-3">
@@ -295,11 +296,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                   type={"button"}
                   size="small"
                   databsdismiss="offcanvas"
-                  //isDisabled={value === ""}
+                  isDisabled={!value.name}
                   colorVariant="primary"
                   class="me-2"
                   showLoadingSpinner={true}
-                  //onClick={addDataHandler}
+                  onClick={editDataHandler}
                 ></RdsButton>
               </div>
             </>
@@ -307,7 +308,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
         ></RdsOffcanvas>
 
         <RdsOffcanvas
-          backDrop={false}
+          backDrop={true}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-features"
@@ -395,7 +396,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           messageAlert="The selected Resource will be Deleted Permanently "
           alertConfirmation="Are you sure"
           deleteButtonLabel="Yes"
-          onSuccess={success}
+          onSuccess={deleteHandler}
         />
       </div>
     </div>

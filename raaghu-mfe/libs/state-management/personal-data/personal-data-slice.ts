@@ -65,6 +65,20 @@ export const downloadTokenPersonalData = createAsyncThunk(
     }
 );
 
+export const RequestsData = createAsyncThunk(
+    "PersonalData/downloadTokenPersonalData",
+    async (data:any) => {
+        
+        return GdprRequestService.getRequestsData({requestId:data.requestId, token:data.token}).then(
+            (result: any) => {
+                
+                return result;
+
+            }
+        );
+    }
+);
+
 const PersonalDataSlice = createSlice({
     name: "PersonalData",
     initialState,

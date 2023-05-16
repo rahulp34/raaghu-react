@@ -322,7 +322,7 @@ const Roles = (props: RdsPageRolesProps) => {
               >
                 <div className="mt-2">
                   <div>
-                    <div className=" mt-4 mb-2 ">
+                    <div>
                       <RdsInput
                         inputType="text"
                         label="Role Name"
@@ -334,7 +334,7 @@ const Roles = (props: RdsPageRolesProps) => {
                         onChange={(e: any) => setVal(e.target.value)}
                       ></RdsInput>
                     </div>
-                    <div className="d-flex mt-4 me-2">
+                    <div className="me-2">
                       <div className="form-check">
                         <input
                           className="form-check-input"
@@ -353,7 +353,7 @@ const Roles = (props: RdsPageRolesProps) => {
                           Default Role
                         </label>
                       </div>
-                      <div className="ms-4 form-check">
+                      <div className="mt-3 form-check">
                         <input
                           className="form-check-input"
                           type="checkbox"
