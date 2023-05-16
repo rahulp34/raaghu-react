@@ -406,6 +406,38 @@ const Edition = (props: RdsPageEditionProps) => {
                 // saveFeature={saveFeature}
                 // restoreFeatures={restoreFeatures}
               />
+              <div className="footer-buttons">
+                  <RdsButton
+                    class="me-2"
+                    tooltipTitle={""}
+                    type={"button"}
+                    label="Restore to default"
+                    colorVariant="outline-primary"
+                    size="small"
+                    databsdismiss="offcanvas"
+                    onClick={restoreFeatures}
+                  ></RdsButton>
+                  <RdsButton
+                    class="me-2"
+                    tooltipTitle={""}
+                    type={"button"}
+                    label="Cancel"
+                    colorVariant="outline-primary"
+                    size="small"
+                    databsdismiss="offcanvas"
+                  ></RdsButton>
+                  <RdsButton
+                    class="me-2"
+                    label="Create"
+                    showLoadingSpinner={true}
+                    size="small"
+                    colorVariant="primary"
+                    tooltipTitle={""}
+                    type={"submit"}
+                    databsdismiss="offcanvas"
+                    onClick={saveFeature}
+                  ></RdsButton>
+                  </div>
             </>
           )}
         </RdsOffcanvas>
