@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { RdsCompBlogPost, RdsCompBlogPostNew } from "../../../rds-components";
 import { RdsButton, RdsDropdownList, RdsSearch } from "../../../../../raaghu-elements/src";
 import { useTranslation } from "react-i18next";
@@ -60,7 +60,7 @@ const BlogPost = () => {
 			details: "Standard",
 			title: 60,
 			blog: "Name",
-			status : "publish",
+			status: "publish",
 			slug: 5,
 			isHomePage: "yes",
 			creationTime: "11-03-2023",
@@ -72,7 +72,7 @@ const BlogPost = () => {
 			details: "Basic",
 			title: 120,
 			blog: "Name",
-			status : "publish",
+			status: "publish",
 			slug: 10,
 			isHomePage: "yes",
 			creationTime: "11-03-2023",
@@ -84,7 +84,7 @@ const BlogPost = () => {
 			details: "Premium",
 			title: 250,
 			blog: "Name",
-			status : "publish",
+			status: "publish",
 			slug: 5,
 			isHomePage: "yes",
 			creationTime: "11-03-2023",
@@ -122,168 +122,168 @@ const BlogPost = () => {
 
 	const dispatch = useAppDispatch();
 
-	useEffect(()=>{
-		 dispatch(getAllBlogPost() as any)
-	},[dispatch]);
+	useEffect(() => {
+		dispatch(getAllBlogPost() as any)
+	}, [dispatch]);
 
-  function createNewCanvasFn(event: any) {
-    event.preventDefault();
-    setActionId("new");
-  }
+	function createNewCanvasFn(event: any) {
+		event.preventDefault();
+		setActionId("new");
+	}
 
-  const blogPostOffCanvashandler =()=>{};
+	const blogPostOffCanvashandler = () => { };
 
-  const [blogPostData, setBlogPostData] = useState<any>({
-	file : "",
-	title: "",
-	blog : "",
-	slug : "",
-	description : "",
-	tag : ""
-});
-
-const postSubmitHandler = (data: any)=>{
-	console.log("Dta check", blogPostData);
-	 dispatch(addBlogPostData(data) as any).then((res : any)=>{
-      console.log(res)
-
-	  dispatch(getAllBlogPost() as any);
-	 });
-
-	 setBlogPostData({
-		file : "",
+	const [blogPostData, setBlogPostData] = useState<any>({
+		file: "",
 		title: "",
-		blog : "",
-		slug : "",
-		description : "",
-		tag : ""
-	  })
-};
+		blog: "",
+		slug: "",
+		description: "",
+		tag: ""
+	});
+
+	const postSubmitHandler = (data: any) => {
+		console.log("Dta check", blogPostData);
+		dispatch(addBlogPostData(data) as any).then((res: any) => {
+			console.log(res)
+
+			dispatch(getAllBlogPost() as any);
+		});
+
+		setBlogPostData({
+			file: "",
+			title: "",
+			blog: "",
+			slug: "",
+			description: "",
+			tag: ""
+		})
+	};
 
 	return (
 		<>
 			<div className="container-fluid m-0 p-0">
 				<div className="row align-items-center">
 					<div className="col-md-12 d-flex justify-content-end">
-              <RdsOffcanvas
-                canvasTitle={"Blog Post"}
-                placement="end" 
-				onClose={blogPostOffCanvashandler}
-                offcanvasbutton={
-                  <div className="d-flex justify-content-end my-1">
-                    <RdsButton
-                      icon="plus"
-                      label={"New Blog Post"}
-                      iconColorVariant="light"
-                      iconHeight="15px"
-                      iconWidth="15px"
-                      iconFill={false}
-                      iconStroke={true}
-                      block={false}
-                      size="small"
-                      type="button"
-                      colorVariant="primary"
-					  showLoadingSpinner={true}
-                      onClick={(e: any) => createNewCanvasFn(e)}
-                    ></RdsButton>
-                  </div>
-                }
-                backDrop={true}
-                scrolling={false}
-                preventEscapeKey={false}
-                offId="blog-post-add-off"
-              >
-                <div className="mt-3">
-                  <RdsCompBlogPostNew  
-				  isEdit={false}
-				  blogPostData={blogPostData}
-				   onSubmit={postSubmitHandler}
-				  />
-                </div>
-              </RdsOffcanvas>
-
-			  <RdsOffcanvas
-          canvasTitle="Edit"
-          placement="end"
-          offId="blogsPost-edit-off"
-          offcanvaswidth={650}
-          backDrop={true}
-          scrolling={false}
-          preventEscapeKey={false}
-        >
-          <RdsCompBlogPostNew isEdit={true}
-
-				  blogPostData={blogPostData}
-				   onSubmit={postSubmitHandler}
-				  />
-
-          <div className="footer-buttons justify-content-end bottom-0 pt-0">
-            <RdsButton
-              class="me-2"
-              label="CANCEL"
-              type="button"
-              databsdismiss="offcanvas"
-              isOutline={true}
-              colorVariant="primary"
-            ></RdsButton>
-            <RdsButton
-              class="me-2"
-              label="SAVE"
-              type="button"
-              isOutline={false}
-              colorVariant="primary"
-              databsdismiss="offcanvas"
-            
-            ></RdsButton>
-          </div>
-        </RdsOffcanvas>
-            </div>
-				</div>
-
-
-				
-				<div className="row">
-					<div className="col-md-12">
-				<div className="card h-100 border-0 rounded-0 card-full-stretch">
-					<div className="container-fluid m-0 py-3">
-				<div className="row">
-					<div className="col-md-12">
-					
-				
-						<div className="row">
-							<div className="col-2">
-								<RdsDropdownList
-									borderDropdown
-									listItems={dropDownList}
-									placeholder="Select a Status"
-									id={"selectStatus"}
+						<RdsOffcanvas
+							canvasTitle={"Blog Post"}
+							placement="end"
+							onClose={blogPostOffCanvashandler}
+							offcanvasbutton={
+								<div className="d-flex justify-content-end my-1">
+									<RdsButton
+										icon="plus"
+										label={"New Blog Post"}
+										iconColorVariant="light"
+										iconHeight="15px"
+										iconWidth="15px"
+										iconFill={false}
+										iconStroke={true}
+										block={false}
+										size="small"
+										type="button"
+										colorVariant="primary"
+										showLoadingSpinner={true}
+										onClick={(e: any) => createNewCanvasFn(e)}
+									></RdsButton>
+								</div>
+							}
+							backDrop={true}
+							scrolling={false}
+							preventEscapeKey={false}
+							offId="blog-post-add-off"
+						>
+							<div className="mt-3">
+								<RdsCompBlogPostNew
+									isEdit={false}
+									blogPostData={blogPostData}
+									onSubmit={postSubmitHandler}
 								/>
 							</div>
-							<div className="col-md-10">
-								<RdsSearch
-									iconside="right"
-									placeholder="Search"
-									size="small"
-								/>
+						</RdsOffcanvas>
+
+						<RdsOffcanvas
+							canvasTitle="Edit"
+							placement="end"
+							offId="blogsPost-edit-off"
+							offcanvaswidth={650}
+							backDrop={true}
+							scrolling={false}
+							preventEscapeKey={false}
+						>
+							<RdsCompBlogPostNew isEdit={true}
+
+								blogPostData={blogPostData}
+								onSubmit={postSubmitHandler}
+							/>
+
+							<div className="footer-buttons justify-content-end bottom-0 pt-0">
+								<RdsButton
+									class="me-2"
+									label="CANCEL"
+									type="button"
+									databsdismiss="offcanvas"
+									isOutline={true}
+									colorVariant="primary"
+								></RdsButton>
+								<RdsButton
+									class="me-2"
+									label="SAVE"
+									type="button"
+									isOutline={false}
+									colorVariant="primary"
+									databsdismiss="offcanvas"
+
+								></RdsButton>
 							</div>
-						
-					</div>
+						</RdsOffcanvas>
 					</div>
 				</div>
+
+
+
 				<div className="row">
 					<div className="col-md-12">
-					<RdsCompBlogPost
-						tableHeaders={tableHeaders}
-						tableData={tableData}
-						pagination={true}
-						actions={actions}
-						recordsPerPage={10}
-					></RdsCompBlogPost>
-				</div></div>
-				</div></div>
+						<div className="card h-100 border-0 rounded-0 card-full-stretch">
+							<div className="container-fluid m-0 py-3">
+								<div className="row">
+									<div className="col-md-12">
+
+
+										<div className="row">
+											<div className="col-xxl-2 col-xl-2 col-lg-6 col-md-12 col-12 mb-3">
+												<RdsDropdownList
+													borderDropdown
+													listItems={dropDownList}
+													placeholder="Select a Status"
+													id={"selectStatus"}
+												/>
+											</div>
+											<div className="col-xxl-10 col-xl-10 col-lg-6 col-md-12 col-12 mb-3">
+												<RdsSearch
+													iconside="right"
+													placeholder="Search"
+													size="small"
+												/>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-md-12">
+										<RdsCompBlogPost
+											tableHeaders={tableHeaders}
+											tableData={tableData}
+											pagination={true}
+											actions={actions}
+											recordsPerPage={10}
+										></RdsCompBlogPost>
+									</div></div>
+							</div></div>
+					</div>
+
 				</div>
-			
-			</div>
 			</div>
 		</>
 	);

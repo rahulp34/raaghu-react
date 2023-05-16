@@ -285,7 +285,7 @@ const Pages = (props: any) => {
 
   return (
     <>
-      <div>
+      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
         <div className="row align-items-center">
           <div className="col-md-12 mb-3 ">
             <div className="row ">
@@ -354,7 +354,7 @@ const Pages = (props: any) => {
             </div>
           </div>
         </div>
-        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+        <div>
           <RdsCompPages
             tableHeaders={tableHeaders}
             actions={actions}
