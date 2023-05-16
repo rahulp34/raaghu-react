@@ -12,6 +12,7 @@ import {
   addBlogsData,
   editBlogsData,
   fetchBlogsData,
+  deleteBlogsData,
 } from "../../../../libs/state-management/Blogs/blogs-slice";
 import {
   useAppDispatch,
@@ -25,8 +26,8 @@ const Blogs = (props: RdsPageResourcesProps) => {
   const [blogsData, setBlogsData] = useState<any>([]);
 
   const [value, setValue] = useState({
-    name:"",
-    slug:""
+    name: "",
+    slug: "",
   });
   const [alertOne, setAlertOne] = useState(false);
   const [alert, setAlert] = useState({
@@ -35,42 +36,15 @@ const Blogs = (props: RdsPageResourcesProps) => {
     success: false,
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
-
-  const Data = useAppSelector((state) => state.persistedReducer.blogs) as any;
-  useEffect(() => {
-    if (Array.isArray(Data.blogs)) {
-      setBlogsData(Data.blogs);
-    }
-  }, [Data.blogs]);
-
-  const [newResourceData, setnewResourceData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
-    displayName: "",
     description: "",
-    accessTokenSigningAlgorithm: "",
+    displayName: "",
+    enabled: false,
+    required: false,
+    emphasize: false,
+    showInDiscoveryDocument: false,
   });
-
-  const [activeNavTabId, setActiveNavTabId] = useState();
-  const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState();
-
-  const scopeSelection = (rowData: any, actionId: any) => {
-    setTableDataRowId(rowData.id);
-    //dispatch(editScopeshData(rowData.id) as any);
-  };
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchBlogsData() as any);
-  }, [dispatch]);
-
-  const onActionSelection = (rowData: any, actionId: any) => {
-    setTableDataRowId(rowData.id);
-    setValue(rowData.name);
-    if (actionId === "edit") {
-      dispatch(fetchBlogsData() as any);
-    }
-  };
 
   const tableHeaders = [
     {
@@ -93,15 +67,19 @@ const Blogs = (props: RdsPageResourcesProps) => {
     { id: "delete", displayName: "Delete", modalId: "blogs-delete-off" },
   ];
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    displayName: "",
-    enabled: false,
-    required: false,
-    emphasize: false,
-    showInDiscoveryDocument: false,
-  });
+  const Data = useAppSelector((state) => state.persistedReducer.blogs) as any;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (Array.isArray(Data.blogs)) {
+      setBlogsData(Data.blogs);
+    }
+  }, [Data.blogs]);
+
+  console.log("blogsData ", Data.blogs);
+  useEffect(() => {
+    dispatch(fetchBlogsData() as any);
+  }, [dispatch]);
 
   const handlerActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
@@ -138,6 +116,12 @@ const Blogs = (props: RdsPageResourcesProps) => {
     setAlertOne(true);
   };
 
+  const deleteHandler = () => {
+    dispatch(deleteBlogsData(tableDataRowid) as any).then((res: any) => {
+      dispatch(fetchBlogsData() as any);
+    });
+  };
+
   function handleEnabled(event: any) {
     setFormData({ ...formData, enabled: event });
   }
@@ -153,46 +137,48 @@ const Blogs = (props: RdsPageResourcesProps) => {
 
   return (
     <div className="container-fluid p-0 m-0">
-      <div className="row"><div className="col-md-12">
-        <div className="d-flex justify-content-between">
-          <div className="col-lg-8 col-md-8">
-            {alert.showAlert && alertOne && (
-              <RdsAlert
-                alertmessage={alert.message}
-                colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
-            )}
-          </div>
-          <div className="d-flex justify-content-end">
-            <RdsOffcanvas
-              canvasTitle={"New Blog"}
-              onclick={offCanvasHandler}
-              placement="end"
-              offcanvasbutton={
+      <div className="row">
+        <div className="col-md-12">
+          <div className="d-flex justify-content-between">
+            <div className="col-lg-8 col-md-8">
+              {alert.showAlert && alertOne && (
+                <RdsAlert
+                  alertmessage={alert.message}
+                  colorVariant={alert.success ? "success" : "danger"}
+                ></RdsAlert>
+              )}
+            </div>
+            <div className="d-flex justify-content-end">
+              <RdsOffcanvas
+                canvasTitle={"New Blog"}
+                onclick={offCanvasHandler}
+                placement="end"
+                offcanvasbutton={
+                  <div>
+                    <RdsButton
+                      icon="plus"
+                      label={"New Blog" || ""}
+                      iconColorVariant="light"
+                      iconHeight="15px"
+                      iconWidth="15px"
+                      iconFill={false}
+                      iconStroke={true}
+                      block={false}
+                      size="small"
+                      type="button"
+                      showLoadingSpinner={false}
+                      colorVariant="primary"
+                    ></RdsButton>
+                  </div>
+                }
+                backDrop={true}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"blog-add-off"}
+              >
                 <div>
-                  <RdsButton
-                    icon="plus"
-                    label={"New Blog" || ""}
-                    iconColorVariant="light"
-                    iconHeight="15px"
-                    iconWidth="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    block={false}
-                    size="small"
-                    type="button"
-                    showLoadingSpinner={false}
-                    colorVariant="primary"
-                  ></RdsButton>
-                </div>
-              }
-              backDrop={true}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"blog-add-off"}
-            >
-              <div>
-                <div className="pt-3">
-                <RdsInput
+                  <div className="pt-3">
+                    <RdsInput
                       size="medium"
                       inputType="text"
                       placeholder="Add Name"
@@ -218,33 +204,34 @@ const Blogs = (props: RdsPageResourcesProps) => {
                         setValue({ ...value, slug: e.target.value });
                       }}
                     ></RdsInput>
-                  <div className="d-flex footer-buttons mb-3">
-                    <RdsButton
-                      label="CANCEL"
-                      databsdismiss="offcanvas"
-                      type={"button"}
-                      size="small"
-                      isOutline={true}
-                      colorVariant="primary"
-                      class="me-2"
-                    ></RdsButton>
-                    <RdsButton
-                      label="SAVE"
-                      type={"button"}
-                      size="small"
-                      databsdismiss="offcanvas"
-                      isDisabled={!value.name}
-                      colorVariant="primary"
-                      class="me-2"
-                      showLoadingSpinner={true}
-                      onClick={addDataHandler}
-                    ></RdsButton>
+                    <div className="d-flex footer-buttons mb-3">
+                      <RdsButton
+                        label="CANCEL"
+                        databsdismiss="offcanvas"
+                        type={"button"}
+                        size="small"
+                        isOutline={true}
+                        colorVariant="primary"
+                        class="me-2"
+                      ></RdsButton>
+                      <RdsButton
+                        label="SAVE"
+                        type={"button"}
+                        size="small"
+                        databsdismiss="offcanvas"
+                        isDisabled={!value.name}
+                        colorVariant="primary"
+                        class="me-2"
+                        showLoadingSpinner={true}
+                        onClick={addDataHandler}
+                      ></RdsButton>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </RdsOffcanvas>
+              </RdsOffcanvas>
+            </div>
           </div>
-        </div></div>
+        </div>
       </div>
       <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
         <RdsCompDatatable
@@ -255,11 +242,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
           pagination={true}
           recordsPerPage={10}
           recordsPerPageSelectListOption={true}
-          onActionSelection={onActionSelection}
+          onActionSelection={handlerActionSelection}
         ></RdsCompDatatable>
 
         <RdsOffcanvas
-          backDrop={false}
+          backDrop={true}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-edit-off"
@@ -267,7 +254,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           canvasTitle="Edit Blog"
           children={
             <>
-         <RdsInput
+              <RdsInput
                 size="medium"
                 inputType="text"
                 placeholder="Add Name"
@@ -309,11 +296,11 @@ const Blogs = (props: RdsPageResourcesProps) => {
                   type={"button"}
                   size="small"
                   databsdismiss="offcanvas"
-                  //isDisabled={value === ""}
+                  isDisabled={!value.name}
                   colorVariant="primary"
                   class="me-2"
                   showLoadingSpinner={true}
-                  //onClick={addDataHandler}
+                  onClick={editDataHandler}
                 ></RdsButton>
               </div>
             </>
@@ -321,7 +308,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
         ></RdsOffcanvas>
 
         <RdsOffcanvas
-          backDrop={false}
+          backDrop={true}
           preventEscapeKey={true}
           scrolling={false}
           offId="blogs-features"
@@ -409,7 +396,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
           messageAlert="The selected Resource will be Deleted Permanently "
           alertConfirmation="Are you sure"
           deleteButtonLabel="Yes"
-          // onSuccess={success}
+          onSuccess={deleteHandler}
         />
       </div>
     </div>
