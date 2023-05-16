@@ -49,7 +49,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
        <RdsInput
             label="Name"
             value={data.name}
-            placeholder="Enter name"
+            placeholder="Enter Name"
             required={true}
             name="name"
             onChange={onNameChangeHandler}
@@ -60,16 +60,16 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             <RdsInput
               label="Regex"
               value={data.regex}
-              placeholder="Enter regex"
+              placeholder="Enter Regex"
               name="regex"
               required={false}
               onChange={onRegexChangeHandler}
             />
       </div>
       <div className="col-md-6 mb-3">	
-      <RdsLabel label="Value Type" class="pb-2" />
+      <RdsLabel label="Value Type"/>
             <RdsSelectList
-              label={"Value type"}
+              label={"Value Type"}
               selectItems={props.valueType}
               selectedValue={data.valueType}
               selectedOption={data.valueTypeAsString}
@@ -80,7 +80,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
       <RdsInput
             label="Regex Description"
             value={data.regexDescription}
-            placeholder="Enter regex description"
+            placeholder="Enter Regex Description"
             name="regexDesc"
             required={false}
             onChange={onRegexDescChangeHandler}
@@ -89,7 +89,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
       <div className="col-md-12">	
       <RdsTextArea
             label="Description"
-            placeholder="Enter description"
+            placeholder="Enter Description"
             onChange={onDescChangeHAndler}
             value={data.description}
             rows={3}

@@ -24,7 +24,6 @@ const ClaimTypesCompo = React.lazy(() => import("ClaimTypes/ClaimTypes"));
 const ApplicationsCompo = React.lazy(() => import("Applications/Applications"));
 const TextTemplateCompo = React.lazy(() => import("TextTemplate/TextTemplate"));
 const ApiScopeCompo = React.lazy(() => import("ApiScope/ApiScope"));
-const ScopeCompo = React.lazy(() => import("Scope/Scope"));
 const IdentityResourcesCompo = React.lazy(
   () => import("IdentityResources/IdentityResources")
 );
@@ -88,7 +87,6 @@ const RegisterCompo = React.lazy(() => import("Register/Register"));
   ApplicationsCompo,
   TextTemplateCompo,
   ApiScopeCompo,
-  ScopeCompo,
   IdentityResourcesCompo,
   SecurityLogsCompo,
   ChatsCompo,

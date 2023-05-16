@@ -103,13 +103,6 @@ declare module "ApiScope/ApiScope" {
 	const ApiScopeComponent : React.ComponentType;
 	export default ApiScopeComponent;
 }
-
-declare module "Scope/Scope" {
-	const ScopeComponent : React.ComponentType;
-	export default ScopeComponent;
-}
-
-
 declare module "IdentityResources/IdentityResources" {
 	const IdentityresourcesComponent : React.ComponentType;
 	export default IdentityResourcesComponent;
