@@ -6,14 +6,14 @@ type InitialState = {
   loading: boolean;
   blogs: any;
   error: string;
-  featureIdentitySettings: any;
+  blogsFeature: any;
 };
 
 const initialState: InitialState = {
   loading: false,
   blogs: [],
   error: "",
-  featureIdentitySettings: null,
+  blogsFeature: null,
 };
 
 export const fetchBlogsData = createAsyncThunk("blogs/fetchBlogsData", () => {
@@ -48,7 +48,6 @@ export const addBlogsData = createAsyncThunk(
 export const editBlogsData = createAsyncThunk(
   "blogs/editBlogsData",
   ({ id, dto }: { id: any; dto: any }) => {
-    debugger;
     return BlogAdminService.putBlogs({
       id: id,
       requestBody: dto,
@@ -66,6 +65,18 @@ export const fetchFeaturesBlogs = createAsyncThunk(
         return result;
       }
     );
+  }
+);
+
+export const putBlogsFeatures = createAsyncThunk(
+  "blogs/putBlogsFeatures",
+  ({ id, dto }: { id: string; dto: any }) => {
+    return BlogFeatureAdminService.putBlogsFeatures({
+      blogId: id,
+      requestBody: dto,
+    }).then((result: any) => {
+      return result;
+    });
   }
 );
 // export const saveFeaturesEdition = createAsyncThunk(
@@ -165,7 +176,7 @@ const blogsSlice: any = createSlice({
       fetchFeaturesBlogs.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.featureIdentitySettings = action.payload;
+        state.blogsFeature = action.payload;
       }
     );
     builder.addCase(fetchFeaturesBlogs.rejected, (state, action) => {
@@ -181,7 +192,7 @@ const blogsSlice: any = createSlice({
     //   saveFeaturesEdition.fulfilled,
     //   (state, action: PayloadAction<any>) => {
     //     state.loading = false;
-    //     state.featureIdentitySettings = action.payload;
+    //     state.blogsFeature = action.payload;
     //   }
     // );
     // builder.addCase(saveFeaturesEdition.rejected, (state, action) => {
@@ -197,7 +208,7 @@ const blogsSlice: any = createSlice({
     //   restoreToDefaultFeaturesEdition.fulfilled,
     //   (state, action: PayloadAction<any>) => {
     //     state.loading = false;
-    //     state.featureIdentitySettings = action.payload;
+    //     state.blogsFeature = action.payload;
     //   }
     // );
     // builder.addCase(
