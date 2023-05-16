@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import RdsCompRegister from "../../../../../raaghu-components/src/rds-comp-register";
+import { useAppDispatch, useAppSelector } from "../../../../libs/state-management/hooks";
+import { registerData } from "../../../../libs/state-management/register/register-slice";
 
 const Register = (props: any) => {
+	const dispatch = useAppDispatch();
 	const loginHandler: any = (isLoginClicked: boolean) => { };
+
+	useEffect(() => {
+		debugger
+		dispatch(registerData(null) as any);
+	}, []);
+
+	const registerHandler = (emailAddress: any, password: any, userName: any, appName: any) => {
+		debugger
+		dispatch(registerData({ emailAddress, password, userName, appName }) as any).then((res: any) => {
+		});
+	};
+
 	return (
 		<>
 			<div className="login-background">
@@ -27,9 +42,14 @@ const Register = (props: any) => {
 											<img src="./assets/raaghu_text_logo.svg"></img>
 										</div>
 									</div>
-									<RdsCompRegister getvalidTenantName={""} email={""} password={""} onRegister={function (email: string, password: string, username: string): void {
-										throw new Error("Function not implemented.");
-									}} currentTenant={undefined} validTenant={undefined} onLogin={loginHandler}></RdsCompRegister>
+									<RdsCompRegister
+										getvalidTenantName={""}
+										emailAddress={""} password={""}
+										userName={""}
+										onLogin={loginHandler}
+										onRegister={registerHandler}
+										currentTenant={undefined}
+										validTenant={undefined} appName={""}></RdsCompRegister>
 
 								</div>
 							</div>
