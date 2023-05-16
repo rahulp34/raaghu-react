@@ -157,7 +157,7 @@ const Users = () => {
     { label: "Roles", tablink: "#nav-role", id: 1 },
     { label: "Organization Units", tablink: "#nav-org", id: 2 },
     { label: "Permissions", tablink: "#nav-profile", id: 3 },
-    { label: "Set Password", tablink: "#set-password", id: 4 },
+    // { label: "Set Password", tablink: "#set-password", id: 4 },
   ];
   const navtabsItems = [
     { label: "Basics", tablink: "#nav-home", id: 0 },
@@ -819,7 +819,7 @@ const Users = () => {
         onclick={offCanvasHandler}
         placement="end"
         offId="user-edit-off"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         onClose={(e) => {
           offcanvasClose();
@@ -935,7 +935,7 @@ const Users = () => {
         onclick={offCanvasHandler}
         placement="end"
         offId="set_password"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         onClose={(e) => {
           offcanvasClose();

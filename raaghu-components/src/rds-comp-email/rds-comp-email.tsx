@@ -183,7 +183,7 @@ useEffect( () => {
         </div>
 
         {condition }
-        <div className="position-relative bottom-0 justify-content-end" style={{right:0}}>
+        <div className="footer-buttons d-flex justify-content-start" style={{right:0}}>
           <div className=" d-flex justify-content-start mt-3" >
             <RdsButton
               class="me-2"
