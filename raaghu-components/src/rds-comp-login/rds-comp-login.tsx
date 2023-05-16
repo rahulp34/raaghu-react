@@ -264,8 +264,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               tooltipTitle={""}
               type="submit"
             />
-             <div className="float-start mt-3">
-              <p>Not a member yet?  <span><a
+             <div className="mt-3">
+              <p>Don't Have An Account  <span><a
                 className="link-primary text-decoration-none"
                 href="javascript:void(0)"
                 onClick={registerHandler}
