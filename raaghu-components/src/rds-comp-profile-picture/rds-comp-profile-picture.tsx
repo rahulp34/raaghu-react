@@ -20,7 +20,7 @@ const RdsCompProfilePicture = (props: any) => {
 
   function profileImage(data: any) {
     const fileSize = data.files[0].size / 1024; //now size in kb
-
+//validation
     if(fileSize>props?.limit){
       setIsExceed(true)
     }else{
