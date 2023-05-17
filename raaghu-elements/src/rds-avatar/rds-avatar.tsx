@@ -108,8 +108,7 @@ const RdsAvatar = (props: RdsAvatarProps) => {
         )}
         {WPP === true && (
           <div
-            className=" flex-grow-0 align-items-center"
-            style={{ display: Aligned }}
+            className=" flex-grow-0 align-items-center d-flex"
           >
             <img
               src={withPP}
