@@ -9,7 +9,7 @@ export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
-  onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
+  onClickThemeCheck?:(event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   notifications?: any[];
   languageItems: any[];
   themeItems:any[];
@@ -69,31 +69,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
-  const themeItems = [
-    {
-      label: "Light",
-      val:"",
-      id:"light"
-    },
-    {
-      label: "Dark",
-      val:"",
-      id:"dark"
-    },
-    {
-      label: "SemiDark",
-      val:"",
-      id:"semidark"
-    },
-  ];
+ 
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
       props.onClick(e, val);
     }
   };
-  const onClicktheme = (e: any) => {
+
+  const onClicktheme  =(e: any, val:string)  =>
+  {
     if(props.onClickThemeCheck){
-        props.onClickThemeCheck(e);
+        props.onClickThemeCheck(e,val);
     }
   };
 
@@ -241,18 +227,28 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           ></MultiLevelDropdown></div> */}
            <div className="position-relative me-3 border-end">
             <RdsDropdownList
+               labelIcon='sun'
+               labelIconWidth='18px'
+               labelIconHeight='18px'
+               isIconPlaceholder={true}
+               isPlaceholder={false}
               placeholder={props.themeLabel}            
               id={"themeDropdown"}
               listItems={props.themeItems}
               onClick={onClicktheme}
             ></RdsDropdownList>
           </div>
-          <div className="position-relative me-3 border-end">
+          <div className="position-relative px-3 border-end">
             <RdsDropdownList
+              labelIcon='en'
+              labelIconWidth='18px'
+              labelIconHeight='18px'
               placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
               iconStroke={true}
+              isIconPlaceholder={true}
+              isPlaceholder={false}
               id={"languageDropdown"}
               listItems={props.languageItems}
               onClick={onClickHandler}
@@ -260,7 +256,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
           <Link
             to="/chats"
-            className="me-3 pe-3 border-end"
+            className="px-3 border-end"
             role="button"
             onClick={chatsHandler}
           >
@@ -273,7 +269,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               colorVariant="primary"
             ></RdsIcon>
           </Link>
-          <div >
+          <div className="px-3">
             <RdsOffcanvas
               className="pb-0"
               placement="end"

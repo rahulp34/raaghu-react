@@ -241,7 +241,7 @@ const Polls = (props: any) => {
     setAlertOne(true);
   };
 
-
+  const offCanvasHandler = () => {};
   function OnSave() {
     console.log(getCreateNewPollsOptionData, "Polls Data here");
     const allData = {
@@ -297,37 +297,43 @@ const Polls = (props: any) => {
   return (
     <div className="container-fluid p-0 m-0">
     <div className="row">
-      <div className="col-md-12 text-end pb-3 desktop-btn">
-        <RdsButton
-          label="New poll"
-          type="button"
-          size="medium"
-          colorVariant="primary"
-          showLoadingSpinner={true}
-          databstoggle="offcanvas"
-          databstarget="#poll-new-off"
-          icon={"plus"}
-          iconWidth={"12px"}
-          iconHeight={"12px"}
-        ></RdsButton>
-      </div>
-      <div className=" col-md-10">
+      <div className="col-md-12 d-flex  justify-content-between desktop-btn">
+      <div>
           {alert.showAlert && alertOne && (
           <RdsAlert
             alertmessage={alert.message}
             colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
         )}
           </div>
-      <div className="col-lg-3 col-md-3 mb-2 d-flex justify-content-end">
-        <RdsOffcanvas
-          backDrop={true}
-          scrolling={true}
-          preventEscapeKey={false}
-          offId="poll-new-off"
-          canvasTitle={"New"}
-          placement="end"
-        >
-          <RdsNavtabs
+      <RdsOffcanvas
+            canvasTitle="NEW POLL"
+            onclick={offCanvasHandler}
+            placement="end"
+            offcanvasbutton={
+              
+
+                <RdsButton
+                  icon="plus"
+                  iconColorVariant="light"
+                  size="small"
+                  type="button"
+                  block={false}
+                  iconHeight="15px"
+                  iconWidth="15px"
+                  iconFill={false}
+                  iconStroke={true}
+                  showLoadingSpinner={true}
+                  colorVariant="primary"
+                  label="New poll"
+                />
+              
+            }
+            backDrop={true}
+            scrolling={false}
+            preventEscapeKey={false}
+            offId={"Edition"}
+          >
+            <RdsNavtabs
             navtabsItems={navtabsItems}
             type={"tabs"}
             activeNavTabId={activeNavTabId}
@@ -355,7 +361,7 @@ const Polls = (props: any) => {
             )}
           </RdsNavtabs>
           <div className="row mt-5 footer-buttons bottom-0 mx-0 ">
-            <div className="col-2 mx-2">
+            <div className="col-md-2 mx-2">
               <RdsButton
                 label="Cancel"
                 colorVariant="primary"
@@ -382,14 +388,13 @@ const Polls = (props: any) => {
               />
             </div>
           </div>
-        </RdsOffcanvas>
-
-        <RdsOffcanvas
+          </RdsOffcanvas>
+          <RdsOffcanvas
           canvasTitle="Edit"
           placement="end"
           offId="poll-edit-off"
           offcanvaswidth={650}
-          backDrop={false}
+          backDrop={true}
           scrolling={false}
           preventEscapeKey={false}
         >
@@ -443,8 +448,9 @@ const Polls = (props: any) => {
           </div>
         </RdsOffcanvas>
       </div>
+
       <div className="col-md-12">
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch mt-3">
+      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
         <RdsCompDatatable
          actionPosition="right"
           tableHeaders={tableHeaders}

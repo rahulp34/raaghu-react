@@ -268,7 +268,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className=" justify-content-end d-flex bottom-0 pt-0 ">
+        <div className=" justify-content-start d-flex bottom-0 pt-0 ">
           <RdsButton
             class="me-2"
             label="CANCEL"
