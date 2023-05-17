@@ -519,7 +519,7 @@ const PaymentPlans = () => {
                 recordsPerPage={5}
                 noDataTitle={"No Plans Available"}
               ></RdsCompDatatable>
-              <RdsCompAlertPopup alertID="delete" onSuccess={confirmDelete} />
+              <RdsCompAlertPopup alertID="payPlan-delete-off" onSuccess={confirmDelete} />
               <RdsCompAlertPopup
                 alertID="manageGatewayPlans"
                 onSuccess={confirmRoute}
