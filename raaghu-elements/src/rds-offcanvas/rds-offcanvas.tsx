@@ -68,7 +68,7 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
         style={{ width: Width }}
       >
         <div className={`${isCanvasTitle ? 'offcanvas-header' : "offcanvas-header border-0"}`}>
-          {isCanvasTitle && <h5 className="offcanvas-title text-uppercase fw-bold" id={`'canvas' +${props.offId}`}>
+          {isCanvasTitle && <h5 className="offcanvas-title text-uppercase" id={`'canvas' +${props.offId}`}>
             {props.canvasTitle}
           </h5>}
           <button

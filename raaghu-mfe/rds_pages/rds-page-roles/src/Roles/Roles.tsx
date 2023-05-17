@@ -539,7 +539,7 @@ const Roles = (props: RdsPageRolesProps) => {
                       <RdsCompClaims allClaimsArray={allClaimsArray} claimsTable={claimsTable} id={id}  ></RdsCompClaims>
                     </div>
                   )}
-                  {/* <div className="footer-buttons my-2">
+                  <div className="footer-buttons my-2">
                     <div className="row">
                       <div className="col-md-12 d-flex">
                         <div>
@@ -564,38 +564,6 @@ const Roles = (props: RdsPageRolesProps) => {
                             databstoggle="offcanvas"
                             databstarget="#role-edit-off"
                             class="ms-2"
-                          ></RdsButton>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-                    <div className="footer-buttons my-2">
-                    <div className="row">
-                      <div className="col-md-12 d-flex">
-                        <div>
-                          <RdsButton
-                            label="Cancel"
-                            type="button"
-                            colorVariant="primary"
-                            size="small"
-                            databsdismiss="offcanvas"
-                            databstoggle="offcanvas"
-                            databstarget="#role-edit-off"
-                            isOutline={true}
-                          ></RdsButton>
-                        </div>
-                        <div>
-                          <RdsButton
-                            label="Save"
-                            type="button"
-                            size="small"
-                            // isDisabled={formValid}
-                            class="ms-2"
-                            colorVariant="primary"
-                            databsdismiss="offcanvas"
-                            databstoggle="offcanvas"
-                            databstarget="#newRole"
-                            onClick={handlerEditRole}
                           ></RdsButton>
                         </div>
                       </div>
