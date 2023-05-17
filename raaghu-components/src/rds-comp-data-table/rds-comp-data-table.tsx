@@ -7,7 +7,7 @@ import {
   RdsPagination,
   RdsIllustration,
   RdsAvatar
-} from "raaghu-react-elements";
+} from "../rds-elements";
 import "./rds-comp-data-table.scss";
 
 

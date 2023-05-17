@@ -5,7 +5,7 @@ import {
   RdsIllustration,
   RdsInput,
   RdsTextArea,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 export interface RdsCompWebhookSubscriptionProps {
   webhookItem?: (item: any) => void;
