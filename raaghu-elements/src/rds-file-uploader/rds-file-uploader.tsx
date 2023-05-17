@@ -32,6 +32,12 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     size = "form-select-sm";
     SIZE = "small";
   }
+  const kbToMb = (kb:any) => {
+    const mb = kb / 1024;
+    return Math.round(mb * 100) / 100; // Round off to 2 decimal places
+  };
+  
+  const fileSizeInMB = kbToMb(props.limit);
 
   const borderColor = "border-" + props.colorVariant || "primary";
   const onDelete = (id: any) => {
@@ -91,7 +97,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   onChange={onchangehandler}
                 />
                {isExceed&& <div className="form-control-feedback">
-                  <span className="text-danger">File size should not be greater than {props.limit} MB </span>
+                  <span className="text-danger">File size should not be greater than {fileSizeInMB} MB </span>
                 </div>}
               </form>
             </div>
@@ -103,7 +109,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             <div className="labelbox">
               <label className={`label  ${SIZE} `}>{props.label}</label>
               <label className={`label ${SIZE}`}>
-                Maximum {props.limit} MB
+                Maximum {fileSizeInMB} MB
               </label>
             </div>
 
