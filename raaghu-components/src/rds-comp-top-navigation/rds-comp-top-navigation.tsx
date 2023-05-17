@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
-import { RdsIcon, RdsOffcanvas } from "../rds-elements";
+import { RdsIcon, RdsOffcanvas,RdsButton } from "../rds-elements";
 import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/index";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 import elementList from "./element-list";
@@ -221,9 +221,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
         </div>
         
-        <span className="d-block d-md-none " onClick={() => setExpanded(!expanded)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-three-dots-vertical"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg></span>
         {expanded ? (
-        <div className="d-flex me-2 align-items-center right-side-menu">
+        <div className="d-flex align-items-center right-side-menu">
           {/* <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
@@ -257,6 +256,18 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               onClick={onClickHandler}
             ></RdsDropdownList>
           </div>
+          <div className="position-relative px-3 border-end d-block d-lg-none">
+            <RdsButton
+									type={"button"}
+									icon="home"
+									
+									iconFill={false}
+									iconColorVariant="light"
+									iconStroke={true}
+									iconHeight="13px"
+									iconWidth="13px"
+								></RdsButton>
+                </div>
           <Link
             to="/chats"
             className="px-3 border-end"

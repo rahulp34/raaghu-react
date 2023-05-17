@@ -351,10 +351,10 @@ const Main = (props: MainProps) => {
     configurationService(currentLanguage).then(async (res: any) => {
       if (res.currentUser.id) { 
         localStorage.setItem("userId", res.currentUser.id);
-        if(e.target.innerText =='العربية'){
+          if (currentLanguage =='العربية'){
           document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
         }
-        else if (e.target.innerText !== 'Hindi') {
+        else  {
           document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
         }
       }
