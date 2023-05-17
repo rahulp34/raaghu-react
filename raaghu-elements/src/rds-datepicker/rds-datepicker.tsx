@@ -105,7 +105,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     <>
       {props.type !== "advanced" && (
         <>
-          {props.DatePickerLabel && <div>{props.DatePickerLabel}</div>}
+          {props.DatePickerLabel && <label className="form-label">{props.DatePickerLabel}</label>}
           <div className="input-group input-group-datePicker mb-3">
             <DatePicker
               selected={startDate}
@@ -138,7 +138,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       )}
       {props.type === "advanced" && (
         <>
-          {props.DatePickerLabel && <div className="mb-2">{props.DatePickerLabel}</div>}
+          {props.DatePickerLabel && <label className="form-label">{props.DatePickerLabel}</label>}
           <div className="dropdown border rounded justify-content-between text-start d-block">
             <button
               className="bg-transparent border-0 d-flex dropdown-toggle py-1 ps-2 w-100 justify-content-between"

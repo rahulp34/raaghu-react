@@ -7,7 +7,7 @@ import {
   RdsPagination,
   RdsIllustration,
   RdsAvatar
-} from "raaghu-react-elements";
+} from "../rds-elements";
 import "./rds-comp-data-table.scss";
 
 
@@ -392,7 +392,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                             <>
                               <div className="btn-group dropstart">
                                 <button
-                                  className="btn rounded-pill border-0"
+                                  className="btn rounded-pill border-0 three-dot-btn"
                                   type="button"
                                   aria-expanded="false"
                                   //onClick={() => openCloseDropDown(index)}
@@ -652,7 +652,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                             <>
                               <div className="btn-group dropstart">
                                 <button
-                                  className="btn rounded-pill border-0"
+                                  className="btn rounded-pill border-0 three-dot-btn"
                                   type="button"
                                   aria-expanded="false"
                                   //onClick={() => openCloseDropDown(index)}
