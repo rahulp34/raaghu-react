@@ -71,10 +71,10 @@ function RdsCompPollsQuestion(props:any) {
 
   return(
     <>
-    <div>
+    <div className='container-fluid m-0 p-0'>
 
           <div className="row mt-3">
-            <div className="col-6">
+            <div className="col-md-6">
               <RdsInput
                 required={true}
                 label="Question"
@@ -87,7 +87,7 @@ function RdsCompPollsQuestion(props:any) {
               ></RdsInput>
             </div>
 
-            <div className="col-6 ">
+            <div className="col-md-6 ">
               <RdsInput
                 label="Code"
                 placeholder=""
@@ -101,7 +101,7 @@ function RdsCompPollsQuestion(props:any) {
             </div>
           </div>
           <div className="row">
-            <div className="col-6 mt-1">
+            <div className="col-md-6 mt-1">
             <RdsInput
                 label="Name"
                 placeholder=""
@@ -114,7 +114,7 @@ function RdsCompPollsQuestion(props:any) {
               ></RdsInput>
             </div>
             
-            <div className="col-6 mt-2">
+            <div className="col-md-6 mt-2">
             <RdsLabel
             class="mb-1"
           label="Widget"
@@ -128,14 +128,14 @@ function RdsCompPollsQuestion(props:any) {
             </div>
           </div>
           <div className="row mt-2">
-            <div className="col-6">
+            <div className="col-md-6">
             <RdsDatepicker
             onDatePicker={handleStartDate}
             DatePickerLabel="Start Date"
             type="default" 
           />
             </div>
-          <div className="col-6">
+          <div className="col-md-6">
           <RdsDatepicker
             onDatePicker={handleEndDate}
             DatePickerLabel="End Date"
@@ -144,7 +144,7 @@ function RdsCompPollsQuestion(props:any) {
           </div>
           </div>
           <div className="row mt-2">
-            <div className="col-12">
+            <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show remaining time"
@@ -156,7 +156,7 @@ function RdsCompPollsQuestion(props:any) {
             </div>
           </div>
            <div className="row mt-3">
-            <div className="col-12">
+            <div className="col-md-12">
              <RdsDatepicker
               onDatePicker={handleResultDatepickerData}
               DatePickerLabel="Result Showing End Date"
@@ -165,7 +165,7 @@ function RdsCompPollsQuestion(props:any) {
             </div>
            </div>
           <div className="row mt-2">
-            <div className="col-12">
+            <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Allow multiple voting"
@@ -178,7 +178,7 @@ function RdsCompPollsQuestion(props:any) {
           </div>
          
           <div className="row mt-2">
-            <div className="col-12">
+            <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show vote count"
@@ -190,7 +190,7 @@ function RdsCompPollsQuestion(props:any) {
             </div>
           </div>
           <div className="row mt-2">
-            <div className="col-12">
+            <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show result without giving vote"
