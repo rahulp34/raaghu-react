@@ -1,6 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { RdsLabel, RdsCheckbox, RdsSelectList, RdsDropdownList } from "../rds-elements";
 import './rds-comp-tenant-management.scss'
+
 export interface RdsCompTenantManagementProps {
   settingsTenantEditionList: any[];
   allowSelfRegistration: boolean;
@@ -10,8 +11,8 @@ export interface RdsCompTenantManagementProps {
 const RdsCompTenantManagement = (props: RdsCompTenantManagementProps) => {
   const dropdownListItems = [
     {
-    label: "Standard",
-    val: "en",
+      label: "Standard",
+      val: "en",
     },
     {
       label: "Basic",
@@ -25,61 +26,61 @@ const RdsCompTenantManagement = (props: RdsCompTenantManagementProps) => {
       label: "Professional",
       val: "en",
     },
-];
+  ];
   return (
-    <div className="mt-4">
-        <div className="fw-medium">
-          <RdsLabel label="Form-Based Registration"/>
-        </div>
-        <div className="form-group py-2 fw-medium">
-          <RdsCheckbox
-            isDisabled={false}
-            label="Allow Tenants To Register To The System."
-            checked={props.allowSelfRegistration}
-            withlabel={true}
-            isSwitch={false}
-          />
-          <h6 className="sub-text pt-2">
-            If You Disable This, Tenants Will Only Be Added By Admin Using
-            Tenant Management Page
-          </h6>
-        </div>
-        <div className="form-group py-2 fw-medium">
-          <RdsCheckbox
-            isDisabled={false}
-            label="New Registered Tenants Are Active By Default."
-            checked={props.isNewRegisteredTenantActiveByDefault}
-            withlabel={true}
-            isSwitch={false}
-          />
-          <h6 className="sub-text pt-2">
-            If You Disable This, New Tenants Will Not Be Active (And Can Not
-            Login) Until Admin Manually Activates The Account
-          </h6>
-        </div>
+    <div className="mt-4" >
+      <div className="fw-medium" >
+        <RdsLabel label="Form-Based Registration" />
+      </div>
+      <div className="form-group py-2 fw-medium">
+        <RdsCheckbox
+          isDisabled={false}
+          label="Allow Tenants To Register To The System."
+          checked={props.allowSelfRegistration}
+          withlabel={true}
+          isSwitch={false}
+        />
+        <h6 className="sub-text pt-2">
+          If You Disable This, Tenants Will Only Be Added By Admin Using
+          Tenant Management Page
+        </h6>
+      </div>
+      <div className="form-group py-2 fw-medium">
+        <RdsCheckbox
+          isDisabled={false}
+          label="New Registered Tenants Are Active By Default."
+          checked={props.isNewRegisteredTenantActiveByDefault}
+          withlabel={true}
+          isSwitch={false}
+        />
+        <h6 className="sub-text pt-2">
+          If You Disable This, New Tenants Will Not Be Active (And Can Not
+          Login) Until Admin Manually Activates The Account
+        </h6>
+      </div>
 
-        <div className="form-group py-2 fw-medium">
-          <RdsCheckbox
-            isDisabled={false}
-            label="Use Security Image Question (Captcha) On Registration."
-            checked={props.useCaptchaOnRegistration}
-            withlabel={true}
-            isSwitch={false}
-          />
-        </div>
-        
-        <div className="row py-2">
-          <div className="col-md-5">
-            <label>Edition</label>
-            <div className="form-group my-2">
-              <RdsDropdownList
-               borderDropdown = {true}   
-               placeholder='Edition'          
-               listItems={dropdownListItems}
-              />
-            </div>
+      <div className="form-group py-2 fw-medium">
+        <RdsCheckbox
+          isDisabled={false}
+          label="Use Security Image Question (Captcha) On Registration."
+          checked={props.useCaptchaOnRegistration}
+          withlabel={true}
+          isSwitch={false}
+        />
+      </div>
+
+      <div className="row py-2">
+        <div className="col-md-5">
+          <label >Edition</label>
+          <div className="form-group my-2">
+            <RdsDropdownList
+              borderDropdown={true}
+              placeholder='Edition'
+              listItems={dropdownListItems}
+            />
           </div>
         </div>
+      </div>
 
     </div>
   );

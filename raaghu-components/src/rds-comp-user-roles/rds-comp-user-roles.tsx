@@ -3,25 +3,25 @@ import { RdsButton, RdsCheckbox, RdsLabel } from "../rds-elements";
 
 interface RdsCompUserRolesProps {
   usersRole: any;
-  changedData?:any
+  changedData?: any
 }
 
 const RdsCompUserRoles = (props: RdsCompUserRolesProps) => {
   const [roleData, setRoleData] = useState<any>([]);
   //const [tempRoleData, settempRoleData] = useState<any>([]);
-  
+
   useEffect(() => {
-    
+
     setRoleData(props.usersRole);
   }, [props.usersRole]);
-  
+
   // useEffect(() => {
   //   
   //   settempRoleData(roleData);
   // }, [roleData]);
 
   function isRoleChecked(index: number, value: boolean) {
-    
+
     const updatedRoleData = [...roleData];
     updatedRoleData[index] = { ...updatedRoleData[index], isChecked: value };
     props.changedData(updatedRoleData)
@@ -34,14 +34,14 @@ const RdsCompUserRoles = (props: RdsCompUserRolesProps) => {
         <div className="col-md-12">
           {roleData.map((e: any, index: number) => (
             <div className="mt-3">
-            <RdsCheckbox
-              key={e.name}
-              label={e.name}
-              onChange={(event) => {
-                isRoleChecked(index, event.target.checked);
-              }}
-              checked={e.isChecked}
-            />
+              <RdsCheckbox
+                key={e.name}
+                label={e.name}
+                onChange={(event) => {
+                  isRoleChecked(index, event.target.checked);
+                }}
+                checked={e.isChecked}
+              />
             </div>
           ))}
         </div>

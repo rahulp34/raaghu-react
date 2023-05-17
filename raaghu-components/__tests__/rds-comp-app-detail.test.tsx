@@ -37,11 +37,7 @@ describe("RdsCompAppDetail", () => {
     const routeLabelElement = getByText(/Mock Route Label/);
     expect(routeLabelElement).toBeInTheDocument();
   });
-});
 
-
-
-describe("RdsAppDetail", () => {
   test("renders the app detail component correctly", () => {
     const props: RdsAppDetailProps = {
       appDetailsItem: appDetailList[0],
@@ -55,6 +51,11 @@ describe("RdsAppDetail", () => {
 
     const subtitleElement = getByText(/Mock Subtitle/);
     expect(subtitleElement).toBeInTheDocument();
+  });
+});
+describe("Example Test Suite", () => {
+  test("should pass this dummy test", () => {
+    expect(true).toBe(true);
   });
 });
 
