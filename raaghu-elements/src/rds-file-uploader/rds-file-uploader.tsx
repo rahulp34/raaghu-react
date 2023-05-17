@@ -21,6 +21,7 @@ const filesize: any = [];
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const [FileArray, setFileArray] = useState(fileholder);
+  const[isExceed, setIsExceed] =useState(false)
   const [fileName, setfileName] = useState(filenameholder);
   const [FileSize, setFileSize] = useState(filesize);
 
@@ -43,6 +44,13 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
   };
   const [fileUploaderData, setFileUploaderData] = useState<any>([]);
   const onchangehandler = (event: any) => {
+    const fileSize = event.target.files[0].size / 1024; //now size in kb
+
+    if(fileSize>props?.limit){
+      setIsExceed(true)
+    }else{
+      setIsExceed(false)
+    }
     setFileSize([...FileSize, event.target.files[0].size]);
     let files = event.target.files;
 
@@ -73,7 +81,6 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             <div className="mb-2">
               <label className={`label  ${SIZE} `}>{props.label}</label>
             </div>
-
             <div>
               <form>
                 <input
@@ -81,8 +88,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   type="file"
                   name="file"
                   accept={props.extensions}
-                  onChange={(event) => onchangehandler(event)}
+                  onChange={onchangehandler}
                 />
+               {isExceed&& <div className="form-control-feedback">
+                  <span className="text-danger">File size should not be greater than {props.limit} MB </span>
+                </div>}
               </form>
             </div>
           </div>
