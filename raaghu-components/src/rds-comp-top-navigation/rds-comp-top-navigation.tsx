@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
-
 import { RdsIcon, RdsOffcanvas } from "../rds-elements";
 import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/index";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
-import elementList from "./element-list";
-import componentList from "./components-list";
-import chartList from "./charts-list";
 import MultiLevelDropdown from "./multi-level-dropdown";
-
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
-  
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   onClickThemeCheck?:(event: React.MouseEvent<HTMLLIElement>, val: string) => void;
@@ -38,7 +32,6 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
-  
   const [themes, setThemes] = useState("light");
   const [path, setPath] = useState({
     elem: "/elements",
@@ -50,7 +43,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [resetDrop, setResetDrop] = useState(false);
 
   const navigate = useNavigate();
-
   const navtabItems = [
     {
       label: "Linked Accounts",
@@ -194,6 +186,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
   }, [path]);
 
+  const chatsHandler =(e:any) =>{
+    setNavtitle("Chats");
+    props.onChatClickHandler&&props.onChatClickHandler(e)
+  }
+
   return (
     <div>
       <nav
@@ -227,8 +224,8 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           {/* <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
-            ></MultiLevelDropdown></div> */}
-           <div className="position-relative px-3 border-end">
+          ></MultiLevelDropdown></div> */}
+           <div className="position-relative me-3 border-end">
             <RdsDropdownList
                labelIcon='sun'
                labelIconWidth='18px'
@@ -261,7 +258,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             to="/chats"
             className="px-3 border-end"
             role="button"
-            onClick={props.onChatClickHandler}
+            onClick={chatsHandler}
           >
             <RdsIcon
               name="chat"
