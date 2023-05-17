@@ -15,7 +15,7 @@ export interface RdsCompTopNavigationProps {
   
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
-  onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
+  onClickThemeCheck?:(event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   notifications?: any[];
   languageItems: any[];
   themeItems:any[];
@@ -77,31 +77,17 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
-  const themeItems = [
-    {
-      label: "Light",
-      val:"",
-      id:"light"
-    },
-    {
-      label: "Dark",
-      val:"",
-      id:"dark"
-    },
-    {
-      label: "SemiDark",
-      val:"",
-      id:"semidark"
-    },
-  ];
+ 
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
       props.onClick(e, val);
     }
   };
-  const onClicktheme = (e: any) => {
+
+  const onClicktheme  =(e: any, val:string)  =>
+  {
     if(props.onClickThemeCheck){
-        props.onClickThemeCheck(e);
+        props.onClickThemeCheck(e,val);
     }
   };
 
@@ -238,24 +224,34 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         <span className="d-block d-md-none " onClick={() => setExpanded(!expanded)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-three-dots-vertical"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg></span>
         {expanded ? (
         <div className="d-flex me-2 align-items-center right-side-menu">
-          <div className="position-relative me-3 border-end"><MultiLevelDropdown
+          {/* <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
-          ></MultiLevelDropdown></div>
-           <div className="position-relative me-3 border-end">
+            ></MultiLevelDropdown></div> */}
+           <div className="position-relative px-3 border-end">
             <RdsDropdownList
+               labelIcon='sun'
+               labelIconWidth='18px'
+               labelIconHeight='18px'
+               isIconPlaceholder={true}
+               isPlaceholder={false}
               placeholder={props.themeLabel}            
               id={"themeDropdown"}
               listItems={props.themeItems}
               onClick={onClicktheme}
             ></RdsDropdownList>
           </div>
-          <div className="position-relative me-3 border-end">
+          <div className="position-relative px-3 border-end">
             <RdsDropdownList
+              labelIcon='en'
+              labelIconWidth='18px'
+              labelIconHeight='18px'
               placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
               iconStroke={true}
+              isIconPlaceholder={true}
+              isPlaceholder={false}
               id={"languageDropdown"}
               listItems={props.languageItems}
               onClick={onClickHandler}
@@ -263,7 +259,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
           <Link
             to="/chats"
-            className="me-3 pe-3 border-end"
+            className="px-3 border-end"
             role="button"
             onClick={props.onChatClickHandler}
           >
@@ -276,7 +272,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               colorVariant="primary"
             ></RdsIcon>
           </Link>
-          <div >
+          <div className="px-3">
             <RdsOffcanvas
               className="pb-0"
               placement="end"

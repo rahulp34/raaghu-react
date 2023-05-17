@@ -87,6 +87,7 @@ const Main = (props: MainProps) => {
   const [themes, setThemes] = useState("light");
   const [count, setCount] = useState(0);
   const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
+  const [appTheme,setAppTheme]=useState<any[]>([]);
 
  
   const navigate = useNavigate();
@@ -212,22 +213,7 @@ const Main = (props: MainProps) => {
     }
   }
 
-  const toggleItems = [
-    {
-      label: "Light",
-      val: "light",
-      icon: "sun",
-      iconWidth: "20px",
-      iconHeight: "20px",
-    },
-    {
-      label: "Dark",
-      val: "dark",
-      icon: "moon",
-      iconWidth: "17px",
-      iconHeight: "17px",
-    },
-  ];
+
   const componentsList = [
     {
       label: "Account",
@@ -239,29 +225,7 @@ const Main = (props: MainProps) => {
     },
   ];
 
-  const themeItems = [
-    {
-      label: "Light",
-      val: "",
-      icon: "light",
-      iconWidth: "17px",
-      iconHeight: "17px",
-    },
-    {
-      label: "Dark",
-      val: "",
-      icon: "dark",
-      iconWidth: "17px",
-      iconHeight: "17px",
-    },
-    {
-      label: "Semi Dark",
-      val: "",
-      icon: "semidark",
-      iconWidth: "17px",
-      iconHeight: "17px",
-    },
-  ];
+  
 
   // useEffect(() => {
   //   dispatch(callLoginAction(null) as any);
@@ -332,27 +296,60 @@ const Main = (props: MainProps) => {
     else if (e.target.innerText !== 'Hindi') {
       document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
     }
+
+    console.log("event:",e,"value:",val)
   };
 
-  const onClickThemeCheck = (e: any) => {
-    if (e.target.innerText == 'Light' ) {
+  const themeItems = [
+    {
+      id:0,
+      label: "Light",
+      val: "Light",
+      icon: "light",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      id:1,
+      label: "Dark",
+      val: "Dark",
+      icon: "dark",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+    {
+      id:2,
+      label: "Semi Dark",
+      val: "Semi Dark",
+      icon: "semidark",
+      iconWidth: "17px",
+      iconHeight: "17px",
+    },
+  ];
+
+
+  const onClicktheme = (e:any,val:any)=>{
+    if(val=="Light"){
       setThemes("light"); 
       setLogoImage("./assets/raaghu_logs.png");
-    } else if (e.target.innerText == 'Dark') {
+    }
+    else if(val=="Dark"){
       setThemes("dark");
       setLogoImage("./assets/raaghu-logo-white-text.png");
-    } else if (e.target.innerText == 'Semi Dark') {
+    }
+    else if(val=="Semi Dark"){
       setThemes("semidark");
       setLogoImage("./assets/raaghu-logo-white-text.png");
     }
-  };
+  }
+  
 
   const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
   const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
 
   useEffect(() => {
     configurationService(currentLanguage).then(async (res: any) => {
-      if (res.currentUser.id) {
+      if (res.currentUser.id) { 
         localStorage.setItem("userId", res.currentUser.id);
         if(e.target.innerText =='العربية'){
           document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
@@ -746,7 +743,7 @@ const Main = (props: MainProps) => {
                         languageItems={languageData}
                         componentsList={componentsList}
                         onClick={onClickHandler}
-                        onClickThemeCheck={onClickThemeCheck}
+                        onClickThemeCheck={onClicktheme}
                         profileTitle="Host Admin"
                         profileName="admin"
                         onLogout={logout}
