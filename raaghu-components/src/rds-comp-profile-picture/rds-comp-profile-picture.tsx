@@ -16,22 +16,18 @@ const RdsCompProfilePicture = (props: any) => {
   const [type, setavatarType] = useState(0);
   const [show, setShow] = useState<boolean>(false);
   const [newProfileImage, setNewProfileImage] = useState<string>("");
+  const[isExceed, setIsExceed] =useState(false)
 
   function profileImage(data: any) {
-    ;
-    const file = data.files[0];
-    const reader = new FileReader();
+    const fileSize = data.files[0].size / 1024; //now size in kb
 
-    reader.addEventListener("load", () => {
-      const imageUrl = reader.result;
-      const image = new Image();
-      image.src = imageUrl as string;
-      setAvatarImg(image.src);
-      props.postProfilePic(file, 2);
-    });
-
-    reader.readAsDataURL(file);
+    if(fileSize>props?.limit){
+      setIsExceed(true)
+    }else{
+      setIsExceed(false)
+    }
     props.postProfilePic(data.files[0]);
+    
   }
 
   useEffect(() => {
@@ -135,15 +131,15 @@ const RdsCompProfilePicture = (props: any) => {
       <div className="row">
         <div className="col-md-4"></div>
         {show && (
-          <div className="col-md-8">
+          <div className="col-md-4">
             <RdsFileUploader
               colorVariant="primary"
-              extensions=""
+              extensions=".jpg, .jpeg, .png"
               multiple={false}
               placeholder=""
               size={""}
               label={"Select New Image"}
-              limit={10}
+              limit={1024}
               getFileUploaderInfo={(data: any) => profileImage(data)}
             />
           </div>
@@ -154,6 +150,7 @@ const RdsCompProfilePicture = (props: any) => {
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
+          isDisabled={isExceed!==true}
           block={false}
           type="button"
           onClick={props.handleProfileDataSubmit}
