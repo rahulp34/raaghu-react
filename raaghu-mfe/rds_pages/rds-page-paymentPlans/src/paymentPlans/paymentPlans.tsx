@@ -24,36 +24,6 @@ import {
 import { RdsCompAlertPopup, RdsCompDatatable } from "../../../rds-components";
 
 const PaymentPlans = () => {
-  // Constants / Variables =============
-  const tableHeadersPlans = [
-    {
-      displayName: "Name",
-      key: "name",
-      datatype: "text",
-      dataLength: 30,
-      required: true,
-      sortable: false,
-    },
-  ];
-  const tableHeadersGatewayPlans = [
-    {
-      displayName: "Gateway",
-      key: "gateway",
-      datatype: "text",
-      dataLength: 30,
-      required: true,
-      sortable: false,
-    },
-    {
-      displayName: "External Id",
-      key: "externalId",
-      datatype: "text",
-      dataLength: 30,
-      required: true,
-      sortable: false,
-    },
-  ];
-
   // Use States ================
   const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [actions, setActions] = useState([
@@ -81,6 +51,36 @@ const PaymentPlans = () => {
   const [managePlan, setManagePlan] = useState(true);
   const [isEdit, setIsEdit] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState<any>({});
+
+ // Constants / Variables =============
+ const tableHeadersPlans = [
+  {
+    displayName: "Name",
+    key: "name",
+    datatype: "text",
+    dataLength: 30,
+    required: true,
+    sortable: false,
+  },
+];
+const tableHeadersGatewayPlans = [
+  {
+    displayName: "Gateway",
+    key: "gateway",
+    datatype: "text",
+    dataLength: 30,
+    required: true,
+    sortable: false,
+  },
+  {
+    displayName: "External Id",
+    key: "externalId",
+    datatype: "text",
+    dataLength: 30,
+    required: true,
+    sortable: false,
+  },
+];
 
   // dispatch and selectores for API calling ===============
   const dispatch = useAppDispatch();
