@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
-import { RdsButton } from "raaghu-react-elements";
+import { RdsButton } from "../rds-elements";
 
 export interface RdsCompUserPermissionProps {
   tableHeaders: {
