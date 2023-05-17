@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
-
 import { RdsIcon, RdsOffcanvas } from "../rds-elements";
 import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/index";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
-import elementList from "./element-list";
-import componentList from "./components-list";
-import chartList from "./charts-list";
 import MultiLevelDropdown from "./multi-level-dropdown";
-
 export interface RdsCompTopNavigationProps {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
-  
   onChatClickHandler?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   toggleTheme?: React.MouseEventHandler<HTMLInputElement>;
   onClickThemeCheck?:(event: React.MouseEventHandler<HTMLInputElement>) => void;
@@ -38,7 +32,6 @@ export interface RdsCompTopNavigationProps {
 }
 const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [breacrumItem, setBreadCrumItem] = useState(props.breacrumItem);
-  
   const [themes, setThemes] = useState("light");
   const [path, setPath] = useState({
     elem: "/elements",
@@ -50,7 +43,6 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
   const [resetDrop, setResetDrop] = useState(false);
 
   const navigate = useNavigate();
-
   const navtabItems = [
     {
       label: "Linked Accounts",
@@ -208,6 +200,11 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     }
   }, [path]);
 
+  const chatsHandler =(e:any) =>{
+    setNavtitle("Chats");
+    props.onChatClickHandler&&props.onChatClickHandler(e)
+  }
+
   return (
     <div>
       <nav
@@ -238,10 +235,10 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         <span className="d-block d-md-none " onClick={() => setExpanded(!expanded)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" className="bi bi-three-dots-vertical"><path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path></svg></span>
         {expanded ? (
         <div className="d-flex me-2 align-items-center right-side-menu">
-          <div className="position-relative me-3 border-end"><MultiLevelDropdown
+          {/* <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
-          ></MultiLevelDropdown></div>
+          ></MultiLevelDropdown></div> */}
            <div className="position-relative me-3 border-end">
             <RdsDropdownList
               placeholder={props.themeLabel}            
@@ -265,7 +262,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
             to="/chats"
             className="me-3 pe-3 border-end"
             role="button"
-            onClick={props.onChatClickHandler}
+            onClick={chatsHandler}
           >
             <RdsIcon
               name="chat"
