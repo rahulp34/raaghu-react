@@ -6,16 +6,19 @@ import { registerData } from "../../../../libs/state-management/register/registe
 const Register = (props: any) => {
 	const dispatch = useAppDispatch();
 	const loginHandler: any = (isLoginClicked: boolean) => { };
-	
+
 	useEffect(() => {
 		debugger
 		dispatch(registerData(null) as any);
 	}, []);
 
 
-	const registerHandler = (emailAddress: any, password: any, userName: any,appName:any) => {
+	const registerHandler = (emailAddress: any, password: any, userName: any, appName: any, returnUrl?: string) => {
 		debugger
-		dispatch(registerData({ emailAddress, password, userName,appName }) as any).then((res: any) => {
+		dispatch(registerData({ emailAddress, password, userName, appName, returnUrl }) as any).then((res: any) => {
+			// if (res.success && returnUrl) {
+			// 	window.location.href = returnUrl;
+			// }
 		});
 	};
 
@@ -51,7 +54,8 @@ const Register = (props: any) => {
 										onLogin={loginHandler}
 										onRegister={registerHandler}
 										currentTenant={undefined}
-										validTenant={undefined} appName={""}									></RdsCompRegister>
+										validTenant={undefined} appName={""}	
+										></RdsCompRegister>
 
 								</div>
 							</div>

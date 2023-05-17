@@ -16,9 +16,8 @@ export interface RdsCompRegisterProps {
   userName: string;
   appName: string;
   onDismissAlert?: () => any;
-  //onLogin: (email: string, password: string, rememberMe: boolean) => any;
   onLogin: (isLoginClicked?: boolean) => void;
-  onRegister: (emailAddress: string, password: string, userName: string, appName: string) => void;
+  onRegister: (emailAddress: string, password: string, userName: string, appName: string, returnUrl?: string) => void;
   currentTenant: any;
   validTenant: any;
 }
@@ -93,6 +92,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
     props.onRegister(emailAddress, password, userName, appName);
     setEmail("");
     setPassword("");
+    //navigate("/");
   };
 
   const [checked, setChecked] = useState(false);
