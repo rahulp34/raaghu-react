@@ -274,7 +274,6 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
      </div>
      <div className="mb-3">
        <RdsButton
-         class="me-2"
          label="SAVE"
          type="submit"
          onClick={saveFeaturesData}

@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import SecurityLogs from "./security-logs/SecurityLogs";
-import { RdsLabel, RdsButton, RdsInput, RdsDatePicker } from "../../../../raaghu-elements/src";
+import { RdsLabel, RdsButton, RdsInput, RdsDatePicker, RdsIcon } from "../../../../raaghu-elements/src";
 import {
   useAppDispatch,
   useAppSelector,
@@ -223,7 +223,7 @@ const SecurityLogsPage = () => {
               type="button"
               colorVariant="primary"
               label="Download"
-              isOutline={true}
+              isOutline={false}
               icon="export_data"
               iconHeight="15px"
               size="small"
@@ -291,20 +291,16 @@ const SecurityLogsPage = () => {
                       onChange={onActionFilter}
                     ></RdsInput>
                   </div>
-                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-4 mt-auto">
-                    <RdsButton
-                      type="button"
-                      colorVariant="primary"
-                      label="Search"
-                      isOutline={false}
-                      icon="search"
-                      iconHeight="15px"
-                      iconFill={false}
-                      iconStroke={true}
-                      iconWidth="15px"
-                      iconColorVariant="light"
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 d-flex align-items-center">
+                    <RdsIcon
+                      name="search"
+                      width="16px"
+                      height="16px"
+                      colorVariant="dark"
+                      fill={false}
+                      stroke={true}
                       onClick={securityLogs}
-                    />
+                    ></RdsIcon>
                   </div> 
                 </div>
               </div>

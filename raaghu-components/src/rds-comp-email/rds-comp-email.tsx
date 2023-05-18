@@ -194,7 +194,6 @@ useEffect( () => {
               size="small"
             ></RdsButton>
             <RdsButton
-              class="me-2"
               label="SAVE"
               type="submit"
               isOutline={false}
