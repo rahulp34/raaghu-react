@@ -41,6 +41,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 						value={basicFormData.title}
 						name={"title"}
 						required={true}
+						dataTestId="title"
 					></RdsInput>
 					</div>
 					<div className="col-8">
@@ -50,6 +51,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 						onChange={e => setDescription(e.target.value)}
 						value={basicFormData.description}
 						rows={1}
+						dataTestId="description"
 					/>
 					</div>
 				</div>
@@ -64,6 +66,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 						value={basicFormData.title}
 						name={"title"}
 						required={true}
+						dataTestId="title"
 					></RdsInput>
 					</div>
 					
@@ -75,6 +78,7 @@ const RdsCompFormsBasic = (props: RdsCompFormsBasicProps) => {
 						onChange={e => setDescription(e.target.value)}
 						value={basicFormData.description}
 						rows={3}
+						dataTestId="description"
 					/>
 				</div>
 				</>
