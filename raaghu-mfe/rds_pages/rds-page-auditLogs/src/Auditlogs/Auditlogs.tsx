@@ -94,7 +94,9 @@ const Auditpayload = ()=>{
     applicationName: "",
     correlationId: "",
     exceptions: "",
-    executionTime : ""
+    executionTime : "",
+    startDate:'',
+    endDate:''
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
   const operationActions = [
@@ -167,8 +169,6 @@ const Auditpayload = ()=>{
     dispatch(auditActionData(rowData.id) as any);
   };
 
-  const onDatePicker = () => {};
-
   const AuditTableData = [
     {
       displayName: "Http Request",
@@ -220,7 +220,16 @@ const Auditpayload = ()=>{
   const handleSearch = (event: any) => {
     console.log("Hello", event.target.value);
   };
+  const dateRangeHandler=  (startEndDate:any) =>{
+    
+    const [start, end] = startEndDate;
+    setSelectFilterValue({
+      ...selectFilterValue,
+      startDate:start.toISOString(),
+      endDate:end.toISOString(),
+    }); 
 
+  };
   return (
     <div className="container-fluid p-0 m-0">
       <div className="row">
@@ -228,14 +237,16 @@ const Auditpayload = ()=>{
           <div className="card border-0 rounded-0">
             <div className="card-body">
               <div className="align-items-end justify-content-between row">
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
-                  <RdsDatePicker
-                    DatePickerLabel="Select Date"
-                    onDatePicker={onDatePicker}
+                <div className="col-xxl-3 col-xl-3 flex-grow-1 mb-4">
+                 <RdsDatePicker
+                   // DatePickerLabel="Date Range"
+                    // onDatePicker={dateRangeHandler}
+                     customDate={dateRangeHandler}
+                    selectedDate={selectFilterValue.startDate}
                     type="advanced"
                   ></RdsDatePicker>
                 </div>
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                <div className="col-xxl-1 col-xl-1 flex-grow-1 mb-4">
                   <RdsInput
                     placeholder="User"
                     onChange={onActionFilter}
