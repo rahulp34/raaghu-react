@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsLabel } from "../rds-elements";
+import { RdsLabel } from "raaghu-react-elements";
 
 export interface RdsCompFaqProps {
   questionList: any[];
