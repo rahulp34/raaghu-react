@@ -85,27 +85,24 @@ const RdsBankCardDetail = (props: RdsBankCardDetailProps) => {
                 {props.isEditable == true && (
                   <div className="mt-2  ms-5">
                     {activeButton== index ? (clicked == false?(<a
-                        className="ms-3 text-primary "
-                        style={{ textDecoration: "auto" }}
-                        onClick={setDefaultHandler}
+                        className="ms-3 text-primary text-decoration-none "
+                         onClick={setDefaultHandler}
                       >
                         Set as default
                       </a>
                     ):(<a
-                      className=" ms-3 text-muted  me-1"
-                      style={{ textDecoration: "auto" }}
-                      onClick={setDefaultHandler}
+                      className=" ms-3 text-muted  me-1 text-decoration-none"
+                     onClick={setDefaultHandler}
                     >
                       Default
                     </a>)):(<a
-                        className="ms-3 text-primary "
-                        style={{ textDecoration: "auto" }}
-                      >
+                        className="ms-3 text-primary text-decoration-none "
+                       >
                         Set as default
                       </a>)}
                     
                     <a
-                      className="text-primary ms-2 "
+                      className="text-primary ms-2 text-decoration-none "
                       style={{ textDecoration: "auto" }}
                     >
                       Edit

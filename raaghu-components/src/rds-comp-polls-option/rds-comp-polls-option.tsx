@@ -228,6 +228,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
             ></RdsInput>
           </div>
           <div className="col-md-3">
+           <div> <label className="form-label"> &nbsp;</label></div>
             <RdsButton
               label="Add"
               colorVariant="primary"

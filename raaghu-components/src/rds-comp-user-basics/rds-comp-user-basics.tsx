@@ -91,7 +91,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   return (
     <>
       <form className="mt-2">
-        <div className="row align-items-center mb-3">
+        <div className="align-items-center flex-column-reverse flex-lg-row flex-md-row mb-4 row">
           <div className="col-lg-6 col-md-6">
             <div>
               <RdsInput
@@ -132,7 +132,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             </div>
         </div>
 
-        <div className="row mb-2">
+        <div className="row">
           <div className="col-lg-6 col-md-6">
             <div className="">
               <RdsInput
@@ -159,7 +159,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
             </div>
           </div>)}
         </div>
-        <div className="row">
+        <div className="row mb-3">
         <div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
@@ -188,7 +188,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
           </div>
           
         </div>
-        {props.isEdit && (<div className="row my-2">
+        {props.isEdit && (<div className="row">
           <div className="mb-2 ">
             <RdsCheckbox
               id="0"

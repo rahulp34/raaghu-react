@@ -73,7 +73,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
     setLockoutSettings({ ...lockoutSettings, allowedForNewUsers: value });
   }
   return (
-    <div className="pt-4">
+    <div className="pt-4 overflow-auto">
       <form onSubmit={handleIdentity}>
         {/* Password Settings */}
         <div className="border-bottom pb-2 text-muted fw-bold">
@@ -268,7 +268,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className=" justify-content-end d-flex bottom-0 pt-0 ">
+        <div className=" justify-content-start d-flex bottom-0 pt-0 ">
           <RdsButton
             class="me-2"
             label="CANCEL"

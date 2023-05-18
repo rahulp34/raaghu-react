@@ -6,14 +6,14 @@ type InitialState = {
   loading: boolean;
   blogs: any;
   error: string;
-  featureIdentitySettings: any;
+  blogsFeature: any;
 };
 
 const initialState: InitialState = {
   loading: false,
   blogs: [],
   error: "",
-  featureIdentitySettings: null,
+  blogsFeature: null,
 };
 
 export const fetchBlogsData = createAsyncThunk("blogs/fetchBlogsData", () => {
@@ -48,7 +48,6 @@ export const addBlogsData = createAsyncThunk(
 export const editBlogsData = createAsyncThunk(
   "blogs/editBlogsData",
   ({ id, dto }: { id: any; dto: any }) => {
-    debugger;
     return BlogAdminService.putBlogs({
       id: id,
       requestBody: dto,
@@ -68,23 +67,18 @@ export const fetchFeaturesBlogs = createAsyncThunk(
     );
   }
 );
-// export const saveFeaturesEdition = createAsyncThunk(
-//   "edition/saveFeaturesEdition",
-//   (data: any) => {
-//     return proxy.featuresPUT("E", data.id, data.body).then((result: any) => {
-//       return result;
-//     });
-//   }
-// );
-// export const restoreToDefaultFeaturesEdition = createAsyncThunk(
-//   "edition/restoreToDefaultFeaturesEdition",
-//   (id: any) => {
-//     return proxy.featuresDELETE("E", id, undefined).then((result: any) => {
-//       return result;
-//     });
-//   }
-// );
 
+export const putBlogsFeatures = createAsyncThunk(
+  "blogs/putBlogsFeatures",
+  ({ id, dto }: { id: string; dto: any }) => {
+    return BlogFeatureAdminService.putBlogsFeatures({
+      blogId: id,
+      requestBody: dto,
+    }).then((result: any) => {
+      return result;
+    });
+  }
+);
 const blogsSlice: any = createSlice({
   name: "blogs",
   initialState,
@@ -165,48 +159,13 @@ const blogsSlice: any = createSlice({
       fetchFeaturesBlogs.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.loading = false;
-        state.featureIdentitySettings = action.payload;
+        state.blogsFeature = action.payload;
       }
     );
     builder.addCase(fetchFeaturesBlogs.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message || "Something went wrong";
     });
-
-    // builder.addCase(saveFeaturesEdition.pending, (state) => {
-    //   state.loading = true;
-    // });
-
-    // builder.addCase(
-    //   saveFeaturesEdition.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.featureIdentitySettings = action.payload;
-    //   }
-    // );
-    // builder.addCase(saveFeaturesEdition.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.error.message || "Something went wrong";
-    // });
-
-    // builder.addCase(restoreToDefaultFeaturesEdition.pending, (state) => {
-    //   state.loading = true;
-    // });
-
-    // builder.addCase(
-    //   restoreToDefaultFeaturesEdition.fulfilled,
-    //   (state, action: PayloadAction<any>) => {
-    //     state.loading = false;
-    //     state.featureIdentitySettings = action.payload;
-    //   }
-    // );
-    // builder.addCase(
-    //   restoreToDefaultFeaturesEdition.rejected,
-    //   (state, action) => {
-    //     state.loading = false;
-    //     state.error = action.error.message || "Something went wrong";
-    //   }
-    // );
   },
 });
 

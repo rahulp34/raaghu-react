@@ -30,17 +30,15 @@ import {
   saveDirectoryDescriptor,
   updateDirectoryDescriptor,
   uploadFileDescriptor,
-  useAppDispatch,
 } from "../../../../libs/public.api";
-import { useAppSelector } from "../../../../libs/state-management/hooks";
-import { size } from "lodash-es";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "../../../../libs/state-management/hooks";
 import RdsCompFileMover from "../../../../../raaghu-components/src/rds-comp-file-mover";
 
 const FileManagement = () => {
-  const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const file = useAppSelector((state) => state.persistedReducer.fileManagement);
-
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [path, setPath] = useState("");
   const [name, setName] = useState("");
   const [data, setData] = useState([]);
@@ -53,12 +51,11 @@ const FileManagement = () => {
   const [addedFile, setAddedFile] = useState<any>([]);
   const [moveFile, setMoveFile] = useState<any>({});
   const [files, setFiles] = useState([]);
-  const [formData, setformData] = useState<any>("")
+  const [formData, setformData] = useState<any>("");
   const [folderId, setFolderId] = useState<string>("");
   const [datafolderId, setDataFolderId] = useState<string>("");
   const [isDirectory, setDirectory] = useState<string>();
   const [datafolderParentId, setdatafolderParentId] = useState<any>();
-
   const [directories, setDirectories] = useState<any[]>([
     {
       name: "All",
@@ -70,23 +67,11 @@ const FileManagement = () => {
     },
   ]);
   const [tableData, setTableData] = useState<any[]>([]);
+  const [breadItems, setbreadCrumItems] = useState<any>([]);
 
-  const [breadItems, setbreadCrumItems] = useState<any>([])
-  // const [breadItems, setbreadCrumItems] = useState<any>([
-  //   {
-  //     label: "All",
-  //     // id: 1,
-  //     //route: "#",
-  //   //   disabled: false,
-  //   //   icon: "home",
-  //   //   iconFill: false,
-  //   //   iconstroke: true,
-  //   //   iconWidth: "12px",
-  //   //   iconHeight: "12px",
-  //   //   iconColor: "primary",
-  //   //   active: false,
-  //   },
-  // ]);
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const file = useAppSelector((state) => state.persistedReducer.fileManagement);
 
   const tableHeaders = [
     {
@@ -149,6 +134,22 @@ const FileManagement = () => {
   const UpdateFolderName = () => {
     let dto = { body: { name: name }, id: folderId };
     dispatch(updateDirectoryDescriptor(dto) as any).then((res: any) => {
+      if (res.type.includes("rejected")) {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Directory desctiptor updated Successfully",
+          color: "success",
+        });
+      }
+
       dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
     });
@@ -179,9 +180,25 @@ const FileManagement = () => {
       },
     };
     dispatch(moveDirectoryDescriptor(files) as any).then((res: any) => {
+      if (res.type.includes("rejected")) {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Directory desctiptor added Successfully",
+          color: "success",
+        });
+      }
+
       dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
-    })
+    });
     setDirectories([
       {
         name: "All",
@@ -192,11 +209,9 @@ const FileManagement = () => {
         children: [],
       },
     ]);
-
-  }
+  };
 
   const movefolder = (e: any) => {
-
     const files = {
       body: {
         id: folderId,
@@ -207,14 +222,44 @@ const FileManagement = () => {
 
     if (isDirectory) {
       dispatch(moveDirectoryDescriptor(files) as any).then((res: any) => {
+        if (res.type.includes("rejected")) {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Directory desctiptor moved Successfully",
+            color: "success",
+          });
+        }
         dispatch(fetchSubDirectory(undefined) as any);
         dispatch(fetchDirectoryDescriptor(undefined) as any);
-      })
+      });
     } else {
       dispatch(moveFileDescriptor(files) as any).then((res: any) => {
+        if (res.type.includes("rejected")) {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "File desctiptor moved Successfully",
+            color: "success",
+          });
+        }
         dispatch(fetchSubDirectory(undefined) as any);
         dispatch(fetchDirectoryDescriptor(undefined) as any);
-      })
+      });
     }
     setDirectories([
       {
@@ -226,7 +271,6 @@ const FileManagement = () => {
         children: [],
       },
     ]);
-
   };
   useEffect(() => {
     if (file.moveDirectory) {
@@ -267,15 +311,13 @@ const FileManagement = () => {
   }, [dispatch]);
 
   useEffect(() => {
-
     if (file.subDirectories) {
       let parsedDirectory = JSON.parse(JSON.stringify(directories));
       file.subDirectories.items.map((el: any) => {
         let tempData = recursiveFunctionAddData(parsedDirectory, el);
         setDirectories(tempData);
-        setbreadCrumItems({ ...breadItems, label: el.name })
+        setbreadCrumItems({ ...breadItems, label: el.name });
       });
-
     }
   }, [file.subDirectories]);
   const dTo: {
@@ -288,7 +330,6 @@ const FileManagement = () => {
   }
 
   function setPathValue(event: any) {
-
     let id = undefined;
     if (event && event.id) {
       id = event.id;
@@ -314,10 +355,25 @@ const FileManagement = () => {
     dispatch(fetchSubDirectory(id) as any);
   }
 
-  const addDataHandler = () => {
+  const addNewFolder = () => {
     dTo.name = name;
     dTo.parentId = folderId;
     dispatch(saveDirectoryDescriptor(dTo) as any).then((res: any) => {
+      if (res.type.includes("rejected")) {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "File desctiptor added Successfully",
+          color: "success",
+        });
+      }
       dispatch(fetchSubDirectory(undefined) as any);
       dispatch(fetchDirectoryDescriptor(undefined) as any);
     });
@@ -334,35 +390,46 @@ const FileManagement = () => {
     ]);
   };
 
-  // const onDeleteFile = () => {
-  //   dispatch(deleteDirectoryDescriptor(folderId) as any).then((res: any) => {
-  //     setDirectories([
-  //       {
-  //         name: "All",
-  //         path: "/all",
-  //         parentId: null,
-  //         id: null,
-  //         hasChildren: false,
-  //         children: [],
-  //       },
-  //     ]);
-
-  //     dispatch(fetchSubDirectory(undefined) as any);
-  //     dispatch(fetchDirectoryDescriptor(undefined) as any);
-  //   });
-  // };
-
-
   const onDeleteFile = () => {
     if (isDirectory) {
       dispatch(deleteDirectoryDescriptor(datafolderId) as any).then(
         (res: any) => {
+          if (res.type.includes("rejected")) {
+            setAlert({
+              ...Alert,
+              show: true,
+              message: "your request has been denied",
+              color: "danger",
+            });
+          } else {
+            setAlert({
+              ...Alert,
+              show: true,
+              message: "Directory desctiptor deleted Successfully",
+              color: "success",
+            });
+          }
           dispatch(fetchSubDirectory(undefined) as any);
           dispatch(fetchDirectoryDescriptor(undefined) as any);
         }
       );
     } else {
       dispatch(DeleteFileDescriptor(datafolderId) as any).then((res: any) => {
+        if (res.type.includes("rejected")) {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "File desctiptor deleted Successfully",
+            color: "success",
+          });
+        }
         dispatch(fetchSubDirectory(undefined) as any);
         dispatch(fetchDirectoryDescriptor(undefined) as any);
       });
@@ -410,7 +477,6 @@ const FileManagement = () => {
     dispatch(infoFileDescriptor(uploadFiles) as any);
   }, [uploadFiles]);
   const UploadedFile = () => {
-
     totalFiles.map((e: any) => {
       const body = {
         relativePath: null,
@@ -421,116 +487,157 @@ const FileManagement = () => {
       };
       console.log(body);
       // setUploadFile(totalFiles[0])
-      dispatch(uploadFileDescriptor(body) as any);
-      dispatch(fetchSubDirectory(folderId) as any);
-      dispatch(fetchDirectoryDescriptor(undefined) as any);
+      dispatch(uploadFileDescriptor(body) as any).then((res: any) => {
+        if (res.type.includes("rejected")) {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "File desctiptor deleted Successfully",
+            color: "success",
+          });
+        }
+        dispatch(fetchSubDirectory(folderId) as any);
+        dispatch(fetchDirectoryDescriptor(undefined) as any);
+      });
     });
   };
+  useEffect(() => {
+    // Set a 2-second timer to update the state
+    const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+
+    // Clean up the timer when the component unmounts or when the state changes
+    return () => clearTimeout(timer);
+  }, [file]);
 
   return (
     <div className="New Folder">
-      <div className="d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-end">
-        <RdsOffcanvas
-          canvasTitle={"CREATE FOLDER"}
-          placement="end"
-          backDrop={true}
-          scrolling={false}
-          preventEscapeKey={false}
-          offId={"Folder"}
-          offcanvasbutton={
-            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
-              <RdsButton
-                icon="plus"
-                label={"Create New Folder"}
-                iconColorVariant="light"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                block={false}
-                size="small"
-                type="button"
-                showLoadingSpinner={true}
-                colorVariant="primary"
-              ></RdsButton>
-            </div>
-          }
-        >
-          <div>
-            <div className="pt-3">
-              <RdsInput
-                size="medium"
-                inputType="text"
-                placeholder="Enter Name"
-                label="Folder Name"
-                labelPositon="top"
-                id=""
-                value={name}
-                required={true}
-                onChange={(e) => {
-                  setName(e.target.value);
-
-                }}
-              ></RdsInput>
-              <div className="d-flex footer-buttons">
-                <RdsButton
-                  label="CANCEL"
-                  databsdismiss="offcanvas"
-                  type={"button"}
-                  size="small"
-                  isOutline={true}
-                  colorVariant="primary"
-                  class="me-2"
-                ></RdsButton>
-                <RdsButton
-                  label="SAVE"
-                  type={"button"}
-                  size="small"
-                  databsdismiss="offcanvas"
-                  isDisabled={name === ""}
-                  colorVariant="primary"
-                  class="me-2"
-                  showLoadingSpinner={true}
-                  onClick={addDataHandler}
-                ></RdsButton>
-              </div>
-            </div>
+      <div className="col-md-12 mb-3 ">
+        <div className="row ">
+          <div className="col-md-4">
+            {Alert.show && (
+              <RdsAlert
+                alertmessage={Alert.message}
+                colorVariant={Alert.color}
+              ></RdsAlert>
+            )}
           </div>
-        </RdsOffcanvas>
+          <div className="col-md-8 d-flex justify-content-end my-1">
+          <RdsOffcanvas
+              canvasTitle={"Upload Files"}
+              placement="end"
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              offId={"Files"}
+              offcanvasbutton={
+                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
+                  <RdsButton
+                    icon="upload_data"
+                    label={"UPLOAD FILES"}
+                    iconColorVariant="primary"
+                    iconHeight="15px"
+                    iconWidth="15px"
+                    iconFill={false}
+                    iconStroke={true}
+                    block={false}
+                    size="small"
+                    type="button"
+                    colorVariant="primary"
+                    isOutline={true}
+                    showLoadingSpinner={true}
+                  ></RdsButton>
+                </div>
+              }
+            >
+              <RdsCompFileUploader
+                onClick={UploadedFile}
+                preFileInfo={(data: any) => preUploadFileInfo(data)}
+              ></RdsCompFileUploader>
+            </RdsOffcanvas>
+            <RdsOffcanvas
+              canvasTitle={"CREATE FOLDER"}
+              placement="end"
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              offId={"Folder"}
+              offcanvasbutton={
+                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
+                  <RdsButton
+                    icon="plus"
+                    label={"New Folder"}
+                    iconColorVariant="light"
+                    iconHeight="15px"
+                    iconWidth="15px"
+                    iconFill={false}
+                    iconStroke={true}
+                    block={false}
+                    size="small"
+                    type="button"
+                    showLoadingSpinner={true}
+                    colorVariant="primary"
+                  ></RdsButton>
+                </div>
+              }
+            >
+              <div>
+                <div className="pt-3">
+                  <RdsInput
+                    size="medium"
+                    inputType="text"
+                    placeholder="Enter Name"
+                    label="Folder Name"
+                    labelPositon="top"
+                    id=""
+                    value={name}
+                    required={true}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                  ></RdsInput>
+                  <div className="d-flex footer-buttons">
+                    <RdsButton
+                      label="CANCEL"
+                      databsdismiss="offcanvas"
+                      type={"button"}
+                      size="small"
+                      isOutline={true}
+                      colorVariant="primary"
+                      class="me-2"
+                    ></RdsButton>
+                    <RdsButton
+                      label="SAVE"
+                      type={"button"}
+                      size="small"
+                      databsdismiss="offcanvas"
+                      isDisabled={name === ""}
+                      colorVariant="primary"
+                      class="me-2"
+                      showLoadingSpinner={true}
+                      onClick={addNewFolder}
+                    ></RdsButton>
+                  </div>
+                </div>
+              </div>
+            </RdsOffcanvas>
 
-        <RdsOffcanvas
-          canvasTitle={"Upload Files"}
-          placement="end"
-          backDrop={true}
-          scrolling={false}
-          preventEscapeKey={false}
-          offId={"Files"}
-          offcanvasbutton={
-            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
-              <RdsButton
-                icon="upload_data"
-                label={"UPLOAD FILES"}
-                iconColorVariant="primary"
-                iconHeight="15px"
-                iconWidth="15px"
-                iconFill={false}
-                iconStroke={true}
-                block={false}
-                size="small"
-                type="button"
-                colorVariant="primary"
-                isOutline={true}
-                showLoadingSpinner={true}
-              ></RdsButton>
-            </div>
-          }
-        >
-          <RdsCompFileUploader
-            onClick={UploadedFile}
-            preFileInfo={(data: any) => preUploadFileInfo(data)}
-          ></RdsCompFileUploader>
-        </RdsOffcanvas>
+           
+          </div>
+        </div>
       </div>
+      {/* <div className="d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-end">
+       
+      </div> */}
+
       <div className="card pt-2 h-100 border-0 rounded-0 mt-3 ">
         <div className="card-body">
           <div className="row">

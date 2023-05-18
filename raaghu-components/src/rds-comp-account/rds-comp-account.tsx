@@ -254,7 +254,7 @@ const RdsCompAccount = (props: any) => {
   }, [props.accountGeneralSettings]);
 
   return (
-    <div>
+    <div className="overflow-auto">
       <form onSubmit={AccountData}>
         <div className="border-bottom pb-2 text-muted mt-3 fw-bold">
           <RdsLabel label="General Settings" size="14px"></RdsLabel>
@@ -465,7 +465,7 @@ const RdsCompAccount = (props: any) => {
           </div>
           {twitterCheckBox}
         </div>
-        <div className=" justify-content-end d-flex bottom-0 pt-4">
+        <div className=" justify-content-start d-flex bottom-0 pt-4">
           <RdsButton
             class="me-2"
             label="CANCEL"
