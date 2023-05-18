@@ -205,7 +205,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       <span className="navbar-toggler-icon"></span>
     </button> */}
     
-        <div className="d-flex align-items-center mx-4 breadcrumb-title">
+        <div className="d-flex align-items-center mx-4 ms-2 mt-5 mt-md-0 ">
           <div>
             <div className="text-bold">{navtitle}</div>
             {breacrumItem.length > 1 && (
@@ -222,12 +222,12 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
         </div>
         
         {expanded ? (
-        <div className="d-flex align-items-center right-side-menu">
+        <div className="d-flex align-items-center justify-content-between right-side-menu">
           {/* <div className="position-relative me-3 border-end"><MultiLevelDropdown
             reset={resetDrop}
             onsubmenu={handlerSubMenuselect}
             ></MultiLevelDropdown></div> */}
-           <div className="position-relative px-3 border-end">
+           <div className="position-relative px-2 px-md-3 border-end col text-center">
             <RdsDropdownList
                labelIcon='sun'
                labelIconWidth='18px'
@@ -239,8 +239,9 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               listItems={props.themeItems}
               onClick={onClicktheme}
             ></RdsDropdownList>
+            <div className="d-block d-lg-none fs-8 text-center">Light</div>
           </div>
-          <div className="position-relative px-3 border-end">
+          <div className="position-relative px-2 px-md-3 border-end col text-center">
             <RdsDropdownList
               labelIcon='en'
               labelIconWidth='18px'
@@ -255,25 +256,26 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               listItems={props.languageItems}
               onClick={onClickHandler}
             ></RdsDropdownList>
+            <div className="d-block d-lg-none fs-8 text-center">Language</div>
           </div>
-          <div className="position-relative px-3 border-end d-block d-lg-none">
-            <RdsButton
-									type={"button"}
-									icon="home"
-									
-									iconFill={false}
-									iconColorVariant="light"
-									iconStroke={true}
-									iconHeight="13px"
-									iconWidth="13px"
-								></RdsButton>
+          <div className="position-relative px-2 px-md-3 border-end d-block d-lg-none col text-center">
+            <div className="rounded-circle mbhome bg-primary">
+          <RdsIcon
+						name="home"
+						fill={false}
+						stroke={true}
+						height="24px"
+						width="24px"
+						colorVariant="light"
+					></RdsIcon></div>
                 </div>
+                <div className="position-relative px-2 px-md-3 border-end col text-center">
           <Link
             to="/chats"
-            className="px-3 border-end"
             role="button"
             onClick={props.onChatClickHandler}
           >
+            <div className="px-2 py-1 d-flex align-items-center justify-content-center">
             <RdsIcon
               name="chat"
               height="20px"
@@ -281,9 +283,45 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               fill={false}
               stroke={true}
               colorVariant="primary"
-            ></RdsIcon>
+            ></RdsIcon></div>
           </Link>
-          <div className="px-3">
+          <div className="d-block d-lg-none fs-8 text-center">Chat</div>
+          </div>
+          <div className="position-relative px-2 px-md-3 border-end d-block d-lg-none col text-center">
+          <RdsOffcanvas
+              className="pb-0"
+              placement="end"
+              offcanvaswidth={307}
+              offId="Profile"
+              offcanvasbutton={
+                <div
+                  className="d-flex align-items-center justify-content-center"
+                  style={{ cursor: "pointer" }}
+                >
+                  <img
+                    className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
+                    src={profilePic}
+                  ></img>
+                 
+                 
+                </div>
+              }
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              canvasTitle={""}
+            >
+              <RdsCompProfile
+                navtabItems={navtabItems}
+                profilePic={profilePic}
+                userName={"Host Admin"}
+                userRole={"admin"}
+                onLogout={props.onLogout}
+              ></RdsCompProfile>
+            </RdsOffcanvas>
+            <div className="d-block d-lg-none fs-8 text-center">Profile</div>
+                </div>
+          <div className="px-2 px-md-3 d-none d-lg-block">
             <RdsOffcanvas
               className="pb-0"
               placement="end"
