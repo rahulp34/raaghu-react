@@ -57,6 +57,7 @@ const actions = [
   { id: "edit", displayName: "Edit", offId: "language-edit-off" },
   { id: "delete", displayName: "Delete", modalId: "language-delete-off" },
   { id: "defaa", displayName: "set as default language" },
+  {id: "add", displayName: "New Language", offId: "new-language"}
 ];
 
 export interface LanguageProps {
@@ -350,7 +351,7 @@ const Language = (props: LanguageProps) => {
                   backDrop={true}
                   scrolling={false}
                   preventEscapeKey={false}
-                  offId={"Language"}
+                  offId={"new-language"}
                   canvasTitle={"New Language"}
                 >
                   <RdsCompNewLanguage
