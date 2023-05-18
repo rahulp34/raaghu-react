@@ -277,6 +277,7 @@ const Language = (props: LanguageProps) => {
   };
 
   const onNewLangHandler = () => {
+    
     dispatch(fetchCultureList() as any);
   };
 
@@ -336,6 +337,8 @@ const Language = (props: LanguageProps) => {
                         icon="plus"
                         iconFill={false}
                         iconStroke={true}
+                        databstarget="offcanvas"
+                        databsdismiss="offcanvas"
                         iconHeight="12px"
                         onClick={onNewLangHandler}
                         showLoadingSpinner={true}

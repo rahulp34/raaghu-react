@@ -546,6 +546,7 @@ const Roles = (props: RdsPageRolesProps) => {
                           <RdsButton
                             type={"button"}
                             label="cancel"
+                            size="small"
                             isOutline={true}
                             colorVariant="primary"
                             databsdismiss="offcanvas"
@@ -557,6 +558,7 @@ const Roles = (props: RdsPageRolesProps) => {
                           <RdsButton
                             type={"button"}
                             label="save"
+                            size="small"
                             isDisabled={val === ""}
                             colorVariant="primary"
                             onClick={handlerEditRole}
