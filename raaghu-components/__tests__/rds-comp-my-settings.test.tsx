@@ -50,8 +50,8 @@ describe("RdsCompMySettings", () => {
 });
 
 it("should update the current password state on input change", () => {
-    const { getAllByPlaceholderText } = render(<RdsCompMySettings />);
-    const curPassInput = getAllByPlaceholderText('Confirm new password')[0]; // Access the first element
+    render(<RdsCompMySettings />);
+    const curPassInput = screen.getAllByPlaceholderText('Confirm new password')[0]; // Access the first element
     expect(curPassInput).toBeVisible();
     expect(curPassInput).toBeInTheDocument();
 });

@@ -7,7 +7,7 @@ import {
   RdsLabel,
   RdsSelectList,
   RdsTextArea,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 export interface RdsCompFormsQuestionProps {
   formQuestionsData?: any;
@@ -196,6 +196,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                       props.deleteQuestion(element);
                     }}
                     classes="cursor-pointer"
+                    dataTestId="delete-question"
                   ></RdsIcon>
                 </div>
               </div>
@@ -208,6 +209,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                     onChange={(e: any) => setTitle(i, e.target.value)}
                     value={element.title}
                     name={"title"}
+                    dataTestId="title"
                   ></RdsInput>
                 </div>
                 <div className="col-6">
@@ -217,6 +219,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                     onChange={(e) => setDescription(i, e.target.value)}
                     value={element.description}
                     rows={1}
+                    dataTestId="description"
                   />
                 </div>
               </div>
@@ -278,6 +281,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                   value={elements.value}
                                   name={"option"}
                                   readonly={elements.readOnly}
+                                  dataTestId="option"
                                 ></RdsInput>
                                 {element.choices.length > 1 && (
                                   <RdsIcon
@@ -290,6 +294,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                     stroke={true}
                                     colorVariant="danger"
                                     onClick={() => handleDelete(i, idx)}
+                                    dataTestId="handle-delete"
                                   ></RdsIcon>
                                 )}
                               </div>
@@ -329,6 +334,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                               handleAddMoreChoices(i);
                             }}
                             className="cursor-pointer"
+                            data-testId="add-more"
                           >
                             Add More
                           </span>
@@ -340,6 +346,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                     handleAddOtherChoices(i);
                                   }}
                                   className="cursor-pointer"
+                                  data-testId="add-other"
                                 >
                                   / Add Other
                                 </span>
@@ -368,6 +375,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
               iconWidth="15px"
               colorVariant="primary"
               onClick={handleAddMorequestions}
+              dataTestId="new-question-btn"
             ></RdsButton>
           </div>
         </div>

@@ -351,13 +351,14 @@ const Main = (props: MainProps) => {
     configurationService(currentLanguage).then(async (res: any) => {
       if (res.currentUser.id) { 
         localStorage.setItem("userId", res.currentUser.id);
-          if (currentLanguage =='العربية'){
+        if(currentLanguage =='العربية'){
           document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
         }
-        else  {
+        else{
           document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
         }
       }
+      
       const tempdata: any[] = await res.localization?.languages?.map(
         (item: any) => {
           return {

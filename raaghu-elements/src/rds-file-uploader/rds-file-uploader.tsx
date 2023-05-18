@@ -21,6 +21,7 @@ const filesize: any = [];
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const [FileArray, setFileArray] = useState(fileholder);
+  const[isExceed, setIsExceed] =useState(false)
   const [fileName, setfileName] = useState(filenameholder);
   const [FileSize, setFileSize] = useState(filesize);
 
@@ -31,6 +32,12 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     size = "form-select-sm";
     SIZE = "small";
   }
+  const kbToMb = (kb:any) => {
+    const mb = kb / 1024;
+    return Math.round(mb * 100) / 100; // Round off to 2 decimal places
+  };
+  
+  const fileSizeInMB = kbToMb(props.limit);
 
   const borderColor = "border-" + props.colorVariant || "primary";
   const onDelete = (id: any) => {
@@ -43,6 +50,13 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
   };
   const [fileUploaderData, setFileUploaderData] = useState<any>([]);
   const onchangehandler = (event: any) => {
+    const fileSize = event.target.files[0].size / 1024; //now size in kb
+
+    if(fileSize>props?.limit){
+      setIsExceed(true)
+    }else{
+      setIsExceed(false)
+    }
     setFileSize([...FileSize, event.target.files[0].size]);
     let files = event.target.files;
 
@@ -73,7 +87,6 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             <div className="mb-2">
               <label className={`label  ${SIZE} `}>{props.label}</label>
             </div>
-
             <div>
               <form>
                 <input
@@ -81,8 +94,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   type="file"
                   name="file"
                   accept={props.extensions}
-                  onChange={(event) => onchangehandler(event)}
+                  onChange={onchangehandler}
                 />
+               {isExceed&& <div className="form-control-feedback">
+                  <span className="text-danger">File size should not be greater than {fileSizeInMB} MB </span>
+                </div>}
               </form>
             </div>
           </div>
@@ -93,7 +109,7 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             <div className="labelbox">
               <label className={`label  ${SIZE} `}>{props.label}</label>
               <label className={`label ${SIZE}`}>
-                Maximum {props.limit} MB
+                Maximum {fileSizeInMB} MB
               </label>
             </div>
 

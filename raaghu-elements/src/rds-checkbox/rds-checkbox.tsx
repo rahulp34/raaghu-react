@@ -14,6 +14,7 @@ export interface RdsCheckboxProps {
   state?: "Checkbox" | "Indeterminate" | "ErrorCheckbox";
   errorMessage?: string;
   id?: string;
+  dataTestId?: string
 }
 
 const RdsCheckbox = (props: RdsCheckboxProps) => {
@@ -49,6 +50,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             id={props.id}
             name={props.id}
             onChange={props.onChange}
+            data-testId={props.dataTestId}
           />
 
           {props.withlabel == false ? (

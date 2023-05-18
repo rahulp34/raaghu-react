@@ -1,6 +1,6 @@
 import React from "react";
 import "./rds-comp-shipping-address.scss";
-import { RdsLabel, RdsInput, RdsSelectList, RdsButton } from "raaghu-react-elements";
+import { RdsLabel, RdsInput, RdsSelectList, RdsButton } from "../rds-elements";
 
 export interface RdsCompShippingAddressProps {
 	countryList: any[];
