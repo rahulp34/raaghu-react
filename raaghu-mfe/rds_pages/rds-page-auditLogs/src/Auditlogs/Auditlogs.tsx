@@ -239,8 +239,6 @@ const Auditpayload = ()=>{
               <div className="align-items-end justify-content-between row">
                 <div className="col-xxl-3 col-xl-3 flex-grow-1 mb-4">
                  <RdsDatePicker
-                   // DatePickerLabel="Date Range"
-                    // onDatePicker={dateRangeHandler}
                      customDate={dateRangeHandler}
                     selectedDate={selectFilterValue.startDate}
                     type="advanced"
