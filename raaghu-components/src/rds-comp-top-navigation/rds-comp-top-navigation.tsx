@@ -188,6 +188,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
 
   const chatsHandler =(e:any) =>{
     setNavtitle("Chats");
+    setBreadCrumItem([]);
     props.onChatClickHandler&&props.onChatClickHandler(e)
   }
 
