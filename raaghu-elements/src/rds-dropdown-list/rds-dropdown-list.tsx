@@ -148,7 +148,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
         onClick={clickedOnDropDown}
       >      
         <div
-          className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-center ${border}`}
+          className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}
         >
           {/* simple dropdown  */}
           {isTouch !== true && props.placeholder && props.multiSelect !== true &&   (
