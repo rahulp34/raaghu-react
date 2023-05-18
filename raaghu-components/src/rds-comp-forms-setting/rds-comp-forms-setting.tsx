@@ -49,18 +49,21 @@ const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 							label="Is accepting responses"
 							onChange={e => { setResponses(e.target.checked) }}
 							checked={formsSetting.isAcceptingResponses}
+							dataTestId="accept-response"
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
 							label="Is collecting email"
 							onChange={e => { setEmail(e.target.checked) }}
 							checked={formsSetting.isCollectingEmail}
+							dataTestId="collect-email"
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
 							label="Is a quiz"
 							onChange={e => { setQuiz(e.target.checked) }}
 							checked={formsSetting.isQuiz}
+							dataTestId="quiz"
 						></RdsCheckbox>
 					</div>
 					<div className="row">
@@ -70,6 +73,7 @@ const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 							label="Requires login"
 							onChange={e => { setLogin(e.target.checked) }}
 							checked={formsSetting.requiresLogin}
+							dataTestId="require-login"
 						></RdsCheckbox>
 						<RdsCheckbox
 							classes="py-2"
@@ -77,6 +81,7 @@ const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 							onChange={e => { setHasLimit(e.target.checked) }}
 							checked={formsSetting.hasLimitOneResponsePerUser}
 							isDisabled={formsSetting.requiresLogin}
+							dataTestId="limit-response"
 						></RdsCheckbox>
 					</div>
 					<div className="row ">
@@ -86,6 +91,7 @@ const RdsCompFormsSettings = (props: RdsCompFormsSettingProps) => {
 							label="Can edit after submit"
 							onChange={e => { setEdit(e.target.checked) }}
 							checked={formsSetting.canEditResponse}
+							dataTestId="edit-after-submit"
 						></RdsCheckbox>
 					</div>
 
