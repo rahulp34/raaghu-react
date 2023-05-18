@@ -819,7 +819,7 @@ const Users = () => {
         onclick={offCanvasHandler}
         placement="end"
         offId="user-edit-off"
-        backDrop={false}
+        backDrop={true}
         scrolling={false}
         onClose={(e) => {
           offcanvasClose();
@@ -874,7 +874,7 @@ const Users = () => {
                   SelectesPermissions(SelectesPermission);
                 }}
               ></RdsCompPermissionTree>
-              <div className="footer-buttons my-2">
+              {/* <div className="footer-buttons my-2">
                 <div className="row">
                   <div className="col-md-12 d-flex">
                     <div>
@@ -902,7 +902,30 @@ const Users = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+               <div className="footer-buttons justify-content-end bottom-0 pt-0">
+               <RdsButton
+            class="me-2"
+            label="CANCEL"
+            type="button"
+            databsdismiss="offcanvas"
+            isOutline={true}
+            size="small"
+            colorVariant="primary"
+          ></RdsButton>
+          <RdsButton
+            class="me-2"
+            label="SAVE"
+            type="button"
+            // isDisabled={!isFormValid}
+            isOutline={false}
+            size="small"
+            colorVariant="primary"
+            onClick={handleSelectesPermission}
+            showLoadingSpinner={true}
+            databsdismiss="offcanvas"
+          ></RdsButton>
+        </div>
             </>
           )}
          
@@ -913,6 +936,7 @@ const Users = () => {
             class="me-2"
             label="CANCEL"
             type="button"
+            size="small"
             databsdismiss="offcanvas"
             isOutline={true}
             colorVariant="primary"
@@ -921,6 +945,7 @@ const Users = () => {
             class="me-2"
             label="SAVE"
             type="button"
+            size="small"
             isOutline={false}
             colorVariant="primary"
             onClick={updateUserData}
@@ -984,7 +1009,7 @@ const Users = () => {
             value={password}
              /> */}
 
-       <div className="footer-buttons justify-content-end bottom-0 pt-0">
+       {/* <div className="footer-buttons justify-content-end bottom-0 pt-0">
           <RdsButton
             class="me-2"
             label="CANCEL"
@@ -1002,7 +1027,7 @@ const Users = () => {
             onClick={setPasswordButton}
             databsdismiss="offcanvas"
           ></RdsButton>
-        </div>
+        </div> */}
       </RdsOffcanvas>
   </div>
   </div>
