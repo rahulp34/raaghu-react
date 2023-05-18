@@ -56,7 +56,6 @@ const Auditpayload = ()=>{
   }
   dispatch(auditLogsData(payload) as any);
   const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
-    console.log(auditDataTable);
     return {
       id: dataAudit.id,
       httpStatusCode: dataAudit.httpStatusCode,
@@ -218,8 +217,7 @@ const Auditpayload = ()=>{
   const [showAction, setShowAction] = useState(false);
 
   const handleSearch = (event: any) => {
-    console.log("Hello", event.target.value);
-  };
+    };
   const dateRangeHandler=  (startEndDate:any) =>{
     
     const [start, end] = startEndDate;
