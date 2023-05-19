@@ -1,5 +1,5 @@
 import React from "react";
-import './rds-navbar.scss'
+import './rds-navbar.css'
 
 export interface RdsNavbarProps {
     size?:string;

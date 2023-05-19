@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./rds-select-list.scss";
+import "./rds-select-list.css";
 export interface RdsSelectProps {
   label: string;
   isDisabled?: boolean;

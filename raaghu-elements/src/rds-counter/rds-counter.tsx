@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { colors, placements } from "../../libs/types";
 import RdsButton from "../rds-button/rds-button";
 import RdsIcon from "../rds-icon/rds-icon";
-import "./rds-counter.scss";
+import "./rds-counter.css";
 
 export interface RdsCounterProps {
 	counterValue: number;
@@ -48,13 +48,13 @@ const RdsCounter = (props: RdsCounterProps) => {
 								<RdsButton
 									type={"button"}
 									icon="minus"
-									style={{ borderRadius: "5px 0 0 5px" }}
+									
 									iconFill={false}
 									iconColorVariant="light"
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-start`}
 									onClick={onMinusClick}
 									dataTestId="minusButton"
 								></RdsButton>
@@ -63,12 +63,12 @@ const RdsCounter = (props: RdsCounterProps) => {
 									type={"button"}
 									icon="plus"
 									iconColorVariant="light"
-									style={{ borderRadius: "0 5px 5px 0" }}
+									
 									iconFill={false}
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-end`}
 									onClick={onPlusClick}
 									dataTestId="plusButton"
 								></RdsButton>
@@ -84,13 +84,13 @@ const RdsCounter = (props: RdsCounterProps) => {
 								<RdsButton
 									type={"button"}
 									icon="minus"
-									style={{ borderRadius: "5px 0 0 5px" }}
+									
 									iconFill={false}
 									iconColorVariant="light"
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-start`}
 									onClick={onMinusClick}
 									dataTestId="minusButton"
 								></RdsButton>
@@ -99,12 +99,12 @@ const RdsCounter = (props: RdsCounterProps) => {
 									type={"button"}
 									icon="plus"
 									iconColorVariant="light"
-									style={{ borderRadius: "0 5px 5px 0" }}
+									
 									iconFill={false}
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-end`}
 									onClick={onPlusClick}
 									dataTestId="plusButton"
 								></RdsButton>
@@ -123,13 +123,13 @@ const RdsCounter = (props: RdsCounterProps) => {
 								<RdsButton
 									type={"button"}
 									icon="minus"
-									style={{ borderRadius: "5px 0 0 5px" }}
+									
 									iconFill={false}
 									iconColorVariant="light"
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-start`}
 									onClick={onMinusClick}
 									dataTestId="minusButton"
 								></RdsButton>
@@ -138,12 +138,12 @@ const RdsCounter = (props: RdsCounterProps) => {
 									type={"button"}
 									icon="plus"
 									iconColorVariant="light"
-									style={{ borderRadius: "0 5px 5px 0" }}
+									
 									iconFill={false}
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-end`}
 									onClick={onPlusClick}
 									dataTestId="plusButton"
 								></RdsButton>
@@ -159,13 +159,13 @@ const RdsCounter = (props: RdsCounterProps) => {
 								<RdsButton
 									type={"button"}
 									icon="minus"
-									style={{ borderRadius: "5px 0 0 5px" }}
+									
 									iconFill={false}
 									iconColorVariant="light"
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-start`}
 									onClick={onMinusClick}
 									dataTestId="minusButton"
 								></RdsButton>
@@ -174,12 +174,12 @@ const RdsCounter = (props: RdsCounterProps) => {
 									type={"button"}
 									icon="plus"
 									iconColorVariant="light"
-									style={{ borderRadius: "0 5px 5px 0" }}
+									
 									iconFill={false}
 									iconStroke={true}
 									iconHeight="13px"
 									iconWidth="13px"
-									class={classesForButton}
+									class={`${classesForButton} rounded-0 rounded-end`}
 									onClick={onPlusClick}
 									dataTestId="plusButton"
 								></RdsButton>
@@ -195,13 +195,13 @@ const RdsCounter = (props: RdsCounterProps) => {
 						<RdsButton
 							type={"button"}
 							icon="minus"
-							style={{ borderRadius: "5px 0 0 5px" }}
+							
 							iconFill={false}
 							iconColorVariant="light"
 							iconStroke={true}
 							iconHeight="13px"
 							iconWidth="13px"
-							class={classesForButton}
+							class={`${classesForButton} rounded-0 rounded-start`}
 							onClick={onMinusClick}
 							dataTestId="minusButton"
 						></RdsButton>
@@ -210,12 +210,12 @@ const RdsCounter = (props: RdsCounterProps) => {
 							type={"button"}
 							icon="plus"
 							iconColorVariant="light"
-							style={{ borderRadius: "0 5px 5px 0" }}
+							
 							iconFill={false}
 							iconStroke={true}
 							iconHeight="13px"
 							iconWidth="13px"
-							class={classesForButton}
+							class={`${classesForButton} rounded-0 rounded-end`}
 							onClick={onPlusClick}
 							dataTestId="plusButton"
 						></RdsButton>

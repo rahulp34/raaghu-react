@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-tag.scss";
+import "./rds-tag.css";
 
 export interface RdsTagProps {
   tagType: "square" | "round";

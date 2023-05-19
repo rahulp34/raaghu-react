@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import "./rds-checkbox-parent-child.scss";
+import "./rds-checkbox-parent-child.css";
 
 export interface RdsCheckboxParentChildProps {
   userData: any[];

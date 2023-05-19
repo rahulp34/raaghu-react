@@ -1,5 +1,5 @@
 import React, { HtmlHTMLAttributes, ReactNode, useEffect } from "react";
-import "./rds-offcanvas.scss";
+import "./rds-offcanvas.css";
 export interface RdsOffcanvasProps {
   placement: "start" | "end" | "top" | "bottom";
   backDrop: "static" | true | false;

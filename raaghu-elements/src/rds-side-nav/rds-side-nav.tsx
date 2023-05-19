@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-side-nav-new.scss";
+import "./rds-side-nav-new.css";
 import RdsSideNavChild from "./rds-side-nav-child";
 import RdsIcon from "../rds-icon/rds-icon";
 

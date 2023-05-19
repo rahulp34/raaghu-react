@@ -10,6 +10,7 @@ import {
   RdsSelectList,
   RdsNavtabs,
   RdsButton,
+  RdsIcon,
 } from "../../../rds-elements";
 import {
   useAppSelector,
@@ -86,7 +87,7 @@ const Auditpayload = ()=>{
   const [selectFilterValue, setSelectFilterValue] = useState({
     userName: "",
     url: "",
-    minDuration : "",
+    minDuration: "",
     maxDuration: "",
     httpMethod: "",
     HttpStatusCode: "",
@@ -161,7 +162,7 @@ const Auditpayload = ()=>{
     });
     return auditData
   };
-  
+
 
   const onActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
@@ -212,7 +213,7 @@ const Auditpayload = ()=>{
     { label: "Actions", tablink: " #nav-action", id: 1 },
   ];
 
-  const offCanvasHandler = () => {};
+  const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showAction, setShowAction] = useState(false);
 
@@ -257,7 +258,7 @@ const Auditpayload = ()=>{
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
                   <RdsInput
                     placeholder="Min Duration"
-                    // onChange={onMinDurationFilter}
+                  // onChange={onMinDurationFilter}
                   ></RdsInput>
                 </div>
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
@@ -336,7 +337,7 @@ const Auditpayload = ()=>{
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
                   <RdsSelectList
                     label="Has Exception"
-                  onSelectListChange={onHasExceptionFilter}
+                    onSelectListChange={onHasExceptionFilter}
                     selectItems={[
                       {
                         option: "Yes",
@@ -349,26 +350,20 @@ const Auditpayload = ()=>{
                 </div>
               </div>
               <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mt-2">
-                <RdsButton
-                  label="Search"
-                  type="button"
-                  colorVariant="primary"
-                  size="small"
-                  isOutline={false}
-                  icon = "search"
-                  iconFill = {false}
-                  iconStroke = {true}
-                  iconColorVariant = "light"
-                  iconHeight = "15px"
-                  iconWidth = "15px"
+                <RdsIcon
+                  name="search"
+                  width="16px"
+                  height="16px"
+                  colorVariant="dark"
+                  fill={false}
+                  stroke={true}
                   onClick={Auditpayload}
-                  showLoadingSpinner={true}
-                ></RdsButton>
+                 ></RdsIcon>
               </div>
 
               <div className="row mx-3 my-5">
                 <RdsCompDatatable
-                actionPosition="right"
+                  actionPosition="right"
                   classes="table__userTable"
                   tableHeaders={AuditTableData}
                   tableData={auditData}
@@ -390,7 +385,7 @@ const Auditpayload = ()=>{
               placement="end"
               canvasTitle="Detail"
               onclick={offCanvasHandler}
-              
+
               className="mx-1"
             >
               <RdsNavtabs
@@ -404,7 +399,7 @@ const Auditpayload = ()=>{
               />
               {activeNavTabId == 0 && showAction === false && (
                 <ViewOperationLogsOffCanvas
-                  selectedRowData={ auditData.filter(
+                  selectedRowData={auditData.filter(
                     (item: any) => item.id == (tableDataRowid || 1)
                   )}
                 ></ViewOperationLogsOffCanvas>
@@ -546,7 +541,7 @@ const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
           </div>
         </div>
       </div>
-    
+
       <div className="row">
         <div className="col-md-6">
           <div className="form-group mb-3">

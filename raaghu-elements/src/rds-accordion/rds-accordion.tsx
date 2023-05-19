@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from "react";
-import "./rds-accordion.scss";
-import "../style.scss";
+import "./rds-accordion.css";
+
 import { anyTypeAnnotation } from "@babel/types";
 import { colors } from "../../libs/types";
 import RdsAccordionItem from "./rds-accordion-item";

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { colors } from "../../libs/types";
-import "./rds-illustration.scss";
+import "./rds-illustration.css";
 import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsIllustrationProps {
@@ -12,7 +12,7 @@ export interface RdsIllustrationProps {
 const RdsIllustration = (props: RdsIllustrationProps) => {
   return (
     <Fragment>
-      <div className="align-items-center d-flex h-100 justify-content-center">
+      <div className="align-items-center d-flex vh-100 justify-content-center">
         <div className="text-center" data-testid="icon" >
           <RdsIcon
             name="file_plus"

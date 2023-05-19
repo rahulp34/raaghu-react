@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
-import "./rds-chart-line.scss";
+import "./rds-chart-line.css";
 
 export interface Rdslineprops {
   labels: any[];

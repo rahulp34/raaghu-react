@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-popular-page.scss";
+import "./rds-popular-page.css";
 export interface RdsPopularPageProps {
   itemList: any;
 }
