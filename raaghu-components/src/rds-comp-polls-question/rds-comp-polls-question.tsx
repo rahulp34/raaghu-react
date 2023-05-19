@@ -1,150 +1,156 @@
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel, RdsSelectList } from 'raaghu-react-elements';
-import React, { useEffect, useState } from 'react';
-import RdsDatepicker from '../../../raaghu-elements/src/rds-datepicker';
+import {
+  RdsButton,
+  RdsCheckbox,
+  RdsInput,
+  RdsLabel,
+  RdsSelectList,
+} from "../rds-elements";
+import React, { useEffect, useState } from "react";
+import RdsDatepicker from "../../../raaghu-elements/src/rds-datepicker";
 
-export interface RdsCompPollsQuestion{
-  widgetList:any[];
-  getPollsQuestion:any
+export interface RdsCompPollsQuestion {
+  widgetList: any[];
+  getPollsQuestion: any;
 }
 
-function RdsCompPollsQuestion(props:any) {
+function RdsCompPollsQuestion(props: any) {
   const [QuestionData, setQuestionData] = useState(props.questionData);
- 
+
   const questionFormData = (event: any) => {
     event.preventDefault();
-    console.log("Check poll data", QuestionData)
+    console.log("Check poll data", QuestionData);
   };
- useEffect(()=>{
-  if(props.questionData){
-    console.log(props.questionData)
-    setQuestionData(props.questionData);
-  }
- },[props.questionData])
+  useEffect(() => {
+    if (props.questionData) {
+      console.log(props.questionData);
+      setQuestionData(props.questionData);
+    }
+  }, [props.questionData]);
   function setQuestion(value: any) {
     setQuestionData({ ...QuestionData, question: value });
     props.getPollsQuestion({ ...QuestionData, question: value });
   }
   function setCode(value: any) {
     setQuestionData({ ...QuestionData, code: value });
-    props.getPollsQuestion({ ...QuestionData, code: value })
+    props.getPollsQuestion({ ...QuestionData, code: value });
   }
   function setName(value: any) {
     setQuestionData({ ...QuestionData, name: value });
-    props.getPollsQuestion({ ...QuestionData, name: value })
+    props.getPollsQuestion({ ...QuestionData, name: value });
   }
   const widgetChange = (event: any) => {
-    setQuestionData({ ...QuestionData, widget: event,});
-    props.getPollsQuestion({ ...QuestionData, widget: event,})
+    setQuestionData({ ...QuestionData, widget: event });
+    props.getPollsQuestion({ ...QuestionData, widget: event });
+  };
+  function setShowTime(value: boolean) {
+    setQuestionData({ ...QuestionData, showHoursLeft: value });
+    props.getPollsQuestion({ ...QuestionData, showHoursLeft: value });
   }
-    function setShowTime(value: boolean) {
-      setQuestionData({ ...QuestionData, showHoursLeft: value });
-      props.getPollsQuestion({ ...QuestionData, showHoursLeft: value })
-    }
-    function setAllowMultipleVoting(value: boolean) {
-      
-      setQuestionData({ ...QuestionData, allowMultipleVote: value });
-      props.getPollsQuestion({ ...QuestionData, allowMultipleVote: value })
-    }
-    function setShowVoteCount(value: boolean) {
-      setQuestionData({ ...QuestionData, showVoteCount: value });
-      props.getPollsQuestion({ ...QuestionData, showVoteCount: value })
-    }
-    function setShowResult(value: boolean) {
-      setQuestionData({ ...QuestionData, showResultWithoutGivingVote: value });
-      props.getPollsQuestion({ ...QuestionData, showResultWithoutGivingVote: value })
-    }
-    function handleStartDate(data:any){
-      let date1 = data.toISOString();
-      setQuestionData({ ...QuestionData, startDate:date1  }); 
-      props.getPollsQuestion({ ...QuestionData, startDate:date1  })
-    }
-    function handleEndDate(data:any){
-      let date1 = data.toISOString();
-      setQuestionData({ ...QuestionData, endDate:date1  }); 
-      props.getPollsQuestion({ ...QuestionData, endDate:date1  })
-    }
-    function handleResultDatepickerData(data:any){
-      let date1 = data.toISOString();
-      setQuestionData({ ...QuestionData, resultShowingEndDate:date1  }); 
-      props.getPollsQuestion({ ...QuestionData, resultShowingEndDate:date1  })
-    }
+  function setAllowMultipleVoting(value: boolean) {
+    setQuestionData({ ...QuestionData, allowMultipleVote: value });
+    props.getPollsQuestion({ ...QuestionData, allowMultipleVote: value });
+  }
+  function setShowVoteCount(value: boolean) {
+    setQuestionData({ ...QuestionData, showVoteCount: value });
+    props.getPollsQuestion({ ...QuestionData, showVoteCount: value });
+  }
+  function setShowResult(value: boolean) {
+    setQuestionData({ ...QuestionData, showResultWithoutGivingVote: value });
+    props.getPollsQuestion({
+      ...QuestionData,
+      showResultWithoutGivingVote: value,
+    });
+  }
+  function handleStartDate(data: any) {
+    let date1 = data.toISOString();
+    setQuestionData({ ...QuestionData, startDate: date1 });
+    props.getPollsQuestion({ ...QuestionData, startDate: date1 });
+  }
+  function handleEndDate(data: any) {
+    let date1 = data.toISOString();
+    setQuestionData({ ...QuestionData, endDate: date1 });
+    props.getPollsQuestion({ ...QuestionData, endDate: date1 });
+  }
+  function handleResultDatepickerData(data: any) {
+    let date1 = data.toISOString();
+    setQuestionData({ ...QuestionData, resultShowingEndDate: date1 });
+    props.getPollsQuestion({ ...QuestionData, resultShowingEndDate: date1 });
+  }
 
-  return(
+  return (
     <>
-    <div className='container-fluid m-0 p-0'>
-
-          <div className="row mt-3">
-            <div className="col-md-6">
-              <RdsInput
-                required={true}
-                label="Question"
-                placeholder=""
-                inputType="text"
-                value={QuestionData.question}
-                onChange={(e: any) => {
-                  setQuestion(e.target.value);
-                }}
-              ></RdsInput>
-            </div>
-
-            <div className="col-md-6 ">
-              <RdsInput
-                label="Code"
-                placeholder=""
-                inputType="text"
-                required={true}
-                value={QuestionData.code}
-                onChange={(e: any) => {
-                  setCode(e.target.value);
-                }}
-              ></RdsInput>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 mt-1">
-            <RdsInput
-                label="Name"
-                placeholder=""
-                inputType="text"
-                required={false}
-                value={QuestionData.name}
-                onChange={(e: any) => {
-                  setName(e.target.value);
-                }}
-              ></RdsInput>
-            </div>
-            
-            <div className="col-md-6 mt-2">
-            <RdsLabel
-            class="mb-1"
-          label="Widget"
-          size="14px"
-        ></RdsLabel>
-            <RdsSelectList
-								label="Select Roles"
-								selectItems={props.widgetList}
-								onSelectListChange={(e: any) => widgetChange(e.target.value)}
-						></RdsSelectList>
-            </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-md-6">
-            <RdsDatepicker
-            onDatePicker={handleStartDate}
-            DatePickerLabel="Start Date"
-            type="default" 
-          />
-            </div>
+      <div className="container-fluid m-0 p-0">
+        <div className="row mt-3">
           <div className="col-md-6">
-          <RdsDatepicker
-            onDatePicker={handleEndDate}
-            DatePickerLabel="End Date"
-            type="default"
-          />
+            <RdsInput
+              required={true}
+              label="Question"
+              placeholder=""
+              inputType="text"
+              value={QuestionData.question}
+              onChange={(e: any) => {
+                setQuestion(e.target.value);
+              }}
+              dataTestId="question"
+            ></RdsInput>
           </div>
+
+          <div className="col-md-6 ">
+            <RdsInput
+              label="Code"
+              placeholder=""
+              inputType="text"
+              required={true}
+              value={QuestionData.code}
+              onChange={(e: any) => {
+                setCode(e.target.value);
+              }}
+              dataTestId="code"
+            ></RdsInput>
           </div>
-          <div className="row mt-2">
-            <div className="col-md-12">
+        </div>
+        <div className="row">
+          <div className="col-md-6 mt-1">
+            <RdsInput
+              label="Name"
+              placeholder=""
+              inputType="text"
+              required={false}
+              value={QuestionData.name}
+              onChange={(e: any) => {
+                setName(e.target.value);
+              }}
+              dataTestId="name"
+            ></RdsInput>
+          </div>
+
+          <div className="col-md-6 mt-2">
+            <RdsLabel class="mb-1" label="Widget" size="14px"></RdsLabel>
+            <RdsSelectList
+              label="Select Roles"
+              selectItems={props.widgetList}
+              onSelectListChange={(e: any) => widgetChange(e.target.value)}
+            ></RdsSelectList>
+          </div>
+        </div>
+        <div className="row mt-2">
+          <div className="col-md-6">
+            <RdsDatepicker
+              onDatePicker={handleStartDate}
+              DatePickerLabel="Start Date"
+              type="default"
+            />
+          </div>
+          <div className="col-md-6">
+            <RdsDatepicker
+              onDatePicker={handleEndDate}
+              DatePickerLabel="End Date"
+              type="default"
+            />
+          </div>
+        </div>
+        <div className="row mt-2">
+          <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show remaining time"
@@ -152,20 +158,21 @@ function RdsCompPollsQuestion(props:any) {
               onChange={(e: any) => {
                 setShowTime(e.target.checked);
               }}
+              dataTestId="remaining-time"
             ></RdsCheckbox>
-            </div>
           </div>
-           <div className="row mt-3">
-            <div className="col-md-12">
-             <RdsDatepicker
+        </div>
+        <div className="row mt-3">
+          <div className="col-md-12">
+            <RdsDatepicker
               onDatePicker={handleResultDatepickerData}
               DatePickerLabel="Result Showing End Date"
               type="default"
-             />
-            </div>
-           </div>
-          <div className="row mt-2">
-            <div className="col-md-12">
+            />
+          </div>
+        </div>
+        <div className="row mt-2">
+          <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Allow multiple voting"
@@ -173,12 +180,13 @@ function RdsCompPollsQuestion(props:any) {
               onChange={(e: any) => {
                 setAllowMultipleVoting(e.target.checked);
               }}
+              dataTestId="multiple-voting"
             ></RdsCheckbox>
-            </div>
           </div>
-         
-          <div className="row mt-2">
-            <div className="col-md-12">
+        </div>
+
+        <div className="row mt-2">
+          <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show vote count"
@@ -186,11 +194,12 @@ function RdsCompPollsQuestion(props:any) {
               onChange={(e: any) => {
                 setShowVoteCount(e.target.checked);
               }}
+              dataTestId="vote-count"
             ></RdsCheckbox>
-            </div>
           </div>
-          <div className="row mt-2">
-            <div className="col-md-12">
+        </div>
+        <div className="row mt-2">
+          <div className="col-md-12">
             <RdsCheckbox
               id="0"
               label="Show result without giving vote"
@@ -198,10 +207,11 @@ function RdsCompPollsQuestion(props:any) {
               onChange={(e: any) => {
                 setShowResult(e.target.checked);
               }}
+              dataTestId="result-without-vote"
             ></RdsCheckbox>
-            </div>
           </div>
-          {/* <div className="mt-3 d-flex footer-buttons">
+        </div>
+        {/* <div className="mt-3 d-flex footer-buttons">
             <RdsButton
               class="me-2"
               tooltipTitle={""}
@@ -221,7 +231,6 @@ function RdsCompPollsQuestion(props:any) {
               databsdismiss="offcanvas"
             ></RdsButton>
           </div> */}
-        
       </div>
     </>
   );
