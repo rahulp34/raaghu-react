@@ -34,9 +34,9 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
   const statusListChange = (event: any) => {
     setFormData({ ...formData, StatusList: event.target.value });
   };
-  function submitData(event:any) {
-	
-	event.preventDefault();
+  function submitData(event: any) {
+
+    event.preventDefault();
     console.log(formData);
   }
   return (
@@ -53,7 +53,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.StyleList}
               size="small"
-              onSelectListChange={(e:any) => {
+              onSelectListChange={(e: any) => {
                 handleStyleListChange(e);
               }}
             ></RdsSelectList>
@@ -68,7 +68,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.WebList}
               size="small"
-              onSelectListChange={(e:any) => {
+              onSelectListChange={(e: any) => {
                 webStyleListChange(e);
               }}
             ></RdsSelectList>
@@ -86,7 +86,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.MenuList}
               size="small"
-              onSelectListChange={(e:any) => {
+              onSelectListChange={(e: any) => {
                 menuListChange(e);
               }}
             ></RdsSelectList>
@@ -101,30 +101,30 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               label="Select"
               selectItems={props.StatusList}
               size="small"
-              onSelectListChange={(e:any) => {
+              onSelectListChange={(e: any) => {
                 statusListChange(e);
               }}
             ></RdsSelectList>
           </div>
         </div>
         <div className="footer-buttons justify-content-end d-flex bottom-0 pt-0" >
-            <RdsButton
-              class="me-2"
-              label="CANCEL"
-              type="button"
-              isOutline={true}
-              colorVariant="primary"
-              size="small"
-            ></RdsButton>
-            <RdsButton
-              class="me-2"
-              label="SAVE"
-              type="submit"
-              isOutline={false}
-              colorVariant="primary"
-              size="small"
-            ></RdsButton>
-          </div>
+          <RdsButton
+            class="me-2"
+            label="CANCEL"
+            type="button"
+            isOutline={true}
+            colorVariant="primary"
+            size="small"
+          ></RdsButton>
+          <RdsButton
+            class="me-2"
+            label="SAVE"
+            type="submit"
+            isOutline={false}
+            colorVariant="primary"
+            size="small"
+          ></RdsButton>
+        </div>
       </form>
     </>
   );

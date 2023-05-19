@@ -531,6 +531,38 @@ const FileManagement = () => {
             )}
           </div>
           <div className="col-md-8 d-flex justify-content-end my-1">
+          <RdsOffcanvas
+              canvasTitle={"Upload Files"}
+              placement="end"
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+              offId={"Files"}
+              offcanvasbutton={
+                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
+                  <RdsButton
+                    icon="upload_data"
+                    label={"UPLOAD FILES"}
+                    iconColorVariant="primary"
+                    iconHeight="15px"
+                    iconWidth="15px"
+                    iconFill={false}
+                    iconStroke={true}
+                    block={false}
+                    size="small"
+                    type="button"
+                    colorVariant="primary"
+                    isOutline={true}
+                    showLoadingSpinner={true}
+                  ></RdsButton>
+                </div>
+              }
+            >
+              <RdsCompFileUploader
+                onClick={UploadedFile}
+                preFileInfo={(data: any) => preUploadFileInfo(data)}
+              ></RdsCompFileUploader>
+            </RdsOffcanvas>
             <RdsOffcanvas
               canvasTitle={"CREATE FOLDER"}
               placement="end"
@@ -539,10 +571,10 @@ const FileManagement = () => {
               preventEscapeKey={false}
               offId={"Folder"}
               offcanvasbutton={
-                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mb-xxl-0 mb-xl-0 mb-lg-0 mb-3">
+                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
                   <RdsButton
                     icon="plus"
-                    label={"Create New Folder"}
+                    label={"New Folder"}
                     iconColorVariant="light"
                     iconHeight="15px"
                     iconWidth="15px"
@@ -598,38 +630,7 @@ const FileManagement = () => {
               </div>
             </RdsOffcanvas>
 
-            <RdsOffcanvas
-              canvasTitle={"Upload Files"}
-              placement="end"
-              backDrop={true}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"Files"}
-              offcanvasbutton={
-                <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
-                  <RdsButton
-                    icon="upload_data"
-                    label={"UPLOAD FILES"}
-                    iconColorVariant="primary"
-                    iconHeight="15px"
-                    iconWidth="15px"
-                    iconFill={false}
-                    iconStroke={true}
-                    block={false}
-                    size="small"
-                    type="button"
-                    colorVariant="primary"
-                    isOutline={true}
-                    showLoadingSpinner={true}
-                  ></RdsButton>
-                </div>
-              }
-            >
-              <RdsCompFileUploader
-                onClick={UploadedFile}
-                preFileInfo={(data: any) => preUploadFileInfo(data)}
-              ></RdsCompFileUploader>
-            </RdsOffcanvas>
+           
           </div>
         </div>
       </div>

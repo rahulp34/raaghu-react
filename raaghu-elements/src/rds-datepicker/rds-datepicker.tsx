@@ -9,7 +9,7 @@ export interface RdsDatepickerProps {
   selectedDate?: any
   dateForEdit?: any
   DatePickerLabel?: string;
-  onDatePicker: (start: any, end?: any) => void;
+  onDatePicker?: (start: any, end?: any) => void;
   type?: "default" | "advanced";
   customDate?: any;
 }
@@ -29,6 +29,13 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     );
   };
 
+  const handlerDateChange =(date:any) => {
+      if (date != null) setStartDate(date);
+      else setStartDate(new Date());
+      props.selectedDate(date)
+      props.onDatePicker && props.onDatePicker(startDate)
+    }
+  
   const ExampleCustomInput = forwardRef(({ value, onClick }: any, ref: any) => (
     <li
       className="example-custom-input dropdown-item d-flex justify-content-between bg-opacity-10 bg-primary"
@@ -109,12 +116,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
           <div className="input-group input-group-datePicker mb-3">
             <DatePicker
               selected={startDate}
-              onChange={(date) => {
-                if (date != null) setStartDate(date);
-                else setStartDate(new Date());
-                props.selectedDate(date)
-                props.onDatePicker(startDate)
-              }}
+              onChange={handlerDateChange}
               className="datepicker__input"
               wrapperClassName="datepicker__wrapper"
             />

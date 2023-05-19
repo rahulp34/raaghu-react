@@ -107,7 +107,7 @@ const RdsInput = (props: RdsInputProps) => {
             onChange={handlerChange}
             disabled={props.isDisabled}
             readOnly={props.readonly}
-            data-testId= {props.dataTestId}
+            data-testid= {props.dataTestId}
           />
           {props.inputType === "password" && (
             <RdsIcon
@@ -147,7 +147,7 @@ const RdsInput = (props: RdsInputProps) => {
               onChange={handlerChange}
               disabled={props.isDisabled}
               readOnly={props.readonly}
-              data-testId= {props.dataTestId}
+              data-testid= {props.dataTestId}
             ></input>
             {props.inputType === "password" && (
               <RdsIcon

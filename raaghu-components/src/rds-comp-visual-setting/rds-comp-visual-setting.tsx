@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "raaghu-react-elements";
+import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "../rds-elements";
 import "./rds-comp-visual-setting.scss";
 
 export interface RdsCompVisualSettingProps {
@@ -30,16 +30,16 @@ const reducer = (state: any, action: any) => {
         }
       });
 
-      case "SELECTLIST":
-        return state.map((vsItem: any) => {
-          if (vsItem.themeId === action.theme) {
-            const obj = Object.assign({}, vsItem);
-            obj[action.tab][action.name] = action.value;
-            return obj;
-          } else {
-            return { ...vsItem };
-          }
-        });
+    case "SELECTLIST":
+      return state.map((vsItem: any) => {
+        if (vsItem.themeId === action.theme) {
+          const obj = Object.assign({}, vsItem);
+          obj[action.tab][action.name] = action.value;
+          return obj;
+        } else {
+          return { ...vsItem };
+        }
+      });
 
     default:
       return state;
@@ -104,11 +104,10 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
               {props.themeItem.map((theme) => (
                 <div className="col-md-4 mb-4" key={theme.themeId}>
                   <div
-                    className={`d-inline-block p-3 pb-0 ${
-                      activeTheme == theme.themeId
+                    className={`d-inline-block p-3 pb-0 ${activeTheme == theme.themeId
                         ? "themeActivate"
                         : "themeInactivate"
-                    }`}
+                      }`}
                   >
                     <div
                       className="p-0"
@@ -198,8 +197,8 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                         tooltipTitle={""}
                         type="submit"
                         onClick={onSaveVisualSettings}
-                        // icon="plus"
-                        // iconColorVariant="light"
+                      // icon="plus"
+                      // iconColorVariant="light"
                       />
                     </div>
                   </div>
@@ -319,8 +318,8 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                             tooltipTitle={""}
                             type="submit"
                             onClick={onSaveVisualSettings}
-                            // icon="plus"
-                            // iconColorVariant="light"
+                          // icon="plus"
+                          // iconColorVariant="light"
                           />
                         </div>
                       </div>
@@ -353,14 +352,14 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                         tooltipTitle={""}
                         type="submit"
                         onClick={onSaveVisualSettings}
-                        // icon="plus"
-                        // iconColorVariant="light"
+                      // icon="plus"
+                      // iconColorVariant="light"
                       />
                     </div>
                   </div>
                 )}
 
-                {activeTab == "header" && ( 
+                {activeTab == "header" && (
                   <div className="tab-content" id="headerbar">
                     <div
                       className="  pt-4 navsm-p-0"
@@ -429,8 +428,8 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                               tooltipTitle={""}
                               type="submit"
                               onClick={onSaveVisualSettings}
-                              // icon="plus"
-                              // iconColorVariant="danger"
+                            // icon="plus"
+                            // iconColorVariant="danger"
                             />
                           </div>
                         </div>

@@ -8,13 +8,11 @@ const Register = (props: any) => {
 	const loginHandler: any = (isLoginClicked: boolean) => { };
 
 	useEffect(() => {
-		debugger
 		dispatch(registerData(null) as any);
 	}, []);
 
 
 	const registerHandler = (emailAddress: any, password: any, userName: any, appName: any, returnUrl?: string) => {
-		debugger
 		dispatch(registerData({ emailAddress, password, userName, appName, returnUrl }) as any).then((res: any) => {
 			// if (res.success && returnUrl) {
 			// 	window.location.href = returnUrl;

@@ -43,42 +43,41 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
 
 
 
-  const Auditpayload = () => {
-    const payload = {
-      userName: selectFilterValue.userName,
-      url: selectFilterValue.url,
-      minDuration: selectFilterValue.minDuration,
-      maxDuration: selectFilterValue.maxDuration,
-      httpMethod: selectFilterValue.httpMethod,
-      HttpStatusCode: selectFilterValue.HttpStatusCode,
-      applicationName: selectFilterValue.applicationName,
-      correlationId: selectFilterValue.correlationId,
-      exceptions: selectFilterValue.exceptions,
-    }
-    dispatch(auditLogsData(payload) as any);
-    const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
-      console.log(auditDataTable);
-      return {
-        id: dataAudit.id,
-        httpStatusCode: dataAudit.httpStatusCode,
-        userName: dataAudit.userName,
-        clientIpAddress: dataAudit.clientIpAddress,
-        executionTime: dataAudit.executionTime,
-        // executionDuration: dataAudit.executionDuration,
-        applicationName: dataAudit.applicationName,
-        browserInfo: dataAudit.browserInfo,
-        httpMethod: dataAudit.httpMethod,
-        url: dataAudit.url,
-        clientName: dataAudit.clientName,
-        exceptions: dataAudit.exceptions,
-        correlationId: dataAudit.correlationId,
-        comments: dataAudit.comments,
-        // extraProperties : dataAudit.extraProperties
-      };
-    }, []);
-    setAuditData(auditDataTable);
+const Auditpayload = ()=>{
+  const payload = {
+    userName: selectFilterValue.userName,
+    url: selectFilterValue.url,
+    minDuration: selectFilterValue.minDuration,
+    maxDuration: selectFilterValue.maxDuration,
+    httpMethod: selectFilterValue.httpMethod,
+    HttpStatusCode: selectFilterValue.HttpStatusCode,
+    applicationName: selectFilterValue.applicationName,
+    correlationId: selectFilterValue.correlationId,
+    exceptions: selectFilterValue.exceptions,
   }
-
+  dispatch(auditLogsData(payload) as any);
+  const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
+    return {
+      id: dataAudit.id,
+      httpStatusCode: dataAudit.httpStatusCode,
+      userName: dataAudit.userName,
+      clientIpAddress: dataAudit.clientIpAddress,
+      executionTime: dataAudit.executionTime,
+      // executionDuration: dataAudit.executionDuration,
+      applicationName: dataAudit.applicationName,
+      browserInfo: dataAudit.browserInfo,
+      httpMethod: dataAudit.httpMethod,
+      url: dataAudit.url,
+      clientName: dataAudit.clientName,
+      exceptions: dataAudit.exceptions,
+      correlationId: dataAudit.correlationId,
+      comments: dataAudit.comments,
+      // extraProperties : dataAudit.extraProperties
+    };
+  }, []);
+  setAuditData(auditDataTable);
+}
+  
 
   useEffect(() => {
     Auditpayload();
@@ -95,7 +94,9 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
     applicationName: "",
     correlationId: "",
     exceptions: "",
-    executionTime: ""
+    executionTime : "",
+    startDate:'',
+    endDate:''
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
   const operationActions = [
@@ -168,8 +169,6 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
     dispatch(auditActionData(rowData.id) as any);
   };
 
-  const onDatePicker = () => { };
-
   const AuditTableData = [
     {
       displayName: "Http Request",
@@ -219,9 +218,17 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
   const [showAction, setShowAction] = useState(false);
 
   const handleSearch = (event: any) => {
-    console.log("Hello", event.target.value);
-  };
+    };
+  const dateRangeHandler=  (startEndDate:any) =>{
+    
+    const [start, end] = startEndDate;
+    setSelectFilterValue({
+      ...selectFilterValue,
+      startDate:start.toISOString(),
+      endDate:end.toISOString(),
+    }); 
 
+  };
   return (
     <div className="container-fluid p-0 m-0">
       <div className="row">
@@ -229,14 +236,14 @@ const Auditlogs = (props: RdsPageAuditlogsProps) => {
           <div className="card border-0 rounded-0">
             <div className="card-body">
               <div className="align-items-end justify-content-between row">
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
-                  <RdsDatePicker
-                    DatePickerLabel="Select Date"
-                    onDatePicker={onDatePicker}
+                <div className="col-xxl-3 col-xl-3 flex-grow-1 mb-4">
+                 <RdsDatePicker
+                     customDate={dateRangeHandler}
+                    selectedDate={selectFilterValue.startDate}
                     type="advanced"
                   ></RdsDatePicker>
                 </div>
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                <div className="col-xxl-1 col-xl-1 flex-grow-1 mb-4">
                   <RdsInput
                     placeholder="User"
                     onChange={onActionFilter}

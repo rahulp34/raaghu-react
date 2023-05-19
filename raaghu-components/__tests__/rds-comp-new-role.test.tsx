@@ -1,28 +1,54 @@
-import React from 'react';
+import React from "react";
 import "@testing-library/jest-dom";
-import { render, fireEvent, screen } from '@testing-library/react';
-import RdsCompNewRole from "../src/rds-comp-new-role/rds-comp-new-role";
+import { render, screen, fireEvent } from "@testing-library/react";
+import RdsCompNewRole, {
+  RdsCompNewRoleProps,
+} from "../src/rds-comp-new-role/rds-comp-new-role";
 
 describe("RdsCompNewRole", () => {
-    const roleData = {
-        displayName: "Role Name",
-        isDefault: false,
-    };
+  const roleData: any = {
+    displayName: "Test Role",
+    isDefault: false,
+  };
 
-    it("renders the component with role data", () => {
-        render(<RdsCompNewRole roleData={roleData} />);
-        const dataone = screen.getByText(roleData.displayName);
-        const datatwo = screen.getByPlaceholderText(roleData.displayName);
+  const renderComponent = (props: RdsCompNewRoleProps) => {
+    render(<RdsCompNewRole {...props} />);
+  };
 
-        // Assert that the component is rendered correctly
-        expect(dataone).toBeInTheDocument();
-        expect(datatwo).toBeInTheDocument();
-        //Adding some more assertion
-        expect(dataone).toBeEnabled();
-        expect(dataone).toBeVisible();
-        //Added for second one 
-        expect(datatwo).toBeEnabled();
-        expect(datatwo).toBeVisible();
-    });
+  it("renders the component with role data", () => {
+    renderComponent({ roleData });
+    // Assert labels, inputs, and buttons are rendered correctly
+    expect(screen.getByText(roleData.displayName)).toBeInTheDocument();
+    expect(screen.getByText("Default")).toBeInTheDocument();
+    expect(screen.getByText("CANCEL")).toBeInTheDocument();
+    expect(screen.getByText("SAVE")).toBeInTheDocument();
+  });
 
+  it("displays the role data correctly", () => {
+    renderComponent({ roleData });
+    // Assert input placeholder and checkbox checked state
+    expect(
+      screen.getByPlaceholderText(roleData.displayName)
+    ).toBeInTheDocument();
+    expect(screen.getByRole("checkbox")).not.toBeChecked();
+  });
+
+  it("updates the input value when typing", () => {
+    renderComponent({ roleData });
+    const input = screen.getByPlaceholderText(
+      roleData.displayName
+    ) as HTMLInputElement;
+    input.value = "New Value";
+    fireEvent.input(input); // Simulate the input event
+    expect(input.value).toBe("New Value");
+  });
+
+  it("toggles the checkbox when clicked", () => {
+    renderComponent({ roleData });
+    const checkbox = screen.getByRole("checkbox") as HTMLInputElement;
+    expect(checkbox.checked).toBe(false);
+    checkbox.checked = true;
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBe(false);
+  });
 });
