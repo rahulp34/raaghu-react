@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-stepper.scss";
+import "./rds-stepper.css";
 
 export interface RdsStepperProps {
     stepperType: string;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-input.scss";
+import "./rds-input.css";
 import Tooltip from "../rds-tooltip/rds-tooltip";
 import { placements } from "../../libs/types";
 import RdsIcon from "../rds-icon";

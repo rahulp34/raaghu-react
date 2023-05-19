@@ -3,7 +3,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
-import "./rds-datepicker.scss";
+import "./rds-datepicker.css";
 
 export interface RdsDatepickerProps {
   selectedDate?: any

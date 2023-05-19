@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import Chart from 'chart.js/auto';
-import "./rds-chart-stacked.scss"
+import "./rds-chart-stacked.css"
 
 export interface RdsStackedprops {
   labels:any[],

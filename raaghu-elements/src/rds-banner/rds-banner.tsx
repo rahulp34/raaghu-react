@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "./rds-banner.scss";
+import "./rds-banner.css";
 import RdsIcon from "../rds-icon";
 
 export interface RdsBannerProps {

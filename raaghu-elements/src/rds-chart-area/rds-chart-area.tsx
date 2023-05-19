@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import Chart from 'chart.js/auto';
-import "./rds-chart-area.scss"
+import "./rds-chart-area.css"
 
 export interface lineprops {
   labels:any[],

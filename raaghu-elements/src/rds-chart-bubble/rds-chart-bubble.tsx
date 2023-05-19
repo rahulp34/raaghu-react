@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
-import "./rds-chart-bubble.scss";
+import "./rds-chart-bubble.css";
 
 export interface RdsBubbleChartProps {
   id: string;

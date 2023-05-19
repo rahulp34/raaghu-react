@@ -1,6 +1,6 @@
 import { useState, ReactNode } from "react";
 import React from "react";
-import "./rds-collapse.scss";
+import "./rds-collapse.css";
 
 export interface RdsCollapseProps {
   children?: ReactNode;

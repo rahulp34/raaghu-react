@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
-import "./rds-color-picker.scss";
+import "./rds-color-picker.css";
 
 export interface RdsColorPickerProps {
   value: string;

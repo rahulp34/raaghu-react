@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-checkbox-group.scss";
+import "./rds-checkbox-group.css";
 
 export interface RdsCheckboxGroupProps {
   isSwitch?: boolean;
