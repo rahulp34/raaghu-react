@@ -32,8 +32,8 @@ const RdsCompFormsEmail = (props: RdsCompFormsEmailProps) => {
     return (
         <>
             <div className="ps-2">
-                <RdsInput required={true} inputType="email" label="To" value={emailData.to} onChange={(e) => setTo(e.target.value)}></RdsInput>
-                <RdsInput label="Subject" value={emailData.subject} onChange={(e) => setSubject(e.target.value)}></RdsInput>
+                <RdsInput required={true} inputType="email" label="To" value={emailData.to} onChange={(e) => setTo(e.target.value)} dataTestId="email"></RdsInput>
+                <RdsInput label="Subject" value={emailData.subject} onChange={(e) => setSubject(e.target.value)} dataTestId="subject"></RdsInput>
                 <div className="pt-3">
                     <RdsTextEditor label="Body" value={emailData.body} onChange={(e) => setBody(e)} placeholder={""} ></RdsTextEditor >
                 </div>
@@ -60,6 +60,7 @@ const RdsCompFormsEmail = (props: RdsCompFormsEmailProps) => {
                                     databsdismiss="offcanvas"
                                     onClick={() => props.handleSubmit(emailData)}
                                     isDisabled={!isFormValid}
+                                    dataTestId="send"
                                 ></RdsButton>
                             </div>
                         </div>

@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import RdsIcon from "../rds-icon";
 import RdsBadge from "../rds-badge";
-import "./rds-dropdown-list.scss";
+import "./rds-dropdown-list.css";
 import { Dropdown } from "bootstrap";
 export interface RdsDropdownListProps {
   id?: string;
   reset?: boolean;
+  labelIcon?:string;
+  labelIconWidth?:string;
+  labelIconHeight?:string;
   icon?: string;
   iconFill?: boolean;
   iconWidth?: string;
   iconStroke?: boolean;
   iconHeight?: string;
   placeholder?: string;
+  isPlaceholder?:boolean;
+  isIconPlaceholder?:boolean;
   borderDropdown?: boolean;
   listItems: {
     label: string;
@@ -23,7 +28,7 @@ export interface RdsDropdownListProps {
   multiSelect?: boolean;
   xOffset?: string;
   yOffset?: string;
-  onClick?: (event: React.MouseEvent<HTMLLIElement>, val: string) => void;
+  onClick?: ($event: React.MouseEvent<HTMLLIElement>, val: string) => void;
   selectedItems?: (selectedItems: any) => void;
   selectedIndex?: (selectedindex: number) => void;
 }
@@ -128,9 +133,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
         setToggle("show");
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -143,35 +146,52 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       <span
         className="dropdown-raaghu-button cursor-pointer"
         onClick={clickedOnDropDown}
-      >
+      >      
         <div
           className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}
         >
           {/* simple dropdown  */}
-          {isTouch !== true && props.placeholder && props.multiSelect !== true && (
+          {isTouch !== true && props.placeholder && props.multiSelect !== true &&   (
+            
             <div className="d-flex align-items-baseline">
-              {props.icon && (
+                {props.isIconPlaceholder ==true && props.isPlaceholder==false && (
+                <span>
+                  <RdsIcon
+                    name={props.labelIcon}
+                    height={props.labelIconHeight}
+                    width={props.labelIconWidth}
+                    // fill={props.iconFill}
+                    // stroke={props.iconStroke}
+                    // classes="pe-1"
+                  />
+                </span>
+              )}
+              
+              {props.icon && props.isPlaceholder==true && props.isIconPlaceholder==false && (
                 <span>
                   <RdsIcon
                     name={props.icon}
                     height={IconHeight}
                     width={IconWidth}
                     fill={props.iconFill}
-                    stroke={props.iconStroke}
-                    classes="pe-1"
+                    stroke={props.iconStroke}                  
                   />
                 </span>
               )}
-              <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
-                {props.placeholder}
-              </span>
+  
+              {props.isPlaceholder==true && (
+                 <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
+                 {props.placeholder}
+               </span>
+              )}
+             
             </div>
           )}
 
           {isTouch === true &&
             props.multiSelect !== true &&
             props.listItems &&
-            props.listItems[0] && (
+            props.listItems[0]  &&(
               <>
                 <div className="d-flex align-items-baseline">
                   {props.listItems[selectedOption].icon && (
@@ -185,9 +205,11 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
                       ></RdsIcon>
                     </span>
                   )}
-                  <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
-                    {props.listItems[selectedOption].label}
-                  </span>
+                  {props.isIconPlaceholder==false &&  (
+                     <span className="fs-6 ms-2 me-2 flex-grow-1 text-nowrap">
+                     {props.listItems[selectedOption].label}
+                   </span>
+                  )}   
                 </div>
               </>
             )}
@@ -295,3 +317,4 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
 };
 
 export default RdsDropdownList;
+

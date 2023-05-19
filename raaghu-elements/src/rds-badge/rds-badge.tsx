@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./rds-badge.scss";
+import "./rds-badge.css";
 
 export interface RdsBadgeProps {
   label: string;

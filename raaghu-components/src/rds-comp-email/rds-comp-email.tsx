@@ -183,7 +183,7 @@ useEffect( () => {
         </div>
 
         {condition }
-        <div className="position-relative bottom-0 justify-content-end" style={{right:0}}>
+        <div className="position-relative bottom-0 d-flex justify-content-end">
           <div className=" d-flex justify-content-start mt-3" >
             <RdsButton
               class="me-2"
@@ -194,7 +194,6 @@ useEffect( () => {
               size="small"
             ></RdsButton>
             <RdsButton
-              class="me-2"
               label="SAVE"
               type="submit"
               isOutline={false}

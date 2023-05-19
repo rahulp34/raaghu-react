@@ -53,6 +53,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             required={true}
             name="name"
             onChange={onNameChangeHandler}
+            dataTestId="name"
           />
       </div>
       <div className="col-md-6 mb-3">	
@@ -64,6 +65,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
               name="regex"
               required={false}
               onChange={onRegexChangeHandler}
+              dataTestId="regex"
             />
       </div>
       <div className="col-md-6 mb-3">	
@@ -84,6 +86,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             name="regexDesc"
             required={false}
             onChange={onRegexDescChangeHandler}
+            dataTestId="reges-description"
           />
       </div>
       <div className="col-md-12">	
@@ -93,6 +96,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onChange={onDescChangeHAndler}
             value={data.description}
             rows={3}
+            dataTestId="description"
           />
       </div>
       
@@ -101,6 +105,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             label="Required"
             onChange={e => { setDevice(e.target.checked) }}
             checked={data.required}
+            dataTestId="required"
           ></RdsCheckbox>
         </div>
        
@@ -113,6 +118,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             isOutline={true}
             colorVariant="primary"
             class="me-2"
+            dataTestId="cancel"
           ></RdsButton>
           <RdsButton
             label="SAVE"
@@ -125,6 +131,7 @@ const RdsCompNewClaimType = (props: RdsCompNewClaimTypeProps) => {
             onClick={() => {
               props.onSubmit(data);
             }}
+            dataTestId="save"
           ></RdsButton>
         </div>
       

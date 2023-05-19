@@ -29,7 +29,7 @@ export interface RdsCompEditionListProps {
 const RdsCompEditionList = (props: RdsCompEditionListProps) => {
   return (
     <RdsCompDatatable
-    actionPosition="right"
+      actionPosition="right"
       tableHeaders={props.tableHeaders}
       actions={props.actions}
       tableData={props.tableData!}

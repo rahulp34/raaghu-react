@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-radio-button.scss";
+import "./rds-radio-button.css";
 import { useReducer } from "react";
 
 export interface RdsRadioButtonProps {

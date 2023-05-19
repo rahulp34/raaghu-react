@@ -254,7 +254,7 @@ const RdsCompAccount = (props: any) => {
   }, [props.accountGeneralSettings]);
 
   return (
-    <div>
+    <div className="overflow-auto">
       <form onSubmit={AccountData}>
         <div className="border-bottom pb-2 text-muted mt-3 fw-bold">
           <RdsLabel label="General Settings" size="14px"></RdsLabel>
@@ -475,7 +475,6 @@ const RdsCompAccount = (props: any) => {
             size="small"
           ></RdsButton>
           <RdsButton
-            class="me-2"
             label="SAVE"
             type="submit"
             onClick={() => {

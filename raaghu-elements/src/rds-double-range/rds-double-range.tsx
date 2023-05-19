@@ -7,7 +7,7 @@ import React, {
   useRef,
   Fragment,
 } from "react";
-import "./rds-double-range.scss";
+import "./rds-double-range.css";
 
 export interface RdsDoubleRangeProps {
   min: number;

@@ -110,6 +110,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                     onClick={() => {
                       handleEdit(res.id);
                     }}
+                    dataTestId="edit"
                   ></RdsIcon>
                 </div>
                 <RdsIcon
@@ -121,6 +122,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleDelete(res.id);
                   }}
+                  dataTestId="delete"
                 ></RdsIcon>
               </div>
             </>
@@ -147,6 +149,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleEdit(id);
                   }}
+                  dataTestId="edit"
                 ></RdsIcon>
               </div>
               <RdsIcon
@@ -158,6 +161,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                 onClick={() => {
                   handleDelete(id);
                 }}
+                dataTestId="delete"
               ></RdsIcon>
             </div>
           </>
@@ -190,6 +194,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleEdit(res.id);
                   }}
+                  dataTestId="edit"
                 ></RdsIcon>
               </div>
               <RdsIcon
@@ -201,6 +206,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                 onClick={() => {
                   handleDelete(res.id);
                 }}
+                dataTestId="delete"
               ></RdsIcon>
             </div>
           </>
@@ -227,6 +233,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                 optionChange(e.target.value);
               }}
               value={optionData.option}
+              dataTestId="option"
             ></RdsInput>
           </div>
           <div className="col-md-3">
@@ -239,6 +246,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
               onClick={handleAddItem}
               tooltipTitle={""}
               type="button"
+              dataTestId="add"
             />
           </div>
         </div>

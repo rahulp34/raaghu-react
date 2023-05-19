@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-input.scss";
+import "./rds-input.css";
 import Tooltip from "../rds-tooltip/rds-tooltip";
 import { placements } from "../../libs/types";
 import RdsIcon from "../rds-icon";
@@ -65,7 +65,7 @@ const RdsInput = (props: RdsInputProps) => {
       {!props.labelPositon && (
         <>
           {props.label && (
-            <label htmlFor={props.id} className="form-label d-inline">
+            <label htmlFor={props.id} className="form-label">
               {props.label}
             </label>
           )}
@@ -76,7 +76,7 @@ const RdsInput = (props: RdsInputProps) => {
         <>
           {props.label && (
             <>
-              <label htmlFor={props.id} className="form-label d-inline">
+              <label htmlFor={props.id} className="form-label">
                 {props.label}
               </label>
               {props.required && <span className="text-danger ms-1">*</span>}
@@ -107,7 +107,7 @@ const RdsInput = (props: RdsInputProps) => {
             onChange={handlerChange}
             disabled={props.isDisabled}
             readOnly={props.readonly}
-            data-testId= {props.dataTestId}
+            data-testid= {props.dataTestId}
           />
           {props.inputType === "password" && (
             <RdsIcon
@@ -147,7 +147,7 @@ const RdsInput = (props: RdsInputProps) => {
               onChange={handlerChange}
               disabled={props.isDisabled}
               readOnly={props.readonly}
-              data-testId= {props.dataTestId}
+              data-testid= {props.dataTestId}
             ></input>
             {props.inputType === "password" && (
               <RdsIcon
@@ -168,7 +168,7 @@ const RdsInput = (props: RdsInputProps) => {
         <>
           {props.label && (
             <>
-              <label htmlFor={props.id} className="form-label d-inline"></label>
+              <label htmlFor={props.id} className="form-label"></label>
               {props.required && <span className="text-danger ms-1">*</span>}
             </>
           )}

@@ -1,12 +1,6 @@
 // import { RdsButton, RdsInput, RdsRadioButton,RdsCheckbox } from "raaghu-react-elements";
-import React, { FC, useState, useEffect } from "react";
-import {
-  RdsButton,
-  RdsCheckbox,
-  RdsFileUploader,
-  RdsRadioButton,
-} from "../rds-elements";
-import { RdsCompProfilePictureWrapper } from "./rds-comp-profile-picture.styled";
+import React, { useState, useEffect } from "react";
+import { RdsButton, RdsFileUploader, RdsRadioButton } from "../rds-elements";
 
 interface RdsCompProfilePictureProps {}
 
@@ -16,21 +10,16 @@ const RdsCompProfilePicture = (props: any) => {
   const [type, setavatarType] = useState(0);
   const [show, setShow] = useState<boolean>(false);
   const [newProfileImage, setNewProfileImage] = useState<string>("");
+  const [isExceed, setIsExceed] = useState(false);
 
   function profileImage(data: any) {
-    ;
-    const file = data.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-      const imageUrl = reader.result;
-      const image = new Image();
-      image.src = imageUrl as string;
-      setAvatarImg(image.src);
-      props.postProfilePic(file, 2);
-    });
-
-    reader.readAsDataURL(file);
+    const fileSize = data.files[0].size / 1024; //now size in kb
+    //validation
+    if (fileSize > props?.limit) {
+      setIsExceed(true);
+    } else {
+      setIsExceed(false);
+    }
     props.postProfilePic(data.files[0]);
   }
 
@@ -38,18 +27,8 @@ const RdsCompProfilePicture = (props: any) => {
     setAvatarImg(props.profilePictureData);
   }, [props.profilePictureData]);
 
-  const handleProfileDataSubmit = (event: any) => {
-    console.log("formData is", event);
-  };
-
-  // function setProfilePicture(value:number){
-  // 	setFormData({...formData,type:value})
-  //   }
 
   const onClickSetProfilePicture = (event: any) => {
-    
-    // 
-    console.log("type is",type)
     if (event.target.value == "Use Default Avatar") {
       // alert(0);
       setAvatarImg("./assets/profile-picture-circle.svg");
@@ -60,8 +39,8 @@ const RdsCompProfilePicture = (props: any) => {
       const file = new File([imagePath], "profile.svg", {
         type: "image/svg+xml",
       });
-      
-      props.postProfilePic(file,0);
+
+      props.postProfilePic(file, 0);
       setShow(false);
     } else if (event.target.value === "Use Gravatar") {
       setAvatarImg("./assets/Avatar-rds-mascot.svg");
@@ -73,7 +52,7 @@ const RdsCompProfilePicture = (props: any) => {
       const file = new File([imagePath], "avatar.svg", {
         type: "image/svg+xml",
       });
-      props.postProfilePic(file,1); // pass the file to the function
+      props.postProfilePic(file, 1); // pass the file to the function
       setShow(false);
     } else if (event.target.value == "Upload File") {
       // alert(2);
@@ -81,8 +60,7 @@ const RdsCompProfilePicture = (props: any) => {
       // profileImage(event)
       setShow(true);
     }
-    // console.log(event.target.value);
-  };
+   };
 
   const profileList = [
     {
@@ -107,7 +85,16 @@ const RdsCompProfilePicture = (props: any) => {
       type: 2,
     },
   ];
-
+  const validation = [
+    {
+      hint: "File size should not be greater than 1 MB.",
+      isError: false,
+    },
+    {
+      hint: "File type should be .jpg, .jpeg, and .png.",
+      isError: false,
+    },
+  ];
   return (
     <form>
       <div className="row py-4 mt-4">
@@ -121,7 +108,6 @@ const RdsCompProfilePicture = (props: any) => {
           ></img>
         </div>
         <div className="col-8 my-3">
-         
           <RdsRadioButton
             displayType="Default"
             itemList={profileList}
@@ -132,21 +118,25 @@ const RdsCompProfilePicture = (props: any) => {
           />
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-4"></div>
+      <div className="row position-relative">
+        <div className="col-md-4 "></div>
         {show && (
-          <div className="col-md-8">
-            <RdsFileUploader
-              colorVariant="primary"
-              extensions=""
-              multiple={false}
-              placeholder=""
-              size={""}
-              label={"Select New Image"}
-              limit={10}
-              getFileUploaderInfo={(data: any) => profileImage(data)}
-            />
-          </div>
+          <>
+            <div className="col-md-4 ">
+              <RdsFileUploader
+                colorVariant="primary"
+                extensions=".jpg, .jpeg, .png"
+                multiple={false}
+                placeholder=""
+                size={""}
+                label={"Select New Image"}
+                limit={10}
+                validation={validation}
+                getFileUploaderInfo={(data: any) => profileImage(data)}
+              />
+         
+            </div>
+          </>
         )}
       </div>
 
@@ -154,6 +144,7 @@ const RdsCompProfilePicture = (props: any) => {
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
+          isDisabled={isExceed !== true}
           block={false}
           type="button"
           size="small"

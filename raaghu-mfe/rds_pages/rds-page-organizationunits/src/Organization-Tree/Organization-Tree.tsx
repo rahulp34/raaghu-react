@@ -37,6 +37,7 @@ export interface OrganizationTreeProps {
 }
 const OrganizationTree = (props: OrganizationTreeProps) => {
   const dispatch = useAppDispatch();
+    const offCanvasHandler = () => {};
   const [activeTab, setActiveTab] = useState("member");
   const [treeData, setTreeData] = useState<any>([]);
   const [user, setUser] = useState<any>({
@@ -442,7 +443,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Select Member"
-        
+         onclick={offCanvasHandler}
         offId="oMember-add-off"
         backDrop={true}
         scrolling={false}
@@ -479,8 +480,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       isOutline={true}
                       colorVariant="primary"
                       databsdismiss="offcanvas"
-                      databstoggle="offcanvas"
-                      databstarget="#oMember-add-off"
+                      // databstoggle="offcanvas"
+                      // databstarget="#oMember-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -495,8 +496,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       onClick={handlerUserPush}
                       databsdismiss="offcanvas"
-                      databstoggle="offcanvas"
-                      databstarget="#addMemberOff"
+                      // databstoggle="offcanvas"
+                      // databstarget="#addMemberOff"
                       showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
@@ -509,7 +510,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Select Roles"
-        
+        onclick={offCanvasHandler}
         offId="oRole-add-off"
         backDrop={true}
         scrolling={false}
@@ -547,8 +548,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       isOutline={true}
                       colorVariant="primary"
                       databsdismiss="offcanvas"
-                      databstoggle="offcanvas"
-                      databstarget="#oRole-add-off"
+                      // databstoggle="offcanvas"
+                      // databstarget="#oRole-add-off"
                     ></RdsButton>
                   </div>
                   <div className="px-2">
@@ -563,8 +564,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
                       colorVariant="primary"
                       onClick={handlerRolePush}
                       databsdismiss="offcanvas"
-                      databstoggle="offcanvas"
-                      databstarget="#addRoleOff"
+                      // databstoggle="offcanvas"
+                      // databstarget="#addRoleOff"
                       showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
@@ -580,6 +581,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         offId="aoganization"
         backDrop={true}
         scrolling={false}
+        onclick={offCanvasHandler}
         preventEscapeKey={false}
       >
         <RdsInput
@@ -599,8 +601,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               isOutline={true}
               colorVariant="primary"
               databsdismiss="offcanvas"
-              databstoggle="offcanvas"
-              databstarget="#aoganization"
+              // databstoggle="offcanvas"
+              // databstarget="#aoganization"
             ></RdsButton>
          
           <RdsButton
@@ -612,8 +614,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             colorVariant="primary"
             onClick={handlerAddNestedNode}
             databsdismiss="offcanvas"
-            databstoggle="offcanvas"
-            databstarget="#aoganization"
+            // databstoggle="offcanvas"
+            // databstarget="#aoganization"
           ></RdsButton>
         </div>
       </RdsOffcanvas>
@@ -621,7 +623,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Edit Organization Unit"
-        
+        onclick={offCanvasHandler}
         offId="boganization"
         backDrop={true}
         scrolling={false}
@@ -645,8 +647,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               isOutline={true}
               colorVariant="primary"
               databsdismiss="offcanvas"
-              databstoggle="offcanvas"
-              databstarget="#boganization"
+              // databstoggle="offcanvas"
+              // databstarget="#boganization"
             ></RdsButton>
           
           <RdsButton
@@ -657,8 +659,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             colorVariant="primary"
             onClick={handlerEdit}
             databsdismiss="offcanvas"
-            databstoggle="offcanvas"
-            databstarget="#boganization"
+            // databstoggle="offcanvas"
+            // databstarget="#boganization"
           ></RdsButton>
         </div>
       </RdsOffcanvas>
@@ -669,6 +671,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
         backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
+        onclick={offCanvasHandler}
         
       >
         <RdsInput
@@ -689,8 +692,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               colorVariant="primary"
               isOutline={true}
               databsdismiss="offcanvas"
-              databstoggle="offcanvas"
-              databstarget="#coganization"
+              // databstoggle="offcanvas"
+              // databstarget="#coganization"
              ></RdsButton>
           
           <RdsButton
@@ -701,8 +704,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"
-            databstoggle="offcanvas"
-            databstarget="#coganization"
+            // databstoggle="offcanvas"
+            // databstarget="#coganization"
             onClick={handlerAddSubUnitNode}
           ></RdsButton>
         </div>
@@ -710,7 +713,7 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
       <RdsOffcanvas
         placement="end"
         canvasTitle="Add Organiztion New Unit"
-        
+        onclick={offCanvasHandler}
         backDrop={true}
         scrolling={false}
         preventEscapeKey={false}
@@ -733,8 +736,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
               colorVariant="primary"
               isOutline={true}
               databsdismiss="offcanvas"
-              databstoggle="offcanvas"
-              databstarget="#doganization"
+              // databstoggle="offcanvas"
+              // databstarget="#doganization"
             ></RdsButton>
         
           <RdsButton
@@ -745,8 +748,8 @@ const OrganizationTree = (props: OrganizationTreeProps) => {
             isDisabled={val === ""}
             colorVariant="primary"
             databsdismiss="offcanvas"
-            databstoggle="offcanvas"
-            databstarget="#doganization"
+            // databstoggle="offcanvas"
+            // databstarget="#doganization"
             onClick={handlerAddRootNode}
           ></RdsButton>
         </div>

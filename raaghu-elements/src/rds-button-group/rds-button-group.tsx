@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-button-group.scss";
+import "./rds-button-group.css";
 import { colors } from "../../libs/types";
 export interface RdsButtonGroupProps {
   vertical: boolean;

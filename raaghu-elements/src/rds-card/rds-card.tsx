@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { colors } from "../../libs/types";
 import RdsAvatar from "../rds-avatar";
 
-import "./rds-card.scss";
+import "./rds-card.css";
 
 export interface RdsCardProps {
 	buttonLabel?: string;

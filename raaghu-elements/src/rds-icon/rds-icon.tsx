@@ -16,6 +16,7 @@ export interface RdsIconProps {
   opacity?: string;
   isAnimate?: boolean;
   classes?: any;
+  dataTestId?: string;
 }
 
 const RdsIcon = (props: RdsIconProps) => {
@@ -100,6 +101,7 @@ const RdsIcon = (props: RdsIconProps) => {
       onClick={props.onClick}
       dangerouslySetInnerHTML={{ __html: stringData }}
       role="img"
+      data-testid={props.dataTestId}
     />
   );
 };

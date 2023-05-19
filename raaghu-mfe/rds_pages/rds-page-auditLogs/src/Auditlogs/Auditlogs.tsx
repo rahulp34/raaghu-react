@@ -10,6 +10,7 @@ import {
   RdsSelectList,
   RdsNavtabs,
   RdsButton,
+  RdsIcon,
 } from "../../../rds-elements";
 import {
   useAppSelector,
@@ -56,7 +57,6 @@ const Auditpayload = ()=>{
   }
   dispatch(auditLogsData(payload) as any);
   const auditDataTable = audituser.audits.items.map((dataAudit: any) => {
-    console.log(auditDataTable);
     return {
       id: dataAudit.id,
       httpStatusCode: dataAudit.httpStatusCode,
@@ -87,14 +87,16 @@ const Auditpayload = ()=>{
   const [selectFilterValue, setSelectFilterValue] = useState({
     userName: "",
     url: "",
-    minDuration : "",
+    minDuration: "",
     maxDuration: "",
     httpMethod: "",
     HttpStatusCode: "",
     applicationName: "",
     correlationId: "",
     exceptions: "",
-    executionTime : ""
+    executionTime : "",
+    startDate:'',
+    endDate:''
   });
   const [tableDataRowid, setTableDataRowId] = useState(0);
   const operationActions = [
@@ -160,14 +162,12 @@ const Auditpayload = ()=>{
     });
     return auditData
   };
-  
+
 
   const onActionSelection = (rowData: any, actionId: any) => {
     setTableDataRowId(rowData.id);
     dispatch(auditActionData(rowData.id) as any);
   };
-
-  const onDatePicker = () => {};
 
   const AuditTableData = [
     {
@@ -213,14 +213,22 @@ const Auditpayload = ()=>{
     { label: "Actions", tablink: " #nav-action", id: 1 },
   ];
 
-  const offCanvasHandler = () => {};
+  const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showAction, setShowAction] = useState(false);
 
   const handleSearch = (event: any) => {
-    console.log("Hello", event.target.value);
-  };
+    };
+  const dateRangeHandler=  (startEndDate:any) =>{
+    
+    const [start, end] = startEndDate;
+    setSelectFilterValue({
+      ...selectFilterValue,
+      startDate:start.toISOString(),
+      endDate:end.toISOString(),
+    }); 
 
+  };
   return (
     <div className="container-fluid p-0 m-0">
       <div className="row">
@@ -228,14 +236,14 @@ const Auditpayload = ()=>{
           <div className="card border-0 rounded-0">
             <div className="card-body">
               <div className="align-items-end justify-content-between row">
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
-                  <RdsDatePicker
-                    DatePickerLabel="Select Date"
-                    onDatePicker={onDatePicker}
+                <div className="col-xxl-3 col-xl-3 flex-grow-1 mb-4">
+                 <RdsDatePicker
+                     customDate={dateRangeHandler}
+                    selectedDate={selectFilterValue.startDate}
                     type="advanced"
                   ></RdsDatePicker>
                 </div>
-                <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
+                <div className="col-xxl-1 col-xl-1 flex-grow-1 mb-4">
                   <RdsInput
                     placeholder="User"
                     onChange={onActionFilter}
@@ -250,7 +258,7 @@ const Auditpayload = ()=>{
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
                   <RdsInput
                     placeholder="Min Duration"
-                    // onChange={onMinDurationFilter}
+                  // onChange={onMinDurationFilter}
                   ></RdsInput>
                 </div>
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
@@ -329,7 +337,7 @@ const Auditpayload = ()=>{
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
                   <RdsSelectList
                     label="Has Exception"
-                  onSelectListChange={onHasExceptionFilter}
+                    onSelectListChange={onHasExceptionFilter}
                     selectItems={[
                       {
                         option: "Yes",
@@ -342,26 +350,20 @@ const Auditpayload = ()=>{
                 </div>
               </div>
               <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mt-2">
-                <RdsButton
-                  label="Search"
-                  type="button"
-                  colorVariant="primary"
-                  size="small"
-                  isOutline={false}
-                  icon = "search"
-                  iconFill = {false}
-                  iconStroke = {true}
-                  iconColorVariant = "light"
-                  iconHeight = "15px"
-                  iconWidth = "15px"
+                <RdsIcon
+                  name="search"
+                  width="16px"
+                  height="16px"
+                  colorVariant="dark"
+                  fill={false}
+                  stroke={true}
                   onClick={Auditpayload}
-                  showLoadingSpinner={true}
-                ></RdsButton>
+                 ></RdsIcon>
               </div>
 
               <div className="row mx-3 my-5">
                 <RdsCompDatatable
-                actionPosition="right"
+                  actionPosition="right"
                   classes="table__userTable"
                   tableHeaders={AuditTableData}
                   tableData={auditData}
@@ -383,7 +385,7 @@ const Auditpayload = ()=>{
               placement="end"
               canvasTitle="Detail"
               onclick={offCanvasHandler}
-              
+
               className="mx-1"
             >
               <RdsNavtabs
@@ -397,7 +399,7 @@ const Auditpayload = ()=>{
               />
               {activeNavTabId == 0 && showAction === false && (
                 <ViewOperationLogsOffCanvas
-                  selectedRowData={ auditData.filter(
+                  selectedRowData={auditData.filter(
                     (item: any) => item.id == (tableDataRowid || 1)
                   )}
                 ></ViewOperationLogsOffCanvas>
@@ -539,7 +541,7 @@ const ViewOperationLogsOffCanvas = (selectedRowData: any) => {
           </div>
         </div>
       </div>
-    
+
       <div className="row">
         <div className="col-md-6">
           <div className="form-group mb-3">

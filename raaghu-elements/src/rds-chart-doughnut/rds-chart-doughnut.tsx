@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect} from "react";
 import Chart from 'chart.js/auto';
-//import "./rds-chart-doughnut.scss"
+//import "./rds-chart-doughnut.css"
 
 export interface RdsDoughnutprops {
   labels:any[],

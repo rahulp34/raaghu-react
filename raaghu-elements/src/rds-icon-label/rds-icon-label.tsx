@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-icon-label.scss";
+import "./rds-icon-label.css";
 import RdsIcon from "../rds-icon/rds-icon";
 import RdsLabel from "../rds-label/rds-label";
 

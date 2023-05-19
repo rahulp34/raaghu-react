@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import "./rds-button.scss";
+import "./rds-button.css";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
 import Tooltip from "../rds-tooltip/rds-tooltip";
@@ -56,7 +56,7 @@ const RdsButton= (props: RdsButtonProps) => {
         data-bs-toggle={props.databstoggle}
         aria-controls={props.ariacontrols}
         id={props.id}
-        data-testId={props.dataTestId}
+        data-testid={props.dataTestId}
       >
         {props.icon && (
           <span className={iconClasses}>
@@ -90,7 +90,7 @@ const RdsButton= (props: RdsButtonProps) => {
       data-bs-toggle={props.databstoggle}
       aria-controls={props.ariacontrols}
       id={props.id}
-      data-testId={props.dataTestId}
+      data-testid={props.dataTestId}
     >
       {props.icon && (
         <span className={iconClasses}>

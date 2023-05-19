@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-pagination.scss";
+import "./rds-pagination.css";
 export interface RdsPaginationProps {
   totalRecords: number;
   recordsPerPage?: any;

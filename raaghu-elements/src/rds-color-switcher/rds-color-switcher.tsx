@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-color-switcher.scss"
+import "./rds-color-switcher.css"
 
 export interface RdsColorSwitcherProps {
   header?: string;

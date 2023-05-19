@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./rds-breadcrumb.scss";
+import "./rds-breadcrumb.css";
 import RdsIcon from "../rds-icon";
 import { BrowserRouter, Routes } from "react-router-dom";
 

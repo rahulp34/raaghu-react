@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton } from "raaghu-react-elements";
+import { RdsInput, RdsButton } from "../rds-elements";
 import React from "react";
 import "./rds-comp-profile-edit.scss";
 export interface RdsCompProfileEditProps {
@@ -59,6 +59,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   placeholder="Enter Name"
                   onBlur={() => setIsNameTouched(true)}
                   onChange={(e) => setEnteredName(e.target.value)}
+                  dataTestId="name"
                 ></RdsInput>
                 {isNameEmptyAndTouched && (
                   <span className="red-color-error">
@@ -77,6 +78,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   id="email"
                   onBlur={() => setIsEmailTouched(true)}
                   onChange={(e) => setEnteredEmail(e.target.value)}
+                  dataTestId="email"
                 ></RdsInput>
                 {isEnteredEmailEmptyAndTouched && (
                   <span className="red-color-error">
@@ -104,6 +106,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   required={true}
                   onBlur={() => setIsPhoneNumberTouched(true)}
                   onChange={(e) => setEnteredPhoneNumber(e.target.value)}
+                  dataTestId="phone-number"
                 ></RdsInput>
                 {isPhoneNumberEmptyAndTouched && (
                   <span className="red-color-error">
@@ -129,6 +132,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
                   required={true}
                   onBlur={() => setIsUserNameTouched(true)}
                   onChange={(e) => setEnteredUserName(e.target.value)}
+                  dataTestId="username"
                 ></RdsInput>
                 {isUserNameEmptyAndTouched && (
                   <span className="red-color-error">
@@ -146,6 +150,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
               isOutline={true}
               colorVariant="primary"
               size="small"
+              dataTestId="cancel"
             ></RdsButton>
             <RdsButton
               class="me-2"
@@ -154,6 +159,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
               isOutline={false}
               colorVariant="primary"
               size="small"
+              dataTestId="save"
             ></RdsButton>
           </div>
         </form>
