@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "./rds-text-area.scss";
+import "./rds-text-area.css";
 export interface RdsTextAreaProps {
 	rows?: number;
 	readonly?: boolean;

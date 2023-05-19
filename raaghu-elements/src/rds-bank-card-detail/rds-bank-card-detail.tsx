@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-bank-card-detail.scss";
+import "./rds-bank-card-detail.css";
 
 export interface RdsBankCardDetailProps {
   cardDatas: any;

@@ -268,7 +268,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className=" justify-content-start d-flex bottom-0 pt-0 ">
+        <div className=" justify-content-end d-flex bottom-0 pt-0 ">
           <RdsButton
             class="me-2"
             label="CANCEL"
@@ -278,8 +278,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             size="small"
           ></RdsButton>
           <RdsButton
-            class="me-2"
-            label="SAVE"
+           label="SAVE"
             type="submit"
             onClick={() => { props.handleIdentity({ lockout: lockoutSettings, user: userSettings, signIn: signSettings, password: passwordSettings }) }}
             isOutline={false}

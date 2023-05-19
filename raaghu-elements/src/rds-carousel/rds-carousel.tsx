@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import "./rds-carousel.scss";
+import "./rds-carousel.css";
 import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsCarouselProps {

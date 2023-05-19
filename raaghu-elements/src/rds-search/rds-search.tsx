@@ -1,7 +1,7 @@
 import React from "react";
 import RdsIcon from "../rds-icon";
 
-import "./rds-search.scss";
+import "./rds-search.css";
 
 export interface RdsSearchProps {
 	placeholder: string;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./rds-accordion.scss";
-import "../style.scss";
+import "./rds-accordion.css";
+
 
 export interface RdsAccordionItemProps {
   title: string;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from "react";
-import "./rds-button.scss";
+import "./rds-button.css";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
 import Tooltip from "../rds-tooltip/rds-tooltip";

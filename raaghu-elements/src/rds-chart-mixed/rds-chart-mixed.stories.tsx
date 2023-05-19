@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsMixedChart  from "./rds-chart-mixed";
-import "./rds-chart-mixed.scss"
+import "./rds-chart-mixed.css"
 
 export default {
   title: "Charts/Mixed Chart",

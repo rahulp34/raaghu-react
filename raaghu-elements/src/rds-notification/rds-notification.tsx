@@ -3,7 +3,7 @@ import { colors } from "../../libs/types";
 import RdsIcon from "../rds-icon/rds-icon";
 import RdsBadge from "../rds-badge/rds-badge";
 import RdsButton from "../rds-button";
-import "./rds-notification.scss";
+import "./rds-notification.css";
 
 export interface RdsNotificationProps {
   colorVariant?: colors;

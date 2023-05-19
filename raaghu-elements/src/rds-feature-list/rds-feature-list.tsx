@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode } from "react";
-import "./rds-feature-list.scss";
+import "./rds-feature-list.css";
 
 export interface RdsFeatureListProps {
     heading: string

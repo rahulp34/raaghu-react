@@ -1,5 +1,5 @@
 import React, { useState, useRef, Fragment, useEffect } from "react";
-import "./rds-checkbox.scss";
+import "./rds-checkbox.css";
 
 export interface RdsCheckboxProps {
   label: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsScatterChart  from "./rds-chart-scatter";
-import "./rds-chart-scatter.scss"
+import "./rds-chart-scatter.css"
 
 export default {
   title: "Charts/Scatter Chart",

@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-stat.scss";
+import "./rds-stat.css";
 
 export interface RdsStatProps {
   displayType: 'basic'|'advanced';

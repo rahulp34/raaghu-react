@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-file-uploader.scss";
+import "./rds-file-uploader.css";
 import { useState, useEffect } from "react";
 import RdsIcon from "../rds-icon/rds-icon";
 

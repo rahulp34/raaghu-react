@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import "./rds-spinner.scss";
+import "./rds-spinner.css";
 
 export interface RdsSpinnerProps {
   spinnerType?: string;

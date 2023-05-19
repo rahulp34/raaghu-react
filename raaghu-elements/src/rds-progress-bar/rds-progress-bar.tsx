@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-progress-bar.scss";
+import "./rds-progress-bar.css";
 
 export interface RdsProgressBarProps {
   colorVariant: string;

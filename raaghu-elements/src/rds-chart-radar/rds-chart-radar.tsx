@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import Chart from 'chart.js/auto';
-import "./rds-chart-radar.scss";
+import "./rds-chart-radar.css";
 
 export interface RdsRadarprops {
   labels:any[],
