@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsLabel, RdsInput, RdsCheckbox, RdsButton } from "raaghu-react-elements";
+import { RdsLabel, RdsInput, RdsCheckbox, RdsButton } from "../rds-elements";
 
 export interface RdsCompNewRoleProps {
 	roleData: any;

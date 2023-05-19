@@ -164,7 +164,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
           >
             <li
               className={
-                "m-1 page-item " + `${currentPage == 1 ? "disabled" : " "}`
+                "m-1 page-item chevron " + `${currentPage == 1 ? "disabled" : " "}`
               }
             >
               <a
@@ -233,7 +233,7 @@ const RdsPagination = (props: RdsPaginationProps) => {
 
             <li
               className={
-                "page-item m-1 " + `${currentPage == int ? "disabled" : " "}`
+                "page-item m-1 chevron " + `${currentPage == int ? "disabled" : " "}`
               }
             >
               <a

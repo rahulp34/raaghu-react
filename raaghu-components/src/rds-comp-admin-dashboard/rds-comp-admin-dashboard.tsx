@@ -906,7 +906,7 @@ const RdsCompAdminDashboard = () => {
 											</div>
 										),
 										member: (
-											<div className="d-flex align-items-center">
+											<div className="d-flex align-items-center gap-2">
 												<div>
 													{" "}
 													<img
@@ -914,7 +914,7 @@ const RdsCompAdminDashboard = () => {
 														width="40px"
 													/>
 												</div>
-												<div className="ms-2 mt-2">
+												<div className="">
 													<p className="mb-0">
 														<b>Brian</b>
 													</p>
@@ -948,7 +948,7 @@ const RdsCompAdminDashboard = () => {
 											</div>
 										),
 										member: (
-											<div className="d-flex align-items-center">
+											<div className="d-flex align-items-center gap-2">
 												<div>
 													{" "}
 													<img
@@ -956,7 +956,7 @@ const RdsCompAdminDashboard = () => {
 														width="40px"
 													/>
 												</div>
-												<div className="ms-2 mt-2">
+												<div className="">
 													<p className="mb-0">
 														<b>Kim</b>
 													</p>
@@ -990,7 +990,7 @@ const RdsCompAdminDashboard = () => {
 											</div>
 										),
 										member: (
-											<div className="d-flex align-items-center">
+											<div className="d-flex align-items-center gap-2">
 												<div>
 													{" "}
 													<img
@@ -998,7 +998,7 @@ const RdsCompAdminDashboard = () => {
 														width="40px\"
 													/>
 												</div>
-												<div className="ms-2 mt-2">
+												<div className="">
 													<p className="mb-0">
 														<b>Jane</b>
 													</p>
@@ -1032,7 +1032,7 @@ const RdsCompAdminDashboard = () => {
 											</div>
 										),
 										member: (
-											<div className="d-flex align-items-center">
+											<div className="d-flex align-items-center gap-2">
 												<div>
 													{" "}
 													<img
@@ -1040,7 +1040,7 @@ const RdsCompAdminDashboard = () => {
 														width="40px\"
 													/>
 												</div>
-												<div className="ms-2 mt-2">
+												<div className="">
 													<p className="mb-0">
 														<b>Brian</b>
 													</p>
@@ -1074,7 +1074,7 @@ const RdsCompAdminDashboard = () => {
 											</div>
 										),
 										member: (
-											<div className="d-flex align-items-center">
+											<div className="d-flex align-items-center gap-2">
 												<div>
 													{" "}
 													<img
@@ -1082,7 +1082,7 @@ const RdsCompAdminDashboard = () => {
 														width="40px\"
 													/>
 												</div>
-												<div className="ms-2 mt-2">
+												<div className="">
 													<p className="mb-0">
 														<b>Kath</b>
 													</p>

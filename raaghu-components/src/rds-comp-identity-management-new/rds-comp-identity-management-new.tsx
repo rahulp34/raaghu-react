@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
 
 export interface RdsCompIdentityManagementProps {
   handleIdentity: any;
@@ -268,7 +268,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             ></RdsCheckbox>
           </div>
         </div>
-        <div className=" justify-content-end d-flex bottom-0 pt-0 ">
+        <div className=" d-flex bottom-0 pt-0 ">
           <RdsButton
             class="me-2"
             label="CANCEL"

@@ -1,4 +1,4 @@
-import { RdsButton, RdsIcon, RdsInput } from "raaghu-react-elements";
+import { RdsButton, RdsIcon, RdsInput } from "../rds-elements";
 import React, { useEffect, useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
 
@@ -216,9 +216,11 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     <>
       <div className="container-fluid m-0 p-0">
         <div className=" row mt-3">
+            <label className="mb-2">
+              Option
+            </label>
           <div className="col-md-5  mb-2">
             <RdsInput
-              label="Option"
               placeholder=""
               inputType="text"
               onChange={(e: any) => {
@@ -228,7 +230,6 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
             ></RdsInput>
           </div>
           <div className="col-md-3">
-           <div> <label className="form-label"> &nbsp;</label></div>
             <RdsButton
               label="Add"
               colorVariant="primary"

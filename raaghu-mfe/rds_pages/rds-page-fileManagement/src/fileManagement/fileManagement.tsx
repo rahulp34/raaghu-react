@@ -429,7 +429,7 @@ const FileManagement = () => {
 
   return (
     <div className="New Folder">
-      <div className="d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-end">
+      <div className="d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-end gap-3">
         <RdsOffcanvas
           canvasTitle={"CREATE FOLDER"}
           placement="end"
@@ -506,7 +506,7 @@ const FileManagement = () => {
           preventEscapeKey={false}
           offId={"Files"}
           offcanvasbutton={
-            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ms-xxl-3 ms-xl-3 ms-lg-3 ms-md-3 ms-0">
+            <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end ">
               <RdsButton
                 icon="upload_data"
                 label={"UPLOAD FILES"}

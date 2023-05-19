@@ -95,7 +95,7 @@ const RdsInput = (props: RdsInputProps) => {
                   : "password"
                 : props.inputType
             }
-            className={inputClasses}
+            className={`${inputClasses}`}
             id={props.id}
             placeholder={props.placeholder}
             form={props.formName}

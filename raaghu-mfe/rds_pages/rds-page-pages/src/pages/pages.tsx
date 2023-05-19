@@ -9,7 +9,7 @@ import {
   RdsOffcanvas,
   RdsSearch,
   RdsAlert,
-} from "raaghu-react-elements";
+} from "../../../rds-elements";
 import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 import {
@@ -285,7 +285,7 @@ const Pages = (props: any) => {
 
   return (
     <>
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+      <div className="mb-3">
         <div className="row align-items-center">
           <div className="col-md-12 mb-3 ">
             <div className="row ">
@@ -337,7 +337,7 @@ const Pages = (props: any) => {
           </div>
         </div>
 
-        <div className="my-3">
+        <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
           <div className="border-0 card p-3 pt-4 rounded-0">
             <div className="row">
               <div className="col-md-12">

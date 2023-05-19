@@ -46,7 +46,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
             <div
               key={idx}
               className={
-                "form-check mb-3 " + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
+                "form-check mb-3 d-flex" + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
               }
             >
 
@@ -69,7 +69,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 disabled={item.disabled}
                 onClick = {props.onClick}
               />
-              <label htmlFor={item.id} className="form-check-label">
+              <label htmlFor={item.id} className="form-check-label me-5 ms-2">
                 {item.label}
               </label>
             </div>

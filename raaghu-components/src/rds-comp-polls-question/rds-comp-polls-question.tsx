@@ -1,4 +1,4 @@
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel, RdsSelectList } from 'raaghu-react-elements';
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel, RdsSelectList } from '../rds-elements';
 import React, { useEffect, useState } from 'react';
 import RdsDatepicker from '../../../raaghu-elements/src/rds-datepicker';
 

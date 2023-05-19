@@ -5,7 +5,7 @@ import {
   RdsInput,
   RdsLabel,
   RdsButton,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 export interface RdsCompNewLanguageProps {
   languageNames: any[];
@@ -167,7 +167,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
 
       <div className="footer-buttons my-2">
         <div className="row">
-          <div className="col-md-12 d-flex">
+          <div className="col-md-12 d-flex gap-3">
             <div>
               <RdsButton
                 label="Cancel"
@@ -184,7 +184,7 @@ const RdsCompNewLanguage = (props: RdsCompNewLanguageProps) => {
                 type="button"
                 size="small"
                 isDisabled={formValid}
-                class="ms-2"
+                class=""
                 colorVariant="primary"
                 databsdismiss="offcanvas"
                 onClick={() => onSaveHandler(dataEmit)}
