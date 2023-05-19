@@ -13,6 +13,7 @@ export interface RdsFileUploaderProps {
   label: string;
   onFileArray?: (files: any[]) => void;
   getFileUploaderInfo?: any;
+  validation?: any[];
 }
 
 const fileholder: any = [];
@@ -21,9 +22,11 @@ const filesize: any = [];
 
 const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const [FileArray, setFileArray] = useState(fileholder);
-  const[isExceed, setIsExceed] =useState(false)
+  const [isExceed, setIsExceed] = useState(false);
   const [fileName, setfileName] = useState(filenameholder);
   const [FileSize, setFileSize] = useState(filesize);
+  const [validation, setValidation] = useState(props.validation);
+  //
 
   let size: "form-select-sm" | undefined = undefined;
   let SIZE: string;
@@ -32,11 +35,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
     size = "form-select-sm";
     SIZE = "small";
   }
-  const kbToMb = (kb:any) => {
+  const kbToMb = (kb: any) => {
     const mb = kb / 1024;
     return Math.round(mb * 100) / 100; // Round off to 2 decimal places
   };
-  
+
   const fileSizeInMB = kbToMb(props.limit);
 
   const borderColor = "border-" + props.colorVariant || "primary";
@@ -52,10 +55,26 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
   const onchangehandler = (event: any) => {
     const fileSize = event.target.files[0].size / 1024; //now size in kb
 
-    if(fileSize>props?.limit){
-      setIsExceed(true)
-    }else{
-      setIsExceed(false)
+    if (fileSize > props?.limit) {
+      const tempValid = validation?.map((ele: any, index: number) => {
+        if (index == 0) {
+          return { ...ele, isError: true };
+        } else {
+          return ele;
+        }
+      });
+      setValidation(tempValid);
+      setIsExceed(true);
+    } else {
+      const tempValid = validation?.map((ele: any, index: number) => {
+        if (index == 0) {
+          return { ...ele, isError: false };
+        } else {
+          return ele;
+        }
+      });
+      setValidation(tempValid);
+      setIsExceed(false);
     }
     setFileSize([...FileSize, event.target.files[0].size]);
     let files = event.target.files;
@@ -90,15 +109,30 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
             <div>
               <form>
                 <input
-                  className={` input text-${props.colorVariant} form-control  ${size} `}
+                  className={` input text-${
+                    props.colorVariant
+                  } form-control  ${size} `}
                   type="file"
                   name="file"
                   accept={props.extensions}
                   onChange={onchangehandler}
                 />
-               {isExceed&& <div className="form-control-feedback">
+                {validation &&
+                  validation.map((val: any, index: number) => (
+                    <div key={index}>
+                      <small
+                        className={`${
+                          val.isError ? "showError" : "noError"
+                        }`}
+                      >
+                        {val.hint}
+                      </small>
+                    </div>
+                  ))}
+
+                {/* {isExceed&& <div className="form-control-feedback">
                   <span className="text-danger">File size should not be greater than {fileSizeInMB} MB </span>
-                </div>}
+                </div>} */}
               </form>
             </div>
           </div>
@@ -117,18 +151,15 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
               <div className="col-6 leftinnerbox">
                 <div className="row lefttext">
                   <h6
-                    className={` ${SIZE} ${props.colorVariant
-                      ? ` text-${props.colorVariant}`
-                      : `text-dark`
-                      } `}
+                    className={` ${SIZE} ${
+                      props.colorVariant
+                        ? ` text-${props.colorVariant}`
+                        : `text-dark`
+                    } `}
                   >
                     Drag and drop files
                   </h6>
-                  <h6
-                    className="text-muted"
-                  >
-                    (All Files)
-                  </h6>
+                  <h6 className="text-muted">(All Files)</h6>
                 </div>
                 <div className="row lefttext">
                   <div className="format text-muted ">
@@ -160,7 +191,10 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   </svg> */}
               </div>
 
-              <div className=" row inputbox" data-testid="rds-file-uploader-input">
+              <div
+                className=" row inputbox"
+                data-testid="rds-file-uploader-input"
+              >
                 <input
                   className={` col-md-12 input mulinput   ${size} `}
                   type="file"
@@ -199,18 +233,20 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                   </div>
                   <div className="filename ">
                     <div
-                      className={`${fileName[i].length > 60
-                        ? ` text-${props.colorVariant}`
-                        : "disname"
-                        }`}
+                      className={`${
+                        fileName[i].length > 60
+                          ? ` text-${props.colorVariant}`
+                          : "disname"
+                      }`}
                     >
                       {fileName[i].substr(0, 60)}...
                     </div>
                     <div
-                      className={` ${SIZE} ${fileName[i].length < 60
-                        ? ` text-${props.colorVariant}`
-                        : "disname"
-                        }`}
+                      className={` ${SIZE} ${
+                        fileName[i].length < 60
+                          ? ` text-${props.colorVariant}`
+                          : "disname"
+                      }`}
                     >
                       {fileName[i]}
                     </div>
@@ -218,10 +254,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
                 </div>
                 <div className="col-lg-2 col-md-2 closeIcon">
                   <span
-                    className={` size ${SIZE} ${props.colorVariant
-                      ? ` text-${props.colorVariant}`
-                      : `text-dark`
-                      } `}
+                    className={` size ${SIZE} ${
+                      props.colorVariant
+                        ? ` text-${props.colorVariant}`
+                        : `text-dark`
+                    } `}
                   >
                     {" "}
                     {(FileSize[i] / 1048576).toFixed(2)} MB{" "}
@@ -243,10 +280,11 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
 
               <div className="row">
                 <div
-                  className={`col-md-6 ${SIZE} text-danger ${props.limit > parseFloat((FileSize[i] / 1048576).toFixed(2))
-                    ? "disname"
-                    : ""
-                    } 
+                  className={`col-md-6 ${SIZE} text-danger ${
+                    props.limit > parseFloat((FileSize[i] / 1048576).toFixed(2))
+                      ? "disname"
+                      : ""
+                  } 
                     }`}
                 >
                   {/* File size exceed {props.limit} MB */}
