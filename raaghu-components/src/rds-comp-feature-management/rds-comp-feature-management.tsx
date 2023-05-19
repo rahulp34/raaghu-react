@@ -7,7 +7,7 @@ import {
   RdsLabel,
   RdsNavtabs,
   RdsSelectList,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 
 export interface RdsCompFeatureManagementProps {
   featureIdentitySettingsData1?: any;
@@ -175,6 +175,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                     required={true}
                     value={featureIdentitySettingsData[1].value}
                     onChange={(e: any) => setMaxUser(e.target.value)}
+                    dataTestId="max-user-count"
                   ></RdsInput>
                 </div>
               </div>
@@ -185,6 +186,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                   onChange={(e: any) => {
                     setLDAP(e.target.checked);
                   }}
+                  dataTestId="ldap-login"
                 ></RdsCheckbox>
               </div>
               <div className="col-md-12 mt-3">
@@ -194,6 +196,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                   onChange={(e: any) => {
                     setOAuthLogin(e.target.checked);
                   }}
+                  dataTestId="oauth-login"
                 ></RdsCheckbox>
               </div>
             </form>
@@ -208,6 +211,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                 onChange={(e: any) => {
                   setLanguage(e.target.checked);
                 }}
+                dataTestId="language-management"
               ></RdsCheckbox>
             </div>
             <h6 className="text-muted my-2">
@@ -224,6 +228,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                 onChange={(e: any) => {
                   setTextTemplate(e.target.checked);
                 }}
+                dataTestId="text-template-management"
               ></RdsCheckbox>
             </div>
             <h6 className="text-muted my-2">
@@ -240,6 +245,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
                 onChange={(e: any) => {
                   setAuditLog(e.target.checked);
                 }}
+                dataTestId="audit-logging"
               ></RdsCheckbox>
             </div>
             <h6 className="text-muted my-2">
@@ -260,6 +266,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
          onClick={props.restoreFeatures}
          colorVariant="primary"
          size="small"
+         dataTestId="restore-default"
        ></RdsButton>
      </div>
      <div className="mb-3">
@@ -270,6 +277,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
          isOutline={true}
          colorVariant="primary"
          size="small"
+         dataTestId="cancel"
        ></RdsButton>
      </div>
      <div className="mb-3">
@@ -281,6 +289,7 @@ const RdsCompFeatureManagement = (props: RdsCompFeatureManagementProps) => {
          isOutline={false}
          colorVariant="primary"
          size="small"
+         dataTestId="save"
        ></RdsButton>
      </div>
    </div>

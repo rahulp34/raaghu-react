@@ -1,4 +1,4 @@
-import { RdsButton, RdsInput } from "raaghu-react-elements";
+import { RdsButton, RdsInput } from "../rds-elements";
 import React, {  useEffect, useState } from "react";
 
 
@@ -51,6 +51,7 @@ const RdsCompPersonalInfo = (props: any) => {
             value={formData.userName}
             onChange={(e: any) => setUserName(e.target.value)}
             required={true}
+            dataTestId="admin"
           ></RdsInput>
         </div>
         <div className="col-6">
@@ -64,6 +65,7 @@ const RdsCompPersonalInfo = (props: any) => {
             value={formData.name}
             onChange={(e: any) => setName(e.target.value)}
             required={true}
+            dataTestId="name"
           ></RdsInput>
         </div>
         <div className="col-6">
@@ -77,6 +79,7 @@ const RdsCompPersonalInfo = (props: any) => {
             value={formData.surname}
             onChange={(e: any) => setSurname(e.target.value)}
             required={true}
+            dataTestId="surname"
           ></RdsInput>
         </div>
         <div className="col-8">
@@ -90,6 +93,7 @@ const RdsCompPersonalInfo = (props: any) => {
             value={formData.email}
             onChange={(e: any) => setEmail(e.target.value)}
             required={false}
+            dataTestId="email"
           ></RdsInput>
         </div>
         <div className="col-4 d-flex align-items-end">
@@ -101,6 +105,7 @@ const RdsCompPersonalInfo = (props: any) => {
             onClick={() => {
               props.handleVerifyEmailSubmit(formData);
             }}
+            dataTestId="verify-email"
           />
         </div>
         <div className="col-12 pt-4">
@@ -114,6 +119,7 @@ const RdsCompPersonalInfo = (props: any) => {
             value={formData.phoneNumber}
             onChange={(e: any) => setPhoneNumber(e.target.value)}
             required={false}
+            dataTestId="phone-number"
           ></RdsInput>
         </div>
         <div className="col-12 col-md-12 footer-buttons mx-3">
@@ -125,6 +131,7 @@ const RdsCompPersonalInfo = (props: any) => {
             onClick={() => {
               props.handlePersonalDataSubmit(formData);
             }}
+            dataTestId="save"
           />
         </div>
       </div>
