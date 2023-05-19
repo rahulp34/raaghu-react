@@ -101,6 +101,7 @@ const Applications = () => {
   }
 
   function handleApplicationSubmit(basicApplicationData: any) {
+    
     dispatch(saveApplications(basicApplicationData) as any).then((res: any) => {
       dispatch(fetchApplications() as any);
     })
@@ -108,16 +109,21 @@ const Applications = () => {
       clientId: '',
       displayName: '',
       clientUri: '',
+      clientSecret:'',
       logoUri: '',
+      consentType:'',
+      postLogoutRedirectUris: [],
+      redirectUris: [],
       allowAuthorizationCodeFlow: false,
       allowDeviceEndpoint: false,
       allowImplicitFlow: false,
       allowHybridFlow: false,
       allowPasswordFlow: false,
       allowClientCredentialsFlow: false,
+      allowLogoutEndPoint:false,
       allowRefreshTokenFlow: false,
       type: '',
-      scopes: ''
+      scopes: [],
     })
     setAlertOne(true);
   }
