@@ -105,6 +105,7 @@ const RdsCompProfilePicture = (props: any) => {
             width="130px"
             height="120px"
             className="profil_image_Class rounded-circle"
+            data-testid="avatar"
           ></img>
         </div>
         <div className="col-8 my-3">
@@ -115,6 +116,7 @@ const RdsCompProfilePicture = (props: any) => {
             // checked={type}
             onChange={() => setavatarType(type)}
             onClick={onClickSetProfilePicture}
+            dataTestId="radio-btn"
           />
         </div>
       </div>
@@ -134,7 +136,6 @@ const RdsCompProfilePicture = (props: any) => {
                 validation={validation}
                 getFileUploaderInfo={(data: any) => profileImage(data)}
               />
-         
             </div>
           </>
         )}
@@ -148,6 +149,7 @@ const RdsCompProfilePicture = (props: any) => {
           block={false}
           type="button"
           onClick={props.handleProfileDataSubmit}
+          dataTestId="save"
         />
       </div>
     </form>
