@@ -214,7 +214,7 @@ const Applications = () => {
   const [scopesListData, setScopesListData] = useState<any>([]);
   const [permissionListData, setPermissionListData] = useState<any>([]);
   const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
-  const offCanvasHandler = () => { };
+  // const offCanvasHandler = () => { };
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 
   const [showNextTab, setShowNextTab] = useState(false);
@@ -267,7 +267,7 @@ const Applications = () => {
           <div className="col d-flex justify-content-end mb-3">
             <RdsOffcanvas
               canvasTitle={"New Application"}
-              onclick={offCanvasHandler}
+              // onclick={offCanvasHandler}
               placement="end"
               
               offcanvasbutton={               
@@ -310,7 +310,7 @@ const Applications = () => {
               ></RdsCompDatatable>
               <RdsOffcanvas
                 canvasTitle={"Edit APPLICATION"}
-                onclick={offCanvasHandler}
+                // onclick={offCanvasHandler}
                 placement="end"
                 
                 backDrop={true}

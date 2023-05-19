@@ -301,7 +301,8 @@ const UrlForwarding = () => {
             ></RdsCompAlertPopup>
           </div>
         </div>
-      </div></div>
+      </div>
+      </div>
   );
 }
 

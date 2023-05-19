@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { BlogPostAdminService } from "../../proxy";
 
-
 export interface blogPostInitialState {
   loading: boolean;
   blogPosts: [];
@@ -16,7 +15,8 @@ export const blogPostState: blogPostInitialState = {
   error: "",
 };
 
-export const getAllBlogPost = createAsyncThunk("BlogPost/GetAll", () => {
+export const getAllBlogPost = createAsyncThunk(
+  "blogPost/getAllBlogPost", () => {
   return BlogPostAdminService.getBlogsBlogPosts({
     filter: undefined,
     blogId: undefined,
@@ -25,29 +25,32 @@ export const getAllBlogPost = createAsyncThunk("BlogPost/GetAll", () => {
     status: undefined,
     sorting: undefined,
     skipCount: 0,
-    maxResultCount: 1000,
+    maxResultCount: 10,
   }).then((result: any) => {
     return result;
   });
 });
 
 export const addBlogPostData = createAsyncThunk(
-  "BlogPostTypes/addBlogPostTypesData",
+  "blogPost/addBlogPostData",
   (data: any) => {
-    return BlogPostAdminService.postBlogsBlogPostsCreateAndPublish(data).then((result: any) => {
-      return result.items;
-    });
+    return BlogPostAdminService.postBlogsBlogPostsCreateAndPublish(data).then(
+      (result: any) => {
+        return result.items;
+      }
+    );
   }
 );
 
-
-
 export const editBlogPostData = createAsyncThunk(
-  "BlogPostTypes/editBlogPostTypesData",
-  ({id ,postTypeDto}:{id: any, postTypeDto: any}) => {
-    return BlogPostAdminService.putBlogsBlogPosts({id, requestBody:postTypeDto}).then((result:any)=>{
+  "blogPost/editBlogPostData",
+  ({ id, postTypeDto }: { id: any; postTypeDto: any }) => {
+    return BlogPostAdminService.putBlogsBlogPosts({
+      id,
+      requestBody: postTypeDto,
+    }).then((result: any) => {
       return result.items;
-    })
+    });
   }
 );
 
@@ -104,13 +107,13 @@ const blogPostSlice = createSlice({
         state.loading = false;
         state.allblogpost = action.payload;
         state.error = "";
-    
-      });
+      }
+    );
     builder.addCase(editBlogPostData.rejected, (state, action) => {
       state.loading = false;
       state.allblogpost = [];
       state.error = action.error.message || "Something Went Wrong";
-    })
+    });
   },
 });
 

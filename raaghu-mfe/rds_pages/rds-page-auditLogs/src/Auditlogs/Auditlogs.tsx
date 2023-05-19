@@ -213,7 +213,6 @@ const Auditpayload = ()=>{
     { label: "Actions", tablink: " #nav-action", id: 1 },
   ];
 
-  const offCanvasHandler = () => { };
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [showAction, setShowAction] = useState(false);
 
@@ -384,8 +383,6 @@ const Auditpayload = ()=>{
               offId="auditLogs"
               placement="end"
               canvasTitle="Detail"
-              onclick={offCanvasHandler}
-
               className="mx-1"
             >
               <RdsNavtabs
