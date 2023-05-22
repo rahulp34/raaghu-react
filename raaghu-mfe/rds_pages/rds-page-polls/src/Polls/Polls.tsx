@@ -360,8 +360,8 @@ const Polls = (props: any) => {
               ></RdsCompPollsOption>
             )}
           </RdsNavtabs>
-          <div className="row mt-5 footer-buttons bottom-0 mx-0 ">
-            <div className="col-md-2 mx-2">
+          <div className="footer-buttons bottom-0 d-flex gap-2">
+            <div className="">
               <RdsButton
                 label="Cancel"
                 colorVariant="primary"
@@ -373,7 +373,7 @@ const Polls = (props: any) => {
                 isOutline={true}
               />
             </div>
-            <div className="col-2">
+            <div className="">
               <RdsButton
                 label="Save"
                 size="small"
