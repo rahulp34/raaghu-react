@@ -10,12 +10,12 @@ const RdsCompProfilePicture = (props: any) => {
   const [type, setavatarType] = useState(0);
   const [show, setShow] = useState<boolean>(false);
   const [newProfileImage, setNewProfileImage] = useState<string>("");
-  const [isExceed, setIsExceed] = useState(false);
+  const [isExceed, setIsExceed] = useState(true);
 
   function profileImage(data: any) {
     const fileSize = data.files[0].size / 1024; //now size in kb
     //validation
-    if (fileSize > props?.limit) {
+    if (fileSize > 10) {
       setIsExceed(true);
     } else {
       setIsExceed(false);
@@ -145,7 +145,7 @@ const RdsCompProfilePicture = (props: any) => {
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
-          isDisabled={isExceed !== true}
+          isDisabled={isExceed}
           block={false}
           type="button"
           size="small"

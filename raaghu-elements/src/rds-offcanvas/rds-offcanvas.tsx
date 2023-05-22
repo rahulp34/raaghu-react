@@ -64,7 +64,7 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
         data-bs-padding={0}
         tabIndex={-1}
         id={`${props.offId}`}
-        aria-labelledby={`canvas${props.offId}`}
+        aria-labelledby={`${props.offId}`}
         style={{ width: Width }}
       >
         <div className={`${isCanvasTitle ? 'offcanvas-header' : "offcanvas-header border-0 justify-content-end "}`}>

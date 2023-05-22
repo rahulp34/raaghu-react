@@ -16,6 +16,12 @@ const RdsButton= (props: RdsButtonProps) => {
   const btnType = props.type === "submit" ? "submit" : "button";
   const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
+    const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+        if (allBackdrops.length > 1) {
+          for (let i = 0; i < allBackdrops.length - 1; i++) {
+            allBackdrops[i].remove();
+          }
+        }
     if (props.showLoadingSpinner) {
       let tempClasses = classes;
       setClasses(`${tempClasses} ${spinner}`)
@@ -40,7 +46,7 @@ const RdsButton= (props: RdsButtonProps) => {
   const showLoadingSpinner = props.showLoadingSpinner || false;
   const id = props.id || 'rds_buttonId_';
 
-  return (<>
+   return (<>
     {props.tooltip ? (< Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
       <button
         type={btnType}
