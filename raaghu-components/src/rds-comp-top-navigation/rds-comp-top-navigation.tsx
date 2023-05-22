@@ -291,7 +291,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               className="pb-0"
               placement="end"
               offcanvaswidth={307}
-              offId="Profile"
+              offId="Profile1"
               offcanvasbutton={
                 <div
                   className="d-flex align-items-center justify-content-center"

@@ -222,10 +222,10 @@ const Auditpayload = ()=>{
   };
 
   return (
-    <div className="container-fluid p-0 m-0">
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card border-0 rounded-0">
+    <div className="container-fluid p-0 m-0 h-100">
+      <div className="row h-100">
+        <div className="col-md-12 h-100">
+          <div className="card border-0 rounded-0 card-stretch">
             <div className="card-body">
               <div className="align-items-end justify-content-between row">
                 <div className="col-xxl-2 col-xl-2 flex-grow-1 mb-4">
@@ -343,14 +343,15 @@ const Auditpayload = ()=>{
               </div>
               <div className="d-xxl-flex d-xl-flex d-lg-flex justify-content-end mt-2">
                 <RdsButton
-                  label="Search"
                   type="button"
+                  block={false}
                   colorVariant="primary"
                   size="small"
                   isOutline={false}
                   icon = "search"
                   iconFill = {false}
                   iconStroke = {true}
+                  class="btn-icon"
                   iconColorVariant = "light"
                   iconHeight = "15px"
                   iconWidth = "15px"
