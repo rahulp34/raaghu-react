@@ -35,7 +35,7 @@ const RdsCompChangePassword= (props:any)  => {
   return(
    <div className="row py-4">
       <form onSubmit={handlePasswordDataSubmit}>
-      <div className="col-6 col-md-6">
+      <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
          <RdsInput   
                   size="medium"
                   label="Current Password"
@@ -48,7 +48,7 @@ const RdsCompChangePassword= (props:any)  => {
                   required={true}               
          ></RdsInput>
       </div>
-      <div className="col-6 col-md-6">
+      <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
          <RdsInput
                   size="medium"
                   label="New Password"
@@ -61,7 +61,7 @@ const RdsCompChangePassword= (props:any)  => {
                   onChange={(e:any) => setNewPassword(e.target.value)}                
          ></RdsInput>
       </div>
-      <div className="col-6 col-md-6">
+      <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
          <RdsInput
                   size="medium"
                   label="Confirm New Password"
@@ -74,12 +74,13 @@ const RdsCompChangePassword= (props:any)  => {
                   onChange={(e:any) => setConfirmNewPassword(e.target.value)}               
          ></RdsInput>
       </div> 
-      <div className="col-12 col-md-12 footer-buttons mx-3">
+      <div className="col-12 col-md-12 position-absolute bottom-0 mb-4">
          <RdsButton
             label = 'Save'
             colorVariant ='primary'                 
             block = {false}                 
             type = "submit"
+            size="small"
             onClick={()=>{props.handlePasswordDataSubmit(formData)}}				
          />      
       </div>        

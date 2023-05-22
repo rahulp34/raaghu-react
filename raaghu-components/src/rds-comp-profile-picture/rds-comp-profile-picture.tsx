@@ -97,8 +97,8 @@ const RdsCompProfilePicture = (props: any) => {
   ];
   return (
     <form>
-      <div className="row py-4 mt-4">
-        <div className="col-4">
+      <div className="row py-4 mt-4 align-items-center">
+        <div className="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-12 mb-3 d-xxl-block d-xl-block d-lg-block d-md-block d-flex justify-content-center mb-xxl-0 mb-xl-0 mb-lg-0 mb-md-0 mb-4">
           <img
             src={avatarImg}
             alt="profilePic"
@@ -107,7 +107,7 @@ const RdsCompProfilePicture = (props: any) => {
             className="profil_image_Class rounded-circle"
           ></img>
         </div>
-        <div className="col-8 my-3">
+        <div className="col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-12 mb-3">
           <RdsRadioButton
             displayType="Default"
             itemList={profileList}
@@ -119,10 +119,9 @@ const RdsCompProfilePicture = (props: any) => {
         </div>
       </div>
       <div className="row position-relative">
-        <div className="col-md-4 "></div>
         {show && (
           <>
-            <div className="col-md-4 ">
+            <div className="offset-xxl-2 offset-xl-2 offset-lg-3 offset-md-3 col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-12 mb-3">
               <RdsFileUploader
                 colorVariant="primary"
                 extensions=".jpg, .jpeg, .png"
@@ -140,7 +139,7 @@ const RdsCompProfilePicture = (props: any) => {
         )}
       </div>
 
-      <div className="col-12 col-md-12 position-absolute bottom-0 mb-4  mx-3">
+      <div className="col-12 col-md-12 position-absolute bottom-0 mb-4">
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
