@@ -363,7 +363,7 @@ const Auditpayload = ()=>{
                   iconHeight = "15px"
                   iconWidth = "15px"
                   onClick={Auditpayload}
-                 ></RdsIcon>
+                 ></RdsButton>
               </div>
 
               <div className="row mx-3 my-5">
