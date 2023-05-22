@@ -5,7 +5,6 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../libs/state-management/hooks";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchSecurityLogs } from "../../../libs/state-management/security-logs/security-logs-slice";
 import { RdsCompAlertPopup } from "../../rds-components";
 import { useTranslation } from "react-i18next";
@@ -254,8 +253,7 @@ const SecurityLogsPage = () => {
                 <div className="row">
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
                     <RdsDatePicker
-                      DatePickerLabel="Select Date"  
-                      onDatePicker={(s:any)=>onDatePicker(s)}
+                      DatePickerLabel="Date range"  
                       type="advanced"
                       selectedDate={selectFilterValue.startDate}
                       customDate={onDatePicker}

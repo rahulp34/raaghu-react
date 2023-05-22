@@ -10,12 +10,12 @@ const RdsCompProfilePicture = (props: any) => {
   const [type, setavatarType] = useState(0);
   const [show, setShow] = useState<boolean>(false);
   const [newProfileImage, setNewProfileImage] = useState<string>("");
-  const [isExceed, setIsExceed] = useState(false);
+  const [isExceed, setIsExceed] = useState(true);
 
   function profileImage(data: any) {
     const fileSize = data.files[0].size / 1024; //now size in kb
     //validation
-    if (fileSize > props?.limit) {
+    if (fileSize > 10) {
       setIsExceed(true);
     } else {
       setIsExceed(false);
@@ -105,6 +105,7 @@ const RdsCompProfilePicture = (props: any) => {
             width="130px"
             height="120px"
             className="profil_image_Class rounded-circle"
+            data-testid="avatar"
           ></img>
         </div>
         <div className="col-xxl-10 col-xl-10 col-lg-9 col-md-9 col-12 mb-3">
@@ -115,6 +116,7 @@ const RdsCompProfilePicture = (props: any) => {
             // checked={type}
             onChange={() => setavatarType(type)}
             onClick={onClickSetProfilePicture}
+            dataTestId="radio-btn"
           />
         </div>
       </div>
@@ -133,7 +135,6 @@ const RdsCompProfilePicture = (props: any) => {
                 validation={validation}
                 getFileUploaderInfo={(data: any) => profileImage(data)}
               />
-         
             </div>
           </>
         )}
@@ -143,11 +144,12 @@ const RdsCompProfilePicture = (props: any) => {
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
-          isDisabled={isExceed !== true}
+          isDisabled={isExceed}
           block={false}
           type="button"
           size="small"
           onClick={props.handleProfileDataSubmit}
+          dataTestId="save"
         />
       </div>
     </form>

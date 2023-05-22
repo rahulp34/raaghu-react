@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Route, useNavigate, Routes} from "react-router-dom";
+import { Route, useNavigate, Routes } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
@@ -85,11 +85,13 @@ export interface MainProps {
 const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
-  const [count, setCount] = useState(0);
   const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
-  const [appTheme,setAppTheme]=useState<any[]>([]);
+  const [currentLanguage, setCurrentLanguage] = useState("en-GB");
+  const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
+  const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
 
- 
+  const [appTheme, setAppTheme] = useState<any[]>([]);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const dataHost = useAppSelector(
@@ -139,7 +141,7 @@ const Main = (props: MainProps) => {
       "REACT_APP_API_URL",
       process.env.REACT_APP_API_URL || ""
     );
-    if (localStorage.getItem("auth") && true) {
+    if (localStorage.getItem("auth")) {
       if (currentPath !== "/dashboard" && currentPath !== "/") {
         navigate(currentPath);
       } else {
@@ -191,7 +193,6 @@ const Main = (props: MainProps) => {
     const diffInSeconds: number = Math.floor(
       (currentDate.getTime() - savedDate.getTime()) / 1000
     );
-    console.log(diffInSeconds, "diffInSeconds");
     const expiresIn: any = localStorage.getItem("expiresIn");
     if (diffInSeconds > expiresIn) {
       tokenRefresh()
@@ -213,7 +214,6 @@ const Main = (props: MainProps) => {
     }
   }
 
-
   const componentsList = [
     {
       label: "Account",
@@ -224,8 +224,6 @@ const Main = (props: MainProps) => {
       val: "AddressInput",
     },
   ];
-
-  
 
   // useEffect(() => {
   //   dispatch(callLoginAction(null) as any);
@@ -283,26 +281,14 @@ const Main = (props: MainProps) => {
     },
   ]);
   const { t, i18n } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState(
-    localStorage.getItem("currentLang") || "en-GB"
-  );
+ 
   const onClickHandler = (e: any, val: any) => {
-    setCurrentLanguage(val);    
-
-    localStorage.setItem("currentLang", val);
-    if(e.target.innerText =='العربية'){
-      document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
-    }
-    else if (e.target.innerText !== 'Hindi') {
-      document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
-    }
-
-    console.log("event:",e,"value:",val)
+    setCurrentLanguage(val);
   };
 
   const themeItems = [
     {
-      id:0,
+      id: 0,
       label: "Light",
       val: "Light",
       icon: "light",
@@ -310,7 +296,7 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
     {
-      id:1,
+      id: 1,
       label: "Dark",
       val: "Dark",
       icon: "dark",
@@ -318,7 +304,7 @@ const Main = (props: MainProps) => {
       iconHeight: "17px",
     },
     {
-      id:2,
+      id: 2,
       label: "Semi Dark",
       val: "Semi Dark",
       icon: "semidark",
@@ -327,38 +313,31 @@ const Main = (props: MainProps) => {
     },
   ];
 
-
-  const onClicktheme = (e:any,val:any)=>{
-    if(val=="Light"){
-      setThemes("light"); 
+  const onClicktheme = (e: any, val: any) => {
+    if (val == "Light") {
+      setThemes("light");
       setLogoImage("./assets/raaghu_logs.png");
-    }
-    else if(val=="Dark"){
+    } else if (val == "Dark") {
       setThemes("dark");
       setLogoImage("./assets/raaghu-logo-white-text.png");
-    }
-    else if(val=="Semi Dark"){
+    } else if (val == "Semi Dark") {
       setThemes("semidark");
       setLogoImage("./assets/raaghu-logo-white-text.png");
     }
-  }
+  };
+
   
-
-  const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
-  const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
-
-  useEffect(() => {
+  const configLocalization=()=> {
     configurationService(currentLanguage).then(async (res: any) => {
-      if (res.currentUser.id) { 
+      if (res.currentUser.id) {
         localStorage.setItem("userId", res.currentUser.id);
-        if(currentLanguage =='العربية'){
-          document.getElementsByTagName('html')[0].setAttribute("dir", "rtl");
-        }
-        else{
-          document.getElementsByTagName('html')[0].setAttribute("dir", "ltr");
+        if (currentLanguage == "العربية") {
+          document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
+        } else {
+          document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
         }
       }
-      
+
       const tempdata: any[] = await res.localization?.languages?.map(
         (item: any) => {
           return {
@@ -373,35 +352,36 @@ const Main = (props: MainProps) => {
           };
         }
       );
-      const lang = localStorage.getItem("currentLang");
-      let index = tempdata.findIndex((item: any) => item.val === lang);
+      let index = tempdata.findIndex((item: any) => item.val === currentLanguage);
       index = index == -1 ? 0 : index;
       setCurrentLanguageLabel(tempdata[index].label);
       setCurrentLanguageIcon(tempdata[index].icon);
       setLanguageData(tempdata);
-    });
-
-    localizationService(currentLanguage).then((resp: any) => {
-      let data2 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          Object.keys(translation[key].texts).forEach((k1) => {
-            let k2 = k1.replace(/[^\w\s]/gi, "_");
-            let value1 = translation[key].texts[k1];
-            data2 = { ...data2, [k2]: value1 };
+      localizationService(currentLanguage).then((resp: any) => {
+        let data2 = {};
+        const translation = resp?.resources;
+        if (translation) {
+          Object.keys(translation).forEach((key) => {
+            Object.keys(translation[key].texts).forEach((k1) => {
+              let k2 = k1.replace(/[^\w\s]/gi, "_");
+              let value1 = translation[key].texts[k1];
+              data2 = { ...data2, [k2]: value1 };
+            });
           });
-        });
-        i18n.addResourceBundle(
-          currentLanguage,
-          "translation",
-          data2,
-          false,
-          true
-        );
-        i18n.changeLanguage(currentLanguage);
-      }
+          i18n.addResourceBundle(
+            currentLanguage,
+            "translation",
+            data2,
+            false,
+            true
+          );
+          i18n.changeLanguage(currentLanguage);
+        }
+      });
     });
+  }
+  useEffect(() => {
+    configLocalization()
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -464,7 +444,6 @@ const Main = (props: MainProps) => {
       setBreadCrumItem(a);
       setCurrentTitle(a[0].label);
       document.title = `raaghu-${a[0].label.toLowerCase()}`;
-
     } else {
       a = a[0].reverse();
       a = a.map((res: any) => {
@@ -473,18 +452,17 @@ const Main = (props: MainProps) => {
           label: t(res.label),
           icon: "",
         };
-      }); 
+      });
       setBreadCrumItem(a);
       setCurrentTitle(a[a.length - 1].label);
       document.title = `raaghu-${a[a.length - 1].label.toLowerCase()}`;
-
     }
   };
   function showBreadCrum() {
     let breadcrumData = recursiveFunction1(concatenatedExtended, currentPath);
 
     breadcrumData = breadcrumData.filter((res: any) => (res ? true : false));
-    if (breadcrumData.length && breadcrumData[0]. id) {
+    if (breadcrumData.length && breadcrumData[0].id) {
       breadcrumData = breadcrumData.map((res: any) => {
         return {
           id: res.id,
@@ -505,81 +483,50 @@ const Main = (props: MainProps) => {
         };
       });
       setBreadCrumItem(breadcrumData);
-      document.title = `raaghu-${breadcrumData[breadcrumData.length - 1].label.toLowerCase()}`;
+      document.title = `raaghu-${breadcrumData[
+        breadcrumData.length - 1
+      ].label.toLowerCase()}`;
       setCurrentTitle(breadcrumData[breadcrumData.length - 1].label);
     }
   }
 
-  useEffect(() => {
-    const lang = localStorage.getItem("currentLang") || "en-GB";
-    localizationService(lang).then((resp: any) => {
-      let data2 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          Object.keys(translation[key].texts).forEach((k1) => {
-            let k2 = k1.replace(/[^\w\s]/gi, "_");
-            let value1 = translation[key].texts[k1];
-            data2 = { ...data2, [k2]: value1 };
-          });
-        });
-        i18n.addResourceBundle(
-          currentLanguage,
-          "translation",
-          data2,
-          false,
-          true
-        );
-        i18n.changeLanguage(currentLanguage);
-        showBreadCrum();
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //    localizationService("en-GB").then((resp: any) => {
+  //     let data2 = {};
+  //     const translation = resp?.resources;
+  //     if (translation) {
+  //       Object.keys(translation).forEach((key) => {
+  //         Object.keys(translation[key].texts).forEach((k1) => {
+  //           let k2 = k1.replace(/[^\w\s]/gi, "_");
+  //           let value1 = translation[key].texts[k1];
+  //           data2 = { ...data2, [k2]: value1 };
+  //         });
+  //       });
+  //       i18n.addResourceBundle(
+  //         currentLanguage,
+  //         "translation",
+  //         data2,
+  //         false,
+  //         true
+  //       );
+  //       i18n.changeLanguage(currentLanguage);
+  //       showBreadCrum();
+  //     }
+  //   });
+  // }, []);
 
-  function hello(res: any) {
-    localStorage.setItem("auth", JSON.stringify(true));
-    const lang = localStorage.getItem("currentLang") || "en-GB";
-    navigate("/dashboard");
-    setCurrentTitle("Dashboard");
-    configurationService(lang).then(async (res: any) => {
-      if (res.currentUser.id) {
-        localStorage.setItem("userId", res.currentUser.id);
-      }
-    });
-    localizationService(currentLanguage).then((resp: any) => {
-      let data2 = {};
-      const translation = resp?.resources;
-      if (translation) {
-        Object.keys(translation).forEach((key) => {
-          Object.keys(translation[key].texts).forEach((k1) => {
-            let k2 = k1.replace(/[^\w\s]/gi, "_");
-            let value1 = translation[key].texts[k1];
-            data2 = { ...data2, [k2]: value1 };
-          });
-        });
-        i18n.addResourceBundle(
-          currentLanguage,
-          "translation",
-          data2,
-          false,
-          true
-        );
-        i18n.changeLanguage(currentLanguage);
-      }
-    });
-  }
 
-  useEffect(() => {
-    configurationService(currentLanguage).then(async (res: any) => {
-      if (res.currentUser.id) {
-        localStorage.setItem("userId", res.currentUser.id);
-      }
-    });
-  }, []);
+
+  // useEffect(() => {
+  //   configurationService(currentLanguage).then(async (res: any) => {
+  //     if (res.currentUser.id) {
+  //       localStorage.setItem("userId", res.currentUser.id);
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (dataHost && dataHost.email != "" && dataHost.password != "") {
-      setCount((prevCount) => prevCount + 1);
       localStorage.setItem("datahostEmail", dataHost.email);
       sessionStorage.setItem(
         "REACT_APP_API_URL",
@@ -595,8 +542,14 @@ const Main = (props: MainProps) => {
       )
         .then(async (res: any) => {
           if (res.access_token) {
-            await dispatch(invalidCredentialAction({ invalid: false, message: "" }));
-            await hello(res);
+            await dispatch(
+              invalidCredentialAction({ invalid: false, message: "" })
+            );
+            localStorage.setItem("auth", JSON.stringify(true));
+   
+    navigate("/dashboard");
+    setCurrentTitle("Dashboard");
+            await configLocalization();
             sessionStorage.setItem("accessToken", res.access_token);
             localStorage.setItem("refreshToken", res.refresh_token);
             localStorage.setItem("expiresIn", res.expires_in);
@@ -691,241 +644,253 @@ const Main = (props: MainProps) => {
           element={<ForgotPasswordCompo />}
         ></Route>
         <Route path="/changepassword" element={<ChangePasswordCompo />}></Route>
-        <Route path="/register" element={<RegisterCompo />} /> 
+        <Route path="/register" element={<RegisterCompo />} />
       </Routes>
-      {/* {auth && isAuth && (        have to implement this one we get started with service proxy for abp        */}
-      {location.pathname != "/login" &&
-        location.pathname != "/forgot-password" &&
-        location.pathname != "/changepassword" &&
-        location.pathname != "/register" && (
-          <div className="d-flex flex-column flex-root">
-            <div className="page d-flex flex-column flex-column-fluid">
-              <div
-                className="
+      {localStorage.getItem("auth") && (
+        <>
+          {location.pathname != "/login" &&
+            location.pathname != "/forgot-password" &&
+            location.pathname != "/changepassword" &&
+            location.pathname != "/register" && (
+              <div className="d-flex flex-column flex-root">
+                <div className="page d-flex flex-column flex-column-fluid">
+                  <div
+                    className="
 							page
         d-flex
         flex-column-fluid
         align-items-stretch
         container-fluid 
         px-0"
-              >
-                <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
-                  <div className="aside ng-tns-c99-0" id="aside">
-                  
-                    <div onClick={()=>navigate("/dashboard")} id="raaghuLogo">
-                
-                    <img
-                    className="ms-1 cursor-pointer sidenav-logo"
-                    src={logoImage}
-                    alt="logo"
-                  ></img>
-                 
-                  </div>
-                  
-                    <div className="mx-2 mt-6">
-                      <RdsCompSideNavigation
-                        sideNavItems={sideNavItems}
-                        onClick={sideNavOnClickHandler}
-                        toggleTheme={props.toggleTheme}
-                      ></RdsCompSideNavigation>
-                    </div>
-                  </div>
-                  <div
-                    className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
-                    id="FixedHeaderOverFlow"
                   >
-                    <div className="align-items-stretch position-sticky top-0 w-100 shadow-sm top-navigation-zindex">
-                      <RdsCompTopNavigation
-                        languageLabel={currentLanguageLabel}
-                        themeLabel="Theme"
-                        profilePic={profilePic}
-                        breacrumItem={breacrumItem}
-                        languageIcon={currentLanguageIcon}
-                        languageItems={languageData}
-                        componentsList={componentsList}
-                        onClick={onClickHandler}
-                        onClickThemeCheck={onClicktheme}
-                        profileTitle="Host Admin"
-                        profileName="admin"
-                        onLogout={logout}
-                        // logo={logo}
-                        // toggleTheme={toggleTheme}
-                        themeItems={themeItems}
-                        navbarTitle={t(currentTitle) || ""}
-                        navbarSubTitle={t(currentSubTitle) || ""}
-                        onChatClickHandler={() => {
-                          console.log(" session Hey Chat Button Clicked!!");
-                        }}
-                        toggleItems={[]}
-                        elementList={[]}
-                      />
-                    </div>
-                    <div className="layoutmargin mb-top-margin h-100 ">
-                      <Suspense>
-                        <Routes>
-                          <Route
-                            path="/dashboard"
-                            element={<DashboardCompo />}
-                          ></Route>
-                          <Route
-                            path="/tenant"
-                            element={<TenantCompo></TenantCompo>}
-                          ></Route>
-                          <Route
-                            path="/edition"
-                            element={<EditionCompo></EditionCompo>}
-                          ></Route>
-                          <Route
-                            path="/settings"
-                            element={<SettingsCompo></SettingsCompo>}
-                          ></Route>
-                          <Route
-                            path="/audit-logs"
-                            element={<AuditlogsCompo></AuditlogsCompo>}
-                          ></Route>
-                          <Route path="/users" element={<UsersCompo />}></Route>
-                          <Route
-                            path="/role"
-                            element={<RolesCompo></RolesCompo>}
-                          ></Route>
-                          <Route
-                            path="/organization-unit"
-                            element={
-                              <OrganizationUnitsCompo></OrganizationUnitsCompo>
-                            }
-                          ></Route>
-                          <Route
-                            path="/language"
-                            element={<LanguageCompo></LanguageCompo>}
-                          ></Route>
-                          <Route
-                            path="/language-text"
-                            element={<LanguageTextCompo></LanguageTextCompo>}
-                          ></Route>
-                          <Route
-                            path="/dynamic-properties"
-                            element={
-                              <DynamicPropertyCompo></DynamicPropertyCompo>
-                            }
-                          ></Route>
-                          <Route
-                            path="/security-logs"
-                            element={<SecurityLogsCompo />}
-                          ></Route>
+                    <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
+                      <div className="aside ng-tns-c99-0" id="aside">
+                        <div
+                          onClick={() => navigate("/dashboard")}
+                          id="raaghuLogo"
+                        >
+                          <img
+                            className="ms-1 cursor-pointer sidenav-logo"
+                            src={logoImage}
+                            alt="logo"
+                          ></img>
+                        </div>
 
-                          <Route
-                            path="/icons"
-                            element={<IconListCompo />}
-                          ></Route>
-                          <Route
-                            path="/claim-types"
-                            element={<ClaimTypesCompo />}
+                        <div className="mx-2 mt-6">
+                          <RdsCompSideNavigation
+                            sideNavItems={sideNavItems}
+                            onClick={sideNavOnClickHandler}
+                            toggleTheme={props.toggleTheme}
+                          ></RdsCompSideNavigation>
+                        </div>
+                      </div>
+                      <div
+                        className="wrapper d-flex flex-column flex-row-fluid rds-scrollable-wrapper px-sm-0"
+                        id="FixedHeaderOverFlow"
+                      >
+                        <div className="align-items-stretch position-sticky top-0 w-100 shadow-sm top-navigation-zindex">
+                          <RdsCompTopNavigation
+                            languageLabel={currentLanguageLabel}
+                            themeLabel="Theme"
+                            profilePic={profilePic}
+                            breacrumItem={breacrumItem}
+                            languageIcon={currentLanguageIcon}
+                            languageItems={languageData}
+                            componentsList={componentsList}
+                            onClick={onClickHandler}
+                            onClickThemeCheck={onClicktheme}
+                            profileTitle="Host Admin"
+                            profileName="admin"
+                            onLogout={logout}
+                            // logo={logo}
+                            // toggleTheme={toggleTheme}
+                            themeItems={themeItems}
+                            navbarTitle={t(currentTitle) || ""}
+                            navbarSubTitle={t(currentSubTitle) || ""}
+                            onChatClickHandler={() => {}}
+                            toggleItems={[]}
+                            elementList={[]}
                           />
-                          <Route
-                            path="/text-template"
-                            element={<TextTemplateCompo />}
-                          ></Route>
-                          <Route
-                            path="/applications"
-                            element={<ApplicationsCompo />}
-                          ></Route>
-                          <Route
-                            path="/identityResources"
-                            element={<IdentityResourcesCompo />}
-                          />
+                        </div>
+                        <div className="layoutmargin mb-top-margin h-100 m-4">
+                          <Suspense>
+                            <Routes>
+                              <Route
+                                path="/dashboard"
+                                element={<DashboardCompo />}
+                              ></Route>
+                              <Route
+                                path="/tenant"
+                                element={<TenantCompo></TenantCompo>}
+                              ></Route>
+                              <Route
+                                path="/edition"
+                                element={<EditionCompo></EditionCompo>}
+                              ></Route>
+                              <Route
+                                path="/settings"
+                                element={<SettingsCompo></SettingsCompo>}
+                              ></Route>
+                              <Route
+                                path="/audit-logs"
+                                element={<AuditlogsCompo></AuditlogsCompo>}
+                              ></Route>
+                              <Route
+                                path="/users"
+                                element={<UsersCompo />}
+                              ></Route>
+                              <Route
+                                path="/role"
+                                element={<RolesCompo></RolesCompo>}
+                              ></Route>
+                              <Route
+                                path="/organization-unit"
+                                element={
+                                  <OrganizationUnitsCompo></OrganizationUnitsCompo>
+                                }
+                              ></Route>
+                              <Route
+                                path="/language"
+                                element={<LanguageCompo></LanguageCompo>}
+                              ></Route>
+                              <Route
+                                path="/language-text"
+                                element={
+                                  <LanguageTextCompo></LanguageTextCompo>
+                                }
+                              ></Route>
+                              <Route
+                                path="/dynamic-properties"
+                                element={
+                                  <DynamicPropertyCompo></DynamicPropertyCompo>
+                                }
+                              ></Route>
+                              <Route
+                                path="/security-logs"
+                                element={<SecurityLogsCompo />}
+                              ></Route>
 
-                          <Route
-                            path="/api-scope"
-                            element={<ApiScopeCompo />}
-                          />
-                          <Route
-                            path="/apiResources"
-                            element={<ApiResourcesCompo />}
-                          />
-                          <Route path="/blogs" element={<BlogsCompo />} />
-                          <Route path="/chats" element={<ChatsCompo />} />
-                          <Route
-                            path="/fileManagement"
-                            element={<FileManagementCompo />}
-                          />
-                          <Route path="/forms" element={<FormsCompo />} />
-                          <Route
-                            path="/formsView/:id"
-                            element={<FormsViewCompo />}
-                          />
-                          <Route
-                            path="/formsPreview/:id"
-                            element={<FormsPreviewCompo />}
-                          />
-                          <Route path="/polls" element={<PollsCompo />} />
-                          <Route path="/blogger" element={<BloggerCompo />} />
-                          <Route path="/client" element={<ClientCompo />} />
-                          <Route
-                            path="/url-forwarding"
-                            element={<UrlForwardingCompo />}
-                          />
-                          <Route
-                            path="/paymentPlans"
-                            element={<PaymentPlansCompo />}
-                          />
-                          <Route
-                            path="/paymentRequests"
-                            element={<PaymentRequestsCompo />}
-                          />
-                          <Route path="/comments" element={<CommentsCompo />} />
-                          <Route path="/tags" element={<TagsCompo />} />
-                          <Route
-                            path="/globalResources"
-                            element={<GlobalResourcesCompo />}
-                          />
-                          <Route
-                            path="/elements/:type"
-                            element={<ElementsCompo />}
-                          />
-                          <Route
-                            path="/personal-data"
-                            element={<PersonalDataCompo />}
-                          />
-                          <Route
-                            path="/my-account"
-                            element={<MyAccountCompo />}
-                          />
-                          <Route
-                            path="/linked-accounts"
-                            element={<RdsCompLinkedAccount />}
-                          />
+                              <Route
+                                path="/icons"
+                                element={<IconListCompo />}
+                              ></Route>
+                              <Route
+                                path="/claim-types"
+                                element={<ClaimTypesCompo />}
+                              />
+                              <Route
+                                path="/text-template"
+                                element={<TextTemplateCompo />}
+                              ></Route>
+                              <Route
+                                path="/applications"
+                                element={<ApplicationsCompo />}
+                              ></Route>
+                              <Route
+                                path="/identityResources"
+                                element={<IdentityResourcesCompo />}
+                              />
 
-                          <Route path="/menus" element={<MenusCompo />} />
-                          <Route
-                            path="/components/:type"
-                            element={<ComponentsCompo />}
-                          />
-                          <Route path="/pages" element={<PagesCompo />} />
-                          <Route
-                            path="/**/*"
-                            element={<RdsCompPageNotFound />}
-                          />
-                          <Route
-                            path="/blog-post"
-                            element={<BlogPostCompo />}
-                          />
-                          <Route
-                            path="/newsletters"
-                            element={<NewslettersCompo />}
-                          />
-                          <Route
-                            path="/charts/:type"
-                            element={<ChartCompo />}
-                          />         
-</Routes>
-                      </Suspense>
+                              <Route
+                                path="/api-scope"
+                                element={<ApiScopeCompo />}
+                              />
+                              <Route
+                                path="/apiResources"
+                                element={<ApiResourcesCompo />}
+                              />
+                              <Route path="/blogs" element={<BlogsCompo />} />
+                              <Route path="/chats" element={<ChatsCompo />} />
+                              <Route
+                                path="/fileManagement"
+                                element={<FileManagementCompo />}
+                              />
+                              <Route path="/forms" element={<FormsCompo />} />
+                              <Route
+                                path="/formsView/:id"
+                                element={<FormsViewCompo />}
+                              />
+                              <Route
+                                path="/formsPreview/:id"
+                                element={<FormsPreviewCompo />}
+                              />
+                              <Route path="/polls" element={<PollsCompo />} />
+                              <Route
+                                path="/blogger"
+                                element={<BloggerCompo />}
+                              />
+                              <Route path="/client" element={<ClientCompo />} />
+                              <Route
+                                path="/url-forwarding"
+                                element={<UrlForwardingCompo />}
+                              />
+                              <Route
+                                path="/paymentPlans"
+                                element={<PaymentPlansCompo />}
+                              />
+                              <Route
+                                path="/paymentRequests"
+                                element={<PaymentRequestsCompo />}
+                              />
+                              <Route
+                                path="/comments"
+                                element={<CommentsCompo />}
+                              />
+                              <Route path="/tags" element={<TagsCompo />} />
+                              <Route
+                                path="/globalResources"
+                                element={<GlobalResourcesCompo />}
+                              />
+                              <Route
+                                path="/elements/:type"
+                                element={<ElementsCompo />}
+                              />
+                              <Route
+                                path="/personal-data"
+                                element={<PersonalDataCompo />}
+                              />
+                              <Route
+                                path="/my-account"
+                                element={<MyAccountCompo />}
+                              />
+                              <Route
+                                path="/linked-accounts"
+                                element={<RdsCompLinkedAccount />}
+                              />
+
+                              <Route path="/menus" element={<MenusCompo />} />
+                              <Route
+                                path="/components/:type"
+                                element={<ComponentsCompo />}
+                              />
+                              <Route path="/pages" element={<PagesCompo />} />
+                              <Route
+                                path="/**/*"
+                                element={<RdsCompPageNotFound />}
+                              />
+                              <Route
+                                path="/blog-post"
+                                element={<BlogPostCompo />}
+                              />
+                              <Route
+                                path="/newsletters"
+                                element={<NewslettersCompo />}
+                              />
+                              <Route
+                                path="/charts/:type"
+                                element={<ChartCompo />}
+                              />
+                            </Routes>
+                          </Suspense>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            )}
+        </>
+      )}
     </Suspense>
   );
 };

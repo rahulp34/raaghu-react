@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton } from "raaghu-react-elements";
+import { RdsInput, RdsButton } from "../rds-elements";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 export interface RdsForgotPasswordProps {
@@ -67,6 +67,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 										value={email}
 										onChange={(e: any) => setEmail(e.target.value)}
 										required={false}
+										dataTestId="email"
 									></RdsInput>
 									<div className="row d-flex justify-content-between mt-2">
 										<div className="col-md-12">
@@ -90,6 +91,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 										tooltipTitle={""}
 										showLoadingSpinner={true}
 										type={"submit"}
+										dataTestId="submit"
 									></RdsButton>
 
 								</div>
@@ -102,6 +104,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 						<img
 							src="https://www.nicepng.com/png/full/362-3624869_success-image-png.png"
 							className="mt-4 mb-4 w-25"
+							alt="img"
 						/>
 						<h3 className="pb-3">Email has been sent !</h3>
 						<div>
@@ -115,6 +118,7 @@ const RdsCompForgotPassword = (props: RdsForgotPasswordProps) => {
 								className="link-primary text-decoration-none px-1"
 								href="javascript:void(0)"
 								onClick={resendHandler}
+								data-testid="resend-link"
 							>
 								Resend
 							</a>

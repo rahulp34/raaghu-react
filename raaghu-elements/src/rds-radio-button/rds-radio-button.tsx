@@ -12,7 +12,7 @@ export interface RdsRadioButtonProps {
   displayType?: string;
   label?: string;
   id?:number;
-
+  dataTestId?: string ;
   state?: 'radio' | 'errorRadio',
   errorMessage?:string;
 }
@@ -68,6 +68,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 id={item.id}
                 disabled={item.disabled}
                 onClick = {props.onClick}
+                data-testid={props.dataTestId}
               />
               <label htmlFor={item.id} className="form-check-label me-5 ms-2">
                 {item.label}

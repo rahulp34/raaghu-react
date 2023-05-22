@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-import { RdsLabel, RdsInput, RdsButton } from "raaghu-react-elements";
+import { RdsLabel, RdsInput, RdsButton } from "../rds-elements";
 
 export interface RdsCompPropertiesProp {
   propertyData: any[];
@@ -73,6 +73,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
               onChange={headerKeyhandleChange}
               name={"Key"}
               value={key}
+              dataTestId="key"
             ></RdsInput>
           </div>
           <div className="col-md-5 col-sm-12 mb-3">
@@ -83,6 +84,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
               onChange={headerValuehandleChange}
               name={"value"}
               value={value}
+              dataTestId="value"
             ></RdsInput>
           </div>
           <div className="col-2 mb-3 align-self-end">
@@ -92,6 +94,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
               block={true}
               tooltipTitle={""}
               type="submit"
+              dataTestId="add"
             />
           </div>
         </div>
@@ -104,6 +107,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
               tooltipTitle={""}
               type="button"
               isOutline={true}
+              dataTestId="cancel"
             />
           </div>
           <div className="col-2">
@@ -113,6 +117,7 @@ const RdsCompProperties = (props: RdsCompPropertiesProp) => {
               block={true}
               tooltipTitle={""}
               type="submit"
+              dataTestId="save"
             />
           </div>
         </div>
