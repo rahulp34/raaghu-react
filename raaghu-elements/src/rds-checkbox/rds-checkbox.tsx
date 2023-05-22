@@ -50,7 +50,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             id={props.id}
             name={props.id}
             onChange={props.onChange}
-            data-testId={props.dataTestId}
+            data-testid={props.dataTestId}
           />
 
           {props.withlabel == false ? (
