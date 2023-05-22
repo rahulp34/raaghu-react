@@ -4,9 +4,9 @@ import {
   RdsInput,
   RdsLabel,
   RdsSelectList,
+  RdsDatePicker
 } from "../rds-elements";
 import React, { useEffect, useState } from "react";
-import RdsDatepicker from "../../../raaghu-elements/src/rds-datepicker";
 
 export interface RdsCompPollsQuestion {
   widgetList: any[];
@@ -15,7 +15,6 @@ export interface RdsCompPollsQuestion {
 
 function RdsCompPollsQuestion(props: any) {
   const [QuestionData, setQuestionData] = useState(props.questionData);
-
   const questionFormData = (event: any) => {
     event.preventDefault();
     console.log("Check poll data", QuestionData);
@@ -26,55 +25,34 @@ function RdsCompPollsQuestion(props: any) {
       setQuestionData(props.questionData);
     }
   }, [props.questionData]);
-  function setQuestion(value: any) {
-    setQuestionData({ ...QuestionData, question: value });
-    props.getPollsQuestion({ ...QuestionData, question: value });
+  const handlerChangeValues =(key:any, value: any)=>{
+    setQuestionData({ ...QuestionData, [key]: value });
+    props.getPollsQuestion&&props.getPollsQuestion({ ...QuestionData, [key]: value });
   }
-  function setCode(value: any) {
-    setQuestionData({ ...QuestionData, code: value });
-    props.getPollsQuestion({ ...QuestionData, code: value });
-  }
-  function setName(value: any) {
-    setQuestionData({ ...QuestionData, name: value });
-    props.getPollsQuestion({ ...QuestionData, name: value });
-  }
-  const widgetChange = (event: any) => {
-    setQuestionData({ ...QuestionData, widget: event });
-    props.getPollsQuestion({ ...QuestionData, widget: event });
-  };
-  function setShowTime(value: boolean) {
-    setQuestionData({ ...QuestionData, showHoursLeft: value });
-    props.getPollsQuestion({ ...QuestionData, showHoursLeft: value });
-  }
-  function setAllowMultipleVoting(value: boolean) {
-    setQuestionData({ ...QuestionData, allowMultipleVote: value });
-    props.getPollsQuestion({ ...QuestionData, allowMultipleVote: value });
-  }
-  function setShowVoteCount(value: boolean) {
-    setQuestionData({ ...QuestionData, showVoteCount: value });
-    props.getPollsQuestion({ ...QuestionData, showVoteCount: value });
-  }
-  function setShowResult(value: boolean) {
-    setQuestionData({ ...QuestionData, showResultWithoutGivingVote: value });
-    props.getPollsQuestion({
-      ...QuestionData,
-      showResultWithoutGivingVote: value,
-    });
-  }
-  function handleStartDate(data: any) {
-    let date1 = data.toISOString();
-    setQuestionData({ ...QuestionData, startDate: date1 });
-    props.getPollsQuestion({ ...QuestionData, startDate: date1 });
+function dateFormateConvert(data:any){
+  // const year = data.getFullYear();
+  // const month = String(data.getMonth() + 1).padStart(2, '0');
+  // const day = String(data.getDate()).padStart(2, '0');
+  // // const hours = String(data.getHours()).padStart(2, '0');
+  // // const minutes = String(data.getMinutes()).padStart(2, '0');
+  // // const meridiem = parseInt(hours) >= 12 ? 'PM' : 'AM';    
+  // const formattedDate = `${year}-${month}-${day} 00:00 AM`;
+  return data.toISOString()
+}
+  function handlerStartDate(data: any) {
+    let date= dateFormateConvert(data)
+    setQuestionData({ ...QuestionData, startDate: date });
+    props.getPollsQuestion&&props.getPollsQuestion({ ...QuestionData, startDate: date });
   }
   function handleEndDate(data: any) {
-    let date1 = data.toISOString();
-    setQuestionData({ ...QuestionData, endDate: date1 });
-    props.getPollsQuestion({ ...QuestionData, endDate: date1 });
+    let date= dateFormateConvert(data)
+    setQuestionData({ ...QuestionData, endDate: date });
+    props.getPollsQuestion&&props.getPollsQuestion({ ...QuestionData, endDate: date });
   }
   function handleResultDatepickerData(data: any) {
-    let date1 = data.toISOString();
-    setQuestionData({ ...QuestionData, resultShowingEndDate: date1 });
-    props.getPollsQuestion({ ...QuestionData, resultShowingEndDate: date1 });
+    let date= dateFormateConvert(data)
+    setQuestionData({ ...QuestionData, resultShowingEndDate: date });
+    props.getPollsQuestion&&props.getPollsQuestion({ ...QuestionData, resultShowingEndDate: date });
   }
 
   return (
@@ -89,7 +67,7 @@ function RdsCompPollsQuestion(props: any) {
               inputType="text"
               value={QuestionData.question}
               onChange={(e: any) => {
-                setQuestion(e.target.value);
+                handlerChangeValues("question",e.target.value);
               }}
               dataTestId="question"
             ></RdsInput>
@@ -103,7 +81,7 @@ function RdsCompPollsQuestion(props: any) {
               required={true}
               value={QuestionData.code}
               onChange={(e: any) => {
-                setCode(e.target.value);
+                handlerChangeValues("code",e.target.value);
               }}
               dataTestId="code"
             ></RdsInput>
@@ -118,8 +96,8 @@ function RdsCompPollsQuestion(props: any) {
               required={false}
               value={QuestionData.name}
               onChange={(e: any) => {
-                setName(e.target.value);
-              }}
+                handlerChangeValues("name",e.target.value);
+               }}
               dataTestId="name"
             ></RdsInput>
           </div>
@@ -129,20 +107,22 @@ function RdsCompPollsQuestion(props: any) {
             <RdsSelectList
               label="Select Roles"
               selectItems={props.widgetList}
-              onSelectListChange={(e: any) => widgetChange(e.target.value)}
+              onSelectListChange={(e: any) => 
+                handlerChangeValues("name",e.target.value)
+              }
             ></RdsSelectList>
           </div>
         </div>
         <div className="row mt-2">
           <div className="col-md-6">
-            <RdsDatepicker
-              onDatePicker={handleStartDate}
+            <RdsDatePicker
+              onDatePicker={handlerStartDate}
               DatePickerLabel="Start Date"
               type="default"
             />
           </div>
           <div className="col-md-6">
-            <RdsDatepicker
+            <RdsDatePicker
               onDatePicker={handleEndDate}
               DatePickerLabel="End Date"
               type="default"
@@ -156,15 +136,15 @@ function RdsCompPollsQuestion(props: any) {
               label="Show remaining time"
               checked={QuestionData.showHoursLeft}
               onChange={(e: any) => {
-                setShowTime(e.target.checked);
-              }}
+                handlerChangeValues("showHoursLeft",e.target.value)
+                }}
               dataTestId="remaining-time"
             ></RdsCheckbox>
           </div>
         </div>
         <div className="row mt-3">
           <div className="col-md-12">
-            <RdsDatepicker
+            <RdsDatePicker
               onDatePicker={handleResultDatepickerData}
               DatePickerLabel="Result Showing End Date"
               type="default"
@@ -178,7 +158,7 @@ function RdsCompPollsQuestion(props: any) {
               label="Allow multiple voting"
               checked={QuestionData.allowMultipleVote}
               onChange={(e: any) => {
-                setAllowMultipleVoting(e.target.checked);
+                handlerChangeValues("allowMultipleVote",e.target.value)
               }}
               dataTestId="multiple-voting"
             ></RdsCheckbox>
@@ -192,7 +172,7 @@ function RdsCompPollsQuestion(props: any) {
               label="Show vote count"
               checked={QuestionData.showVoteCount}
               onChange={(e: any) => {
-                setShowVoteCount(e.target.checked);
+                handlerChangeValues("showVoteCount",e.target.value)
               }}
               dataTestId="vote-count"
             ></RdsCheckbox>
@@ -205,8 +185,8 @@ function RdsCompPollsQuestion(props: any) {
               label="Show result without giving vote"
               checked={QuestionData.showResultWithoutGivingVote}
               onChange={(e: any) => {
-                setShowResult(e.target.checked);
-              }}
+                handlerChangeValues("showResultWithoutGivingVote",e.target.value)
+             }}
               dataTestId="result-without-vote"
             ></RdsCheckbox>
           </div>
