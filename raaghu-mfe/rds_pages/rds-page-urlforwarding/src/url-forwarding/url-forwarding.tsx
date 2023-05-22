@@ -231,7 +231,7 @@ const UrlForwarding = () => {
             >
               <div className="mt-2">
                 <RdsCompUrlForwardings urlForwardingData={urlNewData} emitUrlForwardingData={getUrlForwardingsData} />
-                <div className="d-flex footer-buttons">
+                <div className="d-flex footer-buttons gap-2">
                   <RdsButton
                     type={"button"}
                     label="cancel"
@@ -241,7 +241,7 @@ const UrlForwarding = () => {
                     databstoggle="offcanvas"
                     databstarget="#newUrlForwarding"
                     size="small"
-                    class="me-2"
+                    class=""
                   ></RdsButton>
                   <RdsButton
                     type={"button"}
@@ -268,7 +268,7 @@ const UrlForwarding = () => {
             >
               <div className="mt-2">
                 <RdsCompUrlForwardings urlForwardingData={editUrlShortingData} emitUrlForwardingData={getUrlForwardingsDataForEdit} />
-                <div className="d-flex footer-buttons">
+                <div className="d-flex footer-buttons gap-2">
                   <RdsButton
                     type={"button"}
                     label="cancel"
@@ -278,7 +278,7 @@ const UrlForwarding = () => {
                     databstoggle="offcanvas"
                     databstarget="#editUrlForwardingoff"
                     size="small"
-                    class="me-2"
+                    class=""
                   ></RdsButton>
                   <RdsButton
                     type={"button"}
@@ -301,7 +301,8 @@ const UrlForwarding = () => {
             ></RdsCompAlertPopup>
           </div>
         </div>
-      </div></div>
+      </div>
+      </div>
   );
 }
 

@@ -223,7 +223,7 @@ const Forms = () => {
               <RdsCompFormsBasic basicInfo={basicFormData} handleNewFormData={(data: any) => handleGetFormData(data)} />
               <div className="footer-buttons my-2">
                 <div className="row">
-                  <div className="col-md-12 d-flex">
+                  <div className="col-md-12 d-flex gap-3">
                     <div>
                       <RdsButton
                         label="Cancel"
@@ -240,7 +240,7 @@ const Forms = () => {
                         type="button"
                         size="small"
                         isDisabled={saveNewFormData.title == ''}
-                        class="ms-2"
+                        class=""
                         colorVariant="primary"
                         databsdismiss="offcanvas"
                         showLoadingSpinner={true}
@@ -256,7 +256,7 @@ const Forms = () => {
         </div>
 
         <div className="col-md-12 mb-3">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+          <div className="card p-2 h-100 d-flex justify-content-center align-items-center border-0 rounded-0 card-full-stretch">
             <div>
               <RdsCompDatatable
                actionPosition="right"

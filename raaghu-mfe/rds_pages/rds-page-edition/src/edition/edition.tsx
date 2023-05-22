@@ -202,8 +202,6 @@ const Edition = (props: RdsPageEditionProps) => {
     setAlertOne(true);
   };
 
-  const offCanvasHandler = () => {};
-
   function saveFeature(data: any) {
     console.log("This is data ", data);
     const tempData: any[] = [];
@@ -251,7 +249,6 @@ const Edition = (props: RdsPageEditionProps) => {
         <div className="col-lg-4 col-md-4">
           <RdsOffcanvas
             canvasTitle="NEW EDITION"
-            onclick={offCanvasHandler}
             placement="end"
             offcanvasbutton={
               <div className="d-flex justify-content-end">
@@ -336,7 +333,6 @@ const Edition = (props: RdsPageEditionProps) => {
 
         <RdsOffcanvas
           canvasTitle="Edit Edition"
-          onclick={offCanvasHandler}
           placement="end"
           offId="edition-edit-off"
           backDrop={true}

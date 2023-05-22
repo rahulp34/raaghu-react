@@ -101,6 +101,7 @@ const Applications = () => {
   }
 
   function handleApplicationSubmit(basicApplicationData: any) {
+    
     dispatch(saveApplications(basicApplicationData) as any).then((res: any) => {
       dispatch(fetchApplications() as any);
     })
@@ -108,16 +109,21 @@ const Applications = () => {
       clientId: '',
       displayName: '',
       clientUri: '',
+      clientSecret:'',
       logoUri: '',
+      consentType:'',
+      postLogoutRedirectUris: [],
+      redirectUris: [],
       allowAuthorizationCodeFlow: false,
       allowDeviceEndpoint: false,
       allowImplicitFlow: false,
       allowHybridFlow: false,
       allowPasswordFlow: false,
       allowClientCredentialsFlow: false,
+      allowLogoutEndPoint:false,
       allowRefreshTokenFlow: false,
       type: '',
-      scopes: ''
+      scopes: [],
     })
     setAlertOne(true);
   }
@@ -214,7 +220,7 @@ const Applications = () => {
   const [scopesListData, setScopesListData] = useState<any>([]);
   const [permissionListData, setPermissionListData] = useState<any>([]);
   const [selectedPermissionListData, setSelectedPermissionListData] = useState<any>([]);
-  const offCanvasHandler = () => { };
+  // const offCanvasHandler = () => { };
   const [activeNavTabEditId, setActiveNavTabEditId] = useState(0);
 
   const [showNextTab, setShowNextTab] = useState(false);
@@ -267,7 +273,7 @@ const Applications = () => {
           <div className="col d-flex justify-content-end mb-3">
             <RdsOffcanvas
               canvasTitle={"New Application"}
-              onclick={offCanvasHandler}
+              // onclick={offCanvasHandler}
               placement="end"
               
               offcanvasbutton={               
@@ -310,7 +316,7 @@ const Applications = () => {
               ></RdsCompDatatable>
               <RdsOffcanvas
                 canvasTitle={"Edit APPLICATION"}
-                onclick={offCanvasHandler}
+                // onclick={offCanvasHandler}
                 placement="end"
                 
                 backDrop={true}

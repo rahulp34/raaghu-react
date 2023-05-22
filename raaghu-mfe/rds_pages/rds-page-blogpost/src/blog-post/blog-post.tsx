@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RdsCompBlogPost, RdsCompBlogPostNew } from "../../../rds-components";
 import { RdsButton, RdsDropdownList, RdsSearch } from "../../../../../raaghu-elements/src";
 import { useTranslation } from "react-i18next";
-import { RdsOffcanvas } from 'raaghu-react-elements';
+import { RdsOffcanvas } from '../../../rds-elements';
 import { addBlogPostData, getAllBlogPost } from "../../../../libs/state-management/blog-post/blog-post-slice";
 import { useAppDispatch } from "../../../../libs/public.api";
 
@@ -163,7 +163,7 @@ const BlogPost = () => {
 	return (
 		<>
 			<div className="container-fluid m-0 p-0">
-				<div className="row align-items-center">
+				<div className="row align-items-center mb-3">
 					<div className="col-md-12 d-flex justify-content-end">
 						<RdsOffcanvas
 							canvasTitle={"Blog Post"}
