@@ -28,7 +28,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
 
 
   const SWITCH = `${
-    props.isSwitch !== true ? " form-check " : " form-switch "
+    props.isSwitch !== true ? " form-check d-flex" : " form-switch "
   }`;
 
   return (

@@ -335,7 +335,7 @@ const Roles = (props: RdsPageRolesProps) => {
                       ></RdsInput>
                     </div>
                     <div className="me-2">
-                      <div className="form-check">
+                      <div className="form-check d-flex">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -347,13 +347,13 @@ const Roles = (props: RdsPageRolesProps) => {
                           id="flexCheckDefaultrole"
                         />
                         <label
-                          className="form-check-label"
+                          className="form-check-label me-5 ms-2"
                           htmlFor="flexCheckDefaultrole"
                         >
                           Default Role
                         </label>
                       </div>
-                      <div className="mt-3 form-check">
+                      <div className="mt-3 form-check d-flex">
                         <input
                           className="form-check-input"
                           type="checkbox"
@@ -365,7 +365,7 @@ const Roles = (props: RdsPageRolesProps) => {
                           }}
                         />
                         <label
-                          className="form-check-label"
+                          className="form-check-label me-5 ms-2"
                           htmlFor="flexCheckDefaultpublic"
                         >
                           Available For Public
@@ -376,7 +376,7 @@ const Roles = (props: RdsPageRolesProps) => {
 
                   <div className="footer-buttons my-2">
                     <div className="row">
-                      <div className="col-md-12 d-flex">
+                      <div className="col-md-12 d-flex gap-2">
                         <div>
                           <RdsButton
                             label="Cancel"

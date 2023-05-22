@@ -6,7 +6,7 @@ import Tooltip from "../rds-tooltip/rds-tooltip";
 import RdsIcon from "../rds-icon";
 
 const RdsButton= (props: RdsButtonProps) => {
-  const outline = `${props.isOutline ? "  btn-outline-" + props.colorVariant : "  align-items-center btn-" + props.colorVariant}`;
+  const outline = `${props.isOutline ? " align-items-center d-flex gap-2 justify-content-center btn-outline-" + props.colorVariant : "  align-items-center d-flex gap-2 justify-content-center btn-" + props.colorVariant}`;
   const mode = props.size ? ` btn-${props.size === "small" ? "sm " : props.size === "large" ? "lg " : "md "}` : "";
   const icon = props.isFabIcon ? " btn-icon p-1 rounded-pill " : "";
   const icon1 = props.isRounded ? " rounded-pill " : "";
@@ -35,7 +35,7 @@ const RdsButton= (props: RdsButtonProps) => {
 
   const iconClasses =
     props.hasOwnProperty("icon") && props.hasOwnProperty("label")
-      ? "me-2 d-inline-block"
+      ? "d-inline-block"
       : "";
   const showLoadingSpinner = props.showLoadingSpinner || false;
   const id = props.id || 'rds_buttonId_';

@@ -141,13 +141,14 @@ const RdsCompProfilePicture = (props: any) => {
         )}
       </div>
 
-      <div className="col-12 col-md-12 footer-buttons mx-2 mb-2">
+      <div className="col-12 col-md-12 position-absolute bottom-0 mb-4  mx-3">
         <RdsButton
           label="Save Changes"
           colorVariant="primary"
           isDisabled={isExceed !== true}
           block={false}
           type="button"
+          size="small"
           onClick={props.handleProfileDataSubmit}
           dataTestId="save"
         />
