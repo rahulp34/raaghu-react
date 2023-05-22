@@ -53,7 +53,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
   const loginHandler: any = (isLoginClicked: boolean) => {
     setIsLoginClicked(true);
     navigate("/login");
-    props.onLogin(isLoginClicked);
+    props.onLogin(true);
     console.log(isLoginClicked);
   };
   const TenancyNameChange = (event: {
@@ -130,6 +130,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                       }`}
                       checked={checked} isSwitch={checked}
                       onChange={() => setChecked(!checked)}
+                      dataTestId="switch-tenant"
                     ></RdsCheckbox>
                   </div>
                   <RdsInput
@@ -141,6 +142,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                     name={"currentTenant"}
                     required={true}
                     isDisabled={!checked}
+                    dataTestId="tenacy-name"
                   ></RdsInput>
                 </div>
                 <div className=" mb-2 mt-3 d-flex justify-content-end">
@@ -152,6 +154,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                     colorVariant="outline-primary"
                     size="small"
                     databsdismiss="modal"
+                    dataTestId="cancel"
                   ></RdsButton>
                   <RdsButton
                     class="me-2"
@@ -163,6 +166,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                     type={"submit"}
                     databsdismiss="modal"
                     onClick={() => { props.validTenant(currentTenant); setChecked(!checked) }}
+                    dataTestId="submit"
                   ></RdsButton>
                 </div>
               </RdsModal>
@@ -180,6 +184,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                 value={emailAddress}
                 name={"email"}
                 required={true}
+                dataTestId="email"
               ></RdsInput>
             </div>
 
@@ -192,6 +197,7 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
                 onChange={passwordhandleChange}
                 name={"password"}
                 value={password}
+                dataTestId="password"
               ></RdsInput>
             </div>
 
@@ -203,12 +209,14 @@ const RdsCompRegister: React.FC<RdsCompRegisterProps> = (
               block={true}
               tooltipTitle={""}
               type="submit"
+              dataTestId="register"
             />
             <div className="mt-3">
               <p>Already Have An Account  <span><a
                 className="link-primary text-decoration-none"
                 href="javascript:void(0)"
-                onClick={loginHandler}
+                onClick={()=>loginHandler(isLoginClicked)}
+                data-testid="login"
               >
                 Login
               </a></span></p>
