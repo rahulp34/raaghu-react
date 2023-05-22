@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode, useEffect, useState } from "react";
-import "./rds-navtabs.scss";
+import "./rds-navtabs.css";
 
 import RdsIcon from "../rds-icon";
 

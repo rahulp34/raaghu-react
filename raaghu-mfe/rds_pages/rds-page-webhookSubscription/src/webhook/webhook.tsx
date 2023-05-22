@@ -62,7 +62,7 @@ const Webhook = (props: RdsPageWebhookSubscriptionProps) => {
          scrolling={false}
          offId="webhook_off"
          placement="end"
-        canvasTitle="NEW WEBHOOK SUBSCRIPTION"
+         canvasTitle="NEW WEBHOOK SUBSCRIPTION"
         
           offcanvasbutton={
             <RdsButton

@@ -330,7 +330,7 @@ const TextTemplate = () => {
                 rows={10}
               ></RdsTextArea>
             </div>
-            <div className="position-absolute bottom-0 py-4 d-flex w-100 bg-white">
+            <div className="position-absolute bottom-0 py-4 d-flex gap-2 w-100 bg-white">
               <div>
                 <RdsButton
                   size={"small"}
@@ -341,7 +341,7 @@ const TextTemplate = () => {
                   onClick={restoreDefault}
                 ></RdsButton>
               </div>
-              <div className="ms-2">
+              <div>
                 <RdsButton
                   size={"small"}
                   colorVariant="primary"
@@ -352,7 +352,7 @@ const TextTemplate = () => {
                   databsdismiss="offcanvas"
                 ></RdsButton>
               </div>
-              <div className="ms-2">
+              <div>
                 <RdsButton
                   size={"small"}
                   colorVariant="primary"

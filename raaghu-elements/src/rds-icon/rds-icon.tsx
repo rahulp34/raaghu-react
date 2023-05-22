@@ -101,7 +101,7 @@ const RdsIcon = (props: RdsIconProps) => {
       onClick={props.onClick}
       dangerouslySetInnerHTML={{ __html: stringData }}
       role="img"
-      data-testId={props.dataTestId}
+      data-testid={props.dataTestId}
     />
   );
 };

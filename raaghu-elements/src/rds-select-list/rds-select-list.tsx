@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./rds-select-list.scss";
+import "./rds-select-list.css";
 export interface RdsSelectProps {
   label: string;
   isDisabled?: boolean;
@@ -44,11 +44,12 @@ const RdsSelectList = (props: RdsSelectProps) => {
   const Size = `${props.hasOwnProperty("size") ? props.size : "md"}`;
   const customSize = `${
     Size === "lg"
-      ? "form-select form-select-lg cursor-pointer"
+      ? " form-select-lg"
       : Size === "sm"
-      ? "form-select form-select-sm cursor-pointer"
-      : "form-select cursor-pointer"
+      ? " form-select-sm "
+      : " "
   }`;
+  let multiselect =props.isMultiple?"":'form-select-single'
   let Disabled = props.isDisabled || false;
   return (
     <Fragment>
@@ -56,7 +57,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
       <select
         key={props.id}
         value={selectedOption}
-        className={`${customSize} ${props.classes}`}
+        className={`form-select cursor-pointer ${multiselect} ${customSize}  ${props.classes}`}
         disabled={Disabled}
         multiple={props.isMultiple}
         aria-label="select example"

@@ -1,12 +1,12 @@
 import React, {useEffect, useState } from "react";
-import "./rds-button.scss";
+import "./rds-button.css";
 import { RdsButtonProps } from "./rds-button.types";
 // import { colors, placements } from "../../libs/types";
 import Tooltip from "../rds-tooltip/rds-tooltip";
 import RdsIcon from "../rds-icon";
 
 const RdsButton= (props: RdsButtonProps) => {
-  const outline = `${props.isOutline ? "  btn-outline-" + props.colorVariant : "  align-items-center btn-" + props.colorVariant}`;
+  const outline = `${props.isOutline ? " align-items-center d-flex gap-2 justify-content-center btn-outline-" + props.colorVariant : "  align-items-center d-flex gap-2 justify-content-center btn-" + props.colorVariant}`;
   const mode = props.size ? ` btn-${props.size === "small" ? "sm " : props.size === "large" ? "lg " : "md "}` : "";
   const icon = props.isFabIcon ? " btn-icon p-1 rounded-pill " : "";
   const icon1 = props.isRounded ? " rounded-pill " : "";
@@ -16,6 +16,12 @@ const RdsButton= (props: RdsButtonProps) => {
   const btnType = props.type === "submit" ? "submit" : "button";
   const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
+    const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+        if (allBackdrops.length > 1) {
+          for (let i = 0; i < allBackdrops.length - 1; i++) {
+            allBackdrops[i].remove();
+          }
+        }
     if (props.showLoadingSpinner) {
       let tempClasses = classes;
       setClasses(`${tempClasses} ${spinner}`)
@@ -35,12 +41,12 @@ const RdsButton= (props: RdsButtonProps) => {
 
   const iconClasses =
     props.hasOwnProperty("icon") && props.hasOwnProperty("label")
-      ? "me-2 d-inline-block"
+      ? "d-inline-block"
       : "";
   const showLoadingSpinner = props.showLoadingSpinner || false;
   const id = props.id || 'rds_buttonId_';
 
-  return (<>
+   return (<>
     {props.tooltip ? (< Tooltip text={props.tooltipTitle} place={props.tooltipPlacement}>
       <button
         type={btnType}
@@ -56,7 +62,7 @@ const RdsButton= (props: RdsButtonProps) => {
         data-bs-toggle={props.databstoggle}
         aria-controls={props.ariacontrols}
         id={props.id}
-        data-testId={props.dataTestId}
+        data-testid={props.dataTestId}
       >
         {props.icon && (
           <span className={iconClasses}>
@@ -90,7 +96,7 @@ const RdsButton= (props: RdsButtonProps) => {
       data-bs-toggle={props.databstoggle}
       aria-controls={props.ariacontrols}
       id={props.id}
-      data-testId={props.dataTestId}
+      data-testid={props.dataTestId}
     >
       {props.icon && (
         <span className={iconClasses}>

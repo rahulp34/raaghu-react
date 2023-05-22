@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import "./rds-popover.scss";
+import "./rds-popover.css";
 import RdsButton from "../rds-button/rds-button";
 
 export interface RdsPopoverProps {

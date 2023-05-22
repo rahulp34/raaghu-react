@@ -1,11 +1,10 @@
 import React, { Suspense, useEffect, useState } from "react";
 import SecurityLogs from "./security-logs/SecurityLogs";
-import { RdsLabel, RdsButton, RdsInput, RdsDatePicker } from "../../../../raaghu-elements/src";
+import { RdsLabel, RdsButton, RdsInput, RdsDatePicker, RdsIcon } from "../../../../raaghu-elements/src";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../libs/state-management/hooks";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchSecurityLogs } from "../../../libs/state-management/security-logs/security-logs-slice";
 import { RdsCompAlertPopup } from "../../rds-components";
 import { useTranslation } from "react-i18next";
@@ -223,7 +222,7 @@ const SecurityLogsPage = () => {
               type="button"
               colorVariant="primary"
               label="Download"
-              isOutline={true}
+              isOutline={false}
               icon="export_data"
               iconHeight="15px"
               size="small"
@@ -254,8 +253,7 @@ const SecurityLogsPage = () => {
                 <div className="row">
                   <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-3">
                     <RdsDatePicker
-                      DatePickerLabel="Select Date"  
-                      onDatePicker={(s:any)=>onDatePicker(s)}
+                      DatePickerLabel="Date range"  
                       type="advanced"
                       selectedDate={selectFilterValue.startDate}
                       customDate={onDatePicker}
@@ -291,20 +289,16 @@ const SecurityLogsPage = () => {
                       onChange={onActionFilter}
                     ></RdsInput>
                   </div>
-                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 mb-4 mt-auto">
-                    <RdsButton
-                      type="button"
-                      colorVariant="primary"
-                      label="Search"
-                      isOutline={false}
-                      icon="search"
-                      iconHeight="15px"
-                      iconFill={false}
-                      iconStroke={true}
-                      iconWidth="15px"
-                      iconColorVariant="light"
+                  <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12 d-flex align-items-center">
+                    <RdsIcon
+                      name="search"
+                      width="16px"
+                      height="16px"
+                      colorVariant="dark"
+                      fill={false}
+                      stroke={true}
                       onClick={securityLogs}
-                    />
+                    ></RdsIcon>
                   </div> 
                 </div>
               </div>

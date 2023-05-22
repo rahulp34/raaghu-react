@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-scrollspy.scss";
+import "./rds-scrollspy.css";
 
 export interface RdsScrollspyProps { }
 

@@ -56,6 +56,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                     label={t("Use Host Database") || ""}
                     onChange={(e) => setHostDatabaseChecked(e.target.checked)}
                     checked={false}
+                    dataTestId="host-database"
                   ></RdsCheckbox>
                 </div>
               </div>
@@ -72,6 +73,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                     label="Database Connection String"
                     name="dcstring"
                     id="dcstring"
+                    dataTestId="connection-string"
                   ></RdsInput>
                 </div>
               </div>
@@ -90,6 +92,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                     id="password"
                     onBlur={() => setIsPasswordTouched(true)}
                     onChange={(e) => setEnteredPassword(e.target.value)}
+                    dataTestId="password"
                   ></RdsInput>
                   {isPasswordInputEmptyAndTouched && (
                     <span className="red-color-error">
@@ -97,7 +100,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                     </span>
                   )}
                   {isEnteredPasswordInvalid && !isEnteredPasswordEmpty && (
-                    <span className="red-color-error">
+                    <span className="red-color-error" role="alert">
                       Password should be between 8 to 15 characters which
                       contain atleast one lowercase letter, one uppercase
                       letter, one numeric digit, and one special character.
@@ -117,6 +120,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                     onFocus={() => setIsConfirmPasswordFocused(true)}
                     onBlur={() => setIsConfirmPasswordTouched(true)}
                     onChange={(e) => setEnteredConfirmPassword(e.target.value)}
+                    dataTestId="confirm-password"
                   ></RdsInput>
                   {isConfirmPasswordInputEmptyAndTouched && (
                     <span className="red-color-error">
@@ -143,6 +147,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                       setIsRandomPasswordChecked(e.target.checked)
                     }
                     checked={false}
+                    dataTestId="random-password"
                   ></RdsCheckbox>
                 </div>
               </div>
@@ -153,6 +158,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                   <RdsCheckbox
                     label={t("Should Change Password On Next Login") ||""}
                     checked={false}
+                    dataTestId="change-passord-on-next-login"
                   ></RdsCheckbox>
                 </div>
               </div>
@@ -163,13 +169,14 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
                   <RdsCheckbox
                     label="Send Activation Password"
                     checked={false}
+                    dataTestId="send-activation-password"
                   ></RdsCheckbox>
                 </div>
               </div>
             )}
             <div className="col-md-12 sm-p-0">
               <div className="form-group mb-3">
-                <RdsCheckbox label={t("Activate") || ""} checked={false}></RdsCheckbox>
+                <RdsCheckbox label={t("Activate") || ""} checked={false} dataTestId="activate"></RdsCheckbox>
               </div>
             </div>
           </div>
@@ -182,6 +189,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
               isOutline
               colorVariant="primary"
               size="small"
+              dataTestId="cancel"
             ></RdsButton>
             <RdsButton
               tooltipTitle={""}
@@ -191,6 +199,7 @@ const RdsCompTenantSettings = (props: RdsCompTenantSettingsProps) => {
               colorVariant="primary"
               class="ms-2"
               databsdismiss="offcanvas"
+              dataTestId="save"
             ></RdsButton>
           </div>
         </form>

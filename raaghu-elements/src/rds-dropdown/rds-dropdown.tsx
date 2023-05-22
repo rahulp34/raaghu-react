@@ -77,8 +77,7 @@ const RdsDropdown = (props: RdsDropdownProps) => {
         )}
 
         <ul
-          style={{ width: "auto" }}
-          className={`dropdown-menu ${
+          className={`dropdown-menu w-auto ${
             props.darkDropdown ? "dropdown-menu-dark" : ""
           }`}
           aria-labelledby={`dropdownMenuButton23${props.id}`}

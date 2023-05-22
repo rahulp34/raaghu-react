@@ -162,6 +162,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       modalId?: string;
     }
   ) => {
+    if(action.offId !=undefined){
+    const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+    if (allBackdrops.length > 1) {
+      for (let i = 0; i < allBackdrops.length - 1; i++) {
+        allBackdrops[i].remove();
+      }
+    }}
 
     let tempArray: boolean[] = [];
     array.map((res: any) => {
@@ -426,7 +433,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                             data-bs-toggle="modal"
                                             data-bs-target={`#${action?.modalId}`}
                                             aria-controls={action?.modalId}
-                                            data-bs-backdrop={false}
+                                            // data-bs-backdrop={false}
                                             onClick={(e) => {
                                               actionOnClickHandler(
                                                 e,

@@ -32,7 +32,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
   };
   return (
     <>
-      <div className="row mt-3">
+      <div className="row">
         <div className="col-md-12 mb-3">
           <RdsInput
             label="Url"
@@ -42,7 +42,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             onChange={(e)=>handlerChangeInput(e,"url")}
           />
         </div>
-        <div className="col-md-12 mt-2">
+        <div className="col-md-12">
           <RdsInput
           
             label="Display Name"
@@ -64,7 +64,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
           ></RdsSelectList>
         </div> */}
       
-        <div className="col-md-12 ">
+        <div className="col-md-12 mb-3">
           <RdsCheckbox
             label="Active"
             onChange={(e) => {
@@ -73,7 +73,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             checked={data.isActive}
           ></RdsCheckbox>
         </div>
-        <div className="col-md-12 mt-2">
+        <div className="col-md-12 mb-3">
           <RdsInput
             label="Icon"
             value={data.icon}
@@ -82,7 +82,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             onChange={(e)=>handlerChangeInput(e,"icon")}
           />
         </div>
-        <div className="col-md-12 mt-2">
+        <div className="col-md-12 mb-3">
           <RdsInput
             label="Target"
             value={data.target}
@@ -91,7 +91,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             onChange={(e)=>handlerChangeInput(e,"target")}
           />
         </div>
-        <div className="col-md-12 mt-2">
+        <div className="col-md-12 mb-3">
           <RdsInput
             label="Icon"
             value={data.elementId}
@@ -100,7 +100,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             onChange={(e)=>handlerChangeInput(e,"elementId")}
           />
         </div>
-        <div className="col-md-12 mt-2">
+        <div className="col-md-12 mb-3">
           <RdsInput
             label="CssClass"
             value={data.cssClass}

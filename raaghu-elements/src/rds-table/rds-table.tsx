@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-table.scss";
+import "./rds-table.css";
 import RdsIcon from "../rds-icon/rds-icon";
 import RdsPagination from "../rds-pagination";
 

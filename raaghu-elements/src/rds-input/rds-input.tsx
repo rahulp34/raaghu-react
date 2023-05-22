@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-input.scss";
+import "./rds-input.css";
 import Tooltip from "../rds-tooltip/rds-tooltip";
 import { placements } from "../../libs/types";
 import RdsIcon from "../rds-icon";
@@ -95,7 +95,7 @@ const RdsInput = (props: RdsInputProps) => {
                   : "password"
                 : props.inputType
             }
-            className={inputClasses}
+            className={`${inputClasses}`}
             id={props.id}
             placeholder={props.placeholder}
             form={props.formName}
@@ -107,7 +107,7 @@ const RdsInput = (props: RdsInputProps) => {
             onChange={handlerChange}
             disabled={props.isDisabled}
             readOnly={props.readonly}
-            data-testId= {props.dataTestId}
+            data-testid= {props.dataTestId}
           />
           {props.inputType === "password" && (
             <RdsIcon
@@ -147,7 +147,7 @@ const RdsInput = (props: RdsInputProps) => {
               onChange={handlerChange}
               disabled={props.isDisabled}
               readOnly={props.readonly}
-              data-testId= {props.dataTestId}
+              data-testid= {props.dataTestId}
             ></input>
             {props.inputType === "password" && (
               <RdsIcon

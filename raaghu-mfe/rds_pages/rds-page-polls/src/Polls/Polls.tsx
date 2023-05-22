@@ -88,23 +88,19 @@ const Polls = (props: any) => {
     },
   ];
   const [questionData, setQuestionData] = useState({
-    question: '',
-    code: '',
-    name: '',
-    widget:'',
-    time: false,
+    question: "",
+    code: "",
+    widget:   null,
+    name:  null,
     allowMultipleVote: false,
-    voteCount : false,
-    result:false,
-    startDate:'',
-    endDate:'',
-    resultEndDate:''
+    showVoteCount: false,
+    showResultWithoutGivingVote: false,
+    showHoursLeft: false,
+    startDate: new Date,
+    endDate:  null,
+    resultShowingEndDate: null,
   });
-  const [alert, setAlert] = useState({
-    showAlert: false,
-    message: "",
-    success: false,
-  });
+  const [alert, setAlert] = useState({ showAlert: false, message: "", success: "" });
   const [alertOne, setAlertOne] = useState(false);
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [getCreateNewPollsOptionData, setGetCreateNewPollsOptionData] = useState<any[]>([]);
@@ -204,9 +200,9 @@ const Polls = (props: any) => {
     dispatch(fetchPollsData(rowData.id) as any)
     if(actionId === 'entity-widgetcode-off'){
       
-      dispatch(Widgets() as any).then((result: any) => {
+      dispatch(Widgets() as any).then((res: any) => {
+     
         dispatch(GetPolls() as any);
-        setAlertOne(true);
       }); 
     }
   }
@@ -238,31 +234,30 @@ const Polls = (props: any) => {
         dispatch(GetPolls() as any);
       }
     );
-    setAlertOne(true);
   };
 
   const offCanvasHandler = () => {};
-  function OnSave() {
-    console.log(getCreateNewPollsOptionData, "Polls Data here");
+  function handleAddNewPoll() {
     const allData = {
       ...questionData, pollOptions: getCreateNewPollsOptionData,
     };
-    dispatch(SavePolls(allData) as any);
-    setAlertOne(true);
+    dispatch(SavePolls(allData) as any).then((res: any) => {
+      dispatch(GetPolls() as any);
+    });
+   
   }
 
   //const [getCreateNewPollQuestion, setGetCreateNewPollQuestion] = useState({});
   
   function getPollsQuestion(data: any) {
-    
     setQuestionData(data);
   }
 
   function deleteHandler(data:any){
     console.log(data);
-     dispatch(deletePolls(rowDataId) as any).then((result: any) => {
+     dispatch(deletePolls(rowDataId) as any).then((res: any) => {
+     
       dispatch(GetPolls() as any);
-      setAlertOne(true);
     });
   }
   
@@ -299,7 +294,7 @@ const Polls = (props: any) => {
     <div className="row">
       <div className="col-md-12 d-flex  justify-content-between desktop-btn">
       <div>
-          {alert.showAlert && alertOne && (
+      {alert.showAlert && alertOne && (
           <RdsAlert
             alertmessage={alert.message}
             colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
@@ -360,8 +355,8 @@ const Polls = (props: any) => {
               ></RdsCompPollsOption>
             )}
           </RdsNavtabs>
-          <div className="row mt-5 footer-buttons bottom-0 mx-0 ">
-            <div className="col-md-2 mx-2">
+          <div className="footer-buttons bottom-0 d-flex gap-2">
+            <div className="">
               <RdsButton
                 label="Cancel"
                 colorVariant="primary"
@@ -373,7 +368,7 @@ const Polls = (props: any) => {
                 isOutline={true}
               />
             </div>
-            <div className="col-2">
+            <div className="">
               <RdsButton
                 label="Save"
                 size="small"
@@ -384,7 +379,7 @@ const Polls = (props: any) => {
                 tooltipTitle={""}
                 type="button"
                 showLoadingSpinner={true}
-                onClick={OnSave}
+                onClick={handleAddNewPoll}
               />
             </div>
           </div>

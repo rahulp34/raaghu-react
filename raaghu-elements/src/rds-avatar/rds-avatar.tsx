@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "./rds-avatar.scss";
+import "./rds-avatar.css";
 
 import validator from "validator";
 import { colors } from "../../libs/types";

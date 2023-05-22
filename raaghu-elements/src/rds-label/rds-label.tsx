@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./rds-label.scss";
+import "./rds-label.css";
 
 export interface RdsLabelProps {
 	children?: ReactNode;

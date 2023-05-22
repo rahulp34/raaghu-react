@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-modal.scss";
+import "./rds-modal.css";
 
 export interface RdsModalProps {
   modalId: string;

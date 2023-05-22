@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import RdsIcon from "../rds-icon";
 import RdsBadge from "../rds-badge";
-import "./rds-dropdown-list.scss";
+import "./rds-dropdown-list.css";
 import { Dropdown } from "bootstrap";
 export interface RdsDropdownListProps {
   id?: string;

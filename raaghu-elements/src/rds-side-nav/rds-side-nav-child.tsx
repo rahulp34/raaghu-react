@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-side-nav-new.scss";
+import "./rds-side-nav-new.css";
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
 import RdsToggle from "../rds-toggle";

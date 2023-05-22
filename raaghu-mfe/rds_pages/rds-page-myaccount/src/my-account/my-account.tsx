@@ -222,6 +222,7 @@ import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile
                         <div className="mt-3 footer-buttons mx-3">
                         <RdsButton
                             label = 'Save'
+                            size="small"
                             colorVariant ='primary'
                             block = {false}
                             type = "submit"

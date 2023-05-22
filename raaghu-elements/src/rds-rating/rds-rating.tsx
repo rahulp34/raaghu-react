@@ -1,7 +1,7 @@
 import React from "react";
 import RdsIcon from "../rds-icon";
 import { colors, size } from "../../libs/types";
-import "./rds-rating.scss";
+import "./rds-rating.css";
 
 export interface RdsRatingProps {
   rating:number,

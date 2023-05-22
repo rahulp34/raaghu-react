@@ -1,5 +1,5 @@
 import React, { Fragment, ReactNode } from "react";
-import "./rds-website-matrix.scss";
+import "./rds-website-matrix.css";
 import RdsIcon from "../rds-icon/rds-icon";
 import { colors } from "../../libs/types";
 

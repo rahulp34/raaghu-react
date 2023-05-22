@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsPolarAreaChart  from "./rds-chart-polar-area";
-import "./rds-chart-polar-area.scss"
+import "./rds-chart-polar-area.css"
 
 export default {
   title: "Charts/Polar Area Chart",

@@ -57,6 +57,7 @@ const actions = [
   { id: "edit", displayName: "Edit", offId: "language-edit-off" },
   { id: "delete", displayName: "Delete", modalId: "language-delete-off" },
   { id: "defaa", displayName: "set as default language" },
+  {id: "add", displayName: "New Language", offId: "new-language"}
 ];
 
 export interface LanguageProps {
@@ -277,6 +278,7 @@ const Language = (props: LanguageProps) => {
   };
 
   const onNewLangHandler = () => {
+    
     dispatch(fetchCultureList() as any);
   };
 
@@ -336,6 +338,8 @@ const Language = (props: LanguageProps) => {
                         icon="plus"
                         iconFill={false}
                         iconStroke={true}
+                        databstarget="offcanvas"
+                        databsdismiss="offcanvas"
                         iconHeight="12px"
                         onClick={onNewLangHandler}
                         showLoadingSpinner={true}
@@ -347,7 +351,7 @@ const Language = (props: LanguageProps) => {
                   backDrop={true}
                   scrolling={false}
                   preventEscapeKey={false}
-                  offId={"Language"}
+                  offId={"new-language"}
                   canvasTitle={"New Language"}
                 >
                   <RdsCompNewLanguage

@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsBooleanChart  from "./rds-chart-boolean";
-import "./rds-chart-boolean.scss"
+import "./rds-chart-boolean.css"
 
 export default {
   title: "Charts/Boolean Chart",

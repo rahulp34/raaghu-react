@@ -1,7 +1,7 @@
 import React from "react";
 import RdsLabel from "../rds-label";
 import RdsBage from "../rds-badge"
-import "./rds-list-group.scss";
+import "./rds-list-group.css";
 
 export interface RdsListGroupProps {
 	labelPosition?: string;

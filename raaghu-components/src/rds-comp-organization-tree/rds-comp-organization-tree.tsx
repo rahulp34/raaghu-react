@@ -3,7 +3,7 @@ import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import {
   RdsIcon,
   RdsButton,
-} from "raaghu-react-elements";
+} from "../rds-elements";
 import "./rds-comp-organization-tree.scss";
 export interface RdsCompOrganizationTreeProps {
   counter?: number;
@@ -21,6 +21,13 @@ export interface RdsCompOrganizationTreeProps {
 }
 
 const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
+  const handlerExtraBackdrop =()=>{
+    const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+    if (allBackdrops.length > 1) {
+      for (let i = 0; i < allBackdrops.length - 1; i++) {
+        allBackdrops[i].remove();
+      }
+    }}
   const TreeNode = ({
     node,
     index,
@@ -36,6 +43,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
       return props?.nodeColor[(level - 1) % 4];
     };
 
+    
     return (
       <>
         {node && (
@@ -60,19 +68,22 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                     {" "}
                     <span
                       className="cursor-pointer"
-                      onClick={() =>
-                        props.onSelectNode && props.onSelectNode(node)
+                      onClick={() =>{
+                        props.onSelectNode && props.onSelectNode(node)}
                       }
                     >
                       {node.data.displayName}
                     </span>
-                    <span className="node-icon">
+                    <span className="node-icon1">
                       <a
                         className="pl-3 mx-2"
-                        type="button"
-                        data-bs-toggle="offcanvas"
-                        data-bs-target={`#a${props.offId}`}
-                        onClick={() => props.onCreateNode && node.data}
+                          href={`#a${props.offId}`}
+                          role="button"
+                          aria-controls={`a${props.offId}`}
+                          data-bs-toggle="offcanvas"
+                          onClick={() => {
+                            handlerExtraBackdrop()
+                            props.onCreateNode && node.data}}
                       >
                         <RdsIcon
                           name={"plus"}
@@ -83,12 +94,15 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                       </a>
                       <a
                         className="mx-2"
-                        type="button"
+                        href={`#b${props.offId}`}
+                        role="button"
+                        aria-controls={`b${props.offId}`}
                         data-bs-toggle="offcanvas"
-                        data-bs-target={`#b${props.offId}`}
                         onClick={() =>
+                          {
+                            handlerExtraBackdrop()
                           props.onNodeEdit && props.onNodeEdit(node.data)
-                        }
+                        }}
                       >
                         <RdsIcon
                           name={"pencil"}
@@ -100,9 +114,10 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
 
                       <a
                         className="mx-2"
-                        type="button"
+                        href={`#deleteTreeNode`}
+                        role="button"
+                        aria-controls="deleteTreeNode"
                         data-bs-toggle="modal"
-                        data-bs-target={`#deleteTreeNode`}
                         onClick={() =>
                           props.onDeleteNode && props.onDeleteNode(node.data.id)
                         }
@@ -163,14 +178,15 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                                       ? "NEW-ROOT-UNIT"
                                       : "SUB-UNIT"
                                   }`}
-                                  data-bs-dismiss="offcanvas"
+                                  // data-bs-dismiss="offcanvas"
                                   databstoggle="offcanvas"
                                   databstarget={`#c${props.offId}`}
                                   ariacontrols={`c${props.offId}`}
-                                  onClick={() =>
+                                  onClick={() => {
+                                    handlerExtraBackdrop()
                                     props.onCreateSubUnit &&
                                     props.onCreateSubUnit(node.data)
-                                  }
+                                  }}
                                 />
                               )}
                             </div>
@@ -222,6 +238,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                 databstoggle="offcanvas"
                 databstarget={`#d${props.offId}`}
                 ariacontrols={`d${props.offId}`}
+                onClick={handlerExtraBackdrop}
               />
             </div>
           </div>

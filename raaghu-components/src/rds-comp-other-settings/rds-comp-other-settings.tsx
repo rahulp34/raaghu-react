@@ -1,5 +1,5 @@
 import React from "react"
-import { RdsLabel, RdsCheckbox } from "raaghu-react-elements";
+import { RdsLabel, RdsCheckbox } from "../rds-elements";
 
 export interface RdsCompOtherSettingsProps {}
 
@@ -14,6 +14,7 @@ const RdsCompOtherSettings = (props: RdsCompOtherSettingsProps) => {
 					<RdsCheckbox
 						label={"Is Quick Theme Select Enabled"}
 						checked={false}
+						dataTestId="quick-theme-select"
 					></RdsCheckbox>
 				</div>
 			</li>

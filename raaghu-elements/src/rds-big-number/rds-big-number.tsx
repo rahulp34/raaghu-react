@@ -1,6 +1,6 @@
 import React, { Fragment, ReactNode } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-big-number.scss";
+import "./rds-big-number.css";
 
 export interface RdsBigNumberProps {
   colorVariant?: string;
