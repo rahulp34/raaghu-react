@@ -17,8 +17,7 @@ const Template: ComponentStory<typeof Tooltip> = (args) => (
 export const Default = Template.bind({});
 Default.decorators= [
     (Story) => (
-      <div style={{ padding:'10% 50%' ,
-      }}>
+      <div className="align-items-center d-flex justify-content-center vh-100">
         <Story/>
       </div>
     ),

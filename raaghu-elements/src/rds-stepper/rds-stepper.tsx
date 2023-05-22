@@ -34,12 +34,11 @@ const RdsStepper = (props: RdsStepperProps) => {
       {props.stepperType =="simple" && (
         <>
         <div className="progressBar">
-        <div
+        <div className="h-100"
           style={{
             background: "#336cff",
             width: progressIndex,
-            height: "100%",
-          }}
+            }}
         ></div>
         {formTitles.map((formItem, idx, arr) => (
           <>

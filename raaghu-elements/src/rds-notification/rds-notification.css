@@ -1,6 +1,4 @@
-@import '../style.css';
-
-/* .headerStyle{
+.headerStyle{
     display: flex;
     justify-content: space-between;
     border-bottom: none !important;
@@ -15,4 +13,4 @@
 }
 .card-footer{
     min-width: 50px;
-} */
+}
