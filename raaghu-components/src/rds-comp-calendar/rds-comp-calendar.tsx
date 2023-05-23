@@ -18,8 +18,8 @@ const RdsCompCalendar = (props: RdsCalendarProps) => {
           events={props.events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 500 }}
-        />
+          className="calenderHeight"
+         />
       </div>
     </>
   );
