@@ -1,14 +1,14 @@
 .Card__body{
     padding: 20px !important;
 }
-//recommended
+/* recommended */
 .bg-recommended {
     background-color: #F58220;
     top: -2px;
     
 }
 
-// ribbon
+/* ribbon */
 .ribbon {
     position: relative;
     z-index: 1;
@@ -39,7 +39,7 @@
     border-right: 13px solid #F58220;
     border-bottom: 5px solid transparent;
 }
-//Upgrade btn
+/* Upgrade btn */
 .upGrade__btn{
     border-radius: 20px;
 }

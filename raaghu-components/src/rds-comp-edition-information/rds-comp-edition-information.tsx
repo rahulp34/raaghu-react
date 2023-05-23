@@ -6,7 +6,7 @@ import {
   RdsCounter,
   RdsDropdownList,
 } from "raaghu-react-elements";
-import './rds-comp-edition-information.scss'
+import './rds-comp-edition-information.css'
 export interface RdsCompEditionInformationProps {
   radioItems: any[];
   sizeDataWithDescription?: any[];

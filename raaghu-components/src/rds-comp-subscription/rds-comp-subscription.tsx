@@ -1,6 +1,6 @@
 import React from "react";
 import { RdsButton, RdsIcon } from "../rds-elements";
-import "./rds-comp-subscription.scss";
+import "./rds-comp-subscription.css";
 export interface RdsCompSubscriptionProps {
   subscriptionData: any[];
   width?: string;

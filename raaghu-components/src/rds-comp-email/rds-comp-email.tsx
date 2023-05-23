@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
-import "./rds-comp-email.scss";
+import "./rds-comp-email.css";
 
 const RdsCompEmail = (props: any) => {
 	const [formData,setFormData] = useState(props.emailSettings)
