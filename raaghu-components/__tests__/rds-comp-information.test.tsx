@@ -48,4 +48,17 @@ describe("RdsCompInformation", () => {
     expect(mockOnPropertyChange).toHaveBeenCalledWith(expect.any(Object)); // You can assert the event object here if needed
     expect(propertyNameInput).toHaveValue(newPropertyName);
   });
+
+  it("calls onDisplayChange when Display Name input changes", () => {
+    render(<RdsCompInformation {...defaultProps} />);
+
+    const displayNameInput = screen.getByTestId("display-name");
+    const newDisplayName = "New Display";
+
+    fireEvent.change(displayNameInput, { target: { value: newDisplayName } });
+
+    expect(mockOnDisplayChange).toHaveBeenCalledTimes(1);
+    expect(mockOnDisplayChange).toHaveBeenCalledWith(expect.any(Object)); // You can assert the event object here if needed
+    expect(displayNameInput).toHaveValue(newDisplayName);
+  });
 });
