@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RdsDropdownList, RdsInput, RdsTextArea } from "raaghu-react-elements";
+import { RdsDropdownList, RdsInput, RdsTextArea } from "../rds-elements";
 
 export interface RdsCompInformationProps {
   inputTypeList: any;
@@ -100,6 +100,7 @@ const RdsCompInformation = (props: RdsCompInformationProps) => {
               onChange={propertyhandleChange}
               value={user.propertyname}
               name={"Property Name"}
+              dataTestId="property-name"
             ></RdsInput>
             {error.propertyname && (
               <span style={{ color: "red" }}>{error.propertyname}</span>
@@ -115,6 +116,7 @@ const RdsCompInformation = (props: RdsCompInformationProps) => {
               onChange={displayhandleChange}
               name={"Display Name"}
               value={user.displayname}
+              dataTestId="display-name"
             ></RdsInput>
           </div>
         </div>

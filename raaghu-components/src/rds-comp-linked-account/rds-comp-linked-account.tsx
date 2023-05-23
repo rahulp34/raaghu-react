@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsButton, RdsInput } from "raaghu-react-elements";
+import { RdsButton, RdsInput } from "../rds-elements";
 
 export interface RdsLinkedAccountProps {}
 
@@ -43,6 +43,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 							size="small"
 							iconColorVariant="light"
 							onClick={onClickHandler}
+							dataTestId="link-new-account"
 						></RdsButton>
 					)}
 					</div>
@@ -57,6 +58,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 										required={true}
 										size="medium"
 										name="tenancyName"
+										dataTestId="tenancy-name"
 									></RdsInput>
 								</div>
 								<div className="col-12 col-lg-4 col-xl-4 col-xxl-4 mb-2">
@@ -67,6 +69,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 										required={true}
 										size="medium"
 										name="userName"
+										dataTestId="username"
 									></RdsInput>
 								</div>
 								<div className="col-12 col-lg-4 col-xl-4 col-xxl-4 mb-2">
@@ -77,6 +80,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 										required={true}
 										size="medium"
 										name="password"
+										dataTestId="password"
 									></RdsInput>
 								</div>
 							</div>
@@ -91,6 +95,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 										label="CANCEL"
 										size="small"
 										onClick={onClickHandler}
+										dataTestId="cancel"
 									></RdsButton>
 								</div>
 								<div>
@@ -100,6 +105,7 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 										colorVariant="primary"
 										label="SAVE"
 										size="small"
+										dataTestId="submit"
 									></RdsButton>
 								</div>
 							</div>
