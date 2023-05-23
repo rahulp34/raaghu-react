@@ -8,6 +8,7 @@ const OpenAPI = require('raaghu-react-core/dist/build-proxy');
 const eTc = process.argv[2];
 const url = process.argv[3];
 const urlToReplace = process.argv[4];
+const gatewayUrl = urlToReplace + '/swagger/v1/swagger.json';
 const completeURL = url + '/swagger/v1/swagger.json';
 
 const generate = async (input, output) => {
@@ -35,6 +36,10 @@ const generateRealWorldSpecs = async () => {
         `curl -o swaggerJSON.json ${completeURL}`,
         { cwd: '.', stdio: "inherit" }
     )
+    execSync(
+        `curl -o gatewaySwagger.json ${gatewayUrl}`,
+        { cwd: '.', stdio: "inherit" }
+    )
 
     // const response = await fetch('https://raaghu-react.azurewebsites.net/swagger/v1/swagger.json');
     // const response = require('../swaggerJSON.json');
@@ -42,7 +47,14 @@ const generateRealWorldSpecs = async () => {
 
     // const list = await response.json();
     const list = require('../swaggerJSON.json');
-    const scope = Object.keys(list.components.securitySchemes.oauth2.flows.authorizationCode.scopes)[0];
+    const gateway = require('../gatewaySwagger.json')
+
+    const scope = Object.keys(gateway.components.securitySchemes.oauth2.flows.authorizationCode.scopes).map((el)=>{
+        return el;
+    });
+    const connectTokenUrl = gateway.components.securitySchemes.oauth2.flows.authorizationCode.tokenUrl;
+
+    console.log("This is scope buddy!!", scope);
     const proxyGeneratedFileName = (list.info.title).split(" ").map((word, index) => {
         if (index === 0) {
           return word;
@@ -59,7 +71,8 @@ const generateRealWorldSpecs = async () => {
     );
     let envConfigContent = fs.readFileSync(envConfig, "utf-8");
     envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
-    fs.writeFileSync(envConfig, envConfigContent, "utf-8");
+    envConfigContent = envConfigContent.replace(`<CONNECT_TOKEN_URL>`, `${connectTokenUrl}`);
+    fs.writeFileSync(envConfig, envConfigContent, "utf-8"); 
 
     const envLines = envConfigContent.split('\n');
     const scopeLineIndex = envLines.findIndex(line => line.startsWith('REACT_APP_SCOPE='));
@@ -68,8 +81,11 @@ const generateRealWorldSpecs = async () => {
         process.exit(1);
     }
     const currentScope = envLines[scopeLineIndex].split('=')[1];
-    const newScopeValue = `${currentScope} ${scope}`;
-    envLines[scopeLineIndex] = `REACT_APP_SCOPE=${newScopeValue.replace(/\s+/g, ' ')}`;
+    const newScopeValue = `${currentScope} ${scope.map((el)=>{
+        return el;
+    })}`;
+    const scopewithoutcoma = newScopeValue.replace(/,/g," ");
+    envLines[scopeLineIndex] = `REACT_APP_SCOPE=${scopewithoutcoma.replace(/\s+/g, ' ')}`;
     const newEnvContent = envLines.join('\n');
     fs.writeFileSync(envConfig, newEnvContent);
 
@@ -80,15 +96,16 @@ const generateRealWorldSpecs = async () => {
     );
     let OpenAPIConfigContent = fs.readFileSync(OpenAPIConfig, "utf-8");
     OpenAPIConfigContent = OpenAPIConfigContent.replace(`<API_URL>`, `${urlToReplace}`);
+    console.log("Url hoon main: ",connectTokenUrl)
     fs.writeFileSync(OpenAPIConfig, OpenAPIConfigContent, "utf-8");
 
-    // Replacing the BASE URL in the Login.tsx file
-    const LoginTSX = path.resolve(
-        __dirname, '../', 'raaghu-mfe', 'rds_pages', 'rds-page-login', 'src', 'Login', 'Login.tsx'
+    // Replacing the BASE URL in the Main.tsx file for micro service template
+    const MainTSX = path.resolve(
+        __dirname, '../', 'raaghu-mfe', 'rds_pages', 'host', `src`, 'Main.tsx'
     );
-    let LoginTSXContent = fs.readFileSync(LoginTSX, "utf-8");
-    LoginTSXContent = LoginTSXContent.replace(`<API_URL>`, `${url}`);
-    fs.writeFileSync(LoginTSX, LoginTSXContent, "utf-8");
+    let MainTSXContent = fs.readFileSync(MainTSX, "utf-8");
+    MainTSXContent = MainTSXContent.replace(`openidConfig.issuer`, `"${connectTokenUrl}"`);
+    fs.writeFileSync(MainTSX, MainTSXContent, "utf-8");
 
     // Replacing the BASE URL in the interceptor.ts file
     const interceptor = path.resolve(
@@ -99,21 +116,70 @@ const generateRealWorldSpecs = async () => {
     fs.writeFileSync(interceptor, interceptorContent, "utf-8");
 
     // Replacing the BASE URL in the index.ts file
+    const NewProxyIndex = path.resolve( __dirname, '../', 'raaghu-mfe', 'libs', 'proxy',`${proxyGeneratedFileName}`, 'index.ts'
+    );
+        let NewProxy = fs.readFileSync(NewProxyIndex, "utf-8");
+        // let NewProxy = fs.readFileSync(OpenAPIIndex, "utf-8");
+        NewProxy = NewProxy.replaceAll(`export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+        NewProxy = NewProxy.replaceAll(`export type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+        NewProxy = NewProxy.replaceAll(`export { $Volo_Abp_Application_Dtos_ListResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+        NewProxy = NewProxy.replaceAll(`export { $Volo_Abp_Application_Dtos_PagedResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+        fs.writeFileSync(NewProxyIndex, NewProxy, "utf-8");
+        // fs.appendFile(
+        //     NewProxyIndex,
+        //     `export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\nexport type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\nexport { $Volo_Abp_Application_Dtos_PagedResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_PagedResultDto_1';\r\nexport { $Volo_Abp_Application_Dtos_ListResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`,
+        //     "utf8",
+        //     function (err) {
+        //         if (err) throw err;
+        //     }
+        // );
+
+
+
+
+
+
+
+
+
     const OpenAPIIndex = path.resolve(
         __dirname, '../', 'raaghu-mfe', 'libs', 'proxy', 'index.ts'
     );
-    let OpenAPIIndexContent = fs.readFileSync(OpenAPIIndex, "utf-8");
-    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
-    OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
-    fs.writeFileSync(OpenAPIIndex, OpenAPIIndexContent, "utf-8");
-    fs.appendFile(
-        OpenAPIIndex,
-        `export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\nexport type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`,
-        "utf8",
-        function (err) {
-            if (err) throw err;
-        }
-    );
+
+   
+
+
+    if(!fs.existsSync(OpenAPIIndex)){
+
+        fs.writeFileSync(OpenAPIIndex,"", "utf-8");
+        fs.appendFile(
+            OpenAPIIndex,
+            `export * from './${proxyGeneratedFileName}/index';\r\n`,
+            "utf8",
+            function (err) {
+                if (err) throw err;
+            }
+        );
+
+    }else{
+
+        let OpenAPIIndexContent = fs.readFileSync(OpenAPIIndex, "utf-8");
+        OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+        OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+        OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export { $Volo_Abp_Application_Dtos_ListResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`, ``);
+        OpenAPIIndexContent = OpenAPIIndexContent.replaceAll(`export { $Volo_Abp_Application_Dtos_PagedResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_PagedResultDto_1';\r\n`, ``);
+        fs.writeFileSync(OpenAPIIndex, OpenAPIIndexContent, "utf-8");
+        fs.appendFile(
+            OpenAPIIndex,
+            `export type { Volo_Abp_Application_Dtos_ListResultDto_1 } from './models/Volo_Abp_Application_Dtos_ListResultDto_1';\r\nexport type { Volo_Abp_Application_Dtos_PagedResultDto_1 } from './models/Volo_Abp_Application_Dtos_PagedResultDto_1';\r\nexport * from './${proxyGeneratedFileName}/index';\r\nexport { $Volo_Abp_Application_Dtos_PagedResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_PagedResultDto_1';\r\nexport { $Volo_Abp_Application_Dtos_ListResultDto_1 } from './schemas/$Volo_Abp_Application_Dtos_ListResultDto_1';\r\n`,
+            "utf8",
+            function (err) {
+                if (err) throw err;
+            }
+        );
+
+    }
+
 
     console.log("\x1b[32m%s\x1b[0m", `proxy successfully created!!`);
 };
