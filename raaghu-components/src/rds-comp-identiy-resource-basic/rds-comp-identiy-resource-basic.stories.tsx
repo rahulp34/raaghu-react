@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React from "react";
-import RdsCompIdentiyResourcseBasic from "./rds-comp-identiy-resourcse-basic";
+import RdsCompIdentiyResourceBasic from "./rds-comp-identiy-resource-basic";
 
 
 
@@ -9,7 +9,7 @@ export default {
   title: "Components/Identiy Resourcse Basic",
 };
 
-export const Default = () => <RdsCompIdentiyResourcseBasic />;
+export const Default = () => <RdsCompIdentiyResourceBasic />;
 
 Default.story = {
   name: 'default',
