@@ -95,7 +95,6 @@ const RdsButton= (props: RdsButtonProps) => {
       data-bs-target={props.databstarget}
       data-bs-toggle={props.databstoggle}
       aria-controls={props.ariacontrols}
-      aria-disabled={showLoadingSpinner||props.isDisabled}
       id={props.id}
       data-testid={props.dataTestId}
     >
