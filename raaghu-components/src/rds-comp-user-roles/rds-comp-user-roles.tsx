@@ -41,6 +41,7 @@ const RdsCompUserRoles = (props: RdsCompUserRolesProps) => {
                   isRoleChecked(index, event.target.checked);
                 }}
                 checked={e.isChecked}
+                dataTestId={e.name}
               />
             </div>
           ))}

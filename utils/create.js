@@ -87,7 +87,7 @@ let formattedName = shortName
   .join(" ");
 
 // Convert name to "camelCaseName"
-let camelCaseName = shortName
+let camelCaseName = shortName 
   .split("-")
   .map((word, index) => {
     if (index === 0) {

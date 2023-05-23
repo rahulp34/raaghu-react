@@ -12,7 +12,7 @@ const RdsButton= (props: RdsButtonProps) => {
   const icon1 = props.isRounded ? " rounded-pill " : "";
   const blockWidth = props.block === true ? "w-100" : "";
   const spinner = props.showLoadingSpinner ? " spinner" : "";
-  const [classes, setClasses] = useState(`${outline}${mode}${icon}${icon1} ${blockWidth} ${props.class}`);
+  const [classes, setClasses] = useState(`${outline}${mode}${icon}${icon1} ${blockWidth}  ${props.class}`);
   const btnType = props.type === "submit" ? "submit" : "button";
   const [turnSpinnerOff, setTurnSpinnerOff] = useState<any>(0);
   const buttonClick = (evt: any) => {
@@ -24,7 +24,7 @@ const RdsButton= (props: RdsButtonProps) => {
         }
     if (props.showLoadingSpinner) {
       let tempClasses = classes;
-      setClasses(`${tempClasses} ${spinner}`)
+      setClasses(`${tempClasses} ${spinner} disabled`)
       setTurnSpinnerOff(1);
     }
     props.onClick != undefined && props.onClick(evt);
@@ -32,7 +32,7 @@ const RdsButton= (props: RdsButtonProps) => {
   useEffect(() => {
     if (turnSpinnerOff) {
       setTimeout(() => {
-        let tempClasses = classes.replace('spinner', '');
+        let tempClasses = classes.replace('spinner disabled', '');
         setClasses(tempClasses);
       }, 3000);
     }

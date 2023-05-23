@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-comp-shipping-address.scss";
+import "./rds-comp-shipping-address.css";
 import { RdsLabel, RdsInput, RdsSelectList, RdsButton } from "../rds-elements";
 
 export interface RdsCompShippingAddressProps {

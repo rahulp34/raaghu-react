@@ -7,7 +7,7 @@ import {
   RdsModal,
   RdsAlert,
 } from "../rds-elements";
-import "./rds-comp-login.scss";
+import "./rds-comp-login.css";
 import { useNavigate } from "react-router-dom";
 import { use } from "i18next";
 export interface RdsCompLoginProps {

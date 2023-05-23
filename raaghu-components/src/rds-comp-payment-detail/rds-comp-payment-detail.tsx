@@ -1,6 +1,6 @@
 import React from 'react'
 import { RdsRadioButton, RdsInput, RdsButton, RdsSpinner } from 'raaghu-react-elements';
-import "./rds-comp-payment-detail.scss"
+import "./rds-comp-payment-detail.css"
 
 export interface RdsCompPaymentDetailProps {
     cvc?:number,

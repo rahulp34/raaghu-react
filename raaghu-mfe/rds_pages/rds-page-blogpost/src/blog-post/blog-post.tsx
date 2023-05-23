@@ -244,9 +244,9 @@ const BlogPost = () => {
 
 
 
-				<div className="row">
+				<div className="row mt-3">
 					<div className="col-md-12">
-						<div className="card h-100 border-0 rounded-0 card-full-stretch">
+						<div className="card h-100 border-0 rounded-0 card-full-stretch-wthlabel">
 							<div className="container-fluid m-0 py-3">
 								<div className="row">
 									<div className="col-md-12">

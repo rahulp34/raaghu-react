@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-comp-page-not-found.scss";
+import "./rds-comp-page-not-found.css";
 import { RdsLabel, RdsIcon } from "raaghu-react-elements";
 
 export interface RdsCompPageNotFoundProps {}
