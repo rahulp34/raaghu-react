@@ -6,7 +6,7 @@ import {
   RdsLabel,
   RdsSelectList,
 } from "../rds-elements";
-import "./rds-comp-claims.scss";
+import "./rds-comp-claims.css";
 
 export interface RdsCompClaimsProps {
   allClaimsArray?: any[];

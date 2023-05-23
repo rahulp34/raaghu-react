@@ -4,7 +4,7 @@ import {
   RdsIcon,
   RdsButton,
 } from "../rds-elements";
-import "./rds-comp-organization-tree.scss";
+import "./rds-comp-organization-tree.css";
 export interface RdsCompOrganizationTreeProps {
   counter?: number;
   nodeColor: any[];

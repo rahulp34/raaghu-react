@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Children, useReducer } from "react";
 import { RdsAccordion, RdsCheckbox } from "raaghu-react-elements";
-import "./rds-comp-api-scope-resource.scss";
+import "./rds-comp-api-scope-resource.css";
 
 export interface RdsCompApiScopeResourceProps {
 	resources: any[];

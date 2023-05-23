@@ -8,7 +8,7 @@ import {
   RdsIllustration,
   RdsAvatar
 } from "../rds-elements";
-import "./rds-comp-data-table.scss";
+import "./rds-comp-data-table.css";
 
 
 export interface RdsCompDatatableProps {

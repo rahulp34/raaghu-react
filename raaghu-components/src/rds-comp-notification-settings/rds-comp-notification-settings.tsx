@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-comp-notification-settings.scss";
+import "./rds-comp-notification-settings.css";
 
 export interface RdsCompNotificationSettingsProps {
   onSave?: (event: React.MouseEvent, data: any) => void;
