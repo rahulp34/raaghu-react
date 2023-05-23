@@ -20,7 +20,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="First Name"
 								class="form-label ms-1 inputLabel"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
@@ -39,7 +39,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="Last Name"
 								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
@@ -79,7 +79,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="Phone"
 								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
@@ -100,7 +100,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 							fontWeight={500}
 							label="Address"
 							class="form-label ms-1"
-							children={<span style={{ color: "red" }}>*</span>}
+							children={<span className="text-danger"></span>}
 						></RdsLabel>
 						<RdsInput
 							size="small"
@@ -121,7 +121,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="City"
 								class="form-label ms-1 inputLabel"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
@@ -140,7 +140,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="Country"
 								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsSelectList
 								label="Select Country"
@@ -159,7 +159,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="State/Province"
 								class="form-label ms-1 inputLabel"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
@@ -178,7 +178,7 @@ const RdsCompShippingAddress = (props: RdsCompShippingAddressProps) => {
 								fontWeight={500}
 								label="Postal Code"
 								class="form-label ms-1"
-								children={<span style={{ color: "red" }}>*</span>}
+								children={<span className="text-danger"></span>}
 							></RdsLabel>
 							<RdsInput
 								size="small"
