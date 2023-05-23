@@ -217,11 +217,12 @@ const BlogPost = () => {
 								onSubmit={postSubmitHandler}
 							/>
 
-							<div className="footer-buttons justify-content-end bottom-0 pt-0">
+							<div className="footer-buttons mb-2 d-flex">
 								<RdsButton
 									class="me-2"
 									label="CANCEL"
 									type="button"
+									size="small"
 									databsdismiss="offcanvas"
 									isOutline={true}
 									colorVariant="primary"
@@ -230,6 +231,7 @@ const BlogPost = () => {
 									class="me-2"
 									label="SAVE"
 									type="button"
+									size="small"
 									isOutline={false}
 									colorVariant="primary"
 									databsdismiss="offcanvas"
@@ -242,9 +244,9 @@ const BlogPost = () => {
 
 
 
-				<div className="row">
+				<div className="row mt-3">
 					<div className="col-md-12">
-						<div className="card h-100 border-0 rounded-0 card-full-stretch">
+						<div className="card h-100 border-0 rounded-0 card-full-stretch-wthlabel">
 							<div className="container-fluid m-0 py-3">
 								<div className="row">
 									<div className="col-md-12">

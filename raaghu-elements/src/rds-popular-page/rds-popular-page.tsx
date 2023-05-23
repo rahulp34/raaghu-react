@@ -29,7 +29,7 @@ const RdsPopularPage = (props: RdsPopularPageProps) => {
                 <div className="text-muted">{item.subtitle}</div>
               </div>
               <div>
-                <a href={item.route} className="pointerStyle">
+                <a href={item.route}>
                   <RdsIcon
                     name="chevron_right"
                     height="47px"

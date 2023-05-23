@@ -21,10 +21,9 @@ const RdsListGroup = (props: RdsListGroupProps) => {
 				<ul className="list-group mb-1" >
 					{props.listItem.map((listItems) => (
 						<>
-							<li 
+							<li
 								className={`list-group-item form-check ${listItems.disabled ? "disabled" : ""
-									}  d-flex justify-content-between align-items-center`}
-								style={{ marginBottom: 0 }}
+									}  d-flex justify-content-between align-items-center mb-0`}
 							>
 								{listItems.label}
 								{props.withBadge && (
@@ -41,19 +40,16 @@ const RdsListGroup = (props: RdsListGroupProps) => {
 						<>
 							<li
 								className={`list-group-item form-check ${listItems.disabled ? "disabled" : ""
-									}   justify-content-between align-items-center`}
-								style={{ marginBottom: 0 }}
+									}   justify-content-between align-items-center mb-0`}
 							>
 								<input
-									className="form-check-input ms-1 me-2"
+									className="form-check-input ms-1 me-2 mb-0"
 									type="checkbox"
 									value=""
 									id="flexCheckDefault"
-									style={{ marginBottom: 0 }}
 								/>
-								<div 
-									className="d-flex justify-content-between"
-									style={{ marginBottom: 0 }}
+								<div
+									className="d-flex justify-content-between mb-0"
 								>
 									<label
 										className="form-check-label"

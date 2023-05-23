@@ -50,8 +50,7 @@ const RdsWidget = (props: RdsWidgetProps) => {
             {props.headerTitle}
           </h5>
           <div
-            className="card-toolbar"
-            style={{ cursor: "pointer" }}
+            className="card-toolbar cursorpointer"
             onClick={props.onRefresh}
           >
             {isRefreshIcon == true && (
