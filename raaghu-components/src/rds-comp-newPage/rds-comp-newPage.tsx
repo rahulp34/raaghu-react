@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { RdsCompNewPageWrapper } from './rds-comp-newPage.styled';
-import { RdsButton, RdsInput, RdsTextEditor } from 'raaghu-react-elements';
+import { RdsButton, RdsInput, RdsTextEditor } from '../rds-elements';
 
 interface RdsCompNewPageProps {
    title?: string;
@@ -39,6 +39,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
                   placeholder={"Enter Title Name"}
                   value={data.title}
                   onChange={onTextChangeHandler}
+                  dataTestId='title'
                ></RdsInput>
             </div>
          </div>
@@ -51,6 +52,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
                   placeholder={"Enter Slug Name"}
                   value={data.slug}
                   onChange={onSlugChangeHandler}
+                  dataTestId='slug'
                ></RdsInput>
             </div>
          </div>
@@ -64,6 +66,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
             isOutline={true}
             colorVariant="primary"
             class="me-2"
+            dataTestId='cancel'
           ></RdsButton>
           <RdsButton
             label="SAVE"
@@ -76,6 +79,7 @@ const RdsCompNewPage = (props: RdsCompNewPageProps) => {
             onClick={() => {
               props.onSubmit(data);
             }}
+            dataTestId='save'
           ></RdsButton>
         </div>
       </div>
