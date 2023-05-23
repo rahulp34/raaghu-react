@@ -94,6 +94,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 onChange={(e: any) => {
                   setLenght(e.target.value);
                 }}
+                dataTestId="required-length"
               ></RdsInput>
             </div>
           </div>
@@ -109,6 +110,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 required={true}
                 value={passwordSettings.requiredUniqueChars}
                 onChange={(e: any) => setNumber(e.target.value)}
+                dataTestId="required-special-char"
               ></RdsInput>
             </div>
           </div>
@@ -121,6 +123,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setNonAlphaNumeric(e.target.checked);
               }}
+              dataTestId="required-non-alpha-num-char"
             ></RdsCheckbox>
           </div>
         </div>
@@ -132,6 +135,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setUpperCase(e.target.checked);
               }}
+              dataTestId="required-upper-case"
             ></RdsCheckbox>
           </div>
         </div>
@@ -143,6 +147,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setLowerCase(e.target.checked);
               }}
+              dataTestId="required-lower-case"
             ></RdsCheckbox>
           </div>
         </div>
@@ -154,6 +159,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setReqNumber(e.target.checked);
               }}
+              dataTestId="required-numbers"
             ></RdsCheckbox>
           </div>
         </div>
@@ -169,6 +175,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 enabledNewUsers(e.target.checked);
               }}
+              dataTestId="enable-new-user"
             ></RdsCheckbox>
           </div>
         </div>
@@ -185,6 +192,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 required={true}
                 value={lockoutSettings.lockoutDuration}
                 onChange={(e: any) => setLockDuration(e.target.value)}
+                dataTestId="lockout-duration"
               ></RdsInput>
             </div>
           </div>
@@ -200,6 +208,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
                 required={true}
                 value={lockoutSettings.maxFailedAccessAttempts}
                 onChange={(e: any) => setAccessAttempts(e.target.value)}
+                dataTestId="max-failed-attempts"
               ></RdsInput>
             </div>
           </div>
@@ -217,6 +226,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setReqEmail(e.target.checked);
               }}
+              dataTestId="required-confirmed-email"
             ></RdsCheckbox>
           </div>
         </div>
@@ -228,6 +238,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setAllowUsers(e.target.checked);
               }}
+              dataTestId="allow-user-conf-phone"
             ></RdsCheckbox>
           </div>
         </div>
@@ -239,6 +250,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 setReqPhoneNumber(e.target.checked);
               }}
+              dataTestId="required-conf-phone"
             ></RdsCheckbox>
           </div>
         </div>
@@ -254,6 +266,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 changeEmail(e.target.checked);
               }}
+              dataTestId="allow-user-change-email"
             ></RdsCheckbox>
           </div>
         </div>
@@ -265,6 +278,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
               onChange={(e: any) => {
                 changeUserNames(e.target.checked);
               }}
+              dataTestId="allow-user-change-username"
             ></RdsCheckbox>
           </div>
         </div>
@@ -276,6 +290,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             isOutline={true}
             colorVariant="primary"
             size="small"
+            dataTestId="cancel"
           ></RdsButton>
           <RdsButton
            label="SAVE"
@@ -284,6 +299,7 @@ const RdsCompIdentityManagement = (props: RdsCompIdentityManagementProps) => {
             isOutline={false}
             colorVariant="primary"
             size="small"
+            dataTestId="save"
           ></RdsButton>
         </div>
       </form>

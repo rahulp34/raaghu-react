@@ -1279,7 +1279,7 @@ BillingAddressDetails={()=>{}}
     name: "Identity Management",
   },
   {
-    identityResourcesBasic: ` <RdsCompIdentiyResourcseBasic/>`,
+    identityResourcesBasic: ` <RdsCompIdentiyResourceBasic/>`,
     name: "Identity Resources Basic",
   },
   {

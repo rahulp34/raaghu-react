@@ -1,9 +1,9 @@
-import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from "raaghu-react-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from "../rds-elements";
 import React, { FC, useState } from "react";
 
-export interface RdsCompIdentiyResourcseBasicProps { }
+export interface RdsCompIdentiyResourceBasicProps { }
 
-const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) => {
+const RdsCompIdentiyResourceBasic = (props: RdsCompIdentiyResourceBasicProps) => {
 
   const [identityBasicData, setidentityBasicData] = useState({
     name: '',
@@ -58,6 +58,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
                 onChange={(e: any) => {
                   setName(e.target.value);
                 }}
+                dataTestId="name"
               ></RdsInput>
             </div>
 
@@ -72,6 +73,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
                   setDisplayName(e.target.value);
                 }}
                 name={"Displayname"}
+                dataTestId="display-name"
               ></RdsInput>
             </div>
           </div>
@@ -85,6 +87,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               onChange={(e: any) => {
                 setDescription(e.target.value);
               }}
+              dataTestId="description"
             />
           </div>
           <div className="row mt-2">
@@ -95,6 +98,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               onChange={(e: any) => {
                 setEnabled(e.target.checked);
               }}
+              dataTestId="enabled"
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
@@ -105,6 +109,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               onChange={(e: any) => {
                 setRequired(e.target.checked);
               }}
+              dataTestId="required"
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
@@ -115,6 +120,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               onChange={(e: any) => {
                 setEmphasize(e.target.checked);
               }}
+              dataTestId="emphasize"
             ></RdsCheckbox>
           </div>
           <div className="row mt-2">
@@ -125,6 +131,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               onChange={(e: any) => {
                 setDiscovery(e.target.checked);
               }}
+              dataTestId="discovery-document"
             ></RdsCheckbox>
           </div>
           <div className="mt-3 d-flex footer-buttons">
@@ -136,6 +143,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               colorVariant="outline-primary"
               size="small"
               databsdismiss="offcanvas"
+              dataTestId="cancel"
             ></RdsButton>
             <RdsButton
               class="me-2"
@@ -145,6 +153,7 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
               tooltipTitle={""}
               type={"submit"}
               databsdismiss="offcanvas"
+              dataTestId="save"
             ></RdsButton>
           </div>
         </form>
@@ -153,4 +162,4 @@ const RdsCompIdentiyResourcseBasic = (props: RdsCompIdentiyResourcseBasicProps) 
   );
 };
 
-export default RdsCompIdentiyResourcseBasic;
+export default RdsCompIdentiyResourceBasic;

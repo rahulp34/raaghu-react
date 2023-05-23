@@ -6,7 +6,7 @@ import {
   RdsCompTenantSettings,
   RdsCompDatatable,
   RdsCompAlertPopup,
-  RdsCompIdentiyResourcseBasic,
+  RdsCompIdentiyResourceBasic,
   RdsCompPropertiesNew
 } from "../../../rds-components";
 import {
@@ -221,7 +221,7 @@ const IdentityResources = (props: IdentityResourcesProps) => {
           justified={false}
         >
           {activeNavTabId == 0 && (
-               <RdsCompIdentiyResourcseBasic ></RdsCompIdentiyResourcseBasic>
+               <RdsCompIdentiyResourceBasic ></RdsCompIdentiyResourceBasic>
           )}
               {/* <RdsCompApiScopeBasicResource
                 onSuccess={submit} email={newScopeData.name} fullname={newScopeData.displayName} message={newScopeData.description} /> */}
