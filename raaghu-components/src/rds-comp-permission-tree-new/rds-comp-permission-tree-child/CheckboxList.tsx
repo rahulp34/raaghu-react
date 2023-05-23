@@ -1,7 +1,7 @@
 import React from "react";
 import Checkbox from "./Checkbox";
 import { CheckboxState } from "../rds-comp-permission-tree";
-import styles from "./checkboxlist.module.scss";
+import styles from "./checkboxlist.module.css";
 
 export type Item = {
   id: number;
