@@ -27,6 +27,26 @@ const Applications = () => {
   const [permissionKeyName, setPermissionKeyName] = useState("")
   const [editApplicationData, setEditApplicationData] = useState<any>({});
   const { t } = useTranslation();
+  const [basicApplicationData, setBasicApplicationData] = useState<any>({
+    clientId: '',
+    displayName: '',
+    type: '',
+    clientSecret: '',
+    consentType: '',
+    postLogoutRedirectUris: [''],
+    redirectUris: [''],
+    allowPasswordFlow: false,
+    allowClientCredentialsFlow: false,
+    allowAuthorizationCodeFlow: false,
+    allowRefreshTokenFlow: false,
+    allowHybridFlow: false,
+    allowImplicitFlow: false,
+    allowLogoutEndpoint: false,
+    allowDeviceEndpoint: false,
+    scopes: [''],
+    clientUri: '',
+    logoUri: '',
+  })
 
 
   useEffect(() => {
@@ -102,6 +122,7 @@ const Applications = () => {
 
   function handleApplicationSubmit(basicApplicationData: any) {
     
+    
     dispatch(saveApplications(basicApplicationData) as any).then((res: any) => {
       dispatch(fetchApplications() as any);
     })
@@ -112,8 +133,8 @@ const Applications = () => {
       clientSecret:'',
       logoUri: '',
       consentType:'',
-      postLogoutRedirectUris: [],
-      redirectUris: [],
+      postLogoutRedirectUris: [''],
+      redirectUris: [''],
       allowAuthorizationCodeFlow: false,
       allowDeviceEndpoint: false,
       allowImplicitFlow: false,
@@ -123,7 +144,7 @@ const Applications = () => {
       allowLogoutEndPoint:false,
       allowRefreshTokenFlow: false,
       type: '',
-      scopes: [],
+      scopes: [''],
     })
     setAlertOne(true);
   }
@@ -196,26 +217,7 @@ const Applications = () => {
     { label: "Applications Information", tablink: "#nav-home", id: 0 },
     { label: "Permissions", tablink: "#nav-profile", id: 1 },
   ];
-  const [basicApplicationData, setBasicApplicationData] = useState<any>({
-    clientId: '',
-    displayName: '',
-    type: '',
-    clientSecret: '',
-    consentType: '',
-    postLogoutRedirectUris: [],
-    redirectUris: [],
-    allowPasswordFlow: false,
-    allowClientCredentialsFlow: false,
-    allowAuthorizationCodeFlow: false,
-    allowRefreshTokenFlow: false,
-    allowHybridFlow: false,
-    allowImplicitFlow: false,
-    allowLogoutEndpoint: false,
-    allowDeviceEndpoint: false,
-    scopes: [],
-    clientUri: '',
-    logoUri: '',
-  })
+
   const [applicationData, setApplicationData] = useState<any>([]);
   const [scopesListData, setScopesListData] = useState<any>([]);
   const [permissionListData, setPermissionListData] = useState<any>([]);

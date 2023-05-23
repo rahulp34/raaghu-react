@@ -1,6 +1,6 @@
 import React from "react";
 import { RdsBankCardDetail } from "raaghu-react-elements";
-import "./rds-comp-card-detail-list.scss";
+import "./rds-comp-card-detail-list.css";
 
 export interface RdsCompCardDetailListProps {
   cardDatas: any[];

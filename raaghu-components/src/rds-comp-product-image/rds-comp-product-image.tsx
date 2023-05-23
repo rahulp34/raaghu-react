@@ -7,7 +7,7 @@ import {
   RdsColorSwitcher,
   RdsButton,
 } from "raaghu-react-elements";
-import "./rds-comp-product-image.scss";
+import "./rds-comp-product-image.css";
 export interface Item {
   imgUrl?: string;
   rating?: 0 | 1 | 2 | 3 | 4 | 5;

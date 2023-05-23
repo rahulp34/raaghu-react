@@ -1,6 +1,6 @@
 import React from "react";
 import { RdsButton, RdsIcon } from "raaghu-react-elements";
-import "./rds-comp-hierarcy.scss";
+import "./rds-comp-hierarcy.css";
 
 export interface RdsCompHierarcyProps {
   treeData: any[];
