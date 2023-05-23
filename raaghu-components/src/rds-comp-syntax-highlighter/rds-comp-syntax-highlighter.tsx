@@ -28,7 +28,7 @@ const RdsCompSyntaxHighlighter = (props: RdsCompSyntaxHighlighterProps) => {
   const [code,setCode] = useState(props.value||"");
   
   return (
-    <Editor value={props.value} onValueChange={(data:any)=>{setCode(data); props.onValueChange}} highlight={()=>Prism.highlight(code, languages.js, languages.js as any)}
+    <Editor className='form-control' value={props.value} onValueChange={(data:any)=>{setCode(data); props.onValueChange}} highlight={()=>Prism.highlight(code, languages.js, languages.js as any)}
       textareaId={props.editorId} disabled={props.disabled} maxLength={props.maxLength} minLength={props.minLength}
       name={props.name} placeholder={props.placeholder} padding={props.padding}
       required={props.required}

@@ -50,18 +50,13 @@ const GlobalResources = () => {
             <form>
               {activeNavTabId == 0 && (
                 <RdsCompSyntaxHighlighter value={scriptStyleValue.script} padding={10} style={{
-                  // fontFamily: '"Fira code", "Fira Mono", monospace',
-                  fontSize: 14,
-                  border: "1px solid #ced4da",
-                  borderRadius:"0.5rem"
+        
+                 
                 }} onValueChange={(value: any) => setScriptStyleValue({ ...scriptStyleValue, script: value })}></RdsCompSyntaxHighlighter>
               )}
               {activeNavTabId == 1 && (
                 <RdsCompSyntaxHighlighter value={scriptStyleValue.style} padding={10} style={{
-                  // fontFamily: '"Fira code", "Fira Mono", monospace',
-                  fontSize: 14,
-                  border: "1px solid #ced4da",
-                  borderRadius:"0.5rem"
+               
                 }}
                   onValueChange={(value: any) => setScriptStyleValue({ ...scriptStyleValue, style: value })}></RdsCompSyntaxHighlighter>
               )}

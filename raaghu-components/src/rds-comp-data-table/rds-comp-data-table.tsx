@@ -293,9 +293,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       )}
 
       {data?.length > 0 && (<>
-        <div className=" sm-datatable table-responsive">
+        <div className=" sm-datatable">
           <table
-            className={`table  table-hover table-bordered  ${Classes} `}
+            className={`table  table-hover table-bordered table-responsive  ${Classes} `}
             id="sortTable"
             width="400px"
           >
@@ -671,7 +671,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                     name={"three_dots"}
                                     height="14px"
                                     width="14px"
-                                    stroke={true}
+                                    stroke={false}
                                     fill={true}
                                   // class="bi bi-three-dots-vertical"
                                   />
