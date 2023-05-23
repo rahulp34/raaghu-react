@@ -1,0 +1,67 @@
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export { ApiError } from './core/ApiError';
+export { CancelablePromise, CancelError } from './core/CancelablePromise';
+export { OpenAPI } from './core/OpenAPI';
+export type { OpenAPIConfig } from './core/OpenAPI';
+
+export type { MicroServ1904_ProductService_Products_ProductCreateDto } from './models/MicroServ1904_ProductService_Products_ProductCreateDto';
+export type { MicroServ1904_ProductService_Products_ProductDto } from './models/MicroServ1904_ProductService_Products_ProductDto';
+export type { MicroServ1904_ProductService_Products_ProductUpdateDto } from './models/MicroServ1904_ProductService_Products_ProductUpdateDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationAuthConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationAuthConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationFeatureConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationFeatureConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationGlobalFeatureConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationGlobalFeatureConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationResourceDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationLocalizationResourceDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationSettingConfigurationDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ApplicationSettingConfigurationDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ClockDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ClockDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_CurrentCultureDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_CurrentCultureDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_CurrentUserDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_CurrentUserDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_DateTimeFormatDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_DateTimeFormatDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_IanaTimeZone } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_IanaTimeZone';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_EntityExtensionDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_EntityExtensionDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumFieldDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionEnumFieldDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiCreateDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiCreateDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiGetDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiGetDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiUpdateDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyApiUpdateDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyAttributeDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyAttributeDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiFormDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiFormDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiLookupDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiLookupDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiTableDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ExtensionPropertyUiTableDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_LocalizableStringDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_LocalizableStringDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ModuleExtensionDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ModuleExtensionDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ObjectExtensionsDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_ObjectExtending_ObjectExtensionsDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimeZone } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimeZone';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimingDto } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_TimingDto';
+export type { Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_WindowsTimeZone } from './models/Volo_Abp_AspNetCore_Mvc_ApplicationConfigurations_WindowsTimeZone';
+export type { Volo_Abp_AspNetCore_Mvc_MultiTenancy_CurrentTenantDto } from './models/Volo_Abp_AspNetCore_Mvc_MultiTenancy_CurrentTenantDto';
+export type { Volo_Abp_AspNetCore_Mvc_MultiTenancy_MultiTenancyInfoDto } from './models/Volo_Abp_AspNetCore_Mvc_MultiTenancy_MultiTenancyInfoDto';
+export type { Volo_Abp_Http_Modeling_ActionApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ActionApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ApplicationApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ApplicationApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ControllerApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ControllerApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ControllerInterfaceApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ControllerInterfaceApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_InterfaceMethodApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_InterfaceMethodApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_MethodParameterApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_MethodParameterApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ModuleApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ModuleApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ParameterApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ParameterApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_PropertyApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_PropertyApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_ReturnValueApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_ReturnValueApiDescriptionModel';
+export type { Volo_Abp_Http_Modeling_TypeApiDescriptionModel } from './models/Volo_Abp_Http_Modeling_TypeApiDescriptionModel';
+export type { Volo_Abp_Http_RemoteServiceErrorInfo } from './models/Volo_Abp_Http_RemoteServiceErrorInfo';
+export type { Volo_Abp_Http_RemoteServiceErrorResponse } from './models/Volo_Abp_Http_RemoteServiceErrorResponse';
+export type { Volo_Abp_Http_RemoteServiceValidationErrorInfo } from './models/Volo_Abp_Http_RemoteServiceValidationErrorInfo';
+export type { Volo_Abp_Localization_LanguageInfo } from './models/Volo_Abp_Localization_LanguageInfo';
+export type { Volo_Abp_NameValue } from './models/Volo_Abp_NameValue';
+
+export { AbpApiDefinitionService } from './services/AbpApiDefinitionService';
+export { AbpApplicationConfigurationService } from './services/AbpApplicationConfigurationService';
+export { AbpApplicationLocalizationService } from './services/AbpApplicationLocalizationService';
+export { ProductService } from './services/ProductService';
+export { ProductPublicService } from './services/ProductPublicService';

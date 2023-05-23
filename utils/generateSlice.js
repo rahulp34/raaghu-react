@@ -2,7 +2,7 @@ let path = require("path");
 const fs = require("fs");
 const ServicePath = process.argv[2]
 const OpenAPIConfig = path.resolve(ServicePath);
-const serviceFileContent = fs.readFileSync(OpenAPIConfig, "utf-8");
+const serviceFileContent = fs.readFileSync(OpenAPIConfig, "utf-8"); 
 
 // extract the service methods from the file content
 const methods = serviceFileContent.match(/public static ([^({}]+\([^)]*\))/g);
@@ -67,7 +67,7 @@ const asyncThunks = methods.map((method) => {
 // console.log(asyncThunks.join("\n\n"))
 
 if(importTypes.length!==0){
-var importStatement = importTypes.map((importType)=>{
+var importStatement = importTypes.map((importType)=>{ 
 
   return `import {${importType}} from '../../proxy/index';`
 
