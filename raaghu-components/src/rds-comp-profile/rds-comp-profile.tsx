@@ -59,11 +59,12 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
         <p className="mb-3 text-center text-muted ">{props.userRole}</p>
       </div>
 
-      <div className="justify-content-center d-flex   p-2 m-2">
-        <div>
+      <div className="justify-content-center d-flex   p-2 m-2 profile-offcanvas" >
+        <div> 
+          <ul className="m-0 p-0">
           {props.navtabItems.map((item: any, i) => (
             <div key={i} data-bs-dismiss="offcanvas">
-              <div
+              <li
                 className={` d-flex mb-4 align-items-baseline gap-1 cursor-pointer  ${activetab == item.id ? " activeBackgraound" : ""
                   }`}
                 onClick={() => onSetNavTabHandler(item.id)}
@@ -87,7 +88,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
                   </div>
                   <p className="text-muted text-break m-0">{item.subText}</p>
                 </div>
-              </div>
+              </li>
               <RdsOffcanvas
 								offId={item.id}
 								placement="start"
@@ -104,6 +105,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
 							</RdsOffcanvas>
             </div>
           ))}
+          </ul>
         </div>
       </div>
 

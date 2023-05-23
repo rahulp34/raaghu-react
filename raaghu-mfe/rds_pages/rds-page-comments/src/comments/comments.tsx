@@ -132,7 +132,7 @@ const Comments = () => {
   return (
     <>
       <div className="container-fluid m-0 p-0">
-        <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
+        <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch-wthlabel">
           <div className="row mb-4">
             <div className="col-xxl-11 col-xl-11 col-lg-12 col-12 mb-xxl-0 mb-xl-0 mb-lg-3 mb-0">
               <div className="row">
@@ -183,7 +183,7 @@ const Comments = () => {
                 iconHeight={"20px"}
                 onClick={(event) => searchByInputValues(event)}
                 class="btn-icon"
-                block={true}
+                block={false}
               ></RdsButton>
             </div>
           </div>

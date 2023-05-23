@@ -40,17 +40,18 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             placeholder="enter url"
             name="url"
             onChange={(e)=>handlerChangeInput(e,"url")}
+            dataTestId="url"
           />
         </div>
         <div className="col-md-12">
           <RdsInput
-          
             label="Display Name"
             value={data.displayName}
             placeholder="enter Name"
             name="displayName"
             required={true}
             onChange={(e)=>handlerChangeInput(e,"displayName")}
+            dataTestId="display-name"
           />
         </div>
         {/* <div className="col-md-6">
@@ -71,6 +72,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
               handlerChangeActive(e.target.checked);
             }}
             checked={data.isActive}
+            dataTestId="active"
           ></RdsCheckbox>
         </div>
         <div className="col-md-12 mb-3">
@@ -80,6 +82,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             placeholder="enter icon"
             name="icon"
             onChange={(e)=>handlerChangeInput(e,"icon")}
+            dataTestId="enter-icon"
           />
         </div>
         <div className="col-md-12 mb-3">
@@ -89,6 +92,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             placeholder="enter target"
             name="target"
             onChange={(e)=>handlerChangeInput(e,"target")}
+            dataTestId="target"
           />
         </div>
         <div className="col-md-12 mb-3">
@@ -98,6 +102,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             placeholder="enter element Id"
             name="elementId"
             onChange={(e)=>handlerChangeInput(e,"elementId")}
+            dataTestId="enter-id"
           />
         </div>
         <div className="col-md-12 mb-3">
@@ -107,6 +112,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             placeholder="enter css class"
             name="cssClass"
             onChange={(e)=>handlerChangeInput(e,"cssClass")}
+            dataTestId="enter-css-class"
           />
         </div>
 
@@ -119,6 +125,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             isOutline={true}
             colorVariant="primary"
             class="me-2"
+            dataTestId="cancel"
           ></RdsButton>
           <RdsButton
             label="SAVE"
@@ -131,6 +138,7 @@ const RdsCompNewMenu = (props: RdsCompNewMenuProps) => {
             onClick={() => {
               props.onSubmit(data);
             }}
+            dataTestId="save"
           ></RdsButton>
         </div>
       </div>

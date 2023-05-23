@@ -24,6 +24,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								readonly={false}
 								placeholder="Enter Type"
 								required={true}
+								dataTestId="type"
 							></RdsInput>
 						</div>
 						<div className="col-md-4 mb-3 form-group">
@@ -41,6 +42,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								readonly={false}
 								placeholder="Enter Value"
 								required={true}
+								dataTestId="value"
 							></RdsInput>
 						</div>
 						<div className="col-md-4 mb-3 form-group">
@@ -57,6 +59,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								readonly={false}
 								placeholder="Enter a value"
 								required={true}
+								dataTestId="expiration"
 							></RdsInput>
 						</div>
 					</div>
@@ -75,6 +78,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 							readonly={false}
 							placeholder="Enter Type"
 							required={true}
+							dataTestId="description"
 						></RdsInput>
 					</div>
 					<div className="mt-3 mb-3">
@@ -86,6 +90,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 							colorVariant="primary"
 							label="ADD"
 							type="button"
+							dataTestId="add"
 						></RdsButton>
 					</div>
 				</div>
@@ -102,6 +107,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								label="CANCEL"
 								data-bs-dismiss="offcanvas"
 								type="button"
+								dataTestId="cancel"
 							></RdsButton>
 						</div>
 						<div className="m-2">
@@ -115,6 +121,7 @@ const RdsCompSecrets = (props: RdsCompSecretsProps) => {
 								label="Create"
 								data-bs-dismiss="offcanvas"
 								type="button"
+								dataTestId="create"
 							></RdsButton>
 						</div>
 					</div>

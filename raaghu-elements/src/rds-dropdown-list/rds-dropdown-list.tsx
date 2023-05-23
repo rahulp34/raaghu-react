@@ -246,7 +246,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
               name="chevron_down"
               fill={false}
               stroke={true}
-              height="6px"
+              height="18px"
               width="12px"
             ></RdsIcon>
           </div>
@@ -257,7 +257,6 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       <ul className="dropdown-menu" id={props.id} aria-labelledby={props.id}>
         {props.listItems?.map((language: any, i: any) => (
           <li
-            className="ps-1"
             key={i}
             onClick={(event) => {
               handlerLIstItem(event, i, language.val);
