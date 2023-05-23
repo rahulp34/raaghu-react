@@ -3,14 +3,14 @@ import { colors } from "../../libs/types";
 import RdsIcon from "../rds-icon/rds-icon";
 import RdsBadge from "../rds-badge/rds-badge";
 import RdsButton from "../rds-button";
-import "./rds-notification.scss";
+import "./rds-notification.css";
 
 export interface RdsNotificationProps {
   colorVariant?: colors;
   notifications: any[];
   footerText: string;
-  onSetAsRead?: (Event:React.MouseEventHandler<HTMLButtonElement> ,notification:any) => void;
-  onMarkAsRead?:  (Event:React.MouseEventHandler<HTMLButtonElement> ,notifications:any) => void;
+  onSetAsRead?: (Event: React.MouseEventHandler<HTMLButtonElement>, notification: any) => void;
+  onMarkAsRead?: (Event: React.MouseEventHandler<HTMLButtonElement>, notifications: any) => void;
 }
 
 const RdsNotification = (props: RdsNotificationProps) => {
@@ -79,14 +79,14 @@ const RdsNotification = (props: RdsNotificationProps) => {
     console.log("TextColor - " + textColor);
   };
   let bgColor = "bg-" + (props.colorVariant || "success");
-  
-  const onSetAsRead=(e:any, notification:any)=>{
+
+  const onSetAsRead = (e: any, notification: any) => {
     console.log(notification)
-     props.onSetAsRead != undefined && props.onSetAsRead(e, notification);
+    props.onSetAsRead != undefined && props.onSetAsRead(e, notification);
   }
-  const onMarkAsRead=(e:any, notifications:any)=>{
+  const onMarkAsRead = (e: any, notifications: any) => {
     props.onSetAsRead != undefined && props.onSetAsRead(e, notifications);
- }
+  }
 
   useEffect(() => {
   }, [props.notifications]);
@@ -126,65 +126,64 @@ const RdsNotification = (props: RdsNotificationProps) => {
         </div>
         {props.notifications?.map((notification: any, index: any) => (
           <div key={notification.userNotificationId}>
-          <div 
-            className="d-flex py-2 px-4  justify-content-between"
-            onClick={() => textColorHandler(notification, index)}
-          >
-            <div className="d-flex p-1">
-              <div
-                className="px-3 d-flex ps-0"
-                style={{ alignItems: "center" }}
-              >
-                <RdsIcon
-                  name={getIcon(notification)}
-                  fill={false}
-                  stroke={true}
-                  colorVariant={getColor(notification, true)}
-                  width="20px"
-                  height="20px"
+            <div
+              className="d-flex py-2 px-4  justify-content-between"
+              onClick={() => textColorHandler(notification, index)}
+            >
+              <div className="d-flex p-1">
+                <div
+                  className="px-3 d-flex ps-0 align-items-center"
+                >
+                  <RdsIcon
+                    name={getIcon(notification)}
+                    fill={false}
+                    stroke={true}
+                    colorVariant={getColor(notification, true)}
+                    width="20px"
+                    height="20px"
+                  />
+                </div>
+                <div className="text-start ps-0 w-100">
+                  <div
+                    className={
+                      "fs-6 " +
+                      `${notification.userNotificationId == id ? textColor : ""}`
+                    }
+                  >
+                    {notification.title}{" "}
+                  </div>
+                  {notification.hasOwnProperty("url") == true && (
+                    <a href={notification.url}>{notification.urlTitle}</a>
+                  )}
+                  <div>
+                    <small className="text-muted">{notification.time}</small>
+                  </div>
+                </div>
+              </div>
+              <div className=" align-self-center">
+                {" "}
+                <RdsButton
+                  colorVariant="light"
+                  label="Set as Read"
+                  type={"button"}
+                  onClick={(e) => onSetAsRead(e, notification)}
                 />
               </div>
-              <div className="text-start ps-0 w-100">
-                <div
-                  className={
-                    "fs-6 " +
-                    `${notification.userNotificationId == id ? textColor : ""}`
-                  }
-                >
-                  {notification.title}{" "}
-                </div>
-                {notification.hasOwnProperty("url") == true && (
-                  <a href={notification.url}>{notification.urlTitle}</a>
-                )}
-                <div>
-                  <small className="text-muted">{notification.time}</small>
-                </div>
-              </div>
-            </div>
-            <div className=" align-self-center">
-              {" "}
-              <RdsButton
-                colorVariant="light"
-                label="Set as Read"
-                type={"button"}
-                onClick={(e)=>onSetAsRead(e,notification)}
-              />
-            </div>
 
-          </div>
-          <hr className="m-0"/> 
+            </div>
+            <hr className="m-0" />
           </div>
         ))}
-      <div className="d-flex justify-content-end m-4 ">
-      <RdsButton
-                colorVariant="primary"
-                label="Mark As Read"
-                class="fw-semibold"
-                type={"button"}
-                onClick={(e)=>onMarkAsRead(e, props.notifications)}
-              />
+        <div className="d-flex justify-content-end m-4 ">
+          <RdsButton
+            colorVariant="primary"
+            label="Mark As Read"
+            class="fw-semibold"
+            type={"button"}
+            onClick={(e) => onMarkAsRead(e, props.notifications)}
+          />
 
-      </div>
+        </div>
       </div>
     </Fragment>
   );

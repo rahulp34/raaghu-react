@@ -1,7 +1,7 @@
 import { id } from "date-fns/locale";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
-import { RdsAlert, RdsIcon, RdsSearch } from "raaghu-react-elements";
+import { RdsAlert, RdsIcon, RdsSearch } from "../rds-elements";
 
 export interface RdsCompIconListProps {}
 
@@ -53,6 +53,7 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
             value={value}
             onChange={onIconSearchHandler}
             iconside="left"
+            dataTestId="search"
           ></RdsSearch>
         </div>
       </div>
@@ -73,6 +74,7 @@ const RdsCompIconList = (props: RdsCompIconListProps) => {
                   width="35px"
                   fill={false}
                   stroke={true} isAnimate = {true}
+                  dataTestId="icon-list"
                 ></RdsIcon>
               </div>
              

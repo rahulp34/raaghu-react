@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-video-player.scss";
+import "./rds-video-player.css";
 import ReactPlayer from "react-player";
 export interface RdsVideoPlayerProps {
   width: string;

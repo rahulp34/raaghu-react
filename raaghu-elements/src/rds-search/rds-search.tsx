@@ -1,7 +1,7 @@
 import React from "react";
 import RdsIcon from "../rds-icon";
 
-import "./rds-search.scss";
+import "./rds-search.css";
 
 export interface RdsSearchProps {
 	placeholder: string;
@@ -11,6 +11,7 @@ export interface RdsSearchProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?: (event: React.KeyboardEvent) => void;
   onSearchClick?: () => void;
+  dataTestId?: string;
 }
 
 const RdsSearch = (props: RdsSearchProps) => {
@@ -38,6 +39,7 @@ const RdsSearch = (props: RdsSearchProps) => {
         defaultValue={props.value}
         onChange={props.onChange}
         onKeyDown={props.onKeyPress}
+        data-testid={props.dataTestId}
       />
        </>
      :
@@ -51,6 +53,7 @@ const RdsSearch = (props: RdsSearchProps) => {
         defaultValue=""
         onChange={props.onChange}
         onKeyDown={props.onKeyPress}
+        data-testid={props.dataTestId}
       />
        <span className={spanClass} id={ariaDescribedby} onClick={props.onSearchClick} data-testId="search-icon">
        <RdsIcon name="search" fill={false}  stroke={true} height='17px' width="17px" ></RdsIcon>

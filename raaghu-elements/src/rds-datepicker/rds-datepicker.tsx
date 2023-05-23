@@ -3,13 +3,13 @@ import React, { forwardRef, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import RdsIcon from "../rds-icon";
-import "./rds-datepicker.scss";
+import "./rds-datepicker.css";
 
 export interface RdsDatepickerProps {
   selectedDate?: any
   dateForEdit?: any
   DatePickerLabel?: string;
-  onDatePicker?: (start: any, end?: any) => void;
+  onDatePicker?: (date: any) => void;
   type?: "default" | "advanced";
   customDate?: any;
 }
@@ -29,10 +29,10 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
     );
   };
 
-  const handlerDateChange =(date:any) => {
-      if (date != null) setStartDate(date);
-      else setStartDate(new Date());
-      props.selectedDate(date)
+  const handlerDateChange = (date:any) => {
+      if (date != null) {setStartDate(date);}
+      else {setStartDate(new Date());}
+      props.selectedDate&&props.selectedDate(date)
       props.onDatePicker && props.onDatePicker(startDate)
     }
   

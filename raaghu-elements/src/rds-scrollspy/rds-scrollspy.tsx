@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-scrollspy.scss";
+import "./rds-scrollspy.css";
 
 export interface RdsScrollspyProps { }
 
@@ -56,8 +56,7 @@ const RdsScrollspy = (props: RdsScrollspyProps) => {
             <a
               href="#scrollspy"
               target="_self"
-              style={{ textDecoration: "none" }}
-            >
+              className="text-decoration-none">
               Go Top
             </a>
           </div>
@@ -78,8 +77,7 @@ const RdsScrollspy = (props: RdsScrollspyProps) => {
             <a
               href="#scrollspy"
               target="_self"
-              style={{ textDecoration: "none" }}
-            >
+              className="text-decoration-none">
               Go Top
             </a>
           </div>
@@ -100,8 +98,7 @@ const RdsScrollspy = (props: RdsScrollspyProps) => {
             <a
               href="#scrollspy"
               target="_self"
-              style={{ textDecoration: "none" }}
-            >
+              className="text-decoration-none">
               Go Top
             </a>
           </div>

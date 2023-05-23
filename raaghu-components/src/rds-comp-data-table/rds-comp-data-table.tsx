@@ -162,6 +162,13 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       modalId?: string;
     }
   ) => {
+    if(action.offId !=undefined){
+    const allBackdrops = document.querySelectorAll('.offcanvas-backdrop')
+    if (allBackdrops.length > 1) {
+      for (let i = 0; i < allBackdrops.length - 1; i++) {
+        allBackdrops[i].remove();
+      }
+    }}
 
     let tempArray: boolean[] = [];
     array.map((res: any) => {
@@ -286,9 +293,9 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       )}
 
       {data?.length > 0 && (<>
-        <div className=" sm-datatable table-responsive">
+        <div className=" sm-datatable">
           <table
-            className={`table  table-hover table-bordered  ${Classes} `}
+            className={`table  table-hover table-bordered table-responsive  ${Classes} `}
             id="sortTable"
             width="400px"
           >
@@ -426,7 +433,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                             data-bs-toggle="modal"
                                             data-bs-target={`#${action?.modalId}`}
                                             aria-controls={action?.modalId}
-                                            data-bs-backdrop={false}
+                                            // data-bs-backdrop={false}
                                             onClick={(e) => {
                                               actionOnClickHandler(
                                                 e,
@@ -664,7 +671,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                     name={"three_dots"}
                                     height="14px"
                                     width="14px"
-                                    stroke={true}
+                                    stroke={false}
                                     fill={true}
                                   // class="bi bi-three-dots-vertical"
                                   />
@@ -777,7 +784,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
           </table>
         </div>
         {props.pagination && props.tableData.length > 4 && (
-          <div className=" d-flex justify-content-end ">
+          <div className=" d-flex justify-content-end pt-3 ">
             <RdsPagination
               totalRecords={props.tableData?.length}
               recordsPerPage={props.recordsPerPage ? props.recordsPerPage : 5}

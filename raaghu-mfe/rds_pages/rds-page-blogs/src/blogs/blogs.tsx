@@ -39,13 +39,13 @@ const Blogs = (props: RdsPageResourcesProps) => {
       displayName: t("Name"),
       key: "name",
       datatype: "text",
-      sortable: false,
+      sortable: true,
     },
     {
       displayName: t("Slug"),
       key: "slug",
       datatype: "text",
-      sortable: false,
+      sortable: true,
     },
   ];
 

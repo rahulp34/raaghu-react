@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"; 
-import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "raaghu-react-elements";
+import {RdsButton, RdsCheckbox, RdsLabel, RdsNavtabs} from "../../../rds-elements";
 import {RdsCompChangePassword, RdsCompPersonalInfo, RdsCompProfilePicture } from "../../../rds-components";
 import {  useAppDispatch,  useAppSelector} from "../../../../libs/state-management/hooks";
 import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile, sendEmailVerifyProfile, setProfilePicture, setTwoFactorEnabled } from "../../../../libs/state-management/my-account/my-account-slice";
@@ -219,7 +219,7 @@ import { changepasswordProfile, fetchMyProfile, getProfilePicture, saveMyProfile
                                 checked={twoFactorData}
                             ></RdsCheckbox>  
                         </div>
-                        <div className="mt-3 footer-buttons mx-3">
+                        <div className="mt-3 position-absolute bottom-0 mb-4">
                         <RdsButton
                             label = 'Save'
                             size="small"

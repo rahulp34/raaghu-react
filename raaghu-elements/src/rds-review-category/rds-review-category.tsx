@@ -3,7 +3,7 @@ import RdsAvatar from "../rds-avatar";
 import RdsLabel from "../rds-label";
 import RdsLikeDislike from "../rds-like-dislike";
 import RdsRating from "../rds-rating";
-import "./rds-review-category.scss";
+import "./rds-review-category.css";
 export interface Item {
 	name: string;
 	date?: Date;

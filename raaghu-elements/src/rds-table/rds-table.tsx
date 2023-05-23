@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-table.scss";
+import "./rds-table.css";
 import RdsIcon from "../rds-icon/rds-icon";
 import RdsPagination from "../rds-pagination";
 
@@ -41,12 +41,7 @@ const RdsTable = (props: RdsTableProps) => {
               <th
                 key={headerData.key}
                 scope="col"
-                className={`pl-4`}
-                style={{
-                  fontWeight: "400",
-                  paddingLeft: "16px",
-                  padding: "0.625rem 0.5rem",
-                }}
+                className={`pl-4 fw-normal`}
               >
                 {headerData.displayName}
               </th>

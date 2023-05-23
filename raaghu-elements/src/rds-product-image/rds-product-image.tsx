@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-product-image.scss";
+import "./rds-product-image.css";
 
 export interface RdsProductImageProps {
   displayType:
@@ -38,8 +38,7 @@ const RdsProductImage = (props: RdsProductImageProps) => {
             <div className="col-md-4 d-flex flex-column justify-content-between">
               <div
                 className="w-100 h-45 card-stretch d-flex"
-                style={{ height: "47%" }}
-              >
+                >
                 <img
                   src={props.itemList[1]}
                   className="w-100 h-100 img-fluid"
@@ -48,8 +47,7 @@ const RdsProductImage = (props: RdsProductImageProps) => {
               </div>
               <div
                 className="w-100 h-45 card-stretch d-flex"
-                style={{ height: "47%" }}
-              >
+                >
                 <img
                   src={props.itemList[2]}
                   className="w-100 h-100 img-fluid"

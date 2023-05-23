@@ -1,4 +1,4 @@
-import { RdsButton, RdsIcon, RdsInput } from "raaghu-react-elements";
+import { RdsButton, RdsIcon, RdsInput } from "../rds-elements";
 import React, { useEffect, useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
 
@@ -110,6 +110,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                     onClick={() => {
                       handleEdit(res.id);
                     }}
+                    dataTestId="edit"
                   ></RdsIcon>
                 </div>
                 <RdsIcon
@@ -121,6 +122,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleDelete(res.id);
                   }}
+                  dataTestId="delete"
                 ></RdsIcon>
               </div>
             </>
@@ -147,6 +149,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleEdit(id);
                   }}
+                  dataTestId="edit"
                 ></RdsIcon>
               </div>
               <RdsIcon
@@ -158,6 +161,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                 onClick={() => {
                   handleDelete(id);
                 }}
+                dataTestId="delete"
               ></RdsIcon>
             </div>
           </>
@@ -190,6 +194,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                   onClick={() => {
                     handleEdit(res.id);
                   }}
+                  dataTestId="edit"
                 ></RdsIcon>
               </div>
               <RdsIcon
@@ -201,6 +206,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
                 onClick={() => {
                   handleDelete(res.id);
                 }}
+                dataTestId="delete"
               ></RdsIcon>
             </div>
           </>
@@ -216,19 +222,21 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
     <>
       <div className="container-fluid m-0 p-0">
         <div className=" row mt-3">
+            <label className="mb-2">
+              Option
+            </label>
           <div className="col-md-5  mb-2">
             <RdsInput
-              label="Option"
               placeholder=""
               inputType="text"
               onChange={(e: any) => {
                 optionChange(e.target.value);
               }}
               value={optionData.option}
+              dataTestId="option"
             ></RdsInput>
           </div>
           <div className="col-md-3">
-           <div> <label className="form-label"> &nbsp;</label></div>
             <RdsButton
               label="Add"
               colorVariant="primary"
@@ -238,6 +246,7 @@ const RdsCompPollsOption = (props: RdsCompPollsOptionProps) => {
               onClick={handleAddItem}
               tooltipTitle={""}
               type="button"
+              dataTestId="add"
             />
           </div>
         </div>

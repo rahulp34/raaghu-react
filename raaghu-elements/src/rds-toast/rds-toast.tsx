@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { colors } from "../../libs/types";
-import "./rds-toast.scss";
+import "./rds-toast.css";
 import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsToastProps {

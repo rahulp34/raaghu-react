@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-tag.scss";
+import "./rds-tag.css";
 
 export interface RdsTagProps {
   tagType: "square" | "round";
@@ -56,8 +56,8 @@ const RdsTag = (props: RdsTagProps) => {
       <div>
         <div className="binding-tags border p-2">
           <div className="d-flex">
-            <div className="rds-tags res-class" style={{ width: "100%" }}>
-              <div className=" " style={{ float: "left" }}>
+            <div className="rds-tags res-class w-100">
+              <div className=" float-left ">
                 <div
                   className={
                     props.role == "basic"
@@ -79,17 +79,15 @@ const RdsTag = (props: RdsTagProps) => {
                           aria-atomic="true"
                         >
                           <div className="d-flex align-items-center">
-                            <div className={`tags-body ${tagtextcolor}`}>
+                            <div className={`mx-1 tags-body ${tagtextcolor}`}>
                               {item}
                             </div>
                             <span
                               onClick={() => deleteTag(i)}
-                              className={tagtextcolor}
-                              style={{
-                                cursor: "pointer",
-                                marginLeft: "14px",
-                                paddingBottom: "2px",
-                              }}
+                              //className={tagtextcolor} 
+                              className={`cursorpointer ${tagtextcolor} `}
+                               
+                             
                             >
                               <RdsIcon
                                 name="cancel"

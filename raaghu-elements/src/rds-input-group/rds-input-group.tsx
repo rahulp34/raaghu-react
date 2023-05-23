@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import RdsButton from "../rds-button";
 import RdsInput from "../rds-input";
 import { colors } from "../../libs/types";
-import "./rds-input-group.scss";
+import "./rds-input-group.css";
 
 export interface RdsInputGroupProps {
   buttonLabel?: string;

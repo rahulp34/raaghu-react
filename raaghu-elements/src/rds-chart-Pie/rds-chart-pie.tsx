@@ -1,6 +1,6 @@
 import React, { useEffect} from "react";
 import Chart from 'chart.js/auto';
-import "./rds-chart-pie.scss"
+import "./rds-chart-pie.css"
 
 export interface RdsPieprops {
   labels:any[],

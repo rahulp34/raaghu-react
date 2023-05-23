@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import RdsBarChart  from "./rds-chart-bar";
-import "./rds-chart-bar.scss"
+import "./rds-chart-bar.css"
 
 export default {
   title: "Charts/Bar Chart",

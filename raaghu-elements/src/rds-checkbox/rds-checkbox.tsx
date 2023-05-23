@@ -1,5 +1,5 @@
 import React, { useState, useRef, Fragment, useEffect } from "react";
-import "./rds-checkbox.scss";
+import "./rds-checkbox.css";
 
 export interface RdsCheckboxProps {
   label: string;
@@ -28,7 +28,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
 
 
   const SWITCH = `${
-    props.isSwitch !== true ? " form-check " : " form-switch "
+    props.isSwitch !== true ? " form-check d-flex" : " form-switch "
   }`;
 
   return (
@@ -50,7 +50,7 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
             id={props.id}
             name={props.id}
             onChange={props.onChange}
-            data-testId={props.dataTestId}
+            data-testid={props.dataTestId}
           />
 
           {props.withlabel == false ? (

@@ -160,7 +160,7 @@ export const Icons: any = {
   file_data:
     '<svg id="a" viewBox="0 0 21 21"><rect class="icon" x=".5" y="3.5" width="16" height="17" rx="1.543" ry="1.543"/><path class="icon" d="M6.043,.5h12.915c.852,0,1.543,.691,1.543,1.543V15.957"/><line class="icon" x1="4.266" y1="15.844" x2="12.499" y2="15.844"/><rect class="icon" x="4" y="7" width="8" height="6"/></svg>',
   file_plus:
-    '<svg id="a" viewBox="0 0 20.5 20.5" style="color:#dee2e6;"><path class="icon" d="M3.5,8V2c0-.828,.672-1.5,1.5-1.5h7.5l7.5,7.5v10.5c0,.828-.672,1.5-1.5,1.5h-7.5"/><polyline class="icon" points="12.5 .5 12.5 8 20 8"/><line class="icon" x1="5" y1="11" x2="5" y2="20"/><line class="icon" x1=".5" y1="15.5" x2="9.5" y2="15.5"/></svg>',
+    '<svg id="a" viewBox="0 0 20.5 20.5"><path class="icon" d="M3.5,8V2c0-.828,.672-1.5,1.5-1.5h7.5l7.5,7.5v10.5c0,.828-.672,1.5-1.5,1.5h-7.5"/><polyline class="icon" points="12.5 .5 12.5 8 20 8"/><line class="icon" x1="5" y1="11" x2="5" y2="20"/><line class="icon" x1=".5" y1="15.5" x2="9.5" y2="15.5"/></svg>',
   filter:
     '<svg id="a" viewBox="0 0 21 13.357"><defs></defs><line class="icon" x1=".5" y1=".5" x2="20.5" y2=".5"/><line class="icon" x1="3.634" y1="6.679" x2="17.366" y2="6.679"/><line class="icon" x1="7.195" y1="12.857" x2="13.805" y2="12.857"/></svg>',
   folder:

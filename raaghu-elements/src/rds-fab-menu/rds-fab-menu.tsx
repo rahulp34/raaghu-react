@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-fab-menu.scss";
+import "./rds-fab-menu.css";
 import { colors } from "../../libs/types";
 import RdsIcon from "../rds-icon";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "raaghu-react-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
 import "./rds-comp-email.scss";
 
 const RdsCompEmail = (props: any) => {
@@ -168,7 +168,7 @@ useEffect( () => {
         </div>
         <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12 mb-3 sm-p-0">
-            <RdsCheckbox label="Use SSL"  onChange={(e:any) =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
+            <RdsCheckbox label="Use SSL" onChange={(e:any) =>{setSSL(e.target.checked)}} checked={formData.smtpEnableSsl}></RdsCheckbox>
           </div>
         </div>
 
@@ -194,7 +194,6 @@ useEffect( () => {
               size="small"
             ></RdsButton>
             <RdsButton
-              class="me-2"
               label="SAVE"
               type="submit"
               isOutline={false}

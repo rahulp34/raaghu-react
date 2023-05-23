@@ -1,5 +1,5 @@
 import React from "react";
-import "./rds-price.scss";
+import "./rds-price.css";
 import RdsIcon from "../rds-icon/rds-icon";
 
 export interface RdsPriceProps {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./rds-radio-button.scss";
+import "./rds-radio-button.css";
 import { useReducer } from "react";
 
 export interface RdsRadioButtonProps {
@@ -12,7 +12,7 @@ export interface RdsRadioButtonProps {
   displayType?: string;
   label?: string;
   id?:number;
-
+  dataTestId?: string ;
   state?: 'radio' | 'errorRadio',
   errorMessage?:string;
 }
@@ -46,7 +46,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
             <div
               key={idx}
               className={
-                "form-check mb-3 " + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
+                "form-check mb-3 d-flex" + `${InputGroup1}` + `${Switch1}` + `${Inline1}`
               }
             >
 
@@ -68,8 +68,9 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 id={item.id}
                 disabled={item.disabled}
                 onClick = {props.onClick}
+                data-testid={props.dataTestId}
               />
-              <label htmlFor={item.id} className="form-check-label">
+              <label htmlFor={item.id} className="form-check-label me-5 ms-2">
                 {item.label}
               </label>
             </div>

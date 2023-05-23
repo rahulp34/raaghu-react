@@ -1,5 +1,5 @@
 import React, { HtmlHTMLAttributes, ReactNode, useEffect } from "react";
-import "./rds-offcanvas.scss";
+import "./rds-offcanvas.css";
 export interface RdsOffcanvasProps {
   placement: "start" | "end" | "top" | "bottom";
   backDrop: "static" | true | false;
@@ -64,16 +64,16 @@ const RdsOffcanvas = (props: RdsOffcanvasProps) => {
         data-bs-padding={0}
         tabIndex={-1}
         id={`${props.offId}`}
-        aria-labelledby={`canvas${props.offId}`}
+        aria-labelledby={`${props.offId}`}
         style={{ width: Width }}
       >
-        <div className={`${isCanvasTitle ? 'offcanvas-header' : "offcanvas-header border-0"}`}>
+        <div className={`${isCanvasTitle ? 'offcanvas-header' : "offcanvas-header border-0 justify-content-end "}`}>
           {isCanvasTitle && <h5 className="offcanvas-title text-uppercase" id={`'canvas' +${props.offId}`}>
             {props.canvasTitle}
           </h5>}
           <button
             type="button"
-            className="btn-close text-reset offcanvas-close"
+            className="btn-close text-reset"
             onClick={props.onClose}
             data-bs-dismiss="offcanvas"
             aria-label="Close"

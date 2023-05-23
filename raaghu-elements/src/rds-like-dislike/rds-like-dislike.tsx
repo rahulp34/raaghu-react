@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 
 import RdsIcon from "../rds-icon/rds-icon";
-import "./rds-like-dislike.scss";
+import "./rds-like-dislike.css";
 
 export interface RdsLikeDislikeProps {
 	colorVariant?: string;

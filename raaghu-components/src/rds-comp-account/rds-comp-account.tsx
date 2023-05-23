@@ -465,7 +465,7 @@ const RdsCompAccount = (props: any) => {
           </div>
           {twitterCheckBox}
         </div>
-        <div className=" justify-content-start d-flex bottom-0 pt-4">
+        <div className=" d-flex bottom-0 pt-4">
           <RdsButton
             class="me-2"
             label="CANCEL"
@@ -475,7 +475,6 @@ const RdsCompAccount = (props: any) => {
             size="small"
           ></RdsButton>
           <RdsButton
-            class="me-2"
             label="SAVE"
             type="submit"
             onClick={() => {

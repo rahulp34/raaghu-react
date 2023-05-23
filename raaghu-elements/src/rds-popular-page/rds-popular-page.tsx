@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-popular-page.scss";
+import "./rds-popular-page.css";
 export interface RdsPopularPageProps {
   itemList: any;
 }
@@ -29,7 +29,7 @@ const RdsPopularPage = (props: RdsPopularPageProps) => {
                 <div className="text-muted">{item.subtitle}</div>
               </div>
               <div>
-                <a href={item.route} className="pointerStyle">
+                <a href={item.route}>
                   <RdsIcon
                     name="chevron_right"
                     height="47px"

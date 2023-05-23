@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import RdsIcon from "../rds-icon";
-import "./rds-size.scss";
+import "./rds-size.css";
 
 export interface RdsSizeProps {
   sizeType: string;
