@@ -572,66 +572,6 @@ const Polls = (props: any) => {
                 alertID="poll-delete-off"
                 onSuccess={deleteHandler}
               />
-            </div>
-          </div>
-          </RdsOffcanvas>
-          <RdsOffcanvas
-          canvasTitle="Edit"
-          placement="end"
-          offId="poll-edit-off"
-          offcanvaswidth={650}
-          backDrop={true}
-          scrolling={false}
-          preventEscapeKey={false}
-        >
-          <RdsNavtabs
-            navtabsItems={navtabsItemsEdit}
-            type={"tabs"}
-            activeNavTabId={activeNavTabIdEdit}
-            activeNavtabOrder={(activeNavTabIdEdit) => {
-              setActiveNavTabIdEdit(activeNavTabIdEdit);
-            }}
-            justified={false}>
-
-            {activeNavTabIdEdit == 0 && (
-              <RdsCompPollsQuestion
-                widgetList={[
-                  { option: "a", value: "a" },
-                  { option: "b", value: "b" },
-                ]}
-                questionData={editQuestionData}
-                getPollsQuestion={getEditPollsQuestionData}
-              ></RdsCompPollsQuestion>
-            )}
-
-            {activeNavTabIdEdit == 1 && (
-              <>
-                <RdsCompPollsOption  optionsData={editPollsOptionData}  getPollsOptionData={getPollsEditOptionData}></RdsCompPollsOption>
-              </>
-            )}
-          </RdsNavtabs>
-
-          <div className="footer-buttons d-flex bottom-0 pt-0">
-            <RdsButton
-              class="me-2"
-              label="CANCEL"
-              size="small"
-              type="button"
-              databsdismiss="offcanvas"
-              isOutline={true}
-              colorVariant="primary"
-            ></RdsButton>
-            <RdsButton
-              class="me-2"
-              label="SAVE"
-              type="button"
-              size="small"
-              isOutline={false}
-              colorVariant="primary"
-              databsdismiss="offcanvas"
-              showLoadingSpinner={true}
-              onClick={editDataHandler}
-            ></RdsButton>
           </div>
         </div>
       </div>
