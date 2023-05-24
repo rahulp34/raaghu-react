@@ -17,7 +17,7 @@ const generate = async (input, output) => {
         useOptions: true,
         useUnionTypes: false,
         exportCore: true,
-        exportSchemas: false,
+        exportSchemas: true,
         exportModels: true,
         exportServices: true,
         // clientName: 'Demo',
@@ -27,20 +27,21 @@ const generate = async (input, output) => {
     });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars 
 const generateRealWorldSpecs = async () => {
     console.log("\x1b[32m%s\x1b[0m", `Downloading swagger json...`);
-    execSync(
-        `curl -o swaggerJSON.json ${completeURL}`, 
-        { cwd: '.', stdio: "inherit" }
-    )
+    // execSync(
+    //     `curl -o swaggerJSON.json ${completeURL}`, 
+    //     { cwd: '.', stdio: "inherit" }
+    // )
 
     // const response = await fetch('https://raaghu-react.azurewebsites.net/swagger/v1/swagger.json');
     // const response = require('../swaggerJSON.json');
-    // const response = await fetch(url);
+    const response = await fetch(completeURL, { insecure: true });
 
-    // const list = await response.json();
-    const list = require('../swaggerJSON.json');
+    const list = await response.json();
+    const scope = Object.keys(list.components.securitySchemes.oauth2.flows.authorizationCode.scopes)[0];
+    // const list = require('../swaggerJSON.json');
 
     console.log("\x1b[32m%s\x1b[0m", `Generating proxy...`);
     await generate(list, `./raaghu-mfe/libs/${eTc}`);
@@ -52,6 +53,18 @@ const generateRealWorldSpecs = async () => {
     let envConfigContent = fs.readFileSync(envConfig, "utf-8");
     envConfigContent = envConfigContent.replace(`<API_URL>`, `${url}`);
     fs.writeFileSync(envConfig, envConfigContent, "utf-8");
+
+    const envLines = envConfigContent.split('\n');
+    const scopeLineIndex = envLines.findIndex(line => line.startsWith('REACT_APP_SCOPE='));
+    if (scopeLineIndex === -1) {
+        console.error('Error: REACT_APP_SCOPE variable not found in .env file');
+        process.exit(1);
+    }
+    const currentScope = envLines[scopeLineIndex].split('=')[1];
+    const newScopeValue = `${currentScope} ${scope}`;
+    envLines[scopeLineIndex] = `REACT_APP_SCOPE=${newScopeValue.replace(/\s+/g, ' ')}`;
+    const newEnvContent = envLines.join('\n');
+    fs.writeFileSync(envConfig, newEnvContent);
 
     // Replacing the BASE URL in the OpenAPI.ts file
     const OpenAPIConfig = path.resolve(

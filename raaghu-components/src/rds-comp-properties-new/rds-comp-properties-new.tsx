@@ -42,8 +42,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
       sortable: true,
     },
   ];
-  const style = { marginTop: "29px" };
-  const handleAddItem = () => {
+   const handleAddItem = () => {
     let newTempData: any;
     newTempData = {
       key: propertyData.key,
@@ -88,7 +87,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
           ></RdsCompDatatable>
         </div>
         <div className=" row mt-3">
-          <div className="col-md-5  mb-2">
+          <div className="col-md-5">
             <RdsInput
               label="Key"
               placeholder="Enter a key"
@@ -99,7 +98,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               value={propertyData.key}
             ></RdsInput>
           </div>
-          <div className="col-md-5  mb-2">
+          <div className="col-md-5">
             <RdsInput
               label="Value"
               placeholder="Enter a value"
@@ -110,7 +109,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               value={propertyData.PropValue}
             ></RdsInput>
           </div>
-          <div className="col-md-2 " style={style}>
+          <div className="col-md-2 align-items-end d-flex ">
             <RdsButton
               label="ADD"
               colorVariant="primary"

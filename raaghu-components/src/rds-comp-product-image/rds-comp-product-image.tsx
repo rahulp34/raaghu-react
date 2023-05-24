@@ -72,7 +72,7 @@ const RdsCompProductImage = (props: RdsCompProductImageProps) => {
           ></RdsIcon>
         </div>
         {props.item.rating && (
-          <div className="mt-1 me-4" style={{ display: "inline-block" }}>
+          <div className="mt-1 me-4 d-inline-block">
             <RdsRating
               rating={props.item.rating}
               colorVariant="warning"
@@ -80,7 +80,7 @@ const RdsCompProductImage = (props: RdsCompProductImageProps) => {
           </div>
         )}
         {props.item.reviews && (
-          <div style={{ display: "inline-block" }}>
+          <div className="d-inline-block">
             <a href="#" className="text-decoration-none">
               {props.item.reviews}
             </a>
