@@ -121,7 +121,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
               wrapperClassName="datepicker__wrapper"
             />
             <div className="input-group-append datepicker__icon-box">
-              <span className="input-group-text" id="basic-addon2">s
+              <span className="input-group-text" id="basic-addon2">
                 <svg style={{stroke: "gray"}} id="a" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
                   width="20"
                   height="20"><line className="icon" x1=".521" y1="9.67" x2="20.394" y2="9.67"/><path className="icon" d="M2.038,3.577c-.85,0-1.538,.689-1.538,1.538v13.846c0,.85,.689,1.538,1.538,1.538H18.962c.85,0,1.538-.689,1.538-1.538V5.115c0-.85-.689-1.538-1.538-1.538h-3.077"/><line className="icon" x1="5.115" y1="1.013" x2="5.115" y2="6.141"/><line className="icon" x1="15.885" y1=".5" x2="15.885" y2="6.654"/><line className="icon" x1="5.115" y1="3.577" x2="12.808" y2="3.577"/></svg>
