@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import { RdsCompDatatable } from "../../../rds-components";
-import "./Auditlogs.scss";
+import "./Auditlogs.css";
 import {
   RdsBadge,
   RdsOffcanvas,

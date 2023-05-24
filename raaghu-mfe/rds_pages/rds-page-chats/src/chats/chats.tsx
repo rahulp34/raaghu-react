@@ -96,14 +96,12 @@ const Chats = () => {
             <div className="d-flex justify-content-between">
               <div className="d-flex">
                 <div className="me-3">
-                  <div style={{ position: "relative" }}>
+                  <div className="position-relative">
                     <img
                       src="./assets/profile-picture-circle.svg"
                       className="avatar avatar-lg rounded rounded-circle"
                     ></img>
-                    <span
-                      style={{ position: "absolute", top: "23px", right: "0" }}
-                    >
+                    <span className="end-0 position-absolute top-50">
                       <span className="text-success fs-4">●</span>
                     </span>
                   </div>
@@ -148,18 +146,12 @@ const Chats = () => {
                 <div className="d-flex justify-content-between mb-3">
                   <div className="d-flex">
                     <div className="me-3">
-                      <div style={{ position: "relative" }}>
+                      <div className="position-relative">
                         <img
                           src="./assets/profile-picture-circle.svg"
                           className="avatar avatar-md rounded rounded-circle"
                         ></img>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "23px",
-                            right: "0",
-                          }}
-                        >
+                        <span className="end-0 position-absolute top-50">
                           {/* <span className="text-success fs-4">●</span> */}
                         </span>
                       </div>
@@ -177,18 +169,12 @@ const Chats = () => {
                 <div className="d-flex justify-content-between">
                   <div className="d-flex">
                     <div className="me-3">
-                      <div style={{ position: "relative" }}>
+                      <div className="position-relative">
                         <img
                           src="./assets/profile-picture-circle.svg"
                           className="avatar avatar-md rounded rounded-circle"
                         ></img>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "23px",
-                            right: "0",
-                          }}
-                        >
+                        <span className="end-0 position-absolute top-50">
                           {/* <span className="text-success fs-4">●</span> */}
                         </span>
                       </div>
