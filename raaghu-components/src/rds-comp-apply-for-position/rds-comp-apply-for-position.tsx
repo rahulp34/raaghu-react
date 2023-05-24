@@ -135,7 +135,7 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
               name={"email"}
               required 
             ></RdsInput>
-            {error.email !="" && <span style={{ color: "red" }}>{error.email}</span>}
+            {error.email !="" && <span className="text-danger">{error.email}</span>}
           </div>
 
           <div className="col-lg-6  mb-4 col-md-12">
@@ -149,7 +149,7 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
               required
             ></RdsInput>
             {error.fullName && (
-              <span style={{ color: "red" }}>{error.fullName}</span>
+              <span className="text-danger">{error.fullName}</span>
             )}
           </div>
         </div>
@@ -165,7 +165,7 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
               required
             ></RdsInput>
             {error.contactNumber && (
-              <span style={{ color: "red" }}>{error.contactNumber}</span>
+              <span className="text-danger">{error.contactNumber}</span>
             )}
           </div>
 
@@ -180,7 +180,7 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
               required
             ></RdsInput>
             {error.position && (
-              <span style={{ color: "red" }}>{error.position}</span>
+              <span className="text-danger">{error.position}</span>
             )}
           </div>
         </div>
@@ -197,7 +197,7 @@ const RdsCompApplyForPosition = (props: RdsCompApplyForPositionProps) => {
                 required
               ></RdsInput>
               {error.period && (
-                <span style={{ color: "red" }}>{error.period}</span>
+                <span className="text-danger">{error.period}</span>
               )}
 
            </div>

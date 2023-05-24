@@ -13,7 +13,7 @@ import {
 import RdsCompAlertPopup from "../rds-comp-alert-popup";
 import RdsCompNewFeatures from "../rds-comp-new-features";
 
-import "./rds-comp-edition.scss";
+import "./rds-comp-edition.css";
 export interface RdsCompEditionProps {
   EditionItems: any;
   features: any;

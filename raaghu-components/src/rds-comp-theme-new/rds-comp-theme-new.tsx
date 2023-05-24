@@ -6,7 +6,7 @@ import {
   RdsSelectList,
 } from "../rds-elements";
 
-import "./rds-comp-theme-new.scss";
+import "./rds-comp-theme-new.css";
 
 export interface RdsCompThemeNewProps {
   StyleList: any;

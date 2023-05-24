@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./rds-comp-notification-settings.scss";
+import "./rds-comp-notification-settings.css";
 
 export interface RdsCompNotificationSettingsProps {
   onSave?: (event: React.MouseEvent, data: any) => void;
@@ -38,6 +38,7 @@ const RdsCompNotificationSettings = (
           type="checkbox"
           id="notification"
           checked={props.default[0].enabled}
+          data-testid="notification"
         />
 
         <label className="form-check-label" htmlFor="notification">
@@ -53,6 +54,7 @@ const RdsCompNotificationSettings = (
           type="checkbox"
           id="newuser"
           checked={props.default[0].NewUser}
+          data-testid="new-user"
         />
         <label className="form-check-label" htmlFor="newuser">
           On a New User Registered to the Application
@@ -65,6 +67,7 @@ const RdsCompNotificationSettings = (
           type="checkbox"
           id="newtenant"
           checked={props.default[0].NewTenant}
+          data-testid="new-tenant"
         />
         <label className="form-check-label" htmlFor="newtenant">
           On a New Tenant Registered to the Application
@@ -75,6 +78,7 @@ const RdsCompNotificationSettings = (
           <button
             className="btn buttonname btn-outline-primary me-3"
             onClick={props.onCancel}
+            data-testid="cancel-btn"
           >
             Cancel
           </button>
@@ -83,6 +87,7 @@ const RdsCompNotificationSettings = (
           <button
             className="btn buttonname btn-primary"
             onClick={(event) =>props.onSave && props.onSave(event, data)}
+            data-testid="save-btn"
           >
             save
           </button>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RdsButton } from "raaghu-react-elements";
-import "./rds-comp-delivery-method.scss";
+import "./rds-comp-delivery-method.css";
 
 export interface RdsCompDeliveryMethodProps {
   sizeDataWithDescription: any[];

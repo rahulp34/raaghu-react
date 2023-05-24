@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "raaghu-react-elements";
+import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "../rds-elements";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import "./rds-comp-profile.scss";
+import "./rds-comp-profile.css";
 import RdsCompLinkedAccount from "../rds-comp-linked-account/rds-comp-linked-account";
 
 export interface RdsCompProfileProps {
@@ -53,6 +53,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
             width="130px"
             height="120px"
             className="profil_image_Class rounded-circle"
+            data-testid="profile-pic"
           ></img>
         </div>
         <p className="fw-bold text-center m-0 mt-3">{props.userName}</p>
@@ -118,6 +119,7 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
           type="submit"
           isOutline={true}
           onClick={props.onLogout}
+          dataTestId="logout"
         />
       </div>
     </>

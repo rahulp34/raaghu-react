@@ -3,7 +3,7 @@ import { RdsLabel, RdsIcon, RdsButton } from "raaghu-react-elements";
 import RdsCompProductImage, {
   Item,
 } from "../rds-comp-product-image/rds-comp-product-image";
-import "./rds-comp-product-list.scss";
+import "./rds-comp-product-list.css";
 export interface RdsCompProductListProps {
   items: Item[];
   type?: string;

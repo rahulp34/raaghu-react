@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "../rds-elements";
-import "./rds-comp-visual-setting.scss";
+import "./rds-comp-visual-setting.css";
 
 export interface RdsCompVisualSettingProps {
   visualsettingsItem: any[];

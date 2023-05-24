@@ -246,7 +246,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
               name="chevron_down"
               fill={false}
               stroke={true}
-              height="6px"
+              height="18px"
               width="12px"
             ></RdsIcon>
           </div>

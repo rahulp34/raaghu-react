@@ -41,7 +41,7 @@ export const deleteApplications = createAsyncThunk("applications/deleteApplicati
 });
 
 export const saveApplications = createAsyncThunk("applications/saveApplications", (data:any) => {
-  return ApplicationsService.postApplications(data).then((result:any)=>{
+  return ApplicationsService.postApplications({requestBody:data}).then((result:any)=>{
      return result;
   }) 
 });
