@@ -82,13 +82,14 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                           data-bs-toggle="offcanvas"
                           onClick={() => {
                             handlerExtraBackdrop()
-                            props.onCreateNode && node.data}}
+                            props.onCreateNode && props.onCreateNode(node.data)}}
                       >
                         <RdsIcon
                           name={"plus"}
                           height="15px"
                           width="15px"
                           stroke={true}
+                          dataTestId="add-icon"
                         ></RdsIcon>
                       </a>
                       <a
@@ -108,6 +109,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                           width="15px"
                           height="15px"
                           stroke={true}
+                          dataTestId="edit-icon"
                         ></RdsIcon>
                       </a>
 
@@ -126,6 +128,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                           height="16px"
                           width="20px"
                           stroke={true}
+                          dataTestId="delete-icon"
                         ></RdsIcon>
                       </a>
                     </span>
@@ -184,6 +187,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                                     props.onCreateSubUnit &&
                                     props.onCreateSubUnit(node.data)
                                   }}
+                                  dataTestId="new-sub-unit"
                                 />
                               )}
                             </div>
@@ -236,6 +240,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                 databstarget={`#d${props.offId}`}
                 ariacontrols={`d${props.offId}`}
                 onClick={handlerExtraBackdrop}
+                dataTestId="new-root-unit"
               />
             </div>
           </div>

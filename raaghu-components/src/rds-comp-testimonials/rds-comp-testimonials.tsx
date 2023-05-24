@@ -29,6 +29,7 @@ const RdsCompTestimonials = (props: RdsCompTestimonialsProps) => {
 									stroke={true}
 									width="15px"
 									name="chevron_left"
+									dataTestId="chevron_left"
 								></RdsIcon>
 								<RdsIcon
 									height="15px"
@@ -36,6 +37,7 @@ const RdsCompTestimonials = (props: RdsCompTestimonialsProps) => {
 									stroke={true}
 									width="15px"
 									name="chevron_right"
+									dataTestId="chevron_right"
 								></RdsIcon>
 							</span>
 						</div>

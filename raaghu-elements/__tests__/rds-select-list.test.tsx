@@ -15,7 +15,7 @@ describe('RdsSelectList', () => {
   };
 
   it('should render select list with label and options', () => {
-    render(<RdsSelectList {...props} />);
+    render(<RdsSelectList {...props} dataTestId='select-example'/>);
     const selectElement = screen.getByTestId('select-example');
     expect(selectElement).toBeInTheDocument();
     expect(screen.getByTestId('select-example')).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('RdsSelectList', () => {
   it('should call onSelectListChange callback when a single option is selected', () => {
     const onSelectListChange = jest.fn();
     render(
-      <RdsSelectList {...props} onSelectListChange={onSelectListChange} />
+      <RdsSelectList {...props} onSelectListChange={onSelectListChange} dataTestId='select-example' />
     );
     const selectElement = screen.getByTestId('select-example');
     fireEvent.change(selectElement, { target: { value: 'option-2' } });

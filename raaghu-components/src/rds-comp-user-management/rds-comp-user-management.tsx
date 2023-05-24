@@ -14,6 +14,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="email-confirmation"
           />
         </div>
         <div className="py-1">
@@ -23,6 +24,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="phone-number-verification"
           />
         </div>
         <div className="py-1">
@@ -32,6 +34,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="security-image-quest"
           />
         </div>
         <label className="mt-3 fw-medium">Cookie Consent</label>
@@ -42,6 +45,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="cookie-consent-enable"
           />
         </div>
         <label className="mt-3 fw-medium">Session Timeout Control</label>
@@ -52,6 +56,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="session-time-out-control"
           />
         </div>
         <label className="mt-3 fw-medium">Profile</label>
@@ -62,6 +67,7 @@ const RdsCompUserManagement = (props: RdsCompUserManagementProps) => {
             checked={false}
             withlabel={true}
             isSwitch={false}
+            dataTestId="gravatar-profile-picture"
           />
         </div>
       </div>

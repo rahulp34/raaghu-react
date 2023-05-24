@@ -13,7 +13,8 @@ export interface RdsSelectProps {
   children?: React.ReactNode;
   someCallback?: any;
   onSelectListChange?: any;
-  placeholder?:string
+  placeholder?:string;
+  dataTestId?: string;
 }
 const RdsSelectList = (props: RdsSelectProps) => {
   const [selectedOption, setselectedoption] = useState(props.selectedValue);
@@ -61,7 +62,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
         disabled={Disabled}
         multiple={props.isMultiple}
         aria-label="select example"
-        data-testId="select-example"
+        data-testId={props.dataTestId}
         onChange={handleChange}
       >
         {}

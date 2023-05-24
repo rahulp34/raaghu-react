@@ -133,7 +133,7 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
       {props.type === "advanced" && (
         <>
           {props.DatePickerLabel && <label className="form-label">{props.DatePickerLabel}</label>}
-          <div className="dropdown border rounded justify-content-between text-start d-block">
+          <div className="dropdown border rounded justify-content-between text-start d-block datepicker">
             <button
               className="bg-transparent border-0 d-flex dropdown-toggle py-1 ps-2 w-100 justify-content-between"
               type="button"
