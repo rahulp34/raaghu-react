@@ -272,6 +272,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                     ""
                                   )}
                                 </div>
+                                <div className="form-control">
                                 <RdsInput
                                   placeholder="Option"
                                   inputType="text"
@@ -296,7 +297,7 @@ const RdsCompFormsQuestions = (props: RdsCompFormsQuestionProps) => {
                                     onClick={() => handleDelete(i, idx)}
                                     dataTestId="handle-delete"
                                   ></RdsIcon>
-                                )}
+                                )}</div>
                               </div>
                             </div>
                           </div>

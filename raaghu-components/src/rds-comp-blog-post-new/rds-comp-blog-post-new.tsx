@@ -75,7 +75,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
       <>
          <div className="row align-items-center">
             <div className="col-md-12">
-               <form>
+               <form className='mb-0'>
                <div className="from-group">
 
                   <RdsFileUploader
@@ -89,7 +89,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      // getFileUploaderInfo={(data:any)=>profileImage(data)}
                      />
                </div>
-               <div className="form-group pb-3 px-2">
+               <div className="form-group pb-3">
                 <div className="mb-2">
                 <RdsLabel   
                      label="Blog"
@@ -107,7 +107,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                   />
                </div>
 
-               <div className="form-group px-2">
+               <div className="form-group">
                   <RdsInput
                      inputType="text"
                      size="medium"
@@ -121,7 +121,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      onChange={(e:any)=>onTitleChangeHandler(e.target.value)}
                   ></RdsInput>
                </div>
-               <div className="form-group px-2">
+               <div className="form-group">
                   <RdsInput
                      inputType="text"
                      required={true}
@@ -132,7 +132,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      onChange={(e:any)=>onSlugChangedHandler(e.target.value)}
                   ></RdsInput>
                </div>
-               {props.isEdit && <div className="form-group px-2">
+               {props.isEdit && <div className="form-group">
                   <RdsInput
                      inputType="text"
                      required={true}
@@ -143,7 +143,7 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      onChange={(e:any)=>ConcurrencyStampupdate(e.target.value)}
                   ></RdsInput>
                </div>}
-               <div className="form-group px-2">
+               <div className="form-group">
                   <RdsTextArea
                      label="Short description"
                      placeholder="Enter Description"
@@ -152,10 +152,10 @@ const RdsCompBlogPostNew = (props: RdsCompBlogPostNewProps) => {
                      rows={3}
                   />
                </div>
-               <div className="form-group px-2 pt-4">
+               <div className="form-group pt-4">
                   <RdsTextEditor />
                </div>
-               <div className="form-group mt-3 px-2">
+               <div className="form-group mt-3">
                   <RdsInput
                      inputType="text"
                      required={true}
