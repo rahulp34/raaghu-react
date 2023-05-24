@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RdsAlert, RdsButton, RdsOffcanvas } from "../../../rds-elements";
+import { RdsAlert, RdsButton, RdsOffcanvas, RdsIllustration} from "../../../rds-elements";
 import { RdsCompAlertPopup } from "../../../rds-components";
 import RdsCompMenuDirectory from "../../../../../raaghu-components/src/rds-comp-menus-directories/rds-comp-menus-directories";
 import { createTree } from "../../../../libs/shared/array-to-tree-converter";
@@ -312,7 +312,15 @@ const Menus = () => {
 
         <div className="col-md-12">
           <div className="card p-3 h-100 border-0 rounded-0 card-full-stretch">
-            {directories.length === 0 && <h6>There is no menu item yet!</h6>}
+            {directories.length === 0 && 
+            
+            <div className="">
+              <RdsIllustration
+                label="There is no menu item yet!"
+                colorVariant="light"
+              />
+             </div>
+            }
             <RdsCompMenuDirectory
               items={directories}
               offId="menus"

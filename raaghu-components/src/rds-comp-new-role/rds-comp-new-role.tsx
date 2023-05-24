@@ -17,7 +17,7 @@ const RdsCompNewRole = (props: RdsCompNewRoleProps) => {
 									size="14px"
 									label={props.roleData.displayName}
 									class="form-label ms-1"
-									children={<span style={{ color: "red" }}>*</span>}
+									children={<span className="text-danger"></span>}
 								></RdsLabel>
 								<RdsInput
 									size="small"

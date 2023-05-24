@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RdsInput, RdsButton, RdsIcon } from "raaghu-react-elements";
 import React from "react";
 import img from "./cookie.svg";
-import "./rds-comp-cookies-section.scss";
+import "./rds-comp-cookies-section.css";
 import { RdsAlert } from "raaghu-react-elements";
 export interface RdsCompCookiesSectionProps {
   showDeclineButton?: boolean;
@@ -68,7 +68,7 @@ const RdsCompCookiesSection = (props: RdsCompCookiesSectionProps) => {
           {props.showDeclineButton && (
             <div className="col-md-3 p-0">
               <div className="mx-2 my-2">
-                <div className="mt-3" style={{ width: "150px" }}>
+                <div className="mt-3 w-50">
                   <RdsButton
                     label="Accept"
                     type="button"
@@ -76,7 +76,7 @@ const RdsCompCookiesSection = (props: RdsCompCookiesSectionProps) => {
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
-                <div className="mt-3" style={{ width: "150px" }}>
+                <div className="mt-3 w-50">
                   <RdsButton
                     class="me-2"
                     tooltipTitle={""}

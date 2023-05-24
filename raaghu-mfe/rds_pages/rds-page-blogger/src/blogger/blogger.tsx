@@ -396,7 +396,7 @@ const Blogger = () => {
                 actionPosition="right"
                 tableHeaders={tableHeaders}
                 tableData={tableData}
-                pagination={false}
+                pagination={true}
                 actions={actions}
                 onActionSelection={onActionSelection}
                 classes="table"

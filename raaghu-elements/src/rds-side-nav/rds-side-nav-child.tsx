@@ -72,7 +72,7 @@ const RdsSideNavChild = ({
     </div>*/
       }
         <div
-          className={`sidenav-footer text-center cursor-pointer rounded-5 py-1 p-1 ${collapse ? "" : ""}`}
+          className={`sidenav-footer text-center cursor-pointer rounded-5 d-flex align-items-center justify-content-center py-1 p-1 ${collapse ? "" : ""}`}
         >
           {/* <div className="ms-3"> */}
             {/* <div className="text-center mb-3"> */}

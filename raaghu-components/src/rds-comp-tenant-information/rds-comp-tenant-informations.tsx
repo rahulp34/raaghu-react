@@ -104,8 +104,7 @@ const RdsCompTenantInformation = (props: any) => {
                 type="file"
                 id="file"
                 //ref={inputFile}
-                style={{ display: "none" }}
-              />
+                className="d-none"/>
             </div>
           </div>
           <div className="mt-3 border-bottom text-muted">

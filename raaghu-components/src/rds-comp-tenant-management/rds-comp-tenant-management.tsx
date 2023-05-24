@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RdsLabel, RdsCheckbox, RdsSelectList, RdsDropdownList } from "../rds-elements";
-import './rds-comp-tenant-management.scss'
+import './rds-comp-tenant-management.css'
 
 export interface RdsCompTenantManagementProps {
   settingsTenantEditionList: any[];

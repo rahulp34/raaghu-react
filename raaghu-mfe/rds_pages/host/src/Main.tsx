@@ -143,10 +143,10 @@ const Main = (props: MainProps) => {
       process.env.REACT_APP_API_URL || ""
     );
     if (localStorage.getItem("auth")) {
-      if (currentPath !== "/dashboard" && currentPath !== "/") {
+      if (currentPath !== "/raaghu-dashboard" && currentPath !== "/") {
         navigate(currentPath);
       } else {
-        navigate("/dashboard");
+        navigate("/raaghu-dashboard");
       }
     } else {
       navigate("/login");
@@ -202,7 +202,7 @@ const Main = (props: MainProps) => {
             sessionStorage.getItem("accessToken") == undefined ||
             sessionStorage.getItem("accessToken") == null
           ) {
-            navigate("/dashboard");
+            navigate("/raaghu-dashboard");
           }
           sessionStorage.setItem("accessToken", data.access_token);
           localStorage.setItem("refreshToken", data.refresh_token);
@@ -565,7 +565,7 @@ const Main = (props: MainProps) => {
             );
             localStorage.setItem("auth", JSON.stringify(true));
    
-    navigate("/dashboard");
+    navigate("/raaghu-dashboard");
     setCurrentTitle("Dashboard");
             await configLocalization();
             sessionStorage.setItem("accessToken", res.access_token);
@@ -684,7 +684,7 @@ const Main = (props: MainProps) => {
                     <div className="d-flex flex-column-fluid align-items-stretch container-fluid px-0">
                       <div className="aside ng-tns-c99-0" id="aside">
                         <div
-                          onClick={() => navigate("/dashboard")}
+                          onClick={() => navigate("/raaghu-dashboard")}
                           id="raaghuLogo"
                         >
                           <img
@@ -734,168 +734,168 @@ const Main = (props: MainProps) => {
                           <Suspense>
                             <Routes>
                               <Route
-                                path="/dashboard"
+                                path="/raaghu-dashboard"
                                 element={<DashboardCompo />}
                               ></Route>
                               <Route
-                                path="/tenant"
+                                path="/raaghu-tenant"
                                 element={<TenantCompo></TenantCompo>}
                               ></Route>
                               <Route
-                                path="/edition"
+                                path="/raaghu-edition"
                                 element={<EditionCompo></EditionCompo>}
                               ></Route>
                               <Route
-                                path="/settings"
+                                path="/raaghu-settings"
                                 element={<SettingsCompo></SettingsCompo>}
                               ></Route>
                               <Route
-                                path="/audit-logs"
+                                path="/raaghu-audit-logs"
                                 element={<AuditlogsCompo></AuditlogsCompo>}
                               ></Route>
                               <Route
-                                path="/users"
+                                path="/raaghu-users"
                                 element={<UsersCompo />}
                               ></Route>
                               <Route
-                                path="/role"
+                                path="/raaghu-role"
                                 element={<RolesCompo></RolesCompo>}
                               ></Route>
                               <Route
-                                path="/organization-unit"
+                                path="/raaghu-organization-unit"
                                 element={
                                   <OrganizationUnitsCompo></OrganizationUnitsCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/language"
+                                path="/raaghu-language"
                                 element={<LanguageCompo></LanguageCompo>}
                               ></Route>
                               <Route
-                                path="/language-text"
+                                path="/raaghu-language-text"
                                 element={
                                   <LanguageTextCompo></LanguageTextCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/dynamic-properties"
+                                path="/raaghu-dynamic-properties"
                                 element={
                                   <DynamicPropertyCompo></DynamicPropertyCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/security-logs"
+                                path="/raaghu-security-logs"
                                 element={<SecurityLogsCompo />}
                               ></Route>
 
                               <Route
-                                path="/icons"
+                                path="/raaghu-icons"
                                 element={<IconListCompo />}
                               ></Route>
                               <Route
-                                path="/claim-types"
+                                path="/raaghu-claim-types"
                                 element={<ClaimTypesCompo />}
                               />
                               <Route
-                                path="/text-template"
+                                path="/raaghu-text-template"
                                 element={<TextTemplateCompo />}
                               ></Route>
                               <Route
-                                path="/applications"
+                                path="/raaghu-applications"
                                 element={<ApplicationsCompo />}
                               ></Route>
                               <Route
-                                path="/identityResources"
+                                path="/raaghu-identityResources"
                                 element={<IdentityResourcesCompo />}
                               />
 
                               <Route
-                                path="/api-scope"
+                                path="/raaghu-api-scope"
                                 element={<ApiScopeCompo />}
                               />
                               <Route
-                                path="/apiResources"
+                                path="/raaghu-apiResources"
                                 element={<ApiResourcesCompo />}
                               />
-                              <Route path="/blogs" element={<BlogsCompo />} />
-                              <Route path="/chats" element={<ChatsCompo />} />
+                              <Route path="/raaghu-blogs" element={<BlogsCompo />} />
+                              <Route path="/raaghu-chats" element={<ChatsCompo />} />
                               <Route
-                                path="/fileManagement"
+                                path="/raaghu-fileManagement"
                                 element={<FileManagementCompo />}
                               />
-                              <Route path="/forms" element={<FormsCompo />} />
+                              <Route path="/raaghu-forms" element={<FormsCompo />} />
                               <Route
                                 path="/formsView/:id"
                                 element={<FormsViewCompo />}
                               />
                               <Route
-                                path="/formsPreview/:id"
+                                path="/raaghu-formsPreview/:id"
                                 element={<FormsPreviewCompo />}
                               />
-                              <Route path="/polls" element={<PollsCompo />} />
+                              <Route path="/raaghu-polls" element={<PollsCompo />} />
                               <Route
-                                path="/blogger"
+                                path="/raaghu-blogger"
                                 element={<BloggerCompo />}
                               />
-                              <Route path="/client" element={<ClientCompo />} />
+                              <Route path="/raaghu-client" element={<ClientCompo />} />
                               <Route
-                                path="/url-forwarding"
+                                path="/raaghu-url-forwarding"
                                 element={<UrlForwardingCompo />}
                               />
                               <Route
-                                path="/paymentPlans"
+                                path="/raaghu-paymentPlans"
                                 element={<PaymentPlansCompo />}
                               />
                               <Route
-                                path="/paymentRequests"
+                                path="/raaghu-paymentRequests"
                                 element={<PaymentRequestsCompo />}
                               />
                               <Route
-                                path="/comments"
+                                path="/raaghu-comments"
                                 element={<CommentsCompo />}
                               />
-                              <Route path="/tags" element={<TagsCompo />} />
+                              <Route path="/raaghu-tags" element={<TagsCompo />} />
                               <Route
-                                path="/globalResources"
+                                path="/raaghu-globalResources"
                                 element={<GlobalResourcesCompo />}
                               />
                               <Route
-                                path="/elements/:type"
+                                path="/raaghu-elements/:type"
                                 element={<ElementsCompo />}
                               />
                               <Route
-                                path="/personal-data"
+                                path="/raaghu-personal-data"
                                 element={<PersonalDataCompo />}
                               />
                               <Route
-                                path="/my-account"
+                                path="/raaghu-my-account"
                                 element={<MyAccountCompo />}
                               />
                               <Route
-                                path="/linked-accounts"
+                                path="/raaghu-linked-accounts"
                                 element={<RdsCompLinkedAccount />}
                               />
 
-                              <Route path="/menus" element={<MenusCompo />} />
+                              <Route path="/raaghu-menus" element={<MenusCompo />} />
                               <Route
-                                path="/components/:type"
+                                path="/raaghu-components/:type"
                                 element={<ComponentsCompo />}
                               />
-                              <Route path="/pages" element={<PagesCompo />} />
+                              <Route path="/raaghu-pages" element={<PagesCompo />} />
                               <Route
                                 path="/**/*"
                                 element={<RdsCompPageNotFound />}
                               />
                               <Route
-                                path="/blog-post"
+                                path="/raaghu-blog-post"
                                 element={<BlogPostCompo />}
                               />
                               <Route
-                                path="/newsletters"
+                                path="/raaghu-newsletters"
                                 element={<NewslettersCompo />}
                               />
                               <Route
-                                path="/charts/:type"
+                                path="/raaghu-charts/:type"
                                 element={<ChartCompo />}
                               />
                             </Routes>

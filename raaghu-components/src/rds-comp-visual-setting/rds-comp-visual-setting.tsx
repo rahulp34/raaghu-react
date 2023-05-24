@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { RdsButton, RdsCheckbox, RdsLabel, RdsIcon } from "../rds-elements";
-import "./rds-comp-visual-setting.scss";
+import "./rds-comp-visual-setting.css";
 
 export interface RdsCompVisualSettingProps {
   visualsettingsItem: any[];
@@ -110,10 +110,9 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                       }`}
                   >
                     <div
-                      className="p-0"
+                      className="p-0 cursorpointer"
                       onClick={() => onSetActiveTheme(theme.themeId)}
-                      style={{ cursor: "pointer" }}
-                    >
+                      >
                       <img src={theme.imgsrc} className="w-100" />
                     </div>
                     <div className="col-md-12">
