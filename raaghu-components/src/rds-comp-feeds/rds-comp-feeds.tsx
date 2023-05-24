@@ -38,9 +38,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
               <div className="ps-3 flex-grow-1">
                 <div className="pb-1 d-flex">
                   <div
-                    className="text-left fw-bold"
-                    style={{ paddingRight: "4px" }}
-                  >
+                    className="text-left fw-bold">
                     {item.name}{" "}
                   </div>
                   {item.date && (
@@ -55,7 +53,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
                 </div>
                 {
                   <div className="h-25 mt-1">
-                    <label style={{ color: "#626262" }}>
+                    <label className="text-muted">
                       {item.description.slice(0, 82)}
                     </label>
                   </div>
@@ -77,11 +75,9 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
                 ></RdsAvatar>
               </div>
               <div className="ps-3 flex-grow-1">
-                <div className="pb-2 d-flex">
+                <div className="pb-2 d-flex gap-2">
                   <div
-                    className="text-left fw-bold"
-                    style={{ paddingRight: "4px" }}
-                  >
+                    className="text-left fw-bold">
                     {item.name}{" "}
                   </div>
                   {item.feedIcon !== undefined && (
@@ -102,9 +98,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
                   )}
                   {item.username && item.date && (
                     <span
-                      className="text-muted"
-                      style={{ marginLeft: "4px", marginRight: "4px" }}
-                    >
+                      className="text-muted">
                       &#8901;
                     </span>
                   )}
@@ -117,9 +111,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
 
                 {item.rating !== undefined && (
                   <div
-                    className="h-25 mt-1 me-4"
-                    style={{ display: "inline-block" }}
-                  >
+                    className="h-25 mt-1 me-4 d-inline-block">
                     <RdsRating
                       rating={item.rating}
                       colorVariant="warning"
@@ -128,7 +120,7 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
                   </div>
                 )}
                 {item.reviews && (
-                  <div style={{ display: "inline-block" }}>
+                  <div className="d-inline-block">
                     <a href="#" className="text-decoration-none">
                       {item.reviews}
                     </a>
@@ -142,18 +134,18 @@ const RdsCompFeeds = (props: RdsCompFeedProps) => {
             </div>
 
             {item.hashtags && (
-              <div style={{ marginTop: "20px" }}>
+              <div className="mt-3">
                 <a href="#" className="text-decoration-none">
                   {item.hashtags}
                 </a>
               </div>
             )}
-            <div className="h-25 mt-3">
+            <div className="h-25 my-3">
               <RdsLikeDislike dislike={10} like={35} />
             </div>
 
             {item.replies && (
-              <div style={{ marginTop: "20px" }}>
+              <div>
                 <a href="#" className="text-decoration-none">
                   {item.replies}
                 </a>
