@@ -14,7 +14,7 @@ import {
   RdsCompPollsOption,
   RdsCompPollsQuestion,
 } from "../../../rds-components";
-import './Polls.scss'
+import './Polls.css'
 import {
   useAppDispatch,
   useAppSelector,

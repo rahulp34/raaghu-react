@@ -1,7 +1,7 @@
 import React from "react";
 // To view for separetly forgot-password page please uncomment the below link
 // import "../../../../../raaghu-themes/themes/default.scss";
-import "./forgotpassword.scss";
+import "./forgotpassword.css";
 import {
 	RootState,
 	AppDispatch,
