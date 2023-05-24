@@ -117,22 +117,14 @@ const RdsDatepicker = (props: RdsDatepickerProps) => {
             <DatePicker
               selected={startDate}
               onChange={handlerDateChange}
-              className="datepicker__input"
+              className="datepicker__input form-control"
               wrapperClassName="datepicker__wrapper"
             />
             <div className="input-group-append datepicker__icon-box">
               <span className="input-group-text" id="basic-addon2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
+                <svg style={{stroke: "gray"}} id="a" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg"
                   width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-calendar3"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
-                  <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                </svg>
+                  height="20"><line className="icon" x1=".521" y1="9.67" x2="20.394" y2="9.67"/><path className="icon" d="M2.038,3.577c-.85,0-1.538,.689-1.538,1.538v13.846c0,.85,.689,1.538,1.538,1.538H18.962c.85,0,1.538-.689,1.538-1.538V5.115c0-.85-.689-1.538-1.538-1.538h-3.077"/><line className="icon" x1="5.115" y1="1.013" x2="5.115" y2="6.141"/><line className="icon" x1="15.885" y1=".5" x2="15.885" y2="6.654"/><line className="icon" x1="5.115" y1="3.577" x2="12.808" y2="3.577"/></svg>
               </span>
             </div>
           </div>
