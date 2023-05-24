@@ -84,7 +84,7 @@ const RdsCompContactInformation = (props: RdsCompContactInfoProps) => {
               name={"email"}
             ></RdsInput>
             {error.email != "" && (
-              <span style={{ color: "red" }}>{error.email}</span>
+              <span className="text-danger">{error.email}</span>
             )}
           </div>
 
@@ -102,7 +102,7 @@ const RdsCompContactInformation = (props: RdsCompContactInfoProps) => {
               value={user.contact}
             ></RdsInput>
             {error.contact != "" && (
-              <span style={{ color: "red" }}>{error.contact}</span>
+              <span className="text-danger">{error.contact}</span>
             )}
           </div>
           <div className="form-check mt-2 mb-4">

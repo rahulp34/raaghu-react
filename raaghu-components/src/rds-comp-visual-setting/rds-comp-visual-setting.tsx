@@ -110,10 +110,9 @@ const RdsCompVisualSetting = (props: RdsCompVisualSettingProps) => {
                       }`}
                   >
                     <div
-                      className="p-0"
+                      className="p-0 cursorpointer"
                       onClick={() => onSetActiveTheme(theme.themeId)}
-                      style={{ cursor: "pointer" }}
-                    >
+                      >
                       <img src={theme.imgsrc} className="w-100" />
                     </div>
                     <div className="col-md-12">

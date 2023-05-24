@@ -70,9 +70,7 @@ const RdsUserDelegations = (props: RdsUserDelegationsProps) => {
             </div>
           </div>
           <div
-            className="d-flex"
-            style={{ position: "absolute", bottom: "5%" }}
-          >
+            className="d-flex fixed-bottom p-3 position-absolute">
             <div className="me-2">
               <RdsButton
                 type="button"
