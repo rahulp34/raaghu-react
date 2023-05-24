@@ -1,10 +1,11 @@
 .node-icon {
   display: none;
 }
-  
+
 .node-label:hover .node-icon {
   display: block;
 }
+
 .horizontal {
   height: 0rem;
   width: 1.75rem;
@@ -15,7 +16,8 @@
   top: 4px;
   z-index: 0;
 }
-.vertical{
+
+.vertical {
   position: absolute;
   left: -25px;
   bottom: 0;
@@ -25,12 +27,15 @@
   border-right: 1px dashed #adb5bd;
   z-index: 0;
 }
-.unitName{
+
+.unitName {
   margin-left: -28px;
 }
-.member-count{
+
+.member-count {
   margin-left: -10px;
 }
+
 .node_dot {
   border-radius: 50%;
   height: 14px;
@@ -40,8 +45,15 @@
   margin-top: 0.3125rem;
   z-index: 2;
 }
-.node-icons{
+
+.node-icons {
   position: absolute;
   left: -27px;
   top: 10px;
+}
+
+.list-style {
+  list-style-position: initial !important;
+  list-style-image: initial !important;
+  list-style-type: none !important;
 }
