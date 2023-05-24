@@ -73,7 +73,7 @@ const RdsCompNotificationSettings = (
           On a New Tenant Registered to the Application
         </label>
       </div>
-      <div className="buttongrp" style={{ position: "absolute", bottom: "5%" }}>
+      <div className="buttongrp fixed-bottom m-3 position-absolute">
         <div>
           <button
             className="btn buttonname btn-outline-primary me-3"

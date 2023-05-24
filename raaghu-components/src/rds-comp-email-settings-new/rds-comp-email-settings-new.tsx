@@ -57,18 +57,16 @@ const RdsCompEmailSettingsNew = (props: RdsCompEmailSettingsNewProps) => {
 
 				<div className="row mb-3">
 					<div
-						className="col-lg-12 col-md-12 col-sm-12"
-						style={{ fontSize: "14px" }}
-					>
+						className="col-lg-12 col-md-12 col-sm-12 fs-small-size"
+						>
 						<RdsCheckbox label="Enable SSL" checked={false}></RdsCheckbox>
 					</div>
 				</div>
 
 				<div className="row mb-3">
 					<div
-						className="col-lg-12 col-md-12 col-sm-12"
-						style={{ fontSize: "14px" }}
-					>
+						className="col-lg-12 col-md-12 col-sm-12 fs-small-size"
+						>
 						<RdsCheckbox
 							label="Use Default Credentials"
 							checked={false}

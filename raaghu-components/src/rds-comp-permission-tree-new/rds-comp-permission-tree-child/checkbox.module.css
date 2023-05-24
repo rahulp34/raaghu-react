@@ -5,7 +5,7 @@
     width: $size;
     height: $size;
     display: inline-block;
-    // background-color: lighten($color, 40%);
+     /* background-color: lighten($color, 40%); */
     align-items: center;
     color: white;
     text-align: center;
@@ -14,7 +14,7 @@
     position: relative;
     border: 1px solid grey;
     border-radius: 0.25em;
-    // outline: 1px solid #ddd;
+    /* outline: 1px solid #ddd; */
     line-height: $fontSize;
     margin-right: 5px;
   
