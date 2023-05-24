@@ -58,7 +58,7 @@ const RdsSelectList = (props: RdsSelectProps) => {
       <select
         key={props.id}
         value={selectedOption}
-        className={`form-select cursor-pointer ${multiselect} ${customSize}  ${props.classes}`}
+        className={`form-select lh-lg py-1 cursor-pointer ${multiselect} ${customSize}  ${props.classes}`}
         disabled={Disabled}
         multiple={props.isMultiple}
         aria-label="select example"

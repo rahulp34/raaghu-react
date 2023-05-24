@@ -420,10 +420,11 @@ const Polls = (props: any) => {
             )}
           </RdsNavtabs>
 
-          <div className="footer-buttons justify-content-end bottom-0 pt-0">
+          <div className="footer-buttons d-flex bottom-0 pt-0">
             <RdsButton
               class="me-2"
               label="CANCEL"
+              size="small"
               type="button"
               databsdismiss="offcanvas"
               isOutline={true}
@@ -433,7 +434,7 @@ const Polls = (props: any) => {
               class="me-2"
               label="SAVE"
               type="button"
-             
+              size="small"
               isOutline={false}
               colorVariant="primary"
               databsdismiss="offcanvas"
@@ -505,11 +506,12 @@ const Polls = (props: any) => {
 </div>
           </>))}
          
-          <div className="footer-buttons justify-content-end bottom-0 pt-0">
+          <div className="footer-buttons d-flex bottom-0 pt-0">
             <RdsButton
               class="me-2"
               label="CANCEL"
               type="button"
+              size="small"
               databsdismiss="offcanvas"
               isOutline={true}
               colorVariant="primary"

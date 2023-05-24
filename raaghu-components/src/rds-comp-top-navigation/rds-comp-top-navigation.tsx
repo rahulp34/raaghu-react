@@ -248,7 +248,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
-              iconStroke={true}
+              iconStroke={false}
               isIconPlaceholder={true}
               isPlaceholder={false}
               id={"languageDropdown"}
@@ -294,9 +294,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               offId="Profile1"
               offcanvasbutton={
                 <div
-                  className="d-flex align-items-center justify-content-center"
-                  style={{ cursor: "pointer" }}
-                >
+                  className="d-flex align-items-center justify-content-center cursorpointer">
                   <img
                     className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
                     src={profilePic}
@@ -328,9 +326,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               offId="Profile"
               offcanvasbutton={
                 <div
-                  className="d-flex align-items-center"
-                  style={{ cursor: "pointer" }}
-                >
+                  className="d-flex align-items-center cursorpointer">
                   <img
                     className="avatar bg-light avatar-sm rounded rounded-circle mb-0"
                     src={profilePic}

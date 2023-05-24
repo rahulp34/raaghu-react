@@ -48,7 +48,6 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
       <>
         {node && (
           <>
-            <div style={{ height: "8px" }}></div>
             <li key={node.data.id}>
               <div className="position-relative">
                 {setStateBasedOnMutable && <div className="vertical"></div>}
@@ -146,9 +145,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                   <div>
                     <ul key={node.data.id} className="unitName">
                       <ul
-                        className="position-relative mb-0"
-                        style={{ listStyle: "none" }}
-                      >
+                        className="position-relative mb-0 list-style">
                         {node.children.map((tree: any, index: any) => (
                           <div key={tree.data.id}>
                             <TreeNode
@@ -159,12 +156,12 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
                           </div>
                         ))}
                         {node.children?.length != 0 && (
-                          <div style={{ height: "18px" }}></div>
+                          <div></div>
                         )}
                       </ul>
 
                       <div>
-                        <div className="mb-2 ms-5">
+                        <div className="mb-2 ms-4 mt-3">
                           {node.children?.length !== 0 && (
                             <div className="unitName">
                               {node.children[node.children?.length - 1] && (
@@ -210,7 +207,7 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
 
   return (
     <>
-      <ul className="position-relative mb-0 ms-3" style={{ listStyle: "none" }}>
+      <ul className="position-relative mb-0 ms-3 list-style">
         {props.organizationTreeData.map((tree, index) => (
           <div key={tree.data.id}>
             <TreeNode
@@ -221,13 +218,13 @@ const RdsCompOrganizationTree = (props: RdsCompOrganizationTreeProps) => {
           </div>
         ))}
         {props.organizationTreeData?.length !== 0 && (
-          <div style={{ height: "18px" }}></div>
+          <div></div>
         )}
       </ul>
 
       {props.mutable === true && (
         <div>
-          <div className="mb-2 ms-4">
+          <div className="mb-2 ms-4 mt-3">
             <div className="unitName">
               <RdsButton
                 iconHeight="10px"
