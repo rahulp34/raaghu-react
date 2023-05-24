@@ -248,7 +248,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
               placeholder={props.languageLabel}
               icon={props.languageIcon}
               iconFill={false}
-              iconStroke={true}
+              iconStroke={false}
               isIconPlaceholder={true}
               isPlaceholder={false}
               id={"languageDropdown"}

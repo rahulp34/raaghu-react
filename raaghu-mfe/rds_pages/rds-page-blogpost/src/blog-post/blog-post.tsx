@@ -193,7 +193,7 @@ const BlogPost = () => {
 							preventEscapeKey={false}
 							offId="blog-post-add-off"
 						>
-							<div className="mt-3">
+							<div>
 								<RdsCompBlogPostNew
 									isEdit={false}
 									blogPostData={blogPostData}

@@ -68,7 +68,7 @@ const RdsCompCookiesSection = (props: RdsCompCookiesSectionProps) => {
           {props.showDeclineButton && (
             <div className="col-md-3 p-0">
               <div className="mx-2 my-2">
-                <div className="mt-3" style={{ width: "150px" }}>
+                <div className="mt-3 w-50">
                   <RdsButton
                     label="Accept"
                     type="button"
@@ -76,7 +76,7 @@ const RdsCompCookiesSection = (props: RdsCompCookiesSectionProps) => {
                     colorVariant="primary"
                   ></RdsButton>
                 </div>
-                <div className="mt-3" style={{ width: "150px" }}>
+                <div className="mt-3 w-50">
                   <RdsButton
                     class="me-2"
                     tooltipTitle={""}

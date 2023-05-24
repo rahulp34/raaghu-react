@@ -148,7 +148,7 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
         onClick={clickedOnDropDown}
       >      
         <div
-          className={`px-2 py-1 fw-light fs-5 d-flex align-items-center ps-2 justify-content-between ${border}`}
+          className={`d-flex align-items-center ps-2 justify-content-between ${border}`}
         >
           {/* simple dropdown  */}
           {isTouch !== true && props.placeholder && props.multiSelect !== true &&   (
@@ -256,15 +256,11 @@ const RdsDropdownList = (props: RdsDropdownListProps) => {
       {/* DropdownList items */}
       <ul className="dropdown-menu" id={props.id} aria-labelledby={props.id}>
         {props.listItems?.map((language: any, i: any) => (
-          <li
-            key={i}
-            onClick={(event) => {
-              handlerLIstItem(event, i, language.val);
-            }}
+          <li key={i} onClick={(event) => { handlerLIstItem(event, i, language.val); }}
           >
             <a
               id={i}
-              className="ps-2 dropdown-item fab-dropdown-item d-flex cursor-pointer"
+              className="dropdown-item fab-dropdown-item d-flex cursor-pointer"
             >
               {props.multiSelect && (
                 <div className="form-check">

@@ -101,10 +101,10 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
   return (
     <>
       {props.multiple === false ? (
-        <div className="row p-2">
+       
           <div className="">
-            <div className="mb-2">
-              <label className={`label  ${SIZE} `}>{props.label}</label>
+            <div>
+              <label className={`form-label  ${SIZE} `}>{props.label}</label>
             </div>
             <div>
               <form>
@@ -136,13 +136,13 @@ const RdsFileUploader = (props: RdsFileUploaderProps) => {
               </form>
             </div>
           </div>
-        </div>
+        
       ) : (
         <div className="row p-2">
           <div className="pl-2">
             <div className="labelbox">
-              <label className={`label  ${SIZE} `}>{props.label}</label>
-              <label className={`label ${SIZE}`}>
+              <label className={`form-label  ${SIZE} `}>{props.label}</label>
+              <label className={`form-label ${SIZE}`}>
                 Maximum {fileSizeInMB} MB
               </label>
             </div>

@@ -103,7 +103,7 @@ const RdsCompInformation = (props: RdsCompInformationProps) => {
               dataTestId="property-name"
             ></RdsInput>
             {error.propertyname && (
-              <span style={{ color: "red" }}>{error.propertyname}</span>
+              <span className="text-danger">{error.propertyname}</span>
             )}
           </div>
 

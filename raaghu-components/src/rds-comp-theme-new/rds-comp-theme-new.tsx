@@ -47,7 +47,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             <RdsLabel
               label="Style"
               class="form-label"
-              children={<span style={{ color: "red" }}>*</span>}
+              children={<span className="text-danger">*</span>}
             ></RdsLabel>
             <RdsSelectList
               label="Select"
@@ -62,7 +62,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             <RdsLabel
               label="Public Website Style"
               class="form-label"
-              children={<span style={{ color: "red" }}>*</span>}
+              children={<span className="text-danger">*</span>}
             ></RdsLabel>
             <RdsSelectList
               label="Select"
@@ -80,7 +80,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             <RdsLabel
               label="Menu Placement"
               class="form-label"
-              children={<span style={{ color: "red" }}>*</span>}
+              children={<span className="text-danger">*</span>}
             ></RdsLabel>
             <RdsSelectList
               label="Select"
@@ -95,7 +95,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             <RdsLabel
               label="Menu Status"
               class="form-label"
-              children={<span style={{ color: "red" }}>*</span>}
+              children={<span className="text-danger">*</span>}
             ></RdsLabel>
             <RdsSelectList
               label="Select"

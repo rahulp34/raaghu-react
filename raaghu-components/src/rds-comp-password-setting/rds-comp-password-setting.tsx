@@ -91,7 +91,7 @@ const RdsCompPasswordSetting = (props: RdsCompPasswordSettingProps) => {
               name={"curPass"}
 			  dataTestId="current-password"
             ></RdsInput>
-            {error1 && <span style={{ color: "red" }}>{error1}</span>}
+            {error1 && <span className="text-danger">{error1}</span>}
           </div>
           <div className=" fw-normal mb-3">
             <RdsInput
@@ -104,7 +104,7 @@ const RdsCompPasswordSetting = (props: RdsCompPasswordSettingProps) => {
               value={newPass}
 			  dataTestId="new-password"
             ></RdsInput>
-            {error2 && <span style={{ color: "red" }}>{error2}</span>}
+            {error2 && <span className="text-danger">{error2}</span>}
           </div>
           <div className=" fw-normal mb-3">
             <RdsInput
@@ -117,7 +117,7 @@ const RdsCompPasswordSetting = (props: RdsCompPasswordSettingProps) => {
               value={curNewPass}
 			  dataTestId="confirm-password"
             ></RdsInput>
-            {error3 && <span style={{ color: "red" }}>{error3}</span>}
+            {error3 && <span className="text-danger">{error3}</span>}
           </div>
 
           <div>
