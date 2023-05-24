@@ -41,7 +41,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
   }
   return (
     <>
-      <form onSubmit={submitData}>
+      <form data-testid="form" onSubmit={submitData}>
         <div className="row mb-3 pt-4">
           <div className="col-lg-6 col-md-6 form-group">
             <RdsLabel
@@ -56,6 +56,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               onSelectListChange={(e: any) => {
                 handleStyleListChange(e);
               }}
+              dataTestId="style-select-list"
             ></RdsSelectList>
           </div>
           <div className="col-lg-6 col-md-6">
@@ -71,6 +72,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               onSelectListChange={(e: any) => {
                 webStyleListChange(e);
               }}
+              dataTestId="web-select-list"
             ></RdsSelectList>
           </div>
         </div>
@@ -89,6 +91,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               onSelectListChange={(e: any) => {
                 menuListChange(e);
               }}
+              dataTestId="menu-select-list"
             ></RdsSelectList>
           </div>
           <div className="col-lg-6 col-md-6">
@@ -104,6 +107,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
               onSelectListChange={(e: any) => {
                 statusListChange(e);
               }}
+              dataTestId="status-select-list"
             ></RdsSelectList>
           </div>
         </div>
@@ -115,6 +119,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             isOutline={true}
             colorVariant="primary"
             size="small"
+            dataTestId="cancel"
           ></RdsButton>
           <RdsButton
             class="me-2"
@@ -123,6 +128,7 @@ const RdsCompThemeNew = (props: RdsCompThemeNewProps) => {
             isOutline={false}
             colorVariant="primary"
             size="small"
+            dataTestId="save"
           ></RdsButton>
         </div>
       </form>
