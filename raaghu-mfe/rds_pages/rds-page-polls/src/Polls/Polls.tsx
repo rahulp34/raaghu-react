@@ -100,8 +100,7 @@ const Polls = (props: any) => {
     endDate:  null,
     resultShowingEndDate: null,
   });
-  const [alert, setAlert] = useState({ showAlert: false, message: "", success: "" });
-  const [alertOne, setAlertOne] = useState(false);
+  const [Alert, setAlert] = useState({ show: false, message: "", color: "" });
   const [activeNavTabId, setActiveNavTabId] = useState(0);
   const [getCreateNewPollsOptionData, setGetCreateNewPollsOptionData] = useState<any[]>([]);
  const [pollsOptionsData, setPollsOptionsData]= useState([])
@@ -231,6 +230,21 @@ const Polls = (props: any) => {
     const data = {...editQuestionData, pollOptions: removeIdsFromPollsOptions}
     dispatch(UpdatePollsData({ id: rowDataId,body:data }) as any).then(
       (res: any) => {
+        if (res.type.includes("rejected")) {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "your request has been denied",
+            color: "danger",
+          });
+        } else {
+          setAlert({
+            ...Alert,
+            show: true,
+            message: "Poll updated Successfully",
+            color: "success",
+          });
+        }
         dispatch(GetPolls() as any);
       }
     );
@@ -242,6 +256,21 @@ const Polls = (props: any) => {
       ...questionData, pollOptions: getCreateNewPollsOptionData,
     };
     dispatch(SavePolls(allData) as any).then((res: any) => {
+      if (res.type.includes("rejected")) {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Poll added Successfully",
+          color: "success",
+        });
+      }
       dispatch(GetPolls() as any);
     });
    
@@ -256,7 +285,21 @@ const Polls = (props: any) => {
   function deleteHandler(data:any){
     console.log(data);
      dispatch(deletePolls(rowDataId) as any).then((res: any) => {
-     
+      if (res.type.includes("rejected")) {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "your request has been denied",
+          color: "danger",
+        });
+      } else {
+        setAlert({
+          ...Alert,
+          show: true,
+          message: "Poll deleted Successfully",
+          color: "success",
+        });
+      }
       dispatch(GetPolls() as any);
     });
   }
@@ -289,235 +332,254 @@ const Polls = (props: any) => {
     
     setEditQuestionData(data);
   }
+  useEffect(() => {
+     const timer = setTimeout(() => {
+      setAlert({ ...Alert, show: false });
+    }, 2000);
+     return () => clearTimeout(timer);
+  }, [polls.GetPolls]);
   return (
+    <>
     <div className="container-fluid p-0 m-0">
-    <div className="row">
-      <div className="col-md-12 d-flex  justify-content-between desktop-btn">
-      <div>
-      {alert.showAlert && alertOne && (
-          <RdsAlert
-            alertmessage={alert.message}
-            colorVariant={alert.success ? "success" : "danger"}></RdsAlert>
-        )}
+      <div className="row">
+        <div className="col-md-12 mb-3 ">
+          <div className="row ">
+            <div className="col-md-4">
+              {Alert.show && (
+                <RdsAlert
+                  alertmessage={Alert.message}
+                  colorVariant={Alert.color}
+                ></RdsAlert>
+              )}
+            </div>
+            <div className="col-md-8 d-flex justify-content-end ">
+            <RdsOffcanvas
+                canvasTitle="NEW POLL"
+                onclick={offCanvasHandler}
+                placement="end"
+                offcanvasbutton={
+                  <div className="my-1">
+                    <RdsButton
+                      icon="plus"
+                      iconColorVariant="light"
+                      size="small"
+                      type="button"
+                      block={false}
+                      iconHeight="15px"
+                      iconWidth="15px"
+                      iconFill={false}
+                      iconStroke={true}
+                      showLoadingSpinner={true}
+                      colorVariant="primary"
+                      label="New poll"
+                    />
+                  </div> 
+                }
+                backDrop={true}
+                scrolling={false}
+                preventEscapeKey={false}
+                offId={"polls-add-new"}
+              >
+                <RdsNavtabs
+                navtabsItems={navtabsItems}
+                type={"tabs"}
+                activeNavTabId={activeNavTabId}
+                activeNavtabOrder={(activeNavTabId) => {
+                  setActiveNavTabId(activeNavTabId);
+                }}
+                justified={false}
+              >
+                {activeNavTabId == 0 && (
+                  <RdsCompPollsQuestion
+                    widgetList={[
+                      { option: "a", value: "a" },
+                      { option: "b", value: "b" },
+                    ]}
+                    getPollsQuestion={(data: any) => getPollsQuestion(data)}
+                    questionData={questionData}
+                  ></RdsCompPollsQuestion>
+                  
+                )}
+                {activeNavTabId == 1 && (
+                  <RdsCompPollsOption
+                    optionsData={pollsOptionsData}
+                    getPollsOptionData={getPollsOptionData}
+                  ></RdsCompPollsOption>
+                )}
+              </RdsNavtabs>
+              <div className="row mt-5 footer-buttons bottom-0 mx-0 ">
+                <div className="col-md-2 mx-2">
+                  <RdsButton
+                    label="Cancel"
+                    colorVariant="primary"
+                    block={true}
+                    size="small"
+                    databsdismiss="offcanvas"
+                    tooltipTitle={""}
+                    type="button"
+                    isOutline={true}
+                  />
+                </div>
+                <div className="col-2">
+                  <RdsButton
+                    label="Save"
+                    size="small"
+                    isDisabled={!isFormValid}
+                    colorVariant="primary"
+                    block={true}
+                    databsdismiss="offcanvas"
+                    tooltipTitle={""}
+                    type="button"
+                    showLoadingSpinner={true}
+                    onClick={handleAddNewPoll}
+                  />
+                </div>
+              </div>
+              </RdsOffcanvas>
+            </div>
           </div>
-      <RdsOffcanvas
-            canvasTitle="NEW POLL"
-            onclick={offCanvasHandler}
-            placement="end"
-            offcanvasbutton={
-              
-
-                <RdsButton
-                  icon="plus"
-                  iconColorVariant="light"
-                  size="small"
-                  type="button"
-                  block={false}
-                  iconHeight="15px"
-                  iconWidth="15px"
-                  iconFill={false}
-                  iconStroke={true}
-                  showLoadingSpinner={true}
+        </div>
+    
+        <div className="col-md-12">
+          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch">
+          <RdsCompDatatable
+             actionPosition="right"
+              tableHeaders={tableHeaders}
+              actions={actions}
+              tableData={getDataPolls}
+              pagination={true}
+              recordsPerPage={10}
+              recordsPerPageSelectListOption={true}
+              onActionSelection={scopeSelection}
+            ></RdsCompDatatable>
+             <RdsOffcanvas
+              canvasTitle="Edit"
+              placement="end"
+              offId="poll-edit-off"
+              offcanvaswidth={650}
+              backDrop={true}
+              scrolling={false}
+              preventEscapeKey={false}
+            >
+              <RdsNavtabs
+                navtabsItems={navtabsItemsEdit}
+                type={"tabs"}
+                activeNavTabId={activeNavTabIdEdit}
+                activeNavtabOrder={(activeNavTabIdEdit) => {
+                  setActiveNavTabIdEdit(activeNavTabIdEdit);
+                }}
+                justified={false}>
+    
+                {activeNavTabIdEdit == 0 && (
+                  <RdsCompPollsQuestion
+                    widgetList={[
+                      { option: "a", value: "a" },
+                      { option: "b", value: "b" },
+                    ]}
+                    questionData={editQuestionData}
+                    getPollsQuestion={getEditPollsQuestionData}
+                  ></RdsCompPollsQuestion>
+                )}
+    
+                {activeNavTabIdEdit == 1 && (
+                  <>
+                    <RdsCompPollsOption  optionsData={editPollsOptionData}  getPollsOptionData={getPollsEditOptionData}></RdsCompPollsOption>
+                  </>
+                )}
+              </RdsNavtabs>
+              <div className="row mt-5 footer-buttons bottom-0 mx-0 ">
+                <div className="col-md-2 mx-2">
+                  <RdsButton
+                    label="Cancel"
+                    colorVariant="primary"
+                    block={true}
+                    size="small"
+                    databsdismiss="offcanvas"
+                    tooltipTitle={""}
+                    type="button"
+                    isOutline={true}
+                  />
+                </div>
+                <div className="col-2">
+                  <RdsButton
+                    label="Save"
+                    size="small"
+                    colorVariant="primary"
+                    block={true}
+                    databsdismiss="offcanvas"
+                    tooltipTitle={""}
+                    type="button"
+                    showLoadingSpinner={true}
+                    onClick={editDataHandler}
+                  />
+                </div>
+              </div>
+            </RdsOffcanvas>
+            <RdsOffcanvas
+              canvasTitle="Results"
+              placement="end"
+              offId="show-result-off"
+              offcanvaswidth={700}
+              backDrop={false}
+              scrolling={false}
+              preventEscapeKey={false}
+            >
+              {pollsResultData.length && pollsResultData.map((e:any)=>(<>
+                <div className="row mx-4">
+                <RdsLabel  label={e.text} size="16px"></RdsLabel>
+              </div>
+              {/* <div className="row p-4">
+                <RdsProgressBar
                   colorVariant="primary"
-                  label="New poll"
+                  displaypercentage
+                  height={15}
+                  progressWidth={e.voteCount}
+                  role="single"
+                  striped="default"
                 />
-              
-            }
-            backDrop={true}
-            scrolling={false}
-            preventEscapeKey={false}
-            offId={"Edition"}
-          >
-            <RdsNavtabs
-            navtabsItems={navtabsItems}
-            type={"tabs"}
-            activeNavTabId={activeNavTabId}
-            activeNavtabOrder={(activeNavTabId) => {
-              setActiveNavTabId(activeNavTabId);
-            }}
-            justified={false}
-          >
-            {activeNavTabId == 0 && (
-              <RdsCompPollsQuestion
-                widgetList={[
-                  { option: "a", value: "a" },
-                  { option: "b", value: "b" },
-                ]}
-                getPollsQuestion={(data: any) => getPollsQuestion(data)}
-                questionData={questionData}
-              ></RdsCompPollsQuestion>
-              
-            )}
-            {activeNavTabId == 1 && (
-              <RdsCompPollsOption
-                optionsData={pollsOptionsData}
-                getPollsOptionData={getPollsOptionData}
-              ></RdsCompPollsOption>
-            )}
-          </RdsNavtabs>
-          <div className="footer-buttons bottom-0 d-flex gap-2">
-            <div className="">
-              <RdsButton
-                label="Cancel"
-                colorVariant="primary"
-                block={true}
-                size="small"
-                databsdismiss="offcanvas"
-                tooltipTitle={""}
-                type="button"
-                isOutline={true}
-              />
-            </div>
-            <div className="">
-              <RdsButton
-                label="Save"
-                size="small"
-                isDisabled={!isFormValid}
-                colorVariant="primary"
-                block={true}
-                databsdismiss="offcanvas"
-                tooltipTitle={""}
-                type="button"
-                showLoadingSpinner={true}
-                onClick={handleAddNewPoll}
-              />
-            </div>
-          </div>
-          </RdsOffcanvas>
-          <RdsOffcanvas
-          canvasTitle="Edit"
-          placement="end"
-          offId="poll-edit-off"
-          offcanvaswidth={650}
-          backDrop={true}
-          scrolling={false}
-          preventEscapeKey={false}
-        >
-          <RdsNavtabs
-            navtabsItems={navtabsItemsEdit}
-            type={"tabs"}
-            activeNavTabId={activeNavTabIdEdit}
-            activeNavtabOrder={(activeNavTabIdEdit) => {
-              setActiveNavTabIdEdit(activeNavTabIdEdit);
-            }}
-            justified={false}>
-
-            {activeNavTabIdEdit == 0 && (
-              <RdsCompPollsQuestion
-                widgetList={[
-                  { option: "a", value: "a" },
-                  { option: "b", value: "b" },
-                ]}
-                questionData={editQuestionData}
-                getPollsQuestion={getEditPollsQuestionData}
-              ></RdsCompPollsQuestion>
-            )}
-
-            {activeNavTabIdEdit == 1 && (
-              <>
-                <RdsCompPollsOption  optionsData={editPollsOptionData}  getPollsOptionData={getPollsEditOptionData}></RdsCompPollsOption>
-              </>
-            )}
-          </RdsNavtabs>
-
-          <div className="footer-buttons justify-content-end bottom-0 pt-0">
-            <RdsButton
-              class="me-2"
-              label="CANCEL"
-              type="button"
-              databsdismiss="offcanvas"
-              isOutline={true}
-              colorVariant="primary"
-            ></RdsButton>
-            <RdsButton
-              class="me-2"
-              label="SAVE"
-              type="button"
+              </div> */}
+              <div className="input-group mb-3">
+                <div className="form-control border-0">
+                <RdsProgressBar
+                  colorVariant="primary"
+                  displaypercentage
+                  height={15}
+                  progressWidth={e.voteCount}
+                  role="single"
+                  striped="default"
+                /> 
+                </div>
+              <div className="input-group-prepend">
+        <span className="input-group-text border-0 bg-transparent" id="basic-addon1">
+        <RdsLabel  label={`${e.voteCount}%`} size="16px"></RdsLabel>
+        </span>
+      </div>
+    </div>
+              </>))}
              
-              isOutline={false}
-              colorVariant="primary"
-              databsdismiss="offcanvas"
-              showLoadingSpinner={true}
-              onClick={editDataHandler}
-            ></RdsButton>
+              <div className="footer-buttons justify-content-end bottom-0 pt-0">
+                <RdsButton
+                  class="me-2"
+                  label="CANCEL"
+                  type="button"
+                  databsdismiss="offcanvas"
+                  isOutline={true}
+                  colorVariant="primary"
+                ></RdsButton>
+              </div>
+            </RdsOffcanvas>
+             <RdsCompAlertPopup
+                alertID="poll-delete-off"
+                onSuccess={deleteHandler}
+              />
           </div>
-        </RdsOffcanvas>
+        </div>
       </div>
-
-      <div className="col-md-12">
-      <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch-wthlabel mt-3">
-        <RdsCompDatatable
-         actionPosition="right"
-          tableHeaders={tableHeaders}
-          actions={actions}
-          tableData={getDataPolls}
-          pagination={true}
-          recordsPerPage={10}
-          recordsPerPageSelectListOption={true}
-          onActionSelection={scopeSelection}
-        ></RdsCompDatatable>
-         <RdsCompAlertPopup
-            alertID="poll-delete-off"
-            onSuccess={deleteHandler}
-          />
-      </div>
-      </div>
-      <div>
-        <RdsOffcanvas
-          canvasTitle="Results"
-          placement="end"
-          offId="show-result-off"
-          offcanvaswidth={700}
-          backDrop={false}
-          scrolling={false}
-          preventEscapeKey={false}
-        >
-          {pollsResultData.length && pollsResultData.map((e:any)=>(<>
-            <div className="row mx-4">
-            <RdsLabel  label={e.text} size="16px"></RdsLabel>
-          </div>
-          {/* <div className="row p-4">
-            <RdsProgressBar
-              colorVariant="primary"
-              displaypercentage
-              height={15}
-              progressWidth={e.voteCount}
-              role="single"
-              striped="default"
-            />
-          </div> */}
-          <div className="input-group mb-3">
-            <div className="form-control border-0">
-            <RdsProgressBar
-              colorVariant="primary"
-              displaypercentage
-              height={15}
-              progressWidth={e.voteCount}
-              role="single"
-              striped="default"
-            /> 
-            </div>
-          <div className="input-group-prepend">
-    <span className="input-group-text border-0 bg-transparent" id="basic-addon1">
-    <RdsLabel  label={`${e.voteCount}%`} size="16px"></RdsLabel>
-    </span>
-  </div>
-</div>
-          </>))}
-         
-          <div className="footer-buttons justify-content-end bottom-0 pt-0">
-            <RdsButton
-              class="me-2"
-              label="CANCEL"
-              type="button"
-              databsdismiss="offcanvas"
-              isOutline={true}
-              colorVariant="primary"
-            ></RdsButton>
-          </div>
-        </RdsOffcanvas>
-      </div>
-    </div></div>
+    </div>
+    </>
   );
 };
 export default Polls;
+
+
+
