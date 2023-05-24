@@ -165,7 +165,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
               name={"endpoint"}
             ></RdsInput>
             {error.endpoint && (
-              <span style={{ color: "red" }}>{error.endpoint}</span>
+              <span className="text-danger">{error.endpoint}</span>
             )}
           </div>
           <div className="fw-normal mb-4">
@@ -177,7 +177,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
               rows={4}
               value={user.event}
             />
-            {error.event && <span style={{ color: "red" }}>{error.event}</span>}
+            {error.event && <span className="text-danger">{error.event}</span>}
           </div>
 
           <div className=" fw-normal row mb-3 mt-2">
@@ -191,7 +191,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
                 value={user.headerKey}
               ></RdsInput>
               {error.headerKey && (
-                <span style={{ color: "red" }}>{error.headerKey}</span>
+                <span className="text-danger">{error.headerKey}</span>
               )}
             </div>
             <div className="col-5 mb-3">
@@ -203,7 +203,7 @@ const RdsCompWebhookSubscription = (props: RdsCompWebhookSubscriptionProps) => {
                 value={user.headerValue}
               ></RdsInput>
               {error.headerValue && (
-                <span style={{ color: "red" }}>{error.headerValue}</span>
+                <span className="text-danger">{error.headerValue}</span>
               )}
             </div>
             <div className="col-2 mb-3">

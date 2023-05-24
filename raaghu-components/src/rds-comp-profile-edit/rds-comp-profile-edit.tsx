@@ -46,7 +46,7 @@ const RdsCompProfileEdit = (props: RdsCompProfileEditProps) => {
             <div className="col-md-3 text-center cursor-pointer sm-p-0">
               <img src='./edit-pic.png' />
 
-              <input type="file" accept="image/*" style={{ display: "none" }} />
+              <input type="file" accept="image/*" className="d-none"/>
             </div>
             <div className="col-md-9 sm-p-0">
               <div className="form-group mb-3">

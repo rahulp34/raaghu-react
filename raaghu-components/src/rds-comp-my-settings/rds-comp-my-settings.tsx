@@ -161,7 +161,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             value={curPass}
             name={"curPass"}
           ></RdsInput>
-          {error1 && <span style={{ color: "red" }}>{error1}</span>}
+          {error1 && <span className="text-danger">{error1}</span>}
         </div>
         <div className=" fw-normal mb-3">
           <RdsInput
@@ -173,7 +173,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             name={"newPass"}
             value={newPass}
           ></RdsInput>
-          {error2 && <span style={{ color: "red" }}>{error2}</span>}
+          {error2 && <span className="text-danger">{error2}</span>}
         </div>
         <div className=" fw-normal mb-3">
           <RdsInput
@@ -185,7 +185,7 @@ const RdsCompMySettings = (props: RdsCompMySettingsProps) => {
             name={"curNewPass"}
             value={curNewPass}
           ></RdsInput>
-          {error3 && <span style={{ color: "red" }}>{error3}</span>}
+          {error3 && <span className="text-danger">{error3}</span>}
         </div>
 
         <div className="row">
