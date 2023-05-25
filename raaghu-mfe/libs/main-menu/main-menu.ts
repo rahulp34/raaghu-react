@@ -77,7 +77,7 @@ const MainMenu = [
       },
       {
         "key": "3-1",
-        "label": "OpenIddict",
+        "label": "Open Iddict",
         "icon": "bullet",
         "children": [
           {
@@ -238,7 +238,7 @@ const MainMenu = [
       },
       {
         "key": "7-0-6",
-        "label": "BlogPosts",
+        "label": "Blog Posts",
         "icon": "bullet",
         "path": "/raaghu-blog-post",
         "subTitle": "subtitle here"

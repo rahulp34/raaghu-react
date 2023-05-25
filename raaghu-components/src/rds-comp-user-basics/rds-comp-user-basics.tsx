@@ -6,130 +6,114 @@ export interface RdsCompUserBasicsProps {
   userData?: any;
   organizationUnit?: any;
   roles?: any;
-  createUser?:any
-  isEdit?:boolean;
+  createUser?: any
+  isEdit?: boolean;
 }
 
 const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
   const [organizationUnit, setOrganizationUnit] = useState(
     props.organizationUnit
   );
-  
-  const [roles, setRoles ] = useState(props.roles);
+
+  const [roles, setRoles] = useState(props.roles);
 
   const [userData, setUserData] = useState<any>(props.userData);
 
 
 
   const setName = (event: any) => {
-    setUserData({...userData, name:event.target.value})
-    props.createUser({...userData, name:event.target.value})
+    setUserData({ ...userData, name: event.target.value })
+    props.createUser({ ...userData, name: event.target.value })
   };
 
   const setSurname = (event: any) => {
-    setUserData({...userData, surname:event.target.value})
-    props.createUser({...userData, surname:event.target.value})
+    setUserData({ ...userData, surname: event.target.value })
+    props.createUser({ ...userData, surname: event.target.value })
   };
 
   const setEmail = (event: any) => {
-    setUserData({...userData, email:event.target.value})
-    props.createUser({...userData, email:event.target.value})
+    setUserData({ ...userData, email: event.target.value })
+    props.createUser({ ...userData, email: event.target.value })
   };
 
   const setPassword = (event: any) => {
-    setUserData({...userData, password:event.target.value})
-    props.createUser({...userData, password:event.target.value})
+    setUserData({ ...userData, password: event.target.value })
+    props.createUser({ ...userData, password: event.target.value })
   };
 
   const setUserName = (event: any) => {
-    
-    setUserData({...userData, userName:event.target.value})
-    props.createUser({...userData, userName:event.target.value})
+
+    setUserData({ ...userData, userName: event.target.value })
+    props.createUser({ ...userData, userName: event.target.value })
   };
 
   const setPhoneNumber = (event: any) => {
-    setUserData({...userData, phoneNumber:event.target.value})
-    props.createUser({...userData, phoneNumber:event.target.value})
+    setUserData({ ...userData, phoneNumber: event.target.value })
+    props.createUser({ ...userData, phoneNumber: event.target.value })
   };
- 
-  function setOrganizationUnitData(value:any){
-    
+
+  function setOrganizationUnitData(value: any) {
+
     //setUserData({...userData, organizationUnitIds:[value]})
     //props.createUser()
   }
-  function setRolesData(value:any){
-    
+  function setRolesData(value: any) {
+
     //setUserData({...userData, roleNames:[value]})
   }
-  function handletwoFactorEnable(event:any){
+  function handletwoFactorEnable(event: any) {
     //setUserData({...userData, twoFactorEnabled:event.target.checked})
   }
-  function handleIsActive(event:any){
-    setUserData({...userData, isActive:event.target.checked})
-    props.createUser({...userData, isActive:event.target.checked})
+  function handleIsActive(event: any) {
+    setUserData({ ...userData, isActive: event.target.checked })
+    props.createUser({ ...userData, isActive: event.target.checked })
   }
-  function handleLockoutEnabled(event:any){
-    setUserData({...userData, lockoutEnabled:event.target.checked})
-    props.createUser({...userData, lockoutEnabled:event.target.checked})
+  function handleLockoutEnabled(event: any) {
+    setUserData({ ...userData, lockoutEnabled: event.target.checked })
+    props.createUser({ ...userData, lockoutEnabled: event.target.checked })
   }
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     setUserData(props.userData)
-   },[props.userData])
+  }, [props.userData])
 
-   useEffect(()=>{
+  useEffect(() => {
     setOrganizationUnit(props.organizationUnit)
-   },[props.organizationUnit])
+  }, [props.organizationUnit])
 
-  useEffect(()=>{
-   setOrganizationUnit(props.organizationUnit);
-   setRoles(props.roles)
-  },[props.roles])
+  useEffect(() => {
+    setOrganizationUnit(props.organizationUnit);
+    setRoles(props.roles)
+  }, [props.roles])
 
   return (
     <>
       <form className="mt-2">
-        <div className="align-items-center flex-column-reverse flex-lg-row flex-md-row mb-4 row">
+        <div className="flex-column-reverse flex-lg-row flex-md-row row">
           <div className="col-lg-6 col-md-6">
-            <div>
-              <RdsInput
-                value={userData.name}
-                placeholder="Enter Name"
-                inputType="text"
-                label="Name"
-                name="name"
-                required={true}
-                onChange={(e)=>{setName(e)}}
-              ></RdsInput>
-            </div>
-            <div>
-              <RdsInput
-                value={userData.surname}
-                placeholder="Enter Surname"
-                inputType="text"
-                label="Surname"
-                name="surName"
-                required={false}
-                onChange={(e)=>{setSurname(e)}}
-              ></RdsInput>
-            </div>
+            <RdsInput
+              value={userData.name}
+              placeholder="Enter Name"
+              inputType="text"
+              label="Name"
+              name="name"
+              required={true}
+              onChange={(e) => { setName(e) }}
+            ></RdsInput>
           </div>
-
-          <div className="col-md-6 text-center cursor-pointer sm-p-0">
-              <img
-                src="./assets/edit-pic.png"
-                width="100"
-                //onClick={}
-              />
-              <input
-                type="file"
-                id="file"
-                //ref={inputFile}
-                className="d-none"
-                />
-            </div>
+          <div className="col-lg-6 col-md-6">
+            <RdsInput
+              value={userData.surname}
+              placeholder="Enter Surname"
+              inputType="text"
+              label="Surname"
+              name="surName"
+              required={false}
+              onChange={(e) => { setSurname(e) }}
+            ></RdsInput>
+          </div>
         </div>
 
         <div className="row">
@@ -142,7 +126,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Email Address"
                 name="email"
                 required={true}
-                onChange={(e)=>{setEmail(e)}}
+                onChange={(e) => { setEmail(e) }}
               ></RdsInput>
             </div>
           </div>
@@ -154,13 +138,13 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Password"
                 name="password"
                 required={true}
-                onChange={(e)=>{setPassword(e)}}
+                onChange={(e) => { setPassword(e) }}
               ></RdsInput>
             </div>
           </div>)}
         </div>
         <div className="row mb-3">
-        <div className="col-lg-6 col-md-6">
+          <div className="col-lg-6 col-md-6">
             <div className="mb-2">
               <RdsInput
                 value={userData.userName}
@@ -169,7 +153,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="User Name"
                 name="userName"
                 required={false}
-                onChange={(e)=>{setUserName(e)}}
+                onChange={(e) => { setUserName(e) }}
               ></RdsInput>
             </div>
           </div>
@@ -182,11 +166,11 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
                 label="Phone Number"
                 name="phone"
                 required={false}
-                onChange={(e)=>{setPhoneNumber(e)}}
+                onChange={(e) => { setPhoneNumber(e) }}
               ></RdsInput>
             </div>
           </div>
-          
+
         </div>
         {props.isEdit && (<div className="row">
           <div className="mb-2 ">
@@ -194,7 +178,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               id="0"
               label="Two Factor Authentication"
               checked={userData.twoFactorEnabled}
-              onChange={e=>{handletwoFactorEnable(e)}}
+              onChange={e => { handletwoFactorEnable(e) }}
             ></RdsCheckbox>
           </div>
         </div>)}
@@ -204,7 +188,7 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               id="0"
               label="Active"
               checked={userData.isActive}
-              onChange={e=>{handleIsActive(e)}}
+              onChange={e => { handleIsActive(e) }}
             ></RdsCheckbox>
           </div>
         </div>
@@ -214,11 +198,11 @@ const RdsCompUserBasics = (props: RdsCompUserBasicsProps) => {
               id="0"
               label="Account Lockout"
               checked={userData.lockoutEnabled}
-              onChange={e=>{handleLockoutEnabled(e)}}
+              onChange={e => { handleLockoutEnabled(e) }}
             ></RdsCheckbox>
           </div>
         </div>
-      </form>
+      </form >
     </>
   );
 };

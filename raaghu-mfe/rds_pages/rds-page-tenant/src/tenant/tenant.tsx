@@ -29,7 +29,7 @@ import {
 import RdsCompFeatures from "../../../../../raaghu-components/src/rds-comp-new-features/rds-comp-new-features";
 import { useTranslation } from "react-i18next";
 
-interface RdsPageTenantProps {}
+interface RdsPageTenantProps { }
 
 const actions = [
   { id: "editTenant", displayName: "Edit", offId: "tenant-edit-off" },
@@ -74,7 +74,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     name: "",
     activationEndDate: null,
     adminPassword: "",
-    activationState:"" ,
+    activationState: "",
     adminEmailAddress: "",
     connectionStrings: { id: "", default: null, databases: [] },
   });
@@ -82,7 +82,7 @@ const Tenant = (props: RdsPageTenantProps) => {
     {
       displayName: "Tenant",
       key: "tenant",
-      datatype: "avatarTitleInfo",
+      datatype: "text",
       sortable: true,
     },
     {
@@ -102,7 +102,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   const tenantActivationState = [
     { option: 'Active', value: 1 },
     { option: 'Active with Limited Time', value: 2 },
-    {option: 'Inactive', value: 0}
+    { option: 'Inactive', value: 0 }
   ]
 
   const navtabsItems = [
@@ -141,27 +141,21 @@ const Tenant = (props: RdsPageTenantProps) => {
     if (data.tenants.length) {
 
       const tempData = data.tenants.map((tenant: any) => {
-        let status="";
-        if(tenant.activationState===1){
-          status="Active";
+        let status = "";
+        if (tenant.activationState === 1) {
+          status = "Active";
         }
-        else if(tenant.activationState===2 && tenant.editionEndDateUtc!==null)
-        {
-          status="Active with limited time";
+        else if (tenant.activationState === 2 && tenant.editionEndDateUtc !== null) {
+          status = "Active with limited time";
         }
-        else{
-          status="Inactive";
+        else {
+          status = "Inactive";
         }
         return {
           id: tenant.id,
-          tenant: {
-            avatar:
-              "https://media-exp1.licdn.com/dms/image/C4E0BAQE_SFGM1PgQQA/company-logo_200_200/0/1519889670567?e=2147483647&v=beta&t=a7t0VCUvkgkiicBZVFWj7be8pApofE4mjjuHSmaZgbg",
-            title: tenant.name,
-            info: "software",
-          },
+          tenant:tenant.name,
           editionName: tenant.editionName,
-          status: status ,
+          status: status,
           expiry: tenant.editionEndDateUtc,
         };
       });
@@ -220,7 +214,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   }, [data.editTenant]);
 
   function saveTenant(data: any) {
-    
+
     const updateitem = { id: data.id, body: data };
     const createItem = { data: data };
     if (actionId === "editTenant") {
@@ -332,7 +326,7 @@ const Tenant = (props: RdsPageTenantProps) => {
   }
   function restoreFeatures(data: any) {
     dispatch(restoreToDefaultFeaturesEdition(tableDataRowid) as any).then(
-      (res: any) => {}
+      (res: any) => { }
     );
   }
 
@@ -360,150 +354,150 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   return (
     <>
-    <div className="container-fluid m-0 p-0 h-100">
-      <div className="row">
-        <div className="col-md-12 mb-3 ">
-          <div className="row ">
-            <div className="col-md-4">
-              {Alert.show && (
-                <RdsAlert
-                  alertmessage={Alert.message}
-                  colorVariant={Alert.color}
-                ></RdsAlert>
-              )}
-            </div>
-            <div className="col-md-8 d-flex justify-content-end ">
-              <RdsOffcanvas
-                canvasTitle={"NEW TENANT"}
-                placement="end"
-                offcanvasbutton={
-                  <div className="d-flex justify-content-end">
-                    <RdsButton
-                      icon="plus"
-                      label={"New Tenant"}
-                      iconColorVariant="light"
-                      iconHeight="15px"
-                      iconWidth="15px"
-                      iconFill={false}
-                      iconStroke={true}
-                      block={false}
-                      size="small"
-                      type="button"
-                      colorVariant="primary"
-                      showLoadingSpinner={true}
-                      onClick={(e: any) => createNewCanvasFn(e)}
-                    ></RdsButton>
+      <div className="container-fluid m-0 p-0 h-100">
+        <div className="row">
+          <div className="col-md-12 mb-3 ">
+            <div className="row ">
+              <div className="col-md-4">
+                {Alert.show && (
+                  <RdsAlert
+                    alertmessage={Alert.message}
+                    colorVariant={Alert.color}
+                  ></RdsAlert>
+                )}
+              </div>
+              <div className="col-md-8 d-flex justify-content-end ">
+                <RdsOffcanvas
+                  canvasTitle={"NEW TENANT"}
+                  placement="end"
+                  offcanvasbutton={
+                    <div className="d-flex justify-content-end">
+                      <RdsButton
+                        icon="plus"
+                        label={"New Tenant"}
+                        iconColorVariant="light"
+                        iconHeight="15px"
+                        iconWidth="15px"
+                        iconFill={false}
+                        iconStroke={true}
+                        block={false}
+                        size="small"
+                        type="button"
+                        colorVariant="primary"
+                        showLoadingSpinner={true}
+                        onClick={(e: any) => createNewCanvasFn(e)}
+                      ></RdsButton>
+                    </div>
+                  }
+                  backDrop={true}
+                  scrolling={false}
+                  preventEscapeKey={false}
+                  offId={"tenant-new-off"}
+                >
+                  <div className="mt-3">
+                    <RdsCompTenantInformation
+                      editions={editionList}
+                      activationState={tenantActivationState}
+                      onSaveHandler={(e: any) => saveTenant(e)}
+                      tenantInformationData1={basicTenantInformation}
+                      emittedDataTenantData={getTenantData}
+                    />
                   </div>
-                }
+                </RdsOffcanvas>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-12">
+            <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch-wthlabel">
+              <RdsCompTenantList
+                tableHeaders={tableHeaders}
+                tableData={tableData}
+                actions={actions}
+                onActionSelection={onActionHandler}
+                pagination={true}
+                recordsPerPage={10}
+                recordsPerPageSelectListOption={true}
+              />
+
+              <RdsOffcanvas
+                canvasTitle={"EDIT TENANT"}
+                placement="end"
                 backDrop={true}
                 scrolling={false}
                 preventEscapeKey={false}
-                offId={"tenant-new-off"}
+                offId={"tenant-edit-off"}
               >
-                <div className="mt-3">
-                  <RdsCompTenantInformation
-                    editions={editionList}
-                    activationState={tenantActivationState}
-                    onSaveHandler={(e: any) => saveTenant(e)}
-                    tenantInformationData1={basicTenantInformation}
-                    emittedDataTenantData={getTenantData}
-                  />
-                </div>
+                <RdsNavtabs
+                  navtabsItems={navtabsItems}
+                  type="tabs"
+                  isNextPressed={showTenantSettings}
+                  activeNavTabId={activeNavTabIdEdit}
+                  activeNavtabOrder={(activeNavTabIdEdit) => {
+                    setActiveNavTabIdEdit(activeNavTabIdEdit),
+                      setShowTenantSettings(false);
+                  }}
+                />
+                {activeNavTabIdEdit == 0 && showTenantSettings === false && (
+                  <div className="mt-3">
+                    <RdsCompTenantInformation
+                      editions={editionList}
+                      tenantInformationData1={tenantInformationData}
+                      onSaveHandler={(e: any) => {
+                        saveTenant(e);
+                      }}
+                      emittedDataTenantData={getTenantData}
+                      activationState={tenantActivationState}
+                    />
+                  </div>
+                )}
+                {(activeNavTabIdEdit == 1 || showTenantSettings === true) && (
+                  <div className="mt-3">
+                    <RdsCompFeatures
+                      featuresData={featuresData}
+                      onFeatureSelection={onFeatureSelection}
+                    />
+                    <div className="footer-buttons d-flex">
+                      <RdsButton
+                        class="me-2"
+                        tooltipTitle={""}
+                        type={"button"}
+                        label="Restore to default"
+                        colorVariant="outline-primary"
+                        size="small"
+                        databsdismiss="offcanvas"
+                        onClick={restoreFeatures}
+                      ></RdsButton>
+                      <RdsButton
+                        class="me-2"
+                        tooltipTitle={""}
+                        type={"button"}
+                        label="Cancel"
+                        colorVariant="outline-primary"
+                        size="small"
+                        databsdismiss="offcanvas"
+                      ></RdsButton>
+                      <RdsButton
+                        class="me-2"
+                        label="Create"
+                        showLoadingSpinner={true}
+                        size="small"
+                        colorVariant="primary"
+                        tooltipTitle={""}
+                        type={"submit"}
+                        databsdismiss="offcanvas"
+                        onClick={() => saveTenant(emittedDataTenantData)}
+                      ></RdsButton>
+                    </div>
+
+                  </div>
+                )}
               </RdsOffcanvas>
             </div>
+            <RdsCompAlertPopup alertID="tenant-delete-off" onSuccess={onDeleteHandler} />
           </div>
-        </div>
 
-        <div className="col-md-12">
-          <div className="card p-2 h-100 border-0 rounded-0 card-full-stretch-wthlabel">
-            <RdsCompTenantList
-              tableHeaders={tableHeaders}
-              tableData={tableData}
-              actions={actions}
-              onActionSelection={onActionHandler}
-              pagination={true}
-              recordsPerPage={10}
-              recordsPerPageSelectListOption={true}
-            />
-
-            <RdsOffcanvas
-              canvasTitle={"EDIT TENANT"}
-              placement="end"
-              backDrop={true}
-              scrolling={false}
-              preventEscapeKey={false}
-              offId={"tenant-edit-off"}
-            >
-              <RdsNavtabs
-                navtabsItems={navtabsItems}
-                type="tabs"
-                isNextPressed={showTenantSettings}
-                activeNavTabId={activeNavTabIdEdit}
-                activeNavtabOrder={(activeNavTabIdEdit) => {
-                  setActiveNavTabIdEdit(activeNavTabIdEdit),
-                    setShowTenantSettings(false);
-                }}
-              />
-              {activeNavTabIdEdit == 0 && showTenantSettings === false && (
-                <div className="mt-3">
-                  <RdsCompTenantInformation
-                    editions={editionList}
-                    tenantInformationData1={tenantInformationData}
-                    onSaveHandler={(e: any) => {
-                      saveTenant(e);
-                    }}
-                    emittedDataTenantData={getTenantData}
-                    activationState={tenantActivationState}
-                  />
-                </div>
-              )}
-              {(activeNavTabIdEdit == 1 || showTenantSettings === true) && (
-                <div className="mt-3">
-                  <RdsCompFeatures
-                    featuresData={featuresData}
-                    onFeatureSelection={onFeatureSelection}
-                  />
-                  <div className="footer-buttons d-flex">
-                  <RdsButton
-                    class="me-2"
-                    tooltipTitle={""}
-                    type={"button"}
-                    label="Restore to default"
-                    colorVariant="outline-primary"
-                    size="small"
-                    databsdismiss="offcanvas"
-                    onClick={restoreFeatures}
-                  ></RdsButton>
-                  <RdsButton
-                    class="me-2"
-                    tooltipTitle={""}
-                    type={"button"}
-                    label="Cancel"
-                    colorVariant="outline-primary"
-                    size="small"
-                    databsdismiss="offcanvas"
-                  ></RdsButton>
-                  <RdsButton
-                    class="me-2"
-                    label="Create"
-                    showLoadingSpinner={true}
-                    size="small"
-                    colorVariant="primary"
-                    tooltipTitle={""}
-                    type={"submit"}
-                    databsdismiss="offcanvas"
-                    onClick={() => saveTenant(emittedDataTenantData)}
-                  ></RdsButton>
-                  </div>
-                
-                </div>
-              )}
-            </RdsOffcanvas>
-          </div>
-          <RdsCompAlertPopup alertID="tenant-delete-off" onSuccess={onDeleteHandler} />
-        </div>
-
-      </div></div>
+        </div></div>
     </>
   );
 };
