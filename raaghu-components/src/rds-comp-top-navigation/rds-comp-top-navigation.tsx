@@ -70,7 +70,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
       id: "nav-PersonalData",
     },
   ];
- 
+
   const onClickHandler = (e: any, val: any) => {
     if (props.onClick) {
       props.onClick(e, val);
@@ -242,7 +242,7 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
           </div>
           <div className="position-relative px-2 px-md-3 border-end col text-center">
             <RdsDropdownList
-              labelIcon='en'
+              labelIcon={props.languageIcon}
               labelIconWidth='18px'
               labelIconHeight='18px'
               placeholder={props.languageLabel}

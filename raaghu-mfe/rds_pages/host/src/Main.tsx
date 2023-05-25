@@ -87,7 +87,7 @@ const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
   const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
-  const [currentLanguage, setCurrentLanguage] = useState("en-GB");
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")|| "en-GB");
   const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
   const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
 
@@ -225,10 +225,6 @@ const Main = (props: MainProps) => {
       val: "AddressInput",
     },
   ];
-
-  // useEffect(() => {
-  //   dispatch(callLoginAction(null) as any);
-  // }, [dispatch]);
   
   const objectArray = Object.entries(menus);
 
@@ -299,6 +295,7 @@ const Main = (props: MainProps) => {
   const { t, i18n } = useTranslation();
  
   const onClickHandler = (e: any, val: any) => {
+    localStorage.setItem("currentLang",val)
     setCurrentLanguage(val);
   };
 
@@ -401,6 +398,7 @@ const Main = (props: MainProps) => {
   useEffect(() => {
     configLocalization();
   }, [currentLanguage]);
+
 
   const sideNavItems = concatenated;
 
