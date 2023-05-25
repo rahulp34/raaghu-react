@@ -220,7 +220,7 @@ const RdsCompTenantInformation = (props: any) => {
           </>
           )}
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6">
               <div className="form-group">
                 <RdsSelectList
                   label={"Activation State"}

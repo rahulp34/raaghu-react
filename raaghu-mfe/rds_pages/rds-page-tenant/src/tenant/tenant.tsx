@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import {configurationService,
+localizationService,
+sessionService,
+impersonateService
+} from "raaghu-react-core";
 import {
   createTenant,
   deleteTenant,
@@ -34,6 +39,8 @@ interface RdsPageTenantProps {}
 const actions = [
   { id: "editTenant", displayName: "Edit", offId: "tenant-edit-off" },
   { id: "delete", displayName: "Delete", modalId: "tenant-delete-off" },
+  { id: "login", displayName: "Login as Tenant" },
+
 ];
 
 
@@ -125,6 +132,14 @@ const Tenant = (props: RdsPageTenantProps) => {
       });
       dispatch(tenantFeaturesGet(rowData) as any);
     } else if (actionId === "delete") setTenantid(rowData.id);
+
+    else if (actionId=== 'login'){
+      
+      setTenantid(String(rowData.id));
+      loginAsTenant(rowData.id,rowData.tenant.title)
+      
+    }
+
   };
   const [showTenantSettings, setShowTenantSettings] = useState(false);
   const [activeNavTabIdEdit, setActiveNavTabIdEdit] = useState(0);
@@ -132,6 +147,37 @@ const Tenant = (props: RdsPageTenantProps) => {
 
   const [emittedDataTenantData, setEmittedDataTenantData] = useState<any>([]);
 
+  async function loginAsTenant(tenantId:any,tenantUserName:any) {
+    const url = "https://raaghu-react.azurewebsites.net/connect/token";
+    const params = new URLSearchParams();
+    params.append("grant_type", "Impersonation");
+    params.append("client_id", "raaghu");
+    params.append("scope", "BookStore");
+    params.append("TenantId", tenantId);
+    params.append("TenantUserName", tenantUserName);
+
+    const accessToken = sessionStorage.getItem("accessToken");
+    
+    if (accessToken) {
+      params.append("access_token", accessToken);
+    }
+    let token = sessionStorage.getItem("accessToken");
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: `Bearer ${token}`,
+      },
+      body: params,
+    });
+    const data = await response.json();
+    return data;
+
+    // const impersonateTenant= impersonateService(accessToken)
+
+  }
+
+ 
   useEffect(() => {
     dispatch(fetchTenant() as any);
     dispatch(fetchEdition() as any);
