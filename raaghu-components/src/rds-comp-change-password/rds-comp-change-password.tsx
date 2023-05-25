@@ -1,4 +1,4 @@
-import { RdsButton, RdsInput } from 'raaghu-react-elements';
+import { RdsButton, RdsInput } from '../rds-elements';
 import React, { FC, useEffect, useState } from 'react';
 import { RdsCompChangePasswordWrapper } from './rds-comp-change-password.styled';
 
@@ -34,7 +34,7 @@ const RdsCompChangePassword= (props:any)  => {
 
   return(
    <div className="row py-4">
-      <form onSubmit={handlePasswordDataSubmit}>
+      <form data-testid="password-form" onSubmit={handlePasswordDataSubmit}>
       <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
          <RdsInput   
                   size="medium"
@@ -45,7 +45,8 @@ const RdsCompChangePassword= (props:any)  => {
                   placeholder="Current Password"
                   value={formData.currentPassword} 
                   onChange={(e:any) => setCurrentPassword(e.target.value)}              
-                  required={true}               
+                  required={true}  
+                  dataTestId='curr-password'             
          ></RdsInput>
       </div>
       <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
@@ -58,7 +59,8 @@ const RdsCompChangePassword= (props:any)  => {
                   required={true}
                   placeholder="New Password"
                   value={formData.newPassword} 
-                  onChange={(e:any) => setNewPassword(e.target.value)}                
+                  onChange={(e:any) => setNewPassword(e.target.value)}  
+                  dataTestId='new-pass'              
          ></RdsInput>
       </div>
       <div className="col-xxl-6 col-xl-6 col-lg-6 col-12 mb-3">
@@ -71,7 +73,8 @@ const RdsCompChangePassword= (props:any)  => {
                   required={true} 
                   placeholder="Confirm New Password"
                   value={formData.newPasswordConfirm} 
-                  onChange={(e:any) => setConfirmNewPassword(e.target.value)}               
+                  onChange={(e:any) => setConfirmNewPassword(e.target.value)} 
+                  dataTestId='confirm-password'              
          ></RdsInput>
       </div> 
       <div className="col-12 col-md-12 position-absolute bottom-0 mb-4">
@@ -81,7 +84,8 @@ const RdsCompChangePassword= (props:any)  => {
             block = {false}                 
             type = "submit"
             size="small"
-            onClick={()=>{props.handlePasswordDataSubmit(formData)}}				
+            onClick={()=>{props.handlePasswordDataSubmit(formData)}}			
+            dataTestId='save'	
          />      
       </div>        
       </form>        

@@ -1,4 +1,4 @@
-import { RdsButton, RdsIcon, RdsInput } from "raaghu-react-elements";
+import { RdsButton, RdsIcon, RdsInput } from "../rds-elements";
 import React, { FC, useState } from "react";
 import { json } from "react-router-dom";
 import { Value } from "sass";
@@ -55,6 +55,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
             data-bs-toggle="modal"
             data-bs-target={`#deleteTreeNode`}
             onClick={() => onDelete(propertyData.key)}
+            data-testid="delete"
           >
             <RdsIcon
               name={"delete"}
@@ -96,6 +97,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
                 headerKeyhandleChange(e.target.value);
               }}
               value={propertyData.key}
+              dataTestId="key"
             ></RdsInput>
           </div>
           <div className="col-md-5">
@@ -107,6 +109,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
                 headerValuehandleChange(e.target.value);
               }}
               value={propertyData.PropValue}
+              dataTestId="value"
             ></RdsInput>
           </div>
           <div className="col-md-2 align-items-end d-flex ">
@@ -117,6 +120,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               onClick={handleAddItem}
               tooltipTitle={""}
               type="submit"
+              dataTestId="add"
             />
           </div>
         </div>
@@ -129,6 +133,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               tooltipTitle={""}
               type="button"
               isOutline={true}
+              dataTestId="cancel"
             />
           </div>
           <div className="col-2">
@@ -138,6 +143,7 @@ const RdsCompPropertiesNew = (props: RdsCompPropertiesNewProps) => {
               block={true}
               tooltipTitle={""}
               type="submit"
+              dataTestId="submit"
             />
           </div>
         </div>
