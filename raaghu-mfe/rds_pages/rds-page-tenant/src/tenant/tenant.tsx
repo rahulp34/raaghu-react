@@ -504,7 +504,7 @@ const Tenant = (props: RdsPageTenantProps) => {
                     featuresData={featuresData}
                     onFeatureSelection={onFeatureSelection}
                   />
-                  <div className="footer-buttons">
+                  <div className="footer-buttons d-flex">
                   <RdsButton
                     class="me-2"
                     tooltipTitle={""}
