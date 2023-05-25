@@ -365,7 +365,26 @@ const Edition = (props: RdsPageEditionProps) => {
                   setVal(e.target.value);
                 }}
               ></RdsInput>
-              <div className="d-flex footer-buttons">
+              
+            </div>
+          )}
+          {(activeEditNavTabId == 1 || showNextEdtiTab == true) && (
+            <>
+              <RdsCompFeatures
+                featuresData={featureIdentitySettingsData}
+                onFeatureSelection={saveFeature}
+                // featureIdentitySettingsData1={featureIdentitySettingsData}
+                // twoFactorList={[
+                //   { option: "Optional", value: "Optional" },
+                //   { option: "Disabled", value: "Disabled" },
+                //   { option: "Forced", value: "Forced" },
+                // ]}
+                // saveFeature={saveFeature}
+                // restoreFeatures={restoreFeatures}
+              />
+            </>
+          )}
+          <div className="d-flex footer-buttons">
                 <RdsButton
                   label="CANCEL"
                   databsdismiss="offcanvas"
@@ -386,24 +405,6 @@ const Edition = (props: RdsPageEditionProps) => {
                   onClick={editDataHandler}
                 ></RdsButton>
               </div>
-            </div>
-          )}
-          {(activeEditNavTabId == 1 || showNextEdtiTab == true) && (
-            <>
-              <RdsCompFeatures
-                featuresData={featureIdentitySettingsData}
-                onFeatureSelection={saveFeature}
-                // featureIdentitySettingsData1={featureIdentitySettingsData}
-                // twoFactorList={[
-                //   { option: "Optional", value: "Optional" },
-                //   { option: "Disabled", value: "Disabled" },
-                //   { option: "Forced", value: "Forced" },
-                // ]}
-                // saveFeature={saveFeature}
-                // restoreFeatures={restoreFeatures}
-              />
-            </>
-          )}
         </RdsOffcanvas>
       </div>
     </div>
