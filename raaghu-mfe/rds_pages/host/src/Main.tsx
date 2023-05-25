@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Translation, useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
 import {
@@ -76,6 +76,7 @@ import {
   RegisterCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
+import { iteratee } from "lodash-es";
 ("../ApiRequestOptions");
 
 export interface MainProps {
@@ -228,8 +229,10 @@ const Main = (props: MainProps) => {
   // useEffect(() => {
   //   dispatch(callLoginAction(null) as any);
   // }, [dispatch]);
-
+  
   const objectArray = Object.entries(menus);
+
+  
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
 
   if (index !== -1) {
@@ -238,11 +241,24 @@ const Main = (props: MainProps) => {
   let newobjectArray = objectArray.map((item) => {
     return item[1];
   });
+
+
   const concatenated = newobjectArray.reduce(
     (acc: any, arr: any) => acc.concat(arr),
     []
+   
   );
 
+  const updatedMainMenu = concatenated.map((item:any) =>{
+    if(item.label.startsWith("Menu_")){
+      return {
+        ...item,
+        label:item.label.substring(5),
+      };
+    }
+    return item;
+  });
+  // console.log(updatedMainMenu);
   const concatenatedExtended = concatenated.concat([
     {
       label: "Host Admin",
@@ -357,15 +373,17 @@ const Main = (props: MainProps) => {
       setCurrentLanguageLabel(tempdata[index].label);
       setCurrentLanguageIcon(tempdata[index].icon);
       setLanguageData(tempdata);
+
       localizationService(currentLanguage).then((resp: any) => {
         let data2 = {};
         const translation = resp?.resources;
         if (translation) {
           Object.keys(translation).forEach((key) => {
-            Object.keys(translation[key].texts).forEach((k1) => {
-              let k2 = k1.replace(/[^\w\s]/gi, "_");
+            Object.keys(translation[key].texts).map((k1) => { 
+              let k2 = k1.replace(/[a-zA-Z]{0,20}[^\w\s]/gi,"");
+              let k4 = k2.replace(/([a-z])([A-Z])/g, '$1 $2');
               let value1 = translation[key].texts[k1];
-              data2 = { ...data2, [k2]: value1 };
+              data2 = { ...data2, [k4]: value1 };
             });
           });
           i18n.addResourceBundle(
@@ -381,7 +399,7 @@ const Main = (props: MainProps) => {
     });
   }
   useEffect(() => {
-    configLocalization()
+    configLocalization();
   }, [currentLanguage]);
 
   const sideNavItems = concatenated;
@@ -677,7 +695,7 @@ const Main = (props: MainProps) => {
                         </div>
 
                         <div className="mx-2 mt-6">
-                          <RdsCompSideNavigation
+                           <RdsCompSideNavigation
                             sideNavItems={sideNavItems}
                             onClick={sideNavOnClickHandler}
                             toggleTheme={props.toggleTheme}

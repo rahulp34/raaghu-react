@@ -4,6 +4,9 @@
 .desktop-btn{
   display: flex;
 }
+.custom-z-index{
+  z-index: 1;
+}
 
 @media (max-width: 767px){
   .mobile-btn{

@@ -9,7 +9,7 @@ const MainMenu = [
   },
   {
     "key": "2",
-    "label": "Menu_Saas",
+    "label": "Saas",
     "icon": "saas",
     "children": [
       {
@@ -30,17 +30,17 @@ const MainMenu = [
   },
   {
     "key": "3",
-    "label": "Menu_Administration",
+    "label": "Administration",
     "icon": "administration",
     "children": [
       {
         "key": "3-0",
-        "label": "Menu_IdentityManagement",
+        "label": "IdentityManagement",
         "icon": "bullet",
         "children": [
           {
             "key": "3-0-0",
-            "label": "Organization units",
+            "label": "Organizationunits",
             "icon": "bullet",
             "path": "/raaghu-organization-unit",
             "subTitle": "Use organization units to organize users and entities",
@@ -77,12 +77,12 @@ const MainMenu = [
       },
       {
         "key": "3-1",
-        "label": "Menu_OpenIddict",
+        "label": "OpenIddict",
         "icon": "bullet",
         "children": [
           {
             "key": "3-1-0",
-            "label": "MySecurityLogs_Application",
+            "label": "Application",
             "icon": "bullet",
             "path": "/raaghu-applications",
             "subTitle": "Use organization units to organize users and entities",
@@ -110,7 +110,7 @@ const MainMenu = [
           },
           {
             "key": "3-2-1",
-            "label": "Language-Text",
+            "label": "LanguageTexts",
             "icon": "bullet",
             "path": "/raaghu-language-text",
             "subTitle": "Manage user interface languages",
@@ -119,14 +119,14 @@ const MainMenu = [
       },
       {
         "key": "3-3",
-        "label": "Menu_TextTemplates",
+        "label": "TextTemplates",
         "icon": "bullet",
         "path": "/raaghu-text-template",
         "subTitle": "Manage user interface languages",
       },
       {
         "key": "3-4",
-        "label": "Permission_AuditLogs",
+        "label": "AuditLogs",
         "icon": "bullet",
         "path": "/raaghu-audit-logs",
         "subTitle": "",
@@ -140,12 +140,12 @@ const MainMenu = [
       },
       {
         "key": "3-6",
-        "label": "Permission_Blogging",
+        "label": "Blogging",
         "icon": "bullet",
         "children": [
           {
             "key": "3-6-0",
-            "label": "Permission_Blogging",
+            "label": "Blogging",
             "icon": "bullet",
             "path": "/raaghu-blogger",
             "subTitle": "Blogs, Posts, Articles",
@@ -156,33 +156,33 @@ const MainMenu = [
   },
   {
     "key": "4",
-    "label": "Menu_FileManagement",
+    "label": "File Management",
     "icon": "file_management",
     "path": "/raaghu-fileManagement",
     "subTitle": "File Management",
   },
   {
     "key": "5",
-    "label": "Permission_Forms",
+    "label": "Forms",
     "icon": "forms",
     "path": "/raaghu-forms",
     "subTitle": "Forms",
   },
   {
     "key": "6",
-    "label": "Menu_PaymentManagement",
+    "label": "Payment Management",
     "icon": "payment",
     "children": [
       {
         "key": "6-0-0",
-        "label": "Menu_Plans",
+        "label": "Plans",
         "icon": "bullet",
         "path": "/raaghu-paymentPlans",
         "subTitle": "Payment Plans",
       },
       {
         "key": "6-0-1",
-        "label": "Menu_PaymentRequests",
+        "label": "Payment Requests",
         "icon": "bullet",
         "path": "/raaghu-paymentRequests",
         "subTitle": "Payment Requests",
@@ -210,7 +210,7 @@ const MainMenu = [
       },
       {
         "key": "7-0-2",
-        "label": "UrlForwarding",
+        "label": "Url Forwarding",
         "icon": "bullet",
         "path": "/raaghu-url-forwarding",
         "subTitle": "Blogs, Posts, Articles",
@@ -245,14 +245,14 @@ const MainMenu = [
       },
       {
         "kay": "7-0-7",
-        "label": "Permission_GlobalResources",
+        "label": "Global Resources",
         "icon": "bullet",
         "path": "/raaghu-globalResources",
         "subTitle": "Global Resources",
       },
       {
         "key": "7-0-8",
-        "label": "Newsletters",
+        "label": "News letters",
         "icon": "bullet",
         "path": "/raaghu-newsletters",
         "subTitle": "Newsletters"

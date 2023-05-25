@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "./fileManagement.scss";
+import "./fileManagement.css";
 import RdsCompDataTable from "../../../../../raaghu-components/src/rds-comp-data-table";
 import RdsCompDirectoryList, {
   DirectoryItem,
