@@ -233,7 +233,7 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       block={false}
                       size="small"
                       type="button"
-                      showLoadingSpinner={false}
+                      showLoadingSpinner={true}
                       colorVariant="primary"
                     ></RdsButton>
                   </div>

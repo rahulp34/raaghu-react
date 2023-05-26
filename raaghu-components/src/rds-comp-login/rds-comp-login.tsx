@@ -88,8 +88,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     props.onLogin(email, password, rememberMe);
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
   };
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {
