@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {configurationService,
-localizationService,
-sessionService,
-impersonateService
-} from "raaghu-react-core";
+// import {configurationService,
+// localizationService,
+// sessionService,
+// impersonateService
+// } from "raaghu-react-core";
 import {
   createTenant,
   deleteTenant,
