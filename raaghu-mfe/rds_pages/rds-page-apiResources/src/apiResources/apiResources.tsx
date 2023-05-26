@@ -275,8 +275,8 @@ const ApiResources = (props: RdsPageResourcesProps) => {
                                         icon="plus"
                                         label={("New Resource") || ""}
                                         iconColorVariant="light"
-                                        iconHeight="15px"
-                                        iconWidth="15px"
+                                        iconHeight="12px"
+                                        iconWidth="12px"
                                         iconFill={false}
                                         iconStroke={true}
                                         block={false}

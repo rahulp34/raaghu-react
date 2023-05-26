@@ -288,11 +288,10 @@ const Applications = () => {
                     iconColorVariant="light"
                     iconFill={false}
                     iconStroke={true}
-                    iconHeight="15px"
-                    iconWidth="15px"
+                    iconHeight="12px"
+                    iconWidth="12px"
                     colorVariant="primary"
                     showLoadingSpinner={true}
-                    class="me-2"
                   ></RdsButton>
                 </div>
               }

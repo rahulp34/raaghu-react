@@ -266,12 +266,12 @@ const RdsCompTenantDashboard = () => {
 										<div className="col col-sm-12">
 											<RdsDoughnutChart
 												id="doughnutchart"
-												titleText="35K"
+												titleText="45K"
 												subTitleText="Profit"
 												height={200}
 												width={255}
 												labels={[
-													"Total Sales - 60%",
+													"Total Sales - 90%",
 													"Revenue - 25%",
 													"Expenses - 15%",
 												]}
@@ -282,6 +282,12 @@ const RdsCompTenantDashboard = () => {
 													},
 													responsive: true,
 													maintainAspectRatio: false,
+													title:{
+														fontColor: "#fff",
+													  },
+													subtitles: {
+														fontColor: "#fff",
+													},
 													plugins: {
 														series: {
 															label: {
@@ -289,6 +295,12 @@ const RdsCompTenantDashboard = () => {
 																text: "total",
 																display: false,
 															},
+														},
+														title:{
+															fontColor: "#fff",
+														  },
+														subtitles: {
+															fontColor: "#fff",
 														},
 														doughnutlabel: {
 															labels: [
@@ -330,6 +342,7 @@ const RdsCompTenantDashboard = () => {
 															text: "Doughnut Chart",
 															verticalAlign: "center",
 															dockInsidePlotArea: true,
+															fontColor: "#fff",
 														},
 													},
 												]}

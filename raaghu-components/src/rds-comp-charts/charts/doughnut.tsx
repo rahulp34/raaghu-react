@@ -20,6 +20,10 @@ export const code_actual = () => {
             title: {
               display: true,
               text: "Chart.js Doughnut Chart",
+              fontColor: "#ff6384",
+            },
+            subtitles: {		
+              fontColor: "#ff6384",
             },
           },
         },
@@ -30,6 +34,7 @@ export const code_actual = () => {
           data: [20, 10, 30, 40],
           backgroundColor: ["#ff6384", "#ff9f40", "#ffcd56", "#4bc0c0"],
           borderColor: ["#fff"],
+          
         },
       ]}
       id="doughnut"
