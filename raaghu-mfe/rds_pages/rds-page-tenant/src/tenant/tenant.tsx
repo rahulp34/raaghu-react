@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {configurationService,
-localizationService,
-sessionService,
-//impersonateService
-} from "raaghu-react-core";
+// import {configurationService,
+// localizationService,
+// sessionService,
+// impersonateService
+// } from "raaghu-react-core";
 import {
   createTenant,
   deleteTenant,
@@ -422,8 +422,8 @@ const Tenant = (props: RdsPageTenantProps) => {
                         icon="plus"
                         label={"New Tenant"}
                         iconColorVariant="light"
-                        iconHeight="15px"
-                        iconWidth="15px"
+                        iconHeight="12px"
+                        iconWidth="12px"
                         iconFill={false}
                         iconStroke={true}
                         block={false}

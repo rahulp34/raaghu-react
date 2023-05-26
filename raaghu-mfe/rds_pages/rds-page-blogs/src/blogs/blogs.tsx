@@ -226,14 +226,14 @@ const Blogs = (props: RdsPageResourcesProps) => {
                       icon="plus"
                       label={"New Blog" || ""}
                       iconColorVariant="light"
-                      iconHeight="15px"
-                      iconWidth="15px"
+                      iconHeight="12px"
+                      iconWidth="12px"
                       iconFill={false}
                       iconStroke={true}
                       block={false}
                       size="small"
                       type="button"
-                      showLoadingSpinner={false}
+                      showLoadingSpinner={true}
                       colorVariant="primary"
                     ></RdsButton>
                   </div>

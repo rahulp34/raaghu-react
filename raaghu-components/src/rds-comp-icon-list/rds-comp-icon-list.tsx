@@ -1,7 +1,7 @@
 import { id } from "date-fns/locale";
 import React, { useState } from "react";
 import { Icons } from "./Icons";
-import { RdsAlert, RdsIcon, RdsSearch } from "../rds-elements";
+import { RdsAlert, RdsIcon, RdsSearch } from '../rds-elements';
 
 export interface RdsCompIconListProps {}
 

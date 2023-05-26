@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   RdsLabel,
   RdsSelectList,
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import { RdsCompDatatable } from "../../../rds-components";
 import RdsInputGroup from "../../../../../raaghu-elements/src/rds-input-group";
 import {
@@ -108,8 +108,8 @@ const Newsletters = (props: any) => {
             buttonColorVariant="primary"
             inputGroupLabel="Source"
             icon="refresh_sync" 
-            iconHeight="15px"
-            iconWidth="15px"
+            iconHeight="12px"
+            iconWidth="12px"
             iconFill={false}
             iconStroke={true}
             iconColorVariant="light"

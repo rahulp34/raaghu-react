@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsButton, RdsLabel } from "raaghu-react-elements";
+import { RdsButton, RdsLabel } from '../rds-elements';
 
 export interface RdsCompOrderSummaryProps {
   isCheckout: boolean;

@@ -5,7 +5,7 @@ import {
   RdsInput,
   RdsCheckbox,
   RdsModal,
-} from "../rds-elements";
+} from '../rds-elements';
 import { useNavigate } from "react-router-dom";
 
 export interface RdsCompRegisterProps {

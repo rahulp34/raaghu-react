@@ -1,4 +1,4 @@
-import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from 'raaghu-react-elements'
+import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from '../rds-elements'
 import React, { useState } from 'react'
 
 

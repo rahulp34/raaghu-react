@@ -4,7 +4,7 @@ import {
 	RdsTestimonial,
 	RdsIcon,
 	RdsCarousel,
-} from "../rds-elements";
+} from '../rds-elements';
 
 export interface RdsCompTestimonialsProps {
 	testimonialItems?: any;

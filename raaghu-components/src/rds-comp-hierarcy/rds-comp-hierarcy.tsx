@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsButton, RdsIcon } from "raaghu-react-elements";
+import { RdsButton, RdsIcon } from '../rds-elements';
 import "./rds-comp-hierarcy.css";
 
 export interface RdsCompHierarcyProps {

@@ -289,8 +289,8 @@ const Blogger = () => {
                         icon="plus"
                         label={"Create a new blog"}
                         iconColorVariant="light"
-                        iconHeight="15px"
-                        iconWidth="15px"
+                        iconHeight="12px"
+                        iconWidth="12px"
                         iconFill={false}
                         iconStroke={true}
                         block={false}

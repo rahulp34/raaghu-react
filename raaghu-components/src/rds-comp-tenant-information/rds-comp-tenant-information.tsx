@@ -1,11 +1,11 @@
-import { RdsLabel } from "../rds-elements";
+import { RdsLabel } from '../rds-elements';
 import React, { useState, useEffect } from "react";
 import {
   RdsInput,
   RdsSelectList,
   RdsButton,
   RdsRadioButton,
-} from "../rds-elements";
+} from '../rds-elements';
 
 const RdsCompTenantInformation = (props: any) => {
   const radioItemList = [
@@ -193,7 +193,7 @@ const RdsCompTenantInformation = (props: any) => {
 
               <div className="row">
                 <div className="col-md-12">
-                  <div className="form-group">
+                  <div className="form-group mb-2">
                     <RdsInput
 
                       inputType="URL"

@@ -1,6 +1,6 @@
-// import { RdsButton, RdsInput, RdsRadioButton,RdsCheckbox } from "raaghu-react-elements";
+// import { RdsButton, RdsInput, RdsRadioButton,RdsCheckbox } from '../rds-elements';
 import React, { useState, useEffect } from "react";
-import { RdsButton, RdsFileUploader, RdsRadioButton } from "../rds-elements";
+import { RdsButton, RdsFileUploader, RdsRadioButton } from '../rds-elements';
 
 interface RdsCompProfilePictureProps {}
 

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { RdsButton, RdsCheckbox, RdsLabel } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsLabel } from '../rds-elements';
 
 interface RdsCompUserRolesProps {
   usersRole: any;

@@ -14,9 +14,9 @@ import {
 	RdsButton,
 	RdsDatePicker,
 	RdsIcon
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import { ScriptableContext } from "chart.js";
-//import { RdsButton, RdsDatePicker, RdsIcon } from "../rds-elements";
+//import { RdsButton, RdsDatePicker, RdsIcon } from '../rds-elements';
 const RdsCompAdminDashboard = () => {
 	const monthlySummaryChartOptions = () => {
 		return;
@@ -386,12 +386,21 @@ const RdsCompAdminDashboard = () => {
 												"Revenue - 25%",
 												"Expenses - 15%",
 											]}
+											
 											options={{
+												animationEnabled: true,
+												title:{
+													fontColor: "#fff",
+												},
 												cutoutPercentage: 40,
 												legend: {
 													display: false,
 												},
 												responsive: true,
+												
+												subtitles: {
+													fontColor: "#fff",
+												},
 												maintainAspectRatio: false,
 												plugins: {
 													series: {
@@ -415,6 +424,7 @@ const RdsCompAdminDashboard = () => {
 															},
 														],
 													},
+													
 													legend: {
 														display: true,
 														align: "middle",

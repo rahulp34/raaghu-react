@@ -1,4 +1,4 @@
-import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsTextArea } from '../rds-elements';
 import React, { FC, useState } from "react";
 
 export interface RdsCompIdentiyResourceBasicProps { }

@@ -5,7 +5,7 @@ import {
   RdsIllustration,
   RdsInput,
   RdsTextArea,
-} from "../rds-elements";
+} from '../rds-elements';
 
 export interface RdsCompWebhookSubscriptionProps {
   webhookItem?: (item: any) => void;

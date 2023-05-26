@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsInput, RdsLabel } from '../rds-elements';
 
 export interface RdsCompIdentityManagementProps {
   handleIdentity: any;

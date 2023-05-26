@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RdsCompProfile from "../rds-comp-profile/rds-comp-profile";
 
-import { RdsIcon, RdsOffcanvas,RdsButton } from "../rds-elements";
+import { RdsIcon, RdsOffcanvas,RdsButton } from '../rds-elements';
 import RdsDropdownList from "../../../raaghu-elements/src/rds-dropdown-list/index";
 import RdsBreadcrumb from "../../../raaghu-elements/src/rds-breadcrumb/rds-breadcrumb";
 import MultiLevelDropdown from "./multi-level-dropdown";
@@ -191,6 +191,25 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     setNavtitle("Chats");
     setBreadCrumItem([]);
     props.onChatClickHandler&&props.onChatClickHandler(e)
+  }
+
+  const toggleBetweenMode = (event: any) => {
+    let checked = event;
+    let selectedTheme: string = 'default';
+    if (!checked) {
+      
+      localStorage.setItem('THEME', 'dark');
+      selectedTheme = 'dark'
+      localStorage.setItem('themeIndex', '7');
+
+    } else {
+     
+      localStorage.setItem('THEME', 'light');
+      selectedTheme = 'default';
+      localStorage.setItem('themeIndex', '12');
+
+    }
+    // this.alertService.setTheme(selectedTheme);
   }
 
   return (

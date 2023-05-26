@@ -6,7 +6,7 @@ import {
   RdsCheckbox,
   RdsModal,
   RdsAlert,
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-login.css";
 import { useNavigate } from "react-router-dom";
 import { use } from "i18next";
@@ -88,8 +88,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     props.onLogin(email, password, rememberMe);
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
   };
 
   const forgotPasswordHandler: any = (isForgotPasswordClicked: boolean) => {

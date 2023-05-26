@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RdsAccordionItem from "../../../../raaghu-elements/src/rds-accordion/rds-accordion-item";
-import { RdsAccordion } from "raaghu-react-elements";
+import { RdsAccordion } from '../../rds-elements';
 
 export const code_actual = () => {
   return (

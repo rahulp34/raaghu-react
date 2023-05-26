@@ -7,7 +7,7 @@ import {
   RdsPagination,
   RdsIllustration,
   RdsAvatar
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-data-table.css";
 
 
@@ -285,15 +285,14 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
       {data?.length == 0 && (
         <div className="h-100 d-flex align-items-center justify-content-center">
           <RdsIllustration
-            label={props.noDataTitle}
+            label={props.noDataTitle} 
             //subLabel="Click on the button above to add."
-            colorVariant="light"
           />
         </div>
       )}
 
       {data?.length > 0 && (<>
-        <div className=" sm-datatable">
+        <div className="sm-datatable">
           <table
             className={`table  table-hover table-bordered table-responsive  ${Classes} `}
             id="sortTable"

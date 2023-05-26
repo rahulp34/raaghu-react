@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsBadge, RdsPagination } from "../rds-elements";
+import { RdsBadge, RdsPagination } from '../rds-elements';
 
 export interface RdsCompWebsiteLogProps {
 	websiteLogData: any[];

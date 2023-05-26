@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from "../rds-elements";
+import { RdsButton, RdsCheckbox, RdsDropdownList, RdsInput, RdsLabel, RdsSelectList, RdsTextArea } from '../rds-elements';
 
 export interface RdsCompFormsSettingProps {
 	formsSettingData?: any;
