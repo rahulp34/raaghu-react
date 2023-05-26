@@ -4,7 +4,7 @@ import {
 	RdsCompCache,
 	RdsCompAlertPopup,
 } from "../../../rds-components";
-import "./Maintainance.scss";
+import "./Maintainance.css";
 import {
 	RdsButton,
 	RdsFabMenu,
@@ -177,9 +177,7 @@ const Maintainance = () => {
 								></RdsCompAlertPopup>
 							</div>
 							<div
-								className="mobile-btn position-fixed bottom-0 end-0 my-5 me-5"
-								style={{ zIndex: 1 }}
-							>
+								className="mobile-btn position-fixed bottom-0 end-0 mb-3 me-5 custom-z-index">
 								<RdsFabMenu
 									listItems={listItems1}
 									colorVariant="primary"
@@ -225,9 +223,7 @@ const Maintainance = () => {
 								></RdsButton>
 							</div>
 							<div
-								className="mobile-btn position-fixed bottom-0 end-0 my-5 me-5"
-								style={{ zIndex: 1 }}
-							>
+								className="mobile-btn position-fixed bottom-0 end-0 mb-3 me-5 custom-z-index">
 								<RdsFabMenu
 									listItems={listItems2}
 									menuIcon="plus"

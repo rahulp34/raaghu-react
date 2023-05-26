@@ -1170,7 +1170,7 @@ const RdsCompAdminDashboard = () => {
 										project: (
 											<div className="d-flex align-items-center ">
 												<div className="ms-2 mt-2\">
-													<p style={{ marginBottom: "3px" }}>
+													<p className="mb-1">
 														<b>Volosoft</b>
 													</p>
 													<small className="text-muted\">Website </small>
@@ -1209,7 +1209,7 @@ const RdsCompAdminDashboard = () => {
 										project: (
 											<div className="">
 												<div className="ms-2 mt-2\">
-													<p style={{ marginBottom: "3px" }}>
+													<p className="mb-1">
 														<b>ABP Framework</b>
 													</p>
 													<small className="text-muted\">Modules</small>
@@ -1248,7 +1248,7 @@ const RdsCompAdminDashboard = () => {
 										project: (
 											<div className="d-flex align-items-center ">
 												<div className="ms-2 mt-2\">
-													<p style={{ marginBottom: "3px" }}>
+													<p className="mb-1">
 														<b>ASPNET Zero</b>
 													</p>
 													<small className="text-muted\">
@@ -1286,7 +1286,7 @@ const RdsCompAdminDashboard = () => {
 										project: (
 											<div className="d-flex align-items-center ">
 												<div className="ms-2 mt-2\">
-													<p style={{ marginBottom: "3px" }}>
+													<p className="mb-1">
 														<b>Volosoft</b>
 													</p>
 													<small className="text-muted\">ABP framework</small>
@@ -1324,7 +1324,7 @@ const RdsCompAdminDashboard = () => {
 										project: (
 											<div className="d-flex align-items-center ">
 												<div className="ms-2 mt-2\">
-													<p style={{ marginBottom: "3px" }}>
+													<p className="mb-1">
 														<b>Volosoft</b>
 													</p>
 													<small className="text-muted\">Website </small>

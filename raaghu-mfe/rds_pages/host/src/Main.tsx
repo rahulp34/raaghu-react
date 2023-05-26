@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Route, useNavigate, Routes } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Translation, useTranslation } from "react-i18next";
 import * as openApi from "../../../libs/proxy/core/OpenAPI";
 import "./App.scss";
 import {
@@ -76,6 +76,7 @@ import {
   RegisterCompo,
 } from "./PageComponent";
 import openidConfig from "./openid.config";
+import { iteratee } from "lodash-es";
 ("../ApiRequestOptions");
 
 export interface MainProps {
@@ -86,7 +87,7 @@ const Main = (props: MainProps) => {
   const [languageData, setLanguageData] = useState<any[]>([]);
   const [themes, setThemes] = useState("light");
   const [logoImage, setLogoImage] = useState("./assets/raaghu_logs.png");
-  const [currentLanguage, setCurrentLanguage] = useState("en-GB");
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem("currentLang")|| "en-GB");
   const [currentLanguageLabel, setCurrentLanguageLabel] = useState("");
   const [currentLanguageIcon, setCurrentLanguageIcon] = useState("");
 
@@ -224,12 +225,10 @@ const Main = (props: MainProps) => {
       val: "AddressInput",
     },
   ];
-
-  // useEffect(() => {
-  //   dispatch(callLoginAction(null) as any);
-  // }, [dispatch]);
-
+  
   const objectArray = Object.entries(menus);
+
+  
   const index = objectArray.findIndex(([key, value]) => key === "MainMenu");
 
   if (index !== -1) {
@@ -238,11 +237,24 @@ const Main = (props: MainProps) => {
   let newobjectArray = objectArray.map((item) => {
     return item[1];
   });
+
+
   const concatenated = newobjectArray.reduce(
     (acc: any, arr: any) => acc.concat(arr),
     []
+   
   );
 
+  const updatedMainMenu = concatenated.map((item:any) =>{
+    if(item.label.startsWith("Menu_")){
+      return {
+        ...item,
+        label:item.label.substring(5),
+      };
+    }
+    return item;
+  });
+  // console.log(updatedMainMenu);
   const concatenatedExtended = concatenated.concat([
     {
       label: "Host Admin",
@@ -283,6 +295,7 @@ const Main = (props: MainProps) => {
   const { t, i18n } = useTranslation();
  
   const onClickHandler = (e: any, val: any) => {
+    localStorage.setItem("currentLang",val)
     setCurrentLanguage(val);
   };
 
@@ -357,15 +370,17 @@ const Main = (props: MainProps) => {
       setCurrentLanguageLabel(tempdata[index].label);
       setCurrentLanguageIcon(tempdata[index].icon);
       setLanguageData(tempdata);
+
       localizationService(currentLanguage).then((resp: any) => {
         let data2 = {};
         const translation = resp?.resources;
         if (translation) {
           Object.keys(translation).forEach((key) => {
-            Object.keys(translation[key].texts).forEach((k1) => {
-              let k2 = k1.replace(/[^\w\s]/gi, "_");
+            Object.keys(translation[key].texts).map((k1) => { 
+              let k2 = k1.replace(/[a-zA-Z]{0,20}[^\w\s]/gi,"");
+              let k4 = k2.replace(/([a-z])([A-Z])/g, '$1 $2');
               let value1 = translation[key].texts[k1];
-              data2 = { ...data2, [k2]: value1 };
+              data2 = { ...data2, [k4]: value1 };
             });
           });
           i18n.addResourceBundle(
@@ -381,8 +396,9 @@ const Main = (props: MainProps) => {
     });
   }
   useEffect(() => {
-    configLocalization()
+    configLocalization();
   }, [currentLanguage]);
+
 
   const sideNavItems = concatenated;
 
@@ -471,7 +487,7 @@ const Main = (props: MainProps) => {
         };
       });
       setCurrentTitle(breadcrumData[0].label);
-      document.title = `raaghu-${breadcrumData[0].label.toLowerCase()}`;
+      document.title = `raaghu-${breadcrumData[0].label}`;
       setBreadCrumItem(breadcrumData);
     } else if (breadcrumData.length) {
       breadcrumData = breadcrumData[0].reverse();
@@ -485,7 +501,7 @@ const Main = (props: MainProps) => {
       setBreadCrumItem(breadcrumData);
       document.title = `raaghu-${breadcrumData[
         breadcrumData.length - 1
-      ].label.toLowerCase()}`;
+      ].label}`;
       setCurrentTitle(breadcrumData[breadcrumData.length - 1].label);
     }
   }
@@ -677,7 +693,7 @@ const Main = (props: MainProps) => {
                         </div>
 
                         <div className="mx-2 mt-6">
-                          <RdsCompSideNavigation
+                           <RdsCompSideNavigation
                             sideNavItems={sideNavItems}
                             onClick={sideNavOnClickHandler}
                             toggleTheme={props.toggleTheme}
@@ -716,57 +732,57 @@ const Main = (props: MainProps) => {
                           <Suspense>
                             <Routes>
                               <Route
-                                path="/raaghu-dashboard"
+                                path="/raaghu-Dashboard"
                                 element={<DashboardCompo />}
                               ></Route>
                               <Route
-                                path="/raaghu-tenant"
+                                path="/raaghu-Tenant"
                                 element={<TenantCompo></TenantCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-edition"
+                                path="/raaghu-Edition"
                                 element={<EditionCompo></EditionCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-settings"
+                                path="/raaghu-Settings"
                                 element={<SettingsCompo></SettingsCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-audit-logs"
+                                path="/raaghu-Audit-Logs"
                                 element={<AuditlogsCompo></AuditlogsCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-users"
+                                path="/raaghu-Users"
                                 element={<UsersCompo />}
                               ></Route>
                               <Route
-                                path="/raaghu-role"
+                                path="/raaghu-Role"
                                 element={<RolesCompo></RolesCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-organization-unit"
+                                path="/raaghu-Organization-Unit"
                                 element={
                                   <OrganizationUnitsCompo></OrganizationUnitsCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/raaghu-language"
+                                path="/raaghu-Language"
                                 element={<LanguageCompo></LanguageCompo>}
                               ></Route>
                               <Route
-                                path="/raaghu-language-text"
+                                path="/raaghu-Language-Text"
                                 element={
                                   <LanguageTextCompo></LanguageTextCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/raaghu-dynamic-properties"
+                                path="/raaghu-Dynamic-Properties"
                                 element={
                                   <DynamicPropertyCompo></DynamicPropertyCompo>
                                 }
                               ></Route>
                               <Route
-                                path="/raaghu-security-logs"
+                                path="/raaghu-Security-Logs"
                                 element={<SecurityLogsCompo />}
                               ></Route>
 
@@ -775,37 +791,37 @@ const Main = (props: MainProps) => {
                                 element={<IconListCompo />}
                               ></Route>
                               <Route
-                                path="/raaghu-claim-types"
+                                path="/raaghu-Claim-Types"
                                 element={<ClaimTypesCompo />}
                               />
                               <Route
-                                path="/raaghu-text-template"
+                                path="/raaghu-Text-Template"
                                 element={<TextTemplateCompo />}
                               ></Route>
                               <Route
-                                path="/raaghu-applications"
+                                path="/raaghu-Applications"
                                 element={<ApplicationsCompo />}
                               ></Route>
                               <Route
-                                path="/raaghu-identityResources"
+                                path="/raaghu-IdentityResources"
                                 element={<IdentityResourcesCompo />}
                               />
 
                               <Route
-                                path="/raaghu-api-scope"
+                                path="/raaghu-Api-Scope"
                                 element={<ApiScopeCompo />}
                               />
                               <Route
                                 path="/raaghu-apiResources"
                                 element={<ApiResourcesCompo />}
                               />
-                              <Route path="/raaghu-blogs" element={<BlogsCompo />} />
-                              <Route path="/raaghu-chats" element={<ChatsCompo />} />
+                              <Route path="/raaghu-Blogs" element={<BlogsCompo />} />
+                              <Route path="/raaghu-Chats" element={<ChatsCompo />} />
                               <Route
-                                path="/raaghu-fileManagement"
+                                path="/raaghu-File-Management"
                                 element={<FileManagementCompo />}
                               />
-                              <Route path="/raaghu-forms" element={<FormsCompo />} />
+                              <Route path="/raaghu-Forms" element={<FormsCompo />} />
                               <Route
                                 path="/formsView/:id"
                                 element={<FormsViewCompo />}
@@ -814,31 +830,31 @@ const Main = (props: MainProps) => {
                                 path="/raaghu-formsPreview/:id"
                                 element={<FormsPreviewCompo />}
                               />
-                              <Route path="/raaghu-polls" element={<PollsCompo />} />
+                              <Route path="/raaghu-Polls" element={<PollsCompo />} />
                               <Route
-                                path="/raaghu-blogger"
+                                path="/raaghu-Blogger"
                                 element={<BloggerCompo />}
                               />
-                              <Route path="/raaghu-client" element={<ClientCompo />} />
+                              <Route path="/raaghu-Client" element={<ClientCompo />} />
                               <Route
-                                path="/raaghu-url-forwarding"
+                                path="/raaghu-Url-Forwarding"
                                 element={<UrlForwardingCompo />}
                               />
                               <Route
-                                path="/raaghu-paymentPlans"
+                                path="/raaghu-PaymentPlans"
                                 element={<PaymentPlansCompo />}
                               />
                               <Route
-                                path="/raaghu-paymentRequests"
+                                path="/raaghu-PaymentRequests"
                                 element={<PaymentRequestsCompo />}
                               />
                               <Route
-                                path="/raaghu-comments"
+                                path="/raaghu-Comments"
                                 element={<CommentsCompo />}
                               />
-                              <Route path="/raaghu-tags" element={<TagsCompo />} />
+                              <Route path="/raaghu-Tags" element={<TagsCompo />} />
                               <Route
-                                path="/raaghu-globalResources"
+                                path="/raaghu-GlobalResources"
                                 element={<GlobalResourcesCompo />}
                               />
                               <Route
@@ -846,7 +862,7 @@ const Main = (props: MainProps) => {
                                 element={<ElementsCompo />}
                               />
                               <Route
-                                path="/raaghu-personal-data"
+                                path="/raaghu-Personal-data"
                                 element={<PersonalDataCompo />}
                               />
                               <Route
@@ -854,26 +870,26 @@ const Main = (props: MainProps) => {
                                 element={<MyAccountCompo />}
                               />
                               <Route
-                                path="/raaghu-linked-accounts"
+                                path="/raaghu-Linked-Accounts"
                                 element={<RdsCompLinkedAccount />}
                               />
 
-                              <Route path="/raaghu-menus" element={<MenusCompo />} />
+                              <Route path="/raaghu-Menus" element={<MenusCompo />} />
                               <Route
                                 path="/raaghu-components/:type"
                                 element={<ComponentsCompo />}
                               />
-                              <Route path="/raaghu-pages" element={<PagesCompo />} />
+                              <Route path="/raaghu-Pages" element={<PagesCompo />} />
                               <Route
                                 path="/**/*"
                                 element={<RdsCompPageNotFound />}
                               />
                               <Route
-                                path="/raaghu-blog-post"
+                                path="/raaghu-Blog-Post"
                                 element={<BlogPostCompo />}
                               />
                               <Route
-                                path="/raaghu-newsletters"
+                                path="/raaghu-Newsletters"
                                 element={<NewslettersCompo />}
                               />
                               <Route

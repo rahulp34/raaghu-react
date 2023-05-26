@@ -7,3 +7,8 @@
     color: #336CFF;
     text-decoration: none;
 }
+
+.mt-mb-custom{
+    margin-top: 20vh; 
+    margin-bottom: 20vh;
+}

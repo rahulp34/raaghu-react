@@ -405,6 +405,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   data-bs-toggle="dropdown"
                                   data-bs-auto-close="true"
                                   id="dropdownMenuButton"
+                                  data-testid="action-btn"
                                 >
                                   <RdsIcon
                                     name={"three_dots"}
@@ -665,6 +666,7 @@ const RdsCompDatatable = (props: RdsCompDatatableProps) => {
                                   data-bs-toggle="dropdown"
                                   data-bs-auto-close="true"
                                   id="dropdownMenuButton"
+                                  data-testid="action-btn"
                                 >
                                   <RdsIcon
                                     name={"three_dots"}

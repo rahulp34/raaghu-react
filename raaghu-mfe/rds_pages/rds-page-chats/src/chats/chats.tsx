@@ -9,6 +9,8 @@ import {
 } from "../../../../libs/state-management/chats/chats-slice";
 import { RdsButton, RdsIcon, RdsInput, RdsSearch } from "../../../rds-elements";
 import { useTranslation } from "react-i18next";
+import "./chats.css"
+
 
 const Chats = () => {
   const [conversationVisibility, setConversationVisibility] = useState(false);
@@ -91,19 +93,17 @@ const Chats = () => {
   return (
     <div className="container-fluid m-0 p-0">
       <div className="row p-3">
-        <div className="col-lg-4 col-md-4" style={{ height: "630px" }}>
+        <div className="col-lg-4 col-md-4 chat-cust-height">
           <div className="border h-100 pt-4 ps-3 pe-3">
             <div className="d-flex justify-content-between">
               <div className="d-flex">
                 <div className="me-3">
-                  <div style={{ position: "relative" }}>
+                  <div className="position-relative">
                     <img
                       src="./assets/profile-picture-circle.svg"
                       className="avatar avatar-lg rounded rounded-circle"
                     ></img>
-                    <span
-                      style={{ position: "absolute", top: "23px", right: "0" }}
-                    >
+                    <span className="end-0 position-absolute top-50">
                       <span className="text-success fs-4">●</span>
                     </span>
                   </div>
@@ -111,15 +111,11 @@ const Chats = () => {
                 <div>
                   <div className="fw-bold fs-6 text-muted">Amit Trivedi</div>
                   <div
-                    className="fw-light text-muted"
-                    style={{ fontSize: "10px" }}
-                  >
+                    className="fw-light text-muted fs-custom">
                     Senior Frontend Developer
                   </div>
                   <div
-                    className="fw-light text-primary"
-                    style={{ fontSize: "10px" }}
-                  >
+                    className="fw-light text-primary fs-custom">
                     Online
                   </div>
                 </div>
@@ -148,18 +144,12 @@ const Chats = () => {
                 <div className="d-flex justify-content-between mb-3">
                   <div className="d-flex">
                     <div className="me-3">
-                      <div style={{ position: "relative" }}>
+                      <div className="position-relative">
                         <img
                           src="./assets/profile-picture-circle.svg"
                           className="avatar avatar-md rounded rounded-circle"
                         ></img>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "23px",
-                            right: "0",
-                          }}
-                        >
+                        <span className="end-0 position-absolute top-50">
                           {/* <span className="text-success fs-4">●</span> */}
                         </span>
                       </div>
@@ -177,18 +167,12 @@ const Chats = () => {
                 <div className="d-flex justify-content-between">
                   <div className="d-flex">
                     <div className="me-3">
-                      <div style={{ position: "relative" }}>
+                      <div className="position-relative">
                         <img
                           src="./assets/profile-picture-circle.svg"
                           className="avatar avatar-md rounded rounded-circle"
                         ></img>
-                        <span
-                          style={{
-                            position: "absolute",
-                            top: "23px",
-                            right: "0",
-                          }}
-                        >
+                        <span className="end-0 position-absolute top-50">
                           {/* <span className="text-success fs-4">●</span> */}
                         </span>
                       </div>
@@ -235,11 +219,7 @@ const Chats = () => {
 
         {conversationVisibility && (
           <div className="col-lg-8 col-md-8 d-flex flex-column pt-5 ps-2 pe-2 pb-1 justify-content-between">
-            <div ref={containerRef} style={{
-                  height: "68vh",
-                  overflowY: "scroll",
-                  padding: "2%"
-            }}>
+            <div ref={containerRef} className="h-100 overflow-scroll p-3">
               {/* opponent text */}
               <div className="mb-4">
                 <div className="d-flex">
@@ -252,20 +232,10 @@ const Chats = () => {
                   <div className="d-flex flex-column">
                     {opponentText.map((item) => (
                       <div
-                        className="p-3 mb-2"
-                        style={{
-                          backgroundColor: "#E4ECFF",
-                          marginLeft: "20px",
-                          borderRadius: "20px 20px 20px 0",
-                          maxWidth: "534px",
-                          width: "fit-content",
-                        }}
-                      >
+                        className="p-3 mb-2 opp-chat-bg">
                         <div>{item.text}</div>
                         <div
-                          className="mt-1"
-                          style={{ color: "#BEBEBE", fontSize: "13px" }}
-                        >
+                          className="mt-1 fs-6 time-text-color">
                           {item.time}
                         </div>
                       </div>
@@ -282,32 +252,17 @@ const Chats = () => {
                     {myText.map((item) => (
                       <div className="d-flex justify-content-end">
                         <div
-                          className="p-3 mb-2"
-                          style={{
-                            background:
-                              "transparent linear-gradient(259deg, #7E2EEF 0%, #2A75BC 100%) 0% 0% no-repeat padding-box",
-                            borderRadius: "20px 20px 0 20px",
-                            maxWidth: "534px",
-                            marginRight: "20px",
-                            width: "fit-content",
-                          }}
-                        >
-                          <div className="text-white" style={{wordWrap: "break-word"}}>{item.text}</div>
+                          className="p-3 mb-2 my-chat-bg">
+                          <div className="text-white text-wrap">{item.text}</div>
                           <div
-                            className="mt-1"
-                            style={{
-                              color: "#BEBEBE",
-                              fontSize: "13px",
-                              textAlign: "right",
-                            }}
-                          >
+                            className="mt-1 fs-6 text-end time-text-color">
                             {item.time}
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div style={{ position: "relative" }}>
+                  <div className="position-relative">
                     <img
                       src="./assets/profile-picture-circle.svg"
                       className="avatar avatar-sm rounded rounded-circle mt-2"
@@ -319,9 +274,7 @@ const Chats = () => {
 
             <div>
               <div
-                className="p-3 d-flex justify-content-between"
-                style={{ backgroundColor: "#F7F7F7" }}
-              >
+                className="p-3 d-flex justify-content-between">
                 <RdsInput
                   size="small"
                   placeholder="Type your message"

@@ -32,9 +32,7 @@ const RdsCompHierarcy = (props: RdsCompHierarcyProps) => {
         <div>
           <div className="d-flex align-items-center">
             <div
-              className="node-dot"
-              style={{ backgroundColor: "green" }} //style={{backgroundColor:getNodeColor(node.level)}}
-              >
+              className="node-dot bg-success">
               {node.level !== 1 && (
                 <div //*ngIf="node.level !== 1"
                 className="horizontal-dotted-line"
@@ -105,9 +103,7 @@ const RdsCompHierarcy = (props: RdsCompHierarcyProps) => {
             <div //</div>*ngIf="node.children?.length > 0"
             >
               <div
-                className="position-relative"
-                style={{ marginLeft:"20px" }}
-                >
+                className="position-relative submenuMargin">
                 {node.children.map((node: any, i: number) => {
                   console.log("users.length- ", node.length);
                   return (<>

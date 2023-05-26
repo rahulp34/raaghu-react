@@ -88,7 +88,7 @@ function dateFormateConvert(data:any){
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6 mt-1">
+          <div className="col-md-6 mb-4">
             <RdsInput
               label="Name"
               placeholder=""
@@ -102,8 +102,8 @@ function dateFormateConvert(data:any){
             ></RdsInput>
           </div>
 
-          <div className="col-md-6 mt-2">
-            <RdsLabel class="mb-1" label="Widget" size="14px"></RdsLabel>
+          <div className="col-md-6 mb-4">
+            <RdsLabel class="mb-2" label="Widget" size="14px"></RdsLabel>
             <RdsSelectList
               label="Select Roles"
               selectItems={props.widgetList}
@@ -113,15 +113,15 @@ function dateFormateConvert(data:any){
             ></RdsSelectList>
           </div>
         </div>
-        <div className="row mt-2">
-          <div className="col-md-6">
+        <div className="row">
+          <div className="col-md-6 mb-3">
             <RdsDatePicker
               onDatePicker={handlerStartDate}
               DatePickerLabel="Start Date"
               type="default"
             />
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 mb-3">
             <RdsDatePicker
               onDatePicker={handleEndDate}
               DatePickerLabel="End Date"
@@ -129,8 +129,8 @@ function dateFormateConvert(data:any){
             />
           </div>
         </div>
-        <div className="row mt-2">
-          <div className="col-md-12">
+        <div className="row">
+          <div className="col-md-12 mb-4">
             <RdsCheckbox
               id="0"
               label="Show remaining time"
@@ -142,8 +142,8 @@ function dateFormateConvert(data:any){
             ></RdsCheckbox>
           </div>
         </div>
-        <div className="row mt-3">
-          <div className="col-md-12">
+        <div className="row">
+          <div className="col-md-12 mb-3">
             <RdsDatePicker
               onDatePicker={handleResultDatepickerData}
               DatePickerLabel="Result Showing End Date"
@@ -151,8 +151,8 @@ function dateFormateConvert(data:any){
             />
           </div>
         </div>
-        <div className="row mt-2">
-          <div className="col-md-12">
+        <div className="row">
+          <div className="col-md-12 mb-2">
             <RdsCheckbox
               id="0"
               label="Allow multiple voting"
@@ -165,8 +165,8 @@ function dateFormateConvert(data:any){
           </div>
         </div>
 
-        <div className="row mt-2">
-          <div className="col-md-12">
+        <div className="row">
+          <div className="col-md-12 mb-2">
             <RdsCheckbox
               id="0"
               label="Show vote count"
@@ -178,8 +178,8 @@ function dateFormateConvert(data:any){
             ></RdsCheckbox>
           </div>
         </div>
-        <div className="row mt-2">
-          <div className="col-md-12">
+        <div className="row">
+          <div className="col-md-12 mb-2">
             <RdsCheckbox
               id="0"
               label="Show result without giving vote"

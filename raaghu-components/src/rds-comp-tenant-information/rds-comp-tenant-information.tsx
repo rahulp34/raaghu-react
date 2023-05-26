@@ -24,15 +24,15 @@ const RdsCompTenantInformation = (props: any) => {
   ];
   const RadioButton = "Separated Database";
   const [editionList, setEditionList] = useState<any>([]);
-  const[activationStateList, setActivationStateList]=useState<any[]>(
-     [
+  const [activationStateList, setActivationStateList] = useState<any[]>(
+    [
       { option: 'Active', value: 1 },
       { option: 'Active with Limited Time', value: 2 },
-      {option: 'Inactive', value: 0}
+      { option: 'Inactive', value: 0 }
     ]
   );
   const [tenantInformationData, setTenantInformationData] = useState<any>(props.tenantInformationData1);
-  const [databaseUrl , setDatabaseUrl]= useState("");
+  const [databaseUrl, setDatabaseUrl] = useState("");
   const isEmailValid = (email: any) => {
     if (!email || email.length === 0) {
       return false;
@@ -54,14 +54,14 @@ const RdsCompTenantInformation = (props: any) => {
   };
   const isFormValid = isPasswordValid(tenantInformationData.adminPassword) && isEmailValid(tenantInformationData.adminEmailAddress) && isNameValid(tenantInformationData.name);
   useEffect(() => {
-    
+
     setTenantInformationData(props.tenantInformationData1)
   }, [props.tenantInformationData1])
 
   useEffect(() => {
     setEditionList(props.editions)
   }, [props.editions])
-  
+
   // useEffect(() => {
   //   setActivationStateList(props.activationStates)
   // },[props.activationStates])
@@ -74,7 +74,7 @@ const RdsCompTenantInformation = (props: any) => {
     setTenantInformationData({ ...tenantInformationData, editionId: value })
   }
   function handleEmail(value: any) {
-    
+
     setTenantInformationData({ ...tenantInformationData, adminEmailAddress: value })
   }
   function handlePassword(value: any) {
@@ -92,8 +92,8 @@ const RdsCompTenantInformation = (props: any) => {
   function emitSaveData(event: any) {
     event.preventDefault();
     props.onSaveHandler(tenantInformationData);
-    setTenantInformationData (
-      {     
+    setTenantInformationData(
+      {
         editionId: "",
         name: "",
         activationEndDate: null,
@@ -103,19 +103,19 @@ const RdsCompTenantInformation = (props: any) => {
         connectionStrings: { id: "", default: null, databases: [] },
       }
     );
-    
+
   }
 
   useEffect(() => {
     props.emittedDataTenantData(tenantInformationData);
   }, [tenantInformationData]);
-  
+
 
   return (
     <div>
       <div className="tab-content">
         <form>
-          <div className="row align-items-center align-items-center flex-column-reverse flex-lg-row flex-md-row">
+          <div className="row flex-column-reverse flex-lg-row flex-md-row">
             <div className="col-md-6">
               <div className="form-group">
                 <RdsInput
@@ -127,6 +127,8 @@ const RdsCompTenantInformation = (props: any) => {
                   onChange={(e) => { handleName(e.target.value) }}
                 ></RdsInput>
               </div>
+            </div>
+            <div className="col-md-6">
               <div className="form-group">
                 <label htmlFor="Edition" className="mb-2">
                   {"Edition"}
@@ -139,24 +141,11 @@ const RdsCompTenantInformation = (props: any) => {
                 ></RdsSelectList>
               </div>
             </div>
-            <div className="col-md-6 cursor-pointer text-center mt-2 pb-xxl-0 pb-xl-0 pb-lg-0 pb-md-0 pb-5">
-             
-              <img
-                src="./assets/edit-pic.png"
-                width="100"
-              //onClick={}
-              />
-              <input
-                type="file"
-                id="file"
-                //ref={inputFile}
-               className="d-none"/>      
-            </div>
           </div>
-          <div className="mt-4 pb-2 border-bottom">
+          <div className="pb-2 border-bottom">
             <label htmlFor="Admin details">{"Admin Details"}</label>
           </div>
-          <div className="row mt-4 pb-2">
+          <div className="row mt-3">
             <div className="col-md-6 cursor-pointer">
               <div className="form-group">
                 <RdsInput
@@ -186,42 +175,46 @@ const RdsCompTenantInformation = (props: any) => {
               </div>
             </div>
           </div>
-          <div className="row pb-2">
-            <div className="col-md-12">
-              <div className="form-group">
+          <div className="row">
+            <div className="col-md-8">
+              <RdsLabel label="Database Connection Strings" required={true} />
+              <div className="form-group mt-3">
                 <RdsRadioButton
-                  displayType="Default"
+                  displayType="Horizontal"
                   label=""
                   itemList={radioItemList}
-                onClick={(e: any) => { handleDatabaseUrl(e.target.value) }}
+                  onClick={(e: any) => { handleDatabaseUrl(e.target.value) }}
                 ></RdsRadioButton>
               </div>
             </div>
           </div>
           {databaseUrl == "Separated Database" && (
             <>
-            <div className="row">
-            <div className="col-md-12">
-              <div className="form-group mb-2">
-                <RdsInput
-                  
-                  inputType="URL"
-                  label={"Database URL"}
-                  placeholder={"Enter URL"}
-                  name="URL"
-                  id="URL"
-                  value={tenantInformationData.connectionStrings.id}
-                  // onChange={(e: any) => { handleDatabaseURL(e.target.value) }}
-                //onFocus={() => setUrlTouched(true)}
-                ></RdsInput>
+
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="form-group mb-2">
+                    <RdsInput
+
+                      inputType="URL"
+                      label={"Database URL"}
+                      placeholder={"Enter URL"}
+                      name="URL"
+                      id="URL"
+                      required={true}
+                      value={tenantInformationData.connectionStrings.id}
+                    // onChange={(e: any) => { handleDatabaseURL(e.target.value) }}
+                    //onFocus={() => setUrlTouched(true)}
+                    ></RdsInput>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          </>
+            </>
           )}
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6">
               <div className="form-group">
+                <RdsLabel label="Activation State" />
                 <RdsSelectList
                   label={"Activation State"}
                   selectItems={activationStateList}
