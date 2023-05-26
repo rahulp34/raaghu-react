@@ -37,6 +37,7 @@ const RdsCompUserPermission = (props: RdsCompUserPermissionProps) => {
           iconStroke={true}
           iconWidth="15px"
           iconColorVariant="light"
+          dataTestId="new-user"
         />
       </div>
 
