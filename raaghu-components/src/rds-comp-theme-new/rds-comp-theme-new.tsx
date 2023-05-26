@@ -4,7 +4,7 @@ import {
   RdsDropdownList,
   RdsLabel,
   RdsSelectList,
-} from "../rds-elements";
+} from '../rds-elements';
 
 import "./rds-comp-theme-new.css";
 

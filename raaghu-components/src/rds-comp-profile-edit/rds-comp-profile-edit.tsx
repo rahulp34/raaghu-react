@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RdsInput, RdsButton } from "../rds-elements";
+import { RdsInput, RdsButton } from '../rds-elements';
 import React from "react";
 import "./rds-comp-profile-edit.css";
 export interface RdsCompProfileEditProps {

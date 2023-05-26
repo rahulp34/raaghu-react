@@ -291,6 +291,7 @@ const Applications = () => {
                     iconHeight="12px"
                     iconWidth="12px"
                     colorVariant="primary"
+                    showLoadingSpinner={true}
                   ></RdsButton>
                 </div>
               }

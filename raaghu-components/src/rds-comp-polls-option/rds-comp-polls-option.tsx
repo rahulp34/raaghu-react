@@ -1,4 +1,4 @@
-import { RdsButton, RdsIcon, RdsInput } from "../rds-elements";
+import { RdsButton, RdsIcon, RdsInput } from '../rds-elements';
 import React, { useEffect, useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
 

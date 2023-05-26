@@ -251,6 +251,7 @@ const Tags = () => {
                     size="small"
                     type="button"
                     colorVariant="primary"
+                    showLoadingSpinner={true}
                     onClick={createTagFn}
                   ></RdsButton>
                 </div>

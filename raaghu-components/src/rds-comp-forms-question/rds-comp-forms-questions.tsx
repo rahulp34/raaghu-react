@@ -7,7 +7,7 @@ import {
   RdsLabel,
   RdsSelectList,
   RdsTextArea,
-} from "../rds-elements";
+} from '../rds-elements';
 
 export interface RdsCompFormsQuestionProps {
   formQuestionsData?: any;

@@ -14,9 +14,9 @@ import {
 	RdsButton,
 	RdsDatePicker,
 	RdsIcon
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import { ScriptableContext } from "chart.js";
-//import { RdsButton, RdsDatePicker, RdsIcon } from "../rds-elements";
+//import { RdsButton, RdsDatePicker, RdsIcon } from '../rds-elements';
 const RdsCompAdminDashboard = () => {
 	const monthlySummaryChartOptions = () => {
 		return;

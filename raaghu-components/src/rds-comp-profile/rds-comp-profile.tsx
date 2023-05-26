@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "../rds-elements";
+import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from '../rds-elements';
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./rds-comp-profile.css";
@@ -30,16 +30,16 @@ const RdsCompProfile = (props: RdsCompProfileProps) => {
     setAcivetab(id);
     console.log(id);
     if (id === "nav-MyAccount") {
-      navigate('/my-account');
+      navigate('/raaghu-my-account');
     }
     else if (id === "nav-LinkAccount") {
       navigate('/linked-accounts')
     }
     else if (id === "nav-SecuityLogs") {
-      navigate('/security-logs')
+      navigate('/raaghu-Security-Logs')
     }
     else if (id === "nav-PersonalData") {
-      navigate('/personal-data')
+      navigate('/raaghu-personal-data')
     }
     props.currNavTabId != undefined && props.currNavTabId(id);
   };

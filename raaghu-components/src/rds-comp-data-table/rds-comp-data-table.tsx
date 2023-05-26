@@ -7,7 +7,7 @@ import {
   RdsPagination,
   RdsIllustration,
   RdsAvatar
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-data-table.css";
 
 

@@ -5,7 +5,7 @@ import {
   RdsInput,
   RdsLabel,
   RdsButton,
-} from "../rds-elements";
+} from '../rds-elements';
 
 export interface RdsCompNewLanguageProps {
   languageNames: any[];

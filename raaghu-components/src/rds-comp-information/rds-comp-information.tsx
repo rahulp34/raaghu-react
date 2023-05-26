@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RdsDropdownList, RdsInput, RdsTextArea } from "../rds-elements";
+import { RdsDropdownList, RdsInput, RdsTextArea } from '../rds-elements';
 
 export interface RdsCompInformationProps {
   inputTypeList: any;
