@@ -862,7 +862,7 @@ const Main = (props: MainProps) => {
                                 element={<ElementsCompo />}
                               />
                               <Route
-                                path="/raaghu-Personal-data"
+                                path="/Personal-data"
                                 element={<PersonalDataCompo />}
                               />
                               <Route
