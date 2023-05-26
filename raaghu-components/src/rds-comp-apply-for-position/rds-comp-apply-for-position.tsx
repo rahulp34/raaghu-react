@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { RdsInput } from "raaghu-react-elements";
-import { RdsButton, RdsTextArea, RdsFileUploader , RdsLabel} from "raaghu-react-elements";
+import { RdsInput } from '../rds-elements';
+import { RdsButton, RdsTextArea, RdsFileUploader , RdsLabel} from '../rds-elements';
 
 export interface RdsCompApplyForPositionProps {
     onApply?: (applicantDetails: any) => void;

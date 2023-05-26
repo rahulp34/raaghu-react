@@ -9,7 +9,7 @@ import {
   RdsSelectList,
   RdsCounter,
   RdsCheckbox,
-} from "../rds-elements";
+} from '../rds-elements';
 import RdsCompAlertPopup from "../rds-comp-alert-popup";
 import RdsCompNewFeatures from "../rds-comp-new-features";
 

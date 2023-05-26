@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RdsModal, RdsIcon, RdsButton, RdsLabel } from "raaghu-react-elements";
+import { RdsModal, RdsIcon, RdsButton, RdsLabel } from '../rds-elements';
 
 // import {countruData} from "./country"
 

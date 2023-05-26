@@ -1,6 +1,6 @@
 import React, { MouseEvent, useEffect, useState } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
-import { RdsDatePicker, RdsIllustration } from "raaghu-react-elements";
+import { RdsDatePicker, RdsIllustration } from '../rds-elements';
 import "./rds-comp-login-attempts.css";
 
 export interface RdsCompLoginAttemptsProps {

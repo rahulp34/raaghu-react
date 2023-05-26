@@ -5,7 +5,7 @@ import {
   RdsLabel,
   RdsSelectList,
   RdsDatePicker
-} from "../rds-elements";
+} from '../rds-elements';
 import React, { useEffect, useState } from "react";
 
 export interface RdsCompPollsQuestion {

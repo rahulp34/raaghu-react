@@ -6,7 +6,7 @@ import {
   RdsCheckbox,
   RdsModal,
   RdsAlert,
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-login.css";
 import { useNavigate } from "react-router-dom";
 import { use } from "i18next";

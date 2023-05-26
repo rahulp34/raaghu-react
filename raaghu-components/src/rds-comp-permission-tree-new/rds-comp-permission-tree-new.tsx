@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RdsCheckbox } from "../rds-elements";
+import { RdsCheckbox } from '../rds-elements';
 
 function TreeNode(props:any) {
 

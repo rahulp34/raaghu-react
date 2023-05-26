@@ -5,7 +5,7 @@ import {
   RdsRadioButton,
   RdsCounter,
   RdsDropdownList,
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import './rds-comp-edition-information.css'
 export interface RdsCompEditionInformationProps {
   radioItems: any[];

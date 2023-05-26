@@ -6,7 +6,7 @@ import {
   RdsRating,
   RdsColorSwitcher,
   RdsButton,
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import "./rds-comp-product-image.css";
 export interface Item {
   imgUrl?: string;
