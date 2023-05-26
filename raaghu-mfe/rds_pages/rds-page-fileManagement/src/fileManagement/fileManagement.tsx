@@ -544,8 +544,8 @@ const FileManagement = () => {
                     icon="upload_data"
                     label={"UPLOAD FILES"}
                     iconColorVariant="primary"
-                    iconHeight="15px"
-                    iconWidth="15px"
+                    iconHeight="12px"
+                    iconWidth="12px"
                     iconFill={false}
                     iconStroke={true}
                     block={false}

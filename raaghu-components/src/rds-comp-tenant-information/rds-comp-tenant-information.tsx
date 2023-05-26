@@ -202,7 +202,7 @@ const RdsCompTenantInformation = (props: any) => {
             <>
             <div className="row">
             <div className="col-md-12">
-              <div className="form-group">
+              <div className="form-group mb-2">
                 <RdsInput
                   
                   inputType="URL"

@@ -164,8 +164,8 @@ const Maintainance = () => {
 									label="CLEAR ALL"
 									icon="delete"
 									iconColorVariant="light"
-									iconHeight="15px"
-									iconWidth="15px"
+									iconHeight="12px"
+									iconWidth="12px"
 									iconFill={false}
 									iconStroke={true}
 									databstarget="#maintainance"
@@ -217,8 +217,8 @@ const Maintainance = () => {
 									tooltipPlacement="top"
 									size="small"
 									icon="download"
-									iconHeight="15px"
-									iconWidth="15px"
+									iconHeight="12px"
+									iconWidth="12px"
 									iconFill={false}
 									iconStroke={true}
 									iconColorVariant="primary"
