@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { RdsIcon } from "../rds-elements";
-import { RdsLabel } from "raaghu-react-elements";
+import { RdsIcon } from '../rds-elements';
+import { RdsLabel } from '../rds-elements';
 
 export interface DirectoryItem {
   id: string;

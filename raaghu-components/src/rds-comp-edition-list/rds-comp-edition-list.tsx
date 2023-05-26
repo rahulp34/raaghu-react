@@ -1,6 +1,6 @@
 import React, { MouseEvent } from "react";
 import RdsCompDatatable from "../rds-comp-data-table/rds-comp-data-table";
-import { RdsButton, RdsIcon } from "raaghu-react-elements";
+import { RdsButton, RdsIcon } from '../rds-elements';
 export interface RdsCompEditionListProps {
   enablecheckboxselection?: boolean;
   tableHeaders: {

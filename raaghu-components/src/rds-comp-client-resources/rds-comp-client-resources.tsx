@@ -1,6 +1,6 @@
 import React from 'react';
 import RdsCompApiScopeResource from "../rds-comp-api-scope-resource";
-import { RdsButton } from "raaghu-react-elements"
+import { RdsButton } from '../rds-elements'
 
 export interface RdsCompClientResourceProp {
   resources: any[];

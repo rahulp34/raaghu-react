@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from "../rds-elements";
+import { RdsInput, RdsButton, RdsIcon, RdsOffcanvas } from '../rds-elements';
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./rds-comp-profile.css";

@@ -4,7 +4,7 @@ import {
 	RdsCheckbox,
 	RdsCheckboxGroup,
 	RdsCounter,
-} from "raaghu-react-elements";
+} from '../rds-elements';
 
 export interface RdsCompSecurityProps {
 	checkgroupList: any;
