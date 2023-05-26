@@ -2,25 +2,24 @@ import {
   createSlice,
   createAsyncThunk,
   PayloadAction,
-  AnyAction,
 } from "@reduxjs/toolkit";
 import { RoleService } from "../../proxy/services/RoleService";
 
 import { PermissionsService } from "../../proxy";
 
-type InitialState = {
+export interface InitialRolesState{
   roles: any;
   permission: any;
-  allClaims: any;
+  claimsAll: any;
   claims: any;
   error: string;
   status: "pending" | "loading" | "error" | "success";
 };
-export const rolesInitialState: InitialState = {
+export const rolesInitialState: InitialRolesState = {
   roles: [],
   permission: [],
-  allClaims: null,
-  claims: null,
+  claimsAll: [],
+  claims: [],
   error: "",
   status: "pending",
 };
@@ -39,8 +38,10 @@ export const fetchRolesInRoles = createAsyncThunk(
   }
 );
 
-export const fetchAllClaims = createAsyncThunk("Roles/fetchAllClaims", () => {
-  RoleService.getRolesAllClaimTypes().then((result: any) => {
+export const fetchAllClaims = createAsyncThunk("Roles/fetchAllClaims",
+async () => {
+return RoleService.getRolesAllClaimTypes().then((result: any) => {
+    
     return result;
   });
 });
@@ -126,6 +127,7 @@ const RolesSlice = createSlice({
     builder.addCase(
       fetchRolesInRoles.fulfilled,
       (state, action: PayloadAction<any>) => {
+        
         state.status = "success";
         state.roles = action.payload;
         state.error = "";
@@ -143,8 +145,10 @@ const RolesSlice = createSlice({
     builder.addCase(
       fetchAllClaims.fulfilled,
       (state, action: PayloadAction<any>) => {
+        console.log(" action.payload", action.payload)
+        
         state.status = "success";
-        state.allClaims = action.payload;
+        state.claimsAll = action.payload;
         state.error = "";
       }
     );
