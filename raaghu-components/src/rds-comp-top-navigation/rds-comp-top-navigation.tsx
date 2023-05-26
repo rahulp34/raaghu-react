@@ -193,6 +193,25 @@ const RdsCompTopNavigation = (props: RdsCompTopNavigationProps) => {
     props.onChatClickHandler&&props.onChatClickHandler(e)
   }
 
+  const toggleBetweenMode = (event: any) => {
+    let checked = event;
+    let selectedTheme: string = 'default';
+    if (!checked) {
+      
+      localStorage.setItem('THEME', 'dark');
+      selectedTheme = 'dark'
+      localStorage.setItem('themeIndex', '7');
+
+    } else {
+     
+      localStorage.setItem('THEME', 'light');
+      selectedTheme = 'default';
+      localStorage.setItem('themeIndex', '12');
+
+    }
+    // this.alertService.setTheme(selectedTheme);
+  }
+
   return (
     <div>
       <nav

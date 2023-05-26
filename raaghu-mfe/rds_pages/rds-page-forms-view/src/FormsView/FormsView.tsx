@@ -283,8 +283,8 @@ const FormsView = (props: any) => {
             iconColorVariant="light"
             iconFill={false}
             iconStroke={true}
-            iconHeight="15px"
-            iconWidth="15px"
+            iconHeight="12px"
+            iconWidth="12px"
             colorVariant="primary"
             isOutline={true}
             onClick={() => handlePreview(props.id)}

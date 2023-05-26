@@ -280,8 +280,8 @@ const Roles = (props: RdsPageRolesProps) => {
               icon="plus"
               label="New Role"
               iconColorVariant="light"
-              iconHeight="15px"
-              iconWidth="15px"
+              iconHeight="12px"
+              iconWidth="12px"
               iconFill={false}
               iconStroke={true}
               block={false}

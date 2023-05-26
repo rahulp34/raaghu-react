@@ -20,7 +20,7 @@ const RdsIllustration = (props: RdsIllustrationProps) => {
             height="120px"
             fill={false}
             stroke={true}
-            colorVariant={props.colorVariant || "dark"}
+            colorVariant="light"
           ></RdsIcon>
           <h5 data-testid="labelElement" >
             <label className="mt-4 opacity-50 text-muted" >{props.label}</label>
