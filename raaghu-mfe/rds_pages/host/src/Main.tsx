@@ -271,21 +271,21 @@ const Main = (props: MainProps) => {
         {
           label: "My Account",
           icon: "manage_authority",
-          path: "/my-account",
+          path: "/raaghu-my-account",
           subText: "Manage authority accounts",
           id: "nav-MyAccount",
         },
         {
           label: "Security Logs",
           icon: "login_attempts",
-          path: "/security-logs",
+          path: "/raaghu-Security-Logs",
           subText: "See recent login attempts for your account",
           id: "nav-SecuityLogs",
         },
         {
           label: "Personal Data",
           icon: "my_settings",
-          path: "/personal-data",
+          path: "/raaghu-personal-data",
           subText: "Change your account settings",
           id: "nav-PersonalData",
         },
@@ -342,13 +342,11 @@ const Main = (props: MainProps) => {
   
   const configLocalization=()=> {
     configurationService(currentLanguage).then(async (res: any) => {
-      if (res.currentUser.id) {
-        localStorage.setItem("userId", res.currentUser.id);
-        if (currentLanguage == "العربية") {
-          document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
-        } else {
-          document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
-        }
+      if(currentLanguage=="ar"){
+        document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
+      }
+      else {
+      document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
       }
 
       const tempdata: any[] = await res.localization?.languages?.map(
@@ -862,7 +860,7 @@ const Main = (props: MainProps) => {
                                 element={<ElementsCompo />}
                               />
                               <Route
-                                path="/raaghu-Personal-data"
+                                path="/raaghu-personal-data"
                                 element={<PersonalDataCompo />}
                               />
                               <Route
