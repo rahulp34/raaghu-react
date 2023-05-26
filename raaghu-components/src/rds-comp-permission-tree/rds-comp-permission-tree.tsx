@@ -1,6 +1,6 @@
 import "./rds-comp-permission-tree.css";
 import React, { useState, useEffect } from "react";
-import { RdsCheckbox } from "raaghu-react-elements";
+import { RdsCheckbox } from '../rds-elements';
 
 export interface RdsCompPermissionTreeProps {
   permissions: any[];

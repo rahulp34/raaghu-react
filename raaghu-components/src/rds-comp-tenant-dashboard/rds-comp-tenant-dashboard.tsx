@@ -1,12 +1,12 @@
 import React from 'react';
-import { RdsTable, RdsWidget } from "raaghu-react-elements";
+import { RdsTable, RdsWidget } from '../rds-elements';
 import {
 	RdsLineChart,
 	RdsBigNumber,
 	RdsDoughnutChart,
 	RdsBooleanChart,
 	RdsBarChart
-} from "raaghu-react-elements";
+} from '../rds-elements';
 
 const RdsCompTenantDashboard = () => {
 	const monthlySummaryChartOptions = () => {

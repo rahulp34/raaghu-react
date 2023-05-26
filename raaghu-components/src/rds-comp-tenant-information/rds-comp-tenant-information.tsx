@@ -1,11 +1,11 @@
-import { RdsLabel } from "../rds-elements";
+import { RdsLabel } from '../rds-elements';
 import React, { useState, useEffect } from "react";
 import {
   RdsInput,
   RdsSelectList,
   RdsButton,
   RdsRadioButton,
-} from "../rds-elements";
+} from '../rds-elements';
 
 const RdsCompTenantInformation = (props: any) => {
   const radioItemList = [

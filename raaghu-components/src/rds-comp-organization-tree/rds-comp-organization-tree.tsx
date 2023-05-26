@@ -3,7 +3,7 @@ import RdsCompAlertPopup from "../rds-comp-alert-popup/rds-comp-alert-popup";
 import {
   RdsIcon,
   RdsButton,
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-organization-tree.css";
 export interface RdsCompOrganizationTreeProps {
   counter?: number;

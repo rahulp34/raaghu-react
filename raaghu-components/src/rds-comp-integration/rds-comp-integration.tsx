@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsAppDetail, RdsButton, RdsSpinner } from "raaghu-react-elements";
+import { RdsAppDetail, RdsButton, RdsSpinner } from '../rds-elements';
 
 export interface RdsCompIntegrationProps {
 	integrationList: any[];

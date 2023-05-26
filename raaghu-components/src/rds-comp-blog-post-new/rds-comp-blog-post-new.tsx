@@ -1,4 +1,4 @@
-import { RdsButton, RdsDropdownList, RdsInput, RdsLabel, RdsTextArea, RdsTextEditor } from 'raaghu-react-elements';
+import { RdsButton, RdsDropdownList, RdsInput, RdsLabel, RdsTextArea, RdsTextEditor } from '../rds-elements';
 import React, { useEffect, useState } from 'react';
 import { RdsFileUploader } from '../rds-elements';
 

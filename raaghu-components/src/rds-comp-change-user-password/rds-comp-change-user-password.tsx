@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RdsInput, RdsButton } from "raaghu-react-elements";
+import { RdsInput, RdsButton } from '../rds-elements';
 import React from "react";
 import { useNavigate } from "react-router-dom";
 export interface RdsChangePasswordProps {

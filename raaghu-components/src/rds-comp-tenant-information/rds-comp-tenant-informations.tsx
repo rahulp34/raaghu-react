@@ -4,7 +4,7 @@ import {
   RdsSelectList,
   RdsButton,
   RdsRadioButton,
-} from "../rds-elements";
+} from '../rds-elements';
 
 const RdsCompTenantInformation = (props: any) => {
   const radioItemList = [

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RdsIcon } from "../rds-elements";
+import { RdsIcon } from '../rds-elements';
 export interface RdsCompMenuDirectoryProps {
   items?: any;
   offId: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
-import { RdsButton } from "../rds-elements"
+import { RdsButton } from '../rds-elements'
 
 export interface RdsCompUserPermissionProps {
   tableHeaders: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsTextArea, RdsButton, RdsLabel } from "../rds-elements";
+import { RdsTextArea, RdsButton, RdsLabel } from '../rds-elements';
 export interface RdsCompEditLanguageTextProps {}
 const RdsCompEditLanguageText = (props: RdsCompEditLanguageTextProps) => {
   return (

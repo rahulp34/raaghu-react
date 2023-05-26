@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsInput, RdsSelectList } from "raaghu-react-elements";
+import { RdsInput, RdsSelectList } from '../rds-elements';
 
 export interface RdsCompEditionNewBasicProps {
   planList: any[];

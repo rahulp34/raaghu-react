@@ -5,7 +5,7 @@ import {
   RdsInput,
   RdsLabel,
   RdsSelectList,
-} from "../rds-elements";
+} from '../rds-elements';
 import "./rds-comp-claims.css";
 
 export interface RdsCompClaimsProps {

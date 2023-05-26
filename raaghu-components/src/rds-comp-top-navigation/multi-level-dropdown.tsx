@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RdsDropdownList, RdsIcon } from "../rds-elements";
+import { RdsDropdownList, RdsIcon } from '../rds-elements';
 import elementList from "./element-list";
 import componentList from "./components-list";
 import chartList from "./charts-list";
