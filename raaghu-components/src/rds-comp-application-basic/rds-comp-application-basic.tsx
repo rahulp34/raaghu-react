@@ -129,6 +129,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								value={basicApplicationData.clientId}
 								name={"clientId"}
 								required={true}
+								dataTestId="client-id"
 							></RdsInput>
 							{errorClientId && <span className="text-danger">{errorClientId}</span>}
 						</div>
@@ -141,6 +142,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => setDisplayName(e.target.value)}
 								name={"displayName"}
 								value={basicApplicationData.displayName}
+								dataTestId="display-name"
 							></RdsInput>
 							{errorDisplayName && <span className="text-danger">{errorDisplayName}</span>}
 						</div>
@@ -155,6 +157,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								value={basicApplicationData.clientUri}
 								name={"clientUrl"}
 								required={false}
+								dataTestId="client-url"
 							></RdsInput>
 						</div>
 						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-4">
@@ -166,6 +169,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								name={"logoUrl"}
 								value={basicApplicationData.logoUri}
 								required={false}
+								dataTestId="logo-url"
 							></RdsInput>
 						</div>
 					</div>
@@ -177,6 +181,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								selectItems={props.typeList}
 								selectedValue={basicApplicationData.type}
 								onSelectListChange={setSelectedOption}
+								dataTestId="type"
 							></RdsSelectList>
 							{errorType && <span className="text-danger">{errorType}</span>}
 						</div>
@@ -188,6 +193,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								selectedValue={basicApplicationData.scopes}
 								isMultiple={true}
 								someCallback={setScopesOption}
+								dataTestId="ecoped"
 							></RdsSelectList>
 						</div>
 					</div>
@@ -200,6 +206,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => setClientSecret(e.target.value)}
 								name={"clientSecret"}
 								value={basicApplicationData.clientSecret}
+								dataTestId="client-secret"
 							></RdsInput>
 						)}
 					</div>
@@ -210,18 +217,21 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								label="Allow Authorization Code Flow"
 								onChange={e => { setCredential(e.target.checked) }}
 								checked={basicApplicationData.allowAuthorizationCodeFlow}
+								dataTestId="authorization-flow"
 							></RdsCheckbox>
 							<RdsCheckbox
 								classes="py-2"
 								label="Allow Implicit Flow"
 								onChange={e => { setImplicit(e.target.checked) }}
 								checked={basicApplicationData.allowImplicitFlow}
+								dataTestId="implicit-flow"
 							></RdsCheckbox>
 							<RdsCheckbox
 								classes="py-2"
 								label="Allow Hybrid Flow"
 								onChange={e => { setHybrid(e.target.checked) }}
 								checked={basicApplicationData.allowHybridFlow}
+								dataTestId="hybrid-flow"
 							></RdsCheckbox>
 							<RdsCheckbox
 								classes="py-2"
@@ -229,6 +239,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => { setRefresh(e.target.checked) }}
 								checked={basicApplicationData.allowRefreshTokenFlow}
 								isDisabled={isDisabled}
+								dataTestId="refresh-flow"
 							></RdsCheckbox>
 						</div>
 						<div className="col-12 col-6 col-lg-6 col-md-6 col-xl4 col-xxl-6 mb-3">
@@ -237,6 +248,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								label="Allow Password Flow"
 								onChange={e => { setPassword(e.target.checked) }}
 								checked={basicApplicationData.allowPasswordFlow}
+								dataTestId="password-flow"
 							></RdsCheckbox>
 							<RdsCheckbox
 								classes="py-2"
@@ -244,6 +256,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => { setClient(e.target.checked) }}
 								checked={basicApplicationData.allowClientCredentialsFlow}
 								isDisabled={basicApplicationData.type === 'public'}
+								dataTestId="client-credential-flow"
 							></RdsCheckbox>
 							<RdsCheckbox
 								classes="py-2"
@@ -251,6 +264,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								onChange={e => { setDevice(e.target.checked) }}
 								checked={basicApplicationData.allowDeviceEndpoint}
 								isDisabled={basicApplicationData.type === 'public'}
+								dataTestId="device-endpoint"
 							></RdsCheckbox>
 						</div>
 					</div>
@@ -264,6 +278,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								selectItems={props.consentType}
 								selectedValue={basicApplicationData.consentType}
 								onSelectListChange={setConsentType}
+								dataTestId="consent-type"
 							></RdsSelectList>
 							<div className="row">
 								<RdsTextArea
@@ -272,6 +287,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									onChange={e => setRedirectUris(e.target.value)}
 									value={basicApplicationData.redirectUris}
 									rows={3}
+									dataTestId="redirect-uri"
 								/>
 							</div>
 							<div className=" col-6 py-3">
@@ -279,6 +295,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									label="Allow Logout EndPoint"
 									onChange={e => { setLogoutEndpoint(e.target.checked) }}
 									checked={basicApplicationData.allowLogoutEndpoint}
+									dataTestId="logout-endpoint"
 								></RdsCheckbox>
 							</div>
 						</>) : null
@@ -292,6 +309,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 									onChange={e => setPostLogoutRedirectUris(e.target.value)}
 									value={basicApplicationData.postLogoutRedirectUris}
 									rows={3}
+									dataTestId="logout-redirect-uri"
 								/>
 							</>)
 						}
@@ -302,6 +320,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 								label="Enabled"
 								// onChange={true}
 								checked={basicApplicationData.enabled}
+								dataTestId="enabled"
 							></RdsCheckbox>
 						</div>
 					)}
@@ -316,6 +335,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							databsdismiss="offcanvas"
 							databstoggle="offcanvas"
 							databstarget="#application"
+							dataTestId="cancel"
 						></RdsButton>
 						<RdsButton
 							class="me-2"
@@ -327,6 +347,7 @@ const RdsCompApplicationBasic = (props: RdsCompApplicationBasicProps) => {
 							size="small"
 							isDisabled={!isFormValid}
 							onClick={() => { props.handleSubmit(basicApplicationData) }}
+							dataTestId="save"
 						></RdsButton>
 					</div>
 				</form>
