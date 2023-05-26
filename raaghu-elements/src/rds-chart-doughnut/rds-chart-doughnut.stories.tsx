@@ -30,6 +30,9 @@ Default.args = {
         title: {
           display: true,
           text: 'Chart.js Doughnut Chart'
+        },
+        subTitle:{
+          fontColor: "#fff",
         }
       }
     },

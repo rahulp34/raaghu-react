@@ -39,6 +39,9 @@ const RdsDoughnutChart = (props:RdsDoughnutprops) => {
         ctx.textAlign = 'center';
         ctx.fillText(subTitle, width / 2, (height / 0.85) / 2.0 + top);
         ctx.restore();
+        ctx.textColor = '#fff'; 
+       ctx.fontColor ='#fff'; 
+       ctx.subtitles.set("fontColor", "#F084C2");
       }
     }
     const DoughnutCanvas = new Chart(ctx, {

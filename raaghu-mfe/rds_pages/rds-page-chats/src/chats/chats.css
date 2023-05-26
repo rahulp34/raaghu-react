@@ -1,0 +1,27 @@
+.opp-chat-bg {
+    background-color: #E4ECFF;
+    margin-left: 20px;
+    border-radius: 20px 20px 20px 0;
+    max-width: 534px;
+    width: fit-content
+}
+
+.time-text-color{
+    color: #BEBEBE;
+}
+
+.my-chat-bg {
+    background: transparent linear-gradient(259deg, #7E2EEF 0%, #2A75BC 100%) 0% 0% no-repeat padding-box;
+    border-radius: 20px 20px 0 20px;
+    max-width: 534px;
+    margin-right: 20px;
+    width: fit-content;
+}
+
+.chat-cust-height{
+    height: 630px;
+}
+
+.fs-custom{
+    font-size: 10px;
+}

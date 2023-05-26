@@ -243,8 +243,8 @@ const Tags = () => {
                     icon="plus"
                     label={"New Tag"}
                     iconColorVariant="light"
-                    iconHeight="15px"
-                    iconWidth="15px"
+                    iconHeight="12px"
+                    iconWidth="12px"
                     iconFill={false}
                     iconStroke={true}
                     block={false}

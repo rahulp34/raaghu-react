@@ -108,8 +108,8 @@ const Newsletters = (props: any) => {
             buttonColorVariant="primary"
             inputGroupLabel="Source"
             icon="refresh_sync" 
-            iconHeight="15px"
-            iconWidth="15px"
+            iconHeight="12px"
+            iconWidth="12px"
             iconFill={false}
             iconStroke={true}
             iconColorVariant="light"

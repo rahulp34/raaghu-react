@@ -41,7 +41,9 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
           <div className = {radioButtonClass}>
 
           {props.itemList?.map((item: any, idx: any) => (
-            <div className="col-md-6">
+            <div 
+            className={`${display_type =="Horizontal" ? "col": "col-md-6" }`}
+            >
 
             <div
               key={idx}
@@ -70,7 +72,7 @@ const RdsRadioButton = (props: RdsRadioButtonProps) => {
                 onClick = {props.onClick}
                 data-testid={props.dataTestId}
               />
-              <label htmlFor={item.id} className="form-check-label me-5 ms-2">
+              <label htmlFor={item.id} className="form-check-label ms-2">
                 {item.label}
               </label>
             </div>

@@ -386,12 +386,21 @@ const RdsCompAdminDashboard = () => {
 												"Revenue - 25%",
 												"Expenses - 15%",
 											]}
+											
 											options={{
+												animationEnabled: true,
+												title:{
+													fontColor: "#fff",
+												},
 												cutoutPercentage: 40,
 												legend: {
 													display: false,
 												},
 												responsive: true,
+												
+												subtitles: {
+													fontColor: "#fff",
+												},
 												maintainAspectRatio: false,
 												plugins: {
 													series: {
@@ -415,6 +424,7 @@ const RdsCompAdminDashboard = () => {
 															},
 														],
 													},
+													
 													legend: {
 														display: true,
 														align: "middle",

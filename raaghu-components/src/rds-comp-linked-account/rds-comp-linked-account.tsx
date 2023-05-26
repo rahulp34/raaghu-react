@@ -38,8 +38,8 @@ const RdsCompLinkedAccount = (props: RdsLinkedAccountProps) => {
 							label="LINK NEW ACCOUNT"
 							iconFill={false}
 							iconStroke={true}
-							iconHeight="15px"
-							iconWidth="15px"
+							iconHeight="12px"
+							iconWidth="12px"
 							size="small"
 							iconColorVariant="light"
 							onClick={onClickHandler}
