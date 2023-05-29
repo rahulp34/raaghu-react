@@ -16,6 +16,8 @@ export interface RdsCompLoginProps {
   email: string;
   password: string;
   onDismissAlert?: () => any;
+  onEmailChange?:()=>any;
+  onPasswordChange?:()=>any;
   onLogin: (email: string, password: string, rememberMe: boolean) => any;
   onForgotPassword: (isForgotPasswordClicked?: boolean) => void;
   onRegister: (isRegisterClicked?: boolean) => void;
@@ -75,11 +77,13 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const emailhandleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
+    props.onEmailChange && props.onEmailChange();
     setEmail(event.target.value);
   };
   const passwordhandleChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
+    props.onPasswordChange && props.onPasswordChange();
     setPassword(event.target.value);
   };
   const TenancyNameChange = (event: {
