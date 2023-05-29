@@ -291,6 +291,7 @@ const Menus = () => {
                       iconHeight="12px"
                       onClick={() => {}}
                       iconWidth="12px"
+                      showLoadingSpinner={true}
                     ></RdsButton>
                   </div>
                 }

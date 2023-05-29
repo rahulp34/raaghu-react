@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import {
   RdsLabel,
   RdsSelectList,
-} from "raaghu-react-elements";
+} from '../rds-elements';
 import { RdsCompDatatable } from "../../../rds-components";
 import RdsInputGroup from "../../../../../raaghu-elements/src/rds-input-group";
 import {

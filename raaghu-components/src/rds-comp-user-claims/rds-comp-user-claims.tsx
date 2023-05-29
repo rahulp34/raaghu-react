@@ -1,5 +1,5 @@
 import React from "react";
-import { RdsInput, RdsLabel, RdsButton } from "../rds-elements";
+import { RdsInput, RdsLabel, RdsButton } from '../rds-elements';
 
 export interface RdsCompUserClaimsProps {}
 

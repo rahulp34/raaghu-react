@@ -1,7 +1,7 @@
 import React from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
 import RdsCompSubscription from "../rds-comp-subscription";
-import { RdsButton } from "raaghu-react-elements";
+import { RdsButton } from '../rds-elements';
 
 export interface RdsCompBillingProp {
   subscriptionData: any[];

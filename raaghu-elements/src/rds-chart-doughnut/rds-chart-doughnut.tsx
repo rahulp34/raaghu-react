@@ -1,33 +1,33 @@
-import React, { ReactNode, useEffect} from "react";
+import React, { ReactNode, useEffect } from "react";
 import Chart from 'chart.js/auto';
 //import "./rds-chart-doughnut.css"
 
 export interface RdsDoughnutprops {
-  labels:any[],
-  options:any,
-  dataSets:any[],
-  id:string,
-  height?:number,
-  width?:number,
-  titleText?:string,
-  subTitleText?:string,
+  labels: any[],
+  options: any,
+  dataSets: any[],
+  id: string,
+  height?: number,
+  width?: number,
+  titleText?: string,
+  subTitleText?: string,
 }
 
-const RdsDoughnutChart = (props:RdsDoughnutprops) => {
- const CanvasId = props.id;
+const RdsDoughnutChart = (props: RdsDoughnutprops) => {
+  const CanvasId = props.id;
   let ctx;
- 
+
 
   useEffect(() => {
     const canvasElm = document.getElementById(
       CanvasId
     ) as HTMLCanvasElement | null;
     ctx = canvasElm?.getContext("2d") as CanvasRenderingContext2D;
-    const title = props.titleText||"";
-    const subTitle = props.subTitleText||"";
+    const title = props.titleText || "";
+    const subTitle = props.subTitleText || "";
     let centerText = {
       id: 'counter3',
-      beforeDraw(chart:any, args:any, options:any) {
+      beforeDraw(chart: any, args: any, options: any) {
         const { ctx, chartArea: { top, right, bottom, left, width, height } } = chart;
         ctx.save();
         ctx.font = '500 1.4rem Poppins';
@@ -39,34 +39,33 @@ const RdsDoughnutChart = (props:RdsDoughnutprops) => {
         ctx.textAlign = 'center';
         ctx.fillText(subTitle, width / 2, (height / 0.85) / 2.0 + top);
         ctx.restore();
-        debugger;
-        ctx.textColor = '#fff'; 
-       ctx.fontColor ='#fff'; 
-       ctx.subtitles.set("fontColor", "#F084C2");
+        ctx.textColor = '#fff';
+        ctx.fontColor = '#fff';
+        // ctx.subtitles.set("fontColor", "#F084C2");
       }
     }
     const DoughnutCanvas = new Chart(ctx, {
-      type:'doughnut',
-      plugins:[centerText] ,
+      type: 'doughnut',
+      plugins: [centerText],
       data: {
         labels: props.labels,
-        datasets:props.dataSets
+        datasets: props.dataSets
       },
       options: props.options,
     });
     if (DoughnutCanvas !== null) {
-     
+
       DoughnutCanvas.canvas.style.width = props.width + "px";
       DoughnutCanvas.canvas.style.height = props.height + "px";
-     }
-      return () => {
-        DoughnutCanvas.destroy()
-      }
-  },[]);
+    }
+    return () => {
+      DoughnutCanvas.destroy()
+    }
+  }, []);
 
   return (
     <div>
-      <canvas id={CanvasId}  ref={ctx}></canvas>
+      <canvas id={CanvasId} ref={ctx}></canvas>
     </div>
   );
 };

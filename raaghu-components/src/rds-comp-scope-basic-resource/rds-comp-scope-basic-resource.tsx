@@ -6,7 +6,7 @@ import {
   RdsTextArea,
   RdsButton,
   RdsCheckbox,
-} from "../rds-elements";
+} from '../rds-elements';
 
 export interface RdsCompScopeBasicResourceProps {
   apiScopeData?: any;

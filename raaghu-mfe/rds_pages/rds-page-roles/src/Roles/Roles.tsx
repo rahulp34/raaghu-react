@@ -54,7 +54,9 @@ const Roles = (props: RdsPageRolesProps) => {
 
   useEffect(() => {
     dispatch(fetchRolesInRoles() as any);
+    dispatch(fetchAllClaims() as any);
   }, [dispatch]);
+  
   useEffect(() => {
     if (Array.isArray(Data.roles)) {
       const tempData = Data.roles?.map((curr: any) => {
@@ -165,6 +167,7 @@ const Roles = (props: RdsPageRolesProps) => {
     setId(rowData.id);
 
     if (actionId === "edit") {
+      
       setVal(rowData.provideKey);
       setChecked({
         ...checked,
@@ -173,8 +176,6 @@ const Roles = (props: RdsPageRolesProps) => {
       });
 
       dispatch(fetchClaims(rowData.id) as any)
-      dispatch(fetchAllClaims() as any);
-
       dispatch(fetchPermission(rowData.id) as any);
     }
   };
@@ -183,9 +184,9 @@ const Roles = (props: RdsPageRolesProps) => {
 
   useEffect(() => {
 
-    if (Data.allClaims) {
+    if (Data.claimsAll) {
       let tempAllClaimsArray: any[] = [];
-      Data.allClaims.map((res: any) => {
+      Data.claimsAll.map((res: any) => {
         const item = {
           option: res.name,
           value: res.name
@@ -194,7 +195,7 @@ const Roles = (props: RdsPageRolesProps) => {
       })
       setAllClaimsArray(tempAllClaimsArray);
     }
-  }, [Data.allClaims])
+  }, [Data.claimsAll])
 
   useEffect(() => {
     if (Data.claims) {

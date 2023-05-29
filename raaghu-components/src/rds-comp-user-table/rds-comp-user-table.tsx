@@ -1,7 +1,7 @@
 import React from "react";
 import { MouseEvent } from "react";
 import RdsCompDatatable from "../rds-comp-data-table";
-import { RdsButton } from "../rds-elements";
+import { RdsButton } from '../rds-elements';
 import "./rds-comp-user-table.css";
 
 export interface RdsCompUserTableProps {

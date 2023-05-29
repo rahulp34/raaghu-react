@@ -1,6 +1,6 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import React, {useEffect, useState} from "react";
-import {RdsCheckboxGroup, RdsInput, RdsTextArea,RdsButton } from "../rds-elements";
+import {RdsCheckboxGroup, RdsInput, RdsTextArea,RdsButton } from '../rds-elements';
 
 export interface RdsCompApiScopeBasicResourceProps {
 	email:any;

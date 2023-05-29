@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Children, useReducer } from "react";
-import { RdsAccordion, RdsCheckbox } from "raaghu-react-elements";
+import { RdsAccordion, RdsCheckbox } from '../rds-elements';
 import "./rds-comp-api-scope-resource.css";
 
 export interface RdsCompApiScopeResourceProps {

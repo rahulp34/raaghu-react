@@ -1,6 +1,6 @@
-import { RdsCheckbox, RdsLabel, RdsSelectList } from "../rds-elements";
+import { RdsCheckbox, RdsLabel, RdsSelectList } from '../rds-elements';
 import React, { FormEventHandler, useState, useEffect } from "react";
-import { RdsInput, RdsTextArea, RdsButton } from "../rds-elements";
+import { RdsInput, RdsTextArea, RdsButton } from '../rds-elements';
 
 export interface RdsCompNewClaimTypeProps {
   name?: string;

@@ -1,7 +1,7 @@
 import { id } from "date-fns/locale";
 import { AnyArray } from "immer/dist/internal";
 import React, { useState, useEffect, Children, useReducer } from "react";
-import { RdsAccordion, RdsButton } from "raaghu-react-elements";
+import { RdsAccordion, RdsButton } from '../rds-elements';
 import "./rds-comp-claim.css";
 
 export interface RdsCompClaimProps {

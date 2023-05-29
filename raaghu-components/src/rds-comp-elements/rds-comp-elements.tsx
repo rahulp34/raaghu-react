@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 
 import "./rds-comp-elements.css";
-import { RdsLabel, RdsIcon } from "../rds-elements";
+import { RdsLabel, RdsIcon } from '../rds-elements';
 import code_snippet from "./code_snippet";
 
 export interface RdsCompElementsProps {}

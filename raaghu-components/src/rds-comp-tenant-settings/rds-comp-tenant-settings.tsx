@@ -1,5 +1,5 @@
 import React , { useState } from "react";
-import { RdsCheckbox, RdsInput, RdsButton } from "../rds-elements";
+import { RdsCheckbox, RdsInput, RdsButton } from '../rds-elements';
 import { useTranslation } from "react-i18next";
 
 export interface RdsCompTenantSettingsProps {
