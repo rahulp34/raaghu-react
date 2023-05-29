@@ -35,7 +35,9 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   const [rememberMe, setrememberMe] = useState(false);
 
   useEffect(() => {
-    setEmail(props.email);
+    if(props.email){
+      setEmail(props.email);
+    }
   }, [props.email]);
 
   //side effect of props.error
@@ -44,7 +46,10 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
   }, [props.error]);
 
   useEffect(() => {
-    setPassword(props.password);
+    if(props.password){
+      setPassword(props.password);
+    }
+  
   }, [props.password]);
 
   useEffect(() => {
@@ -85,8 +90,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
 
   const isFormValid = isPasswordValid(password) && isEmailValid(email);
 
-  const handleSubmit: any = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit: any = (event: any) => {
+    // event.preventDefault();
     props.onLogin(email, password, rememberMe);
     // setEmail("");
     // setPassword("");
@@ -215,7 +220,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               </div>
             )}
           </div>
-          <form onSubmit={handleSubmit}>
+       
             <div className="form-group text-start">
               <RdsInput
                 label="Email/Username"
@@ -269,7 +274,8 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               isDisabled={!isFormValid}
               block={true}
               tooltipTitle={""}
-              type="submit"
+              // type="submit"
+              onClick={handleSubmit}
               dataTestId="login"
             />
              <div className="mt-3">
@@ -281,7 +287,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 Register
               </a></span></p>
             </div>
-          </form>
+   
           <div className="pt-2">
             <RdsLabel
               class="text-mute pt-2 secondary "
