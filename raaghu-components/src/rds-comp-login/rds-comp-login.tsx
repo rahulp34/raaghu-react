@@ -153,6 +153,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                       }`}
                       checked={checked} isSwitch={checked}
                       onChange={() => setChecked(!checked)}
+                      dataTestId="swtich-checkbox"
                     ></RdsCheckbox>
                   </div>
                   <RdsInput
@@ -164,6 +165,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     name={"currentTenant"}
                     required={true}
                     isDisabled={!checked}
+                    dataTestId="tenancy-name"
                   ></RdsInput>
                 </div>
                 <div className=" mb-2 mt-3 d-flex justify-content-end">
@@ -175,6 +177,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     colorVariant="outline-primary"
                     size="small"
                     databsdismiss="modal"
+                    dataTestId="cancel"
                   ></RdsButton>
                   <RdsButton
                     class="me-2"
@@ -191,6 +194,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                       props.validTenant(currentTenant);
                       setChecked(!checked);
                     }}
+                    dataTestId="switch-btn"
                   ></RdsButton>
                 </div>
               </RdsModal>
@@ -221,6 +225,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 value={email}
                 name={"email"}
                 required={true}
+                dataTestId="username"
               ></RdsInput>
             </div>
 
@@ -233,6 +238,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                 onChange={passwordhandleChange}
                 name={"password"}
                 value={password}
+                dataTestId="password"
               ></RdsInput>
             </div>
             <div className="d-flex justify-content-between mt-2 mb-4">
@@ -242,6 +248,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
                     label={"Remember me"}
                     checked={rememberMe}
                     onChange={onCheckedHandler}
+                    dataTestId="remember-me"
                   ></RdsCheckbox>
                 </div>
               </div>
@@ -263,6 +270,7 @@ const RdsCompLogin: React.FC<RdsCompLoginProps> = (
               block={true}
               tooltipTitle={""}
               type="submit"
+              dataTestId="login"
             />
              <div className="mt-3">
               <p>Don't Have An Account  <span><a
