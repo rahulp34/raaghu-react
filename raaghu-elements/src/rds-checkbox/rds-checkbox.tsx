@@ -18,7 +18,9 @@ export interface RdsCheckboxProps {
 }
 
 const RdsCheckbox = (props: RdsCheckboxProps) => {
-
+  const onClickHandler = () => {
+    setcheck(props.checked)
+  };
   const[check,setcheck]=useState(props.checked)
 
   useEffect(() => {
@@ -56,9 +58,9 @@ const RdsCheckbox = (props: RdsCheckboxProps) => {
           {props.withlabel == false ? (
             <></>
           ) : (
-            <label
+            <label  onClick={() => onClickHandler()}
               className={` form-check-label me-5 ms-2  ${props.labelClass} `}
-              htmlFor={props.id}
+              htmlFor={props.id} 
             >
               {props.label}
             </label>

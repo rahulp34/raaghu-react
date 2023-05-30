@@ -325,6 +325,8 @@ const Edition = (props: RdsPageEditionProps) => {
           recordsPerPage={10}
           onActionSelection={onActionSelection}
           recordsPerPageSelectListOption={true}
+          noDataTitle={"There is no editions available, Click on New Edition to add."}
+          noDataheaderTitle={"No Edition Available"}
         ></RdsCompDatatable>
         <RdsCompAlertPopup
           alertID="edition-delete-offc"

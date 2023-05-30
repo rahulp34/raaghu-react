@@ -735,6 +735,8 @@ const Users = () => {
           recordsPerPage={10}
           onActionSelection={onActionSelection}
           recordsPerPageSelectListOption={true}
+          noDataTitle={"There is no users available, Click on New Users to add."}
+          noDataheaderTitle={"No Users Available"}
         ></RdsCompDatatable>
           <RdsCompAlertPopup
             alertID="user-delete-off"

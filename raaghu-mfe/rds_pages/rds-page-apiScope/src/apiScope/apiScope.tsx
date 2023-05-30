@@ -256,6 +256,8 @@ const ApiScope = () => {
             recordsPerPage={10}
             recordsPerPageSelectListOption={true}
             onActionSelection={handlerActionSelection}
+            noDataTitle={"There is no Scopes available, Click on New Scopes to add."}
+            noDataheaderTitle={"No Scopes Available."}
           ></RdsCompDatatable>
           <RdsOffcanvas
             backDrop={true}
